@@ -2,6 +2,7 @@
 import Base from "../../layouts/Base.astro";
 import ItemIcon from "../../components/ItemIcon.astro";
 import HeroPortrait from "../../components/HeroPortrait.astro";
+import SoulIcon from "../../components/SoulIcon.astro";
 import {
   releasedHeroes,
   shopItems,
@@ -117,9 +118,7 @@ const payload = {
       </select>
     </label>
     <span class="totals">
-      <span class="t"><b id="t-souls">0</b> ソウル</span>
       <span class="t"><b id="t-level">—</b></span>
-      <span class="t"><b id="t-count">0</b> 個</span>
     </span>
     <span class="acts">
       <button class="share" id="share">共有URLをコピー</button>
@@ -141,26 +140,22 @@ const payload = {
         <span class="hname" id="hname">ヒーロー未選択</span>
       </div>
 
-      {/* 12マスのスロット。ゲームと同じく1TYPEあたり4枠 */}
-      <div class="slots">
-        {
-          slots.map((s) => (
-            <div
-              class="slotrow"
-              data-slot={s}
-              style={`--cat: var(--c-${SLOT_META[s].cssVar}); --cat-bg: var(--c-${SLOT_META[s].cssVar}-bg)`}
-            >
-              <span class="slabel">{SLOT_META[s].label}</span>
-              <div class="cells" data-cells={s}>
-                {[0, 1, 2, 3].map(() => <span class="cell" />)}
-              </div>
-            </div>
-          ))
-        }
+      {/*
+        アイテムスロット。ゲームでは12枠すべてがフレックス(TYPE固定ではない)なので、
+        カテゴリごとに割らず、購入順に2段×6で埋める。枠の色でTYPEが分かるようにする。
+      */}
+      <div class="slotbar">
+        <span class="slotcount"><b id="t-count">0</b> / 12</span>
+        <span class="soulcost">
+          <SoulIcon size={15} />
+          <b id="t-souls">0</b>
+          <small>ソウル</small>
+        </span>
       </div>
-      <p class="slotnote">
-        アイコンをクリックすると外れます。ゲームと同じくTYPEごとに4枠までです。
-      </p>
+      <div class="cells" data-cells>
+        {Array.from({ length: 12 }, () => <span class="cell" />)}
+      </div>
+      <p class="slotnote">アイコンをクリックすると外れます。枠はゲームと同じく12枠です。</p>
 
       {/* TYPE別ステータス */}
       {
@@ -273,7 +268,7 @@ const payload = {
     let picked = [];
     let heroId = null;
     const SLOTS = ["WeaponMod", "Armor", "Tech"];
-    const PER_SLOT = 4; // ゲーム内のTYPEあたりの枠数
+    const SLOT_TOTAL = 12; // ゲーム内のアイテム枠数。TYPE固定ではなく全部フレックス
 
     const ID_PREFIX = "upgrade_";
     const shorten = (id) => (id.startsWith(ID_PREFIX) ? id.slice(ID_PREFIX.length) : "!" + id);
@@ -334,31 +329,34 @@ const payload = {
       return c;
     }
 
-    /** 12マスのスロット。ショップ側のアイコンを複製して入れる */
+    /**
+     * アイテムスロット。ゲームでは12枠すべてがフレックスなので、
+     * TYPEで分けずに購入順で埋める。ショップ側のアイコンを複製して入れる。
+     */
     function renderSlots() {
-      for (const slot of SLOTS) {
-        const mine = picked.filter((id) => payload.items[id]?.slot === slot);
-        const cells = document.querySelector(`[data-cells="${slot}"]`);
-        cells.innerHTML = "";
-        const n = Math.max(PER_SLOT, mine.length);
-        for (let i = 0; i < n; i++) {
-          const id = mine[i];
-          if (!id) {
-            const empty = document.createElement("span");
-            empty.className = "cell";
-            cells.append(empty);
-            continue;
-          }
-          const item = payload.items[id];
-          const cell = document.createElement("button");
-          cell.className = "cell filled";
-          cell.dataset.id = id;
-          cell.title = item.name + " — クリックで外す";
-          const src = document.querySelector(`.card[data-id="${CSS.escape(id)}"] .icon`);
-          if (src) cell.append(src.cloneNode(true));
-          if (i >= PER_SLOT) cell.classList.add("over");
-          cells.append(cell);
+      const cells = document.querySelector("[data-cells]");
+      cells.innerHTML = "";
+      const n = Math.max(SLOT_TOTAL, picked.length);
+      for (let i = 0; i < n; i++) {
+        const id = picked[i];
+        if (!id) {
+          const empty = document.createElement("span");
+          empty.className = "cell";
+          cells.append(empty);
+          continue;
         }
+        const item = payload.items[id];
+        const meta = payload.slotMeta[item.slot];
+        const cell = document.createElement("button");
+        cell.className = "cell filled";
+        cell.dataset.id = id;
+        cell.title = `${item.name}（${fmt(item.cost)}ソウル） — クリックで外す`;
+        if (meta) cell.style.setProperty("--cat", `var(--c-${meta.cssVar})`);
+        const src = document.querySelector(`.card[data-id="${CSS.escape(id)}"] .icon`);
+        if (src) cell.append(src.cloneNode(true));
+        // 12枠を超えた分。ゲームでは持てない数であることを示す
+        if (i >= SLOT_TOTAL) cell.classList.add("over");
+        cells.append(cell);
       }
     }
 
@@ -472,6 +470,7 @@ const payload = {
       const spent = cost.WeaponMod + cost.Armor + cost.Tech;
       $("t-souls").textContent = fmt(spent);
       $("t-count").textContent = String(picked.length);
+      document.querySelector(".slotcount").classList.toggle("over", picked.length > SLOT_TOTAL);
       const h = hero();
       $("t-level").textContent = h ? "Lv" + levelForSouls(h.levels, spent) : "Lv—";
       renderHero();
@@ -506,7 +505,7 @@ const payload = {
       card.innerHTML =
         `<div class="hc-head"><span class="hc-name">${esc(it.name)}</span>` +
         `${badge ? `<span class="hc-badge">${badge}</span>` : ""}</div>` +
-        `<div class="hc-meta">${esc(meta.label)}・ティア${it.tier}・${fmt(it.cost)}ソウル・枠${it.slotCost}</div>` +
+        `<div class="hc-meta">${esc(meta.label)}・ティア${it.tier}・<span class="hc-soul">${fmt(it.cost)}ソウル</span>・枠${it.slotCost}</div>` +
         (it.desc ? `<p class="hc-desc">${esc(it.desc)}</p>` : "") +
         (it.passives.length ? `<div class="hc-sec">常時パッシブ</div>${rows(it.passives, "hc-rows")}` : "") +
         (it.conditional.length ? `<div class="hc-sec">条件付き</div>${rows(it.conditional, "hc-rows")}` : "") +
@@ -547,7 +546,7 @@ const payload = {
       el.addEventListener("blur", hideCard);
     }
 
-    document.querySelector(".slots").addEventListener("click", (e) => {
+    document.querySelector("[data-cells]").addEventListener("click", (e) => {
       const cell = e.target.closest(".cell.filled");
       if (!cell) return;
       picked = picked.filter((id) => id !== cell.dataset.id);
@@ -647,26 +646,41 @@ const payload = {
     .heroline { display: flex; align-items: center; gap: var(--sp-3); margin-bottom: var(--sp-3); }
     .hname { font-weight: 600; color: var(--c-text-strong); }
 
-    /* ---- 左: 12マスのスロット ---- */
-    .slots { display: grid; gap: var(--sp-2); }
-    .slotrow {
-      display: flex; align-items: center; gap: var(--sp-3);
-      background: var(--c-surface); border: 1px solid var(--c-border);
-      border-left: 3px solid var(--cat); border-radius: var(--radius);
-      padding: var(--sp-2) var(--sp-3);
+    /* ---- 左: アイテムスロット(12枠フレックス) ---- */
+    .slotbar {
+      display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3);
+      margin-bottom: var(--sp-2);
     }
-    .slabel { font-size: 11px; color: var(--cat); width: 3.5em; flex: 0 0 auto; letter-spacing: .04em; }
-    .cells { display: flex; gap: 5px; flex-wrap: wrap; }
+    .slotcount { font-size: 11px; color: var(--c-text-muted); font-family: var(--font-mono); }
+    .slotcount b { color: var(--c-text-strong); font-size: 13px; }
+    .slotcount.over b { color: #d08a3e; }
+    /* ソウルの合計。ゲームの通貨表示に合わせて水色で目立たせる */
+    .soulcost {
+      display: flex; align-items: center; gap: 5px;
+      color: var(--c-soul); background: var(--c-soul-bg);
+      border: 1px solid var(--c-soul-dim); border-radius: var(--radius);
+      padding: 3px 10px;
+    }
+    .soulcost b { font-family: var(--font-mono); font-size: 17px; line-height: 1.1; letter-spacing: -0.01em; }
+    .soulcost small { font-size: 10px; color: var(--c-soul); opacity: .75; }
+
+    /* 2段×6。埋まった枠はTYPEの色で縁取る */
+    .cells {
+      display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px;
+    }
     .cells :global(.cell) {
-      width: 40px; height: 40px; border-radius: 5px;
+      aspect-ratio: 1; border-radius: 5px;
       border: 1px dashed var(--c-border-strong); background: var(--c-bg);
-      display: inline-block; padding: 0; line-height: 0;
+      display: block; padding: 0; line-height: 0; width: 100%;
     }
-    .cells :global(.cell.filled) { border: none; background: none; cursor: pointer; }
+    .cells :global(.cell.filled) {
+      border: 1px solid var(--cat, var(--c-border-strong)); background: none; cursor: pointer;
+      overflow: hidden;
+    }
     .cells :global(.cell.filled:hover) { filter: brightness(1.25); }
-    /* 4枠を超えた分。ゲームでは持てない数であることを示す */
+    /* 12枠を超えた分。ゲームでは持てない数であることを示す */
     .cells :global(.cell.over) { outline: 2px solid #d08a3e; outline-offset: 1px; }
-    .cells :global(.cell.filled .icon) { width: 40px; height: 40px; }
+    .cells :global(.cell.filled .icon) { width: 100%; height: 100%; border: none; border-radius: 4px; }
     .slotnote { font-size: 11px; color: var(--c-text-faint); margin: var(--sp-2) 0 var(--sp-4); }
 
     /* ---- 左: TYPE別ボックス ---- */
@@ -756,7 +770,7 @@ const payload = {
       display: flex; justify-content: space-between; margin: 0 0 var(--sp-2); border: none; padding: 0;
     }
     .tier { margin-bottom: var(--sp-5); }
-    .price { font-family: var(--font-mono); color: var(--c-text-faint); }
+    .price { font-family: var(--font-mono); color: var(--c-soul); opacity: .85; }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: var(--sp-2); }
     .card {
       display: flex; flex-direction: column; align-items: center; gap: 5px;
@@ -785,6 +799,7 @@ const payload = {
       color: var(--c-bg); background: var(--cat);
     }
     .hovercard :global(.hc-meta) { font-size: 11px; color: var(--cat); margin-top: 2px; font-family: var(--font-mono); }
+    .hovercard :global(.hc-soul) { color: var(--c-soul); }
     .hovercard :global(.hc-desc) { font-size: 12px; color: var(--c-text); line-height: 1.6; margin: var(--sp-2) 0 0; }
     .hovercard :global(.hc-sec) {
       font-size: 10px; letter-spacing: .08em; text-transform: uppercase;

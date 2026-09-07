@@ -36,6 +36,11 @@
   --c-weapon: #e0a458; /* Weapon   7.7:1 */
   --c-vitality: #8cc96e; /* Vitality 8.6:1 */
   --c-spirit: #b58be6; /* Spirit   6.3:1 */
+  /* ---- ソウル: ゲーム内の通貨色に合わせた水色 ---- */
+  --c-soul: #6fd4e8; /* ソウル額        9.8:1 */
+  --c-soul-dim: #3d8ea1; /* 罫線・枠        3.4:1 */
+  --c-soul-bg: rgb(111 212 232 / 0.1);
+
   --c-weapon-bg: rgb(224 164 88 / 0.12);
   --c-vitality-bg: rgb(140 201 110 / 0.12);
   --c-spirit-bg: rgb(181 139 230 / 0.12);
