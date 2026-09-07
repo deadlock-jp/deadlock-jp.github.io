@@ -3,11 +3,11 @@
 Valve の『Deadlock』のヒーロー・アイテム・スキルの数値を、日本語で引けるようにした
 データベース型サイトとビルドシミュレーターです。
 
-公開先: https://moromisocial-collab.github.io/deadlock-wiki/
+公開先: https://deadlock-jp.github.io/
 
 ## これは何か
 
-**ファンが個人で作っている非公式サイトです。Valve Corporation とは一切関係がなく、
+**ファンの有志が作っている非公式サイトです。Valve Corporation とは一切関係がなく、
 許諾も受けていません。**
 
 やっていることは、ゲーム本体とデータリポジトリから数値を機械的に取り出し、
