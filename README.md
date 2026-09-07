@@ -40,10 +40,10 @@ MIT ライセンスが及ぶのはコードだけで、`data/` と `public/image
 |---|---|
 | ヒーロー・アイテム・スキルの数値 | [GameTracking-Deadlock](https://github.com/SteamDatabase/GameTracking-Deadlock) の `.vdata`（KV3テキスト） |
 | 日本語の表示テキスト | ゲーム本体の `citadel_*_japanese.txt`（公式ローカライズ） |
-| アイコン画像 | ゲーム本体の VPK から抽出（393枚） |
+| アイコン画像・ヒーロー肖像 | ゲーム本体の VPK から抽出 |
 
 数値は人手で書き写しておらず、すべてパーサーが自動で取り出しています。
-どのフィールドをどう解釈したかは `architecture.html` に記録してあります。
+どのフィールドをどう解釈したかは `src/parsers/` のコードとコメントに書いてあります。
 
 ## 開発
 
@@ -68,9 +68,11 @@ npm run parse -- --gt <GameTracking-Deadlockのパス>
 src/parsers/   .vdata → data/*.json のパーサー
 src/pages/     Astroのページ
 src/lib/       表示テキストの解決（トークンID → 日本語）
+src/components/  アイコン・肖像の表示
 data/          パース済みJSON
-public/images/ ゲームから抽出したアイコン
-architecture.html  設計・データ構造・判明した仕様の記録
+public/images/ ゲームから抽出した画像
+tools/         ゲーム本体から画像を取り出すためのバッチ
 ```
 
-作業のルールは `CLAUDE.md`、詳細は `architecture.html` にあります。
+`data/image-manifest.json` が「どの画像がどこから来てどこに置かれるか」の対応表です。
+`tools/make-arrange-bat.ts` はこの対応表から取り出し用のバッチを生成します。

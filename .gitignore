@@ -17,3 +17,12 @@ game-localization/
 Claude outputs/
 _to_delete/
 *.tgz
+
+# 作業用のドキュメント。手元には残すが、サイトのビルドには不要なので公開しない
+CLAUDE.md
+architecture.html
+docs/
+実測チェックリスト.md
+実測チェックリスト_記入済み.md
+実測チェックリストv2.md
+ゲーム本体からの抽出手順.md

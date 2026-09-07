@@ -54,7 +54,7 @@ export function decodeBuild(hash: string): BuildState {
  * levels は heroes.json の levels(レベル昇順・requiredGold は累積必要ソウル)。
  *
  * 横軸を購入順にしているため、各時点の累積コストをその時点の獲得ソウル総額と
- * みなしている。詳細は architecture.html の「成長曲線」を参照。
+ * みなしている。詳細はプロジェクトの設計メモ(architecture.html、リポジトリ外)を参照。
  */
 export function levelForSouls(
   levels: { level: number; requiredGold: number }[],
