@@ -2,20 +2,39 @@
 import Base from "../../layouts/Base.astro";
 import AbilityIcon from "../../components/AbilityIcon.astro";
 import HeroRender from "../../components/HeroRender.astro";
-import { releasedHeroes, t, describe, ability, modifierLabel } from "../../lib/data.ts";
+import StatRadar from "../../components/StatRadar.astro";
+import {
+  releasedHeroes,
+  t,
+  describe,
+  ability,
+  modifierLabel,
+  heroTags,
+  heroNotes,
+} from "../../lib/data.ts";
+import { heroRadar } from "../../lib/herorank.ts";
+import { skillCard } from "../../lib/skillcard.ts";
 
 export function getStaticPaths() {
   return releasedHeroes().map((h) => ({ params: { id: String(h.id) }, props: { hero: h } }));
 }
 const { hero } = Astro.props;
 const name = t(hero.nameToken, hero.key);
+const tags = heroTags(hero);
+const radar = heroRadar(hero.id);
 
 const weaponSlot = hero.abilities.find((a) => a.slot === "Weapon_Primary");
 const weapon = weaponSlot ? ability(weaponSlot.abilityKey)?.weapon ?? null : null;
 const skills = hero.abilities
   .filter((a) => a.slot.startsWith("Signature"))
-  .map((a) => ({ slot: a.slot, ab: ability(a.abilityKey), key: a.abilityKey }))
-  .filter((s) => s.ab);
+  .sort((a, b) => a.slot.localeCompare(b.slot))
+  .map((a) => {
+    const ab = ability(a.abilityKey);
+    return ab
+      ? { key: a.abilityKey, ab, card: skillCard(ab), notes: heroNotes(a.abilityKey) }
+      : null;
+  })
+  .filter((s): s is NonNullable<typeof s> => s !== null);
 
 const STAT_LABELS: Record<string, string> = {
   EMaxHealth: "最大HP",
@@ -32,18 +51,38 @@ const shown = Object.entries(STAT_LABELS)
 
 const levels = hero.levels.filter((l) => l.level % 5 === 0 || l.level === 1 || l.level === 36);
 const bonus = hero.levelUpBonuses;
+const spiritBadge = (scale: number | null) => (scale ? `×${scale}` : null);
 ---
 
 <Base title={name} description={`${name} の基礎ステータス・スキル・成長`}>
   <a class="back" href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/heroes/`}>← ヒーロー一覧</a>
   <HeroRender name={name} heroKey={hero.key} />
   <h1>{name}</h1>
+  {tags.length > 0 && (
+    <ul class="tags">
+      {tags.map((tag) => (
+        <li>{tag}</li>
+      ))}
+    </ul>
+  )}
   <p class="lead">{t(hero.roleToken, "")}</p>
+
+  <div class="radars">
+    <StatRadar axes={radar.base} cssVar="vitality" title="基礎スタッツ" />
+    {radar.weapon.length > 0 && <StatRadar axes={radar.weapon} cssVar="weapon" title="武器" />}
+  </div>
+  <p class="radarnote">
+    各軸は実装済み {releasedHeroes().length} 体の中での位置（中央＝最下位、外周＝最上位）。
+    破線は中央値の目安です。
+  </p>
 
   <h2>基礎ステータス</h2>
   <ul class="statgrid">
     {shown.map((s) => (
-      <li><span class="l">{s.label}</span><span class="v">{s.value}</span></li>
+      <li>
+        <span class="l">{s.label}</span>
+        <span class="v">{s.value}</span>
+      </li>
     ))}
   </ul>
 
@@ -62,25 +101,89 @@ const bonus = hero.levelUpBonuses;
   )}
 
   <h2>スキル</h2>
-  <ul class="skills">
-    {skills.map((s) => (
-      <li class={s.ab!.kind === "Ultimate" ? "ult" : undefined}>
-        <AbilityIcon
-          name={t(s.key, s.key)}
-          image={s.ab!.image}
-          cssVar={s.ab!.kind === "Ultimate" ? "spirit" : "accent"}
-        />
-        <div class="sbody">
-          <span class="sname">
-            {t(s.key, s.key)}
-            {/* kind は abilities.vdata の値。Signature_4 は全38体で Ultimate だった */}
-            {s.ab!.kind === "Ultimate" && <span class="ult-tag">アルティメット</span>}
-          </span>
-          <span class="sdesc">{describe(`${s.key}_desc`, s.ab!.properties, "（説明なし）")}</span>
-        </div>
-      </li>
-    ))}
-  </ul>
+  <div class="skills">
+    {skills.map((s) => {
+      const isUlt = s.ab.kind === "Ultimate";
+      return (
+        <article class:list={["skill", { ult: isUlt }]}>
+          <header class="shead">
+            <AbilityIcon
+              name={t(s.key, s.key)}
+              image={s.ab.image}
+              size={44}
+              cssVar={isUlt ? "spirit" : "accent"}
+            />
+            <div class="stitle">
+              <span class="sname">
+                {t(s.key, s.key)}
+                {isUlt && <span class="ult-tag">アルティメット</span>}
+              </span>
+              {s.card.meta.length > 0 && (
+                <ul class="smeta">
+                  {s.card.meta.map((m) => (
+                    <li>
+                      <span class="mk">{m.label}</span>
+                      <span class="mv">{m.value}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </header>
+
+          <p class="sdesc">{describe(`${s.key}_desc`, s.ab.properties, "（説明なし）")}</p>
+
+          {(s.card.damage.length > 0 || s.card.effects.length > 0) && (
+            <ul class="srows">
+              {s.card.damage.map((d) => (
+                <li class="dmg">
+                  <span class="l">{d.label}</span>
+                  <span class="v">
+                    {d.value}
+                    {spiritBadge(d.scale) && <span class="spirit-badge">{spiritBadge(d.scale)}</span>}
+                  </span>
+                </li>
+              ))}
+              {s.card.effects.map((e) => (
+                <li>
+                  <span class="l">{e.label}</span>
+                  <span class="v">{e.value}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {s.card.upgrades.length > 0 && (
+            <ol class="supg">
+              {s.card.upgrades.map((tier) => (
+                <li>
+                  <span class="ap">{tier.ap}<small>AP</small></span>
+                  <span class="urows">
+                    {tier.rows.map((r) => (
+                      <span class="u">
+                        {r.label} <b>{r.value}</b>
+                      </span>
+                    ))}
+                  </span>
+                </li>
+              ))}
+            </ol>
+          )}
+
+          {s.notes.length > 0 && (
+            <div class="snotes">
+              <span class="nt">メモ</span>
+              <ul>
+                {s.notes.map((note) => (
+                  <li>{note}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </article>
+      );
+    })}
+  </div>
 
   <h2>レベルと成長</h2>
   <p class="note">
@@ -97,7 +200,8 @@ const bonus = hero.levelUpBonuses;
       <tbody>
         {levels.map((l) => {
           const boons = hero.levels.filter((x) => x.level <= l.level && x.useStandardUpgrade).length;
-          const hp = hero.startingStats.EMaxHealth + boons * (bonus.MODIFIER_VALUE_BASE_HEALTH_FROM_LEVEL ?? 0);
+          const hp =
+            hero.startingStats.EMaxHealth + boons * (bonus.MODIFIER_VALUE_BASE_HEALTH_FROM_LEVEL ?? 0);
           return (
             <tr>
               <td>Lv{l.level}</td>
@@ -112,8 +216,38 @@ const bonus = hero.levelUpBonuses;
 
   <style>
     .back { font-size: 13px; }
-    h1 { margin-top: var(--sp-4); }
+    h1 { margin-top: var(--sp-4); margin-bottom: var(--sp-2); }
+    .tags {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-2);
+      padding: 0;
+      margin: 0 0 var(--sp-2);
+    }
+    .tags li {
+      font-size: 12px;
+      color: var(--c-accent);
+      border: 1px solid var(--c-accent-dim);
+      border-radius: 999px;
+      padding: 1px 10px;
+    }
     .lead { color: var(--c-text-muted); margin-top: var(--sp-1); }
+
+    .radars {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-4) var(--sp-7);
+      justify-content: center;
+      margin: var(--sp-5) 0 var(--sp-2);
+      padding: var(--sp-4) var(--sp-5);
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-lg);
+    }
+    .radars :global(.radar) { flex: 0 1 300px; }
+    .radarnote { font-size: 11px; color: var(--c-text-faint); text-align: center; margin: 0 0 var(--sp-4); }
+
     .statgrid {
       list-style: none; padding: 0; margin: 0;
       display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: var(--sp-2);
@@ -125,21 +259,79 @@ const bonus = hero.levelUpBonuses;
     .statgrid .l { display: block; font-size: 11px; color: var(--c-text-muted); letter-spacing: .05em; }
     .statgrid .v { font-family: var(--font-mono); font-size: 19px; color: var(--c-text-strong); }
     .statgrid .v small { font-size: 11px; color: var(--c-text-muted); font-family: var(--font-sans); }
-    .skills { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--sp-2); }
-    .skills li {
-      display: flex; align-items: flex-start; gap: var(--sp-3);
-      background: var(--c-surface); border: 1px solid var(--c-border);
-      border-left: 3px solid var(--c-accent); border-radius: var(--radius); padding: var(--sp-3) var(--sp-4);
+
+    /* ---- スキルカード ---- */
+    .skills { display: grid; gap: var(--sp-3); }
+    .skill {
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-left: 3px solid var(--c-accent);
+      border-radius: var(--radius);
+      padding: var(--sp-3) var(--sp-4) var(--sp-4);
     }
-    .skills li.ult { border-left-color: var(--c-spirit); }
-    .sbody { min-width: 0; }
-    .sname { display: block; font-weight: 600; color: var(--c-text-strong); }
+    .skill.ult { border-left-color: var(--c-spirit); }
+    .shead { display: flex; align-items: flex-start; gap: var(--sp-3); }
+    .stitle { min-width: 0; flex: 1; }
+    .sname { display: block; font-weight: 700; color: var(--c-text-strong); font-size: 15px; }
     .ult-tag {
       margin-left: var(--sp-2); padding: 1px 5px; border-radius: 3px;
       font-size: 10px; font-weight: 700; letter-spacing: 0.04em; vertical-align: 1px;
       color: var(--c-spirit); background: var(--c-spirit-bg); border: 1px solid var(--c-spirit);
     }
-    .sdesc { font-size: 13px; color: var(--c-text-muted); }
+    .smeta {
+      list-style: none; padding: 0; margin: var(--sp-2) 0 0;
+      display: flex; flex-wrap: wrap; gap: 5px;
+    }
+    .smeta li {
+      display: flex; gap: 4px; align-items: baseline;
+      background: var(--c-surface-2); border: 1px solid var(--c-border);
+      border-radius: var(--radius); padding: 1px 7px; font-size: 11px;
+    }
+    .smeta .mk { color: var(--c-text-muted); }
+    .smeta .mv { font-family: var(--font-mono); color: var(--c-text-strong); }
+
+    .sdesc { font-size: 13px; color: var(--c-text-muted); line-height: 1.7; margin: var(--sp-3) 0 0; }
+
+    .srows { list-style: none; padding: 0; margin: var(--sp-3) 0 0; }
+    .srows li {
+      display: flex; justify-content: space-between; align-items: baseline; gap: var(--sp-3);
+      padding: 4px 0; font-size: 13px; border-bottom: 1px solid var(--c-border);
+    }
+    .srows .l { color: var(--c-text-muted); }
+    .srows .v { font-family: var(--font-mono); color: var(--c-text-strong); white-space: nowrap; }
+    .srows li.dmg .v { color: var(--c-spirit); }
+    .spirit-badge {
+      margin-left: 5px; font-size: 10px; font-family: var(--font-sans);
+      color: var(--c-spirit); border: 1px solid var(--c-spirit); border-radius: 3px; padding: 0 3px;
+    }
+
+    .supg { list-style: none; padding: 0; margin: var(--sp-3) 0 0; display: grid; gap: 4px; }
+    .supg > li {
+      display: flex; gap: var(--sp-3); align-items: baseline;
+      font-size: 12px; padding: 3px 0;
+    }
+    .supg .ap {
+      flex: 0 0 auto; font-family: var(--font-mono); font-size: 12px;
+      color: var(--c-accent); border: 1px solid var(--c-accent-dim); border-radius: var(--radius);
+      padding: 1px 6px; min-width: 34px; text-align: center;
+    }
+    .supg .ap small { font-size: 9px; opacity: 0.8; }
+    .skill.ult .supg .ap { color: var(--c-spirit); border-color: var(--c-spirit); }
+    .urows { display: flex; flex-wrap: wrap; gap: var(--sp-3); color: var(--c-text-muted); }
+    .urows .u b { font-family: var(--font-mono); color: var(--c-text-strong); }
+
+    .snotes {
+      margin-top: var(--sp-3); padding-top: var(--sp-3); border-top: 1px dashed var(--c-border);
+    }
+    .snotes .nt {
+      font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-text-muted);
+    }
+    .snotes ul { margin: var(--sp-1) 0 0; padding-left: 1.2em; font-size: 12px; color: var(--c-text-muted); line-height: 1.7; }
+
     .note { font-size: 12px; color: var(--c-text-muted); font-family: var(--font-mono); }
+
+    @media (max-width: 560px) {
+      .radars { gap: var(--sp-4); }
+    }
   </style>
 </Base>

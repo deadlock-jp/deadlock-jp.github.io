@@ -1,0 +1,123 @@
+---
+/**
+ * ステータスのレーダーチャート(自前SVG・ライブラリ非依存)。
+ *
+ * 各軸は「全実装済みヒーロー中の百分位(0..1)」。中央=最下位、外周=最上位。
+ * 数値の大小ではなく "他ヒーローと比べた位置" を見るためのもの。
+ * 破線の六角は全体の中央値(=百分位0.5)の目安。
+ */
+interface Axis {
+  label: string;
+  value: number; // 0..1
+  raw: string;
+}
+interface Props {
+  axes: Axis[];
+  size?: number;
+  /** アクセント色の CSS 変数名(weapon / vitality / spirit / accent) */
+  cssVar?: string;
+  title?: string;
+}
+const { axes, size = 260, cssVar = "accent", title } = Astro.props;
+
+const M = 46; // ラベルぶんの余白(viewBox を外側に広げる)
+const cx = size / 2;
+const cy = size / 2;
+const R = size / 2 - 12;
+const n = axes.length;
+
+/** i番目の軸の角度(真上から時計回り) */
+const ang = (i: number) => -Math.PI / 2 + (i * 2 * Math.PI) / n;
+const pt = (i: number, r: number): [number, number] => [
+  cx + Math.cos(ang(i)) * R * r,
+  cy + Math.sin(ang(i)) * R * r,
+];
+const poly = (r: number | ((i: number) => number)) =>
+  axes
+    .map((_, i) => pt(i, typeof r === "function" ? r(i) : r).map((v) => v.toFixed(1)).join(","))
+    .join(" ");
+
+const rings = [0.25, 0.5, 0.75, 1];
+const heroPoly = poly((i) => Math.max(0.04, axes[i].value));
+---
+
+<figure class="radar" style={`--cat: var(--c-${cssVar}); --cat-bg: var(--c-${cssVar}-bg)`}>
+  {title && <figcaption>{title}</figcaption>}
+  <svg viewBox={`${-M} ${-M} ${size + M * 2} ${size + M * 2}`} role="img" aria-label={title ?? "レーダーチャート"}>
+    {/* グリッド */}
+    {rings.map((r) => (
+      <polygon points={poly(r)} class="ring" />
+    ))}
+    {axes.map((_, i) => {
+      const [x, y] = pt(i, 1);
+      return <line x1={cx} y1={cy} x2={x} y2={y} class="spoke" />;
+    })}
+    {/* 中央値の目安 */}
+    <polygon points={poly(0.5)} class="median" />
+    {/* このヒーロー */}
+    <polygon points={heroPoly} class="hero" />
+    {axes.map((a, i) => {
+      const [x, y] = pt(i, 1.14);
+      const anchor = Math.abs(x - cx) < 8 ? "middle" : x < cx ? "end" : "start";
+      return (
+        <text x={x.toFixed(1)} y={y.toFixed(1)} text-anchor={anchor} class="lbl">
+          <tspan class="lname">{a.label}</tspan>
+          <tspan x={x.toFixed(1)} dy="11" class="lval">{a.raw}</tspan>
+        </text>
+      );
+    })}
+  </svg>
+</figure>
+
+<style>
+  .radar {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-2);
+  }
+  figcaption {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cat);
+  }
+  svg {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+  }
+  .ring {
+    fill: none;
+    stroke: var(--c-border);
+    stroke-width: 1;
+  }
+  .spoke {
+    stroke: var(--c-border);
+    stroke-width: 1;
+  }
+  .median {
+    fill: none;
+    stroke: var(--c-text-faint);
+    stroke-width: 1;
+    stroke-dasharray: 3 3;
+  }
+  .hero {
+    fill: color-mix(in srgb, var(--cat) 24%, transparent);
+    stroke: var(--cat);
+    stroke-width: 2;
+    stroke-linejoin: round;
+  }
+  .lbl {
+    font-size: 10px;
+  }
+  .lname {
+    fill: var(--c-text-muted);
+  }
+  .lval {
+    fill: var(--c-text-strong);
+    font-family: var(--font-mono);
+    font-size: 10px;
+  }
+</style>
