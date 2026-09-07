@@ -88,6 +88,8 @@ const payload = {
           .map((c) => itemsFile.items[c])
           .filter((c) => c !== undefined)
           .map((c) => t(c.nameToken, c.id)),
+        // 上位アイテムを買ったときに下位を外すための参照。名前ではなくIDで持つ
+        componentIds: i.componentItems.filter((c) => itemsFile.items[c] !== undefined),
         usedIn: usedIn(i.id).map((c) => t(c.nameToken, c.id)),
       },
     ]),
@@ -117,9 +119,6 @@ const payload = {
         {heroes.map((h) => <option value={h.id}>{t(h.nameToken, h.key)}</option>)}
       </select>
     </label>
-    <span class="totals">
-      <span class="t"><b id="t-level">—</b></span>
-    </span>
     <span class="acts">
       <button class="share" id="share">共有URLをコピー</button>
       <button class="clear" id="clear">クリア</button>
@@ -146,6 +145,7 @@ const payload = {
       */}
       <div class="slotbar">
         <span class="slotcount"><b id="t-count">0</b> / 12</span>
+        <span class="lvl"><b id="t-level">Lv—</b></span>
         <span class="soulcost">
           <SoulIcon size={15} />
           <b id="t-souls">0</b>
@@ -282,6 +282,27 @@ const payload = {
       return payload.heroes.find((h) => h.id === heroId) ?? null;
     }
 
+    /**
+     * そのアイテムが内包している素材アイテムを、入れ子も含めて全部返す。
+     * 素材の素材まであるもの(トランセンデント ← クールダウンブースト ← コンプレッサー)が
+     * 実在するため再帰で辿る。
+     */
+    function allComponents(id, seen = new Set()) {
+      for (const c of payload.items[id]?.componentIds ?? []) {
+        if (seen.has(c)) continue;
+        seen.add(c);
+        allComponents(c, seen);
+      }
+      return seen;
+    }
+
+    /** いま持っているアイテムに内包されている(=個別に持つ意味がない)IDの集合 */
+    function coveredIds() {
+      const out = new Set();
+      for (const id of picked) for (const c of allComponents(id)) out.add(c);
+      return out;
+    }
+
     function levelForSouls(levels, spent) {
       let current = levels.length ? levels[0].level : 1;
       for (const l of levels) {
@@ -369,6 +390,20 @@ const payload = {
       $("hero").value = heroId === null ? "" : String(heroId);
     }
 
+    /**
+     * 現在のスピリットパワー。
+     * 購入ボーナス(累計投資額の階段)と、アイテムの常時パッシブぶんを足したもの。
+     * どちらも平坦加算なので、%の合成規則が未確定でもこの値は確定できる。
+     */
+    function spiritPower(cost) {
+      const type = payload.costBonusTarget.Tech.valueType;
+      let v = costBonusStep("Tech", cost.Tech)?.bonus ?? 0;
+      for (const id of picked) {
+        for (const m of payload.items[id]?.mods ?? []) if (m.type === type) v += m.value;
+      }
+      return v;
+    }
+
     /** TYPE別ボックス。ヒーロー未選択のときは案内だけ出す */
     function renderBoxes(cost) {
       const h = hero();
@@ -393,8 +428,11 @@ const payload = {
             `<b>${esc(h.weaponHead.dps)}</b> DPS` +
             `<small>${esc(h.weaponName)} / 減衰 ${esc(h.weaponHead.falloffStart)} → ${esc(h.weaponHead.falloffEnd)}</small>`;
         } else if (slot === "Tech") {
-          const step = costBonusStep("Tech", cost.Tech);
-          head.innerHTML = `<b>${step ? step.bonus : 0}</b> スピリットパワー`;
+          const sp = spiritPower(cost);
+          const fromBonus = costBonusStep("Tech", cost.Tech)?.bonus ?? 0;
+          head.innerHTML =
+            `<b>${Math.round(sp * 10) / 10}</b> スピリットパワー` +
+            `<small>購入ボーナス ${fromBonus} + アイテム ${Math.round((sp - fromBonus) * 10) / 10}</small>`;
         } else if (slot === "Armor") {
           const hp = h.rows.Armor.find((r) => r.label === "最大HP");
           head.innerHTML = hp ? `<b>${esc(hp.value)}</b> 最大HP<small>アイテム未反映の基礎値</small>` : "";
@@ -423,7 +461,7 @@ const payload = {
       if (!h) {
         box.innerHTML = '<li class="empty">—</li>';
       } else {
-        const sp = costBonusStep("Tech", cost.Tech)?.bonus ?? 0;
+        const sp = spiritPower(cost);
         box.innerHTML = h.abilities
           .map((a) => {
             const icon = document.querySelector(`.aicon-src[data-ab="${CSS.escape(a.key)}"]`);
@@ -477,8 +515,11 @@ const payload = {
       renderSlots();
       renderBoxes(cost);
       renderStats(cost);
+      const covered = coveredIds();
       for (const c of document.querySelectorAll(".card")) {
-        c.classList.toggle("on", picked.includes(c.dataset.id));
+        const id = c.dataset.id;
+        c.classList.toggle("on", picked.includes(id));
+        c.classList.toggle("covered", covered.has(id));
       }
     }
 
@@ -513,19 +554,38 @@ const payload = {
         (it.usedIn.length ? `<div class="hc-rel">上位: ${esc(it.usedIn.join("、"))}</div>` : "");
       card.hidden = false;
 
-      // 画面外にはみ出さない位置に置く
-      const r = anchor.getBoundingClientRect();
-      const cw = card.offsetWidth;
-      const ch = card.offsetHeight;
-      // ショップが右側にあるため、左に出すと自分のステータス欄を隠してしまう。右を優先する
-      let left = r.right + 10;
-      if (left + cw > window.innerWidth - 8) left = r.left - cw - 10;
-      if (left < 8) left = Math.max(8, window.innerWidth - cw - 8);
-      let top = r.top + window.scrollY - 4;
-      const maxTop = window.scrollY + window.innerHeight - ch - 8;
-      if (top > maxTop) top = Math.max(window.scrollY + 8, maxTop);
-      card.style.left = left + "px";
-      card.style.top = top + "px";
+      /*
+       * 位置決め。カードは position: fixed なので、ビューポート座標をそのまま入れる。
+       *
+       * 縦は、カードがビューポートより高い場合に上端が画面外へ飛ばないよう、
+       * 下端クランプのあとに必ず上端クランプをかける(順序が逆だと画面外に出る)。
+       *
+       * 高さは直後に変わることがある(Webフォントの適用で行の折り返しが変わる)。
+       * 1回だけ測って置くと下にはみ出すため、次の描画フレームでもう一度測り直す。
+       */
+      const place = () => {
+        const M = 8; // 画面端からの余白
+        const r = anchor.getBoundingClientRect();
+        const cw = card.offsetWidth;
+        const ch = card.offsetHeight;
+        const vw = document.documentElement.clientWidth;
+        const vh = document.documentElement.clientHeight;
+
+        // ショップが右側にあるため、左に出すと自分のステータス欄を隠す。右を優先する
+        let left = r.right + 10;
+        if (left + cw > vw - M) left = r.left - cw - 10;
+        left = Math.min(left, vw - cw - M);
+        left = Math.max(M, left);
+
+        let top = r.top - 4;
+        top = Math.min(top, vh - ch - M);
+        top = Math.max(M, top);
+
+        card.style.left = left + "px";
+        card.style.top = top + "px";
+      };
+      place();
+      requestAnimationFrame(place);
     }
     function hideCard() {
       card.hidden = true;
@@ -536,8 +596,20 @@ const payload = {
       el.addEventListener("click", () => {
         const id = el.dataset.id;
         const at = picked.indexOf(id);
-        if (at >= 0) picked.splice(at, 1);
-        else picked.push(id);
+        if (at >= 0) {
+          picked.splice(at, 1);
+        } else {
+          // 既に持っている上位アイテムに内包されているものは、単体で足す意味がない
+          if (coveredIds().has(id)) return;
+          /*
+           * 上位アイテムは下位アイテムの効果を含むので、下位は外す。
+           * 価格もこれで辻褄が合う。ゲームでは素材を先に買うと差額で強化できるため、
+           * 「素材800 + 差額2400」も「上位を直接3200」も合計は同じになる。
+           */
+          const drop = allComponents(id);
+          picked = picked.filter((x) => !drop.has(x));
+          picked.push(id);
+        }
         refresh(false);
       });
       el.addEventListener("mouseenter", () => showCard(el.dataset.id, el));
@@ -654,6 +726,12 @@ const payload = {
     .slotcount { font-size: 11px; color: var(--c-text-muted); font-family: var(--font-mono); }
     .slotcount b { color: var(--c-text-strong); font-size: 13px; }
     .slotcount.over b { color: #d08a3e; }
+    .lvl { margin-right: auto; }
+    .lvl b {
+      font-family: var(--font-mono); font-size: 13px; color: var(--c-accent);
+      border: 1px solid var(--c-accent-dim); border-radius: var(--radius);
+      padding: 2px 8px;
+    }
     /* ソウルの合計。ゲームの通貨表示に合わせて水色で目立たせる */
     .soulcost {
       display: flex; align-items: center; gap: 5px;
@@ -664,9 +742,16 @@ const payload = {
     .soulcost b { font-family: var(--font-mono); font-size: 17px; line-height: 1.1; letter-spacing: -0.01em; }
     .soulcost small { font-size: 10px; color: var(--c-soul); opacity: .75; }
 
-    /* 2段×6。埋まった枠はTYPEの色で縁取る */
+    /*
+     * 2段×6。ゲームと同じく「上下を埋めてから次の列へ」進む。
+     * grid-auto-flow: column にすると、列ごとに行を埋めてから次の列に移る。
+     */
     .cells {
-      display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: repeat(2, auto);
+      grid-auto-flow: column;
+      gap: 5px;
     }
     .cells :global(.cell) {
       aspect-ratio: 1; border-radius: 5px;
@@ -781,11 +866,20 @@ const payload = {
     }
     .card:hover { background: var(--cat-bg); border-color: var(--cat); color: var(--c-text); }
     .card.on { border-color: var(--cat); background: var(--cat-bg); color: var(--c-text-strong); box-shadow: inset 0 0 0 1px var(--cat); }
+    /* 上位アイテムに内包されているもの。単体で持つ意味がないので選べない */
+    .card.covered { opacity: 0.32; cursor: not-allowed; }
+    .card.covered:hover { background: var(--c-surface); border-color: var(--c-border); }
     .cname { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
     /* ---- ホバーカード ---- */
     .hovercard {
-      position: absolute; z-index: 50; width: 280px;
+      /*
+       * position: absolute だと基準が .site-main(position:relative)になり、
+       * ビューポート座標で計算した値がヘッダーぶんずれて下にはみ出す。
+       * fixed にして、そのままビューポート座標で置く。
+       */
+      position: fixed; z-index: 40; width: 280px;
+      max-height: calc(100vh - 16px); overflow: auto;
       background: var(--c-surface); border: 1px solid var(--cat);
       border-left: 3px solid var(--cat);
       border-radius: var(--radius); padding: var(--sp-3);

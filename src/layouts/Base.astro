@@ -72,11 +72,16 @@ const path = Astro.url.pathname;
 
     <style>
       .site-header {
-        position: relative;
-        z-index: 1;
+        /*
+         * 追従ヘッダー。本文(.site-main)も z-index:1 を持っており、
+         * 同じ重なり順だと後ろにあるDOMが上に描かれてヘッダーに重なる。
+         * ヘッダー側を明示的に上に置く。
+         */
+        z-index: 20;
         border-bottom: 1px solid var(--c-border);
-        background: rgb(17 22 26 / 0.72);
-        backdrop-filter: blur(8px);
+        /* backdrop-filter が効かない環境でも本文が透けないよう、少し濃くする */
+        background: rgb(17 22 26 / 0.92);
+        backdrop-filter: blur(10px);
         position: sticky;
         top: 0;
       }
