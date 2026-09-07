@@ -47,7 +47,12 @@ const payload = {
     return {
       id: h.id,
       name: t(h.nameToken, h.key),
-      levels: h.levels.map((l) => ({ level: l.level, requiredGold: l.requiredGold })),
+      levels: h.levels.map((l) => ({
+        level: l.level,
+        requiredGold: l.requiredGold,
+        // 標準レベルアップ = Boon 1。Boon 数を数えるのに使う
+        up: l.useStandardUpgrade,
+      })),
       // 購入ボーナスはカテゴリへの累計投資額で決まる階段関数
       costBonuses: h.costBonuses,
       weaponHead: weaponHeadline(weapon),
@@ -56,6 +61,19 @@ const payload = {
         WeaponMod: weaponRows(h, weapon),
         Armor: vitalityRows(h),
         Tech: spiritRows(h),
+      },
+      /*
+       * 実測(実測チェックリストv2, 2026-09-07)で確定した式で最大HP・武器ダメージ・
+       * スピリットパワーの実数値をクライアント側で組み立てるための、素の数値。
+       */
+      calc: {
+        baseHealth: h.startingStats.EMaxHealth ?? 0,
+        healthPerBoon: h.levelUpBonuses.MODIFIER_VALUE_BASE_HEALTH_FROM_LEVEL ?? 0,
+        techPowerPerBoon: h.levelUpBonuses.MODIFIER_VALUE_TECH_POWER ?? 0,
+        bulletDamage: weapon?.bulletDamage ?? null,
+        bulletDamagePerBoon: h.levelUpBonuses.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL ?? 0,
+        cycleTime: weapon?.cycleTime ?? null,
+        bulletsPerShot: weapon?.bulletsPerShot ?? 1,
       },
       // ゲーム内の「スピリットパワーの影響値」と同じ並び
       abilities: abilityDamages(h),
@@ -191,8 +209,11 @@ const payload = {
       <section class="box plain">
         <header class="bhead"><h2>合計ステータス</h2></header>
         <p class="caveat">
-          常時パッシブと購入ボーナスを単純加算した値です。%の合成規則と基礎値への反映は
-          実測待ちのため、最終値には変換していません。
+          常時パッシブと購入ボーナスを種類ごとに単純加算した内訳です。
+          最大HP・武器ダメージ・スピリットパワーの実数値は上の各ボックスに出しています。
+          最大HP と Boon(レベル)分の扱いは実測チェックリストv2で確定した式によるもの。
+          武器ダメージのレベル成長と複数%の合成規則は直接測れておらず、
+          データ上の値と、HP実測(加算合成)からの推定で出しています。
         </p>
         <ul class="stats" id="stats"><li class="empty">—</li></ul>
       </section>
@@ -391,21 +412,87 @@ const payload = {
     }
 
     /**
-     * 現在のスピリットパワー。
-     * 購入ボーナス(累計投資額の階段)と、アイテムの常時パッシブぶんを足したもの。
-     * どちらも平坦加算なので、%の合成規則が未確定でもこの値は確定できる。
+     * 標準レベルアップの回数 = Boon 数。
+     * 実測(実測チェックリストv2 測定A, 2026-09-07)で、レベルアップによる基礎値の
+     * 増加分にも購入ボーナス%が掛かる(=%の内側)ことを確認済み。
      */
-    function spiritPower(cost) {
+    function boonCount(level) {
+      const levels = hero()?.levels ?? [];
+      let n = 0;
+      for (const l of levels) if (l.level > 1 && l.level <= level && l.up !== false) n++;
+      return n;
+    }
+
+    /** picked のアイテムが常時パッシブで供給する、指定タイプ(複数可)の合計 */
+    function sumMods(types) {
+      const want = Array.isArray(types) ? types : [types];
+      let v = 0;
+      for (const id of picked) {
+        for (const m of payload.items[id]?.mods ?? []) if (want.includes(m.type)) v += m.value;
+      }
+      return v;
+    }
+
+    /**
+     * 現在のスピリットパワー。すべて平坦加算なので%の合成規則に依らず確定できる。
+     *   レベルアップぶん(Boon あたり TECH_POWER。v1測定1で 1レベル +1.1 を実測確認)
+     * + 購入ボーナス(累計投資額の階段)
+     * + アイテムの常時パッシブぶん
+     */
+    function spiritPower(cost, level) {
+      const h = hero();
+      if (!h) return 0;
       const type = payload.costBonusTarget.Tech.valueType;
-      let v = costBonusStep("Tech", cost.Tech)?.bonus ?? 0;
+      let v = boonCount(level) * h.calc.techPowerPerBoon;
+      v += costBonusStep("Tech", cost.Tech)?.bonus ?? 0;
       for (const id of picked) {
         for (const m of payload.items[id]?.mods ?? []) if (m.type === type) v += m.value;
       }
       return v;
     }
 
+    /**
+     * 最大HP。実測(実測チェックリストv2, 2026-09-07)で確定した式:
+     *   (基礎HP + Boon数 × レベルあたりHP) × (1 + Vitality%の合計/100) + 平坦HP
+     * ・Vitality% は購入ボーナスの段とアイテムの%を「加算」してから1回だけ掛ける(測定B)
+     * ・平坦HP(HEALTH_MAX) は%適用後に足す(v1測定3)
+     * ・購入ボーナスの段は「投資額以下で最大の段」= 切り下げ(測定C)
+     */
+    function maxHealth(cost, level) {
+      const h = hero();
+      if (!h) return null;
+      const boon = boonCount(level) * h.calc.healthPerBoon;
+      const pct =
+        (costBonusStep("Armor", cost.Armor)?.bonus ?? 0) +
+        sumMods(["MODIFIER_VALUE_BASE_HEALTH_PERCENT", "MODIFIER_VALUE_HEALTH_MAX_PERCENT"]);
+      const flat = sumMods("MODIFIER_VALUE_HEALTH_MAX");
+      const total = (h.calc.baseHealth + boon) * (1 + pct / 100) + flat;
+      return { total, base: h.calc.baseHealth, boon, pct, flat };
+    }
+
+    /**
+     * 武器の1発ダメージと DPS。base に購入ボーナス%とアイテムの武器ダメージ%を掛ける。
+     * 単一%の適用は実測(v1測定4: Rapid Rounds で 5.5 → 6)で確認済み。
+     * 複数%の合成は直接測っていないが、HP(測定B)が加算合成だったのに揃えて「加算」で扱う。
+     */
+    function weaponDamage(cost, level) {
+      const h = hero();
+      if (!h || h.calc.bulletDamage === null) return null;
+      const boon = boonCount(level) * h.calc.bulletDamagePerBoon;
+      const pct =
+        (costBonusStep("WeaponMod", cost.WeaponMod)?.bonus ?? 0) +
+        sumMods("MODIFIER_VALUE_WEAPON_DAMAGE_INCREASE");
+      const perBullet = (h.calc.bulletDamage + boon) * (1 + pct / 100);
+      const dps = h.calc.cycleTime
+        ? (perBullet / h.calc.cycleTime) * (h.calc.bulletsPerShot || 1)
+        : null;
+      return { perBullet, dps, pct, base: h.calc.bulletDamage, boon };
+    }
+
+    const round1 = (n) => Math.round(n * 10) / 10;
+
     /** TYPE別ボックス。ヒーロー未選択のときは案内だけ出す */
-    function renderBoxes(cost) {
+    function renderBoxes(cost, level) {
       const h = hero();
       for (const slot of SLOTS) {
         const rows = document.querySelector(`[data-rows="${slot}"]`);
@@ -419,23 +506,39 @@ const payload = {
           continue;
         }
 
+        // 「最大HP」「弾薬ダメージ」の行は、実測式で出した実数値に差し替える。
+        // 他の行(移動速度・弾速など)は反映規則が未確定なので基礎値のまま。
+        const mh = slot === "Armor" ? maxHealth(cost, level) : null;
+        const wd = slot === "WeaponMod" ? weaponDamage(cost, level) : null;
         rows.innerHTML = h.rows[slot]
-          .map((r) => `<li><span class="l">${esc(r.label)}</span><span class="v">${esc(r.value)}</span></li>`)
+          .map((r) => {
+            let value = r.value;
+            if (mh && r.label === "最大HP") value = String(Math.round(mh.total));
+            if (wd && r.label === "弾薬ダメージ") value = String(round1(wd.perBullet));
+            return `<li><span class="l">${esc(r.label)}</span><span class="v">${esc(value)}</span></li>`;
+          })
           .join("");
 
         if (slot === "WeaponMod" && h.weaponHead) {
+          const dps = wd && wd.dps !== null ? Math.round(wd.dps) : h.weaponHead.dps;
+          const pctNote = wd && wd.pct ? ` / 武器 +${round1(wd.pct)}%` : "";
           head.innerHTML =
-            `<b>${esc(h.weaponHead.dps)}</b> DPS` +
-            `<small>${esc(h.weaponName)} / 減衰 ${esc(h.weaponHead.falloffStart)} → ${esc(h.weaponHead.falloffEnd)}</small>`;
+            `<b>${esc(dps)}</b> DPS` +
+            `<small>${esc(h.weaponName)} / 減衰 ${esc(h.weaponHead.falloffStart)} → ${esc(h.weaponHead.falloffEnd)}${esc(pctNote)}</small>`;
         } else if (slot === "Tech") {
-          const sp = spiritPower(cost);
+          const sp = spiritPower(cost, level);
+          const fromLevel = boonCount(level) * h.calc.techPowerPerBoon;
           const fromBonus = costBonusStep("Tech", cost.Tech)?.bonus ?? 0;
+          const fromItems = sp - fromLevel - fromBonus;
           head.innerHTML =
-            `<b>${Math.round(sp * 10) / 10}</b> スピリットパワー` +
-            `<small>購入ボーナス ${fromBonus} + アイテム ${Math.round((sp - fromBonus) * 10) / 10}</small>`;
-        } else if (slot === "Armor") {
-          const hp = h.rows.Armor.find((r) => r.label === "最大HP");
-          head.innerHTML = hp ? `<b>${esc(hp.value)}</b> 最大HP<small>アイテム未反映の基礎値</small>` : "";
+            `<b>${round1(sp)}</b> スピリットパワー` +
+            `<small>レベル ${round1(fromLevel)} + 購入ボーナス ${fromBonus} + アイテム ${round1(fromItems)}</small>`;
+        } else if (slot === "Armor" && mh) {
+          const parts = [`基礎 ${Math.round(mh.base)}`];
+          if (mh.boon) parts.push(`Boon +${Math.round(mh.boon)}`);
+          if (mh.pct) parts.push(`×(1+${round1(mh.pct)}%)`);
+          if (mh.flat) parts.push(`平坦 +${Math.round(mh.flat)}`);
+          head.innerHTML = `<b>${Math.round(mh.total)}</b> 最大HP<small>${esc(parts.join(" "))}</small>`;
         } else {
           head.textContent = "";
         }
@@ -461,7 +564,7 @@ const payload = {
       if (!h) {
         box.innerHTML = '<li class="empty">—</li>';
       } else {
-        const sp = spiritPower(cost);
+        const sp = spiritPower(cost, level);
         box.innerHTML = h.abilities
           .map((a) => {
             const icon = document.querySelector(`.aicon-src[data-ab="${CSS.escape(a.key)}"]`);
@@ -510,10 +613,11 @@ const payload = {
       $("t-count").textContent = String(picked.length);
       document.querySelector(".slotcount").classList.toggle("over", picked.length > SLOT_TOTAL);
       const h = hero();
-      $("t-level").textContent = h ? "Lv" + levelForSouls(h.levels, spent) : "Lv—";
+      const level = h ? levelForSouls(h.levels, spent) : 1;
+      $("t-level").textContent = h ? "Lv" + level : "Lv—";
       renderHero();
       renderSlots();
-      renderBoxes(cost);
+      renderBoxes(cost, level);
       renderStats(cost);
       const covered = coveredIds();
       for (const c of document.querySelectorAll(".card")) {
