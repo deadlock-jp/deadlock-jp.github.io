@@ -23,6 +23,13 @@ const path = Astro.url.pathname;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title} | Deadlock 日本語リファレンス</title>
     {description && <meta name="description" content={description} />}
+    {/* ゲーム内表記に合わせて Noto Sans JP を使う。数字用に等幅も1書体だけ入れる */}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap"
+    />
   </head>
   <body>
     <header class="site-header">

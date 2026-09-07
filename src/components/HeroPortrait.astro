@@ -1,0 +1,107 @@
+---
+/**
+ * ヒーローの肖像。
+ *
+ * heroes.json の images.iconSmall / images.heroCard を image-manifest で
+ * 実ファイルに解決して表示する。実画像が無ければ頭文字のプレースホルダを描く
+ * (ItemIcon / AbilityIcon と同じ方針)。
+ *
+ * ゲーム本体から画像を取り出して public/images/heroes/ に置けば、
+ * 呼び出し側を変えずに実画像へ切り替わる。
+ */
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+import { resolveImagePath } from "../parsers/image-manifest.ts";
+
+interface Props {
+  name: string;
+  /** file://{images}/heroes/*.psd 形式 */
+  image: string | null;
+  /** sm = 一覧カード用の正方形 / card = 詳細ページ見出し用の横長 */
+  variant?: "sm" | "card";
+  /** sm のときの一辺(px) */
+  size?: number;
+}
+const { name, image, variant = "sm", size = 56 } = Astro.props;
+
+let src: string | null = null;
+if (image) {
+  const resolved = resolveImagePath(image);
+  if (resolved && existsSync(join(process.cwd(), resolved.outPath))) {
+    src = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/${resolved.outPath.replace(/^public\//, "")}`;
+  }
+}
+
+/** プレースホルダ用の頭文字。日本語名は先頭1文字を使う */
+const initial = /^[\x20-\x7e]+$/.test(name)
+  ? name
+      .split(/[\s'-]+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((w) => w[0]?.toUpperCase() ?? "")
+      .join("")
+  : name.slice(0, 1);
+---
+
+<span class:list={["portrait", variant]} style={`--size: ${size}px`} title={name}>
+  {
+    src ? (
+      <img src={src} alt="" loading="lazy" />
+    ) : (
+      <span class="ph" aria-hidden="true">
+        {initial}
+      </span>
+    )
+  }
+</span>
+
+<style>
+  .portrait {
+    display: block;
+    overflow: hidden;
+    background: var(--c-surface-2);
+    border: 1px solid var(--c-border);
+    line-height: 0;
+  }
+  .portrait.sm {
+    width: var(--size);
+    height: var(--size);
+    flex: 0 0 auto;
+    border-radius: 6px;
+  }
+  /* 詳細ページの見出し。横長に切り出して帯として見せる */
+  .portrait.card {
+    width: 100%;
+    aspect-ratio: 16 / 5;
+    border-radius: var(--radius-lg);
+  }
+  .portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  /* card は顔が中央より上にあるので、上寄りで切る */
+  .portrait.card img {
+    object-position: center 32%;
+  }
+  .ph {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--c-accent);
+    background:
+      repeating-linear-gradient(135deg, transparent 0 6px, rgb(255 255 255 / 0.02) 6px 12px),
+      var(--c-surface-2);
+  }
+  .portrait.sm .ph {
+    font-size: calc(var(--size) * 0.36);
+  }
+  .portrait.card .ph {
+    font-size: 40px;
+  }
+</style>

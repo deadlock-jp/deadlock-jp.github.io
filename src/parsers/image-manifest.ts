@@ -20,6 +20,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import type { ItemsFile } from "../types/item.ts";
 import type { AbilitiesFile } from "../types/ability.ts";
+import type { HeroesFile } from "../types/hero.ts";
 
 export interface ImageEntry {
   /** データ側の参照パス */
@@ -70,6 +71,9 @@ export function buildImageManifest(dataDir: string): ImageManifest {
   const abilities = JSON.parse(
     readFileSync(join(dataDir, "abilities.json"), "utf8"),
   ) as AbilitiesFile;
+  const heroes = JSON.parse(
+    readFileSync(join(dataDir, "heroes.json"), "utf8"),
+  ) as HeroesFile;
 
   const byRef = new Map<string, ImageEntry>();
   const add = (ref: string | null, user: string): void => {
@@ -89,6 +93,13 @@ export function buildImageManifest(dataDir: string): ImageManifest {
   }
   for (const ab of Object.values(abilities.abilities)) {
     add(ab.image, `ability:${ab.id}`);
+  }
+  // 未実装ヒーローの絵は取り込まない。VPKに無いこともあるため
+  for (const h of Object.values(heroes.heroes)) {
+    if (!h.released) continue;
+    add(h.images.iconSmall, `hero:${h.key}:sm`);
+    add(h.images.heroCard, `hero:${h.key}:card`);
+    add(h.images.minimap, `hero:${h.key}:mm`);
   }
 
   const entries = [...byRef.values()].sort((a, b) => a.vpkPath.localeCompare(b.vpkPath));

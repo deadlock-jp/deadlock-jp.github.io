@@ -111,6 +111,18 @@ export interface Hero {
   };
   /** スロット → abilities.vdata のキー */
   abilities: BoundAbility[];
+  /**
+   * ヒーローの画像参照(file://{images}/... 形式)。
+   * item/ability と同じく image-manifest 経由で実ファイルに解決する。
+   *   iconSmall: 一覧カード用の小さい肖像
+   *   heroCard:  詳細ページの見出し用の大きい絵
+   *   minimap:   ミニマップ用の小アイコン(現在は未使用だが対応表には載せる)
+   */
+  images: {
+    iconSmall: string | null;
+    heroCard: string | null;
+    minimap: string | null;
+  };
 }
 
 export interface HeroesFile {

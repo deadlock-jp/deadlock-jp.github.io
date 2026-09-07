@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "upstreamCommit": "c34d25e806a6410f00037d34782d45fe2b9f550f",
-  "generatedAt": "2026-09-05T05:17:53.793Z",
+  "generatedAt": "2026-09-07T04:28:27.362Z",
   "heroes": {
     "1": {
       "id": 1,
@@ -732,7 +732,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_fire_bomb"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/inferno_sm.psd",
+        "heroCard": "file://{images}/heroes/inferno_card.psd",
+        "minimap": "file://{images}/heroes/inferno_mm.psd"
+      }
     },
     "2": {
       "id": 2,
@@ -1463,7 +1468,12 @@
           "slot": "Signature_4",
           "abilityKey": "citadel_ability_storm_cloud"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/gigawatt_sm.psd",
+        "heroCard": "file://{images}/heroes/gigawatt_card.psd",
+        "minimap": "file://{images}/heroes/gigawatt_mm.psd"
+      }
     },
     "3": {
       "id": 3,
@@ -2194,7 +2204,12 @@
           "slot": "Signature_4",
           "abilityKey": "citadel_ability_hornet_snipe"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/hornet_sm.png",
+        "heroCard": "file://{images}/heroes/hornet_card.psd",
+        "minimap": "file://{images}/heroes/hornet_mm.psd"
+      }
     },
     "4": {
       "id": 4,
@@ -2925,7 +2940,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_health_swap"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/spectre_sm.psd",
+        "heroCard": "file://{images}/heroes/spectre_card.psd",
+        "minimap": "file://{images}/heroes/spectre_mm.psd"
+      }
     },
     "6": {
       "id": 6,
@@ -3656,7 +3676,12 @@
           "slot": "Signature_4",
           "abilityKey": "citadel_ability_bull_leap"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/bull_sm.psd",
+        "heroCard": "file://{images}/heroes/bull_card.psd",
+        "minimap": "file://{images}/heroes/bull_mm.psd"
+      }
     },
     "7": {
       "id": 7,
@@ -4387,7 +4412,12 @@
           "slot": "Signature_4",
           "abilityKey": "citadel_ability_psychic_lift"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/wraith_sm.psd",
+        "heroCard": "file://{images}/heroes/wraith_card.psd",
+        "minimap": "file://{images}/heroes/wraith_mm.psd"
+      }
     },
     "8": {
       "id": 8,
@@ -5118,7 +5148,12 @@
           "slot": "Signature_4",
           "abilityKey": "citadel_ability_rocket_barrage"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/engineer_sm.psd",
+        "heroCard": "file://{images}/heroes/engineer_card.psd",
+        "minimap": "file://{images}/heroes/engineer_mm.psd"
+      }
     },
     "10": {
       "id": 10,
@@ -5849,7 +5884,12 @@
           "slot": "Signature_4",
           "abilityKey": "citadel_ability_chrono_swap"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/chrono_sm.psd",
+        "heroCard": "file://{images}/heroes/chrono_card.psd",
+        "minimap": "file://{images}/heroes/chrono_mm.psd"
+      }
     },
     "11": {
       "id": 11,
@@ -6580,7 +6620,12 @@
           "slot": "Signature_4",
           "abilityKey": "citadel_ability_self_vacuum"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/sumo_sm.psd",
+        "heroCard": "file://{images}/heroes/sumo_card.psd",
+        "minimap": "file://{images}/heroes/sumo_mm.psd"
+      }
     },
     "12": {
       "id": 12,
@@ -7311,7 +7356,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_ice_dome"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/kelvin_sm.psd",
+        "heroCard": "file://{images}/heroes/kelvin_card.psd",
+        "minimap": "file://{images}/heroes/kelvin_mm.psd"
+      }
     },
     "13": {
       "id": 13,
@@ -8042,7 +8092,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_bullet_flurry"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/haze_sm.psd",
+        "heroCard": "file://{images}/heroes/haze_card.psd",
+        "minimap": "file://{images}/heroes/haze_mm.psd"
+      }
     },
     "14": {
       "id": 14,
@@ -8773,7 +8828,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_gravity_lasso"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/astro_sm.psd",
+        "heroCard": "file://{images}/heroes/astro_card.psd",
+        "minimap": "file://{images}/heroes/astro_mm.psd"
+      }
     },
     "15": {
       "id": 15,
@@ -9504,7 +9564,12 @@
           "slot": "Signature_4",
           "abilityKey": "citadel_ability_bebop_laser_beam"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/bebop_sm.psd",
+        "heroCard": "file://{images}/heroes/bebop_card.psd",
+        "minimap": "file://{images}/heroes/bebop_mm.psd"
+      }
     },
     "16": {
       "id": 16,
@@ -10235,7 +10300,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_nano_shadow_pulse"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/nano_sm.psd",
+        "heroCard": "file://{images}/heroes/nano_card.psd",
+        "minimap": "file://{images}/heroes/nano_mm.psd"
+      }
     },
     "17": {
       "id": 17,
@@ -10966,7 +11036,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_guided_arrow"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/archer_sm.psd",
+        "heroCard": "file://{images}/heroes/archer_card.psd",
+        "minimap": "file://{images}/heroes/archer_mm.psd"
+      }
     },
     "18": {
       "id": 18,
@@ -11697,7 +11772,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_ult_combo"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/digger_sm.psd",
+        "heroCard": "file://{images}/heroes/digger_card.psd",
+        "minimap": "file://{images}/heroes/digger_mm.psd"
+      }
     },
     "19": {
       "id": 19,
@@ -12432,7 +12512,12 @@
           "slot": "Signature_4",
           "abilityKey": "citadel_ability_shiv_killing_blow"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/shiv_sm.psd",
+        "heroCard": "file://{images}/heroes/shiv_card.psd",
+        "minimap": "file://{images}/heroes/shiv_mm.psd"
+      }
     },
     "20": {
       "id": 20,
@@ -13163,7 +13248,12 @@
           "slot": "Signature_4",
           "abilityKey": "citadel_ability_tengu_airlift"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/tengu_sm.psd",
+        "heroCard": "file://{images}/heroes/tengu_card.psd",
+        "minimap": "file://{images}/heroes/tengu_mm.psd"
+      }
     },
     "21": {
       "id": 21,
@@ -13894,7 +13984,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_kali_trappers_bolo"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/kali_sm.psd",
+        "heroCard": "file://{images}/heroes/kali_card.psd",
+        "minimap": "file://{images}/heroes/kali_mm.psd"
+      }
     },
     "25": {
       "id": 25,
@@ -14625,7 +14720,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_warden_riot_protocol"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/warden_sm.psd",
+        "heroCard": "file://{images}/heroes/warden_card.psd",
+        "minimap": "file://{images}/heroes/warden_mm.psd"
+      }
     },
     "27": {
       "id": 27,
@@ -15360,7 +15460,12 @@
           "slot": "Signature_4",
           "abilityKey": "citadel_ability_infinity_slash"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/yamato_sm.psd",
+        "heroCard": "file://{images}/heroes/yamato_card.psd",
+        "minimap": "file://{images}/heroes/yamato_mm.psd"
+      }
     },
     "31": {
       "id": 31,
@@ -16092,7 +16197,12 @@
           "slot": "Signature_4",
           "abilityKey": "citadel_ability_lash_ultimate"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/lash_sm.psd",
+        "heroCard": "file://{images}/heroes/lash_card.psd",
+        "minimap": "file://{images}/heroes/lash_mm.psd"
+      }
     },
     "35": {
       "id": 35,
@@ -16827,7 +16937,12 @@
           "slot": "Weapon_Secondary",
           "abilityKey": "citadel_weapon_viscous_set_2"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/viscous_sm.psd",
+        "heroCard": "file://{images}/heroes/viscous_card.psd",
+        "minimap": "file://{images}/heroes/viscous_mm.psd"
+      }
     },
     "38": {
       "id": 38,
@@ -17558,7 +17673,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_gunslinger_salvo"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/gunslinger_sm.psd",
+        "heroCard": "file://{images}/heroes/gunslinger_sm.psd",
+        "minimap": "file://{images}/heroes/gunslinger_mm.psd"
+      }
     },
     "39": {
       "id": 39,
@@ -18289,7 +18409,12 @@
           "slot": "Signature_4",
           "abilityKey": "yakuza_setting_sun"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/yakuza_sm.psd",
+        "heroCard": "file://{images}/heroes/yakuza_sm.psd",
+        "minimap": "file://{images}/heroes/yakuza_mm.psd"
+      }
     },
     "46": {
       "id": 46,
@@ -19020,7 +19145,12 @@
           "slot": "Signature_4",
           "abilityKey": "genericperson_ability_4"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/genericperson_sm.psd",
+        "heroCard": "file://{images}/heroes/genericperson_sm.psd",
+        "minimap": "file://{images}/heroes/genericperson_mm.psd"
+      }
     },
     "47": {
       "id": 47,
@@ -19751,7 +19881,12 @@
           "slot": "Signature_4",
           "abilityKey": "tokamak_crimson_cannon"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/tokamak_sm.psd",
+        "heroCard": "file://{images}/heroes/tokamak_card.psd",
+        "minimap": "file://{images}/heroes/tokamak_mm.psd"
+      }
     },
     "48": {
       "id": 48,
@@ -20482,7 +20617,12 @@
           "slot": "Signature_4",
           "abilityKey": "citadel_ability_wrecker_garbage_suck"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/wrecker_sm.psd",
+        "heroCard": "file://{images}/heroes/wrecker_card.psd",
+        "minimap": "file://{images}/heroes/wrecker_mm.psd"
+      }
     },
     "49": {
       "id": 49,
@@ -21213,7 +21353,12 @@
           "slot": "Signature_4",
           "abilityKey": "rutger_pulse"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/rutger_sm.psd",
+        "heroCard": "file://{images}/heroes/rutger_card.psd",
+        "minimap": "file://{images}/heroes/rutger_mm.psd"
+      }
     },
     "50": {
       "id": 50,
@@ -21945,7 +22090,12 @@
           "slot": "Signature_4",
           "abilityKey": "synth_affliction"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/synth_sm.psd",
+        "heroCard": "file://{images}/heroes/synth_card.psd",
+        "minimap": "file://{images}/heroes/synth_mm.psd"
+      }
     },
     "51": {
       "id": 51,
@@ -22676,7 +22826,12 @@
           "slot": "Signature_4",
           "abilityKey": "thumper_ability_4"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/thumper_sm.psd",
+        "heroCard": "file://{images}/heroes/thumper_sm.psd",
+        "minimap": "file://{images}/heroes/thumper_mm.psd"
+      }
     },
     "52": {
       "id": 52,
@@ -23407,7 +23562,12 @@
           "slot": "Signature_4",
           "abilityKey": "mirage_teleport"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/mirage_sm.psd",
+        "heroCard": "file://{images}/heroes/mirage_card.psd",
+        "minimap": "file://{images}/heroes/mirage_mm.psd"
+      }
     },
     "53": {
       "id": 53,
@@ -24138,7 +24298,12 @@
           "slot": "Signature_4",
           "abilityKey": "fathom_lurkers_ambush"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/slork_sm.psd",
+        "heroCard": "file://{images}/heroes/slork_card.psd",
+        "minimap": "file://{images}/heroes/slork_mm.psd"
+      }
     },
     "54": {
       "id": 54,
@@ -24869,7 +25034,12 @@
           "slot": "Signature_4",
           "abilityKey": "cadence_ability_crescendo"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/cadence_sm.psd",
+        "heroCard": "file://{images}/heroes/cadence_sm.psd",
+        "minimap": "file://{images}/heroes/cadence_mm.psd"
+      }
     },
     "55": {
       "id": 55,
@@ -25600,7 +25770,12 @@
           "slot": "Signature_4",
           "abilityKey": "targetdummy_ability_4"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/targetdummy_sm.psd",
+        "heroCard": "file://{images}/heroes/generic_vertical.psd",
+        "minimap": "file://{images}/heroes/targetdummy_mm.psd"
+      }
     },
     "56": {
       "id": 56,
@@ -26331,7 +26506,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_bomber_ult"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": null,
+        "heroCard": null,
+        "minimap": null
+      }
     },
     "57": {
       "id": 57,
@@ -27062,7 +27242,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_shieldguy_ult"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": null,
+        "heroCard": null,
+        "minimap": null
+      }
     },
     "58": {
       "id": 58,
@@ -27793,7 +27978,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_viper_petrifybola"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/kali_sm.psd",
+        "heroCard": "file://{images}/heroes/kali_card.psd",
+        "minimap": "file://{images}/heroes/kali_mm.psd"
+      }
     },
     "59": {
       "id": 59,
@@ -28524,7 +28714,12 @@
           "slot": "Signature_4",
           "abilityKey": "citadel_ability_vandal_overflow"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/vandal_sm.psd",
+        "heroCard": "file://{images}/heroes/vandal_card.psd",
+        "minimap": "file://{images}/heroes/vandal_mm.psd"
+      }
     },
     "60": {
       "id": 60,
@@ -29255,7 +29450,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_magician_copyult"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/magician_sm.psd",
+        "heroCard": "file://{images}/heroes/magician_card.psd",
+        "minimap": "file://{images}/heroes/magician_mm.psd"
+      }
     },
     "61": {
       "id": 61,
@@ -29987,7 +30187,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_trapper_spiderwave"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/trapper_sm.psd",
+        "heroCard": "file://{images}/heroes/trapper_card.psd",
+        "minimap": "file://{images}/heroes/trapper_mm.psd"
+      }
     },
     "62": {
       "id": 62,
@@ -30718,7 +30923,12 @@
           "slot": "Signature_4",
           "abilityKey": "operative_revelation"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/operative_sm.psd",
+        "heroCard": "file://{images}/heroes/operative_card.psd",
+        "minimap": "file://{images}/heroes/operative_mm.psd"
+      }
     },
     "63": {
       "id": 63,
@@ -31450,7 +31660,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_vampirebat_batswarm"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/vampirebat_sm.psd",
+        "heroCard": "file://{images}/heroes/vampirebat_card.psd",
+        "minimap": "file://{images}/heroes/vampirebat_mm.psd"
+      }
     },
     "64": {
       "id": 64,
@@ -32181,7 +32396,12 @@
           "slot": "Signature_4",
           "abilityKey": "drifter_darkness"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/drifter_sm.psd",
+        "heroCard": "file://{images}/heroes/drifter_card.psd",
+        "minimap": "file://{images}/heroes/drifter_mm.psd"
+      }
     },
     "65": {
       "id": 65,
@@ -32912,7 +33132,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_priest_weaponswap"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/priest_sm.psd",
+        "heroCard": "file://{images}/heroes/priest_card.psd",
+        "minimap": "file://{images}/heroes/priest_mm.psd"
+      }
     },
     "66": {
       "id": 66,
@@ -33644,7 +33869,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_frank_revive"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/frank_sm.psd",
+        "heroCard": "file://{images}/heroes/frank_card.psd",
+        "minimap": "file://{images}/heroes/frank_mm.psd"
+      }
     },
     "67": {
       "id": 67,
@@ -34375,7 +34605,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_bookworm_knightcharge"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/bookworm_sm.psd",
+        "heroCard": "file://{images}/heroes/bookworm_card.psd",
+        "minimap": "file://{images}/heroes/bookworm_mm.psd"
+      }
     },
     "68": {
       "id": 68,
@@ -35106,7 +35341,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_boho_channeltether"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/hornet_sm.png",
+        "heroCard": "file://{images}/heroes/boho_card.psd",
+        "minimap": "file://{images}/heroes/boho_mm.psd"
+      }
     },
     "69": {
       "id": 69,
@@ -35837,7 +36077,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_doorman_hotel"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/doorman_sm.psd",
+        "heroCard": "file://{images}/heroes/doorman_card.psd",
+        "minimap": "file://{images}/heroes/doorman_mm.psd"
+      }
     },
     "70": {
       "id": 70,
@@ -36573,7 +36818,12 @@
           "slot": "Weapon_Secondary",
           "abilityKey": "citadel_weapon_skyrunner_alt"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/skyrunner_sm.psd",
+        "heroCard": "file://{images}/heroes/skyrunner_card.psd",
+        "minimap": "file://{images}/heroes/skyrunner_mm.psd"
+      }
     },
     "71": {
       "id": 71,
@@ -37304,7 +37554,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_swan_ult"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/swan_sm.psd",
+        "heroCard": "file://{images}/heroes/swan_card.psd",
+        "minimap": "file://{images}/heroes/swan_mm.psd"
+      }
     },
     "72": {
       "id": 72,
@@ -38035,7 +38290,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_punkgoat_tether"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/punkgoat_sm.psd",
+        "heroCard": "file://{images}/heroes/punkgoat_card.psd",
+        "minimap": "file://{images}/heroes/punkgoat_mm.psd"
+      }
     },
     "74": {
       "id": 74,
@@ -38766,7 +39026,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_graf_ult"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/graf_sm.psd",
+        "heroCard": "file://{images}/heroes/graf_card.psd",
+        "minimap": "file://{images}/heroes/graf_mm.psd"
+      }
     },
     "75": {
       "id": 75,
@@ -39497,7 +39762,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_fortuna_ult"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/fortuna_sm.psd",
+        "heroCard": "file://{images}/heroes/fortuna_card.psd",
+        "minimap": "file://{images}/heroes/fortuna_mm.psd"
+      }
     },
     "76": {
       "id": 76,
@@ -40230,7 +40500,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_necro_gravestone"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/necro_sm.psd",
+        "heroCard": "file://{images}/heroes/necro_card.psd",
+        "minimap": "file://{images}/heroes/necro_mm.psd"
+      }
     },
     "77": {
       "id": 77,
@@ -40961,7 +41236,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_fencer_ultimate"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/fencer_sm.psd",
+        "heroCard": "file://{images}/heroes/fencer_card.psd",
+        "minimap": "file://{images}/heroes/fencer_mm.psd"
+      }
     },
     "79": {
       "id": 79,
@@ -41693,7 +41973,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_familiar_ability01"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/familiar_sm.psd",
+        "heroCard": "file://{images}/heroes/familiar_card.psd",
+        "minimap": "file://{images}/heroes/familiar_mm.psd"
+      }
     },
     "80": {
       "id": 80,
@@ -42424,7 +42709,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_werewolf_transformation"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/werewolf_sm.psd",
+        "heroCard": "file://{images}/heroes/werewolf_card.psd",
+        "minimap": "file://{images}/heroes/werewolf_mm.psd"
+      }
     },
     "81": {
       "id": 81,
@@ -43155,7 +43445,12 @@
           "slot": "Signature_4",
           "abilityKey": "ability_unicorn_dazzlingorb"
         }
-      ]
+      ],
+      "images": {
+        "iconSmall": "file://{images}/heroes/unicorn_sm.psd",
+        "heroCard": "file://{images}/heroes/unicorn_card.psd",
+        "minimap": "file://{images}/heroes/unicorn_mm.psd"
+      }
     }
   }
 }

@@ -83,6 +83,15 @@ function parseCostBonuses(v: Kv3Value | undefined): Record<ItemSlotType, CostBon
   return out;
 }
 
+/**
+ * 画像参照は panorama:"file://{images}/heroes/inferno_sm.psd" の形で入っている。
+ * KV3パーサーは panorama: の型プレフィックスを落として文字列にしているので、
+ * ここでは値をそのまま受け取る。
+ */
+function imageRef(v: Kv3Value | undefined): string | null {
+  return typeof v === "string" && v.startsWith("file://") ? v : null;
+}
+
 function parseMaxPurchases(v: Kv3Value | undefined): Record<ItemSlotType, number[]> {
   const map = obj(v);
   const out = {} as Record<ItemSlotType, number[]>;
@@ -158,6 +167,11 @@ export function parseHeroes(vdataPath: string, upstreamCommit: string): HeroesFi
         spirit: parseStatGroup(shop["m_eSpiritStatsDisplay"]),
       },
       abilities: parseBoundAbilities(h["m_mapBoundAbilities"]),
+      images: {
+        iconSmall: imageRef(h["m_strIconImageSmall"]),
+        heroCard: imageRef(h["m_strIconHeroCard"]),
+        minimap: imageRef(h["m_strMinimapImage"]),
+      },
     };
 
     const idKey = String(id);

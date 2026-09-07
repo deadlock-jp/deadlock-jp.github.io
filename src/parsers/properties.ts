@@ -46,9 +46,11 @@ export function parseProperties(v: Kv3Value | undefined): Record<string, Ability
   const out: Record<string, AbilityProperty> = {};
   for (const [name, raw] of Object.entries(obj(v))) {
     const e = obj(raw);
-    // m_strValue を持たないものは表示・計算の対象外
-    if (typeof e["m_strValue"] !== "string") continue;
-    const rawValue = e["m_strValue"];
+    // m_strValue は名前に反して数値のことがある(Damage = { m_strValue = 125 })。
+    // 文字列だけを受け取っていた頃は、スキルの主ダメージが丸ごと欠落していた。
+    const v = e["m_strValue"];
+    if (typeof v !== "string" && typeof v !== "number") continue;
+    const rawValue = String(v);
     out[name] = {
       name,
       rawValue,
@@ -58,6 +60,8 @@ export function parseProperties(v: Kv3Value | undefined): Record<string, Ability
       units: str(e["m_eDisplayUnits"]),
       cssClass: str(e["m_strCSSClass"]),
       scale: parseScale(e["m_subclassScaleFunction"]),
+      // このスキルの「主ダメージ」。ゲーム内のスピリットパワー影響値の一覧はこれを並べている
+      isAbilityDamage: e["m_bIsAbilityDamageProperty"] === true,
     };
   }
   return out;

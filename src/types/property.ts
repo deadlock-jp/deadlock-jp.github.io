@@ -34,6 +34,11 @@ export interface AbilityProperty {
   cssClass: string | null;
   /** スピリットパワー等によるスケーリング。無ければ null */
   scale: PropertyScale | null;
+  /**
+   * m_bIsAbilityDamageProperty。そのスキルの主ダメージであることを示す。
+   * ゲーム内の「スピリットパワーの影響値」の一覧はこのフラグが立ったものを並べている。
+   */
+  isAbilityDamage: boolean;
 }
 
 /** ツールチップの構成。表示順の再現に使う */

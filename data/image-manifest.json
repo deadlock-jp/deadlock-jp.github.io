@@ -1,8 +1,1034 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-05T05:03:59.926Z",
+  "generatedAt": "2026-09-05T12:15:53.599Z",
   "sourceVpk": "game/citadel/pak01_dir.vpk",
   "entries": [
+    {
+      "ref": "file://{images}/heroes/archer_card.psd",
+      "vpkPath": "panorama/images/heroes/archer_card_psd.vtex_c",
+      "outPath": "public/images/heroes/archer_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_orion:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/archer_mm.psd",
+      "vpkPath": "panorama/images/heroes/archer_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/archer_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_orion:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/archer_sm.psd",
+      "vpkPath": "panorama/images/heroes/archer_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/archer_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_orion:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/astro_card.psd",
+      "vpkPath": "panorama/images/heroes/astro_card_psd.vtex_c",
+      "outPath": "public/images/heroes/astro_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_astro:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/astro_mm.psd",
+      "vpkPath": "panorama/images/heroes/astro_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/astro_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_astro:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/astro_sm.psd",
+      "vpkPath": "panorama/images/heroes/astro_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/astro_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_astro:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/bebop_card.psd",
+      "vpkPath": "panorama/images/heroes/bebop_card_psd.vtex_c",
+      "outPath": "public/images/heroes/bebop_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_bebop:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/bebop_mm.psd",
+      "vpkPath": "panorama/images/heroes/bebop_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/bebop_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_bebop:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/bebop_sm.psd",
+      "vpkPath": "panorama/images/heroes/bebop_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/bebop_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_bebop:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/bookworm_card.psd",
+      "vpkPath": "panorama/images/heroes/bookworm_card_psd.vtex_c",
+      "outPath": "public/images/heroes/bookworm_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_bookworm:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/bookworm_mm.psd",
+      "vpkPath": "panorama/images/heroes/bookworm_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/bookworm_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_bookworm:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/bookworm_sm.psd",
+      "vpkPath": "panorama/images/heroes/bookworm_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/bookworm_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_bookworm:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/bull_card.psd",
+      "vpkPath": "panorama/images/heroes/bull_card_psd.vtex_c",
+      "outPath": "public/images/heroes/bull_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_atlas:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/bull_mm.psd",
+      "vpkPath": "panorama/images/heroes/bull_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/bull_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_atlas:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/bull_sm.psd",
+      "vpkPath": "panorama/images/heroes/bull_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/bull_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_atlas:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/chrono_card.psd",
+      "vpkPath": "panorama/images/heroes/chrono_card_psd.vtex_c",
+      "outPath": "public/images/heroes/chrono_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_chrono:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/chrono_mm.psd",
+      "vpkPath": "panorama/images/heroes/chrono_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/chrono_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_chrono:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/chrono_sm.psd",
+      "vpkPath": "panorama/images/heroes/chrono_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/chrono_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_chrono:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/digger_card.psd",
+      "vpkPath": "panorama/images/heroes/digger_card_psd.vtex_c",
+      "outPath": "public/images/heroes/digger_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_krill:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/digger_mm.psd",
+      "vpkPath": "panorama/images/heroes/digger_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/digger_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_krill:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/digger_sm.psd",
+      "vpkPath": "panorama/images/heroes/digger_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/digger_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_krill:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/doorman_card.psd",
+      "vpkPath": "panorama/images/heroes/doorman_card_psd.vtex_c",
+      "outPath": "public/images/heroes/doorman_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_doorman:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/doorman_mm.psd",
+      "vpkPath": "panorama/images/heroes/doorman_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/doorman_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_doorman:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/doorman_sm.psd",
+      "vpkPath": "panorama/images/heroes/doorman_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/doorman_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_doorman:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/drifter_card.psd",
+      "vpkPath": "panorama/images/heroes/drifter_card_psd.vtex_c",
+      "outPath": "public/images/heroes/drifter_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_drifter:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/drifter_mm.psd",
+      "vpkPath": "panorama/images/heroes/drifter_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/drifter_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_drifter:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/drifter_sm.psd",
+      "vpkPath": "panorama/images/heroes/drifter_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/drifter_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_drifter:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/engineer_card.psd",
+      "vpkPath": "panorama/images/heroes/engineer_card_psd.vtex_c",
+      "outPath": "public/images/heroes/engineer_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_forge:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/engineer_mm.psd",
+      "vpkPath": "panorama/images/heroes/engineer_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/engineer_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_forge:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/engineer_sm.psd",
+      "vpkPath": "panorama/images/heroes/engineer_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/engineer_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_forge:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/familiar_card.psd",
+      "vpkPath": "panorama/images/heroes/familiar_card_psd.vtex_c",
+      "outPath": "public/images/heroes/familiar_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_familiar:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/familiar_mm.psd",
+      "vpkPath": "panorama/images/heroes/familiar_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/familiar_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_familiar:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/familiar_sm.psd",
+      "vpkPath": "panorama/images/heroes/familiar_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/familiar_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_familiar:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/fencer_card.psd",
+      "vpkPath": "panorama/images/heroes/fencer_card_psd.vtex_c",
+      "outPath": "public/images/heroes/fencer_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_fencer:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/fencer_mm.psd",
+      "vpkPath": "panorama/images/heroes/fencer_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/fencer_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_fencer:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/fencer_sm.psd",
+      "vpkPath": "panorama/images/heroes/fencer_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/fencer_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_fencer:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/frank_card.psd",
+      "vpkPath": "panorama/images/heroes/frank_card_psd.vtex_c",
+      "outPath": "public/images/heroes/frank_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_frank:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/frank_mm.psd",
+      "vpkPath": "panorama/images/heroes/frank_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/frank_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_frank:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/frank_sm.psd",
+      "vpkPath": "panorama/images/heroes/frank_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/frank_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_frank:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/gigawatt_card.psd",
+      "vpkPath": "panorama/images/heroes/gigawatt_card_psd.vtex_c",
+      "outPath": "public/images/heroes/gigawatt_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_gigawatt:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/gigawatt_mm.psd",
+      "vpkPath": "panorama/images/heroes/gigawatt_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/gigawatt_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_gigawatt:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/gigawatt_sm.psd",
+      "vpkPath": "panorama/images/heroes/gigawatt_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/gigawatt_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_gigawatt:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/haze_card.psd",
+      "vpkPath": "panorama/images/heroes/haze_card_psd.vtex_c",
+      "outPath": "public/images/heroes/haze_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_haze:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/haze_mm.psd",
+      "vpkPath": "panorama/images/heroes/haze_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/haze_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_haze:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/haze_sm.psd",
+      "vpkPath": "panorama/images/heroes/haze_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/haze_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_haze:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/hornet_card.psd",
+      "vpkPath": "panorama/images/heroes/hornet_card_psd.vtex_c",
+      "outPath": "public/images/heroes/hornet_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_hornet:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/hornet_mm.psd",
+      "vpkPath": "panorama/images/heroes/hornet_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/hornet_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_hornet:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/hornet_sm.png",
+      "vpkPath": "panorama/images/heroes/hornet_sm_png.vtex_c",
+      "outPath": "public/images/heroes/hornet_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_hornet:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/inferno_card.psd",
+      "vpkPath": "panorama/images/heroes/inferno_card_psd.vtex_c",
+      "outPath": "public/images/heroes/inferno_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_inferno:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/inferno_mm.psd",
+      "vpkPath": "panorama/images/heroes/inferno_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/inferno_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_inferno:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/inferno_sm.psd",
+      "vpkPath": "panorama/images/heroes/inferno_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/inferno_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_inferno:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/kali_card.psd",
+      "vpkPath": "panorama/images/heroes/kali_card_psd.vtex_c",
+      "outPath": "public/images/heroes/kali_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_viper:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/kali_mm.psd",
+      "vpkPath": "panorama/images/heroes/kali_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/kali_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_viper:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/kali_sm.psd",
+      "vpkPath": "panorama/images/heroes/kali_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/kali_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_viper:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/kelvin_card.psd",
+      "vpkPath": "panorama/images/heroes/kelvin_card_psd.vtex_c",
+      "outPath": "public/images/heroes/kelvin_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_kelvin:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/kelvin_mm.psd",
+      "vpkPath": "panorama/images/heroes/kelvin_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/kelvin_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_kelvin:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/kelvin_sm.psd",
+      "vpkPath": "panorama/images/heroes/kelvin_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/kelvin_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_kelvin:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/lash_card.psd",
+      "vpkPath": "panorama/images/heroes/lash_card_psd.vtex_c",
+      "outPath": "public/images/heroes/lash_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_lash:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/lash_mm.psd",
+      "vpkPath": "panorama/images/heroes/lash_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/lash_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_lash:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/lash_sm.psd",
+      "vpkPath": "panorama/images/heroes/lash_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/lash_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_lash:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/magician_card.psd",
+      "vpkPath": "panorama/images/heroes/magician_card_psd.vtex_c",
+      "outPath": "public/images/heroes/magician_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_magician:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/magician_mm.psd",
+      "vpkPath": "panorama/images/heroes/magician_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/magician_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_magician:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/magician_sm.psd",
+      "vpkPath": "panorama/images/heroes/magician_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/magician_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_magician:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/mirage_card.psd",
+      "vpkPath": "panorama/images/heroes/mirage_card_psd.vtex_c",
+      "outPath": "public/images/heroes/mirage_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_mirage:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/mirage_mm.psd",
+      "vpkPath": "panorama/images/heroes/mirage_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/mirage_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_mirage:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/mirage_sm.psd",
+      "vpkPath": "panorama/images/heroes/mirage_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/mirage_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_mirage:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/nano_card.psd",
+      "vpkPath": "panorama/images/heroes/nano_card_psd.vtex_c",
+      "outPath": "public/images/heroes/nano_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_nano:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/nano_mm.psd",
+      "vpkPath": "panorama/images/heroes/nano_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/nano_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_nano:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/nano_sm.psd",
+      "vpkPath": "panorama/images/heroes/nano_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/nano_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_nano:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/necro_card.psd",
+      "vpkPath": "panorama/images/heroes/necro_card_psd.vtex_c",
+      "outPath": "public/images/heroes/necro_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_necro:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/necro_mm.psd",
+      "vpkPath": "panorama/images/heroes/necro_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/necro_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_necro:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/necro_sm.psd",
+      "vpkPath": "panorama/images/heroes/necro_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/necro_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_necro:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/priest_card.psd",
+      "vpkPath": "panorama/images/heroes/priest_card_psd.vtex_c",
+      "outPath": "public/images/heroes/priest_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_priest:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/priest_mm.psd",
+      "vpkPath": "panorama/images/heroes/priest_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/priest_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_priest:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/priest_sm.psd",
+      "vpkPath": "panorama/images/heroes/priest_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/priest_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_priest:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/punkgoat_card.psd",
+      "vpkPath": "panorama/images/heroes/punkgoat_card_psd.vtex_c",
+      "outPath": "public/images/heroes/punkgoat_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_punkgoat:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/punkgoat_mm.psd",
+      "vpkPath": "panorama/images/heroes/punkgoat_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/punkgoat_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_punkgoat:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/punkgoat_sm.psd",
+      "vpkPath": "panorama/images/heroes/punkgoat_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/punkgoat_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_punkgoat:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/shiv_card.psd",
+      "vpkPath": "panorama/images/heroes/shiv_card_psd.vtex_c",
+      "outPath": "public/images/heroes/shiv_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_shiv:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/shiv_mm.psd",
+      "vpkPath": "panorama/images/heroes/shiv_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/shiv_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_shiv:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/shiv_sm.psd",
+      "vpkPath": "panorama/images/heroes/shiv_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/shiv_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_shiv:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/spectre_card.psd",
+      "vpkPath": "panorama/images/heroes/spectre_card_psd.vtex_c",
+      "outPath": "public/images/heroes/spectre_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_ghost:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/spectre_mm.psd",
+      "vpkPath": "panorama/images/heroes/spectre_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/spectre_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_ghost:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/spectre_sm.psd",
+      "vpkPath": "panorama/images/heroes/spectre_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/spectre_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_ghost:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/sumo_card.psd",
+      "vpkPath": "panorama/images/heroes/sumo_card_psd.vtex_c",
+      "outPath": "public/images/heroes/sumo_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_dynamo:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/sumo_mm.psd",
+      "vpkPath": "panorama/images/heroes/sumo_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/sumo_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_dynamo:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/sumo_sm.psd",
+      "vpkPath": "panorama/images/heroes/sumo_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/sumo_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_dynamo:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/synth_card.psd",
+      "vpkPath": "panorama/images/heroes/synth_card_psd.vtex_c",
+      "outPath": "public/images/heroes/synth_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_synth:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/synth_mm.psd",
+      "vpkPath": "panorama/images/heroes/synth_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/synth_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_synth:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/synth_sm.psd",
+      "vpkPath": "panorama/images/heroes/synth_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/synth_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_synth:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/tengu_card.psd",
+      "vpkPath": "panorama/images/heroes/tengu_card_psd.vtex_c",
+      "outPath": "public/images/heroes/tengu_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_tengu:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/tengu_mm.psd",
+      "vpkPath": "panorama/images/heroes/tengu_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/tengu_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_tengu:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/tengu_sm.psd",
+      "vpkPath": "panorama/images/heroes/tengu_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/tengu_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_tengu:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/unicorn_card.psd",
+      "vpkPath": "panorama/images/heroes/unicorn_card_psd.vtex_c",
+      "outPath": "public/images/heroes/unicorn_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_unicorn:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/unicorn_mm.psd",
+      "vpkPath": "panorama/images/heroes/unicorn_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/unicorn_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_unicorn:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/unicorn_sm.psd",
+      "vpkPath": "panorama/images/heroes/unicorn_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/unicorn_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_unicorn:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/vampirebat_card.psd",
+      "vpkPath": "panorama/images/heroes/vampirebat_card_psd.vtex_c",
+      "outPath": "public/images/heroes/vampirebat_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_vampirebat:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/vampirebat_mm.psd",
+      "vpkPath": "panorama/images/heroes/vampirebat_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/vampirebat_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_vampirebat:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/vampirebat_sm.psd",
+      "vpkPath": "panorama/images/heroes/vampirebat_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/vampirebat_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_vampirebat:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/viscous_card.psd",
+      "vpkPath": "panorama/images/heroes/viscous_card_psd.vtex_c",
+      "outPath": "public/images/heroes/viscous_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_viscous:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/viscous_mm.psd",
+      "vpkPath": "panorama/images/heroes/viscous_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/viscous_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_viscous:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/viscous_sm.psd",
+      "vpkPath": "panorama/images/heroes/viscous_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/viscous_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_viscous:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/warden_card.psd",
+      "vpkPath": "panorama/images/heroes/warden_card_psd.vtex_c",
+      "outPath": "public/images/heroes/warden_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_warden:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/warden_mm.psd",
+      "vpkPath": "panorama/images/heroes/warden_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/warden_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_warden:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/warden_sm.psd",
+      "vpkPath": "panorama/images/heroes/warden_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/warden_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_warden:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/werewolf_card.psd",
+      "vpkPath": "panorama/images/heroes/werewolf_card_psd.vtex_c",
+      "outPath": "public/images/heroes/werewolf_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_werewolf:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/werewolf_mm.psd",
+      "vpkPath": "panorama/images/heroes/werewolf_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/werewolf_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_werewolf:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/werewolf_sm.psd",
+      "vpkPath": "panorama/images/heroes/werewolf_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/werewolf_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_werewolf:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/wraith_card.psd",
+      "vpkPath": "panorama/images/heroes/wraith_card_psd.vtex_c",
+      "outPath": "public/images/heroes/wraith_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_wraith:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/wraith_mm.psd",
+      "vpkPath": "panorama/images/heroes/wraith_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/wraith_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_wraith:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/wraith_sm.psd",
+      "vpkPath": "panorama/images/heroes/wraith_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/wraith_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_wraith:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/yamato_card.psd",
+      "vpkPath": "panorama/images/heroes/yamato_card_psd.vtex_c",
+      "outPath": "public/images/heroes/yamato_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_yamato:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/yamato_mm.psd",
+      "vpkPath": "panorama/images/heroes/yamato_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/yamato_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_yamato:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/yamato_sm.psd",
+      "vpkPath": "panorama/images/heroes/yamato_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/yamato_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_yamato:sm"
+      ]
+    },
     {
       "ref": "file://{images}/hud/abilities/ability_activate.psd",
       "vpkPath": "panorama/images/hud/abilities/ability_activate_psd.vtex_c",

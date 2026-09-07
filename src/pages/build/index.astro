@@ -1,35 +1,65 @@
 ---
 import Base from "../../layouts/Base.astro";
 import ItemIcon from "../../components/ItemIcon.astro";
+import HeroPortrait from "../../components/HeroPortrait.astro";
 import {
   releasedHeroes,
   shopItems,
   t,
   describe,
+  formatProperty,
   itemsFile,
-  SLOT_META,
+  ability,
+  usedIn,
   modifierLabel,
+  SLOT_META,
   souls,
-  localization,
 } from "../../lib/data.ts";
+import {
+  weaponRows,
+  weaponHeadline,
+  weaponName,
+  vitalityRows,
+  spiritRows,
+  abilityDamages,
+} from "../../lib/gamestats.ts";
 import { COST_BONUS_TARGET, type ItemSlotType } from "../../types/hero.ts";
 
 const heroes = releasedHeroes();
 const items = shopItems();
 const slots = ["WeaponMod", "Armor", "Tech"] as const;
 const tiers = [1, 2, 3, 4];
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
-/** クライアント側に渡す最小限のデータ */
+/** ホバーカードに出す1行。ゲーム側のトークンで整形済み */
+function propRows(names: string[], item: (typeof items)[number]) {
+  return names
+    .filter((n) => item.properties[n])
+    .map((n) => formatProperty(n, item.properties[n]!));
+}
+
+/** クライアントに渡すデータ。ページ内で完結させ、追加の通信はしない */
 const payload = {
-  heroes: heroes.map((h) => ({
-    id: h.id,
-    name: t(h.nameToken, h.key),
-    levels: h.levels.map((l) => ({ level: l.level, requiredGold: l.requiredGold })),
-    // 購入ボーナスは「カテゴリへの累計投資額」で決まる階段関数。
-    // 旧 purchaseBonuses(アイテム個別のティア加算)は誤りだったので渡さない。
-    costBonuses: h.costBonuses,
-    startingStats: h.startingStats,
-  })),
+  heroes: heroes.map((h) => {
+    const weaponSlot = h.abilities.find((a) => a.slot === "Weapon_Primary");
+    const weapon = weaponSlot ? (ability(weaponSlot.abilityKey)?.weapon ?? null) : null;
+    return {
+      id: h.id,
+      name: t(h.nameToken, h.key),
+      levels: h.levels.map((l) => ({ level: l.level, requiredGold: l.requiredGold })),
+      // 購入ボーナスはカテゴリへの累計投資額で決まる階段関数
+      costBonuses: h.costBonuses,
+      weaponHead: weaponHeadline(weapon),
+      weaponName: weaponName(h),
+      rows: {
+        WeaponMod: weaponRows(h, weapon),
+        Armor: vitalityRows(h),
+        Tech: spiritRows(h),
+      },
+      // ゲーム内の「スピリットパワーの影響値」と同じ並び
+      abilities: abilityDamages(h),
+    };
+  }),
   items: Object.fromEntries(
     items.map((i) => [
       i.id,
@@ -38,15 +68,29 @@ const payload = {
         tier: i.tier,
         slot: i.slotType,
         cost: i.cost,
-        // 常時パッシブだけを合算対象にする。条件付き効果は含めない。
+        slotCost: i.slotCost,
+        activation: i.activation,
+        isImbue: i.isImbue,
+        desc: describe(i.descToken, i.properties),
+        // 常時パッシブだけを合計ステータスに足す
         mods: i.passiveProperties
           .map((n) => i.properties[n])
           .filter((p) => p?.providedType && p.value !== null)
           .map((p) => ({ type: p!.providedType!, value: p!.value! })),
+        passives: propRows(i.passiveProperties, i),
+        conditional: i.tooltip
+          .flatMap((s) => [...s.elevatedProperties, ...s.properties])
+          .filter((n, idx, a) => a.indexOf(n) === idx && !i.passiveProperties.includes(n))
+          .filter((n) => i.properties[n])
+          .map((n) => formatProperty(n, i.properties[n]!)),
+        components: i.componentItems
+          .map((c) => itemsFile.items[c])
+          .filter((c) => c !== undefined)
+          .map((c) => t(c.nameToken, c.id)),
+        usedIn: usedIn(i.id).map((c) => t(c.nameToken, c.id)),
       },
     ]),
   ),
-  // 画面に出る可能性のある MODIFIER_VALUE_* をすべて解決しておく
   labels: Object.fromEntries(
     [
       ...new Set([
@@ -57,9 +101,8 @@ const payload = {
       ]),
     ].map((type) => [type, modifierLabel(type as string)]),
   ),
-  prices: itemsFile.itemPricePerTier,
-  /** カテゴリ購入ボーナスの適用先(2026-09-05 実測で確定) */
   costBonusTarget: COST_BONUS_TARGET,
+  slotMeta: SLOT_META,
 };
 ---
 
@@ -73,31 +116,120 @@ const payload = {
         {heroes.map((h) => <option value={h.id}>{t(h.nameToken, h.key)}</option>)}
       </select>
     </label>
+    <span class="totals">
+      <span class="t"><b id="t-souls">0</b> ソウル</span>
+      <span class="t"><b id="t-level">—</b></span>
+      <span class="t"><b id="t-count">0</b> 個</span>
+    </span>
+    <span class="acts">
+      <button class="share" id="share">共有URLをコピー</button>
+      <button class="clear" id="clear">クリア</button>
+    </span>
   </div>
 
   <div class="layout">
-    <section class="shop">
-      <div class="tabs" role="tablist">
-        <button class="tab current" data-slot="all">すべて</button>
+    {/* ---------------- 左: ビルドの中身とステータス ---------------- */}
+    <section class="side">
+      <div class="heroline" id="heroline">
+        {
+          heroes.map((h) => (
+            <span class="hp" data-hero={h.id} hidden>
+              <HeroPortrait name={t(h.nameToken, h.key)} image={h.images.iconSmall} size={40} />
+            </span>
+          ))
+        }
+        <span class="hname" id="hname">ヒーロー未選択</span>
+      </div>
+
+      {/* 12マスのスロット。ゲームと同じく1TYPEあたり4枠 */}
+      <div class="slots">
         {
           slots.map((s) => (
-            <button class="tab" data-slot={s} style={`--cat: var(--c-${SLOT_META[s].cssVar})`}>
+            <div
+              class="slotrow"
+              data-slot={s}
+              style={`--cat: var(--c-${SLOT_META[s].cssVar}); --cat-bg: var(--c-${SLOT_META[s].cssVar}-bg)`}
+            >
+              <span class="slabel">{SLOT_META[s].label}</span>
+              <div class="cells" data-cells={s}>
+                {[0, 1, 2, 3].map(() => <span class="cell" />)}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      <p class="slotnote">
+        アイコンをクリックすると外れます。ゲームと同じくTYPEごとに4枠までです。
+      </p>
+
+      {/* TYPE別ステータス */}
+      {
+        slots.map((s) => (
+          <section
+            class="box"
+            data-box={s}
+            style={`--cat: var(--c-${SLOT_META[s].cssVar}); --cat-bg: var(--c-${SLOT_META[s].cssVar}-bg)`}
+          >
+            <header class="bhead">
+              <h2>{SLOT_META[s].label}ステータス</h2>
+              <span class="bhl" data-headline={s} />
+            </header>
+            <div class="bbody">
+              <div class="bcol">
+              <ul class="brows" data-rows={s} />
+              {s === "Tech" && (
+                <div class="spirit" data-spirit>
+                  <h3>スピリットパワーの影響値</h3>
+                  <ul class="alist" data-abilities />
+                </div>
+              )}
+              </div>
+              <div class="invest">
+                <h3>投資額</h3>
+                <ol class="ladder" data-ladder={s} />
+              </div>
+            </div>
+          </section>
+        ))
+      }
+
+      <section class="box plain">
+        <header class="bhead"><h2>合計ステータス</h2></header>
+        <p class="caveat">
+          常時パッシブと購入ボーナスを単純加算した値です。%の合成規則と基礎値への反映は
+          実測待ちのため、最終値には変換していません。
+        </p>
+        <ul class="stats" id="stats"><li class="empty">—</li></ul>
+      </section>
+    </section>
+
+    {/* ---------------- 右: ショップ ---------------- */}
+    <section class="shop">
+      <div class="tabs" role="tablist">
+        {
+          slots.map((s, idx) => (
+            <button
+              class:list={["tab", { current: idx === 0 }]}
+              data-slot={s}
+              style={`--cat: var(--c-${SLOT_META[s].cssVar}); --cat-bg: var(--c-${SLOT_META[s].cssVar}-bg)`}
+            >
               {SLOT_META[s].label}
+              <small>{items.filter((i) => i.slotType === s).length}</small>
             </button>
           ))
         }
       </div>
 
       {
-        slots.map((slot) => {
+        slots.map((slot, idx) => {
           const meta = SLOT_META[slot];
           return (
             <div
               class="cat"
               data-slot={slot}
+              hidden={idx !== 0}
               style={`--cat: var(--c-${meta.cssVar}); --cat-bg: var(--c-${meta.cssVar}-bg)`}
             >
-              <h2 class="catname">{meta.label}</h2>
               {tiers.map((tier) => {
                 const rows = items.filter((i) => i.slotType === slot && i.tier === tier);
                 if (rows.length === 0) return null;
@@ -109,11 +241,7 @@ const payload = {
                     </h3>
                     <div class="grid">
                       {rows.map((i) => (
-                        <button
-                          class="card"
-                          data-id={i.id}
-                          title={describe(i.descToken, i.properties)}
-                        >
+                        <button class="card" data-id={i.id} aria-label={t(i.nameToken, i.id)}>
                           <ItemIcon
                             name={t(i.nameToken, i.id)}
                             slotType={i.slotType}
@@ -121,6 +249,7 @@ const payload = {
                             shopIcon={i.shopIcon}
                             activation={i.activation}
                             isImbue={i.isImbue}
+                            size={48}
                           />
                           <span class="cname">{t(i.nameToken, i.id)}</span>
                         </button>
@@ -134,59 +263,30 @@ const payload = {
         })
       }
     </section>
-
-    <aside class="panel">
-      <div class="sticky">
-        <h2 class="phead">ビルド</h2>
-
-        <ul class="totals">
-          <li><span class="l">累計ソウル</span><span class="v" id="t-souls">0</span></li>
-          <li><span class="l">レベル</span><span class="v" id="t-level">—</span></li>
-          <li><span class="l">アイテム</span><span class="v" id="t-count">0</span></li>
-        </ul>
-
-        <div class="picked" id="picked">
-          <p class="empty">アイテムを選ぶとここに並びます。</p>
-        </div>
-
-        <h3 class="shead">TYPE別</h3>
-        <ul class="bycat" id="bycat"></ul>
-
-        <h3 class="shead">購入ボーナス</h3>
-        <p class="caveat">
-          そのTYPEに使った累計ソウルだけで決まります（アイテムの個数・ティアは無関係）。
-        </p>
-        <ul class="bycat" id="catbonus"></ul>
-
-        <h3 class="shead">合計ステータス</h3>
-        <p class="caveat">
-          常時発動のパッシブと購入ボーナスを単純加算した値です。%の合成規則（加算か乗算か）と
-          基礎ステータスへの反映は実測待ちのため、まだ最終値には変換していません。
-        </p>
-        <ul class="stats" id="stats">
-          <li class="empty">—</li>
-        </ul>
-
-        <button class="share" id="share">共有URLをコピー</button>
-        <button class="clear" id="clear">クリア</button>
-      </div>
-    </aside>
   </div>
 
-  <script is:inline define:vars={{ payload }}>
-    // ---- 状態 -------------------------------------------------------------
-    /** 購入順を保持する。同じアイテムは1つまで。 */
+  {/* ホバー時の詳細カード。中身はクライアントで組み立てる */}
+  <div class="hovercard" id="hovercard" role="tooltip" hidden></div>
+
+  <script is:inline define:vars={{ payload, base }}>
+    /** 購入順を保持する。同じアイテムは1つまで */
     let picked = [];
     let heroId = null;
+    const SLOTS = ["WeaponMod", "Armor", "Tech"];
+    const PER_SLOT = 4; // ゲーム内のTYPEあたりの枠数
 
     const ID_PREFIX = "upgrade_";
     const shorten = (id) => (id.startsWith(ID_PREFIX) ? id.slice(ID_PREFIX.length) : "!" + id);
     const expand = (s) => (s.startsWith("!") ? s.slice(1) : ID_PREFIX + s);
-
     const $ = (id) => document.getElementById(id);
     const fmt = (n) => n.toLocaleString("en-US");
+    const esc = (s) =>
+      String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
-    /** 累積ソウルからレベルを求める */
+    function hero() {
+      return payload.heroes.find((h) => h.id === heroId) ?? null;
+    }
+
     function levelForSouls(levels, spent) {
       let current = levels.length ? levels[0].level : 1;
       for (const l of levels) {
@@ -196,497 +296,514 @@ const payload = {
       return current;
     }
 
-    // ---- URL --------------------------------------------------------------
+    /** 累計投資額に対応する段。投資額以下で最大の goldThreshold を引く（補間しない） */
+    function costBonusStep(slot, invested) {
+      const table = hero()?.costBonuses?.[slot];
+      if (!table?.length) return null;
+      let step = null;
+      for (const row of table) if (invested >= row.goldThreshold) step = row;
+      return step;
+    }
+
+    // ---- URL ---------------------------------------------------------
     function readUrl() {
       const p = new URLSearchParams(location.hash.replace(/^#/, ""));
       const h = p.get("h");
       heroId = h && /^\d+$/.test(h) ? Number(h) : null;
       const i = p.get("i");
-      const known = payload.items;
-      picked = i ? i.split(",").filter(Boolean).map(expand).filter((id) => known[id]) : [];
+      picked = i
+        ? i.split(",").filter(Boolean).map(expand).filter((id) => payload.items[id])
+        : [];
     }
-
     function writeUrl(replace) {
       const parts = [];
       if (heroId !== null) parts.push("h=" + heroId);
       if (picked.length) parts.push("i=" + picked.map(shorten).join(","));
-      const hash = parts.length ? "#" + parts.join("&") : "";
-      const url = location.pathname + location.search + hash;
+      const url = location.pathname + location.search + (parts.length ? "#" + parts.join("&") : "");
       if (replace) history.replaceState(null, "", url);
       else history.pushState(null, "", url);
     }
 
-    // ---- 描画 -------------------------------------------------------------
-    function hero() {
-      return payload.heroes.find((h) => h.id === heroId) ?? null;
-    }
-
-    function render() {
-      const spent = picked.reduce((a, id) => a + (payload.items[id]?.cost ?? 0), 0);
-      $("t-souls").textContent = fmt(spent);
-      $("t-count").textContent = String(picked.length);
-      const h = hero();
-      $("t-level").textContent = h ? "Lv" + levelForSouls(h.levels, spent) : "—";
-
-      // 選んだアイコンの一覧。ショップ側のアイコンを複製して使う
-      const box = $("picked");
-      box.innerHTML = "";
-      if (picked.length === 0) {
-        const p = document.createElement("p");
-        p.className = "empty";
-        p.textContent = "アイテムを選ぶとここに並びます。";
-        box.append(p);
-      } else {
-        picked.forEach((id, index) => {
-          const source = document.querySelector(`.card[data-id="${CSS.escape(id)}"] .icon`);
-          const item = payload.items[id];
-          const cell = document.createElement("button");
-          cell.className = "pick";
-          cell.title = item.name + " — クリックで外す";
-          cell.dataset.id = id;
-          if (source) cell.append(source.cloneNode(true));
-          const order = document.createElement("span");
-          order.className = "order";
-          order.textContent = String(index + 1);
-          cell.append(order);
-          box.append(cell);
-        });
-      }
-
-      // TYPE別の内訳
-      const byCat = { WeaponMod: 0, Armor: 0, Tech: 0 };
-      const catCost = { WeaponMod: 0, Armor: 0, Tech: 0 };
+    // ---- 描画 --------------------------------------------------------
+    function catCost() {
+      const c = { WeaponMod: 0, Armor: 0, Tech: 0 };
       for (const id of picked) {
         const it = payload.items[id];
-        if (it && it.slot in byCat) {
-          byCat[it.slot]++;
-          catCost[it.slot] += it.cost;
+        if (it && it.slot in c) c[it.slot] += it.cost;
+      }
+      return c;
+    }
+
+    /** 12マスのスロット。ショップ側のアイコンを複製して入れる */
+    function renderSlots() {
+      for (const slot of SLOTS) {
+        const mine = picked.filter((id) => payload.items[id]?.slot === slot);
+        const cells = document.querySelector(`[data-cells="${slot}"]`);
+        cells.innerHTML = "";
+        const n = Math.max(PER_SLOT, mine.length);
+        for (let i = 0; i < n; i++) {
+          const id = mine[i];
+          if (!id) {
+            const empty = document.createElement("span");
+            empty.className = "cell";
+            cells.append(empty);
+            continue;
+          }
+          const item = payload.items[id];
+          const cell = document.createElement("button");
+          cell.className = "cell filled";
+          cell.dataset.id = id;
+          cell.title = item.name + " — クリックで外す";
+          const src = document.querySelector(`.card[data-id="${CSS.escape(id)}"] .icon`);
+          if (src) cell.append(src.cloneNode(true));
+          if (i >= PER_SLOT) cell.classList.add("over");
+          cells.append(cell);
         }
       }
-      const catLabel = { WeaponMod: "武器", Armor: "生命力", Tech: "スピリット" };
-      const catVar = { WeaponMod: "weapon", Armor: "vitality", Tech: "spirit" };
-      $("bycat").innerHTML = Object.keys(byCat)
-        .map(
-          (k) =>
-            `<li style="--cat: var(--c-${catVar[k]})"><span class="l">${catLabel[k]}</span>` +
-            `<span class="v">${byCat[k]}<small> 個 / ${fmt(catCost[k])}</small></span></li>`,
-        )
-        .join("");
-
-      renderCatBonus(catCost);
-      renderStats(catCost);
     }
 
-    /**
-     * カテゴリへの累計投資額に対応する段を返す。
-     * 「投資額以下で最大の goldThreshold」を引く。中間値の補間はしない。
-     */
-    function costBonusStep(slot, invested) {
+    function renderHero() {
       const h = hero();
-      const table = h?.costBonuses?.[slot];
-      if (!table || table.length === 0) return null;
-      let step = null;
-      for (const row of table) {
-        if (invested >= row.goldThreshold) step = row;
-        else break;
+      $("hname").textContent = h ? h.name : "ヒーロー未選択";
+      for (const el of document.querySelectorAll(".hp")) {
+        el.hidden = !h || Number(el.dataset.hero) !== h.id;
       }
-      return step;
+      $("hero").value = heroId === null ? "" : String(heroId);
     }
 
-    /** TYPE別の内訳の下に、今かかっている購入ボーナスの段を出す */
-    function renderCatBonus(catCost) {
-      const el = $("catbonus");
+    /** TYPE別ボックス。ヒーロー未選択のときは案内だけ出す */
+    function renderBoxes(cost) {
       const h = hero();
+      for (const slot of SLOTS) {
+        const rows = document.querySelector(`[data-rows="${slot}"]`);
+        const head = document.querySelector(`[data-headline="${slot}"]`);
+        const ladder = document.querySelector(`[data-ladder="${slot}"]`);
+
+        if (!h) {
+          rows.innerHTML = '<li class="empty">ヒーローを選ぶと表示されます</li>';
+          head.textContent = "";
+          ladder.innerHTML = "";
+          continue;
+        }
+
+        rows.innerHTML = h.rows[slot]
+          .map((r) => `<li><span class="l">${esc(r.label)}</span><span class="v">${esc(r.value)}</span></li>`)
+          .join("");
+
+        if (slot === "WeaponMod" && h.weaponHead) {
+          head.innerHTML =
+            `<b>${esc(h.weaponHead.dps)}</b> DPS` +
+            `<small>${esc(h.weaponName)} / 減衰 ${esc(h.weaponHead.falloffStart)} → ${esc(h.weaponHead.falloffEnd)}</small>`;
+        } else if (slot === "Tech") {
+          const step = costBonusStep("Tech", cost.Tech);
+          head.innerHTML = `<b>${step ? step.bonus : 0}</b> スピリットパワー`;
+        } else if (slot === "Armor") {
+          const hp = h.rows.Armor.find((r) => r.label === "最大HP");
+          head.innerHTML = hp ? `<b>${esc(hp.value)}</b> 最大HP<small>アイテム未反映の基礎値</small>` : "";
+        } else {
+          head.textContent = "";
+        }
+
+        // 投資額の階段。現在の段に印を付け、まだ届いていない段は淡く出す
+        const table = h.costBonuses[slot] ?? [];
+        const step = costBonusStep(slot, cost[slot]);
+        const kind = payload.costBonusTarget[slot].kind;
+        ladder.innerHTML = [...table]
+          .reverse()
+          .map((r) => {
+            const reached = cost[slot] >= r.goldThreshold;
+            const current = step && step.goldThreshold === r.goldThreshold;
+            const cls = current ? "now" : reached ? "done" : "todo";
+            const val = kind === "percent" ? `+${r.bonus}%` : `+${r.bonus}`;
+            return `<li class="${cls}"><span class="b">${val}</span><span class="g">${fmt(r.goldThreshold)}</span></li>`;
+          })
+          .join("");
+      }
+
+      // スピリット: ヒーローのスキルと、現在のスピリットパワーでのダメージ
+      const box = document.querySelector("[data-abilities]");
       if (!h) {
-        el.innerHTML = '<li class="empty">ヒーロー未選択</li>';
-        return;
+        box.innerHTML = '<li class="empty">—</li>';
+      } else {
+        const sp = costBonusStep("Tech", cost.Tech)?.bonus ?? 0;
+        box.innerHTML = h.abilities
+          .map((a) => {
+            const icon = document.querySelector(`.aicon-src[data-ab="${CSS.escape(a.key)}"]`);
+            const img = icon ? icon.innerHTML : "";
+            const v = a.damage
+              ? `<span class="l">${esc(a.damage.label)}</span><span class="v">${
+                  Math.round((a.damage.base + sp * a.damage.scale) * 10) / 10
+                }</span>`
+              : '<span class="l">ダメージなし</span><span class="v">—</span>';
+            return `<li class="${a.isUltimate ? "ult" : ""}"><span class="ai">${img}</span><span class="an">${esc(a.name)}</span>${v}</li>`;
+          })
+          .join("");
       }
-      const catLabel = { WeaponMod: "武器", Armor: "生命力", Tech: "スピリット" };
-      const catVar = { WeaponMod: "weapon", Armor: "vitality", Tech: "spirit" };
-      el.innerHTML = Object.keys(catLabel)
-        .map((slot) => {
-          const step = costBonusStep(slot, catCost[slot] ?? 0);
-          const target = payload.costBonusTarget[slot];
-          const shown = step
-            ? (target.kind === "percent" ? "+" + step.bonus + "%" : "+" + step.bonus)
-            : "—";
-          const at = step ? `<small> / ${fmt(step.goldThreshold)}到達</small>` : "";
-          return (
-            `<li style="--cat: var(--c-${catVar[slot]})"><span class="l">${catLabel[slot]}</span>` +
-            `<span class="v">${shown}${at}</span></li>`
-          );
-        })
-        .join("");
     }
 
-    /** 常時パッシブの加算値と、カテゴリ別の購入ボーナスを合算する */
-    function renderStats(catCost) {
+    /** 常時パッシブと購入ボーナスの合算 */
+    function renderStats(cost) {
       const total = new Map();
       const add = (type, value) => total.set(type, (total.get(type) ?? 0) + value);
-
-      for (const id of picked) {
-        for (const m of payload.items[id]?.mods ?? []) add(m.type, m.value);
-      }
-
-      // 購入ボーナスはアイテム単位ではなく、カテゴリへの累計投資額から1回だけ引く
-      for (const slot of Object.keys(payload.costBonusTarget)) {
-        const step = costBonusStep(slot, catCost[slot] ?? 0);
+      for (const id of picked) for (const m of payload.items[id]?.mods ?? []) add(m.type, m.value);
+      for (const slot of SLOTS) {
+        const step = costBonusStep(slot, cost[slot]);
         if (step) add(payload.costBonusTarget[slot].valueType, step.bonus);
       }
-
       const rows = [...total.entries()]
         .filter(([, v]) => v !== 0)
         .sort((a, b) => Math.abs(b[1]) - Math.abs(a[1]));
-
       const el = $("stats");
-      if (rows.length === 0) {
-        el.innerHTML = '<li class="empty">—</li>';
-        return;
-      }
-      el.innerHTML = rows
-        .map(([type, value]) => {
-          const label = payload.labels[type] ?? type.replace("MODIFIER_VALUE_", "");
-          const sign = value > 0 ? "+" : "";
-          return `<li><span class="l">${label}</span><span class="v">${sign}${Math.round(value * 100) / 100}</span></li>`;
-        })
-        .join("");
+      el.innerHTML = rows.length
+        ? rows
+            .map(([type, value]) => {
+              const label = payload.labels[type] ?? type.replace("MODIFIER_VALUE_", "");
+              const sign = value > 0 ? "+" : "";
+              return `<li><span class="l">${esc(label)}</span><span class="v">${sign}${
+                Math.round(value * 100) / 100
+              }</span></li>`;
+            })
+            .join("")
+        : '<li class="empty">—</li>';
     }
 
-    function syncCards() {
-      document.querySelectorAll(".card").forEach((c) => {
+    function render() {
+      const cost = catCost();
+      const spent = cost.WeaponMod + cost.Armor + cost.Tech;
+      $("t-souls").textContent = fmt(spent);
+      $("t-count").textContent = String(picked.length);
+      const h = hero();
+      $("t-level").textContent = h ? "Lv" + levelForSouls(h.levels, spent) : "Lv—";
+      renderHero();
+      renderSlots();
+      renderBoxes(cost);
+      renderStats(cost);
+      for (const c of document.querySelectorAll(".card")) {
         c.classList.toggle("on", picked.includes(c.dataset.id));
-      });
-      const sel = $("hero");
-      sel.value = heroId === null ? "" : String(heroId);
+      }
     }
 
     function refresh(replaceUrl) {
       writeUrl(replaceUrl);
-      syncCards();
       render();
     }
 
-    // ---- 操作 -------------------------------------------------------------
-    document.querySelectorAll(".card").forEach((card) => {
-      card.addEventListener("click", () => {
-        const id = card.dataset.id;
+    // ---- ホバーカード -------------------------------------------------
+    const card = $("hovercard");
+    function showCard(id, anchor) {
+      const it = payload.items[id];
+      if (!it) return;
+      const meta = payload.slotMeta[it.slot] ?? { label: "", cssVar: "accent" };
+      const rows = (list, cls) =>
+        list.length
+          ? `<ul class="${cls}">${list
+              .map((r) => `<li><span class="l">${esc(r.label)}</span><span class="v">${esc(r.value)}</span></li>`)
+              .join("")}</ul>`
+          : "";
+      const badge = it.isImbue ? "IMBUE" : it.activation !== "PASSIVE" ? "ACTIVE" : null;
+      card.style.setProperty("--cat", `var(--c-${meta.cssVar})`);
+      card.style.setProperty("--cat-bg", `var(--c-${meta.cssVar}-bg)`);
+      card.innerHTML =
+        `<div class="hc-head"><span class="hc-name">${esc(it.name)}</span>` +
+        `${badge ? `<span class="hc-badge">${badge}</span>` : ""}</div>` +
+        `<div class="hc-meta">${esc(meta.label)}・ティア${it.tier}・${fmt(it.cost)}ソウル・枠${it.slotCost}</div>` +
+        (it.desc ? `<p class="hc-desc">${esc(it.desc)}</p>` : "") +
+        (it.passives.length ? `<div class="hc-sec">常時パッシブ</div>${rows(it.passives, "hc-rows")}` : "") +
+        (it.conditional.length ? `<div class="hc-sec">条件付き</div>${rows(it.conditional, "hc-rows")}` : "") +
+        (it.components.length ? `<div class="hc-rel">素材: ${esc(it.components.join("、"))}</div>` : "") +
+        (it.usedIn.length ? `<div class="hc-rel">上位: ${esc(it.usedIn.join("、"))}</div>` : "");
+      card.hidden = false;
+
+      // 画面外にはみ出さない位置に置く
+      const r = anchor.getBoundingClientRect();
+      const cw = card.offsetWidth;
+      const ch = card.offsetHeight;
+      // ショップが右側にあるため、左に出すと自分のステータス欄を隠してしまう。右を優先する
+      let left = r.right + 10;
+      if (left + cw > window.innerWidth - 8) left = r.left - cw - 10;
+      if (left < 8) left = Math.max(8, window.innerWidth - cw - 8);
+      let top = r.top + window.scrollY - 4;
+      const maxTop = window.scrollY + window.innerHeight - ch - 8;
+      if (top > maxTop) top = Math.max(window.scrollY + 8, maxTop);
+      card.style.left = left + "px";
+      card.style.top = top + "px";
+    }
+    function hideCard() {
+      card.hidden = true;
+    }
+
+    // ---- 操作 --------------------------------------------------------
+    for (const el of document.querySelectorAll(".card")) {
+      el.addEventListener("click", () => {
+        const id = el.dataset.id;
         const at = picked.indexOf(id);
         if (at >= 0) picked.splice(at, 1);
         else picked.push(id);
         refresh(false);
       });
-    });
+      el.addEventListener("mouseenter", () => showCard(el.dataset.id, el));
+      el.addEventListener("focus", () => showCard(el.dataset.id, el));
+      el.addEventListener("mouseleave", hideCard);
+      el.addEventListener("blur", hideCard);
+    }
 
-    $("picked").addEventListener("click", (e) => {
-      const cell = e.target.closest(".pick");
+    document.querySelector(".slots").addEventListener("click", (e) => {
+      const cell = e.target.closest(".cell.filled");
       if (!cell) return;
       picked = picked.filter((id) => id !== cell.dataset.id);
       refresh(false);
     });
 
     $("hero").addEventListener("change", (e) => {
-      const v = e.target.value;
-      heroId = v === "" ? null : Number(v);
+      heroId = e.target.value === "" ? null : Number(e.target.value);
       refresh(false);
     });
-
     $("clear").addEventListener("click", () => {
       picked = [];
       refresh(false);
     });
-
     $("share").addEventListener("click", async () => {
       const btn = $("share");
-      const url = location.href;
       try {
-        await navigator.clipboard.writeText(url);
+        await navigator.clipboard.writeText(location.href);
         btn.textContent = "コピーしました";
       } catch {
-        // クリップボードが使えない環境では選択できる形で見せる
-        btn.textContent = url;
+        btn.textContent = location.href;
       }
       setTimeout(() => (btn.textContent = "共有URLをコピー"), 2000);
     });
 
-    // カテゴリの絞り込み
-    document.querySelectorAll(".tab").forEach((tab) => {
+    for (const tab of document.querySelectorAll(".tab")) {
       tab.addEventListener("click", () => {
-        document.querySelectorAll(".tab").forEach((x) => x.classList.remove("current"));
+        for (const x of document.querySelectorAll(".tab")) x.classList.remove("current");
         tab.classList.add("current");
-        const want = tab.dataset.slot;
-        document.querySelectorAll(".cat").forEach((c) => {
-          c.hidden = want !== "all" && c.dataset.slot !== want;
-        });
+        for (const c of document.querySelectorAll(".cat")) {
+          c.hidden = c.dataset.slot !== tab.dataset.slot;
+        }
+        hideCard();
       });
-    });
+    }
 
     window.addEventListener("hashchange", () => {
       readUrl();
-      syncCards();
       render();
     });
+    window.addEventListener("scroll", hideCard, { passive: true });
 
     readUrl();
     refresh(true);
   </script>
 
+  {/* スキルアイコンの供給元。表示はせず、クローン元としてだけ使う */}
+  <div class="iconsrc" aria-hidden="true">
+    {
+      heroes.flatMap((h) =>
+        abilityDamages(h).map((a) => (
+          <span class="aicon-src" data-ab={a.key} set:html={
+            a.image
+              ? `<img src="${base}/${(a.image.replace("file://{images}/", "images/")).replace(/\.[a-z0-9]+$/i, ".png")}" alt="" width="26" height="26" loading="lazy">`
+              : ""
+          } />
+        )),
+      )
+    }
+  </div>
+
   <style>
+    /* ---- 見出し ---- */
     .head {
       display: flex;
-      align-items: baseline;
-      gap: var(--sp-5);
-      flex-wrap: wrap;
-    }
-    .heropick {
-      font-size: 13px;
-      color: var(--c-text-muted);
-      display: flex;
       align-items: center;
-      gap: var(--sp-2);
+      gap: var(--sp-4);
+      flex-wrap: wrap;
+      margin-bottom: var(--sp-4);
     }
+    .head h1 { margin: 0; }
+    .heropick { font-size: 13px; color: var(--c-text-muted); display: flex; align-items: center; gap: var(--sp-2); }
     select {
-      background: var(--c-surface);
-      color: var(--c-text);
-      border: 1px solid var(--c-border-strong);
-      border-radius: var(--radius);
-      padding: 5px 8px;
-      font: inherit;
-      font-size: 13px;
+      background: var(--c-surface); color: var(--c-text);
+      border: 1px solid var(--c-border-strong); border-radius: var(--radius);
+      padding: 5px 8px; font: inherit; font-size: 13px;
     }
+    .totals { display: flex; gap: var(--sp-4); margin-left: auto; font-size: 12px; color: var(--c-text-muted); }
+    .totals b { font-family: var(--font-mono); color: var(--c-text-strong); font-size: 14px; }
+    .acts { display: flex; gap: var(--sp-2); }
+    .share, .clear {
+      padding: 5px 12px; border-radius: var(--radius); font: inherit; font-size: 12px; cursor: pointer;
+    }
+    .share { background: var(--c-accent-bg); border: 1px solid var(--c-accent-dim); color: var(--c-accent); }
+    .share:hover { background: var(--c-accent-bg-strong); color: var(--c-accent-hover); }
+    .clear { background: transparent; border: 1px solid var(--c-border); color: var(--c-text-muted); }
+    .clear:hover { border-color: var(--c-border-strong); color: var(--c-text); }
+
     .layout {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 300px;
+      grid-template-columns: 360px minmax(0, 1fr);
       gap: var(--sp-5);
       align-items: start;
-      margin-top: var(--sp-4);
     }
-    /* --- ショップ --- */
-    .tabs {
-      display: flex;
-      gap: var(--sp-2);
-      margin-bottom: var(--sp-4);
-      flex-wrap: wrap;
+
+    /* ---- 左: ヒーロー行 ---- */
+    .heroline { display: flex; align-items: center; gap: var(--sp-3); margin-bottom: var(--sp-3); }
+    .hname { font-weight: 600; color: var(--c-text-strong); }
+
+    /* ---- 左: 12マスのスロット ---- */
+    .slots { display: grid; gap: var(--sp-2); }
+    .slotrow {
+      display: flex; align-items: center; gap: var(--sp-3);
+      background: var(--c-surface); border: 1px solid var(--c-border);
+      border-left: 3px solid var(--cat); border-radius: var(--radius);
+      padding: var(--sp-2) var(--sp-3);
     }
+    .slabel { font-size: 11px; color: var(--cat); width: 3.5em; flex: 0 0 auto; letter-spacing: .04em; }
+    .cells { display: flex; gap: 5px; flex-wrap: wrap; }
+    .cells :global(.cell) {
+      width: 40px; height: 40px; border-radius: 5px;
+      border: 1px dashed var(--c-border-strong); background: var(--c-bg);
+      display: inline-block; padding: 0; line-height: 0;
+    }
+    .cells :global(.cell.filled) { border: none; background: none; cursor: pointer; }
+    .cells :global(.cell.filled:hover) { filter: brightness(1.25); }
+    /* 4枠を超えた分。ゲームでは持てない数であることを示す */
+    .cells :global(.cell.over) { outline: 2px solid #d08a3e; outline-offset: 1px; }
+    .cells :global(.cell.filled .icon) { width: 40px; height: 40px; }
+    .slotnote { font-size: 11px; color: var(--c-text-faint); margin: var(--sp-2) 0 var(--sp-4); }
+
+    /* ---- 左: TYPE別ボックス ---- */
+    .box {
+      background: var(--cat-bg);
+      border: 1px solid var(--cat);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-3) var(--sp-4) var(--sp-4);
+      margin-bottom: var(--sp-3);
+    }
+    .box.plain { background: var(--c-surface); border-color: var(--c-border); }
+    .bhead { display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-3); }
+    .bhead h2 {
+      font-size: 13px; margin: 0 0 var(--sp-2); border: none; padding: 0;
+      color: var(--cat); letter-spacing: .04em;
+    }
+    .box.plain .bhead h2 { color: var(--c-text-strong); }
+    .bhl { font-size: 11px; color: var(--c-text-muted); text-align: right; }
+    .bbody { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--sp-4); align-items: start; }
+    .bcol { min-width: 0; }
+    .invest { min-width: 0; }
+    .bhl :global(b) { font-family: var(--font-mono); font-size: 15px; color: var(--c-text-strong); margin-right: 3px; }
+    .bhl :global(small) { display: block; color: var(--c-text-faint); }
+    /*
+     * 以下は中身をJSで差し込むため、Astroのスコープ属性が付かない。
+     * :global でないと当たらない。
+     */
+    .brows, .stats, .alist { list-style: none; padding: 0; margin: 0; }
+    .brows :global(li), .stats :global(li), .alist :global(li) {
+      display: flex; justify-content: space-between; align-items: baseline; gap: var(--sp-3);
+      padding: 3px 0; font-size: 12px; border-bottom: 1px solid var(--c-border);
+    }
+    .brows :global(.l), .stats :global(.l), .alist :global(.l) { color: var(--c-text-muted); }
+    .brows :global(.v), .stats :global(.v), .alist :global(.v) {
+      font-family: var(--font-mono); color: var(--c-text-strong); white-space: nowrap;
+    }
+    .brows :global(.empty), .stats :global(.empty), .alist :global(.empty) {
+      color: var(--c-text-faint); border: none; font-size: 12px; display: block;
+    }
+
+    /* スピリット: スキルアイコン付きの一覧 */
+    .spirit h3, .invest h3 {
+      font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--c-text-muted); margin: var(--sp-4) 0 var(--sp-2); border: none; padding: 0;
+    }
+    .alist :global(li) { gap: var(--sp-2); }
+    .alist :global(.ai) { flex: 0 0 auto; line-height: 0; }
+    .alist :global(.ai img) {
+      width: 26px; height: 26px; border-radius: 4px;
+      border: 1px solid var(--cat); background: var(--c-surface-2);
+    }
+    .alist :global(.an) {
+      flex: 1 1 auto; min-width: 0; color: var(--c-text); font-size: 11px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .alist :global(.l) { font-size: 10px; }
+    .alist :global(li.ult .an) { color: var(--c-spirit); font-weight: 600; }
+
+    /* 投資額の階段 */
+    .ladder { list-style: none; margin: 0; padding: 0; }
+    .ladder :global(li) {
+      display: flex; justify-content: space-between; gap: var(--sp-2);
+      font-family: var(--font-mono); font-size: 10px; line-height: 1.5;
+      padding: 0 4px; border-radius: 3px;
+    }
+    .ladder :global(.b), .ladder :global(.g) { color: var(--c-text-faint); }
+    .ladder :global(li.done .b) { color: var(--c-text); }
+    .ladder :global(li.done .g) { color: var(--c-text-muted); }
+    .ladder :global(li.now) { background: var(--cat); }
+    .ladder :global(li.now .b), .ladder :global(li.now .g) { color: var(--c-bg); font-weight: 700; }
+    .caveat { font-size: 11px; color: var(--c-text-faint); line-height: 1.6; margin: 0 0 var(--sp-2); }
+
+    /* ---- 右: ショップ ---- */
+    .tabs { display: flex; gap: var(--sp-2); margin-bottom: var(--sp-4); }
     .tab {
       --cat: var(--c-accent);
-      background: var(--c-surface);
-      border: 1px solid var(--c-border);
-      color: var(--c-text-muted);
-      border-radius: var(--radius);
-      padding: 5px 12px;
-      font: inherit;
-      font-size: 13px;
-      cursor: pointer;
+      display: flex; align-items: baseline; gap: 6px;
+      background: var(--c-surface); border: 1px solid var(--c-border); color: var(--c-text-muted);
+      border-radius: var(--radius); padding: 6px 16px; font: inherit; font-size: 13px; cursor: pointer;
     }
-    .tab:hover {
-      color: var(--c-text);
-      border-color: var(--c-border-strong);
-    }
-    .tab.current {
-      color: var(--cat);
-      border-color: var(--cat);
-      background: var(--c-surface-2);
-    }
-    .catname {
-      color: var(--cat);
-      border-bottom-color: var(--cat);
-      margin-top: var(--sp-5);
-    }
+    .tab small { font-family: var(--font-mono); font-size: 10px; color: var(--c-text-faint); }
+    .tab:hover { color: var(--c-text); border-color: var(--c-border-strong); }
+    .tab.current { color: var(--cat); border-color: var(--cat); background: var(--cat-bg); }
+    .tab.current small { color: var(--cat); }
     .tier h3 {
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      color: var(--c-text-muted);
-      text-transform: uppercase;
-      display: flex;
-      justify-content: space-between;
-      margin: var(--sp-4) 0 var(--sp-2);
+      font-size: 11px; letter-spacing: .08em; color: var(--c-text-muted); text-transform: uppercase;
+      display: flex; justify-content: space-between; margin: 0 0 var(--sp-2); border: none; padding: 0;
     }
-    .price {
-      font-family: var(--font-mono);
-      color: var(--c-text-faint);
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
-      gap: var(--sp-2);
-    }
+    .tier { margin-bottom: var(--sp-5); }
+    .price { font-family: var(--font-mono); color: var(--c-text-faint); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: var(--sp-2); }
     .card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 5px;
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
       padding: var(--sp-2) 4px;
-      background: var(--c-surface);
-      border: 1px solid var(--c-border);
-      border-radius: var(--radius);
-      color: var(--c-text-muted);
-      font: inherit;
-      font-size: 11px;
-      line-height: 1.3;
-      text-align: center;
-      cursor: pointer;
+      background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius);
+      color: var(--c-text-muted); font: inherit; font-size: 10px; line-height: 1.3;
+      text-align: center; cursor: pointer;
     }
-    .card:hover {
-      background: var(--cat-bg);
-      border-color: var(--cat);
-      color: var(--c-text);
+    .card:hover { background: var(--cat-bg); border-color: var(--cat); color: var(--c-text); }
+    .card.on { border-color: var(--cat); background: var(--cat-bg); color: var(--c-text-strong); box-shadow: inset 0 0 0 1px var(--cat); }
+    .cname { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+    /* ---- ホバーカード ---- */
+    .hovercard {
+      position: absolute; z-index: 50; width: 280px;
+      background: var(--c-surface); border: 1px solid var(--cat);
+      border-left: 3px solid var(--cat);
+      border-radius: var(--radius); padding: var(--sp-3);
+      box-shadow: 0 8px 28px rgb(0 0 0 / 0.5);
+      pointer-events: none;
     }
-    .card.on {
-      border-color: var(--cat);
-      background: var(--cat-bg);
-      color: var(--c-text-strong);
-      box-shadow: inset 0 0 0 1px var(--cat);
+    .hovercard :global(.hc-head) { display: flex; align-items: center; gap: var(--sp-2); }
+    .hovercard :global(.hc-name) { font-weight: 700; color: var(--c-text-strong); font-size: 14px; }
+    .hovercard :global(.hc-badge) {
+      font-size: 9px; font-weight: 700; letter-spacing: .06em; padding: 0 4px; border-radius: 2px;
+      color: var(--c-bg); background: var(--cat);
     }
-    .cname {
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+    .hovercard :global(.hc-meta) { font-size: 11px; color: var(--cat); margin-top: 2px; font-family: var(--font-mono); }
+    .hovercard :global(.hc-desc) { font-size: 12px; color: var(--c-text); line-height: 1.6; margin: var(--sp-2) 0 0; }
+    .hovercard :global(.hc-sec) {
+      font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--c-text-muted); margin-top: var(--sp-3);
     }
-    /* --- ビルドパネル --- */
-    .sticky {
-      position: sticky;
-      top: 74px;
-      background: var(--c-surface);
-      border: 1px solid var(--c-border);
-      border-radius: var(--radius-lg);
-      padding: var(--sp-4);
+    .hovercard :global(.hc-rows) { list-style: none; padding: 0; margin: 2px 0 0; }
+    .hovercard :global(.hc-rows li) {
+      display: flex; justify-content: space-between; gap: var(--sp-3);
+      font-size: 11px; padding: 2px 0; border-bottom: 1px solid var(--c-border);
     }
-    .phead {
-      margin: 0 0 var(--sp-3);
-      font-size: 15px;
-      border-bottom: 1px solid var(--c-border);
-      padding-bottom: var(--sp-2);
-    }
-    .shead {
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--c-text-muted);
-      margin: var(--sp-5) 0 var(--sp-2);
-    }
-    .totals,
-    .bycat,
-    .stats {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .totals li,
-    .bycat li,
-    .stats li {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: var(--sp-3);
-      padding: 3px 0;
-      font-size: 12px;
-      border-bottom: 1px solid var(--c-border);
-    }
-    .totals .l,
-    .bycat .l,
-    .stats .l {
-      color: var(--c-text-muted);
-    }
-    .bycat li .l {
-      color: var(--cat);
-    }
-    .totals .v,
-    .bycat .v,
-    .stats .v {
-      font-family: var(--font-mono);
-      color: var(--c-text-strong);
-    }
-    .totals .v small,
-    .bycat .v small {
-      color: var(--c-text-muted);
-      font-size: 10px;
-    }
-    .stats .empty,
-    .bycat .empty,
-    .picked .empty {
-      color: var(--c-text-faint);
-      border: none;
-      font-size: 12px;
-      margin: 0;
-    }
-    /* 選んだアイコンの一覧 */
-    .picked {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      margin: var(--sp-3) 0;
-      min-height: 56px;
-    }
-    .pick {
-      position: relative;
-      padding: 0;
-      background: none;
-      border: none;
-      cursor: pointer;
-      line-height: 0;
-    }
-    .pick:hover {
-      filter: brightness(1.25);
-    }
-    .pick .order {
-      position: absolute;
-      left: -3px;
-      top: -4px;
-      min-width: 14px;
-      height: 14px;
-      padding: 0 3px;
-      border-radius: 7px;
-      background: var(--c-bg);
-      border: 1px solid var(--c-border-strong);
-      color: var(--c-text-muted);
-      font-family: var(--font-mono);
-      font-size: 9px;
-      line-height: 13px;
-      text-align: center;
-    }
-    .caveat {
-      font-size: 11px;
-      color: var(--c-text-faint);
-      line-height: 1.5;
-      margin: 0 0 var(--sp-2);
-    }
-    .share,
-    .clear {
-      width: 100%;
-      margin-top: var(--sp-3);
-      padding: 7px;
-      border-radius: var(--radius);
-      font: inherit;
-      font-size: 12px;
-      cursor: pointer;
-    }
-    .share {
-      background: var(--c-accent-bg);
-      border: 1px solid var(--c-accent-dim);
-      color: var(--c-accent);
-    }
-    .share:hover {
-      background: var(--c-accent-bg-strong);
-      color: var(--c-accent-hover);
-    }
-    .clear {
-      background: transparent;
-      border: 1px solid var(--c-border);
-      color: var(--c-text-muted);
-      margin-top: var(--sp-2);
-    }
-    .clear:hover {
-      border-color: var(--c-border-strong);
-      color: var(--c-text);
-    }
-    @media (max-width: 900px) {
-      .layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .sticky {
-        position: static;
-      }
+    .hovercard :global(.hc-rows .l) { color: var(--c-text-muted); }
+    .hovercard :global(.hc-rows .v) { font-family: var(--font-mono); color: var(--c-text-strong); }
+    .hovercard :global(.hc-rel) { font-size: 11px; color: var(--c-text-muted); margin-top: var(--sp-2); }
+
+    .iconsrc { display: none; }
+
+    @media (max-width: 1000px) {
+      .layout { grid-template-columns: minmax(0, 1fr); }
+      .hovercard { display: none; }
     }
   </style>
 </Base>

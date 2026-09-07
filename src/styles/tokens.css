@@ -41,10 +41,15 @@
   --c-spirit-bg: rgb(181 139 230 / 0.12);
 
   /* ---- タイポグラフィ ---- */
+  /*
+   * ゲーム内の日本語表記が Noto Sans JP 系のため、サイト側も先頭に置いて揃える。
+   * Base.astro で Google Fonts から読み込んでいる。
+   * 読み込みに失敗した環境では、以下の端末内蔵フォントに落ちる。
+   */
   --font-sans:
-    "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", "Segoe UI",
+    "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Segoe UI",
     system-ui, sans-serif;
-  --font-mono: "SFMono-Regular", Consolas, "Roboto Mono", monospace;
+  --font-mono: "Roboto Mono", "SFMono-Regular", Consolas, monospace;
 
   /* ---- 余白・角丸 ---- */
   --sp-1: 4px;

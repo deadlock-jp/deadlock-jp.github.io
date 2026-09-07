@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import AbilityIcon from "../../components/AbilityIcon.astro";
+import HeroPortrait from "../../components/HeroPortrait.astro";
 import { releasedHeroes, t, describe, ability, modifierLabel } from "../../lib/data.ts";
 
 export function getStaticPaths() {
@@ -35,6 +36,7 @@ const bonus = hero.levelUpBonuses;
 
 <Base title={name} description={`${name} の基礎ステータス・スキル・成長`}>
   <a class="back" href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/heroes/`}>← ヒーロー一覧</a>
+  <HeroPortrait name={name} image={hero.images.heroCard} variant="card" />
   <h1>{name}</h1>
   <p class="lead">{t(hero.roleToken, "")}</p>
 
@@ -110,6 +112,7 @@ const bonus = hero.levelUpBonuses;
 
   <style>
     .back { font-size: 13px; }
+    h1 { margin-top: var(--sp-4); }
     .lead { color: var(--c-text-muted); margin-top: var(--sp-1); }
     .statgrid {
       list-style: none; padding: 0; margin: 0;
