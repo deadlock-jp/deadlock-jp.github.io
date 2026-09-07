@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "note": "GameTracking-Deadlock の更新で data/*.json の数値が変わったときの差分を、新しい順に並べたもの。エントリは将来 tools/ 側の自動生成(上流コミットの差分算出)で追記していく。",
+  "upstreamRepo": "https://github.com/SteamDatabase/GameTracking-Deadlock",
+  "entries": [
+    {
+      "date": "2026-09-07",
+      "upstreamCommit": "c34d25e806a6410f00037d34782d45fe2b9f550f",
+      "title": "初回データ取り込み",
+      "changes": [
+        "GameTracking-Deadlock の .vdata からヒーロー・アイテム・スキル・オブジェクトの数値を生成",
+        "ゲーム本体の公式日本語ローカライズを取り込み(未収録分のみ英語)"
+      ]
+    }
+  ]
+}

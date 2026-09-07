@@ -1,10 +1,22 @@
 ---
 import Base from "../layouts/Base.astro";
-import { heroesFile, itemsFile, abilitiesFile, releasedHeroes, shopItems } from "../lib/data.ts";
+import {
+  heroesFile,
+  itemsFile,
+  abilitiesFile,
+  releasedHeroes,
+  shopItems,
+  localization,
+  upstreamRepo,
+} from "../lib/data.ts";
+import imageManifest from "../../data/image-manifest.json" with { type: "json" };
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const heroCount = releasedHeroes().length;
 const itemCount = shopItems().length;
 const abilityCount = Object.keys(abilitiesFile.abilities).length;
+const textCount = Object.keys(localization.tokens).length;
+const imageCount = imageManifest.entries.length;
 const commit = heroesFile.upstreamCommit;
 const generated = new Date(itemsFile.generatedAt).toLocaleDateString("ja-JP", {
   year: "numeric",
@@ -49,9 +61,7 @@ const repo = "https://github.com/deadlock-jp/deadlock-jp.github.io";
     <li>
       <span class="k">ヒーロー・アイテム・スキルの数値</span>
       <span class="v">
-        <a href="https://github.com/SteamDatabase/GameTracking-Deadlock" rel="noopener">
-          GameTracking-Deadlock
-        </a>
+        <a href={upstreamRepo} rel="noopener">GameTracking-Deadlock</a>
         の <code>.vdata</code>
       </span>
     </li>
@@ -60,16 +70,26 @@ const repo = "https://github.com/deadlock-jp/deadlock-jp.github.io";
       <span class="v">ゲーム本体の公式ローカライズ（<code>citadel_*_japanese.txt</code>）</span>
     </li>
     <li>
-      <span class="k">アイコン画像</span>
+      <span class="k">アイコン・肖像の画像</span>
       <span class="v">ゲーム本体の VPK から抽出</span>
     </li>
   </ul>
+
+  <h2>更新のしかた</h2>
+  <p>
+    <a href={upstreamRepo} rel="noopener">GameTracking-Deadlock</a>
+    に新しいコミットが入ると、変更のあったファイルだけを再パースして
+    <code>data/*.json</code> を差分更新します。更新前後の JSON を比べて出した数値の差分は、
+    トップページの <a href={`${base}/`}>更新履歴</a> に簡易一覧で載せています。
+  </p>
 
   <h2>現在のデータ</h2>
   <ul class="src">
     <li><span class="k">実装済みヒーロー</span><span class="v">{heroCount} 体</span></li>
     <li><span class="k">ショップ掲載アイテム</span><span class="v">{itemCount} 件</span></li>
     <li><span class="k">スキル</span><span class="v">{abilityCount} 件</span></li>
+    <li><span class="k">日本語テキスト</span><span class="v">{textCount.toLocaleString("en-US")} トークン</span></li>
+    <li><span class="k">画像</span><span class="v">{imageCount} 枚</span></li>
     <li><span class="k">抽出元コミット</span><span class="v"><code>{commit.slice(0, 12)}</code></span></li>
     <li><span class="k">生成日</span><span class="v">{generated}</span></li>
   </ul>

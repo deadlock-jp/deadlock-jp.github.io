@@ -1,124 +1,296 @@
 ---
 import Base from "../layouts/Base.astro";
-import { releasedHeroes, shopItems, abilitiesFile, localization, heroesFile } from "../lib/data.ts";
-import imageManifest from "../../data/image-manifest.json" with { type: "json" };
+import HeroPortrait from "../components/HeroPortrait.astro";
+import ItemIcon from "../components/ItemIcon.astro";
+import { releasedHeroes, shopItems, t, siteUpdates, upstreamRepo, SLOT_META } from "../lib/data.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const heroes = releasedHeroes();
+const heroes = releasedHeroes().map((h) => ({
+  h,
+  name: t(h.nameToken, h.key),
+  role: t(h.roleToken, ""),
+}));
+const slots = ["WeaponMod", "Armor", "Tech"] as const;
 const items = shopItems();
-// image-manifest は「サイトが必要とする画像の対応表」。entries の件数をそのまま出す
-const imageCount = imageManifest.entries.length;
-const stats = [
-  { n: heroes.length, label: "ヒーロー", href: `${base}/heroes/` },
-  { n: items.length, label: "アイテム", href: `${base}/items/` },
-  { n: Object.keys(abilitiesFile.abilities).length, label: "スキル", href: null },
-  { n: Object.keys(localization.tokens).length, label: "テキスト", href: null },
-];
+const updates = siteUpdates();
+const commitUrl = (sha: string | null) => (sha ? `${upstreamRepo}/commit/${sha}` : null);
 ---
 
 <Base title="トップ" description="Deadlockのヒーロー・アイテム・スキルの数値を日本語で引けるデータベース">
-  <section class="hero">
+  <section class="intro">
     <h1>Deadlock 日本語リファレンス</h1>
     <p class="lead">
-      ヒーロー・アイテム・スキルの数値を日本語で引けるデータベースと、
-      ビルドの成長曲線を可視化するツール。解説や考察は載せず、ゲームの生データだけを扱います。
+      ヒーロー・アイテム・スキルの数値を日本語で引けるデータベースと、ビルドの実数値ツール。
+      解説や考察は載せず、ゲームの生データだけを扱います。
+    </p>
+    <p class="notice">
+      ファンによる非公式サイトです。表示するデータ・画像・テキストの著作権は Valve Corporation に帰属します。
+      <a href={`${base}/about/`}>このサイトについて</a>
     </p>
   </section>
 
-  <ul class="stats">
-    {
-      stats.map((s) => (
-        <li>
-          {s.href ? (
-            <a href={s.href}>
-              <span class="n">{s.n}</span>
-              <span class="l">{s.label}</span>
+  <section class="block">
+    <h2>更新履歴</h2>
+    <ol class="updates">
+      {
+        updates.map((u) => (
+          <li>
+            <span class="udate">{u.date}</span>
+            <div class="ubody">
+              <span class="utitle">
+                {u.title}
+                {commitUrl(u.upstreamCommit) && (
+                  <a class="ucommit" href={commitUrl(u.upstreamCommit)} rel="noopener">
+                    {u.upstreamCommit!.slice(0, 8)}
+                  </a>
+                )}
+              </span>
+              <ul class="uchanges">
+                {u.changes.map((c) => (
+                  <li>{c}</li>
+                ))}
+              </ul>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="block">
+    <h2>
+      ヒーロー
+      <a class="more" href={`${base}/heroes/`}>一覧を見る →</a>
+    </h2>
+    <ul class="herogrid">
+      {
+        heroes.map(({ h, name, role }) => (
+          <li>
+            <a href={`${base}/heroes/${h.id}/`}>
+              <HeroPortrait name={name} image={h.images.iconSmall} size={40} />
+              <span class="hwho">
+                <span class="hname">{name}</span>
+                <span class="hrole">{role}</span>
+              </span>
             </a>
-          ) : (
-            <span>
-              <span class="n">{s.n}</span>
-              <span class="l">{s.label}</span>
-            </span>
-          )}
-        </li>
-      ))
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="block">
+    <h2>
+      アイテム
+      <a class="more" href={`${base}/items/`}>一覧を見る →</a>
+    </h2>
+    {
+      slots.map((slot) => {
+        const meta = SLOT_META[slot];
+        const list = items.filter((i) => i.slotType === slot);
+        return (
+          <div class="itemcat" style={`--cat: var(--c-${meta.cssVar})`}>
+            <h3>
+              {meta.label}
+              <span class="icount">{list.length}</span>
+            </h3>
+            <ul class="itemwall">
+              {list.map((i) => (
+                <li>
+                  <a href={`${base}/items/${i.id}/`} title={t(i.nameToken, i.id)}>
+                    <ItemIcon
+                      name={t(i.nameToken, i.id)}
+                      slotType={i.slotType}
+                      tier={i.tier}
+                      shopIcon={i.shopIcon}
+                      activation={i.activation}
+                      isImbue={i.isImbue}
+                      size={40}
+                    />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      })
     }
-  </ul>
+  </section>
 
-  <p class="notice">
-    本サイトはファンによる非公式サイトです。『Deadlock』および本サイトが表示する
-    データ・画像・テキストの著作権は Valve Corporation に帰属します。
-    <a href={`${base}/about/`}>このサイトについて</a>
-  </p>
-
-  <h2>データについて</h2>
-  <div class="scroll-x">
-    <table>
-      <thead>
-        <tr><th>項目</th><th>内容</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>数値の出典</td><td>GameTracking-Deadlock の <code>.vdata</code></td></tr>
-        <tr><td>取り込みコミット</td><td><code>{heroesFile.upstreamCommit.slice(0, 12)}</code></td></tr>
-        <tr><td>日本語表記</td><td>ゲーム本体の公式ローカライズをそのまま使用（未収録分のみ英語）</td></tr>
-        <tr><td>アイコン画像</td><td>ゲーム本体から抽出（{imageCount}枚）</td></tr>
-        <tr><td>更新方法</td><td>上流の新規コミットを検知して差分のみ再抽出</td></tr>
-      </tbody>
-    </table>
-  </div>
+  <section class="block">
+    <h2>このサイトについて</h2>
+    <p class="about">
+      数値はすべてパーサーが GameTracking-Deadlock の <code>.vdata</code> から自動で取り出しています。
+      日本語表記はゲーム本体の公式ローカライズをそのまま使用。出典・権利表示・ライセンスは
+      <a href={`${base}/about/`}>このサイトについて</a> にまとめています。
+    </p>
+  </section>
 
   <style>
-    .hero {
-      padding: var(--sp-6) 0 var(--sp-5);
+    .intro {
+      padding: var(--sp-5) 0 var(--sp-4);
     }
     .lead {
       max-width: 62ch;
       color: var(--c-text-muted);
       font-size: 15px;
     }
-    .stats {
-      list-style: none;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: var(--sp-3);
-      margin: 0 0 var(--sp-5);
-      padding: 0;
-    }
-    .stats li > * {
-      display: block;
-      padding: var(--sp-4);
-      background: var(--c-surface);
-      border: 1px solid var(--c-border);
-      border-radius: var(--radius-lg);
-      color: inherit;
-    }
-    .stats a:hover {
-      border-color: var(--c-accent-dim);
-      background: var(--c-surface-2);
-      text-decoration: none;
-    }
-    .n {
-      display: block;
-      font-family: var(--font-mono);
-      font-size: 26px;
-      color: var(--c-text-strong);
-      line-height: 1.2;
-    }
-    .stats a .n {
-      color: var(--c-accent);
-    }
     .notice {
       font-size: 12px;
       color: var(--c-text-faint);
       line-height: 1.7;
       max-width: 62ch;
-      margin: 0 0 var(--sp-5);
+      margin: var(--sp-3) 0 0;
     }
-    .l {
-      display: block;
+    .block {
+      margin-top: var(--sp-6);
+    }
+    .block h2 {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--sp-3);
+    }
+    .more {
+      font-size: 12px;
+      font-weight: 400;
+      white-space: nowrap;
+    }
+
+    /* ---- 更新履歴 ---- */
+    .updates {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: var(--sp-3);
+    }
+    .updates > li {
+      display: grid;
+      grid-template-columns: 92px minmax(0, 1fr);
+      gap: var(--sp-3);
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius);
+      padding: var(--sp-3) var(--sp-4);
+    }
+    .udate {
+      font-family: var(--font-mono);
       font-size: 12px;
       color: var(--c-text-muted);
-      letter-spacing: 0.06em;
+    }
+    .utitle {
+      font-weight: 600;
+      color: var(--c-text-strong);
+      font-size: 14px;
+    }
+    .ucommit {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      margin-left: var(--sp-2);
+      color: var(--c-text-muted);
+    }
+    .uchanges {
+      margin: var(--sp-1) 0 0;
+      padding-left: 1.2em;
+      font-size: 12px;
+      color: var(--c-text-muted);
+      line-height: 1.7;
+    }
+
+    /* ---- ヒーローグリッド ---- */
+    .herogrid {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: var(--sp-2);
+    }
+    .herogrid a {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+      padding: var(--sp-2) var(--sp-3);
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-left: 3px solid var(--c-accent-dim);
+      border-radius: var(--radius);
+      color: inherit;
+    }
+    .herogrid a:hover {
+      background: var(--c-surface-2);
+      border-left-color: var(--c-accent);
+      text-decoration: none;
+    }
+    .hwho {
+      min-width: 0;
+    }
+    .hname {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--c-text-strong);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .hrole {
+      display: block;
+      font-size: 11px;
+      color: var(--c-text-muted);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* ---- アイテムアイコンの壁 ---- */
+    .itemcat {
+      margin-top: var(--sp-4);
+    }
+    .itemcat h3 {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cat);
+      display: flex;
+      gap: var(--sp-2);
+      align-items: baseline;
+      margin: 0 0 var(--sp-2);
+      border: none;
+      padding: 0;
+    }
+    .icount {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--c-text-faint);
+    }
+    .itemwall {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .itemwall a {
+      display: block;
+      line-height: 0;
+      border-radius: 5px;
+    }
+    .itemwall a:hover {
+      filter: brightness(1.2);
+    }
+
+    .about {
+      max-width: 62ch;
+      font-size: 13px;
+      color: var(--c-text-muted);
+      line-height: 1.8;
+    }
+    code {
+      font-family: var(--font-mono);
+      font-size: 0.92em;
     }
   </style>
 </Base>

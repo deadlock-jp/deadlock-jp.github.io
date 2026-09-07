@@ -5,6 +5,7 @@ import itemsJson from "../../data/items.json" with { type: "json" };
 import abilitiesJson from "../../data/abilities.json" with { type: "json" };
 import localizationJson from "../../data/localization.japanese.json" with { type: "json" };
 import localizationEnJson from "../../data/localization.english.json" with { type: "json" };
+import updatesJson from "../../data/updates.json" with { type: "json" };
 import type { HeroesFile, Hero } from "../types/hero.ts";
 import type { ItemsFile, Item } from "../types/item.ts";
 import type { AbilitiesFile, Ability } from "../types/ability.ts";
@@ -248,4 +249,23 @@ export const SLOT_META = {
 /** ソウルを 3桁区切りにする */
 export function souls(n: number): string {
   return n.toLocaleString("en-US");
+}
+
+/**
+ * 更新履歴。GameTracking-Deadlock の更新で data/*.json が変わったときの差分要約。
+ * data/updates.json を新しい順で返す。将来は上流コミットの差分から自動生成する。
+ */
+export interface SiteUpdate {
+  date: string;
+  upstreamCommit: string | null;
+  title: string;
+  changes: string[];
+}
+const updatesFile = updatesJson as unknown as {
+  upstreamRepo: string;
+  entries: SiteUpdate[];
+};
+export const upstreamRepo = updatesFile.upstreamRepo;
+export function siteUpdates(): SiteUpdate[] {
+  return [...updatesFile.entries].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
 }
