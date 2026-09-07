@@ -1,0 +1,56 @@
+---
+/**
+ * ヒーロー詳細ページ上部の肖像。
+ *
+ * ゲーム本体の <英語表示名>_Render.png を幅760のWebPに縮小したものを
+ * public/images/heroes/render/<herokey>.webp に置いてある(tools/hero-images.mjs)。
+ * 表示は「サムネイル幅にそろえ、上ぞろえで下は見切れる」。無ければ何も出さない。
+ */
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+
+interface Props {
+  name: string;
+  /** heroes.json の key (hero_inferno など) */
+  heroKey: string;
+  /** 見せる高さ(px)。デフォルトは詳細ページ用 */
+  height?: number;
+}
+const { name, heroKey, height = 320 } = Astro.props;
+const key = heroKey.replace(/^hero_/, "");
+const rel = `images/heroes/render/${key}.webp`;
+const src = existsSync(join(process.cwd(), "public", rel))
+  ? `${import.meta.env.BASE_URL.replace(/\/$/, "")}/${rel}`
+  : null;
+---
+
+{
+  src && (
+    <div class="hrender" style={`--h: ${height}px`} role="img" aria-label={name}>
+      <img src={src} alt="" />
+    </div>
+  )
+}
+
+<style>
+  .hrender {
+    width: 100%;
+    height: var(--h);
+    overflow: hidden;
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+    background:
+      radial-gradient(120% 80% at 50% 0%, rgb(63 191 143 / 0.1), transparent 70%),
+      var(--c-surface-2);
+    margin-bottom: var(--sp-3);
+  }
+  /*
+   * 幅を100%にして height:auto。コンテナが固定高 + overflow:hidden なので
+   * はみ出た下側が自然に切れる = 「上から表示」。
+   */
+  .hrender img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>
