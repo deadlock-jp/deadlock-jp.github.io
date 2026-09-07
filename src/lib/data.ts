@@ -6,6 +6,7 @@ import abilitiesJson from "../../data/abilities.json" with { type: "json" };
 import localizationJson from "../../data/localization.japanese.json" with { type: "json" };
 import localizationEnJson from "../../data/localization.english.json" with { type: "json" };
 import updatesJson from "../../data/updates.json" with { type: "json" };
+import heroNotesJson from "../../data/hero-notes.json" with { type: "json" };
 import type { HeroesFile, Hero } from "../types/hero.ts";
 import type { ItemsFile, Item } from "../types/item.ts";
 import type { AbilitiesFile, Ability } from "../types/ability.ts";
@@ -198,6 +199,39 @@ export function releasedHeroes(): Hero[] {
   return Object.values(heroesFile.heroes)
     .filter((h) => h.released)
     .sort((a, b) => a.id - b.id);
+}
+
+/**
+ * ヒーロータグ(ゲーム内ヒーローセレクトの3語)。
+ * トークンは citadel_heroes の Citadel_<名前>_HeroTag_1..3。
+ * <名前> はキー由来のコードネームだったり表示名だったりで規則が一定しないため、
+ * 実在を確認した対応表を持つ(2026-09-07 時点、実装済み38体すべて解決)。
+ */
+const HERO_TAG_BASE: Record<string, string> = {
+  hero_inferno: "Inferno", hero_gigawatt: "Gigawatt", hero_hornet: "Vindicta", hero_ghost: "Geist",
+  hero_atlas: "Abrams", hero_wraith: "Wraith", hero_forge: "Engineer", hero_chrono: "Chrono",
+  hero_dynamo: "Dynamo", hero_kelvin: "Kelvin", hero_haze: "Haze", hero_astro: "Astro",
+  hero_bebop: "Bebop", hero_nano: "Nano", hero_orion: "Orion", hero_krill: "Digger",
+  hero_shiv: "Shiv", hero_tengu: "Tengu", hero_warden: "Warden", hero_yamato: "Yamato",
+  hero_lash: "Lash", hero_viscous: "Viscous", hero_synth: "Synth", hero_mirage: "Mirage",
+  hero_viper: "Viper", hero_magician: "Magician", hero_vampirebat: "VampireBat", hero_drifter: "Drifter",
+  hero_priest: "Priest", hero_frank: "Frank", hero_bookworm: "Bookworm", hero_doorman: "Doorman",
+  hero_punkgoat: "Punkgoat", hero_necro: "Necro", hero_fencer: "Fencer", hero_familiar: "Familiar",
+  hero_werewolf: "Werewolf", hero_unicorn: "Unicorn",
+};
+export function heroTags(hero: Hero): string[] {
+  const base = HERO_TAG_BASE[hero.key];
+  if (!base) return [];
+  return [1, 2, 3].map((n) => t(`Citadel_${base}_HeroTag_${n}`, "")).filter(Boolean);
+}
+
+/**
+ * スキルの補足メモ。data/hero-notes.json(キーはアビリティの実ID、値は文字列配列)。
+ * 内容はこちらで自前に書くもので、他サイトの文章は使わない。
+ */
+const heroNotesFile = heroNotesJson as unknown as { notes: Record<string, string[]> };
+export function heroNotes(abilityKey: string): string[] {
+  return heroNotesFile.notes[abilityKey] ?? [];
 }
 
 /** ショップに並ぶアイテムを ティア → 名前 順で返す */

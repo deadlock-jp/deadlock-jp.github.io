@@ -8,6 +8,10 @@
  *   詳細ページの肖像: <英語表示名>_Render.png (1440px 前後・数MB)
  *       → 幅 760 の WebP に縮小して public/images/heroes/render/<herokey>.webp
  *         (herokey = key から "hero_" を除いたもの)
+ *   トップのカード: <codename>_vertical_psd.png (120x200)
+ *       → public/images/heroes/vertical/<herokey>.png (小さいのでそのままコピー)
+ *   カードのホバー詳細: <codename>_card_gloat_psd.png (280x380)
+ *       → WebP にして public/images/heroes/gloat/<herokey>.webp
  *
  * 数値と同じく画像も手作業で名前を付け替えない。対応は上の2規則だけで、
  * どちらも決め打ちの推測ではなく「iconSmall の参照パス」「公式英語表示名」から導いている。
@@ -46,6 +50,10 @@ function smExtractFor(ref) {
   const ext = /\.([a-z0-9]+)$/i.exec(m[1])?.[1]?.toLowerCase() ?? "";
   return `${m[1].replace(/\.[a-z0-9]+$/i, "")}_${ext}.png`;
 }
+/** iconSmall の参照からアートのコードネームを取る (inferno_sm.psd → inferno) */
+function codenameFor(ref) {
+  return /heroes\/([a-z0-9_]+)_sm\./.exec(ref ?? "")?.[1] ?? null;
+}
 
 const heroes = JSON.parse(readFileSync(join(repoRoot, "data/heroes.json"), "utf8"));
 const enLoc = JSON.parse(readFileSync(join(repoRoot, "data/localization.english.json"), "utf8"));
@@ -82,11 +90,25 @@ for (const h of Object.values(heroes.heroes)) {
         key,
       });
   }
+
+  const cn = codenameFor(h.images.iconSmall);
+  if (!cn) problems.push(`${h.key}: コードネームが取れない`);
+  else {
+    // トップのカード用の縦長(小さいのでそのままコピー)
+    const vSrc = `${cn}_vertical_psd.png`;
+    if (!srcFiles.includes(vSrc)) problems.push(`${h.key} (${cn}): 抽出物に ${vSrc} が無い`);
+    else copies.push({ from: join(SRC, vSrc), to: join(repoRoot, `public/images/heroes/vertical/${key}.png`) });
+
+    // カードのホバー詳細用(WebP へ)
+    const gSrc = `${cn}_card_gloat_psd.png`;
+    if (!srcFiles.includes(gSrc)) problems.push(`${h.key} (${cn}): 抽出物に ${gSrc} が無い`);
+    else renders.push({ from: join(SRC, gSrc), to: join(repoRoot, `public/images/heroes/gloat/${key}.webp`), key });
+  }
 }
 
 const releasedCount = Object.values(heroes.heroes).filter((h) => h.released).length;
 console.log(`対象ヒーロー ${releasedCount} 体`);
-console.log(`アイコン ${copies.length} 件 / 肖像 ${renders.length} 件 / 問題 ${problems.length} 件`);
+console.log(`そのままコピー ${copies.length} 件 / WebP化 ${renders.length} 件 / 問題 ${problems.length} 件`);
 for (const p of problems) console.log(`  ! ${p}`);
 if (problems.length) process.exit(1);
 
