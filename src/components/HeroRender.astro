@@ -4,7 +4,8 @@
  *
  * ゲーム本体の <英語表示名>_Render.png を幅760のWebPに縮小したものを
  * public/images/heroes/render/<herokey>.webp に置いてある(tools/hero-images.mjs)。
- * 表示は「サムネイル幅にそろえ、上ぞろえで下は見切れる」。無ければ何も出さない。
+ * 帯状に切り出す。object-fit: cover + object-position で、顔が入る位置(上から約2割)
+ * を見せる。無ければ何も出さない。
  */
 import { existsSync } from "node:fs";
 import { join } from "node:path";
@@ -13,10 +14,8 @@ interface Props {
   name: string;
   /** heroes.json の key (hero_inferno など) */
   heroKey: string;
-  /** 見せる高さ(px)。デフォルトは詳細ページ用 */
-  height?: number;
 }
-const { name, heroKey, height = 320 } = Astro.props;
+const { name, heroKey } = Astro.props;
 const key = heroKey.replace(/^hero_/, "");
 const rel = `images/heroes/render/${key}.webp`;
 const src = existsSync(join(process.cwd(), "public", rel))
@@ -26,7 +25,7 @@ const src = existsSync(join(process.cwd(), "public", rel))
 
 {
   src && (
-    <div class="hrender" style={`--h: ${height}px`} role="img" aria-label={name}>
+    <div class="hrender" role="img" aria-label={name}>
       <img src={src} alt="" />
     </div>
   )
@@ -35,7 +34,9 @@ const src = existsSync(join(process.cwd(), "public", rel))
 <style>
   .hrender {
     width: 100%;
-    height: var(--h);
+    /* 帯。横幅に対して高さを決める(830px幅で ≒ 300px) */
+    aspect-ratio: 25 / 9;
+    max-height: 340px;
     overflow: hidden;
     border: 1px solid var(--c-border);
     border-radius: var(--radius-lg);
@@ -44,13 +45,12 @@ const src = existsSync(join(process.cwd(), "public", rel))
       var(--c-surface-2);
     margin-bottom: var(--sp-3);
   }
-  /*
-   * 幅を100%にして height:auto。コンテナが固定高 + overflow:hidden なので
-   * はみ出た下側が自然に切れる = 「上から表示」。
-   */
   .hrender img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
+    /* 元絵はほぼ正方形。ヒーローごとに構図が違うので、頭が概ね入る上寄りで固定 */
+    object-position: center 12%;
     display: block;
   }
 </style>

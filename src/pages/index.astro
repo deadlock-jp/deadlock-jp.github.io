@@ -21,7 +21,7 @@ const BOON_LABEL = { hp: "HP成長", weapon: "武器成長", spirit: "スピリ�
 
 const heroes = releasedHeroes().map((h) => {
   const key = h.key.replace(/^hero_/, "");
-  const verticalRel = `images/heroes/vertical/${key}.png`;
+  const verticalRel = `images/heroes/card/${key}.webp`;
   const gloatRel = `images/heroes/gloat/${key}.webp`;
   const r = ranks[h.id];
   return {
@@ -93,7 +93,7 @@ const commitUrl = (sha: string | null) => (sha ? `${upstreamRepo}/commit/${sha}`
             <a href={`${base}/heroes/${h.id}/`} data-hero={h.id}>
               <span class="hcard">
                 {vertical ? (
-                  <img src={vertical} alt="" width="120" height="200" loading="lazy" />
+                  <img src={vertical} alt="" width="280" height="380" loading="lazy" />
                 ) : (
                   <span class="hph" aria-hidden="true">
                     {name.slice(0, 1)}

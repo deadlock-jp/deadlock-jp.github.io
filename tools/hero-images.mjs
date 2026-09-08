@@ -8,8 +8,8 @@
  *   詳細ページの肖像: <英語表示名>_Render.png (1440px 前後・数MB)
  *       → 幅 760 の WebP に縮小して public/images/heroes/render/<herokey>.webp
  *         (herokey = key から "hero_" を除いたもの)
- *   トップのカード: <codename>_vertical_psd.png (120x200)
- *       → public/images/heroes/vertical/<herokey>.png (小さいのでそのままコピー)
+ *   トップのカード: <codename>_card_psd.png (280x380)
+ *       → WebP にして public/images/heroes/card/<herokey>.webp
  *   カードのホバー詳細: <codename>_card_gloat_psd.png (280x380)
  *       → WebP にして public/images/heroes/gloat/<herokey>.webp
  *
@@ -94,10 +94,10 @@ for (const h of Object.values(heroes.heroes)) {
   const cn = codenameFor(h.images.iconSmall);
   if (!cn) problems.push(`${h.key}: コードネームが取れない`);
   else {
-    // トップのカード用の縦長(小さいのでそのままコピー)
-    const vSrc = `${cn}_vertical_psd.png`;
-    if (!srcFiles.includes(vSrc)) problems.push(`${h.key} (${cn}): 抽出物に ${vSrc} が無い`);
-    else copies.push({ from: join(SRC, vSrc), to: join(repoRoot, `public/images/heroes/vertical/${key}.png`) });
+    // トップのカード用(280x380 → WebP)
+    const cSrc = `${cn}_card_psd.png`;
+    if (!srcFiles.includes(cSrc)) problems.push(`${h.key} (${cn}): 抽出物に ${cSrc} が無い`);
+    else renders.push({ from: join(SRC, cSrc), to: join(repoRoot, `public/images/heroes/card/${key}.webp`), key });
 
     // カードのホバー詳細用(WebP へ)
     const gSrc = `${cn}_card_gloat_psd.png`;
