@@ -12,7 +12,7 @@ import {
   heroTags,
   heroNotes,
 } from "../../lib/data.ts";
-import { heroRadar } from "../../lib/herorank.ts";
+import { heroRadar, heroMeleeSpirit } from "../../lib/herorank.ts";
 import { skillCard } from "../../lib/skillcard.ts";
 
 export function getStaticPaths() {
@@ -22,9 +22,8 @@ const { hero } = Astro.props;
 const name = t(hero.nameToken, hero.key);
 const tags = heroTags(hero);
 const radar = heroRadar(hero.id);
+const meleeSpirit = heroMeleeSpirit(hero.id);
 
-const weaponSlot = hero.abilities.find((a) => a.slot === "Weapon_Primary");
-const weapon = weaponSlot ? ability(weaponSlot.abilityKey)?.weapon ?? null : null;
 const skills = hero.abilities
   .filter((a) => a.slot.startsWith("Signature"))
   .sort((a, b) => a.slot.localeCompare(b.slot))
@@ -35,19 +34,6 @@ const skills = hero.abilities
       : null;
   })
   .filter((s): s is NonNullable<typeof s> => s !== null);
-
-const STAT_LABELS: Record<string, string> = {
-  EMaxHealth: "最大HP",
-  EBaseHealthRegen: "HP回復/秒",
-  EMaxMoveSpeed: "移動速度",
-  ESprintSpeed: "スプリント加算",
-  EStamina: "スタミナ",
-  ELightMeleeDamage: "軽近接ダメージ",
-  EHeavyMeleeDamage: "重近接ダメージ",
-};
-const shown = Object.entries(STAT_LABELS)
-  .filter(([k]) => hero.startingStats[k] !== undefined)
-  .map(([k, label]) => ({ label, value: hero.startingStats[k] }));
 
 const levels = hero.levels.filter((l) => l.level % 5 === 0 || l.level === 1 || l.level === 36);
 const bonus = hero.levelUpBonuses;
@@ -67,38 +53,26 @@ const spiritBadge = (scale: number | null) => (scale ? `×${scale}` : null);
   )}
   <p class="lead">{t(hero.roleToken, "")}</p>
 
+  <h2>ステータス</h2>
   <div class="radars">
-    <StatRadar axes={radar.base} cssVar="vitality" title="基礎スタッツ" />
     {radar.weapon.length > 0 && <StatRadar axes={radar.weapon} cssVar="weapon" title="武器" />}
+    <StatRadar axes={radar.base} cssVar="vitality" title="生命力" />
   </div>
-  <p class="radarnote">
-    各軸は実装済み {releasedHeroes().length} 体の中での位置（中央＝最下位、外周＝最上位）。
-    破線は中央値の目安です。
-  </p>
-
-  <h2>基礎ステータス</h2>
-  <ul class="statgrid">
-    {shown.map((s) => (
-      <li>
-        <span class="l">{s.label}</span>
-        <span class="v">{s.value}</span>
-      </li>
-    ))}
-  </ul>
-
-  {weapon && (
-    <>
-      <h2>武器</h2>
-      <ul class="statgrid">
-        <li><span class="l">1発ダメージ</span><span class="v">{weapon.bulletDamage}</span></li>
-        <li><span class="l">連射速度</span><span class="v">{weapon.cycleTime ? (1 / weapon.cycleTime).toFixed(2) : "-"}<small> 発/秒</small></span></li>
-        <li><span class="l">装弾数</span><span class="v">{weapon.clipSize}</span></li>
-        <li><span class="l">リロード</span><span class="v">{weapon.reloadDuration}<small> 秒</small></span></li>
-        <li><span class="l">ヘッドショット倍率</span><span class="v">×{weapon.crit.bonusStart}</span></li>
-        <li><span class="l">弾速</span><span class="v">{weapon.bulletSpeed}</span></li>
-      </ul>
-    </>
+  {meleeSpirit.length > 0 && (
+    <ul class="msrow">
+      {meleeSpirit.map((r) => (
+        <li>
+          <span class="l">{r.label}</span>
+          <span class="v">{r.value}</span>
+        </li>
+      ))}
+    </ul>
   )}
+  <p class="radarnote">
+    各軸は実装済み {releasedHeroes().length} 体の中での位置（中央＝最下位、外周＝最上位）。数値は実値、
+    <span class="grow">緑</span>は標準レベルアップ1回ごとの上昇値。破線は中央値の目安です。
+    ヘッドショット倍率・しゃがみ速度は全ヒーロー共通のため省いています。
+  </p>
 
   <h2>スキル</h2>
   <div class="skills">
@@ -237,28 +211,34 @@ const spiritBadge = (scale: number | null) => (scale ? `×${scale}` : null);
     .radars {
       display: flex;
       flex-wrap: wrap;
-      gap: var(--sp-4) var(--sp-7);
+      gap: var(--sp-4) var(--sp-6);
       justify-content: center;
-      margin: var(--sp-5) 0 var(--sp-2);
-      padding: var(--sp-4) var(--sp-5);
+      margin: var(--sp-4) 0 var(--sp-3);
+      padding: var(--sp-4) var(--sp-3) var(--sp-3);
       background: var(--c-surface);
       border: 1px solid var(--c-border);
       border-radius: var(--radius-lg);
     }
-    .radars :global(.radar) { flex: 0 1 300px; }
-    .radarnote { font-size: 11px; color: var(--c-text-faint); text-align: center; margin: 0 0 var(--sp-4); }
-
-    .statgrid {
-      list-style: none; padding: 0; margin: 0;
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: var(--sp-2);
+    .radars :global(.radar) { flex: 0 1 340px; }
+    /* 近接・スピリットの補足(レーダーに載せにくい少数の値) */
+    .msrow {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--sp-2) var(--sp-4);
+      padding: 0;
+      margin: 0 0 var(--sp-3);
+      font-size: 12px;
     }
-    .statgrid li {
-      background: var(--c-surface); border: 1px solid var(--c-border);
-      border-radius: var(--radius); padding: var(--sp-3);
+    .msrow li { display: flex; gap: var(--sp-2); align-items: baseline; }
+    .msrow .l { color: var(--c-text-muted); }
+    .msrow .v { font-family: var(--font-mono); color: var(--c-text-strong); }
+    .radarnote {
+      font-size: 11px; color: var(--c-text-faint); text-align: center;
+      max-width: 60ch; margin: 0 auto var(--sp-4); line-height: 1.7;
     }
-    .statgrid .l { display: block; font-size: 11px; color: var(--c-text-muted); letter-spacing: .05em; }
-    .statgrid .v { font-family: var(--font-mono); font-size: 19px; color: var(--c-text-strong); }
-    .statgrid .v small { font-size: 11px; color: var(--c-text-muted); font-family: var(--font-sans); }
+    .radarnote .grow { color: var(--c-accent); }
 
     /* ---- スキルカード ---- */
     .skills { display: grid; gap: var(--sp-3); }

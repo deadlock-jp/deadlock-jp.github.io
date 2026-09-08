@@ -47,6 +47,10 @@ function weaponOf(h: Hero) {
   const slot = h.abilities.find((a) => a.slot === "Weapon_Primary");
   return slot ? (ability(slot.abilityKey)?.weapon ?? null) : null;
 }
+function dashSpeed(h: Hero): number | null {
+  const d = h.startingStats.EGroundDashDuration;
+  return d ? (h.startingStats.EGroundDashDistanceInMeters ?? 0) / d : null;
+}
 
 /** 署名アビリティ1つあたりの「主ダメージ×スピリット係数」平均。異常値(>2)は頭打ち */
 function skillScaleAvg(h: Hero): number | null {
@@ -79,7 +83,35 @@ const METRICS: Metric[] = [
     fmt: (v) => num(v, 0),
   },
   { key: "bullet", label: "1発ダメージ", group: "weapon", get: (h) => weaponOf(h)?.bulletDamage ?? null, fmt: (v) => num(v, 1) },
+  {
+    key: "firerate",
+    label: "連射",
+    group: "weapon",
+    get: (h) => {
+      const w = weaponOf(h);
+      return w?.cycleTime ? 1 / w.cycleTime : null;
+    },
+    fmt: (v) => `${num(v, 1)}発/秒`,
+  },
   { key: "clip", label: "装弾数", group: "weapon", get: (h) => weaponOf(h)?.clipSize ?? null, fmt: (v) => num(v, 0) },
+  {
+    key: "reload",
+    label: "リロード",
+    group: "weapon",
+    lowerIsBetter: true,
+    get: (h) => weaponOf(h)?.reloadDuration ?? null,
+    fmt: (v) => `${num(v, 2)}秒`,
+  },
+  {
+    key: "velocity",
+    label: "弾速",
+    group: "weapon",
+    get: (h) => {
+      const w = weaponOf(h);
+      return w?.bulletSpeed != null ? (toMeters(w.bulletSpeed) ?? null) : null;
+    },
+    fmt: (v) => `${num(v, 0)}m/秒`,
+  },
   {
     key: "range",
     label: "減衰開始",
@@ -90,18 +122,33 @@ const METRICS: Metric[] = [
     },
     fmt: (v) => `${num(v, 0)}m`,
   },
+  { key: "lmelee", label: "軽近接", group: "weapon", get: (h) => h.startingStats.ELightMeleeDamage ?? null, fmt: (v) => num(v, 0) },
+  { key: "hmelee", label: "重近接", group: "weapon", get: (h) => h.startingStats.EHeavyMeleeDamage ?? null, fmt: (v) => num(v, 0) },
   // --- 生命力 ---
   { key: "hp", label: "最大HP", group: "vitality", get: (h) => h.startingStats.EMaxHealth ?? null, fmt: (v) => num(v, 0) },
   { key: "regen", label: "HP回復", group: "vitality", get: (h) => h.startingStats.EBaseHealthRegen ?? null, fmt: (v) => num(v, 1) },
   { key: "move", label: "移動速度", group: "vitality", get: (h) => h.startingStats.EMaxMoveSpeed ?? null, fmt: (v) => `${num(v, 1)}m` },
+  { key: "sprint", label: "スプリント速度", group: "vitality", get: (h) => h.startingStats.ESprintSpeed ?? null, fmt: (v) => `+${num(v, 1)}m` },
+  { key: "dash", label: "ダッシュ速度", group: "vitality", get: dashSpeed, fmt: (v) => `${num(v, 1)}m` },
   { key: "stam", label: "スタミナ", group: "vitality", get: (h) => h.startingStats.EStamina ?? null, fmt: (v) => num(v, 0) },
+  {
+    key: "stamcd",
+    label: "スタミナCD",
+    group: "vitality",
+    lowerIsBetter: true,
+    get: (h) => {
+      const x = h.startingStats.EStaminaRegenPerSecond;
+      return x ? 1 / x : null;
+    },
+    fmt: (v) => `${num(v, 1)}秒`,
+  },
   // --- スピリット(初期スタッツは全員共通なので、成長と係数で表す) ---
   {
     key: "techpow",
-    label: "パワー成長/Lv",
+    label: "パワー成長",
     group: "spirit",
     get: (h) => h.levelUpBonuses.MODIFIER_VALUE_TECH_POWER ?? null,
-    fmt: (v) => `+${num(v, 1)}`,
+    fmt: (v) => `+${num(v, 1)}/Lv`,
   },
   { key: "skillscale", label: "スキル係数", group: "spirit", get: skillScaleAvg, fmt: (v) => `×${num(v, 2)}` },
 ];
@@ -165,27 +212,63 @@ export function heroRanks(): Record<number, HeroRank> {
   return out;
 }
 
-/** レーダーチャート用。基礎スタッツ + 武器を 0..1 正規化した軸で返す */
+/** RankRow を key で絞る(トップページのホバーカード用) */
+export function pickRows(rows: RankRow[], keys: string[]): RankRow[] {
+  return keys.map((k) => rows.find((r) => r.key === k)).filter((r): r is RankRow => Boolean(r));
+}
+
+// --- レーダーチャート ---------------------------------------------------------
+
 export interface RadarAxis {
   label: string;
   /** このヒーローの正規化値 0..1 */
   value: number;
   /** 実値の表示 */
   raw: string;
-  /** 全ヒーローの中央値(0..1)。基準線として描く */
-  median: number;
+  /** 標準レベルアップ1回ごとの上昇値(あれば)。"+39/Lv" のような表示済み文字列 */
+  growth?: string;
 }
+
+/** レーダー軸に出す Boon 成長。key → その軸に添える成長値 */
+function growthFor(h: Hero, key: string): string | undefined {
+  const b = h.levelUpBonuses;
+  if (key === "hp" && b.MODIFIER_VALUE_BASE_HEALTH_FROM_LEVEL)
+    return `+${num(b.MODIFIER_VALUE_BASE_HEALTH_FROM_LEVEL, 1)}/Lv`;
+  if (key === "bullet" && b.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL)
+    return `+${num(b.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL, 3)}/Lv`;
+  if (key === "lmelee" && b.MODIFIER_VALUE_BASE_MELEE_DAMAGE_FROM_LEVEL)
+    return `+${num(b.MODIFIER_VALUE_BASE_MELEE_DAMAGE_FROM_LEVEL, 2)}/Lv`;
+  return undefined;
+}
+
+const WEAPON_AXES = ["dps", "bullet", "firerate", "clip", "reload", "velocity", "range"];
+const VITALITY_AXES = ["hp", "regen", "move", "sprint", "dash", "stam", "stamcd"];
 
 export function heroRadar(heroId: number): { base: RadarAxis[]; weapon: RadarAxis[] } {
   const ranks = heroRanks();
   const r = ranks[heroId];
-  const pick = (group: "weapon" | "vitality" | "spirit", keys: string[]) =>
+  const h = releasedHeroes().find((x) => x.id === heroId)!;
+  const build = (rows: RankRow[], keys: string[]): RadarAxis[] =>
     keys
-      .map((k) => (group === "vitality" ? r.vitality : group === "weapon" ? r.weapon : r.spirit).find((x) => x.key === k))
+      .map((k) => rows.find((x) => x.key === k))
       .filter((x): x is RankRow => Boolean(x))
-      .map((x) => ({ label: x.label, value: x.pct, raw: x.value, median: 0.5 }));
+      .map((x) => ({ label: x.label, value: x.pct, raw: x.value, growth: growthFor(h, x.key) }));
   return {
-    base: pick("vitality", ["hp", "regen", "move", "stam"]),
-    weapon: pick("weapon", ["dps", "bullet", "clip", "range"]),
+    base: build(r.vitality, VITALITY_AXES),
+    weapon: build(r.weapon, WEAPON_AXES),
   };
+}
+
+/** レーダーに載せにくい近接・スピリットの補足(ヒーロー詳細で1行表示) */
+export function heroMeleeSpirit(heroId: number): RankRow[] {
+  const r = heroRanks()[heroId];
+  const h = releasedHeroes().find((x) => x.id === heroId)!;
+  const rows = [
+    ...pickRows(r.weapon, ["lmelee", "hmelee"]),
+    ...pickRows(r.spirit, ["techpow", "skillscale"]),
+  ].map((row) => {
+    const g = growthFor(h, row.key);
+    return g ? { ...row, value: `${row.value} (${g})` } : row;
+  });
+  return rows;
 }

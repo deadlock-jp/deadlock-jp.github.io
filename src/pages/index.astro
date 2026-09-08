@@ -12,7 +12,7 @@ import {
   heroTags,
   SLOT_META,
 } from "../lib/data.ts";
-import { heroRanks } from "../lib/herorank.ts";
+import { heroRanks, pickRows } from "../lib/herorank.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const ranks = heroRanks();
@@ -34,9 +34,10 @@ const heroes = releasedHeroes().map((h) => {
       name: t(h.nameToken, h.key),
       gloat: existsSync(join(process.cwd(), "public", gloatRel)) ? `${base}/${gloatRel}` : null,
       tags: heroTags(h),
-      weapon: r.weapon,
-      vitality: r.vitality,
-      spirit: r.spirit,
+      // ホバーカードは各カテゴリ4項目まで(レーダーはヒーロー詳細で全項目)
+      weapon: pickRows(r.weapon, ["dps", "bullet", "clip", "range"]),
+      vitality: pickRows(r.vitality, ["hp", "regen", "move", "stam"]),
+      spirit: pickRows(r.spirit, ["techpow", "skillscale"]),
       boon: r.boonAccent.map((a) => BOON_LABEL[a]),
     },
   };
