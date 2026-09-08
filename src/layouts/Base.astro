@@ -21,7 +21,7 @@ const path = Astro.url.pathname;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title} | Deadlock 日本語リファレンス</title>
+    <title>{title} | DEADLOCK-JP DB</title>
     {description && <meta name="description" content={description} />}
     {/* ゲーム内表記に合わせて Noto Sans JP を使う。数字用に等幅も1書体だけ入れる */}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -36,8 +36,8 @@ const path = Astro.url.pathname;
       <div class="inner">
         <a class="wordmark" href={`${base}/`}>
           <span class="mark" aria-hidden="true"></span>
-          <span class="name">DEADLOCK</span>
-          <span class="sub">日本語リファレンス</span>
+          <span class="name">DEADLOCK-JP</span>
+          <span class="sub">DB</span>
         </a>
         <nav>
           {
@@ -128,9 +128,10 @@ const path = Astro.url.pathname;
         letter-spacing: 0.14em;
       }
       .sub {
-        font-size: 11px;
-        color: var(--c-text-muted);
-        letter-spacing: 0.08em;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--c-accent);
+        letter-spacing: 0.1em;
       }
       nav {
         display: flex;
@@ -175,9 +176,6 @@ const path = Astro.url.pathname;
       @media (max-width: 640px) {
         .site-header .inner {
           gap: var(--sp-4);
-        }
-        .sub {
-          display: none;
         }
       }
     </style>

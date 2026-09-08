@@ -51,19 +51,9 @@ const commitUrl = (sha: string | null) => (sha ? `${upstreamRepo}/commit/${sha}`
 ---
 
 <Base title="トップ" description="Deadlockのヒーロー・アイテム・スキルの数値を日本語で引けるデータベース">
-  <section class="intro">
-    <h1>Deadlock 日本語リファレンス</h1>
-    <p class="lead">
-      ヒーロー・アイテム・スキルの数値を日本語で引けるデータベースと、ビルドの実数値ツール。
-      解説や考察は載せず、ゲームの生データだけを扱います。
-    </p>
-    <p class="notice">
-      ファンによる非公式サイトです。表示するデータ・画像・テキストの著作権は Valve Corporation に帰属します。
-      <a href={`${base}/about/`}>このサイトについて</a>
-    </p>
-  </section>
+  <h1 class="sr-only">DEADLOCK-JP DB</h1>
 
-  <section class="block">
+  <section class="block first">
     <h2>更新履歴</h2>
     <ol class="updates">
       {
@@ -236,23 +226,11 @@ const commitUrl = (sha: string | null) => (sha ? `${upstreamRepo}/commit/${sha}`
   </script>
 
   <style>
-    .intro {
-      padding: var(--sp-5) 0 var(--sp-4);
-    }
-    .lead {
-      max-width: 62ch;
-      color: var(--c-text-muted);
-      font-size: 15px;
-    }
-    .notice {
-      font-size: 12px;
-      color: var(--c-text-faint);
-      line-height: 1.7;
-      max-width: 62ch;
-      margin: var(--sp-3) 0 0;
-    }
     .block {
       margin-top: var(--sp-6);
+    }
+    .block.first {
+      margin-top: 0;
     }
     .block h2 {
       display: flex;
