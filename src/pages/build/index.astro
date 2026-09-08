@@ -294,6 +294,8 @@ const payload = {
     /** 購入順を保持する。同じアイテムは1つまで */
     let picked = [];
     let heroId = null;
+    /** スキルごとの AP 段(0〜3)。スキルダメージ表示に反映する */
+    const apLevel = {};
     const SLOTS = ["WeaponMod", "Armor", "Tech"];
     const SLOT_TOTAL = 12; // ゲーム内のアイテム枠数。TYPE固定ではなく全部フレックス
 
@@ -565,7 +567,7 @@ const payload = {
           .join("");
       }
 
-      // スピリット: ヒーローのスキルと、現在のスピリットパワーでのダメージ
+      // スピリット: ヒーローのスキルと、現在のスピリットパワー + AP段でのダメージ
       const box = document.querySelector("[data-abilities]");
       if (!h) {
         box.innerHTML = '<li class="empty">—</li>';
@@ -575,12 +577,30 @@ const payload = {
           .map((a) => {
             const icon = document.querySelector(`.aicon-src[data-ab="${CSS.escape(a.key)}"]`);
             const img = icon ? icon.innerHTML : "";
-            const v = a.damage
-              ? `<span class="l">${esc(a.damage.label)}</span><span class="v">${
-                  Math.round((a.damage.base + sp * a.damage.scale) * 10) / 10
-                }</span>`
-              : '<span class="l">ダメージなし</span><span class="v">—</span>';
-            return `<li class="${a.isUltimate ? "ult" : ""}"><span class="ai">${img}</span><span class="an">${esc(a.name)}</span>${v}</li>`;
+            const lvl = apLevel[a.key] ?? 0;
+            // AP でダメージが変わるスキルだけトグルを出す
+            const hasAp = a.damage && a.damage.apBonus.some((x) => x !== 0);
+            const apToggle = hasAp
+              ? `<span class="aptop">${[1, 2, 3]
+                  .map(
+                    (n) =>
+                      `<button type="button" class="apd${n <= lvl ? " on" : ""}" data-ab="${esc(
+                        a.key,
+                      )}" data-lvl="${n}" aria-label="AP${n}">${n}</button>`,
+                  )
+                  .join("")}</span>`
+              : "";
+            let v = '<span class="l">ダメージなし</span><span class="v">—</span>';
+            if (a.damage) {
+              const apAdd = lvl > 0 ? a.damage.apBonus[lvl - 1] : 0;
+              const dmg = Math.round((a.damage.base + apAdd + sp * a.damage.scale) * 10) / 10;
+              v = `<span class="l">${esc(a.damage.label)}</span><span class="v">${dmg}</span>`;
+            }
+            return (
+              `<li class="${a.isUltimate ? "ult" : ""}"><span class="ai">${img}</span>` +
+              `<span class="abody">${apToggle}` +
+              `<span class="aline"><span class="an">${esc(a.name)}</span>${v}</span></span></li>`
+            );
           })
           .join("");
       }
@@ -758,6 +778,16 @@ const payload = {
       if (!cell) return;
       picked = picked.filter((id) => id !== cell.dataset.id);
       refresh(false);
+    });
+
+    // スキルの AP 段トグル(スキルダメージ表示に反映)。中身は render で作り直すので委譲
+    document.querySelector("[data-spirit]").addEventListener("click", (e) => {
+      const btn = e.target.closest(".apd");
+      if (!btn) return;
+      const key = btn.dataset.ab;
+      const n = Number(btn.dataset.lvl);
+      apLevel[key] = (apLevel[key] ?? 0) === n ? n - 1 : n;
+      render();
     });
 
     $("hero").addEventListener("change", (e) => {
@@ -946,11 +976,16 @@ const payload = {
       font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
       color: var(--c-text-muted); margin: var(--sp-4) 0 var(--sp-2); border: none; padding: 0;
     }
-    .alist :global(li) { gap: var(--sp-2); }
-    .alist :global(.ai) { flex: 0 0 auto; line-height: 0; }
+    /* スキル1行: アイコン + (AP段トグル / 名前+ダメージ) */
+    .alist :global(li) { align-items: flex-start; gap: var(--sp-2); }
+    .alist :global(.ai) { flex: 0 0 auto; line-height: 0; margin-top: 2px; }
     .alist :global(.ai img) {
       width: 26px; height: 26px; border-radius: 4px;
       border: 1px solid var(--cat); background: var(--c-surface-2);
+    }
+    .alist :global(.abody) { flex: 1 1 auto; min-width: 0; }
+    .alist :global(.aline) {
+      display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-2);
     }
     .alist :global(.an) {
       flex: 1 1 auto; min-width: 0; color: var(--c-text); font-size: 11px;
@@ -958,6 +993,18 @@ const payload = {
     }
     .alist :global(.l) { font-size: 10px; }
     .alist :global(li.ult .an) { color: var(--c-spirit); font-weight: 600; }
+    /* AP 段トグル(ゲームの菱形マークを模した clip-path) */
+    .alist :global(.aptop) { display: flex; gap: 3px; margin: 1px 0 3px; }
+    .alist :global(.apd) {
+      width: 15px; height: 15px; padding: 0; border: 0;
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      background: color-mix(in srgb, var(--c-spirit) 22%, transparent);
+      color: var(--c-spirit);
+      font-family: var(--font-mono); font-size: 9px; font-weight: 700; line-height: 1;
+      display: grid; place-items: center; cursor: pointer;
+    }
+    .alist :global(.apd:hover) { background: color-mix(in srgb, var(--c-spirit) 45%, transparent); }
+    .alist :global(.apd.on) { background: var(--c-spirit); color: var(--c-bg); }
 
     /* 投資額の階段 */
     .ladder { list-style: none; margin: 0; padding: 0; }

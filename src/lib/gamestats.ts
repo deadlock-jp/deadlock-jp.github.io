@@ -104,19 +104,43 @@ export function vitalityRows(hero: Hero): StatRow[] {
 /**
  * スピリットパワーが効くスキルのダメージ。
  *
- * m_bIsAbilityDamageProperty が立ったプロパティが、ゲーム内の
- * 「スピリットパワーの影響値」に並んでいるものと一致する
+ * まず m_bIsAbilityDamageProperty が立ったプロパティを探す
  * (インファーナスで 40 / 30 / 14 / 125 の一致を確認済み)。
+ * ヒーローによってはこのフラグが1つも立っていない(レムなど)ので、
+ * その場合は cssClass が tech_damage / damage で値を持つプロパティを主ダメージとみなす。
  *
- * 表示値 = 基礎値 + スピリットパワー × 係数。
- * 係数は m_flStatScale。持たないスキルは damage を null にする。
+ * 表示値 = (基礎値 + AP強化ぶん) + スピリットパワー × 係数。
+ * apBonus[i] は「AP i 段まで取ったときにこのダメージに加算される合計」。
+ * 係数は m_flStatScale。ダメージが見つからないスキルは damage を null にする。
  */
 export interface AbilityDamage {
   key: string;
   name: string;
   image: string | null;
   isUltimate: boolean;
-  damage: { label: string; base: number; scale: number } | null;
+  damage: {
+    label: string;
+    base: number;
+    scale: number;
+    /** [AP1まで, AP2まで, AP3まで] の累積加算値。全部0なら AP で変化しない */
+    apBonus: [number, number, number];
+  } | null;
+}
+
+/** そのスキルの「主ダメージ」プロパティ名を返す */
+function mainDamageProp(ab: Ability): string | undefined {
+  const props = Object.entries(ab.properties ?? {});
+  // 1) ゲームがマークしたもの(値 > 0)
+  const marked = props.find(([, p]) => p.isAbilityDamage && (p.value ?? 0) > 0);
+  if (marked) return marked[0];
+  // 2) スピリットダメージ扱い(css)で値を持つもの。係数持ちを優先し、その中で値が最大
+  const cand = props.filter(
+    ([, p]) => (p.cssClass === "tech_damage" || p.cssClass === "damage") && (p.value ?? 0) > 0,
+  );
+  if (!cand.length) return undefined;
+  const scaled = cand.filter(([, p]) => p.scale?.statScale);
+  const pool = scaled.length ? scaled : cand;
+  return pool.sort((a, b) => (b[1].value ?? 0) - (a[1].value ?? 0))[0][0];
 }
 
 export function abilityDamages(hero: Hero): AbilityDamage[] {
@@ -125,21 +149,34 @@ export function abilityDamages(hero: Hero): AbilityDamage[] {
     .sort((a, b) => a.slot.localeCompare(b.slot))
     .map((a) => {
       const ab: Ability | undefined = ability(a.abilityKey);
-      const hit = ab
-        ? Object.entries(ab.properties).find(([, p]) => p.isAbilityDamage && p.value !== null)
-        : undefined;
+      const propName = ab ? mainDamageProp(ab) : undefined;
+      const prop = propName ? ab!.properties[propName] : undefined;
+      let damage: AbilityDamage["damage"] = null;
+      if (ab && propName && prop && prop.value !== null) {
+        // AP強化のうち、この主ダメージプロパティに乗る加算を段ごとに拾って累積する
+        const per = (ab.upgrades ?? []).map((tier) =>
+          tier
+            .filter((u) => u.property === propName)
+            .reduce((s, u) => s + (Number.parseFloat(String(u.bonus)) || 0), 0),
+        );
+        const cum: [number, number, number] = [
+          per[0] ?? 0,
+          (per[0] ?? 0) + (per[1] ?? 0),
+          (per[0] ?? 0) + (per[1] ?? 0) + (per[2] ?? 0),
+        ];
+        damage = {
+          label: t(`${propName}_label`, propName),
+          base: prop.value,
+          scale: prop.scale?.statScale ?? 0,
+          apBonus: cum,
+        };
+      }
       return {
         key: a.abilityKey,
         name: t(a.abilityKey, a.abilityKey),
         image: ab?.image ?? null,
         isUltimate: ab?.kind === "Ultimate",
-        damage: hit
-          ? {
-              label: t(`${hit[0]}_label`, hit[0]),
-              base: hit[1].value!,
-              scale: hit[1].scale?.statScale ?? 0,
-            }
-          : null,
+        damage,
       };
     });
 }
