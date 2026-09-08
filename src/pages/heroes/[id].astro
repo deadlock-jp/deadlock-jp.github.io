@@ -12,7 +12,7 @@ import {
   heroTags,
   heroNotes,
 } from "../../lib/data.ts";
-import { heroRadar, heroSpiritRows } from "../../lib/herorank.ts";
+import { heroRadar, heroMiscRows } from "../../lib/herorank.ts";
 import { skillCard } from "../../lib/skillcard.ts";
 
 export function getStaticPaths() {
@@ -22,14 +22,12 @@ const { hero } = Astro.props;
 const name = t(hero.nameToken, hero.key);
 const tags = heroTags(hero);
 const radar = heroRadar(hero.id);
-const spiritRows = heroSpiritRows(hero.id);
+const miscRows = heroMiscRows(hero.id);
 
 /**
- * 標準レベルアップの成長。武器ダメージ・最大HP・近接ダメージ・スピリットパワーの4つ+恩恵は
- * 全38ヒーロー共通(前2つは武器/生命力レーダーの軸に、近接は武器レーダーの軽近接軸に、
- * スピリットパワーは下のスピリット行に "+X/Lv" で出す)。
- * それ以外(テック耐性・弾丸装甲ダメージ耐性・攻撃射程・サブ射撃ダメージ)は
- * 一部のヒーローだけが持つので、その分だけを注記する。
+ * 成長度レーダーに出す4つ(武器ダメージ・最大HP・近接ダメージ・スピリットパワー)+恩恵は
+ * 全38ヒーロー共通。それ以外(テック耐性・弾丸装甲ダメージ耐性・攻撃射程・サブ射撃ダメージ)は
+ * 一部のヒーローだけが持つので radar には載せず、その分だけ文で注記する。
  */
 const STD_GROWTH = new Set([
   "MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL",
@@ -53,8 +51,6 @@ const skills = hero.abilities
   })
   .filter((s): s is NonNullable<typeof s> => s !== null);
 
-const levels = hero.levels.filter((l) => l.level % 5 === 0 || l.level === 1 || l.level === 36);
-const bonus = hero.levelUpBonuses;
 const spiritBadge = (scale: number | null) => (scale ? `×${scale}` : null);
 ---
 
@@ -75,11 +71,12 @@ const spiritBadge = (scale: number | null) => (scale ? `×${scale}` : null);
   <div class="radars">
     {radar.weapon.length > 0 && <StatRadar axes={radar.weapon} cssVar="weapon" title="武器" />}
     <StatRadar axes={radar.base} cssVar="vitality" title="生命力" />
+    <StatRadar axes={radar.growth} cssVar="spirit" title="成長度／Lv" />
   </div>
-  {spiritRows.length > 0 && (
+  {miscRows.length > 0 && (
     <ul class="msrow">
-      <li class="hd">スピリット</li>
-      {spiritRows.map((r) => (
+      <li class="hd">その他</li>
+      {miscRows.map((r) => (
         <li>
           <span class="l">{r.label}</span>
           <span class="v">{r.value}</span>
@@ -89,13 +86,13 @@ const spiritBadge = (scale: number | null) => (scale ? `×${scale}` : null);
   )}
   <p class="radarnote">
     各軸は実装済み {releasedHeroes().length} 体の中での位置（中央＝最下位、外周＝最上位）。数値は実値、
-    <span class="grow">緑</span>は標準レベルアップ1回ごとの上昇値（武器ダメージ・HP・近接ダメージ、
-    スピリットパワーは上のスピリット行）。破線は中央値の目安です。
+    破線は中央値の目安です。「成長度／Lv」は標準レベルアップ1回ごとの上昇値で、
+    スピリットパワーを含むので紫色です。
     ヘッドショット倍率・しゃがみ速度は全ヒーロー共通のため省いています。
   </p>
   {extraGrowth.length > 0 && (
     <p class="radarnote extra">
-      このヒーローは標準の成長に加えて、レベルごとに
+      このヒーローは成長度の4項目に加えて、レベルごとに
       {extraGrowth.map(([k, v]) => `${modifierLabel(k)} +${v}`).join(" / ")}
       も上がります。
     </p>
@@ -186,27 +183,6 @@ const spiritBadge = (scale: number | null) => (scale ? `×${scale}` : null);
     })}
   </div>
 
-  <h2>レベルと成長</h2>
-  <div class="scroll-x">
-    <table>
-      <thead><tr><th>レベル</th><th>累積ソウル</th><th>この時点の最大HP（アイテムなし）</th></tr></thead>
-      <tbody>
-        {levels.map((l) => {
-          const boons = hero.levels.filter((x) => x.level <= l.level && x.useStandardUpgrade).length;
-          const hp =
-            hero.startingStats.EMaxHealth + boons * (bonus.MODIFIER_VALUE_BASE_HEALTH_FROM_LEVEL ?? 0);
-          return (
-            <tr>
-              <td>Lv{l.level}</td>
-              <td class="num">{l.requiredGold.toLocaleString("en-US")}</td>
-              <td class="num">{Math.round(hp)}</td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
-  </div>
-
   <style>
     .back { font-size: 13px; }
     h1 { margin-top: var(--sp-4); margin-bottom: var(--sp-2); }
@@ -238,8 +214,8 @@ const spiritBadge = (scale: number | null) => (scale ? `×${scale}` : null);
       border: 1px solid var(--c-border);
       border-radius: var(--radius-lg);
     }
-    .radars :global(.radar) { flex: 0 1 340px; }
-    /* レーダーに載せにくいスピリット側の補足 */
+    .radars :global(.radar) { flex: 0 1 300px; }
+    /* レーダーに載せにくい少数の値 */
     .msrow {
       list-style: none;
       display: flex;
@@ -254,7 +230,7 @@ const spiritBadge = (scale: number | null) => (scale ? `×${scale}` : null);
     .msrow li { display: flex; gap: var(--sp-2); align-items: baseline; }
     .msrow .hd {
       font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--c-spirit);
+      color: var(--c-text-muted);
     }
     .msrow .l { color: var(--c-text-muted); }
     .msrow .v { font-family: var(--font-mono); color: var(--c-text-strong); }
@@ -263,7 +239,6 @@ const spiritBadge = (scale: number | null) => (scale ? `×${scale}` : null);
       max-width: 60ch; margin: 0 auto var(--sp-4); line-height: 1.7;
     }
     .radarnote.extra { color: var(--c-text-muted); margin-top: calc(var(--sp-4) * -1 + var(--sp-1)); }
-    .radarnote .grow { color: var(--c-accent); }
 
     /* ---- スキルカード ---- */
     .skills { display: grid; gap: var(--sp-3); }

@@ -225,46 +225,68 @@ export interface RadarAxis {
   value: number;
   /** 実値の表示 */
   raw: string;
-  /** 標準レベルアップ1回ごとの上昇値(あれば)。"+39/Lv" のような表示済み文字列 */
-  growth?: string;
 }
 
-/** レーダー軸に出す Boon 成長。key → その軸に添える成長値 */
-function growthFor(h: Hero, key: string): string | undefined {
-  const b = h.levelUpBonuses;
-  if (key === "hp" && b.MODIFIER_VALUE_BASE_HEALTH_FROM_LEVEL)
-    return `+${num(b.MODIFIER_VALUE_BASE_HEALTH_FROM_LEVEL, 1)}/Lv`;
-  if (key === "bullet" && b.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL)
-    return `+${num(b.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL, 3)}/Lv`;
-  if (key === "lmelee" && b.MODIFIER_VALUE_BASE_MELEE_DAMAGE_FROM_LEVEL)
-    return `+${num(b.MODIFIER_VALUE_BASE_MELEE_DAMAGE_FROM_LEVEL, 2)}/Lv`;
-  return undefined;
-}
-
-const WEAPON_AXES = ["dps", "bullet", "firerate", "clip", "reload", "velocity", "range", "lmelee"];
+const WEAPON_AXES = ["dps", "bullet", "firerate", "clip", "reload", "velocity", "range"];
 const VITALITY_AXES = ["hp", "regen", "move", "sprint", "dash", "stam", "stamcd"];
 
-export function heroRadar(heroId: number): { base: RadarAxis[]; weapon: RadarAxis[] } {
-  const ranks = heroRanks();
-  const r = ranks[heroId];
+/**
+ * 標準レベルアップ1回ごとの成長。武器ダメージ・最大HP・近接ダメージ・スピリットパワーの
+ * 4つは全38体が持つ。それ以外(テック耐性など)は一部のヒーローだけなので radar には載せない
+ * (詳細ページで別途注記)。
+ */
+const GROWTH_AXES: Array<{ key: string; label: string; bonus: string; digits: number }> = [
+  { key: "wdmg", label: "武器ダメージ", bonus: "MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL", digits: 3 },
+  { key: "hp", label: "最大HP", bonus: "MODIFIER_VALUE_BASE_HEALTH_FROM_LEVEL", digits: 1 },
+  { key: "melee", label: "近接ダメージ", bonus: "MODIFIER_VALUE_BASE_MELEE_DAMAGE_FROM_LEVEL", digits: 2 },
+  { key: "spower", label: "スピリットパワー", bonus: "MODIFIER_VALUE_TECH_POWER", digits: 1 },
+];
+
+let growthCache: Map<string, number[]> | null = null;
+function growthSorted(): Map<string, number[]> {
+  if (growthCache) return growthCache;
+  const heroes = releasedHeroes();
+  const m = new Map<string, number[]>();
+  for (const g of GROWTH_AXES) {
+    m.set(
+      g.key,
+      heroes.map((h) => h.levelUpBonuses[g.bonus] ?? 0).sort((a, b) => a - b),
+    );
+  }
+  growthCache = m;
+  return m;
+}
+
+export function heroRadar(heroId: number): {
+  weapon: RadarAxis[];
+  base: RadarAxis[];
+  growth: RadarAxis[];
+} {
+  const r = heroRanks()[heroId];
   const h = releasedHeroes().find((x) => x.id === heroId)!;
-  const build = (rows: RankRow[], keys: string[]): RadarAxis[] =>
+  const fromRows = (rows: RankRow[], keys: string[]): RadarAxis[] =>
     keys
       .map((k) => rows.find((x) => x.key === k))
       .filter((x): x is RankRow => Boolean(x))
-      .map((x) => ({ label: x.label, value: x.pct, raw: x.value, growth: growthFor(h, x.key) }));
+      .map((x) => ({ label: x.label, value: x.pct, raw: x.value }));
+  const sorted = growthSorted();
+  const growth: RadarAxis[] = GROWTH_AXES.map((g) => {
+    const v = h.levelUpBonuses[g.bonus] ?? 0;
+    return { label: g.label, value: percentileOf(sorted.get(g.key)!, v), raw: `+${num(v, g.digits)}/Lv` };
+  });
   return {
-    base: build(r.vitality, VITALITY_AXES),
-    weapon: build(r.weapon, WEAPON_AXES),
+    weapon: fromRows(r.weapon, WEAPON_AXES),
+    base: fromRows(r.vitality, VITALITY_AXES),
+    growth,
   };
 }
 
 /**
- * レーダーに載せにくいスピリット側の補足(ヒーロー詳細で1行)。
- * スピリットの初期スタッツは全ヒーロー共通なので、成長(パワー成長)とスキル係数だけ。
- * 近接ダメージと成長は武器レーダーの「軽近接」軸に出す。
+ * レーダーに載せにくい少数の値(ヒーロー詳細で1行)。
+ * 近接ダメージの基礎値と、スキルのスピリット係数。
+ * (近接・スピリットパワーの "成長度" は成長レーダーに出す)
  */
-export function heroSpiritRows(heroId: number): RankRow[] {
+export function heroMiscRows(heroId: number): RankRow[] {
   const r = heroRanks()[heroId];
-  return pickRows(r.spirit, ["techpow", "skillscale"]);
+  return pickRows(r.weapon, ["lmelee", "hmelee"]).concat(pickRows(r.spirit, ["skillscale"]));
 }
