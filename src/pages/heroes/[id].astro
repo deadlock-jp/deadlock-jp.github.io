@@ -11,9 +11,12 @@ import {
   modifierLabel,
   heroTags,
   heroNotes,
+  heroAdjustments,
+  upstreamRepo,
 } from "../../lib/data.ts";
 import { heroRadar, heroMiscRows } from "../../lib/herorank.ts";
 import { skillCard } from "../../lib/skillcard.ts";
+import AdjustmentHistory from "../../components/AdjustmentHistory.astro";
 
 export function getStaticPaths() {
   return releasedHeroes().map((h) => ({ params: { id: String(h.id) }, props: { hero: h } }));
@@ -52,6 +55,7 @@ const skills = hero.abilities
   .filter((s): s is NonNullable<typeof s> => s !== null);
 
 const spiritBadge = (scale: number | null) => (scale ? `×${scale}` : null);
+const adjRows = heroAdjustments(hero.key);
 ---
 
 <Base title={name} description={`${name} の基礎ステータス・スキル・成長`}>
@@ -176,6 +180,8 @@ const spiritBadge = (scale: number | null) => (scale ? `×${scale}` : null);
       );
     })}
   </div>
+
+  <AdjustmentHistory rows={adjRows} upstreamRepo={upstreamRepo} />
 
   <style>
     .back { font-size: 13px; }

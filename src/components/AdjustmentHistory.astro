@@ -1,0 +1,99 @@
+---
+/**
+ * ヒーロー/アイテム詳細ページ下部の「調整履歴」。
+ *
+ * data/updates.json の各エントリの adjustments から、このエンティティに対する
+ * 強化/弱体/リワークを新しい順に並べる。中身(数値差分)は tools/gen-updates.mjs が
+ * before/after の data/*.json を突き合わせて生成する。該当が無ければ何も描かない。
+ */
+import type { AdjustmentHistoryRow } from "../lib/data.ts";
+
+interface Props {
+  rows: AdjustmentHistoryRow[];
+  upstreamRepo: string;
+}
+const { rows, upstreamRepo } = Astro.props;
+const KIND_LABEL: Record<AdjustmentHistoryRow["kind"], string> = {
+  buff: "強化",
+  nerf: "弱体",
+  rework: "リワーク",
+};
+---
+
+{rows.length > 0 && (
+  <section class="adjhist">
+    <h2>調整履歴</h2>
+    <ol>
+      {rows.map((r) => (
+        <li>
+          <span class="d">{r.date}</span>
+          <span class:list={["k", r.kind]}>{KIND_LABEL[r.kind]}</span>
+          <span class="n">
+            {r.note ?? r.title}
+            {r.upstreamCommit && (
+              <a class="c" href={`${upstreamRepo}/commit/${r.upstreamCommit}`} rel="noopener">
+                {r.upstreamCommit.slice(0, 8)}
+              </a>
+            )}
+          </span>
+        </li>
+      ))}
+    </ol>
+  </section>
+)}
+
+<style>
+  .adjhist {
+    margin-top: var(--sp-5);
+  }
+  .adjhist h2 {
+    margin-bottom: var(--sp-2);
+  }
+  .adjhist ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 4px;
+  }
+  .adjhist li {
+    display: grid;
+    grid-template-columns: 84px 64px minmax(0, 1fr);
+    gap: var(--sp-2);
+    align-items: baseline;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--c-border);
+    font-size: 12px;
+  }
+  .adjhist .d {
+    font-family: var(--font-mono);
+    color: var(--c-text-muted);
+  }
+  .adjhist .k {
+    justify-self: start;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 1px 6px;
+    border-radius: 3px;
+    border: 1px solid currentColor;
+  }
+  .adjhist .k.buff { color: var(--c-vitality); }
+  .adjhist .k.nerf { color: var(--c-weapon); }
+  .adjhist .k.rework { color: var(--c-spirit); }
+  .adjhist .n {
+    color: var(--c-text-muted);
+    line-height: 1.6;
+  }
+  .adjhist .c {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    margin-left: var(--sp-2);
+    color: var(--c-text-faint);
+  }
+  @media (max-width: 560px) {
+    .adjhist li {
+      grid-template-columns: 64px 56px minmax(0, 1fr);
+    }
+  }
+</style>

@@ -292,12 +292,24 @@ export function souls(n: number): string {
 /**
  * 更新履歴。GameTracking-Deadlock の更新で data/*.json が変わったときの差分要約。
  * data/updates.json を新しい順で返す。将来は上流コミットの差分から自動生成する。
+ *
+ * adjustments は「そのパッチでどのヒーロー/アイテムが強化/弱体/リワークされたか」の一覧。
+ * key はヒーローなら hero.key、アイテムなら item.id。note は差分の短い説明(任意)。
+ * これも tools/gen-updates で before/after の data/*.json を突き合わせて生成する。
  */
+export type AdjustmentKind = "buff" | "nerf" | "rework";
+export interface Adjustment {
+  kind: AdjustmentKind;
+  target: "hero" | "item";
+  key: string;
+  note?: string;
+}
 export interface SiteUpdate {
   date: string;
   upstreamCommit: string | null;
   title: string;
   changes: string[];
+  adjustments?: Adjustment[];
 }
 const updatesFile = updatesJson as unknown as {
   upstreamRepo: string;
@@ -307,3 +319,34 @@ export const upstreamRepo = updatesFile.upstreamRepo;
 export function siteUpdates(): SiteUpdate[] {
   return [...updatesFile.entries].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
 }
+
+/** ヒーローを内部キー(hero_inferno など)で引く */
+export function heroByKey(key: string): Hero | undefined {
+  return Object.values(heroesFile.heroes).find((h) => h.key === key);
+}
+
+/** そのエンティティに対する調整履歴。新しい順。 */
+export interface AdjustmentHistoryRow {
+  date: string;
+  title: string;
+  upstreamCommit: string | null;
+  kind: AdjustmentKind;
+  note?: string;
+}
+function adjustmentsFor(target: "hero" | "item", key: string): AdjustmentHistoryRow[] {
+  return siteUpdates().flatMap((u) =>
+    (u.adjustments ?? [])
+      .filter((a) => a.target === target && a.key === key)
+      .map((a) => ({
+        date: u.date,
+        title: u.title,
+        upstreamCommit: u.upstreamCommit,
+        kind: a.kind,
+        note: a.note,
+      })),
+  );
+}
+export const heroAdjustments = (heroKey: string): AdjustmentHistoryRow[] =>
+  adjustmentsFor("hero", heroKey);
+export const itemAdjustments = (itemId: string): AdjustmentHistoryRow[] =>
+  adjustmentsFor("item", itemId);

@@ -1,6 +1,6 @@
 {
-  "schemaVersion": 1,
-  "note": "GameTracking-Deadlock の更新で data/*.json の数値が変わったときの差分を、新しい順に並べたもの。エントリは将来 tools/ 側の自動生成(上流コミットの差分算出)で追記していく。",
+  "schemaVersion": 2,
+  "note": "GameTracking-Deadlock の更新で data/*.json の数値が変わったときの差分を、新しい順に並べたもの。changes は文の要約、adjustments は強化/弱体/リワークされたヒーロー・アイテムの一覧(key はヒーロー hero.key / アイテム item.id、kind は buff|nerf|rework)。エントリは tools/gen-updates.mjs が before/after の data/*.json を突き合わせて追記する。",
   "upstreamRepo": "https://github.com/SteamDatabase/GameTracking-Deadlock",
   "entries": [
     {
@@ -10,7 +10,8 @@
       "changes": [
         "GameTracking-Deadlock の .vdata からヒーロー・アイテム・スキル・オブジェクトの数値を生成",
         "ゲーム本体の公式日本語ローカライズを取り込み(未収録分のみ英語)"
-      ]
+      ],
+      "adjustments": []
     }
   ]
 }

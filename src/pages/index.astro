@@ -3,6 +3,7 @@ import { existsSync } from "node:fs";
 import { join } from "node:path";
 import Base from "../layouts/Base.astro";
 import ItemIcon from "../components/ItemIcon.astro";
+import HeroPortrait from "../components/HeroPortrait.astro";
 import {
   releasedHeroes,
   shopItems,
@@ -10,8 +11,11 @@ import {
   siteUpdates,
   upstreamRepo,
   heroTags,
+  heroByKey,
+  item as itemById,
   SLOT_META,
 } from "../lib/data.ts";
+import type { Adjustment, AdjustmentKind } from "../lib/data.ts";
 import { heroRanks, pickRows } from "../lib/herorank.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -46,8 +50,46 @@ const heroDetail = Object.fromEntries(heroes.map((x) => [x.h.id, x.detail]));
 
 const slots = ["WeaponMod", "Armor", "Tech"] as const;
 const items = shopItems();
-const updates = siteUpdates();
 const commitUrl = (sha: string | null) => (sha ? `${upstreamRepo}/commit/${sha}` : null);
+
+/** 調整履歴のアイコン一覧に出すための解決 */
+type ResolvedAdj =
+  | { kind: AdjustmentKind; target: "hero"; name: string; href: string; image: string | null; note?: string }
+  | { kind: AdjustmentKind; target: "item"; name: string; href: string; it: ReturnType<typeof itemById>; note?: string };
+function resolveAdj(a: Adjustment): ResolvedAdj | null {
+  if (a.target === "hero") {
+    const h = heroByKey(a.key);
+    if (!h) return null;
+    return {
+      kind: a.kind, target: "hero", name: t(h.nameToken, h.key),
+      href: `${base}/heroes/${h.id}/`, image: h.images.iconSmall, note: a.note,
+    };
+  }
+  const it = itemById(a.key);
+  if (!it) return null;
+  return {
+    kind: a.kind, target: "item", name: t(it.nameToken, it.id),
+    href: `${base}/items/${it.id}/`, it, note: a.note,
+  };
+}
+const ADJ_KINDS: { kind: AdjustmentKind; label: string }[] = [
+  { kind: "buff", label: "強化" },
+  { kind: "nerf", label: "弱体" },
+  { kind: "rework", label: "リワーク" },
+];
+const updates = siteUpdates().map((u) => {
+  const resolved = (u.adjustments ?? [])
+    .map(resolveAdj)
+    .filter((x): x is ResolvedAdj => x !== null);
+  return {
+    ...u,
+    adjGroups: ADJ_KINDS.map(({ kind, label }) => ({
+      kind,
+      label,
+      items: resolved.filter((r) => r.kind === kind),
+    })).filter((g) => g.items.length > 0),
+  };
+});
 ---
 
 <Base title="トップ" description="Deadlockのヒーロー・アイテム・スキルの数値を日本語で引けるデータベース">
@@ -139,6 +181,36 @@ const commitUrl = (sha: string | null) => (sha ? `${upstreamRepo}/commit/${sha}`
                   <li>{c}</li>
                 ))}
               </ul>
+              {u.adjGroups.length > 0 && (
+                <div class="uadj">
+                  {u.adjGroups.map((g) => (
+                    <div class="uadj-grp" data-kind={g.kind}>
+                      <span class="uadj-k">{g.label}</span>
+                      <ul class="uadj-icons">
+                        {g.items.map((r) => (
+                          <li>
+                            <a href={r.href} title={r.note ? `${r.name}｜${r.note}` : r.name}>
+                              {r.target === "hero" ? (
+                                <HeroPortrait name={r.name} image={r.image} size={30} />
+                              ) : (
+                                <ItemIcon
+                                  name={r.name}
+                                  slotType={r.it!.slotType}
+                                  tier={r.it!.tier}
+                                  shopIcon={r.it!.shopIcon}
+                                  activation={r.it!.activation}
+                                  isImbue={r.it!.isImbue}
+                                  size={30}
+                                />
+                              )}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </li>
         ))
@@ -284,6 +356,44 @@ const commitUrl = (sha: string | null) => (sha ? `${upstreamRepo}/commit/${sha}`
       color: var(--c-text-muted);
       line-height: 1.7;
     }
+    /* ---- 調整履歴(強化/弱体/リワークされたヒーロー・アイテムのアイコン) ---- */
+    .uadj {
+      margin-top: var(--sp-2);
+      display: grid;
+      gap: var(--sp-2);
+    }
+    .uadj-grp {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-2);
+    }
+    .uadj-k {
+      flex: 0 0 auto;
+      margin-top: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 1px 6px;
+      border-radius: 3px;
+      border: 1px solid currentColor;
+    }
+    .uadj-grp[data-kind="buff"] .uadj-k { color: var(--c-vitality); }
+    .uadj-grp[data-kind="nerf"] .uadj-k { color: var(--c-weapon); }
+    .uadj-grp[data-kind="rework"] .uadj-k { color: var(--c-spirit); }
+    .uadj-icons {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .uadj-icons a {
+      display: block;
+      line-height: 0;
+      border-radius: 6px;
+    }
+    .uadj-icons a:hover { outline: 2px solid var(--c-accent); outline-offset: 1px; }
 
     /* ---- ヒーローカード(ゲームの縦長カード) ---- */
     .herogrid {
@@ -361,13 +471,15 @@ const commitUrl = (sha: string | null) => (sha ? `${upstreamRepo}/commit/${sha}`
       pointer-events: none;
     }
     .herocard :global(.hc-img) {
-      width: 100%;
-      /* 元絵は 280x380 の縦長。ほぼそのまま出す(頭が切れないよう上ぞろえ) */
-      aspect-ratio: 280 / 360;
+      /* 元絵は 280x380 の縦長。周りに余白をとって少し小さめに出す */
+      width: 74%;
+      margin: var(--sp-5) auto var(--sp-1);
+      aspect-ratio: 280 / 340;
       object-fit: cover;
       object-position: center top;
       display: block;
-      border-bottom: 1px solid var(--c-border);
+      border: 1px solid var(--c-border);
+      border-radius: calc(var(--radius) - 2px);
     }
     .herocard :global(.hc-in) { padding: var(--sp-3) var(--sp-4) var(--sp-4); }
     .herocard :global(.hc-name) { font-weight: 700; color: var(--c-text-strong); font-size: 15px; }

@@ -10,7 +10,10 @@ import {
   usedIn,
   SLOT_META,
   souls,
+  itemAdjustments,
+  upstreamRepo,
 } from "../../lib/data.ts";
+import AdjustmentHistory from "../../components/AdjustmentHistory.astro";
 
 export function getStaticPaths() {
   // 実IDは "upgrade_clip_size" のような文字列。連番に振り直さない
@@ -53,6 +56,7 @@ const components = item.componentItems
 const parents = usedIn(item.id);
 
 const badge = item.isImbue ? "IMBUE" : item.activation !== "PASSIVE" ? "ACTIVE" : null;
+const adjRows = itemAdjustments(item.id);
 ---
 
 <Base title={name} description={`${name} の効果と数値`}>
@@ -182,6 +186,8 @@ const badge = item.isImbue ? "IMBUE" : item.activation !== "PASSIVE" ? "ACTIVE" 
       </div>
     </>
   )}
+
+  <AdjustmentHistory rows={adjRows} upstreamRepo={upstreamRepo} />
 
   <p class="idline">内部ID <code>{item.id}</code></p>
 
