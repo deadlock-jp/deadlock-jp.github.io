@@ -1,28 +1,90 @@
 ---
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import Base from "../../layouts/Base.astro";
 import AbilityIcon from "../../components/AbilityIcon.astro";
 import HeroPortrait from "../../components/HeroPortrait.astro";
-import { releasedHeroes, t, ability } from "../../lib/data.ts";
+import { releasedHeroes, t, ability, heroTags } from "../../lib/data.ts";
+import { resolveImagePath } from "../../parsers/image-manifest.ts";
+import { heroRanks, pickRows, heroTierTable } from "../../lib/herorank.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const ranks = heroRanks();
+const tier = heroTierTable();
+const BOON_LABEL: Record<string, string> = { hp: "HP成長", weapon: "武器成長", spirit: "スピリット成長" };
+
+/** トップページと同じホバーカードのデータ + 正方形アイコンのURL */
+const heroMeta: Record<number, { name: string; sm: string | null }> = {};
+const heroDetail: Record<number, unknown> = {};
+for (const h of releasedHeroes()) {
+  const name = t(h.nameToken, h.key);
+  const key = h.key.replace(/^hero_/, "");
+  const gloatRel = `images/heroes/gloat/${key}.webp`;
+  const smResolved = resolveImagePath(h.images.iconSmall);
+  const smRel = smResolved ? smResolved.outPath.replace(/^public\//, "") : null;
+  const r = ranks[h.id];
+  heroMeta[h.id] = {
+    name,
+    sm: smRel && existsSync(join(process.cwd(), "public", smRel)) ? `${base}/${smRel}` : null,
+  };
+  heroDetail[h.id] = {
+    name,
+    gloat: existsSync(join(process.cwd(), "public", gloatRel)) ? `${base}/${gloatRel}` : null,
+    tags: heroTags(h),
+    weapon: pickRows(r.weapon, ["dps", "bullet", "clip", "range"]),
+    vitality: pickRows(r.vitality, ["hp", "regen", "move", "stam"]),
+    spirit: pickRows(r.growth, ["gspower"]).concat(pickRows(r.spirit, ["skillscale"])),
+    boon: r.boonAccent.map((a) => BOON_LABEL[a]),
+  };
+}
+
+// 下部の一覧(従来のカード)
 const heroes = releasedHeroes().map((h) => ({
   hero: h,
   name: t(h.nameToken, h.key),
   role: t(h.roleToken, ""),
-  // Signature_1〜4。4番目は全38体で kind が Ultimate だった
   skills: h.abilities
     .filter((a) => a.slot.startsWith("Signature"))
     .sort((a, b) => a.slot.localeCompare(b.slot))
     .map((a) => ({ key: a.abilityKey, ab: ability(a.abilityKey) })),
 }));
-// 複雑さは 1〜3 想定だが、データ側に範囲外の値があるためクランプする
 const cx = (n: number) => Math.max(0, Math.min(3, n));
 ---
 
-<Base title="ヒーロー一覧" description="Deadlockの実装済みヒーローの基礎ステータス一覧">
+<Base title="ヒーロー一覧" description="Deadlockの実装済みヒーローの基礎ステータスとティア表">
   <h1>ヒーロー</h1>
   <p class="lead">実装済み {heroes.length} 体。数値はレベル1・アイテムなしの基礎値です。</p>
 
+  {/* ------------ 上部: 項目別ティア表 ------------ */}
+  <section class="tt">
+    <div class="tt-head">
+      <h2>ティア表</h2>
+      <label>
+        項目
+        <select id="metric">
+          {
+            [...new Set(tier.metrics.map((m) => m.group))].map((g) => (
+              <optgroup label={g}>
+                {tier.metrics
+                  .filter((m) => m.group === g)
+                  .map((m) => (
+                    <option value={m.key}>{m.label}</option>
+                  ))}
+              </optgroup>
+            ))
+          }
+        </select>
+      </label>
+    </div>
+    <div class="tt-body" id="ttbody"></div>
+    <p class="tt-note">
+      各段は「その項目の全{heroes.length}体中の位置」で S / A / B / C / D に分けたもの。
+      同じ段の中は、その項目で優れるヒーローほど左です。
+    </p>
+  </section>
+
+  {/* ------------ 下部: 一覧 ------------ */}
+  <h2 class="listh">一覧</h2>
   <div class="search">
     <input
       type="search"
@@ -67,14 +129,116 @@ const cx = (n: number) => Math.max(0, Math.min(3, n));
     }
   </ul>
 
+  {/* ホバー詳細カード(トップページと同じ) */}
+  <div class="herocard" id="herocard" role="tooltip" hidden></div>
+
+  <script is:inline define:vars={{ heroMeta, heroDetail, tierData: tier.data, base }}>
+    (() => {
+      const esc = (s) =>
+        String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+      const stars = (n) =>
+        `<span class="s">${"★".repeat(n)}<span class="dim">${"☆".repeat(5 - n)}</span></span>`;
+      const rows = (list) =>
+        list
+          .map(
+            (r) =>
+              `<li class="${r.stars >= 4 ? "accent" : ""}"><span class="l">${esc(r.label)}</span>` +
+              `<span class="v">${esc(r.value)}</span>${stars(r.stars)}</li>`,
+          )
+          .join("");
+
+      // ---- ホバーカード ----
+      const card = document.getElementById("herocard");
+      function show(id, anchor) {
+        const d = heroDetail[id];
+        if (!d) return;
+        card.innerHTML =
+          (d.gloat ? `<img class="hc-img" src="${d.gloat}" alt="">` : "") +
+          `<div class="hc-in"><div class="hc-name">${esc(d.name)}</div>` +
+          (d.tags.length
+            ? `<ul class="hc-tags">${d.tags.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`
+            : "") +
+          `<div class="hc-grp" style="--hc-cat:var(--c-weapon)">武器</div><ul class="hc-rows">${rows(d.weapon)}</ul>` +
+          `<div class="hc-grp" style="--hc-cat:var(--c-vitality)">生命力</div><ul class="hc-rows">${rows(d.vitality)}</ul>` +
+          `<div class="hc-grp" style="--hc-cat:var(--c-spirit)">成長/スピリット</div><ul class="hc-rows">${rows(d.spirit)}</ul>` +
+          (d.boon.length ? `<div class="hc-boon">成長が高い: <b>${esc(d.boon.join(" / "))}</b></div>` : "") +
+          `</div>`;
+        card.hidden = false;
+        const place = () => {
+          const M = 8;
+          const r = anchor.getBoundingClientRect();
+          const cw = card.offsetWidth;
+          const ch = card.offsetHeight;
+          const vw = document.documentElement.clientWidth;
+          const vh = document.documentElement.clientHeight;
+          let left = r.right + 10;
+          if (left + cw > vw - M) left = r.left - cw - 10;
+          left = Math.max(M, Math.min(left, vw - cw - M));
+          let top = Math.min(r.top, vh - ch - M);
+          top = Math.max(M, top);
+          card.style.left = left + "px";
+          card.style.top = top + "px";
+        };
+        place();
+        requestAnimationFrame(place);
+      }
+      const hide = () => (card.hidden = true);
+      // ティア表のアイコンは数が変わるので委譲で拾う
+      document.getElementById("ttbody").addEventListener("mouseover", (e) => {
+        const a = e.target.closest(".tt-hero");
+        if (a) show(a.dataset.hero, a);
+      });
+      document.getElementById("ttbody").addEventListener("mouseout", (e) => {
+        if (e.target.closest(".tt-hero")) hide();
+      });
+      document.getElementById("ttbody").addEventListener("focusin", (e) => {
+        const a = e.target.closest(".tt-hero");
+        if (a) show(a.dataset.hero, a);
+      });
+      document.getElementById("ttbody").addEventListener("focusout", hide);
+      window.addEventListener("scroll", hide, { passive: true });
+
+      // ---- ティア表の描画 ----
+      const LETTER = ["", "D", "C", "B", "A", "S"];
+      const ttbody = document.getElementById("ttbody");
+      const sel = document.getElementById("metric");
+      function render(key) {
+        const list = tierData[key] ?? [];
+        const bucket = { 5: [], 4: [], 3: [], 2: [], 1: [] };
+        for (const r of list) (bucket[r.tier] ?? bucket[1]).push(r);
+        ttbody.innerHTML = [5, 4, 3, 2, 1]
+          .map((tn) => {
+            const L = LETTER[tn];
+            const icons = bucket[tn]
+              .map((r) => {
+                const m = heroMeta[r.id] ?? { name: "?", sm: null };
+                const img = m.sm
+                  ? `<img src="${m.sm}" alt="" loading="lazy">`
+                  : `<span class="ph">${esc(m.name.slice(0, 1))}</span>`;
+                return (
+                  `<a class="tt-hero" data-hero="${r.id}" href="${base}/heroes/${r.id}/" ` +
+                  `title="${esc(m.name)}｜${esc(r.value)}">${img}</a>`
+                );
+              })
+              .join("");
+            return (
+              `<div class="tt-row tier-${L}"><span class="tt-rank">${L}</span>` +
+              `<div class="tt-icons">${icons || '<span class="tt-empty">該当なし</span>'}</div></div>`
+            );
+          })
+          .join("");
+      }
+      sel.addEventListener("change", () => render(sel.value));
+      render(sel.value);
+    })();
+  </script>
+
   <script is:inline>
-    // 追加ライブラリなしのクライアント側フィルタ。
-    // 各カードが data-find に「名前 + 役割 + キー + スキル名」を小文字で持っている。
+    // 下部一覧の絞り込み(従来どおり)
     (() => {
       const q = document.getElementById("q");
       const hits = document.getElementById("hits");
       const cards = [...document.querySelectorAll(".grid li")];
-
       function apply() {
         const words = q.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
         let shown = 0;
@@ -91,80 +255,112 @@ const cx = (n: number) => Math.max(0, Math.min(3, n));
   </script>
 
   <style>
-    .lead {
-      color: var(--c-text-muted);
-      margin-bottom: var(--sp-5);
-    }
-    .grid {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-      gap: var(--sp-3);
-    }
-    .grid a {
-      display: flex;
-      flex-direction: column;
-      padding: var(--sp-4);
+    .lead { color: var(--c-text-muted); margin-bottom: var(--sp-5); }
+
+    /* ---- ティア表 ---- */
+    .tt {
       background: var(--c-surface);
       border: 1px solid var(--c-border);
-      border-left: 3px solid var(--c-accent-dim);
-      border-radius: var(--radius);
-      color: inherit;
-      height: 100%;
+      border-radius: var(--radius-lg);
+      padding: var(--sp-4);
+      margin-bottom: var(--sp-6);
     }
-    .grid a:hover {
-      background: var(--c-surface-2);
-      border-color: var(--c-border-strong);
-      border-left-color: var(--c-accent);
-      text-decoration: none;
-    }
-    .head {
+    .tt-head {
       display: flex;
-      align-items: center;
-      gap: var(--sp-3);
-      margin-bottom: var(--sp-3);
-    }
-    .who { min-width: 0; }
-    .name {
-      display: block;
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--c-text-strong);
-    }
-    .role {
-      display: block;
-      font-size: 12px;
-      color: var(--c-text-muted);
-    }
-    .stats {
-      margin-top: auto;
-      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
       flex-wrap: wrap;
       gap: var(--sp-3);
-      font-size: 12px;
-      color: var(--c-text-muted);
-      border-top: 1px solid var(--c-border);
-      padding-top: var(--sp-2);
-    }
-    .stats b {
-      font-family: var(--font-mono);
-      font-weight: 500;
-      color: var(--c-text);
-    }
-    .cx {
-      color: var(--c-accent);
-      letter-spacing: 1px;
-    }
-    .cx .dim {
-      color: var(--c-text-faint);
-    }
-    .skills {
-      display: flex;
-      gap: 4px;
       margin-bottom: var(--sp-3);
     }
+    .tt-head h2 { margin: 0; border: none; padding: 0; }
+    .tt-head label { font-size: 13px; color: var(--c-text-muted); display: flex; align-items: center; gap: var(--sp-2); }
+    .tt-head select {
+      background: var(--c-surface-2); color: var(--c-text);
+      border: 1px solid var(--c-border-strong); border-radius: var(--radius);
+      padding: 5px 8px; font: inherit; font-size: 13px;
+    }
+    .tt-body { display: grid; gap: 4px; }
+    /* tt-body の中身は JS で innerHTML 挿入するので、以下はすべて :global で当てる */
+    .tt-body :global(.tt-row) {
+      --tier: var(--c-text-muted);
+      display: grid;
+      grid-template-columns: 30px minmax(0, 1fr);
+      gap: var(--sp-3);
+      align-items: center;
+      background: color-mix(in srgb, var(--tier) 8%, transparent);
+      border: 1px solid color-mix(in srgb, var(--tier) 35%, transparent);
+      border-left: 3px solid var(--tier);
+      border-radius: var(--radius);
+      padding: 5px var(--sp-2);
+      min-height: 46px;
+    }
+    /* S=レジェンダリー(金) A=エピック(紫) B=レア(青) C=アンコモン(緑) D=コモン(白) */
+    .tt-body :global(.tier-S) { --tier: #e8b93a; }
+    .tt-body :global(.tier-A) { --tier: #a970d6; }
+    .tt-body :global(.tier-B) { --tier: #4f9fd8; }
+    .tt-body :global(.tier-C) { --tier: #6bbf59; }
+    .tt-body :global(.tier-D) { --tier: #b9bcc0; }
+    .tt-body :global(.tt-rank) {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 18px;
+      text-align: center;
+      color: var(--tier);
+    }
+    .tt-body :global(.tt-icons) { display: flex; flex-wrap: wrap; gap: 4px; }
+    .tt-body :global(.tt-empty) { font-size: 12px; color: var(--c-text-faint); }
+    .tt-body :global(.tt-hero) {
+      display: block;
+      width: 34px;
+      height: 34px;
+      border-radius: 5px;
+      overflow: hidden;
+      border: 1px solid color-mix(in srgb, var(--tier) 50%, var(--c-border));
+      background: var(--c-surface-2);
+      line-height: 0;
+    }
+    .tt-body :global(.tt-hero:hover) {
+      border-color: var(--tier);
+      filter: brightness(1.15);
+    }
+    .tt-body :global(.tt-hero img) { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .tt-body :global(.tt-hero .ph) {
+      display: flex; align-items: center; justify-content: center;
+      width: 100%; height: 100%; font-size: 13px; font-weight: 700; color: var(--c-accent);
+    }
+    .tt-note { font-size: 11px; color: var(--c-text-faint); margin: var(--sp-3) 0 0; line-height: 1.6; }
+
+    .listh { border: none; }
+
+    /* ---- 下部の一覧(従来) ---- */
+    .grid {
+      list-style: none; padding: 0; margin: 0;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: var(--sp-3);
+    }
+    .grid a {
+      display: flex; flex-direction: column; padding: var(--sp-4);
+      background: var(--c-surface); border: 1px solid var(--c-border);
+      border-left: 3px solid var(--c-accent-dim); border-radius: var(--radius);
+      color: inherit; height: 100%;
+    }
+    .grid a:hover {
+      background: var(--c-surface-2); border-color: var(--c-border-strong);
+      border-left-color: var(--c-accent); text-decoration: none;
+    }
+    .head { display: flex; align-items: center; gap: var(--sp-3); margin-bottom: var(--sp-3); }
+    .who { min-width: 0; }
+    .name { display: block; font-size: 16px; font-weight: 600; color: var(--c-text-strong); }
+    .role { display: block; font-size: 12px; color: var(--c-text-muted); }
+    .stats {
+      margin-top: auto; display: flex; flex-wrap: wrap; gap: var(--sp-3);
+      font-size: 12px; color: var(--c-text-muted);
+      border-top: 1px solid var(--c-border); padding-top: var(--sp-2);
+    }
+    .stats b { font-family: var(--font-mono); font-weight: 500; color: var(--c-text); }
+    .cx { color: var(--c-accent); letter-spacing: 1px; }
+    .cx .dim { color: var(--c-text-faint); }
+    .skills { display: flex; gap: 4px; margin-bottom: var(--sp-3); }
     .grid li[hidden] { display: none; }
     .search { display: flex; align-items: center; gap: var(--sp-3); margin-bottom: var(--sp-5); }
     .search input {
@@ -175,5 +371,47 @@ const cx = (n: number) => Math.max(0, Math.min(3, n));
     }
     .search input:focus { outline: none; border-color: var(--c-accent); }
     .hits { font-size: 12px; color: var(--c-text-muted); font-family: var(--font-mono); }
+
+    /* ---- ホバーカード(トップページからコピー。中身はJS差し込みなので :global) ---- */
+    .herocard {
+      position: fixed; z-index: 40; width: 300px;
+      max-height: calc(100vh - 16px); overflow: auto;
+      background: var(--c-surface); border: 1px solid var(--c-accent-dim);
+      border-radius: var(--radius); box-shadow: 0 8px 28px rgb(0 0 0 / 0.5);
+      pointer-events: none;
+    }
+    .herocard :global(.hc-img) {
+      width: 100%; aspect-ratio: 280 / 200; object-fit: cover; object-position: top;
+      display: block; border-bottom: 1px solid var(--c-border);
+    }
+    .herocard :global(.hc-in) { padding: var(--sp-3) var(--sp-4) var(--sp-4); }
+    .herocard :global(.hc-name) { font-weight: 700; color: var(--c-text-strong); font-size: 15px; }
+    .herocard :global(.hc-tags) {
+      list-style: none; display: flex; flex-wrap: wrap; gap: 4px; padding: 0; margin: var(--sp-2) 0 0;
+    }
+    .herocard :global(.hc-tags li) {
+      font-size: 10px; color: var(--c-accent);
+      border: 1px solid var(--c-accent-dim); border-radius: 999px; padding: 0 7px;
+    }
+    .herocard :global(.hc-grp) {
+      font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--hc-cat, var(--c-text-muted)); margin-top: var(--sp-3);
+    }
+    .herocard :global(.hc-rows) { list-style: none; padding: 0; margin: 2px 0 0; }
+    .herocard :global(.hc-rows li) {
+      display: grid; grid-template-columns: 1fr auto auto; gap: var(--sp-2); align-items: baseline;
+      font-size: 11px; padding: 2px 0; border-bottom: 1px solid var(--c-border);
+    }
+    .herocard :global(.hc-rows .l) { color: var(--c-text-muted); }
+    .herocard :global(.hc-rows .v) { font-family: var(--font-mono); color: var(--c-text-strong); }
+    .herocard :global(.hc-rows .s) { color: var(--c-accent); letter-spacing: 1px; font-size: 10px; }
+    .herocard :global(.hc-rows .s .dim) { color: var(--c-text-faint); }
+    .herocard :global(.hc-rows li.accent .l) { color: var(--c-accent); }
+    .herocard :global(.hc-boon) { margin-top: var(--sp-3); font-size: 11px; color: var(--c-text-muted); }
+    .herocard :global(.hc-boon b) { color: var(--c-accent); }
+
+    @media (max-width: 1000px) {
+      .herocard { display: none; }
+    }
   </style>
 </Base>

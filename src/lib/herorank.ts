@@ -26,6 +26,8 @@ export interface HeroRank {
   weapon: RankRow[];
   vitality: RankRow[];
   spirit: RankRow[];
+  /** 標準レベルアップ1回ごとの成長。武器ダメージ/最大HP/近接ダメージ/スピリットパワー */
+  growth: RankRow[];
   /** 成長(Boon)が全体で上位の軸。カードでアクセントを付ける */
   boonAccent: Array<"hp" | "weapon" | "spirit">;
 }
@@ -33,7 +35,7 @@ export interface HeroRank {
 type Metric = {
   key: string;
   label: string;
-  group: "weapon" | "vitality" | "spirit";
+  group: "weapon" | "vitality" | "spirit" | "growth";
   /** そのヒーローの生値。取れなければ null */
   get: (h: Hero) => number | null;
   /** 表示整形 */
@@ -143,14 +145,36 @@ const METRICS: Metric[] = [
     fmt: (v) => `${num(v, 1)}秒`,
   },
   // --- スピリット(初期スタッツは全員共通なので、成長と係数で表す) ---
+  { key: "skillscale", label: "スキル係数", group: "spirit", get: skillScaleAvg, fmt: (v) => `×${num(v, 2)}` },
+  // --- 成長度(標準レベルアップ1回ごと。全38体が持つ4つ) ---
   {
-    key: "techpow",
-    label: "パワー成長",
-    group: "spirit",
+    key: "gwdmg",
+    label: "武器ダメージ",
+    group: "growth",
+    get: (h) => h.levelUpBonuses.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL ?? null,
+    fmt: (v) => `+${num(v, 3)}/Lv`,
+  },
+  {
+    key: "ghp",
+    label: "最大HP",
+    group: "growth",
+    get: (h) => h.levelUpBonuses.MODIFIER_VALUE_BASE_HEALTH_FROM_LEVEL ?? null,
+    fmt: (v) => `+${num(v, 1)}/Lv`,
+  },
+  {
+    key: "gmelee",
+    label: "近接ダメージ",
+    group: "growth",
+    get: (h) => h.levelUpBonuses.MODIFIER_VALUE_BASE_MELEE_DAMAGE_FROM_LEVEL ?? null,
+    fmt: (v) => `+${num(v, 2)}/Lv`,
+  },
+  {
+    key: "gspower",
+    label: "スピリットパワー",
+    group: "growth",
     get: (h) => h.levelUpBonuses.MODIFIER_VALUE_TECH_POWER ?? null,
     fmt: (v) => `+${num(v, 1)}/Lv`,
   },
-  { key: "skillscale", label: "スキル係数", group: "spirit", get: skillScaleAvg, fmt: (v) => `×${num(v, 2)}` },
 ];
 
 /** 昇順ソートした配列の中で v の百分位(0..1)。同値は中間順位 */
@@ -193,7 +217,7 @@ export function heroRanks(): Record<number, HeroRank> {
 
   const out: Record<number, HeroRank> = {};
   heroes.forEach((h, i) => {
-    const rank: HeroRank = { weapon: [], vitality: [], spirit: [], boonAccent: [] };
+    const rank: HeroRank = { weapon: [], vitality: [], spirit: [], growth: [], boonAccent: [] };
     for (const m of METRICS) {
       const raw = m.get(h);
       if (raw == null) continue;
@@ -229,33 +253,13 @@ export interface RadarAxis {
 
 const WEAPON_AXES = ["dps", "bullet", "firerate", "clip", "reload", "velocity", "range"];
 const VITALITY_AXES = ["hp", "regen", "move", "sprint", "dash", "stam", "stamcd"];
+const GROWTH_AXES = ["gwdmg", "ghp", "gmelee", "gspower"];
 
-/**
- * 標準レベルアップ1回ごとの成長。武器ダメージ・最大HP・近接ダメージ・スピリットパワーの
- * 4つは全38体が持つ。それ以外(テック耐性など)は一部のヒーローだけなので radar には載せない
- * (詳細ページで別途注記)。
- */
-const GROWTH_AXES: Array<{ key: string; label: string; bonus: string; digits: number }> = [
-  { key: "wdmg", label: "武器ダメージ", bonus: "MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL", digits: 3 },
-  { key: "hp", label: "最大HP", bonus: "MODIFIER_VALUE_BASE_HEALTH_FROM_LEVEL", digits: 1 },
-  { key: "melee", label: "近接ダメージ", bonus: "MODIFIER_VALUE_BASE_MELEE_DAMAGE_FROM_LEVEL", digits: 2 },
-  { key: "spower", label: "スピリットパワー", bonus: "MODIFIER_VALUE_TECH_POWER", digits: 1 },
-];
-
-let growthCache: Map<string, number[]> | null = null;
-function growthSorted(): Map<string, number[]> {
-  if (growthCache) return growthCache;
-  const heroes = releasedHeroes();
-  const m = new Map<string, number[]>();
-  for (const g of GROWTH_AXES) {
-    m.set(
-      g.key,
-      heroes.map((h) => h.levelUpBonuses[g.bonus] ?? 0).sort((a, b) => a - b),
-    );
-  }
-  growthCache = m;
-  return m;
-}
+const asAxes = (rows: RankRow[], keys: string[]): RadarAxis[] =>
+  keys
+    .map((k) => rows.find((x) => x.key === k))
+    .filter((x): x is RankRow => Boolean(x))
+    .map((x) => ({ label: x.label, value: x.pct, raw: x.value }));
 
 export function heroRadar(heroId: number): {
   weapon: RadarAxis[];
@@ -263,30 +267,80 @@ export function heroRadar(heroId: number): {
   growth: RadarAxis[];
 } {
   const r = heroRanks()[heroId];
-  const h = releasedHeroes().find((x) => x.id === heroId)!;
-  const fromRows = (rows: RankRow[], keys: string[]): RadarAxis[] =>
-    keys
-      .map((k) => rows.find((x) => x.key === k))
-      .filter((x): x is RankRow => Boolean(x))
-      .map((x) => ({ label: x.label, value: x.pct, raw: x.value }));
-  const sorted = growthSorted();
-  const growth: RadarAxis[] = GROWTH_AXES.map((g) => {
-    const v = h.levelUpBonuses[g.bonus] ?? 0;
-    return { label: g.label, value: percentileOf(sorted.get(g.key)!, v), raw: `+${num(v, g.digits)}/Lv` };
-  });
   return {
-    weapon: fromRows(r.weapon, WEAPON_AXES),
-    base: fromRows(r.vitality, VITALITY_AXES),
-    growth,
+    weapon: asAxes(r.weapon, WEAPON_AXES),
+    base: asAxes(r.vitality, VITALITY_AXES),
+    growth: asAxes(r.growth, GROWTH_AXES),
   };
 }
 
 /**
  * レーダーに載せにくい少数の値(ヒーロー詳細で1行)。
  * 近接ダメージの基礎値と、スキルのスピリット係数。
- * (近接・スピリットパワーの "成長度" は成長レーダーに出す)
  */
 export function heroMiscRows(heroId: number): RankRow[] {
   const r = heroRanks()[heroId];
   return pickRows(r.weapon, ["lmelee", "hmelee"]).concat(pickRows(r.spirit, ["skillscale"]));
+}
+
+// --- ティア表(ヒーロー一覧ページ) ------------------------------------------
+
+export interface TierMetric {
+  key: string;
+  label: string;
+  /** セレクトの optgroup 見出し */
+  group: string;
+}
+export interface TierEntry {
+  id: number;
+  /** 1..5 (1=D, 5=S) */
+  tier: number;
+  /** 実値の表示 */
+  value: string;
+}
+
+/** 選べる項目。key は heroRanks の RankRow.key、group はセレクトの見出し */
+const TIER_METRICS: Array<TierMetric & { rankGroup: "weapon" | "vitality" | "spirit" | "growth" }> = [
+  { key: "dps", label: "DPS", group: "武器", rankGroup: "weapon" },
+  { key: "bullet", label: "1発ダメージ", group: "武器", rankGroup: "weapon" },
+  { key: "firerate", label: "連射(発/秒)", group: "武器", rankGroup: "weapon" },
+  { key: "clip", label: "装弾数", group: "武器", rankGroup: "weapon" },
+  { key: "reload", label: "リロード(速い順)", group: "武器", rankGroup: "weapon" },
+  { key: "velocity", label: "弾速", group: "武器", rankGroup: "weapon" },
+  { key: "range", label: "射程(減衰開始)", group: "武器", rankGroup: "weapon" },
+  { key: "lmelee", label: "軽近接", group: "武器", rankGroup: "weapon" },
+  { key: "hmelee", label: "重近接", group: "武器", rankGroup: "weapon" },
+  { key: "hp", label: "最大HP", group: "生命力", rankGroup: "vitality" },
+  { key: "regen", label: "HP回復", group: "生命力", rankGroup: "vitality" },
+  { key: "move", label: "移動速度", group: "生命力", rankGroup: "vitality" },
+  { key: "sprint", label: "スプリント速度", group: "生命力", rankGroup: "vitality" },
+  { key: "dash", label: "ダッシュ速度", group: "生命力", rankGroup: "vitality" },
+  { key: "stam", label: "スタミナ", group: "生命力", rankGroup: "vitality" },
+  { key: "stamcd", label: "スタミナCD(速い順)", group: "生命力", rankGroup: "vitality" },
+  { key: "gwdmg", label: "武器ダメージ成長/Lv", group: "成長度", rankGroup: "growth" },
+  { key: "ghp", label: "最大HP成長/Lv", group: "成長度", rankGroup: "growth" },
+  { key: "gmelee", label: "近接ダメージ成長/Lv", group: "成長度", rankGroup: "growth" },
+  { key: "gspower", label: "スピリットパワー成長/Lv", group: "成長度", rankGroup: "growth" },
+  { key: "skillscale", label: "スキルのスピリット係数", group: "スピリット", rankGroup: "spirit" },
+];
+
+/**
+ * ヒーロー一覧のティア表。項目ごとに、全38体を「その項目の百分位」で
+ * S/A/B/C/D の5段(= RankRow.stars)に分け、段内は上位ほど先頭にする。
+ */
+export function heroTierTable(): { metrics: TierMetric[]; data: Record<string, TierEntry[]> } {
+  const ranks = heroRanks();
+  const ids = releasedHeroes().map((h) => h.id);
+  const data: Record<string, TierEntry[]> = {};
+  for (const m of TIER_METRICS) {
+    const rows = ids
+      .map((id) => {
+        const row = ranks[id][m.rankGroup].find((r) => r.key === m.key);
+        return row ? { id, tier: row.stars, value: row.value, pct: row.pct } : null;
+      })
+      .filter((x): x is { id: number; tier: number; value: string; pct: number } => x !== null)
+      .sort((a, b) => b.pct - a.pct);
+    data[m.key] = rows.map(({ id, tier, value }) => ({ id, tier, value }));
+  }
+  return { metrics: TIER_METRICS.map(({ key, label, group }) => ({ key, label, group })), data };
 }

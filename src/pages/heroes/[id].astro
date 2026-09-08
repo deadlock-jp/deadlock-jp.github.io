@@ -84,12 +84,6 @@ const spiritBadge = (scale: number | null) => (scale ? `×${scale}` : null);
       ))}
     </ul>
   )}
-  <p class="radarnote">
-    各軸は実装済み {releasedHeroes().length} 体の中での位置（中央＝最下位、外周＝最上位）。数値は実値、
-    破線は中央値の目安です。「成長度／Lv」は標準レベルアップ1回ごとの上昇値で、
-    スピリットパワーを含むので紫色です。
-    ヘッドショット倍率・しゃがみ速度は全ヒーロー共通のため省いています。
-  </p>
   {extraGrowth.length > 0 && (
     <p class="radarnote extra">
       このヒーローは成長度の4項目に加えて、レベルごとに

@@ -37,7 +37,7 @@ const heroes = releasedHeroes().map((h) => {
       // ホバーカードは各カテゴリ4項目まで(レーダーはヒーロー詳細で全項目)
       weapon: pickRows(r.weapon, ["dps", "bullet", "clip", "range"]),
       vitality: pickRows(r.vitality, ["hp", "regen", "move", "stam"]),
-      spirit: pickRows(r.spirit, ["techpow", "skillscale"]),
+      spirit: pickRows(r.growth, ["gspower"]).concat(pickRows(r.spirit, ["skillscale"])),
       boon: r.boonAccent.map((a) => BOON_LABEL[a]),
     },
   };
@@ -196,7 +196,7 @@ const commitUrl = (sha: string | null) => (sha ? `${upstreamRepo}/commit/${sha}`
             : "") +
           `<div class="hc-grp" style="--hc-cat:var(--c-weapon)">武器</div><ul class="hc-rows">${rows(d.weapon)}</ul>` +
           `<div class="hc-grp" style="--hc-cat:var(--c-vitality)">生命力</div><ul class="hc-rows">${rows(d.vitality)}</ul>` +
-          `<div class="hc-grp" style="--hc-cat:var(--c-spirit)">スピリット</div><ul class="hc-rows">${rows(d.spirit)}</ul>` +
+          `<div class="hc-grp" style="--hc-cat:var(--c-spirit)">成長/スピリット</div><ul class="hc-rows">${rows(d.spirit)}</ul>` +
           (d.boon.length
             ? `<div class="hc-boon">成長が高い: <b>${esc(d.boon.join(" / "))}</b></div>`
             : "") +
