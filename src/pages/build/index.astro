@@ -160,20 +160,26 @@ const payload = {
       {/*
         アイテムスロット。ゲームでは12枠すべてがフレックス(TYPE固定ではない)なので、
         カテゴリごとに割らず、購入順に2段×6で埋める。枠の色でTYPEが分かるようにする。
+        buildbar はスマホで画面上部に追従させる(sticky)。
       */}
-      <div class="slotbar">
-        <span class="slotcount"><b id="t-count">0</b> / 12</span>
-        <span class="lvl"><b id="t-level">Lv—</b></span>
-        <span class="soulcost">
-          <SoulIcon size={15} />
-          <b id="t-souls">0</b>
-          <small>ソウル</small>
-        </span>
+      <div class="buildbar">
+        <div class="slotbar">
+          <span class="slotcount"><b id="t-count">0</b> / 12</span>
+          <span class="lvl"><b id="t-level">Lv—</b></span>
+          <span class="soulcost">
+            <SoulIcon size={15} />
+            <b id="t-souls">0</b>
+            <small>ソウル</small>
+          </span>
+        </div>
+        <div class="cells" data-cells>
+          {Array.from({ length: 12 }, () => <span class="cell" />)}
+        </div>
       </div>
-      <div class="cells" data-cells>
-        {Array.from({ length: 12 }, () => <span class="cell" />)}
-      </div>
-      <p class="slotnote">アイコンをクリックすると外れます。枠はゲームと同じく12枠です。</p>
+      <p class="slotnote">
+        枠のアイコンをタップすると外れます。ショップはタップで詳細、もう一度タップで追加します。
+        枠はゲームと同じく12個です。
+      </p>
 
       {/* TYPE別ステータス */}
       {
@@ -691,35 +697,60 @@ const payload = {
       place();
       requestAnimationFrame(place);
     }
+    // モバイル(ホバー不可)は「1タップで詳細チップ、もう一度タップで追加」にする
+    const coarse = window.matchMedia("(hover: none)").matches;
+    let tapPreviewId = null; // いまタップでチップを出しているアイテム
+
     function hideCard() {
       card.hidden = true;
+      tapPreviewId = null;
+    }
+
+    /** ショップのアイテムをビルドに足す/外す */
+    function toggleItem(id) {
+      const at = picked.indexOf(id);
+      if (at >= 0) {
+        picked.splice(at, 1);
+      } else {
+        // 既に持っている上位アイテムに内包されているものは、単体で足す意味がない
+        if (coveredIds().has(id)) return;
+        /*
+         * 上位アイテムは下位アイテムの効果を含むので、下位は外す。
+         * 価格もこれで辻褄が合う。ゲームでは素材を先に買うと差額で強化できるため、
+         * 「素材800 + 差額2400」も「上位を直接3200」も合計は同じになる。
+         */
+        const drop = allComponents(id);
+        picked = picked.filter((x) => !drop.has(x));
+        picked.push(id);
+      }
+      refresh(false);
     }
 
     // ---- 操作 --------------------------------------------------------
     for (const el of document.querySelectorAll(".card")) {
       el.addEventListener("click", () => {
         const id = el.dataset.id;
-        const at = picked.indexOf(id);
-        if (at >= 0) {
-          picked.splice(at, 1);
-        } else {
-          // 既に持っている上位アイテムに内包されているものは、単体で足す意味がない
-          if (coveredIds().has(id)) return;
-          /*
-           * 上位アイテムは下位アイテムの効果を含むので、下位は外す。
-           * 価格もこれで辻褄が合う。ゲームでは素材を先に買うと差額で強化できるため、
-           * 「素材800 + 差額2400」も「上位を直接3200」も合計は同じになる。
-           */
-          const drop = allComponents(id);
-          picked = picked.filter((x) => !drop.has(x));
-          picked.push(id);
+        // モバイルで、まだそのアイテムのチップを出していない → チップを出すだけ
+        if (coarse && tapPreviewId !== id) {
+          tapPreviewId = id;
+          showCard(id, el);
+          return;
         }
-        refresh(false);
+        // デスクトップ、またはモバイルで同じアイテムの2回目のタップ
+        if (coarse) hideCard();
+        toggleItem(id);
       });
       el.addEventListener("mouseenter", () => showCard(el.dataset.id, el));
       el.addEventListener("focus", () => showCard(el.dataset.id, el));
       el.addEventListener("mouseleave", hideCard);
       el.addEventListener("blur", hideCard);
+    }
+
+    // モバイル: カード以外をタップしたらチップを閉じる
+    if (coarse) {
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".card")) hideCard();
+      });
     }
 
     document.querySelector("[data-cells]").addEventListener("click", (e) => {
@@ -1016,7 +1047,22 @@ const payload = {
 
     @media (max-width: 1000px) {
       .layout { grid-template-columns: minmax(0, 1fr); }
-      .hovercard { display: none; }
+      /*
+       * スマホ: 12スロット(buildbar)を画面上部に追従させる。
+       * site-header(sticky・約58px)の直下に貼り付き、ショップをスクロールしても
+       * 現在のビルドが常に見えるようにする。左右は画面端までベタ塗り。
+       */
+      .buildbar {
+        position: sticky;
+        top: 57px;
+        z-index: 15;
+        background: var(--c-bg);
+        margin: 0 calc(var(--sp-5) * -1);
+        padding: var(--sp-2) var(--sp-5) var(--sp-3);
+        border-bottom: 1px solid var(--c-border);
+      }
+      /* スマホはホバーが無いのでチップはタップで出す(JS)。幅は画面内に収める */
+      .hovercard { width: min(280px, calc(100vw - 16px)); }
     }
   </style>
 </Base>
