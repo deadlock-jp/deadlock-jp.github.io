@@ -2,11 +2,20 @@
 import "../styles/global.css";
 import { heroesFile } from "../lib/data.ts";
 
+interface Crumb {
+  name: string;
+  /** サイトルートからの絶対パス（例: /heroes/） */
+  path: string;
+}
 interface Props {
   title: string;
   description?: string;
+  /** OGP タイプ。トップは website、詳細ページは article 相当 */
+  ogType?: string;
+  /** パンくず（構造化データにも使う）。先頭に「トップ」は自動で付く */
+  breadcrumbs?: Crumb[];
 }
-const { title, description } = Astro.props;
+const { title, description, ogType = "website", breadcrumbs = [] } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const nav = [
   { href: `${base}/heroes/`, label: "ヒーロー" },
@@ -14,6 +23,49 @@ const nav = [
   { href: `${base}/build/`, label: "ビルド" },
 ];
 const path = Astro.url.pathname;
+
+const SITE_NAME = "DEADLOCK-JP DB";
+const SITE = Astro.site ?? new URL("https://deadlock-jp.github.io");
+const canonical = new URL(path, SITE).href;
+const fullTitle = `${title} | ${SITE_NAME}`;
+const desc =
+  description ??
+  "Valve『Deadlock（デッドロック）』のヒーロー・アイテム・スキルの数値を日本語で引ける非公式データベース。";
+const isHome = path === "/" || path === base + "/";
+
+/* 構造化データ（SEO / 生成AI検索対策）。値はサイトの事実のみ。 */
+const jsonLd: Record<string, unknown>[] = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE_NAME,
+    alternateName: "Deadlock 日本語データベース",
+    url: SITE.href,
+    inLanguage: "ja",
+    description:
+      "Deadlock（デッドロック）のヒーロー・アイテム・スキルの数値を日本語で引けるデータベースとビルドシミュレーター。数値はゲームの生データから自動生成した非公式ファンサイト。",
+    about: {
+      "@type": "VideoGame",
+      name: "Deadlock",
+      alternateName: "デッドロック",
+      publisher: { "@type": "Organization", name: "Valve Corporation" },
+    },
+    isFamilyFriendly: true,
+  },
+];
+const crumbs: Crumb[] = [{ name: "トップ", path: "/" }, ...breadcrumbs];
+if (crumbs.length > 1) {
+  jsonLd.push({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((c, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: c.name,
+      item: new URL(c.path, SITE).href,
+    })),
+  });
+}
 ---
 
 <!doctype html>
@@ -21,14 +73,36 @@ const path = Astro.url.pathname;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title} | DEADLOCK-JP DB</title>
-    {description && <meta name="description" content={description} />}
+    <title>{fullTitle}</title>
+    <meta name="description" content={desc} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href={canonical} />
+
+    {/* Open Graph / Twitter（SNS・チャット・生成AIのプレビュー用） */}
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:type" content={isHome ? "website" : ogType} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={desc} />
+
+    <link rel="sitemap" type="application/xml" href={`${base}/sitemap.xml`} />
+
     {/* ゲーム内表記に合わせて Noto Sans JP を使う。数字用に等幅も1書体だけ入れる */}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap"
+    />
+
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(jsonLd.length === 1 ? jsonLd[0] : jsonLd)}
     />
   </head>
   <body>

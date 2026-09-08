@@ -1,0 +1,192 @@
+---
+/**
+ * ヒーロー詳細ページ上部の、全ヒーローアイコンの自動横スクロール帯。
+ *
+ * - 既定でゆっくり自動スクロール(ループ)。`prefers-reduced-motion` では止める。
+ * - 指/マウスでスワイプ可能。触れている間と直後は自動スクロールを止める。
+ * - タップ(10px 未満の移動)でそのヒーローのページへ。スワイプ時はクリックを無効化。
+ * リストを2回並べて、片方ぶんスクロールしたら戻すことで継ぎ目なくループする。
+ */
+import HeroPortrait from "./HeroPortrait.astro";
+import { releasedHeroes, t } from "../lib/data.ts";
+
+interface Props {
+  /** 現在表示中のヒーローID(帯の中でハイライト&中央寄せ) */
+  current?: number;
+}
+const { current } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const heroes = releasedHeroes().map((h) => ({
+  id: h.id,
+  name: t(h.nameToken, h.key),
+  image: h.images.iconSmall,
+}));
+---
+
+<nav class="herostrip" aria-label="ヒーローを切り替え">
+  <div class="hs-track" id="hs-track">
+    {[0, 1].map((dup) => (
+      <ul aria-hidden={dup === 1 ? "true" : undefined}>
+        {heroes.map((h) => (
+          <li>
+            <a
+              href={`${base}/heroes/${h.id}/`}
+              class:list={["hs-item", { on: h.id === current }]}
+              title={h.name}
+              tabindex={dup === 1 ? -1 : undefined}
+            >
+              <HeroPortrait name={h.name} image={h.image} size={40} />
+            </a>
+          </li>
+        ))}
+      </ul>
+    ))}
+  </div>
+</nav>
+
+<script is:inline>
+  (() => {
+    const track = document.getElementById("hs-track");
+    if (!track) return;
+
+    let half = track.scrollWidth / 2;
+    const measure = () => (half = track.scrollWidth / 2);
+    window.addEventListener("resize", measure);
+
+    // 現在ヒーローを中央あたりに置く
+    const cur = track.querySelector(".hs-item.on");
+    let pos = 0;
+    if (cur) {
+      pos = Math.max(0, cur.offsetLeft - track.clientWidth / 2 + cur.offsetWidth / 2);
+      track.scrollLeft = pos;
+    }
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const SPEED = 0.5; // px/frame
+    let paused = reduce;
+    let resumeTimer = 0;
+
+    // scrollLeft は小数を丸めるブラウザがあるので、位置は pos(float)で持って毎フレーム反映する
+    function tick() {
+      if (!paused) {
+        pos += SPEED;
+        if (pos >= half) pos -= half;
+        track.scrollLeft = pos;
+      }
+      requestAnimationFrame(tick);
+    }
+    if (!reduce) requestAnimationFrame(tick);
+
+    const pause = () => {
+      paused = true;
+      clearTimeout(resumeTimer);
+    };
+    const resumeSoon = (delay) => {
+      if (reduce) return;
+      clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(() => {
+        pos = track.scrollLeft; // 手動スクロールぶんを取り込む
+        if (pos >= half) pos -= half;
+        paused = false;
+      }, delay);
+    };
+    track.addEventListener("mouseenter", pause);
+    track.addEventListener("mouseleave", () => resumeSoon(400));
+    track.addEventListener("focusin", pause);
+    track.addEventListener("focusout", () => resumeSoon(400));
+
+    // スワイプとタップの区別
+    let sx = 0,
+      sy = 0,
+      moved = false;
+    track.addEventListener(
+      "pointerdown",
+      (e) => {
+        sx = e.clientX;
+        sy = e.clientY;
+        moved = false;
+        pause();
+      },
+      { passive: true },
+    );
+    track.addEventListener(
+      "pointermove",
+      (e) => {
+        if (Math.abs(e.clientX - sx) > 10 || Math.abs(e.clientY - sy) > 10) moved = true;
+      },
+      { passive: true },
+    );
+    window.addEventListener("pointerup", () => resumeSoon(1500));
+    track.addEventListener(
+      "click",
+      (e) => {
+        if (moved) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      },
+      true,
+    );
+  })();
+</script>
+
+<style>
+  .herostrip {
+    /* .site-main の内側パディングを打ち消して、ヘッダー直下に帯として貼る */
+    margin: calc(-1 * var(--sp-6)) calc(-1 * var(--sp-5)) var(--sp-4);
+    border-bottom: 1px solid var(--c-border);
+    background: var(--c-surface);
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent,
+      #000 28px,
+      #000 calc(100% - 28px),
+      transparent
+    );
+    mask-image: linear-gradient(
+      90deg,
+      transparent,
+      #000 28px,
+      #000 calc(100% - 28px),
+      transparent
+    );
+  }
+  .hs-track {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: var(--sp-2) var(--sp-3);
+    gap: var(--sp-3);
+    overscroll-behavior-x: contain;
+  }
+  .hs-track::-webkit-scrollbar {
+    display: none;
+  }
+  .hs-track ul {
+    list-style: none;
+    display: flex;
+    gap: 6px;
+    padding: 0;
+    margin: 0;
+    flex: 0 0 auto;
+  }
+  .hs-item {
+    display: block;
+    border-radius: 7px;
+    border: 1px solid var(--c-border);
+    overflow: hidden;
+    line-height: 0;
+    opacity: 0.78;
+    transition: opacity 0.12s;
+  }
+  .hs-item:hover {
+    opacity: 1;
+    border-color: var(--c-accent);
+  }
+  .hs-item.on {
+    opacity: 1;
+    border-color: var(--c-accent);
+    box-shadow: 0 0 0 1px var(--c-accent);
+  }
+</style>

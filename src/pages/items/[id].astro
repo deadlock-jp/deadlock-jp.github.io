@@ -57,9 +57,23 @@ const parents = usedIn(item.id);
 
 const badge = item.isImbue ? "IMBUE" : item.activation !== "PASSIVE" ? "ACTIVE" : null;
 const adjRows = itemAdjustments(item.id);
+
+const passiveText = passives.map((p) => `${p.label} ${p.value}`).join("、");
+const metaDesc =
+  `Deadlock（デッドロック）のアイテム「${name}」の効果・価格・強化を日本語で。` +
+  `${meta ? meta.label + "・" : ""}ティア${item.tier}／${souls(item.cost)}ソウル／枠${item.slotCost}。` +
+  (passiveText ? `常時パッシブ: ${passiveText}。` : "");
 ---
 
-<Base title={name} description={`${name} の効果と数値`}>
+<Base
+  title={name}
+  description={metaDesc}
+  ogType="article"
+  breadcrumbs={[
+    { name: "アイテム", path: "/items/" },
+    { name, path: `/items/${item.id}/` },
+  ]}
+>
   <a class="back" href={`${base}/items/`}>← アイテム一覧</a>
 
   <header class="head" style={meta ? `--cat: var(--c-${meta.cssVar}); --cat-bg: var(--c-${meta.cssVar}-bg)` : ""}>

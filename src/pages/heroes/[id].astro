@@ -17,6 +17,7 @@ import {
 import { heroRadar, heroMiscRows } from "../../lib/herorank.ts";
 import { skillCard } from "../../lib/skillcard.ts";
 import AdjustmentHistory from "../../components/AdjustmentHistory.astro";
+import HeroStrip from "../../components/HeroStrip.astro";
 
 export function getStaticPaths() {
   return releasedHeroes().map((h) => ({ params: { id: String(h.id) }, props: { hero: h } }));
@@ -56,9 +57,24 @@ const skills = hero.abilities
 
 const spiritBadge = (scale: number | null) => (scale ? `×${scale}` : null);
 const adjRows = heroAdjustments(hero.key);
+const skillNames = skills.map((s) => t(s.key, "")).filter(Boolean);
+const metaDesc =
+  `Deadlock（デッドロック）のヒーロー「${name}」の基礎ステータス・スキル・レベル成長を日本語で。` +
+  `最大HP ${hero.startingStats.EMaxHealth}／移動速度 ${hero.startingStats.EMaxMoveSpeed}m。` +
+  (tags.length ? `特徴: ${tags.join("・")}。` : "") +
+  (skillNames.length ? `スキル: ${skillNames.join("・")}。` : "");
 ---
 
-<Base title={name} description={`${name} の基礎ステータス・スキル・成長`}>
+<Base
+  title={name}
+  description={metaDesc}
+  ogType="article"
+  breadcrumbs={[
+    { name: "ヒーロー", path: "/heroes/" },
+    { name, path: `/heroes/${hero.id}/` },
+  ]}
+>
+  <HeroStrip current={hero.id} />
   <a class="back" href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/heroes/`}>← ヒーロー一覧</a>
   <HeroRender name={name} heroKey={hero.key} />
   <h1>{name}</h1>
