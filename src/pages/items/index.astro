@@ -59,10 +59,6 @@ const details = Object.fromEntries(
 
 <Base title="アイテム一覧" description="Deadlockのショップアイテムの効果と価格">
   <h1>アイテム</h1>
-  <p class="lead">
-    ショップ掲載 {items.length} 件。価格はティアで決まります（
-    {tiers.map((t2) => `T${t2}: ${souls(itemsFile.itemPricePerTier[t2] ?? 0)}`).join(" / ")}）。
-  </p>
 
   <div class="search">
     <input

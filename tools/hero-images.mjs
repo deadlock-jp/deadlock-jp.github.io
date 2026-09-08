@@ -36,6 +36,7 @@ const SRC =
 
 const RENDER_WIDTH = 760;
 const RENDER_QUALITY = 82;
+const PORTRAIT_QUALITY = 90; // card / gloat は小さいので高品質で
 
 /** file://{images}/heroes/x_sm.psd → public/images/heroes/x_sm.png (image-manifest と同じ規則) */
 function smOutFor(ref) {
@@ -97,12 +98,24 @@ for (const h of Object.values(heroes.heroes)) {
     // トップのカード用(280x380 → WebP)
     const cSrc = `${cn}_card_psd.png`;
     if (!srcFiles.includes(cSrc)) problems.push(`${h.key} (${cn}): 抽出物に ${cSrc} が無い`);
-    else renders.push({ from: join(SRC, cSrc), to: join(repoRoot, `public/images/heroes/card/${key}.webp`), key });
+    else
+      renders.push({
+        from: join(SRC, cSrc),
+        to: join(repoRoot, `public/images/heroes/card/${key}.webp`),
+        key,
+        q: PORTRAIT_QUALITY,
+      });
 
     // カードのホバー詳細用(WebP へ)
     const gSrc = `${cn}_card_gloat_psd.png`;
     if (!srcFiles.includes(gSrc)) problems.push(`${h.key} (${cn}): 抽出物に ${gSrc} が無い`);
-    else renders.push({ from: join(SRC, gSrc), to: join(repoRoot, `public/images/heroes/gloat/${key}.webp`), key });
+    else
+      renders.push({
+        from: join(SRC, gSrc),
+        to: join(repoRoot, `public/images/heroes/gloat/${key}.webp`),
+        key,
+        q: PORTRAIT_QUALITY,
+      });
   }
 }
 
@@ -134,7 +147,7 @@ for (const r of renders) {
   before += statSync(r.from).size;
   await sharp(r.from)
     .resize({ width: RENDER_WIDTH, withoutEnlargement: true })
-    .webp({ quality: RENDER_QUALITY })
+    .webp({ quality: r.q ?? RENDER_QUALITY })
     .toFile(r.to);
   after += statSync(r.to).size;
 }

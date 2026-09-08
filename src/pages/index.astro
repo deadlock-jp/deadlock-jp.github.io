@@ -54,34 +54,6 @@ const commitUrl = (sha: string | null) => (sha ? `${upstreamRepo}/commit/${sha}`
   <h1 class="sr-only">DEADLOCK-JP DB</h1>
 
   <section class="block first">
-    <h2>更新履歴</h2>
-    <ol class="updates">
-      {
-        updates.map((u) => (
-          <li>
-            <span class="udate">{u.date}</span>
-            <div class="ubody">
-              <span class="utitle">
-                {u.title}
-                {commitUrl(u.upstreamCommit) && (
-                  <a class="ucommit" href={commitUrl(u.upstreamCommit)} rel="noopener">
-                    {u.upstreamCommit!.slice(0, 8)}
-                  </a>
-                )}
-              </span>
-              <ul class="uchanges">
-                {u.changes.map((c) => (
-                  <li>{c}</li>
-                ))}
-              </ul>
-            </div>
-          </li>
-        ))
-      }
-    </ol>
-  </section>
-
-  <section class="block">
     <h2>
       ヒーロー
       <a class="more" href={`${base}/heroes/`}>一覧を見る →</a>
@@ -144,6 +116,34 @@ const commitUrl = (sha: string | null) => (sha ? `${upstreamRepo}/commit/${sha}`
         );
       })
     }
+  </section>
+
+  <section class="block">
+    <h2>更新履歴</h2>
+    <ol class="updates">
+      {
+        updates.map((u) => (
+          <li>
+            <span class="udate">{u.date}</span>
+            <div class="ubody">
+              <span class="utitle">
+                {u.title}
+                {commitUrl(u.upstreamCommit) && (
+                  <a class="ucommit" href={commitUrl(u.upstreamCommit)} rel="noopener">
+                    {u.upstreamCommit!.slice(0, 8)}
+                  </a>
+                )}
+              </span>
+              <ul class="uchanges">
+                {u.changes.map((c) => (
+                  <li>{c}</li>
+                ))}
+              </ul>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
   </section>
 
   <section class="block">
@@ -362,9 +362,10 @@ const commitUrl = (sha: string | null) => (sha ? `${upstreamRepo}/commit/${sha}`
     }
     .herocard :global(.hc-img) {
       width: 100%;
-      aspect-ratio: 280 / 200;
+      /* 元絵は 280x380 の縦長。ほぼそのまま出す(頭が切れないよう上ぞろえ) */
+      aspect-ratio: 280 / 360;
       object-fit: cover;
-      object-position: top;
+      object-position: center top;
       display: block;
       border-bottom: 1px solid var(--c-border);
     }
