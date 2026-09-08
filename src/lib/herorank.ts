@@ -241,7 +241,7 @@ function growthFor(h: Hero, key: string): string | undefined {
   return undefined;
 }
 
-const WEAPON_AXES = ["dps", "bullet", "firerate", "clip", "reload", "velocity", "range"];
+const WEAPON_AXES = ["dps", "bullet", "firerate", "clip", "reload", "velocity", "range", "lmelee"];
 const VITALITY_AXES = ["hp", "regen", "move", "sprint", "dash", "stam", "stamcd"];
 
 export function heroRadar(heroId: number): { base: RadarAxis[]; weapon: RadarAxis[] } {
@@ -259,16 +259,12 @@ export function heroRadar(heroId: number): { base: RadarAxis[]; weapon: RadarAxi
   };
 }
 
-/** レーダーに載せにくい近接・スピリットの補足(ヒーロー詳細で1行表示) */
-export function heroMeleeSpirit(heroId: number): RankRow[] {
+/**
+ * レーダーに載せにくいスピリット側の補足(ヒーロー詳細で1行)。
+ * スピリットの初期スタッツは全ヒーロー共通なので、成長(パワー成長)とスキル係数だけ。
+ * 近接ダメージと成長は武器レーダーの「軽近接」軸に出す。
+ */
+export function heroSpiritRows(heroId: number): RankRow[] {
   const r = heroRanks()[heroId];
-  const h = releasedHeroes().find((x) => x.id === heroId)!;
-  const rows = [
-    ...pickRows(r.weapon, ["lmelee", "hmelee"]),
-    ...pickRows(r.spirit, ["techpow", "skillscale"]),
-  ].map((row) => {
-    const g = growthFor(h, row.key);
-    return g ? { ...row, value: `${row.value} (${g})` } : row;
-  });
-  return rows;
+  return pickRows(r.spirit, ["techpow", "skillscale"]);
 }
