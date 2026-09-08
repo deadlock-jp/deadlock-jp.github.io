@@ -1046,11 +1046,18 @@ const payload = {
     .iconsrc { display: none; }
 
     @media (max-width: 1000px) {
-      .layout { grid-template-columns: minmax(0, 1fr); }
       /*
-       * スマホ: 12スロット(buildbar)を画面上部に追従させる。
-       * site-header(sticky・約58px)の直下に貼り付き、ショップをスクロールしても
-       * 現在のビルドが常に見えるようにする。左右は画面端までベタ塗り。
+       * スマホ: 左右段組みをやめて縦一列。
+       * .side を display:contents にして子要素を .layout 直下に出すことで、
+       * sticky な .buildbar の基準(包含ブロック)が .side ではなく .layout になり、
+       * ショップまでスクロールしても追従し続ける(.side 内だけだと途中で外れる)。
+       */
+      .layout { display: block; }
+      .side { display: contents; }
+      .shop { margin-top: var(--sp-4); }
+      /*
+       * 12スロット(buildbar)を画面上部に追従。site-header(sticky・約58px)の直下。
+       * 左右は画面端までベタ塗り。
        */
       .buildbar {
         position: sticky;
@@ -1061,8 +1068,16 @@ const payload = {
         padding: var(--sp-2) var(--sp-5) var(--sp-3);
         border-bottom: 1px solid var(--c-border);
       }
-      /* スマホはホバーが無いのでチップはタップで出す(JS)。幅は画面内に収める */
-      .hovercard { width: min(280px, calc(100vw - 16px)); }
+      /*
+       * スマホはホバーが無いのでチップはタップで出す(JS)。
+       * 2回目のタップ位置(裏のアイコン)が見えるよう背景を少し透過し、
+       * 文字が読めるようすりガラスにする。
+       */
+      .hovercard {
+        width: min(280px, calc(100vw - 16px));
+        background: color-mix(in srgb, var(--c-surface) 82%, transparent);
+        backdrop-filter: blur(8px);
+      }
     }
   </style>
 </Base>
