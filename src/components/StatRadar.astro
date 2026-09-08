@@ -20,11 +20,28 @@ interface Props {
 }
 const { axes, size = 280, cssVar = "accent", title } = Astro.props;
 
-const M = 58; // ラベルぶんの余白(viewBox を外側に広げる)
+const M = 64; // ラベルぶんの余白(viewBox を外側に広げる)
 const cx = size / 2;
 const cy = size / 2;
 const R = size / 2 - 10;
 const n = axes.length;
+
+/**
+ * 長いラベルを2行に折る。軸数が少ないと左右の軸が真横に来て、
+ * 「スピリットパワー」のような長い語が viewBox からはみ出す(先頭が切れる)。
+ * カタカナ列→漢字の境目で折り、全部カタカナの複合語は既知表で折る。
+ */
+const COMPOUND_BREAK: Record<string, [string, string]> = {
+  スピリットパワー: ["スピリット", "パワー"],
+};
+function labelLines(s: string): string[] {
+  if (s.length <= 6) return [s];
+  if (COMPOUND_BREAK[s]) return COMPOUND_BREAK[s];
+  const m = s.match(/^([゠-ヿ]{3,})([^゠-ヿ].*)$/);
+  if (m) return [m[1], m[2]];
+  const h = Math.ceil(s.length / 2);
+  return [s.slice(0, h), s.slice(h)];
+}
 
 /** i番目の軸の角度(真上から時計回り) */
 const ang = (i: number) => -Math.PI / 2 + (i * 2 * Math.PI) / n;
@@ -59,12 +76,15 @@ const heroPoly = poly((i) => Math.max(0.04, axes[i].value));
     {axes.map((a, i) => {
       const [x, y] = pt(i, 1.13);
       const anchor = Math.abs(x - cx) < 8 ? "middle" : x < cx ? "end" : "start";
-      // 下半分は2行ぶん上へずらして viewBox からはみ出さないようにする
-      const yAdj = y > cy ? y - 10 : y;
+      const lines = labelLines(a.label);
+      // 名前が複数行になるぶん、下半分は上へずらして viewBox からはみ出さないようにする
+      const yAdj = y > cy ? y - 10 - (lines.length - 1) * 11 : y - (lines.length - 1) * 5.5;
       const px = x.toFixed(1);
       return (
         <text x={px} y={yAdj.toFixed(1)} text-anchor={anchor} class="lbl">
-          <tspan class="lname">{a.label}</tspan>
+          {lines.map((ln, k) => (
+            <tspan x={px} dy={k === 0 ? 0 : 11} class="lname">{ln}</tspan>
+          ))}
           <tspan x={px} dy="11" class="lval">{a.raw}</tspan>
         </text>
       );

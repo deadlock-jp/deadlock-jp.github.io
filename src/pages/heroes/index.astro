@@ -376,8 +376,10 @@ const cx = (n: number) => Math.max(0, Math.min(3, n));
       pointer-events: none;
     }
     .herocard :global(.hc-img) {
-      width: 100%; aspect-ratio: 280 / 360; object-fit: cover; object-position: center top;
-      display: block; border-bottom: 1px solid var(--c-border);
+      /* 周りに余白をとって少し小さめに出す */
+      width: 74%; margin: var(--sp-5) auto var(--sp-1);
+      aspect-ratio: 280 / 340; object-fit: cover; object-position: center top;
+      display: block; border: 1px solid var(--c-border); border-radius: calc(var(--radius) - 2px);
     }
     .herocard :global(.hc-in) { padding: var(--sp-3) var(--sp-4) var(--sp-4); }
     .herocard :global(.hc-name) { font-weight: 700; color: var(--c-text-strong); font-size: 15px; }
