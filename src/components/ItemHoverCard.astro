@@ -1,0 +1,130 @@
+---
+/**
+ * アイテムのマウスオーバー詳細カード(ビルド画面・アイテム一覧・トップで共用)。
+ *
+ * `[data-itemcard="<itemId>"]` を持つ要素に自動でホバー/フォーカスを張る。
+ * データは data.ts の itemHoverData() で作る。中身は JS 組み立てなので CSS は :global。
+ */
+interface Props {
+  /** itemId → itemHoverData() の戻り値 */
+  details: Record<string, unknown>;
+}
+const { details } = Astro.props;
+---
+
+<div class="hovercard" id="hovercard" role="tooltip" hidden></div>
+
+<script is:inline define:vars={{ details }}>
+  (() => {
+    const card = document.getElementById("hovercard");
+    if (!card) return;
+    const esc = (s) =>
+      String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+    const fmt = (n) => Number(n).toLocaleString("en-US");
+
+    const rows = (list, cls) =>
+      list.length
+        ? `<ul class="${cls}">${list
+            .map((r) => `<li><span class="l">${esc(r.label)}</span><span class="v">${esc(r.value)}</span></li>`)
+            .join("")}</ul>`
+        : "";
+
+    function show(id, anchor) {
+      const it = details[id];
+      if (!it) return;
+      card.style.setProperty("--cat", `var(--c-${it.cssVar})`);
+      card.style.setProperty("--cat-bg", `var(--c-${it.cssVar}-bg)`);
+      card.innerHTML =
+        `<div class="hc-head"><span class="hc-name">${esc(it.name)}</span>` +
+        `${it.badge ? `<span class="hc-badge">${esc(it.badge)}</span>` : ""}</div>` +
+        `<div class="hc-meta">${esc(it.slotLabel)}・ティア${it.tier}・` +
+        `<span class="hc-soul">${fmt(it.cost)}ソウル</span>・枠${it.slotCost}</div>` +
+        (it.desc ? `<p class="hc-desc">${esc(it.desc)}</p>` : "") +
+        (it.passives.length ? `<div class="hc-sec">常時パッシブ</div>${rows(it.passives, "hc-rows")}` : "") +
+        (it.conditional.length ? `<div class="hc-sec">条件付き</div>${rows(it.conditional, "hc-rows")}` : "") +
+        (it.components.length ? `<div class="hc-rel">素材: ${esc(it.components.join("、"))}</div>` : "") +
+        (it.usedIn.length ? `<div class="hc-rel">上位: ${esc(it.usedIn.join("、"))}</div>` : "");
+      card.hidden = false;
+
+      const place = () => {
+        const M = 8;
+        const r = anchor.getBoundingClientRect();
+        const cw = card.offsetWidth;
+        const ch = card.offsetHeight;
+        const vw = document.documentElement.clientWidth;
+        const vh = document.documentElement.clientHeight;
+        let left = r.right + 10;
+        if (left + cw > vw - M) left = r.left - cw - 10;
+        left = Math.max(M, Math.min(left, vw - cw - M));
+        let top = Math.min(r.top - 4, vh - ch - M);
+        top = Math.max(M, top);
+        card.style.left = left + "px";
+        card.style.top = top + "px";
+      };
+      place();
+      requestAnimationFrame(place);
+    }
+    const hide = () => (card.hidden = true);
+
+    function wire(root) {
+      const scope = root || document;
+      for (const a of scope.querySelectorAll("[data-itemcard]")) {
+        if (a.dataset.icWired) continue;
+        a.dataset.icWired = "1";
+        const id = a.dataset.itemcard;
+        a.addEventListener("mouseenter", () => show(id, a));
+        a.addEventListener("focus", () => show(id, a));
+        a.addEventListener("mouseleave", hide);
+        a.addEventListener("blur", hide);
+      }
+    }
+
+    window.itemHoverCard = { show, hide, wire };
+    wire();
+    window.addEventListener("scroll", hide, { passive: true });
+  })();
+</script>
+
+<style>
+  .hovercard {
+    position: fixed;
+    z-index: 40;
+    width: 280px;
+    max-height: calc(100vh - 16px);
+    overflow: auto;
+    background: var(--c-surface);
+    border: 1px solid var(--cat, var(--c-accent));
+    border-left: 3px solid var(--cat, var(--c-accent));
+    border-radius: var(--radius);
+    padding: var(--sp-3);
+    box-shadow: 0 8px 28px rgb(0 0 0 / 0.5);
+    pointer-events: none;
+  }
+  .hovercard :global(.hc-head) { display: flex; align-items: center; gap: var(--sp-2); }
+  .hovercard :global(.hc-name) { font-weight: 700; color: var(--c-text-strong); font-size: 14px; }
+  .hovercard :global(.hc-badge) {
+    font-size: 9px; font-weight: 700; letter-spacing: .06em; padding: 0 4px; border-radius: 2px;
+    color: var(--c-bg); background: var(--cat, var(--c-accent));
+  }
+  .hovercard :global(.hc-meta) {
+    font-size: 11px; color: var(--cat, var(--c-accent)); margin-top: 2px; font-family: var(--font-mono);
+  }
+  .hovercard :global(.hc-soul) { color: var(--c-soul); }
+  .hovercard :global(.hc-desc) { font-size: 12px; color: var(--c-text); line-height: 1.6; margin: var(--sp-2) 0 0; }
+  .hovercard :global(.hc-sec) {
+    font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--c-text-muted); margin-top: var(--sp-3);
+  }
+  .hovercard :global(.hc-rows) { list-style: none; padding: 0; margin: 2px 0 0; }
+  .hovercard :global(.hc-rows li) {
+    display: flex; justify-content: space-between; gap: var(--sp-3);
+    font-size: 11px; padding: 2px 0; border-bottom: 1px solid var(--c-border);
+  }
+  .hovercard :global(.hc-rows .l) { color: var(--c-text-muted); }
+  .hovercard :global(.hc-rows .v) { font-family: var(--font-mono); color: var(--c-text-strong); }
+  .hovercard :global(.hc-rel) { font-size: 11px; color: var(--c-text-muted); margin-top: var(--sp-2); }
+
+  @media (max-width: 1000px) {
+    .hovercard { display: none; }
+  }
+</style>

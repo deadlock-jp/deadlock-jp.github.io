@@ -4,6 +4,7 @@ import { join } from "node:path";
 import Base from "../../layouts/Base.astro";
 import AbilityIcon from "../../components/AbilityIcon.astro";
 import HeroPortrait from "../../components/HeroPortrait.astro";
+import HeroHoverCard from "../../components/HeroHoverCard.astro";
 import { releasedHeroes, t, ability, heroTags } from "../../lib/data.ts";
 import { resolveImagePath } from "../../parsers/image-manifest.ts";
 import { heroRanks, pickRows, heroTierTable } from "../../lib/herorank.ts";
@@ -51,9 +52,11 @@ const heroes = releasedHeroes().map((h) => ({
 const cx = (n: number) => Math.max(0, Math.min(3, n));
 ---
 
-<Base title="ヒーロー一覧" description="Deadlockの実装済みヒーローの基礎ステータスとティア表">
+<Base
+  title="ヒーロー一覧"
+  description="Deadlock（デッドロック）の実装済みヒーロー全員の基礎ステータス（最大HP・移動速度・スタミナ）とスキル、項目別ティア表を日本語で。レベル1・アイテムなしの素の数値。"
+>
   <h1>ヒーロー</h1>
-  <p class="lead">実装済み {heroes.length} 体。数値はレベル1・アイテムなしの基礎値です。</p>
 
   {/* ------------ 上部: 項目別ティア表 ------------ */}
   <section class="tt">
@@ -81,22 +84,12 @@ const cx = (n: number) => Math.max(0, Math.min(3, n));
 
   {/* ------------ 下部: 一覧 ------------ */}
   <h2 class="listh">一覧</h2>
-  <div class="search">
-    <input
-      type="search"
-      id="q"
-      placeholder="ヒーロー名・役割で絞り込む"
-      autocomplete="off"
-      aria-label="ヒーローの絞り込み"
-    />
-    <span class="hits" id="hits"></span>
-  </div>
 
   <ul class="grid">
     {
       heroes.map(({ hero: h, name, role, skills }) => (
-        <li data-find={`${name} ${role} ${h.key} ${skills.map((s) => t(s.key, "")).join(" ")}`.toLowerCase()}>
-          <a href={`${base}/heroes/${h.id}/`}>
+        <li>
+          <a href={`${base}/heroes/${h.id}/`} data-herocard={h.id}>
             <span class="head">
               <HeroPortrait name={name} image={h.images.iconSmall} size={44} />
               <span class="who">
@@ -125,74 +118,13 @@ const cx = (n: number) => Math.max(0, Math.min(3, n));
     }
   </ul>
 
-  {/* ホバー詳細カード(トップページと同じ) */}
-  <div class="herocard" id="herocard" role="tooltip" hidden></div>
+  {/* ホバー詳細カード(トップページと共通コンポーネント) */}
+  <HeroHoverCard heroDetail={heroDetail} />
 
-  <script is:inline define:vars={{ heroMeta, heroDetail, tierData: tier.data, base }}>
+  <script is:inline define:vars={{ heroMeta, tierData: tier.data, base }}>
     (() => {
       const esc = (s) =>
         String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
-      const stars = (n) =>
-        `<span class="s">${"★".repeat(n)}<span class="dim">${"☆".repeat(5 - n)}</span></span>`;
-      const rows = (list) =>
-        list
-          .map(
-            (r) =>
-              `<li class="${r.stars >= 4 ? "accent" : ""}"><span class="l">${esc(r.label)}</span>` +
-              `<span class="v">${esc(r.value)}</span>${stars(r.stars)}</li>`,
-          )
-          .join("");
-
-      // ---- ホバーカード ----
-      const card = document.getElementById("herocard");
-      function show(id, anchor) {
-        const d = heroDetail[id];
-        if (!d) return;
-        card.innerHTML =
-          (d.gloat ? `<img class="hc-img" src="${d.gloat}" alt="">` : "") +
-          `<div class="hc-in"><div class="hc-name">${esc(d.name)}</div>` +
-          (d.tags.length
-            ? `<ul class="hc-tags">${d.tags.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`
-            : "") +
-          `<div class="hc-grp" style="--hc-cat:var(--c-weapon)">武器</div><ul class="hc-rows">${rows(d.weapon)}</ul>` +
-          `<div class="hc-grp" style="--hc-cat:var(--c-vitality)">生命力</div><ul class="hc-rows">${rows(d.vitality)}</ul>` +
-          `<div class="hc-grp" style="--hc-cat:var(--c-spirit)">成長/スピリット</div><ul class="hc-rows">${rows(d.spirit)}</ul>` +
-          (d.boon.length ? `<div class="hc-boon">成長が高い: <b>${esc(d.boon.join(" / "))}</b></div>` : "") +
-          `</div>`;
-        card.hidden = false;
-        const place = () => {
-          const M = 8;
-          const r = anchor.getBoundingClientRect();
-          const cw = card.offsetWidth;
-          const ch = card.offsetHeight;
-          const vw = document.documentElement.clientWidth;
-          const vh = document.documentElement.clientHeight;
-          let left = r.right + 10;
-          if (left + cw > vw - M) left = r.left - cw - 10;
-          left = Math.max(M, Math.min(left, vw - cw - M));
-          let top = Math.min(r.top, vh - ch - M);
-          top = Math.max(M, top);
-          card.style.left = left + "px";
-          card.style.top = top + "px";
-        };
-        place();
-        requestAnimationFrame(place);
-      }
-      const hide = () => (card.hidden = true);
-      // ティア表のアイコンは数が変わるので委譲で拾う
-      document.getElementById("ttbody").addEventListener("mouseover", (e) => {
-        const a = e.target.closest(".tt-hero");
-        if (a) show(a.dataset.hero, a);
-      });
-      document.getElementById("ttbody").addEventListener("mouseout", (e) => {
-        if (e.target.closest(".tt-hero")) hide();
-      });
-      document.getElementById("ttbody").addEventListener("focusin", (e) => {
-        const a = e.target.closest(".tt-hero");
-        if (a) show(a.dataset.hero, a);
-      });
-      document.getElementById("ttbody").addEventListener("focusout", hide);
-      window.addEventListener("scroll", hide, { passive: true });
 
       // ---- ティア表の描画 ----
       const LETTER = ["", "D", "C", "B", "A", "S"];
@@ -212,7 +144,7 @@ const cx = (n: number) => Math.max(0, Math.min(3, n));
                   ? `<img src="${m.sm}" alt="" loading="lazy">`
                   : `<span class="ph">${esc(m.name.slice(0, 1))}</span>`;
                 return (
-                  `<a class="tt-hero" data-hero="${r.id}" href="${base}/heroes/${r.id}/" ` +
+                  `<a class="tt-hero" data-herocard="${r.id}" href="${base}/heroes/${r.id}/" ` +
                   `title="${esc(m.name)}｜${esc(r.value)}">${img}</a>`
                 );
               })
@@ -223,30 +155,11 @@ const cx = (n: number) => Math.max(0, Math.min(3, n));
             );
           })
           .join("");
+        // 差し込んだアイコンにホバーカードを張り直す
+        window.heroHoverCard?.wire(ttbody);
       }
       sel.addEventListener("change", () => render(sel.value));
       render(sel.value);
-    })();
-  </script>
-
-  <script is:inline>
-    // 下部一覧の絞り込み(従来どおり)
-    (() => {
-      const q = document.getElementById("q");
-      const hits = document.getElementById("hits");
-      const cards = [...document.querySelectorAll(".grid li")];
-      function apply() {
-        const words = q.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
-        let shown = 0;
-        for (const li of cards) {
-          const ok = words.every((w) => li.dataset.find.includes(w));
-          li.hidden = !ok;
-          if (ok) shown++;
-        }
-        hits.textContent = words.length === 0 ? "" : `${shown} / ${cards.length} 体`;
-      }
-      q.addEventListener("input", apply);
-      apply();
     })();
   </script>
 
@@ -356,59 +269,5 @@ const cx = (n: number) => Math.max(0, Math.min(3, n));
     .cx { color: var(--c-accent); letter-spacing: 1px; }
     .cx .dim { color: var(--c-text-faint); }
     .skills { display: flex; gap: 4px; margin-bottom: var(--sp-3); }
-    .grid li[hidden] { display: none; }
-    .search { display: flex; align-items: center; gap: var(--sp-3); margin-bottom: var(--sp-5); }
-    .search input {
-      flex: 1 1 auto; max-width: 420px;
-      background: var(--c-surface); color: var(--c-text);
-      border: 1px solid var(--c-border-strong); border-radius: var(--radius);
-      padding: 7px 10px; font: inherit; font-size: 13px;
-    }
-    .search input:focus { outline: none; border-color: var(--c-accent); }
-    .hits { font-size: 12px; color: var(--c-text-muted); font-family: var(--font-mono); }
-
-    /* ---- ホバーカード(トップページからコピー。中身はJS差し込みなので :global) ---- */
-    .herocard {
-      position: fixed; z-index: 40; width: 300px;
-      max-height: calc(100vh - 16px); overflow: auto;
-      background: var(--c-surface); border: 1px solid var(--c-accent-dim);
-      border-radius: var(--radius); box-shadow: 0 8px 28px rgb(0 0 0 / 0.5);
-      pointer-events: none;
-    }
-    .herocard :global(.hc-img) {
-      /* 周りに余白をとって少し小さめに出す */
-      width: 74%; margin: var(--sp-5) auto var(--sp-1);
-      aspect-ratio: 280 / 340; object-fit: cover; object-position: center top;
-      display: block; border: 1px solid var(--c-border); border-radius: calc(var(--radius) - 2px);
-    }
-    .herocard :global(.hc-in) { padding: var(--sp-3) var(--sp-4) var(--sp-4); }
-    .herocard :global(.hc-name) { font-weight: 700; color: var(--c-text-strong); font-size: 15px; }
-    .herocard :global(.hc-tags) {
-      list-style: none; display: flex; flex-wrap: wrap; gap: 4px; padding: 0; margin: var(--sp-2) 0 0;
-    }
-    .herocard :global(.hc-tags li) {
-      font-size: 10px; color: var(--c-accent);
-      border: 1px solid var(--c-accent-dim); border-radius: 999px; padding: 0 7px;
-    }
-    .herocard :global(.hc-grp) {
-      font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--hc-cat, var(--c-text-muted)); margin-top: var(--sp-3);
-    }
-    .herocard :global(.hc-rows) { list-style: none; padding: 0; margin: 2px 0 0; }
-    .herocard :global(.hc-rows li) {
-      display: grid; grid-template-columns: 1fr auto auto; gap: var(--sp-2); align-items: baseline;
-      font-size: 11px; padding: 2px 0; border-bottom: 1px solid var(--c-border);
-    }
-    .herocard :global(.hc-rows .l) { color: var(--c-text-muted); }
-    .herocard :global(.hc-rows .v) { font-family: var(--font-mono); color: var(--c-text-strong); }
-    .herocard :global(.hc-rows .s) { color: var(--c-accent); letter-spacing: 1px; font-size: 10px; }
-    .herocard :global(.hc-rows .s .dim) { color: var(--c-text-faint); }
-    .herocard :global(.hc-rows li.accent .l) { color: var(--c-accent); }
-    .herocard :global(.hc-boon) { margin-top: var(--sp-3); font-size: 11px; color: var(--c-text-muted); }
-    .herocard :global(.hc-boon b) { color: var(--c-accent); }
-
-    @media (max-width: 1000px) {
-      .herocard { display: none; }
-    }
   </style>
 </Base>

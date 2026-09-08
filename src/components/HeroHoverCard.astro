@@ -1,0 +1,145 @@
+---
+/**
+ * ヒーローのマウスオーバー詳細カード(トップ・ヒーロー一覧・ティア表で共用)。
+ *
+ * `[data-herocard="<heroId>"]` を持つ要素に自動でホバー/フォーカスを張る。
+ * 後から innerHTML で足したアイコン(ティア表)には
+ * `window.heroHoverCard.wire(親要素)` を呼んで張り直す。
+ * 中身は JS で組み立てるので CSS は :global。
+ */
+interface Props {
+  /** heroId → { name, gloat, tags, weapon[], vitality[], spirit[], boon[] } */
+  heroDetail: Record<number, unknown>;
+}
+const { heroDetail } = Astro.props;
+---
+
+<div class="herocard" id="herocard" role="tooltip" hidden></div>
+
+<script is:inline define:vars={{ heroDetail }}>
+  (() => {
+    const card = document.getElementById("herocard");
+    if (!card) return;
+    const esc = (s) =>
+      String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+    const stars = (n) =>
+      `<span class="s">${"★".repeat(n)}<span class="dim">${"☆".repeat(5 - n)}</span></span>`;
+    const rows = (list) =>
+      list
+        .map(
+          (r) =>
+            `<li class="${r.stars >= 4 ? "accent" : ""}"><span class="l">${esc(r.label)}</span>` +
+            `<span class="v">${esc(r.value)}</span>${stars(r.stars)}</li>`,
+        )
+        .join("");
+
+    function show(id, anchor) {
+      const d = heroDetail[id];
+      if (!d) return;
+      card.innerHTML =
+        (d.gloat ? `<img class="hc-img" src="${d.gloat}" alt="">` : "") +
+        `<div class="hc-in">` +
+        `<div class="hc-name">${esc(d.name)}</div>` +
+        (d.tags.length
+          ? `<ul class="hc-tags">${d.tags.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`
+          : "") +
+        `<div class="hc-grp" style="--hc-cat:var(--c-weapon)">武器</div><ul class="hc-rows">${rows(d.weapon)}</ul>` +
+        `<div class="hc-grp" style="--hc-cat:var(--c-vitality)">生命力</div><ul class="hc-rows">${rows(d.vitality)}</ul>` +
+        `<div class="hc-grp" style="--hc-cat:var(--c-spirit)">成長/スピリット</div><ul class="hc-rows">${rows(d.spirit)}</ul>` +
+        (d.boon.length ? `<div class="hc-boon">成長が高い: <b>${esc(d.boon.join(" / "))}</b></div>` : "") +
+        `</div>`;
+      card.hidden = false;
+
+      const place = () => {
+        const M = 8;
+        const r = anchor.getBoundingClientRect();
+        const cw = card.offsetWidth;
+        const ch = card.offsetHeight;
+        const vw = document.documentElement.clientWidth;
+        const vh = document.documentElement.clientHeight;
+        let left = r.right + 10;
+        if (left + cw > vw - M) left = r.left - cw - 10;
+        left = Math.max(M, Math.min(left, vw - cw - M));
+        let top = Math.min(r.top, vh - ch - M);
+        top = Math.max(M, top);
+        card.style.left = left + "px";
+        card.style.top = top + "px";
+      };
+      place();
+      requestAnimationFrame(place);
+    }
+    const hide = () => (card.hidden = true);
+
+    function wire(root) {
+      const scope = root || document;
+      for (const a of scope.querySelectorAll("[data-herocard]")) {
+        if (a.dataset.hcWired) continue;
+        a.dataset.hcWired = "1";
+        const id = a.dataset.herocard;
+        a.addEventListener("mouseenter", () => show(id, a));
+        a.addEventListener("focus", () => show(id, a));
+        a.addEventListener("mouseleave", hide);
+        a.addEventListener("blur", hide);
+      }
+    }
+
+    window.heroHoverCard = { show, hide, wire };
+    wire();
+    window.addEventListener("scroll", hide, { passive: true });
+  })();
+</script>
+
+<style>
+  .herocard {
+    position: fixed;
+    z-index: 40;
+    width: 300px;
+    max-height: calc(100vh - 16px);
+    overflow: auto;
+    background: var(--c-surface);
+    border: 1px solid var(--c-accent-dim);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 28px rgb(0 0 0 / 0.5);
+    pointer-events: none;
+  }
+  .herocard :global(.hc-img) {
+    /* 元絵は 280x380 の縦長。周りに余白をとって少し小さめに出す */
+    width: 74%;
+    margin: var(--sp-5) auto var(--sp-1);
+    aspect-ratio: 280 / 340;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    border: 1px solid var(--c-border);
+    border-radius: calc(var(--radius) - 2px);
+  }
+  .herocard :global(.hc-in) { padding: var(--sp-3) var(--sp-4) var(--sp-4); }
+  .herocard :global(.hc-name) { font-weight: 700; color: var(--c-text-strong); font-size: 15px; }
+  .herocard :global(.hc-tags) {
+    list-style: none; display: flex; flex-wrap: wrap; gap: 4px; padding: 0; margin: var(--sp-2) 0 0;
+  }
+  .herocard :global(.hc-tags li) {
+    font-size: 10px; color: var(--c-accent);
+    border: 1px solid var(--c-accent-dim); border-radius: 999px; padding: 0 7px;
+  }
+  .herocard :global(.hc-grp) {
+    font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--hc-cat, var(--c-text-muted)); margin-top: var(--sp-3);
+  }
+  .herocard :global(.hc-rows) { list-style: none; padding: 0; margin: 2px 0 0; }
+  .herocard :global(.hc-rows li) {
+    display: grid; grid-template-columns: 1fr auto auto; gap: var(--sp-2); align-items: baseline;
+    font-size: 11px; padding: 2px 0; border-bottom: 1px solid var(--c-border);
+  }
+  .herocard :global(.hc-rows .l) { color: var(--c-text-muted); }
+  .herocard :global(.hc-rows .v) { font-family: var(--font-mono); color: var(--c-text-strong); }
+  .herocard :global(.hc-rows .s) { color: var(--c-accent); letter-spacing: 1px; font-size: 10px; }
+  .herocard :global(.hc-rows .s .dim) { color: var(--c-text-faint); }
+  .herocard :global(.hc-rows li.accent .l) { color: var(--c-accent); }
+  .herocard :global(.hc-boon) { margin-top: var(--sp-3); font-size: 11px; color: var(--c-text-muted); }
+  .herocard :global(.hc-boon b) { color: var(--c-accent); }
+
+  @media (max-width: 1000px) {
+    .herocard { display: none; }
+  }
+</style>

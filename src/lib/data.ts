@@ -284,6 +284,36 @@ export const SLOT_META = {
   Tech: { label: "スピリット", cssVar: "spirit" },
 } as const;
 
+/**
+ * アイテムのホバーカード用データ(ビルド画面・アイテム一覧・トップで共用)。
+ * ItemHoverCard.astro が受け取る形。値はすべてゲームの生データ由来。
+ */
+export function itemHoverData(i: Item) {
+  return {
+    name: t(i.nameToken, i.id),
+    slotLabel: i.slotType ? SLOT_META[i.slotType].label : "",
+    cssVar: i.slotType ? SLOT_META[i.slotType].cssVar : "accent",
+    tier: i.tier,
+    cost: i.cost,
+    slotCost: i.slotCost,
+    badge: i.isImbue ? "IMBUE" : i.activation !== "PASSIVE" ? "ACTIVE" : null,
+    desc: describe(i.descToken, i.properties),
+    passives: i.passiveProperties
+      .filter((n) => i.properties[n])
+      .map((n) => formatProperty(n, i.properties[n]!)),
+    conditional: i.tooltip
+      .flatMap((s) => [...s.elevatedProperties, ...s.properties])
+      .filter((n, idx, a) => a.indexOf(n) === idx && !i.passiveProperties.includes(n))
+      .filter((n) => i.properties[n])
+      .map((n) => formatProperty(n, i.properties[n]!)),
+    components: i.componentItems
+      .map((c) => itemsFile.items[c])
+      .filter((c): c is Item => c !== undefined)
+      .map((c) => t(c.nameToken, c.id)),
+    usedIn: usedIn(i.id).map((c) => t(c.nameToken, c.id)),
+  };
+}
+
 /** ソウルを 3桁区切りにする */
 export function souls(n: number): string {
   return n.toLocaleString("en-US");
