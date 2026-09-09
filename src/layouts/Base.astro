@@ -166,21 +166,25 @@ if (crumbs.length > 1) {
       }
       .site-header .inner {
         display: flex;
+        flex-wrap: nowrap;
         align-items: center;
         gap: var(--sp-6);
         min-height: 58px;
       }
       .wordmark {
         display: flex;
+        flex: 0 0 auto;
         align-items: baseline;
         gap: var(--sp-2);
         color: var(--c-text-strong);
+        white-space: nowrap;
       }
       .wordmark:hover {
         text-decoration: none;
       }
-      /* サムネイルのロゴ(円+スポーク)を簡略化した記号 */
+      /* サムネイルのロゴ(円+スポーク)を簡略化した記号。flex で潰れて縦長にならないよう固定 */
       .mark {
+        flex: 0 0 auto;
         width: 15px;
         height: 15px;
         border: 2px solid var(--c-accent);
@@ -200,19 +204,32 @@ if (crumbs.length > 1) {
         font-size: 17px;
         font-weight: 700;
         letter-spacing: 0.14em;
+        white-space: nowrap;
       }
       .sub {
         font-size: 13px;
         font-weight: 700;
         color: var(--c-accent);
         letter-spacing: 0.1em;
+        white-space: nowrap;
       }
       nav {
         display: flex;
+        /* 縮む(=足りなければ横スクロール)が、伸びはしない。デスクトップの見た目は据え置き */
+        flex: 0 1 auto;
+        min-width: 0;
         gap: var(--sp-5);
         font-size: 14px;
+        /* 収まらないときは折り返さず横スクロール */
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      nav::-webkit-scrollbar {
+        display: none;
       }
       nav a {
+        flex: 0 0 auto;
+        white-space: nowrap;
         color: var(--c-text-muted);
         padding: 4px 0;
         border-bottom: 2px solid transparent;
@@ -248,8 +265,22 @@ if (crumbs.length > 1) {
         color: var(--c-text-faint);
       }
       @media (max-width: 640px) {
+        .inner {
+          padding: 0 var(--sp-4);
+        }
         .site-header .inner {
-          gap: var(--sp-4);
+          gap: var(--sp-3);
+        }
+        .name {
+          font-size: 14px;
+          letter-spacing: 0.06em;
+        }
+        .sub {
+          font-size: 11px;
+        }
+        nav {
+          gap: var(--sp-3);
+          font-size: 12px;
         }
       }
     </style>
