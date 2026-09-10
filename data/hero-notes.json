@@ -6,19 +6,32 @@
       "命中した対象に継続ダメージ(ナパーム)とスロウを付与する。"
     ],
     "ability_flame_dash": [],
-    "ability_afterburn": [],
+    "ability_afterburn": [
+      "スタックは武器のダメージ距離減衰の影響を受ける。",
+      "近接攻撃でもスタックが蓄積される。"
+    ],
     "ability_fire_bomb": [],
-    "citadel_ability_lightning_ball": [],
+    "citadel_ability_lightning_ball": [
+      "ダメージは0.1秒間隔で発生する。"
+    ],
     "citadel_ability_static_charge": [],
     "ability_power_surge": [],
-    "citadel_ability_storm_cloud": [],
+    "citadel_ability_storm_cloud": [
+      "ダメージは0.3秒間隔で発生する。"
+    ],
     "citadel_ability_hornet_chain": [],
     "citadel_ability_hornet_leap": [],
     "citadel_ability_hornet_sting": [],
     "citadel_ability_hornet_snipe": [],
-    "ability_blood_bomb": [],
-    "ability_life_drain": [],
-    "ability_blood_shards": [],
+    "ability_blood_bomb": [
+      "自傷ダメージはスピリット耐性を上げると軽減できる。"
+    ],
+    "ability_life_drain": [
+      "味方へのオルトキャストによる自傷ダメージは、スピリット耐性を上げると軽減できる。"
+    ],
+    "ability_blood_shards": [
+      "自傷ダメージはスピリット耐性を上げると軽減できる。"
+    ],
     "ability_health_swap": [],
     "citadel_ability_bull_heal": [],
     "citadel_ability_bull_charge": [
@@ -32,13 +45,24 @@
     "citadel_ability_projectmind": [],
     "citadel_ability_wraith_rapidfire": [],
     "citadel_ability_psychic_lift": [],
-    "citadel_ability_shieldedsentry": [],
-    "citadel_ability_mobile_resupply": [],
-    "citadel_ability_fissure_wall": [],
+    "citadel_ability_shieldedsentry": [
+      "砲塔は、マクギニスが射撃でダメージを与えたヒーローを優先して狙う。",
+      "砲塔は他のヒーローからの武器ダメージをフルに受け、距離減衰の影響を受けない。"
+    ],
+    "citadel_ability_mobile_resupply": [
+      "回復エリアが重なっても、回復効果は重複しない。"
+    ],
+    "citadel_ability_fissure_wall": [
+      "T3の砲塔は、壁のマクギニス側に出現する。"
+    ],
     "citadel_ability_rocket_barrage": [],
     "citadel_ability_chrono_pulse_grenade": [],
     "citadel_ability_chrono_time_wall": [],
-    "citadel_ability_chrono_kinetic_carbine": [],
+    "citadel_ability_chrono_kinetic_carbine": [
+      "フルチャージで特殊な移動速度ボーナスを得る。",
+      "フルチャージ中、空中ダッシュ後にズームを一瞬入力するとダッシュ加速が発生する。",
+      "フルチャージ中、空中ダッシュ後にズーム入力でダッシュをキャンセルできる。"
+    ],
     "citadel_ability_chrono_swap": [],
     "citadel_ability_stomp": [
       "アビリティ範囲を上げると射程がスケールするが、パルスの太さはスケールしない。",
@@ -56,14 +80,26 @@
     "ability_ice_grenade": [],
     "ability_icepath": [],
     "ability_icebeam": [],
-    "ability_ice_dome": [],
+    "ability_ice_dome": [
+      "「アーマーピアッサー」の発動効果と、ヴェナトルのアルティメットからの攻撃は、ドームを貫通する。"
+    ],
     "ability_sleep_dagger": [],
     "ability_smoke_bomb": [],
     "ability_stacking_damage": [],
-    "ability_bullet_flurry": [],
-    "ability_explosive_barrel": [],
-    "ability_bounce_pad": [],
-    "ability_crackshot": [],
+    "ability_bullet_flurry": [
+      "ミスティックショットやラッキーショットなど、弾丸ベースのアイテム効果が適用される。"
+    ],
+    "ability_explosive_barrel": [
+      "オルトキャストで設置した樽は、近接攻撃で飛んでいく。",
+      "転がった樽がバウンスパッドに当たると飛んでいく。"
+    ],
+    "ability_bounce_pad": [
+      "バウンスした味方も踏みつけダメージを発生させられる。",
+      "ダッシュで進入すると滞空時間を短くできる。"
+    ],
+    "ability_crackshot": [
+      "スピリットパワーでスケールするが、武器ダメージとして適用される。"
+    ],
     "ability_gravity_lasso": [],
     "citadel_ability_uppercut": [
       "視点を下に向けるほど打ち上げ時間が短くなり、上に向けるほど長くなる。"
@@ -81,21 +117,44 @@
       "変身中はマップの通気口を通れる。"
     ],
     "ability_nano_shadow_pulse": [],
-    "ability_charged_shot": [],
+    "ability_charged_shot": [
+      "スプリットショットでマルチショット数を増やせるが、1回のマルチショットあたりのダメージ判定は1回だけ。"
+    ],
     "ability_power_jump": [],
     "ability_immobilize_trap": [],
-    "ability_guided_arrow": [],
-    "ability_intimidate": [],
-    "ability_burrow": [],
+    "ability_guided_arrow": [
+      "スキルのダメージ判定のあとに、処刑閾値のチェックが入る。",
+      "フクロウは水平に進入すれば通気口を通過できる。"
+    ],
+    "ability_intimidate": [
+      "アルティメット中でも発動できる。"
+    ],
+    "ability_burrow": [
+      "発動中でも斜面でスライディングできる。",
+      "発動中は通気口を通過できる。",
+      "発動中でも壺を運べる。"
+    ],
     "ability_throw_sand": [],
-    "ability_ult_combo": [],
-    "citadel_ability_shiv_dagger": [],
+    "ability_ult_combo": [
+      "発動中でもアイテムを使用できる。「マジェスティックリープ」も発動できる。"
+    ],
+    "citadel_ability_shiv_dagger": [
+      "ダメージは1秒に1回発生する。"
+    ],
     "citadel_ability_shiv_dash": [],
     "citadel_ability_shiv_defer_damage": [],
-    "citadel_ability_shiv_killing_blow": [],
-    "citadel_ability_tengu_urn": [],
-    "citadel_ability_tangotether": [],
-    "citadel_ability_tengu_stone_form": [],
+    "citadel_ability_shiv_killing_blow": [
+      "処刑閾値以下の敵ヒーローには、赤い輪郭が表示される。"
+    ],
+    "citadel_ability_tengu_urn": [
+      "0.25秒ごとにダメージとスロウが発動する。"
+    ],
+    "citadel_ability_tangotether": [
+      "T3状態で「ヒーリングテンポ」を所持していると、常に両側へバフ効果が適用される。"
+    ],
+    "citadel_ability_tengu_stone_form": [
+      "重近接攻撃のモーション中でも発動できる。"
+    ],
     "citadel_ability_tengu_airlift": [],
     "ability_warden_crowd_control": [],
     "ability_warden_high_alert": [],
@@ -106,20 +165,33 @@
     "citadel_ability_healing_slash": [],
     "citadel_ability_infinity_slash": [],
     "citadel_ability_lash_down_strike": [],
-    "citadel_ability_lash": [],
+    "citadel_ability_lash": [
+      "味方・敵を問わず、すべてのヒーローを対象にできる。"
+    ],
     "ability_lash_flog": [],
     "citadel_ability_lash_ultimate": [],
     "viscous_goo_grenade": [],
     "viscous_restorative_goo": [],
     "viscous_telepunch": [],
     "viscous_goo_bowling_ball": [],
-    "synth_barrage": [],
-    "synth_plasma_flux": [],
+    "synth_barrage": [
+      "発動前の水平方向の運動量を維持する。",
+      "発動中にダッシュとフライングクロークを発動できる。"
+    ],
+    "synth_plasma_flux": [
+      "発動より前にリロードを挟んでおくと、発動後は即座にリロードが完了する。"
+    ],
     "synth_pulse": [],
     "synth_affliction": [],
-    "mirage_fire_beetles": [],
-    "mirage_tornado": [],
-    "mirage_sand_phantom": [],
+    "mirage_fire_beetles": [
+      "重ね掛けしても効果は重複せず、持続時間がリセットされるだけ。"
+    ],
+    "mirage_tornado": [
+      "発動中は無敵状態。"
+    ],
+    "mirage_sand_phantom": [
+      "ダメージは発動時のスピリットパワーを参照するため、「インヒューザー」などの一時的なスピリットパワー増加の影響を受ける。"
+    ],
     "mirage_teleport": [],
     "ability_viper_debuffdagger": [],
     "ability_viper_venom": [],
@@ -129,10 +201,14 @@
     "ability_magician_cloneturret": [],
     "ability_magician_animalhexarea": [],
     "ability_magician_copyult": [],
-    "ability_vampirebat_steallife": [],
+    "ability_vampirebat_steallife": [
+      "レーキでトルーパーをキルしたときは、ソウルオーブが出現しない（近接ラストヒットと同じ扱い）。"
+    ],
     "ability_vampirebat_batblink": [],
     "ability_vampirebat_lovebites": [],
-    "ability_vampirebat_batswarm": [],
+    "ability_vampirebat_batswarm": [
+      "チャネリング中でも、2スキルのテレポートを発動できる。"
+    ],
     "drifter_blood_blast": [
       "T3にすると重近接の効果が乗る(メレーチャージやスピリットスナッチの対象になる)。"
     ],
@@ -154,10 +230,16 @@
     "ability_frank_selfzap": [],
     "ability_frank_painaura": [],
     "ability_frank_revive": [],
-    "ability_bookworm_dragonfire": [],
-    "ability_bookworm_knightbarrier": [],
+    "ability_bookworm_dragonfire": [
+      "アビリティ範囲の増加は、進行方向と幅の両方にスケールする。"
+    ],
+    "ability_bookworm_knightbarrier": [
+      "セルフキャストできる。"
+    ],
     "ability_bookworm_aoemagic": [],
-    "ability_bookworm_knightcharge": [],
+    "ability_bookworm_knightcharge": [
+      "敵にも味方にも当たらなかった場合、クールダウンが半減する。"
+    ],
     "ability_doorman_bomb": [
       "T3状態ではコールベルを複数重ねて設置でき、任意のタイミングでまとめて起爆できる。"
     ],
@@ -201,8 +283,15 @@
     ],
     "ability_fencer_ultimate": [],
     "ability_familiar_ability02": [],
-    "ability_familiar_attach": [],
-    "ability_familiar_helpinghands": [],
+    "ability_familiar_attach": [
+      "別の味方への飛びつきは、使い魔が付いたトルーパーも対象にできる。",
+      "自分への回復効果とスキル効果時間は、飛びつくたびに更新される。"
+    ],
+    "ability_familiar_helpinghands": [
+      "使い魔はブリッジバフを獲得できる。",
+      "使い魔はトルーパーに付着すると、そのトルーパーのHPを全回復する。",
+      "使い魔は敵のショップでも自動購入を実行できる。"
+    ],
     "ability_familiar_ability01": [],
     "ability_werewolf_unloadgun": [],
     "ability_werewolf_kickflip": [],
