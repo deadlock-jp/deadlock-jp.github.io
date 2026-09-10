@@ -7,6 +7,7 @@ import localizationJson from "../../data/localization.japanese.json" with { type
 import localizationEnJson from "../../data/localization.english.json" with { type: "json" };
 import updatesJson from "../../data/updates.json" with { type: "json" };
 import heroNotesJson from "../../data/hero-notes.json" with { type: "json" };
+import itemNotesJson from "../../data/item-notes.json" with { type: "json" };
 import type { HeroesFile, Hero } from "../types/hero.ts";
 import type { ItemsFile, Item } from "../types/item.ts";
 import type { AbilitiesFile, Ability } from "../types/ability.ts";
@@ -236,6 +237,15 @@ export function heroTags(hero: Hero): string[] {
 const heroNotesFile = heroNotesJson as unknown as { notes: Record<string, string[]> };
 export function heroNotes(abilityKey: string): string[] {
   return heroNotesFile.notes[abilityKey] ?? [];
+}
+
+/**
+ * アイテムの補足メモ。data/item-notes.json(キーはアイテムの実ID、値は文字列配列)。
+ * heroNotes と同じく自前で書く欄。生データだけでは分からない仕様の但し書きだけを置く。
+ */
+const itemNotesFile = itemNotesJson as unknown as { notes: Record<string, string[]> };
+export function itemNotes(itemId: string): string[] {
+  return itemNotesFile.notes[itemId] ?? [];
 }
 
 /** ショップに並ぶアイテムを ティア → 名前 順で返す */

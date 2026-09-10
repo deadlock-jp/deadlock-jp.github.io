@@ -11,6 +11,7 @@ import {
   SLOT_META,
   souls,
   itemAdjustments,
+  itemNotes,
   upstreamRepo,
 } from "../../lib/data.ts";
 import AdjustmentHistory from "../../components/AdjustmentHistory.astro";
@@ -57,6 +58,7 @@ const parents = usedIn(item.id);
 
 const badge = item.isImbue ? "IMBUE" : item.activation !== "PASSIVE" ? "ACTIVE" : null;
 const adjRows = itemAdjustments(item.id);
+const notes = itemNotes(item.id);
 
 const passiveText = passives.map((p) => `${p.label} ${p.value}`).join("、");
 const metaDesc =
@@ -145,6 +147,17 @@ const metaDesc =
         ))}
       </ol>
     </>
+  )}
+
+  {notes.length > 0 && (
+    <div class="inotes">
+      <span class="nt">メモ</span>
+      <ul>
+        {notes.map((note) => (
+          <li>{note}</li>
+        ))}
+      </ul>
+    </div>
   )}
 
   {(components.length > 0 || parents.length > 0) && (
@@ -285,6 +298,16 @@ const metaDesc =
       color: var(--c-text);
     }
     .links a:hover { background: var(--c-surface-2); color: var(--c-text-strong); }
+    .inotes {
+      margin-top: var(--sp-5);
+      padding-top: var(--sp-3);
+      border-top: 1px dashed var(--c-border);
+      max-width: 62ch;
+    }
+    .inotes .nt {
+      font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-text-muted);
+    }
+    .inotes ul { margin: var(--sp-1) 0 0; padding-left: 1.2em; font-size: 12px; color: var(--c-text-muted); line-height: 1.7; }
     .idline { margin-top: var(--sp-6); font-size: 11px; color: var(--c-text-faint); }
     .idline code { font-family: var(--font-mono); }
   </style>

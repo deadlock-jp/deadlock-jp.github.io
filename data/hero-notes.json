@@ -21,8 +21,12 @@
     "ability_blood_shards": [],
     "ability_health_swap": [],
     "citadel_ability_bull_heal": [],
-    "citadel_ability_bull_charge": [],
-    "citadel_ability_passive_beefy": [],
+    "citadel_ability_bull_charge": [
+      "突進距離は初速×持続時間で決まる。射程(スキル効果範囲)を上げても距離は変わらず、距離が伸びるのは持続時間を上げたときだけ。"
+    ],
+    "citadel_ability_passive_beefy": [
+      "「デスチーター」で復活待機状態(HP1固定)になっている間に受けたダメージも、回復量の蓄積対象になる。"
+    ],
     "citadel_ability_bull_leap": [],
     "citadel_ability_card_toss": [],
     "citadel_ability_projectmind": [],
@@ -36,10 +40,19 @@
     "citadel_ability_chrono_time_wall": [],
     "citadel_ability_chrono_kinetic_carbine": [],
     "citadel_ability_chrono_swap": [],
-    "citadel_ability_stomp": [],
-    "citadel_ability_void_sphere": [],
-    "citadel_ability_nikuman": [],
-    "citadel_ability_self_vacuum": [],
+    "citadel_ability_stomp": [
+      "アビリティ範囲を上げると射程がスケールするが、パルスの太さはスケールしない。",
+      "アビリティ持続時間を上げるとノックアップ時間がスケールする。"
+    ],
+    "citadel_ability_void_sphere": [
+      "アビリティ範囲は移動距離をスケールするが、自身を中心とした対象範囲はスケールしない。"
+    ],
+    "citadel_ability_nikuman": [
+      "T3になるまで、詠唱中はスライディングできない。"
+    ],
+    "citadel_ability_self_vacuum": [
+      "ダメージは0.25秒間隔で発生する。"
+    ],
     "ability_ice_grenade": [],
     "ability_icepath": [],
     "ability_icebeam": [],
@@ -52,13 +65,21 @@
     "ability_bounce_pad": [],
     "ability_crackshot": [],
     "ability_gravity_lasso": [],
-    "citadel_ability_uppercut": [],
-    "citadel_ability_sticky_bomb": [],
+    "citadel_ability_uppercut": [
+      "視点を下に向けるほど打ち上げ時間が短くなり、上に向けるほど長くなる。"
+    ],
+    "citadel_ability_sticky_bomb": [
+      "ヒット/キルで増える永続追加ダメージは、アップグレードとスピリット係数をすべて加算した後にスタック倍率を掛ける。順序は (基礎 + アップグレード + スピリット係数) × スタック倍率。"
+    ],
     "citadel_ability_hook": [],
-    "citadel_ability_bebop_laser_beam": [],
+    "citadel_ability_bebop_laser_beam": [
+      "効果範囲を上げると、ダメージペナルティエリア・ビーム全長・ビーム先端のスプラッシュ範囲が広がる。ビームの太さは変わらない。"
+    ],
     "ability_nano_clustergrenade": [],
     "ability_nano_dash": [],
-    "ability_nano_catform": [],
+    "ability_nano_catform": [
+      "変身中はマップの通気口を通れる。"
+    ],
     "ability_nano_shadow_pulse": [],
     "ability_charged_shot": [],
     "ability_power_jump": [],
@@ -112,10 +133,19 @@
     "ability_vampirebat_batblink": [],
     "ability_vampirebat_lovebites": [],
     "ability_vampirebat_batswarm": [],
-    "drifter_blood_blast": [],
-    "drifter_shadow_mark": [],
-    "ability_drifter_hunger": [],
-    "drifter_darkness": [],
+    "drifter_blood_blast": [
+      "T3にすると重近接の効果が乗る(メレーチャージやスピリットスナッチの対象になる)。"
+    ],
+    "drifter_shadow_mark": [
+      "瞬間移動に射程制限はない。対象への効果が続いている間なら、どこへでも移動できる。"
+    ],
+    "ability_drifter_hunger": [
+      "獲得した永続スタックは武器ダメージのステータスに加算されるため、弾丸ダメージと近接ダメージの両方にスケールする。"
+    ],
+    "drifter_darkness": [
+      "発動時に非戦闘状態になる(非戦闘時のパッシブが適用され、戦闘時のパッシブは外れる)。",
+      "発動時に空中にいる場合は、直前の慣性を維持する。"
+    ],
     "ability_priest_flashbang": [],
     "ability_priest_knockback": [],
     "ability_priest_beartrap": [],
@@ -128,21 +158,47 @@
     "ability_bookworm_knightbarrier": [],
     "ability_bookworm_aoemagic": [],
     "ability_bookworm_knightcharge": [],
-    "ability_doorman_bomb": [],
-    "ability_doorman_doorway": [],
-    "ability_doorman_luggage_cart": [],
-    "ability_doorman_hotel": [],
-    "ability_punkgoat_ult": [],
+    "ability_doorman_bomb": [
+      "T3状態ではコールベルを複数重ねて設置でき、任意のタイミングでまとめて起爆できる。"
+    ],
+    "ability_doorman_doorway": [
+      "2つのドアの設置間隔は、アビリティ範囲とスピリットパワーでスケールする(最大でおよそリスポーン地からミッドボスエリアまで)。"
+    ],
+    "ability_doorman_luggage_cart": [
+      "カートは乗せた対象を、ドアウェイのドアから押し出せる。",
+      "カートの寿命は持続時間ではスケールせず、アビリティ範囲でスケールする(カート速度は一定)。"
+    ],
+    "ability_doorman_hotel": [
+      "ホテルの滞在時間は一定で、他のどの効果でもスケールしない。"
+    ],
+    "ability_punkgoat_ult": [
+      "T3アップグレード後は、ダメージ計算は軽近接扱いだが、効果は重近接として扱われる(スピリットスナッチなどのアイテム効果が発動する)。"
+    ],
     "ability_punkgoat_goatflip": [],
-    "ability_punkgoat_blasted": [],
-    "ability_punkgoat_tether": [],
-    "ability_necro_hauntingskull": [],
+    "ability_punkgoat_blasted": [
+      "近接ダメージでスタックが最大になると、効果時間の延長が発動しなくなる。最大スタックの直前を維持している間は、効果時間を無期限に延長できる。"
+    ],
+    "ability_punkgoat_tether": [
+      "範囲内にいても、射線(視線)が通らないと発動しない。"
+    ],
+    "ability_necro_hauntingskull": [
+      "「死」の収集数は、トルーパー／グールが1、デニゼンが3、ヒーロー／ミッドボスが5。"
+    ],
     "ability_necro_zombiewall": [],
-    "ability_necro_fear": [],
-    "ability_necro_gravestone": [],
-    "ability_fencer_throwblade": [],
+    "ability_necro_fear": [
+      "スタックの増加量は、射程によるダメージ減衰の影響を受ける。"
+    ],
+    "ability_necro_gravestone": [
+      "グールは一度ターゲットを捉えると、視界から消えても付近にいるターゲットを追尾する。",
+      "グールは倒されると相手にソウルを与える。"
+    ],
+    "ability_fencer_throwblade": [
+      "発動の前後にWASD入力を受け付け、任意の方向へ移動できる。"
+    ],
     "ability_fencer_riposte": [],
-    "ability_fencer_lunge": [],
+    "ability_fencer_lunge": [
+      "発動の前後にWASD入力を受け付け、任意の方向へ移動できる。"
+    ],
     "ability_fencer_ultimate": [],
     "ability_familiar_ability02": [],
     "ability_familiar_attach": [],
@@ -153,8 +209,14 @@
     "ability_werewolf_netshot": [],
     "ability_werewolf_transformation": [],
     "ability_unicorn_radiantblast": [],
-    "ability_unicorn_prismaticguard": [],
-    "ability_unicorn_luminousstrike": [],
-    "ability_unicorn_dazzlingorb": []
+    "ability_unicorn_prismaticguard": [
+      "T3状態でセレステのアルティメットを跳ね返すと、このアビリティの持続時間が本来の持続時間ぶんリセットされる。"
+    ],
+    "ability_unicorn_luminousstrike": [
+      "指定した範囲の真上・真下にいる敵ユニットすべてに当たる(建物を貫通する)。"
+    ],
+    "ability_unicorn_dazzlingorb": [
+      "シュラインなどのオブジェクトに当たったときは跳ね返らず、そのまま消滅する。"
+    ]
   }
 }
