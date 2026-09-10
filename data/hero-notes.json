@@ -12,12 +12,12 @@
     ],
     "ability_fire_bomb": [],
     "citadel_ability_lightning_ball": [
-      "ダメージは0.1秒間隔で発生する。"
+      "ダメージは0.1秒間隔で、表示ダメージの10%ずつ発生する。"
     ],
     "citadel_ability_static_charge": [],
     "ability_power_surge": [],
     "citadel_ability_storm_cloud": [
-      "ダメージは0.3秒間隔で発生する。"
+      "ダメージは0.3秒間隔で、表示ダメージの30%ずつ発生する。"
     ],
     "citadel_ability_hornet_chain": [],
     "citadel_ability_hornet_leap": [],
@@ -53,7 +53,7 @@
       "回復エリアが重なっても、回復効果は重複しない。"
     ],
     "citadel_ability_fissure_wall": [
-      "T3の砲塔は、壁のマクギニス側に出現する。"
+      "T3アップグレードで壁に追加される砲塔は、マクギニス側の面に出現する。"
     ],
     "citadel_ability_rocket_barrage": [],
     "citadel_ability_chrono_pulse_grenade": [],
@@ -155,7 +155,9 @@
     "citadel_ability_tengu_stone_form": [
       "重近接攻撃のモーション中でも発動できる。"
     ],
-    "citadel_ability_tengu_airlift": [],
+    "citadel_ability_tengu_airlift": [
+      "自身が壺を保持している間、または壺を保持した味方とチャネリングしている間は、移動速度が大幅に低下する。"
+    ],
     "ability_warden_crowd_control": [],
     "ability_warden_high_alert": [],
     "ability_warden_lock_down": [],
