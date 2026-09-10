@@ -170,9 +170,7 @@
     "ability_warden_high_alert": [],
     "ability_warden_lock_down": [],
     "ability_warden_riot_protocol": [],
-    "citadel_ability_power_slash": [
-      "チャージ完了前にキャストするとダメージが下がる。"
-    ],
+    "citadel_ability_power_slash": [],
     "citadel_ability_flying_strike": [],
     "citadel_ability_healing_slash": [],
     "citadel_ability_infinity_slash": [
@@ -212,9 +210,7 @@
     "mirage_teleport": [],
     "ability_viper_debuffdagger": [],
     "ability_viper_venom": [],
-    "ability_viper_snakedash": [
-      "斜面をスライディングで上方向へ登れる。"
-    ],
+    "ability_viper_snakedash": [],
     "ability_viper_petrifybola": [],
     "ability_magician_magicbolt": [
       "敵ヒーローにカーソルを合わせていれば（壁の向こうの視界外でも）、着弾前のリキャストでその敵ヒーローへ進路を変更する。"
