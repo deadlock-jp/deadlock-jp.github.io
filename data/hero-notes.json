@@ -20,9 +20,15 @@
       "ダメージは0.3秒間隔で、表示ダメージの30%ずつ発生する。"
     ],
     "citadel_ability_hornet_chain": [],
-    "citadel_ability_hornet_leap": [],
+    "citadel_ability_hornet_leap": [
+      "飛行中もパリィ（カウンタースペル）を発動できる。",
+      "飛行中も空中ダッシュができる（上昇とダッシュのキーバインドを別々に設定しておく必要がある）。"
+    ],
     "citadel_ability_hornet_sting": [],
-    "citadel_ability_hornet_snipe": [],
+    "citadel_ability_hornet_snipe": [
+      "ヒットスキャン式で、発動と同時に着弾する。",
+      "「ライトニングスクロール」のスタン効果は、チャージを消費するたびに再発動できる。"
+    ],
     "ability_blood_bomb": [
       "自傷ダメージはスピリット耐性を上げると軽減できる。"
     ],
@@ -41,7 +47,9 @@
       "「デスチーター」で復活待機状態(HP1固定)になっている間に受けたダメージも、回復量の蓄積対象になる。"
     ],
     "citadel_ability_bull_leap": [],
-    "citadel_ability_card_toss": [],
+    "citadel_ability_card_toss": [
+      "チャージ（カード）の獲得量は、攻撃の命中回数で決まる。"
+    ],
     "citadel_ability_projectmind": [],
     "citadel_ability_wraith_rapidfire": [],
     "citadel_ability_psychic_lift": [],
@@ -162,10 +170,14 @@
     "ability_warden_high_alert": [],
     "ability_warden_lock_down": [],
     "ability_warden_riot_protocol": [],
-    "citadel_ability_power_slash": [],
+    "citadel_ability_power_slash": [
+      "チャージ完了前にキャストするとダメージが下がる。"
+    ],
     "citadel_ability_flying_strike": [],
     "citadel_ability_healing_slash": [],
-    "citadel_ability_infinity_slash": [],
+    "citadel_ability_infinity_slash": [
+      "効果中は、パワースラッシュ（1スキル）とクリムゾンスラッシュ（3スキル）の発動が大幅に速くなる。"
+    ],
     "citadel_ability_lash_down_strike": [],
     "citadel_ability_lash": [
       "味方・敵を問わず、すべてのヒーローを対象にできる。"
@@ -174,7 +186,10 @@
     "citadel_ability_lash_ultimate": [],
     "viscous_goo_grenade": [],
     "viscous_restorative_goo": [],
-    "viscous_telepunch": [],
+    "viscous_telepunch": [
+      "パンチはパリィできる。",
+      "T3以降は、重近接をトリガーとするアイテム効果が適用される。"
+    ],
     "viscous_goo_bowling_ball": [],
     "synth_barrage": [
       "発動前の水平方向の運動量を維持する。",
@@ -197,12 +212,21 @@
     "mirage_teleport": [],
     "ability_viper_debuffdagger": [],
     "ability_viper_venom": [],
-    "ability_viper_snakedash": [],
+    "ability_viper_snakedash": [
+      "斜面をスライディングで上方向へ登れる。"
+    ],
     "ability_viper_petrifybola": [],
-    "ability_magician_magicbolt": [],
-    "ability_magician_cloneturret": [],
+    "ability_magician_magicbolt": [
+      "敵ヒーローにカーソルを合わせていれば（壁の向こうの視界外でも）、着弾前のリキャストでその敵ヒーローへ進路を変更する。"
+    ],
+    "ability_magician_cloneturret": [
+      "アシスタントとの位置交換（テレポート）は2回まで発動できる。",
+      "アシスタントが撃つヴェックスボルトも、カーソルが敵ヒーローに合っていればその敵へ向かって飛ぶ。"
+    ],
     "ability_magician_animalhexarea": [],
-    "ability_magician_copyult": [],
+    "ability_magician_copyult": [
+      "コピーしたアルティメットの永続ボーナスも獲得できる。"
+    ],
     "ability_vampirebat_steallife": [
       "レーキでトルーパーをキルしたときは、ソウルオーブが出現しない（近接ラストヒットと同じ扱い）。"
     ],
@@ -224,14 +248,29 @@
       "発動時に非戦闘状態になる(非戦闘時のパッシブが適用され、戦闘時のパッシブは外れる)。",
       "発動時に空中にいる場合は、直前の慣性を維持する。"
     ],
-    "ability_priest_flashbang": [],
-    "ability_priest_knockback": [],
+    "ability_priest_flashbang": [
+      "T3以降は「ラピッドリチャージ」の効果が適用される。"
+    ],
+    "ability_priest_knockback": [
+      "T3以降、祝福された近接攻撃に追加のピュアダメージと処刑効果が付く。"
+    ],
     "ability_priest_beartrap": [],
-    "ability_priest_weaponswap": [],
-    "ability_frank_shocktarget2": [],
-    "ability_frank_selfzap": [],
-    "ability_frank_painaura": [],
-    "ability_frank_revive": [],
+    "ability_priest_weaponswap": [
+      "アクティブな間、杭のダメージでも処刑閾値チェックが行われ、低HPの敵は処刑される。",
+      "杭による攻撃は、ケルビンのアルティメット（フローズンシェルター）を貫通する。"
+    ],
+    "ability_frank_shocktarget2": [
+      "リチャージに必要な被ダメージ量は、クールダウン短縮の影響を受ける。"
+    ],
+    "ability_frank_selfzap": [
+      "自傷ダメージはピュアダメージ扱いのため、スピリット耐性では軽減できない。"
+    ],
+    "ability_frank_painaura": [
+      "自傷ダメージはピュアダメージ扱いのため、スピリット耐性では軽減できない。"
+    ],
+    "ability_frank_revive": [
+      "「デスチーター」や「リジュベネーター」の効果は、このアルティメットがクールダウン中のときだけ発動する。"
+    ],
     "ability_bookworm_dragonfire": [
       "アビリティ範囲の増加は、進行方向と幅の両方にスケールする。"
     ],
