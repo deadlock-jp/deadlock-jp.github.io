@@ -21,6 +21,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync, cpSync, readdirSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { join, resolve } from "node:path";
+import { findSteamInstall as findSteamInstallBase, readClientVersion } from "./steam.mjs";
 
 const args = process.argv.slice(2);
 const opt = (name, def = undefined) => {
@@ -34,38 +35,7 @@ const WORK = resolve(opt("work", "C:\\Users\\nogud\\Downloads\\deadlock-extract"
 const CLI_URL =
   "https://github.com/ValveResourceFormat/ValveResourceFormat/releases/download/20.0/cli-windows-x64.zip";
 
-/** Steam の共通ライブラリフォルダを libraryfolders.vdf から拾い、Deadlock のインストール先を探す */
-function findSteamInstall() {
-  const override = opt("install");
-  if (override) return resolve(override);
-
-  const steamRoots = ["C:\\Program Files (x86)\\Steam"];
-  const libPaths = new Set(steamRoots);
-  for (const root of steamRoots) {
-    const vdf = join(root, "steamapps", "libraryfolders.vdf");
-    if (!existsSync(vdf)) continue;
-    const text = readFileSync(vdf, "utf8");
-    for (const m of text.matchAll(/"path"\s+"([^"]+)"/g)) {
-      libPaths.add(m[1].replace(/\\\\/g, "\\"));
-    }
-  }
-  for (const lib of libPaths) {
-    const candidate = join(lib, "steamapps", "common", "Deadlock");
-    if (existsSync(join(candidate, "game", "citadel", "steam.inf"))) return candidate;
-  }
-  throw new Error(
-    "Deadlock のインストール先が見つかりません。--install <パス> で " +
-      "steamapps\\common\\Deadlock を直接指定してください。",
-  );
-}
-
-function readClientVersion(installPath) {
-  const infPath = join(installPath, "game", "citadel", "steam.inf");
-  const text = readFileSync(infPath, "utf8");
-  const m = text.match(/^ClientVersion=(\S+)/m);
-  if (!m) throw new Error(`steam.inf に ClientVersion が見つかりません: ${infPath}`);
-  return { clientVersion: m[1], infPath, infText: text };
-}
+const findSteamInstall = () => findSteamInstallBase(opt("install"));
 
 function ensureCli() {
   const toolDir = join(WORK, "tool");
