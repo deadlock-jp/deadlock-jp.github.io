@@ -92,20 +92,47 @@ function humanize(name: string): string {
  * extra: {s:...} のうちプロパティではないもの(例: "自身"のヒーロー名を指す
  * {s:hero_name})を解決するための差し込み値。ability/skillのdescTokenは
  * ヒーロー詳細ページの文脈で呼ばれるので、そこから hero_name を渡す。
+ *
+ * {s:X} は、プロパティの内部名(name)ではなく m_strLocTokenOverride の名前で
+ * 参照されることがある(例: ability_doorman_bomb の "ProjectileFuse" は
+ * 説明文中では {s:BellLifetime} として出てくる)。properties[X] に無ければ
+ * labelOverride === X のプロパティを探す。
+ *
+ * ほかにも Valve 側の説明文自体が一点物のズレを持つことがある:
+ *   - 大文字小文字の打ち間違い(例: 実際は "AbilityCharges" なのに
+ *     説明文だけ "AbilitYCharges" と参照している)→ 大文字小文字を無視して再探索
+ *   - 末尾に "_scale" を付けた別名で同じ値を指す(例: "MaxBonusBulletDamage_scale")
+ *     → "_scale" を外して再探索
+ * ゲーム本体のツールチップは実際にこの2つを解決して正しい値を出すため
+ * (実測で確認済み)、こちらも同じ挙動に合わせる。
  */
 export function describe(
   descToken: string,
-  properties: Record<string, { rawValue: string }> = {},
+  properties: Record<string, { rawValue: string; labelOverride?: string | null }> = {},
   fallback = "",
   extra: Record<string, string> = {},
 ): string {
   const raw = t(descToken, fallback);
   if (!raw) return "";
+  const byOverride = (key: string): string | undefined =>
+    Object.values(properties).find((p) => p.labelOverride === key)?.rawValue;
+  const byCaseInsensitive = (key: string): string | undefined => {
+    const lower = key.toLowerCase();
+    const found = Object.entries(properties).find(([name]) => name.toLowerCase() === lower);
+    return found?.[1].rawValue;
+  };
+  const resolveProp = (prop: string): string | undefined => {
+    const direct = properties[prop]?.rawValue ?? byOverride(prop) ?? extra[prop];
+    if (direct !== undefined) return direct;
+    if (prop.endsWith("_scale")) {
+      const base = prop.slice(0, -"_scale".length);
+      const scaled = properties[base]?.rawValue ?? byOverride(base);
+      if (scaled !== undefined) return scaled;
+    }
+    return byCaseInsensitive(prop);
+  };
   const resolved = raw
-    .replace(
-      /\{s:([A-Za-z0-9_]+)\}/g,
-      (_m, prop: string) => properties[prop]?.rawValue ?? extra[prop] ?? `?`,
-    )
+    .replace(/\{s:([A-Za-z0-9_]+)\}/g, (_m, prop: string) => resolveProp(prop) ?? `?`)
     .replace(
       /\{g:citadel_inline_attribute:'([A-Za-z0-9_]+)'\}/g,
       // SpiritIcon は文字ではなくアイコンの差し込み位置。文字にすると文意が壊れるので落とす
@@ -215,11 +242,14 @@ export function modifierLabel(type: string): string {
  */
 export function formatProperty(
   name: string,
-  prop: { rawValue: string; value: number | null },
+  prop: { rawValue: string; value: number | null; labelOverride?: string | null },
 ): { label: string; value: string } {
-  const label = t(`${name}_label`, humanize(name)) + t(`${name}_conditional`, "");
-  const prefix = t(`${name}_prefix`, "");
-  const postfix = t(`${name}_postfix`, "");
+  // m_strLocTokenOverride があれば、ラベル系トークンはそちらの名前で引く
+  // (例: ability_doorman_bomb の "ProjectileFuse" は "BellLifetime_label" しか無い)
+  const lookupName = prop.labelOverride ?? name;
+  const label = t(`${lookupName}_label`, humanize(name)) + t(`${lookupName}_conditional`, "");
+  const prefix = t(`${lookupName}_prefix`, "");
+  const postfix = t(`${lookupName}_postfix`, "");
 
   // rawValue は "15m" のように単位付きのことがある。
   // その場合 postfix("m")を足すと "15mm" になるので、既に付いていれば足さない。

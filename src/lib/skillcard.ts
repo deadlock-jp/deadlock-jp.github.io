@@ -81,7 +81,7 @@ export function skillCard(ab: Ability, heroName = ""): SkillCard {
   for (const [name, p] of Object.entries(props)) {
     if (!p.isAbilityDamage || p.value === null) continue;
     damage.push({
-      label: t(`${name}_label`, "ダメージ"),
+      label: t(`${p.labelOverride ?? name}_label`, "ダメージ"),
       value: formatProperty(name, p).value,
       scale: p.scale?.statScale ?? null,
     });
@@ -94,28 +94,38 @@ export function skillCard(ab: Ability, heroName = ""): SkillCard {
   for (const [name, p] of Object.entries(props)) {
     if (META_NAMES.has(name) || damageNames.has(name)) continue;
     if (isZero(p)) continue;
-    // ラベルがローカライズに無いもの(内部係数など)は出さない
-    if (!t(`${name}_label`, "")) continue;
+    // ラベルがローカライズに無いもの(内部係数など)は出さない。
+    // labelOverride(m_strLocTokenOverride)があれば、ラベルはそちらの名前で引く
+    // (例: ability_doorman_bomb の "ProjectileFuse" は "BellLifetime_label" しか無い)
+    if (!t(`${p.labelOverride ?? name}_label`, "")) continue;
     effects.push(formatProperty(name, p));
   }
 
   const upgrades: UpgradeTier[] = (ab.upgrades ?? []).map((tier, i) => {
     // この段階の bonus を rawValue として重ね、{s:プロパティ名} をこの段階の増分に解決する
     // (base の値ではなく)。例: t2_desc の "{s:AbilityCooldown}秒" は -10 に解決してほしい。
-    const bonusAsProps: Record<string, { rawValue: string }> = {};
-    for (const u of tier) bonusAsProps[u.property] = { rawValue: String(u.bonus) };
+    // labelOverride も引き継ぐ: describe() 側の {s:BellLifetime} のような override名参照が
+    // この段階の bonus 値を見つけられるようにする。
+    const bonusAsProps: Record<string, { rawValue: string; labelOverride: string | null }> = {};
+    for (const u of tier) {
+      bonusAsProps[u.property] = {
+        rawValue: String(u.bonus),
+        labelOverride: props[u.property]?.labelOverride ?? null,
+      };
+    }
     const description =
       describe(`${ab.id}_t${i + 1}_desc`, { ...props, ...bonusAsProps }, "", extra) || null;
     return {
       ap: AP_BY_TIER[i] ?? i + 1,
       description,
       rows: tier.map((u) => {
-        const post = t(`${u.property}_postfix`, "");
+        const lookupName = props[u.property]?.labelOverride ?? u.property;
+        const post = t(`${lookupName}_postfix`, "");
         const b = String(u.bonus);
         const sign = b.startsWith("-") ? "" : "+";
         // bonus が "10m" のように単位付きのことがある。postfix を足して "10mm" にしない
         const tail = post && !b.endsWith(post) ? post : "";
-        return { label: t(`${u.property}_label`, u.property), value: `${sign}${b}${tail}` };
+        return { label: t(`${lookupName}_label`, u.property), value: `${sign}${b}${tail}` };
       }),
     };
   });

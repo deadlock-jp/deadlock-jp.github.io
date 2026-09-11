@@ -137,12 +137,16 @@ const metaDesc =
       <ol class="upgrades">
         {item.upgrades.map((step) => (
           <li>
-            {step.map((u) => (
-              <span class="up">
-                {t(`${u.property}_label`, u.property)}
-                <b>+{u.bonus}{t(`${u.property}_postfix`, "")}</b>
-              </span>
-            ))}
+            {step.map((u) => {
+              // m_strLocTokenOverride があれば、ラベル系トークンはそちらの名前で引く
+              const lookupName = item.properties[u.property]?.labelOverride ?? u.property;
+              return (
+                <span class="up">
+                  {t(`${lookupName}_label`, u.property)}
+                  <b>+{u.bonus}{t(`${lookupName}_postfix`, "")}</b>
+                </span>
+              );
+            })}
           </li>
         ))}
       </ol>

@@ -39,6 +39,14 @@ export interface AbilityProperty {
    * ゲーム内の「スピリットパワーの影響値」の一覧はこのフラグが立ったものを並べている。
    */
   isAbilityDamage: boolean;
+  /**
+   * m_strLocTokenOverride。ラベル・説明文中の{s:X}参照に使う別名。
+   * 内部プロパティ名(name)とローカライズ上の呼び名が違うことがある
+   * (例: ability_doorman_bomb の "ProjectileFuse" は表示上・説明文中では
+   * "BellLifetime" として扱われ、"ProjectileFuse_label" は存在しない)。
+   * 無ければ null(その場合は name をそのまま使う)。
+   */
+  labelOverride: string | null;
 }
 
 /** ツールチップの構成。表示順の再現に使う */

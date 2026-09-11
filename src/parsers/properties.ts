@@ -62,6 +62,7 @@ export function parseProperties(v: Kv3Value | undefined): Record<string, Ability
       scale: parseScale(e["m_subclassScaleFunction"]),
       // このスキルの「主ダメージ」。ゲーム内のスピリットパワー影響値の一覧はこれを並べている
       isAbilityDamage: e["m_bIsAbilityDamageProperty"] === true,
+      labelOverride: str(e["m_strLocTokenOverride"]),
     };
   }
   return out;

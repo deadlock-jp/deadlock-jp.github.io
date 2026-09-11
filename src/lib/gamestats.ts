@@ -165,7 +165,7 @@ export function abilityDamages(hero: Hero): AbilityDamage[] {
           (per[0] ?? 0) + (per[1] ?? 0) + (per[2] ?? 0),
         ];
         damage = {
-          label: t(`${propName}_label`, propName),
+          label: t(`${prop.labelOverride ?? propName}_label`, propName),
           base: prop.value,
           scale: prop.scale?.statScale ?? 0,
           apBonus: cum,
