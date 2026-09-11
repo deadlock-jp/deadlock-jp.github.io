@@ -9,6 +9,7 @@
  */
 
 import type { Hero } from "../types/hero.ts";
+import type { WeaponInfo } from "../types/ability.ts";
 import { releasedHeroes, ability } from "./data.ts";
 import { toMeters, num } from "./gamestats.ts";
 
@@ -49,6 +50,30 @@ function weaponOf(h: Hero) {
   const slot = h.abilities.find((a) => a.slot === "Weapon_Primary");
   return slot ? (ability(slot.abilityKey)?.weapon ?? null) : null;
 }
+
+/**
+ * 武器単体の値を返す関数群。Hero ではなく WeaponInfo を直接受け取るので、
+ * シルバー(人狼)のように hero.abilities の既定武器とは別の武器
+ * (ライカンクロー)を評価したいときにも使い回せる(radarAxesForWeapon 参照)。
+ */
+const WEAPON_METRIC_FNS: Record<string, (w: WeaponInfo) => number | null> = {
+  dps: (w) => (w.cycleTime && w.bulletDamage !== null ? (w.bulletDamage / w.cycleTime) * (w.bulletsPerShot || 1) : null),
+  bullet: (w) => w.bulletDamage ?? null,
+  firerate: (w) => (w.cycleTime ? 1 / w.cycleTime : null),
+  clip: (w) => w.clipSize ?? null,
+  reload: (w) => w.reloadDuration ?? null,
+  velocity: (w) => (w.bulletSpeed != null ? (toMeters(w.bulletSpeed) ?? null) : null),
+  range: (w) => (w.falloff?.startRange != null ? (toMeters(w.falloff.startRange) ?? null) : null),
+  // ダメージ減衰"開始"距離(range)は武器の間合いとは別物(近距離武器でも遠くまで届く砲弾はある)。
+  // 減衰が下げ止まる距離(rangeEnd)の方が「実質的にダメージが届く距離」の指標になる。
+  rangeEnd: (w) => (w.falloff?.endRange != null ? (toMeters(w.falloff.endRange) ?? null) : null),
+};
+const weaponMetric =
+  (key: keyof typeof WEAPON_METRIC_FNS) =>
+  (h: Hero): number | null => {
+    const w = weaponOf(h);
+    return w ? WEAPON_METRIC_FNS[key](w) : null;
+  };
 function dashSpeed(h: Hero): number | null {
   const d = h.startingStats.EGroundDashDuration;
   return d ? (h.startingStats.EGroundDashDistanceInMeters ?? 0) / d : null;
@@ -72,56 +97,31 @@ function skillScaleAvg(h: Hero): number | null {
 
 const METRICS: Metric[] = [
   // --- 武器 ---
-  {
-    key: "dps",
-    label: "DPS",
-    group: "weapon",
-    get: (h) => {
-      const w = weaponOf(h);
-      return w && w.cycleTime && w.bulletDamage !== null
-        ? (w.bulletDamage / w.cycleTime) * (w.bulletsPerShot || 1)
-        : null;
-    },
-    fmt: (v) => num(v, 0),
-  },
-  { key: "bullet", label: "1発ダメージ", group: "weapon", get: (h) => weaponOf(h)?.bulletDamage ?? null, fmt: (v) => num(v, 1) },
-  {
-    key: "firerate",
-    label: "連射",
-    group: "weapon",
-    get: (h) => {
-      const w = weaponOf(h);
-      return w?.cycleTime ? 1 / w.cycleTime : null;
-    },
-    fmt: (v) => `${num(v, 1)}発/秒`,
-  },
-  { key: "clip", label: "装弾数", group: "weapon", get: (h) => weaponOf(h)?.clipSize ?? null, fmt: (v) => num(v, 0) },
+  { key: "dps", label: "DPS", group: "weapon", get: weaponMetric("dps"), fmt: (v) => num(v, 0) },
+  { key: "bullet", label: "1発ダメージ", group: "weapon", get: weaponMetric("bullet"), fmt: (v) => num(v, 1) },
+  { key: "firerate", label: "連射", group: "weapon", get: weaponMetric("firerate"), fmt: (v) => `${num(v, 1)}発/秒` },
+  { key: "clip", label: "装弾数", group: "weapon", get: weaponMetric("clip"), fmt: (v) => num(v, 0) },
   {
     key: "reload",
     label: "リロード",
     group: "weapon",
     lowerIsBetter: true,
-    get: (h) => weaponOf(h)?.reloadDuration ?? null,
+    get: weaponMetric("reload"),
     fmt: (v) => `${num(v, 2)}秒`,
   },
-  {
-    key: "velocity",
-    label: "弾速",
-    group: "weapon",
-    get: (h) => {
-      const w = weaponOf(h);
-      return w?.bulletSpeed != null ? (toMeters(w.bulletSpeed) ?? null) : null;
-    },
-    fmt: (v) => `${num(v, 0)}m/秒`,
-  },
+  { key: "velocity", label: "弾速", group: "weapon", get: weaponMetric("velocity"), fmt: (v) => `${num(v, 0)}m/秒` },
   {
     key: "range",
     label: "減衰開始",
     group: "weapon",
-    get: (h) => {
-      const w = weaponOf(h);
-      return w?.falloff?.startRange != null ? (toMeters(w.falloff.startRange) ?? null) : null;
-    },
+    get: weaponMetric("range"),
+    fmt: (v) => `${num(v, 0)}m`,
+  },
+  {
+    key: "rangeEnd",
+    label: "減衰終了",
+    group: "weapon",
+    get: weaponMetric("rangeEnd"),
     fmt: (v) => `${num(v, 0)}m`,
   },
   { key: "lmelee", label: "軽近接", group: "weapon", get: (h) => h.startingStats.ELightMeleeDamage ?? null, fmt: (v) => num(v, 0) },
@@ -251,7 +251,7 @@ export interface RadarAxis {
   raw: string;
 }
 
-const WEAPON_AXES = ["dps", "bullet", "firerate", "clip", "reload", "velocity", "range"];
+const WEAPON_AXES = ["dps", "bullet", "firerate", "clip", "reload", "velocity", "range", "rangeEnd"];
 const VITALITY_AXES = ["hp", "regen", "move", "sprint", "dash", "stam", "stamcd"];
 const GROWTH_AXES = ["gwdmg", "ghp", "gmelee", "gspower"];
 
@@ -272,6 +272,41 @@ export function heroRadar(heroId: number): {
     base: asAxes(r.vitality, VITALITY_AXES),
     growth: asAxes(r.growth, GROWTH_AXES),
   };
+}
+
+let weaponSortedCache: Record<string, number[]> | null = null;
+function weaponMetricSorted(): Record<string, number[]> {
+  if (weaponSortedCache) return weaponSortedCache;
+  const heroes = releasedHeroes();
+  const out: Record<string, number[]> = {};
+  for (const key of Object.keys(WEAPON_METRIC_FNS)) {
+    const vals = heroes.map((h) => weaponMetric(key)(h)).filter((v): v is number => v != null);
+    out[key] = [...vals].sort((a, b) => a - b);
+  }
+  weaponSortedCache = out;
+  return out;
+}
+
+/**
+ * 特定の武器(WeaponInfo)ぶんのレーダー軸を、実装済みヒーロー全員の武器値分布の中での
+ * 百分位で作る。シルバー(人狼)のライカンクローのように、hero.abilities の
+ * 既定武器(Weapon_Primary)とは別の武器を評価したいときに使う
+ * (通常の heroRadar は常に既定武器を見るため、変身後の武器は別途これで計算する)。
+ */
+export function radarAxesForWeapon(weapon: WeaponInfo | null): RadarAxis[] {
+  if (!weapon) return [];
+  const sorted = weaponMetricSorted();
+  const byKey = new Map(METRICS.filter((m) => m.group === "weapon").map((m) => [m.key, m]));
+  const axes: RadarAxis[] = [];
+  for (const key of WEAPON_AXES) {
+    const fn = WEAPON_METRIC_FNS[key];
+    const m = byKey.get(key);
+    if (!fn || !m) continue;
+    const raw = fn(weapon);
+    if (raw == null) continue;
+    axes.push({ label: m.label, value: percentileOf(sorted[key] ?? [], raw), raw: m.fmt(raw) });
+  }
+  return axes;
 }
 
 /**
@@ -307,7 +342,11 @@ const TIER_METRICS: Array<TierMetric & { rankGroup: "weapon" | "vitality" | "spi
   { key: "clip", label: "装弾数", group: "武器", rankGroup: "weapon" },
   { key: "reload", label: "リロード(速い順)", group: "武器", rankGroup: "weapon" },
   { key: "velocity", label: "弾速", group: "武器", rankGroup: "weapon" },
-  { key: "range", label: "射程(減衰開始)", group: "武器", rankGroup: "weapon" },
+  { key: "range", label: "減衰開始", group: "武器", rankGroup: "weapon" },
+  // 「射程」の実質的な指標。減衰開始距離は間合いの近さとは関係ない
+  // (近接寄りの武器でも遠くまで届くことがある)。減衰が下げ止まる距離の方が
+  // 「ダメージが実質的に届く距離」に近い
+  { key: "rangeEnd", label: "射程(減衰終了)", group: "武器", rankGroup: "weapon" },
   { key: "lmelee", label: "軽近接", group: "武器", rankGroup: "weapon" },
   { key: "hmelee", label: "重近接", group: "武器", rankGroup: "weapon" },
   { key: "hp", label: "最大HP", group: "生命力", rankGroup: "vitality" },

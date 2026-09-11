@@ -14,7 +14,7 @@ import {
   heroAdjustments,
   upstreamRepo,
 } from "../../lib/data.ts";
-import { heroRadar, heroMiscRows } from "../../lib/herorank.ts";
+import { heroRadar, heroMiscRows, radarAxesForWeapon } from "../../lib/herorank.ts";
 import { skillCard } from "../../lib/skillcard.ts";
 import AdjustmentHistory from "../../components/AdjustmentHistory.astro";
 import HeroStrip from "../../components/HeroStrip.astro";
@@ -81,6 +81,12 @@ const skillGroups = altSkills
     ]
   : [{ form: null, label: null, list: skills }];
 
+// 変身で武器も入れ替わる場合、その武器の値を既存ヒーロー全員の分布に載せてレーダーを作る
+// (heroRadar は常に既定武器=Weapon_Primaryを見るため、変身後の武器は別計算になる)
+const altWeaponKey = transformAbility?.alternateFormAbilities?.["Weapon_Primary"];
+const altWeapon = altWeaponKey ? (ability(altWeaponKey)?.weapon ?? null) : null;
+const altWeaponRadar = altWeapon ? radarAxesForWeapon(altWeapon) : null;
+
 const spiritBadge = (scale: number | null) => (scale ? `×${scale}` : null);
 const adjRows = heroAdjustments(hero.key);
 const skillNames = skills.map((s) => t(s.key, "")).filter(Boolean);
@@ -113,9 +119,30 @@ const metaDesc =
   )}
   <p class="lead">{t(hero.roleToken, "")}</p>
 
+  {altSkills && (
+    <div class="formtoggle" role="tablist">
+      {skillGroups.map((g, i) => (
+        <button type="button" class:list={["ftbtn", { active: i === 0 }]} data-form={g.form}>
+          {g.label}
+        </button>
+      ))}
+    </div>
+  )}
+
   <h2>ステータス</h2>
   <div class="radars">
-    {radar.weapon.length > 0 && <StatRadar axes={radar.weapon} cssVar="weapon" title="武器" />}
+    {altWeaponRadar ? (
+      <>
+        <div class="formpanel" data-form="human">
+          {radar.weapon.length > 0 && <StatRadar axes={radar.weapon} cssVar="weapon" title="武器" />}
+        </div>
+        <div class="formpanel" data-form="werewolf" hidden>
+          <StatRadar axes={altWeaponRadar} cssVar="weapon" title="武器" />
+        </div>
+      </>
+    ) : (
+      radar.weapon.length > 0 && <StatRadar axes={radar.weapon} cssVar="weapon" title="武器" />
+    )}
     <StatRadar axes={radar.base} cssVar="vitality" title="生命力" />
     <StatRadar axes={radar.growth} cssVar="spirit" title="成長度／Lv" />
   </div>
@@ -139,15 +166,6 @@ const metaDesc =
   )}
 
   <h2>スキル</h2>
-  {altSkills && (
-    <div class="formtoggle" role="tablist">
-      {skillGroups.map((g, i) => (
-        <button type="button" class:list={["ftbtn", { active: i === 0 }]} data-form={g.form}>
-          {g.label}
-        </button>
-      ))}
-    </div>
-  )}
   <div class="skills">
     {skillGroups.map((g) => g.list.map((s) => {
       const isUlt = s.ab.kind === "Ultimate";
@@ -240,7 +258,7 @@ const metaDesc =
     <script is:inline>
       (() => {
         const buttons = document.querySelectorAll(".formtoggle .ftbtn");
-        const panels = document.querySelectorAll(".skills [data-form]");
+        const panels = document.querySelectorAll(".skills [data-form], .radars .formpanel");
         for (const btn of buttons) {
           btn.addEventListener("click", () => {
             const form = btn.dataset.form;
