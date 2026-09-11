@@ -2,12 +2,19 @@
  * パーサーCLI
  *
  *   node --experimental-strip-types src/parsers/main.ts --gt <GameTracking-Deadlockのパス>
+ *   node --experimental-strip-types src/parsers/main.ts --local <ローカル抽出ルート>
  *
- * GameTracking-Deadlock から data/*.json を生成する。
- * --gt を省略した場合は環境変数 GAMETRACKING_PATH、それも無ければ ../GameTracking-Deadlock を見る。
+ * --gt: GameTracking-Deadlock から data/*.json(フラット)を生成する。
+ *       検算・過去スナップショットのバックフィル用。--gt を省略した場合は
+ *       環境変数 GAMETRACKING_PATH、それも無ければ ../GameTracking-Deadlock を見る。
+ *
+ * --local: このPC のゲームクライアントから抽出したローカルルート
+ *       (tools/extract/extract-local.mjs の出力。steam.inf / scripts/ / localization/ を持つ)
+ *       から data/snapshots/<ClientVersion>/*.json を生成し、data/latest.json を更新する。
+ *       これが現在の一次ソース(architecture.html 参照)。
  */
 
-import { writeFileSync, mkdirSync, existsSync } from "node:fs";
+import { writeFileSync, mkdirSync, existsSync, readFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { resolve, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -51,48 +58,31 @@ function upstreamCommit(gtPath: string): string {
   }
 }
 
-function writeJson(name: string, data: unknown): void {
-  const dir = join(REPO_ROOT, "data");
+function writeJsonTo(dir: string, name: string, data: unknown): void {
   mkdirSync(dir, { recursive: true });
   const path = join(dir, name);
   writeFileSync(path, JSON.stringify(data, null, 2) + "\n", "utf8");
-  return void console.log(`  data/${name}`);
+  console.log(`  ${path.replace(REPO_ROOT + "\\", "").replace(REPO_ROOT + "/", "")}`);
 }
 
-function main(): void {
-  const gt = resolveGameTrackingPath();
-  const sha = upstreamCommit(gt);
-  const scripts = join(gt, "game/citadel/pak01_dir/scripts");
-
-  console.log(`GameTracking-Deadlock: ${gt}`);
-  console.log(`commit: ${sha}`);
-  console.log("生成:");
-
+/** ヒーロー/アイテム/アビリティ/オブジェクトを一括 parse して件数レポートを出す */
+function parseAll(
+  scripts: string,
+  sha: string,
+): {
+  heroes: ReturnType<typeof parseHeroes>;
+  items: ReturnType<typeof parseItems>;
+  abilities: ReturnType<typeof parseAbilities>;
+  objects: ReturnType<typeof parseObjects>;
+} {
   const heroes = parseHeroes(join(scripts, "heroes.vdata"), sha);
-  writeJson("heroes.json", heroes);
-
   const items = parseItems(
     join(scripts, "abilities.vdata"),
     join(scripts, "generic_data.vdata"),
     sha,
   );
-  writeJson("items.json", items);
-
   const abilities = parseAbilities(join(scripts, "abilities.vdata"), sha);
-  writeJson("abilities.json", abilities);
-
   const objects = parseObjects(join(scripts, "npc_units.vdata"), sha);
-  writeJson("objects.json", objects);
-
-  // 英語は GameTracking-Deadlock に含まれる。日本語はゲーム本体から取得して
-  // 同じ場所に置けば、--lang japanese で同じパーサーが読む。
-  const lang = argValue("lang") ?? "english";
-  const localization = parseLocalization(
-    join(gt, "game/citadel/resource/localization"),
-    lang,
-    sha,
-  );
-  writeJson(`localization.${lang}.json`, localization);
 
   const heroTotal = Object.keys(heroes.heroes).length;
   const released = Object.values(heroes.heroes).filter((h) => h.released).length;
@@ -121,9 +111,12 @@ function main(): void {
     console.log(`  ${kind.padEnd(10)} ${String(n).padStart(3)} 件`);
   }
   console.log(`  銃データを持つもの ${abilityList.filter((a) => a.weapon).length} 件`);
-
   console.log(`オブジェクト ${Object.keys(objects.objects).length} 件`);
 
+  return { heroes, items, abilities, objects };
+}
+
+function reportLocalization(localization: ReturnType<typeof parseLocalization>, lang: string): void {
   const tokenTotal = Object.keys(localization.tokens).length;
   console.log(`ローカライズ(${localization.language}) ${tokenTotal} トークン`);
   for (const [group, n] of Object.entries(localization.groupCounts)) {
@@ -131,6 +124,91 @@ function main(): void {
   }
   if (tokenTotal === 0) {
     console.log(`  ※ ${lang} のファイルが見つかりませんでした`);
+  }
+}
+
+/** --gt: GameTracking-Deadlock からフラットな data/*.json を生成(検算・バックフィル用) */
+function runGameTracking(): void {
+  const gt = resolveGameTrackingPath();
+  const sha = upstreamCommit(gt);
+  const scripts = join(gt, "game/citadel/pak01_dir/scripts");
+  const dataDir = join(REPO_ROOT, "data");
+
+  console.log(`GameTracking-Deadlock: ${gt}`);
+  console.log(`commit: ${sha}`);
+  console.log("生成:");
+
+  const { heroes, items, abilities, objects } = parseAll(scripts, sha);
+  writeJsonTo(dataDir, "heroes.json", heroes);
+  writeJsonTo(dataDir, "items.json", items);
+  writeJsonTo(dataDir, "abilities.json", abilities);
+  writeJsonTo(dataDir, "objects.json", objects);
+
+  // 英語は GameTracking-Deadlock に含まれる。日本語はゲーム本体から取得して
+  // 同じ場所に置けば、--lang japanese で同じパーサーが読む。
+  const lang = argValue("lang") ?? "english";
+  const localization = parseLocalization(join(gt, "game/citadel/resource/localization"), lang, sha);
+  writeJsonTo(dataDir, `localization.${lang}.json`, localization);
+  reportLocalization(localization, lang);
+}
+
+/**
+ * --local: tools/extract/extract-local.mjs が作ったローカル抽出ルートから
+ * data/snapshots/<ClientVersion>/*.json を生成し、data/latest.json を更新する。
+ * スナップショットが唯一の真実の源(architecture.html)。フラットな data/*.json は書かない。
+ */
+function runLocal(localRoot: string): void {
+  const scripts = join(localRoot, "scripts");
+  if (!existsSync(join(scripts, "heroes.vdata"))) {
+    throw new Error(
+      `scripts/heroes.vdata が見つかりません: ${scripts}\n` +
+        `tools/extract/extract-local.mjs の出力ディレクトリを --local に渡してください。`,
+    );
+  }
+  const infText = readFileSync(join(localRoot, "steam.inf"), "utf8");
+  const clientVersion = infText.match(/^ClientVersion=(\S+)/m)?.[1];
+  if (!clientVersion) throw new Error(`steam.inf に ClientVersion がありません: ${localRoot}`);
+
+  console.log(`ローカル抽出ルート: ${localRoot}`);
+  console.log(`ClientVersion: ${clientVersion}`);
+  console.log("生成:");
+
+  const snapDir = join(REPO_ROOT, "data", "snapshots", clientVersion);
+  const source = "game-client";
+
+  const { heroes, items, abilities, objects } = parseAll(scripts, clientVersion);
+  writeJsonTo(snapDir, "heroes.json", heroes);
+  writeJsonTo(snapDir, "items.json", items);
+  writeJsonTo(snapDir, "abilities.json", abilities);
+  writeJsonTo(snapDir, "objects.json", objects);
+
+  const locRoot = join(localRoot, "localization");
+  for (const lang of ["japanese", "english"] as const) {
+    const localization = parseLocalization(locRoot, lang, clientVersion);
+    writeJsonTo(snapDir, `localization.${lang}.json`, localization);
+    reportLocalization(localization, lang);
+  }
+
+  const meta = {
+    clientVersion,
+    patchVersion: infText.match(/^ServerVersion=(\S+)/m)?.[1] ?? clientVersion,
+    extractedAt: new Date().toISOString(),
+    source,
+    extractorVersion: "Source2Viewer-CLI 20.0",
+  };
+  writeJsonTo(snapDir, "meta.json", meta);
+
+  const latestPath = join(REPO_ROOT, "data", "latest.json");
+  writeFileSync(latestPath, JSON.stringify({ version: clientVersion }, null, 2) + "\n", "utf8");
+  console.log(`\n  data/latest.json -> ${clientVersion}`);
+}
+
+function main(): void {
+  const local = argValue("local");
+  if (local) {
+    runLocal(resolve(local));
+  } else {
+    runGameTracking();
   }
 }
 

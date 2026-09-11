@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "upstreamCommit": "c34d25e806a6410f00037d34782d45fe2b9f550f",
-  "generatedAt": "2026-09-05T05:01:03.839Z",
+  "upstreamCommit": "6687",
+  "generatedAt": "2026-09-11T14:34:19.546Z",
   "language": "japanese",
   "groupCounts": {
     "citadel_gc_hero_names": 189,
     "citadel_gc_mod_names": 234,
     "citadel_mods": 614,
-    "citadel_heroes": 3324,
+    "citadel_heroes": 3325,
     "citadel_attributes": 1965,
     "citadel_gc": 300,
     "citadel_main": 3924
@@ -129,9 +129,9 @@
       "hash": "646fe4e9fea1"
     },
     "hero_test:n": {
-      "text": "ヒーローを試す",
+      "text": "テストヒーロー",
       "group": "citadel_gc_hero_names",
-      "hash": "b959f335e51b"
+      "hash": "32038acbd767"
     },
     "hero_test_search:n": {
       "text": "ヒーローを試す",
@@ -2289,9 +2289,9 @@
       "hash": "4345cb1fa278"
     },
     "upgrade_bullet_armor_reduction_aura_desc": {
-      "text": "付近にいる敵の<span class=\"highlight\">弾薬耐性と発射速度</span>を低下させる。付近にいる敵が1人だけの場合、この<span class=\"highlight\">効果量は2倍</span>になる",
+      "text": "付近にいる敵の<span class=\"highlight\">弾薬耐性と発射速度</span>を低下させる。付近にいるのが敵ヒーロー1人だけの場合、この<span class=\"highlight\">効果量は2倍</span>になる",
       "group": "citadel_mods",
-      "hash": "7b129d0699f2"
+      "hash": "be0e58cf63ca"
     },
     "upgrade_dps_aura_active_desc": {
       "text": "自分自身と付近にいる味方の<span class=\"highlight\">{g:citadel_inline_attribute:'MoveSpeed'}</span>と<span class=\"highlight\">{g:citadel_inline_attribute:'FireRate'}</span>を上昇させる。<span class=\"highlight\">トルーパー</span>に対しては効果が2倍になる",
@@ -2799,9 +2799,9 @@
       "hash": "bf4c1c510aee"
     },
     "upgrade_pristine_emblem_desc": {
-      "text": "<span class=\"highlight\">HPが{s:EnemyLifeThreshold}%を上回る敵<span class=\"highlight\">に対する攻撃が追加で<span class=\"highlight\">武器ダメージ</span>を与える",
+      "text": "<span class=\"highlight\">HPが{s:EnemyLifeThreshold}%を上回る敵</span>に対する攻撃が追加で<span class=\"highlight\">武器ダメージ</span>を与える",
       "group": "citadel_mods",
-      "hash": "327d4167a76b"
+      "hash": "f2280d64db2b"
     },
     "BaseAttackDamagePercentBonus_label": {
       "text": "武器ダメージ",
@@ -3324,9 +3324,9 @@
       "hash": "a5b71c313561"
     },
     "ProcAmmoConsumed_label": {
-      "text": "消費する追加弾薬",
+      "text": "消費する追加弾数",
       "group": "citadel_mods",
-      "hash": "d245d91be0a8"
+      "hash": "9e804dc20b47"
     },
     "ProcAmmoConsumed_postvalue_label": {
       "text": "消費する追加弾数",
@@ -4109,9 +4109,9 @@
       "hash": "07747949dddc"
     },
     "upgrade_ultimate_burst_hint": {
-      "text": "<span class=\"diminish\">この効果はアルティメットにつき対象1人にのみ発生する</span>",
+      "text": "<span class=\"diminish\">この効果は1度のアルティメットにつき、対象ごとに1度のみ発生する</span>",
       "group": "citadel_mods",
-      "hash": "e3dbc4839bf8"
+      "hash": "31c818170dd1"
     },
     "LightningScrollMysticSlow_label": {
       "text": "スピリットダメージ時の移動速度",
@@ -4539,9 +4539,9 @@
       "hash": "4a5340ddded9"
     },
     "upgrade_weapon_shielding_desc": {
-      "text": "短時間内に敵から一定以上の{g:citadel_inline_attribute:'WeaponDamage'}を受けると、<span class=\"highlight\">バリア</span>を獲得する",
+      "text": "短時間内に敵ヒーローから一定以上の{g:citadel_inline_attribute:'WeaponDamage'}を受けると、<span class=\"highlight\">バリア</span>を獲得する",
       "group": "citadel_mods",
-      "hash": "1226b97717aa"
+      "hash": "da89fb42f853"
     },
     "DamageWindow_label": {
       "text": "判定時間",
@@ -4559,9 +4559,9 @@
       "hash": "eb6aaba1a1ca"
     },
     "upgrade_spirit_bubble_desc": {
-      "text": "短時間内に敵から一定以上の{g:citadel_inline_attribute:'SpiritDamage'}を受けると、<span class=\"highlight\">バリア</span>を獲得する",
+      "text": "短時間内に敵ヒーローから一定以上の{g:citadel_inline_attribute:'SpiritDamage'}を受けると、<span class=\"highlight\">バリア</span>を獲得する",
       "group": "citadel_mods",
-      "hash": "d7da2fd54a80"
+      "hash": "16302c05d352"
     },
     "upgrade_grit_desc": {
       "text": "短時間、<span class=\"highlight\">バリア</span>を獲得する",
@@ -4969,9 +4969,9 @@
       "hash": "c44fe842ae8a"
     },
     "upgrade_haunting_scream_desc": {
-      "text": "拡大する発射物を放つ。投射物は命中した敵を短時間<span class=\"highlight\">呪う</span>",
+      "text": "拡大する発射物を放つ。発射物は命中した敵を短時間<span class=\"highlight\">呪う</span>",
       "group": "citadel_mods",
-      "hash": "2d60f8cc5689"
+      "hash": "d322b979545c"
     },
     "upgrade_apex_combat_desc": {
       "text": "対象にヒットした弾薬が、付近にいる敵に<span class=\"highlight\">跳弾</span>する。跳弾は<span class=\"highlight\">弾薬ヒット時効果を発生</span>させ、<span class=\"highlight\">元ダメージに応じたダメージを与える</span>",
@@ -5544,9 +5544,9 @@
       "hash": "896eb582dc83"
     },
     "citadel_ability_static_charge_t3_desc": {
-      "text": "スタン継続時間 <span class=\"highlight\">+{s:StunDuration}秒</span>、ダメージ <br>+{s:Damage}<span class=\"highlight\">",
+      "text": "スタン継続時間 <span class=\"highlight\">+{s:StunDuration}秒</span><br>ダメージ <span class=\"highlight\">+{s:Damage}</span>",
       "group": "citadel_heroes",
-      "hash": "f6baf39affde"
+      "hash": "bca6ff556773"
     },
     "citadel_ability_static_charge_v2": {
       "text": "スタティックチャージ",
@@ -5579,9 +5579,9 @@
       "hash": "4620a1b83878"
     },
     "citadel_ability_lightning_ball_t2_desc": {
-      "text": "ヒットした対象の移動速度 <span class=\"highlight\">-{s:SlowPercent}%</span>、電球の生存時間 <span class=\"highlight\">+{s:MaxLifetime}秒</span>",
+      "text": "ヒットした対象の移動速度 <span class=\"highlight\">-{s:SlowPercent}%</span>、雷球の生存時間 <span class=\"highlight\">+{s:MaxLifetime}秒</span>",
       "group": "citadel_heroes",
-      "hash": "5e7d2189f18d"
+      "hash": "e22935234abb"
     },
     "citadel_ability_lightning_ball_t3_desc": {
       "text": "DPS +{s:DPS}、範囲 +{s:ShockRadius}m",
@@ -5879,9 +5879,9 @@
       "hash": "7fdb5c5c4dfc"
     },
     "citadel_ability_fissure_wall_desc": {
-      "text": "通り抜けた敵に<span class=\"highlight\">スロウを付与</span>する壁を生成する。生成された壁は<span class=\"highlight\">地形を分断</span>し、付近にいる敵に<span class=\"highlight\">ダメージ</span>を与える<br>キャスト後、{g:citadel_binding:'Attack'}か{g:citadel_binding:'Ability3'}を押すと早めに壁を生成できる<br><br><span class=\"diminish\">壁は近接攻撃で破壊できる</span>",
+      "text": "通り抜けた敵に<span class=\"highlight\">スロウを付与</span>する壁を前方に射出する。壁は生成時に<span class=\"highlight\">地形を分断</span>し、付近にいる敵に<span class=\"highlight\">ダメージ</span>を与える<br>キャスト後、{g:citadel_binding:'Attack'}か{g:citadel_binding:'Ability3'}を押すと早めに壁を生成できる<br><br><span class=\"diminish\">壁は近接攻撃で破壊できる</span>",
       "group": "citadel_heroes",
-      "hash": "74dac12dbedd"
+      "hash": "fa7d9b4ca130"
     },
     "citadel_ability_fissure_wall_t1_desc": {
       "text": "ヒットした敵に対して{s:hero_name}の与えるダメージが、{s:DebuffDuration}秒間<span class=\"highlight\">+{s:BonusDamagePercent}%</span>",
@@ -6789,9 +6789,9 @@
       "hash": "957d010113ea"
     },
     "citadel_ability_chrono_pulse_grenade_t2_desc": {
-      "text": "パルスダメージ <span class=\"highlight\">+{s:PulseDamage}、スピリットスケーリングが上昇する",
+      "text": "パルスダメージ <span class=\"highlight\">+{s:PulseDamage}</span>、スピリットスケーリングが上昇する",
       "group": "citadel_heroes",
-      "hash": "06fe9164ef6a"
+      "hash": "33f906b083e5"
     },
     "citadel_ability_chrono_pulse_grenade_t3_desc": {
       "text": "ダメージ増幅 <span class=\"highlight\">+{s:PulseGrenadeDamageAmplificationPerStack}%</span>、継続時間 <span class=\"highlight\">+{s:AbilityDuration}秒</span>",
@@ -7734,9 +7734,9 @@
       "hash": "ce537842b8b4"
     },
     "ability_stacking_damage/modifier_passive_haze_stacking_damage": {
-      "text": "凝視状態",
+      "text": "フィクセーション状態",
       "group": "citadel_heroes",
-      "hash": "17ccdf5e7ab9"
+      "hash": "da1be91207e6"
     },
     "ability_stacking_damage_t1_desc": {
       "text": "<span class=\"highlight\">{s:ProcDamageStackCount}</span>スタックごとに<span class=\"highlight\">{s:ProcDamage}</span>スピリットダメージを与え、<span class=\"highlight\">{s:SlowPercent}%</span>のスロウを{s:SlowDuration}秒間付与する",
@@ -7749,9 +7749,9 @@
       "hash": "343927b4e4dd"
     },
     "ability_stacking_damage_t3_desc": {
-      "text": "スタックあたり <span class=\"highlight\">+{s:DamageBonusFixedPerStack}</span>武器ダメージでスケールする",
+      "text": "スタックあたり <span class=\"highlight\">+{s:DamageBonusFixedPerStack}</span><br>武器ダメージでスケールする",
       "group": "citadel_heroes",
-      "hash": "8f7b8cc66b7c"
+      "hash": "5827ecd47f33"
     },
     "DamageBonusFixedPerStack_label": {
       "text": "武器ダメージ",
@@ -8229,9 +8229,9 @@
       "hash": "4c612cbb302f"
     },
     "Citadel_Warden_HeroTag_3": {
-      "text": "ワンマン",
+      "text": "ワンマンアーミー",
       "group": "citadel_heroes",
-      "hash": "e1304b848114"
+      "hash": "4cad3a8fc61c"
     },
     "ability_warden_lock_down": {
       "text": "バインディングワード",
@@ -8249,9 +8249,9 @@
       "hash": "adb83c45e2ce"
     },
     "ability_warden_lock_down_t1_desc": {
-      "text": "移動不能状態のヒーローに対して<span class=\"highlight\">{s:BulletArmorReductionDuration}秒間</span>、{s:hero_name}が与える<span class=\"highlight\">弾薬ダメージが +{s:BulletArmorReduction}</span> 上昇する",
+      "text": "移動不能状態のヒーローに対して<span class=\"highlight\">{s:BulletArmorReductionDuration}秒間</span>、{s:hero_name}が与える<span class=\"highlight\">弾薬ダメージが +{s:BulletArmorReduction}%</span> 上昇する",
       "group": "citadel_heroes",
-      "hash": "f655f3889562"
+      "hash": "9785241203d5"
     },
     "ability_warden_lock_down_t2_desc": {
       "text": "継続時間 +{s:ImmobilizeDuration}秒",
@@ -9179,9 +9179,9 @@
       "hash": "166f6116b002"
     },
     "citadel_ability_lash_ultimate_desc": {
-      "text": "敵にフォーカスしてムチをつなげる。詠唱後、ムチでつながった敵を<span class=\"highlight\">持ち上げてスタン状態</span>を付与し、地面に叩きつける。対象と着地地点にいた敵には<span class=\"highlight\">ダメージとスロウ</span>を与える<br>{g:citadel_binding:'Attack'}を押すと早めに敵を持ち上げる。ムチをつないだ後に射線から外れた敵や範囲外に移動した敵は捕まえられない",
+      "text": "敵にフォーカスしてムチをつなげる。詠唱後、ムチでつながった敵を<span class=\"highlight\">持ち上げてスタン状態</span>を付与し、地面に叩きつける。対象と着地地点にいた敵には<span class=\"highlight\">ダメージとスロウ</span>を与える<br>{g:citadel_binding:'Attack'}を押すと、つないだ敵を早めに持ち上げる。ムチをつないだ後に射線から外れた敵や範囲外に移動した敵は捕まえられない",
       "group": "citadel_heroes",
-      "hash": "fc75434176e9"
+      "hash": "d62680e6dad6"
     },
     "citadel_ability_lash_ultimate_t3_desc": {
       "text": "範囲内の敵を{s:StunDuration}秒間<span class=\"highlight\">スタン</span>させる<br>キャスト範囲<span class=\"highlight\">+{s:AbilityCastRange}m</span>",
@@ -9989,9 +9989,9 @@
       "hash": "c56dd71369d0"
     },
     "ability_bounce_pad_desc": {
-      "text": "バウンスパッドを設置し、<span class=\"highlight\">任意のヒーローに放つ</span><br><br>着地時に<span class=\"highlight\">爆発</span>し、付近の敵に<Panel class=\"AbilityPropertyIcon prop_tech_damage\"><span class=\"highlight_spirit\">ダメージ</span>を与える<br><br><span class=\"diminish\">爆発は各バウンスパッドごとに1人につき1回のみ発生する</span>",
+      "text": "<span class=\"highlight\">触れたヒーローを射出する</span>バウンスパッドを設置する<br><br>着地時に<span class=\"highlight\">爆発</span>し、付近の敵に<Panel class=\"AbilityPropertyIcon prop_tech_damage\"><span class=\"highlight_spirit\">ダメージ</span>を与える<br><br><span class=\"diminish\">爆発は各バウンスパッドごとに1人につき1回のみ発生する</span>",
       "group": "citadel_heroes",
-      "hash": "41c253fc1b61"
+      "hash": "9fe4aa1befc3"
     },
     "ability_bounce_pad_t1_desc": {
       "text": "クールダウン <span class=\"highlight\">{s:AbilityCooldown}秒</span>",
@@ -10404,14 +10404,14 @@
       "hash": "eb6aaba1a1ca"
     },
     "StatueHeldRegen_label": {
-      "text": "アヴァのリジェネ回収",
+      "text": "アヴァ回収時のリジェネ",
       "group": "citadel_heroes",
-      "hash": "867732f8e5d5"
+      "hash": "b74545096e8c"
     },
     "StatueHeldRegen_postvalue_label": {
-      "text": "アヴァのリジェネ回収",
+      "text": "アヴァ回収時のリジェネ",
       "group": "citadel_heroes",
-      "hash": "867732f8e5d5"
+      "hash": "b74545096e8c"
     },
     "StatueLifesteal_label": {
       "text": "ライフスティール",
@@ -11069,9 +11069,9 @@
       "hash": "64dc99b1f1b6"
     },
     "ability_guided_arrow_desc": {
-      "text": "{s:AbilityCastDelay}秒の詠唱後、<span class=\"highlight\">操作可能なフクロウの精霊を放つ</span>。フクロウは着弾時に爆発し、敵に<span class=\"highlight\">ダメージを与えてスタンを付与</span>する。 {g:citadel_binding:'MoveForward'}長押しでフクロウを加速可能<br>{g:citadel_binding:'Mantle'}で操作を解除する。ガイドアウルで敵をキルするたびに<span class=\"highlight\">永続的なスピリットパワー</span>を獲得する",
+      "text": "{s:AbilityCastDelay}秒の詠唱後、<span class=\"highlight\">操作可能なフクロウの精霊を放つ</span>。フクロウは着弾時に爆発し、敵に<span class=\"highlight\">ダメージを与えてスタンを付与</span>する。 {g:citadel_binding:'MoveForward'}長押しでフクロウを加速可能<br>{g:citadel_binding:'Mantle'}で操作を解除する。ガイドアウルで敵ヒーローをキルするたびに<span class=\"highlight\">永続的なスピリットパワー</span>を獲得する",
       "group": "citadel_heroes",
-      "hash": "5d7503efa7fd"
+      "hash": "8ba7de52c0c3"
     },
     "ability_guided_arrow_t3_desc": {
       "text": "ヒット後、<span class=\"highlight\">HPが {s:LowHealthEnemyThresholdPct}%</span>を下回る敵をキルする",
@@ -12119,9 +12119,9 @@
       "hash": "6698926011c1"
     },
     "AOERadius_label": {
-      "text": "効果範囲",
+      "text": "衝撃範囲",
       "group": "citadel_heroes",
-      "hash": "d90d54cb70dd"
+      "hash": "331002b717be"
     },
     "AOERadius_postvalue_label": {
       "text": "衝撃範囲",
@@ -12239,9 +12239,9 @@
       "hash": "eb6aaba1a1ca"
     },
     "ImpactMoveSlow_label": {
-      "text": "衝撃 スロウ持続時間",
+      "text": "衝撃 スロウ",
       "group": "citadel_heroes",
-      "hash": "9cb64b37ace9"
+      "hash": "22561720791e"
     },
     "ImpactMoveSlow_postvalue_label": {
       "text": "衝撃 スロウ",
@@ -12544,9 +12544,9 @@
       "hash": "6a68b268f3d7"
     },
     "synth_plasma_flux_t2_desc": {
-      "text": "<span class=\"highlight\">{s:WeaponDamageBonusDuration}秒間</span>、武器ダメージ<span class=\"highlight\">+{s:WeaponDamageBonus}%</span>",
+      "text": "<span class=\"highlight\">{s:WeaponDamageBonusDuration}秒間</span>、武器ダメージ<span class=\"highlight\">+{s:WeaponDamageBonus}</span>",
       "group": "citadel_heroes",
-      "hash": "0bad4c94b4bb"
+      "hash": "ad07d4b89494"
     },
     "synth_plasma_flux_t3_desc": {
       "text": "生存時間 <span class=\"highlight\">+{s:MaxLifetime}秒</span>、クールダウン<span class=\"highlight\">{s:AbilityCooldown}秒</span>",
@@ -12709,9 +12709,9 @@
       "hash": "8add84e71350"
     },
     "synth_affliction_desc": {
-      "text": "付近にいる敵に{g:citadel_inline_attribute:'SpiritIcon'}<span class=\"highlight\">継続ダメージ</span>を付与する</span><span class=\"diminish\"><br><br>アフリクションのダメージで敵をキルすることはできず、アイテムプロックは発生しない</span>",
+      "text": "付近にいる敵に{g:citadel_inline_attribute:'SpiritIcon'}<span class=\"highlight\">継続ダメージ</span>を付与する<span class=\"diminish\"><br><br>アフリクションのダメージで敵をキルすることはできず、アイテムプロックは発生しない</span>",
       "group": "citadel_heroes",
-      "hash": "0d69d8cb7816"
+      "hash": "2479dee6c2d2"
     },
     "synth_affliction_t2_desc": {
       "text": "継続時間 <span class=\"highlight\">+{s:DebuffDuration}秒</span>、範囲 <span class=\"highlight\">+{s:Radius}m</span>",
@@ -13649,9 +13649,9 @@
       "hash": "f21a47aaa7bf"
     },
     "operative_umbrella_maneuver_desc": {
-      "text": "傘で風を捕らえ、自身を後方に浮き上がる。その後、傘をチャージすることで、着弾時に爆発する発射物を放つことができる",
+      "text": "傘で風を捕らえ、後方に向かって浮き上がる。その後、傘をチャージすることで、着弾時に爆発する発射物を放つことができる",
       "group": "citadel_heroes",
-      "hash": "22e1a1e2a1f4"
+      "hash": "64921dce7a2f"
     },
     "operative_umbrella_maneuver_t3_desc": {
       "text": "[まだ実装されていません]",
@@ -14939,9 +14939,9 @@
       "hash": "0661ac33e0ef"
     },
     "ability_viper_ult_desc": {
-      "text": "地面に六角形のエリアを作る。ディレイ後、その範囲内にいるすべてのユニットが<span id=\"TestID\"／></span><span class=\"highlight\">石化</span>し、敵は<span class=\"highlight_spirit\">スピリットダメージ</span>を受ける。石化状態のユニットはあらゆるダメージを受けないが、アクションが行えない",
+      "text": "地面に呪いのエリアを生成する。ディレイ後、その範囲内にいるすべてのユニットが<span id=\"TestID\"/></span><span class=\"highlight\">石化</span>し、敵は<span class=\"highlight_spirit\">スピリットダメージ</span>を受ける。石化状態のユニットはあらゆるダメージを受けないが、アクションが行えない",
       "group": "citadel_heroes",
-      "hash": "7ac287216237"
+      "hash": "b97b4f754b2e"
     },
     "PetrifyDuration_label": {
       "text": "石化継続時間",
@@ -15209,9 +15209,9 @@
       "hash": "761342e5f8b5"
     },
     "ability_magician_cloneturret_t2_desc": {
-      "text": "<span class=\"highlight\">継続時間 +{s:AbilityDuration}</span>、<span class=\"highlight\">召喚距離 +5m</span>",
+      "text": "<span class=\"highlight\">継続時間 +{s:AbilityDuration}秒</span>、<span class=\"highlight\">召喚距離 +5m</span>",
       "group": "citadel_heroes",
-      "hash": "8f0b8d032a4d"
+      "hash": "a414039cd9e4"
     },
     "ability_magician_cloneturret_t3_desc": {
       "text": "<span class=\"highlight\">発射速度 +{s:BonusFireRate}%</span>、<span class=\"highlight\">アシスタントダメージ +{s:Damage}</span>",
@@ -15564,9 +15564,9 @@
       "hash": "ca6d798ef97d"
     },
     "ability_trapper_poisonjar_desc": {
-      "text": "<span class=\"highlight\">毒沼</span>を生成する毒の瓶を投げる。毒沼に捕らわれた敵は、<Panel class=\"AbilityPropertyIcon prop_move_speed\"></Panel><span class=\"highlight\">スロウ状態</span>と<Panel class=\"AbilityPropertyIcon prop_silence\"><Panel class=\"AbilityPropertyIcon prop_silence\"><span class=\"highlight\">サイレンス状態</span>になる",
+      "text": "<span class=\"highlight\">毒沼</span>を生成する毒の瓶を投げる。毒沼に捕らわれた敵は、<Panel class=\"AbilityPropertyIcon prop_move_speed\"></Panel><span class=\"highlight\">スロウ状態</span>と<Panel class=\"AbilityPropertyIcon prop_silence\"><span class=\"highlight\">サイレンス状態</span>になる",
       "group": "citadel_heroes",
-      "hash": "3f17fefadbf8"
+      "hash": "41292ccc26a6"
     },
     "RadiusPerSecond_label": {
       "text": "範囲拡大",
@@ -15604,9 +15604,9 @@
       "hash": "2837cbcdd624"
     },
     "ability_trapper_spidershield_quip": {
-      "text": "ダメージを与えるバリアを獲得する",
+      "text": "ダメージを与えるバリアを付与する",
       "group": "citadel_heroes",
-      "hash": "b26d8f7f2599"
+      "hash": "f3f7e2c0dcfb"
     },
     "ability_trapper_fear": {
       "text": "スペクトラル・シルク",
@@ -15864,9 +15864,9 @@
       "hash": "d4cc2fe21443"
     },
     "ability_vampirebat_doubledagger_t3_desc": {
-      "text": "On Double Hit: Reduce Spirit Resist by <span class=\"highlight\">{s:TechArmorDamageReduction}%</span> for {s:DebuffDuration}s",
+      "text": "ダブルヒット時：{s:DebuffDuration}秒間、<span class=\"highlight\">{s:TechArmorDamageReduction}%</span>スピリット耐性低下",
       "group": "citadel_heroes",
-      "hash": "c8c59951fc08"
+      "hash": "e60378f37bd3"
     },
     "ability_vampirebat_doubledagger_header": {
       "text": "ダブルヒット時：",
@@ -15884,9 +15884,9 @@
       "hash": "06b8ba4cf0ed"
     },
     "ability_vampirebat_lovebites_desc": {
-      "text": "弾薬が追加で{g:citadel_inline_attribute:'SpiritDamage'}を与える。このアビリティでダメージを与えると凶悪な<span class=\"highlight\">ファング</span>が蓄積し、一定量蓄積すると{g:citadel_inline_attribute:'BonusSpiritDamage'}が発生する<br><br><span class=\"diminish\">ラヴファングは対象ごとに個別のクールダウンを持つ</span>",
+      "text": "弾薬が追加で{g:citadel_inline_attribute:'SpiritDamage'}を与える。アビリティでダメージを与えると凶悪な<span class=\"highlight\">ファング</span>が蓄積し、一定量蓄積すると{g:citadel_inline_attribute:'BonusSpiritDamage'}が発生する<br><br><span class=\"diminish\">ラヴファングは対象ごとに個別のクールダウンを持つ</span>",
       "group": "citadel_heroes",
-      "hash": "058b8e7d2d51"
+      "hash": "17d48feb4eda"
     },
     "ability_vampirebat_lovebites/lovebites_proc": {
       "text": "ラヴファング",
@@ -16644,9 +16644,9 @@
       "hash": "f8963ed6d00c"
     },
     "ability_doorman_luggage_cart_desc": {
-      "text": "{g:citadel_inline_attribute:'SpiritDamage'}を与え、通路上の敵ヒーローを{g:citadel_inline_attribute:'Pulls'}るキャリーカートを送り出す<br><br>{g:citadel_binding:'AltCast'}でオルトキャストすると、味方ヒーローを対象にできる",
+      "text": "{g:citadel_inline_attribute:'SpiritDamage'}を与え、進路上の敵ヒーローを{g:citadel_inline_attribute:'Pulls'}るキャリーカートを送り出す<br><br>{g:citadel_binding:'AltCast'}でオルトキャストすると、味方ヒーローを対象にできる",
       "group": "citadel_heroes",
-      "hash": "064923fa1a5f"
+      "hash": "9e09111bca53"
     },
     "ability_doorman_luggage_cart_t3_note": {
       "text": "敵を引きずっている状態でカートが壁に衝突すると、対象に追加ダメージを与える",
@@ -16964,9 +16964,9 @@
       "hash": "f8b32940cc3b"
     },
     "StoredDamageRequired_postvalue_label": {
-      "text": "ダメージのチャージ変換割合",
+      "text": "バッテリーチャージに必要なダメージ",
       "group": "citadel_heroes",
-      "hash": "8f5b0834e967"
+      "hash": "0c309e345a46"
     },
     "MissingHealthPercentHeal_postvalue_label": {
       "text": "減少HPに応じた回復",
@@ -17224,9 +17224,9 @@
       "hash": "1471ab806c16"
     },
     "ability_frank_revive_t1_desc": {
-      "text": "クールダウン中：<span class=\"highlight\">+{s:BonusFireRate}%</span>の発射速度を獲得、弾薬ごとに<span class=\"highlight\">{s:BonusDamagePerBullet}</span>を与える",
+      "text": "クールダウン中：<span class=\"highlight\">+{s:BonusFireRate}%</span>の発射速度を獲得、弾薬ごとに<span class=\"highlight\">{s:BonusDamagePerBullet}</span>のスピリットダメージを与える",
       "group": "citadel_heroes",
-      "hash": "19fb2714235a"
+      "hash": "e6ab93330327"
     },
     "ability_frank_revive_t3_desc": {
       "text": "ダメージ <span class=\"highlight\">+{s:Damage}</span><br>スタン <span class=\"highlight\">+{s:StunDuration}秒</span><br>クールダウン <span class=\"highlight\">{s:AbilityCooldown}秒</span>",
@@ -17254,9 +17254,9 @@
       "hash": "eb6aaba1a1ca"
     },
     "hero_drifter_lore": {
-      "text": "アメリカには古来より、生者を襲う名もなき吸血鬼が存在\nする。その怪物は人々から「ドリフター」と呼ばれていた。\n\n多くの吸血鬼とは異なり、ドリフターは美しい服や装飾品、\nあるいは爵位といったものに重きを置かず、吸血鬼の規則や\n伝統を軽視している。そういった反抗を続けることから\n彼は、アメリカの男爵界から要注意人物としてマーク\nされている。伯爵や古参吸血鬼がドリフターの処刑を\n切望している一方で、当の本人は好き勝手を続けること\nだろう……",
+      "text": "アメリカには古来より、生者を襲う名もなき吸血鬼が存在\nする。その怪物は人々から「ドリフター」と呼ばれていた。\n\n多くの吸血鬼とは異なり、ドリフターは美しい服や装飾品、\nあるいは爵位といったものに重きを置かず、吸血鬼の規則や\n伝統を軽視している。そういった反抗を続けることから\n彼は、アメリカの男爵界から要注意人物としてマーク\nされている。子爵や古参吸血鬼がドリフターの処刑を\n切望している一方で、当の本人は好き勝手を続けること\nだろう……",
       "group": "citadel_heroes",
-      "hash": "30444fac1e75"
+      "hash": "55d07fd48f9a"
     },
     "Citadel_Drifter_HeroTag_1": {
       "text": "追跡者",
@@ -18064,9 +18064,9 @@
       "hash": "cf5e48c7baa9"
     },
     "ability_melee_familiar": {
-      "text": "近接攻撃",
+      "text": "近接",
       "group": "citadel_heroes",
-      "hash": "2c86e8c42b15"
+      "hash": "28b5bcd8a5d4"
     },
     "ability_familiar_ability01": {
       "text": "おやすみのじかん",
@@ -18179,9 +18179,9 @@
       "hash": "80b8413d2e1c"
     },
     "ability_familiar_ability02_t2_desc": {
-      "text": "範囲 +{s:Radius}、-{s:FireRateSlow}%の発射速度を付与",
+      "text": "範囲 +{s:Radius}m、-{s:FireRateSlow}%の発射速度を付与",
       "group": "citadel_heroes",
-      "hash": "547a0209f09d"
+      "hash": "747baa3b7af7"
     },
     "ability_familiar_ability02_t3_desc": {
       "text": "ダメージ +{s:Damage}、アビリティチャージ +1",
@@ -19064,9 +19064,9 @@
       "hash": "39b2d60fc89f"
     },
     "GhoulLifetime_postvalue_label": {
-      "text": "継続時間",
+      "text": "生存時間",
       "group": "citadel_heroes",
-      "hash": "f0e1afd49bd3"
+      "hash": "86deef055d0d"
     },
     "GhoulLifetime_postfix": {
       "text": "秒",
@@ -19284,9 +19284,9 @@
       "hash": "cf5e48c7baa9"
     },
     "ability_melee_werewolf": {
-      "text": "近接攻撃",
+      "text": "近接",
       "group": "citadel_heroes",
-      "hash": "2c86e8c42b15"
+      "hash": "28b5bcd8a5d4"
     },
     "ability_header_human": {
       "text": "人間時：",
@@ -19854,9 +19854,9 @@
       "hash": "38cf82028278"
     },
     "citadel_weapon_priest_crossbow_pure": {
-      "text": "イーラ・ドミニ -  ピュア",
+      "text": "イーラ・ドミニ - ピュア",
       "group": "citadel_heroes",
-      "hash": "ab824ae2f101"
+      "hash": "5db132107ab6"
     },
     "ability_header_priest_while_blessed": {
       "text": "祝福中：",
@@ -19884,9 +19884,9 @@
       "hash": "fd23729481e9"
     },
     "ability_priest_silencebomb_desc": {
-      "text": "<span class=\"highlight\">香煙</span>を生成する香炉を投げる。香煙に捕らわれた敵は、<Panel class=\"AbilityPropertyIcon prop_move_speed\"></Panel><span class=\"highlight\">スロウ状態</span>と<Panel class=\"AbilityPropertyIcon prop_silence\"><Panel class=\"AbilityPropertyIcon prop_silence\"><span class=\"highlight\">サイレンス状態</span>になる",
+      "text": "<span class=\"highlight\">香煙</span>を生成する香炉を投げる。香煙に捕らわれた敵は、<Panel class=\"AbilityPropertyIcon prop_move_speed\"></Panel><span class=\"highlight\">スロウ状態</span>と<Panel class=\"AbilityPropertyIcon prop_silence\"><span class=\"highlight\">サイレンス状態</span>になる",
       "group": "citadel_heroes",
-      "hash": "b5a9d9c1a62b"
+      "hash": "e144d8f65b75"
     },
     "ability_priest_silencebomb_t3_desc": {
       "text": "デバフ時：スタミナを使用できなくなる",
@@ -19944,9 +19944,9 @@
       "hash": "3e1bc72363dc"
     },
     "ability_priest_beartrap/debuff": {
-      "text": "マップに表示",
+      "text": "視認可能状態",
       "group": "citadel_heroes",
-      "hash": "3de562b72211"
+      "hash": "44c9af605cf9"
     },
     "ability_priest_beartrap/immobilize": {
       "text": "魔呪の狩猟罠",
@@ -19959,9 +19959,9 @@
       "hash": "de03bd88c8d3"
     },
     "ability_melee_unicorn": {
-      "text": "近接攻撃",
+      "text": "近接",
       "group": "citadel_heroes",
-      "hash": "2c86e8c42b15"
+      "hash": "28b5bcd8a5d4"
     },
     "ability_unicorn_radiantblast": {
       "text": "ライトイーター",
@@ -20078,6 +20078,11 @@
       "group": "citadel_heroes",
       "hash": "8c7e1de416f7"
     },
+    "ability_unicorn_dazzlingorb_t2_desc": {
+      "text": "ダメージ +{s:Damage}、スピリットスケーリングが上昇する",
+      "group": "citadel_heroes",
+      "hash": "bc6cbd517b4e"
+    },
     "ability_unicorn_dazzlingorb_t3_desc": {
       "text": "最大バウンド回数 +{s:MaxBounces}、クールダウン {s:AbilityCooldown}秒",
       "group": "citadel_heroes",
@@ -20164,9 +20169,9 @@
       "hash": "d405c0270f6a"
     },
     "ability_melee_fencer": {
-      "text": "近接攻撃",
+      "text": "近接",
       "group": "citadel_heroes",
-      "hash": "2c86e8c42b15"
+      "hash": "28b5bcd8a5d4"
     },
     "ability_fencer_throwblade": {
       "text": "退避の五芒星",
@@ -21219,19 +21224,19 @@
       "hash": "28b5bcd8a5d4"
     },
     "ability_melee_mirage": {
-      "text": "近接攻撃",
+      "text": "近接",
       "group": "citadel_heroes",
-      "hash": "2c86e8c42b15"
+      "hash": "28b5bcd8a5d4"
     },
     "ability_melee_opera": {
-      "text": "近接攻撃",
+      "text": "近接",
       "group": "citadel_heroes",
-      "hash": "2c86e8c42b15"
+      "hash": "28b5bcd8a5d4"
     },
     "ability_melee_necro": {
-      "text": "近接攻撃",
+      "text": "近接",
       "group": "citadel_heroes",
-      "hash": "2c86e8c42b15"
+      "hash": "28b5bcd8a5d4"
     },
     "Citadel_Familiar_HeroTag_1": {
       "text": "サポート",
@@ -21569,9 +21574,9 @@
       "hash": "5e320031fa01"
     },
     "hero_warden_playstyle": {
-      "text": "ウォーデンは最前線に飛び込み、敵のアビリティを妨害して戦いを有利に進めることを得意とする。だが、彼にとっての勇敢な行動は、他者にしてみれば無謀そのものだ。慎重さが足りなければ、容易に窮地に追い込まれるだろう。",
+      "text": "ウォーデンは最前線に飛び込んで敵を妨害し、思いどおりに戦わせないことを得意とする。だが、彼にとっての勇敢な行動は、他者にしてみれば無謀そのものだ。慎重さが足りなければ、容易に窮地に追い込まれるだろう。",
       "group": "citadel_heroes",
-      "hash": "8d54fa720dd8"
+      "hash": "11626b322cdf"
     },
     "hero_wraith_playstyle": {
       "text": "標的を孤立させることで冷酷かつ効率的に排除する、一対一の戦闘におけるスペシャリスト。そして助けに来た敵に捕まる前に、瞬時にテレポートで姿を消してしまうのだ。",
@@ -21639,9 +21644,9 @@
       "hash": "a92f2c8abe78"
     },
     "hero_wrecker_lore": {
-      "text": "ニューヨークを襲ったメイルストロームは、単に新たな\n神秘主義の時代をもたらしただけではなく、地政学\nそのものを一変させた。CIAに所属する預言者が数十年後に\n台頭する脅威を特定する一方で、煙に満ちた秘密の部屋\nではオカルト的な契約が交わされる。こうした努力に\nよって、歴史に名を残すような戦争や悲劇の数々が未然に\n防がれてきた。だが、戦争はなくなったわけではない。\n形を変え、我々の社会に溶け込んでいるのだ。\n\n社会では、超常軍事会社が頭角を表し始めていた。超常\n軍事会社とは、異次元の存在や血塗られた魔術を組み\n合わせた技術を用いる会社だ。彼らは、各国の監視役\nである預言者たちが設けた安全策を回避する術を発見\nしており、戦争を望む国々の代理人として機能していた。\n\nそしてレッカーは、そんな会社に所属する兵士の1人だ。\n\nフェアファックス・インダストリーズの子会社である\nエルドリッチ・タクティカル・ソリューションズで働く\nレッカーは、他の民間軍事会社が手を出したがらない\n汚れ仕事も請け負うとして有名な、エリート兵士なのだ。",
+      "text": "ニューヨークを襲ったメイルストロームは、単に新たな\n神秘主義の時代をもたらしただけではなく、地政学\nそのものを一変させた。CIAに所属する預言者が数十年後に\n台頭する脅威を特定する一方で、煙に満ちた秘密の部屋\nではオカルト的な契約が交わされる。こうした努力に\nよって、歴史に名を残すような戦争や悲劇の数々が未然に\n防がれてきた。だが、戦争はなくなったわけではない。\n形を変え、我々の社会に溶け込んでいるのだ。\n\n社会では、超常軍事会社が頭角を現し始めていた。超常\n軍事会社とは、異次元の存在や血塗られた魔術を組み\n合わせた技術を用いる会社だ。彼らは、各国の監視役\nである預言者たちが設けた安全策を回避する術を発見\nしており、戦争を望む国々の代理人として機能していた。\n\nそしてレッカーは、そんな会社に所属する兵士の1人だ。\n\nフェアファックス・インダストリーズの子会社である\nエルドリッチ・タクティカル・ソリューションズで働く\nレッカーは、他の民間軍事会社が手を出したがらない\n汚れ仕事も請け負うとして有名な、エリート兵士なのだ。",
       "group": "citadel_heroes",
-      "hash": "a13a37e87ba0"
+      "hash": "d9c06f9a9d37"
     },
     "hero_chrono_lore": {
       "text": "パラドックス。それは、時間が生み出す乱れであり、\n悪名高き盗賊ギルドの名でもある。彼らは、とりわけ\n手出しが難しい個人や組織を標的とし、綿密な強盗計画を\n練ることを誇りにしていた。ではパラドックスは、\n無数の遺物や国家機密、著名人の親子鑑定結果を一体\n何のために盗んでいるのか？ それは、ポップアップ\nミュージアムにて展示し、パラドックスの手に届かないもの\nはこの世に存在しないと、世界に広く知らしめるためだ。\n\n彼らの正体は謎に包まれている。パラドックスに所属する\n者は仮面を身につけ、組織名を自らの名前として名乗る。\n彼らはどこにも存在し、そしてどこにも存在しない。\n彼らに狙われたものは、決して彼らから逃れられないのだ。",
@@ -21649,9 +21654,9 @@
       "hash": "066c59f7a91e"
     },
     "hero_dynamo_lore": {
-      "text": "科学者であるダイナモ教授は、探求心の塊のような存在だ。\nだからこそ、セントラルパークで時空の裂け目が発生した\nあのとき、現場にいち早く駆けつけて調査を開始したのだ。\nこの壮大な景色を前に、人生が変わるような体験が\nできると考えていたが、それはあくまで比喩的な意味\nであり、まさか自身の身体が原子レベルにまで分解され、\n死にゆく矮小な星になるとは夢にも思っていなかった。\n\nだが、肉体を失った今もなお、彼の精神と知識欲は\n変わらず生き続いている。コロンビア大学の終身教授と\nなったダイナモは、自身の状態について研究しながら、\n講義を続けている――将来有望な若者のために。",
+      "text": "科学者であるダイナモ教授は、探求心の塊のような存在だ。\nだからこそ、セントラルパークで時空の裂け目が発生した\nあのとき、現場にいち早く駆けつけて調査を開始したのだ。\nこの壮大な景色を前に、人生が変わるような体験が\nできると考えていたが、それはあくまで比喩的な意味\nであり、まさか自身の身体が原子レベルにまで分解され、\n死にゆく矮小な星になるとは夢にも思っていなかった。\n\nだが、肉体を失った今もなお、彼の精神と知識欲は\n変わらず生き続けている。コロンビア大学の終身教授と\nなったダイナモは、自身の状態について研究しながら、\n講義を続けている――将来有望な若者のために。",
       "group": "citadel_heroes",
-      "hash": "09bcfa451a2e"
+      "hash": "de704acce6ec"
     },
     "hero_forge_lore": {
       "text": "マギー・マクギニスは、幼少期から物作りの才に恵まれて\nいた。4才の頃には積み木のオモチャを使い建築美を再現。\n10才になると、両親の結婚記念日に一点物の照明器具を\n作り、配線をやり直してみせた。15才には死者の魂を精製\nする機械を設計した……それは、世間の注目を集めるには\n十分過ぎる発明品だった。\n\nこうしてマクギニスは、フェアファックス・インダストリーズ\nの軍事研究開発部のリーダーを務めることになった。しかし\n彼女は研究室ではなく、機械工場で日々を過ごす。理論\nなんぞに興味はない。なぜならマクギニスにとって科学とは、\n手で触れることのできる魔法だからだ。",
@@ -21674,9 +21679,9 @@
       "hash": "46c7e4adb6f6"
     },
     "hero_hornet_lore": {
-      "text": "セイラム魔女裁判においてジョン・ホーソーンの犠牲者と\nなったヴィンディクタは、最初のメイルストローム（超自然\nの存在が広く公に知られるきっかけとなった事件）によって\nその魂が現世に呼び戻され、2回目の人生を手にした。\n\nヴィンディクタは、ひとりの亡霊として「人類の友」に戦い\nを挑んでいる。「人類の友」とは、ホーソーンの子孫が結成\nした新たな審問会だ。彼女の目的は、ホーソーンの血筋から\n超自然の存在を守ること。そのためならば、どれほど多くの\n犠牲を払うことになろうとも、彼女はいとわない。",
+      "text": "セイラム魔女裁判においてジョン・ホーソーンの犠牲者と\nなったヴィンディクタは、最初のメイルストローム（超自然\nの存在が広く公に知られるきっかけとなった事件）によって\nその魂が現世に呼び戻され、2回目の人生を手にした。\n\nヴィンディクタは、ひとりの亡霊として「人類の友」に戦い\nを挑んでいる。「人類の友」とは、ホーソーンの子孫が結成\nした新たな審問会だ。彼女の目的は、ホーソーンの血筋から\n超自然の存在を守ること。そのためならば、死体の山を\n積み上げることになろうとも、彼女はいとわない。",
       "group": "citadel_heroes",
-      "hash": "e48737f60cc5"
+      "hash": "2ef65df0096b"
     },
     "hero_inferno_lore": {
       "text": "他のティーンエイジャーと同じく、インファーナスは乱暴で\n反抗的、そして衝動的であった。唯一違ったのは、彼が\n異界から来た存在で、火を操る超自然的な力を持っていた\nことである。若い頃の彼が、放火に殺人、証拠隠滅と忙しい\n日々を送っていたのは言うまでもない。だがそれも、今と\nなっては過去の話。彼も大人になり、ずいぶん丸くなった。\nいいライブ音楽が楽しめるバーで働き、愉快な者たちとの\n会話を楽しむ。しかし、誰かが乱闘騒ぎや手に負えない\nトラブルを起こしたときは別だ。かつて磨いた力を操り、\n身にかかる火の粉を振り払うだろう。",
@@ -21734,9 +21739,9 @@
       "hash": "d9e366461c63"
     },
     "hero_tengu_lore": {
-      "text": "その身に命が宿った瞬間、そのガーゴイルは、何が\n起こったのかを理解できなかった……唯一わかったのは、\n大きい人間と小さい人間が傷ついていることだった。\nそこでガーゴイルは行動を起こした。人間たちを痛め\nつけている者を怖がらせ、追い払ったのだ。\n感謝を口にした小さな人間は、ガーゴイルに名前を尋ねた。\nしかし、ガーゴイルには名前がなかった。そこで、小さな\n人間はこう言った。「じゃあ、アイビーって呼ぶね」\n体中がツタ――アイビーに覆われていたガーゴイルは、\n安直過ぎるとも思ったが、この小さな人間を喜ばせるため\nにも、その名前を受け入れることにした。\n\n家に招いてお礼をしたい――人間たちからそう言われた\nアイビーは彼らの家に向かうことにした。そしてその夜、\nアイビーは多くのことを学んだ。その家族の名字はアロヨ。\n小さな人間はソフィア。そして、おいしい料理の名前は\nモフォンゴ。だが、その中でも最も重要だったのは、\nこの人間たちを痛めつけていたのが「メンドーザ・\nシンジケート」と呼ばれる存在で、アロヨ家のような善良な\n市民を傷つけているという事実であった。\n\nそして、アロヨ家にアイビーが訪れてから18年が経過した。\nアイビーはこの間、メンドーザ・シンジケートを解体させ、\nスパニッシュ・ハーレムをその支配から解放することに\nその心血を注いでいた。しかし、20年という長い年月を\nたった1つの目的のために捧げたことで、その達成後に\n何をすればいいのか、わからなくなってしまっていた。\nこの世界には、自らの掲げる自警的な正義以外に\nどんなものがあるのか――アイビーは生まれて初めて、\nスパニッシュ・ハーレムの外に飛び出す準備ができたのだ。",
+      "text": "その身に命が宿った瞬間、そのガーゴイルは、何が\n起こったのかを理解できなかった……唯一わかったのは、\n大きい人間と小さい人間が傷ついていることだった。\nそこでガーゴイルは行動を起こした。人間たちを痛め\nつけている者を怖がらせ、追い払ったのだ。\n感謝を口にした小さな人間は、ガーゴイルに名前を尋ねた。\nしかし、ガーゴイルには名前がなかった。そこで、小さな\n人間はこう言った。「じゃあ、アイビーって呼ぶね」\n体中がツタ――アイビーに覆われていたガーゴイルは、\n安直過ぎるとも思ったが、この小さな人間を喜ばせるため\nにも、その名前を受け入れることにした。\n\n家に招いてお礼をしたい――人間たちからそう言われた\nアイビーは彼らの家に向かうことにした。そしてその夜、\nアイビーは多くのことを学んだ。その家族の名字はアロヨ。\n小さな人間はソフィア。そして、おいしい料理の名前は\nモフォンゴ。だが、その中でも最も重要だったのは、\nこの人間たちを痛めつけていたのが「メンドーザ・\nシンジケート」と呼ばれる存在で、アロヨ家のような善良な\n市民を傷つけているという事実であった。\n\nそして、アロヨ家にアイビーが訪れてから18年が経過した。\nアイビーはこの間、メンドーザ・シンジケートを解体させ、\nスパニッシュ・ハーレムをその支配から解放することに\nその心血を注いでいた。しかし、20年近くもの長い年月を\nたった1つの目的のために捧げたことで、その達成後に\n何をすればいいのか、わからなくなってしまっていた。\nこの世界には、自らの掲げる自警的な正義以外に\nどんなものがあるのか――アイビーは生まれて初めて、\nスパニッシュ・ハーレムの外に飛び出す準備ができたのだ。",
       "group": "citadel_heroes",
-      "hash": "a9742492af48"
+      "hash": "3d20ad136346"
     },
     "hero_synth_lore": {
       "text": "アリン・フェアファックスは、フェアファックス・\nインダストリーズにおける最年長の後継者だ。しかし、\nアリンは18才の誕生日に狙撃を受けた。一命は取り留めた\nものの、その後の5年間は身を潜めて生活してきた。\n誰が自分を殺して会社を牛耳ろうとしたのか、アリンには\n見当もついていないが……これだけは明らかだ。\nフェアファックス・インダストリーズのような\n貪欲さに満ちた毒蛇の巣窟では、誰が犯人だとしても\nおかしくはない。\n\nそれからというもの、アリンは「ポケット」という偽名\nを使い、自分の正体を隠し続けている……だがそれは、\n自身の身を守るためだけではない。親とは関係のない、\n自分だけのアイデンティティを得たいからでもあるのだ。",
@@ -21759,9 +21764,9 @@
       "hash": "f494a3887cd5"
     },
     "hero_magician_lore": {
-      "text": "本物の魔法に触れるにはまだ早い――そう考えたヘンリーの\n両親は、魔法の代わりにトランプを与えた。元々手先が\n器用だったのか、ヘンリーはすぐさま手品を習得した。\nそうして超常的な遺物や魔術を使うことなく素晴らしい\nマジックを披露したヘンリーは、クラスメイトを驚かせた。\n\n高校生になったヘンリーはサバンナと出会う。\nステージマジックという共通の趣味を通じて、2人は急速に\n仲を深めていった。次第に彼らは恋に落ち、一緒に\nショーを作り上げた。彼らは結ばれる運命にあったのだ。\nそして、ダンスパーティーの夜。ヘンリーはサバンナに\nプロポーズをし、卒業後まもなく結婚した。\n\n予想通りと言うべきか、2人の両親は若い彼らの結婚を\n歓迎しなかった。その一方でヘンリーとサバンナは、\nお互いがソウルメイトであると確信していた。そこで彼らは\nこの愛を永遠のものにするため、血の魔術を用いて、\nお互いの魂を永遠に結びつけたのだった。\n\nそんなある日、ショーで事故が発生し、2人は命を落とす。\n彼らは、どちらが悪いかで意見が割れていた。ヘンリーは、\nサバンナの立ち位置が間違っていたと主張し、サバンナは\nヘンリーが合図を待たなかったためだと言った。だが\nいずれにせよ、1つだけ確かなことがある。それは、\n彼らの魂は結びついているため、どちらもその場から\n動けなかったということだ。口論の絶えない1組の幽霊と\n化したヘンリーとサバンナ。お互いの魂を永遠に結びつける\n魔術を解きたいのであれば、彼らはいやが応でも力を\n合わせるしかないだろう。",
+      "text": "本物の魔法に触れるにはまだ早い――そう考えたヘンリーの\n両親は、魔法の代わりにトランプを与えた。元々手先が\n器用だったのか、ヘンリーはすぐさま手品を習得した。\nそうして超常的な遺物や魔術を使うことなく素晴らしい\nマジックを披露したヘンリーは、クラスメイトを驚かせた。\n\n高校生になったヘンリーはサバンナと出会う。\nステージマジックという共通の趣味を通じて、2人は急速に\n仲を深めていった。次第に彼らは恋に落ち、一緒に\nショーを作り上げた。彼らは結ばれる運命にあったのだ。\nそして、ダンスパーティーの夜。ヘンリーはサバンナに\nプロポーズをし、卒業後まもなく結婚した。\n\n予想通りと言うべきか、2人の両親は若い彼らの結婚を\n歓迎しなかった。その一方でヘンリーとサバンナは、\nお互いがソウルメイトであると確信していた。そこで彼らは\nこの愛を永遠のものにするため、血の魔術を用いて、\nお互いの魂を永遠に結びつけたのだった。\n\nそんなある日、ショーで事故が発生し、2人は命を落とす。\n彼らは、どちらが悪いかで意見が割れていた。ヘンリーは、\nサバンナの立ち位置が間違っていたと主張し、サバンナは\nヘンリーが合図を待たなかったためだと言った。だが\nいずれにせよ、1つだけ確かなことがある。それは、\n彼らの魂は結びついているため、どちらもあの世に\n行けないということだ。口論の絶えない1組の幽霊と\n化したヘンリーとサバンナ。お互いの魂を永遠に結びつける\n魔術を解きたいのであれば、彼らはいやが応でも力を\n合わせるしかないだろう。",
       "group": "citadel_heroes",
-      "hash": "3682fa573acd"
+      "hash": "c480832406a0"
     },
     "hero_trapper_lore": {
       "text": "魂の壺を作り、巨大ネズミをおびき出し、異界から\nやってきた外来種を捕獲する――ニューヨーク市営魔術\n結社に勤めるトラッパーは来る日も来る日も、このような\n仕事ばかりしている。取り立てて華やかな仕事ではなく、\nむしろ彼としては、クモと関わることが心底嫌いであった。\nしかし、ニューヨーク・ニックスのシーズンチケットは\nタダでは手に入らない。どうにかしてチケット代を工面\nする必要があるのだ。",
@@ -23819,14 +23824,14 @@
       "hash": "e2f95e62e97a"
     },
     "MODIFIER_VALUE_BULLET_ARMOR_label": {
-      "text": "バレットアーマー",
+      "text": "弾薬アーマー",
       "group": "citadel_attributes",
-      "hash": "0c8737bad9c2"
+      "hash": "a5f665bcbd43"
     },
     "MODIFIER_VALUE_BULLET_ARMOR_postvalue_label": {
-      "text": "バレットアーマー",
+      "text": "弾薬アーマー",
       "group": "citadel_attributes",
-      "hash": "0c8737bad9c2"
+      "hash": "a5f665bcbd43"
     },
     "BulletResist_prefix": {
       "text": "{s:sign}",
@@ -24174,14 +24179,14 @@
       "hash": "4345cb1fa278"
     },
     "MODIFIER_VALUE_BULLET_DAMAGE_REDUCTION_label": {
-      "text": "バレットアーマー",
+      "text": "弾薬アーマー",
       "group": "citadel_attributes",
-      "hash": "0c8737bad9c2"
+      "hash": "a5f665bcbd43"
     },
     "MODIFIER_VALUE_BULLET_DAMAGE_REDUCTION_postvalue_label": {
-      "text": "バレットアーマー",
+      "text": "弾薬アーマー",
       "group": "citadel_attributes",
-      "hash": "0c8737bad9c2"
+      "hash": "a5f665bcbd43"
     },
     "ActiveMODIFIER_VALUE_BULLET_DAMAGE_REDUCTION_prefix": {
       "text": "{s:sign}",
@@ -28284,9 +28289,9 @@
       "hash": "bb85787788ab"
     },
     "ChainRadius_postvalue_label": {
-      "text": "拡散範囲",
+      "text": "連鎖範囲",
       "group": "citadel_attributes",
-      "hash": "8d01a5c59e54"
+      "hash": "bb85787788ab"
     },
     "ChainRadius_postfix": {
       "text": "m",
@@ -28369,14 +28374,14 @@
       "hash": "4345cb1fa278"
     },
     "InvisFadeToDuration_label": {
-      "text": "インビジブル時間",
+      "text": "透明化時間",
       "group": "citadel_attributes",
-      "hash": "5952c9e0f0de"
+      "hash": "a4d135ea905c"
     },
     "InvisFadeToDuration_postvalue_label": {
-      "text": "インビジブル時間",
+      "text": "透明化時間",
       "group": "citadel_attributes",
-      "hash": "5952c9e0f0de"
+      "hash": "a4d135ea905c"
     },
     "InvisFadeToDuration_postfix": {
       "text": "秒",
@@ -29369,9 +29374,9 @@
       "hash": "4345cb1fa278"
     },
     "modifier_armor_reactive_armor": {
-      "text": "反射",
+      "text": "リターンファイア",
       "group": "citadel_attributes",
-      "hash": "776127c53a6d"
+      "hash": "91281a4620ca"
     },
     "ReturnFireBulletResist_prefix": {
       "text": "+",
@@ -30124,9 +30129,9 @@
       "hash": "eb6aaba1a1ca"
     },
     "VeilCross_conditional": {
-      "text": "コズミックベールを超える",
+      "text": "コズミックベールを越える",
       "group": "citadel_attributes",
-      "hash": "cb52131a0289"
+      "hash": "c1d93f154b44"
     },
     "modifier_veil_walker_triggered": {
       "text": "ベール発射速度",
@@ -30789,9 +30794,9 @@
       "hash": "eb6aaba1a1ca"
     },
     "ImmunityDuration_label": {
-      "text": "耐性継続時間",
+      "text": "無効継続時間",
       "group": "citadel_attributes",
-      "hash": "83f0b1164913"
+      "hash": "6dcec6b77eb6"
     },
     "ImmunityDuration_postvalue_label": {
       "text": "耐性継続時間",
@@ -30844,9 +30849,9 @@
       "hash": "eb6aaba1a1ca"
     },
     "BonusSoulsPct_label": {
-      "text": "ボーナスソウル",
+      "text": "追加ソウル",
       "group": "citadel_attributes",
-      "hash": "530f3188342f"
+      "hash": "d2f739506098"
     },
     "BonusSoulsPct_postvalue_label": {
       "text": "追加ソウル",
@@ -32409,9 +32414,9 @@
       "hash": "e877eae8f0dc"
     },
     "ItemHistory_Transaction_OpenPlayerCardPack": {
-      "text": "プレイヤーカッドパックを開封しました",
+      "text": "プレイヤーカードパックを開封しました",
       "group": "citadel_gc",
-      "hash": "63b61229b529"
+      "hash": "76432ecc9ea3"
     },
     "ItemHistory_Transaction_PlayerCardRecycle": {
       "text": "ダストにリサイクルされました",
@@ -33659,9 +33664,9 @@
       "hash": "c6ab23859c71"
     },
     "GameUI_ServerRejectInvalidSteamCertLen": {
-      "text": "STEAM認証の長さが不正です！\n",
+      "text": "STEAM証明書の長さが不正です！\n",
       "group": "citadel_main",
-      "hash": "401f047be27c"
+      "hash": "0d5991074f65"
     },
     "GameUI_ServerRejectSteam": {
       "text": "STEAM認証が拒否されました。\n",
@@ -33874,9 +33879,9 @@
       "hash": "69e5c4f19bda"
     },
     "Citadel_ViewMatchID_Loading_Error": {
-      "text": "試合を表示できませんでした",
+      "text": "マッチを表示できませんでした",
       "group": "citadel_main",
-      "hash": "6b7f699bb1a8"
+      "hash": "78486974283b"
     },
     "Citadel_ViewMatchID_InFlight_Title": {
       "text": "マッチがまだ進行中です",
@@ -34069,9 +34074,9 @@
       "hash": "7d52f54ac7d4"
     },
     "Citadel_Key_LWin": {
-      "text": "勝利",
+      "text": "Win",
       "group": "citadel_main",
-      "hash": "2949d100bd55"
+      "hash": "4973f4c599d5"
     },
     "Citadel_Key_RWin": {
       "text": "右Win",
@@ -34264,9 +34269,9 @@
       "hash": "e19ae381618a"
     },
     "Citadel_RecommendFriend_Region_SEA": {
-      "text": "アジア／太平洋",
+      "text": "アジア / 太平洋",
       "group": "citadel_main",
-      "hash": "ca69c56945a5"
+      "hash": "4e9018581299"
     },
     "Citadel_RecommendFriend_Region_Other": {
       "text": "その他（コメントに記入）",
@@ -34324,9 +34329,9 @@
       "hash": "f6d9ae0d7007"
     },
     "Citadel_ReportPlayer_Reason_VoiceTextAbuse": {
-      "text": "ボイス／テキストの悪用",
+      "text": "ボイス / テキストの悪用",
       "group": "citadel_main",
-      "hash": "ae240d67784f"
+      "hash": "158b8c440398"
     },
     "Citadel_ReportPlayer_Reason_Abandon": {
       "text": "マッチの途中退出",
@@ -34334,9 +34339,9 @@
       "hash": "93b5d0375638"
     },
     "Citadel_ReportPlayer_Reason_Griefing": {
-      "text": "迷惑行為／嫌がらせ",
+      "text": "迷惑行為 / 嫌がらせ",
       "group": "citadel_main",
-      "hash": "e6eae9db2b64"
+      "hash": "40ebe0c5b5b4"
     },
     "Citadel_ReportPlayer_Reason_Smurfing": {
       "text": "スマーフ行為",
@@ -34539,9 +34544,9 @@
       "hash": "98ba6a0a468f"
     },
     "Citadel_MatchDetails_TemporarilyDisabled": {
-      "text": "メンテナンス中のため、マッチ履歴が一時的に無効化されています",
+      "text": "メンテナンス中のため、マッチ詳細が一時的に無効化されています",
       "group": "citadel_main",
-      "hash": "5ce035b449fe"
+      "hash": "a8a7096e104e"
     },
     "Citadel_MatchDetails_TooBusy": {
       "text": "Deadlockのネットワークが非常に混雑しているため、現在マッチ詳細を表示できません",
@@ -34744,9 +34749,9 @@
       "hash": "efc53083d707"
     },
     "Citadel_Hud_RideZipLineOnCooldown": {
-      "text": "ダメージ受けた後は使用不可",
+      "text": "ダメージを受けた後は使用不可",
       "group": "citadel_main",
-      "hash": "d246c4f9d5b9"
+      "hash": "62bb5c64f64f"
     },
     "Citadel_Hud_CaptureZipLine": {
       "text": "{g:citadel_binding:'HeldItem'}長押し",
@@ -34934,9 +34939,9 @@
       "hash": "06dd2b62e672"
     },
     "Citadel_Hud_Quickbuy_Instructional": {
-      "text": "<Panel class=\"rightClick\"></Panel> でクイックバイに追加／削除",
+      "text": "<Panel class=\"rightClick\"></Panel> でクイックバイに追加 / 削除",
       "group": "citadel_main",
-      "hash": "cd001bcd17d0"
+      "hash": "51475a0d7bcd"
     },
     "Citadel_Hud_Quickbuy_Instructional_Ready": {
       "text": "{g:citadel_binding:'PurchaseQuickbuy'}を押して購入",
@@ -36109,9 +36114,9 @@
       "hash": "9f37734cc1fe"
     },
     "Citadel_Play_RankedMatchmakingOfflineText": {
-      "text": "ランクマッチメイキングは現在閉鎖中です。予定されたプレイテスト時間に戻ってきてください.",
+      "text": "ランクマッチメイキングは現在閉鎖中です。予定されたプレイテスト時間に戻ってきてください",
       "group": "citadel_main",
-      "hash": "d97e2053d39b"
+      "hash": "e25739062579"
     },
     "Citadel_Play_RankedNoSchedule": {
       "text": "スケジュール未選択",
@@ -36244,9 +36249,9 @@
       "hash": "3a1783e19266"
     },
     "Citadel_RankedSeason_Upcoming_StartsIn": {
-      "text": "シーズンは{t:d:t:T:time_until_start}から開始します",
+      "text": "シーズン開始まで{t:d:t:T:time_until_start}",
       "group": "citadel_main",
-      "hash": "316df8e09ae8"
+      "hash": "07a263e12b4d"
     },
     "Citadel_RankedSeason_Active_NotStarted": {
       "text": "ランクマッチをプレイして振り分けを開始しましょう。",
@@ -36309,14 +36314,14 @@
       "hash": "0f786d5d8273"
     },
     "Citadel_RankedSeason_Eligibility_AccountWins:f": {
-      "text": "スタンダードマッチでの勝利：{d:current_account_wins} ／ {d:required_account_wins}",
+      "text": "スタンダードマッチでの勝利：{d:current_account_wins} / {d:required_account_wins}",
       "group": "citadel_main",
-      "hash": "d38b7fbd5016"
+      "hash": "a5cd62b92ee8"
     },
     "Citadel_RankedSeason_Eligibility_HeroUnlocks:f": {
-      "text": "{d:required_hero_win_count}勝以上のヒーロー：{d:current_unlocked_heroes} ／ {d:required_unlocked_heroes}",
+      "text": "{d:required_hero_win_count}勝以上のヒーロー：{d:current_unlocked_heroes} / {d:required_unlocked_heroes}",
       "group": "citadel_main",
-      "hash": "7312de087edd"
+      "hash": "e9e6f17e0a48"
     },
     "Citadel_RankedSeason_Eligibility_NotEligible": {
       "text": "スタンダードマッチをプレイして、ランクマッチをアンロックしましょう",
@@ -36444,9 +36449,9 @@
       "hash": "d45319d3eeed"
     },
     "Citadel_Ranked_Overview_Playing_Bullet1": {
-      "text": "マッチに勝利／敗北すると、ランクポイントが平均で{d:ranked_point_gain}増加／減少します。この数値は、マッチメイカーによる勝敗の予想や、連続勝利といった要素によって若干変動することがあります。マッチ終了後には、ランクポイントの変動を進捗バーで視覚的に確認できます。",
+      "text": "マッチに勝利・敗北すると、ランクポイントが平均で{d:ranked_point_gain}増加・減少します。この数値は、マッチメイカーによる勝敗の予想や、連続勝利といった要素によって若干変動することがあります。マッチ終了後には、ランクポイントの変動を進捗バーで視覚的に確認できます。",
       "group": "citadel_main",
-      "hash": "7eecc55b3cc4"
+      "hash": "19cfbab26a9f"
     },
     "Citadel_Ranked_Overview_Playing_Bullet2": {
       "text": "ランクまたはサブランクが昇格すると、降格保護トークンを獲得できます。バッジをまたぐランク昇格の場合は5つ、サブランクの場合は2つのトークンを獲得できます。降格保護が有効な状態で敗北し、それによってランクが降格する場合、トークンを消費することでそのランクに留まることができます。",
@@ -37794,19 +37799,19 @@
       "hash": "ff221d4752ce"
     },
     "Citadel_RosterMode_PrivateBotEasy": {
-      "text": "プライベートCUPマッチ - イージー",
+      "text": "プライベートCPUマッチ - イージー",
       "group": "citadel_main",
-      "hash": "1fa6df5dbf16"
+      "hash": "1bfcd287ef2b"
     },
     "Citadel_RosterMode_PrivateBotMedium": {
-      "text": "プライベートCUPマッチ - ノーマル",
+      "text": "プライベートCPUマッチ - ノーマル",
       "group": "citadel_main",
-      "hash": "332383518e45"
+      "hash": "cfe575e64687"
     },
     "Citadel_RosterMode_PrivateBotHard": {
-      "text": "プライベートCUPマッチ - ハード",
+      "text": "プライベートCPUマッチ - ハード",
       "group": "citadel_main",
-      "hash": "cd2eb9e1ebb1"
+      "hash": "52b60b331f26"
     },
     "Citadel_RosterMode_PrivateLobby": {
       "text": "プライベートロビー",
@@ -38059,9 +38064,9 @@
       "hash": "d0121ab37fa5"
     },
     "Citadel_BannedWarning_Desc": {
-      "text": "次のマッチで、このヒーローと一緒になる確率が低くなります。",
+      "text": "このマッチで、このヒーローと一緒になる確率が低くなります。",
       "group": "citadel_main",
-      "hash": "9a4236c0e361"
+      "hash": "58d9c82171a0"
     },
     "Citadel_RankedMatchStatus_Counts": {
       "text": "{d:count_current} / {d:count_required}",
@@ -38629,9 +38634,9 @@
       "hash": "232a7fc9257b"
     },
     "Citadel_Event_Holiday_Challenge2025_Snowball_Level": {
-      "text": "レベル {i:item_level} ／ {i:item_max_level}",
+      "text": "レベル {i:item_level} / {i:item_max_level}",
       "group": "citadel_main",
-      "hash": "8d9e03e495b4"
+      "hash": "c5a19dbda686"
     },
     "Citadel_Hud_Voting_Poster_Tooltip_Header": {
       "text": "ポスターを選択",
@@ -39824,9 +39829,9 @@
       "hash": "f819f09964fc"
     },
     "Citadel_StartMatchmaking_ModeBanned": {
-      "text": "{t:t:time_stamp} の {t:s:time_stamp} まで、このゲームモードでのプレイが一時的に禁止されています。",
+      "text": "{t:s:time_stamp} の {t:t:time_stamp} まで、このゲームモードでのプレイが一時的に禁止されています。",
       "group": "citadel_main",
-      "hash": "ecebc9dec0e8"
+      "hash": "44c07668a0a8"
     },
     "Citadel_StartMatchmaking_PermanentBan": {
       "text": "このゲームモードでのプレイが永久禁止されています。",
@@ -39964,9 +39969,9 @@
       "hash": "fb84ff4b4acb"
     },
     "Citadel_Dashboard_Matchmaking_SearchingForBotMatchTime": {
-      "text": "COOP CPUマッチ - マッチ形成完了まで {s:coop_time_remaining} 秒",
+      "text": "COOP CPUマッチ - マッチ形成完了まで {s:coop_time_remaining}",
       "group": "citadel_main",
-      "hash": "14a3ba1ebf83"
+      "hash": "695e9c0a85bb"
     },
     "Citadel_Dashboard_Matchmaking_UsersInQueue": {
       "text": "キュー待機中のプレイヤー： {s:users_in_queue}人",
@@ -40179,9 +40184,9 @@
       "hash": "ebcd32cb7119"
     },
     "Citadel_Dashboard_Status_MatchInProgress_Detail": {
-      "text": "{g:citadel_binding:'OpenMainMenu'}で再参加／途中退出",
+      "text": "{g:citadel_binding:'OpenMainMenu'}で再参加 / 途中退出",
       "group": "citadel_main",
-      "hash": "a432fee4aade"
+      "hash": "536f47848fac"
     },
     "Citadel_Dashboard_RejoinTooltip": {
       "text": "進行中のゲームに再参加する",
@@ -40669,9 +40674,9 @@
       "hash": "ea53b44c6bb1"
     },
     "Citadel_FriendCode_Expiration": {
-      "text": "有効期限： {t:t:expireDate} の {t:s:expireDate}",
+      "text": "有効期限： {t:s:expireDate} の {t:t:expireDate}",
       "group": "citadel_main",
-      "hash": "19500b741a7b"
+      "hash": "37504e5a6603"
     },
     "Citadel_FriendCode_RevokeCodeButton": {
       "text": "コードを無効化する",
@@ -40934,9 +40939,9 @@
       "hash": "e51a3c0492db"
     },
     "Citadel_PartySetMode_PlayerBanned": {
-      "text": "パーティーメンバーの {g:citadel_persona:nl:account_id} は、 {t:t:time_stamp} の {t:s:time_stamp} までこのモードのプレイを禁止されています。",
+      "text": "パーティーメンバーの {g:citadel_persona:nl:account_id} は、 {t:s:time_stamp} の {t:t:time_stamp} までこのモードのプレイを禁止されています。",
       "group": "citadel_main",
-      "hash": "6ec6319305fd"
+      "hash": "035c69b92fdc"
     },
     "Citadel_PartySetMode_TooManyHighMMR": {
       "text": "パーティー内に、MMRが非常に高いプレイヤーが多すぎるため、マッチメイキングが行えません。チームバランスが崩れるのを防ぐため、このようなパーティーを一時的に許可していません。",
@@ -41304,9 +41309,9 @@
       "hash": "92e9e0f378e8"
     },
     "Citadel_Profile_CopyFriendCodeSuccess": {
-      "text": "設定完了",
+      "text": "コピー完了",
       "group": "citadel_main",
-      "hash": "08b4e2ccabfb"
+      "hash": "166b577e2b18"
     },
     "Citadel_Profile_ViewSteamProfile": {
       "text": "Steamプロフィールを表示",
@@ -41504,9 +41509,9 @@
       "hash": "48c79a21a9e3"
     },
     "Citadel_HeroPage_Sandbox": {
-      "text": "テストヒーロー",
+      "text": "ヒーローを試す",
       "group": "citadel_main",
-      "hash": "32038acbd767"
+      "hash": "b959f335e51b"
     },
     "Citadel_HeroPage_Sandbox_Solo": {
       "text": "ヒーローを試す",
@@ -42534,9 +42539,9 @@
       "hash": "986d2de2ea6d"
     },
     "Citadel_HeroBuilds_Error_Publishing": {
-      "text": "ビルドの公開に失敗しました。内部エラーや無効なデータビルドが原因として考えられます。",
+      "text": "ビルドの公開に失敗しました。内部エラーや無効なビルドデータが原因として考えられます。",
       "group": "citadel_main",
-      "hash": "bf9153438455"
+      "hash": "0f126801c721"
     },
     "Citadel_HeroBuilds_Reverting_Title": {
       "text": "ビルドの復元",
@@ -42749,9 +42754,9 @@
       "hash": "d5427b7b1366"
     },
     "Citadel_HeroBuilds_QuickbuyAll": {
-      "text": "右クリックでクイックバイにカテゴリーのアイテムを追加／削除",
+      "text": "右クリックでクイックバイにカテゴリーのアイテムを追加 / 削除",
       "group": "citadel_main",
-      "hash": "eb53bd7a9817"
+      "hash": "134cbb9798e2"
     },
     "Citadel_HeroBuilds_NewHeroBuild": {
       "text": "%hero_name% の新しいビルド",
@@ -42839,9 +42844,9 @@
       "hash": "af73a24131cd"
     },
     "Citadel_HeroBuilds_FavoriteButtonTooltip": {
-      "text": "お気に入り 登録／解除",
+      "text": "お気に入り 登録 / 解除",
       "group": "citadel_main",
-      "hash": "9fd58e2d47e1"
+      "hash": "f54307f12d70"
     },
     "Citadel_HeroBuilds_OldButtonTooltip": {
       "text": "このビルドは最近更新されていない、あるいは削除されたアイテムが含まれています。ビルドをコピーまたは編集すると、最新でないコンテンツが削除されます。",
@@ -43039,9 +43044,9 @@
       "hash": "f321699db4ab"
     },
     "Citadel_HeroBuilds_ValidateErrorBody": {
-      "text": "ビルドには説明文の名前、少なくとも1つ以上の推奨アイテムが必要です。",
+      "text": "ビルドには説明文と名前、少なくとも1つ以上の推奨アイテムが必要です。",
       "group": "citadel_main",
-      "hash": "6f8dafc5cb8a"
+      "hash": "5ce0ca98e30d"
     },
     "Citadel_HeroBuilds_FavoriteCount": {
       "text": "{i:favorite_count}",
@@ -43689,9 +43694,9 @@
       "hash": "88c673d27e7d"
     },
     "modifier_hint_vertical_movement": {
-      "text": "{g:citadel_binding:'Mantle'}でキャンセル。{g:citadel_binding:'Roll'}／{g:citadel_binding:'Crouch'}で上下に移動",
+      "text": "{g:citadel_binding:'Mantle'}でキャンセル。{g:citadel_binding:'Roll'} / {g:citadel_binding:'Crouch'}で上下に移動",
       "group": "citadel_main",
-      "hash": "858fd464d1aa"
+      "hash": "21c27bf15344"
     },
     "modifier_hint_can_cancel": {
       "text": "{g:citadel_binding:'Mantle'}でキャンセル",
@@ -44039,9 +44044,9 @@
       "hash": "2c86e8c42b15"
     },
     "citadel_hint_zoom": {
-      "text": "{g:citadel_binding:'ADS'}長押しで武器を撃つ際にズームインできます。",
+      "text": "{g:citadel_binding:'ADS'}長押しで武器のズームインができます。",
       "group": "citadel_main",
-      "hash": "9d5e9d089dc7"
+      "hash": "6ff5726fdc85"
     },
     "citadel_hint_slide": {
       "text": "下り坂を走っている際に{g:citadel_binding:'Crouch'}を長押しするとスライディングができます。",
@@ -44494,9 +44499,9 @@
       "hash": "4c12dab9ec7d"
     },
     "citadel_settings_communication_permissions_desc": {
-      "text": "デフォルトで受け取りたいコミュニケーションの種類を選択してください。ESCメニューからプレイヤーを個別にミュートすることもできます。ピンを無効化すると、それらのプレイヤーからのチャットホイールやマップピンもミュートします。",
+      "text": "デフォルトで受け取りたいコミュニケーションの種類を選択してください。ESCメニューからプレイヤーを個別にミュートすることもできます。ピンを無効化すると、それらのプレイヤーからのチャットホイールやマップ描画も無効化します。",
       "group": "citadel_main",
-      "hash": "c18e3a227f31"
+      "hash": "4f37af8f7287"
     },
     "citadel_settings_communication_permissions_confirm_reset": {
       "text": "コミュニケーション権限をデフォルトにリセットしますか？",
@@ -44524,9 +44529,9 @@
       "hash": "b448aa332cc3"
     },
     "citadel_settings_communication_spectated": {
-      "text": "観戦者",
+      "text": "観戦中のプレイヤー",
       "group": "citadel_main",
-      "hash": "c2b8228647bf"
+      "hash": "db497b1b0277"
     },
     "citadel_settings_communication_allow_text": {
       "text": "テキスト",
@@ -45559,9 +45564,9 @@
       "hash": "09bf13cbd3f7"
     },
     "citadel_settings_ingamemenukeybinds_reset_tooltip": {
-      "text": "インゲームメニューのキーバインドをデフォルトに戻します。",
+      "text": "ゲーム内メニューのキーバインドをデフォルトに戻します。",
       "group": "citadel_main",
-      "hash": "53693c31643d"
+      "hash": "5c532e3f5d54"
     },
     "citadel_settings_hideoutkeybinds": {
       "text": "ハイドアウト",
@@ -45914,9 +45919,9 @@
       "hash": "6bf3f6ad8fb0"
     },
     "citadel_settings_crosshair_customization_desc": {
-      "text": "リティクルのラインやセンタードットの輪郭の太さ、オフセット、塗りつぶしの色、センタードットの大きさなどを好きにカスタマイズできます。",
+      "text": "レティクルのラインやセンタードットの輪郭の太さ、オフセット、塗りつぶしの色、センタードットの大きさなどを好きにカスタマイズできます。",
       "group": "citadel_main",
-      "hash": "23824848bd9e"
+      "hash": "0bd428e462be"
     },
     "citadel_settings_crosshair_confirm_reset": {
       "text": "レティクルの設定をデフォルトにリセットしますか？",
@@ -46074,9 +46079,9 @@
       "hash": "6e9c211d064f"
     },
     "citadel_settings_rendering_confirm_reset": {
-      "text": "レンダリング品質の設定をデフォルトにリセッしますか？",
+      "text": "レンダリング品質の設定をデフォルトにリセットしますか？",
       "group": "citadel_main",
-      "hash": "f70258c28310"
+      "hash": "530d7feb8c28"
     },
     "citadel_settings_rendering_reset_tooltip": {
       "text": "レンダリング品質設定をデフォルトに戻します。",
@@ -46229,9 +46234,9 @@
       "hash": "0249f2cb8f3c"
     },
     "citadel_settings_displacement_mapping_desc": {
-      "text": "地形に存在する凹凸をよりより忠実に再現するための、スクリーンスペース・ディスプレイスメント効果を有効化します。<br><br>パフォーマンスコスト：中程度／一貫性あり",
+      "text": "地形に存在する凹凸をより忠実に再現するための、スクリーンスペース・ディスプレイスメント効果を有効化します。<br><br>パフォーマンスコスト：中程度／一貫性あり",
       "group": "citadel_main",
-      "hash": "7caac363bf69"
+      "hash": "1e0e403df2a1"
     },
     "citadel_settings_mboit": {
       "text": "MBOIT",
@@ -46564,9 +46569,9 @@
       "hash": "9420fc7fa41f"
     },
     "citadel_settings_dlssscaling_desc": {
-      "text": "Super Resolutionは、レンダリングするピクセル数を減らし、AIを活用することでより高解像度のフレームを出力します。この機能にはGeForce RTXのグラフィックカードが必要です。<br><br>スケーリングの倍率を高くするとネイティブ解像度は下がりますが、レンダリング速度が速くなります。",
+      "text": "Super Resolutionは、レンダリングするピクセル数を減らし、AIによって高解像度のフレームを出力することで、フレームレートを向上させます。この機能にはGeForce RTXのグラフィックカードが必要です。<br><br>スケーリングの倍率を高くするとネイティブ解像度は下がりますが、レンダリング速度が速くなります。",
       "group": "citadel_main",
-      "hash": "262b02b6e62e"
+      "hash": "eef367379dab"
     },
     "citadel_settings_dlssscaling_auto": {
       "text": "オート",
@@ -46859,9 +46864,9 @@
       "hash": "dc9ff1f0b572"
     },
     "citadel_settings_gsync_info": {
-      "text": "NVIDIA G-Syncを使うと、ゲームのリフレッシュレートに合わせてディスプレイのリフレッシュレートを可能な限り変動させ、よりスムーズな視覚体験を得ることができます。この機能は特定のディスプレイにのみ対応しており、ゲームのフレームレートがディスプレイの最大リフレッシュレートを下回っている場合に最も効果的です。この設定は、NVIDIAコントロールパネルでも有効化できます。変更を反映するには、ゲームの再起動が必要となる場合があります。",
+      "text": "NVIDIA G-Syncを使うと、ゲームのフレームレートに合わせてディスプレイのリフレッシュレートを可能な限り変動させ、よりスムーズな視覚体験を得ることができます。この機能は特定のディスプレイにのみ対応しており、ゲームのフレームレートがディスプレイの最大リフレッシュレートを下回っている場合に最も効果的です。この設定は、NVIDIAコントロールパネルでも有効化できます。変更を反映するには、ゲームの再起動が必要となる場合があります。",
       "group": "citadel_main",
-      "hash": "1927c7e58dc2"
+      "hash": "b45836d31339"
     },
     "citadel_settings_gsync_enabled": {
       "text": "有効",
@@ -46954,9 +46959,9 @@
       "hash": "cc1cc3119c0f"
     },
     "Citadel_Settings_HudTelemetry_NetworkQualityDetailed_Info": {
-      "text": "ネットワーク情報を2列で表示します。Pingやティックの処理ミス率に加え、現在のパケットロスおよびジッターを数値で表示します。",
+      "text": "ネットワーク情報を2行で表示します。Pingやティックの処理ミス率に加え、現在のパケットロスおよびジッターを数値で表示します。",
       "group": "citadel_main",
-      "hash": "7c5cf5264807"
+      "hash": "74c64ca47422"
     },
     "Citadel_Settings_HudTelemetry_NetworkQualityGraph": {
       "text": "ジッターを表示",
@@ -47559,14 +47564,14 @@
       "hash": "65bbed805348"
     },
     "citadel_keybind_cursorselect": {
-      "text": "Select",
+      "text": "選択",
       "group": "citadel_main",
-      "hash": "8598222918d3"
+      "hash": "b9fa67abcaf9"
     },
     "citadel_keybind_cursorcontext": {
-      "text": "Menu",
+      "text": "メニュー",
       "group": "citadel_main",
-      "hash": "57f5f5efbc59"
+      "hash": "8f99b5f7c588"
     },
     "citadel_keybind_cursormiddle": {
       "text": "ミドルマウス",
@@ -47979,9 +47984,9 @@
       "hash": "0778763289bb"
     },
     "guide_movement_slide_desc": {
-      "text": "下り坂を走ってる際や高速で移動している際に{g:citadel_binding:'Crouch'}を長押しするとスライディングができます。",
+      "text": "下り坂を走っている際や高速で移動している際に{g:citadel_binding:'Crouch'}を長押しするとスライディングができます。",
       "group": "citadel_main",
-      "hash": "512788724cdf"
+      "hash": "63cea5d7c37d"
     },
     "guide_movement_dodge_header": {
       "text": "ダッシュ",
@@ -48059,9 +48064,9 @@
       "hash": "c13f3133af4b"
     },
     "guide_basics_aim_desc": {
-      "text": "{g:citadel_binding:'ADS'}長押しで武器を撃つ際にズームインできます。",
+      "text": "{g:citadel_binding:'ADS'}長押しで武器のズームインができます。",
       "group": "citadel_main",
-      "hash": "9d5e9d089dc7"
+      "hash": "6ff5726fdc85"
     },
     "guide_basics_melee_header": {
       "text": "近接攻撃",
@@ -48709,9 +48714,9 @@
       "hash": "4227307ca9de"
     },
     "citadel_bot_name": {
-      "text": "BOT ",
+      "text": "CPU",
       "group": "citadel_main",
-      "hash": "f95db2429033"
+      "hash": "ff221d4752ce"
     },
     "menu_watch_live_games": {
       "text": "{d:live_matches} マッチがライブ中",
@@ -48759,9 +48764,9 @@
       "hash": "4f1848b9422e"
     },
     "menu_play_custom_game_desc": {
-      "text": "最大12人参加できるカスタムマッチを作成／参加",
+      "text": "最大12人参加できるカスタムマッチを作成 / 参加",
       "group": "citadel_main",
-      "hash": "1d2efefca557"
+      "hash": "c582c4b06a66"
     },
     "menu_play_explore_map_desc": {
       "text": "無人の街中で操作方法やマップ構造を確認する",
@@ -48894,9 +48899,9 @@
       "hash": "81f465ad1011"
     },
     "Citadel_RankedNotAllowed_NotEnoughMatches:f": {
-      "text": "ランクマッチを解放するには、スタンダードマッチをプレイする必要があります。進行度：{d:matches_played}／{d:matches_required}",
+      "text": "ランクマッチを解放するには、スタンダードマッチをプレイする必要があります。進行度：{d:matches_played} / {d:matches_required}",
       "group": "citadel_main",
-      "hash": "5f3e9752f371"
+      "hash": "23a013c211a5"
     },
     "Citadel_RankedNotAllowed_LowPri:f": {
       "text": "低優先度マッチメイキング中はプレイできません。解除まで残り {d:low_pri_matches} {low_pri_matches, plural, one{マッチ} other{マッチ}}です。",
@@ -49439,9 +49444,9 @@
       "hash": "91fe781d35a3"
     },
     "Citadel_ranked_load_more": {
-      "text": "詳細を読み込む",
+      "text": "さらに読む",
       "group": "citadel_main",
-      "hash": "77b41186483b"
+      "hash": "16cd5e697981"
     },
     "item_info_abilities": {
       "text": "アビリティ",
@@ -49884,9 +49889,9 @@
       "hash": "dbea3967f5bc"
     },
     "Citadel_PriorityToken_Desc": {
-      "text": "マッチをプレイして、ヒーロー優先トークを手に入れましょう。<br><br>獲得したトークンはヒーローカードにドラッグすることで使用でき、そのヒーローを使用できる確率がもっとも高くなります。トークンはヒーローを使用した時のみ消費されます。<br><br>マッチメイキングプールに追加される新ヒーローの数が多いほど、トークンの獲得レートが増加します。",
+      "text": "マッチをプレイして、ヒーロー優先トークンを手に入れましょう。<br><br>獲得したトークンはヒーローカードにドラッグすることで使用でき、そのヒーローを使用できる確率がもっとも高くなります。トークンはヒーローを使用した時のみ消費されます。<br><br>マッチメイキングプールに追加される新ヒーローの数が多いほど、トークンの獲得レートが増加します。",
       "group": "citadel_main",
-      "hash": "55719f7d89b0"
+      "hash": "19a8ca99b5cd"
     },
     "Citadel_PriorityToken_Available": {
       "text": "利用可能",
@@ -49994,9 +49999,9 @@
       "hash": "81b619bb3148"
     },
     "HeroTesting_NoCooldown": {
-      "text": "クールダウン無限",
+      "text": "クールダウンなし",
       "group": "citadel_main",
-      "hash": "8490bfda96d6"
+      "hash": "5aebb08e3caa"
     },
     "HeroTesting_UnlockFlex": {
       "text": "エクストラスロット",
@@ -51664,9 +51669,9 @@
       "hash": "9820b7636a8b"
     },
     "Citadel_ChatTarget_GameAll": {
-      "text": "全地域",
+      "text": "全体",
       "group": "citadel_main",
-      "hash": "30039b507bdd"
+      "hash": "85c0ff386947"
     },
     "Citadel_ChatTarget_Party": {
       "text": "パーティー",
@@ -52344,9 +52349,9 @@
       "hash": "61e7eb7effa9"
     },
     "Citadel_News_LoadMore": {
-      "text": "詳細を読み込む",
+      "text": "さらに読む",
       "group": "citadel_main",
-      "hash": "77b41186483b"
+      "hash": "16cd5e697981"
     },
     "Citadel_News_Loading": {
       "text": "ロード中...",

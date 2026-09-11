@@ -1,10 +1,7 @@
-/** data/*.json の読み込みと、表示名の解決 */
+/** data/snapshots/<version>/*.json の読み込みと、表示名の解決 */
 
-import heroesJson from "../../data/heroes.json" with { type: "json" };
-import itemsJson from "../../data/items.json" with { type: "json" };
-import abilitiesJson from "../../data/abilities.json" with { type: "json" };
-import localizationJson from "../../data/localization.japanese.json" with { type: "json" };
-import localizationEnJson from "../../data/localization.english.json" with { type: "json" };
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import updatesJson from "../../data/updates.json" with { type: "json" };
 import heroNotesJson from "../../data/hero-notes.json" with { type: "json" };
 import itemNotesJson from "../../data/item-notes.json" with { type: "json" };
@@ -13,12 +10,43 @@ import type { ItemsFile, Item } from "../types/item.ts";
 import type { AbilitiesFile, Ability } from "../types/ability.ts";
 import type { LocalizationFile } from "../types/localization.ts";
 
-export const heroesFile = heroesJson as unknown as HeroesFile;
-export const itemsFile = itemsJson as unknown as ItemsFile;
-export const abilitiesFile = abilitiesJson as unknown as AbilitiesFile;
-export const localization = localizationJson as unknown as LocalizationFile;
+// import.meta.url ベースの相対解決は使わない: Astro/Vite のビルドでこのモジュールは
+// dist/.prerender/chunks/ 以下へ移されるため、ソース上の相対パスが build 時に壊れる。
+// プロジェクトルートは常に process.cwd()(npm run dev/build の実行場所)とする。
+const DATA_DIR = join(process.cwd(), "data");
+const readJson = <T>(path: string): T => JSON.parse(readFileSync(path, "utf8")) as T;
+
+/**
+ * data/snapshots/<version>/ からヒーロー・アイテム・アビリティ・日本語ローカライズを読む。
+ * version を省略すると data/latest.json が指す最新版。
+ * ビルドページに複数バージョン比較 UI を足すときは、ここに version を渡すだけでよい
+ * (architecture.html「データレイアウト」参照)。
+ */
+function loadSnapshot(version?: string): {
+  heroes: HeroesFile;
+  items: ItemsFile;
+  abilities: AbilitiesFile;
+  localization: LocalizationFile;
+  localizationEn: LocalizationFile;
+} {
+  const v = version ?? readJson<{ version: string }>(join(DATA_DIR, "latest.json")).version;
+  const dir = join(DATA_DIR, "snapshots", v);
+  return {
+    heroes: readJson<HeroesFile>(join(dir, "heroes.json")),
+    items: readJson<ItemsFile>(join(dir, "items.json")),
+    abilities: readJson<AbilitiesFile>(join(dir, "abilities.json")),
+    localization: readJson<LocalizationFile>(join(dir, "localization.japanese.json")),
+    localizationEn: readJson<LocalizationFile>(join(dir, "localization.english.json")),
+  };
+}
+
+const snapshot = loadSnapshot();
+export const heroesFile = snapshot.heroes;
+export const itemsFile = snapshot.items;
+export const abilitiesFile = snapshot.abilities;
+export const localization = snapshot.localization;
 /** ゲーム内日本語が用意されていないトークン用の予備。約100件がこちらに落ちる */
-export const localizationEn = localizationEnJson as unknown as LocalizationFile;
+export const localizationEn = snapshot.localizationEn;
 
 /**
  * トークンID から表示テキストを引く。

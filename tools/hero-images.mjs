@@ -56,8 +56,12 @@ function codenameFor(ref) {
   return /heroes\/([a-z0-9_]+)_sm\./.exec(ref ?? "")?.[1] ?? null;
 }
 
-const heroes = JSON.parse(readFileSync(join(repoRoot, "data/heroes.json"), "utf8"));
-const enLoc = JSON.parse(readFileSync(join(repoRoot, "data/localization.english.json"), "utf8"));
+// data/*.json はフラットな形では持たない(スナップショットが唯一の真実の源)。
+// data/latest.json が指す最新版から読む
+const latestVersion = JSON.parse(readFileSync(join(repoRoot, "data/latest.json"), "utf8")).version;
+const snapDir = join(repoRoot, "data/snapshots", latestVersion);
+const heroes = JSON.parse(readFileSync(join(snapDir, "heroes.json"), "utf8"));
+const enLoc = JSON.parse(readFileSync(join(snapDir, "localization.english.json"), "utf8"));
 const enName = (nameToken) => enLoc.tokens[nameToken]?.text ?? null;
 
 const srcFiles = existsSync(SRC) ? readdirSync(SRC) : [];

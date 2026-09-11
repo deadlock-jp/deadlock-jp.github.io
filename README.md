@@ -38,12 +38,17 @@ MIT ライセンスが及ぶのはコードだけで、`data/` と `public/image
 
 | 種類 | 出どころ |
 |---|---|
-| ヒーロー・アイテム・スキルの数値 | [GameTracking-Deadlock](https://github.com/SteamDatabase/GameTracking-Deadlock) の `.vdata`（KV3テキスト） |
+| ヒーロー・アイテム・スキルの数値 | ゲーム本体の `.vdata`（KV3テキスト）を直接 decompile |
 | 日本語の表示テキスト | ゲーム本体の `citadel_*_japanese.txt`（公式ローカライズ） |
 | アイコン画像・ヒーロー肖像 | ゲーム本体の VPK から抽出 |
 
 数値は人手で書き写しておらず、すべてパーサーが自動で取り出しています。
 どのフィールドをどう解釈したかは `src/parsers/` のコードとコメントに書いてあります。
+
+パッチごとのスナップショットは `data/snapshots/<ClientVersion>/` に保存し、
+`data/latest.json` が現在サイトに出ている版を指します。
+[GameTracking-Deadlock](https://github.com/SteamDatabase/GameTracking-Deadlock) は
+検算と過去バージョンの補完に使う副次ソースです。
 
 ## 開発
 
@@ -56,7 +61,15 @@ npm run build      # dist/ に静的サイトを出力
 npm run typecheck  # 型チェック
 ```
 
-データの再生成には、別途 clone した GameTracking-Deadlock を指定します。
+データの再生成は、このゲームがインストールされたPC上で行います
+(`tools/extract/extract-local.mjs` が Steam のインストール先から `.vdata` を decompile します)。
+
+```bash
+node tools/extract/extract-local.mjs   # ローカル抽出ルートを作る(パスを標準出力に出す)
+npm run parse -- --local <上記のパス>   # data/snapshots/<ClientVersion>/ を生成
+```
+
+検算や過去バージョンの補完には、別途 clone した GameTracking-Deadlock も使えます。
 
 ```bash
 npm run parse -- --gt <GameTracking-Deadlockのパス>

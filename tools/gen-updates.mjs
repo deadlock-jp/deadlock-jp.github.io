@@ -6,15 +6,16 @@
  * バランス関連の数値がどう変わったかを 1 エントリにまとめて data/updates.json へ
  * 追記する。数値は人手で書かず、必ず parse 結果の差分から出す(CLAUDE.md ルール7)。
  *
- * 使い方:
- *   1. いまの data/ を退避:   cp -r data /tmp/data-old
- *   2. 上流を取り込んで再 parse: npm run parse -- --gt <GameTracking-Deadlock>
+ * 使い方(ローカル抽出のスナップショットが一次ソース。architecture.html 参照):
+ *   1. node tools/extract/extract-local.mjs でローカル抽出ルートを作る
+ *   2. npm run parse -- --local <そのパス> で data/snapshots/<新Version>/ を生成
  *   3. 差分から履歴を生成:
- *        node tools/gen-updates.mjs --old /tmp/data-old \
- *          --date 2026-09-20 --commit <sha> --title "9/20 パッチ" --write
+ *        node tools/gen-updates.mjs --old data/snapshots/<旧Version> \
+ *          --new data/snapshots/<新Version> \
+ *          --date 2026-09-20 --title "9/20 パッチ" --write
  *
- * --old <dir>     before の data ディレクトリ(必須)
- * --new <dir>     after の data ディレクトリ(既定: ./data)
+ * --old <dir>     before の data ディレクトリ(必須。例: data/snapshots/6686)
+ * --new <dir>     after の data ディレクトリ(既定: ./data。例: data/snapshots/6687)
  * --date <ISO>    エントリの日付(既定: 今日)
  * --commit <sha>  上流コミット(任意)
  * --title <str>   エントリ見出し(既定: "<date> データ更新")
