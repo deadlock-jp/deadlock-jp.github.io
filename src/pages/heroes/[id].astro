@@ -50,7 +50,7 @@ const skills = hero.abilities
   .map((a) => {
     const ab = ability(a.abilityKey);
     return ab
-      ? { key: a.abilityKey, ab, card: skillCard(ab), notes: heroNotes(a.abilityKey) }
+      ? { key: a.abilityKey, ab, card: skillCard(ab, name), notes: heroNotes(a.abilityKey) }
       : null;
   })
   .filter((s): s is NonNullable<typeof s> => s !== null);
@@ -143,7 +143,7 @@ const metaDesc =
             </div>
           </header>
 
-          <p class="sdesc">{describe(`${s.key}_desc`, s.ab.properties, "（説明なし）")}</p>
+          <p class="sdesc">{describe(`${s.key}_desc`, s.ab.properties, "（説明なし）", { hero_name: name })}</p>
 
           {(s.card.damage.length > 0 || s.card.effects.length > 0) && (
             <ul class="srows">
@@ -170,13 +170,17 @@ const metaDesc =
               {s.card.upgrades.map((tier) => (
                 <li>
                   <span class="ap">{tier.ap}<small>AP</small></span>
-                  <span class="urows">
-                    {tier.rows.map((r) => (
-                      <span class="u">
-                        {r.label} <b>{r.value}</b>
-                      </span>
-                    ))}
-                  </span>
+                  {tier.description ? (
+                    <span class="udesc">{tier.description}</span>
+                  ) : (
+                    <span class="urows">
+                      {tier.rows.map((r) => (
+                        <span class="u">
+                          {r.label} <b>{r.value}</b>
+                        </span>
+                      ))}
+                    </span>
+                  )}
                 </li>
               ))}
             </ol>
@@ -315,6 +319,7 @@ const metaDesc =
     .skill.ult .supg .ap { color: var(--c-spirit); border-color: var(--c-spirit); }
     .urows { display: flex; flex-wrap: wrap; gap: var(--sp-3); color: var(--c-text-muted); }
     .urows .u b { font-family: var(--font-mono); color: var(--c-text-strong); }
+    .udesc { color: var(--c-text); line-height: 1.5; }
 
     .snotes {
       margin-top: var(--sp-3); padding-top: var(--sp-3); border-top: 1px dashed var(--c-border);

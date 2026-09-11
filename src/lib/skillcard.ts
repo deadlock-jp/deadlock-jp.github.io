@@ -8,7 +8,7 @@
 
 import type { Ability } from "../types/ability.ts";
 import type { AbilityProperty } from "../types/property.ts";
-import { t, formatProperty } from "./data.ts";
+import { t, formatProperty, describe } from "./data.ts";
 
 export interface CardRow {
   label: string;
@@ -24,6 +24,13 @@ export interface UpgradeTier {
   /** アビリティポイント消費(1 / 2 / 5) */
   ap: number;
   rows: CardRow[];
+  /**
+   * ゲーム側が用意した、この段階専用の説明文(`<abilityKey>_t{1,2,3}_desc`)。
+   * リワークで挙動そのものが変わる段階(例: ヴェナトル ガットショットT3「次の近接強攻撃が
+   * 祝福状態になる」)は、rows の数値羅列だけでは説明にならないためこちらを優先表示する。
+   * 無ければ null(このトークンが無いアビリティの方が多い。単純な数値強化ならrowsで足りる)。
+   */
+  description: string | null;
 }
 export interface SkillCard {
   meta: CardRow[];
@@ -51,8 +58,10 @@ function isZero(p: AbilityProperty | undefined): boolean {
   return /^-?(0|0\.0|-1|-1\.0)/.test(String(p.rawValue).trim());
 }
 
-export function skillCard(ab: Ability): SkillCard {
+/** heroName: 説明文中の {s:hero_name} を解決するためのヒーロー表示名(あれば) */
+export function skillCard(ab: Ability, heroName = ""): SkillCard {
   const props = ab.properties ?? {};
+  const extra: Record<string, string> = heroName ? { hero_name: heroName } : {};
 
   // アップグレードで初めて増えるチャージ(基礎0)も見出しに出したいので拾っておく
   const chargeFromUpgrade = (ab.upgrades ?? []).some((tier) =>
@@ -90,17 +99,26 @@ export function skillCard(ab: Ability): SkillCard {
     effects.push(formatProperty(name, p));
   }
 
-  const upgrades: UpgradeTier[] = (ab.upgrades ?? []).map((tier, i) => ({
-    ap: AP_BY_TIER[i] ?? i + 1,
-    rows: tier.map((u) => {
-      const post = t(`${u.property}_postfix`, "");
-      const b = String(u.bonus);
-      const sign = b.startsWith("-") ? "" : "+";
-      // bonus が "10m" のように単位付きのことがある。postfix を足して "10mm" にしない
-      const tail = post && !b.endsWith(post) ? post : "";
-      return { label: t(`${u.property}_label`, u.property), value: `${sign}${b}${tail}` };
-    }),
-  }));
+  const upgrades: UpgradeTier[] = (ab.upgrades ?? []).map((tier, i) => {
+    // この段階の bonus を rawValue として重ね、{s:プロパティ名} をこの段階の増分に解決する
+    // (base の値ではなく)。例: t2_desc の "{s:AbilityCooldown}秒" は -10 に解決してほしい。
+    const bonusAsProps: Record<string, { rawValue: string }> = {};
+    for (const u of tier) bonusAsProps[u.property] = { rawValue: String(u.bonus) };
+    const description =
+      describe(`${ab.id}_t${i + 1}_desc`, { ...props, ...bonusAsProps }, "", extra) || null;
+    return {
+      ap: AP_BY_TIER[i] ?? i + 1,
+      description,
+      rows: tier.map((u) => {
+        const post = t(`${u.property}_postfix`, "");
+        const b = String(u.bonus);
+        const sign = b.startsWith("-") ? "" : "+";
+        // bonus が "10m" のように単位付きのことがある。postfix を足して "10mm" にしない
+        const tail = post && !b.endsWith(post) ? post : "";
+        return { label: t(`${u.property}_label`, u.property), value: `${sign}${b}${tail}` };
+      }),
+    };
+  });
 
   return { meta, damage, effects, upgrades };
 }

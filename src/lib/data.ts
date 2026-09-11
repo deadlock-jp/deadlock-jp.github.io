@@ -79,6 +79,7 @@ function humanize(name: string): string {
  * Valveの説明文に埋め込まれたプレースホルダを解決する。
  *
  *   {s:PropName}                          → そのアイテム/スキル自身のプロパティ値
+ *   {s:hero_name} など                    → properties に無ければ extra から(第4引数)
  *   {g:citadel_inline_attribute:'X'}      → 文中に埋め込むステータス名
  *
  * 埋め込み名は "InlineAttribute_X" が正しい引き先で、
@@ -87,16 +88,24 @@ function humanize(name: string): string {
  * InlineAttribute_ を優先し、無いものだけ _label に落とす。
  *
  * 解決できないものは読める形に整えて残す(空欄にすると文意が壊れるため)。
+ *
+ * extra: {s:...} のうちプロパティではないもの(例: "自身"のヒーロー名を指す
+ * {s:hero_name})を解決するための差し込み値。ability/skillのdescTokenは
+ * ヒーロー詳細ページの文脈で呼ばれるので、そこから hero_name を渡す。
  */
 export function describe(
   descToken: string,
   properties: Record<string, { rawValue: string }> = {},
   fallback = "",
+  extra: Record<string, string> = {},
 ): string {
   const raw = t(descToken, fallback);
   if (!raw) return "";
   const resolved = raw
-    .replace(/\{s:([A-Za-z0-9_]+)\}/g, (_m, prop: string) => properties[prop]?.rawValue ?? `?`)
+    .replace(
+      /\{s:([A-Za-z0-9_]+)\}/g,
+      (_m, prop: string) => properties[prop]?.rawValue ?? extra[prop] ?? `?`,
+    )
     .replace(
       /\{g:citadel_inline_attribute:'([A-Za-z0-9_]+)'\}/g,
       // SpiritIcon は文字ではなくアイコンの差し込み位置。文字にすると文意が壊れるので落とす
