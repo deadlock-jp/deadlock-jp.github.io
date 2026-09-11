@@ -11,27 +11,36 @@
  *   2. steam.inf の ClientVersion を読む(decompile 無しの軽いチェック)
  *   3. _lastversion.txt と同じなら何もせず終了
  *   4. 違えば: extract-local.mjs → parse --local → gen-snapshot-diff --write
- *      → git commit → push(deploy key 経由の `auto` remote)
+ *      → git commit → push(fine-grained PAT 経由。deploy key は組織ポリシーで
+ *      無効化されているため使えない)
  *   5. 失敗したら push せず・_lastversion.txt も更新せず終了(次回また試みる)。
  *      成功/失敗どちらも _autolog.txt に記録する。
  *
- * push 経路: このPC専用の `auto` remote(SSHのdeploy key)を使う。
- * 通常の `origin`(HTTPS、対話セッション用)には触らない。
+ * 認証: %USERPROFILE%\.deadlock-jp-token.txt に保存した fine-grained PAT
+ * (deadlock-jp/deadlock-jp.github.io 限定・Contents: Read and write のみ)を
+ * askpass.mjs 経由で渡す。トークンの値は argv にも env にも直接乗らないので、
+ * このスクリプトの失敗ログにトークンが混ざる心配がない。push 先は通常の
+ * `origin`(このセッションで使っている個人アカウント認証)と同じリポジトリだが、
+ * 認証情報だけこの専用トークンに差し替える(-c credential.helper= で
+ * Git Credential Manager 等の割り込みを止めてから askpass に任せる)。
  */
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync, appendFileSync, unlinkSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { homedir } from "node:os";
 import { findSteamInstall, readClientVersion } from "../extract/steam.mjs";
 
-const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
+const HERE = dirname(fileURLToPath(import.meta.url));
+const REPO_ROOT = join(HERE, "..", "..");
 const WORK = "C:\\Users\\nogud\\Downloads\\deadlock-extract";
 const LOCK = join(WORK, "_update.lock");
 const LASTVERSION = join(WORK, "_lastversion.txt");
 const AUTOLOG = join(WORK, "_autolog.txt");
-const GIT_REMOTE = "auto"; // deploy key 経由(SSH)。origin(HTTPS)には触らない
-const GIT_SSH = "ssh -i C:\\Users\\nogud\\.ssh\\deadlock_jp_deploy -o IdentitiesOnly=yes";
+const TOKEN_PATH = join(homedir(), ".deadlock-jp-token.txt");
+const ASKPASS = join(HERE, "askpass.cmd");
+const REPO_URL = "https://github.com/deadlock-jp/deadlock-jp.github.io.git";
 
 function log(msg) {
   const line = `[${new Date().toISOString()}] ${msg}`;
@@ -83,6 +92,12 @@ function main() {
     }
     log(`新しいバージョンを検出: ${lastVersion ?? "(初回)"} -> ${clientVersion}`);
 
+    if (!existsSync(TOKEN_PATH)) {
+      throw new Error(
+        `${TOKEN_PATH} が無いので push できません(抽出前に確認して中断)。fine-grained PAT を作って保存してください。`,
+      );
+    }
+
     // 差分の from に使う「更新前の最新版」を、上書きされる前に控えておく
     const latestPath = join(REPO_ROOT, "data", "latest.json");
     const prevVersion = existsSync(latestPath)
@@ -113,8 +128,15 @@ function main() {
       log("data/ に変更がありませんでした(ClientVersion は変わったが数値・ID差分ゼロ)。commit をスキップします。");
     } else {
       run("git", ["commit", "-m", `data: snapshot ${clientVersion} (auto)`]);
-      run("git", ["push", GIT_REMOTE, "HEAD:main"], { env: { ...process.env, GIT_SSH_COMMAND: GIT_SSH } });
-      log(`push 完了: ${GIT_REMOTE} main`);
+      if (!existsSync(TOKEN_PATH)) {
+        throw new Error(
+          `${TOKEN_PATH} が無いので push できません。fine-grained PAT を作って保存してください。`,
+        );
+      }
+      run("git", ["-c", "credential.helper=", "push", REPO_URL, "HEAD:main"], {
+        env: { ...process.env, GIT_ASKPASS: ASKPASS, GIT_TERMINAL_PROMPT: "0" },
+      });
+      log("push 完了");
     }
 
     writeFileSync(LASTVERSION, clientVersion);
