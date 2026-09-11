@@ -1,0 +1,1249 @@
+{
+  "schemaVersion": 1,
+  "upstreamCommit": "6688",
+  "generatedAt": "2026-09-11T18:07:48.601Z",
+  "objects": {
+    "trooper_base": {
+      "id": "trooper_base",
+      "className": "npc_trooper",
+      "baseKey": "weapon_base",
+      "stats": {
+        "maxHealth": 300,
+        "sightRangePlayers": 700,
+        "sightRangeNPCs": 1600,
+        "turnRate": 360,
+        "nearDeathDuration": 1,
+        "breakableForceScale": 5,
+        "walkSpeed": 248,
+        "runSpeed": 512,
+        "acceleration": 200,
+        "meleeAttemptRange": 100,
+        "meleeHitRange": 100,
+        "meleeChargeRange": 0,
+        "healthBarOffset": 76,
+        "healthBarOffsetDucking": 40,
+        "dPSPctGrowthPerMinute": 0,
+        "outlineWidth": 4
+      },
+      "flags": {
+        "playLastHitSound": true,
+        "outlineThroughWalls": true,
+        "outlineWhenVisible": true
+      }
+    },
+    "trooper_zipline_container": {
+      "id": "trooper_zipline_container",
+      "className": "npc_trooper",
+      "baseKey": "trooper_base",
+      "stats": {
+        "maxHealth": 1,
+        "sightRangePlayers": 700,
+        "sightRangeNPCs": 1600,
+        "turnRate": 360,
+        "nearDeathDuration": 0,
+        "breakableForceScale": 5,
+        "walkSpeed": 248,
+        "runSpeed": 512,
+        "acceleration": 200,
+        "meleeAttemptRange": 100,
+        "meleeHitRange": 100,
+        "meleeChargeRange": 0,
+        "healthBarOffset": 76,
+        "healthBarOffsetDucking": 40,
+        "dPSPctGrowthPerMinute": 0,
+        "outlineWidth": 4
+      },
+      "flags": {
+        "playLastHitSound": false,
+        "outlineThroughWalls": true,
+        "outlineWhenVisible": true,
+        "spawnBreakablesOnDeath": false
+      }
+    },
+    "trooper_normal": {
+      "id": "trooper_normal",
+      "className": "npc_trooper",
+      "baseKey": "trooper_base",
+      "stats": {
+        "maxHealth": 300,
+        "sightRangePlayers": 700,
+        "sightRangeNPCs": 1600,
+        "turnRate": 360,
+        "nearDeathDuration": 1,
+        "breakableForceScale": 5,
+        "walkSpeed": 248,
+        "runSpeed": 512,
+        "acceleration": 200,
+        "meleeAttemptRange": 100,
+        "meleeHitRange": 100,
+        "meleeChargeRange": 0,
+        "healthBarOffset": 76,
+        "healthBarOffsetDucking": 60,
+        "dPSPctGrowthPerMinute": 0,
+        "outlineWidth": 4,
+        "meleeDuration": 1.5,
+        "meleeDamage": 50,
+        "outlineRange": 1400
+      },
+      "flags": {
+        "playLastHitSound": true,
+        "outlineThroughWalls": true,
+        "outlineWhenVisible": true,
+        "spawnBreakablesOnDeath": true
+      }
+    },
+    "trooper_medic": {
+      "id": "trooper_medic",
+      "className": "npc_trooper",
+      "baseKey": "trooper_base",
+      "stats": {
+        "maxHealth": 350,
+        "sightRangePlayers": 900,
+        "sightRangeNPCs": 1600,
+        "turnRate": 360,
+        "nearDeathDuration": 1,
+        "breakableForceScale": 5,
+        "walkSpeed": 248,
+        "runSpeed": 512,
+        "acceleration": 200,
+        "meleeAttemptRange": 100,
+        "meleeHitRange": 100,
+        "meleeChargeRange": 0,
+        "healthBarOffset": 76,
+        "healthBarOffsetDucking": 40,
+        "dPSPctGrowthPerMinute": 3,
+        "outlineWidth": 4,
+        "meleeDuration": 1,
+        "meleeDamage": 25,
+        "outlineRange": 1400
+      },
+      "flags": {
+        "playLastHitSound": true,
+        "outlineThroughWalls": true,
+        "outlineWhenVisible": true,
+        "spawnBreakablesOnDeath": true
+      }
+    },
+    "trooper_melee": {
+      "id": "trooper_melee",
+      "className": "npc_trooper",
+      "baseKey": "trooper_base",
+      "stats": {
+        "maxHealth": 400,
+        "sightRangePlayers": 700,
+        "sightRangeNPCs": 1600,
+        "turnRate": 360,
+        "nearDeathDuration": 1,
+        "breakableForceScale": 5,
+        "walkSpeed": 320,
+        "runSpeed": 512,
+        "acceleration": 200,
+        "meleeAttemptRange": 120,
+        "meleeHitRange": 120,
+        "meleeChargeRange": 1000,
+        "healthBarOffset": 76,
+        "healthBarOffsetDucking": 40,
+        "dPSPctGrowthPerMinute": 0,
+        "outlineWidth": 4,
+        "meleeDuration": 1.333,
+        "meleeDamage": 80,
+        "outlineRange": 1400
+      },
+      "flags": {
+        "playLastHitSound": true,
+        "outlineThroughWalls": true,
+        "outlineWhenVisible": true,
+        "spawnBreakablesOnDeath": true
+      }
+    },
+    "npc_boss_tier1": {
+      "id": "npc_boss_tier1",
+      "className": "npc_trooper_boss",
+      "baseKey": "weapon_base",
+      "stats": {
+        "modelScale": 1,
+        "maxHealth": 5500,
+        "sightRangePlayers": 1338.58,
+        "sightRangeNPCs": 700,
+        "navHull": 1,
+        "healthBarOffset": 260,
+        "meleeAttemptRange": 196.85,
+        "meleeHitRange": 275.591,
+        "physicsImpulseMultiplier": 0,
+        "runSpeed": 300,
+        "turnRate": 360,
+        "beamWeaponWidth": 12,
+        "beamTurnRate": 360,
+        "invulRange": 944.882,
+        "playerDPS": 116,
+        "minMeleeAttackTime": 1.5,
+        "tier1PlayerClipCapsuleRadius": 32,
+        "tier1PlayerClipCapsuleHeight": 224,
+        "backDoorProtectionRange": 1181.1,
+        "trooperDamageResistPct": 42.5,
+        "playerDamageResistPct": -25,
+        "trooperDPS": 35,
+        "outlineRange": 1250
+      },
+      "flags": {
+        "mitigateDamageFromPlayers": true,
+        "playLastHitSound": false,
+        "outlineThroughWalls": true,
+        "outlineWhenVisible": true
+      }
+    },
+    "npc_barrack_boss": {
+      "id": "npc_barrack_boss",
+      "className": "npc_barrack_boss",
+      "baseKey": "weapon_base",
+      "stats": {
+        "modelScale": 1,
+        "maxHealth": 4000,
+        "sightRangePlayers": 1250,
+        "sightRangeNPCs": 1500,
+        "navHull": 1,
+        "meleeAttemptRange": 250,
+        "meleeHitRange": 275,
+        "meleeDuration": 0.6,
+        "physicsImpulseMultiplier": 0,
+        "runSpeed": 300,
+        "turnRate": 360,
+        "beamWeaponWidth": 6,
+        "beamTurnRate": 360,
+        "invulRange": 944.882,
+        "playerDPS": 116,
+        "minMeleeAttackTime": 1.5,
+        "tier1PlayerClipCapsuleRadius": 32,
+        "tier1PlayerClipCapsuleHeight": 224,
+        "trooperDamageResistPct": 42.5,
+        "playerDamageResistPct": -25,
+        "trooperDPS": 35,
+        "outlineRange": 1250,
+        "healthBarOffset": 450,
+        "playerAutoAttackRange": 950,
+        "deathFadeTimeStart": 2,
+        "deathFadeTimeEnd": 4,
+        "backDoorProtectionRange": 2000,
+        "enemyTrooperProtectionRange": 1575
+      },
+      "flags": {
+        "playLastHitSound": false,
+        "outlineThroughWalls": false,
+        "outlineWhenVisible": false
+      }
+    },
+    "npc_barrack_boss_amber": {
+      "id": "npc_barrack_boss_amber",
+      "className": "npc_barrack_boss",
+      "baseKey": "npc_barrack_boss",
+      "stats": {
+        "modelScale": 1,
+        "maxHealth": 4000,
+        "sightRangePlayers": 1250,
+        "sightRangeNPCs": 1500,
+        "navHull": 1,
+        "meleeAttemptRange": 250,
+        "meleeHitRange": 275,
+        "meleeDuration": 0.6,
+        "physicsImpulseMultiplier": 0,
+        "runSpeed": 300,
+        "turnRate": 360,
+        "beamWeaponWidth": 6,
+        "beamTurnRate": 360,
+        "invulRange": 944.882,
+        "playerDPS": 116,
+        "minMeleeAttackTime": 1.5,
+        "tier1PlayerClipCapsuleRadius": 32,
+        "tier1PlayerClipCapsuleHeight": 224,
+        "trooperDamageResistPct": 42.5,
+        "playerDamageResistPct": -25,
+        "trooperDPS": 35,
+        "outlineRange": 1250,
+        "healthBarOffset": 450,
+        "playerAutoAttackRange": 950,
+        "deathFadeTimeStart": 2,
+        "deathFadeTimeEnd": 4,
+        "backDoorProtectionRange": 2000,
+        "enemyTrooperProtectionRange": 1575
+      },
+      "flags": {
+        "playLastHitSound": false,
+        "outlineThroughWalls": false,
+        "outlineWhenVisible": false
+      }
+    },
+    "npc_barrack_boss_sapphire": {
+      "id": "npc_barrack_boss_sapphire",
+      "className": "npc_barrack_boss",
+      "baseKey": "npc_barrack_boss",
+      "stats": {
+        "modelScale": 1,
+        "maxHealth": 4000,
+        "sightRangePlayers": 1250,
+        "sightRangeNPCs": 1500,
+        "navHull": 1,
+        "meleeAttemptRange": 250,
+        "meleeHitRange": 275,
+        "meleeDuration": 0.6,
+        "physicsImpulseMultiplier": 0,
+        "runSpeed": 300,
+        "turnRate": 360,
+        "beamWeaponWidth": 6,
+        "beamTurnRate": 360,
+        "invulRange": 944.882,
+        "playerDPS": 116,
+        "minMeleeAttackTime": 1.5,
+        "tier1PlayerClipCapsuleRadius": 32,
+        "tier1PlayerClipCapsuleHeight": 224,
+        "trooperDamageResistPct": 42.5,
+        "playerDamageResistPct": -25,
+        "trooperDPS": 35,
+        "outlineRange": 1250,
+        "healthBarOffset": 450,
+        "playerAutoAttackRange": 950,
+        "deathFadeTimeStart": 2,
+        "deathFadeTimeEnd": 4,
+        "backDoorProtectionRange": 2000,
+        "enemyTrooperProtectionRange": 1575
+      },
+      "flags": {
+        "playLastHitSound": false,
+        "outlineThroughWalls": false,
+        "outlineWhenVisible": false
+      }
+    },
+    "destroyable_building": {
+      "id": "destroyable_building",
+      "className": "destroyable_building",
+      "baseKey": null,
+      "stats": {
+        "maxHealthFinal": 8775,
+        "maxHealthGenerator": 5000,
+        "maxHealthGeneratorSecond": 10000,
+        "trooperJumpRange": 700,
+        "enemyTrooperProtectionRange": 1575
+      },
+      "flags": {}
+    },
+    "alt_npc_boss_tier1": {
+      "id": "alt_npc_boss_tier1",
+      "className": "npc_trooper_boss",
+      "baseKey": "npc_boss_tier1",
+      "stats": {
+        "modelScale": 1,
+        "maxHealth": 5500,
+        "sightRangePlayers": 1338.58,
+        "sightRangeNPCs": 700,
+        "navHull": 1,
+        "healthBarOffset": 260,
+        "meleeAttemptRange": 196.85,
+        "meleeHitRange": 275.591,
+        "physicsImpulseMultiplier": 0,
+        "runSpeed": 300,
+        "turnRate": 360,
+        "beamWeaponWidth": 12,
+        "beamTurnRate": 360,
+        "invulRange": 944.882,
+        "playerDPS": 116,
+        "minMeleeAttackTime": 1.5,
+        "tier1PlayerClipCapsuleRadius": 32,
+        "tier1PlayerClipCapsuleHeight": 224,
+        "backDoorProtectionRange": 1181.1,
+        "trooperDamageResistPct": 42.5,
+        "playerDamageResistPct": -25,
+        "trooperDPS": 35,
+        "outlineRange": 1250
+      },
+      "flags": {
+        "mitigateDamageFromPlayers": true,
+        "playLastHitSound": false,
+        "outlineThroughWalls": true,
+        "outlineWhenVisible": true
+      }
+    },
+    "nano_rollermine": {
+      "id": "nano_rollermine",
+      "className": "npc_nano_rollermine",
+      "baseKey": null,
+      "stats": {
+        "sightRangePlayers": 1024,
+        "sightRangeNPCs": 1024
+      },
+      "flags": {}
+    },
+    "npc_super_neutral": {
+      "id": "npc_super_neutral",
+      "className": "npc_super_neutral",
+      "baseKey": "weapon_base",
+      "stats": {
+        "healthBarOffset": 600,
+        "sightRangePlayers": 1500,
+        "sightRangeNPCs": 1500,
+        "healthGainPerMinute": 195,
+        "startingHealth": 13000,
+        "physicsImpulseMultiplier": 0,
+        "beamWeaponWidth": 24,
+        "beamTurnRate": 360,
+        "dyingDuration": 1.4
+      },
+      "flags": {}
+    },
+    "neutral_base": {
+      "id": "neutral_base",
+      "className": "npc_trooper_neutral",
+      "baseKey": "weapon_base",
+      "stats": {
+        "sightRangePlayers": 2000,
+        "maxHealthBarDrawDistance": 800,
+        "shieldReactivateDelay": 2,
+        "goldReward": 89,
+        "goldRewardBonusPercentPerMinute": 1.08,
+        "outlineRange": 800
+      },
+      "flags": {
+        "suppressOtherOutlinesWhenVisible": true,
+        "outlineThroughWalls": true
+      }
+    },
+    "neutral_trooper_weak": {
+      "id": "neutral_trooper_weak",
+      "className": "npc_trooper_neutral",
+      "baseKey": "neutral_base",
+      "stats": {
+        "sightRangePlayers": 2000,
+        "maxHealthBarDrawDistance": 800,
+        "shieldReactivateDelay": 2,
+        "goldReward": 41,
+        "goldRewardBonusPercentPerMinute": 1.08,
+        "outlineRange": 800,
+        "modelScale": 0.28,
+        "maxHealth": 129,
+        "healthBarOffset": 300,
+        "physicsImpulseMultiplier": 0,
+        "hullCapsuleRadius": 20,
+        "hullCapsuleHeight": 130,
+        "weakPointCount": 1,
+        "weakPointRespawnTime": 6
+      },
+      "flags": {
+        "suppressOtherOutlinesWhenVisible": true,
+        "outlineThroughWalls": true,
+        "capSimultanousAttackers": true,
+        "faceEnemyWhileIdle": true
+      }
+    },
+    "neutral_trooper_normal": {
+      "id": "neutral_trooper_normal",
+      "className": "npc_trooper_neutral",
+      "baseKey": "neutral_base",
+      "stats": {
+        "sightRangePlayers": 2000,
+        "maxHealthBarDrawDistance": 800,
+        "shieldReactivateDelay": 2,
+        "goldReward": 68,
+        "goldRewardBonusPercentPerMinute": 1.08,
+        "outlineRange": 800,
+        "modelScale": 0.375,
+        "maxHealth": 322,
+        "healthBarOffset": 260,
+        "physicsImpulseMultiplier": 0,
+        "hullCapsuleRadius": 30,
+        "hullCapsuleHeight": 170,
+        "weakPointCount": 2,
+        "weakPointRespawnTime": 3
+      },
+      "flags": {
+        "suppressOtherOutlinesWhenVisible": true,
+        "outlineThroughWalls": true,
+        "faceEnemyWhileIdle": true
+      }
+    },
+    "neutral_trooper_strong": {
+      "id": "neutral_trooper_strong",
+      "className": "npc_trooper_neutral",
+      "baseKey": "neutral_base",
+      "stats": {
+        "sightRangePlayers": 2000,
+        "maxHealthBarDrawDistance": 800,
+        "shieldReactivateDelay": 2,
+        "goldReward": 181,
+        "goldRewardBonusPercentPerMinute": 1.08,
+        "outlineRange": 800,
+        "modelScale": 0.525,
+        "maxHealth": 1133,
+        "healthBarOffset": 250,
+        "physicsImpulseMultiplier": 0,
+        "hullCapsuleHeight": 200,
+        "hullCapsuleRadius": 100,
+        "weakPointCount": 3,
+        "weakPointRespawnTime": 3
+      },
+      "flags": {
+        "suppressOtherOutlinesWhenVisible": true,
+        "outlineThroughWalls": true,
+        "faceEnemyWhileIdle": true
+      }
+    },
+    "npc_neutral_weakpoint": {
+      "id": "npc_neutral_weakpoint",
+      "className": "npc_neutral_weakpoint",
+      "baseKey": null,
+      "stats": {
+        "particleRadius": 1,
+        "bonusDamageMult": 0.5,
+        "maxHealth": 100,
+        "damageOnDeath": 20,
+        "goldPercent": 0.05
+      },
+      "flags": {}
+    },
+    "npc_neutral_weakpoint_med": {
+      "id": "npc_neutral_weakpoint_med",
+      "className": "npc_neutral_weakpoint",
+      "baseKey": "npc_neutral_weakpoint",
+      "stats": {
+        "particleRadius": 1,
+        "bonusDamageMult": 0.5,
+        "maxHealth": 125,
+        "damageOnDeath": 25,
+        "goldPercent": 0.05,
+        "soulsPercent": 0.035
+      },
+      "flags": {}
+    },
+    "npc_neutral_weakpoint_strong": {
+      "id": "npc_neutral_weakpoint_strong",
+      "className": "npc_neutral_weakpoint",
+      "baseKey": "npc_neutral_weakpoint",
+      "stats": {
+        "particleRadius": 1,
+        "bonusDamageMult": 0.5,
+        "maxHealth": 250,
+        "damageOnDeath": 50,
+        "goldPercent": 0.05
+      },
+      "flags": {}
+    },
+    "npc_neutral_flying_weakpoint_base": {
+      "id": "npc_neutral_flying_weakpoint_base",
+      "className": "npc_neutral_flying_weakpoint",
+      "baseKey": null,
+      "stats": {
+        "particleRadius": 1
+      },
+      "flags": {}
+    },
+    "npc_neutral_flying_weakpoint": {
+      "id": "npc_neutral_flying_weakpoint",
+      "className": "npc_neutral_flying_weakpoint",
+      "baseKey": "npc_neutral_flying_weakpoint_base",
+      "stats": {
+        "particleRadius": 1
+      },
+      "flags": {}
+    },
+    "npc_neutral_flying_weakpoint_weak": {
+      "id": "npc_neutral_flying_weakpoint_weak",
+      "className": "npc_neutral_flying_weakpoint",
+      "baseKey": "npc_neutral_flying_weakpoint_base",
+      "stats": {
+        "particleRadius": 1,
+        "frequencyY": 3,
+        "minY": 80,
+        "maxY": 100,
+        "frequencyR": 4,
+        "orbitRadius": 20,
+        "bonusDamageMult": 0.5,
+        "damagePctOnDeath": 0.1,
+        "maxDamagePct": 0.35
+      },
+      "flags": {}
+    },
+    "npc_neutral_flying_weakpoint_med": {
+      "id": "npc_neutral_flying_weakpoint_med",
+      "className": "npc_neutral_flying_weakpoint",
+      "baseKey": "npc_neutral_flying_weakpoint_base",
+      "stats": {
+        "particleRadius": 1,
+        "frequencyY": 5,
+        "minY": 60,
+        "maxY": 100,
+        "frequencyR": 3,
+        "orbitRadius": 40,
+        "bonusDamageMult": 0.5,
+        "damagePctOnDeath": 0.1,
+        "maxDamagePct": 0.38
+      },
+      "flags": {}
+    },
+    "npc_neutral_flying_weakpoint_strong": {
+      "id": "npc_neutral_flying_weakpoint_strong",
+      "className": "npc_neutral_flying_weakpoint",
+      "baseKey": "npc_neutral_flying_weakpoint_base",
+      "stats": {
+        "particleRadius": 1,
+        "frequencyY": 2.5,
+        "minY": 70,
+        "maxY": 120,
+        "frequencyR": 3.5,
+        "orbitRadius": 80,
+        "bonusDamageMult": 0.5,
+        "damagePctOnDeath": 0.05,
+        "maxDamagePct": 0.8,
+        "offSetScaler": 0.3
+      },
+      "flags": {}
+    },
+    "neutral_sinners_sacrifice": {
+      "id": "neutral_sinners_sacrifice",
+      "className": "npc_neutral_sinners_sacrifice",
+      "baseKey": "neutral_base",
+      "stats": {
+        "sightRangePlayers": 2000,
+        "maxHealthBarDrawDistance": 800,
+        "shieldReactivateDelay": 2,
+        "goldReward": 155,
+        "goldRewardBonusPercentPerMinute": 1.08,
+        "outlineRange": 800,
+        "maxHealth": 500,
+        "retaliateDamage": 80,
+        "healthBarOffset": 101,
+        "physicsImpulseMultiplier": 0,
+        "dyingDuration": 0,
+        "breakableForceScale": 3,
+        "vaultMiniGameTime": 3,
+        "vaultMiniGameHitWindow": 0.5,
+        "vaultSuccessLightsScroll": 3,
+        "vaultSuccessDestroyTime": 1.3
+      },
+      "flags": {
+        "suppressOtherOutlinesWhenVisible": true,
+        "outlineThroughWalls": true,
+        "damagedByBullets": false,
+        "damagedByAbilities": false,
+        "fixedMeleeDamage": true,
+        "spawnBreakablesOnDeath": true
+      }
+    },
+    "npc_neutral_sinners_sacrifice_hideout": {
+      "id": "npc_neutral_sinners_sacrifice_hideout",
+      "className": "npc_neutral_sinners_sacrifice_hideout",
+      "baseKey": "neutral_sinners_sacrifice",
+      "stats": {
+        "sightRangePlayers": 2000,
+        "maxHealthBarDrawDistance": 800,
+        "shieldReactivateDelay": 2,
+        "goldReward": 155,
+        "goldRewardBonusPercentPerMinute": 1.08,
+        "outlineRange": 800,
+        "maxHealth": 500,
+        "retaliateDamage": 10,
+        "healthBarOffset": 101,
+        "physicsImpulseMultiplier": 0,
+        "dyingDuration": 0,
+        "breakableForceScale": 3,
+        "vaultMiniGameTime": 3,
+        "vaultMiniGameHitWindow": 0.5,
+        "vaultSuccessLightsScroll": 3,
+        "vaultSuccessDestroyTime": 1.3,
+        "respawnTime": 10
+      },
+      "flags": {
+        "suppressOtherOutlinesWhenVisible": true,
+        "outlineThroughWalls": true,
+        "damagedByBullets": false,
+        "damagedByAbilities": false,
+        "fixedMeleeDamage": true,
+        "spawnBreakablesOnDeath": true
+      }
+    },
+    "npc_neutral_bug": {
+      "id": "npc_neutral_bug",
+      "className": "npc_neutral_bug",
+      "baseKey": null,
+      "stats": {
+        "maxHealth": 1,
+        "goldReward": 1,
+        "stepHeight": 32,
+        "respawnTime": 30,
+        "respawnTimeHeroTest": 2
+      },
+      "flags": {
+        "outlineThroughWalls": false
+      }
+    },
+    "npc_boss_tier2": {
+      "id": "npc_boss_tier2",
+      "className": "npc_boss_tier2",
+      "baseKey": null,
+      "stats": {
+        "sightRange": 1417.32,
+        "sightRangePlayers": 944,
+        "sightRangeNPCs": 1102.36,
+        "playerInitialSightRange": 866,
+        "meleeAttemptRange": 600,
+        "meleeTargetRadius": 200,
+        "navHull": 2,
+        "stompDamage": 350,
+        "stompDamageMaxHealthPercent": 15,
+        "stompDamageTrooperRate": 0.3,
+        "stunDuration": 2,
+        "stompAttemptRadius": 495,
+        "stompImpactRadius": 570.8661,
+        "stompImpactHeight": 354.331,
+        "stompTossUpMagnitude": 1.25,
+        "tossSpeed": 350,
+        "sweepRadius": 200,
+        "sweepZScale": 0.5,
+        "sweepSpeed": 1200,
+        "sweepMaxAngle": 0,
+        "sweepMaxRange": 0,
+        "sweepAdjustSpeed": 500,
+        "healthBarOffset": 400,
+        "burstDuration": 1,
+        "burstCooldown": 0.2,
+        "physicsImpulseMultiplier": 0,
+        "meleeDuration": 0.9,
+        "meleeHitTime": 0.6,
+        "meleeAttackRadius": 200,
+        "meleeDamage": 300,
+        "meleeDamageHealthPct": 10,
+        "aoeWaveHealthThreshold": 0.25,
+        "backDoorProtectionRange": 2165.35,
+        "maxHealth": 6000,
+        "modelScale": 0.85,
+        "invulModifierRange": 866.142,
+        "outlineRange": 2200
+      },
+      "flags": {
+        "beamTurnToFire": true,
+        "playLastHitSound": false,
+        "outlineThroughWalls": true,
+        "outlineWhenVisible": true
+      }
+    },
+    "alt_npc_boss_tier2": {
+      "id": "alt_npc_boss_tier2",
+      "className": "npc_boss_tier2",
+      "baseKey": "npc_boss_tier2",
+      "stats": {
+        "sightRange": 1417.32,
+        "sightRangePlayers": 944,
+        "sightRangeNPCs": 1102.36,
+        "playerInitialSightRange": 866,
+        "meleeAttemptRange": 600,
+        "meleeTargetRadius": 200,
+        "navHull": 2,
+        "stompDamage": 350,
+        "stompDamageMaxHealthPercent": 15,
+        "stompDamageTrooperRate": 0.3,
+        "stunDuration": 2,
+        "stompAttemptRadius": 495,
+        "stompImpactRadius": 570.8661,
+        "stompImpactHeight": 354.331,
+        "stompTossUpMagnitude": 1.25,
+        "tossSpeed": 350,
+        "sweepRadius": 200,
+        "sweepZScale": 0.5,
+        "sweepSpeed": 1200,
+        "sweepMaxAngle": 0,
+        "sweepMaxRange": 0,
+        "sweepAdjustSpeed": 500,
+        "healthBarOffset": 400,
+        "burstDuration": 1,
+        "burstCooldown": 0.2,
+        "physicsImpulseMultiplier": 0,
+        "meleeDuration": 0.9,
+        "meleeHitTime": 0.6,
+        "meleeAttackRadius": 200,
+        "meleeDamage": 300,
+        "meleeDamageHealthPct": 10,
+        "aoeWaveHealthThreshold": 0.25,
+        "backDoorProtectionRange": 2165.35,
+        "maxHealth": 6000,
+        "modelScale": 0.85,
+        "invulModifierRange": 866.142,
+        "outlineRange": 2200
+      },
+      "flags": {
+        "beamTurnToFire": true,
+        "playLastHitSound": false,
+        "outlineThroughWalls": true,
+        "outlineWhenVisible": true
+      }
+    },
+    "npc_boss_tier2_weak": {
+      "id": "npc_boss_tier2_weak",
+      "className": "npc_boss_tier2",
+      "baseKey": "npc_boss_tier2",
+      "stats": {
+        "sightRange": 1417.32,
+        "sightRangePlayers": 944,
+        "sightRangeNPCs": 1102.36,
+        "playerInitialSightRange": 866,
+        "meleeAttemptRange": 600,
+        "meleeTargetRadius": 200,
+        "navHull": 2,
+        "stompDamage": 350,
+        "stompDamageMaxHealthPercent": 15,
+        "stompDamageTrooperRate": 0.3,
+        "stunDuration": 2,
+        "stompAttemptRadius": 495,
+        "stompImpactRadius": 570.8661,
+        "stompImpactHeight": 354.331,
+        "stompTossUpMagnitude": 1.25,
+        "tossSpeed": 350,
+        "sweepRadius": 200,
+        "sweepZScale": 0.5,
+        "sweepSpeed": 1200,
+        "sweepMaxAngle": 0,
+        "sweepMaxRange": 0,
+        "sweepAdjustSpeed": 500,
+        "healthBarOffset": 400,
+        "burstDuration": 1,
+        "burstCooldown": 0.2,
+        "physicsImpulseMultiplier": 0,
+        "meleeDuration": 0.9,
+        "meleeHitTime": 0.6,
+        "meleeAttackRadius": 200,
+        "meleeDamage": 300,
+        "meleeDamageHealthPct": 10,
+        "aoeWaveHealthThreshold": 0.25,
+        "backDoorProtectionRange": 2165.35,
+        "maxHealth": 6000,
+        "modelScale": 0.85,
+        "invulModifierRange": 866.142,
+        "outlineRange": 2200
+      },
+      "flags": {
+        "beamTurnToFire": true,
+        "playLastHitSound": false,
+        "outlineThroughWalls": true,
+        "outlineWhenVisible": true
+      }
+    },
+    "alt_npc_boss_tier2_weak": {
+      "id": "alt_npc_boss_tier2_weak",
+      "className": "npc_boss_tier2",
+      "baseKey": "npc_boss_tier2_weak",
+      "stats": {
+        "sightRange": 1417.32,
+        "sightRangePlayers": 944,
+        "sightRangeNPCs": 1102.36,
+        "playerInitialSightRange": 866,
+        "meleeAttemptRange": 600,
+        "meleeTargetRadius": 200,
+        "navHull": 2,
+        "stompDamage": 350,
+        "stompDamageMaxHealthPercent": 15,
+        "stompDamageTrooperRate": 0.3,
+        "stunDuration": 2,
+        "stompAttemptRadius": 495,
+        "stompImpactRadius": 570.8661,
+        "stompImpactHeight": 354.331,
+        "stompTossUpMagnitude": 1.25,
+        "tossSpeed": 350,
+        "sweepRadius": 200,
+        "sweepZScale": 0.5,
+        "sweepSpeed": 1200,
+        "sweepMaxAngle": 0,
+        "sweepMaxRange": 0,
+        "sweepAdjustSpeed": 500,
+        "healthBarOffset": 400,
+        "burstDuration": 1,
+        "burstCooldown": 0.2,
+        "physicsImpulseMultiplier": 0,
+        "meleeDuration": 0.9,
+        "meleeHitTime": 0.6,
+        "meleeAttackRadius": 200,
+        "meleeDamage": 300,
+        "meleeDamageHealthPct": 10,
+        "aoeWaveHealthThreshold": 0.25,
+        "backDoorProtectionRange": 2165.35,
+        "maxHealth": 6000,
+        "modelScale": 0.85,
+        "invulModifierRange": 866.142,
+        "outlineRange": 2200
+      },
+      "flags": {
+        "beamTurnToFire": true,
+        "playLastHitSound": false,
+        "outlineThroughWalls": true,
+        "outlineWhenVisible": true
+      }
+    },
+    "npc_boss_tier3": {
+      "id": "npc_boss_tier3",
+      "className": "npc_boss_tier3",
+      "baseKey": null,
+      "stats": {
+        "coreRadius": 130,
+        "coreVerticalOffset": 350,
+        "maxHealth": 12000,
+        "phase2Health": 12000,
+        "sightRangePlayers": 3000,
+        "sightRangeNPCs": 3000,
+        "phase2SightRange": 600,
+        "defaultMoveSpeed": 200,
+        "healthBarOffset": 0,
+        "physicsImpulseMultiplier": 0,
+        "laserMoveSpeed": 200,
+        "laserDurationPhase1": 4.5,
+        "laserDurationPhase2": 3,
+        "laserCooldownPhase1": 10,
+        "laserCooldownPhase2": 12,
+        "armAttackRadius": 150,
+        "armAttackCooldownMin": 4,
+        "armAttackCooldownMax": 10,
+        "shrineAttackHealthLossPerAttack": 0.15,
+        "shrineAttackMinTimeBetweenAttacks": 10,
+        "phase1DyingBegin": 5,
+        "phase1DyingDrop": 1,
+        "phase1DyingWait": 3.4,
+        "phase1DyingTransformUp": 4.1,
+        "phase1BossScale": 1,
+        "phase2BossScale": 1,
+        "rotateSpeed": 0.3,
+        "postShrineTransition": 2,
+        "transitionLightTime01": 2.5,
+        "transitionLightTime02": 3.2,
+        "transitionLightTime03": 4,
+        "transitionLightTime04": 4.3,
+        "phase1ObserverPitch": 55,
+        "phase2ObserverPitch": 50,
+        "enemyTrooperProtectionRange": 1575
+      },
+      "flags": {
+        "playLastHitSound": false
+      }
+    },
+    "alt_npc_boss_tier3": {
+      "id": "alt_npc_boss_tier3",
+      "className": "npc_boss_tier3",
+      "baseKey": "npc_boss_tier3",
+      "stats": {
+        "coreRadius": 140,
+        "coreVerticalOffset": 350,
+        "maxHealth": 12000,
+        "phase2Health": 12000,
+        "sightRangePlayers": 3000,
+        "sightRangeNPCs": 3000,
+        "phase2SightRange": 600,
+        "defaultMoveSpeed": 200,
+        "healthBarOffset": 0,
+        "physicsImpulseMultiplier": 0,
+        "laserMoveSpeed": 200,
+        "laserDurationPhase1": 4.5,
+        "laserDurationPhase2": 3,
+        "laserCooldownPhase1": 10,
+        "laserCooldownPhase2": 12,
+        "armAttackRadius": 150,
+        "armAttackCooldownMin": 4,
+        "armAttackCooldownMax": 10,
+        "shrineAttackHealthLossPerAttack": 0.15,
+        "shrineAttackMinTimeBetweenAttacks": 10,
+        "phase1DyingBegin": 5,
+        "phase1DyingDrop": 1,
+        "phase1DyingWait": 3.4,
+        "phase1DyingTransformUp": 4.1,
+        "phase1BossScale": 0.8,
+        "phase2BossScale": 1,
+        "rotateSpeed": 0.3,
+        "postShrineTransition": 2,
+        "transitionLightTime01": 2.5,
+        "transitionLightTime02": 3.2,
+        "transitionLightTime03": 4,
+        "transitionLightTime04": 4.3,
+        "phase1ObserverPitch": 55,
+        "phase2ObserverPitch": 50,
+        "enemyTrooperProtectionRange": 1575
+      },
+      "flags": {
+        "playLastHitSound": false
+      }
+    },
+    "npc_shielded_sentry": {
+      "id": "npc_shielded_sentry",
+      "className": "npc_shielded_sentry",
+      "baseKey": null,
+      "stats": {
+        "idleTurnSpeed": 15,
+        "idleTurnAngles": 60,
+        "trooperTakeDamageMult": 0.5,
+        "nearDeathDuration": 0.8,
+        "zShootPostionOffset": 25
+      },
+      "flags": {}
+    },
+    "npc_yakuza_gangster": {
+      "id": "npc_yakuza_gangster",
+      "className": "npc_yakuza_gangster",
+      "baseKey": null,
+      "stats": {
+        "sightRange": 1600,
+        "meleeAttemptRange": 0
+      },
+      "flags": {}
+    },
+    "citadel_viscous_ball": {
+      "id": "citadel_viscous_ball",
+      "className": "citadel_viscous_ball",
+      "baseKey": null,
+      "stats": {
+        "physicsRadius": 40
+      },
+      "flags": {}
+    },
+    "npc_base_defense_sentry": {
+      "id": "npc_base_defense_sentry",
+      "className": "npc_base_defense_sentry",
+      "baseKey": null,
+      "stats": {
+        "physicsImpulseMultiplier": 0,
+        "timeToStartScale": 15,
+        "timeToEndScale": 50,
+        "maxScale": 2
+      },
+      "flags": {}
+    },
+    "npc_field_sentry": {
+      "id": "npc_field_sentry",
+      "className": "npc_field_sentry",
+      "baseKey": null,
+      "stats": {
+        "idleTurnSpeed": 15,
+        "idleTurnAngles": 60
+      },
+      "flags": {}
+    },
+    "npc_player_bot_brain": {
+      "id": "npc_player_bot_brain",
+      "className": "npc_player_bot_brain",
+      "baseKey": null,
+      "stats": {
+        "sightRangePlayers": 1600,
+        "sightRangeNPCs": 1600,
+        "sightRange": 1600,
+        "turnRate": 15,
+        "navHull": 1,
+        "faceTargetDistance": 1200,
+        "jumpMaxRise": 350,
+        "airJumpMin": 200,
+        "jumpMaxDrop": 1024,
+        "jumpMaxDist": 200,
+        "jumpMinDist": 50,
+        "climbUpCostBase": 32,
+        "climbUpCostScalar": 0.5,
+        "verticalAttachOffset": 16,
+        "navGoalTolerance": 32,
+        "stuckTime": 1.5,
+        "stuckTimeAir": 3,
+        "maxPathDistance": 1300,
+        "minLanePathDistance": 250,
+        "enemyDistanceForReload": 1200,
+        "reloadEnemyFarPct": 0.5,
+        "reloadEnemyLoSPct": 0.5,
+        "reloadEnemyLosTime": 0.5,
+        "minShootTimeToReload": 0.75,
+        "dashDamageThreshold": 0.05,
+        "dashDamageTickDown": 0.2,
+        "minDesiredDashDist": 200,
+        "disengageFromEnemyToLaneDist": 1200,
+        "defendBaseSearchRadius": 1800
+      },
+      "flags": {}
+    },
+    "citadel_spider_animating": {
+      "id": "citadel_spider_animating",
+      "className": "citadel_spider_animating",
+      "baseKey": null,
+      "stats": {
+        "modelScale": 0.001
+      },
+      "flags": {}
+    },
+    "shield_escort": {
+      "id": "shield_escort",
+      "className": "npc_escort",
+      "baseKey": null,
+      "stats": {
+        "maxHealth": 5000,
+        "physicsImpulseMultiplier": 0,
+        "healthBarOffset": 200,
+        "escortEnemyObjectiveSearchRadius": 670,
+        "walkSpeed": 248,
+        "runSpeed": 512,
+        "escortFriendlyHeroFastMoveSearchRadius": 590.551,
+        "escortFriendlyHeroSlowMoveSearchRadius": 1574.8,
+        "escortEnemySlowWalkRadius": 787.402,
+        "catchUpSpeed": 2.3,
+        "sightRangeNPCs": 3000,
+        "sightRangePlayers": 3000,
+        "beamWeaponWidth": 40
+      },
+      "flags": {}
+    },
+    "citadel_hideout_shootable_target_spawner": {
+      "id": "citadel_hideout_shootable_target_spawner",
+      "className": null,
+      "baseKey": null,
+      "stats": {
+        "firstThink": 4,
+        "thinkRate": 0.1,
+        "pigeonMaxCount": 15,
+        "ballMaxDist": 3000,
+        "ballGoalThresHold": 40
+      },
+      "flags": {}
+    },
+    "npc_neutral_flying_pigeon": {
+      "id": "npc_neutral_flying_pigeon",
+      "className": "npc_neutral_flying_pigeon",
+      "baseKey": null,
+      "stats": {
+        "particleRadius": 1,
+        "collisionRadius": 41,
+        "respawnTime": 30,
+        "modelScale": 0.4
+      },
+      "flags": {}
+    },
+    "npc_neutral_hideout_cat": {
+      "id": "npc_neutral_hideout_cat",
+      "className": "npc_neutral_hideout_cat",
+      "baseKey": null,
+      "stats": {
+        "collisionRadius": 150,
+        "traceRadius": 30,
+        "respawnTime": 5,
+        "distTolerance": 24,
+        "validDirectionDist": 150,
+        "chaseAtTarget": 32,
+        "chaseDistanceStart": 350,
+        "chaseDistanceEnd": 450,
+        "chaseDistTolerance": 60,
+        "ballSpeedMin": 100,
+        "runSpeed": 320,
+        "walkSpeed": 150
+      },
+      "flags": {}
+    },
+    "npc_neutral_hideout_rabbit": {
+      "id": "npc_neutral_hideout_rabbit",
+      "className": "npc_neutral_hideout_rabbit",
+      "baseKey": "npc_neutral_hideout_cat",
+      "stats": {
+        "collisionRadius": 150,
+        "traceRadius": 30,
+        "respawnTime": 5,
+        "distTolerance": 24,
+        "validDirectionDist": 150,
+        "chaseAtTarget": 16,
+        "chaseDistanceStart": 350,
+        "chaseDistanceEnd": 450,
+        "chaseDistTolerance": 150,
+        "ballSpeedMin": 100,
+        "runSpeed": 390,
+        "walkSpeed": 100
+      },
+      "flags": {}
+    },
+    "citadel_hideout_clock": {
+      "id": "citadel_hideout_clock",
+      "className": "citadel_hideout_clock",
+      "baseKey": null,
+      "stats": {
+        "hourChimeInterval": 2.3
+      },
+      "flags": {}
+    },
+    "citadel_hideout_ball": {
+      "id": "citadel_hideout_ball",
+      "className": "citadel_hideout_ball",
+      "baseKey": null,
+      "stats": {
+        "modelScale": 3,
+        "ballTouchRadius": 40,
+        "forceMult": 10,
+        "forceMultPlayer": 5,
+        "forceMultBullet": 30,
+        "damagePositionOffset": 32,
+        "inheritPlayerSpeedMultiplier": 0.25,
+        "minPlayerLightMeleeForce": 600,
+        "minPlayerHeavyMeleeForce": 2400,
+        "minPlayerBallTouchForce": 80,
+        "playerLightMeleeChipAngle": 60,
+        "fl_MaxExtraGravityScale": 0.9,
+        "minJugglesBeforeDisplay": 2
+      },
+      "flags": {}
+    },
+    "npc_necro_skele": {
+      "id": "npc_necro_skele",
+      "className": "npc_necro_skele",
+      "baseKey": null,
+      "stats": {
+        "meleeAttemptRange": 100,
+        "modelScale": 1,
+        "sightRangePlayers": 1200,
+        "sightRangeNPCs": 1200,
+        "meleeHitRange": 110,
+        "walkSpeed": 230,
+        "runSpeed": 230,
+        "turnRate": 90,
+        "acceleration": 0,
+        "nonPlayerDamageResist": 0.25,
+        "meleeFireDelay": 0.3
+      },
+      "flags": {
+        "outlineWhenVisible": true,
+        "outlineThroughWalls": true
+      }
+    },
+    "npc_familiar_helper": {
+      "id": "npc_familiar_helper",
+      "className": "npc_familiar_helper",
+      "baseKey": null,
+      "stats": {
+        "sightRange": 1600,
+        "meleeAttemptRange": 0,
+        "modelScale": 1,
+        "turnRate": 10000,
+        "stepHeight": 20000
+      },
+      "flags": {
+        "outlineWhenVisible": false
+      }
+    },
+    "trooper_necro": {
+      "id": "trooper_necro",
+      "className": "npc_trooper",
+      "baseKey": "trooper_base",
+      "stats": {
+        "maxHealth": 400,
+        "sightRangePlayers": 700,
+        "sightRangeNPCs": 1600,
+        "turnRate": 360,
+        "nearDeathDuration": 1,
+        "breakableForceScale": 5,
+        "walkSpeed": 320,
+        "runSpeed": 512,
+        "acceleration": 200,
+        "meleeAttemptRange": 120,
+        "meleeHitRange": 120,
+        "meleeChargeRange": 1000,
+        "healthBarOffset": 76,
+        "healthBarOffsetDucking": 40,
+        "dPSPctGrowthPerMinute": 0,
+        "outlineWidth": 4,
+        "meleeDuration": 1.333,
+        "meleeDamage": 80
+      },
+      "flags": {
+        "playLastHitSound": true,
+        "outlineThroughWalls": true,
+        "outlineWhenVisible": true
+      }
+    }
+  }
+}
