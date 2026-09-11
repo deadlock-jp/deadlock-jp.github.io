@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "upstreamCommit": "6688",
-  "generatedAt": "2026-09-11T19:39:28.348Z",
+  "generatedAt": "2026-09-11T19:55:45.039Z",
   "abilities": {
     "citadel_weapon_bosstier2_set": {
       "id": "citadel_weapon_bosstier2_set",
@@ -239,7 +239,8 @@
         "bulletRadius": 10,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_bosstier3_set": {
       "id": "citadel_weapon_bosstier3_set",
@@ -477,7 +478,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_base_defense_turret": {
       "id": "citadel_weapon_base_defense_turret",
@@ -715,7 +717,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_rutger_set": {
       "id": "citadel_weapon_rutger_set",
@@ -953,7 +956,8 @@
         "bulletRadius": 6,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_kali_set": {
       "id": "citadel_weapon_kali_set",
@@ -1191,7 +1195,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_gunslinger_set": {
       "id": "citadel_weapon_gunslinger_set",
@@ -1429,7 +1434,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_yakuza_set": {
       "id": "citadel_weapon_yakuza_set",
@@ -1667,7 +1673,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_architect_set": {
       "id": "citadel_weapon_architect_set",
@@ -1905,7 +1912,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_thumper_set": {
       "id": "citadel_weapon_thumper_set",
@@ -2155,7 +2163,8 @@
         "bulletRadius": 8,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_medic_trooper_heal": {
       "id": "ability_medic_trooper_heal",
@@ -2421,7 +2430,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "super_neutral_shield": {
       "id": "super_neutral_shield",
@@ -2651,7 +2661,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "super_neutral_charge": {
       "id": "super_neutral_charge",
@@ -2968,7 +2979,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "trooper_grenade": {
       "id": "trooper_grenade",
@@ -3258,7 +3270,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "trooper_boss_grenade": {
       "id": "trooper_boss_grenade",
@@ -3560,7 +3573,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/engineer_rockets.psd"
+      "image": "file://{images}/hud/abilities/engineer_rockets.psd",
+      "alternateFormAbilities": null
     },
     "trooper_neutral_grenade": {
       "id": "trooper_neutral_grenade",
@@ -3862,7 +3876,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/engineer_rockets.psd"
+      "image": "file://{images}/hud/abilities/engineer_rockets.psd",
+      "alternateFormAbilities": null
     },
     "ability_golden_idol": {
       "id": "ability_golden_idol",
@@ -4310,7 +4325,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/wraith_lift.psd"
+      "image": "file://{images}/hud/abilities/wraith_lift.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_zip_line": {
       "id": "citadel_ability_zip_line",
@@ -4749,7 +4765,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "citadel_ability_zipline_boost": {
       "id": "citadel_ability_zipline_boost",
@@ -4955,7 +4972,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/upgrades/mods_utility/zipline_mastery.psd"
+      "image": "file://{images}/upgrades/mods_utility/zipline_mastery.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_trooper_zip_line": {
       "id": "citadel_ability_trooper_zip_line",
@@ -5394,7 +5412,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "citadel_ability_mantle": {
       "id": "citadel_ability_mantle",
@@ -5600,7 +5619,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "citadel_ability_climb_rope": {
       "id": "citadel_ability_climb_rope",
@@ -5806,7 +5826,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "citadel_ability_jump": {
       "id": "citadel_ability_jump",
@@ -6101,7 +6122,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "citadel_ability_sprint": {
       "id": "citadel_ability_sprint",
@@ -6307,7 +6329,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/icons/icon_speed.svg"
+      "image": "file://{images}/hud/icons/icon_speed.svg",
+      "alternateFormAbilities": null
     },
     "citadel_ability_dash": {
       "id": "citadel_ability_dash",
@@ -6525,7 +6548,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "citadel_ability_slide": {
       "id": "citadel_ability_slide",
@@ -6743,7 +6767,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "ability_melee_butcher": {
       "id": "ability_melee_butcher",
@@ -6978,7 +7003,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_melee_kali": {
       "id": "citadel_ability_melee_kali",
@@ -7213,7 +7239,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_melee_butcher": {
       "id": "citadel_ability_melee_butcher",
@@ -7448,7 +7475,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_melee_gunslinger": {
       "id": "citadel_ability_melee_gunslinger",
@@ -7683,7 +7711,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_melee_yakuza": {
       "id": "citadel_ability_melee_yakuza",
@@ -7918,7 +7947,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_melee_thumper": {
       "id": "citadel_ability_melee_thumper",
@@ -8153,7 +8183,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_melee_architect": {
       "id": "citadel_ability_melee_architect",
@@ -8388,7 +8419,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_melee_parry": {
       "id": "citadel_ability_melee_parry",
@@ -8630,7 +8662,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "citadel_ability_tier2boss_rocket_barrage": {
       "id": "citadel_ability_tier2boss_rocket_barrage",
@@ -9040,7 +9073,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/engineer_rockets.psd"
+      "image": "file://{images}/hud/abilities/engineer_rockets.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_tier2boss_laser_beam": {
       "id": "citadel_ability_tier2boss_laser_beam",
@@ -9330,7 +9364,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/engineer_rockets.psd"
+      "image": "file://{images}/hud/abilities/engineer_rockets.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_tier2boss_stomp": {
       "id": "citadel_ability_tier2boss_stomp",
@@ -9548,7 +9583,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/sumo/sumo_stomp.psd"
+      "image": "file://{images}/hud/abilities/sumo/sumo_stomp.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_tier2boss_aoe_wave": {
       "id": "citadel_ability_tier2boss_aoe_wave",
@@ -9826,7 +9862,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/sumo/sumo_stomp.psd"
+      "image": "file://{images}/hud/abilities/sumo/sumo_stomp.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_tier3boss_laser_beam": {
       "id": "citadel_ability_tier3boss_laser_beam",
@@ -10080,7 +10117,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/engineer_rockets.psd"
+      "image": "file://{images}/hud/abilities/engineer_rockets.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_tier3boss_aoe_wave": {
       "id": "citadel_ability_tier3boss_aoe_wave",
@@ -10382,7 +10420,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/sumo/sumo_stomp.psd"
+      "image": "file://{images}/hud/abilities/sumo/sumo_stomp.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_tier3boss_drop_bombs": {
       "id": "citadel_ability_tier3boss_drop_bombs",
@@ -10612,7 +10651,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/spectre/blood_bomb.psd"
+      "image": "file://{images}/hud/abilities/spectre/blood_bomb.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_tier3boss_rocket_barrage": {
       "id": "citadel_ability_tier3boss_rocket_barrage",
@@ -11010,7 +11050,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/engineer_rockets.psd"
+      "image": "file://{images}/hud/abilities/engineer_rockets.psd",
+      "alternateFormAbilities": null
     },
     "rutger_rocket": {
       "id": "rutger_rocket",
@@ -11413,7 +11454,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/rutger/rutger_rocket_launcher.psd"
+      "image": "file://{images}/hud/abilities/rutger/rutger_rocket_launcher.psd",
+      "alternateFormAbilities": null
     },
     "rutger_force_field": {
       "id": "rutger_force_field",
@@ -11768,7 +11810,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/rutger/rutger_force_field.psd"
+      "image": "file://{images}/hud/abilities/rutger/rutger_force_field.psd",
+      "alternateFormAbilities": null
     },
     "rutger_cheat_death": {
       "id": "rutger_cheat_death",
@@ -12034,7 +12077,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/rutger/rutger_cheat_death.psd"
+      "image": "file://{images}/hud/abilities/rutger/rutger_cheat_death.psd",
+      "alternateFormAbilities": null
     },
     "rutger_pulse": {
       "id": "rutger_pulse",
@@ -12368,7 +12412,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/rutger/rutger_pulse.psd"
+      "image": "file://{images}/hud/abilities/rutger/rutger_pulse.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_kali_spinning_blade": {
       "id": "citadel_ability_kali_spinning_blade",
@@ -12779,7 +12824,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/kali/kali_oscilloblade.psd"
+      "image": "file://{images}/hud/abilities/kali/kali_oscilloblade.psd",
+      "alternateFormAbilities": null
     },
     "ability_kali_dust_storm": {
       "id": "ability_kali_dust_storm",
@@ -13215,7 +13261,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/kali/kali_whirling_blade.psd"
+      "image": "file://{images}/hud/abilities/kali/kali_whirling_blade.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_kali_disruptive_charge": {
       "id": "citadel_ability_kali_disruptive_charge",
@@ -13510,7 +13557,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/kali/kali_speed_burst.psd"
+      "image": "file://{images}/hud/abilities/kali/kali_speed_burst.psd",
+      "alternateFormAbilities": null
     },
     "ability_kali_trappers_bolo": {
       "id": "ability_kali_trappers_bolo",
@@ -13910,7 +13958,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/bebop/bebop_sticky_bomb.psd"
+      "image": "file://{images}/hud/abilities/bebop/bebop_sticky_bomb.psd",
+      "alternateFormAbilities": null
     },
     "gunslinger_rapid_fire": {
       "id": "gunslinger_rapid_fire",
@@ -14212,7 +14261,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/sumo/sumo_stomp.psd"
+      "image": "file://{images}/hud/abilities/sumo/sumo_stomp.psd",
+      "alternateFormAbilities": null
     },
     "gunslinger_rocket_launcher": {
       "id": "gunslinger_rocket_launcher",
@@ -14512,7 +14562,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/sumo/sumo_stomp.psd"
+      "image": "file://{images}/hud/abilities/sumo/sumo_stomp.psd",
+      "alternateFormAbilities": null
     },
     "gunslinger_tenacity": {
       "id": "gunslinger_tenacity",
@@ -14747,7 +14798,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/sumo/sumo_stomp.psd"
+      "image": "file://{images}/hud/abilities/sumo/sumo_stomp.psd",
+      "alternateFormAbilities": null
     },
     "gunslinger_sleep_bomb": {
       "id": "gunslinger_sleep_bomb",
@@ -15033,7 +15085,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/sumo/sumo_stomp.psd"
+      "image": "file://{images}/hud/abilities/sumo/sumo_stomp.psd",
+      "alternateFormAbilities": null
     },
     "yakuza_kobun": {
       "id": "yakuza_kobun",
@@ -15342,7 +15395,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/theboss/the_boss_hired_muscle.psd"
+      "image": "file://{images}/hud/abilities/theboss/the_boss_hired_muscle.psd",
+      "alternateFormAbilities": null
     },
     "yakuza_shakedown_target": {
       "id": "yakuza_shakedown_target",
@@ -15673,7 +15727,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/theboss/the_boss_shakedown.psd"
+      "image": "file://{images}/hud/abilities/theboss/the_boss_shakedown.psd",
+      "alternateFormAbilities": null
     },
     "yakuza_shakedown": {
       "id": "yakuza_shakedown",
@@ -15879,7 +15934,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/engineer_rockets.psd"
+      "image": "file://{images}/hud/abilities/engineer_rockets.psd",
+      "alternateFormAbilities": null
     },
     "yakuza_setting_sun": {
       "id": "yakuza_setting_sun",
@@ -16232,7 +16288,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/theboss/the_boss_setting_sun.psd"
+      "image": "file://{images}/hud/abilities/theboss/the_boss_setting_sun.psd",
+      "alternateFormAbilities": null
     },
     "yakuza_gang_activity": {
       "id": "yakuza_gang_activity",
@@ -16438,7 +16495,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "yakuza_gang_activity_cancel": {
       "id": "yakuza_gang_activity_cancel",
@@ -16644,7 +16702,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/duo/duo_cancel.psd"
+      "image": "file://{images}/hud/abilities/duo/duo_cancel.psd",
+      "alternateFormAbilities": null
     },
     "yakuza_summon_gangster": {
       "id": "yakuza_summon_gangster",
@@ -16862,7 +16921,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "yakuza_teleport_to_gangster": {
       "id": "yakuza_teleport_to_gangster",
@@ -17068,7 +17128,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "yakuza_fealty": {
       "id": "yakuza_fealty",
@@ -17298,7 +17359,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "yakuza_protection_racket": {
       "id": "yakuza_protection_racket",
@@ -17575,7 +17637,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/theboss/the_boss_protection_racket.psd"
+      "image": "file://{images}/hud/abilities/theboss/the_boss_protection_racket.psd",
+      "alternateFormAbilities": null
     },
     "thumper_ability_1": {
       "id": "thumper_ability_1",
@@ -17910,7 +17973,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/thumper/thumper_ability_1.psd"
+      "image": "file://{images}/hud/abilities/thumper/thumper_ability_1.psd",
+      "alternateFormAbilities": null
     },
     "thumper_ability_2": {
       "id": "thumper_ability_2",
@@ -18321,7 +18385,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/thumper/thumper_ability_2.psd"
+      "image": "file://{images}/hud/abilities/thumper/thumper_ability_2.psd",
+      "alternateFormAbilities": null
     },
     "thumper_ability_3": {
       "id": "thumper_ability_3",
@@ -18587,7 +18652,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/thumper/thumper_ability_3.psd"
+      "image": "file://{images}/hud/abilities/thumper/thumper_ability_3.psd",
+      "alternateFormAbilities": null
     },
     "thumper_ability_4": {
       "id": "thumper_ability_4",
@@ -18920,7 +18986,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/thumper/thumper_ability_4.psd"
+      "image": "file://{images}/hud/abilities/thumper/thumper_ability_4.psd",
+      "alternateFormAbilities": null
     },
     "vanguard_aoe_buff": {
       "id": "vanguard_aoe_buff",
@@ -19227,7 +19294,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/npcs/vanguard_aoe_buff.psd"
+      "image": "file://{images}/npcs/vanguard_aoe_buff.psd",
+      "alternateFormAbilities": null
     },
     "ability_npc_shield": {
       "id": "ability_npc_shield",
@@ -19457,7 +19525,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "ability_trigger_base": {
       "id": "ability_trigger_base",
@@ -19663,7 +19732,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/ability_activate.psd"
+      "image": "file://{images}/hud/abilities/ability_activate.psd",
+      "alternateFormAbilities": null
     },
     "inherent_base": {
       "id": "inherent_base",
@@ -19869,7 +19939,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "held_base": {
       "id": "held_base",
@@ -20075,7 +20146,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "npc_base": {
       "id": "npc_base",
@@ -20281,7 +20353,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "npc_ultimate_base": {
       "id": "npc_ultimate_base",
@@ -20487,7 +20560,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "signature_base": {
       "id": "signature_base",
@@ -20693,7 +20767,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "ultimate_base": {
       "id": "ultimate_base",
@@ -20899,7 +20974,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "melee_base": {
       "id": "melee_base",
@@ -20945,7 +21021,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "weapon_base": {
       "id": "weapon_base",
@@ -21183,7 +21260,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "hero_weapon_base": {
       "id": "hero_weapon_base",
@@ -21421,7 +21499,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "hero_shotgun_base": {
       "id": "hero_shotgun_base",
@@ -21659,7 +21738,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_hold_melee": {
       "id": "citadel_hold_melee",
@@ -21894,7 +21974,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_melee_genericperson": {
       "id": "citadel_ability_melee_genericperson",
@@ -22129,7 +22210,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "weapon_alternative_rmb_activate": {
       "id": "weapon_alternative_rmb_activate",
@@ -22367,7 +22449,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "weapon_alternative_rmb+lmb_activate": {
       "id": "weapon_alternative_rmb+lmb_activate",
@@ -22605,7 +22688,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_base_lockon_ability": {
       "id": "citadel_base_lockon_ability",
@@ -22694,7 +22778,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "citadel_weapon_astro_set": {
       "id": "citadel_weapon_astro_set",
@@ -22932,7 +23017,8 @@
         "bulletRadius": 5,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_astro_set_shotgun_shared_base": {
       "id": "citadel_weapon_astro_set_shotgun_shared_base",
@@ -23242,7 +23328,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_astro_set_shotgun": {
       "id": "citadel_weapon_astro_set_shotgun",
@@ -23552,7 +23639,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_astro_set_shotgun_backwards": {
       "id": "citadel_weapon_astro_set_shotgun_backwards",
@@ -23920,7 +24008,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_astro": {
       "id": "ability_melee_astro",
@@ -24155,7 +24244,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_explosive_barrel": {
       "id": "ability_explosive_barrel",
@@ -24644,7 +24734,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/astro/holliday_powder_keg.psd"
+      "image": "file://{images}/hud/abilities/astro/holliday_powder_keg.psd",
+      "alternateFormAbilities": null
     },
     "ability_bounce_pad": {
       "id": "ability_bounce_pad",
@@ -25085,7 +25176,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/astro/holliday_bounce_pad.psd"
+      "image": "file://{images}/hud/abilities/astro/holliday_bounce_pad.psd",
+      "alternateFormAbilities": null
     },
     "ability_target_practice": {
       "id": "ability_target_practice",
@@ -25425,7 +25517,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/upgrades/mods_weapon/longshot.psd"
+      "image": "file://{images}/upgrades/mods_weapon/longshot.psd",
+      "alternateFormAbilities": null
     },
     "ability_gravity_lasso": {
       "id": "ability_gravity_lasso",
@@ -25883,7 +25976,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/astro/holliday_spirit_lasso.psd"
+      "image": "file://{images}/hud/abilities/astro/holliday_spirit_lasso.psd",
+      "alternateFormAbilities": null
     },
     "ability_astro_shotgun_toggle": {
       "id": "ability_astro_shotgun_toggle",
@@ -26221,7 +26315,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/astro/shotgun.psd"
+      "image": "file://{images}/hud/abilities/astro/shotgun.psd",
+      "alternateFormAbilities": null
     },
     "ability_astro_rifle": {
       "id": "ability_astro_rifle",
@@ -26541,7 +26636,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/hornet/hornet_assassinate.psd"
+      "image": "file://{images}/hud/abilities/hornet/hornet_assassinate.psd",
+      "alternateFormAbilities": null
     },
     "ability_hat_trick": {
       "id": "ability_hat_trick",
@@ -26829,7 +26925,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/archer/archer_guided_arrow.psd"
+      "image": "file://{images}/hud/abilities/archer/archer_guided_arrow.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_astro_hand_cannon": {
       "id": "citadel_weapon_astro_hand_cannon",
@@ -27067,7 +27164,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_crackshot": {
       "id": "ability_crackshot",
@@ -27395,7 +27493,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/astro/holliday_crackshot.psd"
+      "image": "file://{images}/hud/abilities/astro/holliday_crackshot.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_bull_set": {
       "id": "citadel_weapon_bull_set",
@@ -27633,7 +27732,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_melee_bull": {
       "id": "citadel_ability_melee_bull",
@@ -27868,7 +27968,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_bull_charge": {
       "id": "citadel_ability_bull_charge",
@@ -28317,7 +28418,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/bull_charge.psd"
+      "image": "file://{images}/hud/abilities/bull_charge.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_passive_beefy": {
       "id": "citadel_ability_passive_beefy",
@@ -28666,7 +28768,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/bull_beef.psd"
+      "image": "file://{images}/hud/abilities/bull_beef.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_bull_leap": {
       "id": "citadel_ability_bull_leap",
@@ -29033,7 +29136,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/bull_jump.psd"
+      "image": "file://{images}/hud/abilities/bull_jump.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_bull_heal": {
       "id": "citadel_ability_bull_heal",
@@ -29346,7 +29450,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/bull_drain.psd"
+      "image": "file://{images}/hud/abilities/bull_drain.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_bebop_set": {
       "id": "citadel_weapon_bebop_set",
@@ -29618,7 +29723,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_melee_bebop": {
       "id": "citadel_ability_melee_bebop",
@@ -29853,7 +29959,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_uppercut": {
       "id": "citadel_ability_uppercut",
@@ -30366,7 +30473,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/bebop/bebop_uppercut.psd"
+      "image": "file://{images}/hud/abilities/bebop/bebop_uppercut.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_sticky_bomb": {
       "id": "citadel_ability_sticky_bomb",
@@ -30838,7 +30946,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/bebop/bebop_sticky_bomb.psd"
+      "image": "file://{images}/hud/abilities/bebop/bebop_sticky_bomb.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_bebop_laser_beam": {
       "id": "citadel_ability_bebop_laser_beam",
@@ -31296,7 +31405,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/bebop/bebop_hyper_beam.psd"
+      "image": "file://{images}/hud/abilities/bebop/bebop_hyper_beam.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_hook": {
       "id": "citadel_ability_hook",
@@ -31667,7 +31777,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/bebop/bebop_hook.psd"
+      "image": "file://{images}/hud/abilities/bebop/bebop_hook.psd",
+      "alternateFormAbilities": null
     },
     "ability_bebop_stickybomb2": {
       "id": "ability_bebop_stickybomb2",
@@ -32077,7 +32188,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/bebop/bebop_sticky_bomb.psd"
+      "image": "file://{images}/hud/abilities/bebop/bebop_sticky_bomb.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_bomber_set": {
       "id": "citadel_weapon_bomber_set",
@@ -32315,7 +32427,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_bomber": {
       "id": "ability_melee_bomber",
@@ -32550,7 +32663,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_charged_bomb": {
       "id": "ability_charged_bomb",
@@ -32857,7 +32971,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/bebop/bebop_sticky_bomb.psd"
+      "image": "file://{images}/hud/abilities/bebop/bebop_sticky_bomb.psd",
+      "alternateFormAbilities": null
     },
     "ability_charged_bomb_throw": {
       "id": "ability_charged_bomb_throw",
@@ -33063,7 +33178,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/engineer_fissure_2_activate.psd"
+      "image": "file://{images}/hud/abilities/engineer_fissure_2_activate.psd",
+      "alternateFormAbilities": null
     },
     "ability_bomber_ability02": {
       "id": "ability_bomber_ability02",
@@ -33288,7 +33404,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd",
+      "alternateFormAbilities": null
     },
     "ability_bomber_ability03": {
       "id": "ability_bomber_ability03",
@@ -33513,7 +33630,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd",
+      "alternateFormAbilities": null
     },
     "ability_bomber_ult": {
       "id": "ability_bomber_ult",
@@ -33738,7 +33856,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_tunnel_vision.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_tunnel_vision.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_cadence_set": {
       "id": "citadel_weapon_cadence_set",
@@ -34024,7 +34143,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_melee_cadence": {
       "id": "citadel_ability_melee_cadence",
@@ -34259,7 +34379,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "cadence_ability_anthem": {
       "id": "cadence_ability_anthem",
@@ -34537,7 +34658,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/cadence/cadence_ability_1.psd"
+      "image": "file://{images}/hud/abilities/cadence/cadence_ability_1.psd",
+      "alternateFormAbilities": null
     },
     "cadence_ability_lullaby": {
       "id": "cadence_ability_lullaby",
@@ -34842,7 +34964,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/cadence/cadence_ability_3.psd"
+      "image": "file://{images}/hud/abilities/cadence/cadence_ability_3.psd",
+      "alternateFormAbilities": null
     },
     "cadence_ability_silencecontraptions": {
       "id": "cadence_ability_silencecontraptions",
@@ -35149,7 +35272,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/cadence/cadence_ability_2.psd"
+      "image": "file://{images}/hud/abilities/cadence/cadence_ability_2.psd",
+      "alternateFormAbilities": null
     },
     "cadence_ability_grandfinale": {
       "id": "cadence_ability_grandfinale",
@@ -35480,7 +35604,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/cadence/cadence_ability_4.psd"
+      "image": "file://{images}/hud/abilities/cadence/cadence_ability_4.psd",
+      "alternateFormAbilities": null
     },
     "cadence_ability_crescendo": {
       "id": "cadence_ability_crescendo",
@@ -35768,7 +35893,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/cadence/cadence_ability_4.psd"
+      "image": "file://{images}/hud/abilities/cadence/cadence_ability_4.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_chrono_set": {
       "id": "citadel_weapon_chrono_set",
@@ -36006,7 +36132,8 @@
         "bulletRadius": 4,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_melee_chrono": {
       "id": "citadel_ability_melee_chrono",
@@ -36241,7 +36368,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_chrono_pulse_grenade": {
       "id": "citadel_ability_chrono_pulse_grenade",
@@ -36595,7 +36723,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/chrono/chrono_time_bomb.psd"
+      "image": "file://{images}/hud/abilities/chrono/chrono_time_bomb.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_chrono_time_wall": {
       "id": "citadel_ability_chrono_time_wall",
@@ -36995,7 +37124,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/chrono/chrono_time_wall.psd"
+      "image": "file://{images}/hud/abilities/chrono/chrono_time_wall.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_chrono_kinetic_carbine": {
       "id": "citadel_ability_chrono_kinetic_carbine",
@@ -37466,7 +37596,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/duo/duo_attack.psd"
+      "image": "file://{images}/hud/abilities/duo/duo_attack.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_chrono_swap": {
       "id": "citadel_ability_chrono_swap",
@@ -37859,7 +37990,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/chrono/chrono_swap.psd"
+      "image": "file://{images}/hud/abilities/chrono/chrono_swap.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_sumo_set": {
       "id": "citadel_weapon_sumo_set",
@@ -38097,7 +38229,8 @@
         "bulletRadius": 6,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_melee_sumo": {
       "id": "citadel_ability_melee_sumo",
@@ -38332,7 +38465,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_stomp": {
       "id": "citadel_ability_stomp",
@@ -38781,7 +38915,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/sumo/sumo_stomp.psd"
+      "image": "file://{images}/hud/abilities/sumo/sumo_stomp.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_void_sphere": {
       "id": "citadel_ability_void_sphere",
@@ -39094,7 +39229,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/sumo/sumo_quantum.psd"
+      "image": "file://{images}/hud/abilities/sumo/sumo_quantum.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_charged_tackle": {
       "id": "citadel_ability_charged_tackle",
@@ -39519,7 +39655,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/sumo/sumo_charge.psd"
+      "image": "file://{images}/hud/abilities/sumo/sumo_charge.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_nikuman": {
       "id": "citadel_ability_nikuman",
@@ -39860,7 +39997,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/sumo/sumo_pork_bun.psd"
+      "image": "file://{images}/hud/abilities/sumo/sumo_pork_bun.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_self_vacuum": {
       "id": "citadel_ability_self_vacuum",
@@ -40191,7 +40329,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/sumo/sumo_vacuum.psd"
+      "image": "file://{images}/hud/abilities/sumo/sumo_vacuum.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_engineer_set": {
       "id": "citadel_weapon_engineer_set",
@@ -40429,7 +40568,8 @@
         "bulletRadius": 4,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_melee_engineer": {
       "id": "citadel_ability_melee_engineer",
@@ -40664,7 +40804,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_mobile_resupply": {
       "id": "citadel_ability_mobile_resupply",
@@ -41012,7 +41153,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/engineer_resupply.psd"
+      "image": "file://{images}/hud/abilities/engineer_resupply.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_shieldedsentry": {
       "id": "citadel_ability_shieldedsentry",
@@ -41544,7 +41686,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/engineer_turret.psd"
+      "image": "file://{images}/hud/abilities/engineer_turret.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_fissure_wall": {
       "id": "citadel_ability_fissure_wall",
@@ -42002,7 +42145,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/engineer_fissure_2.psd"
+      "image": "file://{images}/hud/abilities/engineer_fissure_2.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_fissure_wall_trigger": {
       "id": "citadel_ability_fissure_wall_trigger",
@@ -42208,7 +42352,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/engineer_fissure_2_activate.psd"
+      "image": "file://{images}/hud/abilities/engineer_fissure_2_activate.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_fissure_wall_cancel": {
       "id": "citadel_ability_fissure_wall_cancel",
@@ -42414,7 +42559,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/ability_activate.psd"
+      "image": "file://{images}/hud/abilities/ability_activate.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_rocket_barrage": {
       "id": "citadel_ability_rocket_barrage",
@@ -42914,7 +43060,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/engineer_rockets.psd"
+      "image": "file://{images}/hud/abilities/engineer_rockets.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_genericperson_set": {
       "id": "citadel_weapon_genericperson_set",
@@ -43152,7 +43299,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "genericperson_ability_1": {
       "id": "genericperson_ability_1",
@@ -43377,7 +43525,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/genericperson/genericperson_ability_1.psd"
+      "image": "file://{images}/hud/abilities/genericperson/genericperson_ability_1.psd",
+      "alternateFormAbilities": null
     },
     "genericperson_ability_2": {
       "id": "genericperson_ability_2",
@@ -43602,7 +43751,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/genericperson/genericperson_ability_2.psd"
+      "image": "file://{images}/hud/abilities/genericperson/genericperson_ability_2.psd",
+      "alternateFormAbilities": null
     },
     "genericperson_ability_3": {
       "id": "genericperson_ability_3",
@@ -43827,7 +43977,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/genericperson/genericperson_ability_3.psd"
+      "image": "file://{images}/hud/abilities/genericperson/genericperson_ability_3.psd",
+      "alternateFormAbilities": null
     },
     "genericperson_ability_4": {
       "id": "genericperson_ability_4",
@@ -44052,7 +44203,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/genericperson/genericperson_ability_4.psd"
+      "image": "file://{images}/hud/abilities/genericperson/genericperson_ability_4.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_targetdummy_set": {
       "id": "citadel_weapon_targetdummy_set",
@@ -44290,7 +44442,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_melee_targetdummy": {
       "id": "citadel_ability_melee_targetdummy",
@@ -44525,7 +44678,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "targetdummy_inherent": {
       "id": "targetdummy_inherent",
@@ -44731,7 +44885,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "targetdummy_ability_1": {
       "id": "targetdummy_ability_1",
@@ -44956,7 +45111,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/targetdummy/targetdummy_ability_1.psd"
+      "image": "file://{images}/hud/abilities/targetdummy/targetdummy_ability_1.psd",
+      "alternateFormAbilities": null
     },
     "targetdummy_ability_2": {
       "id": "targetdummy_ability_2",
@@ -45181,7 +45337,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/targetdummy/targetdummy_ability_2.psd"
+      "image": "file://{images}/hud/abilities/targetdummy/targetdummy_ability_2.psd",
+      "alternateFormAbilities": null
     },
     "targetdummy_ability_3": {
       "id": "targetdummy_ability_3",
@@ -45406,7 +45563,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/targetdummy/targetdummy_ability_3.psd"
+      "image": "file://{images}/hud/abilities/targetdummy/targetdummy_ability_3.psd",
+      "alternateFormAbilities": null
     },
     "targetdummy_ability_4": {
       "id": "targetdummy_ability_4",
@@ -45631,7 +45789,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/targetdummy/targetdummy_ability_4.psd"
+      "image": "file://{images}/hud/abilities/targetdummy/targetdummy_ability_4.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_ghost_set": {
       "id": "citadel_weapon_ghost_set",
@@ -45869,7 +46028,8 @@
         "bulletRadius": 4,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_ghost": {
       "id": "ability_melee_ghost",
@@ -46104,7 +46264,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_blood_bomb": {
       "id": "ability_blood_bomb",
@@ -46460,7 +46621,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/spectre/blood_bomb.psd"
+      "image": "file://{images}/hud/abilities/spectre/blood_bomb.psd",
+      "alternateFormAbilities": null
     },
     "ability_blood_shards": {
       "id": "ability_blood_shards",
@@ -46828,7 +46990,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/spectre/geist_dagger.psd"
+      "image": "file://{images}/hud/abilities/spectre/geist_dagger.psd",
+      "alternateFormAbilities": null
     },
     "ability_life_drain": {
       "id": "ability_life_drain",
@@ -47148,7 +47311,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/spectre/life_drain.psd"
+      "image": "file://{images}/hud/abilities/spectre/life_drain.psd",
+      "alternateFormAbilities": null
     },
     "ability_death_tax": {
       "id": "ability_death_tax",
@@ -47451,7 +47615,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/spectre/death_tax.psd"
+      "image": "file://{images}/hud/abilities/spectre/death_tax.psd",
+      "alternateFormAbilities": null
     },
     "ability_health_swap": {
       "id": "ability_health_swap",
@@ -47863,7 +48028,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/spectre/blood_exchange.psd"
+      "image": "file://{images}/hud/abilities/spectre/blood_exchange.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_gigawatt_set": {
       "id": "citadel_weapon_gigawatt_set",
@@ -48101,7 +48267,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_melee_gigawatt": {
       "id": "citadel_ability_melee_gigawatt",
@@ -48336,7 +48503,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_lightning_ball": {
       "id": "citadel_ability_lightning_ball",
@@ -48656,7 +48824,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/giga_ball.psd"
+      "image": "file://{images}/hud/abilities/giga_ball.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_static_charge": {
       "id": "citadel_ability_static_charge",
@@ -48964,7 +49133,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/giga_static.psd"
+      "image": "file://{images}/hud/abilities/giga_static.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_static_charge_v2": {
       "id": "citadel_ability_static_charge_v2",
@@ -49267,7 +49437,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/giga_static.psd"
+      "image": "file://{images}/hud/abilities/giga_static.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_chain_lightning": {
       "id": "citadel_ability_chain_lightning",
@@ -49550,7 +49721,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/giga_chain.psd"
+      "image": "file://{images}/hud/abilities/giga_chain.psd",
+      "alternateFormAbilities": null
     },
     "ability_power_surge": {
       "id": "ability_power_surge",
@@ -49915,7 +50087,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/giga_chain.psd"
+      "image": "file://{images}/hud/abilities/giga_chain.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_storm_cloud": {
       "id": "citadel_ability_storm_cloud",
@@ -50357,7 +50530,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/giga_storm.psd"
+      "image": "file://{images}/hud/abilities/giga_storm.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_haze_set": {
       "id": "citadel_weapon_haze_set",
@@ -50595,7 +50769,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 3
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_haze": {
       "id": "ability_melee_haze",
@@ -50830,7 +51005,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_sleep_dagger": {
       "id": "ability_sleep_dagger",
@@ -51329,7 +51505,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/haze/haze_sleep_dagger.psd"
+      "image": "file://{images}/hud/abilities/haze/haze_sleep_dagger.psd",
+      "alternateFormAbilities": null
     },
     "ability_smoke_bomb": {
       "id": "ability_smoke_bomb",
@@ -51752,7 +51929,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/haze/haze_smoke_bomb.psd"
+      "image": "file://{images}/hud/abilities/haze/haze_smoke_bomb.psd",
+      "alternateFormAbilities": null
     },
     "ability_stacking_damage": {
       "id": "ability_stacking_damage",
@@ -52088,7 +52266,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/haze/haze_fixation.psd"
+      "image": "file://{images}/hud/abilities/haze/haze_fixation.psd",
+      "alternateFormAbilities": null
     },
     "ability_bullet_flurry": {
       "id": "ability_bullet_flurry",
@@ -52426,7 +52605,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/haze/haze_bullet_flurry.psd"
+      "image": "file://{images}/hud/abilities/haze/haze_bullet_flurry.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_hornet_set": {
       "id": "citadel_weapon_hornet_set",
@@ -52664,7 +52844,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_melee_hornet": {
       "id": "citadel_ability_melee_hornet",
@@ -52899,7 +53080,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_hornet_chain": {
       "id": "citadel_ability_hornet_chain",
@@ -53239,7 +53421,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/hornet/vindicta_stake.psd"
+      "image": "file://{images}/hud/abilities/hornet/vindicta_stake.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_hornet_leap": {
       "id": "citadel_ability_hornet_leap",
@@ -53621,7 +53804,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/hornet/vindicta_flight.psd"
+      "image": "file://{images}/hud/abilities/hornet/vindicta_flight.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_hornet_sting": {
       "id": "citadel_ability_hornet_sting",
@@ -54021,7 +54205,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/hornet/hornet_crow.psd"
+      "image": "file://{images}/hud/abilities/hornet/hornet_crow.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_hornet_snipe": {
       "id": "citadel_ability_hornet_snipe",
@@ -54412,7 +54597,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/hornet/hornet_assassinate.psd"
+      "image": "file://{images}/hud/abilities/hornet/hornet_assassinate.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_inferno_set": {
       "id": "citadel_weapon_inferno_set",
@@ -54650,7 +54836,8 @@
         "bulletRadius": 4,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_inferno": {
       "id": "ability_melee_inferno",
@@ -54885,7 +55072,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_fire_bomb": {
       "id": "ability_fire_bomb",
@@ -55256,7 +55444,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/inferno_bomb.psd"
+      "image": "file://{images}/hud/abilities/inferno_bomb.psd",
+      "alternateFormAbilities": null
     },
     "ability_flame_dash": {
       "id": "ability_flame_dash",
@@ -55689,7 +55878,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/inferno_dash.psd"
+      "image": "file://{images}/hud/abilities/inferno_dash.psd",
+      "alternateFormAbilities": null
     },
     "ability_incendiary_projectile": {
       "id": "ability_incendiary_projectile",
@@ -56098,7 +56288,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/inferno_molotov.psd"
+      "image": "file://{images}/hud/abilities/inferno_molotov.psd",
+      "alternateFormAbilities": null
     },
     "ability_afterburn": {
       "id": "ability_afterburn",
@@ -56468,7 +56659,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/inferno_deflect.psd"
+      "image": "file://{images}/hud/abilities/inferno_deflect.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_kelvin_set": {
       "id": "citadel_weapon_kelvin_set",
@@ -56706,7 +56898,8 @@
         "bulletRadius": 6,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_kelvin": {
       "id": "ability_melee_kelvin",
@@ -56941,7 +57134,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_icebeam": {
       "id": "ability_icebeam",
@@ -57391,7 +57585,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/kelvin/ice_beam.psd"
+      "image": "file://{images}/hud/abilities/kelvin/ice_beam.psd",
+      "alternateFormAbilities": null
     },
     "ability_icepath": {
       "id": "ability_icepath",
@@ -57893,7 +58088,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/kelvin/ice_path.psd"
+      "image": "file://{images}/hud/abilities/kelvin/ice_path.psd",
+      "alternateFormAbilities": null
     },
     "ability_ice_grenade": {
       "id": "ability_ice_grenade",
@@ -58226,7 +58422,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/kelvin/freezing_grenade.psd"
+      "image": "file://{images}/hud/abilities/kelvin/freezing_grenade.psd",
+      "alternateFormAbilities": null
     },
     "ability_ice_dome": {
       "id": "ability_ice_dome",
@@ -58582,7 +58779,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/kelvin/frozen_shelter.psd"
+      "image": "file://{images}/hud/abilities/kelvin/frozen_shelter.psd",
+      "alternateFormAbilities": null
     },
     "ability_ice_dome_trigger": {
       "id": "ability_ice_dome_trigger",
@@ -58598,7 +58796,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/engineer_fissure_2_activate.psd"
+      "image": "file://{images}/hud/abilities/engineer_fissure_2_activate.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_lash_set": {
       "id": "citadel_weapon_lash_set",
@@ -58836,7 +59035,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_lash": {
       "id": "ability_melee_lash",
@@ -59071,7 +59271,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_lash": {
       "id": "citadel_ability_lash",
@@ -59437,7 +59638,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/lash/lash_lash.psd"
+      "image": "file://{images}/hud/abilities/lash/lash_lash.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_lash_down_strike": {
       "id": "citadel_ability_lash_down_strike",
@@ -59855,7 +60057,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/lash/lash_death_slam.psd"
+      "image": "file://{images}/hud/abilities/lash/lash_death_slam.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_lash_ultimate": {
       "id": "citadel_ability_lash_ultimate",
@@ -60352,7 +60555,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/lash/lash_counter_lash.psd"
+      "image": "file://{images}/hud/abilities/lash/lash_counter_lash.psd",
+      "alternateFormAbilities": null
     },
     "ability_lash_flog": {
       "id": "ability_lash_flog",
@@ -60701,7 +60905,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/lash/lash_flog.psd"
+      "image": "file://{images}/hud/abilities/lash/lash_flog.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_mirage_set": {
       "id": "citadel_weapon_mirage_set",
@@ -60939,7 +61144,8 @@
         "bulletRadius": 5,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_mirage": {
       "id": "ability_melee_mirage",
@@ -61174,7 +61380,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "mirage_tornado": {
       "id": "mirage_tornado",
@@ -61708,7 +61915,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/mirage/mirage_tornado.psd"
+      "image": "file://{images}/hud/abilities/mirage/mirage_tornado.psd",
+      "alternateFormAbilities": null
     },
     "mirage_sand_phantom": {
       "id": "mirage_sand_phantom",
@@ -62115,7 +62323,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/mirage/mirage_sand_phantom.psd"
+      "image": "file://{images}/hud/abilities/mirage/mirage_sand_phantom.psd",
+      "alternateFormAbilities": null
     },
     "mirage_fire_beetles": {
       "id": "mirage_fire_beetles",
@@ -62406,7 +62615,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/mirage/mirage_fire_beetles.psd"
+      "image": "file://{images}/hud/abilities/mirage/mirage_fire_beetles.psd",
+      "alternateFormAbilities": null
     },
     "mirage_teleport": {
       "id": "mirage_teleport",
@@ -62771,7 +62981,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/mirage/mirage_teleport.psd"
+      "image": "file://{images}/hud/abilities/mirage/mirage_teleport.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_digger_set": {
       "id": "citadel_weapon_digger_set",
@@ -63009,7 +63220,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_digger": {
       "id": "ability_melee_digger",
@@ -63244,7 +63456,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_intimidate": {
       "id": "ability_intimidate",
@@ -63586,7 +63799,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/grappler/grappler_regen.psd"
+      "image": "file://{images}/hud/abilities/grappler/grappler_regen.psd",
+      "alternateFormAbilities": null
     },
     "ability_burrow": {
       "id": "ability_burrow",
@@ -64002,7 +64216,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/grappler/grappler_spin.psd"
+      "image": "file://{images}/hud/abilities/grappler/grappler_spin.psd",
+      "alternateFormAbilities": null
     },
     "ability_throw_sand": {
       "id": "ability_throw_sand",
@@ -64335,7 +64550,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/grappler/grappler_throw_sand.psd"
+      "image": "file://{images}/hud/abilities/grappler/grappler_throw_sand.psd",
+      "alternateFormAbilities": null
     },
     "ability_ult_combo": {
       "id": "ability_ult_combo",
@@ -64635,7 +64851,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/grappler/grappler_combo.psd"
+      "image": "file://{images}/hud/abilities/grappler/grappler_combo.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_digger_set2": {
       "id": "citadel_weapon_digger_set2",
@@ -64873,7 +65090,8 @@
         "bulletRadius": 12,
         "bulletLifetime": 0.8
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_nano_set": {
       "id": "citadel_weapon_nano_set",
@@ -65111,7 +65329,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_nano_alt": {
       "id": "citadel_weapon_nano_alt",
@@ -65349,7 +65568,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_nano": {
       "id": "ability_melee_nano",
@@ -65584,7 +65804,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_perched_predator": {
       "id": "ability_perched_predator",
@@ -65963,7 +66184,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/upgrades/mods_weapon/high_velocity_mag.psd"
+      "image": "file://{images}/upgrades/mods_weapon/high_velocity_mag.psd",
+      "alternateFormAbilities": null
     },
     "ability_perched_predator_trigger": {
       "id": "ability_perched_predator_trigger",
@@ -66169,7 +66391,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/engineer_fissure_2_activate.psd"
+      "image": "file://{images}/hud/abilities/engineer_fissure_2_activate.psd",
+      "alternateFormAbilities": null
     },
     "ability_rolling_fireball": {
       "id": "ability_rolling_fireball",
@@ -66428,7 +66651,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/upgrades/mods_weapon/high_velocity_mag.psd"
+      "image": "file://{images}/upgrades/mods_weapon/high_velocity_mag.psd",
+      "alternateFormAbilities": null
     },
     "ability_nano_pounce": {
       "id": "ability_nano_pounce",
@@ -66837,7 +67061,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_warp.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_warp.psd",
+      "alternateFormAbilities": null
     },
     "ability_nano_pounce_instant": {
       "id": "ability_nano_pounce_instant",
@@ -67246,7 +67471,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_warp.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_warp.psd",
+      "alternateFormAbilities": null
     },
     "ability_nano_proximity_ritual": {
       "id": "ability_nano_proximity_ritual",
@@ -67761,7 +67987,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd",
+      "alternateFormAbilities": null
     },
     "ability_nano_shadow_step": {
       "id": "ability_nano_shadow_step",
@@ -68228,7 +68455,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/slork/slork_invis.psd"
+      "image": "file://{images}/hud/abilities/slork/slork_invis.psd",
+      "alternateFormAbilities": null
     },
     "ability_nano_catform": {
       "id": "ability_nano_catform",
@@ -68602,7 +68830,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_catform.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_catform.psd",
+      "alternateFormAbilities": null
     },
     "ability_nano_catform_trigger": {
       "id": "ability_nano_catform_trigger",
@@ -68808,7 +69037,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/ability_cancel.psd"
+      "image": "file://{images}/hud/abilities/ability_cancel.psd",
+      "alternateFormAbilities": null
     },
     "ability_nano_catform_pounce": {
       "id": "ability_nano_catform_pounce",
@@ -69009,7 +69239,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "ability_nano_clustergrenade": {
       "id": "ability_nano_clustergrenade",
@@ -69433,7 +69664,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_clustergrenade.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_clustergrenade.psd",
+      "alternateFormAbilities": null
     },
     "ability_nano_shadow_pulse": {
       "id": "ability_nano_shadow_pulse",
@@ -69830,7 +70062,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_shadow_pulse.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_shadow_pulse.psd",
+      "alternateFormAbilities": null
     },
     "ability_nano_dash": {
       "id": "ability_nano_dash",
@@ -70287,7 +70520,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_dash.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_dash.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_archer_set": {
       "id": "citadel_weapon_archer_set",
@@ -70525,7 +70759,8 @@
         "bulletRadius": 5,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_archer": {
       "id": "ability_melee_archer",
@@ -70760,7 +70995,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_charged_shot": {
       "id": "ability_charged_shot",
@@ -71066,7 +71302,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/archer/archer_charged_shot.psd"
+      "image": "file://{images}/hud/abilities/archer/archer_charged_shot.psd",
+      "alternateFormAbilities": null
     },
     "ability_power_jump": {
       "id": "ability_power_jump",
@@ -71526,7 +71763,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/archer/archer_power_jump.psd"
+      "image": "file://{images}/hud/abilities/archer/archer_power_jump.psd",
+      "alternateFormAbilities": null
     },
     "ability_immobilize_trap": {
       "id": "ability_immobilize_trap",
@@ -71983,7 +72221,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/archer/imobolize_trap.psd"
+      "image": "file://{images}/hud/abilities/archer/imobolize_trap.psd",
+      "alternateFormAbilities": null
     },
     "ability_guided_arrow": {
       "id": "ability_guided_arrow",
@@ -72283,7 +72522,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/archer/archer_guided_arrow.psd"
+      "image": "file://{images}/hud/abilities/archer/archer_guided_arrow.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_shiv_set": {
       "id": "citadel_weapon_shiv_set",
@@ -72521,7 +72761,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_shiv_alt": {
       "id": "citadel_weapon_shiv_alt",
@@ -72759,7 +73000,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_melee_shiv": {
       "id": "citadel_ability_melee_shiv",
@@ -72994,7 +73236,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_shiv_dagger": {
       "id": "citadel_ability_shiv_dagger",
@@ -73319,7 +73562,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/shiv/shiv_toss.psd"
+      "image": "file://{images}/hud/abilities/shiv/shiv_toss.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_shiv_dash": {
       "id": "citadel_ability_shiv_dash",
@@ -73767,7 +74011,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/shiv/shiv_flash.psd"
+      "image": "file://{images}/hud/abilities/shiv/shiv_flash.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_shiv_defer_damage": {
       "id": "citadel_ability_shiv_defer_damage",
@@ -74045,7 +74290,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/shiv/shiv_bloodletting.psd"
+      "image": "file://{images}/hud/abilities/shiv/shiv_bloodletting.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_shiv_killing_blow": {
       "id": "citadel_ability_shiv_killing_blow",
@@ -74516,7 +74762,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/shiv/shiv_killing_blow.psd"
+      "image": "file://{images}/hud/abilities/shiv/shiv_killing_blow.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_shieldguy_set": {
       "id": "citadel_weapon_shieldguy_set",
@@ -74754,7 +75001,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_shieldguy": {
       "id": "ability_melee_shieldguy",
@@ -74989,7 +75237,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_shieldguy_ability01": {
       "id": "ability_shieldguy_ability01",
@@ -75214,7 +75463,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd",
+      "alternateFormAbilities": null
     },
     "ability_shieldguy_ability02": {
       "id": "ability_shieldguy_ability02",
@@ -75439,7 +75689,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd",
+      "alternateFormAbilities": null
     },
     "ability_shieldguy_ability03": {
       "id": "ability_shieldguy_ability03",
@@ -75664,7 +75915,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd",
+      "alternateFormAbilities": null
     },
     "ability_shieldguy_ult": {
       "id": "ability_shieldguy_ult",
@@ -75889,7 +76141,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_tunnel_vision.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_tunnel_vision.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_slork_set": {
       "id": "citadel_weapon_slork_set",
@@ -76127,7 +76380,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "fathom_scalding_spray": {
       "id": "fathom_scalding_spray",
@@ -76432,7 +76686,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/slork/slork_scald.psd"
+      "image": "file://{images}/hud/abilities/slork/slork_scald.psd",
+      "alternateFormAbilities": null
     },
     "fathom_breach": {
       "id": "fathom_breach",
@@ -76727,7 +76982,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/tokamak/tokamak_dying_star.psd"
+      "image": "file://{images}/hud/abilities/tokamak/tokamak_dying_star.psd",
+      "alternateFormAbilities": null
     },
     "fathom_defer_damage": {
       "id": "fathom_defer_damage",
@@ -77000,7 +77256,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/rutger/rutger_cheat_death.psd"
+      "image": "file://{images}/hud/abilities/rutger/rutger_cheat_death.psd",
+      "alternateFormAbilities": null
     },
     "fathom_reefdweller_harpoon": {
       "id": "fathom_reefdweller_harpoon",
@@ -77325,7 +77582,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/haze/haze_sleep_dagger.psd"
+      "image": "file://{images}/hud/abilities/haze/haze_sleep_dagger.psd",
+      "alternateFormAbilities": null
     },
     "fathom_lurkers_ambush": {
       "id": "fathom_lurkers_ambush",
@@ -77740,7 +77998,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/slork/slork_invis.psd"
+      "image": "file://{images}/hud/abilities/slork/slork_invis.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_synth_set": {
       "id": "citadel_weapon_synth_set",
@@ -77978,7 +78237,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "synth_plasma_flux": {
       "id": "synth_plasma_flux",
@@ -78303,7 +78563,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/synth/synth_plasma_flux.psd"
+      "image": "file://{images}/hud/abilities/synth/synth_plasma_flux.psd",
+      "alternateFormAbilities": null
     },
     "synth_plasma_flux_trigger": {
       "id": "synth_plasma_flux_trigger",
@@ -78509,7 +78770,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/ability_activate.psd"
+      "image": "file://{images}/hud/abilities/ability_activate.psd",
+      "alternateFormAbilities": null
     },
     "synth_pulse": {
       "id": "synth_pulse",
@@ -78837,7 +79099,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/synth/synth_pulse.psd"
+      "image": "file://{images}/hud/abilities/synth/synth_pulse.psd",
+      "alternateFormAbilities": null
     },
     "synth_barrage": {
       "id": "synth_barrage",
@@ -79252,7 +79515,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/synth/synth_barrage.psd"
+      "image": "file://{images}/hud/abilities/synth/synth_barrage.psd",
+      "alternateFormAbilities": null
     },
     "synth_affliction": {
       "id": "synth_affliction",
@@ -79617,7 +79881,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/synth/synth_affliction.psd"
+      "image": "file://{images}/hud/abilities/synth/synth_affliction.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_tengu_set": {
       "id": "citadel_weapon_tengu_set",
@@ -79855,7 +80120,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_melee_tengu": {
       "id": "citadel_ability_melee_tengu",
@@ -80090,7 +80356,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_tangotether": {
       "id": "citadel_ability_tangotether",
@@ -80446,7 +80713,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/tengu/tengu_tether.psd"
+      "image": "file://{images}/hud/abilities/tengu/tengu_tether.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_tangotether_trigger": {
       "id": "citadel_ability_tangotether_trigger",
@@ -80652,7 +80920,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/astro/gravity_lasso.psd"
+      "image": "file://{images}/hud/abilities/astro/gravity_lasso.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_tengu_urn": {
       "id": "citadel_ability_tengu_urn",
@@ -80984,7 +81253,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/tengu/tengu_storm_flask.psd"
+      "image": "file://{images}/hud/abilities/tengu/tengu_storm_flask.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_tengu_stone_form": {
       "id": "citadel_ability_tengu_stone_form",
@@ -81358,7 +81628,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/tengu/tengu_stone_form.psd"
+      "image": "file://{images}/hud/abilities/tengu/tengu_stone_form.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_tengu_airlift": {
       "id": "citadel_ability_tengu_airlift",
@@ -81826,7 +82097,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/tengu/tengu_lightning_crash.psd"
+      "image": "file://{images}/hud/abilities/tengu/tengu_lightning_crash.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_tokamak_set": {
       "id": "citadel_weapon_tokamak_set",
@@ -82064,7 +82336,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_melee_tokamak": {
       "id": "citadel_ability_melee_tokamak",
@@ -82299,7 +82572,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "tokamak_hot_shot": {
       "id": "tokamak_hot_shot",
@@ -82640,7 +82914,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/tokamak/tokamak_hot_shot.psd"
+      "image": "file://{images}/hud/abilities/tokamak/tokamak_hot_shot.psd",
+      "alternateFormAbilities": null
     },
     "tokamak_breach": {
       "id": "tokamak_breach",
@@ -83067,7 +83342,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/tokamak/tokamak_breach.psd"
+      "image": "file://{images}/hud/abilities/tokamak/tokamak_breach.psd",
+      "alternateFormAbilities": null
     },
     "tokamak_radiance": {
       "id": "tokamak_radiance",
@@ -83395,7 +83671,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/tokamak/tokamak_blinding_radiance.psd"
+      "image": "file://{images}/hud/abilities/tokamak/tokamak_blinding_radiance.psd",
+      "alternateFormAbilities": null
     },
     "tokamak_heat_sinks": {
       "id": "tokamak_heat_sinks",
@@ -83754,7 +84031,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/tokamak/tokamak_heat_sinks.psd"
+      "image": "file://{images}/hud/abilities/tokamak/tokamak_heat_sinks.psd",
+      "alternateFormAbilities": null
     },
     "tokamak_heat_sinks_inherent": {
       "id": "tokamak_heat_sinks_inherent",
@@ -84020,7 +84298,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/ability_activate.psd"
+      "image": "file://{images}/hud/abilities/ability_activate.psd",
+      "alternateFormAbilities": null
     },
     "tokamak_dying_star": {
       "id": "tokamak_dying_star",
@@ -84307,7 +84586,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/tokamak/tokamak_dying_star.psd"
+      "image": "file://{images}/hud/abilities/tokamak/tokamak_dying_star.psd",
+      "alternateFormAbilities": null
     },
     "tokamak_crimson_cannon": {
       "id": "tokamak_crimson_cannon",
@@ -84625,7 +84905,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/tokamak/tokamak_crimson_cannon.psd"
+      "image": "file://{images}/hud/abilities/tokamak/tokamak_crimson_cannon.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_viscous_set": {
       "id": "citadel_weapon_viscous_set",
@@ -84863,7 +85144,8 @@
         "bulletRadius": 8,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_viscous_set_2": {
       "id": "citadel_weapon_viscous_set_2",
@@ -85101,7 +85383,8 @@
         "bulletRadius": 20,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_viscous": {
       "id": "ability_melee_viscous",
@@ -85336,7 +85619,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "viscous_goo_grenade": {
       "id": "viscous_goo_grenade",
@@ -85728,7 +86012,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/viscous/viscous_goo_ball.psd"
+      "image": "file://{images}/hud/abilities/viscous/viscous_goo_ball.psd",
+      "alternateFormAbilities": null
     },
     "viscous_restorative_goo": {
       "id": "viscous_restorative_goo",
@@ -86176,7 +86461,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/viscous/viscous_restorative_goo.psd"
+      "image": "file://{images}/hud/abilities/viscous/viscous_restorative_goo.psd",
+      "alternateFormAbilities": null
     },
     "viscous_goo_bowling_ball": {
       "id": "viscous_goo_bowling_ball",
@@ -86637,7 +86923,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/viscous/viscous_goo_sphere.psd"
+      "image": "file://{images}/hud/abilities/viscous/viscous_goo_sphere.psd",
+      "alternateFormAbilities": null
     },
     "viscous_telepunch": {
       "id": "viscous_telepunch",
@@ -87119,7 +87406,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/viscous/viscous_goo_punch.psd"
+      "image": "file://{images}/hud/abilities/viscous/viscous_goo_punch.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_warden_set": {
       "id": "citadel_weapon_warden_set",
@@ -87357,7 +87645,8 @@
         "bulletRadius": 5,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_melee_warden": {
       "id": "citadel_ability_melee_warden",
@@ -87592,7 +87881,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_warden_lock_down": {
       "id": "ability_warden_lock_down",
@@ -87953,7 +88243,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/warden/warden_lock_down.psd"
+      "image": "file://{images}/hud/abilities/warden/warden_lock_down.psd",
+      "alternateFormAbilities": null
     },
     "ability_warden_high_alert": {
       "id": "ability_warden_high_alert",
@@ -88227,7 +88518,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/warden/warden_high_alert.psd"
+      "image": "file://{images}/hud/abilities/warden/warden_high_alert.psd",
+      "alternateFormAbilities": null
     },
     "ability_warden_crowd_control": {
       "id": "ability_warden_crowd_control",
@@ -88604,7 +88896,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/warden/warden_crowd_control.psd"
+      "image": "file://{images}/hud/abilities/warden/warden_crowd_control.psd",
+      "alternateFormAbilities": null
     },
     "ability_warden_riot_protocol": {
       "id": "ability_warden_riot_protocol",
@@ -88985,7 +89278,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/warden/warden_riot_protocol.psd"
+      "image": "file://{images}/hud/abilities/warden/warden_riot_protocol.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_wraith_set": {
       "id": "citadel_weapon_wraith_set",
@@ -89223,7 +89517,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_melee_wraith": {
       "id": "citadel_ability_melee_wraith",
@@ -89458,7 +89753,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_psychic_lift": {
       "id": "citadel_ability_psychic_lift",
@@ -89801,7 +90097,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/wraith_lift.psd"
+      "image": "file://{images}/hud/abilities/wraith_lift.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_projectmind": {
       "id": "citadel_ability_projectmind",
@@ -90092,7 +90389,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/wraith_teleport.psd"
+      "image": "file://{images}/hud/abilities/wraith_teleport.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_wraith_rapidfire": {
       "id": "citadel_ability_wraith_rapidfire",
@@ -90429,7 +90727,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/wraith_aura.psd"
+      "image": "file://{images}/hud/abilities/wraith_aura.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_card_toss": {
       "id": "citadel_ability_card_toss",
@@ -90989,7 +91288,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/wraith_card_trick.psd"
+      "image": "file://{images}/hud/abilities/wraith_card_trick.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_wrecker_set": {
       "id": "citadel_weapon_wrecker_set",
@@ -91227,7 +91527,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_wrecker": {
       "id": "ability_melee_wrecker",
@@ -91462,7 +91763,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_wrecking_ball": {
       "id": "ability_wrecking_ball",
@@ -91769,7 +92071,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/wrecker/wrecking_ball.psd"
+      "image": "file://{images}/hud/abilities/wrecker/wrecking_ball.psd",
+      "alternateFormAbilities": null
     },
     "ability_wrecking_ball_throw": {
       "id": "ability_wrecking_ball_throw",
@@ -91975,7 +92278,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/ability_activate.psd"
+      "image": "file://{images}/hud/abilities/ability_activate.psd",
+      "alternateFormAbilities": null
     },
     "ability_wrecker_salvage": {
       "id": "ability_wrecker_salvage",
@@ -92326,7 +92630,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/wrecker/salvage.psd"
+      "image": "file://{images}/hud/abilities/wrecker/salvage.psd",
+      "alternateFormAbilities": null
     },
     "ability_scrap_blast": {
       "id": "ability_scrap_blast",
@@ -92609,7 +92914,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/wrecker/scrap_blast.psd"
+      "image": "file://{images}/hud/abilities/wrecker/scrap_blast.psd",
+      "alternateFormAbilities": null
     },
     "ability_wrecker_ultimate": {
       "id": "ability_wrecker_ultimate",
@@ -93027,7 +93333,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/wrecker/wrecking_crew.psd"
+      "image": "file://{images}/hud/abilities/wrecker/wrecking_crew.psd",
+      "alternateFormAbilities": null
     },
     "ability_wrecker_teleport": {
       "id": "ability_wrecker_teleport",
@@ -93315,7 +93622,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/wrecker/wrecking_crew.psd"
+      "image": "file://{images}/hud/abilities/wrecker/wrecking_crew.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_wrecker_garbage_suck": {
       "id": "citadel_ability_wrecker_garbage_suck",
@@ -93696,7 +94004,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/mirage/mirage_sunfire_cataclysm.psd"
+      "image": "file://{images}/hud/abilities/mirage/mirage_sunfire_cataclysm.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_wrecker_bouldergrenade": {
       "id": "citadel_ability_wrecker_bouldergrenade",
@@ -93996,7 +94305,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/wrecker/wrecking_ball.psd"
+      "image": "file://{images}/hud/abilities/wrecker/wrecking_ball.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_yamato_set": {
       "id": "citadel_weapon_yamato_set",
@@ -94287,7 +94597,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_yamato_alt": {
       "id": "citadel_weapon_yamato_alt",
@@ -94525,7 +94836,8 @@
         "bulletRadius": 13,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_yamato": {
       "id": "ability_melee_yamato",
@@ -94760,7 +95072,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_power_slash": {
       "id": "citadel_ability_power_slash",
@@ -95168,7 +95481,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/yamato/yamato_power_slash.psd"
+      "image": "file://{images}/hud/abilities/yamato/yamato_power_slash.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_flying_strike": {
       "id": "citadel_ability_flying_strike",
@@ -95496,7 +95810,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/yamato/yamato_flying_strike.psd"
+      "image": "file://{images}/hud/abilities/yamato/yamato_flying_strike.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_healing_slash": {
       "id": "citadel_ability_healing_slash",
@@ -95855,7 +96170,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/yamato/yamato_crimson_slash.psd"
+      "image": "file://{images}/hud/abilities/yamato/yamato_crimson_slash.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_infinity_slash": {
       "id": "citadel_ability_infinity_slash",
@@ -96203,7 +96519,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/yamato/yamato_blinding_steel.psd"
+      "image": "file://{images}/hud/abilities/yamato/yamato_blinding_steel.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_viper_set": {
       "id": "citadel_weapon_viper_set",
@@ -96441,7 +96758,8 @@
         "bulletRadius": 5,
         "bulletLifetime": 0.5
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_viper": {
       "id": "ability_melee_viper",
@@ -96676,7 +96994,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_viper_hookdagger": {
       "id": "ability_viper_hookdagger",
@@ -97036,7 +97355,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/shiv/shiv_toss.psd"
+      "image": "file://{images}/hud/abilities/shiv/shiv_toss.psd",
+      "alternateFormAbilities": null
     },
     "ability_viper_snakedash": {
       "id": "ability_viper_snakedash",
@@ -97358,7 +97678,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/viper/viper_snakedash.psd"
+      "image": "file://{images}/hud/abilities/viper/viper_snakedash.psd",
+      "alternateFormAbilities": null
     },
     "ability_viper_venom": {
       "id": "ability_viper_venom",
@@ -97748,7 +98069,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/viper/viper_venom.psd"
+      "image": "file://{images}/hud/abilities/viper/viper_venom.psd",
+      "alternateFormAbilities": null
     },
     "ability_viper_ult": {
       "id": "ability_viper_ult",
@@ -98070,7 +98392,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/tokamak/tokamak_blinding_radiance.psd"
+      "image": "file://{images}/hud/abilities/tokamak/tokamak_blinding_radiance.psd",
+      "alternateFormAbilities": null
     },
     "ability_viper_slide": {
       "id": "ability_viper_slide",
@@ -98276,7 +98599,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "ability_viper_debuffdagger": {
       "id": "ability_viper_debuffdagger",
@@ -98665,7 +98989,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/viper/viper_debuffdagger.psd"
+      "image": "file://{images}/hud/abilities/viper/viper_debuffdagger.psd",
+      "alternateFormAbilities": null
     },
     "ability_viper_petrifybola": {
       "id": "ability_viper_petrifybola",
@@ -98999,7 +99324,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/viper/viper_petrifybola.psd"
+      "image": "file://{images}/hud/abilities/viper/viper_petrifybola.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_vandal_set": {
       "id": "citadel_weapon_vandal_set",
@@ -99237,7 +99563,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_vandal": {
       "id": "ability_melee_vandal",
@@ -99472,7 +99799,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_vandal_surge": {
       "id": "citadel_ability_vandal_surge",
@@ -99738,7 +100066,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/wraith_lift.psd"
+      "image": "file://{images}/hud/abilities/wraith_lift.psd",
+      "alternateFormAbilities": null
     },
     "ability_vandal_pillar": {
       "id": "ability_vandal_pillar",
@@ -100055,7 +100384,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/tokamak/tokamak_blinding_radiance.psd"
+      "image": "file://{images}/hud/abilities/tokamak/tokamak_blinding_radiance.psd",
+      "alternateFormAbilities": null
     },
     "ability_haunt": {
       "id": "ability_haunt",
@@ -100389,7 +100719,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/inferno_deflect.psd"
+      "image": "file://{images}/hud/abilities/inferno_deflect.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_vandal_overflow": {
       "id": "citadel_ability_vandal_overflow",
@@ -100655,7 +100986,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/wraith_lift.psd"
+      "image": "file://{images}/hud/abilities/wraith_lift.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_magician_set": {
       "id": "citadel_weapon_magician_set",
@@ -100893,7 +101225,8 @@
         "bulletRadius": 5,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_magician": {
       "id": "ability_melee_magician",
@@ -101128,7 +101461,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_magician_magicbolt": {
       "id": "ability_magician_magicbolt",
@@ -101542,7 +101876,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/magician/magician_magicbolt.psd"
+      "image": "file://{images}/hud/abilities/magician/magician_magicbolt.psd",
+      "alternateFormAbilities": null
     },
     "citadel_ability_magewalk": {
       "id": "citadel_ability_magewalk",
@@ -101920,7 +102255,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/shiv/shiv_gather_foes.psd"
+      "image": "file://{images}/hud/abilities/shiv/shiv_gather_foes.psd",
+      "alternateFormAbilities": null
     },
     "ability_magician_animalcurse": {
       "id": "ability_magician_animalcurse",
@@ -102227,7 +102563,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/magician/magician_animalcurse.psd"
+      "image": "file://{images}/hud/abilities/magician/magician_animalcurse.psd",
+      "alternateFormAbilities": null
     },
     "ability_magician_shadowclone": {
       "id": "ability_magician_shadowclone",
@@ -102529,7 +102866,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/rutger/rutger_cheat_death.psd"
+      "image": "file://{images}/hud/abilities/rutger/rutger_cheat_death.psd",
+      "alternateFormAbilities": null
     },
     "ability_magician_magicbolt_trigger": {
       "id": "ability_magician_magicbolt_trigger",
@@ -102545,7 +102883,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/upgrades/mods_weapon/ricochet.psd"
+      "image": "file://{images}/upgrades/mods_weapon/ricochet.psd",
+      "alternateFormAbilities": null
     },
     "ability_magician_cloneturret": {
       "id": "ability_magician_cloneturret",
@@ -102876,7 +103215,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/magician/magician_cloneturret.psd"
+      "image": "file://{images}/hud/abilities/magician/magician_cloneturret.psd",
+      "alternateFormAbilities": null
     },
     "ability_magician_cloneturret_trigger": {
       "id": "ability_magician_cloneturret_trigger",
@@ -102905,7 +103245,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/ability_activate.psd"
+      "image": "file://{images}/hud/abilities/ability_activate.psd",
+      "alternateFormAbilities": null
     },
     "ability_magician_stage": {
       "id": "ability_magician_stage",
@@ -103245,7 +103586,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/kelvin/frozen_shelter.psd"
+      "image": "file://{images}/hud/abilities/kelvin/frozen_shelter.psd",
+      "alternateFormAbilities": null
     },
     "ability_magician_bigbolt": {
       "id": "ability_magician_bigbolt",
@@ -103664,7 +104006,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/upgrades/mods_tech/return_fire.psd"
+      "image": "file://{images}/upgrades/mods_tech/return_fire.psd",
+      "alternateFormAbilities": null
     },
     "ability_magician_escape": {
       "id": "ability_magician_escape",
@@ -104021,7 +104364,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/mirage/mirage_sand_phantom.psd"
+      "image": "file://{images}/hud/abilities/mirage/mirage_sand_phantom.psd",
+      "alternateFormAbilities": null
     },
     "ability_magician_copyult": {
       "id": "ability_magician_copyult",
@@ -104272,7 +104616,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/magician/magician_copyult.psd"
+      "image": "file://{images}/hud/abilities/magician/magician_copyult.psd",
+      "alternateFormAbilities": null
     },
     "ability_magician_animalhexarea": {
       "id": "ability_magician_animalhexarea",
@@ -104624,7 +104969,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/magician/magician_animalcurse.psd"
+      "image": "file://{images}/hud/abilities/magician/magician_animalcurse.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_trapper_set": {
       "id": "citadel_weapon_trapper_set",
@@ -104862,7 +105208,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_trapper": {
       "id": "ability_melee_trapper",
@@ -105097,7 +105444,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_trapper_poisonjar": {
       "id": "ability_trapper_poisonjar",
@@ -105421,7 +105769,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/trapper/trapper_poison_jar.psd"
+      "image": "file://{images}/hud/abilities/trapper/trapper_poison_jar.psd",
+      "alternateFormAbilities": null
     },
     "ability_trapper_spiderwave": {
       "id": "ability_trapper_spiderwave",
@@ -105902,7 +106251,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/trapper/trapper_spider_wave.psd"
+      "image": "file://{images}/hud/abilities/trapper/trapper_spider_wave.psd",
+      "alternateFormAbilities": null
     },
     "ability_trapper_spidershield": {
       "id": "ability_trapper_spidershield",
@@ -106214,7 +106564,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/trapper/trapper_spider_shield.psd"
+      "image": "file://{images}/hud/abilities/trapper/trapper_spider_shield.psd",
+      "alternateFormAbilities": null
     },
     "ability_trapper_fear": {
       "id": "ability_trapper_fear",
@@ -106504,7 +106855,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/upgrades/mods_tech/healbane.psd"
+      "image": "file://{images}/upgrades/mods_tech/healbane.psd",
+      "alternateFormAbilities": null
     },
     "ability_trapper_webwall": {
       "id": "ability_trapper_webwall",
@@ -106897,7 +107249,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/trapper/trapper_web_wall.psd"
+      "image": "file://{images}/hud/abilities/trapper/trapper_web_wall.psd",
+      "alternateFormAbilities": null
     },
     "ability_trapper_fear1": {
       "id": "ability_trapper_fear1",
@@ -107187,7 +107540,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/upgrades/mods_tech/healbane.psd"
+      "image": "file://{images}/upgrades/mods_tech/healbane.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_operative_set": {
       "id": "citadel_weapon_operative_set",
@@ -107425,7 +107779,8 @@
         "bulletRadius": 4,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "operative_umbrella_maneuver": {
       "id": "operative_umbrella_maneuver",
@@ -107756,7 +108111,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/upgrades/mods_utility/springy_boots.psd"
+      "image": "file://{images}/upgrades/mods_utility/springy_boots.psd",
+      "alternateFormAbilities": null
     },
     "operative_blindside": {
       "id": "operative_blindside",
@@ -108068,7 +108424,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/operative/operative_blindside.psd"
+      "image": "file://{images}/hud/abilities/operative/operative_blindside.psd",
+      "alternateFormAbilities": null
     },
     "operative_revelation": {
       "id": "operative_revelation",
@@ -108421,7 +108778,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/sumo/sumo_pork_bun.psd"
+      "image": "file://{images}/hud/abilities/sumo/sumo_pork_bun.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_gunslinger2_set": {
       "id": "citadel_weapon_gunslinger2_set",
@@ -108659,7 +109017,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_gunslinger_spreadingfire": {
       "id": "ability_gunslinger_spreadingfire",
@@ -108992,7 +109351,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/inferno_passive.psd"
+      "image": "file://{images}/hud/abilities/inferno_passive.psd",
+      "alternateFormAbilities": null
     },
     "ability_empowerbullet": {
       "id": "ability_empowerbullet",
@@ -109339,7 +109699,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/inferno_molotov.psd"
+      "image": "file://{images}/hud/abilities/inferno_molotov.psd",
+      "alternateFormAbilities": null
     },
     "ability_gunslinger_demon_carbine": {
       "id": "ability_gunslinger_demon_carbine",
@@ -109707,7 +110068,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/duo/duo_attack.psd"
+      "image": "file://{images}/hud/abilities/duo/duo_attack.psd",
+      "alternateFormAbilities": null
     },
     "ability_gunslinger_salvo": {
       "id": "ability_gunslinger_salvo",
@@ -110016,7 +110378,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/tokamak/tokamak_hot_shot.psd"
+      "image": "file://{images}/hud/abilities/tokamak/tokamak_hot_shot.psd",
+      "alternateFormAbilities": null
     },
     "gunslinger_demonMark": {
       "id": "gunslinger_demonMark",
@@ -110371,7 +110734,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/hornet/hornet_assassinate.psd"
+      "image": "file://{images}/hud/abilities/hornet/hornet_assassinate.psd",
+      "alternateFormAbilities": null
     },
     "gunslinger_knockbackblast": {
       "id": "gunslinger_knockbackblast",
@@ -110661,7 +111025,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/tokamak/tokamak_hot_shot.psd"
+      "image": "file://{images}/hud/abilities/tokamak/tokamak_hot_shot.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_vampirebat_set": {
       "id": "citadel_weapon_vampirebat_set",
@@ -110899,7 +111264,8 @@
         "bulletRadius": 5,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_vampirebat": {
       "id": "ability_melee_vampirebat",
@@ -111134,7 +111500,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_vampirebat_batblink": {
       "id": "ability_vampirebat_batblink",
@@ -111480,7 +111847,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/vampirebat/vampirebat_sanguine_retreat.psd"
+      "image": "file://{images}/hud/abilities/vampirebat/vampirebat_sanguine_retreat.psd",
+      "alternateFormAbilities": null
     },
     "ability_vampirebat_lovebites": {
       "id": "ability_vampirebat_lovebites",
@@ -111926,7 +112294,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/vampirebat/vampirebat_love_bites.psd"
+      "image": "file://{images}/hud/abilities/vampirebat/vampirebat_love_bites.psd",
+      "alternateFormAbilities": null
     },
     "ability_vampirebat_batswarm": {
       "id": "ability_vampirebat_batswarm",
@@ -112533,7 +112902,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/vampirebat/vampirebat_nox_nostra.psd"
+      "image": "file://{images}/hud/abilities/vampirebat/vampirebat_nox_nostra.psd",
+      "alternateFormAbilities": null
     },
     "ability_vampirebat_batblink_trigger": {
       "id": "ability_vampirebat_batblink_trigger",
@@ -112739,7 +113109,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/vampirebat/vampirebat_sanguine_retreat.psd"
+      "image": "file://{images}/hud/abilities/vampirebat/vampirebat_sanguine_retreat.psd",
+      "alternateFormAbilities": null
     },
     "ability_vampirebat_batcloud": {
       "id": "ability_vampirebat_batcloud",
@@ -113070,7 +113441,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/vampirebat/vampirebat_nox_nostra.psd"
+      "image": "file://{images}/hud/abilities/vampirebat/vampirebat_nox_nostra.psd",
+      "alternateFormAbilities": null
     },
     "ability_vampirebat_steallife": {
       "id": "ability_vampirebat_steallife",
@@ -113481,7 +113853,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/vampirebat/vampirebat_rake.psd"
+      "image": "file://{images}/hud/abilities/vampirebat/vampirebat_rake.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_vampirebat_set2": {
       "id": "citadel_weapon_vampirebat_set2",
@@ -113719,7 +114092,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_boho_set": {
       "id": "citadel_weapon_boho_set",
@@ -113957,7 +114331,8 @@
         "bulletRadius": 6,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_boho": {
       "id": "ability_melee_boho",
@@ -114192,7 +114567,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_boho_ability01": {
       "id": "ability_boho_ability01",
@@ -114417,7 +114793,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd",
+      "alternateFormAbilities": null
     },
     "ability_boho_ability02": {
       "id": "ability_boho_ability02",
@@ -114642,7 +115019,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd",
+      "alternateFormAbilities": null
     },
     "ability_boho_damageshare": {
       "id": "ability_boho_damageshare",
@@ -114949,7 +115327,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/synth/synth_grasp.psd"
+      "image": "file://{images}/hud/abilities/synth/synth_grasp.psd",
+      "alternateFormAbilities": null
     },
     "ability_boho_bouncyprojectile": {
       "id": "ability_boho_bouncyprojectile",
@@ -115244,7 +115623,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/magician/magician_magicbolt.psd"
+      "image": "file://{images}/hud/abilities/magician/magician_magicbolt.psd",
+      "alternateFormAbilities": null
     },
     "ability_boho_doublehit": {
       "id": "ability_boho_doublehit",
@@ -115597,7 +115977,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/shiv/shiv_prison_dance.psd"
+      "image": "file://{images}/hud/abilities/shiv/shiv_prison_dance.psd",
+      "alternateFormAbilities": null
     },
     "ability_boho_channeltether": {
       "id": "ability_boho_channeltether",
@@ -115950,7 +116331,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/mirage/mirage_djinns_reach.psd"
+      "image": "file://{images}/hud/abilities/mirage/mirage_djinns_reach.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_swan_set": {
       "id": "citadel_weapon_swan_set",
@@ -116188,7 +116570,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_swan": {
       "id": "ability_melee_swan",
@@ -116423,7 +116806,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_swan_featherboomerang": {
       "id": "ability_swan_featherboomerang",
@@ -116732,7 +117116,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/mirage/mirage_fire_beetles.psd"
+      "image": "file://{images}/hud/abilities/mirage/mirage_fire_beetles.psd",
+      "alternateFormAbilities": null
     },
     "ability_swan_leap": {
       "id": "ability_swan_leap",
@@ -116993,7 +117378,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/bull_jump.psd"
+      "image": "file://{images}/hud/abilities/bull_jump.psd",
+      "alternateFormAbilities": null
     },
     "ability_swan_acrobat": {
       "id": "ability_swan_acrobat",
@@ -117254,7 +117640,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/kelvin/ice_path.psd"
+      "image": "file://{images}/hud/abilities/kelvin/ice_path.psd",
+      "alternateFormAbilities": null
     },
     "ability_swan_ult": {
       "id": "ability_swan_ult",
@@ -117479,7 +117866,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_tunnel_vision.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_tunnel_vision.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_skyrunner_set": {
       "id": "citadel_weapon_skyrunner_set",
@@ -117741,7 +118129,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 0.5
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_skyrunner": {
       "id": "ability_melee_skyrunner",
@@ -117976,7 +118365,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_skyrunner_flakshot": {
       "id": "ability_skyrunner_flakshot",
@@ -118316,7 +118706,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/upgrades/mods_weapon/ricochet.psd"
+      "image": "file://{images}/upgrades/mods_weapon/ricochet.psd",
+      "alternateFormAbilities": null
     },
     "ability_skyrunner_magic_beam": {
       "id": "ability_skyrunner_magic_beam",
@@ -118589,7 +118980,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/kelvin/freezing_grenade.psd"
+      "image": "file://{images}/hud/abilities/kelvin/freezing_grenade.psd",
+      "alternateFormAbilities": null
     },
     "ability_skyrunner_swingline": {
       "id": "ability_skyrunner_swingline",
@@ -118838,7 +119230,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/lash/lash_flog.psd"
+      "image": "file://{images}/hud/abilities/lash/lash_flog.psd",
+      "alternateFormAbilities": null
     },
     "ability_skyrunner_ult": {
       "id": "ability_skyrunner_ult",
@@ -119063,7 +119456,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_tunnel_vision.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_tunnel_vision.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_skyrunner_alt": {
       "id": "citadel_weapon_skyrunner_alt",
@@ -119337,7 +119731,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_graf_set": {
       "id": "citadel_weapon_graf_set",
@@ -119575,7 +119970,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_graf": {
       "id": "ability_melee_graf",
@@ -119810,7 +120206,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_graf_ability01": {
       "id": "ability_graf_ability01",
@@ -120035,7 +120432,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd",
+      "alternateFormAbilities": null
     },
     "ability_graf_ability02": {
       "id": "ability_graf_ability02",
@@ -120260,7 +120658,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd",
+      "alternateFormAbilities": null
     },
     "ability_graf_ability03": {
       "id": "ability_graf_ability03",
@@ -120485,7 +120884,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd",
+      "alternateFormAbilities": null
     },
     "ability_graf_ult": {
       "id": "ability_graf_ult",
@@ -120710,7 +121110,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_tunnel_vision.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_tunnel_vision.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_fortuna_set": {
       "id": "citadel_weapon_fortuna_set",
@@ -121056,7 +121457,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_fortuna": {
       "id": "ability_melee_fortuna",
@@ -121291,7 +121693,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_fortuna_ability01": {
       "id": "ability_fortuna_ability01",
@@ -121516,7 +121919,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd",
+      "alternateFormAbilities": null
     },
     "ability_fortuna_ability02": {
       "id": "ability_fortuna_ability02",
@@ -121741,7 +122145,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd",
+      "alternateFormAbilities": null
     },
     "ability_fortuna_ability03": {
       "id": "ability_fortuna_ability03",
@@ -121966,7 +122371,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd",
+      "alternateFormAbilities": null
     },
     "ability_fortuna_ult": {
       "id": "ability_fortuna_ult",
@@ -122191,7 +122597,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/nano/nano_tunnel_vision.psd"
+      "image": "file://{images}/hud/abilities/nano/nano_tunnel_vision.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_frank_set2": {
       "id": "citadel_weapon_frank_set2",
@@ -122453,7 +122860,8 @@
         "bulletRadius": 5,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_frank": {
       "id": "ability_melee_frank",
@@ -122688,7 +123096,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_frank_selfzap": {
       "id": "ability_frank_selfzap",
@@ -123006,7 +123415,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/frank/frank_jump_start.psd"
+      "image": "file://{images}/hud/abilities/frank/frank_jump_start.psd",
+      "alternateFormAbilities": null
     },
     "ability_frank_painaura": {
       "id": "ability_frank_painaura",
@@ -123425,7 +123835,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/frank/frank_aura_of_suffering.psd"
+      "image": "file://{images}/hud/abilities/frank/frank_aura_of_suffering.psd",
+      "alternateFormAbilities": null
     },
     "ability_frank_revive": {
       "id": "ability_frank_revive",
@@ -123921,7 +124332,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/frank/frank_shocking_reanimation.psd"
+      "image": "file://{images}/hud/abilities/frank/frank_shocking_reanimation.psd",
+      "alternateFormAbilities": null
     },
     "ability_frank_shocktarget2": {
       "id": "ability_frank_shocktarget2",
@@ -124359,7 +124771,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/frank/frank_pain_battery.psd"
+      "image": "file://{images}/hud/abilities/frank/frank_pain_battery.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_bookworm_set": {
       "id": "citadel_weapon_bookworm_set",
@@ -124741,7 +125154,8 @@
         "bulletRadius": 12,
         "bulletLifetime": 1
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_bookworm": {
       "id": "ability_melee_bookworm",
@@ -124976,7 +125390,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_bookworm_dragonfire": {
       "id": "ability_bookworm_dragonfire",
@@ -125439,7 +125854,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/bookworm/bookworm_dragon.psd"
+      "image": "file://{images}/hud/abilities/bookworm/bookworm_dragon.psd",
+      "alternateFormAbilities": null
     },
     "ability_bookworm_aoemagic": {
       "id": "ability_bookworm_aoemagic",
@@ -125805,7 +126221,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/bookworm/bookworm_blindinglight.psd"
+      "image": "file://{images}/hud/abilities/bookworm/bookworm_blindinglight.psd",
+      "alternateFormAbilities": null
     },
     "ability_bookworm_knightbarrier": {
       "id": "ability_bookworm_knightbarrier",
@@ -126210,7 +126627,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/bookworm/bookworm_defendandfight.psd"
+      "image": "file://{images}/hud/abilities/bookworm/bookworm_defendandfight.psd",
+      "alternateFormAbilities": null
     },
     "ability_bookworm_knightcharge": {
       "id": "ability_bookworm_knightcharge",
@@ -126932,7 +127350,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/bookworm/bookworm_charge.psd"
+      "image": "file://{images}/hud/abilities/bookworm/bookworm_charge.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_bookworm_set2": {
       "id": "citadel_weapon_bookworm_set2",
@@ -127170,7 +127589,8 @@
         "bulletRadius": 25,
         "bulletLifetime": 1.5
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_doorman_set": {
       "id": "citadel_weapon_doorman_set",
@@ -127408,7 +127828,8 @@
         "bulletRadius": 10,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_doorman_alt": {
       "id": "citadel_weapon_doorman_alt",
@@ -127646,7 +128067,8 @@
         "bulletRadius": 10,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_doorman": {
       "id": "ability_melee_doorman",
@@ -127881,7 +128303,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_doorman_doorway": {
       "id": "ability_doorman_doorway",
@@ -128188,7 +128611,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/doorman/doorman_doorway.psd"
+      "image": "file://{images}/hud/abilities/doorman/doorman_doorway.psd",
+      "alternateFormAbilities": null
     },
     "ability_doorman_doorway_close": {
       "id": "ability_doorman_doorway_close",
@@ -128394,7 +128818,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/doorman/doorman_doorwayclose.psd"
+      "image": "file://{images}/hud/abilities/doorman/doorman_doorwayclose.psd",
+      "alternateFormAbilities": null
     },
     "ability_doorman_luggage_cart": {
       "id": "ability_doorman_luggage_cart",
@@ -128682,7 +129107,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/doorman/doorman_luggagetrolley.psd"
+      "image": "file://{images}/hud/abilities/doorman/doorman_luggagetrolley.psd",
+      "alternateFormAbilities": null
     },
     "ability_doorman_bomb": {
       "id": "ability_doorman_bomb",
@@ -129075,7 +129501,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/doorman/doorman_bell.psd"
+      "image": "file://{images}/hud/abilities/doorman/doorman_bell.psd",
+      "alternateFormAbilities": null
     },
     "ability_doorman_hotel": {
       "id": "ability_doorman_hotel",
@@ -129431,7 +129858,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/doorman/doorman_elevator.psd"
+      "image": "file://{images}/hud/abilities/doorman/doorman_elevator.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_punkgoat_set": {
       "id": "citadel_weapon_punkgoat_set",
@@ -129669,7 +130097,8 @@
         "bulletRadius": 4,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_punkgoat_slide": {
       "id": "ability_punkgoat_slide",
@@ -129887,7 +130316,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "ability_melee_punkgoat": {
       "id": "ability_melee_punkgoat",
@@ -130122,7 +130552,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_punkgoat_blasted": {
       "id": "ability_punkgoat_blasted",
@@ -130625,7 +131056,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/punkgoat/goat_blasted.psd"
+      "image": "file://{images}/hud/abilities/punkgoat/goat_blasted.psd",
+      "alternateFormAbilities": null
     },
     "ability_punkgoat_tether": {
       "id": "ability_punkgoat_tether",
@@ -131111,7 +131543,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/punkgoat/goat_chaingang.psd"
+      "image": "file://{images}/hud/abilities/punkgoat/goat_chaingang.psd",
+      "alternateFormAbilities": null
     },
     "ability_punkgoat_goatflip": {
       "id": "ability_punkgoat_goatflip",
@@ -131728,7 +132161,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/punkgoat/goat_risingram.psd"
+      "image": "file://{images}/hud/abilities/punkgoat/goat_risingram.psd",
+      "alternateFormAbilities": null
     },
     "ability_punkgoat_ult": {
       "id": "ability_punkgoat_ult",
@@ -132263,7 +132697,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/punkgoat/goat_sigilslam.psd"
+      "image": "file://{images}/hud/abilities/punkgoat/goat_sigilslam.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_drifter_set": {
       "id": "citadel_weapon_drifter_set",
@@ -132554,7 +132989,8 @@
         "bulletRadius": 6,
         "bulletLifetime": 0.054
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_drifter_alt": {
       "id": "citadel_weapon_drifter_alt",
@@ -132792,7 +133228,8 @@
         "bulletRadius": 13,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_drifter": {
       "id": "ability_melee_drifter",
@@ -133027,7 +133464,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "drifter_blood_blast": {
       "id": "drifter_blood_blast",
@@ -133479,7 +133917,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/drifter/drifter_claw.psd"
+      "image": "file://{images}/hud/abilities/drifter/drifter_claw.psd",
+      "alternateFormAbilities": null
     },
     "drifter_shadow_mark": {
       "id": "drifter_shadow_mark",
@@ -133928,7 +134367,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/drifter/drifter_stalkersmark.psd"
+      "image": "file://{images}/hud/abilities/drifter/drifter_stalkersmark.psd",
+      "alternateFormAbilities": null
     },
     "drifter_shadow_mark_teleport": {
       "id": "drifter_shadow_mark_teleport",
@@ -134134,7 +134574,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/drifter/stalkers_mark_teleport.psd"
+      "image": "file://{images}/hud/abilities/drifter/stalkers_mark_teleport.psd",
+      "alternateFormAbilities": null
     },
     "ability_drifter_hunger": {
       "id": "ability_drifter_hunger",
@@ -134633,7 +135074,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/drifter/drifter_thehunger.psd"
+      "image": "file://{images}/hud/abilities/drifter/drifter_thehunger.psd",
+      "alternateFormAbilities": null
     },
     "drifter_darkness": {
       "id": "drifter_darkness",
@@ -135040,7 +135482,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/drifter/darkness.psd"
+      "image": "file://{images}/hud/abilities/drifter/darkness.psd",
+      "alternateFormAbilities": null
     },
     "cosmetic_base": {
       "id": "cosmetic_base",
@@ -135246,7 +135689,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "cosmetic_item_snowball": {
       "id": "cosmetic_item_snowball",
@@ -135542,7 +135986,8 @@
         }
       ],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "cosmetic_item_voting_poster": {
       "id": "cosmetic_item_voting_poster",
@@ -135760,7 +136205,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": null
+      "image": null,
+      "alternateFormAbilities": null
     },
     "citadel_weapon_priest_set": {
       "id": "citadel_weapon_priest_set",
@@ -135998,7 +136444,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_priest": {
       "id": "ability_melee_priest",
@@ -136233,7 +136680,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_priest_knockback": {
       "id": "ability_priest_knockback",
@@ -136672,7 +137120,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/priest/priest_shotgun.psd"
+      "image": "file://{images}/hud/abilities/priest/priest_shotgun.psd",
+      "alternateFormAbilities": null
     },
     "ability_priest_selfheal": {
       "id": "ability_priest_selfheal",
@@ -136962,7 +137411,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/upgrades/mods_tech/healbane.psd"
+      "image": "file://{images}/upgrades/mods_tech/healbane.psd",
+      "alternateFormAbilities": null
     },
     "ability_priest_stackingdefense": {
       "id": "ability_priest_stackingdefense",
@@ -137264,7 +137714,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/upgrades/mods_armor/advanced_armor.psd"
+      "image": "file://{images}/upgrades/mods_armor/advanced_armor.psd",
+      "alternateFormAbilities": null
     },
     "ability_priest_barrage": {
       "id": "ability_priest_barrage",
@@ -137590,7 +138041,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/hornet/hornet_assassinate.psd"
+      "image": "file://{images}/hud/abilities/hornet/hornet_assassinate.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_priest_crossbow": {
       "id": "citadel_weapon_priest_crossbow",
@@ -137840,7 +138292,8 @@
         "bulletRadius": 14,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_priest_weaponswap": {
       "id": "ability_priest_weaponswap",
@@ -138244,7 +138697,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/priest/priest_crossbow.psd"
+      "image": "file://{images}/hud/abilities/priest/priest_crossbow.psd",
+      "alternateFormAbilities": null
     },
     "ability_priest_smokegrenade": {
       "id": "ability_priest_smokegrenade",
@@ -138618,7 +139072,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/warden/warden_crowd_control.psd"
+      "image": "file://{images}/hud/abilities/warden/warden_crowd_control.psd",
+      "alternateFormAbilities": null
     },
     "ability_priest_antispiritvest": {
       "id": "ability_priest_antispiritvest",
@@ -138941,7 +139396,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/upgrades/upgrade_shield.psd"
+      "image": "file://{images}/upgrades/upgrade_shield.psd",
+      "alternateFormAbilities": null
     },
     "ability_priest_silencebomb": {
       "id": "ability_priest_silencebomb",
@@ -139282,7 +139738,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/warden/warden_crowd_control.psd"
+      "image": "file://{images}/hud/abilities/warden/warden_crowd_control.psd",
+      "alternateFormAbilities": null
     },
     "ability_priest_flashbang": {
       "id": "ability_priest_flashbang",
@@ -139748,7 +140205,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/priest/priest_grenade.psd"
+      "image": "file://{images}/hud/abilities/priest/priest_grenade.psd",
+      "alternateFormAbilities": null
     },
     "ability_priest_beartrap": {
       "id": "ability_priest_beartrap",
@@ -140194,7 +140652,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/priest/priest_trap.psd"
+      "image": "file://{images}/hud/abilities/priest/priest_trap.psd",
+      "alternateFormAbilities": null
     },
     "ability_familiar_alt_weapon": {
       "id": "ability_familiar_alt_weapon",
@@ -140468,7 +140927,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_familiar_primary_weapon_bubblegun": {
       "id": "ability_familiar_primary_weapon_bubblegun",
@@ -140706,7 +141166,8 @@
         "bulletRadius": 10,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_familiar": {
       "id": "ability_melee_familiar",
@@ -140941,7 +141402,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_familiar_ability02": {
       "id": "ability_familiar_ability02",
@@ -141297,7 +141759,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/familiar/familiar_pillow.psd"
+      "image": "file://{images}/hud/abilities/familiar/familiar_pillow.psd",
+      "alternateFormAbilities": null
     },
     "ability_familiar_ability01": {
       "id": "ability_familiar_ability01",
@@ -141702,7 +142165,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/familiar/familiar_sleep.psd"
+      "image": "file://{images}/hud/abilities/familiar/familiar_sleep.psd",
+      "alternateFormAbilities": null
     },
     "ability_familiar_helpinghands": {
       "id": "ability_familiar_helpinghands",
@@ -142233,7 +142697,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/familiar/familiar_helpers.psd"
+      "image": "file://{images}/hud/abilities/familiar/familiar_helpers.psd",
+      "alternateFormAbilities": null
     },
     "ability_familiar_attach": {
       "id": "ability_familiar_attach",
@@ -142706,7 +143171,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/familiar/familiar_tag_along.psd"
+      "image": "file://{images}/hud/abilities/familiar/familiar_tag_along.psd",
+      "alternateFormAbilities": null
     },
     "ability_familiar_attach_trigger": {
       "id": "ability_familiar_attach_trigger",
@@ -142912,7 +143378,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/familiar/familiar_tag_along2.psd"
+      "image": "file://{images}/hud/abilities/familiar/familiar_tag_along2.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_fencer_set": {
       "id": "citadel_weapon_fencer_set",
@@ -143150,7 +143617,8 @@
         "bulletRadius": 10,
         "bulletLifetime": 1
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_fencer_alt": {
       "id": "citadel_weapon_fencer_alt",
@@ -143388,7 +143856,8 @@
         "bulletRadius": 4,
         "bulletLifetime": 1
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_fencer": {
       "id": "ability_melee_fencer",
@@ -143623,7 +144092,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_fencer_throwblade": {
       "id": "ability_fencer_throwblade",
@@ -144113,7 +144583,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/fencer/fencer_sigil.psd"
+      "image": "file://{images}/hud/abilities/fencer/fencer_sigil.psd",
+      "alternateFormAbilities": null
     },
     "ability_fencer_riposte_target_select": {
       "id": "ability_fencer_riposte_target_select",
@@ -144319,7 +144790,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/fencer/fencer_riposte_attack.psd"
+      "image": "file://{images}/hud/abilities/fencer/fencer_riposte_attack.psd",
+      "alternateFormAbilities": null
     },
     "ability_fencer_riposte": {
       "id": "ability_fencer_riposte",
@@ -144880,7 +145352,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/fencer/fencer_riposte.psd"
+      "image": "file://{images}/hud/abilities/fencer/fencer_riposte.psd",
+      "alternateFormAbilities": null
     },
     "ability_fencer_lunge": {
       "id": "ability_fencer_lunge",
@@ -145480,7 +145953,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/fencer/fencer_lungingstab.psd"
+      "image": "file://{images}/hud/abilities/fencer/fencer_lungingstab.psd",
+      "alternateFormAbilities": null
     },
     "ability_fencer_ultimate": {
       "id": "ability_fencer_ultimate",
@@ -146116,7 +146590,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/fencer/fencer_ult.psd"
+      "image": "file://{images}/hud/abilities/fencer/fencer_ult.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_necro_set": {
       "id": "citadel_weapon_necro_set",
@@ -146474,7 +146949,8 @@
         "bulletRadius": 3,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_necro": {
       "id": "ability_melee_necro",
@@ -146709,7 +147185,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_necro_zombiewall": {
       "id": "ability_necro_zombiewall",
@@ -147192,7 +147669,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/necro/necro_hands.psd"
+      "image": "file://{images}/hud/abilities/necro/necro_hands.psd",
+      "alternateFormAbilities": null
     },
     "ability_necro_hauntingskull": {
       "id": "ability_necro_hauntingskull",
@@ -148036,7 +148514,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/necro/necro_skull.psd"
+      "image": "file://{images}/hud/abilities/necro/necro_skull.psd",
+      "alternateFormAbilities": null
     },
     "ability_necro_gravestone": {
       "id": "ability_necro_gravestone",
@@ -148909,7 +149388,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/necro/necro_gravestone.psd"
+      "image": "file://{images}/hud/abilities/necro/necro_gravestone.psd",
+      "alternateFormAbilities": null
     },
     "ability_necro_killsummon": {
       "id": "ability_necro_killsummon",
@@ -149146,7 +149626,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/spectre/life_drain.psd"
+      "image": "file://{images}/hud/abilities/spectre/life_drain.psd",
+      "alternateFormAbilities": null
     },
     "ability_necro_nukemap": {
       "id": "ability_necro_nukemap",
@@ -149424,7 +149905,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/tokamak/tokamak_hot_shot.psd"
+      "image": "file://{images}/hud/abilities/tokamak/tokamak_hot_shot.psd",
+      "alternateFormAbilities": null
     },
     "ability_necro_killsummon_trigger": {
       "id": "ability_necro_killsummon_trigger",
@@ -149747,7 +150229,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/punkgoat/punkgoat_capricious.psd"
+      "image": "file://{images}/hud/abilities/punkgoat/punkgoat_capricious.psd",
+      "alternateFormAbilities": null
     },
     "ability_necro_coffin": {
       "id": "ability_necro_coffin",
@@ -150081,7 +150564,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/necro/necro_coffin.psd"
+      "image": "file://{images}/hud/abilities/necro/necro_coffin.psd",
+      "alternateFormAbilities": null
     },
     "ability_necro_fear": {
       "id": "ability_necro_fear",
@@ -150551,7 +151035,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/necro/necro_siphon.psd"
+      "image": "file://{images}/hud/abilities/necro/necro_siphon.psd",
+      "alternateFormAbilities": null
     },
     "ability_necro_haunt": {
       "id": "ability_necro_haunt",
@@ -151043,7 +151528,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/trapper/trapper_spider_wave.psd"
+      "image": "file://{images}/hud/abilities/trapper/trapper_spider_wave.psd",
+      "alternateFormAbilities": null
     },
     "ability_necro_wither": {
       "id": "ability_necro_wither",
@@ -151598,7 +152084,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/necro/necro_skull.psd"
+      "image": "file://{images}/hud/abilities/necro/necro_skull.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_werewolf": {
       "id": "ability_melee_werewolf",
@@ -151833,7 +152320,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_werewolf_rifle": {
       "id": "citadel_weapon_werewolf_rifle",
@@ -152071,7 +152559,8 @@
         "bulletRadius": 4,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_werewolf_claws": {
       "id": "citadel_weapon_werewolf_claws",
@@ -152316,7 +152805,8 @@
         "bulletRadius": 7,
         "bulletLifetime": 2
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_werewolf_unloadgun": {
       "id": "ability_werewolf_unloadgun",
@@ -152805,7 +153295,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/werewolf/werewolf_slamfire.psd"
+      "image": "file://{images}/hud/abilities/werewolf/werewolf_slamfire.psd",
+      "alternateFormAbilities": null
     },
     "ability_werewolf_kickflip": {
       "id": "ability_werewolf_kickflip",
@@ -153324,7 +153815,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/werewolf/werewolf_jumpback.psd"
+      "image": "file://{images}/hud/abilities/werewolf/werewolf_jumpback.psd",
+      "alternateFormAbilities": null
     },
     "ability_werewolf_maulingleap": {
       "id": "ability_werewolf_maulingleap",
@@ -153691,7 +154183,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/werewolf/werewolf_wolfforward.psd"
+      "image": "file://{images}/hud/abilities/werewolf/werewolf_wolfforward.psd",
+      "alternateFormAbilities": null
     },
     "ability_werewolf_netshot": {
       "id": "ability_werewolf_netshot",
@@ -154052,7 +154545,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/werewolf/werewolf_bola.psd"
+      "image": "file://{images}/hud/abilities/werewolf/werewolf_bola.psd",
+      "alternateFormAbilities": null
     },
     "ability_werewolf_cripplingslash": {
       "id": "ability_werewolf_cripplingslash",
@@ -154426,7 +154920,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/werewolf/werewolf_tailwhack.psd"
+      "image": "file://{images}/hud/abilities/werewolf/werewolf_tailwhack.psd",
+      "alternateFormAbilities": null
     },
     "ability_werewolf_trackingbomb": {
       "id": "ability_werewolf_trackingbomb",
@@ -154896,7 +155391,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/drifter/drifter_terror.psd"
+      "image": "file://{images}/hud/abilities/drifter/drifter_terror.psd",
+      "alternateFormAbilities": null
     },
     "ability_werewolf_transformation": {
       "id": "ability_werewolf_transformation",
@@ -155528,7 +156024,13 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/werewolf/werewolf_lycancurse.psd"
+      "image": "file://{images}/hud/abilities/werewolf/werewolf_lycancurse.psd",
+      "alternateFormAbilities": {
+        "Weapon_Primary": "citadel_weapon_werewolf_claws",
+        "Signature_2": "ability_werewolf_maulingleap",
+        "Signature_1": "ability_werewolf_frenzy",
+        "Signature_3": "ability_werewolf_cripplingslash"
+      }
     },
     "ability_werewolf_hunt": {
       "id": "ability_werewolf_hunt",
@@ -155818,7 +156320,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/phalanx_beef.psd"
+      "image": "file://{images}/hud/abilities/phalanx_beef.psd",
+      "alternateFormAbilities": null
     },
     "ability_werewolf_passive": {
       "id": "ability_werewolf_passive",
@@ -156024,7 +156527,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/drifter/drifter_stalkersmark.psd"
+      "image": "file://{images}/hud/abilities/drifter/drifter_stalkersmark.psd",
+      "alternateFormAbilities": null
     },
     "ability_werewolf_onthehunt": {
       "id": "ability_werewolf_onthehunt",
@@ -156339,7 +156843,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/drifter/drifter_terror.psd"
+      "image": "file://{images}/hud/abilities/drifter/drifter_terror.psd",
+      "alternateFormAbilities": null
     },
     "ability_werewolf_transformation_trigger": {
       "id": "ability_werewolf_transformation_trigger",
@@ -156545,7 +157050,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/haze/haze_fixation.psd"
+      "image": "file://{images}/hud/abilities/haze/haze_fixation.psd",
+      "alternateFormAbilities": null
     },
     "ability_werewolf_frenzy": {
       "id": "ability_werewolf_frenzy",
@@ -156840,7 +157346,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/werewolf/werewolf_bite.psd"
+      "image": "file://{images}/hud/abilities/werewolf/werewolf_bite.psd",
+      "alternateFormAbilities": null
     },
     "ability_werewolf_leap": {
       "id": "ability_werewolf_leap",
@@ -157334,7 +157841,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/werewolf/werewolf_wolfforward.psd"
+      "image": "file://{images}/hud/abilities/werewolf/werewolf_wolfforward.psd",
+      "alternateFormAbilities": null
     },
     "citadel_weapon_unicorn_set": {
       "id": "citadel_weapon_unicorn_set",
@@ -157599,7 +158107,8 @@
         "bulletRadius": 18,
         "bulletLifetime": 5
       },
-      "image": "file://{images}/hud/abilities/weapon_damage.psd"
+      "image": "file://{images}/hud/abilities/weapon_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_melee_unicorn": {
       "id": "ability_melee_unicorn",
@@ -157834,7 +158343,8 @@
       "upgrades": [],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/melee_damage.psd"
+      "image": "file://{images}/hud/abilities/melee_damage.psd",
+      "alternateFormAbilities": null
     },
     "ability_unicorn_radiantblast": {
       "id": "ability_unicorn_radiantblast",
@@ -158158,7 +158668,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/unicorn/unicorn_flare.psd"
+      "image": "file://{images}/hud/abilities/unicorn/unicorn_flare.psd",
+      "alternateFormAbilities": null
     },
     "ability_unicorn_prismaticguard": {
       "id": "ability_unicorn_prismaticguard",
@@ -158495,7 +159006,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/unicorn/unicorn_shield.psd"
+      "image": "file://{images}/hud/abilities/unicorn/unicorn_shield.psd",
+      "alternateFormAbilities": null
     },
     "ability_unicorn_dazzlingorb": {
       "id": "ability_unicorn_dazzlingorb",
@@ -158867,7 +159379,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/unicorn/unicorn_orb.psd"
+      "image": "file://{images}/hud/abilities/unicorn/unicorn_orb.psd",
+      "alternateFormAbilities": null
     },
     "ability_unicorn_luminousstrike": {
       "id": "ability_unicorn_luminousstrike",
@@ -159276,7 +159789,8 @@
       ],
       "tooltip": [],
       "weapon": null,
-      "image": "file://{images}/hud/abilities/unicorn/unicorn_luminousflux.psd"
+      "image": "file://{images}/hud/abilities/unicorn/unicorn_luminousflux.psd",
+      "alternateFormAbilities": null
     }
   }
 }

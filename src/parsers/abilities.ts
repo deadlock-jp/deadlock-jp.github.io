@@ -25,6 +25,34 @@ function nOrNull(v: Kv3Value | undefined): number | null {
   return typeof v === "number" ? v : null;
 }
 
+/**
+ * 変身時のスロット入れ替え(スロット名 → 実ID)。
+ * 唯一の実例はシルバー(人狼)の m_WerewolfModifier.m_mapWerewolfAbilities
+ * (ESlot_Weapon_Primary / ESlot_Signature_1-3 を人狼側のIDへ差し替える)。
+ * ヒーロー固有の命名(Werewolf)だが、他ヒーローが同じ仕組みを持てば
+ * *Modifier.m_map*Abilities という形は同じはずなので、フィールド名を決め打ちにせず
+ * "Modifier"で終わるキー配下の "m_map...Abilities" を総なめして拾う。
+ */
+function parseAlternateFormAbilities(e: Kv3Object): Record<string, string> | null {
+  for (const [key, v] of Object.entries(e)) {
+    if (!key.endsWith("Modifier")) continue;
+    const modifier = obj(v);
+    for (const [mkey, mval] of Object.entries(modifier)) {
+      if (!mkey.startsWith("m_map") || !mkey.endsWith("Abilities")) continue;
+      const map = obj(mval);
+      const out: Record<string, string> = {};
+      for (const [slot, id] of Object.entries(map)) {
+        const s = str(id);
+        // hero.abilities 側の slot("Signature_1"等)と突き合わせられるよう、
+        // ESlot_ 接頭辞をここでも剥がしておく(parseHeroesと同じ規約)
+        if (s) out[stripEnumPrefix(slot, "ESlot_")] = s;
+      }
+      if (Object.keys(out).length > 0) return out;
+    }
+  }
+  return null;
+}
+
 function parseWeapon(v: Kv3Value | undefined): WeaponInfo | null {
   const w = obj(v);
   // ダメージも装弾数も無いものは実質的な銃データを持たない
@@ -99,6 +127,7 @@ export function parseAbilities(abilitiesPath: string, upstreamCommit: string): A
       tooltip: parseTooltip(e["m_vecTooltipSectionInfo"]),
       weapon: kind === "Weapon" ? parseWeapon(e["m_WeaponInfo"]) : null,
       image: str(e["m_strAbilityImage"]),
+      alternateFormAbilities: parseAlternateFormAbilities(e),
     };
   }
 

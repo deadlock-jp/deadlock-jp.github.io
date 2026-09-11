@@ -44,16 +44,42 @@ const extraGrowth = Object.entries(hero.levelUpBonuses).filter(
   ([k, v]) => v !== 0 && !STD_GROWTH.has(k),
 );
 
-const skills = hero.abilities
-  .filter((a) => a.slot.startsWith("Signature"))
-  .sort((a, b) => a.slot.localeCompare(b.slot))
-  .map((a) => {
-    const ab = ability(a.abilityKey);
-    return ab
-      ? { key: a.abilityKey, ab, card: skillCard(ab, name), notes: heroNotes(a.abilityKey) }
-      : null;
-  })
-  .filter((s): s is NonNullable<typeof s> => s !== null);
+function buildSkills(abilities: typeof hero.abilities) {
+  return abilities
+    .filter((a) => a.slot.startsWith("Signature"))
+    .sort((a, b) => a.slot.localeCompare(b.slot))
+    .map((a) => {
+      const ab = ability(a.abilityKey);
+      return ab
+        ? { key: a.abilityKey, ab, card: skillCard(ab, name), notes: heroNotes(a.abilityKey) }
+        : null;
+    })
+    .filter((s): s is NonNullable<typeof s> => s !== null);
+}
+const skills = buildSkills(hero.abilities);
+
+/**
+ * 変身で一部スキルが入れ替わるヒーロー(今のところシルバーのみ)。
+ * alternateFormAbilities はスロット名→実IDの対応表(citadel_ability_transformation側が持つ)。
+ * 該当スロットだけ差し替えたアビリティ一覧から、もう一方のスキルセットを組み立てる。
+ */
+const transformAbility = hero.abilities
+  .map((a) => ability(a.abilityKey))
+  .find((ab): ab is NonNullable<typeof ab> => !!ab?.alternateFormAbilities);
+const altSkills = transformAbility
+  ? buildSkills(
+      hero.abilities.map((a) => ({
+        slot: a.slot,
+        abilityKey: transformAbility.alternateFormAbilities![a.slot] ?? a.abilityKey,
+      })),
+    )
+  : null;
+const skillGroups = altSkills
+  ? [
+      { form: "human", label: t("ability_header_human", "人間時").replace(/[：:]$/, ""), list: skills },
+      { form: "werewolf", label: t("ability_header_werewolf", "人狼時").replace(/[：:]$/, ""), list: altSkills },
+    ]
+  : [{ form: null, label: null, list: skills }];
 
 const spiritBadge = (scale: number | null) => (scale ? `×${scale}` : null);
 const adjRows = heroAdjustments(hero.key);
@@ -113,11 +139,20 @@ const metaDesc =
   )}
 
   <h2>スキル</h2>
+  {altSkills && (
+    <div class="formtoggle" role="tablist">
+      {skillGroups.map((g, i) => (
+        <button type="button" class:list={["ftbtn", { active: i === 0 }]} data-form={g.form}>
+          {g.label}
+        </button>
+      ))}
+    </div>
+  )}
   <div class="skills">
-    {skills.map((s) => {
+    {skillGroups.map((g) => g.list.map((s) => {
       const isUlt = s.ab.kind === "Ultimate";
       return (
-        <article class:list={["skill", { ult: isUlt }]}>
+        <article class:list={["skill", { ult: isUlt }]} data-form={g.form} hidden={g.form === "werewolf"}>
           <header class="shead">
             <AbilityIcon
               name={t(s.key, s.key)}
@@ -198,8 +233,24 @@ const metaDesc =
           )}
         </article>
       );
-    })}
+    }))}
   </div>
+
+  {altSkills && (
+    <script is:inline>
+      (() => {
+        const buttons = document.querySelectorAll(".formtoggle .ftbtn");
+        const panels = document.querySelectorAll(".skills [data-form]");
+        for (const btn of buttons) {
+          btn.addEventListener("click", () => {
+            const form = btn.dataset.form;
+            for (const b of buttons) b.classList.toggle("active", b === btn);
+            for (const el of panels) el.hidden = el.dataset.form !== form;
+          });
+        }
+      })();
+    </script>
+  )}
 
   <AdjustmentHistory rows={adjRows} upstreamRepo={upstreamRepo} />
 
@@ -261,6 +312,18 @@ const metaDesc =
     .radarnote.extra { color: var(--c-text-muted); margin-top: calc(var(--sp-4) * -1 + var(--sp-1)); }
 
     /* ---- スキルカード ---- */
+    .formtoggle { display: flex; gap: var(--sp-2); margin: var(--sp-2) 0 var(--sp-3); }
+    .ftbtn {
+      font: inherit;
+      font-size: 13px;
+      padding: 5px 14px;
+      border-radius: var(--radius);
+      border: 1px solid var(--c-border-strong);
+      background: var(--c-surface);
+      color: var(--c-text-muted);
+      cursor: pointer;
+    }
+    .ftbtn.active { color: var(--c-text-strong); border-color: var(--c-accent); background: var(--c-surface-2); }
     .skills { display: grid; gap: var(--sp-3); }
     .skill {
       background: var(--c-surface);

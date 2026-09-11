@@ -82,6 +82,13 @@ export interface Ability {
   /** 武器スキルのみ。それ以外は null */
   weapon: WeaponInfo | null;
   image: string | null;
+  /**
+   * このアビリティが有効な間、一部スロットのアビリティが入れ替わる場合の対応表
+   * (スロット名 → 実ID)。実データにあるのはシルバー(人狼)の変身のみ
+   * (`ability_werewolf_transformation` の `m_WerewolfModifier.m_mapWerewolfAbilities`)。
+   * 該当なしは null。他のヒーローが変身能力を持てば同じ仕組みで拾えるはず。
+   */
+  alternateFormAbilities: Record<string, string> | null;
 }
 
 export interface AbilitiesFile {
