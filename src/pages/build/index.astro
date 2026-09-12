@@ -139,6 +139,7 @@ const payload = {
     </label>
     <span class="acts">
       <button class="share" id="share">共有URLをコピー</button>
+      <a class="compare" id="compare" href={`${base}/build/compare/`}>バージョン比較</a>
       <button class="clear" id="clear">クリア</button>
     </span>
   </div>
@@ -364,9 +365,11 @@ const payload = {
       const parts = [];
       if (heroId !== null) parts.push("h=" + heroId);
       if (picked.length) parts.push("i=" + picked.map(shorten).join(","));
-      const url = location.pathname + location.search + (parts.length ? "#" + parts.join("&") : "");
+      const hash = parts.length ? "#" + parts.join("&") : "";
+      const url = location.pathname + location.search + hash;
       if (replace) history.replaceState(null, "", url);
       else history.pushState(null, "", url);
+      $("compare").href = base + "/build/compare/" + hash;
     }
 
     // ---- 描画 --------------------------------------------------------
@@ -864,11 +867,14 @@ const payload = {
     .totals { display: flex; gap: var(--sp-4); margin-left: auto; font-size: 12px; color: var(--c-text-muted); }
     .totals b { font-family: var(--font-mono); color: var(--c-text-strong); font-size: 14px; }
     .acts { display: flex; gap: var(--sp-2); }
-    .share, .clear {
+    .share, .clear, .compare {
       padding: 5px 12px; border-radius: var(--radius); font: inherit; font-size: 12px; cursor: pointer;
+      text-decoration: none; display: inline-block;
     }
     .share { background: var(--c-accent-bg); border: 1px solid var(--c-accent-dim); color: var(--c-accent); }
     .share:hover { background: var(--c-accent-bg-strong); color: var(--c-accent-hover); }
+    .compare { background: transparent; border: 1px solid var(--c-spirit); color: var(--c-spirit); }
+    .compare:hover { background: var(--c-spirit-bg); }
     .clear { background: transparent; border: 1px solid var(--c-border); color: var(--c-text-muted); }
     .clear:hover { border-color: var(--c-border-strong); color: var(--c-text); }
 
