@@ -1,0 +1,180 @@
+---
+/**
+ * スキル1つぶんのカード本体。
+ * ヒーロー詳細ページのスキル一覧と、スキル単体の詳細ページ(/abilities/<実ID>/)の
+ * 両方から使う共通コンポーネント。見た目・データ源は完全に同じにする。
+ */
+import type { Ability } from "../types/ability.ts";
+import type { SkillCard as SkillCardData } from "../lib/skillcard.ts";
+import { t, describe } from "../lib/data.ts";
+import AbilityIcon from "./AbilityIcon.astro";
+import StatIcon from "./StatIcon.astro";
+
+export interface Props {
+  abilityKey: string;
+  ab: Ability;
+  card: SkillCardData;
+  notes: string[];
+  /** {s:hero_name} 解決用のヒーロー表示名 */
+  heroName: string;
+  /** 指定するとスキル名がこのURLへのリンクになる(ヒーローページ→スキル詳細への導線) */
+  href?: string;
+}
+const { abilityKey, ab, card, notes, heroName, href } = Astro.props;
+const isUlt = ab.kind === "Ultimate";
+const name = t(abilityKey, abilityKey);
+const spiritBadge = (scale: number | null) => (scale ? `×${scale}` : null);
+---
+
+<article class:list={["skill", { ult: isUlt }]}>
+  <header class="shead">
+    <AbilityIcon name={name} image={ab.image} size={44} cssVar={isUlt ? "spirit" : "accent"} />
+    <div class="stitle">
+      <span class="sname">
+        {href ? <a href={href}>{name}</a> : name}
+        {isUlt && <span class="ult-tag">アルティメット</span>}
+      </span>
+      {card.meta.length > 0 && (
+        <ul class="smeta">
+          {card.meta.map((m) => (
+            <li>
+              <StatIcon kind={m.icon} />
+              <span class="mk">{m.label}</span>
+              <span class="mv">{m.value}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </header>
+
+  <p class="sdesc">{describe(`${abilityKey}_desc`, ab.properties, "（説明なし）", { hero_name: heroName })}</p>
+
+  {(card.damage.length > 0 || card.effects.length > 0) && (
+    <ul class="srows">
+      {card.damage.map((d) => (
+        <li class="dmg">
+          <span class="l"><StatIcon kind={d.icon} />{d.label}</span>
+          <span class="v">
+            {d.value}
+            {spiritBadge(d.scale) && (
+              <span class="spirit-badge"><StatIcon kind="spirit" />{spiritBadge(d.scale)}</span>
+            )}
+          </span>
+        </li>
+      ))}
+      {card.effects.map((e) => (
+        <li>
+          <span class="l"><StatIcon kind={e.icon} />{e.label}</span>
+          <span class="v">{e.value}</span>
+        </li>
+      ))}
+    </ul>
+  )}
+
+  {card.upgrades.length > 0 && (
+    <ol class="supg">
+      {card.upgrades.map((tier) => (
+        <li>
+          <span class="ap"><StatIcon kind="ap" />{tier.ap}<small>AP</small></span>
+          {tier.description ? (
+            <span class="udesc">{tier.description}</span>
+          ) : (
+            <span class="urows">
+              {tier.rows.map((r) => (
+                <span class="u">
+                  <StatIcon kind={r.icon} />{r.label} <b>{r.value}</b>
+                </span>
+              ))}
+            </span>
+          )}
+        </li>
+      ))}
+    </ol>
+  )}
+
+  {notes.length > 0 && (
+    <div class="snotes">
+      <span class="nt">メモ</span>
+      <ul>
+        {notes.map((note) => (
+          <li>{note}</li>
+        ))}
+      </ul>
+    </div>
+  )}
+</article>
+
+<style>
+  .skill {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-left: 3px solid var(--c-accent);
+    border-radius: var(--radius);
+    padding: var(--sp-3) var(--sp-4) var(--sp-4);
+  }
+  .skill.ult { border-left-color: var(--c-spirit); }
+  .shead { display: flex; align-items: flex-start; gap: var(--sp-3); }
+  .stitle { min-width: 0; flex: 1; }
+  .sname { display: block; font-weight: 700; color: var(--c-text-strong); font-size: 15px; }
+  .sname a { color: inherit; text-decoration: none; }
+  .sname a:hover { text-decoration: underline; }
+  .ult-tag {
+    margin-left: var(--sp-2); padding: 1px 5px; border-radius: 3px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.04em; vertical-align: 1px;
+    color: var(--c-spirit); background: var(--c-spirit-bg); border: 1px solid var(--c-spirit);
+  }
+  .smeta {
+    list-style: none; padding: 0; margin: var(--sp-2) 0 0;
+    display: flex; flex-wrap: wrap; gap: 5px;
+  }
+  .smeta li {
+    display: flex; gap: 4px; align-items: baseline;
+    background: var(--c-surface-2); border: 1px solid var(--c-border);
+    border-radius: var(--radius); padding: 1px 7px; font-size: 11px;
+  }
+  .smeta .mk { color: var(--c-text-muted); }
+  .smeta .mv { font-family: var(--font-mono); color: var(--c-text-strong); }
+
+  .sdesc { font-size: 13px; color: var(--c-text-muted); line-height: 1.7; margin: var(--sp-3) 0 0; }
+
+  .srows { list-style: none; padding: 0; margin: var(--sp-3) 0 0; }
+  .srows li {
+    display: flex; justify-content: space-between; align-items: baseline; gap: var(--sp-3);
+    padding: 4px 0; font-size: 13px; border-bottom: 1px solid var(--c-border);
+  }
+  .srows .l { display: inline-flex; align-items: center; gap: 5px; color: var(--c-text-muted); }
+  .srows .v { font-family: var(--font-mono); color: var(--c-text-strong); white-space: nowrap; }
+  .srows li.dmg .v { color: var(--c-spirit); }
+  .spirit-badge {
+    display: inline-flex; align-items: center; gap: 2px;
+    margin-left: 5px; font-size: 10px; font-family: var(--font-sans);
+    color: var(--c-spirit); border: 1px solid var(--c-spirit); border-radius: 3px; padding: 0 3px;
+  }
+
+  .supg { list-style: none; padding: 0; margin: var(--sp-3) 0 0; display: grid; gap: 4px; }
+  .supg > li {
+    display: flex; gap: var(--sp-3); align-items: baseline;
+    font-size: 12px; padding: 3px 0;
+  }
+  .supg .ap {
+    display: inline-flex; align-items: center; justify-content: center; gap: 2px;
+    flex: 0 0 auto; font-family: var(--font-mono); font-size: 12px;
+    color: var(--c-accent); border: 1px solid var(--c-accent-dim); border-radius: var(--radius);
+    padding: 1px 6px; min-width: 34px; text-align: center;
+  }
+  .supg .ap small { font-size: 9px; opacity: 0.8; }
+  .skill.ult .supg .ap { color: var(--c-spirit); border-color: var(--c-spirit); }
+  .urows { display: flex; flex-wrap: wrap; gap: var(--sp-3); color: var(--c-text-muted); }
+  .urows .u { display: inline-flex; align-items: center; gap: 4px; }
+  .urows .u b { font-family: var(--font-mono); color: var(--c-text-strong); }
+  .udesc { color: var(--c-text); line-height: 1.5; }
+
+  .snotes {
+    margin-top: var(--sp-3); padding-top: var(--sp-3); border-top: 1px dashed var(--c-border);
+  }
+  .snotes .nt {
+    font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-text-muted);
+  }
+  .snotes ul { margin: var(--sp-1) 0 0; padding-left: 1.2em; font-size: 12px; color: var(--c-text-muted); line-height: 1.7; }
+</style>

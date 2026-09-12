@@ -1,0 +1,158 @@
+---
+/**
+ * スキル単体の詳細ページ。実IDをそのままパスに使う(ルール5)。
+ * 対象は Signature / Ultimate のみ(全ヒーロー共通の移動アビリティ等は対象外)。
+ * 変身でスキルが入れ替わるヒーロー(シルバー)は、両方の形態ぶんのスキルを対象にする。
+ */
+import Base from "../../layouts/Base.astro";
+import SkillCard from "../../components/SkillCard.astro";
+import AdjustmentIcon from "../../components/AdjustmentIcon.astro";
+import { releasedHeroes, t, ability, heroNotes, upstreamRepo } from "../../lib/data.ts";
+import { skillCard } from "../../lib/skillcard.ts";
+import { abilityHistory } from "../../lib/abilityHistory.ts";
+import type { Hero } from "../../types/hero.ts";
+
+interface Owner {
+  hero: Hero;
+  slot: string;
+  /** シルバーの人狼形態のように、既定ではなく変身後のスロットで持つスキルか */
+  isAlternate: boolean;
+}
+
+export function getStaticPaths() {
+  // 実装済み全ヒーローの Signature/Ultimate スキルと、その持ち主を集める。
+  // (buildOwnerMap を外に切り出すと、Astro の getStaticPaths 抽出時のバンドルで
+  //  シンボルが欠落する問題があったため、この関数の中にそのまま置く)
+  const owners = new Map<string, Owner>();
+  for (const hero of releasedHeroes()) {
+    for (const a of hero.abilities) {
+      if (!a.slot.startsWith("Signature")) continue;
+      if (!owners.has(a.abilityKey)) owners.set(a.abilityKey, { hero, slot: a.slot, isAlternate: false });
+    }
+    // 変身で入れ替わるスキル(今のところシルバーのみ。architecture.html参照)
+    const transformAbility = hero.abilities
+      .map((a) => ability(a.abilityKey))
+      .find((ab): ab is NonNullable<typeof ab> => !!ab?.alternateFormAbilities);
+    if (transformAbility) {
+      for (const [slot, key] of Object.entries(transformAbility.alternateFormAbilities!)) {
+        if (!slot.startsWith("Signature")) continue;
+        if (!owners.has(key)) owners.set(key, { hero, slot, isAlternate: true });
+      }
+    }
+  }
+  return [...owners.entries()].map(([abilityKey, owner]) => ({
+    params: { id: abilityKey },
+    props: { abilityKey, owner },
+  }));
+}
+
+const { abilityKey, owner } = Astro.props as { abilityKey: string; owner: Owner };
+const ab = ability(abilityKey)!;
+const hero = owner.hero;
+const heroName = t(hero.nameToken, hero.key);
+const name = t(abilityKey, abilityKey);
+const card = skillCard(ab, heroName);
+const notes = heroNotes(abilityKey);
+const history = abilityHistory(abilityKey);
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+const KIND_LABEL = { buff: "強化", nerf: "弱体", rework: "リワーク" } as const;
+const propLabel = (name: string) => t(`${ability(abilityKey)?.properties[name]?.labelOverride ?? name}_label`, name);
+const fmtNum = (n: number) => (Number.isInteger(n) ? String(n) : String(Math.round(n * 1000) / 1000));
+
+const metaDesc =
+  `Deadlock（デッドロック）のスキル「${name}」（${heroName}）の効果・数値・` +
+  `アップグレード・更新履歴を日本語で。`;
+---
+
+<Base
+  title={`${name} - ${heroName}`}
+  description={metaDesc}
+  ogType="article"
+  breadcrumbs={[
+    { name: "ヒーロー", path: "/heroes/" },
+    { name: heroName, path: `/heroes/${hero.id}/` },
+    { name, path: `/abilities/${abilityKey}/` },
+  ]}
+>
+  <a class="back" href={`${base}/heroes/${hero.id}/`}>← {heroName}</a>
+
+  {owner.isAlternate && <p class="formnote">人狼形態(シルバー)のスキルです</p>}
+
+  <SkillCard abilityKey={abilityKey} ab={ab} card={card} notes={notes} heroName={heroName} />
+
+  <h2>更新履歴</h2>
+  {history.length === 0 ? (
+    <p class="nohist">変更履歴なし</p>
+  ) : (
+    <ol class="hist">
+      {history.map((h) => (
+        <li>
+          <div class="histhead">
+            <span class="ver">{h.from} → {h.to}</span>
+            <span class:list={["k", h.kind]}>
+              <AdjustmentIcon kind={h.kind} />
+              {KIND_LABEL[h.kind]}
+            </span>
+          </div>
+          <ul class="changes">
+            {h.changes.map((c) => (
+              <li>
+                <AdjustmentIcon kind={c.good ? "buff" : "nerf"} />
+                <span class="cl">
+                  {c.fromUpgrade && <span class="tag">強化枠</span>}
+                  {propLabel(c.property)}
+                </span>
+                <span class="cv">{fmtNum(c.before)} → {fmtNum(c.after)}</span>
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ol>
+  )}
+  <p class="histnote">
+    データはこのサイトが抽出したスナップショット間の機械的な差分（
+    <a href={`${base}/about/`}>詳細</a>）。サーバー側だけの調整はここに出ないことがあります。
+  </p>
+
+  <style>
+    .back { font-size: 13px; }
+    .formnote {
+      margin: var(--sp-2) 0 0; font-size: 12px; color: var(--c-text-muted);
+      border-left: 3px solid var(--c-spirit); padding-left: var(--sp-2);
+    }
+    h2 { margin-top: var(--sp-5); margin-bottom: var(--sp-2); }
+    .nohist { font-size: 13px; color: var(--c-text-faint); }
+
+    .hist { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--sp-3); }
+    .hist > li {
+      border: 1px solid var(--c-border); border-radius: var(--radius);
+      padding: var(--sp-3); background: var(--c-surface);
+    }
+    .histhead { display: flex; align-items: center; gap: var(--sp-3); }
+    .ver { font-family: var(--font-mono); font-size: 13px; color: var(--c-text-strong); }
+    .k {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
+      padding: 1px 7px; border-radius: 3px; border: 1px solid currentColor;
+    }
+    .k.buff { color: var(--c-vitality); }
+    .k.nerf { color: var(--c-weapon); }
+    .k.rework { color: var(--c-spirit); }
+
+    .changes { list-style: none; padding: 0; margin: var(--sp-2) 0 0; display: grid; gap: 3px; }
+    .changes li {
+      display: flex; align-items: center; gap: 6px; font-size: 13px;
+      padding: 3px 0; border-top: 1px solid var(--c-border);
+    }
+    .cl { flex: 1; color: var(--c-text-muted); }
+    .cl .tag {
+      font-size: 10px; color: var(--c-accent); border: 1px solid var(--c-accent-dim);
+      border-radius: 3px; padding: 0 4px; margin-right: 5px;
+    }
+    .cv { font-family: var(--font-mono); color: var(--c-text-strong); white-space: nowrap; }
+
+    .histnote { margin-top: var(--sp-3); font-size: 11px; color: var(--c-text-faint); }
+  </style>
+</Base>

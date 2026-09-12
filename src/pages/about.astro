@@ -60,10 +60,7 @@ const repo = "https://github.com/deadlock-jp/deadlock-jp.github.io";
   <ul class="src">
     <li>
       <span class="k">ヒーロー・アイテム・スキルの数値</span>
-      <span class="v">
-        <a href={upstreamRepo} rel="noopener">GameTracking-Deadlock</a>
-        の <code>.vdata</code>
-      </span>
+      <span class="v">ゲーム本体クライアントの <code>.vdata</code>（直接 decompile）</span>
     </li>
     <li>
       <span class="k">日本語の表示テキスト</span>
@@ -74,13 +71,20 @@ const repo = "https://github.com/deadlock-jp/deadlock-jp.github.io";
       <span class="v">ゲーム本体の VPK から抽出</span>
     </li>
   </ul>
+  <p class="note">
+    検算・過去バージョンの補完には
+    <a href={upstreamRepo} rel="noopener">GameTracking-Deadlock</a>
+    も使っています。
+  </p>
 
   <h2>更新のしかた</h2>
   <p>
-    <a href={upstreamRepo} rel="noopener">GameTracking-Deadlock</a>
-    に新しいコミットが入ると、変更のあったファイルだけを再パースして
-    <code>data/*.json</code> を差分更新します。更新前後の JSON を比べて出した数値の差分は、
-    トップページの <a href={`${base}/`}>更新履歴</a> に簡易一覧で載せています。
+    ゲームにアップデートが入ると、抽出用PCが自動でバージョンの変化を検知し、
+    再抽出・再パースしたうえで数値を突き合わせ、変更があった分だけ
+    <code>data/snapshots/&lt;バージョン&gt;/</code> として保存・公開します。
+    パッチ間の数値差分（機械的な生の差分）は各スキルの詳細ページの「更新履歴」に、
+    強化/弱体/リワークを分類した簡易な一覧はトップページの
+    <a href={`${base}/`}>更新履歴</a> に載せています。
   </p>
 
   <h2>現在のデータ</h2>
@@ -90,7 +94,7 @@ const repo = "https://github.com/deadlock-jp/deadlock-jp.github.io";
     <li><span class="k">スキル</span><span class="v">{abilityCount} 件</span></li>
     <li><span class="k">日本語テキスト</span><span class="v">{textCount.toLocaleString("en-US")} トークン</span></li>
     <li><span class="k">画像</span><span class="v">{imageCount} 枚</span></li>
-    <li><span class="k">抽出元コミット</span><span class="v"><code>{commit.slice(0, 12)}</code></span></li>
+    <li><span class="k">ClientVersion</span><span class="v"><code>{commit}</code></span></li>
     <li><span class="k">生成日</span><span class="v">{generated}</span></li>
   </ul>
 
