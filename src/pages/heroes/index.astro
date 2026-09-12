@@ -5,9 +5,11 @@ import Base from "../../layouts/Base.astro";
 import AbilityIcon from "../../components/AbilityIcon.astro";
 import HeroPortrait from "../../components/HeroPortrait.astro";
 import HeroHoverCard from "../../components/HeroHoverCard.astro";
-import { releasedHeroes, t, ability, heroTags } from "../../lib/data.ts";
+import AbilityHoverCard, { type AbilityHoverDetail } from "../../components/AbilityHoverCard.astro";
+import { releasedHeroes, t, ability, heroTags, describe, heroNotes } from "../../lib/data.ts";
 import { resolveImagePath } from "../../parsers/image-manifest.ts";
-import { heroRanks, pickRows, heroTierTable } from "../../lib/herorank.ts";
+import { heroRanks, pickRows, topRankRows, heroTierTable } from "../../lib/herorank.ts";
+import { skillCard } from "../../lib/skillcard.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const ranks = heroRanks();
@@ -39,31 +41,60 @@ for (const h of releasedHeroes()) {
   };
 }
 
-// 下部の一覧(従来のカード)
+// 下部の一覧(従来のカード)。統計は固定のHP/速度ではなく、このヒーローが
+// 実際に上位に入っている項目を2つ選ぶ(heroRanksの百分位順)
 const heroes = releasedHeroes().map((h) => ({
   hero: h,
   name: t(h.nameToken, h.key),
   role: t(h.roleToken, ""),
+  topStats: topRankRows(ranks[h.id], 2),
   skills: h.abilities
     .filter((a) => a.slot.startsWith("Signature"))
     .sort((a, b) => a.slot.localeCompare(b.slot))
     .map((a) => ({ key: a.abilityKey, ab: ability(a.abilityKey) })),
 }));
 const cx = (n: number) => Math.max(0, Math.min(3, n));
+
+/**
+ * 一覧カードのスキルアイコンにホバーで出す詳細カードのデータ。
+ * 中身はヒーロー詳細ページの SkillCard.astro(スキルカードUI改善)と同じ
+ * skillCard()/describe() の結果を使う。
+ */
+const abilityDetails: Record<string, AbilityHoverDetail> = {};
+for (const h of releasedHeroes()) {
+  const heroName = t(h.nameToken, h.key);
+  for (const a of h.abilities) {
+    if (!a.slot.startsWith("Signature") || abilityDetails[a.abilityKey]) continue;
+    const ab = ability(a.abilityKey);
+    if (!ab) continue;
+    const card = skillCard(ab, heroName);
+    abilityDetails[a.abilityKey] = {
+      name: t(a.abilityKey, a.abilityKey),
+      isUlt: ab.kind === "Ultimate",
+      isPassive: ab.kind !== "Ultimate" && ab.activation === "PASSIVE",
+      meta: card.meta,
+      desc: describe(`${a.abilityKey}_desc`, ab.properties, "（説明なし）", { hero_name: heroName }),
+      tiles: card.tiles,
+      secondaryRows: card.secondaryRows,
+      upgrades: card.upgrades,
+      notes: heroNotes(a.abilityKey),
+    };
+  }
+}
 ---
 
 <Base
   title="ヒーロー一覧"
-  description="Deadlock（デッドロック）の実装済みヒーロー全員の基礎ステータス（最大HP・移動速度・スタミナ）とスキル、項目別ティア表を日本語で。レベル1・アイテムなしの素の数値。"
+  description="Deadlock（デッドロック）の実装済みヒーロー全員の基礎ステータス（最大HP・移動速度・スタミナ）とスキル、項目別ステータスランクを日本語で。レベル1・アイテムなしの素の数値。"
 >
   <h1>ヒーロー</h1>
 
-  {/* ------------ 上部: 項目別ティア表 ------------ */}
+  {/* ------------ 上部: 項目別ステータスランク ------------ */}
   <section class="tt">
     <div class="tt-head">
-      <h2>ティア表</h2>
-      <label>
-        項目
+      <h2>ステータスランク</h2>
+      <label class="metricpick">
+        <span class="mplabel">項目</span>
         <select id="metric">
           {
             [...new Set(tier.metrics.map((m) => m.group))].map((g) => (
@@ -87,7 +118,7 @@ const cx = (n: number) => Math.max(0, Math.min(3, n));
 
   <ul class="grid">
     {
-      heroes.map(({ hero: h, name, role, skills }) => (
+      heroes.map(({ hero: h, name, role, skills, topStats }) => (
         <li>
           <a href={`${base}/heroes/${h.id}/`} data-herocard={h.id}>
             <span class="head">
@@ -99,17 +130,20 @@ const cx = (n: number) => Math.max(0, Math.min(3, n));
             </span>
             <span class="skills">
               {skills.map((s) => (
-                <AbilityIcon
-                  name={t(s.key, s.key)}
-                  image={s.ab?.image ?? null}
-                  size={30}
-                  cssVar={s.ab?.kind === "Ultimate" ? "spirit" : "accent"}
-                />
+                <span class="skillicon" data-abilitycard={s.key}>
+                  <AbilityIcon
+                    name={t(s.key, s.key)}
+                    image={s.ab?.image ?? null}
+                    size={30}
+                    cssVar={s.ab?.kind === "Ultimate" ? "spirit" : "accent"}
+                  />
+                </span>
               ))}
             </span>
             <span class="stats">
-              <span><b>{h.startingStats.EMaxHealth}</b> HP</span>
-              <span><b>{h.startingStats.EMaxMoveSpeed}</b> 速度</span>
+              {topStats.map((r) => (
+                <span class="top"><b>{r.value}</b> {r.label}</span>
+              ))}
               <span class="cx">複雑さ {"●".repeat(cx(h.complexity))}<span class="dim">{"●".repeat(3 - cx(h.complexity))}</span></span>
             </span>
           </a>
@@ -118,8 +152,20 @@ const cx = (n: number) => Math.max(0, Math.min(3, n));
     }
   </ul>
 
-  {/* ホバー詳細カード(トップページと共通コンポーネント) */}
+  {/* アイコンの供給元(ホバーカードのヘッダー用)。表示はせず、クローン元としてだけ使う */}
+  <div class="hcicon-src-wrap" aria-hidden="true">
+    {
+      Object.entries(abilityDetails).map(([key, d]) => (
+        <span class="hcicon-src" data-ability={key}>
+          <AbilityIcon name={d.name} image={ability(key)?.image ?? null} size={44} cssVar={d.isUlt ? "spirit" : "accent"} />
+        </span>
+      ))
+    }
+  </div>
+
+  {/* ホバー詳細カード(トップページと共通コンポーネント + スキルアイコン用) */}
   <HeroHoverCard heroDetail={heroDetail} />
+  <AbilityHoverCard details={abilityDetails} />
 
   <script is:inline define:vars={{ heroMeta, tierData: tier.data, base }}>
     (() => {
@@ -183,12 +229,20 @@ const cx = (n: number) => Math.max(0, Math.min(3, n));
       margin-bottom: var(--sp-3);
     }
     .tt-head h2 { margin: 0; border: none; padding: 0; }
-    .tt-head label { font-size: 13px; color: var(--c-text-muted); display: flex; align-items: center; gap: var(--sp-2); }
-    .tt-head select {
-      background: var(--c-surface-2); color: var(--c-text);
-      border: 1px solid var(--c-border-strong); border-radius: var(--radius);
-      padding: 5px 8px; font: inherit; font-size: 13px;
+    /* 項目セレクトを強調(このカードが何のランキングを出しているかの主役なので目立たせる) */
+    .metricpick {
+      display: flex; align-items: center; gap: var(--sp-2);
+      background: var(--c-accent-bg); border: 1px solid var(--c-accent-dim);
+      border-radius: var(--radius); padding: 5px 6px 5px 12px;
     }
+    .mplabel { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; color: var(--c-accent); }
+    .tt-head select {
+      background: var(--c-surface); color: var(--c-text-strong);
+      border: 1px solid var(--c-accent-dim); border-radius: var(--radius);
+      padding: 6px 10px; font: inherit; font-size: 14px; font-weight: 600;
+      cursor: pointer;
+    }
+    .tt-head select:hover { border-color: var(--c-accent); }
     .tt-body { display: grid; gap: 4px; }
     /* tt-body の中身は JS で innerHTML 挿入するので、以下はすべて :global で当てる */
     .tt-body :global(.tt-row) {
@@ -266,8 +320,12 @@ const cx = (n: number) => Math.max(0, Math.min(3, n));
       border-top: 1px solid var(--c-border); padding-top: var(--sp-2);
     }
     .stats b { font-family: var(--font-mono); font-weight: 500; color: var(--c-text); }
+    /* 得意項目(topStats)の値だけ少し目立たせる。複雑さと区別するため */
+    .stats .top b { color: var(--c-accent); font-weight: 700; }
     .cx { color: var(--c-accent); letter-spacing: 1px; }
     .cx .dim { color: var(--c-text-faint); }
     .skills { display: flex; gap: 4px; margin-bottom: var(--sp-3); }
+    .skillicon { display: block; line-height: 0; }
+    .hcicon-src-wrap { display: none; }
   </style>
 </Base>

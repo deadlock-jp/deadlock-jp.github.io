@@ -76,16 +76,32 @@ function humanize(name: string): string {
 }
 
 /**
- * value の末尾に postfix の単位が既に含まれているか。
- * postfix には " m" のように前に半角スペースを持つものがあり(素の数値の後に
- * 付けたときに読みやすくするため)、rawValue側は "4m" のようにスペース無しで
- * 単位を持つことがあるため、単純な endsWith だけでは二重付与を見逃す。
- * 前後の空白を落として比べることで両方のケースを拾う。
+ * value(数値文字列。例: "8m")の末尾から、数字の直後に続く非数字部分だけを
+ * 単位として取り出す。無ければ空文字("125"のような単位無しの値、
+ * または数値として読めない値)。
  */
-export function endsWithUnit(value: string, postfix: string): boolean {
-  if (!postfix) return false;
-  const trimmed = postfix.trim();
-  return value.endsWith(postfix) || (trimmed !== "" && value.endsWith(trimmed));
+function trailingUnit(value: string): string {
+  return value.match(/^-?\d+(?:\.\d+)?([^\d]*)$/)?.[1] ?? "";
+}
+
+/**
+ * postfix(例: " m", " m／秒")のうち、value(例: "4m", "8m")が既に埋め込んでいる
+ * 単位の部分を取り除いた残りを返す(足す必要がある分だけになる)。
+ *
+ * postfix には素の数値の後に付けたときに読みやすいよう前に半角スペースを
+ * 持つものがあり(" m")、rawValue 側はスペース無しで単位を持つ("4m")ため、
+ * 単純な endsWith だけでは二重付与("4 m"/"4mm")を見逃す。
+ * また "m／秒" のような複合単位で、value 側が先頭の "m" 部分だけを
+ * 既に含んでいることもある("8m" + " m／秒" → "8m m／秒" になってしまう)。
+ * value 側の単位が postfix のどこかに現れていれば、そこまでを重複として
+ * postfix から取り除く。
+ */
+export function dedupedTail(value: string, postfix: string): string {
+  if (!postfix) return postfix;
+  const unit = trailingUnit(value);
+  if (!unit) return postfix;
+  const idx = postfix.indexOf(unit);
+  return idx === -1 ? postfix : postfix.slice(idx + unit.length);
 }
 
 /**
@@ -155,10 +171,11 @@ export function describe(
    *   単位付きの文字列として持っている)。
    * どちらも値はそのまま使い、テンプレ側の重複した単位表記だけを読み飛ばす。
    * 単位はまず正式な_postfixトークンから、無ければ値自身の末尾(数値の後ろに
-   * 続く非数字部分)から拾う。新しい単位を推測して足すことはしない、あくまで
-   * テンプレ側の重複を消すだけ。
+   * 続く非数字部分)から拾う。"m／秒"のような複合単位で値側が先頭の"m"だけ
+   * 持っている場合もあるため、postfixの中でvalの単位と重なる位置を探し、
+   * その重なりぶんだけをテンプレ側から読み飛ばす(dedupedTailの逆: こちらは
+   * テンプレ側を削る)。新しい単位を推測して足すことはしない。
    */
-  const trailingUnit = (v: string): string => v.match(/^-?\d+(?:\.\d+)?([^\d]*)$/)?.[1] ?? "";
   let withProps = "";
   let cursor = 0;
   for (const m of raw.matchAll(/\{s:([A-Za-z0-9_]+)\}/g)) {
@@ -174,11 +191,16 @@ export function describe(
     const valUnit = trailingUnit(val);
     if (valUnit) {
       const postfix = t(`${prop}_postfix`, "");
-      const candidates = [...new Set([postfix, postfix.trim(), valUnit])]
-        .filter((u) => u && u.trim() === valUnit)
-        .sort((a, b) => b.length - a.length);
-      const match = candidates.find((u) => raw.startsWith(u, cursor));
-      if (match) cursor += match.length;
+      const candidates = [...new Set([postfix, postfix.trim(), valUnit])].filter(Boolean);
+      for (const cand of candidates) {
+        const idx = cand.indexOf(valUnit);
+        if (idx === -1) continue;
+        const span = cand.slice(0, idx + valUnit.length);
+        if (raw.startsWith(span, cursor)) {
+          cursor += span.length;
+          break;
+        }
+      }
     }
     withProps += val;
   }
@@ -299,14 +321,18 @@ export function formatProperty(
   // m_strLocTokenOverride があれば、ラベル系トークンはそちらの名前で引く
   // (例: ability_doorman_bomb の "ProjectileFuse" は "BellLifetime_label" しか無い)
   const lookupName = prop.labelOverride ?? name;
-  const label = t(`${lookupName}_label`, humanize(name)) + t(`${lookupName}_conditional`, "");
+  const baseLabel = t(`${lookupName}_label`, humanize(name));
+  const cond = t(`${lookupName}_conditional`, "");
+  // ラベルに既に条件が含まれていることがある(例: "対NPC武器ダメージ" + "対NPC" →
+  // 素直に足すと "対NPC武器ダメージ対NPC" になる)。buildModifierLabels() と同じ回避
+  const label = cond && !baseLabel.includes(cond) ? baseLabel + cond : baseLabel;
   const prefix = t(`${lookupName}_prefix`, "");
   const postfix = t(`${lookupName}_postfix`, "");
 
   // rawValue は "15m" のように単位付きのことがある。
-  // その場合 postfix("m")を足すと "15mm" になるので、既に付いていれば足さない。
+  // その場合 postfix("m")を足すと "15mm" になるので、重複ぶんは足さない。
   let body = prop.rawValue;
-  const tail = endsWithUnit(body, postfix) ? "" : postfix;
+  const tail = dedupedTail(body, postfix);
 
   // "{s:sign}" は値の符号。負なら記号側に出し、数値からは "-" を落とす
   let head = prefix;

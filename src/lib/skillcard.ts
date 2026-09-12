@@ -8,7 +8,7 @@
 
 import type { Ability } from "../types/ability.ts";
 import type { AbilityProperty } from "../types/property.ts";
-import { t, formatProperty, describe, endsWithUnit } from "./data.ts";
+import { t, formatProperty, describe, dedupedTail } from "./data.ts";
 
 export interface CardRow {
   label: string;
@@ -86,6 +86,30 @@ export type StatIconKind =
   | "slow"
   | "spirit"
   | "ap";
+/**
+ * StatIcon.astro が描くSVGの中身(pathなど、viewBox="0 0 16 16"前提)。
+ * ホバーカード(AbilityHoverCard.astro)はJSでHTML文字列を組み立てるため、
+ * Astroコンポーネントを直接は使えずここから同じものを引く(見た目のズレを防ぐ)。
+ */
+export const STAT_ICON_PATHS: Record<StatIconKind, string> = {
+  damage: '<path d="M8 1.2 9.6 5.6 14 8l-4.4 2.4L8 14.8l-1.6-4.4L2 8l4.4-2.4L8 1.2Z"/>',
+  heal: '<path d="M8 13.2S3 10 3 6.6A2.6 2.6 0 0 1 8 5a2.6 2.6 0 0 1 5 1.6c0 3.4-5 6.6-5 6.6Z" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/>',
+  duration:
+    '<path d="M4.2 1.6h7.6M4.2 14.4h7.6M5 1.6c0 2.9.9 3.9 3 5.4-2.1 1.5-3 2.5-3 5.4M11 1.6c0 2.9-.9 3.9-3 5.4 2.1 1.5 3 2.5 3 5.4" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>',
+  cooldown:
+    '<circle cx="8" cy="8" r="6.2" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M8 4.6V8.2l2.6 1.5" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>',
+  range:
+    '<circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.1"/><circle cx="8" cy="8" r="1.4" fill="currentColor"/><path d="M8 0.8v2.4M8 12.8v2.4M0.8 8h2.4M12.8 8h2.4" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>',
+  cast: '<path d="M13.4 8A5.4 5.4 0 1 1 8 2.6" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M7.6 0.6 10.4 2.6 7.6 4.6Z"/>',
+  speed:
+    '<path d="M1.6 4.8 5.4 8l-3.8 3.2M7.6 4.8 11.4 8l-3.8 3.2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>',
+  resist:
+    '<path d="M8 1.2 13 3v3.8c0 3.9-2.2 6.6-5 7.6-2.8-1-5-3.7-5-7.6V3Z" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/>',
+  slow: '<path d="M14.4 6 10.6 8l3.8 2M8.4 6l3.8 2-3.8 2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>',
+  spirit: '<path d="M8 1.4 9.7 5.5l4.4.4-3.3 3 1 4.3L8 11l-3.8 2.2 1-4.3-3.3-3 4.4-.4L8 1.4Z"/>',
+  ap: '<path d="M8.6 1 3.6 9h3.1l-1 6L12.4 7H9.3l1-6Z"/>',
+};
+
 const ICON_BY_CSS_CLASS: Record<string, StatIconKind> = {
   tech_damage: "damage",
   bullet_damage: "damage",
@@ -192,7 +216,7 @@ export function skillCard(ab: Ability, heroName = ""): SkillCard {
         const b = String(u.bonus);
         const sign = b.startsWith("-") ? "" : "+";
         // bonus が "10m" のように単位付きのことがある。postfix を足して "10mm"/"10m m" にしない
-        const tail = endsWithUnit(b, post) ? "" : post;
+        const tail = dedupedTail(b, post);
         return {
           label: t(`${lookupName}_label`, u.property),
           value: `${sign}${b}${tail}`,

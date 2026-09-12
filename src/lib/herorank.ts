@@ -241,6 +241,16 @@ export function pickRows(rows: RankRow[], keys: string[]): RankRow[] {
   return keys.map((k) => rows.find((r) => r.key === k)).filter((r): r is RankRow => Boolean(r));
 }
 
+/**
+ * このヒーローが全項目中でもっとも高い百分位(pct)を持つ上位n件。
+ * ヒーロー一覧カードで「このヒーローが得意な項目」を機械的に選ぶのに使う
+ * (武器・生命力・スピリット・成長度のどれが得意かはヒーローごとに違うため、
+ * 決め打ちの項目を出すのではなく実際のランキングから選ぶ)。
+ */
+export function topRankRows(r: HeroRank, n = 2): RankRow[] {
+  return [...r.weapon, ...r.vitality, ...r.spirit, ...r.growth].sort((a, b) => b.pct - a.pct).slice(0, n);
+}
+
 // --- レーダーチャート ---------------------------------------------------------
 
 export interface RadarAxis {
