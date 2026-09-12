@@ -2,14 +2,21 @@
 /**
  * ビルドのバージョン間比較。/build/ で組んだビルド(ヒーロー+アイテム)を、
  * 2つのスナップショットバージョン(OLDER/NEWEST)それぞれの数値で評価し、
- * 武器・生命力・スピリットのステータスを並べて見せる。
+ * 武器・生命力・スピリットのステータスを左右ペアで並べて見せる。
+ * 見た目は /build/ の各カテゴリーボックス(.box/.bhead/.bhl/.brows)をそのまま踏襲する。
  *
  * データは data/snapshots/ にある全バージョンぶんをこのページに埋め込み、
  * OLDER/NEWEST の選択はクライアント側で完結させる(ページ遷移なしで切り替え可能)。
  * 数値の計算式(maxHealth/weaponDamage/spiritPower)は /build/ の
  * src/pages/build/index.astro と同じもの。どちらかを直したらもう片方も直すこと。
+ *
+ * 重要: このページの動的な内容は全部 JS の innerHTML で組み立てる(OLDER/NEWEST を
+ * 切り替えるたび作り直すため)。Astro の scoped CSS は innerHTML で挿し込んだ要素には
+ * 効かないので、対象セレクタは :global() を使うこと(CLAUDE.md 既知の落とし穴 参照)。
  */
 import Base from "../../layouts/Base.astro";
+import ItemIcon from "../../components/ItemIcon.astro";
+import HeroPortrait from "../../components/HeroPortrait.astro";
 import { t, modifierLabel, SLOT_META, releasedHeroes } from "../../lib/data.ts";
 import { weaponRows, weaponHeadline, weaponName, vitalityRows, spiritRows } from "../../lib/gamestats.ts";
 import { listSnapshotVersions, loadVersionedSnapshot } from "../../lib/versionedData.ts";
@@ -81,10 +88,36 @@ function buildVersionPayload(version: string) {
 const versionPayloads = Object.fromEntries(versions.map((v) => [v, buildVersionPayload(v)]));
 
 // ヒーロー名・アイテム名はラベルなので、どのバージョンで見ても最新版の表記でよい
-const heroNames = Object.fromEntries(releasedHeroes().map((h) => [h.id, t(h.nameToken, h.key)]));
+const heroes = releasedHeroes();
+const heroNames = Object.fromEntries(heroes.map((h) => [h.id, t(h.nameToken, h.key)]));
 const allItemIds = new Set<string>();
 for (const v of versions) for (const id of Object.keys(versionPayloads[v].items)) allItemIds.add(id);
 const itemNames = Object.fromEntries([...allItemIds].map((id) => [id, t(id, id)]));
+
+/*
+ * アイコン表示用の見た目情報(tier/slotType/shopIcon等)は数値ではなく、
+ * バージョン間でまず変わらない。新しい順に見て最初に見つかったバージョンの値を使う。
+ */
+const itemIconMeta: Record<
+  string,
+  { tier: number; slotType: string | null; shopIcon: string | null; activation: string; isImbue: boolean }
+> = {};
+for (const v of versions) {
+  const snap = loadVersionedSnapshot(v);
+  for (const id of allItemIds) {
+    if (itemIconMeta[id]) continue;
+    const it = snap.itemsFile.items[id];
+    if (it) {
+      itemIconMeta[id] = {
+        tier: it.tier,
+        slotType: it.slotType,
+        shopIcon: it.shopIcon,
+        activation: it.activation,
+        isImbue: it.isImbue,
+      };
+    }
+  }
+}
 
 // 合計ステータスの内訳ラベル(MODIFIER_VALUE_* → 日本語)。全バージョンの型を集める
 const allModTypes = new Set<string>();
@@ -111,11 +144,16 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
   </p>
 
   <div id="app" hidden>
-    <div class="ctx" id="ctx"></div>
+    <div class="topbar">
+      <div class="herow" id="herow"></div>
+      <div class="cells" id="cells"></div>
+    </div>
 
     <div class="verpick">
       <label>OLDER <select id="older"></select></label>
+      <span class="verinfo" id="olderinfo"></span>
       <label>NEWEST <select id="newer"></select></label>
+      <span class="verinfo" id="newerinfo"></span>
     </div>
 
     <p class="missingnote" id="missingnote" hidden>
@@ -129,6 +167,36 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
       表示しているのはクライアント側のデータです。サーバー側だけで調整された変更は、
       ここには反映されないことがあります。
     </p>
+  </div>
+
+  {/* アイコンの供給元。表示はせず、クローン元としてだけ使う(build/index.astro と同じ手法) */}
+  <div class="iconsrc" aria-hidden="true">
+    {
+      heroes.map((h) => (
+        <span class="heroicon-src" data-hero={h.id}>
+          <HeroPortrait name={heroNames[h.id]} image={h.images.iconSmall} size={40} />
+        </span>
+      ))
+    }
+    {
+      [...allItemIds].map((id) => {
+        const m = itemIconMeta[id];
+        if (!m) return null;
+        return (
+          <span class="itemicon-src" data-item={id}>
+            <ItemIcon
+              name={itemNames[id]}
+              slotType={m.slotType as any}
+              tier={m.tier}
+              shopIcon={m.shopIcon}
+              activation={m.activation}
+              isImbue={m.isImbue}
+              size={40}
+            />
+          </span>
+        );
+      })
+    }
   </div>
 
   <script
@@ -147,12 +215,15 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
       const $ = (id) => document.getElementById(id);
       const esc = (s) =>
         String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
-      const fmt = (n) => Math.round(n * 100) / 100;
+      const round1 = (n) => Math.round(n * 10) / 10;
+      const fmtSouls = (n) => Math.round(n).toLocaleString("en-US");
 
-      // ---- URL(#h=<heroId>&i=<item,item,...>)は /build/ と同じ形式 ----
+      // ---- URL(#h=<heroId>&i=<item,item,...>)は /build/ と同じ形式(短縮ID) ----
+      const ID_PREFIX = "upgrade_";
+      const expand = (s) => (s.startsWith("!") ? s.slice(1) : ID_PREFIX + s);
       const p = new URLSearchParams(location.hash.replace(/^#/, ""));
       const heroId = p.get("h") ? Number(p.get("h")) : null;
-      const picked = (p.get("i") ?? "").split(",").filter(Boolean);
+      const picked = (p.get("i") ?? "").split(",").filter(Boolean).map(expand);
       $("backlink").href = $("backlink").href.split("#")[0] + (location.hash || "");
 
       if (heroId === null || !heroNames[heroId]) {
@@ -206,24 +277,24 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
         v += sumMods(payload, type);
         return v;
       }
-      function maxHealth(payload, h, cost, level) {
-        if (!h) return null;
+      function maxHealthFull(payload, h, cost, level) {
         const boon = boonCount(h, level) * h.calc.healthPerBoon;
         const pct =
           (costBonusStep(h, "Armor", cost.Armor)?.bonus ?? 0) +
           sumMods(payload, ["MODIFIER_VALUE_BASE_HEALTH_PERCENT", "MODIFIER_VALUE_HEALTH_MAX_PERCENT"]);
         const flat = sumMods(payload, "MODIFIER_VALUE_HEALTH_MAX");
-        return (h.calc.baseHealth + boon) * (1 + pct / 100) + flat;
+        const total = (h.calc.baseHealth + boon) * (1 + pct / 100) + flat;
+        return { total, base: h.calc.baseHealth, boon, pct, flat };
       }
-      function weaponDamage(payload, h, cost, level) {
-        if (!h || h.calc.bulletDamage === null) return { perBullet: null, dps: null };
+      function weaponDamageFull(payload, h, cost, level) {
+        if (h.calc.bulletDamage === null) return null;
         const boon = boonCount(h, level) * h.calc.bulletDamagePerBoon;
         const pct =
           (costBonusStep(h, "WeaponMod", cost.WeaponMod)?.bonus ?? 0) +
           sumMods(payload, "MODIFIER_VALUE_WEAPON_DAMAGE_INCREASE");
         const perBullet = (h.calc.bulletDamage + boon) * (1 + pct / 100);
         const dps = h.calc.cycleTime ? (perBullet / h.calc.cycleTime) * (h.calc.bulletsPerShot || 1) : null;
-        return { perBullet, dps };
+        return { perBullet, dps, pct, base: h.calc.bulletDamage, boon };
       }
       function statsTotal(payload, cost) {
         const total = new Map();
@@ -243,30 +314,61 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
         const cost = catCost(payload);
         const spent = cost.WeaponMod + cost.Armor + cost.Tech;
         const level = h ? levelForSouls(h, spent) : 1;
-        const mh = h ? maxHealth(payload, h, cost, level) : null;
-        const wd = h ? weaponDamage(payload, h, cost, level) : { perBullet: null, dps: null };
-        const sp = h ? spiritPower(payload, h, cost, level) : 0;
         const missing = picked.filter((id) => !payload.items[id]);
+
+        let dps = null;
+        let weaponNote = "";
+        let healthTotal = null;
+        let healthNote = "";
+        let spiritTotal = 0;
+        let spiritNote = "";
         const rows = { WeaponMod: [], Armor: [], Tech: [] };
+
         if (h) {
+          const wd = weaponDamageFull(payload, h, cost, level);
+          dps = wd && wd.dps !== null ? Math.round(wd.dps) : h.weaponHead ? Number(h.weaponHead.dps) : null;
+          if (h.weaponHead) {
+            const pctNote = wd && wd.pct ? ` / 武器 +${round1(wd.pct)}%` : "";
+            weaponNote = `${h.weaponName} / 減衰 ${h.weaponHead.falloffStart} → ${h.weaponHead.falloffEnd}${pctNote}`;
+          }
+
+          const mh = maxHealthFull(payload, h, cost, level);
+          healthTotal = mh.total;
+          const parts = [`基礎 ${Math.round(mh.base)}`];
+          if (mh.boon) parts.push(`Boon +${Math.round(mh.boon)}`);
+          if (mh.pct) parts.push(`×(1+${round1(mh.pct)}%)`);
+          if (mh.flat) parts.push(`平坦 +${Math.round(mh.flat)}`);
+          healthNote = parts.join(" ");
+
+          spiritTotal = spiritPower(payload, h, cost, level);
+          const fromLevel = boonCount(h, level) * h.calc.techPowerPerBoon;
+          const fromBonus = costBonusStep(h, "Tech", cost.Tech)?.bonus ?? 0;
+          const fromItems = spiritTotal - fromLevel - fromBonus;
+          spiritNote = `レベル ${round1(fromLevel)} + 購入ボーナス ${fromBonus} + アイテム ${round1(fromItems)}`;
+
           for (const slot of ["WeaponMod", "Armor", "Tech"]) {
             rows[slot] = h.rows[slot].map((r) => {
               let value = r.value;
-              if (slot === "Armor" && r.label === "最大HP") value = String(Math.round(mh));
-              if (slot === "WeaponMod" && r.label === "弾薬ダメージ" && wd.perBullet !== null)
-                value = String(Math.round(wd.perBullet * 10) / 10);
+              if (slot === "Armor" && r.label === "最大HP") value = String(Math.round(healthTotal));
+              if (slot === "WeaponMod" && r.label === "弾薬ダメージ" && wd && wd.perBullet !== null)
+                value = String(round1(wd.perBullet));
               return { label: r.label, value };
             });
           }
         }
+
         return {
           version,
           hero: h,
           level,
+          spent,
           missing,
-          dps: wd.dps !== null ? Math.round(wd.dps) : (h?.weaponHead ? Number(h.weaponHead.dps) : null),
-          maxHealth: mh,
-          spiritPower: sp,
+          dps,
+          weaponNote,
+          healthTotal,
+          healthNote,
+          spiritTotal,
+          spiritNote,
           rows,
           totals: statsTotal(payload, cost),
         };
@@ -279,7 +381,7 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
         const n = typeof v === "number" ? v : Number.parseFloat(String(v));
         return Number.isNaN(n) ? null : n;
       }
-      function deltaMark(label, before, after) {
+      function deltaHtml(label, before, after) {
         const b = numOf(before);
         const a = numOf(after);
         if (b === null || a === null || b === a) return "";
@@ -289,71 +391,116 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
         const arrow = up ? "▲" : "▼";
         return `<span class="delta ${good ? "good" : "bad"}">${arrow}</span>`;
       }
-      const disp = (v) => (v === null || v === undefined ? "—" : typeof v === "number" ? fmt(v) : v);
-      function statLine(label, before, after) {
+      const disp = (v) => (v === null || v === undefined ? "—" : typeof v === "number" ? round1(v) : v);
+
+      function rowLinePlain(label, value) {
+        return `<li><span class="l">${esc(label)}</span><span class="v">${esc(disp(value))}</span></li>`;
+      }
+      function rowLine(label, before, after) {
         return (
           `<li><span class="l">${esc(label)}</span>` +
-          `<span class="vo">${esc(disp(before))}</span>` +
-          `<span class="vn">${deltaMark(label, before, after)}${esc(disp(after))}</span></li>`
+          `<span class="v">${deltaHtml(label, before, after)}${esc(disp(after))}</span></li>`
         );
       }
 
-      function renderCtx() {
-        const itemsHtml = picked.length
-          ? picked.map((id) => `<li>${esc(itemNames[id] ?? id)}</li>`).join("")
-          : '<li class="empty">アイテムなし</li>';
-        $("ctx").innerHTML =
-          `<div class="ctxhero"><b>${esc(heroNames[heroId])}</b></div>` +
-          `<ul class="ctxitems">${itemsHtml}</ul>`;
+      function boxHeadline(slot, r, prev) {
+        if (!r.hero) return "";
+        if (slot === "WeaponMod") {
+          const mark = prev ? deltaHtml("DPS", prev.dps, r.dps) : "";
+          return `<b>${mark}${esc(disp(r.dps))}</b> DPS<small>${esc(r.weaponNote)}</small>`;
+        }
+        if (slot === "Armor") {
+          const mark = prev ? deltaHtml("最大HP", prev.healthTotal, r.healthTotal) : "";
+          const val = r.healthTotal !== null ? Math.round(r.healthTotal) : null;
+          return `<b>${mark}${esc(disp(val))}</b> 最大HP<small>${esc(r.healthNote)}</small>`;
+        }
+        if (slot === "Tech") {
+          const mark = prev ? deltaHtml("スピリットパワー", prev.spiritTotal, r.spiritTotal) : "";
+          return `<b>${mark}${esc(disp(round1(r.spiritTotal)))}</b> スピリットパワー<small>${esc(r.spiritNote)}</small>`;
+        }
+        return "";
       }
 
-      function renderBoxes(older, newer) {
-        $("missingnote").hidden = newer.missing.length === 0 && older.missing.length === 0;
+      /** カテゴリー1つぶんを OLDER/NEWEST の左右ペアで描く。中身は build/index.astro の .box と同じ見た目 */
+      function categoryPair(slot, older, newer) {
+        const meta = slotMeta[slot];
+        const oRows = older.rows[slot] ?? [];
+        const nRows = newer.rows[slot] ?? [];
+        const byLabel = new Map(oRows.map((r) => [r.label, r.value]));
 
-        const headline = [
-          statLine("DPS", older.dps, newer.dps),
-          statLine("最大HP", older.maxHealth != null ? Math.round(older.maxHealth) : null, newer.maxHealth != null ? Math.round(newer.maxHealth) : null),
-          statLine("スピリットパワー", older.spiritPower, newer.spiritPower),
-          statLine("レベル", older.level, newer.level),
-        ].join("");
+        const oldRowsHtml = oRows.map((r) => rowLinePlain(r.label, r.value)).join("") || '<li class="empty">ヒーロー未選択</li>';
+        const newRowsHtml = nRows.map((r) => rowLine(r.label, byLabel.get(r.label) ?? null, r.value)).join("") || '<li class="empty">ヒーロー未選択</li>';
 
-        const box = (slot) => {
-          const oRows = older.rows[slot] ?? [];
-          const nRows = newer.rows[slot] ?? [];
-          const byLabel = new Map(oRows.map((r) => [r.label, r.value]));
-          const lines = nRows.map((r) => statLine(r.label, byLabel.get(r.label) ?? null, r.value)).join("");
-          return (
-            `<section class="box"><h3>${esc(slotMeta[slot].label)}ステータス</h3>` +
-            `<ul class="rows head"><li><span class="l"></span><span class="vo">OLDER</span><span class="vn">NEWEST</span></li></ul>` +
-            `<ul class="rows">${lines}</ul></section>`
-          );
-        };
+        const style = `--cat: var(--c-${meta.cssVar}); --cat-bg: var(--c-${meta.cssVar}-bg)`;
+        const title = `${esc(meta.label)}ステータス`;
+        return (
+          `<div class="pair" style="${style}">` +
+          `<div class="box"><div class="bhead"><h2>${title}</h2><span class="vtag">OLDER・${esc(older.version)}</span></div>` +
+          `<div class="bhl">${boxHeadline(slot, older, null)}</div>` +
+          `<ul class="brows">${oldRowsHtml}</ul></div>` +
+          `<div class="box"><div class="bhead"><h2>${title}</h2><span class="vtag">NEWEST・${esc(newer.version)}</span></div>` +
+          `<div class="bhl">${boxHeadline(slot, newer, older)}</div>` +
+          `<ul class="brows">${newRowsHtml}</ul></div>` +
+          `</div>`
+        );
+      }
 
-        const totalsBox = () => {
-          const keys = new Set([...older.totals.keys(), ...newer.totals.keys()]);
-          const lines = [...keys]
-            .map((k) => {
-              const label = labels[k] ?? k.replace("MODIFIER_VALUE_", "");
-              const ov = older.totals.get(k) ?? 0;
-              const nv = newer.totals.get(k) ?? 0;
-              if (ov === 0 && nv === 0) return "";
-              return statLine(label, ov, nv);
-            })
-            .filter(Boolean)
-            .join("");
-          return `<section class="box"><h3>合計ステータス(常時パッシブ+購入ボーナス)</h3>` +
-            `<ul class="rows head"><li><span class="l"></span><span class="vo">OLDER</span><span class="vn">NEWEST</span></li></ul>` +
-            `<ul class="rows">${lines || '<li class="empty"><span class="l">—</span></li>'}</ul></section>`;
-        };
+      function totalsPair(older, newer) {
+        const keys = new Set([...older.totals.keys(), ...newer.totals.keys()]);
+        let oldLines = "";
+        let newLines = "";
+        for (const k of keys) {
+          const label = labels[k] ?? k.replace("MODIFIER_VALUE_", "");
+          const ov = older.totals.get(k) ?? 0;
+          const nv = newer.totals.get(k) ?? 0;
+          if (ov === 0 && nv === 0) continue;
+          oldLines += rowLinePlain(label, ov);
+          newLines += rowLine(label, ov, nv);
+        }
+        return (
+          `<div class="pair">` +
+          `<div class="box plain"><div class="bhead"><h2>合計ステータス</h2><span class="vtag">OLDER・${esc(older.version)}</span></div>` +
+          `<ul class="brows">${oldLines || '<li class="empty">—</li>'}</ul></div>` +
+          `<div class="box plain"><div class="bhead"><h2>合計ステータス</h2><span class="vtag">NEWEST・${esc(newer.version)}</span></div>` +
+          `<ul class="brows">${newLines || '<li class="empty">—</li>'}</ul></div>` +
+          `</div>`
+        );
+      }
 
-        $("boxes").innerHTML =
-          `<section class="box headline"><h3>概要</h3>` +
-          `<ul class="rows head"><li><span class="l"></span><span class="vo">OLDER</span><span class="vn">NEWEST</span></li></ul>` +
-          `<ul class="rows">${headline}</ul></section>` +
-          box("WeaponMod") +
-          box("Armor") +
-          box("Tech") +
-          totalsBox();
+      function renderTopBar(missing) {
+        const heroSrc = document.querySelector(`.heroicon-src[data-hero="${heroId}"] .portrait`);
+        $("herow").innerHTML = "";
+        const wrap = document.createElement("div");
+        wrap.className = "herowrap";
+        if (heroSrc) wrap.append(heroSrc.cloneNode(true));
+        const label = document.createElement("b");
+        label.className = "heroname";
+        label.textContent = heroNames[heroId];
+        wrap.append(label);
+        $("herow").append(wrap);
+
+        const cellsEl = $("cells");
+        cellsEl.innerHTML = "";
+        const n = Math.max(12, picked.length);
+        for (let i = 0; i < n; i++) {
+          const id = picked[i];
+          const cell = document.createElement("span");
+          cell.className = "cell";
+          if (id) {
+            cell.classList.add("filled");
+            if (missing.has(id)) cell.classList.add("warn");
+            cell.title = itemNames[id] ?? id;
+            const src = document.querySelector(`.itemicon-src[data-item="${CSS.escape(id)}"] .icon`);
+            if (src) cell.append(src.cloneNode(true));
+          }
+          if (i >= 12) cell.classList.add("over");
+          cellsEl.append(cell);
+        }
+      }
+
+      function renderVerInfo(older, newer) {
+        $("olderinfo").textContent = older.hero ? `Lv${older.level}・${fmtSouls(older.spent)}ソウル` : "";
+        $("newerinfo").textContent = newer.hero ? `Lv${newer.level}・${fmtSouls(newer.spent)}ソウル` : "";
       }
 
       function populateSelect(el, selected) {
@@ -363,7 +510,16 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
       function refresh() {
         const older = evaluate($("older").value);
         const newer = evaluate($("newer").value);
-        renderBoxes(older, newer);
+        const missing = new Set([...older.missing, ...newer.missing]);
+        $("missingnote").hidden = missing.size === 0;
+
+        renderTopBar(missing);
+        renderVerInfo(older, newer);
+        $("boxes").innerHTML =
+          categoryPair("WeaponMod", older, newer) +
+          categoryPair("Armor", older, newer) +
+          categoryPair("Tech", older, newer) +
+          totalsPair(older, newer);
       }
 
       populateSelect($("older"), versions[1] ?? versions[0]);
@@ -371,7 +527,6 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
       $("older").addEventListener("change", refresh);
       $("newer").addEventListener("change", refresh);
 
-      renderCtx();
       refresh();
     })();
   </script>
@@ -381,59 +536,68 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
     .back { font-size: 13px; }
     .lead { max-width: 62ch; color: var(--c-text-muted); }
 
-    .ctx {
-      display: flex; align-items: baseline; gap: var(--sp-4); flex-wrap: wrap;
-      margin: var(--sp-3) 0; padding: var(--sp-2) var(--sp-3);
-      background: var(--c-surface-2); border-radius: var(--radius);
+    /* ---- 上部: ビルドのヒーロー・アイテムUI(見た目は /build/ のスロットバーと同じ) ---- */
+    .topbar { display: flex; align-items: center; gap: var(--sp-5); flex-wrap: wrap; margin: var(--sp-3) 0; }
+    .herow :global(.herowrap) { display: flex; align-items: center; gap: var(--sp-2); }
+    .herow :global(.heroname) { font-weight: 600; color: var(--c-text-strong); font-size: 14px; }
+    .cells {
+      display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(2, auto);
+      grid-auto-flow: column; gap: 5px; width: min(100%, 320px);
     }
-    .ctxhero { font-size: 14px; }
-    .ctxitems { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 0; }
-    .ctxitems li {
-      font-size: 12px; color: var(--c-text-muted);
-      border: 1px solid var(--c-border); border-radius: 3px; padding: 1px 6px;
+    .cells :global(.cell) {
+      aspect-ratio: 1; border-radius: 5px; border: 1px dashed var(--c-border-strong);
+      background: var(--c-bg); display: block; padding: 0; line-height: 0; width: 100%;
     }
-    .ctxitems .empty { border: none; padding: 0; }
+    .cells :global(.cell.filled) { border: 1px solid var(--c-border-strong); overflow: hidden; }
+    .cells :global(.cell.filled.warn) { outline: 2px solid var(--c-weapon); outline-offset: 1px; }
+    .cells :global(.cell.over) { outline: 2px solid #d08a3e; outline-offset: 1px; }
+    .cells :global(.cell.filled .icon) { width: 100%; height: 100%; border: none; border-radius: 4px; }
 
-    .verpick { display: flex; gap: var(--sp-5); margin: var(--sp-3) 0; font-size: 13px; }
+    .verpick { display: flex; align-items: baseline; gap: var(--sp-3); flex-wrap: wrap; margin: var(--sp-3) 0; font-size: 13px; }
     .verpick select { margin-left: var(--sp-2); }
+    .verinfo { font-size: 11px; color: var(--c-text-muted); font-family: var(--font-mono); }
 
     .missingnote {
       font-size: 12px; color: var(--c-weapon); border-left: 3px solid var(--c-weapon);
       padding-left: var(--sp-2); max-width: 62ch;
     }
 
-    .boxes { display: grid; gap: var(--sp-3); margin-top: var(--sp-3); }
-    .box {
-      background: var(--c-surface); border: 1px solid var(--c-border);
-      border-radius: var(--radius); padding: var(--sp-3) var(--sp-4);
+    /* ---- 比較ボックス: OLDER/NEWEST 左右ペア。中身は動的挿入なので :global() 必須 ---- */
+    .boxes { display: block; margin-top: var(--sp-3); }
+    .boxes :global(.pair) {
+      display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-3); margin-bottom: var(--sp-3);
     }
-    .box h3 { margin: 0 0 var(--sp-2); font-size: 13px; color: var(--c-text-muted); }
-    .box.headline { border-left: 3px solid var(--c-accent); }
-
-    .rows { list-style: none; padding: 0; margin: 0; }
-    .rows li {
-      display: grid; grid-template-columns: minmax(0, 1fr) 90px 90px;
-      gap: var(--sp-2); align-items: baseline; padding: 4px 0;
-      border-bottom: 1px solid var(--c-border); font-size: 13px;
+    .boxes :global(.box) {
+      background: var(--cat-bg, var(--c-surface)); border: 1px solid var(--cat, var(--c-border));
+      border-radius: var(--radius-lg); padding: var(--sp-3) var(--sp-4) var(--sp-4); min-width: 0;
     }
-    .rows.head li { border-bottom: 2px solid var(--c-border-strong); padding-bottom: 6px; }
-    .rows.head .vo, .rows.head .vn {
-      font-size: 10px; letter-spacing: 0.06em; color: var(--c-text-faint); text-align: right;
+    .boxes :global(.box.plain) { background: var(--c-surface); border-color: var(--c-border); }
+    .boxes :global(.bhead) { display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-2); flex-wrap: wrap; }
+    .boxes :global(.bhead h2) { font-size: 13px; margin: 0; border: none; padding: 0; color: var(--cat, var(--c-text-strong)); letter-spacing: .04em; }
+    .boxes :global(.box.plain .bhead h2) { color: var(--c-text-strong); }
+    .boxes :global(.vtag) { font-size: 10px; letter-spacing: .04em; color: var(--c-text-faint); font-family: var(--font-mono); }
+    .boxes :global(.bhl) { margin: var(--sp-2) 0; font-size: 11px; min-height: 1em; }
+    .boxes :global(.bhl b) { font-family: var(--font-mono); font-size: 17px; color: var(--c-text-strong); margin-right: 3px; }
+    .boxes :global(.bhl small) { display: block; color: var(--c-text-faint); margin-top: 1px; }
+    .boxes :global(.brows) { list-style: none; padding: 0; margin: 0; }
+    .boxes :global(.brows li) {
+      display: flex; justify-content: space-between; align-items: baseline; gap: var(--sp-3);
+      padding: 3px 0; font-size: 12px; border-bottom: 1px solid var(--c-border);
     }
-    .rows .l { color: var(--c-text-muted); }
-    .rows .vo { font-family: var(--font-mono); color: var(--c-text-muted); text-align: right; }
-    .rows .vn {
-      font-family: var(--font-mono); color: var(--c-text-strong); text-align: right;
-      display: flex; align-items: center; justify-content: flex-end; gap: 3px;
+    .boxes :global(.brows .l) { color: var(--c-text-muted); }
+    .boxes :global(.brows .v) {
+      font-family: var(--font-mono); color: var(--c-text-strong); white-space: nowrap;
+      display: inline-flex; align-items: center; gap: 3px;
     }
-    .rows .empty { color: var(--c-text-faint); }
-    .delta.good { color: var(--c-vitality); }
-    .delta.bad { color: var(--c-weapon); }
+    .boxes :global(.brows .empty) { color: var(--c-text-faint); border: none; font-size: 12px; display: block; }
+    .boxes :global(.delta.good) { color: var(--c-vitality); }
+    .boxes :global(.delta.bad) { color: var(--c-weapon); }
 
     .caveat { margin-top: var(--sp-4); font-size: 11px; color: var(--c-text-faint); max-width: 62ch; }
+    .iconsrc { display: none; }
 
-    @media (max-width: 560px) {
-      .rows li { grid-template-columns: minmax(0, 1fr) 70px 70px; font-size: 12px; }
+    @media (max-width: 700px) {
+      .boxes :global(.pair) { grid-template-columns: 1fr; }
     }
   </style>
 </Base>
