@@ -8,17 +8,20 @@
 
 import type { Ability } from "../types/ability.ts";
 import type { AbilityProperty } from "../types/property.ts";
-import { t, formatProperty, describe } from "./data.ts";
+import { t, formatProperty, describe, endsWithUnit } from "./data.ts";
 
 export interface CardRow {
   label: string;
   value: string;
+  /** value の末尾のうち単位分("秒"/"m"/"%"等)。無ければ空文字。表示を数値と分けて小さくするため */
+  unit: string;
   /** StatIcon.astro に渡す種別。ゲーム本編の見た目に寄せる装飾で、無ければ null */
   icon: StatIconKind | null;
 }
 export interface DamageRow {
   label: string;
   value: string;
+  unit: string;
   /** スピリットパワー係数(m_flStatScale)。null なら非スケーリング */
   scale: number | null;
   icon: StatIconKind | null;
@@ -39,6 +42,15 @@ export interface SkillCard {
   meta: CardRow[];
   damage: DamageRow[];
   effects: CardRow[];
+  /**
+   * カード内で目立たせる数値タイル(ダメージ + 効果の先頭から、空くスロットぶん)。
+   * どれを「主要」にするかはスキルごとに意味が違い機械的な基準では決められないため、
+   * 単純にデータの並び順で埋める(ダメージを常に先頭にし、タイル枠が3つになるまで
+   * effects を前から足す)。残りは secondaryRows へ。
+   */
+  tiles: DamageRow[];
+  /** タイルに収まらなかった効果値。カード下部の薄い帯にまとめて出す */
+  secondaryRows: CardRow[];
   upgrades: UpgradeTier[];
 }
 
@@ -126,16 +138,18 @@ export function skillCard(ab: Ability, heroName = ""): SkillCard {
     const p = props[prop];
     if (!p) continue;
     if (isZero(p) && !(prop === "AbilityCharges" && chargeFromUpgrade)) continue;
-    const { value } = formatProperty(prop, p);
-    meta.push({ label, value, icon: iconFor(p) });
+    const { value, unit } = formatProperty(prop, p);
+    meta.push({ label, value, unit, icon: iconFor(p) });
   }
 
   const damage: DamageRow[] = [];
   for (const [name, p] of Object.entries(props)) {
     if (!p.isAbilityDamage || p.value === null) continue;
+    const f = formatProperty(name, p);
     damage.push({
       label: t(`${p.labelOverride ?? name}_label`, "ダメージ"),
-      value: formatProperty(name, p).value,
+      value: f.value,
+      unit: f.unit,
       scale: p.scale?.statScale ?? null,
       icon: iconFor(p) ?? "damage",
     });
@@ -177,16 +191,22 @@ export function skillCard(ab: Ability, heroName = ""): SkillCard {
         const post = t(`${lookupName}_postfix`, "");
         const b = String(u.bonus);
         const sign = b.startsWith("-") ? "" : "+";
-        // bonus が "10m" のように単位付きのことがある。postfix を足して "10mm" にしない
-        const tail = post && !b.endsWith(post) ? post : "";
+        // bonus が "10m" のように単位付きのことがある。postfix を足して "10mm"/"10m m" にしない
+        const tail = endsWithUnit(b, post) ? "" : post;
         return {
           label: t(`${lookupName}_label`, u.property),
           value: `${sign}${b}${tail}`,
+          unit: tail,
           icon: iconFor(props[u.property]),
         };
       }),
     };
   });
 
-  return { meta, damage, effects, upgrades };
+  const TILE_SLOTS = 3;
+  const tileEffectCount = Math.max(0, TILE_SLOTS - damage.length);
+  const tiles: DamageRow[] = [...damage, ...effects.slice(0, tileEffectCount).map((e) => ({ ...e, scale: null }))];
+  const secondaryRows = effects.slice(tileEffectCount);
+
+  return { meta, damage, effects, tiles, secondaryRows, upgrades };
 }

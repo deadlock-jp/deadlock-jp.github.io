@@ -268,7 +268,18 @@ const metaDesc =
       cursor: pointer;
     }
     .ftbtn.active { color: var(--c-text-strong); border-color: var(--c-accent); background: var(--c-surface-2); }
-    .skills { display: grid; gap: var(--sp-3); }
+    /*
+     * 4スキル(パッシブ・アルティメット含む)を2列×2行で。カード自身の高さは
+     * SkillCard.astro側でheight:100%にしてあるので、ここはgridの既定(align-items:stretch)
+     * と組み合わせるだけで行内の高さが揃う。900px未満は1列。
+     */
+    .skills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-4); }
+    /* [hidden]な要素まで display:flex にしないよう :not([hidden]) で絞る */
+    .skills > div:not([hidden]) { display: flex; }
+
+    @media (max-width: 900px) {
+      .skills { grid-template-columns: minmax(0, 1fr); }
+    }
 
     @media (max-width: 560px) {
       .radars { gap: var(--sp-4); }

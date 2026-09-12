@@ -76,6 +76,19 @@ function humanize(name: string): string {
 }
 
 /**
+ * value の末尾に postfix の単位が既に含まれているか。
+ * postfix には " m" のように前に半角スペースを持つものがあり(素の数値の後に
+ * 付けたときに読みやすくするため)、rawValue側は "4m" のようにスペース無しで
+ * 単位を持つことがあるため、単純な endsWith だけでは二重付与を見逃す。
+ * 前後の空白を落として比べることで両方のケースを拾う。
+ */
+export function endsWithUnit(value: string, postfix: string): boolean {
+  if (!postfix) return false;
+  const trimmed = postfix.trim();
+  return value.endsWith(postfix) || (trimmed !== "" && value.endsWith(trimmed));
+}
+
+/**
  * Valveの説明文に埋め込まれたプレースホルダを解決する。
  *
  *   {s:PropName}                          → そのアイテム/スキル自身のプロパティ値
@@ -131,8 +144,47 @@ export function describe(
     }
     return byCaseInsensitive(prop);
   };
-  const resolved = raw
-    .replace(/\{s:([A-Za-z0-9_]+)\}/g, (_m, prop: string) => resolveProp(prop) ?? `?`)
+  /*
+   * {s:X} を手動で1つずつ置換する(String.replaceの単純な置換だと、テンプレ側が
+   * 値の直後に単位を重ねて書いている場合に対応できない)。
+   * 例1: ability_werewolf_transformation の "{s:BonusMoveSpeed} m／秒" は、
+   *   BonusMoveSpeedの値が既に"4m"のように単位を含むため、そのまま置換すると
+   *   "4 m／秒"のように単位が二重になる。
+   * 例2: ability_bounce_pad の "{s:SpeedOnLand}m／秒" は、SpeedOnLandに
+   *   _postfixトークン自体が無いのに値("4m")が単位を含む(vdata側で既に
+   *   単位付きの文字列として持っている)。
+   * どちらも値はそのまま使い、テンプレ側の重複した単位表記だけを読み飛ばす。
+   * 単位はまず正式な_postfixトークンから、無ければ値自身の末尾(数値の後ろに
+   * 続く非数字部分)から拾う。新しい単位を推測して足すことはしない、あくまで
+   * テンプレ側の重複を消すだけ。
+   */
+  const trailingUnit = (v: string): string => v.match(/^-?\d+(?:\.\d+)?([^\d]*)$/)?.[1] ?? "";
+  let withProps = "";
+  let cursor = 0;
+  for (const m of raw.matchAll(/\{s:([A-Za-z0-9_]+)\}/g)) {
+    const prop = m[1];
+    const offset = m.index;
+    withProps += raw.slice(cursor, offset);
+    cursor = offset + m[0].length;
+    const val = resolveProp(prop);
+    if (val === undefined) {
+      withProps += "?";
+      continue;
+    }
+    const valUnit = trailingUnit(val);
+    if (valUnit) {
+      const postfix = t(`${prop}_postfix`, "");
+      const candidates = [...new Set([postfix, postfix.trim(), valUnit])]
+        .filter((u) => u && u.trim() === valUnit)
+        .sort((a, b) => b.length - a.length);
+      const match = candidates.find((u) => raw.startsWith(u, cursor));
+      if (match) cursor += match.length;
+    }
+    withProps += val;
+  }
+  withProps += raw.slice(cursor);
+
+  const resolved = withProps
     .replace(
       /\{g:citadel_inline_attribute:'([A-Za-z0-9_]+)'\}/g,
       // SpiritIcon は文字ではなくアイコンの差し込み位置。文字にすると文意が壊れるので落とす
@@ -243,7 +295,7 @@ export function modifierLabel(type: string): string {
 export function formatProperty(
   name: string,
   prop: { rawValue: string; value: number | null; labelOverride?: string | null },
-): { label: string; value: string } {
+): { label: string; value: string; unit: string } {
   // m_strLocTokenOverride があれば、ラベル系トークンはそちらの名前で引く
   // (例: ability_doorman_bomb の "ProjectileFuse" は "BellLifetime_label" しか無い)
   const lookupName = prop.labelOverride ?? name;
@@ -254,7 +306,7 @@ export function formatProperty(
   // rawValue は "15m" のように単位付きのことがある。
   // その場合 postfix("m")を足すと "15mm" になるので、既に付いていれば足さない。
   let body = prop.rawValue;
-  const tail = postfix && !body.endsWith(postfix) ? postfix : "";
+  const tail = endsWithUnit(body, postfix) ? "" : postfix;
 
   // "{s:sign}" は値の符号。負なら記号側に出し、数値からは "-" を落とす
   let head = prefix;
@@ -263,7 +315,12 @@ export function formatProperty(
     head = prefix.replace("{s:sign}", negative ? "−" : "+");
     if (body.startsWith("-")) body = body.slice(1);
   }
-  return { label, value: `${head}${body}${tail}` };
+  const value = `${head}${body}${tail}`;
+  // 末尾がpostfixと一致する分だけを「単位」として切り出す(表示上、数値より小さく暗くするため)。
+  // rawValueに既にpostfixが含まれていた場合もここで拾える。新しい単位を推測して足すことはしない。
+  const postfixTrim = postfix.trim();
+  const unit = value.endsWith(postfix) ? postfix : postfixTrim && value.endsWith(postfixTrim) ? postfixTrim : "";
+  return { label, value, unit };
 }
 
 /** 実装済みヒーローをID順で返す */

@@ -3,6 +3,11 @@
  * スキル1つぶんのカード本体。
  * ヒーロー詳細ページのスキル一覧と、スキル単体の詳細ページ(/abilities/<実ID>/)の
  * 両方から使う共通コンポーネント。見た目・データ源は完全に同じにする。
+ *
+ * 見た目はゲーム本編のスキルUIに寄せた情報密度の高いカード(2026-09、デザイン
+ * ハンドオフ「Deadlock スキルカード UI 改善」を反映)。主要な数値を大きなタイルで、
+ * それ以外は薄い帯の一覧で出す。どの数値をタイルにするかは、データの並び順で
+ * ダメージ→効果の先頭から機械的に埋める(スキルごとの意味判断はしない)。
  */
 import type { Ability } from "../types/ability.ts";
 import type { SkillCard as SkillCardData } from "../lib/skillcard.ts";
@@ -22,27 +27,41 @@ export interface Props {
 }
 const { abilityKey, ab, card, notes, heroName, href } = Astro.props;
 const isUlt = ab.kind === "Ultimate";
+const isPassive = !isUlt && ab.activation === "PASSIVE";
 const name = t(abilityKey, abilityKey);
-const spiritBadge = (scale: number | null) => (scale ? `×${scale}` : null);
+
+/** "25秒" のような値文字列を、末尾の unit ぶんだけ切り離して {num, unit} にする */
+function splitUnit(value: string, unit: string): { num: string; unit: string } {
+  return unit && value.endsWith(unit) ? { num: value.slice(0, -unit.length), unit } : { num: value, unit: "" };
+}
+/** スピリット係数の表示用丸め(内部の浮動小数誤差を出さない。値そのものは変えない) */
+const fmtScale = (n: number) => (Math.round(n * 100) / 100).toString();
 ---
 
 <article class:list={["skill", { ult: isUlt }]}>
   <header class="shead">
-    <AbilityIcon name={name} image={ab.image} size={44} cssVar={isUlt ? "spirit" : "accent"} />
+    <AbilityIcon name={name} image={ab.image} size={48} cssVar={isUlt ? "spirit" : "accent"} />
     <div class="stitle">
-      <span class="sname">
-        {href ? <a href={href}>{name}</a> : name}
-        {isUlt && <span class="ult-tag">アルティメット</span>}
-      </span>
+      <div class="snamerow">
+        {href ? <a href={href}>{name}</a> : <span class="sname-plain">{name}</span>}
+        {isUlt && <span class="tag ult-tag">アルティメット</span>}
+        {isPassive && <span class="tag passive-tag">パッシブ</span>}
+      </div>
       {card.meta.length > 0 && (
         <ul class="smeta">
-          {card.meta.map((m) => (
-            <li>
-              <StatIcon kind={m.icon} />
-              <span class="mk">{m.label}</span>
-              <span class="mv">{m.value}</span>
-            </li>
-          ))}
+          {card.meta.map((m) => {
+            const sp = splitUnit(m.value, m.unit);
+            return (
+              <li>
+                <StatIcon kind={m.icon} />
+                {m.label}
+                <span class="mv">
+                  {sp.num}
+                  {sp.unit && <small class="mu">{sp.unit}</small>}
+                </span>
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>
@@ -50,47 +69,68 @@ const spiritBadge = (scale: number | null) => (scale ? `×${scale}` : null);
 
   <p class="sdesc">{describe(`${abilityKey}_desc`, ab.properties, "（説明なし）", { hero_name: heroName })}</p>
 
-  {(card.damage.length > 0 || card.effects.length > 0) && (
-    <ul class="srows">
-      {card.damage.map((d) => (
-        <li class="dmg">
-          <span class="l"><StatIcon kind={d.icon} />{d.label}</span>
-          <span class="v">
-            {d.value}
-            {spiritBadge(d.scale) && (
-              <span class="spirit-badge"><StatIcon kind="spirit" />{spiritBadge(d.scale)}</span>
+  {card.tiles.length > 0 && (
+    <div class="stiles">
+      {card.tiles.map((row) => {
+        const sp = splitUnit(row.value, row.unit);
+        return (
+          <div class:list={["tile", { scaled: row.scale }]}>
+            {row.scale !== null && (
+              <span class="tscale">
+                <StatIcon kind="spirit" />×{fmtScale(row.scale)}
+              </span>
             )}
+            <div class="tval">
+              {sp.num}
+              {sp.unit && <span class="tu">{sp.unit}</span>}
+            </div>
+            <div class="tlabel">{row.label}</div>
+          </div>
+        );
+      })}
+    </div>
+  )}
+
+  {card.secondaryRows.length > 0 && (
+    <div class="ssecondary">
+      {card.secondaryRows.map((row) => {
+        const sp = splitUnit(row.value, row.unit);
+        return (
+          <span class="srow">
+            <span class="l">{row.label}</span>
+            <span class="v">
+              {sp.num}
+              {sp.unit && <small class="su">{sp.unit}</small>}
+            </span>
           </span>
-        </li>
-      ))}
-      {card.effects.map((e) => (
-        <li>
-          <span class="l"><StatIcon kind={e.icon} />{e.label}</span>
-          <span class="v">{e.value}</span>
-        </li>
-      ))}
-    </ul>
+        );
+      })}
+    </div>
   )}
 
   {card.upgrades.length > 0 && (
-    <ol class="supg">
+    <div class="supg">
       {card.upgrades.map((tier) => (
-        <li>
-          <span class="ap"><StatIcon kind="ap" />{tier.ap}<small>AP</small></span>
-          {tier.description ? (
-            <span class="udesc">{tier.description}</span>
-          ) : (
-            <span class="urows">
-              {tier.rows.map((r) => (
-                <span class="u">
-                  <StatIcon kind={r.icon} />{r.label} <b>{r.value}</b>
+        <div class="ucell">
+          <span class="uap">
+            <StatIcon kind="ap" />
+            {tier.ap}
+            <small>AP</small>
+          </span>
+          <span class="ubody">
+            {tier.description ? (
+              tier.description
+            ) : (
+              tier.rows.map((r) => (
+                <span class="upart">
+                  {r.label} <b>{r.value}</b>
                 </span>
-              ))}
-            </span>
-          )}
-        </li>
+              ))
+            )}
+          </span>
+        </div>
       ))}
-    </ol>
+    </div>
   )}
 
   {notes.length > 0 && (
@@ -107,74 +147,100 @@ const spiritBadge = (scale: number | null) => (scale ? `×${scale}` : null);
 
 <style>
   .skill {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+    height: 100%;
     background: var(--c-surface);
     border: 1px solid var(--c-border);
-    border-left: 3px solid var(--c-accent);
-    border-radius: var(--radius);
-    padding: var(--sp-3) var(--sp-4) var(--sp-4);
+    border-top: 2px solid var(--c-accent-dim);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-4);
   }
-  .skill.ult { border-left-color: var(--c-spirit); }
+  .skill.ult { border-top-color: var(--c-spirit); }
+
   .shead { display: flex; align-items: flex-start; gap: var(--sp-3); }
   .stitle { min-width: 0; flex: 1; }
-  .sname { display: block; font-weight: 700; color: var(--c-text-strong); font-size: 15px; }
-  .sname a { color: inherit; text-decoration: none; }
-  .sname a:hover { text-decoration: underline; }
-  .ult-tag {
-    margin-left: var(--sp-2); padding: 1px 5px; border-radius: 3px;
-    font-size: 10px; font-weight: 700; letter-spacing: 0.04em; vertical-align: 1px;
-    color: var(--c-spirit); background: var(--c-spirit-bg); border: 1px solid var(--c-spirit);
+  .snamerow { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--sp-2); }
+  .snamerow a, .sname-plain {
+    font-size: 17px; font-weight: 700; color: var(--c-text-strong); line-height: 1.3;
+    text-decoration: none;
   }
+  .snamerow a:hover { text-decoration: underline; }
+  .tag {
+    padding: 1px 6px; border-radius: 3px; font-size: 10px; font-weight: 700; letter-spacing: 0.04em;
+  }
+  .ult-tag { color: var(--c-spirit); background: var(--c-spirit-bg); border: 1px solid var(--c-spirit); }
+  .passive-tag { color: var(--c-text-muted); background: var(--c-surface-2); border: 1px solid var(--c-border-strong); }
+
   .smeta {
     list-style: none; padding: 0; margin: var(--sp-2) 0 0;
-    display: flex; flex-wrap: wrap; gap: 5px;
+    display: flex; flex-wrap: wrap; gap: 6px;
   }
   .smeta li {
-    display: flex; gap: 4px; align-items: baseline;
+    display: inline-flex; align-items: center; gap: 5px;
     background: var(--c-surface-2); border: 1px solid var(--c-border);
-    border-radius: var(--radius); padding: 1px 7px; font-size: 11px;
+    border-radius: var(--radius); padding: 3px 8px;
+    font-size: 11px; color: var(--c-text-muted); white-space: nowrap;
   }
-  .smeta .mk { color: var(--c-text-muted); }
-  .smeta .mv { font-family: var(--font-mono); color: var(--c-text-strong); }
+  .smeta .mv { font-family: var(--font-mono); font-size: 12px; color: var(--c-text-strong); }
+  .smeta .mu { font-size: 10px; color: var(--c-text-muted); margin-left: 1px; }
 
-  .sdesc { font-size: 13px; color: var(--c-text-muted); line-height: 1.7; margin: var(--sp-3) 0 0; }
+  .sdesc { font-size: 13px; line-height: 1.75; color: var(--c-text-muted); margin: 0; text-wrap: pretty; }
 
-  .srows { list-style: none; padding: 0; margin: var(--sp-3) 0 0; }
-  .srows li {
-    display: flex; justify-content: space-between; align-items: baseline; gap: var(--sp-3);
-    padding: 4px 0; font-size: 13px; border-bottom: 1px solid var(--c-border);
+  /* ---- 主要ステータス タイル ---- */
+  .stiles { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+  .tile {
+    position: relative; flex: 1 1 120px; min-width: 0; text-align: center;
+    padding: var(--sp-3) var(--sp-2) var(--sp-2);
+    border-radius: var(--radius); background: var(--c-surface-2); border: 1px solid var(--c-border);
   }
-  .srows .l { display: inline-flex; align-items: center; gap: 5px; color: var(--c-text-muted); }
-  .srows .v { font-family: var(--font-mono); color: var(--c-text-strong); white-space: nowrap; }
-  .srows li.dmg .v { color: var(--c-spirit); }
-  .spirit-badge {
+  .tile.scaled { background: var(--c-spirit-bg); border-color: var(--c-spirit); }
+  .tscale {
+    position: absolute; top: 5px; right: 6px;
     display: inline-flex; align-items: center; gap: 2px;
-    margin-left: 5px; font-size: 10px; font-family: var(--font-sans);
-    color: var(--c-spirit); border: 1px solid var(--c-spirit); border-radius: 3px; padding: 0 3px;
+    font-family: var(--font-mono); font-size: 10px; color: var(--c-spirit);
   }
+  .tval { font-family: var(--font-mono); font-size: 24px; font-weight: 700; color: var(--c-text-strong); line-height: 1.1; }
+  .tu { font-size: 14px; color: var(--c-text-muted); margin-left: 1px; }
+  .tlabel { margin-top: 4px; font-size: 12px; color: var(--c-text-muted); }
 
-  .supg { list-style: none; padding: 0; margin: var(--sp-3) 0 0; display: grid; gap: 4px; }
-  .supg > li {
-    display: flex; gap: var(--sp-3); align-items: baseline;
-    font-size: 12px; padding: 3px 0;
+  /* ---- 副次ステータス行(タイルにするほどではない値) ---- */
+  .ssecondary {
+    padding: var(--sp-2) var(--sp-3); border-radius: var(--radius);
+    background: var(--c-surface-2); border: 1px solid var(--c-border);
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 4px var(--sp-4);
   }
-  .supg .ap {
-    display: inline-flex; align-items: center; justify-content: center; gap: 2px;
-    flex: 0 0 auto; font-family: var(--font-mono); font-size: 12px;
-    color: var(--c-accent); border: 1px solid var(--c-accent-dim); border-radius: var(--radius);
-    padding: 1px 6px; min-width: 34px; text-align: center;
-  }
-  .supg .ap small { font-size: 9px; opacity: 0.8; }
-  .skill.ult .supg .ap { color: var(--c-spirit); border-color: var(--c-spirit); }
-  .urows { display: flex; flex-wrap: wrap; gap: var(--sp-3); color: var(--c-text-muted); }
-  .urows .u { display: inline-flex; align-items: center; gap: 4px; }
-  .urows .u b { font-family: var(--font-mono); color: var(--c-text-strong); }
-  .udesc { color: var(--c-text); line-height: 1.5; }
+  .srow { display: flex; justify-content: space-between; align-items: baseline; gap: var(--sp-2); font-size: 12px; color: var(--c-text-muted); }
+  .srow .v { font-family: var(--font-mono); font-size: 13px; color: var(--c-text); white-space: nowrap; }
+  .srow .su { font-size: 10px; color: var(--c-text-muted); margin-left: 1px; }
 
-  .snotes {
-    margin-top: var(--sp-3); padding-top: var(--sp-3); border-top: 1px dashed var(--c-border);
+  /* ---- AP強化 3列(下端に固定) ---- */
+  .supg { margin-top: auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sp-2); }
+  .ucell {
+    display: flex; flex-direction: column; border: 1px solid var(--c-border);
+    border-radius: var(--radius); overflow: hidden;
   }
-  .snotes .nt {
-    font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-text-muted);
+  .uap {
+    display: flex; align-items: center; justify-content: center; gap: 3px;
+    padding: 4px; background: var(--c-accent-bg); border-bottom: 1px solid var(--c-border);
+    font-family: var(--font-mono); font-size: 11px; color: var(--c-accent);
   }
+  .skill.ult .uap { background: var(--c-spirit-bg); color: var(--c-spirit); }
+  .uap small { font-size: 9px; opacity: 0.8; }
+  .ubody {
+    flex: 1; padding: var(--sp-2) var(--sp-2) 10px;
+    font-size: 12px; line-height: 1.5; color: var(--c-text); text-align: center; text-wrap: pretty;
+  }
+  .ubody b { font-family: var(--font-mono); color: var(--c-text-strong); }
+  .upart:not(:last-child)::after { content: "、"; color: var(--c-text-muted); }
+
+  .snotes { padding-top: var(--sp-3); border-top: 1px dashed var(--c-border); }
+  .snotes .nt { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-text-faint); }
   .snotes ul { margin: var(--sp-1) 0 0; padding-left: 1.2em; font-size: 12px; color: var(--c-text-muted); line-height: 1.7; }
+
+  @media (max-width: 420px) {
+    .stiles { flex-wrap: wrap; }
+    .tile { flex-basis: calc(50% - var(--sp-2)); }
+  }
 </style>
