@@ -38,7 +38,13 @@ export interface UpgradeTier {
 export interface SkillCard {
   meta: CardRow[];
   damage: DamageRow[];
-  effects: CardRow[];
+  /**
+   * 主要ステータスタイルに昇格させる分。damage と合わせてタイル3枚を目安に、
+   * effects の並び順(=ゲームデータの並び)の先頭から詰める。詳細は skillCard() 内コメント参照
+   */
+  primaryEffects: CardRow[];
+  /** タイルにするほどではない値。カード下部の薄い帯にまとめて出す */
+  secondaryEffects: CardRow[];
   upgrades: UpgradeTier[];
 }
 
@@ -188,5 +194,14 @@ export function skillCard(ab: Ability, heroName = ""): SkillCard {
     };
   });
 
-  return { meta, damage, effects, upgrades };
+  // 主要ステータスタイル(1行2〜3枚)の枚数目安は3。ダメージタイルで埋まらない分だけ、
+  // effects の先頭(=ゲームデータの並び順)から昇格させる。それ以外は副次行(薄い帯)へ。
+  // ラベルの重要度をこちらで判定する手立てが無いため、恣意的な選別をせずこの機械的な
+  // ルールに揃えている。
+  const TILE_TARGET = 3;
+  const primaryCount = Math.max(0, TILE_TARGET - damage.length);
+  const primaryEffects = effects.slice(0, primaryCount);
+  const secondaryEffects = effects.slice(primaryCount);
+
+  return { meta, damage, primaryEffects, secondaryEffects, upgrades };
 }

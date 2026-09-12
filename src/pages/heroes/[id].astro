@@ -268,7 +268,16 @@ const metaDesc =
       cursor: pointer;
     }
     .ftbtn.active { color: var(--c-text-strong); border-color: var(--c-accent); background: var(--c-surface-2); }
-    .skills { display: grid; gap: var(--sp-3); }
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: stretch;
+      gap: var(--sp-3);
+    }
+
+    @media (max-width: 900px) {
+      .skills { grid-template-columns: minmax(0, 1fr); }
+    }
 
     @media (max-width: 560px) {
       .radars { gap: var(--sp-4); }
