@@ -215,13 +215,6 @@ const payload = {
 
       <section class="box plain">
         <header class="bhead"><h2>合計ステータス</h2></header>
-        <p class="caveat">
-          常時パッシブと購入ボーナスを種類ごとに単純加算した内訳です。
-          最大HP・武器ダメージ・スピリットパワーの実数値は上の各ボックスに出しています。
-          最大HP と Boon(レベル)分の扱いは実測チェックリストv2で確定した式によるもの。
-          武器ダメージのレベル成長と複数%の合成規則は直接測れておらず、
-          データ上の値と、HP実測(加算合成)からの推定で出しています。
-        </p>
         <ul class="stats" id="stats"><li class="empty">—</li></ul>
       </section>
     </section>
@@ -1024,7 +1017,6 @@ const payload = {
     .ladder :global(li.done .g) { color: var(--c-text-muted); }
     .ladder :global(li.now) { background: var(--cat); }
     .ladder :global(li.now .b), .ladder :global(li.now .g) { color: var(--c-bg); font-weight: 700; }
-    .caveat { font-size: 11px; color: var(--c-text-faint); line-height: 1.6; margin: 0 0 var(--sp-2); }
 
     /* ---- 右: ショップ ---- */
     .tabs { display: flex; gap: var(--sp-2); margin-bottom: var(--sp-4); }
