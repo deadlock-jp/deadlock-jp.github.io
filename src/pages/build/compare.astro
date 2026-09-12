@@ -149,19 +149,32 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
       <div class="cells" id="cells"></div>
     </div>
 
-    <div class="verpick">
-      <label>OLDER <select id="older"></select></label>
-      <span class="verinfo" id="olderinfo"></span>
-      <label>NEWEST <select id="newer"></select></label>
-      <span class="verinfo" id="newerinfo"></span>
-    </div>
-
     <p class="missingnote" id="missingnote" hidden>
       ⚠ 一部のアイテムは OLDER 側のバージョンに存在しません(未実装または削除済み)。
       該当アイテムはグレーアウトし、合計値には含めていません。
     </p>
 
-    <div class="boxes" id="boxes"></div>
+    <div class="comparegrid">
+      <div class="vercard older">
+        <div class="vercard-head">
+          <span class="vertag">OLDER</span>
+          <select id="older"></select>
+          <span class="vernum" id="olderinfo"></span>
+        </div>
+        <div class="vercard-body" id="olderbody"></div>
+      </div>
+
+      <div class="arrow" aria-hidden="true">⇒</div>
+
+      <div class="vercard newer">
+        <div class="vercard-head">
+          <span class="vertag">NEWEST</span>
+          <select id="newer"></select>
+          <span class="vernum" id="newerinfo"></span>
+        </div>
+        <div class="vercard-body" id="newerbody"></div>
+      </div>
+    </div>
 
     <p class="caveat">
       表示しているのはクライアント側のデータです。サーバー側だけで調整された変更は、
@@ -421,50 +434,45 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
         return "";
       }
 
-      /** カテゴリー1つぶんを OLDER/NEWEST の左右ペアで描く。中身は build/index.astro の .box と同じ見た目 */
-      function categoryPair(slot, older, newer) {
+      /*
+       * カテゴリー1つぶんのボックス。OLDER側は素の値、NEWEST側はOLDERとの差分マーク付き。
+       * 見た目は build/index.astro の .box と同じ(:global() は呼び出し元のカードで面倒を見る)。
+       */
+      function categoryBox(slot, r, prev) {
         const meta = slotMeta[slot];
-        const oRows = older.rows[slot] ?? [];
-        const nRows = newer.rows[slot] ?? [];
-        const byLabel = new Map(oRows.map((r) => [r.label, r.value]));
-
-        const oldRowsHtml = oRows.map((r) => rowLinePlain(r.label, r.value)).join("") || '<li class="empty">ヒーロー未選択</li>';
-        const newRowsHtml = nRows.map((r) => rowLine(r.label, byLabel.get(r.label) ?? null, r.value)).join("") || '<li class="empty">ヒーロー未選択</li>';
-
+        const rows = r.rows[slot] ?? [];
+        const byLabel = prev ? new Map((prev.rows[slot] ?? []).map((x) => [x.label, x.value])) : null;
+        const rowsHtml =
+          rows
+            .map((row) => (prev ? rowLine(row.label, byLabel.get(row.label) ?? null, row.value) : rowLinePlain(row.label, row.value)))
+            .join("") || '<li class="empty">ヒーロー未選択</li>';
         const style = `--cat: var(--c-${meta.cssVar}); --cat-bg: var(--c-${meta.cssVar}-bg)`;
-        const title = `${esc(meta.label)}ステータス`;
         return (
-          `<div class="pair" style="${style}">` +
-          `<div class="box"><div class="bhead"><h2>${title}</h2><span class="vtag">OLDER・${esc(older.version)}</span></div>` +
-          `<div class="bhl">${boxHeadline(slot, older, null)}</div>` +
-          `<ul class="brows">${oldRowsHtml}</ul></div>` +
-          `<div class="box"><div class="bhead"><h2>${title}</h2><span class="vtag">NEWEST・${esc(newer.version)}</span></div>` +
-          `<div class="bhl">${boxHeadline(slot, newer, older)}</div>` +
-          `<ul class="brows">${newRowsHtml}</ul></div>` +
-          `</div>`
+          `<div class="box" style="${style}"><div class="bhead"><h2>${esc(meta.label)}ステータス</h2></div>` +
+          `<div class="bhl">${boxHeadline(slot, r, prev)}</div>` +
+          `<ul class="brows">${rowsHtml}</ul></div>`
         );
       }
 
-      function totalsPair(older, newer) {
-        const keys = new Set([...older.totals.keys(), ...newer.totals.keys()]);
-        let oldLines = "";
-        let newLines = "";
+      function totalsBox(r, prev) {
+        const keys = new Set([...r.totals.keys(), ...(prev ? prev.totals.keys() : [])]);
+        let lines = "";
         for (const k of keys) {
           const label = labels[k] ?? k.replace("MODIFIER_VALUE_", "");
-          const ov = older.totals.get(k) ?? 0;
-          const nv = newer.totals.get(k) ?? 0;
-          if (ov === 0 && nv === 0) continue;
-          oldLines += rowLinePlain(label, ov);
-          newLines += rowLine(label, ov, nv);
+          const v = r.totals.get(k) ?? 0;
+          const pv = prev ? (prev.totals.get(k) ?? 0) : v;
+          if (v === 0 && pv === 0) continue;
+          lines += prev ? rowLine(label, pv, v) : rowLinePlain(label, v);
         }
         return (
-          `<div class="pair">` +
-          `<div class="box plain"><div class="bhead"><h2>合計ステータス</h2><span class="vtag">OLDER・${esc(older.version)}</span></div>` +
-          `<ul class="brows">${oldLines || '<li class="empty">—</li>'}</ul></div>` +
-          `<div class="box plain"><div class="bhead"><h2>合計ステータス</h2><span class="vtag">NEWEST・${esc(newer.version)}</span></div>` +
-          `<ul class="brows">${newLines || '<li class="empty">—</li>'}</ul></div>` +
-          `</div>`
+          `<div class="box plain"><div class="bhead"><h2>合計ステータス</h2></div>` +
+          `<ul class="brows">${lines || '<li class="empty">—</li>'}</ul></div>`
         );
+      }
+
+      function renderCard(bodyId, r, prev) {
+        $(bodyId).innerHTML =
+          categoryBox("WeaponMod", r, prev) + categoryBox("Armor", r, prev) + categoryBox("Tech", r, prev) + totalsBox(r, prev);
       }
 
       function renderTopBar(missing) {
@@ -515,11 +523,8 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
 
         renderTopBar(missing);
         renderVerInfo(older, newer);
-        $("boxes").innerHTML =
-          categoryPair("WeaponMod", older, newer) +
-          categoryPair("Armor", older, newer) +
-          categoryPair("Tech", older, newer) +
-          totalsPair(older, newer);
+        renderCard("olderbody", older, null);
+        renderCard("newerbody", newer, older);
       }
 
       populateSelect($("older"), versions[1] ?? versions[0]);
@@ -553,51 +558,75 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
     .cells :global(.cell.over) { outline: 2px solid #d08a3e; outline-offset: 1px; }
     .cells :global(.cell.filled .icon) { width: 100%; height: 100%; border: none; border-radius: 4px; }
 
-    .verpick { display: flex; align-items: baseline; gap: var(--sp-3); flex-wrap: wrap; margin: var(--sp-3) 0; font-size: 13px; }
-    .verpick select { margin-left: var(--sp-2); }
-    .verinfo { font-size: 11px; color: var(--c-text-muted); font-family: var(--font-mono); }
-
     .missingnote {
       font-size: 12px; color: var(--c-weapon); border-left: 3px solid var(--c-weapon);
-      padding-left: var(--sp-2); max-width: 62ch;
+      padding-left: var(--sp-2); max-width: 62ch; margin: var(--sp-3) 0;
     }
 
-    /* ---- 比較ボックス: OLDER/NEWEST 左右ペア。中身は動的挿入なので :global() 必須 ---- */
-    .boxes { display: block; margin-top: var(--sp-3); }
-    .boxes :global(.pair) {
-      display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-3); margin-bottom: var(--sp-3);
+    /* ---- OLDER/NEWEST を大きなカードで包み、間に⇒を挟む ---- */
+    .comparegrid {
+      display: grid; grid-template-columns: 1fr auto 1fr; gap: var(--sp-4);
+      align-items: start; margin-top: var(--sp-3);
     }
-    .boxes :global(.box) {
+    .vercard {
+      background: var(--c-surface); border: 1px solid var(--c-border);
+      border-radius: var(--radius-lg); padding: var(--sp-4); min-width: 0;
+    }
+    .vercard.newer { border-color: var(--c-accent-dim); box-shadow: 0 0 0 1px var(--c-accent-dim) inset; }
+
+    .vercard-head {
+      display: flex; align-items: center; flex-wrap: wrap; gap: var(--sp-2) var(--sp-3);
+      padding-bottom: var(--sp-3); margin-bottom: var(--sp-3); border-bottom: 1px solid var(--c-border);
+    }
+    .vertag {
+      font-size: 19px; font-weight: 800; letter-spacing: .1em; line-height: 1;
+      padding: 5px 14px; border-radius: var(--radius);
+    }
+    .vercard.older .vertag { color: var(--c-text-muted); background: var(--c-surface-2); border: 1px solid var(--c-border-strong); }
+    .vercard.newer .vertag { color: var(--c-accent); background: var(--c-accent-bg); border: 1px solid var(--c-accent-dim); }
+    .vercard-head select { margin-left: auto; }
+    .vernum { font-size: 11px; color: var(--c-text-faint); font-family: var(--font-mono); flex-basis: 100%; }
+
+    /* 中央の⇒。「変更後は右」を示す。スクロールしても見やすいよう軽く追従させる */
+    .arrow {
+      align-self: center; position: sticky; top: 74px;
+      font-size: 30px; line-height: 1; color: var(--c-accent);
+    }
+
+    /* ---- カード内の各カテゴリーボックス。中身は動的挿入なので :global() 必須 ---- */
+    .vercard-body :global(.box) {
       background: var(--cat-bg, var(--c-surface)); border: 1px solid var(--cat, var(--c-border));
       border-radius: var(--radius-lg); padding: var(--sp-3) var(--sp-4) var(--sp-4); min-width: 0;
+      margin-bottom: var(--sp-3);
     }
-    .boxes :global(.box.plain) { background: var(--c-surface); border-color: var(--c-border); }
-    .boxes :global(.bhead) { display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-2); flex-wrap: wrap; }
-    .boxes :global(.bhead h2) { font-size: 13px; margin: 0; border: none; padding: 0; color: var(--cat, var(--c-text-strong)); letter-spacing: .04em; }
-    .boxes :global(.box.plain .bhead h2) { color: var(--c-text-strong); }
-    .boxes :global(.vtag) { font-size: 10px; letter-spacing: .04em; color: var(--c-text-faint); font-family: var(--font-mono); }
-    .boxes :global(.bhl) { margin: var(--sp-2) 0; font-size: 11px; min-height: 1em; }
-    .boxes :global(.bhl b) { font-family: var(--font-mono); font-size: 17px; color: var(--c-text-strong); margin-right: 3px; }
-    .boxes :global(.bhl small) { display: block; color: var(--c-text-faint); margin-top: 1px; }
-    .boxes :global(.brows) { list-style: none; padding: 0; margin: 0; }
-    .boxes :global(.brows li) {
+    .vercard-body :global(.box:last-child) { margin-bottom: 0; }
+    .vercard-body :global(.box.plain) { background: var(--c-surface); border-color: var(--c-border); }
+    .vercard-body :global(.bhead) { display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-2); flex-wrap: wrap; }
+    .vercard-body :global(.bhead h2) { font-size: 13px; margin: 0; border: none; padding: 0; color: var(--cat, var(--c-text-strong)); letter-spacing: .04em; }
+    .vercard-body :global(.box.plain .bhead h2) { color: var(--c-text-strong); }
+    .vercard-body :global(.bhl) { margin: var(--sp-2) 0; font-size: 11px; min-height: 1em; }
+    .vercard-body :global(.bhl b) { font-family: var(--font-mono); font-size: 17px; color: var(--c-text-strong); margin-right: 3px; }
+    .vercard-body :global(.bhl small) { display: block; color: var(--c-text-faint); margin-top: 1px; }
+    .vercard-body :global(.brows) { list-style: none; padding: 0; margin: 0; }
+    .vercard-body :global(.brows li) {
       display: flex; justify-content: space-between; align-items: baseline; gap: var(--sp-3);
       padding: 3px 0; font-size: 12px; border-bottom: 1px solid var(--c-border);
     }
-    .boxes :global(.brows .l) { color: var(--c-text-muted); }
-    .boxes :global(.brows .v) {
+    .vercard-body :global(.brows .l) { color: var(--c-text-muted); }
+    .vercard-body :global(.brows .v) {
       font-family: var(--font-mono); color: var(--c-text-strong); white-space: nowrap;
       display: inline-flex; align-items: center; gap: 3px;
     }
-    .boxes :global(.brows .empty) { color: var(--c-text-faint); border: none; font-size: 12px; display: block; }
-    .boxes :global(.delta.good) { color: var(--c-vitality); }
-    .boxes :global(.delta.bad) { color: var(--c-weapon); }
+    .vercard-body :global(.brows .empty) { color: var(--c-text-faint); border: none; font-size: 12px; display: block; }
+    .vercard-body :global(.delta.good) { color: var(--c-vitality); }
+    .vercard-body :global(.delta.bad) { color: var(--c-weapon); }
 
     .caveat { margin-top: var(--sp-4); font-size: 11px; color: var(--c-text-faint); max-width: 62ch; }
     .iconsrc { display: none; }
 
-    @media (max-width: 700px) {
-      .boxes :global(.pair) { grid-template-columns: 1fr; }
+    @media (max-width: 900px) {
+      .comparegrid { grid-template-columns: 1fr; }
+      .arrow { position: static; transform: rotate(90deg); justify-self: center; padding: var(--sp-1) 0; }
     }
   </style>
 </Base>
