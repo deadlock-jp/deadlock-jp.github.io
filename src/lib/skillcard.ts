@@ -13,12 +13,15 @@ import { t, formatProperty, describe } from "./data.ts";
 export interface CardRow {
   label: string;
   value: string;
+  /** StatIcon.astro に渡す種別。ゲーム本編の見た目に寄せる装飾で、無ければ null */
+  icon: StatIconKind | null;
 }
 export interface DamageRow {
   label: string;
   value: string;
   /** スピリットパワー係数(m_flStatScale)。null なら非スケーリング */
   scale: number | null;
+  icon: StatIconKind | null;
 }
 export interface UpgradeTier {
   /** アビリティポイント消費(1 / 2 / 5) */
@@ -51,6 +54,56 @@ const META: Array<[prop: string, label: string]> = [
 const META_NAMES = new Set(META.map(([p]) => p));
 const AP_BY_TIER = [1, 2, 5];
 
+/**
+ * ゲーム内UIに寄せた装飾アイコンの種別。実データが持つ m_strCSSClass
+ * (properties.ts で cssClass として素通ししている値)を、その意味ごとに
+ * まとめただけ。cssClass はゲーム側の分類なので、ここでの対応付けが
+ * 間違っていてもラベル・数値そのものは影響を受けない(見た目だけの話)。
+ * 見た目のアイコン自体はまだ抽出できていない(architecture.html参照)ので、
+ * 簡易SVG(StatIcon.astro)で代用している。
+ */
+export type StatIconKind =
+  | "damage"
+  | "heal"
+  | "duration"
+  | "cooldown"
+  | "range"
+  | "cast"
+  | "speed"
+  | "resist"
+  | "slow"
+  | "spirit"
+  | "ap";
+const ICON_BY_CSS_CLASS: Record<string, StatIconKind> = {
+  tech_damage: "damage",
+  bullet_damage: "damage",
+  damage: "damage",
+  melee_damage: "damage",
+  healing: "heal",
+  health: "heal",
+  duration: "duration",
+  time: "duration",
+  cooldown: "cooldown",
+  charge_cooldown: "cooldown",
+  range: "range",
+  distance: "range",
+  radius: "range",
+  cast: "cast",
+  move_speed: "speed",
+  fire_rate: "speed",
+  fireRate: "speed",
+  stamina_recovery: "speed",
+  bullet_armor_up: "resist",
+  bullet_armor_down: "resist",
+  tech_armor_up: "resist",
+  tech_armor_down: "resist",
+  combat_barrier: "resist",
+  slow: "slow",
+};
+function iconFor(p: AbilityProperty | undefined): StatIconKind | null {
+  return p?.cssClass ? (ICON_BY_CSS_CLASS[p.cssClass] ?? null) : null;
+}
+
 /** "0" / "-1" / "0m" など実質ゼロか */
 function isZero(p: AbilityProperty | undefined): boolean {
   if (!p) return true;
@@ -74,7 +127,7 @@ export function skillCard(ab: Ability, heroName = ""): SkillCard {
     if (!p) continue;
     if (isZero(p) && !(prop === "AbilityCharges" && chargeFromUpgrade)) continue;
     const { value } = formatProperty(prop, p);
-    meta.push({ label, value });
+    meta.push({ label, value, icon: iconFor(p) });
   }
 
   const damage: DamageRow[] = [];
@@ -84,6 +137,7 @@ export function skillCard(ab: Ability, heroName = ""): SkillCard {
       label: t(`${p.labelOverride ?? name}_label`, "ダメージ"),
       value: formatProperty(name, p).value,
       scale: p.scale?.statScale ?? null,
+      icon: iconFor(p) ?? "damage",
     });
   }
 
@@ -98,7 +152,7 @@ export function skillCard(ab: Ability, heroName = ""): SkillCard {
     // labelOverride(m_strLocTokenOverride)があれば、ラベルはそちらの名前で引く
     // (例: ability_doorman_bomb の "ProjectileFuse" は "BellLifetime_label" しか無い)
     if (!t(`${p.labelOverride ?? name}_label`, "")) continue;
-    effects.push(formatProperty(name, p));
+    effects.push({ ...formatProperty(name, p), icon: iconFor(p) });
   }
 
   const upgrades: UpgradeTier[] = (ab.upgrades ?? []).map((tier, i) => {
@@ -125,7 +179,11 @@ export function skillCard(ab: Ability, heroName = ""): SkillCard {
         const sign = b.startsWith("-") ? "" : "+";
         // bonus が "10m" のように単位付きのことがある。postfix を足して "10mm" にしない
         const tail = post && !b.endsWith(post) ? post : "";
-        return { label: t(`${lookupName}_label`, u.property), value: `${sign}${b}${tail}` };
+        return {
+          label: t(`${lookupName}_label`, u.property),
+          value: `${sign}${b}${tail}`,
+          icon: iconFor(props[u.property]),
+        };
       }),
     };
   });
