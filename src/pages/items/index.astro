@@ -151,7 +151,13 @@ const details = Object.fromEntries(allForHover.map((i) => [i.id, itemHoverData(i
 
   <style>
     .lead { color: var(--c-text-muted); margin-bottom: var(--sp-5); font-size: 13px; }
-    .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--sp-5); }
+    /*
+     * auto-fit ではなく auto-fill にする。auto-fit は「実際に並ぶ要素数」が
+     * 収まる列数より少ないと空いた列を潰して残りの列を伸ばすため、絞り込みで
+     * カテゴリ列が hidden になるたびに他の列の幅が変わって見た目がガタつく。
+     * auto-fill は列数を画面幅だけで決め、中身が減っても列を潰さない。
+     */
+    .cols { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--sp-5); }
 
     /* ---- TIER5(レジェンダリー。STREET BRAWLのランダムビルドドラフト専用) ---- */
     .legendary {
