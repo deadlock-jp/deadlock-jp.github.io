@@ -35,6 +35,11 @@ const KIND_LABEL: Record<AdjustmentHistoryRow["kind"], string> = {
                 {r.upstreamCommit.slice(0, 8)}
               </a>
             )}
+            {r.sourceUrl && (
+              <a class="c" href={r.sourceUrl} rel="noopener" target="_blank">
+                {r.sourceTitle ?? "公式パッチノート"}
+              </a>
+            )}
           </span>
         </li>
       ))}

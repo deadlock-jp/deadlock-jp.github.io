@@ -32,6 +32,21 @@
   --c-accent-bg: rgb(63 191 143 / 0.12); /* 淡い塗り */
   --c-accent-bg-strong: rgb(63 191 143 / 0.2);
 
+  /*
+   * ---- 背景演出「Halftone Press」用のガラス面(2026-09-13 追加) ----
+   * デザイン提案(design_handoff_site_background)のトークンをそのまま採用。
+   * ヘッダー・パネルを半透明にして、下の背景キャンバス(public/js/deadlock-bg.js)を
+   * 透かして見せる。--c-surface 系(不透明)とは役割が違うので別トークンにする。
+   */
+  --c-glass-header: rgb(7 18 26 / 0.66);
+  --c-glass-panel: rgb(8 17 24 / 0.72);
+  --c-glass-border: rgb(126 224 180 / 0.16);
+  --c-glass-border-strong: rgb(126 224 180 / 0.2);
+  --c-glass-shadow: 0 18px 44px rgb(0 0 0 / 0.55);
+  /* 背景キャンバス自体のアクセント。UIの --c-accent より明るくないと
+     暗いキャンバス上でほぼ見えないため、提案書の色をそのまま使う */
+  --c-bg-accent: #5fe0a8;
+
   /* ---- アイテムTYPE: ゲーム内の色分けに合わせる ---- */
   --c-weapon: #e0a458; /* Weapon   7.7:1 */
   --c-vitality: #8cc96e; /* Vitality 8.6:1 */
@@ -54,7 +69,10 @@
   --font-sans:
     "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Segoe UI",
     system-ui, sans-serif;
-  --font-mono: "Roboto Mono", "SFMono-Regular", Consolas, monospace;
+  /* 2026-09-13: 背景演出のデザイン提案に合わせて Roboto Mono → JetBrains Mono */
+  --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  /* トップページの見出し専用。本文には使わない(デザイン提案の "Halftone Press") */
+  --font-display: "Cinzel", serif;
 
   /* ---- 余白・角丸 ---- */
   --sp-1: 4px;

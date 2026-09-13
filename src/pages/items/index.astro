@@ -32,7 +32,7 @@ const details = Object.fromEntries(items.map((i) => [i.id, itemHoverData(i)]));
       const meta = SLOT_META[slot];
       const list = items.filter((i) => i.slotType === slot);
       return (
-        <section class="col" style={`--cat: var(--c-${meta.cssVar}); --cat-bg: var(--c-${meta.cssVar}-bg)`}>
+        <section class="col panel" style={`--cat: var(--c-${meta.cssVar}); --cat-bg: var(--c-${meta.cssVar}-bg)`}>
           <h2 class="cat">{meta.label}<span class="count">{list.length}</span></h2>
           {tiers.map((tier) => {
             const rows = list.filter((i) => i.tier === tier);

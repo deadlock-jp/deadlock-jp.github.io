@@ -21,6 +21,7 @@ const nav = [
   { href: `${base}/heroes/`, label: "ヒーロー" },
   { href: `${base}/items/`, label: "アイテム" },
   { href: `${base}/build/`, label: "ビルド" },
+  { href: `${base}/patch-notes/`, label: "パッチノート" },
 ];
 const path = Astro.url.pathname;
 
@@ -91,12 +92,13 @@ if (crumbs.length > 1) {
 
     <link rel="sitemap" type="application/xml" href={`${base}/sitemap.xml`} />
 
-    {/* ゲーム内表記に合わせて Noto Sans JP を使う。数字用に等幅も1書体だけ入れる */}
+    {/* ゲーム内表記に合わせて Noto Sans JP を使う。数字用に等幅も1書体だけ入れる。
+        Cinzel はトップページの見出し専用(背景演出「Halftone Press」の書体) */}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&family=Cinzel:wght@700&display=swap"
     />
 
     <script
@@ -106,6 +108,8 @@ if (crumbs.length > 1) {
     />
   </head>
   <body>
+    <div id="dlbg" class="dlbg" aria-hidden="true"></div>
+
     <header class="site-header">
       <div class="inner">
         <a class="wordmark" href={`${base}/`}>
@@ -144,6 +148,20 @@ if (crumbs.length > 1) {
       </div>
     </footer>
 
+    <script src={`${base}/js/deadlock-bg.js`} is:inline></script>
+    <script is:inline>
+      (() => {
+        const el = document.getElementById("dlbg");
+        if (!el || !window.DeadlockBG) return;
+        // UI全体のリンク色(--c-accent)ではなく、暗いキャンバス上で見えるよう
+        // 明るくした背景専用のアクセント(--c-bg-accent)を使う
+        const accent = getComputedStyle(document.documentElement)
+          .getPropertyValue("--c-bg-accent")
+          .trim();
+        window.DeadlockBG.mount(el, { accent: accent || undefined, glow: 0.5 });
+      })();
+    </script>
+
     <style>
       .site-header {
         /*
@@ -152,12 +170,18 @@ if (crumbs.length > 1) {
          * ヘッダー側を明示的に上に置く。
          */
         z-index: 20;
-        border-bottom: 1px solid var(--c-border);
-        /* backdrop-filter が効かない環境でも本文が透けないよう、少し濃くする */
-        background: rgb(17 22 26 / 0.92);
+        border-bottom: 1px solid var(--c-glass-border-strong);
+        background: var(--c-glass-header);
         backdrop-filter: blur(10px);
         position: sticky;
         top: 0;
+      }
+      /* backdrop-filter 非対応環境向けのフォールバック。背景キャンバスが
+         透けない代わりに、ヘッダーの読みやすさを確保する */
+      @supports not (backdrop-filter: blur(1px)) {
+        .site-header {
+          background: rgb(17 22 26 / 0.96);
+        }
       }
       .inner {
         max-width: 1120px;

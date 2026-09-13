@@ -9,17 +9,23 @@
  * 書かない)は database 側(サイトが表示するJSON)の話で、ここでの一時的な
  * 突き合わせ出力には及ばない。
  *
- * ノートのソースは2つ(両方省略可。1つも無ければ全差分が「ノート未記載」扱いになる):
+ * ノートのソースは3つ(すべて省略可。1つも無ければ全差分が「ノート未記載」扱いになる):
+ *   --patch-notes-json <file>  tools/fetch-patch-notes.mjsが生成したdata/patch-notes.json
+ *                        (既定でこのパスを自動で見に行く。diffの対象スナップショットの
+ *                         meta.json の extractedAt に最も近い1件を自動選択する)
  *   --local-root <dir>  tools/extract/extract-local.mjs の出力
  *                        (localization/citadel_patch_notes/*_japanese.txt を読む。
  *                         ヒーローラボの調整履歴のみ。範囲が狭いことに注意)
  *   --notes <file>       公式パッチノート本文を自分で保存したテキストファイル
- *                        (deadlock.wiki 等の転載ではなく、Valve公式の配信をそのまま)
+ *                        (deadlock.wiki 等の転載ではなく、Valve公式の配信をそのまま。
+ *                         --patch-notes-json の自動選択より優先したいときに使う)
  *
  * 使い方:
+ *   node tools/reconcile-patch-notes.mjs --diff data/diffs/6687..6688.json
+ *     (data/patch-notes.json から自動でノートを選んで突き合わせる)
  *   node tools/reconcile-patch-notes.mjs --diff data/diffs/6687..6688.json \
- *     --local-root "C:\Users\nogud\Downloads\deadlock-extract\local-6688" \
  *     --notes C:\path\to\official-patch-notes.txt
+ *     (手元のテキストを優先したいとき)
  */
 
 import { existsSync, readFileSync } from "node:fs";
@@ -94,6 +100,29 @@ if (notesFile) {
   }
   notesText += readFileSync(notesFile, "utf8") + "\n";
   console.error(`公式パッチノート: ${notesFile} を読み込み`);
+} else {
+  // --notes が無ければ data/patch-notes.json から自動選択する。
+  // 選ぶ基準は「to のスナップショット(meta.json.extractedAt)に最も近い日付のノート」。
+  const patchNotesPath = opt("patch-notes-json") ?? join(REPO_ROOT, "data", "patch-notes.json");
+  if (existsSync(patchNotesPath)) {
+    const notes = JSON.parse(readFileSync(patchNotesPath, "utf8")).entries ?? [];
+    let extractedAt = null;
+    try {
+      extractedAt = JSON.parse(readFileSync(join(snapDir, "meta.json"), "utf8")).extractedAt;
+    } catch {
+      /* meta.json が無ければ日付の近さでは選べない */
+    }
+    if (extractedAt && notes.length > 0) {
+      const target = new Date(extractedAt).getTime();
+      const best = notes.reduce((a, b) =>
+        Math.abs(new Date(a.date).getTime() - target) <= Math.abs(new Date(b.date).getTime() - target) ? a : b,
+      );
+      notesText += best.lines.filter((l) => !l.startsWith("## ")).join("\n") + "\n";
+      console.error(`公式パッチノート(自動選択): ${best.date} ${best.title}`);
+    } else {
+      console.error("(data/patch-notes.json はあるが、自動選択に必要な情報が無い)");
+    }
+  }
 }
 if (!notesText.trim()) {
   console.error(

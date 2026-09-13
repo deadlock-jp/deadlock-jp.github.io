@@ -5,6 +5,7 @@ import { join } from "node:path";
 import updatesJson from "../../data/updates.json" with { type: "json" };
 import heroNotesJson from "../../data/hero-notes.json" with { type: "json" };
 import itemNotesJson from "../../data/item-notes.json" with { type: "json" };
+import patchNotesJson from "../../data/patch-notes.json" with { type: "json" };
 import type { HeroesFile, Hero } from "../types/hero.ts";
 import type { ItemsFile, Item } from "../types/item.ts";
 import type { AbilitiesFile, Ability } from "../types/ability.ts";
@@ -500,6 +501,9 @@ export interface SiteUpdate {
   title: string;
   changes: string[];
   adjustments?: Adjustment[];
+  /** 元になった公式パッチノート(tools/gen-updates.mjsがdata/patch-notes.jsonから自動で付与) */
+  sourceTitle?: string;
+  sourceUrl?: string;
 }
 const updatesFile = updatesJson as unknown as {
   upstreamRepo: string;
@@ -522,6 +526,8 @@ export interface AdjustmentHistoryRow {
   upstreamCommit: string | null;
   kind: AdjustmentKind;
   note?: string;
+  sourceTitle?: string;
+  sourceUrl?: string;
 }
 function adjustmentsFor(target: "hero" | "item", key: string): AdjustmentHistoryRow[] {
   return siteUpdates().flatMap((u) =>
@@ -533,6 +539,8 @@ function adjustmentsFor(target: "hero" | "item", key: string): AdjustmentHistory
         upstreamCommit: u.upstreamCommit,
         kind: a.kind,
         note: a.note,
+        sourceTitle: u.sourceTitle,
+        sourceUrl: u.sourceUrl,
       })),
   );
 }
@@ -540,3 +548,21 @@ export const heroAdjustments = (heroKey: string): AdjustmentHistoryRow[] =>
   adjustmentsFor("hero", heroKey);
 export const itemAdjustments = (itemId: string): AdjustmentHistoryRow[] =>
   adjustmentsFor("item", itemId);
+
+/**
+ * 公式パッチノート本文のアーカイブ。data/patch-notes.json(tools/fetch-patch-notes.mjsが
+ * Steamの公開ニュースAPIから取得)を新しい順で返す。Valve公式の投稿本文そのもので、
+ * こちらで書き起こしたものではない。
+ */
+export interface PatchNoteEntry {
+  gid: string;
+  date: string;
+  title: string;
+  url: string;
+  /** BBCodeから変換済みの行。"## " で始まる行は見出し */
+  lines: string[];
+}
+const patchNotesFile = patchNotesJson as unknown as { entries: PatchNoteEntry[] };
+export function patchNotes(): PatchNoteEntry[] {
+  return [...patchNotesFile.entries].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+}

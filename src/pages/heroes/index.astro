@@ -90,7 +90,7 @@ for (const h of releasedHeroes()) {
   <h1>ヒーロー</h1>
 
   {/* ------------ 上部: 項目別ステータスランク ------------ */}
-  <section class="tt">
+  <section class="tt panel">
     <div class="tt-head">
       <h2>ステータスランク</h2>
       <label class="metricpick">
@@ -212,12 +212,8 @@ for (const h of releasedHeroes()) {
   <style>
     .lead { color: var(--c-text-muted); margin-bottom: var(--sp-5); }
 
-    /* ---- ティア表 ---- */
+    /* ---- ティア表(見た目は global.css の .panel を流用) ---- */
     .tt {
-      background: var(--c-surface);
-      border: 1px solid var(--c-border);
-      border-radius: var(--radius-lg);
-      padding: var(--sp-4);
       margin-bottom: var(--sp-6);
     }
     .tt-head {

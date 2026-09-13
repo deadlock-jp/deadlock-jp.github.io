@@ -29,9 +29,11 @@ const repo = "https://github.com/deadlock-jp/deadlock-jp.github.io";
 <Base title="このサイトについて" description="DEADLOCK-JP DB の出典と権利表示">
   <h1>このサイトについて</h1>
 
+  <div class="panel">
   <p class="lead">
     Valve の『Deadlock』のヒーロー・アイテム・スキルの数値を、日本語で引けるようにした
-    非公式のデータベースです。攻略の解説や考察は載せず、ゲームの生データをそのまま並べています。
+    非公式のデータベースです。ゲームの生データをそのまま並べることを基本にしつつ、
+    解説や考察も掲載します。
   </p>
 
   <h2>権利表示</h2>
@@ -70,11 +72,16 @@ const repo = "https://github.com/deadlock-jp/deadlock-jp.github.io";
       <span class="k">アイコン・肖像の画像</span>
       <span class="v">ゲーム本体の VPK から抽出</span>
     </li>
+    <li>
+      <span class="k">パッチノート本文</span>
+      <span class="v">Steam公式ニュース（Valve本人の投稿）</span>
+    </li>
   </ul>
   <p class="note">
     検算・過去バージョンの補完には
     <a href={upstreamRepo} rel="noopener">GameTracking-Deadlock</a>
-    も使っています。
+    も使っています。<a href={`${base}/patch-notes/`}>パッチノート</a>はdeadlock.wiki等の
+    第三者の文章ではなく、Steamの公開ニュースAPIからValve公式の投稿本文をそのまま取得しています。
   </p>
 
   <h2>更新のしかた</h2>
@@ -107,6 +114,7 @@ const repo = "https://github.com/deadlock-jp/deadlock-jp.github.io";
     これはコードにのみ及ぶもので、<code>data/</code> と <code>public/images/</code> の
     ゲーム由来のデータ・画像は対象外です。
   </p>
+  </div>
 
   <style>
     .lead { color: var(--c-text-muted); max-width: 62ch; }

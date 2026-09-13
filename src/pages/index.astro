@@ -100,9 +100,12 @@ const updates = siteUpdates().map((u) => {
   title="トップ"
   description="Deadlock（デッドロック）のヒーロー・アイテム・スキルの数値を日本語で引ける非公式データベース。ヒーローの基礎ステータス、ショップアイテムの効果と価格、スキルのダメージとスピリット係数を、ゲームの生データから自動生成。ビルドシミュレーターつき。"
 >
-  <h1 class="sr-only">DEADLOCK-JP DB — Deadlock 日本語データベース</h1>
+  <div class="herohead">
+    <span class="eyebrow">Unofficial Database</span>
+    <h1>DEADLOCK 日本語データベース</h1>
+  </div>
 
-  <section class="block first">
+  <section class="block panel first">
     <h2>
       ヒーロー
       <a class="more" href={`${base}/heroes/`}>一覧を見る →</a>
@@ -129,7 +132,7 @@ const updates = siteUpdates().map((u) => {
     </ul>
   </section>
 
-  <section class="block">
+  <section class="block panel">
     <h2>
       アイテム
       <a class="more" href={`${base}/items/`}>一覧を見る →</a>
@@ -171,7 +174,7 @@ const updates = siteUpdates().map((u) => {
     }
   </section>
 
-  <section class="block">
+  <section class="block panel">
     <h2>更新履歴</h2>
     <ol class="updates">
       {
@@ -184,6 +187,11 @@ const updates = siteUpdates().map((u) => {
                 {commitUrl(u.upstreamCommit) && (
                   <a class="ucommit" href={commitUrl(u.upstreamCommit)} rel="noopener">
                     {u.upstreamCommit!.slice(0, 8)}
+                  </a>
+                )}
+                {u.sourceUrl && (
+                  <a class="usource" href={u.sourceUrl} rel="noopener" target="_blank">
+                    {u.sourceTitle ?? "公式パッチノート"} →
                   </a>
                 )}
               </span>
@@ -229,7 +237,7 @@ const updates = siteUpdates().map((u) => {
     </ol>
   </section>
 
-  <section class="block">
+  <section class="block panel">
     <h2>このサイトについて</h2>
     <p class="about">
       数値はすべてパーサーが GameTracking-Deadlock の <code>.vdata</code> から自動で取り出しています。
@@ -243,8 +251,37 @@ const updates = siteUpdates().map((u) => {
   <ItemHoverCard details={itemDetails} />
 
   <style>
+    /* ---- ヒーロー見出し(背景演出「Halftone Press」) ---- */
+    .herohead {
+      position: relative;
+      padding: var(--sp-7) 0 var(--sp-6);
+      text-align: center;
+    }
+    .eyebrow {
+      display: block;
+      margin-bottom: var(--sp-3);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: var(--c-bg-accent);
+    }
+    .herohead h1 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(28px, 4.4vw, 48px);
+      line-height: 1.15;
+      letter-spacing: 0.05em;
+      word-break: keep-all;
+      color: var(--c-text-strong);
+      text-shadow: 0 2px 22px rgb(0 0 0 / 0.8);
+      text-wrap: balance;
+    }
+
+    /* ---- 各セクション(見た目は global.css の .panel を流用) ---- */
     .block {
-      margin-top: var(--sp-6);
+      margin-top: var(--sp-5);
     }
     .block.first {
       margin-top: 0;
@@ -254,6 +291,8 @@ const updates = siteUpdates().map((u) => {
       align-items: baseline;
       justify-content: space-between;
       gap: var(--sp-3);
+      margin-top: 0;
+      border-bottom-color: var(--c-glass-border-strong);
     }
     .more {
       font-size: 12px;
@@ -293,6 +332,13 @@ const updates = siteUpdates().map((u) => {
       font-size: 11px;
       margin-left: var(--sp-2);
       color: var(--c-text-muted);
+    }
+    .usource {
+      display: inline-block;
+      margin-left: var(--sp-2);
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--c-accent);
     }
     .uchanges {
       margin: var(--sp-1) 0 0;
@@ -360,10 +406,12 @@ const updates = siteUpdates().map((u) => {
       position: relative;
       display: block;
       aspect-ratio: 120 / 200;
-      border: 1px solid var(--c-border);
+      border: 1px solid var(--c-glass-border);
       border-radius: var(--radius);
       overflow: hidden;
-      background: var(--c-surface-2);
+      /* 不透明にすると、カード絵の透過部分(角のフチなど)が
+         ただの色付き箱に見えてしまう。背景キャンバスを透かす */
+      background: transparent;
     }
     .hcard img {
       width: 100%;

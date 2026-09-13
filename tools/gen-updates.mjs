@@ -202,13 +202,47 @@ const changes = [
   `ヒーロー・アイテムの数値差分から自動生成 (強化 ${count.buff} / 弱体 ${count.nerf} / リワーク ${count.rework})`,
 ];
 
+/**
+ * data/patch-notes.json(tools/fetch-patch-notes.mjsが生成)から、このエントリの日付に
+ * 最も近い公式パッチノートを探して出典として添える。ベストエフォート専用の付加情報で、
+ * 見つからなくても生成は止めない(reconcile-patch-notes.mjsと同じく、ノート取得を
+ * パイプラインの依存にしない方針)。
+ */
+function findNearestPatchNote(dateISO) {
+  let notes;
+  try {
+    notes = JSON.parse(readFileSync(join(process.cwd(), "data", "patch-notes.json"), "utf8")).entries;
+  } catch {
+    return null;
+  }
+  const target = new Date(dateISO).getTime();
+  const MAX_GAP_DAYS = 5;
+  let best = null;
+  let bestGap = Infinity;
+  for (const n of notes ?? []) {
+    const gap = Math.abs(new Date(n.date).getTime() - target);
+    if (gap < bestGap) {
+      best = n;
+      bestGap = gap;
+    }
+  }
+  if (!best || bestGap > MAX_GAP_DAYS * 86400000) return null;
+  return best;
+}
+
+const sourceNote = findNearestPatchNote(DATE);
+
 const entry = {
   date: DATE,
   upstreamCommit: COMMIT,
   title: TITLE,
   changes,
   adjustments,
+  ...(sourceNote ? { sourceTitle: sourceNote.title, sourceUrl: sourceNote.url } : {}),
 };
+if (sourceNote) {
+  console.error(`出典パッチノートを自動で紐付け: ${sourceNote.date} ${sourceNote.title}`);
+}
 
 if (flag("write")) {
   const path = join(NEW_DIR, "updates.json");

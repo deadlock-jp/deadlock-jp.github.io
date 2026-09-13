@@ -25,7 +25,12 @@ html {
 
 body {
   margin: 0;
-  background: var(--c-bg);
+  /*
+   * 背景色は html 側だけに置く(キャンバス背景として最下層に塗られる)。
+   * body にも塗ると、html と両方に背景があるときは body の背景が
+   * 通常フローの描画層(z-index:-1 の .dlbg より上)に乗ってしまい、
+   * 背景キャンバスを完全に覆い隠してしまう(2026-09-13 に発覚)。
+   */
   color: var(--c-text);
   font-family: var(--font-sans);
   font-size: 15px;
@@ -33,20 +38,43 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ページ上部にサムネイルの緑の光を薄く再現する */
-body::before {
-  content: "";
+/*
+ * ページ全体の背景演出(2026-09-13 追加)。サムネイルの緑の光を再現していた
+ * 静的グラデーション(body::before)の代わりに、網点の空+ビルのシルエットを
+ * 描く Canvas アニメーション(public/js/deadlock-bg.js)を敷く。
+ * デザイン提案(design_handoff_site_background)の見出し書体・ガラス面の
+ * ヘッダー/パネルも合わせて採用している(2026-09-13、単独の背景キャンバスだけでは
+ * 新デザインがほぼ視認できなかったため)。
+ */
+
+/*
+ * 各ページの内容をまとめる「ガラス面」。背景キャンバスを透かしつつ、
+ * 中の数値・文章は読める濃さにする(--c-glass-panel は不透明度.72)。
+ * ヒーロー/アイテム一覧の1行1行のような密なデータ行は、可読性優先で
+ * これまでどおり --c-surface(不透明)のままにし、この .panel はページの
+ * 大きな区切り単位(セクション)にだけ使う。
+ */
+.panel {
+  background: var(--c-glass-panel);
+  border: 1px solid var(--c-glass-border);
+  border-radius: 3px;
+  box-shadow: var(--c-glass-shadow);
+  padding: var(--sp-4) var(--sp-5);
+}
+
+.dlbg {
   position: fixed;
-  inset: 0 0 auto 0;
-  height: 420px;
-  background: radial-gradient(
-    120% 100% at 50% 0%,
-    rgb(48 120 96 / 0.28) 0%,
-    rgb(24 36 48 / 0.18) 45%,
-    transparent 75%
-  );
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: var(--c-bg); /* JS読み込み前・非対応環境のフォールバック */
   pointer-events: none;
-  z-index: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  /* アニメーション自体はJS側(deadlock-bg.js)が自動停止する。ここでは薄く控えめにする */
+  .dlbg {
+    opacity: 0.85;
+  }
 }
 
 h1,
