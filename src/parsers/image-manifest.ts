@@ -89,7 +89,9 @@ export function buildImageManifest(dataDir: string): ImageManifest {
   };
 
   for (const item of Object.values(items.items)) {
-    if (item.inShop) add(item.shopIcon, `item:${item.id}`);
+    // tier5 は inShop=false だが、STREET BRAWL(ランダムビルド)モードの
+    // 伝説級アイテムとしてアイテム一覧ページの下部に表示するため対象に含める
+    if (item.inShop || item.tier === 5) add(item.shopIcon, `item:${item.id}`);
   }
   for (const ab of Object.values(abilities.abilities)) {
     add(ab.image, `ability:${ab.id}`);
@@ -125,7 +127,12 @@ export function verifyExtraction(
 
 function main(): void {
   const repoRoot = process.argv[2] ?? ".";
-  const manifest = buildImageManifest(join(repoRoot, "data"));
+  // data/*.json はもう無い(data/snapshots/<version>/ 移行済み)。
+  // data/latest.json が指す現行バージョンのスナップショットを読む。
+  const latest = JSON.parse(
+    readFileSync(join(repoRoot, "data", "latest.json"), "utf8"),
+  ) as { version: string };
+  const manifest = buildImageManifest(join(repoRoot, "data", "snapshots", latest.version));
   mkdirSync(join(repoRoot, "data"), { recursive: true });
   writeFileSync(
     join(repoRoot, "data/image-manifest.json"),

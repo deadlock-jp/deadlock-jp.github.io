@@ -409,6 +409,19 @@ export function shopItems(): Item[] {
     );
 }
 
+/**
+ * TIER5(レジェンダリー)アイテム。通常のショップには並ばず(inShop: false)、
+ * STREET BRAWL(ストリートブロウル)モードのランダムビルドドラフトにだけ
+ * レジェンダリー枠として出現する。ビルドシミュレーターは通常ショップの
+ * 再現なので対象外(shopItems() のみを使う)。名前を持たない内部の
+ * テンプレート(armor_upgrade_t5 等)は除く。
+ */
+export function legendaryItems(): Item[] {
+  return Object.values(itemsFile.items)
+    .filter((i) => i.tier === 5 && t(i.nameToken, ""))
+    .sort((a, b) => t(a.nameToken, a.id).localeCompare(t(b.nameToken, b.id)));
+}
+
 export function ability(id: string): Ability | undefined {
   return abilitiesFile.abilities[id];
 }

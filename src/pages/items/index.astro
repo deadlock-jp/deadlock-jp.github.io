@@ -2,15 +2,21 @@
 import Base from "../../layouts/Base.astro";
 import ItemIcon from "../../components/ItemIcon.astro";
 import ItemHoverCard from "../../components/ItemHoverCard.astro";
-import { shopItems, t, describe, itemsFile, SLOT_META, souls, itemHoverData } from "../../lib/data.ts";
+import { shopItems, legendaryItems, t, describe, itemsFile, SLOT_META, souls, itemHoverData } from "../../lib/data.ts";
 
 const items = shopItems();
 const slots = ["WeaponMod", "Armor", "Tech"] as const;
 const tiers = [...new Set(items.map((i) => i.tier))].sort();
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
+const legendary = legendaryItems();
+/* ゲーム内の表記(t()) をそのまま使う。自前で「伝説級」等に訳し直さない */
+const legendaryLabel = t("Citadel_ItemDraft_Legendary", "Legendary");
+const streetBrawlLabel = t("Citadel_Play_StreetBrawl_Title", "Street Brawl");
+
 /* マウスオーバーで出る詳細カード用データ(ビルド画面・トップと共通) */
-const details = Object.fromEntries(items.map((i) => [i.id, itemHoverData(i)]));
+const allForHover = [...items, ...legendary];
+const details = Object.fromEntries(allForHover.map((i) => [i.id, itemHoverData(i)]));
 ---
 
 <Base title="アイテム一覧" description="Deadlockのショップアイテムの効果と価格">
@@ -73,6 +79,36 @@ const details = Object.fromEntries(items.map((i) => [i.id, itemHoverData(i)]));
     })}
   </div>
 
+  {legendary.length > 0 && (
+    <section class="panel legendary">
+      <h2 class="cat legcat">
+        {legendaryLabel}
+        <span class="legnote">{streetBrawlLabel}のランダムビルドドラフトに出現</span>
+      </h2>
+      <ul class="leggrid">
+        {legendary.map((i) => {
+          const iname = t(i.nameToken, i.id);
+          return (
+            <li>
+              <a href={`${base}/items/${i.id}/`} data-itemcard={i.id}>
+                <ItemIcon
+                  name={iname}
+                  slotType={i.slotType}
+                  tier={i.tier}
+                  shopIcon={i.shopIcon}
+                  activation={i.activation}
+                  isImbue={i.isImbue}
+                  size={52}
+                />
+                <span class="iname">{iname}</span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  )}
+
   {/* ホバー時の詳細カード(ビルド画面・トップと共通コンポーネント) */}
   <ItemHoverCard details={details} />
 
@@ -116,6 +152,28 @@ const details = Object.fromEntries(items.map((i) => [i.id, itemHoverData(i)]));
   <style>
     .lead { color: var(--c-text-muted); margin-bottom: var(--sp-5); font-size: 13px; }
     .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--sp-5); }
+
+    /* ---- TIER5(レジェンダリー。STREET BRAWLのランダムビルドドラフト専用) ---- */
+    .legendary {
+      margin-top: var(--sp-5);
+      /* ヒーロー一覧のティア表(Sランク)と同じ金色で「特別枠」を示す */
+      --leg: #e8b93a;
+    }
+    .legcat {
+      color: var(--leg); border-bottom-color: var(--leg);
+      display: flex; align-items: baseline; gap: var(--sp-3); margin-top: 0;
+    }
+    .legnote { font-size: 12px; font-weight: 400; color: var(--c-text-muted); }
+    .leggrid {
+      list-style: none; padding: 0; margin: 0;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: var(--sp-3);
+    }
+    .leggrid a {
+      display: flex; flex-direction: column; align-items: center; gap: var(--sp-2);
+      text-align: center; color: inherit; padding: var(--sp-2); border-radius: var(--radius);
+    }
+    .leggrid a:hover { background: rgb(232 185 58 / 0.1); text-decoration: none; }
+    .leggrid .iname { font-size: 12px; color: var(--c-text-strong); line-height: 1.3; }
     .cat {
       color: var(--cat); border-bottom-color: var(--cat);
       display: flex; align-items: baseline; justify-content: space-between; margin-top: 0;

@@ -237,15 +237,6 @@ const updates = siteUpdates().map((u) => {
     </ol>
   </section>
 
-  <section class="block panel">
-    <h2>このサイトについて</h2>
-    <p class="about">
-      数値はすべてパーサーが GameTracking-Deadlock の <code>.vdata</code> から自動で取り出しています。
-      日本語表記はゲーム本体の公式ローカライズをそのまま使用。出典・権利表示・ライセンスは
-      <a href={`${base}/about/`}>このサイトについて</a> にまとめています。
-    </p>
-  </section>
-
   {/* ヒーロー/アイテムのホバー詳細(共通コンポーネント) */}
   <HeroHoverCard heroDetail={heroDetail} />
   <ItemHoverCard details={itemDetails} />
@@ -486,17 +477,6 @@ const updates = siteUpdates().map((u) => {
     }
     .itemwall a:hover {
       filter: brightness(1.2);
-    }
-
-    .about {
-      max-width: 62ch;
-      font-size: 13px;
-      color: var(--c-text-muted);
-      line-height: 1.8;
-    }
-    code {
-      font-family: var(--font-mono);
-      font-size: 0.92em;
     }
   </style>
 </Base>

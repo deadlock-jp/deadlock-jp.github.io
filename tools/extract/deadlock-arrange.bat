@@ -1,5 +1,5 @@
 @echo off
-REM 自動生成: tools/make-arrange-bat.ts (画像 507 件)
+REM 自動生成: tools/make-arrange-bat.ts (画像 530 件)
 REM 手で編集しないこと。data/image-manifest.json を直して作り直す。
 setlocal enabledelayedexpansion
 set SRC=%~dp0deadlock-extract\game-images
@@ -63,6 +63,7 @@ mkdir "%ROOT%\public\images\hud\abilities\wrecker" 2>nul
 mkdir "%ROOT%\public\images\hud\abilities\yamato" 2>nul
 mkdir "%ROOT%\public\images\hud\icons" 2>nul
 mkdir "%ROOT%\public\images\items" 2>nul
+mkdir "%ROOT%\public\images\items\brawl" 2>nul
 mkdir "%ROOT%\public\images\items\spirit" 2>nul
 mkdir "%ROOT%\public\images\items\vitality" 2>nul
 mkdir "%ROOT%\public\images\items\weapon" 2>nul
@@ -73,7 +74,7 @@ mkdir "%ROOT%\public\images\upgrades\mods_tech" 2>nul
 mkdir "%ROOT%\public\images\upgrades\mods_utility" 2>nul
 mkdir "%ROOT%\public\images\upgrades\mods_weapon" 2>nul
 
-echo Copying 507 files ...
+echo Copying 530 files ...
 copy /y "%SRC%\panorama\images\heroes\archer_card_psd.png" "%ROOT%\public\images\heroes\archer_card.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING heroes\archer_card_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
 copy /y "%SRC%\panorama\images\heroes\archer_mm_psd.png" "%ROOT%\public\images\heroes\archer_mm.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING heroes\archer_mm_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
 copy /y "%SRC%\panorama\images\heroes\archer_sm_psd.png" "%ROOT%\public\images\heroes\archer_sm.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING heroes\archer_sm_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
@@ -415,6 +416,29 @@ copy /y "%SRC%\panorama\images\hud\abilities\yamato\yamato_crimson_slash_psd.png
 copy /y "%SRC%\panorama\images\hud\abilities\yamato\yamato_flying_strike_psd.png" "%ROOT%\public\images\hud\abilities\yamato\yamato_flying_strike.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING hud\abilities\yamato\yamato_flying_strike_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
 copy /y "%SRC%\panorama\images\hud\abilities\yamato\yamato_power_slash_psd.png" "%ROOT%\public\images\hud\abilities\yamato\yamato_power_slash.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING hud\abilities\yamato\yamato_power_slash_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
 copy /y "%SRC%\panorama\images\hud\icons\icon_speed.svg" "%ROOT%\public\images\hud\icons\icon_speed.svg" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING hud\icons\icon_speed.svg>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\items\brawl\aerial_mastery_psd.png" "%ROOT%\public\images\items\brawl\aerial_mastery.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\brawl\aerial_mastery_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\items\brawl\ancient_shielding_psd.png" "%ROOT%\public\images\items\brawl\ancient_shielding.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\brawl\ancient_shielding_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\items\brawl\apex_combat_psd.png" "%ROOT%\public\images\items\brawl\apex_combat.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\brawl\apex_combat_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\items\brawl\celestial_guidance_psd.png" "%ROOT%\public\images\items\brawl\celestial_guidance.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\brawl\celestial_guidance_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\items\brawl\cloak_of_opportunity_psd.png" "%ROOT%\public\images\items\brawl\cloak_of_opportunity.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\brawl\cloak_of_opportunity_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\items\brawl\eldritch_shot_psd.png" "%ROOT%\public\images\items\brawl\eldritch_shot.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\brawl\eldritch_shot_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\items\brawl\electric_slippers_psd.png" "%ROOT%\public\images\items\brawl\electric_slippers.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\brawl\electric_slippers_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\items\brawl\eternal_gift_psd.png" "%ROOT%\public\images\items\brawl\eternal_gift.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\brawl\eternal_gift_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\items\brawl\frostbite_psd.png" "%ROOT%\public\images\items\brawl\frostbite.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\brawl\frostbite_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\items\brawl\haunting_scream_psd.png" "%ROOT%\public\images\items\brawl\haunting_scream.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\brawl\haunting_scream_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\items\brawl\icarus_wings_psd.png" "%ROOT%\public\images\items\brawl\icarus_wings.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\brawl\icarus_wings_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\items\brawl\infinite_rounds_psd.png" "%ROOT%\public\images\items\brawl\infinite_rounds.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\brawl\infinite_rounds_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\items\brawl\mystical_piano_psd.png" "%ROOT%\public\images\items\brawl\mystical_piano.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\brawl\mystical_piano_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\items\brawl\nullification_aura_psd.png" "%ROOT%\public\images\items\brawl\nullification_aura.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\brawl\nullification_aura_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\items\brawl\omnicharge_pendant_psd.png" "%ROOT%\public\images\items\brawl\omnicharge_pendant.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\brawl\omnicharge_pendant_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\items\brawl\patrons_blessing_psd.png" "%ROOT%\public\images\items\brawl\patrons_blessing.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\brawl\patrons_blessing_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\items\brawl\prism_blast_psd.png" "%ROOT%\public\images\items\brawl\prism_blast.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\brawl\prism_blast_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\items\brawl\runed_gauntlets_psd.png" "%ROOT%\public\images\items\brawl\runed_gauntlets.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\brawl\runed_gauntlets_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\items\brawl\shadow_step_psd.png" "%ROOT%\public\images\items\brawl\shadow_step.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\brawl\shadow_step_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\items\brawl\shadow_strike_psd.png" "%ROOT%\public\images\items\brawl\shadow_strike.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\brawl\shadow_strike_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\items\brawl\shrink_ray_psd.png" "%ROOT%\public\images\items\brawl\shrink_ray.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\brawl\shrink_ray_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\items\brawl\timeless_emblem_psd.png" "%ROOT%\public\images\items\brawl\timeless_emblem.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\brawl\timeless_emblem_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\items\brawl\unstable_concoction_psd.png" "%ROOT%\public\images\items\brawl\unstable_concoction.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\brawl\unstable_concoction_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
 copy /y "%SRC%\panorama\images\items\spirit\arcane_surge_psd.png" "%ROOT%\public\images\items\spirit\arcane_surge.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\spirit\arcane_surge_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
 copy /y "%SRC%\panorama\images\items\spirit\arctic_blast_psd.png" "%ROOT%\public\images\items\spirit\arctic_blast.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\spirit\arctic_blast_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
 copy /y "%SRC%\panorama\images\items\spirit\boundless_spirit_psd.png" "%ROOT%\public\images\items\spirit\boundless_spirit.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\spirit\boundless_spirit_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
@@ -589,6 +613,6 @@ echo Zipping ...
 if exist "%ZIP%" del "%ZIP%"
 powershell -NoProfile -ExecutionPolicy Bypass -Command "Compress-Archive -Path '%ROOT%\public' -DestinationPath '%ZIP%' -Force"
 echo.
-echo DONE -^> %ZIP%    (期待値: 507 件)
+echo DONE -^> %ZIP%    (期待値: 530 件)
 echo.
 pause

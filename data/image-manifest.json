@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-05T12:15:53.599Z",
+  "generatedAt": "2026-09-13T06:56:46.200Z",
   "sourceVpk": "game/citadel/pak01_dir.vpk",
   "entries": [
     {
@@ -3307,6 +3307,213 @@
       "kind": "vsvg",
       "usedBy": [
         "ability:citadel_ability_sprint"
+      ]
+    },
+    {
+      "ref": "file://{images}/items/brawl/aerial_mastery.psd",
+      "vpkPath": "panorama/images/items/brawl/aerial_mastery_psd.vtex_c",
+      "outPath": "public/images/items/brawl/aerial_mastery.png",
+      "kind": "vtex",
+      "usedBy": [
+        "item:upgrade_aerial_supremacy"
+      ]
+    },
+    {
+      "ref": "file://{images}/items/brawl/ancient_shielding.psd",
+      "vpkPath": "panorama/images/items/brawl/ancient_shielding_psd.vtex_c",
+      "outPath": "public/images/items/brawl/ancient_shielding.png",
+      "kind": "vtex",
+      "usedBy": [
+        "item:upgrade_ancient_shield"
+      ]
+    },
+    {
+      "ref": "file://{images}/items/brawl/apex_combat.psd",
+      "vpkPath": "panorama/images/items/brawl/apex_combat_psd.vtex_c",
+      "outPath": "public/images/items/brawl/apex_combat.png",
+      "kind": "vtex",
+      "usedBy": [
+        "item:upgrade_apex_combat"
+      ]
+    },
+    {
+      "ref": "file://{images}/items/brawl/celestial_guidance.psd",
+      "vpkPath": "panorama/images/items/brawl/celestial_guidance_psd.vtex_c",
+      "outPath": "public/images/items/brawl/celestial_guidance.png",
+      "kind": "vtex",
+      "usedBy": [
+        "item:upgrade_celestial_guidance"
+      ]
+    },
+    {
+      "ref": "file://{images}/items/brawl/cloak_of_opportunity.psd",
+      "vpkPath": "panorama/images/items/brawl/cloak_of_opportunity_psd.vtex_c",
+      "outPath": "public/images/items/brawl/cloak_of_opportunity.png",
+      "kind": "vtex",
+      "usedBy": [
+        "item:upgrade_cloak_of_opportunity"
+      ]
+    },
+    {
+      "ref": "file://{images}/items/brawl/eldritch_shot.psd",
+      "vpkPath": "panorama/images/items/brawl/eldritch_shot_psd.vtex_c",
+      "outPath": "public/images/items/brawl/eldritch_shot.png",
+      "kind": "vtex",
+      "usedBy": [
+        "item:upgrade_eldritch_shot"
+      ]
+    },
+    {
+      "ref": "file://{images}/items/brawl/electric_slippers.psd",
+      "vpkPath": "panorama/images/items/brawl/electric_slippers_psd.vtex_c",
+      "outPath": "public/images/items/brawl/electric_slippers.png",
+      "kind": "vtex",
+      "usedBy": [
+        "item:upgrade_electric_slippers"
+      ]
+    },
+    {
+      "ref": "file://{images}/items/brawl/eternal_gift.psd",
+      "vpkPath": "panorama/images/items/brawl/eternal_gift_psd.vtex_c",
+      "outPath": "public/images/items/brawl/eternal_gift.png",
+      "kind": "vtex",
+      "usedBy": [
+        "item:upgrade_eternal_gift"
+      ]
+    },
+    {
+      "ref": "file://{images}/items/brawl/frostbite.psd",
+      "vpkPath": "panorama/images/items/brawl/frostbite_psd.vtex_c",
+      "outPath": "public/images/items/brawl/frostbite.png",
+      "kind": "vtex",
+      "usedBy": [
+        "item:upgrade_shivas_bracelet"
+      ]
+    },
+    {
+      "ref": "file://{images}/items/brawl/haunting_scream.psd",
+      "vpkPath": "panorama/images/items/brawl/haunting_scream_psd.vtex_c",
+      "outPath": "public/images/items/brawl/haunting_scream.png",
+      "kind": "vtex",
+      "usedBy": [
+        "item:upgrade_haunting_scream"
+      ]
+    },
+    {
+      "ref": "file://{images}/items/brawl/icarus_wings.psd",
+      "vpkPath": "panorama/images/items/brawl/icarus_wings_psd.vtex_c",
+      "outPath": "public/images/items/brawl/icarus_wings.png",
+      "kind": "vtex",
+      "usedBy": [
+        "item:upgrade_icarus_wings"
+      ]
+    },
+    {
+      "ref": "file://{images}/items/brawl/infinite_rounds.psd",
+      "vpkPath": "panorama/images/items/brawl/infinite_rounds_psd.vtex_c",
+      "outPath": "public/images/items/brawl/infinite_rounds.png",
+      "kind": "vtex",
+      "usedBy": [
+        "item:upgrade_infinite_rounds"
+      ]
+    },
+    {
+      "ref": "file://{images}/items/brawl/mystical_piano.psd",
+      "vpkPath": "panorama/images/items/brawl/mystical_piano_psd.vtex_c",
+      "outPath": "public/images/items/brawl/mystical_piano.png",
+      "kind": "vtex",
+      "usedBy": [
+        "item:upgrade_mystical_piano"
+      ]
+    },
+    {
+      "ref": "file://{images}/items/brawl/nullification_aura.psd",
+      "vpkPath": "panorama/images/items/brawl/nullification_aura_psd.vtex_c",
+      "outPath": "public/images/items/brawl/nullification_aura.png",
+      "kind": "vtex",
+      "usedBy": [
+        "item:upgrade_nullification_aura"
+      ]
+    },
+    {
+      "ref": "file://{images}/items/brawl/omnicharge_pendant.psd",
+      "vpkPath": "panorama/images/items/brawl/omnicharge_pendant_psd.vtex_c",
+      "outPath": "public/images/items/brawl/omnicharge_pendant.png",
+      "kind": "vtex",
+      "usedBy": [
+        "item:upgrade_omnicharge_pendant"
+      ]
+    },
+    {
+      "ref": "file://{images}/items/brawl/patrons_blessing.psd",
+      "vpkPath": "panorama/images/items/brawl/patrons_blessing_psd.vtex_c",
+      "outPath": "public/images/items/brawl/patrons_blessing.png",
+      "kind": "vtex",
+      "usedBy": [
+        "item:upgrade_patrons_blessing"
+      ]
+    },
+    {
+      "ref": "file://{images}/items/brawl/prism_blast.psd",
+      "vpkPath": "panorama/images/items/brawl/prism_blast_psd.vtex_c",
+      "outPath": "public/images/items/brawl/prism_blast.png",
+      "kind": "vtex",
+      "usedBy": [
+        "item:upgrade_prism_blast"
+      ]
+    },
+    {
+      "ref": "file://{images}/items/brawl/runed_gauntlets.psd",
+      "vpkPath": "panorama/images/items/brawl/runed_gauntlets_psd.vtex_c",
+      "outPath": "public/images/items/brawl/runed_gauntlets.png",
+      "kind": "vtex",
+      "usedBy": [
+        "item:upgrade_runed_gauntlets"
+      ]
+    },
+    {
+      "ref": "file://{images}/items/brawl/shadow_step.psd",
+      "vpkPath": "panorama/images/items/brawl/shadow_step_psd.vtex_c",
+      "outPath": "public/images/items/brawl/shadow_step.png",
+      "kind": "vtex",
+      "usedBy": [
+        "item:upgrade_shadow_step"
+      ]
+    },
+    {
+      "ref": "file://{images}/items/brawl/shadow_strike.psd",
+      "vpkPath": "panorama/images/items/brawl/shadow_strike_psd.vtex_c",
+      "outPath": "public/images/items/brawl/shadow_strike.png",
+      "kind": "vtex",
+      "usedBy": [
+        "item:upgrade_shadow_strike"
+      ]
+    },
+    {
+      "ref": "file://{images}/items/brawl/shrink_ray.psd",
+      "vpkPath": "panorama/images/items/brawl/shrink_ray_psd.vtex_c",
+      "outPath": "public/images/items/brawl/shrink_ray.png",
+      "kind": "vtex",
+      "usedBy": [
+        "item:upgrade_shrink_ray"
+      ]
+    },
+    {
+      "ref": "file://{images}/items/brawl/timeless_emblem.psd",
+      "vpkPath": "panorama/images/items/brawl/timeless_emblem_psd.vtex_c",
+      "outPath": "public/images/items/brawl/timeless_emblem.png",
+      "kind": "vtex",
+      "usedBy": [
+        "item:upgrade_timeless_emblem"
+      ]
+    },
+    {
+      "ref": "file://{images}/items/brawl/unstable_concoction.psd",
+      "vpkPath": "panorama/images/items/brawl/unstable_concoction_psd.vtex_c",
+      "outPath": "public/images/items/brawl/unstable_concoction.png",
+      "kind": "vtex",
+      "usedBy": [
+        "item:upgrade_unstable_concoction"
       ]
     },
     {
