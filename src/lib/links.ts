@@ -38,11 +38,11 @@ const DISCORD: SiteLink = {
 };
 
 /**
- * サーバー代・ドメイン代のカンパ先。未開設のうちは href を空にしておき、
- * 空のあいだはどこにも出さない(リンク切れを置かないため)。
+ * サーバー代・ドメイン代のカンパ先。
+ * 未開設のうちは href を空にしておく運用(空のあいだはどこにも出さない)。
  */
 const SUPPORT_LINK: SiteLink = {
-  href: "",
+  href: "https://ko-fi.com/moromisoch",
   label: "サーバー代のカンパ",
   icon: svg(
     '<path d="M4 3h13a3 3 0 0 1 3 3h1a3 3 0 0 1 0 6h-1.2A7 7 0 0 1 13 17H9a7 7 0 0 1-7-7V4a1 1 0 0 1 1-1Zm16 5h-1v2h1a1 1 0 0 0 0-2ZM3 19h16a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2Z"/>',
