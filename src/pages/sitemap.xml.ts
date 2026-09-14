@@ -6,9 +6,12 @@
 import type { APIRoute } from "astro";
 import { releasedHeroes, shopItems, itemsFile } from "../lib/data.ts";
 
-const SITE = "https://deadlock-jp.github.io";
-
-export const GET: APIRoute = () => {
+export const GET: APIRoute = ({ site }) => {
+  /*
+   * ドメインは astro.config.mjs の site から取る(ここに直書きしない)。
+   * 直書きするとドメイン移行のたびに取りこぼす。末尾スラッシュは足さない形に揃える。
+   */
+  const SITE = String(site).replace(/\/$/, "");
   const lastmod = new Date(itemsFile.generatedAt || Date.now()).toISOString().slice(0, 10);
 
   const paths: { loc: string; priority: string }[] = [

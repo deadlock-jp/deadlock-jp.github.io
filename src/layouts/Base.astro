@@ -27,7 +27,8 @@ const nav = [
 const path = Astro.url.pathname;
 
 const SITE_NAME = "DEADLOCK-JP DB";
-const SITE = Astro.site ?? new URL("https://deadlock-jp.github.io");
+/* ドメインは astro.config.mjs の site が唯一の出どころ(ここに直書きしない) */
+const SITE = Astro.site ?? new URL(import.meta.env.SITE);
 const canonical = new URL(path, SITE).href;
 const fullTitle = `${title} | ${SITE_NAME}`;
 const desc =

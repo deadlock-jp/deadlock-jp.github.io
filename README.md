@@ -3,7 +3,7 @@
 Valve の『Deadlock』のヒーロー・アイテム・スキルの数値を、日本語で引けるようにした
 データベース型サイトとビルドシミュレーターです。
 
-公開先: https://deadlock-jp.github.io/
+公開先: https://deadlock-jpdb.com/
 
 ## これは何か
 
