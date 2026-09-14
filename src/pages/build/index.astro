@@ -143,8 +143,9 @@ const payload = {
 ---
 
 <Base title="ビルドシミュレーター" description="アイテムを選んでビルドを組み、URLで共有する">
+  <h1>ビルドシミュレーター</h1>
+  {/* ヒーロー選択と操作ボタンは見出しの下に一列で置く */}
   <div class="head">
-    <h1>ビルドシミュレーター</h1>
     <label class="heropick">
       ヒーロー
       <select id="hero">
@@ -236,29 +237,31 @@ const payload = {
 
     {/* ---------------- 右: ショップ ---------------- */}
     <section class="shop">
-      <div class="tabs" role="tablist">
-        {
-          slots.map((s, idx) => (
-            <button
-              class:list={["tab", { current: idx === 0 }]}
-              data-slot={s}
-              style={`--cat: var(--c-${SLOT_META[s].cssVar}); --cat-bg: var(--c-${SLOT_META[s].cssVar}-bg)`}
-            >
-              {SLOT_META[s].label}
-              <small>{items.filter((i) => i.slotType === s).length}</small>
-            </button>
-          ))
-        }
-      </div>
-
-      {/* 並び替え。ヒーローを選ぶまでは出す統計が無いので隠しておく */}
-      <div class="sortbar" id="sortbar" hidden>
-        <span class="sortlabel">並び替え</span>
-        <div class="sortbtns" role="group">
-          <button class="sortbtn current" data-sort="pick">人気率</button>
-          <button class="sortbtn" data-sort="win">勝率</button>
+      {/* アイテムTYPE選択を先頭に。並び替えは同じ行の右端に置く */}
+      <div class="shophead">
+        <div class="tabs" role="tablist">
+          {
+            slots.map((s, idx) => (
+              <button
+                class:list={["tab", { current: idx === 0 }]}
+                data-slot={s}
+                style={`--cat: var(--c-${SLOT_META[s].cssVar}); --cat-bg: var(--c-${SLOT_META[s].cssVar}-bg)`}
+              >
+                {SLOT_META[s].label}
+                <small>{items.filter((i) => i.slotType === s).length}</small>
+              </button>
+            ))
+          }
         </div>
-        <span class="sortnote" id="sortnote"></span>
+
+        {/* ヒーローを選ぶまでは出す統計が無いので隠しておく */}
+        <div class="sortbar" id="sortbar" hidden>
+          <span class="sortlabel">並び替え</span>
+          <div class="sortbtns" role="group">
+            <button class="sortbtn current" data-sort="pick">人気率</button>
+            <button class="sortbtn" data-sort="win">勝率</button>
+          </div>
+        </div>
       </div>
 
       {
@@ -682,12 +685,6 @@ const payload = {
 
       const hs = heroId === null ? null : payload.stats.heroes[String(heroId)];
       $("sortbar").hidden = !hs;
-      if (hs) {
-        const d = new Date(payload.stats.fetchedAt);
-        $("sortnote").textContent =
-          `直近30日・全ランク帯 / ${hs.matches.toLocaleString("en-US")}試合 / ` +
-          `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}時点`;
-      }
 
       for (const grid of document.querySelectorAll(".cat .grid")) {
         const cards = [...grid.children];
@@ -957,14 +954,14 @@ const payload = {
 
   <style>
     /* ---- 見出し ---- */
+    /* 見出しの下の操作列(ヒーロー選択・共有URL・バージョン比較・クリア) */
     .head {
       display: flex;
       align-items: center;
       gap: var(--sp-4);
       flex-wrap: wrap;
-      margin-bottom: var(--sp-4);
+      margin: calc(var(--sp-2) * -1) 0 var(--sp-4);
     }
-    .head h1 { margin: 0; }
     .heropick { font-size: 13px; color: var(--c-text-muted); display: flex; align-items: center; gap: var(--sp-2); }
     select {
       background: var(--c-surface); color: var(--c-text);
@@ -1133,7 +1130,7 @@ const payload = {
     .ladder :global(li.now .b), .ladder :global(li.now .g) { color: var(--c-bg); font-weight: 700; }
 
     /* ---- 右: ショップ ---- */
-    .tabs { display: flex; gap: var(--sp-2); margin-bottom: var(--sp-4); }
+    .tabs { display: flex; gap: var(--sp-2); flex-wrap: wrap; }
     .tab {
       --cat: var(--c-accent);
       display: flex; align-items: baseline; gap: 6px;
@@ -1165,10 +1162,16 @@ const payload = {
     .card.covered:hover { background: var(--c-surface); border-color: var(--c-border); }
     .cname { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
+    /* ---- ショップ見出し行: 左にTYPE選択、右に並び替え ---- */
+    .shophead {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: var(--sp-2) var(--sp-4);
+      margin-bottom: var(--sp-4);
+    }
     /* ---- 人気率・勝率(ヒーロー選択中だけ出る) ---- */
     .sortbar {
-      display: flex; align-items: center; flex-wrap: wrap; gap: var(--sp-2) var(--sp-3);
-      margin-bottom: var(--sp-4);
+      display: flex; align-items: center; gap: var(--sp-2);
+      margin-left: auto;
     }
     .sortlabel { font-size: 11px; color: var(--c-text-muted); }
     .sortbtns { display: flex; }
@@ -1184,7 +1187,6 @@ const payload = {
       color: var(--c-accent); border-color: var(--c-accent-dim); background: var(--c-accent-bg);
       position: relative; z-index: 1;
     }
-    .sortnote { font-size: 10px; color: var(--c-text-faint); font-family: var(--font-mono); }
 
     .cstat {
       display: flex; flex-direction: column; gap: 1px; width: 100%;

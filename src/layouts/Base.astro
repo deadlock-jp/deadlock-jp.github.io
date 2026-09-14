@@ -30,11 +30,14 @@ const SITE_NAME = "DEADLOCK-JP DB";
 /* ドメインは astro.config.mjs の site が唯一の出どころ(ここに直書きしない) */
 const SITE = Astro.site ?? new URL(import.meta.env.SITE);
 const canonical = new URL(path, SITE).href;
-const fullTitle = `${title} | ${SITE_NAME}`;
+/* SNSプレビュー画像は絶対URLでないと読まれない */
+const ogImage = new URL(`${base}/images/ogp.jpg`, SITE).href;
+const isHome = path === "/" || path === base + "/";
+/* トップは「トップ | DEADLOCK-JP DB」と重複するので、サイト名だけにする */
+const fullTitle = isHome ? SITE_NAME : `${title} | ${SITE_NAME}`;
 const desc =
   description ??
   "Valve『Deadlock（デッドロック）』のヒーロー・アイテム・スキルの数値を日本語で引ける非公式データベース。";
-const isHome = path === "/" || path === base + "/";
 
 /* 構造化データ（SEO / 生成AI検索対策）。値はサイトの事実のみ。 */
 const jsonLd: Record<string, unknown>[] = [
@@ -81,6 +84,13 @@ if (crumbs.length > 1) {
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href={canonical} />
 
+    {/* ファビコン。ico は 16/32/48 同梱 */}
+    <link rel="icon" href={`${base}/favicon.ico`} sizes="any" />
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+    <link rel="icon" type="image/png" sizes="32x32" href={`${base}/favicon-32.png`} />
+    <link rel="icon" type="image/png" sizes="16x16" href={`${base}/favicon-16.png`} />
+    <link rel="apple-touch-icon" sizes="180x180" href={`${base}/apple-touch-icon-180.png`} />
+
     {/* Open Graph / Twitter（SNS・チャット・生成AIのプレビュー用） */}
     <meta property="og:site_name" content={SITE_NAME} />
     <meta property="og:locale" content="ja_JP" />
@@ -88,9 +98,15 @@ if (crumbs.length > 1) {
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={desc} />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
+    {/* Discord・Xなどに貼ったときのプレビュー画像。1200x630 */}
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${SITE_NAME} — Deadlock 日本語データベース`} />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={desc} />
+    <meta name="twitter:image" content={ogImage} />
 
     <link rel="sitemap" type="application/xml" href={`${base}/sitemap.xml`} />
 
