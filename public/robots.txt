@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://deadlock-jp.github.io/sitemap.xml
