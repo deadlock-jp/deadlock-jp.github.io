@@ -10,6 +10,7 @@ import {
   upstreamRepo,
 } from "../lib/data.ts";
 import imageManifest from "../../data/image-manifest.json" with { type: "json" };
+import { COMMUNITY_LINKS, SUPPORT_LINKS, HAS_SUPPORT_LINK } from "../lib/links.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const heroCount = releasedHeroes().length;
@@ -124,6 +125,54 @@ const repo = "https://github.com/deadlock-jp/deadlock-jp.github.io";
     <li><span class="k">生成日</span><span class="v">{generated}</span></li>
   </ul>
 
+  <h2>運営・応援について</h2>
+  <p>
+    このサイトはファンの有志が個人で作っているもので、企業や団体は関わっていません。
+    運営者の配信・コミュニティは以下です。
+  </p>
+  <ul class="links">
+    {
+      COMMUNITY_LINKS.map((l) => (
+        <li>
+          <a href={l.href} rel="noopener" target="_blank">
+            <span class="ico" set:html={l.icon} />
+            {l.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  {
+    HAS_SUPPORT_LINK ? (
+      <>
+        <p>
+          サイトの維持にはサーバー代・ドメイン代がかかります。
+          続けるうえでの足しになるので、もし気が向いたらというくらいの気持ちで受け取っています。
+          <strong>支援をしなくても、サイトの内容や使える機能は一切変わりません。</strong>
+        </p>
+        <ul class="links">
+          {SUPPORT_LINKS.map((l) => (
+            <li>
+              <a href={l.href} rel="noopener" target="_blank">
+                <span class="ico" set:html={l.icon} />
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </>
+    ) : (
+      <p class="note">
+        サーバー代・ドメイン代のカンパ先は準備中です。
+      </p>
+    )
+  }
+  <p class="note">
+    いただいた支援はこのサイトの運営費に充てるもので、
+    Valve Corporation や『Deadlock』とは一切関係がありません。
+    支援によって本サイトが公式なものになるわけでもありません。
+  </p>
+
   <h2>ソースコード</h2>
   <p>
     <a href={repo} rel="noopener">{repo}</a>
@@ -149,6 +198,16 @@ const repo = "https://github.com/deadlock-jp/deadlock-jp.github.io";
       border-bottom: 1px solid var(--c-border);
       font-size: 13px;
     }
+    /* 運営・応援のリンク */
+    .links { list-style: none; padding: 0; margin: 0 0 var(--sp-4); display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+    .links a {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 12px; font-size: 13px;
+      background: var(--c-surface); border: 1px solid var(--c-border);
+      border-radius: var(--radius); color: var(--c-text);
+    }
+    .links a:hover { border-color: var(--c-accent); color: var(--c-accent); text-decoration: none; }
+    .links .ico { display: inline-flex; line-height: 0; }
     .src .k { color: var(--c-text-muted); }
     .src .v { text-align: right; }
     code { font-family: var(--font-mono); font-size: 0.92em; }

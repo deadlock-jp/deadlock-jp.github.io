@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { heroesFile } from "../lib/data.ts";
+import { COMMUNITY_LINKS, SUPPORT_LINKS } from "../lib/links.ts";
 
 interface Crumb {
   name: string;
@@ -145,6 +146,18 @@ if (crumbs.length > 1) {
           Valve Corporation に帰属します。
           <a href={`${base}/about/`}>このサイトについて</a>
         </p>
+        {/*
+          運営者のリンク。権利表示より下に置き、目立たせない。
+          Ko-fi(サーバー代・ドメイン代のカンパ)は開設後にここへ1行足す。
+        */}
+        <p class="links">
+          {[...SUPPORT_LINKS, ...COMMUNITY_LINKS].map((l) => (
+            <a href={l.href} rel="noopener" target="_blank">
+              <span class="ico" set:html={l.icon} />
+              {l.label}
+            </a>
+          ))}
+        </p>
       </div>
     </footer>
 
@@ -287,6 +300,27 @@ if (crumbs.length > 1) {
       }
       .site-footer .muted {
         color: var(--c-text-faint);
+      }
+      /* 運営者のリンク。権利表示より控えめに、横並びで小さく置く */
+      .site-footer .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--sp-1) var(--sp-4);
+        margin-top: var(--sp-3);
+      }
+      .site-footer .links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        color: var(--c-text-faint);
+        font-size: 11px;
+      }
+      .site-footer .links a:hover {
+        color: var(--c-accent);
+      }
+      .site-footer .links .ico {
+        display: inline-flex;
+        line-height: 0;
       }
       @media (max-width: 640px) {
         .inner {
