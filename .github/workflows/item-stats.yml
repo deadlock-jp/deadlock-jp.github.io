@@ -1,0 +1,56 @@
+name: Update item stats
+
+# アイテムの人気率・勝率(deadlock-api.com)を取り込む。
+#
+# ゲーム本体のデータ更新(ngc-pc のタスクスケジューラ → tools/automation/auto-update.mjs)
+# とは別系統。あちらはこのPCのゲームクライアントが要るが、こちらは公開APIを叩くだけなので
+# CI 上で完結する。更新周期も違う(パッチ単位 vs 日々の統計)ため、ジョブを分けている。
+#
+# APIは6時間キャッシュなので、それより短い間隔で回しても意味がない。
+on:
+  schedule:
+    # 6時間おき(UTC)。JSTで 09/15/21/03 時ごろ
+    - cron: "0 0,6,12,18 * * *"
+  workflow_dispatch:
+
+# contents: data/item-stats.json を push する
+# actions:  deploy.yml を呼び出す
+#   GITHUB_TOKEN による push は(無限ループ防止のため)他のワークフローを起こさない。
+#   つまり push しただけでは公開まで進まないので、deploy を明示的に叩く。
+permissions:
+  contents: write
+  actions: write
+
+# 前の実行が終わる前に次が来ても、重ねて走らせない
+concurrency:
+  group: item-stats
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # 取得に失敗した場合やデータが不足している場合、スクリプト側が
+      # 非ゼロで終了して data/item-stats.json は書き換えられない
+      - run: node tools/fetch-item-stats.mjs --write
+
+      - name: Commit and deploy if changed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if git diff --quiet -- data/item-stats.json; then
+            echo "差分なし。コミットしない"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/item-stats.json
+          git commit -m "アイテムの人気率・勝率を更新 (自動)"
+          git push
+          gh workflow run deploy.yml --ref main

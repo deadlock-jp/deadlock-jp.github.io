@@ -15,6 +15,7 @@ import {
   modifierLabel,
   SLOT_META,
   souls,
+  itemStats as itemStatsFile,
 } from "../../lib/data.ts";
 import {
   weaponRows,
@@ -31,6 +32,13 @@ const items = shopItems();
 const slots = ["WeaponMod", "Armor", "Tech"] as const;
 const tiers = [1, 2, 3, 4];
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+/*
+ * ヒーロー×アイテムの人気率・勝率(tools/fetch-item-stats.mjs が deadlock-api.com から取得)。
+ * ヒーロー選択はクライアント側なので、全ヒーロー分をビルド時に埋め込む
+ * (静的サイトのまま、実行時に追加の通信をしないという既存方針を維持する)。
+ */
+const itemStats = itemStatsFile;
 
 /** ホバーカードに出す1行。ゲーム側のトークンで整形済み */
 function propRows(names: string[], item: (typeof items)[number]) {
@@ -124,6 +132,13 @@ const payload = {
   ),
   costBonusTarget: COST_BONUS_TARGET,
   slotMeta: SLOT_META,
+  /** ヒーロー×アイテムの人気率・勝率。ショップの並び替えと数値表示に使う */
+  stats: {
+    fetchedAt: itemStats.fetchedAt,
+    window: itemStats.window,
+    lowSampleMatches: itemStats.lowSampleMatches,
+    heroes: itemStats.heroes,
+  },
 };
 ---
 
@@ -236,6 +251,16 @@ const payload = {
         }
       </div>
 
+      {/* 並び替え。ヒーローを選ぶまでは出す統計が無いので隠しておく */}
+      <div class="sortbar" id="sortbar" hidden>
+        <span class="sortlabel">並び替え</span>
+        <div class="sortbtns" role="group">
+          <button class="sortbtn current" data-sort="pick">人気率</button>
+          <button class="sortbtn" data-sort="win">勝率</button>
+        </div>
+        <span class="sortnote" id="sortnote"></span>
+      </div>
+
       {
         slots.map((slot, idx) => {
           const meta = SLOT_META[slot];
@@ -256,8 +281,13 @@ const payload = {
                       <span class="price">{souls(itemsFile.itemPricePerTier[tier] ?? 0)}</span>
                     </h3>
                     <div class="grid">
-                      {rows.map((i) => (
-                        <button class="card" data-id={i.id} aria-label={t(i.nameToken, i.id)}>
+                      {rows.map((i, order) => (
+                        <button
+                          class="card"
+                          data-id={i.id}
+                          data-order={order}
+                          aria-label={t(i.nameToken, i.id)}
+                        >
                           <ItemIcon
                             name={t(i.nameToken, i.id)}
                             slotType={i.slotType}
@@ -268,6 +298,11 @@ const payload = {
                             size={48}
                           />
                           <span class="cname">{t(i.nameToken, i.id)}</span>
+                          {/* 人気率・勝率。中身はヒーロー選択時にJSが入れる */}
+                          <span class="cstat" hidden>
+                            <span class="crow"><i>人気</i><b class="cpick">—</b></span>
+                            <span class="crow"><i>勝率</i><b class="cwin">—</b></span>
+                          </span>
                         </button>
                       ))}
                     </div>
@@ -288,6 +323,10 @@ const payload = {
     /** 購入順を保持する。同じアイテムは1つまで */
     let picked = [];
     let heroId = null;
+    /** ショップの並び替え基準。"pick" = 人気率 / "win" = 勝率 */
+    let sortKey = "pick";
+    /** 直近に並べ替えた (ヒーロー, 基準)。同じなら組み直さない */
+    let statsApplied = "";
     /** スキルごとの AP 段(0〜3)。スキルダメージ表示に反映する */
     const apLevel = {};
     const SLOTS = ["WeaponMod", "Armor", "Tech"];
@@ -628,6 +667,69 @@ const payload = {
         : '<li class="empty">—</li>';
     }
 
+    /**
+     * ショップのカードに人気率・勝率を入れ、グループ(カテゴリ×ティア)の中を
+     * 選んだ基準で並べ替える。
+     *
+     * カードはサーバー側で出した実DOMで、クリック・ホバーのハンドラが要素に
+     * 直接張ってある。innerHTML で組み直すとそれが外れるので、appendChild で
+     * ノードを移動するだけにする(移動ならハンドラは保たれる)。
+     */
+    function renderShopStats() {
+      const key = `${heroId ?? ""}:${sortKey}`;
+      if (key === statsApplied) return;
+      statsApplied = key;
+
+      const hs = heroId === null ? null : payload.stats.heroes[String(heroId)];
+      $("sortbar").hidden = !hs;
+      if (hs) {
+        const d = new Date(payload.stats.fetchedAt);
+        $("sortnote").textContent =
+          `直近30日・全ランク帯 / ${hs.matches.toLocaleString("en-US")}試合 / ` +
+          `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}時点`;
+      }
+
+      for (const grid of document.querySelectorAll(".cat .grid")) {
+        const cards = [...grid.children];
+        for (const c of cards) {
+          const st = hs ? hs.items[c.dataset.id] : null;
+          const box = c.querySelector(".cstat");
+          if (!st) {
+            box.hidden = true;
+            continue;
+          }
+          const [pick, win, n] = st;
+          const low = n < payload.stats.lowSampleMatches;
+          box.hidden = false;
+          box.classList.toggle("low", low);
+          box.title = low ? `サンプル ${n}試合(少ないため参考値)` : `サンプル ${fmt(n)}試合`;
+          c.querySelector(".cpick").textContent = (pick / 10).toFixed(1) + "%";
+          const winEl = c.querySelector(".cwin");
+          winEl.textContent = (win / 10).toFixed(1) + "%";
+          // 50%を境に色を変える。数値そのものは加工しない
+          winEl.classList.toggle("good", win >= 500);
+          winEl.classList.toggle("bad", win < 500);
+        }
+
+        cards.sort((a, b) => {
+          if (!hs) return Number(a.dataset.order) - Number(b.dataset.order);
+          const sa = hs.items[a.dataset.id];
+          const sb = hs.items[b.dataset.id];
+          if (!sa || !sb) return (sb ? 1 : 0) - (sa ? 1 : 0);
+          // 勝率順のときだけ、サンプルが少ないものを後ろに送る。
+          // 数試合しかないアイテムが勝率で上位に来ると誤読のもとになるため
+          if (sortKey === "win") {
+            const la = sa[2] < payload.stats.lowSampleMatches;
+            const lb = sb[2] < payload.stats.lowSampleMatches;
+            if (la !== lb) return la ? 1 : -1;
+          }
+          const idx = sortKey === "win" ? 1 : 0;
+          return sb[idx] - sa[idx] || Number(a.dataset.order) - Number(b.dataset.order);
+        });
+        for (const c of cards) grid.appendChild(c);
+      }
+    }
+
     function render() {
       const cost = catCost();
       const spent = cost.WeaponMod + cost.Armor + cost.Tech;
@@ -641,6 +743,7 @@ const payload = {
       renderSlots();
       renderBoxes(cost, level);
       renderStats(cost);
+      renderShopStats();
       const covered = coveredIds();
       for (const c of document.querySelectorAll(".card")) {
         const id = c.dataset.id;
@@ -804,6 +907,17 @@ const payload = {
       }
       setTimeout(() => (btn.textContent = "共有URLをコピー"), 2000);
     });
+
+    for (const btn of document.querySelectorAll(".sortbtn")) {
+      btn.addEventListener("click", () => {
+        if (btn.dataset.sort === sortKey) return;
+        sortKey = btn.dataset.sort;
+        for (const x of document.querySelectorAll(".sortbtn")) {
+          x.classList.toggle("current", x === btn);
+        }
+        renderShopStats();
+      });
+    }
 
     for (const tab of document.querySelectorAll(".tab")) {
       tab.addEventListener("click", () => {
@@ -1050,6 +1164,40 @@ const payload = {
     .card.covered { opacity: 0.32; cursor: not-allowed; }
     .card.covered:hover { background: var(--c-surface); border-color: var(--c-border); }
     .cname { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+    /* ---- 人気率・勝率(ヒーロー選択中だけ出る) ---- */
+    .sortbar {
+      display: flex; align-items: center; flex-wrap: wrap; gap: var(--sp-2) var(--sp-3);
+      margin-bottom: var(--sp-4);
+    }
+    .sortlabel { font-size: 11px; color: var(--c-text-muted); }
+    .sortbtns { display: flex; }
+    .sortbtn {
+      background: var(--c-surface); color: var(--c-text-muted);
+      border: 1px solid var(--c-border); font: inherit; font-size: 12px;
+      padding: 3px 12px; cursor: pointer;
+    }
+    .sortbtn:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+    .sortbtn:last-child { border-radius: 0 var(--radius) var(--radius) 0; margin-left: -1px; }
+    .sortbtn:hover { color: var(--c-text); border-color: var(--c-border-strong); }
+    .sortbtn.current {
+      color: var(--c-accent); border-color: var(--c-accent-dim); background: var(--c-accent-bg);
+      position: relative; z-index: 1;
+    }
+    .sortnote { font-size: 10px; color: var(--c-text-faint); font-family: var(--font-mono); }
+
+    .cstat {
+      display: flex; flex-direction: column; gap: 1px; width: 100%;
+      margin-top: 1px; padding-top: 3px; border-top: 1px solid var(--c-border);
+      font-family: var(--font-mono); font-size: 9px; line-height: 1.4;
+    }
+    .cstat .crow { display: flex; justify-content: space-between; gap: 4px; }
+    .cstat i { font-style: normal; color: var(--c-text-faint); }
+    .cstat b { font-weight: 500; color: var(--c-text); }
+    .cstat .cwin.good { color: var(--c-vitality); }
+    .cstat .cwin.bad { color: var(--c-text-muted); }
+    /* サンプルが少ない行は薄くして、鵜呑みにしないことが分かるようにする */
+    .cstat.low { opacity: 0.45; }
 
     /* ---- ホバーカード ---- */
     .hovercard {

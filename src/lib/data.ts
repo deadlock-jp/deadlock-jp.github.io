@@ -6,6 +6,7 @@ import updatesJson from "../../data/updates.json" with { type: "json" };
 import heroNotesJson from "../../data/hero-notes.json" with { type: "json" };
 import itemNotesJson from "../../data/item-notes.json" with { type: "json" };
 import patchNotesJson from "../../data/patch-notes.json" with { type: "json" };
+import itemStatsJson from "../../data/item-stats.json" with { type: "json" };
 import type { HeroesFile, Hero } from "../types/hero.ts";
 import type { ItemsFile, Item } from "../types/item.ts";
 import type { AbilitiesFile, Ability } from "../types/ability.ts";
@@ -579,3 +580,19 @@ const patchNotesFile = patchNotesJson as unknown as { entries: PatchNoteEntry[] 
 export function patchNotes(): PatchNoteEntry[] {
   return [...patchNotesFile.entries].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
 }
+
+/**
+ * ヒーロー×アイテムの人気率・勝率。data/item-stats.json
+ * (tools/fetch-item-stats.mjs が deadlock-api.com から取得。ゲーム本体由来の
+ * data/snapshots/ とは出所も更新周期も別で、数値統計のみ)。
+ *
+ * items の値は [人気率, 勝率, サンプル試合数]。率は 0.1% 刻みの整数(503 = 50.3%)。
+ * キーはヒーローの実ID(数値)を文字列にしたもの。
+ */
+export interface ItemStatsFile {
+  fetchedAt: string;
+  window: string;
+  lowSampleMatches: number;
+  heroes: Record<string, { matches: number; items: Record<string, [number, number, number]> }>;
+}
+export const itemStats = itemStatsJson as unknown as ItemStatsFile;
