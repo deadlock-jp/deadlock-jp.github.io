@@ -88,8 +88,9 @@ const details = Object.fromEntries(allForHover.map((i) => [i.id, itemHoverData(i
       <ul class="leggrid">
         {legendary.map((i) => {
           const iname = t(i.nameToken, i.id);
+          const idesc = describe(i.descToken, i.properties);
           return (
-            <li>
+            <li data-find={`${iname} ${idesc} ${i.id}`.toLowerCase()}>
               <a href={`${base}/items/${i.id}/`} data-itemcard={i.id}>
                 <ItemIcon
                   name={iname}
@@ -118,8 +119,10 @@ const details = Object.fromEntries(allForHover.map((i) => [i.id, itemHoverData(i
     (() => {
       const q = document.getElementById("q");
       const hits = document.getElementById("hits");
-      const rows = [...document.querySelectorAll(".tier li")];
+      // ショップのティア一覧と、下部のレジェンダリー枠の両方を対象にする
+      const rows = [...document.querySelectorAll(".tier li, .leggrid li")];
       const total = rows.length;
+      const legendary = document.querySelector(".legendary");
 
       function apply() {
         const words = q.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
@@ -129,6 +132,10 @@ const details = Object.fromEntries(allForHover.map((i) => [i.id, itemHoverData(i
           const ok = words.every((w) => hay.includes(w));
           li.hidden = !ok;
           if (ok) shown++;
+        }
+        // レジェンダリー枠も、中身が全部消えたら見出しごと隠す
+        if (legendary) {
+          legendary.hidden = ![...legendary.querySelectorAll("li")].some((li) => !li.hidden);
         }
         // 中身が全部消えたティア見出し・カテゴリ列ごと隠す
         for (const tier of document.querySelectorAll(".tier")) {

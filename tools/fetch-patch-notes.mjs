@@ -57,7 +57,9 @@ async function fetchEvents(lang) {
 function cleanLine(raw) {
   const text = raw
     .replace(/\[\/?[a-z*][^\]]*\]/gi, "") // 残りのBBCodeタグを全部落とす([i] [list] [*] [img] [url=] など)
-    .replace(/\{STEAM_CLAN_IMAGE\}\S*/gi, "") // 画像パスのプレースホルダ(見出し画像など)
+    // 画像パスのプレースホルダ(見出し画像など)。{STEAM_CLAN_IMAGE} のほかに
+    // 言語別画像の {STEAM_CLAN_LOC_IMAGE} もある。まとめて落とす
+    .replace(/\{STEAM_CLAN_[A-Z_]*IMAGE\}\S*/gi, "")
     .replace(/&amp;/g, "&")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")

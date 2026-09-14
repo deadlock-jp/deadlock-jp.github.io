@@ -71,10 +71,18 @@ const entries = patchNotes().map((n) => ({ ...n, sections: toSections(n.lines) }
       padding: 0;
       margin: var(--sp-5) 0 0;
       display: grid;
+      /*
+       * 列を minmax(0, 1fr) で固定する。既定の auto トラックだと、中身
+       * (日付＋長いタイトル＋"Steamで見る"のnowrapリンク)の最小幅に合わせて
+       * トラックが広がり、スマホ幅で横スクロールが出る。
+       */
+      grid-template-columns: minmax(0, 1fr);
       gap: var(--sp-4);
     }
     .patch {
       /* 見た目は global.css の .panel を流用 */
+      /* グリッド項目の既定 min-width:auto を外し、コンテナ幅より広がらないようにする */
+      min-width: 0;
     }
     .phead {
       display: flex;
@@ -94,6 +102,8 @@ const entries = patchNotes().map((n) => ({ ...n, sections: toSections(n.lines) }
       margin: 0;
       font-size: 15px;
       flex: 1 1 auto;
+      /* flex項目の既定 min-width:auto だとタイトルが1行分の幅を要求して縮まない */
+      min-width: 0;
       border: none;
       padding: 0;
     }
@@ -114,6 +124,12 @@ const entries = patchNotes().map((n) => ({ ...n, sections: toSections(n.lines) }
       padding-left: 1.2em;
       font-size: 13px;
       line-height: 1.8;
+      /*
+       * 本文にはValveが書いたURL(フォーラムへの誘導など)がそのまま入ることがある。
+       * 途中で折り返せない長い文字列は、スマホ幅だと行ごと横に伸びて
+       * ページ全体に横スクロールを出すので、どこでも折り返せるようにする。
+       */
+      overflow-wrap: anywhere;
     }
   </style>
 </Base>
