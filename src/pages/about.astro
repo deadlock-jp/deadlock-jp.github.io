@@ -77,17 +77,24 @@ const repo = "https://github.com/deadlock-jp/deadlock-jp.github.io";
       <span class="v">Steam公式ニュース（Valve本人の投稿）</span>
     </li>
     <li>
-      <span class="k">アイテムの人気率・勝率</span>
+      <span class="k">アイテム・ヒーローの使用率・勝率</span>
       <span class="v">
         <a href="https://deadlock-api.com/" rel="noopener">deadlock-api.com</a>（有志運営のAPI）
       </span>
     </li>
   </ul>
   <p class="note">
-    ビルドページのアイテムに出している人気率・勝率だけは、ゲーム本体ではなく
+    ビルドページのアイテムに出している人気率・勝率と、ヒーロー一覧の「使用状況」
+    （ピック率・勝率・BAN率）だけは、ゲーム本体ではなく
     <a href="https://deadlock-api.com/" rel="noopener">deadlock-api.com</a> の公開APIから取得した
-    実際の対戦記録の集計値です（直近30日・全ランク帯、6時間ごとに自動更新）。
+    実際の対戦記録の集計値です（直近30日、6時間ごとに自動更新）。
     Valve公式の数値ではありません。
+  </p>
+  <p class="note">
+    BAN率は「BANされた試合の割合」ではなく、
+    <strong>BANデータが取れた試合のうち、全BANに占めるそのヒーローの割合</strong>です。
+    APIのBANデータは全試合ではなく解析できた一部の試合のみで、
+    その試合数が取得できないため、割合の分母を全BAN数にしています。
   </p>
   <p class="note">
     検算・過去バージョンの補完には

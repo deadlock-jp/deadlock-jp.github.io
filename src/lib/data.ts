@@ -7,6 +7,7 @@ import heroNotesJson from "../../data/hero-notes.json" with { type: "json" };
 import itemNotesJson from "../../data/item-notes.json" with { type: "json" };
 import patchNotesJson from "../../data/patch-notes.json" with { type: "json" };
 import itemStatsJson from "../../data/item-stats.json" with { type: "json" };
+import heroStatsJson from "../../data/hero-stats.json" with { type: "json" };
 import type { HeroesFile, Hero } from "../types/hero.ts";
 import type { ItemsFile, Item } from "../types/item.ts";
 import type { AbilitiesFile, Ability } from "../types/ability.ts";
@@ -596,3 +597,26 @@ export interface ItemStatsFile {
   heroes: Record<string, { matches: number; items: Record<string, [number, number, number]> }>;
 }
 export const itemStats = itemStatsJson as unknown as ItemStatsFile;
+
+/**
+ * ランク帯別のヒーロー統計。data/hero-stats.json
+ * (tools/fetch-hero-stats.mjs が deadlock-api.com から取得)。
+ *
+ * buckets のキーは "all"(全ランク)と ランクtier("1"〜"11")。
+ * tier はゲーム内のランク名トークン Citadel_ranks_rank<tier-1> に対応する。
+ * heroes の値は [ピック率, 勝率, BAN率, 試合数] で、率は 0.1% 刻みの整数。
+ *
+ * BAN率は「BANされた試合の割合」ではなく【全BANに占めるそのヒーローの割合】。
+ * BANデータのある試合数がAPIから取れないため(詳細は fetch-hero-stats.mjs)。
+ */
+export interface HeroStatsFile {
+  fetchedAt: string;
+  window: string;
+  lowSampleMatches: number;
+  banRateNote: string;
+  buckets: Record<
+    string,
+    { matches: number; bans: number; heroes: Record<string, [number, number, number | null, number]> }
+  >;
+}
+export const heroStats = heroStatsJson as unknown as HeroStatsFile;

@@ -6,7 +6,7 @@ import AbilityIcon from "../../components/AbilityIcon.astro";
 import HeroPortrait from "../../components/HeroPortrait.astro";
 import HeroHoverCard from "../../components/HeroHoverCard.astro";
 import AbilityHoverCard, { type AbilityHoverDetail } from "../../components/AbilityHoverCard.astro";
-import { releasedHeroes, t, ability, heroTags, describe, heroNotes } from "../../lib/data.ts";
+import { releasedHeroes, t, ability, heroTags, describe, heroNotes, heroStats } from "../../lib/data.ts";
 import { resolveImagePath } from "../../parsers/image-manifest.ts";
 import { heroRanks, pickRows, topRankRows, heroTierTable } from "../../lib/herorank.ts";
 import { skillCard } from "../../lib/skillcard.ts";
@@ -81,6 +81,29 @@ for (const h of releasedHeroes()) {
     };
   }
 }
+
+/*
+ * ランク帯別のピック率・勝率・BAN率(deadlock-api.com 由来)。
+ * ランク名はゲーム内のトークン Citadel_ranks_rank<N> をそのまま使う。
+ * tier1 が rank0(オブスキュラス)なので、トークン番号は tier-1。
+ */
+const rankBuckets = Object.keys(heroStats.buckets)
+  .filter((k) => k !== "all")
+  .map(Number)
+  .sort((a, b) => a - b);
+const rankOptions = [
+  { key: "all", label: "全ランク" },
+  ...rankBuckets.map((tier) => ({
+    key: String(tier),
+    label: t(`Citadel_ranks_rank${tier - 1}`, `ランク${tier}`),
+  })),
+];
+const statsPayload = {
+  fetchedAt: heroStats.fetchedAt,
+  lowSampleMatches: heroStats.lowSampleMatches,
+  banRateNote: heroStats.banRateNote,
+  buckets: heroStats.buckets,
+};
 ---
 
 <Base
@@ -88,6 +111,34 @@ for (const h of releasedHeroes()) {
   description="Deadlock（デッドロック）の実装済みヒーロー全員の基礎ステータス（最大HP・移動速度・スタミナ）とスキル、項目別ステータスランクを日本語で。レベル1・アイテムなしの素の数値。"
 >
   <h1>ヒーロー</h1>
+
+  {/* ------------ 最上部: ランク帯別の使用状況(実際の対戦記録) ------------ */}
+  <section class="hs panel">
+    <div class="hs-head">
+      <h2>使用状況</h2>
+      <label class="rankpick">
+        <span class="rplabel">ランク帯</span>
+        <select id="rank">
+          {rankOptions.map((r) => <option value={r.key}>{r.label}</option>)}
+        </select>
+      </label>
+    </div>
+    <div class="hs-cols">
+      {
+        [
+          { key: "pick", label: "ピック率", cssVar: "weapon" },
+          { key: "win", label: "勝率", cssVar: "vitality" },
+          { key: "ban", label: "BAN率", cssVar: "spirit" },
+        ].map((c) => (
+          <div class="hs-col" data-metric={c.key} style={`--cat: var(--c-${c.cssVar})`}>
+            <h3>{c.label}</h3>
+            <ol class="hs-list"></ol>
+          </div>
+        ))
+      }
+    </div>
+    <p class="hs-note" id="hs-note"></p>
+  </section>
 
   {/* ------------ 上部: 項目別ステータスランク ------------ */}
   <section class="tt panel">
@@ -167,7 +218,7 @@ for (const h of releasedHeroes()) {
   <HeroHoverCard heroDetail={heroDetail} />
   <AbilityHoverCard details={abilityDetails} />
 
-  <script is:inline define:vars={{ heroMeta, tierData: tier.data, base }}>
+  <script is:inline define:vars={{ heroMeta, tierData: tier.data, base, statsPayload }}>
     (() => {
       const esc = (s) =>
         String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
@@ -206,11 +257,125 @@ for (const h of releasedHeroes()) {
       }
       sel.addEventListener("change", () => render(sel.value));
       render(sel.value);
+
+      // ---- ランク帯別の使用状況(ピック率 / 勝率 / BAN率) ----
+      const rankSel = document.getElementById("rank");
+      const hsNote = document.getElementById("hs-note");
+      /** 指標ごとの、値の取り出し位置。[ピック率, 勝率, BAN率, 試合数] */
+      const METRIC_IDX = { pick: 0, win: 1, ban: 2 };
+      const TOP_N = 5;
+
+      function renderRank(key) {
+        const bucket = statsPayload.buckets[key];
+        if (!bucket) return;
+        const low = bucket.matches < statsPayload.lowSampleMatches;
+
+        for (const col of document.querySelectorAll(".hs-col")) {
+          const idx = METRIC_IDX[col.dataset.metric];
+          const rows = Object.entries(bucket.heroes)
+            // BAN率はデータが無いランク帯もある(null)ので外す
+            .filter(([, v]) => v[idx] !== null && v[idx] !== undefined)
+            .sort((a, b) => b[1][idx] - a[1][idx])
+            .slice(0, TOP_N);
+          col.querySelector(".hs-list").innerHTML = rows
+            .map(([id, v]) => {
+              const m = heroMeta[id] ?? { name: "?", sm: null };
+              const img = m.sm
+                ? `<img src="${m.sm}" alt="" loading="lazy">`
+                : `<span class="ph">${esc(m.name.slice(0, 1))}</span>`;
+              return (
+                `<li><a class="hs-hero" data-herocard="${id}" href="${base}/heroes/${id}/">` +
+                `${img}<span class="hs-name">${esc(m.name)}</span>` +
+                `<span class="hs-val">${(v[idx] / 10).toFixed(1)}%</span></a></li>`
+              );
+            })
+            .join("");
+        }
+        // innerHTML で差し込んだので、ホバーカードを張り直す
+        window.heroHoverCard?.wire(document.querySelector(".hs-cols"));
+
+        const d = new Date(statsPayload.fetchedAt);
+        const stamp = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        hsNote.textContent =
+          `直近30日 / ${bucket.matches.toLocaleString("en-US")}試合 / ${stamp}時点。` +
+          `BAN率は${statsPayload.banRateNote}。` +
+          (low ? "　※このランク帯は母数が少なく、数値がぶれます。" : "");
+        hsNote.classList.toggle("low", low);
+      }
+
+      rankSel.addEventListener("change", () => renderRank(rankSel.value));
+      renderRank(rankSel.value);
     })();
   </script>
 
   <style>
     .lead { color: var(--c-text-muted); margin-bottom: var(--sp-5); }
+
+    /* ---- ランク帯別の使用状況 ---- */
+    .hs { margin-bottom: var(--sp-5); }
+    .hs-head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      flex-wrap: wrap; gap: var(--sp-3); margin-bottom: var(--sp-3);
+    }
+    .hs-head h2 { margin: 0; border: none; padding: 0; }
+    .rankpick {
+      display: flex; align-items: center; gap: var(--sp-2);
+      background: var(--c-accent-bg); border: 1px solid var(--c-accent-dim);
+      border-radius: var(--radius); padding: 5px 6px 5px 12px;
+    }
+    .rplabel { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; color: var(--c-accent); }
+    .rankpick select {
+      background: var(--c-surface); color: var(--c-text-strong);
+      border: 1px solid var(--c-accent-dim); border-radius: var(--radius);
+      padding: 6px 10px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+    }
+    .rankpick select:hover { border-color: var(--c-accent); }
+
+    .hs-cols {
+      display: grid;
+      /* 中身の増減で列幅が変わらないよう、列数は画面幅だけで決める */
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: var(--sp-3);
+    }
+    .hs-col { min-width: 0; }
+    .hs-col h3 {
+      font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--cat); margin: 0 0 var(--sp-2);
+      border-bottom: 1px solid var(--cat); padding-bottom: 4px;
+    }
+    .hs-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 3px; }
+    /*
+     * 以下は JS が innerHTML で差し込む中身。スコープ付きCSSは効かないので
+     * :global() で当てる(CLAUDE.md「Astro: scoped CSS は innerHTML に効かない」)。
+     * 起点の .hs-list はサーバー側で出しているのでスコープが付く。
+     */
+    .hs-list :global(.hs-hero) {
+      display: flex; align-items: center; gap: var(--sp-2);
+      padding: 4px 6px; border-radius: var(--radius);
+      background: var(--c-surface); border: 1px solid var(--c-border);
+      color: var(--c-text); text-decoration: none; font-size: 13px;
+    }
+    .hs-list :global(.hs-hero:hover) {
+      border-color: var(--cat); background: var(--c-surface-2); text-decoration: none;
+    }
+    .hs-list :global(.hs-hero img),
+    .hs-list :global(.hs-hero .ph) {
+      width: 28px; height: 28px; border-radius: 5px; flex: 0 0 auto;
+      background: var(--c-surface-2); display: block;
+    }
+    .hs-list :global(.hs-hero .ph) {
+      display: flex; align-items: center; justify-content: center;
+      color: var(--cat); font-weight: 700; font-size: 12px;
+    }
+    .hs-list :global(.hs-hero .hs-name) {
+      flex: 1 1 auto; min-width: 0; overflow: hidden;
+      text-overflow: ellipsis; white-space: nowrap;
+    }
+    .hs-list :global(.hs-hero .hs-val) {
+      flex: 0 0 auto; font-family: var(--font-mono); font-weight: 500; color: var(--cat);
+    }
+    .hs-note { margin: var(--sp-3) 0 0; font-size: 11px; color: var(--c-text-faint); line-height: 1.6; }
+    .hs-note.low { color: var(--c-weapon); }
 
     /* ---- ティア表(見た目は global.css の .panel を流用) ---- */
     .tt {

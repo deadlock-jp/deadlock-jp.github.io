@@ -1,6 +1,6 @@
-name: Update item stats
+name: Update stats
 
-# アイテムの人気率・勝率(deadlock-api.com)を取り込む。
+# アイテムの人気率・勝率と、ランク帯別のヒーロー統計(deadlock-api.com)を取り込む。
 #
 # ゲーム本体のデータ更新(ngc-pc のタスクスケジューラ → tools/automation/auto-update.mjs)
 # とは別系統。あちらはこのPCのゲームクライアントが要るが、こちらは公開APIを叩くだけなので
@@ -37,20 +37,21 @@ jobs:
           node-version: 22
 
       # 取得に失敗した場合やデータが不足している場合、スクリプト側が
-      # 非ゼロで終了して data/item-stats.json は書き換えられない
+      # 非ゼロで終了して data/*.json は書き換えられない
       - run: node tools/fetch-item-stats.mjs --write
+      - run: node tools/fetch-hero-stats.mjs --write
 
       - name: Commit and deploy if changed
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if git diff --quiet -- data/item-stats.json; then
+          if git diff --quiet -- data/item-stats.json data/hero-stats.json; then
             echo "差分なし。コミットしない"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/item-stats.json
-          git commit -m "アイテムの人気率・勝率を更新 (自動)"
+          git add data/item-stats.json data/hero-stats.json
+          git commit -m "アイテム・ヒーローの統計を更新 (自動)"
           git push
           gh workflow run deploy.yml --ref main
