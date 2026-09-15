@@ -490,7 +490,8 @@ const payload = {
 
     function renderSaved() {
       const list = loadSaved();
-      $("savecount").textContent = list.length ? ` ${list.length}` : "";
+      // 空文字なら CSS 側(:empty)でバッジごと消える。空白を入れないこと
+      $("savecount").textContent = list.length ? String(list.length) : "";
       const box = $("savedlist");
       if (!list.length) {
         box.innerHTML = `<li class="savedempty">まだ保存がありません。ビルドを組んで「＋ 保存」を押すと、この端末にだけ残ります。</li>`;
@@ -1465,17 +1466,27 @@ const payload = {
     }
     .totals { display: flex; gap: var(--sp-4); margin-left: auto; font-size: 12px; color: var(--c-text-muted); }
     .totals b { font-family: var(--font-mono); color: var(--c-text-strong); font-size: 14px; }
-    .acts { display: flex; gap: var(--sp-2); }
-    .share, .clear, .compare {
+    .acts { display: flex; gap: var(--sp-2); flex-wrap: wrap; }
+    /*
+     * 操作ボタンの土台。ボタンを足すときは必ずこのセレクタの並びにも入れる。
+     * 入れ忘れるとブラウザ既定のボタン(OSのUI書体・別サイズ・別の角丸)が混ざる。
+     */
+    .share, .clear, .compare, .savetoggle, .cardbtn, .savebtn {
       padding: 5px 12px; border-radius: var(--radius); font: inherit; font-size: 12px; cursor: pointer;
-      text-decoration: none; display: inline-block;
+      text-decoration: none; white-space: nowrap;
+      display: inline-flex; align-items: center; gap: 6px;
     }
-    .share { background: var(--c-accent-bg); border: 1px solid var(--c-accent-dim); color: var(--c-accent); }
-    .share:hover { background: var(--c-accent-bg-strong); color: var(--c-accent-hover); }
+    /* display を指定した分、hidden 属性の効きが消えるので戻す(保存UIは非対応環境で隠す) */
+    [hidden] { display: none !important; }
+    /* 主要操作(アクセント): 共有URLのコピーと保存の実行 */
+    .share, .savebtn { background: var(--c-accent-bg); border: 1px solid var(--c-accent-dim); color: var(--c-accent); }
+    .share:hover, .savebtn:hover { background: var(--c-accent-bg-strong); color: var(--c-accent-hover); }
     .compare { background: transparent; border: 1px solid var(--c-spirit); color: var(--c-spirit); }
     .compare:hover { background: var(--c-spirit-bg); }
-    .clear { background: transparent; border: 1px solid var(--c-border); color: var(--c-text-muted); }
-    .clear:hover { border-color: var(--c-border-strong); color: var(--c-text); }
+    /* 副次操作: 枠線のみ */
+    .clear, .savetoggle, .cardbtn { background: transparent; border: 1px solid var(--c-border); color: var(--c-text-muted); }
+    .clear:hover, .savetoggle:hover, .cardbtn:hover { border-color: var(--c-border-strong); color: var(--c-text); }
+    .cardbtn:disabled, .savebtn:disabled { opacity: .5; cursor: default; }
 
     .layout {
       display: grid;
@@ -1659,8 +1670,13 @@ const payload = {
 
     /* ---- ビルドの保存(localStorage) ---- */
     .savetoggle[aria-expanded="true"] { color: var(--c-soul); border-color: var(--c-soul-dim); background: var(--c-soul-bg); }
-    .savecount { font-family: var(--font-mono); font-size: 11px; color: var(--c-text-faint); }
-    .savetoggle[aria-expanded="true"] .savecount { color: var(--c-soul); }
+    .savecount {
+      font-family: var(--font-mono); font-size: 10px; line-height: 1; color: var(--c-text-faint);
+      background: var(--c-surface-2); border-radius: 999px; padding: 3px 6px;
+    }
+    /* 0件のときは丸ごと消す(空でも flex の gap が空いてしまうため) */
+    .savecount:empty { display: none; }
+    .savetoggle[aria-expanded="true"] .savecount { color: var(--c-soul); background: var(--c-soul-bg); }
     .savepanel {
       margin: calc(var(--sp-2) * -1) 0 var(--sp-4);
       padding: var(--sp-3) 0 0;
@@ -1676,32 +1692,39 @@ const payload = {
     .savepanel input:focus { outline: none; border-color: var(--c-accent); }
     .savenote { font-size: 11px; color: var(--c-accent); }
     .savedlist { list-style: none; padding: 0; margin: var(--sp-3) 0 0; display: grid; gap: 4px; max-width: 720px; }
-    .savedlist li {
-      display: flex; align-items: center; gap: var(--sp-2);
+    /*
+     * 行は innerHTML で差し込むので scoped CSS が当たらない。
+     * サーバ側で出している .savedlist を起点に :global() で書く(CLAUDE.md の落とし穴)。
+     */
+    .savedlist :global(li) {
+      /* 狭い画面では ソウル額・ボタンが2行目に折り返る(横に溢れさせない) */
+      display: flex; align-items: center; gap: var(--sp-2); flex-wrap: wrap; row-gap: 6px;
       background: var(--c-surface); border: 1px solid var(--c-border);
       border-left: 3px solid var(--c-accent-dim); border-radius: var(--radius); padding: 6px 8px;
     }
-    .savedempty {
-      display: block !important; border: none !important; background: none !important;
-      font-size: 12px; color: var(--c-text-faint); padding: 2px 0 !important;
+    .savedlist :global(.savedempty) {
+      display: block; border: none; background: none;
+      font-size: 12px; color: var(--c-text-faint); padding: 2px 0;
     }
-    .sv-mini { display: flex; gap: 2px; flex: 0 0 auto; }
-    .sv-mini i { width: 14px; height: 14px; border-radius: 3px; display: block; }
-    .sv-mini .w { background: var(--c-weapon-bg); border: 1px solid var(--c-weapon); }
-    .sv-mini .v { background: var(--c-vitality-bg); border: 1px solid var(--c-vitality); }
-    .sv-mini .s { background: var(--c-spirit-bg); border: 1px solid var(--c-spirit); }
-    .sv-name {
+    .savedlist :global(.sv-mini) { display: flex; gap: 2px; flex: 0 0 auto; }
+    .savedlist :global(.sv-mini i) { width: 14px; height: 14px; border-radius: 3px; display: block; }
+    .savedlist :global(.sv-mini .w) { background: var(--c-weapon-bg); border: 1px solid var(--c-weapon); }
+    .savedlist :global(.sv-mini .v) { background: var(--c-vitality-bg); border: 1px solid var(--c-vitality); }
+    .savedlist :global(.sv-mini .s) { background: var(--c-spirit-bg); border: 1px solid var(--c-spirit); }
+    .savedlist :global(.sv-name) {
       flex: 1 1 auto; min-width: 0; font-size: 13px; color: var(--c-text-strong);
       overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
-    .sv-meta { font-family: var(--font-mono); font-size: 11px; color: var(--c-text-faint); white-space: nowrap; }
-    .savedlist button {
+    .savedlist :global(.sv-meta) {
+      font-family: var(--font-mono); font-size: 11px; color: var(--c-text-faint); white-space: nowrap;
+    }
+    .savedlist :global(button) {
       background: var(--c-surface-2); color: var(--c-text-muted);
       border: 1px solid var(--c-border); border-radius: var(--radius);
-      font: inherit; font-size: 11px; padding: 3px 8px; cursor: pointer;
+      font: inherit; font-size: 11px; line-height: 1.6; padding: 3px 9px; cursor: pointer;
     }
-    .savedlist .sv-load:hover { color: var(--c-accent); border-color: var(--c-accent-dim); }
-    .savedlist .sv-del:hover { color: var(--c-weapon); border-color: var(--c-weapon); }
+    .savedlist :global(.sv-load:hover) { color: var(--c-accent); border-color: var(--c-accent-dim); }
+    .savedlist :global(.sv-del:hover) { color: var(--c-weapon); border-color: var(--c-weapon); }
 
     /* ---- ショップ見出し行: 左にTYPE選択、右に並び替え ---- */
     .shophead {
