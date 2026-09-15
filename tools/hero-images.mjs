@@ -8,6 +8,10 @@
  *   詳細ページの肖像: <英語表示名>_Render.png (1440px 前後・数MB)
  *       → 幅 760 の WebP に縮小して public/images/heroes/render/<herokey>.webp
  *         (herokey = key から "hero_" を除いたもの)
+ *   ビルドカードの背景: 同じ <英語表示名>_Render.png
+ *       → 16:9 (1200x675) に切り出した WebP を public/images/heroes/card16x9/<herokey>.webp
+ *         ビルドページの「画像を保存」が Canvas に敷く。顔が上寄りに来るよう上端から切る。
+ *         render/ の 760px を引き伸ばすと甘くなるので、カード用に別途作る。
  *   トップのカード: <codename>_card_psd.png (280x380)
  *       → WebP にして public/images/heroes/card/<herokey>.webp
  *   カードのホバー詳細: <codename>_card_gloat_psd.png (280x380)
@@ -36,6 +40,10 @@ const SRC =
 
 const RENDER_WIDTH = 760;
 const RENDER_QUALITY = 82;
+/** ビルドカードの背景。カード自体が 1200x675 なので等倍で持つ */
+const CARD_W = 1200;
+const CARD_H = 675;
+const CARD_QUALITY = 78;
 const PORTRAIT_QUALITY = 90; // card / gloat は小さいので高品質で
 
 /** file://{images}/heroes/x_sm.psd → public/images/heroes/x_sm.png (image-manifest と同じ規則) */
@@ -72,6 +80,7 @@ if (!srcFiles.length) {
 
 const copies = []; // { from, to }          そのままコピー
 const renders = []; // { from, to, key }     WebP へ縮小
+const cardBgs = []; // { from, to, key }     16:9 に切り出してビルドカードの背景に
 const problems = [];
 for (const h of Object.values(heroes.heroes)) {
   if (!h.released) continue;
@@ -92,6 +101,12 @@ for (const h of Object.values(heroes.heroes)) {
       renders.push({
         from: join(SRC, renderSrc),
         to: join(repoRoot, `public/images/heroes/render/${key}.webp`),
+        key,
+      });
+    if (srcFiles.includes(renderSrc))
+      cardBgs.push({
+        from: join(SRC, renderSrc),
+        to: join(repoRoot, `public/images/heroes/card16x9/${key}.webp`),
         key,
       });
   }
@@ -155,7 +170,26 @@ for (const r of renders) {
     .toFile(r.to);
   after += statSync(r.to).size;
 }
+/*
+ * ビルドカードの背景。元は縦長(1639x1440 など)なので 16:9 に切る。
+ * position: "top" だと顔が切れる絵があるため、上端から少しだけ下げた位置を中心にする。
+ */
+let cardAfter = 0;
+for (const c of cardBgs) {
+  mkdirSync(dirname(c.to), { recursive: true });
+  const meta = await sharp(c.from).metadata();
+  const cropH = Math.round(meta.width / (CARD_W / CARD_H));
+  // 顔が入る高さ。上端から画像高さの8%を残して切る(全部上端だと頭頂が詰まる)
+  const top = Math.max(0, Math.min(Math.round(meta.height * 0.08), meta.height - cropH));
+  await sharp(c.from)
+    .extract({ left: 0, top, width: meta.width, height: Math.min(cropH, meta.height - top) })
+    .resize({ width: CARD_W, height: CARD_H, fit: "cover" })
+    .webp({ quality: CARD_QUALITY })
+    .toFile(c.to);
+  cardAfter += statSync(c.to).size;
+}
 console.log(
   `配置完了: アイコン ${copies.length} 件 / 肖像 ${renders.length} 件 ` +
-    `(${(before / 1e6).toFixed(1)}MB → ${(after / 1e6).toFixed(1)}MB WebP)`,
+    `(${(before / 1e6).toFixed(1)}MB → ${(after / 1e6).toFixed(1)}MB WebP) / ` +
+    `カード背景 ${cardBgs.length} 件 (${(cardAfter / 1e6).toFixed(1)}MB)`,
 );

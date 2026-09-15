@@ -55,6 +55,8 @@ const payload = {
     return {
       id: h.id,
       name: t(h.nameToken, h.key),
+      /* ビルドカードの背景 public/images/heroes/card16x9/<key>.webp を引くのに使う */
+      key: h.key.replace(/^hero_/, ""),
       levels: h.levels.map((l) => ({
         level: l.level,
         requiredGold: l.requiredGold,
@@ -155,9 +157,31 @@ const payload = {
     </label>
     <span class="acts">
       <button class="share" id="share">共有URLをコピー</button>
+      {/* localStorage が使えない環境では JS 側で丸ごと隠す */}
+      <button class="savetoggle" id="savetoggle" aria-expanded="false" hidden>
+        保存 / 呼び出し<span class="savecount" id="savecount"></span>
+      </button>
+      <button class="cardbtn" id="cardbtn">画像を保存</button>
       <a class="compare" id="compare" href={`${base}/build/compare/`}>バージョン比較</a>
       <button class="clear" id="clear">クリア</button>
     </span>
+  </div>
+
+  {/* 保存パネル。既定は閉じていて、保存済みがあれば開いた状態で始める */}
+  <div class="savepanel" id="savepanel" hidden>
+    <div class="savebar">
+      <label class="savelabel" for="savename">ビルド名</label>
+      <input
+        id="savename"
+        type="text"
+        maxlength="40"
+        placeholder="例: 序盤スピリット型（画像にも載ります）"
+        autocomplete="off"
+      />
+      <button class="savebtn" id="savebtn">＋ 保存</button>
+      <span class="savenote" id="savenote"></span>
+    </div>
+    <ul class="savedlist" id="savedlist"></ul>
   </div>
 
   <div class="layout">
@@ -405,6 +429,129 @@ const payload = {
       if (replace) history.replaceState(null, "", url);
       else history.pushState(null, "", url);
       $("compare").href = base + "/build/compare/" + hash;
+    }
+
+    // ---- 保存(localStorage) -------------------------------------------
+    /*
+     * 保存するのは URL のハッシュ(h=<heroId>&i=<短縮ID>)そのもの。
+     * 呼び出しは readUrl() と同じ経路を通るので、共有URLと保存の仕様が自動で揃う。
+     * count / souls / heroId は一覧表示用の控えで、hash から再計算できる。
+     *
+     * private ウィンドウなどで localStorage が使えないことがある。
+     * その場合は保存機能ごと黙って無効化し、ページの他の部分は動かす。
+     */
+    const STORE_KEY = "dljp:builds";
+    const SAVE_MAX = 20;
+    let storeOk = false;
+    try {
+      const probe = "dljp:probe";
+      localStorage.setItem(probe, "1");
+      localStorage.removeItem(probe);
+      storeOk = true;
+    } catch {
+      storeOk = false;
+    }
+
+    function loadSaved() {
+      if (!storeOk) return [];
+      try {
+        const raw = JSON.parse(localStorage.getItem(STORE_KEY) ?? "[]");
+        return Array.isArray(raw) ? raw.filter((b) => b && typeof b.hash === "string") : [];
+      } catch {
+        // 壊れた値が入っていても落とさない
+        return [];
+      }
+    }
+    function storeSaved(list) {
+      if (!storeOk) return false;
+      try {
+        localStorage.setItem(STORE_KEY, JSON.stringify(list));
+        return true;
+      } catch {
+        // 容量超過など
+        return false;
+      }
+    }
+
+    /** いまのビルドの状態を保存用の形にする */
+    function currentBuild(label) {
+      const cost = catCost();
+      return {
+        id: String(Date.now()) + Math.random().toString(36).slice(2, 6),
+        label,
+        hash: (heroId !== null ? "h=" + heroId : "") +
+          (picked.length ? (heroId !== null ? "&" : "") + "i=" + picked.map(shorten).join(",") : ""),
+        heroId,
+        count: picked.length,
+        souls: cost.WeaponMod + cost.Armor + cost.Tech,
+        savedAt: new Date().toISOString().slice(0, 10),
+      };
+    }
+
+    function renderSaved() {
+      const list = loadSaved();
+      $("savecount").textContent = list.length ? ` ${list.length}` : "";
+      const box = $("savedlist");
+      if (!list.length) {
+        box.innerHTML = `<li class="savedempty">まだ保存がありません。ビルドを組んで「＋ 保存」を押すと、この端末にだけ残ります。</li>`;
+        return;
+      }
+      box.innerHTML = list
+        .map((b) => {
+          const h = payload.heroes.find((x) => x.id === b.heroId);
+          const bars = (b.types ?? [])
+            .map((t) => `<i class="${t}"></i>`)
+            .join("");
+          return (
+            `<li data-id="${esc(b.id)}">` +
+            `<span class="sv-mini">${bars}</span>` +
+            `<span class="sv-name">${esc(b.label || "（無題）")}</span>` +
+            `<span class="sv-meta">${h ? esc(h.name) + " / " : ""}${b.count}個 / ${fmt(b.souls ?? 0)}</span>` +
+            `<button class="sv-load" data-act="load">呼び出し</button>` +
+            `<button class="sv-del" data-act="del">削除</button>` +
+            `</li>`
+          );
+        })
+        .join("");
+    }
+
+    /** TYPE構成のミニバー用。購入順に最大8個ぶん色を並べる */
+    function typeMarks() {
+      const map = { WeaponMod: "w", Armor: "v", Tech: "s" };
+      return picked.slice(0, 8).map((id) => map[payload.items[id]?.slot] ?? "w");
+    }
+
+    function saveCurrent() {
+      if (heroId === null && !picked.length) {
+        flashNote("保存するものがありません");
+        return;
+      }
+      const list = loadSaved();
+      if (list.length >= SAVE_MAX) {
+        flashNote(`保存は${SAVE_MAX}件までです。古いものを削除してください`);
+        return;
+      }
+      const typed = $("savename").value.trim();
+      const h = payload.heroes.find((x) => x.id === heroId);
+      const label = typed || `${h ? h.name : "ビルド"} ${picked.length}個`;
+      const b = currentBuild(label);
+      b.types = typeMarks();
+      list.unshift(b);
+      if (!storeSaved(list)) {
+        flashNote("保存できませんでした（保存領域がいっぱいの可能性）");
+        return;
+      }
+      $("savename").value = label;
+      renderSaved();
+      flashNote("保存しました");
+    }
+
+    let noteTimer = 0;
+    function flashNote(msg) {
+      const el = $("savenote");
+      el.textContent = msg;
+      clearTimeout(noteTimer);
+      noteTimer = setTimeout(() => (el.textContent = ""), 2600);
     }
 
     // ---- 描画 --------------------------------------------------------
@@ -754,6 +901,312 @@ const payload = {
       render();
     }
 
+    // ---- ビルドカード画像 ---------------------------------------------
+    /*
+     * ゲーム本編のビルド画面に寄せた 1200x675 を Canvas 2D で描いて PNG で落とす。
+     * 画像はすべて同一オリジン(public/ 配下)なので canvas は汚染されず toBlob できる。
+     * アイテムのアイコンはショップの DOM にあるものをそのまま使う(追加の読み込みをしない)。
+     */
+    const CARD_W = 1200;
+    const CARD_H = 675;
+    const CAT_COLOR = { WeaponMod: "#e0a458", Armor: "#8cc96e", Tech: "#b58be6" };
+    const CAT_TILE = {
+      WeaponMod: ["#6b4c22", "#2a1f12"],
+      Armor: ["#3f6b2f", "#17240f"],
+      Tech: ["#5a3f80", "#241833"],
+    };
+    const ROMAN = ["", "I", "II", "III", "IV", "V"];
+
+    /** 角丸の矩形パス */
+    function roundRect(c, x, y, w, h, r) {
+      c.beginPath();
+      c.moveTo(x + r, y);
+      c.arcTo(x + w, y, x + w, y + h, r);
+      c.arcTo(x + w, y + h, x, y + h, r);
+      c.arcTo(x, y + h, x, y, r);
+      c.arcTo(x, y, x + w, y, r);
+      c.closePath();
+    }
+
+    function loadImage(src) {
+      return new Promise((resolve) => {
+        const im = new Image();
+        im.onload = () => resolve(im);
+        im.onerror = () => resolve(null);
+        im.src = src;
+      });
+    }
+
+    async function drawCard() {
+      const h = hero();
+      const cv = document.createElement("canvas");
+      cv.width = CARD_W;
+      cv.height = CARD_H;
+      const c = cv.getContext("2d");
+
+      // 下地。背景画像が透過を含むので必ず塗っておく
+      c.fillStyle = "#0c1116";
+      c.fillRect(0, 0, CARD_W, CARD_H);
+
+      // 背景: ヒーローの16:9レンダー
+      if (h) {
+        const bg = await loadImage(`${base}/images/heroes/card16x9/${h.key}.webp`);
+        if (bg) c.drawImage(bg, 0, 0, CARD_W, CARD_H);
+      }
+
+      // 下半分を落として UI を載せる
+      const scrim = c.createLinearGradient(0, 0, 0, CARD_H);
+      scrim.addColorStop(0, "rgba(8,12,16,.15)");
+      scrim.addColorStop(0.26, "rgba(8,12,16,0)");
+      scrim.addColorStop(0.55, "rgba(8,12,16,.72)");
+      scrim.addColorStop(0.74, "rgba(6,9,12,.95)");
+      scrim.addColorStop(1, "#05080a");
+      c.fillStyle = scrim;
+      c.fillRect(0, 0, CARD_W, CARD_H);
+
+      const cost = catCost();
+      const spent = cost.WeaponMod + cost.Armor + cost.Tech;
+      const level = h ? levelForSouls(h.levels, spent) : 1;
+
+      // 左上: ヒーロー名 + ビルド名
+      c.textBaseline = "alphabetic";
+      c.shadowColor = "rgba(0,0,0,.9)";
+      c.shadowBlur = 18;
+      c.fillStyle = "#fcf0d8";
+      c.font = '900 40px "Noto Sans JP", sans-serif';
+      c.fillText(h ? h.name : "ヒーロー未選択", 34, 62);
+      const label = $("savename") ? $("savename").value.trim() : "";
+      if (label) {
+        c.fillStyle = "#cfe3dc";
+        c.font = '500 19px "Noto Sans JP", sans-serif';
+        c.fillText(label, 34, 90);
+      }
+
+      // 右上: サイト名
+      c.textAlign = "right";
+      c.fillStyle = "#fcf0d8";
+      c.font = '700 15px "Noto Sans JP", sans-serif';
+      c.fillText("DEADLOCK-JP DB", CARD_W - 34, 48);
+      c.fillStyle = "#8fa39d";
+      c.font = '500 12px "JetBrains Mono", monospace';
+      c.fillText("deadlock-jpdb.com", CARD_W - 34, 66);
+      c.textAlign = "left";
+      c.shadowBlur = 0;
+
+      /*
+       * ---- 下部UI ----
+       * アイテムは6列2段で横幅いっぱいに置く。セルの大きさは横から決まるので、
+       * 段の高さもそれに従う(先に高さを決め打ちすると下段がはみ出す)。
+       * 左のメーターはゲーム本編と同じく2段ぶんの高さに合わせる。
+       */
+      const PAD = 34;
+      const METER_W = 132;
+      const GAP = 9;
+      const COLS = 6;
+      const gridX = PAD + METER_W + 14;
+      const cellSize = Math.floor((CARD_W - PAD - gridX - GAP * (COLS - 1)) / COLS);
+      const gridH = cellSize * 2 + GAP;
+      const gridTop = CARD_H - 30 - gridH;
+      const soulsY = gridTop - 24;
+
+      // レベル(緑の丸)。ゲーム本編ではソウル額の左にこれが出る
+      const lvR = 32;
+      const lvX = PAD + lvR;
+      const lvY = soulsY - lvR + 6;
+      c.beginPath();
+      c.arc(lvX, lvY, lvR, 0, Math.PI * 2);
+      c.strokeStyle = "#5fe0a8";
+      c.lineWidth = 5;
+      c.shadowColor = "rgba(95,224,168,.45)";
+      c.shadowBlur = 14;
+      c.stroke();
+      c.shadowBlur = 0;
+      c.fillStyle = "#5fe0a8";
+      c.font = '700 30px "JetBrains Mono", monospace';
+      c.textAlign = "center";
+      c.fillText(String(level), lvX, lvY + 11);
+      c.textAlign = "left";
+
+      // ソウル額
+      c.shadowColor = "rgba(0,0,0,.8)";
+      c.shadowBlur = 10;
+      c.fillStyle = "#5fe0a8";
+      c.font = '700 40px "JetBrains Mono", monospace';
+      c.fillText("$", PAD + lvR * 2 + 20, lvY + 18);
+      const dollarW = c.measureText("$").width;
+      c.font = '700 56px "JetBrains Mono", monospace';
+      const amountX = PAD + lvR * 2 + 20 + dollarW + 6;
+      c.fillText(fmt(spent), amountX, lvY + 18);
+      const amountW = c.measureText(fmt(spent)).width;
+      c.fillStyle = "#e9f2ef";
+      c.font = '700 19px "Noto Sans JP", sans-serif';
+      c.fillText("アイテム価値", amountX + amountW + 14, lvY + 18);
+      c.shadowBlur = 0;
+
+      // 投資メーター(武器/生命力/スピリット)。高さはアイテム2段ぶんに合わせる
+      const mW = METER_W;
+      const mH = gridH;
+      c.fillStyle = "rgba(10,15,19,.82)";
+      roundRect(c, PAD, gridTop, mW, mH, 6);
+      c.fill();
+      c.strokeStyle = "rgba(126,224,180,.14)";
+      c.lineWidth = 1;
+      c.stroke();
+      const slotsOrder = ["WeaponMod", "Armor", "Tech"];
+      const maxCost = Math.max(cost.WeaponMod, cost.Armor, cost.Tech, 1);
+      const SEG = 14;
+      slotsOrder.forEach((s, i) => {
+        const bw = 24;
+        const bx = PAD + mW / 2 - (bw * 3 + 20) / 2 + i * (bw + 10);
+        const by = gridTop + 14;
+        const bh = mH - 50;
+        c.fillStyle = "rgba(255,255,255,.05)";
+        roundRect(c, bx, by, bw, bh, 3);
+        c.fill();
+        const on = Math.round((cost[s] / maxCost) * SEG);
+        const segH = (bh - 4) / SEG;
+        for (let k = 0; k < SEG; k++) {
+          c.fillStyle = k < on ? CAT_COLOR[s] : "rgba(255,255,255,.07)";
+          c.fillRect(bx + 2, by + bh - 2 - (k + 1) * segH + 2, bw - 4, segH - 2);
+        }
+        // 下のしるし(当サイトで描いた図形。ゲームのアイコンそのものではない)
+        c.fillStyle = CAT_COLOR[s];
+        const ix = bx + bw / 2;
+        const iy = gridTop + mH - 18;
+        c.beginPath();
+        if (s === "WeaponMod") {
+          c.arc(ix, iy, 6, 0, Math.PI * 2);
+          c.lineWidth = 2;
+          c.strokeStyle = CAT_COLOR[s];
+          c.stroke();
+          c.beginPath();
+          c.arc(ix, iy, 2.2, 0, Math.PI * 2);
+          c.fill();
+        } else if (s === "Armor") {
+          c.moveTo(ix, iy - 7);
+          c.lineTo(ix + 6, iy - 4);
+          c.lineTo(ix + 6, iy + 1);
+          c.quadraticCurveTo(ix + 6, iy + 6, ix, iy + 8);
+          c.quadraticCurveTo(ix - 6, iy + 6, ix - 6, iy + 1);
+          c.lineTo(ix - 6, iy - 4);
+          c.closePath();
+          c.fill();
+        } else {
+          c.moveTo(ix, iy - 8);
+          c.lineTo(ix + 2.2, iy - 2.2);
+          c.lineTo(ix + 8, iy);
+          c.lineTo(ix + 2.2, iy + 2.2);
+          c.lineTo(ix, iy + 8);
+          c.lineTo(ix - 2.2, iy + 2.2);
+          c.lineTo(ix - 8, iy);
+          c.lineTo(ix - 2.2, iy - 2.2);
+          c.closePath();
+          c.fill();
+        }
+      });
+
+      // アイテム 6x2
+      const gx = gridX;
+      const gap = GAP;
+      const cols = COLS;
+      const cell = cellSize;
+      for (let i = 0; i < 12; i++) {
+        const col = i % cols;
+        const row = Math.floor(i / cols);
+        const x = gx + col * (cell + gap);
+        const y = gridTop + row * (cell + gap);
+        const id = picked[i];
+        const it = id ? payload.items[id] : null;
+        if (!it) {
+          c.fillStyle = "rgba(12,17,22,.55)";
+          roundRect(c, x, y, cell, cell, 7);
+          c.fill();
+          c.strokeStyle = "rgba(255,255,255,.08)";
+          c.setLineDash([5, 4]);
+          c.lineWidth = 1;
+          c.stroke();
+          c.setLineDash([]);
+          continue;
+        }
+        const [c1, c2] = CAT_TILE[it.slot] ?? CAT_TILE.WeaponMod;
+        const g = c.createLinearGradient(x, y, x + cell, y + cell);
+        g.addColorStop(0, c1);
+        g.addColorStop(0.7, c2);
+        c.fillStyle = g;
+        roundRect(c, x, y, cell, cell, 7);
+        c.fill();
+        c.save();
+        c.clip();
+        // ショップにある実アイコンをそのまま使う
+        const dom = document.querySelector(`.card[data-id="${CSS.escape(id)}"] .icon img`);
+        if (dom && dom.complete && dom.naturalWidth) {
+          const pad = cell * 0.11;
+          c.drawImage(dom, x + pad, y + pad, cell - pad * 2, cell - pad * 2);
+        } else {
+          // 画像が無いアイテムは頭文字で代替(ItemIcon のプレースホルダと同じ考え方)
+          c.fillStyle = "rgba(255,255,255,.75)";
+          c.font = '700 20px "Noto Sans JP", sans-serif';
+          c.textAlign = "center";
+          c.fillText(it.name.slice(0, 2), x + cell / 2, y + cell / 2 + 7);
+          c.textAlign = "left";
+        }
+        c.restore();
+        c.strokeStyle = "rgba(255,255,255,.12)";
+        c.lineWidth = 1;
+        roundRect(c, x + 0.5, y + 0.5, cell - 1, cell - 1, 7);
+        c.stroke();
+        // 右上のティア
+        const tw = 22;
+        const th = 17;
+        c.fillStyle = "rgba(255,255,255,.82)";
+        c.beginPath();
+        c.moveTo(x + cell - tw, y);
+        c.lineTo(x + cell, y);
+        c.lineTo(x + cell, y + th);
+        c.lineTo(x + cell - tw + 6, y + th);
+        c.quadraticCurveTo(x + cell - tw, y + th, x + cell - tw, y + th - 6);
+        c.closePath();
+        c.fill();
+        c.fillStyle = "#0c1116";
+        c.font = '700 11px "JetBrains Mono", monospace';
+        c.textAlign = "center";
+        c.fillText(ROMAN[it.tier] ?? String(it.tier), x + cell - tw / 2 + 2, y + 12);
+        c.textAlign = "left";
+      }
+      return cv;
+    }
+
+    async function saveCardImage() {
+      const btn = $("cardbtn");
+      const label = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = "作成中…";
+      try {
+        // Webフォントが来る前に描くと別書体になるので待つ
+        if (document.fonts && document.fonts.ready) await document.fonts.ready;
+        const cv = await drawCard();
+        const blob = await new Promise((r) => cv.toBlob(r, "image/png"));
+        if (!blob) throw new Error("toBlob failed");
+        const h = hero();
+        const name =
+          "deadlock-jpdb_" + (h ? h.key : "build") + "_" + new Date().toISOString().slice(0, 10) + ".png";
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = name;
+        document.body.append(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 5000);
+      } catch (e) {
+        btn.textContent = "作成できませんでした";
+        setTimeout(() => (btn.textContent = label), 2400);
+        return;
+      }
+      btn.disabled = false;
+      btn.textContent = label;
+    }
+
     // ---- ホバーカード -------------------------------------------------
     const card = $("hovercard");
     function showCard(id, anchor) {
@@ -894,6 +1347,48 @@ const payload = {
       picked = [];
       refresh(false);
     });
+
+    // ---- 保存パネルの配線 ----
+    $("cardbtn").addEventListener("click", saveCardImage);
+    if (storeOk) {
+      $("savetoggle").hidden = false;
+      const panel = $("savepanel");
+      $("savetoggle").addEventListener("click", () => {
+        const open = panel.hidden;
+        panel.hidden = !open;
+        $("savetoggle").setAttribute("aria-expanded", String(open));
+      });
+      $("savebtn").addEventListener("click", saveCurrent);
+      $("savename").addEventListener("keydown", (e) => {
+        if (e.key === "Enter") saveCurrent();
+      });
+      // 呼び出し・削除はイベント委譲(一覧は描き直すため)
+      $("savedlist").addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-act]");
+        if (!btn) return;
+        const id = btn.closest("li")?.dataset.id;
+        const list = loadSaved();
+        const b = list.find((x) => x.id === id);
+        if (!b) return;
+        if (btn.dataset.act === "del") {
+          storeSaved(list.filter((x) => x.id !== id));
+          renderSaved();
+          return;
+        }
+        // 呼び出し: ハッシュを入れて既存の読み込み経路に乗せる
+        location.hash = b.hash;
+        readUrl();
+        $("savename").value = b.label ?? "";
+        render();
+        $("compare").href = base + "/build/compare/" + (b.hash ? "#" + b.hash : "");
+      });
+      renderSaved();
+      // 保存済みがあるときは開いた状態で始める
+      if (loadSaved().length) {
+        panel.hidden = false;
+        $("savetoggle").setAttribute("aria-expanded", "true");
+      }
+    }
     $("share").addEventListener("click", async () => {
       const btn = $("share");
       try {
@@ -1161,6 +1656,52 @@ const payload = {
     .card.covered { opacity: 0.32; cursor: not-allowed; }
     .card.covered:hover { background: var(--c-surface); border-color: var(--c-border); }
     .cname { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+    /* ---- ビルドの保存(localStorage) ---- */
+    .savetoggle[aria-expanded="true"] { color: var(--c-soul); border-color: var(--c-soul-dim); background: var(--c-soul-bg); }
+    .savecount { font-family: var(--font-mono); font-size: 11px; color: var(--c-text-faint); }
+    .savetoggle[aria-expanded="true"] .savecount { color: var(--c-soul); }
+    .savepanel {
+      margin: calc(var(--sp-2) * -1) 0 var(--sp-4);
+      padding: var(--sp-3) 0 0;
+      border-top: 1px solid var(--c-border);
+    }
+    .savebar { display: flex; align-items: center; gap: var(--sp-2); flex-wrap: wrap; }
+    .savelabel { font-size: 11px; color: var(--c-text-muted); letter-spacing: .04em; }
+    .savepanel input {
+      flex: 1 1 260px; max-width: 340px;
+      background: var(--c-surface); border: 1px solid var(--c-border-strong); color: var(--c-text);
+      border-radius: var(--radius); padding: 5px 9px; font: inherit; font-size: 13px;
+    }
+    .savepanel input:focus { outline: none; border-color: var(--c-accent); }
+    .savenote { font-size: 11px; color: var(--c-accent); }
+    .savedlist { list-style: none; padding: 0; margin: var(--sp-3) 0 0; display: grid; gap: 4px; max-width: 720px; }
+    .savedlist li {
+      display: flex; align-items: center; gap: var(--sp-2);
+      background: var(--c-surface); border: 1px solid var(--c-border);
+      border-left: 3px solid var(--c-accent-dim); border-radius: var(--radius); padding: 6px 8px;
+    }
+    .savedempty {
+      display: block !important; border: none !important; background: none !important;
+      font-size: 12px; color: var(--c-text-faint); padding: 2px 0 !important;
+    }
+    .sv-mini { display: flex; gap: 2px; flex: 0 0 auto; }
+    .sv-mini i { width: 14px; height: 14px; border-radius: 3px; display: block; }
+    .sv-mini .w { background: var(--c-weapon-bg); border: 1px solid var(--c-weapon); }
+    .sv-mini .v { background: var(--c-vitality-bg); border: 1px solid var(--c-vitality); }
+    .sv-mini .s { background: var(--c-spirit-bg); border: 1px solid var(--c-spirit); }
+    .sv-name {
+      flex: 1 1 auto; min-width: 0; font-size: 13px; color: var(--c-text-strong);
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .sv-meta { font-family: var(--font-mono); font-size: 11px; color: var(--c-text-faint); white-space: nowrap; }
+    .savedlist button {
+      background: var(--c-surface-2); color: var(--c-text-muted);
+      border: 1px solid var(--c-border); border-radius: var(--radius);
+      font: inherit; font-size: 11px; padding: 3px 8px; cursor: pointer;
+    }
+    .savedlist .sv-load:hover { color: var(--c-accent); border-color: var(--c-accent-dim); }
+    .savedlist .sv-del:hover { color: var(--c-weapon); border-color: var(--c-weapon); }
 
     /* ---- ショップ見出し行: 左にTYPE選択、右に並び替え ---- */
     .shophead {
