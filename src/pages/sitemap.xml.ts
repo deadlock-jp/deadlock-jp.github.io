@@ -45,6 +45,7 @@ export const GET: APIRoute = ({ site }) => {
     { loc: "/items/", priority: "0.9", lastmod: dataDate },
     { loc: "/build/", priority: "0.8", lastmod: dataDate },
     { loc: "/patch-notes/", priority: "0.8", lastmod: patchNotes()[0]?.date ?? dataDate },
+    { loc: "/mechanics/", priority: "0.7", lastmod: dataDate },
     { loc: "/about/", priority: "0.3", lastmod: dataDate },
     ...releasedHeroes().map((h) => ({ loc: `/heroes/${h.id}/`, priority: "0.7", lastmod: dataDate })),
     ...shopItems().map((i) => ({ loc: `/items/${i.id}/`, priority: "0.6", lastmod: dataDate })),

@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "note": "ゲームシステムのリファレンス(/mechanics/)の構成。数値はここに書かず、data/snapshots/<版>/objects.json などから引く(CLAUDE.md ルール6)。このファイルが持つのは「どのトピックで・どのオブジェクトを・どの順に出すか」と、生データからは読み取れない補足だけ。lines は自分の言葉で書く。他サイトの文章は使わない(ルール3)。確かめられていない仕様は書かず、空のままにする。",
+  "topics": [
+    {
+      "id": "lane",
+      "title": "レーンの建造物",
+      "lead": "レーンを進むと順に現れる防衛建造物。名前はゲーム内の表記をそのまま使っている。",
+      "objects": [
+        {
+          "id": "npc_boss_tier1",
+          "nameToken": "Citadel_AttackerClass_CLASS_TROOPER_BOSS"
+        },
+        {
+          "id": "npc_boss_tier2",
+          "nameToken": "Citadel_Hud_KillFeedWalker"
+        },
+        {
+          "id": "npc_barrack_boss",
+          "nameToken": "Citadel_AttackerClass_CLASS_BOSS_BARRACKS"
+        },
+        {
+          "id": "npc_boss_tier3",
+          "nameToken": "Citadel_AttackerClass_CLASS_BOSS_TIER_3"
+        }
+      ],
+      "lines": [
+        "ガーディアンとベース・ガーディアンは、対プレイヤー耐性が負の値になっている。ヒーローからのダメージは増える一方、トルーパーからのダメージは大きく減る。",
+        "無敵化範囲の内側に防衛側のプレイヤーがいない状態が続くと無敵が解けるバックドア保護がある。データ上は建造物ごとに範囲が別々に持たれている。",
+        "パトロンはHPを2本持ち、第1形態と第2形態でレーザーの長さとクールダウンが変わる。"
+      ]
+    },
+    {
+      "id": "trooper",
+      "title": "トルーパー",
+      "lead": "レーンを自動で進む味方NPC。倒すとソウルオーブが出る。",
+      "objects": [
+        {
+          "id": "trooper_normal",
+          "nameToken": "",
+          "name": "トルーパー（射撃）"
+        },
+        {
+          "id": "trooper_melee",
+          "nameToken": "",
+          "name": "トルーパー（近接）"
+        },
+        {
+          "id": "trooper_medic",
+          "nameToken": "",
+          "name": "トルーパー（メディック）"
+        },
+        {
+          "id": "trooper_zipline_container",
+          "nameToken": "",
+          "name": "ジップラインのコンテナ"
+        }
+      ],
+      "lines": [
+        "メディックだけが毎分のDPS上昇を持っている。試合が長引くほど攻撃力が上がる唯一のトルーパー。"
+      ]
+    },
+    {
+      "id": "neutral",
+      "title": "ニュートラル",
+      "lead": "レーン外のキャンプ。弱点を撃つと追加ダメージとソウルが入る。",
+      "objects": [
+        {
+          "id": "neutral_trooper_weak",
+          "nameToken": "",
+          "name": "中立モンスター（小）"
+        },
+        {
+          "id": "neutral_trooper_normal",
+          "nameToken": "",
+          "name": "中立モンスター（中）"
+        },
+        {
+          "id": "neutral_trooper_strong",
+          "nameToken": "",
+          "name": "中立モンスター（大）"
+        },
+        {
+          "id": "npc_super_neutral",
+          "nameToken": "Citadel_Hud_KillFeedSuperNeutral"
+        },
+        {
+          "id": "npc_neutral_weakpoint",
+          "nameToken": "",
+          "name": "弱点"
+        },
+        {
+          "id": "npc_neutral_weakpoint_strong",
+          "nameToken": "",
+          "name": "弱点（大）"
+        }
+      ],
+      "lines": [
+        "獲得ソウルは時間で増える。データ上は「毎分の増加率」として持たれていて、試合開始時の値に掛かる。",
+        "弱点は壊すと一定時間後に戻る。弱点1つを壊すごとに本体のソウルの一部が先に入る。"
+      ]
+    }
+  ]
+}

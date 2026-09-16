@@ -160,6 +160,18 @@ const balanceAbilityKeys = [
     </div>
   </section>
 
+  <section class="block panel">
+    <h2>
+      ゲームシステム
+      <a class="more" href={`${base}/mechanics/`}>リファレンスを見る →</a>
+    </h2>
+    <p class="syslead">
+      ガーディアン・ウォーカー・パトロンのHPと挙動、トルーパーと中立モンスター、
+      アイテム価格・レベル必要ソウル・購入ボーナス。ヒーローやアイテムと同じく、
+      すべてゲーム本体から抽出した数値です。
+    </p>
+  </section>
+
   {/* ヒーロー/アイテム/スキルのホバー詳細(共通コンポーネント) */}
   <HeroHoverCard heroDetail={heroDetail} />
   <ItemHoverCard details={itemDetails} />
@@ -213,6 +225,14 @@ const balanceAbilityKeys = [
       font-size: 12px;
       font-weight: 400;
       white-space: nowrap;
+    }
+
+    .syslead {
+      margin: 0;
+      font-size: 13px;
+      color: var(--c-text-muted);
+      max-width: 70ch;
+      line-height: 1.8;
     }
 
     /* ---- バランス調整 ---- */
