@@ -24,7 +24,6 @@ const generated = new Date(itemsFile.generatedAt).toLocaleDateString("ja-JP", {
   month: "long",
   day: "numeric",
 });
-const repo = "https://github.com/deadlock-jp/deadlock-jp.github.io";
 ---
 
 <Base title="このサイトについて" description="DEADLOCK-JP DB の出典と権利表示">
@@ -58,7 +57,6 @@ const repo = "https://github.com/deadlock-jp/deadlock-jp.github.io";
   <h2>数値の出どころ</h2>
   <p>
     数値は人手で書き写しておらず、すべてパーサーが自動で取り出しています。
-    どのフィールドをどう解釈したかは、リポジトリの <code>src/parsers/</code> のコードに書いてあります。
   </p>
   <ul class="src">
     <li>
@@ -213,15 +211,6 @@ const repo = "https://github.com/deadlock-jp/deadlock-jp.github.io";
     支援によって本サイトが公式なものになるわけでもありません。
   </p>
 
-  <h2>ソースコード</h2>
-  <p>
-    <a href={repo} rel="noopener">{repo}</a>
-  </p>
-  <p class="note">
-    ソースコード（<code>src/</code>、<code>tools/</code>、設定ファイル）は MIT ライセンスです。
-    これはコードにのみ及ぶもので、<code>data/</code> と <code>public/images/</code> の
-    ゲーム由来のデータ・画像は対象外です。
-  </p>
   </div>
 
   <style>

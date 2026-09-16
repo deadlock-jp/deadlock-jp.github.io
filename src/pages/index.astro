@@ -378,5 +378,24 @@ const balanceAbilityKeys = [
     .itemwall a:hover {
       filter: brightness(1.2);
     }
+    /*
+     * スマホ向けの上書き。基本ルールより後ろに置かないと効かない
+     * (同じ詳細度なので、後に書いた方が勝つ)。
+     */
+    @media (max-width: 560px) {
+      /*
+       * 108px のままだと 375px 幅で2列しか入らない(パネルの内寸が約277pxで、
+       * 3列には 108*3 + gap 16 = 340px 要る)。1体ずつが大きすぎて一覧にならないので、
+       * 4列入る幅まで詰める。
+       */
+      .herogrid {
+        grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+      }
+      .hname {
+        padding: 10px 2px 2px;
+        font-size: 9px;
+        -webkit-text-stroke-width: 1.5px;
+      }
+    }
   </style>
 </Base>

@@ -317,7 +317,13 @@ if (crumbs.length > 1) {
       }
       .site-main {
         position: relative;
-        z-index: 1;
+        /*
+         * フッター(z-index:1)より上に置く。本文とフッターが同じ重なり順だと、
+         * 後ろにあるフッターが本文の内側を丸ごと覆い、ホバーカード(position:fixed・
+         * z-index:40)がページ最下部でフッターの裏に隠れる。カードは .site-main の
+         * 内側にあるので、カード側の z-index をいくつ上げてもここで頭打ちになる。
+         */
+        z-index: 2;
         max-width: 1120px;
         margin: 0 auto;
         padding: var(--sp-6) var(--sp-5) var(--sp-7);
