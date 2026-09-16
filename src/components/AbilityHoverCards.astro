@@ -1,0 +1,66 @@
+---
+/**
+ * スキルアイコンのホバー詳細を、スキルの実IDの一覧から丸ごと用意する。
+ *
+ * AbilityHoverCard は「詳細データ」と「アイコンのクローン元プール」の2つを
+ * 必要とする(アイコンの解決ロジックを重複させないため、DOM から clone する作り)。
+ * その両方をここでまとめる。呼ぶ側は data-abilitycard="<実ID>" を付けるだけでよい。
+ */
+import AbilityIcon from "./AbilityIcon.astro";
+import AbilityHoverCard, { type AbilityHoverDetail } from "./AbilityHoverCard.astro";
+import { ability, describe, heroNotes, releasedHeroes, t } from "../lib/data.ts";
+import { skillCard } from "../lib/skillcard.ts";
+
+interface Props {
+  abilityKeys: string[];
+}
+const { abilityKeys } = Astro.props;
+
+/** {s:hero_name} を解決するのに持ち主の名前が要る */
+const ownerName = new Map<string, string>();
+for (const h of releasedHeroes()) {
+  for (const a of h.abilities) {
+    if (!ownerName.has(a.abilityKey)) ownerName.set(a.abilityKey, t(h.nameToken, h.key));
+  }
+}
+
+const details: Record<string, AbilityHoverDetail> = {};
+for (const key of abilityKeys) {
+  if (details[key]) continue;
+  const ab = ability(key);
+  if (!ab) continue;
+  const heroName = ownerName.get(key) ?? "";
+  const card = skillCard(ab, heroName);
+  details[key] = {
+    name: t(key, key),
+    isUlt: ab.kind === "Ultimate",
+    isPassive: ab.kind !== "Ultimate" && ab.activation === "PASSIVE",
+    meta: card.meta,
+    desc: describe(`${key}_desc`, ab.properties, "（説明なし）", { hero_name: heroName }),
+    tiles: card.tiles,
+    secondaryRows: card.secondaryRows,
+    upgrades: card.upgrades,
+    notes: heroNotes(key),
+  };
+}
+---
+
+{/* アイコンの供給元。表示はせず、クローン元としてだけ使う */}
+<div class="hcicon-src-wrap" aria-hidden="true">
+  {Object.entries(details).map(([key, d]) => (
+    <span class="hcicon-src" data-ability={key}>
+      <AbilityIcon
+        name={d.name}
+        image={ability(key)?.image ?? null}
+        size={44}
+        cssVar={d.isUlt ? "spirit" : "accent"}
+      />
+    </span>
+  ))}
+</div>
+
+<AbilityHoverCard details={details} />
+
+<style>
+  .hcicon-src-wrap { display: none; }
+</style>

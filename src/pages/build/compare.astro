@@ -19,11 +19,18 @@ import ItemIcon from "../../components/ItemIcon.astro";
 import HeroPortrait from "../../components/HeroPortrait.astro";
 import { t, modifierLabel, SLOT_META, releasedHeroes } from "../../lib/data.ts";
 import { weaponRows, weaponHeadline, weaponName, vitalityRows, spiritRows } from "../../lib/gamestats.ts";
-import { listSnapshotVersions, loadVersionedSnapshot } from "../../lib/versionedData.ts";
+import { comparableSnapshots, loadVersionedSnapshot } from "../../lib/versionedData.ts";
 import { COST_BONUS_TARGET } from "../../types/hero.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const versions = listSnapshotVersions(); // 新しい順
+/*
+ * 選択肢に出すのは公式アップデートに対応する版と最新の抽出版だけ(versionedData.ts)。
+ * ラベルは ClientVersion ではなく公式アップデートの日付。比較に使う内部キーは
+ * ClientVersion のまま変えない(共有URL・スナップショットの対応がずれるため)。
+ */
+const snapshots = comparableSnapshots(); // 新しい順
+const versions = snapshots.map((s) => s.version);
+const versionLabels = Object.fromEntries(snapshots.map((s) => [s.version, s.label]));
 
 /** 1バージョンぶんのヒーロー・アイテムを、比較に要る数値だけの軽量な形にする */
 function buildVersionPayload(version: string) {
@@ -217,6 +224,7 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
     define:vars={{
       versionPayloads,
       versions,
+      versionLabels,
       heroNames,
       itemNames,
       labels,
@@ -512,7 +520,9 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
       }
 
       function populateSelect(el, selected) {
-        el.innerHTML = versions.map((v) => `<option value="${v}"${v === selected ? " selected" : ""}>${v}</option>`).join("");
+        el.innerHTML = versions
+          .map((v) => `<option value="${v}"${v === selected ? " selected" : ""}>${versionLabels[v] ?? v}</option>`)
+          .join("");
       }
 
       function refresh() {

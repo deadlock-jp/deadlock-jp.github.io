@@ -1,0 +1,178 @@
+---
+/**
+ * バランス調整の一覧行。バフ / ナーフ / 混在 ごとに、調整されたものを
+ * アイコンで並べる。トップページとアップデート一覧の両方で使う。
+ *
+ * 並ぶ単位はスキル・アイテム・ヒーローの基礎ステータス。スキルは
+ * 「誰の」が分かるよう、アイコンの左下にヒーローの小アイコンを重ねる。
+ *
+ * ラベルの文字数(バフ/ナーフ/混在)で右のアイコン列がずれないよう、
+ * ラベルは固定幅の列に置く。件数はラベルの中で右寄せ。
+ */
+import ItemIcon from "./ItemIcon.astro";
+import AbilityIcon from "./AbilityIcon.astro";
+import HeroPortrait from "./HeroPortrait.astro";
+import { ADJUSTMENT_LABEL } from "../lib/data.ts";
+import { CHIP_ORDER, type BalanceChip } from "../lib/balance.ts";
+
+interface Props {
+  chips: BalanceChip[];
+  /** 1行に出す上限。超えたぶんは「ほか N 件」 */
+  max?: number;
+}
+const { chips, max = 24 } = Astro.props;
+
+const rows = CHIP_ORDER.map((kind) => ({
+  kind,
+  label: ADJUSTMENT_LABEL[kind],
+  chips: chips.filter((c) => c.kind === kind),
+})).filter((r) => r.chips.length > 0);
+---
+
+<div class="kinds">
+  {rows.map((row) => (
+    <div class="kindrow" data-kind={row.kind}>
+      <span class="klabel">
+        <span>{row.label}</span>
+        <b>{row.chips.length}</b>
+      </span>
+      <span class="icons">
+        {row.chips.slice(0, max).map((c) => (
+          <a
+            class="chip"
+            href={c.href}
+            title={c.heroName ? `${c.heroName}｜${c.name}` : c.name}
+            data-itemcard={c.item ? c.item.id : undefined}
+            data-abilitycard={c.abilityKey ?? undefined}
+          >
+            {c.item ? (
+              <ItemIcon
+                name={c.name}
+                slotType={c.item.slotType}
+                tier={c.item.tier}
+                shopIcon={c.item.shopIcon}
+                activation={c.item.activation}
+                isImbue={c.item.isImbue}
+                size={34}
+              />
+            ) : c.abilityImage ? (
+              <AbilityIcon name={c.name} image={c.abilityImage} size={34} />
+            ) : (
+              <HeroPortrait name={c.heroName ?? c.name} image={c.heroImage} size={34} />
+            )}
+            {/* スキル以外(基礎ステータス・武器)はヒーローアイコン自体が主役なので重ねない */}
+            {c.abilityImage && c.heroImage && (
+              <HeroPortrait name={c.heroName ?? ""} image={c.heroImage} size={16} />
+            )}
+            {c.tag && <span class="tag">{c.tag}</span>}
+          </a>
+        ))}
+        {row.chips.length > max && <span class="more">ほか {row.chips.length - max} 件</span>}
+      </span>
+    </div>
+  ))}
+</div>
+
+<style>
+  .kinds {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+    min-width: 0;
+  }
+  .kindrow {
+    display: grid;
+    grid-template-columns: 84px minmax(0, 1fr);
+    gap: var(--sp-3);
+    align-items: start;
+  }
+  .klabel {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 6px;
+    width: 100%;
+    margin-top: 8px;
+    padding: 2px 8px;
+    border-radius: 99px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.6;
+    letter-spacing: 0.06em;
+  }
+  .klabel b {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  [data-kind="buff"] .klabel { color: var(--c-buff); background: var(--c-buff-bg); border: 1px solid var(--c-buff-dim); }
+  [data-kind="nerf"] .klabel { color: var(--c-nerf); background: var(--c-nerf-bg); border: 1px solid var(--c-nerf-dim); }
+  [data-kind="mixed"] .klabel { color: var(--c-mixed); background: var(--c-mixed-bg); border: 1px solid var(--c-mixed-dim); }
+  [data-kind="rework"] .klabel { color: var(--c-spirit); background: var(--c-spirit-bg); border: 1px solid var(--c-spirit); }
+  [data-kind="neutral"] .klabel { color: var(--c-text-muted); background: var(--c-surface-2); border: 1px solid var(--c-border); }
+
+  .icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    min-width: 0;
+  }
+  /*
+   * チップは 34px のアイコン + 2px の枠。ヒーローの小アイコンは枠の中に収める。
+   * はみ出させると、スキルで始まる行とアイテムで始まる行で左端がずれる。
+   */
+  .chip {
+    position: relative;
+    display: block;
+    line-height: 0;
+    border: 2px solid var(--c-border);
+    border-radius: 5px;
+    padding: 0;
+  }
+  [data-kind="buff"] .chip { border-color: var(--c-buff-dim); }
+  [data-kind="nerf"] .chip { border-color: var(--c-nerf-dim); }
+  [data-kind="mixed"] .chip { border-color: var(--c-mixed-dim); }
+  [data-kind="rework"] .chip { border-color: var(--c-spirit); }
+  [data-kind="buff"] .chip:hover { border-color: var(--c-buff); }
+  [data-kind="nerf"] .chip:hover { border-color: var(--c-nerf); }
+  [data-kind="mixed"] .chip:hover { border-color: var(--c-mixed); }
+  [data-kind="rework"] .chip:hover { border-color: var(--c-accent); }
+  .chip:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 2px; }
+
+  /* 2つめのアイコン(= 持ち主のヒーロー)だけ左下に重ねる */
+  .chip > :global(*:nth-child(2)) {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border: 1px solid #0b1116;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .tag {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 0 3px;
+    border-radius: 3px 0 2px 0;
+    background: #0b1116;
+    color: var(--c-text-muted);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    line-height: 1.5;
+  }
+  .more {
+    align-self: center;
+    font-size: 11px;
+    color: var(--c-text-faint);
+  }
+
+  @media (max-width: 560px) {
+    .kindrow {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 4px;
+    }
+    .klabel {
+      width: max-content;
+      margin-top: 0;
+    }
+  }
+</style>

@@ -15,8 +15,10 @@ interface Props {
   ogType?: string;
   /** パンくず（構造化データにも使う）。先頭に「トップ」は自動で付く */
   breadcrumbs?: Crumb[];
+  /** 日付を持つページ(アップデートごとのページ)。ISO の日付。構造化データに出す */
+  datePublished?: string;
 }
-const { title, description, ogType = "website", breadcrumbs = [] } = Astro.props;
+const { title, description, ogType = "website", breadcrumbs = [], datePublished } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const nav = [
   { href: `${base}/heroes/`, label: "ヒーロー" },
@@ -59,6 +61,23 @@ const jsonLd: Record<string, unknown>[] = [
     isFamilyFriendly: true,
   },
 ];
+/*
+ * 日付を持つページ(アップデートごとのページ)は Article として日付を明示する。
+ * 「いつの更新か」がページの本質なので、検索側にもそこを伝える。
+ */
+if (datePublished) {
+  jsonLd.push({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: title,
+    datePublished,
+    dateModified: datePublished,
+    inLanguage: "ja",
+    mainEntityOfPage: canonical,
+    description,
+    isAccessibleForFree: true,
+  });
+}
 const crumbs: Crumb[] = [{ name: "トップ", path: "/" }, ...breadcrumbs];
 if (crumbs.length > 1) {
   jsonLd.push({

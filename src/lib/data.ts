@@ -89,6 +89,28 @@ function humanize(name: string): string {
 }
 
 /**
+ * ステータス名の表示ラベル。
+ *
+ * Valve のトークンは末尾が "_label" のものと "_Label" のものが混在していて、
+ * 素直に `${name}_label` だけを引くと8件ほどが日本語を持っているのに英語へ落ちる
+ * (HealingPerCast_Label / DOTDuration_Label など)。describe() が {s:X} の参照で
+ * 大文字小文字を無視して再探索しているのと同じ理由で、ここでも両方見る。
+ */
+const labelTokenIndex = new Map<string, string>();
+for (const file of [localization, localizationEn]) {
+  for (const key of Object.keys(file.tokens)) {
+    const lower = key.toLowerCase();
+    if (lower.endsWith("_label") && !labelTokenIndex.has(lower)) labelTokenIndex.set(lower, key);
+  }
+}
+export function statLabel(name: string, fallback?: string): string {
+  const exact = t(`${name}_label`, "");
+  if (exact) return exact;
+  const key = labelTokenIndex.get(`${name}_label`.toLowerCase());
+  return (key ? t(key, "") : "") || (fallback ?? humanize(name));
+}
+
+/**
  * value(数値文字列。例: "8m")の末尾から、数字の直後に続く非数字部分だけを
  * 単位として取り出す。無ければ空文字("125"のような単位無しの値、
  * または数値として読めない値)。
@@ -334,7 +356,7 @@ export function formatProperty(
   // m_strLocTokenOverride があれば、ラベル系トークンはそちらの名前で引く
   // (例: ability_doorman_bomb の "ProjectileFuse" は "BellLifetime_label" しか無い)
   const lookupName = prop.labelOverride ?? name;
-  const baseLabel = t(`${lookupName}_label`, humanize(name));
+  const baseLabel = statLabel(lookupName, humanize(name));
   const cond = t(`${lookupName}_conditional`, "");
   // ラベルに既に条件が含まれていることがある(例: "対NPC武器ダメージ" + "対NPC" →
   // 素直に足すと "対NPC武器ダメージ対NPC" になる)。buildModifierLabels() と同じ回避
@@ -623,7 +645,7 @@ const UNITS_PER_METER = 39.37;
 /** プロパティ名から表示ラベルを引く。m_strLocTokenOverride があればそちら優先 */
 function adjustmentLabel(name: string, source: Ability | Item | undefined): string {
   const override = source?.properties?.[name]?.labelOverride ?? null;
-  return t(`${override ?? name}_label`, humanize(name));
+  return statLabel(override ?? name, humanize(name));
 }
 
 /**
@@ -639,7 +661,8 @@ function adjustmentValueText(
 ): string | null {
   if (value === null) return null;
   const body = Number.isInteger(value) ? String(value) : String(Math.round(value * 1000) / 1000);
-  if (isScale) return `×${body}`;
+  /* 基礎値の倍率は "×0.6"、AP強化ぶんの倍率は増分なので "+0.45" と出す */
+  if (isScale) return isUpgrade ? `${value >= 0 ? "+" : ""}${body}` : `×${body}`;
   const override = source?.properties?.[name]?.labelOverride ?? null;
   const postfix = t(`${override ?? name}_postfix`, "").trim();
   const sign = isUpgrade && value >= 0 ? "+" : "";
@@ -748,7 +771,13 @@ function adjustmentRow(c: AdjustmentChange, source: Ability | Item | undefined):
   }
   const name = fieldNameOf(c.path);
   const upgrade = isUpgradePath(c.path);
-  const scale = isScalePath(c.path);
+  /*
+   * AP強化で同じ段に同名プロパティが2つ並ぶときの2つ目は、Valve のデータ上
+   * その強化のスピリット倍率(例: T2 の CombatBarrier は 70=バリア量 と 0.76=倍率)。
+   * 公式パッチノートも「+80、スケーリング +0.7」と2つ組で書いている。
+   * 判定は値の大小ではなく出現順(#2 以降)で行う。
+   */
+  const scale = isScalePath(c.path) || (upgrade && /#\d+$/.test(c.path));
   const base = name === "cost" ? "価格" : adjustmentLabel(name, source);
   return {
     path: c.path,

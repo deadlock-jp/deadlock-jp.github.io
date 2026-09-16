@@ -1,0 +1,219 @@
+---
+/**
+ * 公式アップデート1件のページ。URL はその投稿の日付(/patch-notes/2026-08-22/)。
+ *
+ * 上にゲームデータから抽出したバランス調整、下に Valve 公式の投稿本文。
+ * 本文はここにしか置かない(一覧ページにも載せると同じ文章がサイト内で
+ * 二重になり、検索側にどちらを出すか委ねることになる)。
+ */
+import Base from "../../layouts/Base.astro";
+import BalanceDetail from "../../components/BalanceDetail.astro";
+import AbilityHoverCards from "../../components/AbilityHoverCards.astro";
+import { patchNotes, ADJUSTMENT_LABEL } from "../../lib/data.ts";
+import { balanceUpdateByDate } from "../../lib/balance.ts";
+
+export function getStaticPaths() {
+  return patchNotes().map((n) => ({ params: { date: n.date }, props: { note: n } }));
+}
+
+const { note } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const update = balanceUpdateByDate(note.date, base);
+
+/** "## 見出し" 行と通常行を分けて、見出しごとの塊にする(一覧ページと同じ規則) */
+function toSections(lines: string[]): { heading: string | null; items: string[] }[] {
+  const sections: { heading: string | null; items: string[] }[] = [];
+  for (const line of lines) {
+    if (line.startsWith("## ")) {
+      sections.push({ heading: line.slice(3), items: [] });
+      continue;
+    }
+    if (sections.length === 0) sections.push({ heading: null, items: [] });
+    sections[sections.length - 1]!.items.push(line);
+  }
+  return sections.filter((s) => s.items.length > 0);
+}
+const sections = toSections(note.lines);
+
+/* 前後のアップデートへの導線。日付の新しい順に並んでいる */
+const all = patchNotes();
+const at = all.findIndex((n) => n.date === note.date);
+const newer = at > 0 ? all[at - 1] : null;
+const older = at >= 0 && at < all.length - 1 ? all[at + 1] : null;
+
+/* スキルアイコンのホバー詳細。このページに出るスキルぶんだけ用意する */
+const abilityKeys = [
+  ...new Set(
+    (update?.entities ?? []).flatMap((e) =>
+      e.groups.map((g) => g.abilityKey).filter((k): k is string => !!k),
+    ),
+  ),
+];
+
+const summary = update
+  ? (["buff", "nerf", "mixed", "rework", "neutral"] as const)
+      .filter((k) => update.counts[k] > 0)
+      .map((k) => `${ADJUSTMENT_LABEL[k]} ${update.counts[k]}`)
+      .join(" / ")
+  : null;
+---
+
+<Base
+  title={note.title}
+  description={`Deadlock（デッドロック）${note.date} のアップデート。${
+    summary ? `${summary}。` : ""
+  }ゲームデータから抽出した数値の変更点と、Valve公式のパッチノート本文。`}
+  ogType="article"
+  datePublished={note.date}
+  breadcrumbs={[
+    { name: "パッチノート", path: `${base}/patch-notes/` },
+    { name: note.title, path: `${base}/patch-notes/${note.date}/` },
+  ]}
+>
+  <h1>{note.title}</h1>
+  <p class="meta">
+    <time datetime={note.date}>{note.date}</time>
+    {update?.fromVersion && update?.toVersion && (
+      <span class="ver">build {update.fromVersion} → {update.toVersion}</span>
+    )}
+    {summary && <span class="sum">{summary}</span>}
+  </p>
+
+  {update ? (
+    <section class="block panel">
+      <h2>バランス調整</h2>
+      <p class="note">
+        ゲームデータの差分から自動生成しています。公式の文面に無い変更も含みます。
+      </p>
+      <BalanceDetail entities={update.entities} />
+      <ul class="legend">
+        <li class="good">有利な向きに動いた項目</li>
+        <li class="bad">不利な向きに動いた項目</li>
+        <li class="flat">向きを判定していない項目</li>
+      </ul>
+    </section>
+  ) : (
+    <p class="none">
+      このアップデートの数値差分はまだありません（前後のスナップショットが揃っていない期間のものです）。
+    </p>
+  )}
+
+  <section class="block panel">
+    <h2>公式パッチノート</h2>
+    <p class="note">
+      Steamの公式ニュースから取得した、Valve公式の投稿本文です。第三者の要約や翻訳ではありません。
+    </p>
+    {sections.map((s) => (
+      <div class="psection">
+        {s.heading && <h3>{s.heading}</h3>}
+        <ul>
+          {s.items.map((line) => (
+            <li>{line}</li>
+          ))}
+        </ul>
+      </div>
+    ))}
+    <p class="src">
+      <a href={note.url} rel="noopener" target="_blank">Steamで原文を見る →</a>
+    </p>
+  </section>
+
+  <nav class="pager">
+    {older ? (
+      <a href={`${base}/patch-notes/${older.date}/`}>← {older.title}</a>
+    ) : (
+      <span></span>
+    )}
+    <a class="all" href={`${base}/patch-notes/`}>アップデート一覧</a>
+    {newer ? <a href={`${base}/patch-notes/${newer.date}/`}>{newer.title} →</a> : <span></span>}
+  </nav>
+
+  <AbilityHoverCards abilityKeys={abilityKeys} />
+
+  <style>
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-2) var(--sp-4);
+      margin: calc(var(--sp-2) * -1) 0 var(--sp-5);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--c-text-faint);
+    }
+    .sum { color: var(--c-text-muted); }
+    .note {
+      margin: 0 0 var(--sp-3);
+      font-size: 12px;
+      color: var(--c-text-faint);
+    }
+    .none { color: var(--c-text-muted); }
+
+    .legend {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-2) var(--sp-4);
+      margin: var(--sp-4) 0 0;
+      padding: 0;
+      font-size: 12px;
+      color: var(--c-text-muted);
+    }
+    .legend li {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .legend li::before {
+      content: "";
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      border: 1px solid var(--c-border);
+      background: var(--c-surface);
+    }
+    .legend .good::before { border-color: var(--c-buff-dim); background: var(--c-buff-bg); }
+    .legend .bad::before { border-color: var(--c-nerf-dim); background: var(--c-nerf-bg); }
+
+    .psection h3 {
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      color: var(--c-text-muted);
+      margin: var(--sp-3) 0 var(--sp-1);
+      border: none;
+      padding: 0;
+    }
+    .psection ul {
+      margin: 0;
+      padding-left: 1.2em;
+      font-size: 13px;
+      line-height: 1.8;
+      /* Valveの本文にはURLがそのまま入ることがある。途中で折り返せないと横に伸びる */
+      overflow-wrap: anywhere;
+    }
+    .src {
+      margin: var(--sp-4) 0 0;
+      font-size: 12px;
+    }
+
+    .pager {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: center;
+      gap: var(--sp-3);
+      margin-top: var(--sp-5);
+      font-size: 12px;
+    }
+    .pager a { text-decoration: none; }
+    .pager a:hover { text-decoration: underline; }
+    .pager > :last-child { text-align: right; }
+    .pager .all { color: var(--c-text-muted); white-space: nowrap; }
+
+    @media (max-width: 560px) {
+      .pager {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--sp-2);
+      }
+      .pager > :last-child { text-align: left; }
+    }
+  </style>
+</Base>

@@ -1,0 +1,211 @@
+---
+/**
+ * アップデート個別ページの「バランス調整」本体。
+ * ヒーロー(またはアイテム) → スキル → 変更項目 の3階層で出す。
+ *
+ * 項目の色はその項目自身の向き(有利=緑 / 不利=赤 / 判定しない=無色)で、
+ * スキルの枠の色はそのスキルの分類。ナーフのスキルの中に緑の項目が混ざるのは
+ * 正しい(「クールダウン短縮 -18秒 → -20秒」は数値が減って有利側)。
+ */
+import ItemIcon from "./ItemIcon.astro";
+import AbilityIcon from "./AbilityIcon.astro";
+import HeroPortrait from "./HeroPortrait.astro";
+import { ADJUSTMENT_LABEL } from "../lib/data.ts";
+import type { BalanceEntity } from "../lib/balance.ts";
+
+interface Props {
+  entities: BalanceEntity[];
+}
+const { entities } = Astro.props;
+const goodClass = (good: boolean | null) => (good === null ? "flat" : good ? "good" : "bad");
+---
+
+<ol class="entities">
+  {entities.map((e) => (
+    <li class="entity" data-kind={e.kind}>
+      <div class="who">
+        <a href={e.href} data-herocard={e.target === "hero" ? undefined : undefined}>
+          {e.item ? (
+            <ItemIcon
+              name={e.name}
+              slotType={e.item.slotType}
+              tier={e.item.tier}
+              shopIcon={e.item.shopIcon}
+              activation={e.item.activation}
+              isImbue={e.item.isImbue}
+              size={40}
+            />
+          ) : (
+            <HeroPortrait name={e.name} image={e.heroImage} size={40} />
+          )}
+        </a>
+        <span class="kind">{ADJUSTMENT_LABEL[e.kind]}</span>
+      </div>
+
+      <div class="body">
+        <p class="ename">
+          <a href={e.href}>{e.name}</a>
+        </p>
+
+        {e.groups.map((g) => (
+          <div class="group" data-kind={g.kind} data-scope={g.scope}>
+            {/* アイテムは左にアイコンが出ているので、この列は作らない */}
+            {g.scope !== "item" && (
+              <span class="gicon">
+                {g.scope === "ability" && g.image ? (
+                  <a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/abilities/${g.abilityKey}/`} data-abilitycard={g.abilityKey}>
+                    <AbilityIcon name={g.name} image={g.image} size={26} />
+                  </a>
+                ) : (
+                  <span class="gmark">{g.scope === "weapon" ? "銃" : "基"}</span>
+                )}
+              </span>
+            )}
+            <div class="grows">
+              {/* アイテムは名前が上の行に出ているので繰り返さない */}
+              {g.scope !== "item" && <p class="gname">{g.name}</p>}
+              <ul class="rows">
+                {g.rows.map((r) => (
+                  <li class={goodClass(r.good)}>
+                    {r.tier && <span class="tier">T{r.tier}</span>}
+                    <span class="rlabel">{r.label}</span>
+                    <span class="to">{r.toText ?? "削除"}</span>
+                    <span class="from">{r.fromText === null ? "(新規)" : `(${r.fromText})`}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .entities {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .entity {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: var(--sp-3);
+    padding: var(--sp-3) 0;
+    border-top: 1px solid var(--c-border);
+  }
+  .entity:first-child { border-top: none; }
+
+  .who {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+  .who a { line-height: 0; display: block; border-radius: 5px; }
+  .who a:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 2px; }
+  .kind {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    line-height: 1.6;
+    padding: 1px 6px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  [data-kind="buff"] > .who > .kind { color: var(--c-buff); background: var(--c-buff-bg); }
+  [data-kind="nerf"] > .who > .kind { color: var(--c-nerf); background: var(--c-nerf-bg); }
+  [data-kind="mixed"] > .who > .kind { color: var(--c-mixed); background: var(--c-mixed-bg); }
+  [data-kind="rework"] > .who > .kind { color: var(--c-spirit); background: var(--c-spirit-bg); }
+  [data-kind="neutral"] > .who > .kind { color: var(--c-text-muted); background: var(--c-surface-2); }
+
+  .body {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+  }
+  .ename { margin: 0; font-size: 14px; font-weight: 700; line-height: 1.4; }
+  .ename a { color: var(--c-text-strong); text-decoration: none; }
+  .ename a:hover { color: var(--c-accent); }
+
+  .group {
+    display: grid;
+    grid-template-columns: 26px minmax(0, 1fr);
+    gap: 9px;
+    align-items: start;
+  }
+  .group[data-scope="item"] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .gicon { line-height: 0; }
+  .gicon a { display: block; border: 2px solid transparent; border-radius: 6px; }
+  .group[data-kind="buff"] .gicon a { border-color: var(--c-buff-dim); }
+  .group[data-kind="nerf"] .gicon a { border-color: var(--c-nerf-dim); }
+  .group[data-kind="mixed"] .gicon a { border-color: var(--c-mixed-dim); }
+  .gmark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 4px;
+    background: var(--c-surface-2);
+    border: 1px solid var(--c-border);
+    color: var(--c-text-muted);
+    font-size: 11px;
+    line-height: 1;
+  }
+  .grows { min-width: 0; }
+  .gname { margin: 0 0 3px; font-size: 12px; color: var(--c-text-muted); line-height: 1.5; }
+
+  .rows {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+  }
+  .rows li {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 2px 8px;
+    border: 1px solid var(--c-border);
+    border-radius: 4px;
+    background: var(--c-surface);
+    font-size: 12px;
+    line-height: 1.7;
+  }
+  .rows li.good { border-color: var(--c-buff-dim); background: var(--c-buff-bg); }
+  .rows li.bad { border-color: var(--c-nerf-dim); background: var(--c-nerf-bg); }
+  .rlabel { color: var(--c-text-muted); }
+  .to {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    color: var(--c-text-strong);
+    font-weight: 500;
+  }
+  .from {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 11px;
+    color: var(--c-text-faint);
+  }
+  .tier {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1.5;
+    padding: 0 3px;
+    border-radius: 3px;
+    border: 1px solid var(--c-spirit);
+    color: var(--c-spirit);
+  }
+
+  @media (max-width: 560px) {
+    .entity { grid-template-columns: 36px minmax(0, 1fr); gap: 9px; }
+  }
+</style>

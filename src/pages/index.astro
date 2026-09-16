@@ -6,19 +6,17 @@ import ItemIcon from "../components/ItemIcon.astro";
 import HeroPortrait from "../components/HeroPortrait.astro";
 import HeroHoverCard from "../components/HeroHoverCard.astro";
 import ItemHoverCard from "../components/ItemHoverCard.astro";
+import BalanceChips from "../components/BalanceChips.astro";
+import AbilityHoverCards from "../components/AbilityHoverCards.astro";
 import {
   releasedHeroes,
   shopItems,
   t,
-  siteUpdates,
-  upstreamRepo,
   heroTags,
-  heroByKey,
-  item as itemById,
   itemHoverData,
   SLOT_META,
 } from "../lib/data.ts";
-import type { Adjustment, AdjustmentKind } from "../lib/data.ts";
+import { balanceUpdates } from "../lib/balance.ts";
 import { heroRanks, pickRows } from "../lib/herorank.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -54,46 +52,14 @@ const heroDetail = Object.fromEntries(heroes.map((x) => [x.h.id, x.detail]));
 const slots = ["WeaponMod", "Armor", "Tech"] as const;
 const items = shopItems();
 const itemDetails = Object.fromEntries(items.map((i) => [i.id, itemHoverData(i)]));
-const commitUrl = (sha: string | null) => (sha ? `${upstreamRepo}/commit/${sha}` : null);
 
-/** 調整履歴のアイコン一覧に出すための解決 */
-type ResolvedAdj =
-  | { kind: AdjustmentKind; target: "hero"; name: string; href: string; image: string | null; note?: string }
-  | { kind: AdjustmentKind; target: "item"; name: string; href: string; it: ReturnType<typeof itemById>; note?: string };
-function resolveAdj(a: Adjustment): ResolvedAdj | null {
-  if (a.target === "hero") {
-    const h = heroByKey(a.key);
-    if (!h) return null;
-    return {
-      kind: a.kind, target: "hero", name: t(h.nameToken, h.key),
-      href: `${base}/heroes/${h.id}/`, image: h.images.iconSmall, note: a.note,
-    };
-  }
-  const it = itemById(a.key);
-  if (!it) return null;
-  return {
-    kind: a.kind, target: "item", name: t(it.nameToken, it.id),
-    href: `${base}/items/${it.id}/`, it, note: a.note,
-  };
-}
-const ADJ_KINDS: { kind: AdjustmentKind; label: string }[] = [
-  { kind: "buff", label: "強化" },
-  { kind: "nerf", label: "弱体" },
-  { kind: "rework", label: "リワーク" },
+/* 直近のバランス調整。詳細は各アップデートのページに置き、ここは一覧だけ */
+const balance = balanceUpdates(base).slice(0, 3);
+const balanceAbilityKeys = [
+  ...new Set(
+    balance.flatMap((u) => u.chips.map((c) => c.abilityKey).filter((k): k is string => !!k)),
+  ),
 ];
-const updates = siteUpdates().map((u) => {
-  const resolved = (u.adjustments ?? [])
-    .map(resolveAdj)
-    .filter((x): x is ResolvedAdj => x !== null);
-  return {
-    ...u,
-    adjGroups: ADJ_KINDS.map(({ kind, label }) => ({
-      kind,
-      label,
-      items: resolved.filter((r) => r.kind === kind),
-    })).filter((g) => g.items.length > 0),
-  };
-});
 ---
 
 <Base
@@ -175,71 +141,29 @@ const updates = siteUpdates().map((u) => {
   </section>
 
   <section class="block panel">
-    <h2>更新履歴</h2>
-    <ol class="updates">
+    <h2>
+      バランス調整
+      <a class="more" href={`${base}/patch-notes/`}>すべてのアップデート →</a>
+    </h2>
+    <div class="bal">
       {
-        updates.map((u) => (
-          <li>
-            <span class="udate">{u.date}</span>
-            <div class="ubody">
-              <span class="utitle">
-                {u.title}
-                {commitUrl(u.upstreamCommit) && (
-                  <a class="ucommit" href={commitUrl(u.upstreamCommit)} rel="noopener">
-                    {u.upstreamCommit!.slice(0, 8)}
-                  </a>
-                )}
-                {u.sourceUrl && (
-                  <a class="usource" href={u.sourceUrl} rel="noopener" target="_blank">
-                    {u.sourceTitle ?? "公式パッチノート"} →
-                  </a>
-                )}
-              </span>
-              <ul class="uchanges">
-                {u.changes.map((c) => (
-                  <li>{c}</li>
-                ))}
-              </ul>
-              {u.adjGroups.length > 0 && (
-                <div class="uadj">
-                  {u.adjGroups.map((g) => (
-                    <div class="uadj-grp" data-kind={g.kind}>
-                      <span class="uadj-k">{g.label}</span>
-                      <ul class="uadj-icons">
-                        {g.items.map((r) => (
-                          <li>
-                            <a href={r.href} title={r.note ? `${r.name}｜${r.note}` : r.name}>
-                              {r.target === "hero" ? (
-                                <HeroPortrait name={r.name} image={r.image} size={30} />
-                              ) : (
-                                <ItemIcon
-                                  name={r.name}
-                                  slotType={r.it!.slotType}
-                                  tier={r.it!.tier}
-                                  shopIcon={r.it!.shopIcon}
-                                  activation={r.it!.activation}
-                                  isImbue={r.it!.isImbue}
-                                  size={30}
-                                />
-                              )}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              )}
+        balance.map((u) => (
+          <div class="balrow">
+            <div class="baldate">
+              <a href={u.href}>{u.date}</a>
+              <span>{u.title.replace(/\s*-\s*\d{4}年.*$/, "")}</span>
             </div>
-          </li>
+            <BalanceChips chips={u.chips} max={18} />
+          </div>
         ))
       }
-    </ol>
+    </div>
   </section>
 
-  {/* ヒーロー/アイテムのホバー詳細(共通コンポーネント) */}
+  {/* ヒーロー/アイテム/スキルのホバー詳細(共通コンポーネント) */}
   <HeroHoverCard heroDetail={heroDetail} />
   <ItemHoverCard details={itemDetails} />
+  <AbilityHoverCards abilityKeys={balanceAbilityKeys} />
 
   <style>
     /* ---- ヒーロー見出し(背景演出「Halftone Press」) ---- */
@@ -291,91 +215,47 @@ const updates = siteUpdates().map((u) => {
       white-space: nowrap;
     }
 
-    /* ---- 更新履歴 ---- */
-    .updates {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      gap: var(--sp-3);
-    }
-    .updates > li {
-      display: grid;
-      grid-template-columns: 92px minmax(0, 1fr);
-      gap: var(--sp-3);
-      background: var(--c-surface);
-      border: 1px solid var(--c-border);
-      border-radius: var(--radius);
-      padding: var(--sp-3) var(--sp-4);
-    }
-    .udate {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--c-text-muted);
-    }
-    .utitle {
-      font-weight: 600;
-      color: var(--c-text-strong);
-      font-size: 14px;
-    }
-    .ucommit {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      margin-left: var(--sp-2);
-      color: var(--c-text-muted);
-    }
-    .usource {
-      display: inline-block;
-      margin-left: var(--sp-2);
-      font-size: 11px;
-      font-weight: 400;
-      color: var(--c-accent);
-    }
-    .uchanges {
-      margin: var(--sp-1) 0 0;
-      padding-left: 1.2em;
-      font-size: 12px;
-      color: var(--c-text-muted);
-      line-height: 1.7;
-    }
-    /* ---- 調整履歴(強化/弱体/リワークされたヒーロー・アイテムのアイコン) ---- */
-    .uadj {
-      margin-top: var(--sp-2);
-      display: grid;
-      gap: var(--sp-2);
-    }
-    .uadj-grp {
+    /* ---- バランス調整 ---- */
+    .bal {
       display: flex;
-      align-items: flex-start;
-      gap: var(--sp-2);
+      flex-direction: column;
+      gap: var(--sp-4);
     }
-    .uadj-k {
-      flex: 0 0 auto;
-      margin-top: 6px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      padding: 1px 6px;
-      border-radius: 3px;
-      border: 1px solid currentColor;
+    .balrow {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      gap: var(--sp-4);
+      align-items: start;
     }
-    .uadj-grp[data-kind="buff"] .uadj-k { color: var(--c-vitality); }
-    .uadj-grp[data-kind="nerf"] .uadj-k { color: var(--c-weapon); }
-    .uadj-grp[data-kind="rework"] .uadj-k { color: var(--c-spirit); }
-    .uadj-icons {
-      list-style: none;
-      padding: 0;
-      margin: 0;
+    .baldate {
       display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
+      flex-direction: column;
+      gap: 2px;
+      padding-top: 6px;
     }
-    .uadj-icons a {
-      display: block;
-      line-height: 0;
-      border-radius: 6px;
+    .baldate a {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--c-soul);
+      text-decoration: none;
     }
-    .uadj-icons a:hover { outline: 2px solid var(--c-accent); outline-offset: 1px; }
+    .baldate a:hover { text-decoration: underline; }
+    .baldate span {
+      font-size: 11px;
+      color: var(--c-text-faint);
+    }
+    @media (max-width: 560px) {
+      .balrow {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--sp-2);
+      }
+      .baldate {
+        flex-direction: row;
+        align-items: baseline;
+        gap: var(--sp-2);
+        padding-top: 0;
+      }
+    }
 
     /* ---- ヒーローカード(ゲームの縦長カード) ---- */
     .herogrid {

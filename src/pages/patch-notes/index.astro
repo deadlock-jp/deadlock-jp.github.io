@@ -1,61 +1,64 @@
 ---
+/**
+ * アップデートの一覧。
+ *
+ * 公式の投稿本文は各アップデートのページ(/patch-notes/<日付>/)にだけ置く。
+ * ここに全文も載せると同じ文章がサイト内で二重になり、検索側にどちらを出すか
+ * 委ねることになるため、一覧はタイトル・日付・バランス調整のアイコンだけにする。
+ */
 import Base from "../../layouts/Base.astro";
-import { patchNotes } from "../../lib/data.ts";
+import BalanceChips from "../../components/BalanceChips.astro";
+import ItemHoverCard from "../../components/ItemHoverCard.astro";
+import AbilityHoverCards from "../../components/AbilityHoverCards.astro";
+import { patchNotes, shopItems, itemHoverData } from "../../lib/data.ts";
+import { balanceUpdates } from "../../lib/balance.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const updates = new Map(balanceUpdates(base).map((u) => [u.date, u]));
+const entries = patchNotes().map((n) => ({ note: n, update: updates.get(n.date) ?? null }));
 
-/** "## 見出し" 行と通常行を分けて、見出しごとの塊にする */
-function toSections(lines: string[]): { heading: string | null; items: string[] }[] {
-  const sections: { heading: string | null; items: string[] }[] = [];
-  for (const line of lines) {
-    if (line.startsWith("## ")) {
-      sections.push({ heading: line.slice(3), items: [] });
-      continue;
-    }
-    if (sections.length === 0) sections.push({ heading: null, items: [] });
-    sections[sections.length - 1].items.push(line);
-  }
-  return sections.filter((s) => s.items.length > 0);
-}
-
-const entries = patchNotes().map((n) => ({ ...n, sections: toSections(n.lines) }));
+const itemDetails = Object.fromEntries(shopItems().map((i) => [i.id, itemHoverData(i)]));
+const abilityKeys = [
+  ...new Set(
+    [...updates.values()].flatMap((u) =>
+      u.chips.map((c) => c.abilityKey).filter((k): k is string => !!k),
+    ),
+  ),
+];
 ---
 
 <Base
-  title="パッチノート"
-  description="Deadlock（デッドロック）の公式パッチノートのアーカイブ。Steamの公式ニュースからValve公式の投稿本文をそのまま掲載。"
+  title="アップデート"
+  description="Deadlock（デッドロック）の公式アップデート一覧。バランス調整の内容をヒーロー・スキル・アイテム単位で日本語で確認できます。"
   breadcrumbs={[{ name: "パッチノート", path: `${base}/patch-notes/` }]}
 >
-  <h1>パッチノート</h1>
+  <h1>アップデート</h1>
   <p class="lead">
-    Steamの公式ニュース（<a href="https://store.steampowered.com/news/app/1422450" rel="noopener">Deadlock — News</a>）から取得した、
-    Valve公式の投稿本文です。第三者サイトの要約や翻訳ではなく、Valveが公式に用意した日本語版をそのまま掲載しています
-    （日本語版が無い古い投稿のみ英語のまま）。
+    Steamの公式ニュース（<a href="https://store.steampowered.com/news/app/1422450" rel="noopener">Deadlock — News</a>）から取得した
+    Valve公式の投稿と、ゲームデータの差分から自動生成したバランス調整です。
+    日付を選ぶと、そのアップデートの数値の変更点と公式の本文が読めます。
   </p>
 
-  {entries.length === 0 && <p class="empty">まだ取得したパッチノートがありません。</p>}
+  {entries.length === 0 && <p class="empty">まだ取得したアップデートがありません。</p>}
 
-  <ol class="patchlist">
-    {entries.map((e) => (
-      <li class="patch panel">
-        <div class="phead">
-          <span class="pdate">{e.date}</span>
-          <h2 class="ptitle">{e.title}</h2>
-          <a class="psrc" href={e.url} rel="noopener" target="_blank">Steamで見る →</a>
+  <ol class="updates">
+    {entries.map(({ note, update }) => (
+      <li class="update panel">
+        <div class="uhead">
+          <a class="utitle" href={`${base}/patch-notes/${note.date}/`}>{note.title}</a>
+          <time class="udate" datetime={note.date}>{note.date}</time>
         </div>
-        {e.sections.map((s) => (
-          <div class="psection">
-            {s.heading && <h3>{s.heading}</h3>}
-            <ul>
-              {s.items.map((line) => (
-                <li>{line}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        {update ? (
+          <BalanceChips chips={update.chips} max={16} />
+        ) : (
+          <p class="nodata">数値の差分はありません（スナップショットが揃っていない期間です）</p>
+        )}
       </li>
     ))}
   </ol>
+
+  <ItemHoverCard details={itemDetails} />
+  <AbilityHoverCards abilityKeys={abilityKeys} />
 
   <style>
     .lead {
@@ -66,70 +69,51 @@ const entries = patchNotes().map((n) => ({ ...n, sections: toSections(n.lines) }
     .empty {
       color: var(--c-text-muted);
     }
-    .patchlist {
+    .updates {
       list-style: none;
       padding: 0;
       margin: var(--sp-5) 0 0;
       display: grid;
       /*
-       * 列を minmax(0, 1fr) で固定する。既定の auto トラックだと、中身
-       * (日付＋長いタイトル＋"Steamで見る"のnowrapリンク)の最小幅に合わせて
-       * トラックが広がり、スマホ幅で横スクロールが出る。
+       * 列を minmax(0, 1fr) で固定する。既定の auto トラックだと中身の最小幅に
+       * 合わせてトラックが広がり、スマホ幅で横スクロールが出る。
        */
       grid-template-columns: minmax(0, 1fr);
-      gap: var(--sp-4);
+      gap: var(--sp-3);
     }
-    .patch {
-      /* 見た目は global.css の .panel を流用 */
-      /* グリッド項目の既定 min-width:auto を外し、コンテナ幅より広がらないようにする */
+    .update {
       min-width: 0;
     }
-    .phead {
+    .uhead {
       display: flex;
       align-items: baseline;
       flex-wrap: wrap;
       gap: var(--sp-2) var(--sp-3);
       margin-bottom: var(--sp-3);
-      border-bottom: 1px solid var(--c-border);
       padding-bottom: var(--sp-2);
+      border-bottom: 1px solid var(--c-border);
     }
-    .pdate {
+    .utitle {
+      flex: 1 1 auto;
+      min-width: 0;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--c-text-strong);
+      text-decoration: none;
+    }
+    .utitle:hover {
+      color: var(--c-accent);
+    }
+    .udate {
       font-family: var(--font-mono);
       font-size: 12px;
-      color: var(--c-text-muted);
-    }
-    .ptitle {
-      margin: 0;
-      font-size: 15px;
-      flex: 1 1 auto;
-      /* flex項目の既定 min-width:auto だとタイトルが1行分の幅を要求して縮まない */
-      min-width: 0;
-      border: none;
-      padding: 0;
-    }
-    .psrc {
-      font-size: 12px;
+      color: var(--c-text-faint);
       white-space: nowrap;
     }
-    .psection h3 {
-      font-size: 12px;
-      letter-spacing: 0.04em;
-      color: var(--c-text-muted);
-      margin: var(--sp-3) 0 var(--sp-1);
-      border: none;
-      padding: 0;
-    }
-    .psection ul {
+    .nodata {
       margin: 0;
-      padding-left: 1.2em;
-      font-size: 13px;
-      line-height: 1.8;
-      /*
-       * 本文にはValveが書いたURL(フォーラムへの誘導など)がそのまま入ることがある。
-       * 途中で折り返せない長い文字列は、スマホ幅だと行ごと横に伸びて
-       * ページ全体に横スクロールを出すので、どこでも折り返せるようにする。
-       */
-      overflow-wrap: anywhere;
+      font-size: 12px;
+      color: var(--c-text-faint);
     }
   </style>
 </Base>
