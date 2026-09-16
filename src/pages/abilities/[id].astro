@@ -6,10 +6,10 @@
  */
 import Base from "../../layouts/Base.astro";
 import SkillCard from "../../components/SkillCard.astro";
-import AdjustmentIcon from "../../components/AdjustmentIcon.astro";
-import { releasedHeroes, t, ability, heroNotes, upstreamRepo } from "../../lib/data.ts";
+import BalanceHistory from "../../components/BalanceHistory.astro";
+import { releasedHeroes, t, ability, heroNotes } from "../../lib/data.ts";
 import { skillCard } from "../../lib/skillcard.ts";
-import { abilityHistory } from "../../lib/abilityHistory.ts";
+import { abilityBalanceHistory } from "../../lib/balance.ts";
 import type { Hero } from "../../types/hero.ts";
 
 interface Owner {
@@ -53,16 +53,12 @@ const heroName = t(hero.nameToken, hero.key);
 const name = t(abilityKey, abilityKey);
 const card = skillCard(ab, heroName);
 const notes = heroNotes(abilityKey);
-const history = abilityHistory(abilityKey);
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-
-const KIND_LABEL = { buff: "強化", nerf: "弱体", rework: "リワーク" } as const;
-const propLabel = (name: string) => t(`${ability(abilityKey)?.properties[name]?.labelOverride ?? name}_label`, name);
-const fmtNum = (n: number) => (Number.isInteger(n) ? String(n) : String(Math.round(n * 1000) / 1000));
+const history = abilityBalanceHistory(abilityKey, base);
 
 const metaDesc =
   `Deadlock（デッドロック）のスキル「${name}」（${heroName}）の効果・数値・` +
-  `アップグレード・更新履歴を日本語で。`;
+  `アップグレード・バランス調整を日本語で。`;
 ---
 
 <Base
@@ -81,40 +77,7 @@ const metaDesc =
 
   <SkillCard abilityKey={abilityKey} ab={ab} card={card} notes={notes} heroName={heroName} />
 
-  <h2>更新履歴</h2>
-  {history.length === 0 ? (
-    <p class="nohist">変更履歴なし</p>
-  ) : (
-    <ol class="hist">
-      {history.map((h) => (
-        <li>
-          <div class="histhead">
-            <span class="ver">{h.from} → {h.to}</span>
-            <span class:list={["k", h.kind]}>
-              <AdjustmentIcon kind={h.kind} />
-              {KIND_LABEL[h.kind]}
-            </span>
-          </div>
-          <ul class="changes">
-            {h.changes.map((c) => (
-              <li>
-                <AdjustmentIcon kind={c.good ? "buff" : "nerf"} />
-                <span class="cl">
-                  {c.fromUpgrade && <span class="tag">強化枠</span>}
-                  {propLabel(c.property)}
-                </span>
-                <span class="cv">{fmtNum(c.before)} → {fmtNum(c.after)}</span>
-              </li>
-            ))}
-          </ul>
-        </li>
-      ))}
-    </ol>
-  )}
-  <p class="histnote">
-    データはこのサイトが抽出したスナップショット間の機械的な差分（
-    <a href={`${base}/about/`}>詳細</a>）。サーバー側だけの調整はここに出ないことがあります。
-  </p>
+  <BalanceHistory entries={history} />
 
   <style>
     .back { font-size: 13px; }
@@ -123,36 +86,5 @@ const metaDesc =
       border-left: 3px solid var(--c-spirit); padding-left: var(--sp-2);
     }
     h2 { margin-top: var(--sp-5); margin-bottom: var(--sp-2); }
-    .nohist { font-size: 13px; color: var(--c-text-faint); }
-
-    .hist { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--sp-3); }
-    .hist > li {
-      border: 1px solid var(--c-border); border-radius: var(--radius);
-      padding: var(--sp-3); background: var(--c-surface);
-    }
-    .histhead { display: flex; align-items: center; gap: var(--sp-3); }
-    .ver { font-family: var(--font-mono); font-size: 13px; color: var(--c-text-strong); }
-    .k {
-      display: inline-flex; align-items: center; gap: 4px;
-      font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
-      padding: 1px 7px; border-radius: 3px; border: 1px solid currentColor;
-    }
-    .k.buff { color: var(--c-vitality); }
-    .k.nerf { color: var(--c-weapon); }
-    .k.rework { color: var(--c-spirit); }
-
-    .changes { list-style: none; padding: 0; margin: var(--sp-2) 0 0; display: grid; gap: 3px; }
-    .changes li {
-      display: flex; align-items: center; gap: 6px; font-size: 13px;
-      padding: 3px 0; border-top: 1px solid var(--c-border);
-    }
-    .cl { flex: 1; color: var(--c-text-muted); }
-    .cl .tag {
-      font-size: 10px; color: var(--c-accent); border: 1px solid var(--c-accent-dim);
-      border-radius: 3px; padding: 0 4px; margin-right: 5px;
-    }
-    .cv { font-family: var(--font-mono); color: var(--c-text-strong); white-space: nowrap; }
-
-    .histnote { margin-top: var(--sp-3); font-size: 11px; color: var(--c-text-faint); }
   </style>
 </Base>

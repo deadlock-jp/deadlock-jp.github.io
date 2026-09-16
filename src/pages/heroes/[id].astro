@@ -10,12 +10,11 @@ import {
   modifierLabel,
   heroTags,
   heroNotes,
-  heroAdjustments,
-  upstreamRepo,
 } from "../../lib/data.ts";
 import { heroRadar, heroMiscRows, radarAxesForWeapon } from "../../lib/herorank.ts";
+import { heroBalanceHistory } from "../../lib/balance.ts";
 import { skillCard } from "../../lib/skillcard.ts";
-import AdjustmentHistory from "../../components/AdjustmentHistory.astro";
+import BalanceHistory from "../../components/BalanceHistory.astro";
 import HeroStrip from "../../components/HeroStrip.astro";
 
 export function getStaticPaths() {
@@ -87,7 +86,7 @@ const altWeaponKey = transformAbility?.alternateFormAbilities?.["Weapon_Primary"
 const altWeapon = altWeaponKey ? (ability(altWeaponKey)?.weapon ?? null) : null;
 const altWeaponRadar = altWeapon ? radarAxesForWeapon(altWeapon) : null;
 
-const adjRows = heroAdjustments(hero.key);
+const adjRows = heroBalanceHistory(hero.key, base);
 const skillNames = skills.map((s) => t(s.key, "")).filter(Boolean);
 const metaDesc =
   `Deadlock（デッドロック）のヒーロー「${name}」の基礎ステータス・スキル・レベル成長を日本語で。` +
@@ -196,7 +195,7 @@ const metaDesc =
     </script>
   )}
 
-  <AdjustmentHistory rows={adjRows} upstreamRepo={upstreamRepo} />
+  <BalanceHistory entries={adjRows} grouped />
 
   <style>
     .back { font-size: 13px; }

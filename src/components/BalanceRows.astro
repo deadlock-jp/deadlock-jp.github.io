@@ -1,0 +1,83 @@
+---
+/**
+ * バランス調整の変更項目1まとまり。
+ * アップデートのページ(BalanceDetail)とヒーロー/スキル/アイテムページ
+ * (BalanceHistory)で同じ見た目にするための共通部品。
+ *
+ * 色は項目自身の向き(有利=緑 / 不利=赤 / 判定しない=無色)。
+ * ナーフのスキルの中に緑の項目が混ざるのは正しい
+ * (「クールダウン短縮 -18秒 → -20秒」は数値が減って有利側)。
+ */
+import type { AdjustmentRow } from "../lib/data.ts";
+
+interface Props {
+  rows: AdjustmentRow[];
+}
+const { rows } = Astro.props;
+const goodClass = (good: boolean | null) => (good === null ? "flat" : good ? "good" : "bad");
+---
+
+<ul class="rows">
+  {rows.map((r) => (
+    <li class={goodClass(r.good)}>
+      {r.tier && <span class="tier">T{r.tier}</span>}
+      <span class="rlabel">{r.label}</span>
+      <span class="to">{r.toText ?? "削除"}</span>
+      <span class="from">{r.fromText === null ? "(新規)" : `(${r.fromText})`}</span>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .rows {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+  }
+  .rows li {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 2px 8px;
+    border: 1px solid var(--c-border);
+    border-radius: 4px;
+    background: var(--c-surface);
+    font-size: 12px;
+    line-height: 1.7;
+  }
+  .rows li.good {
+    border-color: var(--c-buff-dim);
+    background: var(--c-buff-bg);
+  }
+  .rows li.bad {
+    border-color: var(--c-nerf-dim);
+    background: var(--c-nerf-bg);
+  }
+  .rlabel {
+    color: var(--c-text-muted);
+  }
+  .to {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    color: var(--c-text-strong);
+    font-weight: 500;
+  }
+  .from {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 11px;
+    color: var(--c-text-faint);
+  }
+  .tier {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1.5;
+    padding: 0 3px;
+    border-radius: 3px;
+    border: 1px solid var(--c-spirit);
+    color: var(--c-spirit);
+  }
+</style>

@@ -185,3 +185,83 @@ export function balanceUpdateByDate(date: string, base: string): BalanceUpdate |
 
 /** 一覧で並べる順。バフ → ナーフ → 混在 → 調整 → リワーク */
 export const CHIP_ORDER: AdjustmentKind[] = ["buff", "nerf", "mixed", "rework", "neutral"];
+
+/* ------------------------------------------------------------------ *
+ * ヒーロー / スキル / アイテムのページに出す「バランス調整」の履歴
+ * ------------------------------------------------------------------ */
+
+/** そのページの主役1つぶんの、1アップデートでの変化 */
+export interface BalanceHistoryEntry {
+  date: string;
+  title: string;
+  href: string;
+  /** 主役単位の分類。ヒーローページならヒーロー全体、スキルページならそのスキル */
+  kind: AdjustmentKind;
+  /** ヒーローページはスキルごとに分かれる。スキル/アイテムページは1つだけ */
+  groups: AdjustmentGroup[];
+}
+
+function historyFrom(
+  base: string,
+  pick: (u: SiteUpdate) => AdjustmentGroup[] | null,
+  kindOf: (u: SiteUpdate, groups: AdjustmentGroup[]) => AdjustmentKind,
+): BalanceHistoryEntry[] {
+  const out: BalanceHistoryEntry[] = [];
+  for (const u of siteUpdates()) {
+    const groups = pick(u);
+    if (!groups || groups.length === 0) continue;
+    out.push({
+      date: u.date,
+      title: u.title,
+      href: `${base}/patch-notes/${u.date}/`,
+      kind: kindOf(u, groups),
+      groups,
+    });
+  }
+  return out;
+}
+
+/** ヒーロー1体の履歴。スキル・主武器・基礎ステータスごとに分かれる */
+export function heroBalanceHistory(heroKey: string, base: string): BalanceHistoryEntry[] {
+  return historyFrom(
+    base,
+    (u) => {
+      const a = (u.adjustments ?? []).find((x) => x.target === "hero" && x.key === heroKey);
+      return a ? adjustmentGroups(a) : null;
+    },
+    (u) =>
+      (u.adjustments ?? []).find((x) => x.target === "hero" && x.key === heroKey)?.kind ?? "neutral",
+  );
+}
+
+/** アイテム1件の履歴 */
+export function itemBalanceHistory(itemId: string, base: string): BalanceHistoryEntry[] {
+  return historyFrom(
+    base,
+    (u) => {
+      const a = (u.adjustments ?? []).find((x) => x.target === "item" && x.key === itemId);
+      return a ? adjustmentGroups(a) : null;
+    },
+    (u) =>
+      (u.adjustments ?? []).find((x) => x.target === "item" && x.key === itemId)?.kind ?? "neutral",
+  );
+}
+
+/**
+ * スキル1つの履歴。
+ *
+ * そのスキルに属するまとまりだけを取り出すので、kind もヒーロー全体ではなく
+ * そのスキルの分類になる(同じアップデートでヒーローが「混在」でも、
+ * このスキルはナーフだけ、ということがある)。
+ */
+export function abilityBalanceHistory(abilityKey: string, base: string): BalanceHistoryEntry[] {
+  return historyFrom(
+    base,
+    (u) =>
+      (u.adjustments ?? [])
+        .filter((a) => a.target === "hero")
+        .flatMap((a) => adjustmentGroups(a))
+        .filter((g) => g.abilityKey === abilityKey),
+    (_u, groups) => groups[0]?.kind ?? "neutral",
+  );
+}

@@ -574,35 +574,6 @@ export function heroByKey(key: string): Hero | undefined {
   return Object.values(heroesFile.heroes).find((h) => h.key === key);
 }
 
-/** そのエンティティに対する調整履歴。新しい順。 */
-export interface AdjustmentHistoryRow {
-  date: string;
-  title: string;
-  upstreamCommit: string | null;
-  kind: AdjustmentKind;
-  note?: string;
-  sourceTitle?: string;
-  sourceUrl?: string;
-}
-function adjustmentsFor(target: "hero" | "item", key: string): AdjustmentHistoryRow[] {
-  return siteUpdates().flatMap((u) =>
-    (u.adjustments ?? [])
-      .filter((a) => a.target === target && a.key === key)
-      .map((a) => ({
-        date: u.date,
-        title: u.title,
-        upstreamCommit: u.upstreamCommit,
-        kind: a.kind,
-        note: a.note,
-        sourceTitle: u.sourceTitle,
-        sourceUrl: u.sourceUrl,
-      })),
-  );
-}
-export const heroAdjustments = (heroKey: string): AdjustmentHistoryRow[] =>
-  adjustmentsFor("hero", heroKey);
-export const itemAdjustments = (itemId: string): AdjustmentHistoryRow[] =>
-  adjustmentsFor("item", itemId);
 
 /**
  * 1件の Adjustment を表示用にほぐす。
@@ -770,6 +741,24 @@ function adjustmentRow(c: AdjustmentChange, source: Ability | Item | undefined):
     };
   }
   const name = fieldNameOf(c.path);
+  /*
+   * ヒーローのレベル成長(growth.MODIFIER_VALUE_*)は "_label" を持たないものが多い。
+   * ヒーローページと同じ modifierLabel() で引く(アイテムのプロパティ名からの
+   * 投票で表示名を決めている。ここで別に解決すると表記が食い違う)。
+   */
+  if (c.path.startsWith("growth.")) {
+    const text = (v: number | null) =>
+      v === null ? null : Number.isInteger(v) ? String(v) : String(Math.round(v * 1000) / 1000);
+    return {
+      path: c.path,
+      label: modifierLabel(name),
+      tier: null,
+      isScale: false,
+      fromText: text(c.from),
+      toText: text(c.to),
+      good: c.good,
+    };
+  }
   const upgrade = isUpgradePath(c.path);
   /*
    * AP強化で同じ段に同名プロパティが2つ並ぶときの2つ目は、Valve のデータ上

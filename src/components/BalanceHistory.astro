@@ -1,0 +1,148 @@
+---
+/**
+ * ヒーロー / スキル / アイテムの詳細ページ下部に出す「バランス調整」。
+ *
+ * 出どころも見た目もアップデートのページ(/patch-notes/<日付>/)と同じ。
+ * 日付ごとに、そのページの主役に起きた変化だけを並べる。該当が無ければ何も描かない。
+ *
+ * ヒーローページだけはスキル単位に分かれるので見出し(スキル名)を出す。
+ * スキル・アイテムのページはページ自体が主役なので、変更項目だけを並べる。
+ */
+import AbilityIcon from "./AbilityIcon.astro";
+import BalanceRows from "./BalanceRows.astro";
+import { ADJUSTMENT_LABEL, ability } from "../lib/data.ts";
+import type { BalanceHistoryEntry } from "../lib/balance.ts";
+
+interface Props {
+  entries: BalanceHistoryEntry[];
+  /** true ならスキルごとの見出しを出す(ヒーローページ) */
+  grouped?: boolean;
+}
+const { entries, grouped = false } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+{entries.length > 0 && (
+  <section class="balhist">
+    <h2>バランス調整</h2>
+    <ol>
+      {entries.map((e) => (
+        <li>
+          <div class="head">
+            <a class="date" href={e.href}>{e.date}</a>
+            <span class="title">{e.title.replace(/\s*-\s*\d{4}年.*$/, "")}</span>
+            <span class="kind" data-kind={e.kind}>{ADJUSTMENT_LABEL[e.kind]}</span>
+          </div>
+          {e.groups.map((g) => (
+            <div class="grp">
+              {grouped && (
+                <p class="gname">
+                  {g.scope === "ability" && g.image && g.abilityKey ? (
+                    <a href={`${base}/abilities/${g.abilityKey}/`} data-abilitycard={g.abilityKey}>
+                      <AbilityIcon name={g.name} image={g.image} size={20} />
+                      <span>{ability(g.abilityKey) ? g.name : g.name}</span>
+                    </a>
+                  ) : (
+                    <span class="plain">{g.name}</span>
+                  )}
+                </p>
+              )}
+              <BalanceRows rows={g.rows} />
+            </div>
+          ))}
+        </li>
+      ))}
+    </ol>
+    <p class="note">
+      ゲームデータの差分から自動生成しています。公式の文面に無い変更も含みます。
+      サーバー側だけの調整はここに出ないことがあります。
+    </p>
+  </section>
+)}
+
+<style>
+  .balhist {
+    margin-top: var(--sp-5);
+  }
+  .balhist h2 {
+    margin-bottom: var(--sp-2);
+  }
+  .balhist ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .balhist > ol > li {
+    padding: var(--sp-3) 0;
+    border-top: 1px solid var(--c-border);
+  }
+  .balhist > ol > li:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+  .head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--sp-2) var(--sp-3);
+    margin-bottom: var(--sp-2);
+  }
+  .date {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--c-soul);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .date:hover {
+    text-decoration: underline;
+  }
+  .title {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 13px;
+    color: var(--c-text-muted);
+  }
+  .kind {
+    flex: none;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1.6;
+    padding: 1px 7px;
+    border-radius: 99px;
+  }
+  .kind[data-kind="buff"] { color: var(--c-buff); background: var(--c-buff-bg); border: 1px solid var(--c-buff-dim); }
+  .kind[data-kind="nerf"] { color: var(--c-nerf); background: var(--c-nerf-bg); border: 1px solid var(--c-nerf-dim); }
+  .kind[data-kind="mixed"] { color: var(--c-mixed); background: var(--c-mixed-bg); border: 1px solid var(--c-mixed-dim); }
+  .kind[data-kind="rework"] { color: var(--c-spirit); background: var(--c-spirit-bg); border: 1px solid var(--c-spirit); }
+  .kind[data-kind="neutral"] { color: var(--c-text-muted); background: var(--c-surface-2); border: 1px solid var(--c-border); }
+
+  .grp + .grp {
+    margin-top: var(--sp-2);
+  }
+  .gname {
+    margin: 0 0 4px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .gname a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--c-text-muted);
+    text-decoration: none;
+  }
+  .gname a:hover {
+    color: var(--c-accent);
+  }
+  .gname .plain {
+    color: var(--c-text-muted);
+  }
+  .note {
+    margin: var(--sp-3) 0 0;
+    font-size: 11px;
+    color: var(--c-text-faint);
+  }
+</style>
