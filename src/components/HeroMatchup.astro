@@ -1,0 +1,255 @@
+---
+/**
+ * ヒーロー詳細ページの「強みと対策」。
+ *
+ * 出したものには必ず根拠（実数と全体の中での順位）を添える。
+ * 手動タグ由来の行は実数の代わりに「手動タグ」と出して、機械判定と見分けが付くようにする。
+ * 該当しなかった対策は出さない（出さなかった理由も書かない）。
+ */
+import ItemIcon from "./ItemIcon.astro";
+import { t } from "../lib/data.ts";
+import type { HeroMatchup } from "../lib/matchup.ts";
+
+interface Props {
+  matchup: HeroMatchup;
+  base: string;
+}
+const { matchup, base } = Astro.props;
+const { strengths, noStandout, shares, counters } = matchup;
+---
+
+<section class="matchup">
+  <h2>強みと対策</h2>
+
+  <div class="head">
+    <h3>特徴</h3>
+    <span>{noStandout ? "突出した軸はありません。上位3軸を出しています" : "全38体の中で上位12.5%に入る軸"}</span>
+  </div>
+  <ul class="chips">
+    {strengths.map((s) => (
+      <li>
+        <span class="lb">{s.label}</span>
+        <span class="vl">{s.value}</span>
+        <span class="pc">上位{s.topPercent}%</span>
+      </li>
+    ))}
+  </ul>
+
+  {shares.length > 0 && (
+    <ul class="chips shares">
+      {shares.map((s, i) => (
+        <li>
+          {i === 0 && <span class="lb">よく積まれるアイテム</span>}
+          <span class="vl">{s.label} {s.percent}%</span>
+          <span class="pc">上位{s.topPercent}%</span>
+        </li>
+      ))}
+    </ul>
+  )}
+
+  {counters.length > 0 && (
+    <>
+      <div class="head">
+        <h3>対策</h3>
+        <span>スキルの中身と実際のビルド構成から</span>
+      </div>
+      <div class="rules">
+        {counters.map((c) => (
+          <div class="rule">
+            <p class="rhead">
+              <b>{c.title}</b>
+              <span class="why">
+                根拠: {c.why}
+                {c.evidence && <em> — {c.evidence}</em>}
+                {c.manual && <em class="manual"> — 手動タグ</em>}
+              </span>
+            </p>
+            <ul class="items">
+              {c.items.map((mi) => (
+                <li>
+                  <a href={`${base}/items/${mi.item.id}/`} data-itemcard={mi.item.id}>
+                    <ItemIcon
+                      name={t(mi.item.nameToken, mi.item.id)}
+                      slotType={mi.item.slotType}
+                      tier={mi.item.tier}
+                      shopIcon={mi.item.shopIcon}
+                      activation={mi.item.activation}
+                      isImbue={mi.item.isImbue}
+                      size={30}
+                    />
+                  </a>
+                  <span class="inm">
+                    <a href={`${base}/items/${mi.item.id}/`}>{t(mi.item.nameToken, mi.item.id)}</a>
+                    <small>{mi.note ?? "手動タグ"}</small>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </>
+  )}
+
+  <p class="foot">
+    全ヒーロー中の順位・スキルの数値・実際のビルドの構成比から機械的に出しています。
+    <a href={`${base}/about/`}>算出方法</a>
+  </p>
+</section>
+
+<style>
+  .matchup {
+    margin-top: var(--sp-5);
+  }
+  .matchup h2 {
+    margin-bottom: var(--sp-3);
+  }
+  .head {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-3);
+    border-bottom: 1px solid var(--c-border);
+    padding-bottom: 6px;
+    margin-bottom: var(--sp-3);
+  }
+  .head h3 {
+    margin: 0;
+    font-size: 15px;
+    color: var(--c-text-strong);
+    border: none;
+    padding: 0;
+  }
+  .head span {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--c-text-faint);
+    text-align: right;
+  }
+
+  .chips {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 0 0 var(--sp-4);
+    padding: 0;
+  }
+  .chips li {
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+    border: 1px solid var(--c-border);
+    background: var(--c-surface);
+    border-radius: 4px;
+    padding: 3px 9px;
+    font-size: 12px;
+  }
+  .chips .lb {
+    color: var(--c-text-muted);
+  }
+  .chips .vl {
+    font-family: var(--font-mono);
+    color: var(--c-text-strong);
+    font-weight: 500;
+  }
+  .chips .pc {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--c-accent);
+  }
+  .shares .pc {
+    color: var(--c-text-faint);
+  }
+
+  .rules {
+    display: flex;
+    flex-direction: column;
+  }
+  .rule {
+    border-top: 1px solid var(--c-border);
+    padding: var(--sp-3) 0;
+  }
+  .rule:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+  .rhead {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--sp-2) var(--sp-3);
+    margin: 0 0 var(--sp-2);
+  }
+  .rhead b {
+    font-size: 13px;
+    color: var(--c-text-strong);
+  }
+  .why {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--c-text-faint);
+    /* 根拠はスキル名まで入って長くなる。折り返して縮む側にする */
+    flex: 1 1 260px;
+    min-width: 0;
+    line-height: 1.7;
+  }
+  .why em {
+    font-style: normal;
+    color: var(--c-soul);
+  }
+  .why em.manual {
+    color: var(--c-spirit);
+  }
+
+  .items {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+  }
+  .items li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--c-border);
+    background: var(--c-surface);
+    border-radius: 5px;
+    padding: 5px 10px 5px 5px;
+  }
+  .items li > a {
+    display: block;
+    line-height: 0;
+    border-radius: 4px;
+  }
+  .items li > a:focus-visible {
+    outline: 2px solid var(--c-accent);
+    outline-offset: 2px;
+  }
+  .inm {
+    font-size: 12px;
+    line-height: 1.4;
+    min-width: 0;
+  }
+  .inm a {
+    color: var(--c-text);
+    text-decoration: none;
+  }
+  .inm a:hover {
+    color: var(--c-accent);
+  }
+  .inm small {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--c-text-faint);
+  }
+
+  .foot {
+    margin: var(--sp-4) 0 0;
+    font-size: 11px;
+    color: var(--c-text-faint);
+  }
+</style>

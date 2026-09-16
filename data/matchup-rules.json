@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "note": "ヒーロー詳細ページの「強みと対策」の対応表。ここが唯一の判断材料で、ヒーロー個別の記述は持たない。when は kit(スキルの中身) / composition(実ビルドの構成比) / tag(手動タグ) のいずれか。基礎ステータス(herorank)は when に使わない —— 素の数値が高いことと、実際にそれで戦っていることは別で、対策の根拠になるのは後者だけ(ケルビンは DPS が★5だが実ビルドの武器構成比は3%)。items の minValue はこちらが決める唯一の数字で、画面に出す実数と同じものなので読み手が妥当性を確かめられる。",
+  "rules": [
+    {
+      "id": "anti-heal",
+      "title": "回復を止める",
+      "why": "味方や自分を回復するスキルを持つ",
+      "when": { "kit": "healing", "topPercent": 25 },
+      "items": {
+        "properties": ["HealAmpReceivePenaltyPercent", "HealAmpRegenPenaltyPercent"],
+        "minValue": 30,
+        "label": "回復阻害"
+      }
+    },
+    {
+      "id": "anti-spirit",
+      "title": "スピリットダメージを受け止める",
+      "why": "実際のビルドがスピリットに寄っている",
+      "when": { "composition": "Tech", "topPercent": 35 },
+      "items": {
+        "property": "TechResist",
+        "shopFilter": "EShopFilterDurability",
+        "minValue": 12,
+        "label": "スピリット耐性"
+      }
+    },
+    {
+      "id": "anti-weapon",
+      "title": "弾薬ダメージを受け止める",
+      "why": "実際のビルドが武器に寄っている",
+      "when": { "composition": "WeaponMod", "topPercent": 35 },
+      "items": {
+        "property": "BulletResist",
+        "shopFilter": "EShopFilterDurability",
+        "minValue": 12,
+        "label": "弾薬耐性"
+      }
+    },
+    {
+      "id": "anti-cc",
+      "title": "行動阻害を短くする",
+      "why": "スタン・睡眠・拘束を持つ",
+      "when": { "kit": "cc", "topPercent": 35 },
+      "items": {
+        "property": "StatusResistancePercent",
+        "minValue": 20,
+        "label": "デバフ耐性",
+        "tagIds": "cc-reactive"
+      }
+    },
+    {
+      "id": "anti-air",
+      "title": "空中から落とす",
+      "why": "スキルやパッシブで空中を移動できる",
+      "when": { "tag": "airborne" },
+      "items": { "tagIds": "airborne" }
+    }
+  ]
+}

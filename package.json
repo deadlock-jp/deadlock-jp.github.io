@@ -9,6 +9,7 @@
   "scripts": {
     "parse": "node --experimental-strip-types src/parsers/main.ts",
     "gen:updates": "node --experimental-strip-types tools/gen-updates.mjs",
+    "audit:matchup": "node --experimental-strip-types tools/audit-matchup.mjs",
     "typecheck": "tsc --noEmit",
     "dev": "astro dev",
     "build": "astro build",

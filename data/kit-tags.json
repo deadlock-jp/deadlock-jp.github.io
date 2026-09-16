@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "note": "機械判定できないものだけ、手で付けるタグ。hero-notes.json / item-notes.json と同じ「人が書く欄」だが、文章ではなく実IDの配列にして対応表に閉じる。画面上も自動導出と区別して出す(根拠に「手動タグ」と表示)。\n\nなぜ手動なのか:\n- 空中移動: MaxFlyHeight を持つのはヴィンディクタ1体だけ。FallSpeedMax / AirSpeedMax / AirDrag は13体に当たるが「発動中の空中挙動」で、ヤマトやドリフターまで拾う一方ラッシュのグラップルもアイビーのエアドロップも拾わない。modifiers.vdata に「空中状態」の modifier 自体が存在しない\n- ファントムストライク: 空中関連のプロパティがゼロ。「地面に引き寄せる」が数値になっていない\n- リアクティブバリア: プロパティは VexBarrierCombatBarrier だけで、「CCされるとバリア」は説明文にしかない",
+  "tags": {
+    "airborne": {
+      "label": "空中移動",
+      "heroes": [
+        "hero_gigawatt",
+        "hero_hornet",
+        "hero_astro",
+        "hero_tengu",
+        "hero_yamato",
+        "hero_lash",
+        "hero_vampirebat",
+        "hero_fencer",
+        "hero_unicorn"
+      ],
+      "items": ["upgrade_target_stun", "upgrade_phantom_strike"]
+    },
+    "cc-reactive": {
+      "label": "CCされたときに効く",
+      "heroes": [],
+      "items": ["upgrade_vex_barrier", "upgrade_unstoppable"]
+    }
+  }
+}

@@ -13,6 +13,8 @@ import {
 } from "../../lib/data.ts";
 import { heroRadar, heroMiscRows, radarAxesForWeapon } from "../../lib/herorank.ts";
 import { heroBalanceHistory } from "../../lib/balance.ts";
+import { heroMatchup } from "../../lib/matchup.ts";
+import HeroMatchup from "../../components/HeroMatchup.astro";
 import { skillCard } from "../../lib/skillcard.ts";
 import BalanceHistory from "../../components/BalanceHistory.astro";
 import HeroStrip from "../../components/HeroStrip.astro";
@@ -87,6 +89,7 @@ const altWeapon = altWeaponKey ? (ability(altWeaponKey)?.weapon ?? null) : null;
 const altWeaponRadar = altWeapon ? radarAxesForWeapon(altWeapon) : null;
 
 const adjRows = heroBalanceHistory(hero.key, base);
+const matchup = heroMatchup(hero);
 const skillNames = skills.map((s) => t(s.key, "")).filter(Boolean);
 const metaDesc =
   `Deadlock（デッドロック）のヒーロー「${name}」の基礎ステータス・スキル・レベル成長を日本語で。` +
@@ -194,6 +197,8 @@ const metaDesc =
       })();
     </script>
   )}
+
+  <HeroMatchup matchup={matchup} base={base} />
 
   <BalanceHistory entries={adjRows} grouped />
 
