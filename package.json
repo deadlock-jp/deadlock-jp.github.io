@@ -8,6 +8,7 @@
   },
   "scripts": {
     "parse": "node --experimental-strip-types src/parsers/main.ts",
+    "gen:updates": "node --experimental-strip-types tools/gen-updates.mjs",
     "typecheck": "tsc --noEmit",
     "dev": "astro dev",
     "build": "astro build",

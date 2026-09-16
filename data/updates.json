@@ -12,6 +12,564 @@
         "ゲーム本体の公式日本語ローカライズを取り込み(未収録分のみ英語)"
       ],
       "adjustments": []
+    },
+    {
+      "date": "2026-08-22",
+      "upstreamCommit": "c34d25e806a6410f00037d34782d45fe2b9f550f",
+      "title": "マイナー アップデート - 2026年8月22日",
+      "fromVersion": "6683",
+      "toVersion": "6684",
+      "changes": [
+        "ヒーロー・アイテムの数値差分から自動生成 (バフ 0 / ナーフ 3 / 混在 0、変更項目 13)"
+      ],
+      "adjustments": [
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_unicorn",
+          "note": "Bounce Range 17.5→16.5 / Damage 165→140 / Damage 0.88→0.6 ほか",
+          "changes": [
+            {
+              "path": "ability_unicorn_dazzlingorb.properties.BounceRadius",
+              "from": 17.5,
+              "to": 16.5,
+              "good": false
+            },
+            {
+              "path": "ability_unicorn_dazzlingorb.properties.Damage",
+              "from": 165,
+              "to": 140,
+              "good": false
+            },
+            {
+              "path": "ability_unicorn_dazzlingorb.properties.Damage@scale",
+              "from": 0.88,
+              "to": 0.6,
+              "good": false
+            },
+            {
+              "path": "ability_unicorn_dazzlingorb.upgrades.T2.Damage#2",
+              "from": null,
+              "to": 0.45,
+              "good": true
+            },
+            {
+              "path": "ability_unicorn_luminousstrike.properties.MagicIncreasePerStack",
+              "from": 8,
+              "to": 7,
+              "good": false
+            },
+            {
+              "path": "ability_unicorn_luminousstrike.upgrades.T3.MagicIncreasePerStack",
+              "from": 3,
+              "to": 4,
+              "good": true
+            },
+            {
+              "path": "ability_unicorn_prismaticguard.properties.AbilityCooldown",
+              "from": 32,
+              "to": 34,
+              "good": false
+            },
+            {
+              "path": "ability_unicorn_prismaticguard.upgrades.T2.CombatBarrier",
+              "from": 80,
+              "to": 70,
+              "good": false
+            },
+            {
+              "path": "ability_unicorn_prismaticguard.upgrades.T2.CombatBarrier#2",
+              "from": 0.7,
+              "to": 0.76,
+              "good": true
+            },
+            {
+              "path": "ability_unicorn_prismaticguard.upgrades.T3.AbilityCooldown",
+              "from": -18,
+              "to": -20,
+              "good": true
+            },
+            {
+              "path": "ability_unicorn_prismaticguard.upgrades.T3.DebuffDuration",
+              "from": 1.5,
+              "to": 1.25,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_resonant_healing",
+          "note": "HealingPerCast 70→65",
+          "changes": [
+            {
+              "path": "properties.HealingPerCast",
+              "from": 70,
+              "to": 65,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_restorative_locket",
+          "note": "Spirit Resist 10→8",
+          "changes": [
+            {
+              "path": "properties.TechResist",
+              "from": 10,
+              "to": 8,
+              "good": false
+            }
+          ]
+        }
+      ],
+      "sourceTitle": "マイナー アップデート - 2026年8月22日",
+      "sourceUrl": "https://store.steampowered.com/news/app/1422450/view/676255623445218601"
+    },
+    {
+      "date": "2026-08-12",
+      "upstreamCommit": "746408aad188b2c48986275c682e7717fa85eefe",
+      "title": "マイナー アップデート - 2026年8月12日",
+      "fromVersion": "6675",
+      "toVersion": "6677",
+      "changes": [
+        "ヒーロー・アイテムの数値差分から自動生成 (バフ 4 / ナーフ 5 / 混在 4、変更項目 54)"
+      ],
+      "adjustments": [
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_astro",
+          "note": "BarrelDamage を削除 / BarrelDamage を削除 / Burn Duration 3 を追加 ほか",
+          "changes": [
+            {
+              "path": "ability_explosive_barrel.properties.BarrelDamage",
+              "from": 80,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "ability_explosive_barrel.properties.BarrelDamage@scale",
+              "from": 1.05,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "ability_explosive_barrel.properties.BurnDuration",
+              "from": null,
+              "to": 3,
+              "good": true
+            },
+            {
+              "path": "ability_explosive_barrel.properties.DPS",
+              "from": null,
+              "to": 13.3333,
+              "good": true
+            },
+            {
+              "path": "ability_explosive_barrel.properties.DPS@scale",
+              "from": null,
+              "to": 0.175,
+              "good": true
+            },
+            {
+              "path": "ability_explosive_barrel.properties.ImpactDamage",
+              "from": null,
+              "to": 40,
+              "good": true
+            },
+            {
+              "path": "ability_explosive_barrel.properties.ImpactDamage@scale",
+              "from": null,
+              "to": 0.525,
+              "good": true
+            },
+            {
+              "path": "ability_explosive_barrel.properties.TickRate",
+              "from": null,
+              "to": 0.5,
+              "good": true
+            },
+            {
+              "path": "ability_explosive_barrel.upgrades.T3.BarrelDamage",
+              "from": 80,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "ability_explosive_barrel.upgrades.T3.BarrelDamage#2",
+              "from": 0.5,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "ability_explosive_barrel.upgrades.T3.DPS",
+              "from": null,
+              "to": 13.3333,
+              "good": true
+            },
+            {
+              "path": "ability_explosive_barrel.upgrades.T3.DPS#2",
+              "from": null,
+              "to": 0.083333,
+              "good": true
+            },
+            {
+              "path": "ability_explosive_barrel.upgrades.T3.ImpactDamage",
+              "from": null,
+              "to": 40,
+              "good": true
+            },
+            {
+              "path": "ability_explosive_barrel.upgrades.T3.ImpactDamage#2",
+              "from": null,
+              "to": 0.25,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_bookworm",
+          "note": "Weapon Damage 0.2→0.3",
+          "changes": [
+            {
+              "path": "ability_bookworm_knightbarrier.properties.BaseAttackDamagePercent@scale",
+              "from": 0.2,
+              "to": 0.3,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_doorman",
+          "note": "Doorway Distance 70→65",
+          "changes": [
+            {
+              "path": "ability_doorman_doorway.properties.DoorwayDistance",
+              "from": 70,
+              "to": 65,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_drifter",
+          "note": "Bonus Damage 1.7→1.4 / Cooldown 24→26 / T2強化 Cooldown -12→-10",
+          "changes": [
+            {
+              "path": "drifter_blood_blast.properties.BonusDamage@scale",
+              "from": 1.7,
+              "to": 1.4,
+              "good": false
+            },
+            {
+              "path": "drifter_shadow_mark.properties.AbilityCooldown",
+              "from": 24,
+              "to": 26,
+              "good": false
+            },
+            {
+              "path": "drifter_shadow_mark.upgrades.T2.AbilityCooldown",
+              "from": -12,
+              "to": -10,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_fencer",
+          "note": "Melee Resist -22→-25 / T2強化 Melee Resist -30→-25 / T2強化 Stun Duration 0.4 を追加 ほか",
+          "changes": [
+            {
+              "path": "ability_fencer_riposte.properties.MeleeResistReduction",
+              "from": -22,
+              "to": -25,
+              "good": null
+            },
+            {
+              "path": "ability_fencer_riposte.upgrades.T2.MeleeResistReduction",
+              "from": -30,
+              "to": -25,
+              "good": null
+            },
+            {
+              "path": "ability_fencer_riposte.upgrades.T2.StunDuration",
+              "from": null,
+              "to": 0.4,
+              "good": true
+            },
+            {
+              "path": "ability_fencer_riposte.upgrades.T3.TargetLifesteal",
+              "from": 60,
+              "to": 75,
+              "good": true
+            },
+            {
+              "path": "ability_fencer_riposte.upgrades.T3.TargetLifestealDuration",
+              "from": 7,
+              "to": 13,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_forge",
+          "note": "T1強化 Duration 1.5 を追加 / T1強化 SpiritResist を削除 / T3強化 Duration を削除 ほか",
+          "changes": [
+            {
+              "path": "citadel_ability_mobile_resupply.upgrades.T1.AbilityDuration",
+              "from": null,
+              "to": 1.5,
+              "good": true
+            },
+            {
+              "path": "citadel_ability_mobile_resupply.upgrades.T1.SpiritResist",
+              "from": 40,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_mobile_resupply.upgrades.T3.AbilityDuration",
+              "from": 1.5,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_mobile_resupply.upgrades.T3.SpiritResist",
+              "from": null,
+              "to": 40,
+              "good": true
+            },
+            {
+              "path": "citadel_ability_shieldedsentry.properties.DecayingResist",
+              "from": 80,
+              "to": 0,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_shieldedsentry.properties.DecayingResistDuration",
+              "from": 6,
+              "to": 0,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_shieldedsentry.properties.TurretBaseHealth",
+              "from": 90,
+              "to": 100,
+              "good": true
+            },
+            {
+              "path": "citadel_ability_shieldedsentry.properties.TurretBaseHealth@scale",
+              "from": 7.8,
+              "to": 9,
+              "good": true
+            },
+            {
+              "path": "citadel_weapon_engineer_set.weapon.bulletDamage",
+              "from": 6.4,
+              "to": 6.08,
+              "good": false
+            },
+            {
+              "path": "growth.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL",
+              "from": 0.18,
+              "to": 0.171,
+              "good": false
+            },
+            {
+              "path": "growth.MODIFIER_VALUE_TECH_RESIST",
+              "from": 0.625,
+              "to": 0.35,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_gigawatt",
+          "note": "T3強化 Radius 1.5→1.75",
+          "changes": [
+            {
+              "path": "citadel_ability_lightning_ball.upgrades.T3.ShockRadius",
+              "from": 1.5,
+              "to": 1.75,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_hornet",
+          "note": "T1強化 Damage 65→45",
+          "changes": [
+            {
+              "path": "citadel_ability_hornet_chain.upgrades.T1.Damage",
+              "from": 65,
+              "to": 45,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_lash",
+          "note": "endRange 2264→2125.98 / startRange 787→708.66",
+          "changes": [
+            {
+              "path": "citadel_weapon_lash_set.weapon.falloff.endRange",
+              "from": 2264,
+              "to": 2125.98,
+              "good": false
+            },
+            {
+              "path": "citadel_weapon_lash_set.weapon.falloff.startRange",
+              "from": 787,
+              "to": 708.66,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_punkgoat",
+          "note": "MaxHealthBuffDuration 0 を追加 / MaxHealthBuffPct 0 を追加 / T3強化 DealMaxHealthDamagePct を削除 ほか",
+          "changes": [
+            {
+              "path": "ability_punkgoat_goatflip.properties.MaxHealthBuffDuration",
+              "from": null,
+              "to": 0,
+              "good": null
+            },
+            {
+              "path": "ability_punkgoat_goatflip.properties.MaxHealthBuffPct",
+              "from": null,
+              "to": 0,
+              "good": null
+            },
+            {
+              "path": "ability_punkgoat_goatflip.upgrades.T3.DealMaxHealthDamagePct",
+              "from": 7,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "ability_punkgoat_goatflip.upgrades.T3.DealMaxHealthDamagePct#2",
+              "from": 0.03,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "ability_punkgoat_goatflip.upgrades.T3.MaxHealthBuffDuration",
+              "from": null,
+              "to": 16,
+              "good": true
+            },
+            {
+              "path": "ability_punkgoat_goatflip.upgrades.T3.MaxHealthBuffPct",
+              "from": null,
+              "to": 10,
+              "good": true
+            },
+            {
+              "path": "ability_punkgoat_tether.properties.Damage@scale",
+              "from": 1,
+              "to": 0.7,
+              "good": false
+            },
+            {
+              "path": "stat.EBaseHealthRegen",
+              "from": 2.5,
+              "to": 2,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_tengu",
+          "note": "T3強化 Stun Duration 1→0.75",
+          "changes": [
+            {
+              "path": "citadel_ability_tengu_stone_form.upgrades.T3.StunDuration",
+              "from": 1,
+              "to": 0.75,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_viper",
+          "note": "Petrify Duration 2→2.2 / Radius 8→12",
+          "changes": [
+            {
+              "path": "ability_viper_petrifybola.properties.PetrifyDuration",
+              "from": 2,
+              "to": 2.2,
+              "good": true
+            },
+            {
+              "path": "ability_viper_petrifybola.properties.Radius",
+              "from": 8,
+              "to": 12,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_wraith",
+          "note": "Move Speed -30→30 / Heal 1→0.75 / T3強化 Move Speed -20→20 ほか",
+          "changes": [
+            {
+              "path": "citadel_ability_card_toss.properties.ClubSlowPercent",
+              "from": -30,
+              "to": 30,
+              "good": true
+            },
+            {
+              "path": "citadel_ability_card_toss.properties.HeartHeal@scale",
+              "from": 1,
+              "to": 0.75,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_card_toss.upgrades.T3.ClubSlowPercent",
+              "from": -20,
+              "to": 20,
+              "good": true
+            },
+            {
+              "path": "citadel_ability_wraith_rapidfire.upgrades.T3.MagicDamagePerBullet",
+              "from": 0.06,
+              "to": 0.045,
+              "good": false
+            }
+          ]
+        }
+      ],
+      "sourceTitle": "マイナー アップデート - 2026年8月12日",
+      "sourceUrl": "https://store.steampowered.com/news/app/1422450/view/708906085669405228"
     }
   ]
 }

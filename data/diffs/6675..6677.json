@@ -1,0 +1,440 @@
+{
+  "from": "6675",
+  "to": "6677",
+  "generatedAt": "2026-09-16T04:08:48.416Z",
+  "entries": [
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "14",
+      "path": "ability_explosive_barrel.properties.BarrelDamage",
+      "before": 80,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "14",
+      "path": "ability_explosive_barrel.properties.BarrelDamage@scale",
+      "before": 1.05,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "14",
+      "path": "ability_explosive_barrel.properties.BurnDuration",
+      "before": null,
+      "after": 3
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "14",
+      "path": "ability_explosive_barrel.properties.DPS",
+      "before": null,
+      "after": 13.3333
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "14",
+      "path": "ability_explosive_barrel.properties.DPS@scale",
+      "before": null,
+      "after": 0.175
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "14",
+      "path": "ability_explosive_barrel.properties.ImpactDamage",
+      "before": null,
+      "after": 40
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "14",
+      "path": "ability_explosive_barrel.properties.ImpactDamage@scale",
+      "before": null,
+      "after": 0.525
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "14",
+      "path": "ability_explosive_barrel.properties.TickRate",
+      "before": null,
+      "after": 0.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "14",
+      "path": "ability_explosive_barrel.upgrades.T3.BarrelDamage",
+      "before": 80,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "14",
+      "path": "ability_explosive_barrel.upgrades.T3.BarrelDamage#2",
+      "before": 0.5,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "14",
+      "path": "ability_explosive_barrel.upgrades.T3.DPS",
+      "before": null,
+      "after": 13.3333
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "14",
+      "path": "ability_explosive_barrel.upgrades.T3.DPS#2",
+      "before": null,
+      "after": 0.083333
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "14",
+      "path": "ability_explosive_barrel.upgrades.T3.ImpactDamage",
+      "before": null,
+      "after": 40
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "14",
+      "path": "ability_explosive_barrel.upgrades.T3.ImpactDamage#2",
+      "before": null,
+      "after": 0.25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "2",
+      "path": "citadel_ability_lightning_ball.upgrades.T3.ShockRadius",
+      "before": 1.5,
+      "after": 1.75
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "20",
+      "path": "citadel_ability_tengu_stone_form.upgrades.T3.StunDuration",
+      "before": 1,
+      "after": 0.75
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "3",
+      "path": "citadel_ability_hornet_chain.upgrades.T1.Damage",
+      "before": 65,
+      "after": 45
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "31",
+      "path": "citadel_weapon_lash_set.weapon.falloff.endRange",
+      "before": 2264,
+      "after": 2125.98
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "31",
+      "path": "citadel_weapon_lash_set.weapon.falloff.startRange",
+      "before": 787,
+      "after": 708.66
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "58",
+      "path": "ability_viper_petrifybola.properties.PetrifyDuration",
+      "before": 2,
+      "after": 2.2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "58",
+      "path": "ability_viper_petrifybola.properties.Radius",
+      "before": 8,
+      "after": 12
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "64",
+      "path": "drifter_blood_blast.properties.BonusDamage@scale",
+      "before": 1.7,
+      "after": 1.4
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "64",
+      "path": "drifter_shadow_mark.properties.AbilityCooldown",
+      "before": 24,
+      "after": 26
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "64",
+      "path": "drifter_shadow_mark.upgrades.T2.AbilityCooldown",
+      "before": -12,
+      "after": -10
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "67",
+      "path": "ability_bookworm_knightbarrier.properties.BaseAttackDamagePercent@scale",
+      "before": 0.2,
+      "after": 0.3
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "69",
+      "path": "ability_doorman_doorway.properties.DoorwayDistance",
+      "before": 70,
+      "after": 65
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "7",
+      "path": "citadel_ability_card_toss.properties.ClubSlowPercent",
+      "before": -30,
+      "after": 30
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "7",
+      "path": "citadel_ability_card_toss.properties.HeartHeal@scale",
+      "before": 1,
+      "after": 0.75
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "7",
+      "path": "citadel_ability_card_toss.upgrades.T3.ClubSlowPercent",
+      "before": -20,
+      "after": 20
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "7",
+      "path": "citadel_ability_wraith_rapidfire.upgrades.T3.MagicDamagePerBullet",
+      "before": 0.06,
+      "after": 0.045
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "72",
+      "path": "ability_punkgoat_goatflip.properties.MaxHealthBuffDuration",
+      "before": null,
+      "after": 0
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "72",
+      "path": "ability_punkgoat_goatflip.properties.MaxHealthBuffPct",
+      "before": null,
+      "after": 0
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "72",
+      "path": "ability_punkgoat_goatflip.upgrades.T3.DealMaxHealthDamagePct",
+      "before": 7,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "72",
+      "path": "ability_punkgoat_goatflip.upgrades.T3.DealMaxHealthDamagePct#2",
+      "before": 0.03,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "72",
+      "path": "ability_punkgoat_goatflip.upgrades.T3.MaxHealthBuffDuration",
+      "before": null,
+      "after": 16
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "72",
+      "path": "ability_punkgoat_goatflip.upgrades.T3.MaxHealthBuffPct",
+      "before": null,
+      "after": 10
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "72",
+      "path": "ability_punkgoat_tether.properties.Damage@scale",
+      "before": 1,
+      "after": 0.7
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "72",
+      "path": "stat.EBaseHealthRegen",
+      "before": 2.5,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "77",
+      "path": "ability_fencer_riposte.properties.MeleeResistReduction",
+      "before": -22,
+      "after": -25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "77",
+      "path": "ability_fencer_riposte.upgrades.T2.MeleeResistReduction",
+      "before": -30,
+      "after": -25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "77",
+      "path": "ability_fencer_riposte.upgrades.T2.StunDuration",
+      "before": null,
+      "after": 0.4
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "77",
+      "path": "ability_fencer_riposte.upgrades.T3.TargetLifesteal",
+      "before": 60,
+      "after": 75
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "77",
+      "path": "ability_fencer_riposte.upgrades.T3.TargetLifestealDuration",
+      "before": 7,
+      "after": 13
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "8",
+      "path": "citadel_ability_mobile_resupply.upgrades.T1.AbilityDuration",
+      "before": null,
+      "after": 1.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "8",
+      "path": "citadel_ability_mobile_resupply.upgrades.T1.SpiritResist",
+      "before": 40,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "8",
+      "path": "citadel_ability_mobile_resupply.upgrades.T3.AbilityDuration",
+      "before": 1.5,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "8",
+      "path": "citadel_ability_mobile_resupply.upgrades.T3.SpiritResist",
+      "before": null,
+      "after": 40
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "8",
+      "path": "citadel_ability_shieldedsentry.properties.DecayingResist",
+      "before": 80,
+      "after": 0
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "8",
+      "path": "citadel_ability_shieldedsentry.properties.DecayingResistDuration",
+      "before": 6,
+      "after": 0
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "8",
+      "path": "citadel_ability_shieldedsentry.properties.TurretBaseHealth",
+      "before": 90,
+      "after": 100
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "8",
+      "path": "citadel_ability_shieldedsentry.properties.TurretBaseHealth@scale",
+      "before": 7.8,
+      "after": 9
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "8",
+      "path": "citadel_weapon_engineer_set.weapon.bulletDamage",
+      "before": 6.4,
+      "after": 6.08
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "8",
+      "path": "growth.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL",
+      "before": 0.18,
+      "after": 0.171
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "8",
+      "path": "growth.MODIFIER_VALUE_TECH_RESIST",
+      "before": 0.625,
+      "after": 0.35
+    }
+  ],
+  "excludedFieldCount": 26
+}

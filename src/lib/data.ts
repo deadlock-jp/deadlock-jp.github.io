@@ -5,13 +5,23 @@ import { join } from "node:path";
 import updatesJson from "../../data/updates.json" with { type: "json" };
 import heroNotesJson from "../../data/hero-notes.json" with { type: "json" };
 import itemNotesJson from "../../data/item-notes.json" with { type: "json" };
-import patchNotesJson from "../../data/patch-notes.json" with { type: "json" };
 import itemStatsJson from "../../data/item-stats.json" with { type: "json" };
 import heroStatsJson from "../../data/hero-stats.json" with { type: "json" };
 import type { HeroesFile, Hero } from "../types/hero.ts";
 import type { ItemsFile, Item } from "../types/item.ts";
 import type { AbilitiesFile, Ability } from "../types/ability.ts";
 import type { LocalizationFile } from "../types/localization.ts";
+import type { AdjustmentKind, AdjustmentChange, Adjustment } from "./adjustments.ts";
+import {
+  isUpgradePath,
+  upgradeTierOf,
+  fieldNameOf,
+  isScalePath,
+  weaponFieldOf,
+  WEAPON_FIELDS,
+  abilityKeyOf,
+  classifyChanges,
+} from "./adjustments.ts";
 
 // import.meta.url ベースの相対解決は使わない: Astro/Vite のビルドでこのモジュールは
 // dist/.prerender/chunks/ 以下へ移されるため、ソース上の相対パスが build 時に壊れる。
@@ -496,26 +506,34 @@ export function souls(n: number): string {
 }
 
 /**
- * 更新履歴。GameTracking-Deadlock の更新で data/*.json が変わったときの差分要約。
- * data/updates.json を新しい順で返す。将来は上流コミットの差分から自動生成する。
+ * バランス調整の履歴。公式マイナーアップデート1件が1エントリ。
+ * data/updates.json を新しい順で返す。
  *
- * adjustments は「そのパッチでどのヒーロー/アイテムが強化/弱体/リワークされたか」の一覧。
- * key はヒーローなら hero.key、アイテムなら item.id。note は差分の短い説明(任意)。
- * これも tools/gen-updates で before/after の data/*.json を突き合わせて生成する。
+ * adjustments は「そのアップデートでどのヒーロー/アイテムがどう動いたか」の一覧。
+ * key はヒーローなら hero.key、アイテムなら item.id。changes にフィールド単位の
+ * before/after を持ち、note はそれを1行に畳んだ表示フォールバック。
+ * すべて tools/gen-updates.mjs が before/after のスナップショットから生成する。
+ *
+ * kind の決め方(バフ/ナーフの判定ルール):
+ *   1. 項目ごとの向きは tools/diff/fields.mjs の goodOf()。判定できないものは null
+ *   2. スキル/アイテム単位では、まず基礎値(properties・stat・growth・cost)だけを数える。
+ *      有利のみ=buff / 不利のみ=nerf / 両方=mixed。基礎値の変更が0件のときだけ
+ *      AP強化(upgrades)で同じ判定をする
+ *   3. ヒーロー単位では、スキルごとの判定を集めて同じ規則で畳む
+ *   rework だけは機械判定しない。公式ノートが「リワーク」と書いているときに
+ *   updates.json へ手で書く上書き(数値ではなく分類ラベルなのでルール6の対象外)
  */
-export type AdjustmentKind = "buff" | "nerf" | "rework";
-export interface Adjustment {
-  kind: AdjustmentKind;
-  target: "hero" | "item";
-  key: string;
-  note?: string;
-}
+export type { AdjustmentKind, AdjustmentChange, Adjustment } from "./adjustments.ts";
+export { ADJUSTMENT_LABEL, classifyChanges, combineKinds } from "./adjustments.ts";
 export interface SiteUpdate {
   date: string;
   upstreamCommit: string | null;
   title: string;
   changes: string[];
   adjustments?: Adjustment[];
+  /** 比較に使ったスナップショット(監査用) */
+  fromVersion?: string;
+  toVersion?: string;
   /** 元になった公式パッチノート(tools/gen-updates.mjsがdata/patch-notes.jsonから自動で付与) */
   sourceTitle?: string;
   sourceUrl?: string;
@@ -565,22 +583,194 @@ export const itemAdjustments = (itemId: string): AdjustmentHistoryRow[] =>
   adjustmentsFor("item", itemId);
 
 /**
+ * 1件の Adjustment を表示用にほぐす。
+ *
+ * data/updates.json に入っているのは実ID(パス)と数値だけなので、ラベル・単位・
+ * スキル名は「現在の」スナップショットから引く。ゲーム内日本語が後で増えれば、
+ * 過去のアップデートの表示も作り直さずに直る。
+ * 単位や符号はここで推測せず、formatProperty() と同じ *_label / *_prefix /
+ * *_postfix トークンを使う(CLAUDE.md「単位や%を自分で推測して付けないこと」)。
+ */
+export interface AdjustmentRow {
+  path: string;
+  label: string;
+  /** AP強化の段(1-3)。基礎値なら null */
+  tier: number | null;
+  /** スピリット倍率の行。値は "×0.6" の形で出す */
+  isScale: boolean;
+  /** 表示済みの値。"34秒" "+0.76" "16.5m" など。追加・削除なら片方が null */
+  fromText: string | null;
+  toText: string | null;
+  good: boolean | null;
+}
+export interface AdjustmentGroup {
+  scope: "stat" | "weapon" | "ability" | "item";
+  /** scope === "ability" のときだけ。/abilities/<key>/ のIDでもある */
+  abilityKey: string | null;
+  name: string;
+  /** abilities.json / items.json の image。解決は AbilityIcon などに任せる */
+  image: string | null;
+  kind: AdjustmentKind;
+  rows: AdjustmentRow[];
+}
+
+/**
+ * Source 2 の距離は 1 unit = 1 inch。src/lib/gamestats.ts の UNITS_PER_METER と同じ値だが、
+ * gamestats はこのモジュールを読む側なので、循環 import を作らないようここに置く。
+ */
+const UNITS_PER_METER = 39.37;
+
+/** プロパティ名から表示ラベルを引く。m_strLocTokenOverride があればそちら優先 */
+function adjustmentLabel(name: string, source: Ability | Item | undefined): string {
+  const override = source?.properties?.[name]?.labelOverride ?? null;
+  return t(`${override ?? name}_label`, humanize(name));
+}
+
+/**
+ * 数値に単位を付ける。AP強化の増分には符号も付ける(SkillCard の upgrades と同じ体裁)。
+ * スピリット倍率は SkillCard のダメージタイルと同じく "×0.6" と出す(単位は付かない)。
+ */
+function adjustmentValueText(
+  name: string,
+  value: number | null,
+  source: Ability | Item | undefined,
+  isUpgrade: boolean,
+  isScale: boolean,
+): string | null {
+  if (value === null) return null;
+  const body = Number.isInteger(value) ? String(value) : String(Math.round(value * 1000) / 1000);
+  if (isScale) return `×${body}`;
+  const override = source?.properties?.[name]?.labelOverride ?? null;
+  const postfix = t(`${override ?? name}_postfix`, "").trim();
+  const sign = isUpgrade && value >= 0 ? "+" : "";
+  return `${sign}${body}${dedupedTail(body, postfix)}`;
+}
+
+export function adjustmentGroups(a: Adjustment): AdjustmentGroup[] {
+  const changes = a.changes ?? [];
+  if (changes.length === 0) return [];
+
+  if (a.target === "item") {
+    const it = item(a.key);
+    return [
+      {
+        scope: "item",
+        abilityKey: null,
+        name: it ? t(it.nameToken, it.id) : a.key,
+        image: it?.shopIcon ?? null,
+        kind: classifyChanges(changes),
+        rows: changes.map((c) => adjustmentRow(c, it)),
+      },
+    ];
+  }
+
+  const hero = heroByKey(a.key);
+  const groups: AdjustmentGroup[] = [];
+
+  // ヒーローの基礎ステータス・レベル成長は1つのまとまりとして扱う(1スキルと同格)
+  const statChanges = changes.filter(
+    (c) => abilityKeyOf(c.path) === null && weaponFieldOf(c.path) === null,
+  );
+  if (statChanges.length > 0) {
+    groups.push({
+      scope: "stat",
+      abilityKey: null,
+      name: "基礎ステータス",
+      image: null,
+      kind: classifyChanges(statChanges),
+      rows: statChanges.map((c) => adjustmentRow(c, undefined)),
+    });
+  }
+
+  // 主武器。スキルと同格の1まとまり
+  const weaponChanges = changes.filter((c) => weaponFieldOf(c.path) !== null);
+  if (weaponChanges.length > 0) {
+    // 武器名のトークン規則は src/lib/gamestats.ts の weaponName() と同じ
+    // (スキルのキーでは引けず、ヒーローキー側でしか引けない)
+    const heroKey = a.key.replace(/^hero_/, "");
+    groups.push({
+      scope: "weapon",
+      abilityKey: null,
+      name: t(`citadel_weapon_hero_${heroKey}_set`, "主武器"),
+      image: null,
+      kind: classifyChanges(weaponChanges),
+      rows: weaponChanges.map((c) => adjustmentRow(c, undefined)),
+    });
+  }
+
+  // スキルは持ち主の並び順(Signature_1..4)で。並び順が引けないものは後ろに回す
+  const order = new Map((hero?.abilities ?? []).map((x, i) => [x.abilityKey, i]));
+  const byAbility = new Map<string, AdjustmentChange[]>();
+  for (const c of changes) {
+    const key = abilityKeyOf(c.path);
+    if (!key) continue;
+    const list = byAbility.get(key);
+    if (list) list.push(c);
+    else byAbility.set(key, [c]);
+  }
+  const keys = [...byAbility.keys()].sort(
+    (x, y) => (order.get(x) ?? 99) - (order.get(y) ?? 99) || x.localeCompare(y),
+  );
+  for (const key of keys) {
+    const ab = ability(key);
+    const rows = byAbility.get(key) ?? [];
+    groups.push({
+      scope: "ability",
+      abilityKey: key,
+      name: ab ? t(ab.nameToken, key) : key,
+      image: ab?.image ?? null,
+      kind: classifyChanges(rows),
+      rows: rows.map((c) => adjustmentRow(c, ab)),
+    });
+  }
+  return groups;
+}
+
+function adjustmentRow(c: AdjustmentChange, source: Ability | Item | undefined): AdjustmentRow {
+  const weaponField = weaponFieldOf(c.path);
+  if (weaponField !== null) {
+    const spec = WEAPON_FIELDS[weaponField];
+    const text = (v: number | null): string | null => {
+      if (v === null) return null;
+      const n = spec?.meters ? v / UNITS_PER_METER : v;
+      const body = Number.isInteger(n) ? String(n) : String(Math.round(n * 100) / 100);
+      return `${body}${spec?.unit ?? ""}`;
+    };
+    return {
+      path: c.path,
+      label: spec?.label ?? humanize(weaponField.replace(".", " ")),
+      tier: null,
+      isScale: false,
+      fromText: text(c.from),
+      toText: text(c.to),
+      good: c.good,
+    };
+  }
+  const name = fieldNameOf(c.path);
+  const upgrade = isUpgradePath(c.path);
+  const scale = isScalePath(c.path);
+  const base = name === "cost" ? "価格" : adjustmentLabel(name, source);
+  return {
+    path: c.path,
+    label: scale ? `${base}のスピリット倍率` : base,
+    tier: upgradeTierOf(c.path),
+    isScale: scale,
+    fromText: adjustmentValueText(name, c.from, source, upgrade, scale),
+    toText: adjustmentValueText(name, c.to, source, upgrade, scale),
+    good: c.good,
+  };
+}
+
+/**
  * 公式パッチノート本文のアーカイブ。data/patch-notes.json(tools/fetch-patch-notes.mjsが
  * Steamの公開ニュースAPIから取得)を新しい順で返す。Valve公式の投稿本文そのもので、
  * こちらで書き起こしたものではない。
+ *
+ * 実体は src/lib/patchNotes.ts。日付との対応付けをツール(tools/gen-updates.mjs)と
+ * 共有するため、data.ts からは切り出してある。ここは従来どおりの入り口。
  */
-export interface PatchNoteEntry {
-  gid: string;
-  date: string;
-  title: string;
-  url: string;
-  /** BBCodeから変換済みの行。"## " で始まる行は見出し */
-  lines: string[];
-}
-const patchNotesFile = patchNotesJson as unknown as { entries: PatchNoteEntry[] };
-export function patchNotes(): PatchNoteEntry[] {
-  return [...patchNotesFile.entries].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
-}
+export type { PatchNoteEntry } from "./patchNotes.ts";
+export { patchNotes, patchNoteByDate, nearestPatchNote } from "./patchNotes.ts";
 
 /**
  * ヒーロー×アイテムの人気率・勝率。data/item-stats.json

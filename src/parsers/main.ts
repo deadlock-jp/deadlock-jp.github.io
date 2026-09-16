@@ -127,6 +127,17 @@ function reportLocalization(localization: ReturnType<typeof parseLocalization>, 
   }
 }
 
+/** 取り込み元コミットの日付(ISO)。スナップショットがどの時点のものかを残すのに使う */
+function upstreamCommitDate(gtPath: string): string | null {
+  try {
+    return execFileSync("git", ["-C", gtPath, "show", "-s", "--format=%cI", "HEAD"], {
+      encoding: "utf8",
+    }).trim();
+  } catch {
+    return null;
+  }
+}
+
 /** --gt: GameTracking-Deadlock からフラットな data/*.json を生成(検算・バックフィル用) */
 function runGameTracking(): void {
   const gt = resolveGameTrackingPath();
@@ -150,6 +161,60 @@ function runGameTracking(): void {
   const localization = parseLocalization(join(gt, "game/citadel/resource/localization"), lang, sha);
   writeJsonTo(dataDir, `localization.${lang}.json`, localization);
   reportLocalization(localization, lang);
+}
+
+/**
+ * --gt --snapshot: GameTracking-Deadlock の「今チェックアウトしている版」を
+ * data/snapshots/<ClientVersion>/ として保存する。
+ *
+ * 過去の公式アップデート前後の状態を復元するためのバックフィル専用。
+ * data/latest.json は動かさない(現行版はこのPCのゲームクライアントから採る)。
+ * GameTracking に日本語ローカライズは含まれないので英語だけになるが、サイトの
+ * 表示名は常に最新版から引くため、差分の計算には影響しない。
+ */
+function runGameTrackingSnapshot(): void {
+  const gt = resolveGameTrackingPath();
+  const sha = upstreamCommit(gt);
+  const scripts = join(gt, "game/citadel/pak01_dir/scripts");
+  const infPath = join(gt, "game/citadel/steam.inf");
+  if (!existsSync(infPath)) {
+    throw new Error(`steam.inf が見つかりません: ${infPath}\nsparse-checkout に含めてください。`);
+  }
+  const infText = readFileSync(infPath, "utf8");
+  const clientVersion = infText.match(/^ClientVersion=(\S+)/m)?.[1];
+  if (!clientVersion) throw new Error(`steam.inf に ClientVersion がありません: ${infPath}`);
+
+  console.log(`GameTracking-Deadlock: ${gt}`);
+  console.log(`commit: ${sha}`);
+  console.log(`ClientVersion: ${clientVersion}`);
+  console.log("生成:");
+
+  const snapDir = join(REPO_ROOT, "data", "snapshots", clientVersion);
+  const { heroes, items, abilities, objects } = parseAll(scripts, clientVersion);
+  writeJsonTo(snapDir, "heroes.json", heroes);
+  writeJsonTo(snapDir, "items.json", items);
+  writeJsonTo(snapDir, "abilities.json", abilities);
+  writeJsonTo(snapDir, "objects.json", objects);
+
+  const locRoot = join(gt, "game/citadel/resource/localization");
+  for (const lang of ["japanese", "english"] as const) {
+    const localization = parseLocalization(locRoot, lang, clientVersion);
+    if (Object.keys(localization.tokens).length === 0) {
+      console.log(`  ※ ${lang} は GameTracking に含まれないので省略`);
+      continue;
+    }
+    writeJsonTo(snapDir, `localization.${lang}.json`, localization);
+    reportLocalization(localization, lang);
+  }
+
+  writeJsonTo(snapDir, "meta.json", {
+    clientVersion,
+    patchVersion: infText.match(/^ServerVersion=(\S+)/m)?.[1] ?? clientVersion,
+    extractedAt: upstreamCommitDate(gt) ?? new Date().toISOString(),
+    source: "gametracking",
+    upstreamCommit: sha,
+  });
+  console.log(`\n  data/latest.json は更新しません(過去版のバックフィル)`);
 }
 
 /**
@@ -207,6 +272,8 @@ function main(): void {
   const local = argValue("local");
   if (local) {
     runLocal(resolve(local));
+  } else if (process.argv.includes("--snapshot")) {
+    runGameTrackingSnapshot();
   } else {
     runGameTracking();
   }

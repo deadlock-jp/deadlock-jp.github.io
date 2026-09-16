@@ -1,0 +1,112 @@
+{
+  "from": "6683",
+  "to": "6684",
+  "generatedAt": "2026-09-16T04:08:47.923Z",
+  "entries": [
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "81",
+      "path": "ability_unicorn_dazzlingorb.properties.BounceRadius",
+      "before": 17.5,
+      "after": 16.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "81",
+      "path": "ability_unicorn_dazzlingorb.properties.Damage",
+      "before": 165,
+      "after": 140
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "81",
+      "path": "ability_unicorn_dazzlingorb.properties.Damage@scale",
+      "before": 0.88,
+      "after": 0.6
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "81",
+      "path": "ability_unicorn_dazzlingorb.upgrades.T2.Damage#2",
+      "before": null,
+      "after": 0.45
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "81",
+      "path": "ability_unicorn_luminousstrike.properties.MagicIncreasePerStack",
+      "before": 8,
+      "after": 7
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "81",
+      "path": "ability_unicorn_luminousstrike.upgrades.T3.MagicIncreasePerStack",
+      "before": 3,
+      "after": 4
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "81",
+      "path": "ability_unicorn_prismaticguard.properties.AbilityCooldown",
+      "before": 32,
+      "after": 34
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "81",
+      "path": "ability_unicorn_prismaticguard.upgrades.T2.CombatBarrier",
+      "before": 80,
+      "after": 70
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "81",
+      "path": "ability_unicorn_prismaticguard.upgrades.T2.CombatBarrier#2",
+      "before": 0.7,
+      "after": 0.76
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "81",
+      "path": "ability_unicorn_prismaticguard.upgrades.T3.AbilityCooldown",
+      "before": -18,
+      "after": -20
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "81",
+      "path": "ability_unicorn_prismaticguard.upgrades.T3.DebuffDuration",
+      "before": 1.5,
+      "after": 1.25
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_resonant_healing",
+      "path": "properties.HealingPerCast",
+      "before": 70,
+      "after": 65
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_restorative_locket",
+      "path": "properties.TechResist",
+      "before": 10,
+      "after": 8
+    }
+  ],
+  "excludedFieldCount": 26
+}
