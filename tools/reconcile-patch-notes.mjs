@@ -143,6 +143,15 @@ if (!notesText.trim()) {
   );
 }
 
+/*
+ * 公式ノートは日本語版が遅れて出ることがある(2026-09-16のマイナーアップデートは
+ * 英語のまま公開された)。日本語名だけで突き合わせると1件も一致せず、
+ * 「ノートにあるが差分に無い」が空になって検査が素通りしてしまうので、
+ * 日本語名と英語名の両方で照合する。
+ */
+const tEn = (token) => locEn[token]?.text ?? "";
+const namesOf = (token) => [t(token), tEn(token)].filter(Boolean);
+
 // --- 差分エントリに人が読めるラベルを付ける ---
 function labelFor(entry) {
   if (entry.type === "hero") {
@@ -156,22 +165,42 @@ function labelFor(entry) {
   return i ? t(i.nameToken) : entry.id;
 }
 
-const mentioned = (label) => label && notesText.includes(label);
+/** その差分エントリの対象(ヒーロー/アイテム)が、日英どちらかの名前でノートに出てくるか */
+function mentionedEntry(entry) {
+  const tokens =
+    entry.type === "hero"
+      ? [heroes[entry.id]?.nameToken]
+      : [items[entry.id]?.nameToken];
+  return tokens
+    .filter(Boolean)
+    .flatMap(namesOf)
+    .some((name) => notesText.includes(name));
+}
 
 // --- 1) 差分にあるがノートに無い = サイトの独自価値 ---
 const undocumented = diff.entries
   .map((e) => ({ ...e, label: labelFor(e) }))
-  .filter((e) => !mentioned(e.label));
+  .filter((e) => !mentionedEntry(e));
 
 // --- 2) ノートにある名前で、差分に1件も無いもの = 要確認(サーバー側調整 or 抽出漏れ) ---
 const allNames = [
-  ...Object.values(heroes).map((h) => ({ type: "hero", id: h.id, name: t(h.nameToken) })),
-  ...Object.values(items).map((i) => ({ type: "item", id: i.id, name: t(i.nameToken) })),
-].filter((n) => n.name);
+  ...Object.values(heroes).map((h) => ({
+    type: "hero",
+    id: h.id,
+    name: t(h.nameToken),
+    names: namesOf(h.nameToken),
+  })),
+  ...Object.values(items).map((i) => ({
+    type: "item",
+    id: i.id,
+    name: t(i.nameToken),
+    names: namesOf(i.nameToken),
+  })),
+].filter((n) => n.names.length > 0);
 
 const diffedIds = new Set(diff.entries.map((e) => `${e.type}:${e.id}`));
 const mentionedButNotDiffed = allNames.filter(
-  (n) => notesText.includes(n.name) && !diffedIds.has(`${n.type}:${n.id}`),
+  (n) => n.names.some((name) => notesText.includes(name)) && !diffedIds.has(`${n.type}:${n.id}`),
 );
 
 // --- レポート ---

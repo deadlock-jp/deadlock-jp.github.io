@@ -763,6 +763,23 @@ function adjustmentRow(c: AdjustmentChange, source: Ability | Item | undefined):
       good: c.good,
     };
   }
+  /*
+   * 構成素材の組み替え(components.<アイテムID>)。値は在否を表す 1 / null なので、
+   * 数字は出さずに「追加」「除外」とだけ見せる(tools/diff/fields.mjs 参照)。
+   */
+  const componentId = /^components\.(.+)$/.exec(c.path)?.[1];
+  if (componentId) {
+    const comp = item(componentId);
+    return {
+      path: c.path,
+      label: "構成素材",
+      tier: null,
+      isScale: false,
+      fromText: c.from === null ? null : (comp ? t(comp.nameToken, componentId) : componentId),
+      toText: c.to === null ? null : (comp ? t(comp.nameToken, componentId) : componentId),
+      good: c.good,
+    };
+  }
   const name = fieldNameOf(c.path);
   /*
    * ヒーローのレベル成長(growth.MODIFIER_VALUE_*)は "_label" を持たないものが多い。

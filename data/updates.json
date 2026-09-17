@@ -4,6 +4,1778 @@
   "upstreamRepo": "https://github.com/SteamDatabase/GameTracking-Deadlock",
   "entries": [
     {
+      "date": "2026-09-16",
+      "upstreamCommit": null,
+      "title": "Minor Update - 09-16-2026",
+      "fromVersion": "6689",
+      "toVersion": "6694",
+      "changes": [
+        "ヒーロー・アイテムの数値差分から自動生成 (バフ 6 / ナーフ 41 / 混在 17、変更項目 205)"
+      ],
+      "adjustments": [
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_astro",
+          "note": "弾薬耐性 0 を追加 / BulletResistReductionDuration 0 を追加 / 減衰する移動速度 50→40 ほか",
+          "changes": [
+            {
+              "path": "ability_crackshot.properties.BulletResistReduction",
+              "from": null,
+              "to": 0,
+              "good": null
+            },
+            {
+              "path": "ability_crackshot.properties.BulletResistReductionDuration",
+              "from": null,
+              "to": 0,
+              "good": null
+            },
+            {
+              "path": "ability_crackshot.properties.FadingSlowPercent",
+              "from": 50,
+              "to": 40,
+              "good": false
+            },
+            {
+              "path": "ability_crackshot.upgrades.T1.FadingSlowPercent",
+              "from": 25,
+              "to": 20,
+              "good": false
+            },
+            {
+              "path": "ability_crackshot.upgrades.T2.BulletResistReduction",
+              "from": null,
+              "to": -6,
+              "good": false
+            },
+            {
+              "path": "ability_crackshot.upgrades.T2.BulletResistReductionDuration",
+              "from": null,
+              "to": 5,
+              "good": true
+            },
+            {
+              "path": "ability_gravity_lasso.properties.BouncePadExtendDuration",
+              "from": 1,
+              "to": 1.25,
+              "good": true
+            },
+            {
+              "path": "growth.MODIFIER_VALUE_BASE_HEALTH_FROM_LEVEL",
+              "from": 41,
+              "to": 43,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_atlas",
+          "note": "T1強化 移動速度 40→32 / T3強化 無効継続時間 6→5 / T3強化 ダメージ回復 8→9",
+          "changes": [
+            {
+              "path": "citadel_ability_bull_charge.upgrades.T1.SlowPercent",
+              "from": 40,
+              "to": 32,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_bull_leap.upgrades.T3.ImmunityDuration",
+              "from": 6,
+              "to": 5,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_passive_beefy.upgrades.T3.RegenIncomingDamagePercent",
+              "from": 8,
+              "to": 9,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_bebop",
+          "note": "ダッシュ距離 -40→-36 / 移動速度 25→20 / 移動速度 90→72",
+          "changes": [
+            {
+              "path": "citadel_ability_bebop_laser_beam.properties.GroundDashReductionPercent",
+              "from": -40,
+              "to": -36,
+              "good": null
+            },
+            {
+              "path": "citadel_ability_bebop_laser_beam.properties.SlowPercent",
+              "from": 25,
+              "to": 20,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_hook.properties.SlowPercent",
+              "from": 90,
+              "to": 72,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_bookworm",
+          "note": "移動速度 45→36 / T1強化 クールダウン -11→-14 / T3強化 範囲 1→2",
+          "changes": [
+            {
+              "path": "ability_bookworm_aoemagic.properties.SlowPercent",
+              "from": 45,
+              "to": 36,
+              "good": false
+            },
+            {
+              "path": "ability_bookworm_aoemagic.upgrades.T1.AbilityCooldown",
+              "from": -11,
+              "to": -14,
+              "good": true
+            },
+            {
+              "path": "ability_bookworm_aoemagic.upgrades.T3.Radius",
+              "from": 1,
+              "to": 2,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_chrono",
+          "note": "最小ダメージ 25→10 / T3強化 最小ダメージ を削除 / スロウ 80→64",
+          "changes": [
+            {
+              "path": "citadel_ability_chrono_kinetic_carbine.properties.MinBonusBulletDamage@scale",
+              "from": 25,
+              "to": 10,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_chrono_kinetic_carbine.upgrades.T3.MinBonusBulletDamage",
+              "from": 55,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_chrono_time_wall.properties.MovementSlowPct",
+              "from": 80,
+              "to": 64,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_doorman",
+          "note": "移動速度 35→28",
+          "changes": [
+            {
+              "path": "ability_doorman_bomb.properties.SlowPercent",
+              "from": 35,
+              "to": 28,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_dynamo",
+          "note": "T2強化 移動速度 30→24",
+          "changes": [
+            {
+              "path": "citadel_ability_stomp.upgrades.T2.SlowPercent",
+              "from": 30,
+              "to": 24,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_familiar",
+          "note": "スロウ／ダッシュ性能低下 25→20 / 減衰する移動速度 45→36",
+          "changes": [
+            {
+              "path": "ability_familiar_ability01.properties.MoveSpeedAndDashSlowPct",
+              "from": 25,
+              "to": 20,
+              "good": false
+            },
+            {
+              "path": "ability_familiar_ability02.properties.FadingSlowPercent",
+              "from": 45,
+              "to": 36,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_fencer",
+          "note": "移動速度 30→24 / ダッシュ距離 -30→-26",
+          "changes": [
+            {
+              "path": "ability_fencer_throwblade.properties.SlowPercent",
+              "from": 30,
+              "to": 24,
+              "good": false
+            },
+            {
+              "path": "ability_fencer_ultimate.properties.GroundDashReductionPercent",
+              "from": -30,
+              "to": -26,
+              "good": null
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_forge",
+          "note": "移動速度 20→16 / T3強化 移動速度 30→24 / T1強化 EnemyDashSlowPercent -18→-16 ほか",
+          "changes": [
+            {
+              "path": "citadel_ability_fissure_wall.properties.SlowPercent",
+              "from": 20,
+              "to": 16,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_fissure_wall.upgrades.T3.SlowPercent",
+              "from": 30,
+              "to": 24,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_rocket_barrage.upgrades.T1.EnemyDashSlowPercent",
+              "from": -18,
+              "to": -16,
+              "good": true
+            },
+            {
+              "path": "citadel_ability_rocket_barrage.upgrades.T1.MoveSlowPercent",
+              "from": 30,
+              "to": 24,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_frank",
+          "note": "T1強化 EnemyDashSlowPercent -25→-22 / T1強化 移動速度 25→20 / EnemyDashSlowPercent -30→-26 ほか",
+          "changes": [
+            {
+              "path": "ability_frank_painaura.upgrades.T1.EnemyDashSlowPercent",
+              "from": -25,
+              "to": -22,
+              "good": true
+            },
+            {
+              "path": "ability_frank_painaura.upgrades.T1.SlowPercent",
+              "from": 25,
+              "to": 20,
+              "good": false
+            },
+            {
+              "path": "ability_frank_revive.properties.EnemyDashSlowPercent",
+              "from": -30,
+              "to": -26,
+              "good": true
+            },
+            {
+              "path": "ability_frank_shocktarget2.upgrades.T1.SlowPercent",
+              "from": 40,
+              "to": 32,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_ghost",
+          "note": "T3強化 BloodSpillDPSPercent 26→30 / スロウ 15→12 / 敵移動速度 70→56 ほか",
+          "changes": [
+            {
+              "path": "ability_blood_bomb.upgrades.T3.BloodSpillDPSPercent",
+              "from": 26,
+              "to": 30,
+              "good": true
+            },
+            {
+              "path": "ability_blood_shards.properties.MoveSpeedPenaltyPerStack",
+              "from": 15,
+              "to": 12,
+              "good": false
+            },
+            {
+              "path": "ability_health_swap.properties.EnemySlowPct",
+              "from": 70,
+              "to": 56,
+              "good": false
+            },
+            {
+              "path": "ability_life_drain.properties.MoveSpeedReduction",
+              "from": 40,
+              "to": 32,
+              "good": false
+            },
+            {
+              "path": "ability_life_drain.upgrades.T3.LifeDrainPerSecond",
+              "from": 0.3,
+              "to": 0.45,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_gigawatt",
+          "note": "T2強化 移動速度 35→28",
+          "changes": [
+            {
+              "path": "citadel_ability_lightning_ball.upgrades.T2.SlowPercent",
+              "from": 35,
+              "to": 28,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_haze",
+          "note": "T3強化 ダッシュ距離 -50→-45 / T3強化 移動速度 50→40 / HeadshotStacks 3 を追加 ほか",
+          "changes": [
+            {
+              "path": "ability_sleep_dagger.upgrades.T3.GroundDashReductionPercent",
+              "from": -50,
+              "to": -45,
+              "good": null
+            },
+            {
+              "path": "ability_sleep_dagger.upgrades.T3.SlowPercent",
+              "from": 50,
+              "to": 40,
+              "good": false
+            },
+            {
+              "path": "ability_stacking_damage.properties.HeadshotStacks",
+              "from": null,
+              "to": 3,
+              "good": true
+            },
+            {
+              "path": "ability_stacking_damage.upgrades.T1.SlowPercent",
+              "from": 15,
+              "to": 12,
+              "good": false
+            },
+            {
+              "path": "ability_stacking_damage.upgrades.T3.DamageBonusFixedPerStack#2",
+              "from": 0.0003,
+              "to": 0.00035,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_inferno",
+          "note": "移動速度 35→28",
+          "changes": [
+            {
+              "path": "ability_incendiary_projectile.properties.SlowPercent",
+              "from": 35,
+              "to": 28,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_kelvin",
+          "note": "HPリジェネ 0→0.2 / 移動速度 35→28 / 移動速度 40→32 ほか",
+          "changes": [
+            {
+              "path": "ability_ice_dome.properties.BonusHealthRegen@scale",
+              "from": 0,
+              "to": 0.2,
+              "good": true
+            },
+            {
+              "path": "ability_ice_dome.properties.SlowPercent",
+              "from": 35,
+              "to": 28,
+              "good": false
+            },
+            {
+              "path": "ability_ice_grenade.properties.SlowPercent",
+              "from": 40,
+              "to": 32,
+              "good": false
+            },
+            {
+              "path": "ability_icebeam.properties.MaxGroundDashReductionPercent",
+              "from": -20,
+              "to": -18,
+              "good": null
+            },
+            {
+              "path": "ability_icebeam.properties.MaxSlowPercent",
+              "from": 20,
+              "to": 16,
+              "good": false
+            },
+            {
+              "path": "ability_icebeam.properties.MinSlowPercent",
+              "from": 30,
+              "to": 24,
+              "good": false
+            },
+            {
+              "path": "ability_icebeam.upgrades.T1.MaxSlowPercent",
+              "from": 25,
+              "to": 20,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_krill",
+          "note": "SpinSlowPercent 10→8 / T2強化 ダッシュ距離 -30→-26 / T2強化 移動速度 30→24",
+          "changes": [
+            {
+              "path": "ability_burrow.properties.SpinSlowPercent",
+              "from": 10,
+              "to": 8,
+              "good": false
+            },
+            {
+              "path": "ability_throw_sand.upgrades.T2.GroundDashReductionPercent",
+              "from": -30,
+              "to": -26,
+              "good": null
+            },
+            {
+              "path": "ability_throw_sand.upgrades.T2.SlowPercent",
+              "from": 30,
+              "to": 24,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_lash",
+          "note": "回復量（対ヒーロー） 50→40 / 攻撃角度 38→40 / T1強化 敵移動速度 35→28 ほか",
+          "changes": [
+            {
+              "path": "ability_lash_flog.properties.HealPctVsHeroes",
+              "from": 50,
+              "to": 40,
+              "good": false
+            },
+            {
+              "path": "ability_lash_flog.properties.TargetingConeAngle",
+              "from": 38,
+              "to": 40,
+              "good": true
+            },
+            {
+              "path": "ability_lash_flog.upgrades.T1.EnemySlowPct",
+              "from": 35,
+              "to": 28,
+              "good": false
+            },
+            {
+              "path": "ability_lash_flog.upgrades.T3.HealPctVsHeroes",
+              "from": 20,
+              "to": 15,
+              "good": false
+            },
+            {
+              "path": "ability_lash_flog.upgrades.T3.TargetingConeAngle",
+              "from": 40,
+              "to": 25,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_lash_down_strike.upgrades.T2.EnemySlowPct",
+              "from": 50,
+              "to": 40,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_lash_down_strike.upgrades.T3.StompDamagePerMeterPrimary",
+              "from": 0.03255,
+              "to": 0.04,
+              "good": true
+            },
+            {
+              "path": "citadel_ability_lash_down_strike.upgrades.T3.StompDamagePerMeterPrimary#2",
+              "from": 113,
+              "to": 120,
+              "good": true
+            },
+            {
+              "path": "citadel_ability_lash_down_strike.upgrades.T3.StompDamagePerMeterSecondary#2",
+              "from": 113,
+              "to": 120,
+              "good": true
+            },
+            {
+              "path": "citadel_ability_lash_ultimate.properties.SlowPercent",
+              "from": 50,
+              "to": 40,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_lash.upgrades.T2.WeaponDamageBonusDuration",
+              "from": 10,
+              "to": 6,
+              "good": false
+            },
+            {
+              "path": "citadel_weapon_lash_set.weapon.falloff.endRange",
+              "from": 2125.98,
+              "to": 1889.76,
+              "good": false
+            },
+            {
+              "path": "citadel_weapon_lash_set.weapon.falloff.startRange",
+              "from": 708.66,
+              "to": 629.92,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_mirage",
+          "note": "T1強化 移動速度 60→48 / 移動速度 30→24",
+          "changes": [
+            {
+              "path": "mirage_sand_phantom.upgrades.T1.MovementSpeedSlow",
+              "from": 60,
+              "to": 48,
+              "good": false
+            },
+            {
+              "path": "mirage_tornado.properties.SlowPercent",
+              "from": 30,
+              "to": 24,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_necro",
+          "note": "移動速度 80→64 / T2強化 移動速度 30→24 / MODIFIER_VALUE_BASE_HEALTH_FROM_LEVEL 33→35",
+          "changes": [
+            {
+              "path": "ability_necro_gravestone.properties.SlowPercent",
+              "from": 80,
+              "to": 64,
+              "good": false
+            },
+            {
+              "path": "ability_necro_hauntingskull.upgrades.T2.SlowPercent",
+              "from": 30,
+              "to": 24,
+              "good": false
+            },
+            {
+              "path": "growth.MODIFIER_VALUE_BASE_HEALTH_FROM_LEVEL",
+              "from": 33,
+              "to": 35,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_orion",
+          "note": "移動速度 30→24 / T1強化 移動速度 30→24",
+          "changes": [
+            {
+              "path": "ability_immobilize_trap.properties.SlowPercent",
+              "from": 30,
+              "to": 24,
+              "good": false
+            },
+            {
+              "path": "ability_power_jump.upgrades.T1.SlowPercent",
+              "from": 30,
+              "to": 24,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_shiv",
+          "note": "衝撃範囲 を削除 / 現在HPの割合ダメージ 3.5 を追加 / 現在HPの割合ダメージ 0.01 を追加 ほか",
+          "changes": [
+            {
+              "path": "citadel_ability_shiv_dagger.properties.AOERadius",
+              "from": 10,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_shiv_dagger.properties.FullRageCurrentHealthDamagePct",
+              "from": null,
+              "to": 3.5,
+              "good": true
+            },
+            {
+              "path": "citadel_ability_shiv_dagger.properties.FullRageCurrentHealthDamagePct@scale",
+              "from": null,
+              "to": 0.01,
+              "good": true
+            },
+            {
+              "path": "citadel_ability_shiv_dagger.properties.MovementSlow",
+              "from": 35,
+              "to": 28,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_shiv_dagger.properties.RicochetCount",
+              "from": 1,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "growth.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL_ALT_FIRE",
+              "from": 0.2,
+              "to": 0.24,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_synth",
+          "note": "MoveSlowPercent 30→24 / T3強化 MoveSlowPercent 40→32",
+          "changes": [
+            {
+              "path": "synth_barrage.properties.MoveSlowPercent",
+              "from": 30,
+              "to": 24,
+              "good": false
+            },
+            {
+              "path": "synth_pulse.upgrades.T3.MoveSlowPercent",
+              "from": 40,
+              "to": 32,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_tengu",
+          "note": "T2強化 移動速度 40→32 / 範囲 6→5.75 / T1強化 最大HP回復 7→6 ほか",
+          "changes": [
+            {
+              "path": "citadel_ability_tengu_airlift.upgrades.T2.SlowPercent",
+              "from": 40,
+              "to": 32,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_tengu_stone_form.properties.Radius",
+              "from": 6,
+              "to": 5.75,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_tengu_stone_form.upgrades.T1.MaxHealthRegen",
+              "from": 7,
+              "to": 6,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_tengu_urn.properties.SlowPercent",
+              "from": 35,
+              "to": 28,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_unicorn",
+          "note": "連鎖範囲 16.5→15.5 / ダッシュ距離 -25→-22 / 移動速度 40→32 ほか",
+          "changes": [
+            {
+              "path": "ability_unicorn_dazzlingorb.properties.BounceRadius",
+              "from": 16.5,
+              "to": 15.5,
+              "good": false
+            },
+            {
+              "path": "ability_unicorn_dazzlingorb.properties.GroundDashReductionPercent",
+              "from": -25,
+              "to": -22,
+              "good": null
+            },
+            {
+              "path": "ability_unicorn_dazzlingorb.properties.SlowPercent",
+              "from": 40,
+              "to": 32,
+              "good": false
+            },
+            {
+              "path": "ability_unicorn_dazzlingorb.upgrades.T1.GroundDashReductionPercent",
+              "from": -15,
+              "to": -14,
+              "good": null
+            },
+            {
+              "path": "ability_unicorn_dazzlingorb.upgrades.T1.SlowPercent",
+              "from": 20,
+              "to": 16,
+              "good": false
+            },
+            {
+              "path": "ability_unicorn_dazzlingorb.upgrades.T3.MaxBounces",
+              "from": 8,
+              "to": 6,
+              "good": false
+            },
+            {
+              "path": "ability_unicorn_luminousstrike.upgrades.T2.ImpactDamage",
+              "from": 80,
+              "to": 70,
+              "good": false
+            },
+            {
+              "path": "ability_unicorn_prismaticguard.properties.AbilityCooldown",
+              "from": 34,
+              "to": 38,
+              "good": false
+            },
+            {
+              "path": "ability_unicorn_radiantblast.properties.AbilityLifestealPercentHero",
+              "from": 20,
+              "to": 18,
+              "good": false
+            },
+            {
+              "path": "ability_unicorn_radiantblast.upgrades.T3.Damage",
+              "from": 25,
+              "to": 22,
+              "good": false
+            },
+            {
+              "path": "stat.EStaminaRegenPerSecond",
+              "from": 0.2,
+              "to": 0.18867,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_vampirebat",
+          "note": "T1強化 移動速度 30→24",
+          "changes": [
+            {
+              "path": "ability_vampirebat_lovebites.upgrades.T1.SlowPercent",
+              "from": 30,
+              "to": 24,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_viper",
+          "note": "移動速度 35→28 / SlowPercentPerStack 15→12 / クールダウン 105→115 ほか",
+          "changes": [
+            {
+              "path": "ability_viper_debuffdagger.properties.SlowPercent",
+              "from": 35,
+              "to": 28,
+              "good": false
+            },
+            {
+              "path": "ability_viper_debuffdagger.properties.SlowPercentPerStack",
+              "from": 15,
+              "to": 12,
+              "good": false
+            },
+            {
+              "path": "ability_viper_petrifybola.properties.AbilityCooldown",
+              "from": 105,
+              "to": 115,
+              "good": false
+            },
+            {
+              "path": "ability_viper_petrifybola.properties.SlowPercent",
+              "from": 50,
+              "to": 40,
+              "good": false
+            },
+            {
+              "path": "ability_viper_snakedash.upgrades.T3.BuffDuration",
+              "from": 5,
+              "to": 4,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_viscous",
+          "note": "MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL_ALT_FIRE 1.6→1.44 / T3強化 ダメージ 0.2 を追加 / DetonateCooldown 0.15→0.12 ほか",
+          "changes": [
+            {
+              "path": "growth.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL_ALT_FIRE",
+              "from": 1.6,
+              "to": 1.44,
+              "good": false
+            },
+            {
+              "path": "viscous_goo_bowling_ball.upgrades.T3.Damage",
+              "from": null,
+              "to": 0.2,
+              "good": true
+            },
+            {
+              "path": "viscous_goo_grenade.properties.DetonateCooldown",
+              "from": 0.15,
+              "to": 0.12,
+              "good": true
+            },
+            {
+              "path": "viscous_goo_grenade.properties.SlowPercent",
+              "from": 35,
+              "to": 28,
+              "good": false
+            },
+            {
+              "path": "viscous_goo_grenade.upgrades.T1.Radius",
+              "from": 2,
+              "to": 1.5,
+              "good": false
+            },
+            {
+              "path": "viscous_restorative_goo.properties.AbilityCastRange",
+              "from": 26,
+              "to": 20,
+              "good": false
+            },
+            {
+              "path": "viscous_telepunch.properties.AbilityCooldown",
+              "from": 21,
+              "to": 24,
+              "good": false
+            },
+            {
+              "path": "viscous_telepunch.properties.PunchRollSlow",
+              "from": -40,
+              "to": -36,
+              "good": true
+            },
+            {
+              "path": "viscous_telepunch.properties.SlowPercent",
+              "from": 30,
+              "to": 24,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_warden",
+          "note": "移動速度 20→16 / T3強化 バリア 2.7→2.1 / T3強化 デバフ耐性 40→30 ほか",
+          "changes": [
+            {
+              "path": "ability_warden_crowd_control.properties.MoveSpeedSlowPct",
+              "from": 20,
+              "to": 16,
+              "good": false
+            },
+            {
+              "path": "ability_warden_high_alert.upgrades.T3.CombatBarrier",
+              "from": 2.7,
+              "to": 2.1,
+              "good": false
+            },
+            {
+              "path": "ability_warden_high_alert.upgrades.T3.StatusResistancePercent",
+              "from": 40,
+              "to": 30,
+              "good": false
+            },
+            {
+              "path": "growth.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL",
+              "from": 0.28,
+              "to": 0.25,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_werewolf",
+          "note": "重力スケール 100 を追加 / 移動速度 20→16 / T1強化 移動速度 25→20 ほか",
+          "changes": [
+            {
+              "path": "ability_werewolf_netshot.properties.GravityScale",
+              "from": null,
+              "to": 100,
+              "good": true
+            },
+            {
+              "path": "ability_werewolf_netshot.properties.SlowPercent",
+              "from": 20,
+              "to": 16,
+              "good": false
+            },
+            {
+              "path": "ability_werewolf_netshot.upgrades.T1.SlowPercent",
+              "from": 25,
+              "to": 20,
+              "good": false
+            },
+            {
+              "path": "growth.MODIFIER_VALUE_BASE_HEALTH_FROM_LEVEL",
+              "from": 28,
+              "to": 31,
+              "good": true
+            },
+            {
+              "path": "stat.ESprintSpeed",
+              "from": 1.5,
+              "to": 2.5,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_wraith",
+          "note": "移動速度 30→24 / 弾薬＆スピリット耐性低下 -8→-7 / 回復量 75→60 ほか",
+          "changes": [
+            {
+              "path": "citadel_ability_card_toss.properties.ClubSlowPercent",
+              "from": 30,
+              "to": 24,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_card_toss.properties.DiamondResistShred",
+              "from": -8,
+              "to": -7,
+              "good": null
+            },
+            {
+              "path": "citadel_ability_card_toss.properties.HeartHeal",
+              "from": 75,
+              "to": 60,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_card_toss.properties.HeartHeal@scale",
+              "from": 0.75,
+              "to": 0.5,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_card_toss.upgrades.T3.ClubSlowPercent",
+              "from": 20,
+              "to": 12,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_card_toss.upgrades.T3.DiamondResistShred",
+              "from": -5,
+              "to": -4,
+              "good": null
+            },
+            {
+              "path": "citadel_ability_psychic_lift.properties.SlowPercent",
+              "from": 40,
+              "to": 32,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_wraith_rapidfire.properties.MagicDamagePerBullet@scale",
+              "from": 0.03,
+              "to": 0.045,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_yamato",
+          "note": "ダメージ 1→1.2 / 移動速度 50→40 / T3強化 ヒーローヒット時の回復量 0.4 を追加 ほか",
+          "changes": [
+            {
+              "path": "citadel_ability_flying_strike.properties.Damage@scale",
+              "from": 1,
+              "to": 1.2,
+              "good": true
+            },
+            {
+              "path": "citadel_ability_flying_strike.properties.SlowPercent",
+              "from": 50,
+              "to": 40,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_healing_slash.upgrades.T3.HealFixedHealth",
+              "from": null,
+              "to": 0.4,
+              "good": true
+            },
+            {
+              "path": "citadel_ability_power_slash.upgrades.T1.SlowPercent",
+              "from": 40,
+              "to": 32,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_aoe_root",
+          "note": "ダッシュ距離 -40→-36 / 移動速度 35→28 / T1強化 移動速度 15→12",
+          "changes": [
+            {
+              "path": "properties.GroundDashReductionPercent",
+              "from": -40,
+              "to": -36,
+              "good": null
+            },
+            {
+              "path": "properties.SlowPercent",
+              "from": 35,
+              "to": 28,
+              "good": false
+            },
+            {
+              "path": "upgrades.T1.SlowPercent",
+              "from": 15,
+              "to": 12,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_arctic_blast",
+          "note": "移動速度 60→48",
+          "changes": [
+            {
+              "path": "properties.SlowPercent",
+              "from": 60,
+              "to": 48,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "item",
+          "key": "upgrade_boxing_glove",
+          "note": "近接攻撃時の回復量 100→120 / 近接攻撃時の回復量 1.5→1.75 / 近接攻撃時の回復 30→35 ほか",
+          "changes": [
+            {
+              "path": "properties.LifestealHeal",
+              "from": 100,
+              "to": 120,
+              "good": true
+            },
+            {
+              "path": "properties.LifestealHeal@scale",
+              "from": 1.5,
+              "to": 1.75,
+              "good": true
+            },
+            {
+              "path": "properties.LifestealHealPercent",
+              "from": 30,
+              "to": 35,
+              "good": true
+            },
+            {
+              "path": "properties.SlowPercent",
+              "from": 60,
+              "to": 48,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_bulletshredimbue",
+          "note": "継続時間 14→20",
+          "changes": [
+            {
+              "path": "properties.AbilityDuration",
+              "from": 14,
+              "to": 20,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_capacitor",
+          "note": "最大移動速度 75→60",
+          "changes": [
+            {
+              "path": "properties.MaxSlowPercent",
+              "from": 75,
+              "to": 60,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_chonky",
+          "note": "最大HPリジェネ 2→2.25",
+          "changes": [
+            {
+              "path": "properties.HealLifePercentOutOfCombat",
+              "from": 2,
+              "to": 2.25,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_cloaking_device_active",
+          "note": "構成素材 スプリントブーツ を追加 / クールダウン 45→37 / スプリント速度 1.5→2",
+          "changes": [
+            {
+              "path": "components.upgrade_sprint_booster",
+              "from": null,
+              "to": 1,
+              "good": true
+            },
+            {
+              "path": "properties.AbilityCooldown",
+              "from": 45,
+              "to": 37,
+              "good": true
+            },
+            {
+              "path": "properties.BonusSprintSpeed",
+              "from": 1.5,
+              "to": 2,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_close_quarter_combat",
+          "note": "移動速度 25→20 / T1強化 移動速度 5→4",
+          "changes": [
+            {
+              "path": "properties.SlowPercent",
+              "from": 25,
+              "to": 20,
+              "good": false
+            },
+            {
+              "path": "upgrades.T1.SlowPercent",
+              "from": 5,
+              "to": 4,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_cold_front",
+          "note": "移動速度 60→48",
+          "changes": [
+            {
+              "path": "properties.MovementSpeedSlow",
+              "from": 60,
+              "to": 48,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_colossus",
+          "note": "ダッシュ距離 -25→-22 / 移動速度 30→24",
+          "changes": [
+            {
+              "path": "properties.GroundDashReductionPercent",
+              "from": -25,
+              "to": -22,
+              "good": null
+            },
+            {
+              "path": "properties.SlowPercent",
+              "from": 30,
+              "to": 24,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_containment",
+          "note": "クールダウン 27→29 / ダッシュ距離 -30→-26 / 移動速度 20→16 ほか",
+          "changes": [
+            {
+              "path": "properties.AbilityCooldown",
+              "from": 27,
+              "to": 29,
+              "good": false
+            },
+            {
+              "path": "properties.GroundDashReductionPercent",
+              "from": -30,
+              "to": -26,
+              "good": null
+            },
+            {
+              "path": "properties.SlowPercent",
+              "from": 20,
+              "to": 16,
+              "good": false
+            },
+            {
+              "path": "upgrades.T1.SlowPercent",
+              "from": 10,
+              "to": 8,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_damage_recycler",
+          "note": "スピリットライフスティール 25→28 / 弾薬ライフスティール 25→28",
+          "changes": [
+            {
+              "path": "properties.AbilityLifestealPercentHero",
+              "from": 25,
+              "to": 28,
+              "good": true
+            },
+            {
+              "path": "properties.BulletLifestealPercent",
+              "from": 25,
+              "to": 28,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_diviners_kevlar",
+          "note": "アルティメット クールダウン短縮 10 を追加",
+          "changes": [
+            {
+              "path": "properties.UltimateCooldownReduction",
+              "from": null,
+              "to": 10,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_ethereal_bullets",
+          "note": "基礎弾薬ダメージ 25→20 / 基礎弾薬ダメージ 0.49→0.38",
+          "changes": [
+            {
+              "path": "properties.BulletsBonusMagicDamage",
+              "from": 25,
+              "to": 20,
+              "good": false
+            },
+            {
+              "path": "properties.BulletsBonusMagicDamage@scale",
+              "from": 0.49,
+              "to": 0.38,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_focus_lens",
+          "note": "キャスト範囲 20→25 / 終了時のダメージ 30→35",
+          "changes": [
+            {
+              "path": "properties.AbilityCastRange",
+              "from": 20,
+              "to": 25,
+              "good": true
+            },
+            {
+              "path": "properties.PercentDamage",
+              "from": 30,
+              "to": 35,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_goose_egg",
+          "note": "BonusGoldPerMinute 90→80 / ダメージ低下 -10→-15",
+          "changes": [
+            {
+              "path": "properties.BonusGoldPerMinute",
+              "from": 90,
+              "to": 80,
+              "good": false
+            },
+            {
+              "path": "properties.OutgoingDamagePenaltyPercent",
+              "from": -10,
+              "to": -15,
+              "good": null
+            }
+          ]
+        },
+        {
+          "kind": "neutral",
+          "target": "item",
+          "key": "upgrade_headshot_booster2",
+          "note": "弾薬耐性 -13→-12",
+          "changes": [
+            {
+              "path": "properties.BulletResistReduction",
+              "from": -13,
+              "to": -12,
+              "good": null
+            }
+          ]
+        },
+        {
+          "kind": "neutral",
+          "target": "item",
+          "key": "upgrade_hollow_point_rounds",
+          "note": "弾薬耐性 -9→-10",
+          "changes": [
+            {
+              "path": "properties.BulletArmorReduction",
+              "from": -9,
+              "to": -10,
+              "good": null
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_magic_shock",
+          "note": "現在HPの割合ダメージ 8→7.5",
+          "changes": [
+            {
+              "path": "properties.CurrentHealthDamage",
+              "from": 8,
+              "to": 7.5,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_magic_slow",
+          "note": "ダッシュ距離 -12→-10 / 移動速度 30→24 / T1強化 移動速度 15→12",
+          "changes": [
+            {
+              "path": "properties.GroundDashReductionPercent",
+              "from": -12,
+              "to": -10,
+              "good": null
+            },
+            {
+              "path": "properties.MovementSpeedSlow",
+              "from": 30,
+              "to": 24,
+              "good": false
+            },
+            {
+              "path": "upgrades.T1.MovementSpeedSlow",
+              "from": 15,
+              "to": 12,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_mystic_reverb",
+          "note": "移動速度 40→32",
+          "changes": [
+            {
+              "path": "properties.MovementSpeedSlow",
+              "from": 40,
+              "to": 32,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_non_player_bonus_sacrifice",
+          "note": "追加ソウル 180→170",
+          "changes": [
+            {
+              "path": "properties.BonusSoulsPct",
+              "from": 180,
+              "to": 170,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_phantom_strike",
+          "note": "移動速度 50→40",
+          "changes": [
+            {
+              "path": "properties.SlowPercent",
+              "from": 50,
+              "to": 40,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_resonant_healing",
+          "note": "HealingPerCast 2→1.7",
+          "changes": [
+            {
+              "path": "properties.HealingPerCast@scale",
+              "from": 2,
+              "to": 1.7,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_restorative_locket",
+          "note": "キャスト範囲 35→32 / 回復／スタック 0.5→0.45 / 範囲 35→32",
+          "changes": [
+            {
+              "path": "properties.AbilityCastRange",
+              "from": 35,
+              "to": 32,
+              "good": false
+            },
+            {
+              "path": "properties.HealPerStack@scale",
+              "from": 0.5,
+              "to": 0.45,
+              "good": false
+            },
+            {
+              "path": "properties.Radius",
+              "from": 35,
+              "to": 32,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_rocket_booster",
+          "note": "移動速度 40→32",
+          "changes": [
+            {
+              "path": "properties.SlowPercent",
+              "from": 40,
+              "to": 32,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "item",
+          "key": "upgrade_rupture",
+          "note": "継続時間 10→12 / 出血ダメージ 2.6→1.95 / 出血ダメージ 0.004→0.003 ほか",
+          "changes": [
+            {
+              "path": "properties.AbilityDuration",
+              "from": 10,
+              "to": 12,
+              "good": true
+            },
+            {
+              "path": "properties.DotHealthPercent",
+              "from": 2.6,
+              "to": 1.95,
+              "good": false
+            },
+            {
+              "path": "properties.DotHealthPercent@scale",
+              "from": 0.004,
+              "to": 0.003,
+              "good": false
+            },
+            {
+              "path": "upgrades.T1.DotHealthPercent",
+              "from": 0.5,
+              "to": 0.375,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_slowing_bullets",
+          "note": "ダッシュ距離 -22→-20 / 移動速度 30→24 / T1強化 ダッシュ距離 -10→-8 ほか",
+          "changes": [
+            {
+              "path": "properties.GroundDashReductionPercent",
+              "from": -22,
+              "to": -20,
+              "good": null
+            },
+            {
+              "path": "properties.SlowPercent",
+              "from": 30,
+              "to": 24,
+              "good": false
+            },
+            {
+              "path": "upgrades.T1.GroundDashReductionPercent",
+              "from": -10,
+              "to": -8,
+              "good": null
+            },
+            {
+              "path": "upgrades.T1.SlowPercent",
+              "from": 20,
+              "to": 16,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "item",
+          "key": "upgrade_tech_overflow",
+          "note": "発射速度 30→25 / スピリットパワー 40→30 / BuildUpPerShot 0.75→1.08",
+          "changes": [
+            {
+              "path": "properties.BonusFireRate",
+              "from": 30,
+              "to": 25,
+              "good": false
+            },
+            {
+              "path": "properties.BonusSpirit",
+              "from": 40,
+              "to": 30,
+              "good": false
+            },
+            {
+              "path": "properties.BuildUpPerShot",
+              "from": 0.75,
+              "to": 1.08,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_toxic_bullets",
+          "note": "出血ダメージ 0.005→0.006",
+          "changes": [
+            {
+              "path": "properties.DotHealthPercent@scale",
+              "from": 0.005,
+              "to": 0.006,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_trophy_collector",
+          "note": "ソウル／分 18→16",
+          "changes": [
+            {
+              "path": "properties.StackingGoldPerMinute",
+              "from": 18,
+              "to": 16,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_ultimate_burst",
+          "note": "ダッシュ距離 -12→-10 / 移動速度 30→24 / 移動速度 80→64",
+          "changes": [
+            {
+              "path": "properties.GroundDashReductionPercent",
+              "from": -12,
+              "to": -10,
+              "good": null
+            },
+            {
+              "path": "properties.MovementSpeedSlow",
+              "from": 30,
+              "to": 24,
+              "good": false
+            },
+            {
+              "path": "properties.SlowPercent",
+              "from": 80,
+              "to": 64,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_veil_walker",
+          "note": "構成素材 スプリントブーツ を除外 / スプリント速度 2→0 / 非戦闘時リジェネ 2→0 ほか",
+          "changes": [
+            {
+              "path": "components.upgrade_sprint_booster",
+              "from": 1,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "properties.BonusSprintSpeed",
+              "from": 2,
+              "to": 0,
+              "good": false
+            },
+            {
+              "path": "properties.OutOfCombatHealthRegen",
+              "from": 2,
+              "to": 0,
+              "good": false
+            },
+            {
+              "path": "properties.SpiritPower",
+              "from": 10,
+              "to": 6,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_weighted_shots",
+          "note": "ダッシュ距離 -22→-20 / 移動速度 30→24 / T1強化 ダッシュ距離 -10→-8 ほか",
+          "changes": [
+            {
+              "path": "properties.GroundDashReductionPercent",
+              "from": -22,
+              "to": -20,
+              "good": null
+            },
+            {
+              "path": "properties.SlowPercent",
+              "from": 30,
+              "to": 24,
+              "good": false
+            },
+            {
+              "path": "upgrades.T1.GroundDashReductionPercent",
+              "from": -10,
+              "to": -8,
+              "good": null
+            },
+            {
+              "path": "upgrades.T1.SlowPercent",
+              "from": 20,
+              "to": 16,
+              "good": false
+            }
+          ]
+        }
+      ],
+      "sourceTitle": "Minor Update - 09-16-2026",
+      "sourceUrl": "https://store.steampowered.com/news/app/1422450/view/698776157349216434"
+    },
+    {
       "date": "2026-09-07",
       "upstreamCommit": "c34d25e806a6410f00037d34782d45fe2b9f550f",
       "title": "初回データ取り込み",

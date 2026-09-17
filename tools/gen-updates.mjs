@@ -97,6 +97,12 @@ function noteFor(changes, max = 3) {
   const head = changes
     .slice(0, max)
     .map((c) => {
+      /* 構成素材の在否(components.<アイテムID> = 1/null)。素材名はアイテムIDがそのままトークン */
+      const comp = /^components\.(.+)$/.exec(c.path);
+      if (comp) {
+        const itemName = label(comp[1], comp[1]);
+        return c.to === null ? `構成素材 ${itemName} を除外` : `構成素材 ${itemName} を追加`;
+      }
       const name = fieldNameOf(c.path);
       const nm = name === "cost" ? "価格" : label(`${name}_label`, name);
       const tier = isUpgradePath(c.path) ? `T${/upgrades\.T(\d+)\./.exec(c.path)?.[1]}強化 ` : "";

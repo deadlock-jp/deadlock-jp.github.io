@@ -129,6 +129,13 @@ export function heroFieldMap(hero, abilitiesById, skipped) {
 export function itemFieldMap(item, skipped) {
   const out = {};
   if (isNum(item.cost)) out["cost"] = item.cost;
+  /*
+   * 構成素材の組み替え(2026-09-16の「シャドウウィーブはスプリントブーツから作る/
+   * ベールウォーカーは作らない」)は数値ではないが、公式ノートに載る立派な調整。
+   * ここは数値マップなので「その素材を使っていれば1」という在否で表し、
+   * 追加なら null→1、削除なら 1→null として差分に出す。
+   */
+  for (const c of item.componentItems ?? []) out[`components.${c}`] = 1;
   for (const [k, v] of Object.entries(propValues(item, skipped))) {
     out[`properties.${k}`] = v;
   }

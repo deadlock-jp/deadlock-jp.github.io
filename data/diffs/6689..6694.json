@@ -1,7 +1,7 @@
 {
   "from": "6689",
   "to": "6694",
-  "generatedAt": "2026-09-17T02:36:52.725Z",
+  "generatedAt": "2026-09-17T06:03:44.113Z",
   "entries": [
     {
       "kind": "changed",
@@ -1175,6 +1175,14 @@
       "kind": "changed",
       "type": "item",
       "id": "upgrade_cloaking_device_active",
+      "path": "components.upgrade_sprint_booster",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_cloaking_device_active",
       "path": "properties.AbilityCooldown",
       "before": 45,
       "after": 37
@@ -1570,6 +1578,14 @@
       "path": "properties.SlowPercent",
       "before": 80,
       "after": 64
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_veil_walker",
+      "path": "components.upgrade_sprint_booster",
+      "before": 1,
+      "after": null
     },
     {
       "kind": "changed",
