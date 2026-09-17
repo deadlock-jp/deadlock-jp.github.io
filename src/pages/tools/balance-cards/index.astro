@@ -13,6 +13,7 @@
 import Base from "../../../layouts/Base.astro";
 import { balanceUpdates } from "../../../lib/balance.ts";
 import { resolveImagePath } from "../../../parsers/image-manifest.ts";
+import { releasedHeroes, t } from "../../../lib/data.ts";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 
@@ -86,6 +87,22 @@ const payload = balanceUpdates(base).map((u) => {
 
   return { date: u.date, title: u.title, heroes, items };
 });
+
+/*
+ * 数値上の調整が無いヒーローを手で追加できるようにするための全員分の一覧。
+ * ヴェナトルのように、直接の変更は無くてもアイテム側の調整でアルティメットに
+ * 新しい効果が付く、といった「実質バフ/ナーフ」を書き足すためのもの。
+ * 数値は一切持たない(名前と背景画像だけ)。
+ */
+const allHeroes = releasedHeroes().map((h) => {
+  const key = h.key.replace(/^hero_/, "");
+  const bgRel = `images/heroes/card16x9/${key}.webp`;
+  return {
+    key,
+    name: t(h.nameToken, h.key),
+    bg: existsSync(join(process.cwd(), "public", bgRel)) ? `${base}/${bgRel}` : null,
+  };
+});
 ---
 
 <Base title="バランス調整カード生成" noindex={true}>
@@ -104,13 +121,33 @@ const payload = balanceUpdates(base).map((u) => {
     <span id="stat" class="stat"></span>
   </div>
 
+  <div class="bar">
+    <label>
+      数値変更なしのヒーローを追加
+      <select id="addHero"></select>
+    </label>
+    <label>
+      扱い
+      <select id="addKind">
+        <option value="buff">実質バフ</option>
+        <option value="nerf">実質ナーフ</option>
+        <option value="mixed">実質混在</option>
+        <option value="neutral">影響なし・報告のみ</option>
+      </select>
+    </label>
+    <button id="addBtn">カードを追加</button>
+    <span class="stat">直接の数値調整は無いが、アイテム側の変化などで影響を受けるヒーロー用。TIPS欄に理由を書く前提のカード</span>
+  </div>
+
   <div id="list" class="list"></div>
 
   <script type="application/json" id="payload" is:inline set:html={JSON.stringify(payload)} />
+  <script type="application/json" id="heroes" is:inline set:html={JSON.stringify(allHeroes)} />
 
   <script is:inline>
     (() => {
       const DATA = JSON.parse(document.getElementById("payload").textContent);
+      const HEROES = JSON.parse(document.getElementById("heroes").textContent);
       const $ = (id) => document.getElementById(id);
 
       const W = 1200;
@@ -134,6 +171,18 @@ const payload = balanceUpdates(base).map((u) => {
         mixed: "混在",
         neutral: "調整",
         rework: "リワーク",
+      };
+      /*
+       * 直接の数値調整が無いヒーロー用のバッジ文言。
+       * アイテム側の変更で恩恵/割りを食う場合に「実質バフ」のように区別する
+       * (ヴェナトルの例: アルティメットに効果を与えるアイテムが調整され、
+       * 本人のスキル・ステータスは1つも変わっていないが恩恵を受けている)。
+       */
+      const INDIRECT_KIND_LABEL = {
+        buff: "実質バフ",
+        nerf: "実質ナーフ",
+        mixed: "実質混在",
+        neutral: "報告",
       };
 
       const loadImage = (src) =>
@@ -164,7 +213,7 @@ const payload = balanceUpdates(base).map((u) => {
       }
 
       /** 見出し(ヒーロー名/種別バッジ/日付)とサイト名。ヒーロー・アイテム共通 */
-      function drawHeader(c, title, kind, date, sub) {
+      function drawHeader(c, title, kind, date, sub, badgeLabel) {
         c.textBaseline = "alphabetic";
         c.shadowColor = "rgba(0,0,0,.9)";
         c.shadowBlur = 18;
@@ -174,7 +223,7 @@ const payload = balanceUpdates(base).map((u) => {
         const titleW = c.measureText(title).width;
 
         if (kind) {
-          const label = KIND_LABEL[kind] ?? kind;
+          const label = badgeLabel ?? KIND_LABEL[kind] ?? kind;
           c.font = '700 16px "Noto Sans JP", sans-serif';
           const bw = c.measureText(label).width + 22;
           c.shadowBlur = 0;
@@ -262,16 +311,69 @@ const payload = balanceUpdates(base).map((u) => {
         });
       }
 
+      /**
+       * 直接の数値調整を持たないヒーロー(手で追加したカード)の本文。
+       * データ行の代わりに、TIPSで書いた説明をそのままカードの主役として大きく出す。
+       * 空欄のまま保存されるのを防ぐため、TIPSが無いときは注意書きを表示する。
+       */
+      function drawIndirectBody(c, top, bottom, tips) {
+        const h = bottom - top;
+        c.fillStyle = "rgba(6,9,12,.74)";
+        roundRect(c, PAD - 16, top, W - (PAD - 16) * 2, h, 12);
+        c.fill();
+
+        const maxW = W - PAD * 2 - 20;
+        c.fillStyle = COLOR.muted;
+        c.font = '700 13px "Noto Sans JP", sans-serif';
+        c.fillText("直接の数値調整はありません", PAD + 4, top + 32);
+
+        c.fillStyle = tips ? COLOR.text : COLOR.muted;
+        c.font = tips ? '500 24px "Noto Sans JP", sans-serif' : '500 17px "Noto Sans JP", sans-serif';
+        const body = tips || "（TIPS欄に、影響を受けている理由を書いてください）";
+        const lineH = tips ? 36 : 26;
+        const maxLines = Math.max(1, Math.floor((h - 70) / lineH));
+
+        const lines = [];
+        let cur = "";
+        for (const ch of body.replace(/\s+/g, " ").trim()) {
+          if (c.measureText(cur + ch).width > maxW) {
+            lines.push(cur);
+            cur = ch;
+            if (lines.length === maxLines) break;
+          } else cur += ch;
+        }
+        if (lines.length < maxLines && cur) lines.push(cur);
+
+        const blockH = lines.length * lineH;
+        let ly = top + (h - blockH) / 2 + lineH * 0.72 + 10;
+        lines.forEach((ln, i) => {
+          const last = i === lines.length - 1;
+          c.fillText(last ? fit(c, ln, maxW) : ln, PAD + 4, ly + i * lineH);
+        });
+      }
+
       async function drawHeroCard(hero, date, tips) {
         const cv = document.createElement("canvas");
         cv.width = W;
         cv.height = H;
         const c = cv.getContext("2d");
         /* TIPSを書くぶんだけ本文の下限を上げる(重なると読めなくなる) */
-        const bottom = tips ? H - TIPS_H - 16 : BODY_BOTTOM;
+        const bottom = tips && !hero.indirect ? H - TIPS_H - 16 : BODY_BOTTOM;
 
         drawBackdrop(c, await loadImage(hero.bg));
-        drawHeader(c, hero.name, hero.kind, date, "バランス調整");
+        drawHeader(
+          c,
+          hero.name,
+          hero.kind,
+          date,
+          hero.indirect ? "アイテム等の間接的な影響" : "バランス調整",
+          hero.indirect ? INDIRECT_KIND_LABEL[hero.kind] : undefined,
+        );
+
+        if (hero.indirect) {
+          drawIndirectBody(c, BODY_TOP - 26, bottom, tips);
+          return cv;
+        }
 
         /*
          * 行数が多いヒーロー(セレステは5スキル11項目)は2列に割る。
@@ -489,45 +591,61 @@ const payload = balanceUpdates(base).map((u) => {
           });
         }
 
-        for (const card of cards) {
-          card.canvas = await card.render("");
-          const fig = document.createElement("figure");
-          card.canvas.style.width = "100%";
-          card.canvas.style.height = "auto";
-          fig.appendChild(card.canvas);
+        for (const card of cards) await mountCard(card);
+        updateStat();
+      }
 
-          const cap = document.createElement("figcaption");
-          const btn = document.createElement("button");
-          btn.textContent = "PNGで保存";
-          btn.addEventListener("click", () => download(card.canvas, card.name));
-          cap.appendChild(document.createTextNode(card.name));
-          cap.appendChild(btn);
-          fig.appendChild(cap);
+      /**
+       * カード1枚ぶんの figure(画像・保存ボタン・TIPS欄)を組み立てて #list に足す。
+       * render() の初期表示と、「カードを追加」ボタンの両方から使う共通処理。
+       */
+      async function mountCard(card) {
+        const list = $("list");
+        card.canvas = await card.render(card.tips ?? "");
+        const fig = document.createElement("figure");
+        card.canvas.style.width = "100%";
+        card.canvas.style.height = "auto";
+        fig.appendChild(card.canvas);
 
-          /*
-           * 数値に出ない変更(組み合わせの強弱・挙動の変化など)を書き足す欄。
-           * 打つたびに描き直すと重いので、入力が止まってから描く。
-           */
-          const ta = document.createElement("textarea");
-          ta.placeholder = "TIPS（任意）数値に出ない変更や、組み合わせの評価など";
-          ta.rows = 2;
-          let timer = null;
-          ta.addEventListener("input", () => {
-            card.tips = ta.value.trim();
-            clearTimeout(timer);
-            timer = setTimeout(async () => {
-              const next = await card.render(card.tips);
-              next.style.width = "100%";
-              next.style.height = "auto";
-              fig.replaceChild(next, card.canvas);
-              card.canvas = next;
-            }, 300);
-          });
-          fig.appendChild(ta);
+        const cap = document.createElement("figcaption");
+        const btn = document.createElement("button");
+        btn.textContent = "PNGで保存";
+        btn.addEventListener("click", () => download(card.canvas, card.name));
+        cap.appendChild(document.createTextNode(card.name));
+        cap.appendChild(btn);
+        fig.appendChild(cap);
 
-          list.appendChild(fig);
-        }
-        $("stat").textContent = `${u.heroes.length}体 / アイテム${u.items.length}件 → ${cards.length}枚`;
+        /*
+         * 数値に出ない変更(組み合わせの強弱・挙動の変化など)を書き足す欄。
+         * 打つたびに描き直すと重いので、入力が止まってから描く。
+         * 手で追加したカード(indirect)はこの欄自体が本文になるので、初期表示から
+         * 注意書きを促す文言を変えている。
+         */
+        const ta = document.createElement("textarea");
+        ta.placeholder = card.indirectHint
+          ? "ここに影響の内容を書いてください（例: ○○の調整でアルティメットに追加効果）"
+          : "TIPS（任意）数値に出ない変更や、組み合わせの評価など";
+        ta.rows = card.indirectHint ? 3 : 2;
+        ta.value = card.tips ?? "";
+        let timer = null;
+        ta.addEventListener("input", () => {
+          card.tips = ta.value.trim();
+          clearTimeout(timer);
+          timer = setTimeout(async () => {
+            const next = await card.render(card.tips);
+            next.style.width = "100%";
+            next.style.height = "auto";
+            fig.replaceChild(next, card.canvas);
+            card.canvas = next;
+          }, 300);
+        });
+        fig.appendChild(ta);
+
+        list.appendChild(fig);
+      }
+
+      function updateStat() {
+        $("stat").textContent = `カード ${cards.length} 枚`;
       }
 
       const sel = $("upd");
@@ -540,6 +658,31 @@ const payload = balanceUpdates(base).map((u) => {
       $("all").addEventListener("click", async () => {
         for (const card of cards) await download(card.canvas, card.name);
       });
+
+      const addHeroSel = $("addHero");
+      for (const h of HEROES) {
+        const o = document.createElement("option");
+        o.value = h.key;
+        o.textContent = h.name;
+        addHeroSel.appendChild(o);
+      }
+      $("addBtn").addEventListener("click", async () => {
+        const h = HEROES[addHeroSel.selectedIndex];
+        const kind = $("addKind").value;
+        const date = DATA[sel.selectedIndex].date;
+        const hero = { name: h.name, bg: h.bg, kind, indirect: true, groups: [] };
+        const card = {
+          name: `${date}_${h.name}_${INDIRECT_KIND_LABEL[kind]}.png`,
+          tips: "",
+          indirectHint: true,
+          render: (tips) => drawHeroCard(hero, date, tips),
+        };
+        cards.push(card);
+        await mountCard(card);
+        updateStat();
+        card.canvas.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+
       render();
     })();
   </script>
