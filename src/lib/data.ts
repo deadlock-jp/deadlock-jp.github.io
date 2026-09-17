@@ -636,10 +636,37 @@ export interface AdjustmentGroup {
  */
 const UNITS_PER_METER = 39.37;
 
+/**
+ * ヒーローの基礎ステータス(E*)の表示名。
+ *
+ * これらはゲーム側に "<名前>_label" のトークンが1つも無く、humanize() に落ちると
+ * "EStamina Regen Per Second" のような内部名がそのまま画面に出てしまう。
+ * ヒーローページ(src/lib/gamestats.ts の vitalityRows)が既に日本語を決めているので、
+ * 表記が食い違わないよう同じ言葉をここでも使う。
+ *
+ * スタミナはヒーローページでは 1÷値 を「スタミナクールダウン」として見せているが、
+ * ここで出すのは変換前の生の値なので「スタミナ回復」と呼び分ける。
+ */
+const BASE_STAT_LABEL: Record<string, string> = {
+  EMaxHealth: "最大HP",
+  EBaseHealthRegen: "HPリジェネ",
+  EMaxMoveSpeed: "移動速度",
+  ESprintSpeed: "スプリント速度",
+  ECrouchSpeed: "しゃがみ速度",
+  EStamina: "スタミナ",
+  EStaminaRegenPerSecond: "スタミナ回復",
+  ELightMeleeDamage: "近接弱攻撃",
+  EHeavyMeleeDamage: "近接強攻撃",
+  EGroundDashDistanceInMeters: "地上ダッシュ距離",
+  EGroundDashDuration: "地上ダッシュ時間",
+  EAirDashDistanceInMeters: "空中ダッシュ距離",
+  EAirDashDuration: "空中ダッシュ時間",
+};
+
 /** プロパティ名から表示ラベルを引く。m_strLocTokenOverride があればそちら優先 */
 function adjustmentLabel(name: string, source: Ability | Item | undefined): string {
   const override = source?.properties?.[name]?.labelOverride ?? null;
-  return statLabel(override ?? name, humanize(name));
+  return statLabel(override ?? name, BASE_STAT_LABEL[name] ?? humanize(name));
 }
 
 /**

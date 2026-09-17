@@ -1,0 +1,538 @@
+---
+/**
+ * SNS用のバランス調整カード生成(運用者向けの非公開ページ)。
+ *
+ * data/updates.json の調整内容から、ヒーロー1体につき1枚、アイテムはまとめて数枚の
+ * 1200x675 PNG を作る。以前は機械翻訳とExcelで手作りしていたものを、
+ * サイトが既に持っているデータで置き換えるのが目的。
+ *
+ * 描画はビルドページの「画像を保存」と同じ Canvas 2D・同じ配色で、見た目を揃える。
+ * ナビにもサイトマップにも載せず、noindex にしている(公開する意味が無いため)。
+ * 中身は公開データだけなので、URLを知られても実害は無い。
+ */
+import Base from "../../../layouts/Base.astro";
+import { balanceUpdates } from "../../../lib/balance.ts";
+import { resolveImagePath } from "../../../parsers/image-manifest.ts";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+/** file://{images}/... を public/ の実ファイルに解決する。無ければ null */
+function pub(ref: string | null): string | null {
+  if (!ref) return null;
+  const r = resolveImagePath(ref);
+  if (!r || !existsSync(join(process.cwd(), r.outPath))) return null;
+  return `${base}/${r.outPath.replace(/^public\//, "")}`;
+}
+
+/* 画像生成に必要なぶんだけを取り出してクライアントへ渡す */
+const payload = balanceUpdates(base).map((u) => {
+  const heroes = u.entities
+    .filter((e) => e.target === "hero")
+    .map((e) => {
+      const key = e.key.replace(/^hero_/, "");
+      const bgRel = `images/heroes/card16x9/${key}.webp`;
+      return {
+        name: e.name,
+        kind: e.kind,
+        bg: existsSync(join(process.cwd(), "public", bgRel)) ? `${base}/${bgRel}` : null,
+        groups: e.groups.map((g) => ({
+          name: g.name,
+          icon: pub(g.image),
+          rows: g.rows.map((r) => ({
+            label: r.label,
+            tier: r.tier,
+            from: r.fromText,
+            to: r.toText,
+            good: r.good,
+          })),
+        })),
+      };
+    });
+
+  const items = u.entities
+    .filter((e) => e.target === "item")
+    .map((e) => ({
+      name: e.name,
+      kind: e.kind,
+      icon: pub(e.item?.shopIcon ?? null),
+      rows: (e.groups[0]?.rows ?? []).map((r) => ({
+        label: r.label,
+        tier: r.tier,
+        from: r.fromText,
+        to: r.toText,
+        good: r.good,
+      })),
+    }));
+
+  return { date: u.date, title: u.title, heroes, items };
+});
+---
+
+<Base title="バランス調整カード生成" noindex={true}>
+  <h1>バランス調整カード生成</h1>
+  <p class="lead">
+    アップデートの調整内容から、SNSに貼る1200x675のPNGを作ります。
+    数値はサイトの他のページと同じデータから出しているので、手で書き写す必要はありません。
+  </p>
+
+  <div class="bar">
+    <label>
+      アップデート
+      <select id="upd"></select>
+    </label>
+    <button id="all" class="primary">すべて保存</button>
+    <span id="stat" class="stat"></span>
+  </div>
+
+  <div id="list" class="list"></div>
+
+  <script type="application/json" id="payload" is:inline set:html={JSON.stringify(payload)} />
+
+  <script is:inline>
+    (() => {
+      const DATA = JSON.parse(document.getElementById("payload").textContent);
+      const $ = (id) => document.getElementById(id);
+
+      const W = 1200;
+      const H = 675;
+      const PAD = 34;
+      /* サイト共通の配色に合わせる(global.css の --c-* と同じ考え方) */
+      const COLOR = {
+        buff: "#8cc96e",
+        nerf: "#e06c6c",
+        mixed: "#e0a458",
+        neutral: "#8fa39d",
+        rework: "#b58be6",
+        text: "#fcf0d8",
+        sub: "#cfe3dc",
+        muted: "#8fa39d",
+        bg: "#0c1116",
+      };
+      const KIND_LABEL = {
+        buff: "バフ",
+        nerf: "ナーフ",
+        mixed: "混在",
+        neutral: "調整",
+        rework: "リワーク",
+      };
+
+      const loadImage = (src) =>
+        new Promise((resolve) => {
+          if (!src) return resolve(null);
+          const im = new Image();
+          im.onload = () => resolve(im);
+          im.onerror = () => resolve(null);
+          im.src = src;
+        });
+
+      function roundRect(c, x, y, w, h, r) {
+        c.beginPath();
+        c.moveTo(x + r, y);
+        c.arcTo(x + w, y, x + w, y + h, r);
+        c.arcTo(x + w, y + h, x, y + h, r);
+        c.arcTo(x, y + h, x, y, r);
+        c.arcTo(x, y, x + w, y, r);
+        c.closePath();
+      }
+
+      /** 幅に収まるよう末尾を「…」で詰める */
+      function fit(c, text, max) {
+        if (c.measureText(text).width <= max) return text;
+        let s = text;
+        while (s.length > 1 && c.measureText(s + "…").width > max) s = s.slice(0, -1);
+        return s + "…";
+      }
+
+      /** 見出し(ヒーロー名/種別バッジ/日付)とサイト名。ヒーロー・アイテム共通 */
+      function drawHeader(c, title, kind, date, sub) {
+        c.textBaseline = "alphabetic";
+        c.shadowColor = "rgba(0,0,0,.9)";
+        c.shadowBlur = 18;
+        c.fillStyle = COLOR.text;
+        c.font = '900 40px "Noto Sans JP", sans-serif';
+        c.fillText(title, PAD, 62);
+        const titleW = c.measureText(title).width;
+
+        if (kind) {
+          const label = KIND_LABEL[kind] ?? kind;
+          c.font = '700 16px "Noto Sans JP", sans-serif';
+          const bw = c.measureText(label).width + 22;
+          c.shadowBlur = 0;
+          c.fillStyle = COLOR[kind] ?? COLOR.muted;
+          roundRect(c, PAD + titleW + 14, 40, bw, 26, 13);
+          c.fill();
+          c.fillStyle = "#0c1116";
+          c.fillText(label, PAD + titleW + 14 + 11, 58);
+          c.shadowBlur = 18;
+        }
+
+        c.fillStyle = COLOR.sub;
+        c.font = '500 18px "Noto Sans JP", sans-serif';
+        c.fillText(sub ? `${date}　${sub}` : date, PAD, 92);
+
+        c.textAlign = "right";
+        c.fillStyle = COLOR.text;
+        c.font = '700 15px "Noto Sans JP", sans-serif';
+        c.fillText("DEADLOCK-JP DB", W - PAD, 48);
+        c.fillStyle = COLOR.muted;
+        c.font = '500 12px "JetBrains Mono", monospace';
+        c.fillText("deadlock-jpdb.com", W - PAD, 66);
+        c.textAlign = "left";
+        c.shadowBlur = 0;
+      }
+
+      /**
+       * 背景。ヒーローの絵を敷き、見出しが読める程度に上を軽く落とすだけにする。
+       * 本文は後から半透明のパネルに載せるので、ここで全面を暗くしない
+       * (暗くすると絵がほとんど見えず、ヒーローカードである意味が薄れる)。
+       */
+      function drawBackdrop(c, bgImage) {
+        c.fillStyle = COLOR.bg;
+        c.fillRect(0, 0, W, H);
+        if (bgImage) c.drawImage(bgImage, 0, 0, W, H);
+        const g = c.createLinearGradient(0, 0, 0, H);
+        g.addColorStop(0, "rgba(6,9,12,.78)");
+        g.addColorStop(0.18, "rgba(6,9,12,.42)");
+        g.addColorStop(0.5, "rgba(6,9,12,.30)");
+        g.addColorStop(1, "rgba(5,8,10,.66)");
+        c.fillStyle = g;
+        c.fillRect(0, 0, W, H);
+      }
+
+      /* ---- ヒーローカード ------------------------------------------- */
+      const GROUP_H = 34;
+      const ROW_H = 25;
+      const BODY_TOP = 150;
+      const BODY_BOTTOM = H - 30;
+
+      async function drawHeroCard(hero, date) {
+        const cv = document.createElement("canvas");
+        cv.width = W;
+        cv.height = H;
+        const c = cv.getContext("2d");
+
+        drawBackdrop(c, await loadImage(hero.bg));
+        drawHeader(c, hero.name, hero.kind, date, "バランス調整");
+
+        /*
+         * 行数が多いヒーロー(セレステは5スキル11項目)は2列に割る。
+         * 1列に収まるなら1列のまま大きく見せる。
+         */
+        const lines = hero.groups.reduce((n, g) => n + 1 + g.rows.length, 0);
+        const cols = lines > 11 ? 2 : 1;
+        const gap = 28;
+        const colW = (W - PAD * 2 - gap * (cols - 1)) / cols;
+
+        // 列に振り分ける。スキル単位で切り、1つのスキルが列をまたがないようにする
+        const buckets = Array.from({ length: cols }, () => []);
+        if (cols === 1) {
+          buckets[0] = hero.groups;
+        } else {
+          const half = Math.ceil(lines / 2);
+          let used = 0;
+          for (const g of hero.groups) {
+            buckets[used < half ? 0 : 1].push(g);
+            used += 1 + g.rows.length;
+          }
+        }
+
+        const icons = new Map();
+        for (const g of hero.groups) icons.set(g, await loadImage(g.icon));
+
+        /*
+         * 本文の高さを先に測り、パネルを敷いてから縦中央に置く。
+         * 先に描くと、項目が少ないヒーローで下半分が大きく空いてしまう。
+         */
+        const groupH = (g) => 46 + g.rows.length * ROW_H;
+        const colH = buckets.map((b) => b.reduce((n, g) => n + groupH(g), 0));
+        const bodyH = Math.max(...colH);
+        const areaTop = BODY_TOP - 26;
+        const areaH = BODY_BOTTOM - areaTop;
+        const top = areaTop + Math.max(0, (areaH - bodyH) / 2);
+
+        c.fillStyle = "rgba(6,9,12,.74)";
+        roundRect(c, PAD - 16, top - 30, W - (PAD - 16) * 2, bodyH + 34, 12);
+        c.fill();
+
+        for (let i = 0; i < cols; i++) {
+          const x = PAD + i * (colW + gap);
+          let y = top;
+          for (const g of buckets[i]) {
+            if (y + GROUP_H > BODY_BOTTOM) break;
+            // スキル名(アイコンがあれば添える)
+            const icon = icons.get(g);
+            let tx = x;
+            if (icon) {
+              c.save();
+              roundRect(c, x, y - 18, 24, 24, 5);
+              c.clip();
+              c.drawImage(icon, x, y - 18, 24, 24);
+              c.restore();
+              tx = x + 32;
+            }
+            c.fillStyle = COLOR.text;
+            c.font = '700 17px "Noto Sans JP", sans-serif';
+            c.fillText(fit(c, g.name, colW - (tx - x)), tx, y);
+            y += GROUP_H - 10;
+
+            c.strokeStyle = "rgba(255,255,255,.12)";
+            c.beginPath();
+            c.moveTo(x, y - 4);
+            c.lineTo(x + colW, y - 4);
+            c.stroke();
+            y += 12;
+
+            for (const r of g.rows) {
+              if (y > BODY_BOTTOM) break;
+              const tier = r.tier ? `T${r.tier} ` : "";
+              const value =
+                r.to === null ? "削除" : r.from === null ? `${r.to}（新規）` : `${r.from} → ${r.to}`;
+              c.font = '500 15px "Noto Sans JP", sans-serif';
+              c.textAlign = "right";
+              c.fillStyle =
+                r.good === true ? COLOR.buff : r.good === false ? COLOR.nerf : COLOR.muted;
+              const vw = c.measureText(value).width;
+              c.fillText(value, x + colW, y);
+              c.textAlign = "left";
+              c.fillStyle = COLOR.sub;
+              c.fillText(fit(c, tier + r.label, colW - vw - 14), x, y);
+              y += ROW_H;
+            }
+            y += 10;
+          }
+        }
+        return cv;
+      }
+
+      /* ---- アイテムまとめカード ------------------------------------- */
+      const ITEMS_PER_CARD = 9;
+
+      async function drawItemCard(items, date, page, pages) {
+        const cv = document.createElement("canvas");
+        cv.width = W;
+        cv.height = H;
+        const c = cv.getContext("2d");
+
+        drawBackdrop(c, null);
+        drawHeader(
+          c,
+          "アイテム調整",
+          null,
+          date,
+          pages > 1 ? `バランス調整　${page}/${pages}` : "バランス調整",
+        );
+
+        /* ヒーローカードと同じく、件数が少ない最終ページで下が大きく空かないよう縦中央に置く */
+        const ROW_PITCH = 58;
+        const areaTop = BODY_TOP - 26;
+        const blockH = items.length * ROW_PITCH;
+        let y = areaTop + Math.max(0, (BODY_BOTTOM - areaTop - blockH) / 2) + 26;
+
+        for (const it of items) {
+          const icon = await loadImage(it.icon);
+          if (icon) {
+            c.save();
+            roundRect(c, PAD, y - 26, 38, 38, 7);
+            c.clip();
+            c.drawImage(icon, PAD, y - 26, 38, 38);
+            c.restore();
+          }
+          const tx = PAD + 50;
+
+          c.fillStyle = COLOR.text;
+          c.font = '700 19px "Noto Sans JP", sans-serif';
+          c.fillText(it.name, tx, y - 6);
+          const nameW = c.measureText(it.name).width;
+
+          const label = KIND_LABEL[it.kind] ?? it.kind;
+          c.font = '700 13px "Noto Sans JP", sans-serif';
+          const bw = c.measureText(label).width + 16;
+          c.fillStyle = COLOR[it.kind] ?? COLOR.muted;
+          roundRect(c, tx + nameW + 12, y - 22, bw, 20, 10);
+          c.fill();
+          c.fillStyle = "#0c1116";
+          c.fillText(label, tx + nameW + 20, y - 8);
+
+          // 変更内容は1行にまとめる。入りきらない分は「ほか◯件」
+          c.font = '500 15px "Noto Sans JP", sans-serif';
+          const parts = it.rows.map((r) => {
+            const tier = r.tier ? `T${r.tier} ` : "";
+            const v =
+              r.to === null ? "削除" : r.from === null ? `${r.to}（新規）` : `${r.from}→${r.to}`;
+            return `${tier}${r.label} ${v}`;
+          });
+          let text = parts.join(" ／ ");
+          const maxW = W - PAD - tx;
+          if (c.measureText(text).width > maxW) {
+            let n = parts.length;
+            while (n > 1) {
+              n--;
+              text = parts.slice(0, n).join(" ／ ") + ` ／ ほか${parts.length - n}件`;
+              if (c.measureText(text).width <= maxW) break;
+            }
+          }
+          c.fillStyle = COLOR.muted;
+          c.fillText(fit(c, text, maxW), tx, y + 16);
+
+          y += ROW_PITCH;
+          if (y > BODY_BOTTOM) break;
+        }
+        return cv;
+      }
+
+      /* ---- 画面 ------------------------------------------------------ */
+      const cards = []; // {name, canvas}
+
+      function download(canvas, name) {
+        return new Promise((resolve) => {
+          canvas.toBlob((blob) => {
+            if (!blob) return resolve();
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = name;
+            a.click();
+            setTimeout(() => {
+              URL.revokeObjectURL(a.href);
+              resolve();
+            }, 120);
+          }, "image/png");
+        });
+      }
+
+      async function render() {
+        const u = DATA[$("upd").selectedIndex];
+        const list = $("list");
+        list.textContent = "";
+        cards.length = 0;
+        $("stat").textContent = "描画中…";
+
+        // Webフォントが載る前に描くと游ゴシック等に化けるので待つ
+        if (document.fonts && document.fonts.ready) await document.fonts.ready;
+
+        for (const h of u.heroes) {
+          const cv = await drawHeroCard(h, u.date);
+          cards.push({ name: `${u.date}_${h.name}.png`, canvas: cv });
+        }
+        const pages = Math.ceil(u.items.length / ITEMS_PER_CARD) || 0;
+        for (let p = 0; p < pages; p++) {
+          const slice = u.items.slice(p * ITEMS_PER_CARD, (p + 1) * ITEMS_PER_CARD);
+          const cv = await drawItemCard(slice, u.date, p + 1, pages);
+          cards.push({ name: `${u.date}_アイテム_${p + 1}.png`, canvas: cv });
+        }
+
+        for (const card of cards) {
+          const fig = document.createElement("figure");
+          card.canvas.style.width = "100%";
+          card.canvas.style.height = "auto";
+          fig.appendChild(card.canvas);
+          const cap = document.createElement("figcaption");
+          const btn = document.createElement("button");
+          btn.textContent = "PNGで保存";
+          btn.addEventListener("click", () => download(card.canvas, card.name));
+          cap.appendChild(document.createTextNode(card.name));
+          cap.appendChild(btn);
+          fig.appendChild(cap);
+          list.appendChild(fig);
+        }
+        $("stat").textContent = `${u.heroes.length}体 / アイテム${u.items.length}件 → ${cards.length}枚`;
+      }
+
+      const sel = $("upd");
+      for (const u of DATA) {
+        const o = document.createElement("option");
+        o.textContent = `${u.date}　${u.title}`;
+        sel.appendChild(o);
+      }
+      sel.addEventListener("change", render);
+      $("all").addEventListener("click", async () => {
+        for (const card of cards) await download(card.canvas, card.name);
+      });
+      render();
+    })();
+  </script>
+
+  <style>
+    .lead {
+      color: var(--c-text-muted);
+      line-height: 1.8;
+    }
+    .bar {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-4);
+      flex-wrap: wrap;
+      margin: var(--sp-4) 0;
+      padding: var(--sp-3) var(--sp-4);
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius);
+    }
+    .bar label {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-size: 13px;
+      color: var(--c-text-muted);
+    }
+    select {
+      background: var(--c-surface-2);
+      color: var(--c-text);
+      border: 1px solid var(--c-border);
+      border-radius: 5px;
+      padding: 5px 8px;
+      font: inherit;
+      font-size: 13px;
+    }
+    button {
+      background: transparent;
+      border: 1px solid var(--c-border);
+      color: var(--c-text-muted);
+      border-radius: 5px;
+      padding: 5px 12px;
+      font: inherit;
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+    button:hover {
+      border-color: var(--c-border-strong);
+      color: var(--c-text);
+    }
+    button.primary {
+      border-color: var(--c-accent);
+      color: var(--c-accent);
+    }
+    .stat {
+      font-size: 12px;
+      color: var(--c-text-faint);
+      font-family: var(--font-mono);
+    }
+    .list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: var(--sp-4);
+    }
+    figure {
+      margin: 0;
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius);
+      padding: var(--sp-2);
+    }
+    figure canvas {
+      display: block;
+      border-radius: 4px;
+    }
+    figcaption {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--sp-2);
+      margin-top: var(--sp-2);
+      font-size: 11px;
+      color: var(--c-text-faint);
+      font-family: var(--font-mono);
+    }
+  </style>
+</Base>

@@ -32,6 +32,8 @@ interface Props {
    * (大カードは最低 300x157 を要求するので、小さい絵だと出ない)。
    */
   twitterCard?: "summary" | "summary_large_image";
+  /** 検索避け。運用用の非公開ページ(SNSカード生成など)で使う */
+  noindex?: boolean;
 }
 const {
   title,
@@ -43,6 +45,7 @@ const {
   ogImageWidth,
   ogImageHeight,
   twitterCard = "summary_large_image",
+  noindex = false,
 } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const nav = [
@@ -129,7 +132,10 @@ if (crumbs.length > 1) {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={desc} />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta
+      name="robots"
+      content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large"}
+    />
     <link rel="canonical" href={canonical} />
     {GOOGLE_SITE_VERIFICATION && (
       <meta name="google-site-verification" content={GOOGLE_SITE_VERIFICATION} />
