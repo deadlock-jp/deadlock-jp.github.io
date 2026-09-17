@@ -1,131 +1,57 @@
 ---
 /**
- * ゲームシステムのリファレンス。
- *
- * 数値は data/snapshots/<版>/objects.json（ゲーム本体の npc_units.vdata 由来）から自動で出す。
- * 手で書くのは data/mechanics-notes.json の補足だけで、そこに数値は書かない（CLAUDE.md ルール6）。
- * ヒーロー個別のビルド論・対面論はここには書かない。
+ * 攻略情報のハブページ。
+ * ゲームシステム・オブジェクト・ソウル獲得システム・キャラクターコントロールの
+ * 4ページへの入り口だけを持つ(src/pages/build/index.astro + build/compare.astro と
+ * 同じ、1つのナビ項目の下にサブページをぶら下げる構成)。
  */
 import Base from "../../layouts/Base.astro";
-import { mechanicsTopics, economyTable } from "../../lib/mechanics.ts";
-import { souls } from "../../lib/data.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const topics = mechanicsTopics();
-const economy = economyTable();
+
+const pages = [
+  {
+    href: `${base}/mechanics/system/`,
+    title: "ゲームシステム",
+    lead: "勝利条件、レーンの進行順、デナイやバックドア保護といったルール。",
+  },
+  {
+    href: `${base}/mechanics/objects/`,
+    title: "オブジェクト",
+    lead: "ガーディアン・ウォーカー・シュライン・パトロン、トルーパー、ニュートラルのHPと挙動。",
+  },
+  {
+    href: `${base}/mechanics/souls/`,
+    title: "ソウル獲得システム",
+    lead: "アイテム価格・レベル必要ソウル・購入ボーナスと、建造物破壊やキルで得るソウル。",
+  },
+  {
+    href: `${base}/mechanics/controls/`,
+    title: "キャラクターコントロール",
+    lead: "ダッシュ・二段ジャンプなど共通の操作と、ヒーローごとの移動・近接ダメージの数値差。",
+  },
+];
 ---
 
 <Base
-  title="ゲームシステム"
-  description="Deadlock（デッドロック）のガーディアン・ウォーカー・パトロン・トルーパー・ニュートラルのHPと挙動、ソウルの経済（アイテム価格・レベル必要ソウル・購入ボーナス）を、ゲームの生データから自動生成した日本語リファレンス。"
-  breadcrumbs={[{ name: "ゲームシステム", path: `${base}/mechanics/` }]}
+  title="攻略情報"
+  description="Deadlock（デッドロック）の勝利条件・レーンのルール・ソウル獲得システム・キャラクター操作を、ゲームの生データから自動生成した日本語リファレンス。"
+  breadcrumbs={[{ name: "攻略情報", path: `${base}/mechanics/` }]}
 >
-  <h1>ゲームシステム</h1>
+  <h1>攻略情報</h1>
   <p class="lead">
-    マップ上のNPC・建造物と、ソウルの経済まわりの数値です。
-    ヒーローやアイテムと同じく、すべてゲーム本体から抽出したデータをそのまま出しています。
+    ヒーローやアイテムと同じく、ゲーム本体から抽出したデータをそのまま出しています。
     名前もゲーム内の表記をそのまま使っています。
   </p>
 
-  {topics.map((topic) => (
-    <section class="block panel">
-      <h2>{topic.title}</h2>
-      <p class="tlead">{topic.lead}</p>
-
-      <div class="objs">
-        {topic.objects.map((o) => (
-          <div class="obj">
-            <h3>
-              {o.name}
-              <code>{o.id}</code>
-            </h3>
-            <dl>
-              {o.stats.map((s) => (
-                <div class="row">
-                  <dt>{s.label}</dt>
-                  <dd>{s.value}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        ))}
-      </div>
-
-      {topic.lines.length > 0 && (
-        <ul class="notes">
-          {topic.lines.map((line) => (
-            <li>{line}</li>
-          ))}
-        </ul>
-      )}
-    </section>
-  ))}
-
-  <section class="block panel">
-    <h2>ソウルの経済</h2>
-    <p class="tlead">アイテムの価格とレベルアップに必要なソウル、累計投資額による購入ボーナス。</p>
-
-    <div class="econ">
-      <div class="etable">
-        <h3>ティアごとのアイテム価格</h3>
-        <table>
-          <thead><tr><th>ティア</th><th>価格</th></tr></thead>
-          <tbody>
-            {economy.itemPrices.map((p) => (
-              <tr>
-                <td>T{p.tier}</td>
-                <td class="n">{souls(p.cost)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      <div class="etable">
-        <h3>レベルに必要な累計ソウル</h3>
-        <table>
-          <thead><tr><th>Lv</th><th>累計</th></tr></thead>
-          <tbody>
-            {economy.levels.map((l) => (
-              <tr>
-                <td>{l.level}</td>
-                <td class="n">{souls(l.requiredGold)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      <div class="etable wide">
-        <h3>購入ボーナス</h3>
-        <p class="sub">
-          そのカテゴリに投資した累計ソウルが閾値を超えるたびに、対応するステータスが上がります。全ヒーロー共通です。
-        </p>
-        <table>
-          <thead>
-            <tr>
-              <th>累計投資額</th>
-              {economy.costBonuses.map((c) => <th>{c.label}</th>)}
-            </tr>
-          </thead>
-          <tbody>
-            {(economy.costBonuses[0]?.rows ?? []).map((_, i) => (
-              <tr>
-                <td class="n">{souls(economy.costBonuses[0]!.rows[i]!.goldThreshold)}</td>
-                {economy.costBonuses.map((c) => <td class="n">+{c.rows[i]?.bonus ?? "—"}</td>)}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <p class="foot">
-    数値は <code>npc_units.vdata</code> / <code>heroes.vdata</code> / <code>generic_data.vdata</code> から自動抽出したものです。
-    表示していない内部値（当たり判定やHPバーの位置など）もデータには含まれています。
-    <a href={`${base}/about/`}>このサイトについて</a>
-  </p>
+  <div class="cards">
+    {pages.map((p) => (
+      <a class="card panel" href={p.href}>
+        <h2>{p.title}</h2>
+        <p>{p.lead}</p>
+      </a>
+    ))}
+  </div>
 
   <style>
     .lead {
@@ -133,137 +59,32 @@ const economy = economyTable();
       max-width: 62ch;
       line-height: 1.8;
     }
-    .block {
+    .cards {
       margin-top: var(--sp-5);
-    }
-    .block h2 {
-      margin-top: 0;
-    }
-    .tlead {
-      margin: 0 0 var(--sp-4);
-      font-size: 13px;
-      color: var(--c-text-muted);
-    }
-
-    .objs {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: var(--sp-3);
-    }
-    .obj {
-      min-width: 0;
-      background: var(--c-surface);
-      border: 1px solid var(--c-border);
-      border-radius: var(--radius);
-      padding: var(--sp-3) var(--sp-4);
-    }
-    .obj h3 {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: var(--sp-2);
-      margin: 0 0 var(--sp-2);
-      padding-bottom: var(--sp-2);
-      border-bottom: 1px solid var(--c-border);
-      font-size: 14px;
-      color: var(--c-text-strong);
-    }
-    .obj h3 code {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      color: var(--c-text-faint);
-      background: none;
-      padding: 0;
-      /* 実IDは長いので縮む側にする */
-      min-width: 0;
-      overflow-wrap: anywhere;
-      text-align: right;
-    }
-    .obj dl {
-      margin: 0;
-      display: grid;
-      gap: 2px;
-    }
-    .row {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: var(--sp-3);
-      align-items: baseline;
-      font-size: 12.5px;
-      padding: 2px 0;
-    }
-    .row dt {
-      color: var(--c-text-muted);
-      min-width: 0;
-    }
-    .row dd {
-      margin: 0;
-      font-family: var(--font-mono);
-      font-variant-numeric: tabular-nums;
-      color: var(--c-text-strong);
-      white-space: nowrap;
-    }
-
-    .notes {
-      margin: var(--sp-4) 0 0;
-      padding-left: 1.2em;
-      font-size: 13px;
-      line-height: 1.9;
-      color: var(--c-text);
-      max-width: 70ch;
-    }
-
-    .econ {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: var(--sp-4);
-      align-items: start;
     }
-    .etable {
-      min-width: 0;
+    .card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s, background 0.15s;
     }
-    .etable.wide {
-      grid-column: 1 / -1;
+    .card:hover {
+      border-color: var(--c-border-strong);
+      background: var(--c-surface-2);
     }
-    .etable h3 {
+    .card h2 {
       margin: 0 0 var(--sp-2);
+      font-size: 15px;
+      color: var(--c-text-strong);
+    }
+    .card p {
+      margin: 0;
       font-size: 13px;
-      color: var(--c-text-strong);
-    }
-    .etable .sub {
-      margin: 0 0 var(--sp-2);
-      font-size: 12px;
-      color: var(--c-text-faint);
-      max-width: 62ch;
-    }
-    .etable table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 12.5px;
-    }
-    .etable th,
-    .etable td {
-      text-align: left;
-      padding: 4px 10px 4px 0;
-      border-bottom: 1px solid var(--c-border);
-      white-space: nowrap;
-    }
-    .etable th {
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--c-text-faint);
-    }
-    .etable td.n {
-      font-family: var(--font-mono);
-      font-variant-numeric: tabular-nums;
-      color: var(--c-text-strong);
-    }
-
-    .foot {
-      margin-top: var(--sp-5);
-      font-size: 12px;
-      color: var(--c-text-faint);
-      max-width: 70ch;
+      color: var(--c-text-muted);
+      line-height: 1.7;
     }
   </style>
 </Base>

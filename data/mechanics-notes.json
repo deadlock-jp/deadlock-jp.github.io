@@ -61,6 +61,18 @@
       ]
     },
     {
+      "id": "shrine",
+      "title": "シュライン",
+      "lead": "拠点の左右に1つずつある建造物。2つとも破壊するとパトロンの無敵が解ける。",
+      "objects": [
+        {
+          "id": "destroyable_building",
+          "nameToken": "Citadel_Hud_KillFeedShieldName"
+        }
+      ],
+      "lines": []
+    },
+    {
       "id": "neutral",
       "title": "ニュートラル",
       "lead": "レーン外のキャンプ。弱点を撃つと追加ダメージとソウルが入る。",

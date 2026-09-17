@@ -22,6 +22,7 @@ import { parseHeroes } from "./heroes.ts";
 import { parseItems } from "./items.ts";
 import { parseAbilities } from "./abilities.ts";
 import { parseObjects } from "./objects.ts";
+import { parseEconomy } from "./economy.ts";
 import { parseLocalization } from "./localization.ts";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -74,6 +75,7 @@ function parseAll(
   items: ReturnType<typeof parseItems>;
   abilities: ReturnType<typeof parseAbilities>;
   objects: ReturnType<typeof parseObjects>;
+  economy: ReturnType<typeof parseEconomy>;
 } {
   const heroes = parseHeroes(join(scripts, "heroes.vdata"), sha);
   const items = parseItems(
@@ -83,6 +85,7 @@ function parseAll(
   );
   const abilities = parseAbilities(join(scripts, "abilities.vdata"), sha);
   const objects = parseObjects(join(scripts, "npc_units.vdata"), sha);
+  const economy = parseEconomy(join(scripts, "generic_data.vdata"), sha);
 
   const heroTotal = Object.keys(heroes.heroes).length;
   const released = Object.values(heroes.heroes).filter((h) => h.released).length;
@@ -113,7 +116,7 @@ function parseAll(
   console.log(`  銃データを持つもの ${abilityList.filter((a) => a.weapon).length} 件`);
   console.log(`オブジェクト ${Object.keys(objects.objects).length} 件`);
 
-  return { heroes, items, abilities, objects };
+  return { heroes, items, abilities, objects, economy };
 }
 
 function reportLocalization(localization: ReturnType<typeof parseLocalization>, lang: string): void {
@@ -149,11 +152,12 @@ function runGameTracking(): void {
   console.log(`commit: ${sha}`);
   console.log("生成:");
 
-  const { heroes, items, abilities, objects } = parseAll(scripts, sha);
+  const { heroes, items, abilities, objects, economy } = parseAll(scripts, sha);
   writeJsonTo(dataDir, "heroes.json", heroes);
   writeJsonTo(dataDir, "items.json", items);
   writeJsonTo(dataDir, "abilities.json", abilities);
   writeJsonTo(dataDir, "objects.json", objects);
+  writeJsonTo(dataDir, "economy.json", economy);
 
   // 英語は GameTracking-Deadlock に含まれる。日本語はゲーム本体から取得して
   // 同じ場所に置けば、--lang japanese で同じパーサーが読む。
@@ -190,11 +194,12 @@ function runGameTrackingSnapshot(): void {
   console.log("生成:");
 
   const snapDir = join(REPO_ROOT, "data", "snapshots", clientVersion);
-  const { heroes, items, abilities, objects } = parseAll(scripts, clientVersion);
+  const { heroes, items, abilities, objects, economy } = parseAll(scripts, clientVersion);
   writeJsonTo(snapDir, "heroes.json", heroes);
   writeJsonTo(snapDir, "items.json", items);
   writeJsonTo(snapDir, "abilities.json", abilities);
   writeJsonTo(snapDir, "objects.json", objects);
+  writeJsonTo(snapDir, "economy.json", economy);
 
   const locRoot = join(gt, "game/citadel/resource/localization");
   for (const lang of ["japanese", "english"] as const) {
@@ -241,11 +246,12 @@ function runLocal(localRoot: string): void {
   const snapDir = join(REPO_ROOT, "data", "snapshots", clientVersion);
   const source = "game-client";
 
-  const { heroes, items, abilities, objects } = parseAll(scripts, clientVersion);
+  const { heroes, items, abilities, objects, economy } = parseAll(scripts, clientVersion);
   writeJsonTo(snapDir, "heroes.json", heroes);
   writeJsonTo(snapDir, "items.json", items);
   writeJsonTo(snapDir, "abilities.json", abilities);
   writeJsonTo(snapDir, "objects.json", objects);
+  writeJsonTo(snapDir, "economy.json", economy);
 
   const locRoot = join(localRoot, "localization");
   for (const lang of ["japanese", "english"] as const) {

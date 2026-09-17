@@ -1,0 +1,196 @@
+---
+/**
+ * キャラクターコントロールのリファレンス。
+ *
+ * ヒーロー別の数値は heroes.json の startingStats から自動で出す(src/lib/controls.ts)。
+ * 共通操作の説明は該当する vdata が無いため data/controls-notes.json の "common" に手書きする
+ * (CLAUDE.md ルール6)。ヒーローID配下は数値テーブルへの補足TIPS。
+ */
+import Base from "../../../layouts/Base.astro";
+import HeroPortrait from "../../../components/HeroPortrait.astro";
+import { heroControlStats } from "../../../lib/controls.ts";
+import { controlsNotes } from "../../../lib/data.ts";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const rows = heroControlStats();
+const commonNotes = controlsNotes("common");
+---
+
+<Base
+  title="キャラクターコントロール"
+  description="Deadlock（デッドロック）の共通操作（ダッシュ・二段ジャンプ等）と、ヒーローごとの移動・近接ダメージの数値差を、ゲームの生データから自動生成した日本語リファレンス。"
+  breadcrumbs={[
+    { name: "攻略情報", path: `${base}/mechanics/` },
+    { name: "キャラクターコントロール", path: `${base}/mechanics/controls/` },
+  ]}
+>
+  <h1>キャラクターコントロール</h1>
+  <p class="lead">
+    どのヒーローにも共通する操作と、ヒーローごとに違う移動・近接ダメージの基礎値です。
+  </p>
+
+  {commonNotes.length > 0 && (
+    <section class="block panel">
+      <h2>共通操作</h2>
+      <ul class="notes">
+        {commonNotes.map((line) => <li>{line}</li>)}
+      </ul>
+    </section>
+  )}
+
+  <section class="block panel">
+    <details class="hd">
+      <summary>
+        <h2>ヒーロー別の数値</h2>
+        <span class="hdcount">{rows.length}人</span>
+      </summary>
+      <p class="tlead">
+        基礎ステータス。レベルアップやアイテムでの強化前の値。
+      </p>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ヒーロー</th>
+              <th>移動速度</th>
+              <th>スプリント速度</th>
+              <th>スタミナ</th>
+              <th>スタミナ回復</th>
+              <th>地上ダッシュ</th>
+              <th>空中ダッシュ</th>
+              <th>近接（軽）</th>
+              <th>近接（重）</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr>
+                <td class="hero">
+                  <a href={`${base}/heroes/${r.heroId}/`}>
+                    <HeroPortrait name={r.name} image={r.iconSmall} size={24} />
+                    {r.name}
+                  </a>
+                </td>
+                <td class="n">{r.moveSpeed}m／秒</td>
+                <td class="n">+{r.sprintSpeed}m／秒</td>
+                <td class="n">{r.stamina}</td>
+                <td class="n">{r.staminaRegenPerSecond}秒／1</td>
+                <td class="n">{r.groundDashDistance}m／{r.groundDashDuration}秒</td>
+                <td class="n">{r.airDashDistance}m／{r.airDashDuration}秒</td>
+                <td class="n">{r.lightMeleeDamage}</td>
+                <td class="n">{r.heavyMeleeDamage}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </section>
+
+  <p class="foot">
+    数値は <code>heroes.vdata</code> から自動抽出したものです。
+    <a href={`${base}/about/`}>このサイトについて</a>
+  </p>
+
+  <style>
+    .lead {
+      color: var(--c-text-muted);
+      max-width: 62ch;
+      line-height: 1.8;
+    }
+    .block {
+      margin-top: var(--sp-5);
+    }
+    .block h2 {
+      margin-top: 0;
+    }
+    .tlead {
+      margin: 0 0 var(--sp-4);
+      font-size: 13px;
+      color: var(--c-text-muted);
+    }
+
+    .hd summary {
+      display: flex;
+      align-items: baseline;
+      gap: var(--sp-3);
+      cursor: pointer;
+      list-style: none;
+    }
+    .hd summary::-webkit-details-marker {
+      display: none;
+    }
+    .hd summary h2 {
+      margin: 0;
+    }
+    .hd summary::before {
+      content: "▸";
+      font-size: 11px;
+      color: var(--c-text-faint);
+      transition: transform 0.15s;
+    }
+    .hd[open] summary::before {
+      transform: rotate(90deg);
+    }
+    .hdcount {
+      font-size: 12px;
+      color: var(--c-text-faint);
+      font-variant-numeric: tabular-nums;
+    }
+    .hd .tlead {
+      margin-top: var(--sp-3);
+    }
+
+    .notes {
+      margin: 0;
+      padding-left: 1.2em;
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--c-text);
+      max-width: 70ch;
+    }
+
+    .tablewrap {
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      font-size: 12.5px;
+      width: 100%;
+    }
+    th,
+    td {
+      text-align: left;
+      padding: 6px 12px 6px 0;
+      border-bottom: 1px solid var(--c-border);
+      white-space: nowrap;
+    }
+    th {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--c-text-faint);
+    }
+    td.n {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+      color: var(--c-text-strong);
+    }
+    td.hero a {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      color: var(--c-text-strong);
+      text-decoration: none;
+    }
+    td.hero a:hover {
+      text-decoration: underline;
+    }
+
+    .foot {
+      margin-top: var(--sp-5);
+      font-size: 12px;
+      color: var(--c-text-faint);
+      max-width: 70ch;
+    }
+  </style>
+</Base>

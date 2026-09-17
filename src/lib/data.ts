@@ -5,6 +5,9 @@ import { join } from "node:path";
 import updatesJson from "../../data/updates.json" with { type: "json" };
 import heroNotesJson from "../../data/hero-notes.json" with { type: "json" };
 import itemNotesJson from "../../data/item-notes.json" with { type: "json" };
+import objectNotesJson from "../../data/object-notes.json" with { type: "json" };
+import soulsNotesJson from "../../data/souls-notes.json" with { type: "json" };
+import controlsNotesJson from "../../data/controls-notes.json" with { type: "json" };
 import itemStatsJson from "../../data/item-stats.json" with { type: "json" };
 import heroStatsJson from "../../data/hero-stats.json" with { type: "json" };
 import type { HeroesFile, Hero } from "../types/hero.ts";
@@ -431,6 +434,26 @@ export function heroNotes(abilityKey: string): string[] {
 const itemNotesFile = itemNotesJson as unknown as { notes: Record<string, string[]> };
 export function itemNotes(itemId: string): string[] {
   return itemNotesFile.notes[itemId] ?? [];
+}
+
+/**
+ * オブジェクトの補足メモ。data/object-notes.json(キーはオブジェクトの実ID)。
+ * ソウル獲得システム・キャラクターコントロールも同じ形(id -> string[])で、
+ * それぞれ data/souls-notes.json / data/controls-notes.json に持つ。
+ */
+const objectNotesFile = objectNotesJson as unknown as { notes: Record<string, string[]> };
+export function objectNotes(objectId: string): string[] {
+  return objectNotesFile.notes[objectId] ?? [];
+}
+
+const soulsNotesFile = soulsNotesJson as unknown as { notes: Record<string, string[]> };
+export function soulsNotes(topicId: string): string[] {
+  return soulsNotesFile.notes[topicId] ?? [];
+}
+
+const controlsNotesFile = controlsNotesJson as unknown as { notes: Record<string, string[]> };
+export function controlsNotes(key: string): string[] {
+  return controlsNotesFile.notes[key] ?? [];
 }
 
 /** ショップに並ぶアイテムを ティア → 名前 順で返す */

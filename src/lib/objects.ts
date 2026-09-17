@@ -1,5 +1,5 @@
 /**
- * ゲームシステムのリファレンス(/mechanics/)が読むデータ。
+ * オブジェクトのリファレンス(/mechanics/objects/)が読むデータ。
  *
  * 数値は data/snapshots/<版>/objects.json（ゲーム本体から抽出した npc_units.vdata）から引く。
  * data/mechanics-notes.json が持つのは「どのトピックでどのオブジェクトを出すか」と、
@@ -12,7 +12,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import mechanicsJson from "../../data/mechanics-notes.json" with { type: "json" };
-import { t, itemsFile, releasedHeroes } from "./data.ts";
+import { t } from "./data.ts";
 
 const DATA_DIR = join(process.cwd(), "data");
 
@@ -70,6 +70,11 @@ const STATS: Record<string, StatSpec> = {
   laserCooldownPhase2: { label: "レーザーのCD（第2形態）", unit: "秒" },
   shrineAttackHealthLossPerAttack: { label: "シュライン攻撃1回のHP減少" },
 
+  // シュライン
+  maxHealthFinal: { label: "最大HP" },
+  maxHealthGenerator: { label: "ジェネレーターの最大HP" },
+  maxHealthGeneratorSecond: { label: "第2ジェネレーターの最大HP" },
+
   // ニュートラル
   goldReward: { label: "獲得ソウル" },
   goldRewardBonusPercentPerMinute: { label: "毎分のソウル増加", unit: "%" },
@@ -80,21 +85,21 @@ const STATS: Record<string, StatSpec> = {
   damageOnDeath: { label: "破壊時のダメージ" },
 };
 
-export interface MechanicsStat {
+export interface ObjectStat {
   label: string;
   value: string;
 }
-export interface MechanicsObject {
+export interface GameObjectEntry {
   id: string;
   name: string;
-  stats: MechanicsStat[];
+  stats: ObjectStat[];
 }
-export interface MechanicsTopic {
+export interface ObjectTopic {
   id: string;
   title: string;
   lead: string;
   lines: string[];
-  objects: MechanicsObject[];
+  objects: GameObjectEntry[];
 }
 
 const num = (n: number, digits = 1): string => {
@@ -102,7 +107,7 @@ const num = (n: number, digits = 1): string => {
   return Number.isInteger(r) ? String(r) : r.toFixed(digits);
 };
 
-function formatStat(key: string, raw: number): MechanicsStat | null {
+function formatStat(key: string, raw: number): ObjectStat | null {
   const spec = STATS[key];
   if (!spec) return null;
   const v = spec.meters ? raw / UNITS_PER_METER : raw;
@@ -124,7 +129,7 @@ const notesFile = mechanicsJson as unknown as {
   }[];
 };
 
-export function mechanicsTopics(): MechanicsTopic[] {
+export function objectTopics(): ObjectTopic[] {
   return notesFile.topics.map((topic) => ({
     id: topic.id,
     title: topic.title,
@@ -141,43 +146,8 @@ export function mechanicsTopics(): MechanicsTopic[] {
       const stats = Object.keys(STATS)
         .filter((k) => Number.isFinite(obj.stats[k]))
         .map((k) => formatStat(k, obj.stats[k]!))
-        .filter((s): s is MechanicsStat => s !== null);
+        .filter((s): s is ObjectStat => s !== null);
       return stats.length ? [{ id: o.id, name, stats }] : [];
     }),
   }));
-}
-
-/* ------------------------------------------------------------------ *
- * ソウルの経済。こちらは objects.json ではなく heroes/items から出る
- * ------------------------------------------------------------------ */
-
-export interface EconomyTable {
-  /** ティアごとのアイテム価格。未実装ティアは除く */
-  itemPrices: { tier: number; cost: number }[];
-  /** レベルアップに必要な累計ソウル */
-  levels: { level: number; requiredGold: number }[];
-  /** 累計投資額による購入ボーナス。全ヒーロー共通（architecture.html 参照） */
-  costBonuses: { slot: string; label: string; rows: { goldThreshold: number; bonus: number }[] }[];
-}
-
-const SLOT_LABEL: Record<string, string> = { WeaponMod: "武器", Armor: "生命力", Tech: "スピリット" };
-
-export function economyTable(): EconomyTable {
-  const prices = (itemsFile.itemPricePerTier ?? []) as number[];
-  const hero = releasedHeroes()[0];
-  return {
-    /* ティア0は存在しない。最後のティアは未実装の置き値なので出さない */
-    itemPrices: prices
-      .map((cost, tier) => ({ tier, cost }))
-      .filter((p) => p.tier >= 1 && p.cost > 0 && p.cost < 9999),
-    levels: (hero?.levels ?? []).map((l) => ({ level: l.level, requiredGold: l.requiredGold })),
-    costBonuses: Object.entries(hero?.costBonuses ?? {}).map(([slot, rows]) => ({
-      slot,
-      label: SLOT_LABEL[slot] ?? slot,
-      rows: (rows as { goldThreshold: number; bonus: number }[]).map((r) => ({
-        goldThreshold: r.goldThreshold,
-        bonus: r.bonus,
-      })),
-    })),
-  };
 }

@@ -1,0 +1,120 @@
+---
+/**
+ * ゲームシステムのリファレンス。
+ *
+ * 「勝利までの進行」は data/snapshots/<版>/economy.json から自動で出す。
+ * 勝利条件・レーンのルールの説明は数値を伴わないため data/game-system-notes.json に
+ * 手書きする（CLAUDE.md ルール3・6）。
+ */
+import Base from "../../../layouts/Base.astro";
+import { gameSystemSections, winProgression } from "../../../lib/gameSystem.ts";
+import { souls } from "../../../lib/data.ts";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const sections = gameSystemSections();
+const progression = winProgression();
+---
+
+<Base
+  title="ゲームシステム"
+  description="Deadlock（デッドロック）の勝利条件・レーンのルールを、ゲームの生データと合わせて解説する日本語リファレンス。"
+  breadcrumbs={[
+    { name: "攻略情報", path: `${base}/mechanics/` },
+    { name: "ゲームシステム", path: `${base}/mechanics/system/` },
+  ]}
+>
+  <h1>ゲームシステム</h1>
+  <p class="lead">勝つために必要な、ファイト以外の仕組みです。</p>
+
+  <section class="block panel">
+    <h2>勝利までの進行</h2>
+    <p class="tlead">
+      レーンの防衛建造物は手前から順に破壊する必要がある。ソウルは破壊した瞬間に直接入る分
+      （建造物破壊で得るソウルの詳細は<a href={`${base}/mechanics/souls/`}>ソウル獲得システム</a>）。
+    </p>
+    <ol class="steps">
+      {progression.map((step) => (
+        <li>
+          <span class="stitle">{step.label}</span>
+          {step.goldKill > 0 && <span class="sgold">+{souls(step.goldKill)}</span>}
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  {sections.map((s) => (
+    <section class="block panel">
+      <h2>{s.title}</h2>
+      <ul class="notes">
+        {s.lines.map((line) => <li>{line}</li>)}
+      </ul>
+    </section>
+  ))}
+
+  <p class="foot">
+    「勝利までの進行」のソウル量は <code>generic_data.vdata</code> から自動抽出したものです。
+    建造物ごとの詳しい数値は<a href={`${base}/mechanics/objects/`}>オブジェクト</a>のページに載っています。
+    <a href={`${base}/about/`}>このサイトについて</a>
+  </p>
+
+  <style>
+    .lead {
+      color: var(--c-text-muted);
+      max-width: 62ch;
+      line-height: 1.8;
+    }
+    .block {
+      margin-top: var(--sp-5);
+    }
+    .block h2 {
+      margin-top: 0;
+    }
+    .tlead {
+      margin: 0 0 var(--sp-4);
+      font-size: 13px;
+      color: var(--c-text-muted);
+      max-width: 62ch;
+      line-height: 1.7;
+    }
+    .tlead a {
+      color: inherit;
+    }
+
+    .steps {
+      margin: 0;
+      padding-left: 1.4em;
+      font-size: 13.5px;
+      line-height: 2.2;
+      color: var(--c-text);
+    }
+    .stitle {
+      color: var(--c-text-strong);
+    }
+    .sgold {
+      margin-left: var(--sp-2);
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+      font-size: 12px;
+      color: var(--c-text-muted);
+    }
+
+    .notes {
+      margin: 0;
+      padding-left: 1.2em;
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--c-text);
+      max-width: 70ch;
+    }
+
+    .foot {
+      margin-top: var(--sp-5);
+      font-size: 12px;
+      color: var(--c-text-faint);
+      max-width: 70ch;
+    }
+    .foot a {
+      color: inherit;
+    }
+  </style>
+</Base>
