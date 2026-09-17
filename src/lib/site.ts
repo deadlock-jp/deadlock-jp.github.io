@@ -10,16 +10,20 @@
 export const X_HANDLE = "@moromisocial";
 
 /**
- * Cloudflare Web Analytics のトークン。
+ * Cloudflare Web Analytics のトークン。HTMLにそのまま出る公開値。
  *
- * 取得方法: Cloudflare にログイン → Web Analytics → Add a site で
- * deadlock-jpdb.com を登録すると、beacon の data-cf-beacon に入る
- * 32桁の16進文字列が発行される。それをそのまま貼る。
- * (Cloudflare のDNS配下に無くても、このビーコンを置くだけで計測できる)
+ * このドメインはネームサーバーこそ Cloudflare だが、レコードはプロキシを通さない
+ * DNSのみ(グレークラウド)で、配信は GitHub Pages が直接している
+ * (レスポンスの Server が GitHub.com で cf-ray が付かない)。
+ * Cloudflare の「自動インストール」はプロキシを通った応答にビーコンを差し込む
+ * 仕組みなので、この構成では効かない。だからこのスニペットを自前で出す。
+ *
+ * 将来オレンジクラウド(プロキシ)に切り替えるなら、自動インストールと二重に
+ * なって数字が膨らむので、そのときはここを空に戻すこと。
  *
  * 空のあいだは計測タグを一切出さない。Cookie を使わないので同意バナーは要らない。
  */
-export const CF_BEACON_TOKEN = "";
+export const CF_BEACON_TOKEN = "09761cb7721343ce9631aeacc2453e81";
 
 /**
  * Google Search Console の所有権確認用トークン。

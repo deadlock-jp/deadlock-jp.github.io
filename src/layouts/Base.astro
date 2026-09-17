@@ -185,7 +185,7 @@ if (crumbs.length > 1) {
     {CF_BEACON_TOKEN && (
       <script
         is:inline
-        defer
+        type="module"
         src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon={`{"token": "${CF_BEACON_TOKEN}"}`}
       />
