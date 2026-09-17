@@ -70,6 +70,11 @@ export function objectiveGold(): ObjectiveGoldRow[] {
     .map((o) => ({ key: o.key, label: OBJECTIVE_LABEL[o.key] ?? o.key, goldKill: o.goldKill }));
 }
 
+/** 建造物破壊ソウルのうち、近くのプレイヤーへ配られる割合(%)。残りはチーム全体に均等配分 */
+export function objectiveGoldNearPlayerSplitPct(): number {
+  return economyFile.objectiveGoldNearPlayerSplitPct;
+}
+
 export interface KillShareRow {
   /** キルに絡んだ人数 */
   count: number;

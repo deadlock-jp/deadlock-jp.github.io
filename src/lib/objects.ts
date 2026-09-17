@@ -78,6 +78,9 @@ const STATS: Record<string, StatSpec> = {
   // ニュートラル
   goldReward: { label: "獲得ソウル" },
   goldRewardBonusPercentPerMinute: { label: "毎分のソウル増加", unit: "%" },
+  // ミッドボス（npc_super_neutral）は maxHealth ではなく startingHealth を持つ
+  startingHealth: { label: "開始時HP" },
+  healthGainPerMinute: { label: "毎分のHP増加" },
   weakPointCount: { label: "弱点の数" },
   weakPointRespawnTime: { label: "弱点の再出現", unit: "秒" },
   bonusDamageMult: { label: "弱点の追加ダメージ倍率" },
@@ -125,7 +128,7 @@ const notesFile = mechanicsJson as unknown as {
      * トルーパーの種別や弱点のようにゲーム側が個別の名前を持っていないものだけ、
      * name に短い説明的なラベルを置く。どちらの場合も実IDを併記する。
      */
-    objects: { id: string; nameToken?: string; name?: string }[];
+    objects: { id: string; nameToken?: string; name?: string; excludeStats?: string[] }[];
   }[];
 };
 
@@ -139,12 +142,13 @@ export function objectTopics(): ObjectTopic[] {
       const obj = objectsFile.objects[o.id];
       if (!obj) return [];
       const name = (o.nameToken ? t(o.nameToken, "") : "") || o.name || o.id;
+      const excluded = new Set(o.excludeStats ?? []);
       /*
        * 並び順は STATS の定義順にする。objects.json のキー順は
        * オブジェクトごとにバラバラで、そのまま出すと最大HPが下の方に来る版が出る。
        */
       const stats = Object.keys(STATS)
-        .filter((k) => Number.isFinite(obj.stats[k]))
+        .filter((k) => !excluded.has(k) && Number.isFinite(obj.stats[k]))
         .map((k) => formatStat(k, obj.stats[k]!))
         .filter((s): s is ObjectStat => s !== null);
       return stats.length ? [{ id: o.id, name, stats }] : [];

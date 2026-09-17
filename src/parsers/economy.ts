@@ -40,6 +40,11 @@ function parseObjectiveGold(g: ReturnType<typeof readVdata>): ObjectiveGold[] {
   }));
 }
 
+/** 建造物破壊ソウルのうち、近くのプレイヤーへの配分割合(%)。残りはチーム全体で均等 */
+function parseObjectiveGoldNearPlayerSplitPct(g: ReturnType<typeof readVdata>): number {
+  return num(obj(g["m_ObjectiveParams"])["m_NearPlayerSplitPct"]);
+}
+
 function parseFloatArray(v: Kv3Value | undefined): number[] {
   return arr(v).map((x) => num(x));
 }
@@ -56,6 +61,7 @@ export function parseEconomy(genericDataPath: string, upstreamCommit: string): E
     objectiveGold: parseObjectiveGold(g),
     trooperKillGoldShareFrac: parseFloatArray(g["m_flTrooperKillGoldShareFrac"]),
     heroKillGoldShareFrac: parseFloatArray(g["m_flHeroKillGoldShareFrac"]),
+    objectiveGoldNearPlayerSplitPct: parseObjectiveGoldNearPlayerSplitPct(g),
     rejuv: {
       buffDuration: num(rejuv["m_flRejuvinatorBuffDuration"]),
       expirationWarningTiming: num(rejuv["m_flRejuvinatorExpirationWarningTiming"]),

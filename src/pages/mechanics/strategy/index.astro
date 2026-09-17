@@ -1,0 +1,111 @@
+---
+/**
+ * 戦略のリファレンス。
+ *
+ * このページだけは他のmechanicsサブページと違い、自動抽出データではなく
+ * data/strategy-notes.json の手書き記事がそのまま本文になる。
+ * ヒーロー個別の対策は各ヒーローページの「強みと対策」に譲り、ここでは触れない。
+ */
+import Base from "../../../layouts/Base.astro";
+import { strategySections } from "../../../lib/strategy.ts";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const sections = strategySections();
+---
+
+<Base
+  title="戦略"
+  description="Deadlock（デッドロック）のレーニング・マクロ・ミクロ・エコノミーの考え方をまとめた日本語の攻略記事。"
+  breadcrumbs={[
+    { name: "攻略情報", path: `${base}/mechanics/` },
+    { name: "戦略", path: `${base}/mechanics/strategy/` },
+  ]}
+>
+  <h1>戦略</h1>
+  <p class="lead">
+    勝つために意識すること全般です。他のページと違い、ここは数値データではなく解説記事です。
+    ヒーロー個別の対策は各ヒーローページの「強みと対策」にまとめています。
+  </p>
+
+  <nav class="toc">
+    <span class="toclabel">目次</span>
+    <ol>
+      {sections.map((s) => <li><a href={`#${s.id}`}>{s.title}</a></li>)}
+    </ol>
+  </nav>
+
+  {sections.map((s) => (
+    <section id={s.id} class="block panel">
+      <h2>{s.title}</h2>
+      {s.paragraphs.map((p) => <p>{p}</p>)}
+    </section>
+  ))}
+
+  <p class="foot">
+    <a href={`${base}/mechanics/system/`}>ゲームシステム</a> ・
+    <a href={`${base}/mechanics/objects/`}>オブジェクト</a> ・
+    <a href={`${base}/mechanics/souls/`}>ソウル獲得システム</a> の各ページも参照してください。
+    <a href={`${base}/about/`}>このサイトについて</a>
+  </p>
+
+  <style>
+    .lead {
+      color: var(--c-text-muted);
+      max-width: 62ch;
+      line-height: 1.8;
+    }
+    .toc {
+      margin-top: var(--sp-4);
+      padding: var(--sp-3) var(--sp-4);
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius);
+      max-width: 62ch;
+    }
+    .toclabel {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--c-text-muted);
+    }
+    .toc ol {
+      margin: var(--sp-2) 0 0;
+      padding-left: 1.2em;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+    .toc a {
+      color: var(--c-text);
+    }
+    .toc a:hover {
+      color: var(--c-accent);
+    }
+
+    .block {
+      margin-top: var(--sp-5);
+    }
+    .block h2 {
+      margin-top: 0;
+    }
+    .block p {
+      margin: 0 0 var(--sp-3);
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--c-text);
+      max-width: 70ch;
+    }
+    .block p:last-child {
+      margin-bottom: 0;
+    }
+
+    .foot {
+      margin-top: var(--sp-5);
+      font-size: 12px;
+      color: var(--c-text-faint);
+      max-width: 70ch;
+    }
+    .foot a {
+      color: inherit;
+    }
+  </style>
+</Base>

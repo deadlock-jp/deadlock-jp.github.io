@@ -6,13 +6,15 @@
  * 手で書くのは data/souls-notes.json のTIPSだけ（CLAUDE.md ルール6）。
  */
 import Base from "../../../layouts/Base.astro";
-import { economyTable, objectiveGold, killShareFrac } from "../../../lib/souls.ts";
+import { economyTable, objectiveGold, objectiveGoldNearPlayerSplitPct, killShareFrac } from "../../../lib/souls.ts";
 import { souls, soulsNotes } from "../../../lib/data.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const economy = economyTable();
 const objGold = objectiveGold();
+const objGoldSplitPct = objectiveGoldNearPlayerSplitPct();
 const shareFrac = killShareFrac();
+const generalNotes = soulsNotes("general");
 
 const pct = (n: number): string => `${Math.round(n * 100)}%`;
 ---
@@ -31,10 +33,20 @@ const pct = (n: number): string => `${Math.round(n * 100)}%`;
     すべてゲーム本体から抽出したデータをそのまま出しています。
   </p>
 
+  {generalNotes.length > 0 && (
+    <section class="block panel">
+      <h2>ソウルの基本</h2>
+      <ul class="notes">
+        {generalNotes.map((line) => <li>{line}</li>)}
+      </ul>
+    </section>
+  )}
+
   <section class="block panel">
     <h2>建造物破壊で得るソウル</h2>
     <p class="tlead">
-      破壊した瞬間に破壊者へ直接入るソウル。オーブとして周囲に散らばる分は含まない。
+      破壊した瞬間に直接入るソウル。オーブとして周囲に散らばる分は含まない。
+      このうち{objGoldSplitPct}%が破壊に関わった付近のプレイヤーへ、残りはチーム全体に均等に配られる。
     </p>
     <table>
       <thead><tr><th>建造物</th><th>ソウル</th></tr></thead>
@@ -181,6 +193,14 @@ const pct = (n: number): string => `${Math.round(n * 100)}%`;
       margin: 0 0 var(--sp-4);
       font-size: 13px;
       color: var(--c-text-muted);
+    }
+    .notes {
+      margin: 0;
+      padding-left: 1.2em;
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--c-text);
+      max-width: 70ch;
     }
     table {
       width: 100%;

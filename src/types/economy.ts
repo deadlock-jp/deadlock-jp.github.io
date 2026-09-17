@@ -33,5 +33,7 @@ export interface EconomyFile {
   /** キルに絡んだ人数によるソウル分配率(添字0が1人、1が2人…) */
   trooperKillGoldShareFrac: number[];
   heroKillGoldShareFrac: number[];
+  /** 建造物破壊ソウルのうち、破壊に関わった近くのプレイヤーへ配られる割合(%)。残りはチーム全体に均等配分 */
+  objectiveGoldNearPlayerSplitPct: number;
   rejuv: RejuvParams;
 }
