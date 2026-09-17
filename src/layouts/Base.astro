@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import { heroesFile } from "../lib/data.ts";
 import { COMMUNITY_LINKS, SUPPORT_LINKS } from "../lib/links.ts";
+import { X_HANDLE, CF_BEACON_TOKEN, GOOGLE_SITE_VERIFICATION } from "../lib/site.ts";
 
 interface Crumb {
   name: string;
@@ -17,8 +18,32 @@ interface Props {
   breadcrumbs?: Crumb[];
   /** 日付を持つページ(アップデートごとのページ)。ISO の日付。構造化データに出す */
   datePublished?: string;
+  /**
+   * そのページ固有のプレビュー画像。サイトルートからの絶対パス
+   * (例 /images/heroes/card16x9/inferno.webp)。省略するとサイト共通の ogp.jpg。
+   * 実寸を持つ画像だけを渡すこと(幅・高さを偽ると X 側でカードが崩れる)。
+   */
+  ogImage?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
+  /**
+   * X のカード種別。既定は横長の summary_large_image。
+   * アイテムやスキルのアイコンのような小さい正方形の絵は summary を指定する
+   * (大カードは最低 300x157 を要求するので、小さい絵だと出ない)。
+   */
+  twitterCard?: "summary" | "summary_large_image";
 }
-const { title, description, ogType = "website", breadcrumbs = [], datePublished } = Astro.props;
+const {
+  title,
+  description,
+  ogType = "website",
+  breadcrumbs = [],
+  datePublished,
+  ogImage,
+  ogImageWidth,
+  ogImageHeight,
+  twitterCard = "summary_large_image",
+} = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const nav = [
   { href: `${base}/heroes/`, label: "ヒーロー" },
@@ -33,8 +58,11 @@ const SITE_NAME = "DEADLOCK-JP DB";
 /* ドメインは astro.config.mjs の site が唯一の出どころ(ここに直書きしない) */
 const SITE = Astro.site ?? new URL(import.meta.env.SITE);
 const canonical = new URL(path, SITE).href;
-/* SNSプレビュー画像は絶対URLでないと読まれない */
-const ogImage = new URL(`${base}/images/ogp.jpg`, SITE).href;
+/* SNSプレビュー画像は絶対URLでないと読まれない。ページ固有の指定が無ければ共通の絵 */
+const ogImageUrl = new URL(ogImage ?? `${base}/images/ogp.jpg`, SITE).href;
+const ogSize = ogImage
+  ? { w: ogImageWidth, h: ogImageHeight }
+  : { w: 1200, h: 630 };
 const isHome = path === "/" || path === base + "/";
 /* トップは「トップ | DEADLOCK-JP DB」と重複するので、サイト名だけにする */
 const fullTitle = isHome ? SITE_NAME : `${title} | ${SITE_NAME}`;
@@ -103,6 +131,9 @@ if (crumbs.length > 1) {
     <meta name="description" content={desc} />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href={canonical} />
+    {GOOGLE_SITE_VERIFICATION && (
+      <meta name="google-site-verification" content={GOOGLE_SITE_VERIFICATION} />
+    )}
 
     {/* ファビコン。ico は 16/32/48 同梱 */}
     <link rel="icon" href={`${base}/favicon.ico`} sizes="any" />
@@ -118,15 +149,16 @@ if (crumbs.length > 1) {
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={desc} />
     <meta property="og:url" content={canonical} />
-    {/* Discord・Xなどに貼ったときのプレビュー画像。1200x630 */}
-    <meta property="og:image" content={ogImage} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={`${SITE_NAME} — Deadlock 日本語データベース`} />
-    <meta name="twitter:card" content="summary_large_image" />
+    {/* Discord・Xなどに貼ったときのプレビュー画像 */}
+    <meta property="og:image" content={ogImageUrl} />
+    {ogSize.w && <meta property="og:image:width" content={String(ogSize.w)} />}
+    {ogSize.h && <meta property="og:image:height" content={String(ogSize.h)} />}
+    <meta property="og:image:alt" content={ogImage ? title : `${SITE_NAME} — Deadlock 日本語データベース`} />
+    <meta name="twitter:card" content={twitterCard} />
+    {X_HANDLE && <meta name="twitter:site" content={X_HANDLE} />}
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={desc} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image" content={ogImageUrl} />
 
     <link rel="sitemap" type="application/xml" href={`${base}/sitemap.xml`} />
 
@@ -144,6 +176,20 @@ if (crumbs.length > 1) {
       is:inline
       set:html={JSON.stringify(jsonLd.length === 1 ? jsonLd[0] : jsonLd)}
     />
+
+    {/*
+      アクセス解析(Cloudflare Web Analytics)。Cookieを使わず個人を追跡しないので
+      同意バナーは要らない。トークンが空のあいだはタグ自体を出さない。
+      defer なので表示速度には影響しない。
+    */}
+    {CF_BEACON_TOKEN && (
+      <script
+        is:inline
+        defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon={`{"token": "${CF_BEACON_TOKEN}"}`}
+      />
+    )}
   </head>
   <body>
     <div id="dlbg" class="dlbg" aria-hidden="true"></div>

@@ -1,6 +1,9 @@
 ---
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import Base from "../../layouts/Base.astro";
 import ItemIcon from "../../components/ItemIcon.astro";
+import { resolveImagePath } from "../../parsers/image-manifest.ts";
 import {
   shopItems,
   legendaryItems,
@@ -71,12 +74,26 @@ const metaDesc =
   (isLegendary ? `／${streetBrawlLabel}の${legendaryLabel}` : `／${souls(item.cost)}ソウル／枠${item.slotCost}`) +
   "。" +
   (passiveText ? `常時パッシブ: ${passiveText}。` : "");
+
+/*
+ * プレビュー画像はショップのアイコン(200x200)。小さい正方形なので、
+ * 横長の大カードではなく summary(小さい正方形のカード)で出す。
+ */
+const iconResolved = item.shopIcon ? resolveImagePath(item.shopIcon) : null;
+const ogImage =
+  iconResolved && existsSync(join(process.cwd(), iconResolved.outPath))
+    ? `/${iconResolved.outPath.replace(/^public\//, "")}`
+    : undefined;
 ---
 
 <Base
   title={name}
   description={metaDesc}
   ogType="article"
+  ogImage={ogImage}
+  ogImageWidth={ogImage ? 200 : undefined}
+  ogImageHeight={ogImage ? 200 : undefined}
+  twitterCard={ogImage ? "summary" : "summary_large_image"}
   breadcrumbs={[
     { name: "アイテム", path: "/items/" },
     { name, path: `/items/${item.id}/` },

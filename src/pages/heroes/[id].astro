@@ -1,4 +1,6 @@
 ---
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import Base from "../../layouts/Base.astro";
 import HeroRender from "../../components/HeroRender.astro";
 import StatRadar from "../../components/StatRadar.astro";
@@ -96,12 +98,23 @@ const metaDesc =
   `最大HP ${hero.startingStats.EMaxHealth}／移動速度 ${hero.startingStats.EMaxMoveSpeed}m。` +
   (tags.length ? `特徴: ${tags.join("・")}。` : "") +
   (skillNames.length ? `スキル: ${skillNames.join("・")}。` : "");
+
+/*
+ * XやDiscordに貼ったときのプレビュー画像。ビルドカードの背景に使っている
+ * 16:9(1200x675)をそのまま流用する。元の card/ は 280x380 で、Xの大カードが
+ * 要求する最低幅300pxに届かないのでここでは使えない。
+ */
+const cardRel = `images/heroes/card16x9/${hero.key.replace(/^hero_/, "")}.webp`;
+const ogImage = existsSync(join(process.cwd(), "public", cardRel)) ? `/${cardRel}` : undefined;
 ---
 
 <Base
   title={name}
   description={metaDesc}
   ogType="article"
+  ogImage={ogImage}
+  ogImageWidth={ogImage ? 1200 : undefined}
+  ogImageHeight={ogImage ? 675 : undefined}
   breadcrumbs={[
     { name: "ヒーロー", path: "/heroes/" },
     { name, path: `/heroes/${hero.id}/` },

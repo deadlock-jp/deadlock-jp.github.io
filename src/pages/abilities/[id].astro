@@ -4,6 +4,8 @@
  * 対象は Signature / Ultimate のみ(全ヒーロー共通の移動アビリティ等は対象外)。
  * 変身でスキルが入れ替わるヒーロー(シルバー)は、両方の形態ぶんのスキルを対象にする。
  */
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import Base from "../../layouts/Base.astro";
 import SkillCard from "../../components/SkillCard.astro";
 import BalanceHistory from "../../components/BalanceHistory.astro";
@@ -59,12 +61,22 @@ const history = abilityBalanceHistory(abilityKey, base);
 const metaDesc =
   `Deadlock（デッドロック）のスキル「${name}」（${heroName}）の効果・数値・` +
   `アップグレード・バランス調整を日本語で。`;
+
+/*
+ * プレビュー画像は持ち主のヒーロー画像(16:9)。スキルアイコン自体は137x137前後で、
+ * Xがカードに要求する最低サイズ(小カードでも144x144)に届かないため使えない。
+ */
+const cardRel = `images/heroes/card16x9/${hero.key.replace(/^hero_/, "")}.webp`;
+const ogImage = existsSync(join(process.cwd(), "public", cardRel)) ? `/${cardRel}` : undefined;
 ---
 
 <Base
   title={`${name} - ${heroName}`}
   description={metaDesc}
   ogType="article"
+  ogImage={ogImage}
+  ogImageWidth={ogImage ? 1200 : undefined}
+  ogImageHeight={ogImage ? 675 : undefined}
   breadcrumbs={[
     { name: "ヒーロー", path: "/heroes/" },
     { name: heroName, path: `/heroes/${hero.id}/` },
