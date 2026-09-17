@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-13T06:56:46.200Z",
+  "generatedAt": "2026-09-17T05:40:03.878Z",
   "sourceVpk": "game/citadel/pak01_dir.vpk",
   "entries": [
     {
@@ -4918,6 +4918,64 @@
       "kind": "vtex",
       "usedBy": [
         "item:upgrade_weighted_shots"
+      ]
+    },
+    {
+      "ref": "file://{images}/npcs/neutral_bot.psd",
+      "vpkPath": "panorama/images/npcs/neutral_bot_psd.vtex_c",
+      "outPath": "public/images/npcs/neutral_bot.png",
+      "kind": "vtex",
+      "usedBy": [
+        "object:neutral_trooper_weak",
+        "object:neutral_trooper_normal",
+        "object:neutral_trooper_strong"
+      ]
+    },
+    {
+      "ref": "file://{images}/npcs/patron.psd",
+      "vpkPath": "panorama/images/npcs/patron_psd.vtex_c",
+      "outPath": "public/images/npcs/patron.png",
+      "kind": "vtex",
+      "usedBy": [
+        "object:npc_boss_tier3"
+      ]
+    },
+    {
+      "ref": "file://{images}/npcs/shield_generator.psd",
+      "vpkPath": "panorama/images/npcs/shield_generator_psd.vtex_c",
+      "outPath": "public/images/npcs/shield_generator.png",
+      "kind": "vtex",
+      "usedBy": [
+        "object:destroyable_building"
+      ]
+    },
+    {
+      "ref": "file://{images}/npcs/tier_1_boss.psd",
+      "vpkPath": "panorama/images/npcs/tier_1_boss_psd.vtex_c",
+      "outPath": "public/images/npcs/tier_1_boss.png",
+      "kind": "vtex",
+      "usedBy": [
+        "object:npc_boss_tier1"
+      ]
+    },
+    {
+      "ref": "file://{images}/npcs/tier_2_boss.psd",
+      "vpkPath": "panorama/images/npcs/tier_2_boss_psd.vtex_c",
+      "outPath": "public/images/npcs/tier_2_boss.png",
+      "kind": "vtex",
+      "usedBy": [
+        "object:npc_boss_tier2"
+      ]
+    },
+    {
+      "ref": "file://{images}/npcs/trooper.psd",
+      "vpkPath": "panorama/images/npcs/trooper_psd.vtex_c",
+      "outPath": "public/images/npcs/trooper.png",
+      "kind": "vtex",
+      "usedBy": [
+        "object:trooper_normal",
+        "object:trooper_melee",
+        "object:trooper_medic"
       ]
     },
     {

@@ -1,6 +1,9 @@
 @echo off
-REM Follow-up: the one manifest entry that lives outside the five folders
-REM already extracted (panorama/images/npcs/vanguard_aoe_buff).
+REM Follow-up: the manifest entries that live outside the five folders
+REM already extracted by deadlock-extract.bat.
+REM panorama/images/npcs holds the ability icon vanguard_aoe_buff plus the
+REM object icons shown on /mechanics/objects/ (tier_1_boss, tier_2_boss,
+REM patron, shield_generator, trooper, neutral_bot).
 setlocal
 set BASE=%~dp0deadlock-extract
 set VPK=C:\Program Files (x86)\Steam\steamapps\common\Deadlock\game\citadel\pak01_dir.vpk

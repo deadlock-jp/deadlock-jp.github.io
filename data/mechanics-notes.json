@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "note": "ゲームシステムのリファレンス(/mechanics/)の構成。数値はここに書かず、data/snapshots/<版>/objects.json などから引く(CLAUDE.md ルール6)。このファイルが持つのは「どのトピックで・どのオブジェクトを・どの順に出すか」と、生データからは読み取れない補足だけ。lines は自分の言葉で書く。他サイトの文章は使わない(ルール3)。確かめられていない仕様は書かず、空のままにする。excludeStats はそのオブジェクトで数値が実測・体感と合わない/意味が確認できないフィールドを非表示にする欄（例: npc_boss_tier1のbackDoorProtectionRangeはゲームプレイ上バックドア保護が働いている実感がなく、deadlock.wikiもT1ガーディアンはStreet Brawl以外バックドア保護を持たないとしている。データにフィールド自体はあるが実際に機能していない可能性があり、削除ではなく非表示にとどめる）。",
+  "note": "ゲームシステムのリファレンス(/mechanics/)の構成。数値はここに書かず、data/snapshots/<版>/objects.json などから引く(CLAUDE.md ルール6)。このファイルが持つのは「どのトピックで・どのオブジェクトを・どの順に出すか」と、生データからは読み取れない補足だけ。lines は自分の言葉で書く。他サイトの文章は使わない(ルール3)。確かめられていない仕様は書かず、空のままにする。excludeStats はそのオブジェクトで数値が実測・体感と合わない/意味が確認できないフィールドを非表示にする欄（例: npc_boss_tier1のbackDoorProtectionRangeはゲームプレイ上バックドア保護が働いている実感がなく、deadlock.wikiもT1ガーディアンはStreet Brawl以外バックドア保護を持たないとしている。データにフィールド自体はあるが実際に機能していない可能性があり、削除ではなく非表示にとどめる）。 icon はゲーム内のNPCアイコン(panorama/images/npcs/)への参照。絵柄を実物で確認できたオブジェクトだけに付ける。 未割り当ての絵: npcs/tier_3_boss.psd はパトロンの第2形態(外殻が壊れて剥き出しになった球体)、npc_barrack_boss(ベース・ガーディアン)と npc_super_neutral(神殿の守護者)は npcs/ に該当する絵が無い。",
   "topics": [
     {
       "id": "lane",
@@ -10,11 +10,15 @@
         {
           "id": "npc_boss_tier1",
           "nameToken": "Citadel_AttackerClass_CLASS_TROOPER_BOSS",
-          "excludeStats": ["backDoorProtectionRange"]
+          "excludeStats": [
+            "backDoorProtectionRange"
+          ],
+          "icon": "file://{images}/npcs/tier_1_boss.psd"
         },
         {
           "id": "npc_boss_tier2",
-          "nameToken": "Citadel_Hud_KillFeedWalker"
+          "nameToken": "Citadel_Hud_KillFeedWalker",
+          "icon": "file://{images}/npcs/tier_2_boss.psd"
         },
         {
           "id": "npc_barrack_boss",
@@ -22,7 +26,8 @@
         },
         {
           "id": "npc_boss_tier3",
-          "nameToken": "Citadel_AttackerClass_CLASS_BOSS_TIER_3"
+          "nameToken": "Citadel_AttackerClass_CLASS_BOSS_TIER_3",
+          "icon": "file://{images}/npcs/patron.psd"
         }
       ],
       "lines": [
@@ -39,17 +44,20 @@
         {
           "id": "trooper_normal",
           "nameToken": "",
-          "name": "トルーパー（射撃）"
+          "name": "トルーパー（射撃）",
+          "icon": "file://{images}/npcs/trooper.psd"
         },
         {
           "id": "trooper_melee",
           "nameToken": "",
-          "name": "トルーパー（近接）"
+          "name": "トルーパー（近接）",
+          "icon": "file://{images}/npcs/trooper.psd"
         },
         {
           "id": "trooper_medic",
           "nameToken": "",
-          "name": "トルーパー（メディック）"
+          "name": "トルーパー（メディック）",
+          "icon": "file://{images}/npcs/trooper.psd"
         },
         {
           "id": "trooper_zipline_container",
@@ -69,7 +77,8 @@
       "objects": [
         {
           "id": "destroyable_building",
-          "nameToken": "Citadel_Hud_KillFeedShieldName"
+          "nameToken": "Citadel_Hud_KillFeedShieldName",
+          "icon": "file://{images}/npcs/shield_generator.psd"
         }
       ],
       "lines": []
@@ -82,17 +91,20 @@
         {
           "id": "neutral_trooper_weak",
           "nameToken": "",
-          "name": "中立モンスター（小）"
+          "name": "中立モンスター（小）",
+          "icon": "file://{images}/npcs/neutral_bot.psd"
         },
         {
           "id": "neutral_trooper_normal",
           "nameToken": "",
-          "name": "中立モンスター（中）"
+          "name": "中立モンスター（中）",
+          "icon": "file://{images}/npcs/neutral_bot.psd"
         },
         {
           "id": "neutral_trooper_strong",
           "nameToken": "",
-          "name": "中立モンスター（大）"
+          "name": "中立モンスター（大）",
+          "icon": "file://{images}/npcs/neutral_bot.psd"
         },
         {
           "id": "npc_super_neutral",

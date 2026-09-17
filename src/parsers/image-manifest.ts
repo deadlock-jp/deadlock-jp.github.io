@@ -64,7 +64,7 @@ export function resolveImagePath(
   };
 }
 
-export function buildImageManifest(dataDir: string): ImageManifest {
+export function buildImageManifest(dataDir: string, repoDataDir?: string): ImageManifest {
   const items = JSON.parse(
     readFileSync(join(dataDir, "items.json"), "utf8"),
   ) as ItemsFile;
@@ -103,6 +103,20 @@ export function buildImageManifest(dataDir: string): ImageManifest {
     add(h.images.heroCard, `hero:${h.key}:card`);
     add(h.images.minimap, `hero:${h.key}:mm`);
   }
+  /*
+   * オブジェクト(/mechanics/objects/)のアイコン。
+   * npc_units.vdata 側は2件しかアイコン参照を持たないので、どのオブジェクトに
+   * どの絵を当てるかは data/mechanics-notes.json の icon で人が指定する。
+   * 同じ絵を複数のオブジェクトが使う(トルーパー3種など)ので usedBy は複数付く。
+   */
+  if (repoDataDir) {
+    const mechanics = JSON.parse(
+      readFileSync(join(repoDataDir, "mechanics-notes.json"), "utf8"),
+    ) as { topics: { objects: { id: string; icon?: string }[] }[] };
+    for (const topic of mechanics.topics) {
+      for (const o of topic.objects) add(o.icon ?? null, `object:${o.id}`);
+    }
+  }
 
   const entries = [...byRef.values()].sort((a, b) => a.vpkPath.localeCompare(b.vpkPath));
   return {
@@ -132,7 +146,10 @@ function main(): void {
   const latest = JSON.parse(
     readFileSync(join(repoRoot, "data", "latest.json"), "utf8"),
   ) as { version: string };
-  const manifest = buildImageManifest(join(repoRoot, "data", "snapshots", latest.version));
+  const manifest = buildImageManifest(
+    join(repoRoot, "data", "snapshots", latest.version),
+    join(repoRoot, "data"),
+  );
   mkdirSync(join(repoRoot, "data"), { recursive: true });
   writeFileSync(
     join(repoRoot, "data/image-manifest.json"),

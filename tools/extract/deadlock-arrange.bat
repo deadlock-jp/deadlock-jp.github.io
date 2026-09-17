@@ -1,5 +1,5 @@
 @echo off
-REM 自動生成: tools/make-arrange-bat.ts (画像 530 件)
+REM 自動生成: tools/make-arrange-bat.ts (画像 536 件)
 REM 手で編集しないこと。data/image-manifest.json を直して作り直す。
 setlocal enabledelayedexpansion
 set SRC=%~dp0deadlock-extract\game-images
@@ -74,7 +74,7 @@ mkdir "%ROOT%\public\images\upgrades\mods_tech" 2>nul
 mkdir "%ROOT%\public\images\upgrades\mods_utility" 2>nul
 mkdir "%ROOT%\public\images\upgrades\mods_weapon" 2>nul
 
-echo Copying 530 files ...
+echo Copying 536 files ...
 copy /y "%SRC%\panorama\images\heroes\archer_card_psd.png" "%ROOT%\public\images\heroes\archer_card.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING heroes\archer_card_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
 copy /y "%SRC%\panorama\images\heroes\archer_mm_psd.png" "%ROOT%\public\images\heroes\archer_mm.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING heroes\archer_mm_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
 copy /y "%SRC%\panorama\images\heroes\archer_sm_psd.png" "%ROOT%\public\images\heroes\archer_sm.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING heroes\archer_sm_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
@@ -595,6 +595,12 @@ copy /y "%SRC%\panorama\images\items\weapon\titanic_magazine_psd.png" "%ROOT%\pu
 copy /y "%SRC%\panorama\images\items\weapon\toxic_bullets_psd.png" "%ROOT%\public\images\items\weapon\toxic_bullets.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\weapon\toxic_bullets_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
 copy /y "%SRC%\panorama\images\items\weapon\weakening_headshot_psd.png" "%ROOT%\public\images\items\weapon\weakening_headshot.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\weapon\weakening_headshot_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
 copy /y "%SRC%\panorama\images\items\weapon\weighted_shots_psd.png" "%ROOT%\public\images\items\weapon\weighted_shots.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING items\weapon\weighted_shots_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\npcs\neutral_bot_psd.png" "%ROOT%\public\images\npcs\neutral_bot.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING npcs\neutral_bot_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\npcs\patron_psd.png" "%ROOT%\public\images\npcs\patron.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING npcs\patron_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\npcs\shield_generator_psd.png" "%ROOT%\public\images\npcs\shield_generator.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING npcs\shield_generator_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\npcs\tier_1_boss_psd.png" "%ROOT%\public\images\npcs\tier_1_boss.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING npcs\tier_1_boss_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\npcs\tier_2_boss_psd.png" "%ROOT%\public\images\npcs\tier_2_boss.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING npcs\tier_2_boss_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
+copy /y "%SRC%\panorama\images\npcs\trooper_psd.png" "%ROOT%\public\images\npcs\trooper.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING npcs\trooper_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
 copy /y "%SRC%\panorama\images\npcs\vanguard_aoe_buff_psd.png" "%ROOT%\public\images\npcs\vanguard_aoe_buff.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING npcs\vanguard_aoe_buff_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
 copy /y "%SRC%\panorama\images\upgrades\mods_armor\advanced_armor_psd.png" "%ROOT%\public\images\upgrades\mods_armor\advanced_armor.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING upgrades\mods_armor\advanced_armor_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
 copy /y "%SRC%\panorama\images\upgrades\mods_tech\healbane_psd.png" "%ROOT%\public\images\upgrades\mods_tech\healbane.png" >nul 2>&1 && (set /a N+=1 >nul) || (echo MISSING upgrades\mods_tech\healbane_psd.png>>"%ERR%" & set /a FAIL+=1 >nul)
@@ -613,6 +619,6 @@ echo Zipping ...
 if exist "%ZIP%" del "%ZIP%"
 powershell -NoProfile -ExecutionPolicy Bypass -Command "Compress-Archive -Path '%ROOT%\public' -DestinationPath '%ZIP%' -Force"
 echo.
-echo DONE -^> %ZIP%    (期待値: 530 件)
+echo DONE -^> %ZIP%    (期待値: 536 件)
 echo.
 pause

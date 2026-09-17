@@ -95,6 +95,8 @@ export interface ObjectStat {
 export interface GameObjectEntry {
   id: string;
   name: string;
+  /** ゲーム内のNPCアイコン参照。絵柄を確認できたオブジェクトにだけ付いている */
+  icon: string | null;
   stats: ObjectStat[];
 }
 export interface ObjectTopic {
@@ -128,7 +130,13 @@ const notesFile = mechanicsJson as unknown as {
      * トルーパーの種別や弱点のようにゲーム側が個別の名前を持っていないものだけ、
      * name に短い説明的なラベルを置く。どちらの場合も実IDを併記する。
      */
-    objects: { id: string; nameToken?: string; name?: string; excludeStats?: string[] }[];
+    objects: {
+      id: string;
+      nameToken?: string;
+      name?: string;
+      excludeStats?: string[];
+      icon?: string;
+    }[];
   }[];
 };
 
@@ -151,7 +159,7 @@ export function objectTopics(): ObjectTopic[] {
         .filter((k) => !excluded.has(k) && Number.isFinite(obj.stats[k]))
         .map((k) => formatStat(k, obj.stats[k]!))
         .filter((s): s is ObjectStat => s !== null);
-      return stats.length ? [{ id: o.id, name, stats }] : [];
+      return stats.length ? [{ id: o.id, name, icon: o.icon ?? null, stats }] : [];
     }),
   }));
 }
