@@ -8,6 +8,7 @@ import itemNotesJson from "../../data/item-notes.json" with { type: "json" };
 import objectNotesJson from "../../data/object-notes.json" with { type: "json" };
 import soulsNotesJson from "../../data/souls-notes.json" with { type: "json" };
 import controlsNotesJson from "../../data/controls-notes.json" with { type: "json" };
+import propertyLabelsJson from "../../data/property-labels.json" with { type: "json" };
 import itemStatsJson from "../../data/item-stats.json" with { type: "json" };
 import heroStatsJson from "../../data/hero-stats.json" with { type: "json" };
 import type { HeroesFile, Hero } from "../types/hero.ts";
@@ -106,11 +107,24 @@ for (const file of [localization, localizationEn]) {
     if (lower.endsWith("_label") && !labelTokenIndex.has(lower)) labelTokenIndex.set(lower, key);
   }
 }
+/** ゲーム側に日本語が1つも無いプロパティの自前の名前(data/property-labels.json) */
+const ownLabels = (propertyLabelsJson as unknown as { labels: Record<string, string> }).labels;
+
 export function statLabel(name: string, fallback?: string): string {
   const exact = t(`${name}_label`, "");
   if (exact) return exact;
   const key = labelTokenIndex.get(`${name}_label`.toLowerCase());
-  return (key ? t(key, "") : "") || (fallback ?? humanize(name));
+  const viaLabel = key ? t(key, "") : "";
+  if (viaLabel) return viaLabel;
+  /*
+   * "_postvalue_label"(値の後ろに添える表記)しか持たない項目がある。
+   * 1223件あり "_label"(1108件)より多く、中身は同じ日本語なので流用する。
+   * これを見ていなかったため「BouncePadExtendDuration」のような内部名が出ていた。
+   */
+  const pvKey = labelTokenIndex.get(`${name}_postvalue_label`.toLowerCase());
+  const viaPostvalue = pvKey ? t(pvKey, "") : "";
+  if (viaPostvalue) return viaPostvalue;
+  return ownLabels[name] ?? fallback ?? humanize(name);
 }
 
 /**

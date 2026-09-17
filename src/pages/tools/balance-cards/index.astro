@@ -18,6 +18,16 @@ import { join } from "node:path";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
+/**
+ * カードに載せない行かどうか。
+ *
+ * 値0で新規追加されたプロパティ(ホリデイのクラックショットの「弾薬耐性 0%」など)は、
+ * 実際の効果はT2強化側に乗っていて、基礎値としては何も起きていない。
+ * 詳細ページでは事実として出すが、SNSカードでは読み手を迷わせるだけなので省く。
+ */
+const isZeroAddition = (from: string | null, to: string | null): boolean =>
+  from === null && to !== null && /^0(\D|$)/.test(to);
+
 /** file://{images}/... を public/ の実ファイルに解決する。無ければ null */
 function pub(ref: string | null): string | null {
   if (!ref) return null;
@@ -37,19 +47,24 @@ const payload = balanceUpdates(base).map((u) => {
         name: e.name,
         kind: e.kind,
         bg: existsSync(join(process.cwd(), "public", bgRel)) ? `${base}/${bgRel}` : null,
-        groups: e.groups.map((g) => ({
-          name: g.name,
-          icon: pub(g.image),
-          rows: g.rows.map((r) => ({
-            label: r.label,
-            tier: r.tier,
-            from: r.fromText,
-            to: r.toText,
-            good: r.good,
-          })),
-        })),
+        groups: e.groups
+          .map((g) => ({
+            name: g.name,
+            icon: pub(g.image),
+            rows: g.rows
+              .filter((r) => !isZeroAddition(r.fromText, r.toText))
+              .map((r) => ({
+                label: r.label,
+                tier: r.tier,
+                from: r.fromText,
+                to: r.toText,
+                good: r.good,
+              })),
+          }))
+          .filter((g) => g.rows.length > 0),
       };
-    });
+    })
+    .filter((h) => h.groups.length > 0);
 
   const items = u.entities
     .filter((e) => e.target === "item")
@@ -57,14 +72,17 @@ const payload = balanceUpdates(base).map((u) => {
       name: e.name,
       kind: e.kind,
       icon: pub(e.item?.shopIcon ?? null),
-      rows: (e.groups[0]?.rows ?? []).map((r) => ({
-        label: r.label,
-        tier: r.tier,
-        from: r.fromText,
-        to: r.toText,
-        good: r.good,
-      })),
-    }));
+      rows: (e.groups[0]?.rows ?? [])
+        .filter((r) => !isZeroAddition(r.fromText, r.toText))
+        .map((r) => ({
+          label: r.label,
+          tier: r.tier,
+          from: r.fromText,
+          to: r.toText,
+          good: r.good,
+        })),
+    }))
+    .filter((it) => it.rows.length > 0);
 
   return { date: u.date, title: u.title, heroes, items };
 });
@@ -205,13 +223,52 @@ const payload = balanceUpdates(base).map((u) => {
       const GROUP_H = 34;
       const ROW_H = 25;
       const BODY_TOP = 150;
+      const TIPS_H = 74; // 手打ちTIPSに使う下部の帯
       const BODY_BOTTOM = H - 30;
 
-      async function drawHeroCard(hero, date) {
+      /**
+       * カード下部の手書きTIPS。数値に出ない変更(組み合わせの強弱、挙動の変化など)を
+       * 人が書き足すための欄。空なら帯ごと描かない。
+       */
+      function drawTips(c, text) {
+        if (!text) return;
+        const top = H - TIPS_H;
+        c.fillStyle = "rgba(5,8,10,.88)";
+        c.fillRect(0, top, W, TIPS_H);
+        c.fillStyle = COLOR.mixed;
+        c.fillRect(0, top, 4, TIPS_H);
+
+        c.fillStyle = COLOR.muted;
+        c.font = '700 12px "Noto Sans JP", sans-serif';
+        c.fillText("TIPS", PAD, top + 24);
+
+        // 2行まで。幅に入らなければ折り返し、あふれたら末尾を詰める
+        c.fillStyle = COLOR.sub;
+        c.font = '500 17px "Noto Sans JP", sans-serif';
+        const maxW = W - PAD * 2;
+        const lines = [];
+        let cur = "";
+        for (const ch of text.replace(/\s+/g, " ").trim()) {
+          if (c.measureText(cur + ch).width > maxW) {
+            lines.push(cur);
+            cur = ch;
+            if (lines.length === 2) break;
+          } else cur += ch;
+        }
+        if (lines.length < 2 && cur) lines.push(cur);
+        lines.forEach((ln, i) => {
+          const last = i === lines.length - 1;
+          c.fillText(last ? fit(c, ln, maxW) : ln, PAD, top + 46 + i * 22);
+        });
+      }
+
+      async function drawHeroCard(hero, date, tips) {
         const cv = document.createElement("canvas");
         cv.width = W;
         cv.height = H;
         const c = cv.getContext("2d");
+        /* TIPSを書くぶんだけ本文の下限を上げる(重なると読めなくなる) */
+        const bottom = tips ? H - TIPS_H - 16 : BODY_BOTTOM;
 
         drawBackdrop(c, await loadImage(hero.bg));
         drawHeader(c, hero.name, hero.kind, date, "バランス調整");
@@ -249,7 +306,7 @@ const payload = balanceUpdates(base).map((u) => {
         const colH = buckets.map((b) => b.reduce((n, g) => n + groupH(g), 0));
         const bodyH = Math.max(...colH);
         const areaTop = BODY_TOP - 26;
-        const areaH = BODY_BOTTOM - areaTop;
+        const areaH = bottom - areaTop;
         const top = areaTop + Math.max(0, (areaH - bodyH) / 2);
 
         c.fillStyle = "rgba(6,9,12,.74)";
@@ -260,7 +317,7 @@ const payload = balanceUpdates(base).map((u) => {
           const x = PAD + i * (colW + gap);
           let y = top;
           for (const g of buckets[i]) {
-            if (y + GROUP_H > BODY_BOTTOM) break;
+            if (y + GROUP_H > bottom) break;
             // スキル名(アイコンがあれば添える)
             const icon = icons.get(g);
             let tx = x;
@@ -285,7 +342,7 @@ const payload = balanceUpdates(base).map((u) => {
             y += 12;
 
             for (const r of g.rows) {
-              if (y > BODY_BOTTOM) break;
+              if (y > bottom) break;
               const tier = r.tier ? `T${r.tier} ` : "";
               const value =
                 r.to === null ? "削除" : r.from === null ? `${r.to}（新規）` : `${r.from} → ${r.to}`;
@@ -303,17 +360,19 @@ const payload = balanceUpdates(base).map((u) => {
             y += 10;
           }
         }
+        drawTips(c, tips);
         return cv;
       }
 
       /* ---- アイテムまとめカード ------------------------------------- */
       const ITEMS_PER_CARD = 9;
 
-      async function drawItemCard(items, date, page, pages) {
+      async function drawItemCard(items, date, page, pages, tips) {
         const cv = document.createElement("canvas");
         cv.width = W;
         cv.height = H;
         const c = cv.getContext("2d");
+        const bottom = tips ? H - TIPS_H - 16 : BODY_BOTTOM;
 
         drawBackdrop(c, null);
         drawHeader(
@@ -328,7 +387,7 @@ const payload = balanceUpdates(base).map((u) => {
         const ROW_PITCH = 58;
         const areaTop = BODY_TOP - 26;
         const blockH = items.length * ROW_PITCH;
-        let y = areaTop + Math.max(0, (BODY_BOTTOM - areaTop - blockH) / 2) + 26;
+        let y = areaTop + Math.max(0, (bottom - areaTop - blockH) / 2) + 26;
 
         for (const it of items) {
           const icon = await loadImage(it.icon);
@@ -377,13 +436,15 @@ const payload = balanceUpdates(base).map((u) => {
           c.fillText(fit(c, text, maxW), tx, y + 16);
 
           y += ROW_PITCH;
-          if (y > BODY_BOTTOM) break;
+          if (y > bottom) break;
         }
+        drawTips(c, tips);
         return cv;
       }
 
       /* ---- 画面 ------------------------------------------------------ */
-      const cards = []; // {name, canvas}
+      /* {name, canvas, tips, render(tips)} 。render はTIPSを変えて描き直すのに使う */
+      const cards = [];
 
       function download(canvas, name) {
         return new Promise((resolve) => {
@@ -412,21 +473,29 @@ const payload = balanceUpdates(base).map((u) => {
         if (document.fonts && document.fonts.ready) await document.fonts.ready;
 
         for (const h of u.heroes) {
-          const cv = await drawHeroCard(h, u.date);
-          cards.push({ name: `${u.date}_${h.name}.png`, canvas: cv });
+          cards.push({
+            name: `${u.date}_${h.name}.png`,
+            tips: "",
+            render: (tips) => drawHeroCard(h, u.date, tips),
+          });
         }
         const pages = Math.ceil(u.items.length / ITEMS_PER_CARD) || 0;
         for (let p = 0; p < pages; p++) {
           const slice = u.items.slice(p * ITEMS_PER_CARD, (p + 1) * ITEMS_PER_CARD);
-          const cv = await drawItemCard(slice, u.date, p + 1, pages);
-          cards.push({ name: `${u.date}_アイテム_${p + 1}.png`, canvas: cv });
+          cards.push({
+            name: `${u.date}_アイテム_${p + 1}.png`,
+            tips: "",
+            render: (tips) => drawItemCard(slice, u.date, p + 1, pages, tips),
+          });
         }
 
         for (const card of cards) {
+          card.canvas = await card.render("");
           const fig = document.createElement("figure");
           card.canvas.style.width = "100%";
           card.canvas.style.height = "auto";
           fig.appendChild(card.canvas);
+
           const cap = document.createElement("figcaption");
           const btn = document.createElement("button");
           btn.textContent = "PNGで保存";
@@ -434,6 +503,28 @@ const payload = balanceUpdates(base).map((u) => {
           cap.appendChild(document.createTextNode(card.name));
           cap.appendChild(btn);
           fig.appendChild(cap);
+
+          /*
+           * 数値に出ない変更(組み合わせの強弱・挙動の変化など)を書き足す欄。
+           * 打つたびに描き直すと重いので、入力が止まってから描く。
+           */
+          const ta = document.createElement("textarea");
+          ta.placeholder = "TIPS（任意）数値に出ない変更や、組み合わせの評価など";
+          ta.rows = 2;
+          let timer = null;
+          ta.addEventListener("input", () => {
+            card.tips = ta.value.trim();
+            clearTimeout(timer);
+            timer = setTimeout(async () => {
+              const next = await card.render(card.tips);
+              next.style.width = "100%";
+              next.style.height = "auto";
+              fig.replaceChild(next, card.canvas);
+              card.canvas = next;
+            }, 300);
+          });
+          fig.appendChild(ta);
+
           list.appendChild(fig);
         }
         $("stat").textContent = `${u.heroes.length}体 / アイテム${u.items.length}件 → ${cards.length}枚`;
@@ -533,6 +624,25 @@ const payload = balanceUpdates(base).map((u) => {
       font-size: 11px;
       color: var(--c-text-faint);
       font-family: var(--font-mono);
+    }
+    textarea {
+      display: block;
+      width: 100%;
+      margin-top: var(--sp-2);
+      box-sizing: border-box;
+      background: var(--c-surface-2);
+      color: var(--c-text);
+      border: 1px solid var(--c-border);
+      border-radius: 5px;
+      padding: 6px 8px;
+      font: inherit;
+      font-size: 12.5px;
+      line-height: 1.6;
+      resize: vertical;
+    }
+    textarea:focus {
+      outline: none;
+      border-color: var(--c-accent);
     }
   </style>
 </Base>
