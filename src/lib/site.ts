@@ -26,10 +26,10 @@ export const X_HANDLE = "@moromisocial";
 export const CF_BEACON_TOKEN = "09761cb7721343ce9631aeacc2453e81";
 
 /**
- * Google Search Console の所有権確認用トークン。
+ * Google Search Console の所有権確認用トークン。HTMLタグ方式の content の中身。
  *
- * Search Console で「HTMLタグ」方式を選ぶと
- * <meta name="google-site-verification" content="..."> が案内されるので、
- * その content の中身だけを貼る。確認が済んだ後も外さないこと(再確認で失敗する)。
+ * 貼るのはトークン部分だけで、"google-site-verification=" の接頭辞は含めない
+ * (接頭辞まで含んだ形は、ドメイン単位で確認するときのDNS TXTレコード用の書き方)。
+ * 確認が済んだ後も外さないこと。定期的に再確認されるので、消すと所有権が外れる。
  */
-export const GOOGLE_SITE_VERIFICATION = "";
+export const GOOGLE_SITE_VERIFICATION = "_0Ob03SSbUXeNn3kvJsB7tsVm1Pcdft_uRLYQVX9ZDI";
