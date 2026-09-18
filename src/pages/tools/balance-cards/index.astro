@@ -139,6 +139,16 @@ const allHeroes = releasedHeroes().map((h) => {
     <span class="stat">直接の数値調整は無いが、アイテム側の変化などで影響を受けるヒーロー用。TIPS欄に理由を書く前提のカード</span>
   </div>
 
+  <div class="bar highlight">
+    <div class="hlcol">
+      <label class="hllabel">
+        今回の見どころ（1行1トピック。数値の自動抽出とは別に、目立つ変更を手でまとめる欄）
+      </label>
+      <textarea id="hlText" rows="7"></textarea>
+      <button id="hlBtn" class="primary">見どころカードを作成</button>
+    </div>
+  </div>
+
   <div id="list" class="list"></div>
 
   <script type="application/json" id="payload" is:inline set:html={JSON.stringify(payload)} />
@@ -544,6 +554,91 @@ const allHeroes = releasedHeroes().map((h) => {
         return cv;
       }
 
+      /* ---- アップデートの見どころカード ------------------------------ */
+      /*
+       * ヒーロー・アイテムの自動集計とは別に、査読した人が「今回はこれが目立つ」を
+       * 手でまとめるためのカード。1行1トピックのテキストを、そのまま箇条書きにして描く。
+       * 背景はヒーロー画像を持たないので単色(drawBackdrop に null を渡す)。
+       */
+
+      /** テキストを幅に収まるよう折り返す。1トピックが複数行になることがある */
+      function wrapText(c, text, maxW) {
+        const lines = [];
+        let cur = "";
+        for (const ch of text) {
+          if (c.measureText(cur + ch).width > maxW) {
+            lines.push(cur);
+            cur = ch;
+          } else cur += ch;
+        }
+        if (cur || lines.length === 0) lines.push(cur);
+        return lines;
+      }
+
+      /**
+       * 箇条書き全体が縦の空きに収まるフォントサイズを大きい方から試して決める。
+       * 項目数や文字数はそのときどきで変わるので、固定サイズだと溢れたり
+       * スカスカになったりする。
+       */
+      function layoutBullets(c, bullets, maxW, availH) {
+        const sizes = [30, 27, 24, 22, 20, 18, 16, 15];
+        let best = null;
+        for (const size of sizes) {
+          c.font = `500 ${size}px "Noto Sans JP", sans-serif`;
+          const lineH = Math.round(size * 1.55);
+          const gap = Math.round(size * 0.55);
+          const wrapped = bullets.map((b) => wrapText(c, b, maxW - Math.round(size * 1.3)));
+          const totalLines = wrapped.reduce((n, ls) => n + ls.length, 0);
+          const totalH = totalLines * lineH + (bullets.length - 1) * gap;
+          best = { size, lineH, gap, wrapped, totalH };
+          if (totalH <= availH) return best;
+        }
+        return best; // 最小サイズでも収まらなければ、はみ出し覚悟でそのまま返す
+      }
+
+      async function drawHighlightCard(date, title, bullets) {
+        const cv = document.createElement("canvas");
+        cv.width = W;
+        cv.height = H;
+        const c = cv.getContext("2d");
+
+        drawBackdrop(c, null);
+        drawHeader(c, "アップデートの見どころ", null, date, title);
+
+        const top = BODY_TOP - 26;
+        const bottom = BODY_BOTTOM;
+        c.fillStyle = "rgba(6,9,12,.74)";
+        roundRect(c, PAD - 16, top, W - (PAD - 16) * 2, bottom - top, 12);
+        c.fill();
+
+        if (bullets.length === 0) {
+          c.fillStyle = COLOR.muted;
+          c.font = '500 17px "Noto Sans JP", sans-serif';
+          c.fillText("（見どころを1行ずつ入力してください）", PAD + 4, top + (bottom - top) / 2);
+          return cv;
+        }
+
+        const maxW = W - (PAD - 16) * 2 - 48;
+        const layout = layoutBullets(c, bullets, maxW, bottom - top - 20);
+        let y = top + Math.max(0, (bottom - top - layout.totalH) / 2) + layout.lineH * 0.72;
+        const textX = PAD + 4 + Math.round(layout.size * 1.3);
+        c.textAlign = "left";
+        for (let i = 0; i < bullets.length; i++) {
+          const ls = layout.wrapped[i];
+          c.fillStyle = COLOR.mixed;
+          c.beginPath();
+          c.arc(PAD + 4 + layout.size * 0.28, y - layout.size * 0.32, Math.max(3, layout.size * 0.11), 0, Math.PI * 2);
+          c.fill();
+          c.fillStyle = COLOR.text;
+          c.font = `500 ${layout.size}px "Noto Sans JP", sans-serif`;
+          ls.forEach((line, li) => {
+            c.fillText(line, textX, y + li * layout.lineH);
+          });
+          y += ls.length * layout.lineH + layout.gap;
+        }
+        return cv;
+      }
+
       /* ---- 画面 ------------------------------------------------------ */
       /* {name, canvas, tips, render(tips)} 。render はTIPSを変えて描き直すのに使う */
       const cards = [];
@@ -616,6 +711,16 @@ const allHeroes = releasedHeroes().map((h) => {
         fig.appendChild(cap);
 
         /*
+         * 見どころカードは専用のテキストエリア(#hlText)側で内容を編集し、
+         * ボタンを押すたびに作り直す運用なので、他のカードと違って
+         * 個別のTIPS欄は付けない。
+         */
+        if (card.static) {
+          list.appendChild(fig);
+          return;
+        }
+
+        /*
          * 数値に出ない変更(組み合わせの強弱・挙動の変化など)を書き足す欄。
          * 打つたびに描き直すと重いので、入力が止まってから描く。
          * 手で追加したカード(indirect)はこの欄自体が本文になるので、初期表示から
@@ -683,6 +788,37 @@ const allHeroes = releasedHeroes().map((h) => {
         card.canvas.scrollIntoView({ behavior: "smooth", block: "center" });
       });
 
+      /*
+       * 2026-09-16 のアップデートで最初に査読したときの見どころを初期値にしておく。
+       * 別のアップデートで使うときは、ここを丸ごと書き換えて「見どころカードを作成」を押す。
+       */
+      $("hlText").value = [
+        "ヴェナトル: アルティメット「イラ・ドミニ」がスプリットショット・リコシェに対応",
+        "ペイジ: 近接攻撃のスピリット倍率が1.5倍にアッパー調整",
+        "セレステ: スキルダメージ・効果に大量ナーフ",
+        "ウォーデン: アルケミカルフラスコの投射速度が大幅ナーフ",
+        "スロウ効果の全体調整で、スロウ系スキル全般が弱体化",
+        "ダッシュパリィの仕様変更で、新たなキャラコンが生まれる可能性",
+      ].join("\n");
+
+      $("hlBtn").addEventListener("click", async () => {
+        const date = DATA[sel.selectedIndex].date;
+        const title = DATA[sel.selectedIndex].title;
+        const bullets = $("hlText").value
+          .split("\n")
+          .map((s) => s.trim())
+          .filter(Boolean);
+        const card = {
+          name: `${date}_見どころ.png`,
+          static: true,
+          render: () => drawHighlightCard(date, title, bullets),
+        };
+        cards.push(card);
+        await mountCard(card);
+        updateStat();
+        card.canvas.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+
       render();
     })();
   </script>
@@ -702,6 +838,27 @@ const allHeroes = releasedHeroes().map((h) => {
       background: var(--c-surface);
       border: 1px solid var(--c-border);
       border-radius: var(--radius);
+    }
+    .bar.highlight {
+      align-items: stretch;
+    }
+    .hlcol {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-2);
+      width: 100%;
+    }
+    .hllabel {
+      font-size: 12px;
+      color: var(--c-text-muted);
+    }
+    .hlcol textarea {
+      margin-top: 0;
+      font-size: 13.5px;
+      line-height: 1.8;
+    }
+    .hlcol button {
+      align-self: flex-start;
     }
     .bar label {
       display: flex;
