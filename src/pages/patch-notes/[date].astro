@@ -6,6 +6,8 @@
  * 本文はここにしか置かない(一覧ページにも載せると同じ文章がサイト内で
  * 二重になり、検索側にどちらを出すか委ねることになる)。
  */
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import Base from "../../layouts/Base.astro";
 import BalanceDetail from "../../components/BalanceDetail.astro";
 import AbilityHoverCards from "../../components/AbilityHoverCards.astro";
@@ -56,6 +58,14 @@ const summary = update
       .map((k) => `${ADJUSTMENT_LABEL[k]} ${update.counts[k]}`)
       .join(" / ")
   : null;
+
+/*
+ * XやDiscordに貼ったときのプレビュー画像。そのアップデートの「注目トピック」を
+ * 手作りした 1600x900 を public/images/patch-notes/<日付>.jpg に置いておくと拾う。
+ * 無ければ Base 側の既定(images/ogp.jpg)に落ちる。heroes/[id].astro と同じ規約。
+ */
+const ogRel = `images/patch-notes/${note.date}.jpg`;
+const ogImage = existsSync(join(process.cwd(), "public", ogRel)) ? `/${ogRel}` : undefined;
 ---
 
 <Base
@@ -64,6 +74,9 @@ const summary = update
     summary ? `${summary}。` : ""
   }ゲームデータから抽出した数値の変更点と、Valve公式のパッチノート本文。`}
   ogType="article"
+  ogImage={ogImage}
+  ogImageWidth={ogImage ? 1600 : undefined}
+  ogImageHeight={ogImage ? 900 : undefined}
   datePublished={note.date}
   breadcrumbs={[
     { name: "パッチノート", path: `${base}/patch-notes/` },
