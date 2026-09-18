@@ -146,6 +146,44 @@ export function itemFieldMap(item, skipped) {
 }
 
 /**
+ * economy.json(generic_data.vdata 由来。src/parsers/economy.ts) 1版ぶんの
+ * 「比較対象フィールド名 → 数値」マップ。
+ *
+ * ヒーロー・アイテムに属さない、勝利条件・ソウル獲得まわりの全体調整
+ * (例: 2026-09-16 の「ガーディアン撃破報酬+10%」「オブジェクトのソウル配分 30%→25%」)を
+ * 拾うためのもの。表示名は src/lib/economyLabels.ts、向き(バフ/ナーフ)の判定は
+ * どちらのチームにも中立に効く値なので付けない(呼び出し側で good を null にする)。
+ *
+ * lanes(レーン名・色の定義)は数値ではなく、バランス調整として意味を持たないので対象外。
+ */
+export function economyFieldMap(economy) {
+  const out = {};
+  if (isNum(economy?.objectiveGoldNearPlayerSplitPct)) {
+    out["objectiveGoldNearPlayerSplitPct"] = economy.objectiveGoldNearPlayerSplitPct;
+  }
+  for (const o of economy?.objectiveGold ?? []) {
+    if (isNum(o.goldKill)) out[`objectiveGold.${o.key}.goldKill`] = o.goldKill;
+    if (isNum(o.goldOrbs)) out[`objectiveGold.${o.key}.goldOrbs`] = o.goldOrbs;
+  }
+  (economy?.trooperKillGoldShareFrac ?? []).forEach((v, i) => {
+    if (isNum(v)) out[`trooperKillGoldShareFrac.${i + 1}`] = v;
+  });
+  (economy?.heroKillGoldShareFrac ?? []).forEach((v, i) => {
+    if (isNum(v)) out[`heroKillGoldShareFrac.${i + 1}`] = v;
+  });
+  const rejuv = economy?.rejuv ?? {};
+  if (isNum(rejuv.buffDuration)) out["rejuv.buffDuration"] = rejuv.buffDuration;
+  if (isNum(rejuv.expirationWarningTiming)) out["rejuv.expirationWarningTiming"] = rejuv.expirationWarningTiming;
+  (rejuv.trooperHealthMult ?? []).forEach((v, i) => {
+    if (isNum(v)) out[`rejuv.trooperHealthMult.${i + 1}`] = v;
+  });
+  (rejuv.playerRespawnMult ?? []).forEach((v, i) => {
+    if (isNum(v)) out[`rejuv.playerRespawnMult.${i + 1}`] = v;
+  });
+  return out;
+}
+
+/**
  * 2つのフィールドマップを比べて変化した行を返す。
  * 片方にしか無いフィールドは before/after の一方を null にして返す
  * (2026-08-22 の「T2強化にスピリットスケーリング+0.45を追加」がこれに当たる。

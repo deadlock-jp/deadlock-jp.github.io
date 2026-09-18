@@ -29,7 +29,8 @@ export interface AdjustmentChange {
 
 export interface Adjustment {
   kind: AdjustmentKind;
-  target: "hero" | "item";
+  /** "system" はヒーロー・アイテムどちらにも属さない全体調整(economy.json 由来)。key は常に "economy" */
+  target: "hero" | "item" | "system";
   key: string;
   note?: string;
   changes?: AdjustmentChange[];

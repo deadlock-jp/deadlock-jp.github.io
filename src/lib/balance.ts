@@ -48,7 +48,7 @@ export interface BalanceChip {
 
 /** 個別ページでヒーロー/アイテム1件ぶんをまとめたもの */
 export interface BalanceEntity {
-  target: "hero" | "item";
+  target: "hero" | "item" | "system";
   key: string;
   name: string;
   href: string;
@@ -121,6 +121,39 @@ function toUpdate(u: SiteUpdate, base: string): BalanceUpdate {
         tag: null,
         href,
         changeCount: groups[0]?.rows.length ?? 0,
+      });
+      continue;
+    }
+
+    if (a.target === "system") {
+      /*
+       * ヒーロー・アイテムどちらにも属さない全体調整。専用ページを持たないので、
+       * 数値が今どうなっているかを確認できる場所(ソウル獲得システムのページ)へ飛ばす。
+       */
+      const href = `${base}/mechanics/souls/`;
+      const name = "システム全体の調整";
+      entities.push({
+        target: "system",
+        key: a.key,
+        name,
+        href,
+        kind: a.kind,
+        heroImage: null,
+        item: null,
+        groups,
+      });
+      counts[a.kind]++;
+      chips.push({
+        kind: a.kind,
+        name,
+        heroName: null,
+        heroImage: null,
+        abilityImage: null,
+        abilityKey: null,
+        item: null,
+        tag: null,
+        href,
+        changeCount: groups.reduce((n, g) => n + g.rows.length, 0),
       });
       continue;
     }

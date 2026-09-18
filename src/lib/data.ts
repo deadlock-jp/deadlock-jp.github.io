@@ -17,6 +17,12 @@ import type { AbilitiesFile, Ability } from "../types/ability.ts";
 import type { LocalizationFile } from "../types/localization.ts";
 import type { AdjustmentKind, AdjustmentChange, Adjustment } from "./adjustments.ts";
 import {
+  economyBucketOf,
+  ECONOMY_BUCKET_LABEL,
+  economyFieldLabel,
+  economyValueText,
+} from "./economyLabels.ts";
+import {
   isUpgradePath,
   upgradeTierOf,
   fieldNameOf,
@@ -634,7 +640,8 @@ export interface AdjustmentRow {
   good: boolean | null;
 }
 export interface AdjustmentGroup {
-  scope: "stat" | "weapon" | "ability" | "item";
+  /** "system" は target === "system"(economy.json由来)の1カテゴリ */
+  scope: "stat" | "weapon" | "ability" | "item" | "system";
   /** scope === "ability" のときだけ。/abilities/<key>/ のIDでもある */
   abilityKey: string | null;
   name: string;
@@ -720,6 +727,30 @@ export function adjustmentGroups(a: Adjustment): AdjustmentGroup[] {
         rows: changes.map((c) => adjustmentRow(c, it)),
       },
     ];
+  }
+
+  /*
+   * ヒーロー・アイテムどちらにも属さない全体調整(economy.json由来)。
+   * カテゴリ(建造物破壊のソウル/キルの分配/リジュビネーター)ごとに1つのまとまりにする
+   * (ヒーローのスキルごとの分け方と同じ考え方。1本にまとめると全部同じ「システム全体の
+   * 調整」という名前になって、上のエンティティ名と重複して読みにくくなる)。
+   */
+  if (a.target === "system") {
+    const buckets: ("objective" | "kill" | "rejuv")[] = ["objective", "kill", "rejuv"];
+    const groups: AdjustmentGroup[] = [];
+    for (const b of buckets) {
+      const rows = changes.filter((c) => economyBucketOf(c.path) === b);
+      if (rows.length === 0) continue;
+      groups.push({
+        scope: "system",
+        abilityKey: null,
+        name: ECONOMY_BUCKET_LABEL[b],
+        image: null,
+        kind: classifyChanges(rows),
+        rows: rows.map((c) => adjustmentRow(c, undefined)),
+      });
+    }
+    return groups;
   }
 
   const hero = heroByKey(a.key);
@@ -818,6 +849,22 @@ function adjustmentRow(c: AdjustmentChange, source: Ability | Item | undefined):
       isScale: false,
       fromText: c.from === null ? null : (comp ? t(comp.nameToken, componentId) : componentId),
       toText: c.to === null ? null : (comp ? t(comp.nameToken, componentId) : componentId),
+      good: c.good,
+    };
+  }
+  /*
+   * システム全体の調整(economy.json由来)。ゲーム側のトークンを持たない合成キーなので、
+   * 末尾の名前だけでなくパス全体から表示名を引く(economyLabels.ts)。
+   */
+  const economyLabel = economyFieldLabel(c.path);
+  if (economyLabel !== null) {
+    return {
+      path: c.path,
+      label: economyLabel,
+      tier: null,
+      isScale: false,
+      fromText: economyValueText(c.path, c.from),
+      toText: economyValueText(c.path, c.to),
       good: c.good,
     };
   }

@@ -29,6 +29,7 @@ import { fileURLToPath } from "node:url";
 import {
   heroFieldMap,
   itemFieldMap,
+  economyFieldMap,
   diffFieldMaps,
   goodOf,
   fieldNameOf,
@@ -36,6 +37,7 @@ import {
 } from "./diff/fields.mjs";
 import { classifyChanges, combineKinds, abilityKeyOf } from "../src/lib/adjustments.ts";
 import { nearestPatchNote } from "../src/lib/patchNotes.ts";
+import { economyFieldLabel, economyValueText } from "../src/lib/economyLabels.ts";
 
 const REPO_ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
 const args = process.argv.slice(2);
@@ -57,12 +59,22 @@ const sourceNote = nearestPatchNote(DATE);
 const TITLE = opt("title", sourceNote?.title ?? `${DATE} データ更新`);
 
 const load = (dir, file) => JSON.parse(readFileSync(join(REPO_ROOT, dir, file), "utf8"));
+/** economy.json は後から追加したファイルなので無い版もある。無ければ null */
+const tryLoad = (dir, file) => {
+  try {
+    return load(dir, file);
+  } catch {
+    return null;
+  }
+};
 const oldH = load(OLD_DIR, "heroes.json").heroes;
 const newH = load(NEW_DIR, "heroes.json").heroes;
 const oldI = load(OLD_DIR, "items.json").items;
 const newI = load(NEW_DIR, "items.json").items;
 const oldA = load(OLD_DIR, "abilities.json").abilities;
 const newA = load(NEW_DIR, "abilities.json").abilities;
+const oldEconomy = tryLoad(OLD_DIR, "economy.json");
+const newEconomy = tryLoad(NEW_DIR, "economy.json");
 
 /**
  * note(1行の要約)に使う表示名。after 側のスナップショットから引く。
@@ -109,6 +121,24 @@ function noteFor(changes, max = 3) {
       if (c.from === null) return `${tier}${nm} ${fmtN(c.to)} を追加`;
       if (c.to === null) return `${tier}${nm} を削除`;
       return `${tier}${nm} ${fmtN(c.from)}→${fmtN(c.to)}`;
+    })
+    .join(" / ");
+  return head + (changes.length > max ? " ほか" : "");
+}
+
+/**
+ * システム全体(economy.json)の変更1件ぶんの要約文。
+ * ヒーロー/アイテムの noteFor と違い、ゲーム側のトークンを持たないので
+ * 表示名は economyFieldLabel(パス全体から引く)を使う。
+ */
+function noteForSystem(changes, max = 3) {
+  const head = changes
+    .slice(0, max)
+    .map((c) => {
+      const nm = economyFieldLabel(c.path) ?? c.path;
+      if (c.from === null) return `${nm} ${economyValueText(c.path, c.to)} を追加`;
+      if (c.to === null) return `${nm} を削除`;
+      return `${nm} ${economyValueText(c.path, c.from)}→${economyValueText(c.path, c.to)}`;
     })
     .join(" / ");
   return head + (changes.length > max ? " ほか" : "");
@@ -164,6 +194,28 @@ for (const id of Object.keys(newI)) {
     note: noteFor(changes),
     changes,
   });
+}
+
+// --- システム全体(economy.json。ヒーロー・アイテムどちらにも属さない全体調整) ---
+if (oldEconomy && newEconomy) {
+  const rows = diffFieldMaps(economyFieldMap(oldEconomy), economyFieldMap(newEconomy));
+  if (rows.length > 0) {
+    /*
+     * good は常に null にする。どちらのチームにも同じルールで効く変更で、
+     * 「有利/不利」の色分けは意味を持たない(誰か1人が得をする調整ではない)。
+     * classifyChanges は good===null しか無ければ "neutral" に畳まれる。
+     */
+    const changes = rows.map((row) => ({ path: row.path, from: row.before, to: row.after, good: null }));
+    adjustments.push({
+      kind: classifyChanges(changes),
+      target: "system",
+      key: "economy",
+      note: noteForSystem(changes),
+      changes,
+    });
+  }
+} else {
+  console.error("※ economy.json が無い版を含むため、システム全体の調整は比較していません");
 }
 
 adjustments.sort((a, b) => a.target.localeCompare(b.target) || a.key.localeCompare(b.key));

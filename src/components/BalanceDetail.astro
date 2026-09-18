@@ -57,7 +57,9 @@ const { entities } = Astro.props;
                     <AbilityIcon name={g.name} image={g.image} size={26} />
                   </a>
                 ) : (
-                  <span class="gmark">{g.scope === "weapon" ? "銃" : "基"}</span>
+                  <span class="gmark">
+                    {g.scope === "weapon" ? "銃" : g.scope === "system" ? "全" : "基"}
+                  </span>
                 )}
               </span>
             )}

@@ -23,6 +23,7 @@ import { fileURLToPath } from "node:url";
 import {
   heroFieldMap,
   itemFieldMap,
+  economyFieldMap,
   diffFieldMaps,
 } from "./diff/fields.mjs";
 
@@ -66,7 +67,14 @@ const loadSnap = (version) => {
     process.exit(1);
   }
   const read = (name) => JSON.parse(readFileSync(join(dir, name), "utf8"));
-  return { heroes: read("heroes.json").heroes, items: read("items.json").items, abilities: read("abilities.json").abilities };
+  /* economy.json は後から追加したファイルなので、古いスナップショットには無い */
+  const economyPath = join(dir, "economy.json");
+  return {
+    heroes: read("heroes.json").heroes,
+    items: read("items.json").items,
+    abilities: read("abilities.json").abilities,
+    economy: existsSync(economyPath) ? JSON.parse(readFileSync(economyPath, "utf8")) : null,
+  };
 };
 
 const before = loadSnap(FROM);
@@ -114,6 +122,19 @@ for (const id of itemIds) {
   const aMap = itemFieldMap(ai, skipped);
   for (const row of diffFieldMaps(bMap, aMap)) {
     entries.push({ kind: "changed", type: "item", id, path: row.path, before: row.before, after: row.after });
+  }
+}
+
+/*
+ * --- システム全体(economy.json。generic_data.vdata 由来) ---
+ * 古いスナップショットに economy.json が無い版どうしの比較では、片方が無ければ
+ * 全項目が「追加」扱いになってノイズになるだけなので、両方揃っているときだけ見る。
+ */
+if (before.economy && after.economy) {
+  const bMap = economyFieldMap(before.economy);
+  const aMap = economyFieldMap(after.economy);
+  for (const row of diffFieldMaps(bMap, aMap)) {
+    entries.push({ kind: "changed", type: "system", id: "economy", path: row.path, before: row.before, after: row.after });
   }
 }
 
