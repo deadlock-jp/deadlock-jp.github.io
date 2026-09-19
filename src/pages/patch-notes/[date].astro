@@ -13,6 +13,7 @@ import BalanceDetail from "../../components/BalanceDetail.astro";
 import AbilityHoverCards from "../../components/AbilityHoverCards.astro";
 import { patchNotes, ADJUSTMENT_LABEL } from "../../lib/data.ts";
 import { balanceUpdateByDate } from "../../lib/balance.ts";
+import { updateNoteSections } from "../../lib/updateNotes.ts";
 
 export function getStaticPaths() {
   return patchNotes().map((n) => ({ params: { date: n.date }, props: { note: n } }));
@@ -21,6 +22,8 @@ export function getStaticPaths() {
 const { note } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const update = balanceUpdateByDate(note.date, base);
+/* General 節のうち、対応する数値がゲームデータに無くて差分に出てこない変更 */
+const generalSections = updateNoteSections(note.date);
 
 /** "## 見出し" 行と通常行を分けて、見出しごとの塊にする(一覧ページと同じ規則) */
 function toSections(lines: string[]): { heading: string | null; items: string[] }[] {
@@ -91,6 +94,26 @@ const ogImage = existsSync(join(process.cwd(), "public", ogRel)) ? `/${ogRel}` :
     )}
     {summary && <span class="sum">{summary}</span>}
   </p>
+
+  {generalSections.length > 0 && (
+    <section class="block panel">
+      <h2>全体の変更</h2>
+      <p class="note">
+        ヒーロー・アイテムのどちらにも属さない変更のうち、ゲームデータに数値が無く
+        下のバランス調整に出てこないものです。公式パッチノートを読んで手で書いています。
+      </p>
+      {generalSections.map((s) => (
+        <div class="gsection">
+          <h3>{s.title}</h3>
+          <ul>
+            {s.lines.map((line) => (
+              <li>{line}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </section>
+  )}
 
   {update ? (
     <section class="block panel">
@@ -187,6 +210,7 @@ const ogImage = existsSync(join(process.cwd(), "public", ogRel)) ? `/${ogRel}` :
     .legend .good::before { border-color: var(--c-buff-dim); background: var(--c-buff-bg); }
     .legend .bad::before { border-color: var(--c-nerf-dim); background: var(--c-nerf-bg); }
 
+    .gsection h3,
     .psection h3 {
       font-size: 12px;
       letter-spacing: 0.04em;
@@ -194,6 +218,13 @@ const ogImage = existsSync(join(process.cwd(), "public", ogRel)) ? `/${ogRel}` :
       margin: var(--sp-3) 0 var(--sp-1);
       border: none;
       padding: 0;
+    }
+    .gsection:first-of-type h3 { margin-top: 0; }
+    .gsection ul {
+      margin: 0;
+      padding-left: 1.2em;
+      font-size: 13px;
+      line-height: 1.9;
     }
     .psection ul {
       margin: 0;

@@ -1,7 +1,7 @@
 {
   "from": "6689",
   "to": "6694",
-  "generatedAt": "2026-09-17T06:03:44.113Z",
+  "generatedAt": "2026-09-19T02:45:27.749Z",
   "entries": [
     {
       "kind": "changed",
@@ -1642,6 +1642,30 @@
       "path": "upgrades.T1.SlowPercent",
       "before": 20,
       "after": 16
+    },
+    {
+      "kind": "changed",
+      "type": "system",
+      "id": "economy",
+      "path": "objectiveGold.Tier1.goldKill",
+      "before": 1250,
+      "after": 1375
+    },
+    {
+      "kind": "changed",
+      "type": "system",
+      "id": "economy",
+      "path": "objectiveGold.Tier2.goldKill",
+      "before": 3500,
+      "after": 3675
+    },
+    {
+      "kind": "changed",
+      "type": "system",
+      "id": "economy",
+      "path": "objectiveGoldNearPlayerSplitPct",
+      "before": 30,
+      "after": 25
     }
   ],
   "excludedFieldCount": 26

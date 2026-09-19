@@ -10,7 +10,7 @@
       "fromVersion": "6689",
       "toVersion": "6694",
       "changes": [
-        "ヒーロー・アイテムの数値差分から自動生成 (バフ 6 / ナーフ 41 / 混在 17、変更項目 205)"
+        "ヒーロー・アイテムの数値差分から自動生成 (バフ 6 / ナーフ 41 / 混在 17、変更項目 208)"
       ],
       "adjustments": [
         {
@@ -1768,6 +1768,32 @@
               "from": 20,
               "to": 16,
               "good": false
+            }
+          ]
+        },
+        {
+          "kind": "neutral",
+          "target": "system",
+          "key": "economy",
+          "note": "ガーディアン（Tier1）を破壊した際のソウル 1,250→1,375 / ウォーカー（Tier2）を破壊した際のソウル 3,500→3,675 / 破壊に関わった付近のプレイヤーへの配分率 30%→25%",
+          "changes": [
+            {
+              "path": "objectiveGold.Tier1.goldKill",
+              "from": 1250,
+              "to": 1375,
+              "good": null
+            },
+            {
+              "path": "objectiveGold.Tier2.goldKill",
+              "from": 3500,
+              "to": 3675,
+              "good": null
+            },
+            {
+              "path": "objectiveGoldNearPlayerSplitPct",
+              "from": 30,
+              "to": 25,
+              "good": null
             }
           ]
         }
