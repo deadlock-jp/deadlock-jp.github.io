@@ -49,23 +49,24 @@ const { entities } = Astro.props;
 
         {e.groups.map((g) => (
           <div class="group" data-kind={g.kind} data-scope={g.scope}>
-            {/* アイテムは左にアイコンが出ているので、この列は作らない */}
+            {/* アイテムは左にアイコンが出ているので、この行は作らない */}
             {g.scope !== "item" && (
-              <span class="gicon">
-                {g.scope === "ability" && g.image ? (
-                  <a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/abilities/${g.abilityKey}/`} data-abilitycard={g.abilityKey}>
-                    <AbilityIcon name={g.name} image={g.image} size={26} />
-                  </a>
-                ) : (
-                  <span class="gmark">
-                    {g.scope === "weapon" ? "銃" : g.scope === "system" ? "全" : "基"}
-                  </span>
-                )}
-              </span>
+              <div class="ghead">
+                <span class="gicon">
+                  {g.scope === "ability" && g.image ? (
+                    <a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/abilities/${g.abilityKey}/`} data-abilitycard={g.abilityKey}>
+                      <AbilityIcon name={g.name} image={g.image} size={26} />
+                    </a>
+                  ) : (
+                    <span class="gmark">
+                      {g.scope === "weapon" ? "銃" : g.scope === "system" ? "全" : "基"}
+                    </span>
+                  )}
+                </span>
+                <p class="gname">{g.name}</p>
+              </div>
             )}
             <div class="grows">
-              {/* アイテムは名前が上の行に出ているので繰り返さない */}
-              {g.scope !== "item" && <p class="gname">{g.name}</p>}
               <BalanceRows rows={g.rows} />
             </div>
           </div>
@@ -118,22 +119,35 @@ const { entities } = Astro.props;
     min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--sp-2);
+    gap: var(--sp-3);
   }
-  .ename { margin: 0; font-size: 14px; font-weight: 700; line-height: 1.4; }
+  .ename { margin: 0 0 2px; font-size: 14px; font-weight: 700; line-height: 1.4; }
   .ename a { color: var(--c-text-strong); text-decoration: none; }
   .ename a:hover { color: var(--c-accent); }
 
+  /*
+   * 1スキル/1ステータス分のまとまり。アイコン+名前(ghead)を確実に横並びで
+   * 揃えたうえで、下のチップ列をアイコン幅ぶんインデントして「この名前の
+   * チップ群である」という所属を目で追えるようにする。まとまり同士は
+   * 破線で区切り、どこからどこまでが1グループかを常に分かるようにする
+   * (2026-09-20: アイコン・名前・チップの高さがバラバラで「まとまりを
+   * 感じない」という指摘を受けて全面的に組み直した)。
+   */
   .group {
-    display: grid;
-    grid-template-columns: 26px minmax(0, 1fr);
+    padding-bottom: var(--sp-3);
+    border-bottom: 1px dashed var(--c-border);
+  }
+  .group:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+  .ghead {
+    display: flex;
+    align-items: center;
     gap: 9px;
-    align-items: start;
+    margin-bottom: 7px;
   }
-  .group[data-scope="item"] {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .gicon { line-height: 0; }
+  .gicon { line-height: 0; flex: none; }
   .gicon a { display: block; border: 2px solid transparent; border-radius: 6px; }
   .group[data-kind="buff"] .gicon a { border-color: var(--c-buff-dim); }
   .group[data-kind="nerf"] .gicon a { border-color: var(--c-nerf-dim); }
@@ -151,10 +165,11 @@ const { entities } = Astro.props;
     font-size: 11px;
     line-height: 1;
   }
+  .gname { margin: 0; font-size: 12px; font-weight: 700; color: var(--c-text-muted); line-height: 1.4; }
   .grows { min-width: 0; }
-  .gname { margin: 0 0 3px; font-size: 12px; color: var(--c-text-muted); line-height: 1.5; }
-
-
+  /* アイテムはアイコン・名前をこのグループの中に持たないので、インデントもしない */
+  .group[data-scope="item"] .grows { padding-left: 0; }
+  .group:not([data-scope="item"]) .grows { padding-left: 35px; }
 
   @media (max-width: 560px) {
     .entity { grid-template-columns: 36px minmax(0, 1fr); gap: 9px; }
