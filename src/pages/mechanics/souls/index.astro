@@ -2,11 +2,20 @@
 /**
  * ソウル獲得システムのリファレンス。
  *
- * 数値は heroes.json / items.json / economy.json（generic_data.vdata 由来）から自動で出す。
- * 手で書くのは data/souls-notes.json のTIPSだけ（CLAUDE.md ルール6）。
+ * 数値は heroes.json / items.json / economy.json（generic_data.vdata と misc.vdata 由来）から
+ * 自動で出す。手で書くのは data/souls-notes.json のTIPSだけ（CLAUDE.md ルール6）。
+ * ただしカムバックのTIPSだけは、ツマミがコンソール変数にあって抽出できないため数値を含む。
+ * そのことがページ上で分かるように、該当セクションには断りを出す。
  */
 import Base from "../../../layouts/Base.astro";
-import { economyTable, objectiveGold, objectiveGoldNearPlayerSplitPct, killShareFrac } from "../../../lib/souls.ts";
+import {
+  economyTable,
+  objectiveGold,
+  objectiveGoldNearPlayerSplitPct,
+  killShareFrac,
+  riftComeback,
+  breakableSpawnTimes,
+} from "../../../lib/souls.ts";
 import { souls, soulsNotes } from "../../../lib/data.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -15,6 +24,9 @@ const objGold = objectiveGold();
 const objGoldSplitPct = objectiveGoldNearPlayerSplitPct();
 const shareFrac = killShareFrac();
 const generalNotes = soulsNotes("general");
+const rift = riftComeback();
+const breakables = breakableSpawnTimes();
+const comebackNotes = soulsNotes("comeback");
 
 const pct = (n: number): string => `${Math.round(n * 100)}%`;
 ---
@@ -96,6 +108,63 @@ const pct = (n: number): string => `${Math.round(n * 100)}%`;
     )}
   </section>
 
+  {(rift.length > 0 || comebackNotes.length > 0) && (
+    <section class="block panel">
+      <h2>カムバック（劣勢側への補正）</h2>
+      <p class="tlead">
+        ネットワースで劣勢のチームに入るソウルと耐性の補正。
+        表は不安定な裂け目を確保した側が受ける補正で、ゲームデータから自動抽出している。
+      </p>
+      {rift.length > 0 && (
+        <table>
+          <thead><tr><th>項目</th><th>値</th></tr></thead>
+          <tbody>
+            {rift.map((r) => (
+              <tr>
+                <td>{r.label}</td>
+                <td class="n">{r.value}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+      {comebackNotes.length > 0 && (
+        <div class="snotes">
+          <span class="nt">TIPS</span>
+          <ul>
+            {comebackNotes.map((tip) => <li>{tip}</li>)}
+          </ul>
+          <p class="src">
+            この項目の数値だけは、ゲームのコンソール変数にあってデータファイルから抽出できないため、
+            手で書き写しています。他のページの数値はすべて自動抽出です。
+          </p>
+        </div>
+      )}
+    </section>
+  )}
+
+  {breakables.length > 0 && (
+    <section class="block panel">
+      <h2>破壊可能オブジェクトの出現</h2>
+      <p class="tlead">
+        壊すとソウルが手に入るオブジェクトの出現時間。
+        ゲームデータ側は配置に名前を持たないため、定義された順に並べている。
+      </p>
+      <table>
+        <thead><tr><th>配置</th><th>初回出現</th><th>再出現間隔</th></tr></thead>
+        <tbody>
+          {breakables.map((b) => (
+            <tr>
+              <td>配置{b.index}</td>
+              <td class="n">{b.initialSpawnMinutes}分</td>
+              <td class="n">{b.respawnMinutes}分</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+  )}
+
   <section class="block panel">
     <h2>アイテム・レベルの価格</h2>
     <p class="tlead">アイテムの価格とレベルアップに必要なソウル、累計投資額による購入ボーナス。</p>
@@ -173,8 +242,9 @@ const pct = (n: number): string => `${Math.round(n * 100)}%`;
   </section>
 
   <p class="foot">
-    数値は <code>heroes.vdata</code> / <code>items.vdata</code> / <code>generic_data.vdata</code>
-    から自動抽出したものです。 <a href={`${base}/about/`}>このサイトについて</a>
+    数値は <code>heroes.vdata</code> / <code>items.vdata</code> / <code>generic_data.vdata</code> /
+    <code>misc.vdata</code> から自動抽出したものです（カムバックのTIPSを除く）。
+    <a href={`${base}/about/`}>このサイトについて</a>
   </p>
 
   <style>
@@ -266,6 +336,12 @@ const pct = (n: number): string => `${Math.round(n * 100)}%`;
       padding-left: 1.2em;
       font-size: 12px;
       color: var(--c-text-muted);
+      line-height: 1.7;
+    }
+    .snotes .src {
+      margin: var(--sp-2) 0 0;
+      font-size: 11px;
+      color: var(--c-text-faint);
       line-height: 1.7;
     }
 

@@ -2,9 +2,9 @@
  * ソウル獲得システムのリファレンス(/mechanics/souls/)が読むデータ。
  *
  * アイテム価格・レベル必要ソウル・購入ボーナスは heroes.json / items.json から、
- * 建造物破壊のソウル・キル時の分配率は data/snapshots/<版>/economy.json
- * （generic_data.vdata から抽出。src/parsers/economy.ts）から引く。
- * 数値はすべて自動抽出（CLAUDE.md ルール6）。
+ * 建造物破壊のソウル・キル時の分配率・裂け目のカムバック補正は
+ * data/snapshots/<版>/economy.json（generic_data.vdata と misc.vdata から抽出。
+ * src/parsers/economy.ts）から引く。数値はすべて自動抽出（CLAUDE.md ルール6）。
  */
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -80,6 +80,49 @@ export interface KillShareRow {
   count: number;
   trooperFrac: number;
   heroFrac: number;
+}
+
+export interface RiftComebackRow {
+  label: string;
+  value: string;
+}
+
+/**
+ * 不安定な裂け目の劣勢側補正。その版に存在するフィールドだけを行にする
+ * （2026-09-16 に一律耐性から時間でスケールする方式へ変わっており、
+ *  どちらの方式かはデータ側にしか書かれていない）。
+ */
+export function riftComeback(): RiftComebackRow[] {
+  const r = economyFile.riftComeback;
+  if (!r) return [];
+  const rows: RiftComebackRow[] = [];
+  const add = (label: string, v: number | null, unit = "%") => {
+    if (v !== null) rows.push({ label, value: `${v}${unit}` });
+  };
+  add("劣勢時のボーナス賞金", r.bounty);
+  add("弾薬耐性（一律）", r.bulletResist);
+  add("スピリット耐性（一律）", r.techResist);
+  add("状態異常耐性（一律）", r.statusResist);
+  add("耐性上限（試合開始時）", r.resistMaxAtStart);
+  add("耐性上限の増加（1分ごと）", r.resistMaxPerMinute);
+  add("耐性上限の頭打ち", r.resistMaxCap);
+  return rows;
+}
+
+export interface BreakableSpawnRow {
+  /** ゲーム側の配列に名前が無いので、何番目の配置かだけを出す */
+  index: number;
+  initialSpawnMinutes: number;
+  respawnMinutes: number;
+}
+
+/** 破壊可能オブジェクト(クレート)の出現時間。2026-09-16 より前の版には無いので空になる */
+export function breakableSpawnTimes(): BreakableSpawnRow[] {
+  return (economyFile.breakableSpawnTimes ?? []).map((b, i) => ({
+    index: i + 1,
+    initialSpawnMinutes: b.initialSpawnTime / 60,
+    respawnMinutes: b.respawnInterval / 60,
+  }));
 }
 
 /** キルに絡んだ人数によるソウルの取り分。人数が増えるほど1人あたりは減る */

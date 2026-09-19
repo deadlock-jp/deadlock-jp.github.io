@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "upstreamCommit": "6689",
-  "generatedAt": "2026-09-19T02:45:12.745Z",
+  "generatedAt": "2026-09-19T04:08:56.051Z",
   "lanes": [
     {
       "name": "White",
@@ -124,5 +124,15 @@
       0.4,
       0.3
     ]
+  },
+  "breakableSpawnTimes": [],
+  "riftComeback": {
+    "bounty": 170,
+    "techResist": 35,
+    "bulletResist": 35,
+    "statusResist": 35,
+    "resistMaxAtStart": null,
+    "resistMaxPerMinute": null,
+    "resistMaxCap": null
   }
 }

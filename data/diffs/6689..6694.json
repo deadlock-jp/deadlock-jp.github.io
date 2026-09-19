@@ -1,7 +1,7 @@
 {
   "from": "6689",
   "to": "6694",
-  "generatedAt": "2026-09-19T02:45:27.749Z",
+  "generatedAt": "2026-09-19T04:09:10.963Z",
   "entries": [
     {
       "kind": "changed",
@@ -1647,6 +1647,54 @@
       "kind": "changed",
       "type": "system",
       "id": "economy",
+      "path": "breakableSpawnTimes.1.initialSpawnTime",
+      "before": null,
+      "after": 180
+    },
+    {
+      "kind": "changed",
+      "type": "system",
+      "id": "economy",
+      "path": "breakableSpawnTimes.1.respawnInterval",
+      "before": null,
+      "after": 180
+    },
+    {
+      "kind": "changed",
+      "type": "system",
+      "id": "economy",
+      "path": "breakableSpawnTimes.2.initialSpawnTime",
+      "before": null,
+      "after": 300
+    },
+    {
+      "kind": "changed",
+      "type": "system",
+      "id": "economy",
+      "path": "breakableSpawnTimes.2.respawnInterval",
+      "before": null,
+      "after": 300
+    },
+    {
+      "kind": "changed",
+      "type": "system",
+      "id": "economy",
+      "path": "breakableSpawnTimes.3.initialSpawnTime",
+      "before": null,
+      "after": 600
+    },
+    {
+      "kind": "changed",
+      "type": "system",
+      "id": "economy",
+      "path": "breakableSpawnTimes.3.respawnInterval",
+      "before": null,
+      "after": 180
+    },
+    {
+      "kind": "changed",
+      "type": "system",
+      "id": "economy",
       "path": "objectiveGold.Tier1.goldKill",
       "before": 1250,
       "after": 1375
@@ -1666,6 +1714,62 @@
       "path": "objectiveGoldNearPlayerSplitPct",
       "before": 30,
       "after": 25
+    },
+    {
+      "kind": "changed",
+      "type": "system",
+      "id": "economy",
+      "path": "riftComeback.bounty",
+      "before": 170,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "system",
+      "id": "economy",
+      "path": "riftComeback.bulletResist",
+      "before": 35,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "system",
+      "id": "economy",
+      "path": "riftComeback.resistMaxAtStart",
+      "before": null,
+      "after": 10
+    },
+    {
+      "kind": "changed",
+      "type": "system",
+      "id": "economy",
+      "path": "riftComeback.resistMaxCap",
+      "before": null,
+      "after": 40
+    },
+    {
+      "kind": "changed",
+      "type": "system",
+      "id": "economy",
+      "path": "riftComeback.resistMaxPerMinute",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "system",
+      "id": "economy",
+      "path": "riftComeback.statusResist",
+      "before": 35,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "system",
+      "id": "economy",
+      "path": "riftComeback.techResist",
+      "before": 35,
+      "after": null
     }
   ],
   "excludedFieldCount": 26

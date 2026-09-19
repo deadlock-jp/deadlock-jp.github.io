@@ -21,6 +21,7 @@ import {
   ECONOMY_BUCKET_LABEL,
   economyFieldLabel,
   economyValueText,
+  type EconomyBucket,
 } from "./economyLabels.ts";
 import {
   isUpgradePath,
@@ -731,12 +732,12 @@ export function adjustmentGroups(a: Adjustment): AdjustmentGroup[] {
 
   /*
    * ヒーロー・アイテムどちらにも属さない全体調整(economy.json由来)。
-   * カテゴリ(建造物破壊のソウル/キルの分配/リジュベネーター)ごとに1つのまとまりにする
+   * カテゴリ(建造物破壊のソウル/キルの分配/…)ごとに1つのまとまりにする
    * (ヒーローのスキルごとの分け方と同じ考え方。1本にまとめると全部同じ「システム全体の
    * 調整」という名前になって、上のエンティティ名と重複して読みにくくなる)。
    */
   if (a.target === "system") {
-    const buckets: ("objective" | "kill" | "rejuv")[] = ["objective", "kill", "rejuv"];
+    const buckets: EconomyBucket[] = ["objective", "kill", "rejuv", "rift", "breakable"];
     const groups: AdjustmentGroup[] = [];
     for (const b of buckets) {
       const rows = changes.filter((c) => economyBucketOf(c.path) === b);

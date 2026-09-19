@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "upstreamCommit": "6697",
-  "generatedAt": "2026-09-18T09:00:03.064Z",
+  "generatedAt": "2026-09-19T04:08:56.203Z",
   "lanes": [
     {
       "name": "White",
@@ -124,5 +124,28 @@
       0.4,
       0.3
     ]
+  },
+  "breakableSpawnTimes": [
+    {
+      "initialSpawnTime": 180,
+      "respawnInterval": 180
+    },
+    {
+      "initialSpawnTime": 300,
+      "respawnInterval": 300
+    },
+    {
+      "initialSpawnTime": 600,
+      "respawnInterval": 180
+    }
+  ],
+  "riftComeback": {
+    "bounty": null,
+    "techResist": null,
+    "bulletResist": null,
+    "statusResist": null,
+    "resistMaxAtStart": 10,
+    "resistMaxPerMinute": 1,
+    "resistMaxCap": 40
   }
 }

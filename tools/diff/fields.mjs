@@ -146,7 +146,7 @@ export function itemFieldMap(item, skipped) {
 }
 
 /**
- * economy.json(generic_data.vdata 由来。src/parsers/economy.ts) 1版ぶんの
+ * economy.json(generic_data.vdata + misc.vdata 由来。src/parsers/economy.ts) 1版ぶんの
  * 「比較対象フィールド名 → 数値」マップ。
  *
  * ヒーロー・アイテムに属さない、勝利条件・ソウル獲得まわりの全体調整
@@ -180,6 +180,14 @@ export function economyFieldMap(economy) {
   (rejuv.playerRespawnMult ?? []).forEach((v, i) => {
     if (isNum(v)) out[`rejuv.playerRespawnMult.${i + 1}`] = v;
   });
+  (economy?.breakableSpawnTimes ?? []).forEach((b, i) => {
+    if (isNum(b.initialSpawnTime)) out[`breakableSpawnTimes.${i + 1}.initialSpawnTime`] = b.initialSpawnTime;
+    if (isNum(b.respawnInterval)) out[`breakableSpawnTimes.${i + 1}.respawnInterval`] = b.respawnInterval;
+  });
+  // null のフィールドは isNum で落ちる。方式が変わって消えた項目は「削除」として出る
+  for (const [k, v] of Object.entries(economy?.riftComeback ?? {})) {
+    if (isNum(v)) out[`riftComeback.${k}`] = v;
+  }
   return out;
 }
 

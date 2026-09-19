@@ -85,7 +85,11 @@ function parseAll(
   );
   const abilities = parseAbilities(join(scripts, "abilities.vdata"), sha);
   const objects = parseObjects(join(scripts, "npc_units.vdata"), sha);
-  const economy = parseEconomy(join(scripts, "generic_data.vdata"), sha);
+  const economy = parseEconomy(
+    join(scripts, "generic_data.vdata"),
+    join(scripts, "misc.vdata"),
+    sha,
+  );
 
   const heroTotal = Object.keys(heroes.heroes).length;
   const released = Object.values(heroes.heroes).filter((h) => h.released).length;

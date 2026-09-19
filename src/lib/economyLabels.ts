@@ -23,18 +23,35 @@ const OBJECTIVE_LABEL: Record<string, string> = {
   PatronPhase1: "パトロン（第1形態）",
 };
 
-/** どのカードにまとめるか(建造物破壊ソウル / キルの分配 / リジュベネーター) */
-export function economyBucketOf(path: string): "objective" | "kill" | "rejuv" | null {
+export type EconomyBucket = "objective" | "kill" | "rejuv" | "rift" | "breakable";
+
+/** どのカードにまとめるか */
+export function economyBucketOf(path: string): EconomyBucket | null {
   if (path === "objectiveGoldNearPlayerSplitPct" || path.startsWith("objectiveGold.")) return "objective";
   if (path.startsWith("trooperKillGoldShareFrac.") || path.startsWith("heroKillGoldShareFrac.")) return "kill";
   if (path.startsWith("rejuv.")) return "rejuv";
+  if (path.startsWith("riftComeback.")) return "rift";
+  if (path.startsWith("breakableSpawnTimes.")) return "breakable";
   return null;
 }
 
-export const ECONOMY_BUCKET_LABEL: Record<"objective" | "kill" | "rejuv", string> = {
+export const ECONOMY_BUCKET_LABEL: Record<EconomyBucket, string> = {
   objective: "建造物破壊のソウル",
   kill: "キルのソウル分配",
   rejuv: "リジュベネーター",
+  rift: "不安定な裂け目のカムバック",
+  breakable: "破壊可能オブジェクトの出現",
+};
+
+/** riftComeback.<名前> の表示名。旧方式(一律耐性)と新方式(時間でスケール)が混在する */
+const RIFT_LABEL: Record<string, string> = {
+  bounty: "劣勢時のボーナス賞金",
+  techResist: "スピリット耐性（一律）",
+  bulletResist: "弾薬耐性（一律）",
+  statusResist: "状態異常耐性（一律）",
+  resistMaxAtStart: "耐性上限（試合開始時）",
+  resistMaxPerMinute: "耐性上限の増加（1分ごと）",
+  resistMaxCap: "耐性上限の頭打ち",
 };
 
 /** 表示ラベル。economy.json 由来のパスでなければ null */
@@ -58,6 +75,15 @@ export function economyFieldLabel(path: string): string | null {
   m = /^rejuv\.playerRespawnMult\.(\d+)$/.exec(path);
   if (m) return `リジュベネーター保持中のリスポーン時間倍率（${m[1]}段目）`;
 
+  m = /^riftComeback\.(\w+)$/.exec(path);
+  if (m) return RIFT_LABEL[m[1]!] ?? m[1]!;
+
+  /* ゲーム側の配列に名前が無いので、何番目の配置かだけを出す */
+  m = /^breakableSpawnTimes\.(\d+)\.initialSpawnTime$/.exec(path);
+  if (m) return `破壊可能オブジェクトの初回出現（配置${m[1]}）`;
+  m = /^breakableSpawnTimes\.(\d+)\.respawnInterval$/.exec(path);
+  if (m) return `破壊可能オブジェクトの再出現間隔（配置${m[1]}）`;
+
   return null;
 }
 
@@ -73,5 +99,7 @@ export function economyValueText(path: string, value: number | null): string | n
   if (path.startsWith("rejuv.trooperHealthMult.") || path.startsWith("rejuv.playerRespawnMult.")) {
     return `×${value}`;
   }
+  if (path.startsWith("riftComeback.")) return `${value}%`;
+  if (path.startsWith("breakableSpawnTimes.")) return `${value / 60}分`;
   return String(value);
 }

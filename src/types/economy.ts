@@ -1,4 +1,9 @@
-/** economy.json のスキーマ定義(generic_data.vdata の試合ルール・ソウル関連の定数) */
+/**
+ * economy.json のスキーマ定義(試合ルール・ソウル関連の定数)。
+ *
+ * 出処は generic_data.vdata と misc.vdata の2つ。
+ * riftComeback だけが misc.vdata(citadel_koth_cashin)由来で、残りは generic_data.vdata。
+ */
 
 export interface LaneInfo {
   name: string;
@@ -24,6 +29,36 @@ export interface RejuvParams {
   playerRespawnMult: number[];
 }
 
+/** 破壊可能オブジェクト(クレート)の出現時間。並びはゲーム側の定義順で、どの配置がどれかは名前を持たない */
+export interface BreakableSpawnTime {
+  /** 試合開始から初回出現までの秒数 */
+  initialSpawnTime: number;
+  /** 壊されてから再出現するまでの秒数 */
+  respawnInterval: number;
+}
+
+/**
+ * 不安定な裂け目の、劣勢チームへの補正(misc.vdata の citadel_koth_cashin)。
+ *
+ * 2026-09-16 に方式が変わり、フィールドごと入れ替わった。どちらの方式の版も
+ * 同じ形で持てるように、その版に無いものは null にする（0 で埋めると
+ * 「一律耐性が35%から0%になった」という嘘の差分になる）。
+ */
+export interface RiftComeback {
+  /** 劣勢なら付いていた定額のボーナス賞金(%)。2026-09-16 に廃止 */
+  bounty: number | null;
+  /** 旧方式の一律耐性(%)。スケール方式になって以降は null */
+  techResist: number | null;
+  bulletResist: number | null;
+  statusResist: number | null;
+  /** 新方式: 試合開始時点の耐性上限(%) */
+  resistMaxAtStart: number | null;
+  /** 新方式: 耐性上限の1分あたりの増加(%) */
+  resistMaxPerMinute: number | null;
+  /** 新方式: 耐性上限が頭打ちになる値(%) */
+  resistMaxCap: number | null;
+}
+
 export interface EconomyFile {
   schemaVersion: number;
   upstreamCommit: string;
@@ -36,4 +71,7 @@ export interface EconomyFile {
   /** 建造物破壊ソウルのうち、破壊に関わった近くのプレイヤーへ配られる割合(%)。残りはチーム全体に均等配分 */
   objectiveGoldNearPlayerSplitPct: number;
   rejuv: RejuvParams;
+  /** 2026-09-16 に追加されたフィールド。それより前の版には無いので空配列になる */
+  breakableSpawnTimes: BreakableSpawnTime[];
+  riftComeback: RiftComeback;
 }

@@ -10,7 +10,7 @@
       "fromVersion": "6689",
       "toVersion": "6694",
       "changes": [
-        "ヒーロー・アイテムの数値差分から自動生成 (バフ 6 / ナーフ 41 / 混在 17、変更項目 208)"
+        "ヒーロー・アイテムの数値差分から自動生成 (バフ 6 / ナーフ 41 / 混在 17、変更項目 221)"
       ],
       "adjustments": [
         {
@@ -1775,8 +1775,44 @@
           "kind": "neutral",
           "target": "system",
           "key": "economy",
-          "note": "ガーディアン（Tier1）を破壊した際のソウル 1,250→1,375 / ウォーカー（Tier2）を破壊した際のソウル 3,500→3,675 / 破壊に関わった付近のプレイヤーへの配分率 30%→25%",
+          "note": "破壊可能オブジェクトの初回出現（配置1） 3分 を追加 / 破壊可能オブジェクトの再出現間隔（配置1） 3分 を追加 / 破壊可能オブジェクトの初回出現（配置2） 5分 を追加 ほか",
           "changes": [
+            {
+              "path": "breakableSpawnTimes.1.initialSpawnTime",
+              "from": null,
+              "to": 180,
+              "good": null
+            },
+            {
+              "path": "breakableSpawnTimes.1.respawnInterval",
+              "from": null,
+              "to": 180,
+              "good": null
+            },
+            {
+              "path": "breakableSpawnTimes.2.initialSpawnTime",
+              "from": null,
+              "to": 300,
+              "good": null
+            },
+            {
+              "path": "breakableSpawnTimes.2.respawnInterval",
+              "from": null,
+              "to": 300,
+              "good": null
+            },
+            {
+              "path": "breakableSpawnTimes.3.initialSpawnTime",
+              "from": null,
+              "to": 600,
+              "good": null
+            },
+            {
+              "path": "breakableSpawnTimes.3.respawnInterval",
+              "from": null,
+              "to": 180,
+              "good": null
+            },
             {
               "path": "objectiveGold.Tier1.goldKill",
               "from": 1250,
@@ -1793,6 +1829,48 @@
               "path": "objectiveGoldNearPlayerSplitPct",
               "from": 30,
               "to": 25,
+              "good": null
+            },
+            {
+              "path": "riftComeback.bounty",
+              "from": 170,
+              "to": null,
+              "good": null
+            },
+            {
+              "path": "riftComeback.bulletResist",
+              "from": 35,
+              "to": null,
+              "good": null
+            },
+            {
+              "path": "riftComeback.resistMaxAtStart",
+              "from": null,
+              "to": 10,
+              "good": null
+            },
+            {
+              "path": "riftComeback.resistMaxCap",
+              "from": null,
+              "to": 40,
+              "good": null
+            },
+            {
+              "path": "riftComeback.resistMaxPerMinute",
+              "from": null,
+              "to": 1,
+              "good": null
+            },
+            {
+              "path": "riftComeback.statusResist",
+              "from": 35,
+              "to": null,
+              "good": null
+            },
+            {
+              "path": "riftComeback.techResist",
+              "from": 35,
+              "to": null,
               "good": null
             }
           ]
