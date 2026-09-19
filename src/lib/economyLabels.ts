@@ -23,7 +23,7 @@ const OBJECTIVE_LABEL: Record<string, string> = {
   PatronPhase1: "パトロン（第1形態）",
 };
 
-/** どのカードにまとめるか(建造物破壊ソウル / キルの分配 / リジュビネーター) */
+/** どのカードにまとめるか(建造物破壊ソウル / キルの分配 / リジュベネーター) */
 export function economyBucketOf(path: string): "objective" | "kill" | "rejuv" | null {
   if (path === "objectiveGoldNearPlayerSplitPct" || path.startsWith("objectiveGold.")) return "objective";
   if (path.startsWith("trooperKillGoldShareFrac.") || path.startsWith("heroKillGoldShareFrac.")) return "kill";
@@ -34,7 +34,7 @@ export function economyBucketOf(path: string): "objective" | "kill" | "rejuv" | 
 export const ECONOMY_BUCKET_LABEL: Record<"objective" | "kill" | "rejuv", string> = {
   objective: "建造物破壊のソウル",
   kill: "キルのソウル分配",
-  rejuv: "リジュビネーター",
+  rejuv: "リジュベネーター",
 };
 
 /** 表示ラベル。economy.json 由来のパスでなければ null */
@@ -51,12 +51,12 @@ export function economyFieldLabel(path: string): string | null {
   m = /^heroKillGoldShareFrac\.(\d+)$/.exec(path);
   if (m) return `ヒーローキルの取り分（${m[1]}人絡んだ場合）`;
 
-  if (path === "rejuv.buffDuration") return "リジュビネーターのバフ持続時間";
-  if (path === "rejuv.expirationWarningTiming") return "リジュビネーター消滅の警告タイミング";
+  if (path === "rejuv.buffDuration") return "リジュベネーターのバフ持続時間";
+  if (path === "rejuv.expirationWarningTiming") return "リジュベネーター消滅の警告タイミング";
   m = /^rejuv\.trooperHealthMult\.(\d+)$/.exec(path);
-  if (m) return `リジュビネーター中のトルーパーHP倍率（${m[1]}段目）`;
+  if (m) return `リジュベネーター中のトルーパーHP倍率（${m[1]}段目）`;
   m = /^rejuv\.playerRespawnMult\.(\d+)$/.exec(path);
-  if (m) return `リジュビネーター保持中のリスポーン時間倍率（${m[1]}段目）`;
+  if (m) return `リジュベネーター保持中のリスポーン時間倍率（${m[1]}段目）`;
 
   return null;
 }
