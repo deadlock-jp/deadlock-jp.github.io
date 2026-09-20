@@ -12,7 +12,8 @@
  * APIは数値のアイテムID(7409189 など)を返すが、こちらのデータは
  * ゲーム内部の文字列ID(upgrade_ancient_shield)を使っている(CLAUDE.md ルール4)。
  * ゲーム本体の .vdata に数値IDは入っていない(実測: m_nID 系のフィールドは0件)ため、
- * assets.deadlock-api.com の class_name ↔ id 表を対応付けに使う。
+ * api.deadlock-api.com/v1/assets の class_name ↔ id 表を対応付けに使う
+ * (旧 assets.deadlock-api.com は2026-09頃に廃止され、こちらに統合された)。
  * ショップ掲載アイテム156件は全件この表で解決できることを確認済み。
  *
  * ■ 集計期間
@@ -33,7 +34,7 @@ const REPO_ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
 const OUT_PATH = join(REPO_ROOT, "data", "item-stats.json");
 
 const API = "https://api.deadlock-api.com/v1";
-const ASSETS = "https://assets.deadlock-api.com/v2";
+const ASSETS = "https://api.deadlock-api.com/v1/assets";
 /** これ未満の試合数は「サンプル少」として画面側で区別する(除外はしない) */
 const LOW_SAMPLE = 20;
 /** レート制限は 200req/min。40リクエスト程度だが余裕を持たせる */
