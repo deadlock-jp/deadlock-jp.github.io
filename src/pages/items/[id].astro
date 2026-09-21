@@ -3,7 +3,9 @@ import { existsSync } from "node:fs";
 import { join } from "node:path";
 import Base from "../../layouts/Base.astro";
 import ItemIcon from "../../components/ItemIcon.astro";
+import StatIcon from "../../components/StatIcon.astro";
 import { resolveImagePath } from "../../parsers/image-manifest.ts";
+import { scaleKindOf } from "../../lib/scaleIcons.ts";
 import {
   shopItems,
   legendaryItems,
@@ -15,6 +17,7 @@ import {
   SLOT_META,
   souls,
   itemNotes,
+  dedupedTail,
 } from "../../lib/data.ts";
 import BalanceHistory from "../../components/BalanceHistory.astro";
 import { itemBalanceHistory } from "../../lib/balance.ts";
@@ -31,11 +34,23 @@ const name = t(item.nameToken, item.id);
 const meta = item.slotType ? SLOT_META[item.slotType] : null;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
+/**
+ * プロパティのスピリット/武器スケーリング係数。アビリティと同じく m_flStatScale
+ * (アイテムはほぼ常にスピリット由来。武器由来 statType はアイテム側には確認できていない)。
+ * SkillCard.astro の row.scale / row.scaleKind と同じ考え方。
+ */
+function scaleOf(p: { scale: { statScale: number | null; statType: string | null } | null }) {
+  return {
+    scale: p.scale?.statScale ?? null,
+    scaleKind: p.scale?.statScale != null ? scaleKindOf(p.scale.statType) : null,
+  };
+}
+
 /** 常時パッシブ。ビルドの合計ステータスに加算されるのはこれだけ */
 const passives = item.passiveProperties
   .map((n) => ({ n, p: item.properties[n] }))
   .filter((x) => x.p)
-  .map((x) => ({ ...formatProperty(x.n, x.p!), raw: x.p! }));
+  .map((x) => ({ ...formatProperty(x.n, x.p!), ...scaleOf(x.p!) }));
 
 /**
  * 条件付き効果。ツールチップに載っているプロパティのうち常時パッシブでないもの。
@@ -52,7 +67,7 @@ const conditional = item.tooltip
     area: AREA_LABEL[section.area.replace(/^EArea_/, "")] ?? section.area.replace(/^EArea_/, ""),
     rows: [...section.elevatedProperties, ...section.properties]
       .filter((n) => !item.passiveProperties.includes(n) && item.properties[n])
-      .map((n) => ({ ...formatProperty(n, item.properties[n]!), name: n })),
+      .map((n) => ({ ...formatProperty(n, item.properties[n]!), name: n, ...scaleOf(item.properties[n]!) })),
   }))
   .filter((s) => s.rows.length > 0);
 
@@ -61,6 +76,9 @@ const components = item.componentItems
   .filter((c) => c !== undefined);
 const parents = usedIn(item.id);
 
+/** スピリット係数の表示用丸め(内部の浮動小数誤差を出さない。値そのものは変えない) */
+const fmtScale = (n: number) => (Math.round(n * 100) / 100).toString();
+
 const badge = item.isImbue ? "IMBUE" : item.activation !== "PASSIVE" ? "ACTIVE" : null;
 const adjRows = itemBalanceHistory(item.id, base);
 const notes = itemNotes(item.id);
@@ -68,6 +86,16 @@ const notes = itemNotes(item.id);
 const passiveText = passives.map((p) => `${p.label} ${p.value}`).join("、");
 const legendaryLabel = t("Citadel_ItemDraft_Legendary", "Legendary");
 const streetBrawlLabel = t("Citadel_Play_StreetBrawl_Title", "Street Brawl");
+const enhancedLabel = t("Citadel_ItemDraft_Enhanced", "Enhanced");
+
+/**
+ * アイテムには、アビリティのようなAP1/AP2/AP5の段階的な強化(スキルポイント式)は無い。
+ * m_vecAbilityUpgrades はパーサーをアビリティと共用しているため配列の配列になっているが、
+ * アイテム側で実際に中身が入るのは常に1セットだけ(残りは空配列)。これは
+ * ストリートブロール限定でアイテムが確率で「エンハンスド」状態になったときの
+ * 追加ボーナスをまとめたもので、段階を踏んで強化するものではない。
+ */
+const enhancedRows = item.upgrades.flat();
 const metaDesc =
   `Deadlock（デッドロック）のアイテム「${name}」の効果・強化を日本語で。` +
   `${meta ? meta.label + "・" : ""}ティア${item.tier}` +
@@ -137,7 +165,15 @@ const ogImage =
       <p class="note">装備するだけで常に乗る効果。ビルドの合計ステータスに加算されるのはこれだけです。</p>
       <ul class="props">
         {passives.map((p) => (
-          <li><span class="l">{p.label}</span><span class="v">{p.value}</span></li>
+          <li>
+            <span class="l">{p.label}</span>
+            <span class="v">
+              {p.scale !== null && (
+                <span class="pscale"><StatIcon kind={p.scaleKind ?? "spirit"} />×{fmtScale(p.scale)}</span>
+              )}
+              {p.value}
+            </span>
+          </li>
         ))}
       </ul>
     </>
@@ -152,7 +188,15 @@ const ogImage =
           <h3 class="area">{s.area}</h3>
           <ul class="props">
             {s.rows.map((p) => (
-              <li><span class="l">{p.label}</span><span class="v">{p.value}</span></li>
+              <li>
+                <span class="l">{p.label}</span>
+                <span class="v">
+                  {p.scale !== null && (
+                    <span class="pscale"><StatIcon kind={p.scaleKind ?? "spirit"} />×{fmtScale(p.scale)}</span>
+                  )}
+                  {p.value}
+                </span>
+              </li>
             ))}
           </ul>
         </>
@@ -160,25 +204,31 @@ const ogImage =
     </>
   )}
 
-  {item.upgrades.length > 0 && (
+  {enhancedRows.length > 0 && (
     <>
-      <h2>強化</h2>
-      <ol class="upgrades">
-        {item.upgrades.map((step) => (
-          <li>
-            {step.map((u) => {
-              // m_strLocTokenOverride があれば、ラベル系トークンはそちらの名前で引く
-              const lookupName = item.properties[u.property]?.labelOverride ?? u.property;
-              return (
-                <span class="up">
-                  {t(`${lookupName}_label`, u.property)}
-                  <b>+{u.bonus}{t(`${lookupName}_postfix`, "")}</b>
-                </span>
-              );
-            })}
-          </li>
-        ))}
-      </ol>
+      <h2>{enhancedLabel}</h2>
+      <p class="tlead">
+        {streetBrawlLabel}限定で、アイテムが確率で強化状態（{enhancedLabel}）になって手に入ることがある。
+        アビリティのようなスキルポイントによる段階的な強化ではなく、以下の効果がまとめて1回だけ乗る。
+      </p>
+      <ul class="upgrades">
+        {enhancedRows.map((u) => {
+          // m_strLocTokenOverride があれば、ラベル系トークンはそちらの名前で引く
+          const lookupName = item.properties[u.property]?.labelOverride ?? u.property;
+          const post = t(`${lookupName}_postfix`, "");
+          const b = String(u.bonus);
+          const sign = b.startsWith("-") ? "" : "+";
+          const tail = dedupedTail(b, post);
+          return (
+            <li>
+              <span class="up">
+                {t(`${lookupName}_label`, u.property)}
+                <b>{sign}{b}{tail}</b>
+              </span>
+            </li>
+          );
+        })}
+      </ul>
     </>
   )}
 
@@ -314,7 +364,25 @@ const ogImage =
       font-size: 13px;
     }
     .props .l { color: var(--c-text-muted); }
-    .props .v { font-family: var(--font-mono); color: var(--c-text-strong); white-space: nowrap; }
+    .props .v {
+      font-family: var(--font-mono);
+      color: var(--c-text-strong);
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .pscale {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      font-size: 10.5px;
+      color: var(--c-spirit);
+      background: var(--c-spirit-bg);
+      border-radius: 3px;
+      padding: 1px 4px;
+    }
+    .tlead { margin: 0 0 var(--sp-2); font-size: 12.5px; color: var(--c-text-muted); line-height: 1.7; }
     .upgrades { padding-left: var(--sp-5); margin: 0; }
     .upgrades li { padding: 4px 0; font-size: 13px; }
     .up { color: var(--c-text-muted); margin-right: var(--sp-4); }

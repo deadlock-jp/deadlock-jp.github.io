@@ -725,7 +725,7 @@ export function adjustmentGroups(a: Adjustment): AdjustmentGroup[] {
         name: it ? t(it.nameToken, it.id) : a.key,
         image: it?.shopIcon ?? null,
         kind: classifyChanges(changes),
-        rows: changes.map((c) => adjustmentRow(c, it)),
+        rows: changes.map((c) => adjustmentRow(c, it, true)),
       },
     ];
   }
@@ -816,7 +816,16 @@ export function adjustmentGroups(a: Adjustment): AdjustmentGroup[] {
   return groups;
 }
 
-function adjustmentRow(c: AdjustmentChange, source: Ability | Item | undefined): AdjustmentRow {
+/**
+ * isItem: true ならアイテム由来の変更。アイテムには AP1/AP2/AP5 のような段階的強化が無く、
+ * upgrades.T1.* は「ストリートブロールのエンハンスド状態」の値でしかないため、
+ * アビリティの強化段のように "T1" タグを付けない(tier を常に null にする)。
+ */
+function adjustmentRow(
+  c: AdjustmentChange,
+  source: Ability | Item | undefined,
+  isItem = false,
+): AdjustmentRow {
   const weaponField = weaponFieldOf(c.path);
   if (weaponField !== null) {
     const spec = WEAPON_FIELDS[weaponField];
@@ -900,7 +909,7 @@ function adjustmentRow(c: AdjustmentChange, source: Ability | Item | undefined):
   return {
     path: c.path,
     label: scale ? `${base}のスピリット倍率` : base,
-    tier: upgradeTierOf(c.path),
+    tier: isItem ? null : upgradeTierOf(c.path),
     isScale: scale,
     fromText: adjustmentValueText(name, c.from, source, upgrade, scale),
     toText: adjustmentValueText(name, c.to, source, upgrade, scale),

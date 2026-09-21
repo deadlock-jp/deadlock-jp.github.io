@@ -12,7 +12,7 @@ import type { Ability } from "../types/ability.ts";
 import type { AbilityProperty } from "../types/property.ts";
 import { t, formatProperty, describe, dedupedTail } from "./data.ts";
 import { resolveImagePath } from "../parsers/image-manifest.ts";
-import { SCALE_ICON_REFS } from "./scaleIcons.ts";
+import { SCALE_ICON_REFS, scaleKindOf } from "./scaleIcons.ts";
 
 export interface CardRow {
   label: string;
@@ -130,18 +130,6 @@ export function scaleIconSrc(kind: "spirit" | "weapon"): string | null {
   return resolved.outPath.replace(/^public\//, "");
 }
 
-/**
- * スケーリング係数が何由来かを、abilities.vdata の m_eSpecificStatScaleType から判定する。
- * "Weapon"(武器ダメージそのもの)か "MeleeDamage"(軽/重近接ダメージの基礎値)を含む値は
- * 武器由来。それ以外(大多数の ETechPower や、statType が空でも
- * scale_function_tech_damage を使うもの)はスピリット由来として扱う。
- * 実例: citadel_ability_chrono_kinetic_carbine(パラドックスのキネティックカービン)の
- * ダメージは EWeaponPower(武器パワーで上昇、と説明文に明記)。
- * viscous_telepunch(パドルパンチ)は ELightMeleeDamage/EHeavyMeleeDamage。
- */
-function scaleKindOf(statType: string | null): "spirit" | "weapon" {
-  return statType && /Weapon|MeleeDamage/.test(statType) ? "weapon" : "spirit";
-}
 
 const ICON_BY_CSS_CLASS: Record<string, StatIconKind> = {
   tech_damage: "damage",
