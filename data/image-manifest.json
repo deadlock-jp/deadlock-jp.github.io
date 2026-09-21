@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-17T05:40:03.878Z",
+  "generatedAt": "2026-09-21T11:31:06.867Z",
   "sourceVpk": "game/citadel/pak01_dir.vpk",
   "entries": [
     {
@@ -3310,6 +3310,51 @@
       ]
     },
     {
+      "ref": "file://{images}/hud/icons/powerup_gun.svg",
+      "vpkPath": "panorama/images/hud/icons/powerup_gun.vsvg_c",
+      "outPath": "public/images/hud/icons/powerup_gun.svg",
+      "kind": "vsvg",
+      "usedBy": [
+        "system:powerups:0"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/icons/powerup_movement.svg",
+      "vpkPath": "panorama/images/hud/icons/powerup_movement.vsvg_c",
+      "outPath": "public/images/hud/icons/powerup_movement.svg",
+      "kind": "vsvg",
+      "usedBy": [
+        "system:powerups:1"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/icons/powerup_spirit.svg",
+      "vpkPath": "panorama/images/hud/icons/powerup_spirit.vsvg_c",
+      "outPath": "public/images/hud/icons/powerup_spirit.svg",
+      "kind": "vsvg",
+      "usedBy": [
+        "system:powerups:2"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/icons/powerup_survival.svg",
+      "vpkPath": "panorama/images/hud/icons/powerup_survival.vsvg_c",
+      "outPath": "public/images/hud/icons/powerup_survival.svg",
+      "kind": "vsvg",
+      "usedBy": [
+        "system:powerups:3"
+      ]
+    },
+    {
+      "ref": "file://{images}/icons/properties/zipline.svg",
+      "vpkPath": "panorama/images/icons/properties/zipline.vsvg_c",
+      "outPath": "public/images/icons/properties/zipline.svg",
+      "kind": "vsvg",
+      "usedBy": [
+        "system:map-objects:4"
+      ]
+    },
+    {
       "ref": "file://{images}/items/brawl/aerial_mastery.psd",
       "vpkPath": "panorama/images/items/brawl/aerial_mastery_psd.vtex_c",
       "outPath": "public/images/items/brawl/aerial_mastery.png",
@@ -4918,6 +4963,81 @@
       "kind": "vtex",
       "usedBy": [
         "item:upgrade_weighted_shots"
+      ]
+    },
+    {
+      "ref": "file://{images}/minimap/minimap_icon_koth.svg",
+      "vpkPath": "panorama/images/minimap/minimap_icon_koth.vsvg_c",
+      "outPath": "public/images/minimap/minimap_icon_koth.svg",
+      "kind": "vsvg",
+      "usedBy": [
+        "system:map-objects:1"
+      ]
+    },
+    {
+      "ref": "file://{images}/minimap/minimap_teleporter_highlight.svg",
+      "vpkPath": "panorama/images/minimap/minimap_teleporter_highlight.vsvg_c",
+      "outPath": "public/images/minimap/minimap_teleporter_highlight.svg",
+      "kind": "vsvg",
+      "usedBy": [
+        "system:map-objects:3"
+      ]
+    },
+    {
+      "ref": "file://{images}/minimap/neutral_large.psd",
+      "vpkPath": "panorama/images/minimap/neutral_large_psd.vtex_c",
+      "outPath": "public/images/minimap/neutral_large.png",
+      "kind": "vtex",
+      "usedBy": [
+        "camp:strong"
+      ]
+    },
+    {
+      "ref": "file://{images}/minimap/neutral_medium.psd",
+      "vpkPath": "panorama/images/minimap/neutral_medium_psd.vtex_c",
+      "outPath": "public/images/minimap/neutral_medium.png",
+      "kind": "vtex",
+      "usedBy": [
+        "camp:medium"
+      ]
+    },
+    {
+      "ref": "file://{images}/minimap/neutral_small.psd",
+      "vpkPath": "panorama/images/minimap/neutral_small_psd.vtex_c",
+      "outPath": "public/images/minimap/neutral_small.png",
+      "kind": "vtex",
+      "usedBy": [
+        "camp:weak"
+      ]
+    },
+    {
+      "ref": "file://{images}/minimap/neutral_vault.psd",
+      "vpkPath": "panorama/images/minimap/neutral_vault_psd.vtex_c",
+      "outPath": "public/images/minimap/neutral_vault.png",
+      "kind": "vtex",
+      "usedBy": [
+        "object:neutral_sinners_sacrifice",
+        "camp:vaults",
+        "system:map-objects:2"
+      ]
+    },
+    {
+      "ref": "file://{images}/minimap/soul_jar_marker.psd",
+      "vpkPath": "panorama/images/minimap/soul_jar_marker_psd.vtex_c",
+      "outPath": "public/images/minimap/soul_jar_marker.png",
+      "kind": "vtex",
+      "usedBy": [
+        "system:map-objects:0"
+      ]
+    },
+    {
+      "ref": "file://{images}/minimap/super_neutral_marker.psd",
+      "vpkPath": "panorama/images/minimap/super_neutral_marker_psd.vtex_c",
+      "outPath": "public/images/minimap/super_neutral_marker.png",
+      "kind": "vtex",
+      "usedBy": [
+        "object:npc_super_neutral",
+        "camp:midboss"
       ]
     },
     {

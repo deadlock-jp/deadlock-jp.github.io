@@ -9,11 +9,12 @@
  * 全部出すと healthBarOffset や modelScale のような表示用の値まで並ぶので、
  * ここで「出す項目」を明示的に選ぶ。tools/diff/fields.mjs と同じ「どの箱を見るか」の考え方。
  */
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import mechanicsJson from "../../data/mechanics-notes.json" with { type: "json" };
 import { t } from "./data.ts";
 import type { EconomyFile } from "../types/economy.ts";
+import { resolveImagePath } from "../parsers/image-manifest.ts";
 
 const DATA_DIR = join(process.cwd(), "data");
 
@@ -91,6 +92,11 @@ const STATS: Record<string, StatSpec> = {
   bonusDamageMult: { label: "弱点の追加ダメージ倍率" },
   goldPercent: { label: "弱点1つぶんのソウル割合" },
   damageOnDeath: { label: "破壊時のダメージ" },
+
+  // 罪人の生贄
+  retaliateDamage: { label: "殴ったときの反撃ダメージ" },
+  vaultMiniGameTime: { label: "確保にかかる時間", unit: "秒" },
+  vaultMiniGameHitWindow: { label: "成功判定の受付", unit: "秒" },
 };
 
 export interface ObjectStat {
@@ -148,6 +154,7 @@ const notesFile = mechanicsJson as unknown as {
 export interface CampSpawnRow {
   key: string;
   label: string;
+  icon: string | null;
   initialSpawnMinutes: number;
   respawnMinutes: number;
   /** ミッドボスだけ持つ、撃破ごとの再出現間隔の短縮先。無ければ null */
@@ -163,10 +170,20 @@ const CAMP_LABELS: Record<string, string> = {
   midboss: "ミッドボス",
 };
 
+/** mechanics-notes.json の campIcons(id -> file://{images}/... 参照) をパスに解決 */
+function campIconSrc(key: string): string | null {
+  const ref = (mechanicsJson as unknown as { campIcons?: Record<string, string> }).campIcons?.[key];
+  if (!ref) return null;
+  const resolved = resolveImagePath(ref);
+  if (!resolved || !existsSync(join(process.cwd(), resolved.outPath))) return null;
+  return resolved.outPath.replace(/^public\//, "");
+}
+
 export function campSpawnTimes(): CampSpawnRow[] {
   return (economyFile.campSpawnTimes ?? []).map((c) => ({
     key: c.key,
     label: CAMP_LABELS[c.key] ?? c.key,
+    icon: campIconSrc(c.key),
     initialSpawnMinutes: c.initialSpawnSeconds / 60,
     respawnMinutes: c.respawnIntervalSeconds / 60,
     shrinksToMinutes: c.intervalChangeSeconds !== 0 ? c.intervalMinSeconds / 60 : null,

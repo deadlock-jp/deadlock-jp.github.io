@@ -45,6 +45,16 @@ const progression = winProgression();
   {sections.map((s) => (
     <section class="block panel">
       <h2>{s.title}</h2>
+      {s.icons.length > 0 && (
+        <ul class="icongrid">
+          {s.icons.map((ic) => (
+            <li>
+              <img src={`${base}/${ic.src}`} alt="" loading="lazy" />
+              <span>{ic.label}</span>
+            </li>
+          ))}
+        </ul>
+      )}
       <ul class="notes">
         {s.lines.map((line) => <li>{line}</li>)}
       </ul>
@@ -102,6 +112,37 @@ const progression = winProgression();
       font-size: 13px;
       line-height: 1.9;
       color: var(--c-text);
+    }
+
+    .icongrid {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-4);
+      padding: 0;
+      margin: 0 0 var(--sp-4);
+    }
+    .icongrid li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--sp-1);
+      width: 72px;
+    }
+    .icongrid img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      background: var(--c-surface-2);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius);
+      padding: 6px;
+    }
+    .icongrid span {
+      font-size: 11px;
+      color: var(--c-text-muted);
+      text-align: center;
+      line-height: 1.4;
     }
 
     .foot {

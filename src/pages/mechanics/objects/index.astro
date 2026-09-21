@@ -105,7 +105,10 @@ function iconSrc(ref: string | null): string | null {
           <tbody>
             {camps.map((c) => (
               <tr>
-                <td>{c.label}</td>
+                <td class="clabel">
+                  {c.icon && <img class="cicon" src={`${base}/${c.icon}`} alt="" loading="lazy" />}
+                  {c.label}
+                </td>
                 <td class="n">{c.initialSpawnMinutes === 0 ? "試合開始時" : fmtMin(c.initialSpawnMinutes)}</td>
                 <td class="n">
                   {fmtMin(c.respawnMinutes)}
@@ -241,6 +244,47 @@ function iconSrc(ref: string | null): string | null {
       font-size: 13px;
       line-height: 1.9;
       color: var(--c-text);
+    }
+
+    .tablewrap {
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      font-size: 12.5px;
+      width: 100%;
+    }
+    th,
+    td {
+      text-align: left;
+      padding: 6px 12px 6px 0;
+      border-bottom: 1px solid var(--c-border);
+      white-space: nowrap;
+    }
+    th {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--c-text-faint);
+    }
+    td.n {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+      color: var(--c-text-strong);
+    }
+    td.clabel {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+    }
+    .cicon {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+      background: var(--c-surface-2);
+      border: 1px solid var(--c-border);
+      border-radius: 5px;
+      padding: 3px;
+      flex: 0 0 auto;
     }
 
     .foot {

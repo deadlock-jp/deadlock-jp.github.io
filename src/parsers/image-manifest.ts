@@ -112,9 +112,29 @@ export function buildImageManifest(dataDir: string, repoDataDir?: string): Image
   if (repoDataDir) {
     const mechanics = JSON.parse(
       readFileSync(join(repoDataDir, "mechanics-notes.json"), "utf8"),
-    ) as { topics: { objects: { id: string; icon?: string }[] }[] };
+    ) as {
+      topics: { objects: { id: string; icon?: string }[] }[];
+      campIcons?: Record<string, string>;
+    };
     for (const topic of mechanics.topics) {
       for (const o of topic.objects) add(o.icon ?? null, `object:${o.id}`);
+    }
+    for (const [key, icon] of Object.entries(mechanics.campIcons ?? {})) {
+      add(icon, `camp:${key}`);
+    }
+
+    /*
+     * ゲームシステム(/mechanics/system/)のアイコン。セクションIDごとに
+     * {icon, label} の配列を持つ。lines(文章)とは別に、アイコン付きの
+     * 早見表として表示する分だけ(全項目を網羅しているわけではない)。
+     */
+    const gameSystem = JSON.parse(
+      readFileSync(join(repoDataDir, "game-system-notes.json"), "utf8"),
+    ) as { sections: { id: string; icons?: { icon: string; label: string }[] }[] };
+    for (const section of gameSystem.sections) {
+      for (const [i, item] of (section.icons ?? []).entries()) {
+        add(item.icon, `system:${section.id}:${i}`);
+      }
     }
   }
 

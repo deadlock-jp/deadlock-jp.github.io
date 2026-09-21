@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "note": "ゲームシステムのリファレンス(/mechanics/)の構成。数値はここに書かず、data/snapshots/<版>/objects.json などから引く(CLAUDE.md ルール6)。このファイルが持つのは「どのトピックで・どのオブジェクトを・どの順に出すか」と、生データからは読み取れない補足だけ。lines は自分の言葉で書く。他サイトの文章は使わない(ルール3)。確かめられていない仕様は書かず、空のままにする。excludeStats はそのオブジェクトで数値が実測・体感と合わない/意味が確認できないフィールドを非表示にする欄（例: npc_boss_tier1のbackDoorProtectionRangeはゲームプレイ上バックドア保護が働いている実感がなく、deadlock.wikiもT1ガーディアンはStreet Brawl以外バックドア保護を持たないとしている。データにフィールド自体はあるが実際に機能していない可能性があり、削除ではなく非表示にとどめる）。 icon はゲーム内のNPCアイコン(panorama/images/npcs/)への参照。絵柄を実物で確認できたオブジェクトだけに付ける。 未割り当ての絵: npcs/tier_3_boss.psd はパトロンの第2形態(外殻が壊れて剥き出しになった球体)、npc_barrack_boss(ベース・ガーディアン)と npc_super_neutral(神殿の守護者)は npcs/ に該当する絵が無い。",
+  "note": "ゲームシステムのリファレンス(/mechanics/)の構成。数値はここに書かず、data/snapshots/<版>/objects.json などから引く(CLAUDE.md ルール6)。このファイルが持つのは「どのトピックで・どのオブジェクトを・どの順に出すか」と、生データからは読み取れない補足だけ。lines は自分の言葉で書く。他サイトの文章は使わない(ルール3)。確かめられていない仕様は書かず、空のままにする。excludeStats はそのオブジェクトで数値が実測・体感と合わない/意味が確認できないフィールドを非表示にする欄（例: npc_boss_tier1のbackDoorProtectionRangeはゲームプレイ上バックドア保護が働いている実感がなく、deadlock.wikiもT1ガーディアンはStreet Brawl以外バックドア保護を持たないとしている。データにフィールド自体はあるが実際に機能していない可能性があり、削除ではなく非表示にとどめる）。 icon はNPCの見た目そのもの(panorama/images/npcs/)に限らず、対応するミニマップアイコン(panorama/images/minimap/)で代用することもある（npc_barrack_boss(ベース・ガーディアン)は npcs/ に該当する絵が無くそのまま。npc_super_neutral(神殿の守護者)はミニマップの守護天使マーカー super_neutral_marker.psd で代用。未割り当ての絵: npcs/tier_3_boss.psd はパトロンの第2形態(外殻が壊れて剥き出しになった球体)）。 campIcons は「オブジェクト」ページのキャンプ出現タイミング表(economy.json由来、src/lib/objects.ts の campSpawnTimes)専用のアイコン。ミニマップの難易度別マーカー(線の数で易・中・難を示す三角)をそのまま流用している。",
   "topics": [
     {
       "id": "lane",
@@ -108,7 +108,8 @@
         },
         {
           "id": "npc_super_neutral",
-          "nameToken": "Citadel_Hud_KillFeedSuperNeutral"
+          "nameToken": "Citadel_Hud_KillFeedSuperNeutral",
+          "icon": "file://{images}/minimap/super_neutral_marker.psd"
         },
         {
           "id": "npc_neutral_weakpoint",
@@ -119,6 +120,24 @@
           "id": "npc_neutral_weakpoint_strong",
           "nameToken": "",
           "name": "弱点（大）"
+        },
+        {
+          "id": "neutral_sinners_sacrifice",
+          "nameToken": "",
+          "name": "罪人の生贄",
+          "excludeStats": [
+            "sightRangePlayers",
+            "maxHealthBarDrawDistance",
+            "shieldReactivateDelay",
+            "outlineRange",
+            "healthBarOffset",
+            "physicsImpulseMultiplier",
+            "dyingDuration",
+            "breakableForceScale",
+            "vaultSuccessLightsScroll",
+            "vaultSuccessDestroyTime"
+          ],
+          "icon": "file://{images}/minimap/neutral_vault.psd"
         }
       ],
       "lines": [
@@ -127,8 +146,16 @@
         "目を撃つとクリティカルダメージが入る。",
         "「潜伏」している個体はプレイヤーが近づくまで無敵で姿を見せない。左右対称に見えるキャンプでも、潜伏している個体の配置が同じとは限らない。",
         "射程内でも壁の陰にいる相手には、横に体を傾けて狙ってくる。完全に届かない相手には棒立ちで反撃しない。",
-        "大型の個体は近接攻撃のダメージを軽減する。"
+        "大型の個体は近接攻撃のダメージを軽減する。",
+        "罪人の生贄はニュートラルとは別枠の設置物で、殴るとHPと引き換えにソウルがもらえる。"
       ]
     }
-  ]
+  ],
+  "campIcons": {
+    "weak": "file://{images}/minimap/neutral_small.psd",
+    "medium": "file://{images}/minimap/neutral_medium.psd",
+    "strong": "file://{images}/minimap/neutral_large.psd",
+    "vaults": "file://{images}/minimap/neutral_vault.psd",
+    "midboss": "file://{images}/minimap/super_neutral_marker.psd"
+  }
 }

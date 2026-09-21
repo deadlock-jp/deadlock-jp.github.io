@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "note": "ゲームシステムのリファレンス(/mechanics/system/)の手書きセクション。勝利条件・レーンのルールなど、個別の数値というより仕組みの説明を書く。自分の言葉で書き、他サイトの文章は使わない(ルール3)。確かめられていない仕様は書かず空のままにする。",
+  "note": "ゲームシステムのリファレンス(/mechanics/system/)の手書きセクション。勝利条件・レーンのルールなど、個別の数値というより仕組みの説明を書く。自分の言葉で書き、他サイトの文章は使わない(ルール3)。確かめられていない仕様は書かず空のままにする。icons は任意で、セクションの理解を助けるミニマップ/HUDアイコンをアイコン付きの早見表として文章の上に出す(項目を網羅する一覧ではなく、代表的なものだけ)。",
   "sections": [
     {
       "id": "win-condition",
@@ -22,6 +22,13 @@
     {
       "id": "map-objects",
       "title": "マップ上の目標物",
+      "icons": [
+        { "icon": "file://{images}/minimap/soul_jar_marker.psd", "label": "ソウルアーン" },
+        { "icon": "file://{images}/minimap/minimap_icon_koth.svg", "label": "不安定な裂け目" },
+        { "icon": "file://{images}/minimap/neutral_vault.psd", "label": "罪人の生贄" },
+        { "icon": "file://{images}/minimap/minimap_teleporter_highlight.svg", "label": "テレポーター" },
+        { "icon": "file://{images}/icons/properties/zipline.svg", "label": "ジップライン" }
+      ],
       "lines": [
         "ソウルアーン：試合中盤に出現し、確保すると軽い強化を得られるうえ、複数のソウルオーブが周囲に散らばる。オーブは確保した本人のものになるが、敵に奪われたり味方に確定されたりもする。一定間隔で再出現し、出現地点と確保地点は黄色・緑レーンいずれかの橋の左右で入れ替わる。",
         "不安定な裂け目：試合中盤以降、横レーンの橋に一定間隔で出現する確保ポイント。制した側にソウルが入り、そのレーンに専用のトルーパーが出現する。拮抗した状態がしばらく続くと、中立のソウルオーブが追加で出現する。",
@@ -34,6 +41,12 @@
     {
       "id": "powerups",
       "title": "一時バフ（ルーン）",
+      "icons": [
+        { "icon": "file://{images}/hud/icons/powerup_gun.svg", "label": "ガン系" },
+        { "icon": "file://{images}/hud/icons/powerup_movement.svg", "label": "移動系" },
+        { "icon": "file://{images}/hud/icons/powerup_spirit.svg", "label": "キャスト系" },
+        { "icon": "file://{images}/hud/icons/powerup_survival.svg", "label": "生存系" }
+      ],
       "lines": [
         "ブリッジ上に一定間隔で出現する一時的な強化で、ヘビーメレー攻撃で確保する。",
         "キャスト系（スピリットパワーとクールダウン短縮）・ガン系（連射速度と弾数）・移動系（スタミナ・スプリント速度・スタミナ回復・ジップライン速度）・生存系（ボーナスHPとHP回復）の4種類があり、時間経過とともに効果が強くなっていく。",
