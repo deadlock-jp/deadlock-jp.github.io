@@ -8,7 +8,7 @@
  * 「更新された」と伝えることになる。
  */
 import type { APIRoute } from "astro";
-import { releasedHeroes, shopItems, itemsFile, ability, patchNotes } from "../lib/data.ts";
+import { releasedHeroes, shopItems, legendaryItems, itemsFile, ability, patchNotes } from "../lib/data.ts";
 
 /**
  * スキル詳細ページが生成される実ID。src/pages/abilities/[id].astro の
@@ -50,10 +50,17 @@ export const GET: APIRoute = ({ site }) => {
     { loc: "/mechanics/objects/", priority: "0.7", lastmod: dataDate },
     { loc: "/mechanics/souls/", priority: "0.7", lastmod: dataDate },
     { loc: "/mechanics/controls/", priority: "0.7", lastmod: dataDate },
+    { loc: "/mechanics/movement/", priority: "0.7", lastmod: dataDate },
     { loc: "/mechanics/strategy/", priority: "0.7", lastmod: dataDate },
     { loc: "/about/", priority: "0.3", lastmod: dataDate },
     ...releasedHeroes().map((h) => ({ loc: `/heroes/${h.id}/`, priority: "0.7", lastmod: dataDate })),
     ...shopItems().map((i) => ({ loc: `/items/${i.id}/`, priority: "0.6", lastmod: dataDate })),
+    /*
+     * レジェンダリーアイテム(ストリートブロール限定、tier===5)。items/[id].astro の
+     * getStaticPaths は [...shopItems(), ...legendaryItems()] を使っており、
+     * ページは実際に生成されているのにここに無く、sitemapから漏れていた。
+     */
+    ...legendaryItems().map((i) => ({ loc: `/items/${i.id}/`, priority: "0.5", lastmod: dataDate })),
     ...abilityIds().map((id) => ({ loc: `/abilities/${id}/`, priority: "0.6", lastmod: dataDate })),
     ...patchNotes().map((n) => ({
       loc: `/patch-notes/${n.date}/`,
