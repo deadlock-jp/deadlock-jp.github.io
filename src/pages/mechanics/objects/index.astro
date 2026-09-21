@@ -9,12 +9,15 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import Base from "../../../layouts/Base.astro";
-import { objectTopics } from "../../../lib/objects.ts";
+import { objectTopics, campSpawnTimes } from "../../../lib/objects.ts";
 import { objectNotes } from "../../../lib/data.ts";
 import { resolveImagePath } from "../../../parsers/image-manifest.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const topics = objectTopics();
+const camps = campSpawnTimes();
+
+const fmtMin = (n: number): string => (Number.isInteger(n) ? `${n}分` : `${Math.floor(n)}分${Math.round((n % 1) * 60)}秒`);
 
 /** アイコン参照を public/ の実ファイルに解決する。無いものは null(絵を出さない) */
 function iconSrc(ref: string | null): string | null {
@@ -86,9 +89,42 @@ function iconSrc(ref: string | null): string | null {
     </section>
   ))}
 
+  {camps.length > 0 && (
+    <section class="block panel">
+      <h2>キャンプの出現タイミング</h2>
+      <p class="tlead">試合開始からの初回出現と、全滅させてからの再出現までの時間。</p>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th>対象</th>
+              <th>初回出現</th>
+              <th>再出現</th>
+            </tr>
+          </thead>
+          <tbody>
+            {camps.map((c) => (
+              <tr>
+                <td>{c.label}</td>
+                <td class="n">{c.initialSpawnMinutes === 0 ? "試合開始時" : fmtMin(c.initialSpawnMinutes)}</td>
+                <td class="n">
+                  {fmtMin(c.respawnMinutes)}
+                  {c.shrinksToMinutes !== null && ` → ${fmtMin(c.shrinksToMinutes)}（下限）`}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="tlead" style="margin-top: var(--sp-3); margin-bottom: 0;">
+        ミッドボスは撃破するたびに再出現までの時間が短くなり、下限に達するとそれ以上は縮まらない。
+      </p>
+    </section>
+  )}
+
   <p class="foot">
-    数値は <code>npc_units.vdata</code> から自動抽出したものです。
-    表示していない内部値（当たり判定やHPバーの位置など）もデータには含まれています。
+    数値は <code>npc_units.vdata</code>（キャンプの出現タイミングは <code>misc.vdata</code>）から
+    自動抽出したものです。表示していない内部値（当たり判定やHPバーの位置など）もデータには含まれています。
     <a href={`${base}/about/`}>このサイトについて</a>
   </p>
 

@@ -13,6 +13,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import mechanicsJson from "../../data/mechanics-notes.json" with { type: "json" };
 import { t } from "./data.ts";
+import type { EconomyFile } from "../types/economy.ts";
 
 const DATA_DIR = join(process.cwd(), "data");
 
@@ -22,6 +23,10 @@ interface ObjectsFile {
 const objectsFile: ObjectsFile = (() => {
   const v = JSON.parse(readFileSync(join(DATA_DIR, "latest.json"), "utf8")).version as string;
   return JSON.parse(readFileSync(join(DATA_DIR, "snapshots", v, "objects.json"), "utf8")) as ObjectsFile;
+})();
+const economyFile: EconomyFile = (() => {
+  const v = JSON.parse(readFileSync(join(DATA_DIR, "latest.json"), "utf8")).version as string;
+  return JSON.parse(readFileSync(join(DATA_DIR, "snapshots", v, "economy.json"), "utf8")) as EconomyFile;
 })();
 
 /** Source 2 の距離は 1 unit = 1 inch（src/lib/gamestats.ts と同じ） */
@@ -139,6 +144,34 @@ const notesFile = mechanicsJson as unknown as {
     }[];
   }[];
 };
+
+export interface CampSpawnRow {
+  key: string;
+  label: string;
+  initialSpawnMinutes: number;
+  respawnMinutes: number;
+  /** ミッドボスだけ持つ、撃破ごとの再出現間隔の短縮先。無ければ null */
+  shrinksToMinutes: number | null;
+}
+
+/** ニュートラルキャンプの出現タイミング(economy.json の campSpawnTimes。misc.vdata由来) */
+const CAMP_LABELS: Record<string, string> = {
+  weak: "弱い中立モンスター",
+  medium: "中程度の中立モンスター",
+  strong: "強い中立モンスター",
+  vaults: "罪人の生贄",
+  midboss: "ミッドボス",
+};
+
+export function campSpawnTimes(): CampSpawnRow[] {
+  return (economyFile.campSpawnTimes ?? []).map((c) => ({
+    key: c.key,
+    label: CAMP_LABELS[c.key] ?? c.key,
+    initialSpawnMinutes: c.initialSpawnSeconds / 60,
+    respawnMinutes: c.respawnIntervalSeconds / 60,
+    shrinksToMinutes: c.intervalChangeSeconds !== 0 ? c.intervalMinSeconds / 60 : null,
+  }));
+}
 
 export function objectTopics(): ObjectTopic[] {
   return notesFile.topics.map((topic) => ({

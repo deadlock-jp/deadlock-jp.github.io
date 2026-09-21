@@ -15,6 +15,7 @@ import type {
   ObjectiveGold,
   BreakableSpawnTime,
   RiftComeback,
+  CampSpawnTime,
 } from "../types/economy.ts";
 
 /**
@@ -98,6 +99,32 @@ function parseRiftComeback(misc: ReturnType<typeof readVdata>): RiftComeback {
   };
 }
 
+/**
+ * ニュートラルキャンプ(易・中・難・保管庫・ミッドボス)の出現タイミング。
+ * misc.vdata の info_neutral_trooper_camp を継承した各エントリから引く。
+ * "_herotest" は開発用のテスト値なので対象外。
+ */
+const CAMP_KEYS: Record<string, string> = {
+  neutral_camp_weak: "weak",
+  neutral_camp_medium: "medium",
+  neutral_camp_strong: "strong",
+  neutral_camp_vaults: "vaults",
+  neutral_camp_midboss: "midboss",
+};
+
+function parseCampSpawnTimes(misc: ReturnType<typeof readVdata>): CampSpawnTime[] {
+  return Object.entries(CAMP_KEYS).map(([rawKey, key]) => {
+    const c = obj(misc[rawKey]);
+    return {
+      key,
+      initialSpawnSeconds: num(c["m_iInitialSpawnDelayInSeconds"]),
+      respawnIntervalSeconds: num(c["m_iSpawnIntervalInSeconds"]),
+      intervalChangeSeconds: num(c["m_iSpawnIntervalChange"]),
+      intervalMinSeconds: num(c["m_iSpawnIntervalMin"]),
+    };
+  });
+}
+
 export function parseEconomy(
   genericDataPath: string,
   miscPath: string,
@@ -124,5 +151,6 @@ export function parseEconomy(
     },
     breakableSpawnTimes: parseBreakableSpawnTimes(g),
     riftComeback: parseRiftComeback(misc),
+    campSpawnTimes: parseCampSpawnTimes(misc),
   };
 }

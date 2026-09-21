@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "upstreamCommit": "6698",
-  "generatedAt": "2026-09-19T09:00:03.829Z",
+  "generatedAt": "2026-09-21T11:10:25.374Z",
   "lanes": [
     {
       "name": "White",
@@ -147,5 +147,42 @@
     "resistMaxAtStart": 10,
     "resistMaxPerMinute": 1,
     "resistMaxCap": 40
-  }
+  },
+  "campSpawnTimes": [
+    {
+      "key": "weak",
+      "initialSpawnSeconds": 120,
+      "respawnIntervalSeconds": 85,
+      "intervalChangeSeconds": 0,
+      "intervalMinSeconds": 0
+    },
+    {
+      "key": "medium",
+      "initialSpawnSeconds": 300,
+      "respawnIntervalSeconds": 290,
+      "intervalChangeSeconds": 0,
+      "intervalMinSeconds": 0
+    },
+    {
+      "key": "strong",
+      "initialSpawnSeconds": 480,
+      "respawnIntervalSeconds": 335,
+      "intervalChangeSeconds": 0,
+      "intervalMinSeconds": 0
+    },
+    {
+      "key": "vaults",
+      "initialSpawnSeconds": 480,
+      "respawnIntervalSeconds": 300,
+      "intervalChangeSeconds": 0,
+      "intervalMinSeconds": 0
+    },
+    {
+      "key": "midboss",
+      "initialSpawnSeconds": 0,
+      "respawnIntervalSeconds": 420,
+      "intervalChangeSeconds": -60,
+      "intervalMinSeconds": 300
+    }
+  ]
 }

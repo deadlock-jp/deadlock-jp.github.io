@@ -37,6 +37,20 @@ export interface BreakableSpawnTime {
   respawnInterval: number;
 }
 
+/** ニュートラルキャンプの出現タイミング(misc.vdata の info_neutral_trooper_camp 派生) */
+export interface CampSpawnTime {
+  /** "weak" | "medium" | "strong" | "vaults" | "midboss" */
+  key: string;
+  /** 試合開始から初回出現までの秒数 */
+  initialSpawnSeconds: number;
+  /** 全滅させてから再出現するまでの秒数(初回の間隔。ミッドボスは撃破ごとに短くなる) */
+  respawnIntervalSeconds: number;
+  /** ミッドボスのみ: 撃破するたびに再出現間隔が変わる秒数(負値なら短縮)。他は常に0 */
+  intervalChangeSeconds: number;
+  /** ミッドボスのみ: 再出現間隔が短縮され続ける下限(秒)。他は0(下限なし) */
+  intervalMinSeconds: number;
+}
+
 /**
  * 不安定な裂け目の、劣勢チームへの補正(misc.vdata の citadel_koth_cashin)。
  *
@@ -74,4 +88,5 @@ export interface EconomyFile {
   /** 2026-09-16 に追加されたフィールド。それより前の版には無いので空配列になる */
   breakableSpawnTimes: BreakableSpawnTime[];
   riftComeback: RiftComeback;
+  campSpawnTimes: CampSpawnTime[];
 }
