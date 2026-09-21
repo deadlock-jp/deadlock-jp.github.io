@@ -21,6 +21,7 @@ import { join } from "node:path";
 import type { ItemsFile } from "../types/item.ts";
 import type { AbilitiesFile } from "../types/ability.ts";
 import type { HeroesFile } from "../types/hero.ts";
+import { SCALE_ICON_REFS } from "../lib/scaleIcons.ts";
 
 export interface ImageEntry {
   /** データ側の参照パス */
@@ -87,6 +88,11 @@ export function buildImageManifest(dataDir: string, repoDataDir?: string): Image
     }
     byRef.set(ref, { ref, ...resolved, usedBy: [user] });
   };
+
+  // スキルカードのスケーリング表示(★の代わりに使う武器/スピリットアイコン)
+  for (const [kind, ref] of Object.entries(SCALE_ICON_REFS)) {
+    add(ref, `scaleicon:${kind}`);
+  }
 
   for (const item of Object.values(items.items)) {
     // tier5 は inShop=false だが、STREET BRAWL(ランダムビルド)モードの

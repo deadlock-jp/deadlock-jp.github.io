@@ -11,7 +11,7 @@
  *
  * `[data-abilitycard="<abilityKey>"]` を持つ要素に自動でホバー/フォーカスを張る。
  */
-import { STAT_ICON_PATHS, type CardRow, type DamageRow, type UpgradeTier } from "../lib/skillcard.ts";
+import { STAT_ICON_PATHS, scaleIconSrc, type CardRow, type DamageRow, type UpgradeTier } from "../lib/skillcard.ts";
 
 export interface AbilityHoverDetail {
   name: string;
@@ -30,18 +30,26 @@ interface Props {
   details: Record<string, AbilityHoverDetail>;
 }
 const { details } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+/** SkillCard.astro / StatIcon.astro と同じ「spirit/weapon は実画像優先」をJS側でも再現する */
+const scaleIcons = { spirit: scaleIconSrc("spirit"), weapon: scaleIconSrc("weapon") };
 ---
 
 <div class="hovercard" id="abilityhovercard" role="tooltip" hidden></div>
 
-<script is:inline define:vars={{ details, iconPaths: STAT_ICON_PATHS }}>
+<script is:inline define:vars={{ details, iconPaths: STAT_ICON_PATHS, scaleIcons, base }}>
   (() => {
     const card = document.getElementById("abilityhovercard");
     if (!card) return;
     const esc = (s) =>
       String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
-    const icon = (kind) => (kind && iconPaths[kind] ? `<svg class="hi" viewBox="0 0 16 16" width="12" height="12" fill="currentColor" aria-hidden="true">${iconPaths[kind]}</svg>` : "");
+    const icon = (kind) => {
+      if ((kind === "spirit" || kind === "weapon") && scaleIcons[kind]) {
+        return `<img class="hi-img" src="${base}/${scaleIcons[kind]}" width="12" height="12" alt="">`;
+      }
+      return kind && iconPaths[kind] ? `<svg class="hi" viewBox="0 0 16 16" width="12" height="12" fill="currentColor" aria-hidden="true">${iconPaths[kind]}</svg>` : "";
+    };
 
     /** "25秒" のような値文字列を、末尾の unit ぶんだけ切り離す */
     const splitUnit = (value, unit) => (unit && value.endsWith(unit) ? [value.slice(0, -unit.length), unit] : [value, ""]);
@@ -54,7 +62,7 @@ const { details } = Astro.props;
       const [num, unit] = splitUnit(row.value, row.unit);
       return (
         `<div class="tile${row.scale !== null ? " scaled" : ""}">` +
-        (row.scale !== null ? `<span class="tscale">${icon("spirit")}×${Math.round(row.scale * 100) / 100}</span>` : "") +
+        (row.scale !== null ? `<span class="tscale">${icon(row.scaleKind || "spirit")}×${Math.round(row.scale * 100) / 100}</span>` : "") +
         `<div class="tval">${esc(num)}${unit ? `<span class="tu">${esc(unit)}</span>` : ""}</div>` +
         `<div class="tlabel">${esc(row.label)}</div></div>`
       );
@@ -171,6 +179,7 @@ const { details } = Astro.props;
   .hovercard :global(.smeta .mv) { font-family: var(--font-mono); font-size: 11px; color: var(--c-text-strong); }
   .hovercard :global(.smeta .mu) { font-size: 9px; color: var(--c-text-muted); margin-left: 1px; }
   .hovercard :global(.hi) { flex: none; opacity: 0.75; }
+  .hovercard :global(.hi-img) { flex: none; opacity: 0.85; object-fit: contain; vertical-align: -1px; }
 
   .hovercard :global(.sdesc) { font-size: 12px; line-height: 1.65; color: var(--c-text-muted); margin: var(--sp-2) 0 0; }
 

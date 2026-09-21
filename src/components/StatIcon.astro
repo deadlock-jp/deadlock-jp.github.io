@@ -7,23 +7,34 @@
  * 抽出できなかった(architecture.html参照)。ここでは意味の近い簡易SVGで代用する。
  * 種別(kind)は src/lib/skillcard.ts の StatIconKind /
  * ICON_BY_CSS_CLASS(ゲーム側の m_strCSSClass 分類)から来る。
+ *
+ * 例外: "spirit"(スピリットスケーリング)と"weapon"(武器/近接ダメージスケーリング)だけは、
+ * ゲーム本編のアップグレードUIで実際に使われているアイコン画像を抽出できたので、
+ * そちらを優先する(scaleIconSrc)。抽出できていない版は従来どおりSVGにフォールバックする。
  */
-import { STAT_ICON_PATHS, type StatIconKind } from "../lib/skillcard.ts";
+import { STAT_ICON_PATHS, scaleIconSrc, type StatIconKind } from "../lib/skillcard.ts";
 
 export interface Props {
   kind: StatIconKind | null;
 }
 const { kind } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
-const path = kind ? STAT_ICON_PATHS[kind] : null;
+const imgSrc = kind === "spirit" || kind === "weapon" ? scaleIconSrc(kind) : null;
+const path = !imgSrc && kind ? STAT_ICON_PATHS[kind] : null;
 ---
 
 {
-  path && (
-    <svg class="staticon" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" set:html={path} />
+  imgSrc ? (
+    <img class="staticon-img" src={`${base}/${imgSrc}`} width="12" height="12" alt="" loading="lazy" />
+  ) : (
+    path && (
+      <svg class="staticon" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" set:html={path} />
+    )
   )
 }
 
 <style>
   .staticon { flex: none; opacity: 0.75; vertical-align: -1px; }
+  .staticon-img { flex: none; opacity: 0.85; vertical-align: -1px; object-fit: contain; }
 </style>

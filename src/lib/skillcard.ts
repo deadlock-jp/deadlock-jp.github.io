@@ -6,9 +6,13 @@
  * すべてゲームのトークンをそのまま使う(勝手な訳・単位付けはしない)。
  */
 
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import type { Ability } from "../types/ability.ts";
 import type { AbilityProperty } from "../types/property.ts";
 import { t, formatProperty, describe, dedupedTail } from "./data.ts";
+import { resolveImagePath } from "../parsers/image-manifest.ts";
+import { SCALE_ICON_REFS } from "./scaleIcons.ts";
 
 export interface CardRow {
   label: string;
@@ -22,8 +26,10 @@ export interface DamageRow {
   label: string;
   value: string;
   unit: string;
-  /** スピリットパワー係数(m_flStatScale)。null なら非スケーリング */
+  /** スケーリング係数(m_flStatScale)。null なら非スケーリング */
   scale: number | null;
+  /** scale が何由来か。武器ダメージ・近接ダメージ由来は "weapon"、それ以外(既定)は "spirit" */
+  scaleKind: "spirit" | "weapon" | null;
   icon: StatIconKind | null;
 }
 export interface UpgradeTier {
@@ -85,6 +91,7 @@ export type StatIconKind =
   | "resist"
   | "slow"
   | "spirit"
+  | "weapon"
   | "ap";
 /**
  * StatIcon.astro が描くSVGの中身(pathなど、viewBox="0 0 16 16"前提)。
@@ -107,8 +114,34 @@ export const STAT_ICON_PATHS: Record<StatIconKind, string> = {
     '<path d="M8 1.2 13 3v3.8c0 3.9-2.2 6.6-5 7.6-2.8-1-5-3.7-5-7.6V3Z" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/>',
   slow: '<path d="M14.4 6 10.6 8l3.8 2M8.4 6l3.8 2-3.8 2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>',
   spirit: '<path d="M8 1.4 9.7 5.5l4.4.4-3.3 3 1 4.3L8 11l-3.8 2.2 1-4.3-3.3-3 4.4-.4L8 1.4Z"/>',
+  weapon:
+    '<circle cx="8" cy="8" r="6.4" fill="none" stroke="currentColor" stroke-width="1.1"/><circle cx="8" cy="8" r="1.6" fill="currentColor"/><path d="M8 0.8v3M8 12.2v3M0.8 8h3M12.2 8h3" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>',
   ap: '<path d="M8.6 1 3.6 9h3.1l-1 6L12.4 7H9.3l1-6Z"/>',
 };
+
+/**
+ * スケーリング表示(row.scale / row.scaleKind)専用の実画像を public/ からの相対パスに解決する。
+ * ゲーム本編のアップグレードUIで使われているアイコンをそのまま使う。
+ * 抽出できていなければ null を返し、呼び出し側は STAT_ICON_PATHS のSVGにフォールバックする。
+ */
+export function scaleIconSrc(kind: "spirit" | "weapon"): string | null {
+  const resolved = resolveImagePath(SCALE_ICON_REFS[kind]);
+  if (!resolved || !existsSync(join(process.cwd(), resolved.outPath))) return null;
+  return resolved.outPath.replace(/^public\//, "");
+}
+
+/**
+ * スケーリング係数が何由来かを、abilities.vdata の m_eSpecificStatScaleType から判定する。
+ * "Weapon"(武器ダメージそのもの)か "MeleeDamage"(軽/重近接ダメージの基礎値)を含む値は
+ * 武器由来。それ以外(大多数の ETechPower や、statType が空でも
+ * scale_function_tech_damage を使うもの)はスピリット由来として扱う。
+ * 実例: citadel_ability_chrono_kinetic_carbine(パラドックスのキネティックカービン)の
+ * ダメージは EWeaponPower(武器パワーで上昇、と説明文に明記)。
+ * viscous_telepunch(パドルパンチ)は ELightMeleeDamage/EHeavyMeleeDamage。
+ */
+function scaleKindOf(statType: string | null): "spirit" | "weapon" {
+  return statType && /Weapon|MeleeDamage/.test(statType) ? "weapon" : "spirit";
+}
 
 const ICON_BY_CSS_CLASS: Record<string, StatIconKind> = {
   tech_damage: "damage",
@@ -175,6 +208,7 @@ export function skillCard(ab: Ability, heroName = ""): SkillCard {
       value: f.value,
       unit: f.unit,
       scale: p.scale?.statScale ?? null,
+      scaleKind: p.scale ? scaleKindOf(p.scale.statType) : null,
       icon: iconFor(p) ?? "damage",
     });
   }
@@ -229,7 +263,10 @@ export function skillCard(ab: Ability, heroName = ""): SkillCard {
 
   const TILE_SLOTS = 3;
   const tileEffectCount = Math.max(0, TILE_SLOTS - damage.length);
-  const tiles: DamageRow[] = [...damage, ...effects.slice(0, tileEffectCount).map((e) => ({ ...e, scale: null }))];
+  const tiles: DamageRow[] = [
+    ...damage,
+    ...effects.slice(0, tileEffectCount).map((e) => ({ ...e, scale: null, scaleKind: null })),
+  ];
   const secondaryRows = effects.slice(tileEffectCount);
 
   return { meta, damage, effects, tiles, secondaryRows, upgrades };

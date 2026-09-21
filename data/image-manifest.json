@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-21T11:31:06.867Z",
+  "generatedAt": "2026-09-21T13:54:05.469Z",
   "sourceVpk": "game/citadel/pak01_dir.vpk",
   "entries": [
     {
@@ -3315,6 +3315,7 @@
       "outPath": "public/images/hud/icons/powerup_gun.svg",
       "kind": "vsvg",
       "usedBy": [
+        "scaleicon:weapon",
         "system:powerups:0"
       ]
     },
@@ -3333,6 +3334,7 @@
       "outPath": "public/images/hud/icons/powerup_spirit.svg",
       "kind": "vsvg",
       "usedBy": [
+        "scaleicon:spirit",
         "system:powerups:2"
       ]
     },

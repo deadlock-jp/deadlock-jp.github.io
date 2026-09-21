@@ -77,7 +77,7 @@ const fmtScale = (n: number) => (Math.round(n * 100) / 100).toString();
           <div class:list={["tile", { scaled: row.scale }]}>
             {row.scale !== null && (
               <span class="tscale">
-                <StatIcon kind="spirit" />×{fmtScale(row.scale)}
+                <StatIcon kind={row.scaleKind ?? "spirit"} />×{fmtScale(row.scale)}
               </span>
             )}
             <div class="tval">
