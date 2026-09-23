@@ -41,10 +41,10 @@
     }
   }
 
-  function grainCanvas() {
+  function grainTile(size) {
     var cv = document.createElement("canvas");
-    cv.width = cv.height = 300;
-    var ctx = cv.getContext("2d"), img = ctx.createImageData(300, 300);
+    cv.width = cv.height = size;
+    var ctx = cv.getContext("2d"), img = ctx.createImageData(size, size);
     for (var i = 0; i < img.data.length; i += 4) {
       var v = 110 + Math.random() * 90;
       img.data[i] = v; img.data[i + 1] = v; img.data[i + 2] = v; img.data[i + 3] = 255;
@@ -72,9 +72,7 @@
     el.appendChild(canvas);
     el.appendChild(grain);
 
-    var g0 = grainCanvas();
-    grain.width = g0.width; grain.height = g0.height;
-    grain.getContext("2d").drawImage(g0, 0, 0);
+    var gctx = grain.getContext("2d");
 
     var ctx = canvas.getContext("2d");
     var W = 0, H = 0, dpr = 1, far = null, near = null, base = null, baseKey = "", t = 0, raf = 0;
@@ -89,6 +87,16 @@
       far = makeSkyline(W, { y: H * 0.68, h: H * 0.3, w: [42, 100] }, 5051);
       near = makeSkyline(W, { y: H * 1.02, h: H * 0.49, w: [76, 180] }, 1223);
       baseKey = "";
+
+      // グレインは固定300x300を画面いっぱいに引き伸ばすと、縦長のスマホ画面で
+      // 特に縦方向が強く伸びて粗く見える。タイルを実ピクセル解像度で敷き詰めて
+      // ドットの見かけサイズを画面サイズに関わらず一定に保つ。
+      grain.width = Math.round(W * dpr);
+      grain.height = Math.round(H * dpr);
+      var tileSize = Math.round(48 * dpr);
+      var pattern = gctx.createPattern(grainTile(tileSize), "repeat");
+      gctx.fillStyle = pattern;
+      gctx.fillRect(0, 0, grain.width, grain.height);
     }
 
     function buildBase() {
