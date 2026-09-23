@@ -10,13 +10,22 @@
 import { releasedHeroes, t } from "./data.ts";
 import controlsNotesJson from "../../data/controls-notes.json" with { type: "json" };
 
+/** 実演動画つきのテクニック。自前でYouTube Shortsに撮影・投稿したものだけ見出し化して埋め込む */
+export interface ControlTechniqueWithVideo {
+  title: string;
+  text: string;
+  videoId: string;
+}
+
+export type ControlTechnique = string | ControlTechniqueWithVideo;
+
 export interface ControlCategory {
   id: string;
   title: string;
   /** 基礎操作の説明そのもの。無いカテゴリ(ジップライン等)は空配列 */
   basics: string[];
   /** 基礎操作を組み合わせた発展的なテクニック。無いカテゴリ(パリィ等)は空配列 */
-  techniques: string[];
+  techniques: ControlTechnique[];
 }
 
 export function controlCategories(): ControlCategory[] {

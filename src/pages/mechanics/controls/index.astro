@@ -47,12 +47,43 @@ const categories = controlCategories();
           {c.basics.map((line) => <li>{line}</li>)}
         </ul>
       )}
-      {c.techniques.length > 0 && (
-        <div class:list={["techniques", { withBasics: c.basics.length > 0 }]}>
-          {c.basics.length > 0 && <span class="techlabel">応用テクニック</span>}
-          {c.techniques.map((p) => <p>{p}</p>)}
-        </div>
-      )}
+      {c.techniques.length > 0 && (() => {
+        const videoTechs = c.techniques.filter((t) => typeof t !== "string");
+        return (
+          <div class:list={["techniques", { withBasics: c.basics.length > 0 }]}>
+            {c.basics.length > 0 && <span class="techlabel">応用テクニック</span>}
+            <div class:list={["techsplit", { split: videoTechs.length > 0 }]}>
+              <div class="techtext">
+                {c.techniques.map((t) =>
+                  typeof t === "string" ? (
+                    <p>{t}</p>
+                  ) : (
+                    <div class="techitem">
+                      <h3>{t.title}</h3>
+                      <p>{t.text}</p>
+                    </div>
+                  ),
+                )}
+              </div>
+              {videoTechs.length > 0 && (
+                <div class="techvideos">
+                  {videoTechs.map((t) => (
+                    <div class="techvideo">
+                      <iframe
+                        src={`https://www.youtube.com/embed/${t.videoId}?mute=1`}
+                        title={t.title}
+                        loading="lazy"
+                        allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      })()}
     </section>
   ))}
 
@@ -187,6 +218,55 @@ const categories = controlCategories();
     }
     .techniques p:last-child {
       margin-bottom: 0;
+    }
+
+    .techitem {
+      margin-bottom: var(--sp-3);
+    }
+    .techitem h3 {
+      margin: 0 0 var(--sp-2);
+      font-size: 14px;
+      color: var(--c-text-strong);
+    }
+
+    .techsplit.split {
+      display: flex;
+      gap: var(--sp-5);
+      align-items: flex-start;
+    }
+    .techtext {
+      flex: 1;
+      min-width: 0;
+    }
+    .techvideos {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: row;
+      gap: var(--sp-3);
+    }
+    .techvideo {
+      flex: 0 0 150px;
+      width: 150px;
+      aspect-ratio: 9 / 16;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #000;
+    }
+    .techvideo iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+    @media (max-width: 720px) {
+      .techsplit.split {
+        flex-direction: column;
+      }
+      .techvideos {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-self: center;
+      }
     }
 
     .hd summary {
