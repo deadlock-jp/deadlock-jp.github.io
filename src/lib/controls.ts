@@ -3,10 +3,25 @@
  *
  * ヒーロー別の移動・近接ダメージ系の基礎値は heroes.json の startingStats に
  * 既に抽出済み（src/parsers/heroes.ts）。ここでは表示に使う項目だけ選んで整形する。
- * 共通の操作説明（ダッシュ・二段ジャンプ等の存在）は手書き（ページ側の固定文）で、
- * ここでは数値だけを扱う（CLAUDE.md ルール6）。
+ * 操作の説明・テクニックは data/controls-notes.json に手書きする
+ * (該当する vdata が無く自動抽出できないため。CLAUDE.md ルール6)。
+ * 旧 /mechanics/movement/ (data/movement-notes.json) はここに統合した(2026-09-23)。
  */
 import { releasedHeroes, t } from "./data.ts";
+import controlsNotesJson from "../../data/controls-notes.json" with { type: "json" };
+
+export interface ControlCategory {
+  id: string;
+  title: string;
+  /** 基礎操作の説明そのもの。無いカテゴリ(ジップライン等)は空配列 */
+  basics: string[];
+  /** 基礎操作を組み合わせた発展的なテクニック。無いカテゴリ(パリィ等)は空配列 */
+  techniques: string[];
+}
+
+export function controlCategories(): ControlCategory[] {
+  return (controlsNotesJson as unknown as { categories: ControlCategory[] }).categories;
+}
 
 export interface HeroControlRow {
   heroId: number;

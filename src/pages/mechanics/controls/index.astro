@@ -2,23 +2,24 @@
 /**
  * キャラクターコントロールのリファレンス。
  *
+ * 旧「移動テクニック」(/mechanics/movement/)と統合したページ(2026-09-23)。
+ * 同じ操作を土台にした内容が2ページに分かれていたため、ダッシュ・ジャンプ・
+ * マントルなど操作の起点ごとにカテゴリ分けし、基礎操作の説明→それを組み合わせた
+ * 発展的なテクニックの順で1つにまとめている(data/controls-notes.json)。
  * ヒーロー別の数値は heroes.json の startingStats から自動で出す(src/lib/controls.ts)。
- * 共通操作の説明は該当する vdata が無いため data/controls-notes.json の "common" に手書きする
- * (CLAUDE.md ルール6)。ヒーローID配下は数値テーブルへの補足TIPS。
  */
 import Base from "../../../layouts/Base.astro";
 import HeroPortrait from "../../../components/HeroPortrait.astro";
-import { heroControlStats } from "../../../lib/controls.ts";
-import { controlsNotes } from "../../../lib/data.ts";
+import { heroControlStats, controlCategories } from "../../../lib/controls.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const rows = heroControlStats();
-const commonNotes = controlsNotes("common");
+const categories = controlCategories();
 ---
 
 <Base
   title="キャラクターコントロール"
-  description="Deadlock（デッドロック）の共通操作（ダッシュ・二段ジャンプ等）と、ヒーローごとの移動・近接ダメージの数値差を、ゲームの生データから自動生成した日本語リファレンス。"
+  description="Deadlock（デッドロック）の共通操作（ダッシュ・二段ジャンプ・マントル等）とそれを組み合わせた発展的な移動テクニック、ヒーローごとの移動・近接ダメージの数値差を、日本語でまとめたリファレンス。"
   breadcrumbs={[
     { name: "攻略情報", path: `${base}/mechanics/` },
     { name: "キャラクターコントロール", path: `${base}/mechanics/controls/` },
@@ -26,17 +27,34 @@ const commonNotes = controlsNotes("common");
 >
   <h1>キャラクターコントロール</h1>
   <p class="lead">
-    どのヒーローにも共通する操作と、ヒーローごとに違う移動・近接ダメージの基礎値です。
+    どのヒーローにも共通する操作と、それらを組み合わせた発展的な移動テクニックを、
+    ダッシュ・ジャンプといった操作の起点ごとにまとめています。
+    ヒーローごとに違う移動・近接ダメージの基礎値はページ下部の数値表を参照してください。
   </p>
 
-  {commonNotes.length > 0 && (
-    <section class="block panel">
-      <h2>共通操作</h2>
-      <ul class="notes">
-        {commonNotes.map((line) => <li>{line}</li>)}
-      </ul>
+  <nav class="toc">
+    <span class="toclabel">目次</span>
+    <ol>
+      {categories.map((c) => <li><a href={`#${c.id}`}>{c.title}</a></li>)}
+    </ol>
+  </nav>
+
+  {categories.map((c) => (
+    <section id={c.id} class="block panel">
+      <h2>{c.title}</h2>
+      {c.basics.length > 0 && (
+        <ul class="notes">
+          {c.basics.map((line) => <li>{line}</li>)}
+        </ul>
+      )}
+      {c.techniques.length > 0 && (
+        <div class:list={["techniques", { withBasics: c.basics.length > 0 }]}>
+          {c.basics.length > 0 && <span class="techlabel">応用テクニック</span>}
+          {c.techniques.map((p) => <p>{p}</p>)}
+        </div>
+      )}
     </section>
-  )}
+  ))}
 
   <section class="block panel">
     <details class="hd">
@@ -88,7 +106,8 @@ const commonNotes = controlsNotes("common");
   </section>
 
   <p class="foot">
-    数値は <code>heroes.vdata</code> から自動抽出したものです。
+    ヒーロー別の数値は <code>heroes.vdata</code> から自動抽出したものです。
+    <a href={`${base}/mechanics/strategy/`}>戦略</a> のページも参照してください。
     <a href={`${base}/about/`}>このサイトについて</a>
   </p>
 
@@ -97,6 +116,34 @@ const commonNotes = controlsNotes("common");
       color: var(--c-text-muted);
       line-height: 1.8;
     }
+    .toc {
+      margin-top: var(--sp-4);
+      padding: var(--sp-3) var(--sp-4);
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius);
+      max-width: 62ch;
+    }
+    .toclabel {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--c-text-muted);
+    }
+    .toc ol {
+      margin: var(--sp-2) 0 0;
+      padding-left: 1.2em;
+      font-size: 13px;
+      line-height: 1.9;
+      column-width: 22ch;
+    }
+    .toc a {
+      color: var(--c-text);
+    }
+    .toc a:hover {
+      color: var(--c-accent);
+    }
+
     .block {
       margin-top: var(--sp-5);
     }
@@ -107,6 +154,39 @@ const commonNotes = controlsNotes("common");
       margin: 0 0 var(--sp-4);
       font-size: 13px;
       color: var(--c-text-muted);
+    }
+
+    .notes {
+      margin: 0;
+      padding-left: 1.2em;
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--c-text);
+    }
+
+    .techniques {
+      margin-top: var(--sp-3);
+    }
+    .techniques.withBasics {
+      padding-top: var(--sp-3);
+      border-top: 1px dashed var(--c-border);
+    }
+    .techlabel {
+      display: block;
+      margin-bottom: var(--sp-2);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--c-text-faint);
+    }
+    .techniques p {
+      margin: 0 0 var(--sp-3);
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--c-text);
+    }
+    .techniques p:last-child {
+      margin-bottom: 0;
     }
 
     .hd summary {
@@ -138,14 +218,6 @@ const commonNotes = controlsNotes("common");
     }
     .hd .tlead {
       margin-top: var(--sp-3);
-    }
-
-    .notes {
-      margin: 0;
-      padding-left: 1.2em;
-      font-size: 13px;
-      line-height: 1.9;
-      color: var(--c-text);
     }
 
     .tablewrap {
@@ -188,6 +260,9 @@ const commonNotes = controlsNotes("common");
       margin-top: var(--sp-5);
       font-size: 12px;
       color: var(--c-text-faint);
+    }
+    .foot a {
+      color: inherit;
     }
   </style>
 </Base>

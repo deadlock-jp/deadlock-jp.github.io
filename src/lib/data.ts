@@ -7,7 +7,6 @@ import heroNotesJson from "../../data/hero-notes.json" with { type: "json" };
 import itemNotesJson from "../../data/item-notes.json" with { type: "json" };
 import objectNotesJson from "../../data/object-notes.json" with { type: "json" };
 import soulsNotesJson from "../../data/souls-notes.json" with { type: "json" };
-import controlsNotesJson from "../../data/controls-notes.json" with { type: "json" };
 import propertyLabelsJson from "../../data/property-labels.json" with { type: "json" };
 import itemStatsJson from "../../data/item-stats.json" with { type: "json" };
 import heroStatsJson from "../../data/hero-stats.json" with { type: "json" };
@@ -470,11 +469,6 @@ export function objectNotes(objectId: string): string[] {
 const soulsNotesFile = soulsNotesJson as unknown as { notes: Record<string, string[]> };
 export function soulsNotes(topicId: string): string[] {
   return soulsNotesFile.notes[topicId] ?? [];
-}
-
-const controlsNotesFile = controlsNotesJson as unknown as { notes: Record<string, string[]> };
-export function controlsNotes(key: string): string[] {
-  return controlsNotesFile.notes[key] ?? [];
 }
 
 /** ショップに並ぶアイテムを ティア → 名前 順で返す */

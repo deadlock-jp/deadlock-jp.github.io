@@ -50,7 +50,6 @@ export const GET: APIRoute = ({ site }) => {
     { loc: "/mechanics/objects/", priority: "0.7", lastmod: dataDate },
     { loc: "/mechanics/souls/", priority: "0.7", lastmod: dataDate },
     { loc: "/mechanics/controls/", priority: "0.7", lastmod: dataDate },
-    { loc: "/mechanics/movement/", priority: "0.7", lastmod: dataDate },
     { loc: "/mechanics/strategy/", priority: "0.7", lastmod: dataDate },
     { loc: "/about/", priority: "0.3", lastmod: dataDate },
     ...releasedHeroes().map((h) => ({ loc: `/heroes/${h.id}/`, priority: "0.7", lastmod: dataDate })),
