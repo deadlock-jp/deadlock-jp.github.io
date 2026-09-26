@@ -167,10 +167,30 @@ const statsPayload = {
   {/* ------------ 下部: 一覧 ------------ */}
   <h2 class="listh">一覧</h2>
 
-  <ul class="grid">
+  {/*
+    スキル効果での絞り込み。検索辞書(言い換え・関連語)は /items/・ビルドページと共用の
+    public/js/item-search.js。基本の説明文に加えて、AP強化で付く効果(t1〜t3_desc)も探す。
+  */}
+  <div class="herosearch">
+    <input
+      type="search"
+      id="heroq"
+      placeholder="ヒーロー名・スキルの効果で絞り込む(例: サイレンス)"
+      autocomplete="off"
+      aria-label="ヒーローの絞り込み"
+    />
+    <span class="herohits" id="herohits"></span>
+    <span class="herolegend" id="herolegend" hidden>
+      <i class="lg lg-base"></i>基本の効果
+      <i class="lg lg-up"></i>AP強化で付く効果
+      <i class="lg lg-rel"></i>関連
+    </span>
+  </div>
+
+  <ul class="grid" id="herogrid">
     {
       heroes.map(({ hero: h, name, role, skills, topStats }) => (
-        <li>
+        <li data-find={`${name} ${role} ${h.key}`}>
           <a href={`${base}/heroes/${h.id}/`} data-herocard={h.id}>
             <span class="head">
               <HeroPortrait name={name} image={h.images.iconSmall} size={44} />
@@ -180,16 +200,30 @@ const statsPayload = {
               </span>
             </span>
             <span class="skills">
-              {skills.map((s) => (
-                <span class="skillicon" data-abilitycard={s.key}>
-                  <AbilityIcon
-                    name={t(s.key, s.key)}
-                    image={s.ab?.image ?? null}
-                    size={30}
-                    cssVar={s.ab?.kind === "Ultimate" ? "spirit" : "accent"}
-                  />
-                </span>
-              ))}
+              {skills.map((s) => {
+                const d = abilityDetails[s.key];
+                // AP強化の各段: [AP, その段の説明文]。説明文が無い段(数値だけの段)は探さない
+                const ups = (d?.upgrades ?? [])
+                  .filter((u) => u.description)
+                  .map((u) => [u.ap, u.description]);
+                return (
+                  <span
+                    class="skillicon"
+                    data-abilitycard={s.key}
+                    data-find={`${t(s.key, s.key)} ${d?.desc ?? ""}`}
+                    data-up={JSON.stringify(ups)}
+                  >
+                    <AbilityIcon
+                      name={t(s.key, s.key)}
+                      image={s.ab?.image ?? null}
+                      size={30}
+                      cssVar={s.ab?.kind === "Ultimate" ? "spirit" : "accent"}
+                    />
+                    {/* AP強化で付く効果で当たったときに、何APの段かを出す */}
+                    <span class="upmark" hidden></span>
+                  </span>
+                );
+              })}
             </span>
             <span class="stats">
               {topStats.map((r) => (
@@ -217,6 +251,85 @@ const statsPayload = {
   {/* ホバー詳細カード(トップページと共通コンポーネント + スキルアイコン用) */}
   <HeroHoverCard heroDetail={heroDetail} />
   <AbilityHoverCard details={abilityDetails} />
+
+  <script src={`${base}/js/item-search.js`} is:inline></script>
+  <script is:inline>
+    // 一覧の絞り込み。ヒーロー名・ロール・スキル名・スキル説明・AP強化の説明のどれかで当たったヒーローを残し、
+    // 当たったスキルのアイコンを強調する(基本の効果=実線、AP強化で付く効果=点線+AP表示)。
+    (() => {
+      const S = window.itemSearch;
+      const q = document.getElementById("heroq");
+      const hits = document.getElementById("herohits");
+      const legend = document.getElementById("herolegend");
+      const rows = [...document.querySelectorAll("#herogrid > li")].map((li) => {
+        const skills = [...li.querySelectorAll(".skillicon")].map((el) => ({
+          el,
+          mark: el.querySelector(".upmark"),
+          base: S.prepare(el.dataset.find),
+          ups: JSON.parse(el.dataset.up || "[]").map(([ap, text]) => [ap, S.prepare(text)]),
+        }));
+        // ヒーロー単位の判定用。複数語が別々のスキルに分かれて当たる場合も拾えるよう全部つなげる
+        const all = [S.prepare(li.dataset.find), ...skills.flatMap((s) => [s.base, ...s.ups.map((u) => u[1])])].join(" ");
+        return { li, skills, all };
+      });
+      const total = rows.length;
+
+      function apply() {
+        const cq = S.compile(q.value);
+        let direct = 0;
+        let related = 0;
+        const labels = new Set();
+        for (const { li, skills, all } of rows) {
+          const m = cq ? S.match(cq, all) : [];
+          li.hidden = m === null;
+          for (const s of skills) {
+            s.el.classList.remove("hit", "hitup", "rel", "miss");
+            s.mark.hidden = true;
+          }
+          if (m === null) continue;
+          if (m.length > 0) {
+            related++;
+            m.forEach((l) => labels.add(l));
+          } else {
+            direct++;
+          }
+          if (!cq) continue;
+          let any = false;
+          for (const s of skills) {
+            // 基本の説明 → AP強化の段(安い順)の順に見る。検索語そのもの(直接)で当たる段を
+            // 関連語で当たる段より優先する(基本が関連、AP5で直接、なら AP5 を採る)
+            const cands = [[null, s.base], ...s.ups.map(([a, text]) => [a, `${s.base} ${text}`])]
+              .map(([a, text]) => [a, S.match(cq, text)])
+              .filter(([, m]) => m !== null);
+            const pick = cands.find(([, m]) => m.length === 0) ?? cands[0];
+            if (!pick) continue;
+            const [ap, sm] = pick;
+            any = true;
+            // 関連語(デバフ対策など)だけで当たったスキルは、検索語そのものの効果と見分ける
+            if (sm.length > 0) {
+              s.el.classList.add("rel");
+              s.mark.textContent = "関連";
+              s.mark.hidden = false;
+            } else if (ap !== null) {
+              s.el.classList.add("hitup");
+              s.mark.textContent = `AP${ap}`;
+              s.mark.hidden = false;
+            } else {
+              s.el.classList.add("hit");
+            }
+          }
+          // ヒーロー名だけで当たったときは、スキルを薄くしない
+          if (any) for (const s of skills) if (!s.el.matches(".hit, .hitup, .rel")) s.el.classList.add("miss");
+        }
+        hits.textContent = cq ? S.summary(direct, related, labels, total).replace(/件/g, "人") : "";
+        legend.hidden = !cq;
+        document.getElementById("herogrid").classList.toggle("searching", !!cq);
+      }
+
+      q.addEventListener("input", apply);
+      apply();
+    })();
+  </script>
 
   <script is:inline define:vars={{ heroMeta, tierData: tier.data, base, statsPayload }}>
     (() => {
@@ -486,7 +599,39 @@ const statsPayload = {
     .cx { color: var(--c-accent); letter-spacing: 1px; }
     .cx .dim { color: var(--c-text-faint); }
     .skills { display: flex; gap: 4px; margin-bottom: var(--sp-3); }
-    .skillicon { display: block; line-height: 0; }
+    .skillicon { display: block; line-height: 0; position: relative; border-radius: 6px; }
+
+    /* ---- 一覧の絞り込み ---- */
+    .herosearch { display: flex; align-items: center; flex-wrap: wrap; gap: var(--sp-2) var(--sp-4); margin-bottom: var(--sp-4); }
+    .herosearch input {
+      flex: 1 1 260px; max-width: 420px;
+      background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius);
+      color: var(--c-text); font: inherit; font-size: 13px; padding: 6px 10px;
+    }
+    .herosearch input:focus { outline: none; border-color: var(--c-accent); }
+    .herohits { font-size: 12px; color: var(--c-text-muted); font-family: var(--font-mono); }
+    .herolegend { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: var(--c-text-muted); }
+    .herolegend[hidden] { display: none; }
+    .lg { display: inline-block; width: 12px; height: 12px; border-radius: 3px; }
+    .herolegend .lg-up { margin-left: var(--sp-2); }
+    .lg-base { outline: 2px solid var(--c-soul); }
+    .lg-up { outline: 2px dashed var(--c-soul); }
+    .grid > li[hidden] { display: none; }
+    /* 検索中はアイコン下のAPバッジ分だけ余白を空ける */
+    .grid.searching .skills { gap: 6px; margin-bottom: calc(var(--sp-3) + 10px); }
+    /* 当たったスキル: 実線=基本の効果 / 点線=AP強化で付く効果。当たらなかったスキルは薄く */
+    .skillicon.hit { outline: 2px solid var(--c-soul); outline-offset: 1px; }
+    .skillicon.hitup { outline: 2px dashed var(--c-soul); outline-offset: 1px; }
+    .skillicon.rel { outline: 2px dotted var(--c-text-muted); outline-offset: 1px; }
+    .skillicon.rel .upmark { border-color: var(--c-border-strong); color: var(--c-text-muted); white-space: nowrap; }
+    .lg-rel { outline: 2px dotted var(--c-text-muted); margin-left: var(--sp-2); }
+    .skillicon.miss { opacity: 0.3; }
+    .upmark {
+      position: absolute; left: 50%; bottom: -13px; transform: translateX(-50%); white-space: nowrap;
+      font-family: var(--font-mono); font-size: 9px; line-height: 1.2; padding: 0 3px;
+      background: var(--c-bg); border: 1px solid var(--c-soul); border-radius: 3px; color: var(--c-soul);
+    }
+    .upmark[hidden] { display: none; }
     .hcicon-src-wrap { display: none; }
   </style>
 </Base>
