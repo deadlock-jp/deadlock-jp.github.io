@@ -14,7 +14,7 @@
  *       これが現在の一次ソース(architecture.html 参照)。
  */
 
-import { writeFileSync, mkdirSync, existsSync, readFileSync } from "node:fs";
+import { writeFileSync, mkdirSync, existsSync, readFileSync, copyFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { resolve, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -24,6 +24,9 @@ import { parseAbilities } from "./abilities.ts";
 import { parseObjects } from "./objects.ts";
 import { parseEconomy } from "./economy.ts";
 import { parseLocalization } from "./localization.ts";
+import { parseConvars } from "./convars.ts";
+import { parseMap } from "./map.ts";
+import type { MapImage } from "../types/map.ts";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(HERE, "../..");
@@ -134,6 +137,81 @@ function reportLocalization(localization: ReturnType<typeof parseLocalization>, 
   }
 }
 
+/**
+ * convars.json を書く。convar はクライアントの pak に無いので、GameTracking-Deadlock の
+ * DumpSource2/convars.txt から読む(src/parsers/convars.ts)。
+ * GameTracking の版が expectedVersion と違うときは警告だけ出して、その版の値のまま書く
+ * (どの版の値かは sourceVersion に残る)。GameTracking が無ければ書かない。
+ */
+function writeConvars(snapDir: string, gtPath: string | null, expectedVersion: string): void {
+  const txt = gtPath ? join(gtPath, "DumpSource2", "convars.txt") : null;
+  if (!gtPath || !txt || !existsSync(txt)) {
+    console.log(
+      "  ※ convars.json は省略: GameTracking-Deadlock の DumpSource2/convars.txt が見つかりません\n" +
+        "     (sparse-checkout に DumpSource2 を加えてください)",
+    );
+    return;
+  }
+  const inf = readFileSync(join(gtPath, "game/citadel/steam.inf"), "utf8");
+  const gtVersion = inf.match(/^ClientVersion=(\S+)/m)?.[1] ?? "unknown";
+  const convars = parseConvars(txt, gtVersion);
+  writeJsonTo(snapDir, "convars.json", convars);
+  if (gtVersion !== expectedVersion) {
+    console.log(
+      `  ※ convars.json は GameTracking の ${gtVersion} 版の値です(取り込み対象は ${expectedVersion})。\n` +
+        "     git -C <GameTracking> pull で追いついてから parse し直してください。",
+    );
+  }
+  if (convars.missing.length > 0) {
+    console.log(`  ※ ダンプに無い convar: ${convars.missing.join(", ")}`);
+  }
+}
+
+/**
+ * map.json を書く。extract-local.mjs が <localRoot>/map/ に取り出した配置データと
+ * ミニマップ画像を読み、画像は public/images/minimap/<map>.png(地下は _tunnels)へコピーする。
+ * 取り出していなければ(古い抽出ルートなど)何もしない。
+ */
+function writeMap(snapDir: string, localRoot: string): void {
+  const infoPath = join(localRoot, "map", "_map.json");
+  if (!existsSync(infoPath)) {
+    console.log("  ※ map.json は省略: 抽出ルートにマップがありません(extract-local.mjs を実行し直してください)");
+    return;
+  }
+  const info = JSON.parse(readFileSync(infoPath, "utf8")) as {
+    map: string;
+    entities: string;
+    images: Record<string, { vpkPath: string; png: string }>;
+  };
+  const copyImage = (key: "base" | "tunnels", suffix: string): MapImage | null => {
+    const src = info.images[key];
+    if (!src || !existsSync(src.png)) return null;
+    const outPath = `public/images/minimap/${info.map}${suffix}.png`;
+    mkdirSync(join(REPO_ROOT, "public/images/minimap"), { recursive: true });
+    copyFileSync(src.png, join(REPO_ROOT, outPath));
+    console.log(`  ${outPath}`);
+    return { vpkPath: src.vpkPath, outPath };
+  };
+  const map = parseMap(info.entities, info.map, {
+    base: copyImage("base", ""),
+    tunnels: copyImage("tunnels", "_tunnels"),
+  }, info.images.tunnels?.png && existsSync(info.images.tunnels.png) ? info.images.tunnels.png : null);
+  writeJsonTo(snapDir, "map.json", map);
+  console.log(
+    `マップ ${map.map}: キャンプ ${map.camps.length} / 箱・黄金像 ${map.breakables.length}` +
+      `(地下 ${map.breakables.filter((b) => b.underground).length}) / 目印 ${map.landmarks.length}`,
+  );
+}
+
+/** GameTracking-Deadlock のパス。--local では任意(無ければ convars.json を省く) */
+function optionalGameTrackingPath(): string | null {
+  try {
+    return resolveGameTrackingPath();
+  } catch {
+    return null;
+  }
+}
+
 /** 取り込み元コミットの日付(ISO)。スナップショットがどの時点のものかを残すのに使う */
 function upstreamCommitDate(gtPath: string): string | null {
   try {
@@ -204,6 +282,7 @@ function runGameTrackingSnapshot(): void {
   writeJsonTo(snapDir, "abilities.json", abilities);
   writeJsonTo(snapDir, "objects.json", objects);
   writeJsonTo(snapDir, "economy.json", economy);
+  writeConvars(snapDir, gt, clientVersion);
 
   const locRoot = join(gt, "game/citadel/resource/localization");
   for (const lang of ["japanese", "english"] as const) {
@@ -256,6 +335,8 @@ function runLocal(localRoot: string): void {
   writeJsonTo(snapDir, "abilities.json", abilities);
   writeJsonTo(snapDir, "objects.json", objects);
   writeJsonTo(snapDir, "economy.json", economy);
+  writeConvars(snapDir, optionalGameTrackingPath(), clientVersion);
+  writeMap(snapDir, localRoot);
 
   const locRoot = join(localRoot, "localization");
   for (const lang of ["japanese", "english"] as const) {

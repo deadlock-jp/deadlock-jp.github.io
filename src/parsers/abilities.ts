@@ -1,7 +1,7 @@
 /** abilities.vdata (アイテム以外) → abilities.json */
 
 import type { Kv3Object, Kv3Value } from "./kv3.ts";
-import { readVdata, resolveEntry, stripEnumPrefix } from "./vdata.ts";
+import { readVdata, resolveEntry, stripEnumPrefix, num } from "./vdata.ts";
 import {
   obj,
   str,
@@ -128,6 +128,16 @@ export function parseAbilities(abilitiesPath: string, upstreamCommit: string): A
       weapon: kind === "Weapon" ? parseWeapon(e["m_WeaponInfo"]) : null,
       image: str(e["m_strAbilityImage"]),
       alternateFormAbilities: parseAlternateFormAbilities(e),
+      // パリィ(citadel_ability_melee_parry)だけが持つ、ガーディアン等のボスをパリィしたときの効果。
+      // 他のアビリティには付けない(全アビリティに null が並ぶと差分が騒がしくなる)
+      ...(e["m_flBossVictimNoMeleeTime"] !== undefined
+        ? {
+            parryBoss: {
+              noMeleeTime: num(e["m_flBossVictimNoMeleeTime"]),
+              calmTime: num(e["m_flBossVictimCalmTime"]),
+            },
+          }
+        : {}),
     };
   }
 

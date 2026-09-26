@@ -10,7 +10,7 @@
  *   1. ロックファイル確認(二重起動防止。失敗時も必ず解放)
  *   2. steam.inf の ClientVersion を読む(decompile 無しの軽いチェック)
  *   3. _lastversion.txt と同じなら何もせず終了
- *   4. 違えば: extract-local.mjs → parse --local → gen-snapshot-diff --write
+ *   4. 違えば: extract-local.mjs → GameTracking を git pull → parse --local → gen-snapshot-diff --write
  *      → git commit → push(fine-grained PAT 経由。deploy key は組織ポリシーで
  *      無効化されているため使えない)
  *   5. 失敗したら push せず・_lastversion.txt も更新せず終了(次回また試みる)。
@@ -111,6 +111,21 @@ function main() {
       throw new Error(`extract-local.mjs の出力からローカルルートを取れませんでした: ${JSON.stringify(extractOut)}`);
     }
 
+    // convar(初期ソウル・トルーパー報酬など)は GameTracking の DumpSource2/convars.txt から読むので、
+    // parse の前に最新にしておく。SteamDB 側の更新が遅れていることもあるため、失敗しても止めない
+    // (版が食い違えば parse が警告を出し、convars.json の sourceVersion に古い版が残る)。
+    const gtPath = join(REPO_ROOT, "..", "GameTracking-Deadlock");
+    if (existsSync(gtPath)) {
+      try {
+        log("GameTracking-Deadlock を更新中 (git pull)...");
+        run("git", ["-C", gtPath, "pull", "--ff-only"]);
+      } catch (e) {
+        log(`警告: GameTracking-Deadlock の更新に失敗しました(convars.json が古い版の値になる可能性があります): ${e instanceof Error ? e.message : String(e)}`);
+      }
+    } else {
+      log(`警告: ${gtPath} が無いので convars.json は作られません`);
+    }
+
     log(`parse中 (--local ${localRoot})...`);
     run("node", ["--experimental-strip-types", "src/parsers/main.ts", "--local", localRoot]);
 
@@ -122,8 +137,9 @@ function main() {
     }
 
     log("git commit + push 中...");
-    run("git", ["add", "data/"]);
-    const status = run("git", ["status", "--porcelain", "--", "data/"]);
+    // ミニマップ画像は parse が public/images/minimap/ にコピーする(マップが変われば差分が出る)
+    run("git", ["add", "data/", "public/images/minimap/"]);
+    const status = run("git", ["status", "--porcelain", "--", "data/", "public/images/minimap/"]);
     if (!status.trim()) {
       log("data/ に変更がありませんでした(ClientVersion は変わったが数値・ID差分ゼロ)。commit をスキップします。");
     } else {

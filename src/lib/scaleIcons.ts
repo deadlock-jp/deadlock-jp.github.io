@@ -4,7 +4,7 @@
  * items/[id].astro、image-manifest.ts(CLIとしても実行される)の複数箇所から参照するため、
  * どれにも依存しない独立ファイルに置く(resolveImagePathの解決は呼び出し側で行う)。
  *
- * 一時バフ（ルーン）のガン系／キャスト系アイコン(/mechanics/system/ でも使用)を流用している。
+ * 一時バフ（ルーン）のガン系／キャスト系アイコン(試合の流れ /mechanics/match/ でも使用)を流用している。
  * ブリッジのバフアイコンとスケーリング表示のアイコンはゲーム内でも同じ絵柄が使われている。
  */
 export const SCALE_ICON_REFS: Record<"spirit" | "weapon", string> = {

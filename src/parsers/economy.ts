@@ -16,6 +16,8 @@ import type {
   BreakableSpawnTime,
   RiftComeback,
   CampSpawnTime,
+  BreakableGold,
+  PowerupSpawn,
 } from "../types/economy.ts";
 
 /**
@@ -125,6 +127,29 @@ function parseCampSpawnTimes(misc: ReturnType<typeof readVdata>): CampSpawnTime[
   });
 }
 
+/**
+ * 壊せる小物(箱・壺など)から出るソウル。misc.vdata の citadel_breakable_prop_drop_gold が
+ * 落とす確率、small_gold_pickup が1個あたりの額を持つ。
+ */
+function parseBreakableGold(misc: ReturnType<typeof readVdata>): BreakableGold {
+  const prop = obj(misc["citadel_breakable_prop_drop_gold"]);
+  const pickup = obj(misc["small_gold_pickup"]);
+  return {
+    dropChancePct: optNum(prop["m_flPrimaryDropChance"]),
+    goldAmount: optNum(pickup["m_flGoldAmount"]),
+    goldPerMinute: optNum(pickup["m_flGoldPerMinuteAmount"]),
+  };
+}
+
+/** 橋などに出るパワーアップ(一時バフ)の出現時刻。misc.vdata の citadel_item_powerup_spawner */
+function parsePowerupSpawn(misc: ReturnType<typeof readVdata>): PowerupSpawn {
+  const p = obj(misc["citadel_item_powerup_spawner"]);
+  return {
+    initialSpawnSeconds: optNum(p["m_flInitialSpawnTime"]),
+    respawnIntervalSeconds: optNum(p["m_flSpawnInterval"]),
+  };
+}
+
 export function parseEconomy(
   genericDataPath: string,
   miscPath: string,
@@ -152,5 +177,7 @@ export function parseEconomy(
     breakableSpawnTimes: parseBreakableSpawnTimes(g),
     riftComeback: parseRiftComeback(misc),
     campSpawnTimes: parseCampSpawnTimes(misc),
+    breakableGold: parseBreakableGold(misc),
+    powerupSpawn: parsePowerupSpawn(misc),
   };
 }

@@ -128,9 +128,9 @@ function toUpdate(u: SiteUpdate, base: string): BalanceUpdate {
     if (a.target === "system") {
       /*
        * ヒーロー・アイテムどちらにも属さない全体調整。専用ページを持たないので、
-       * 数値が今どうなっているかを確認できる場所(ソウル獲得システムのページ)へ飛ばす。
+       * 数値が今どうなっているかを確認できる場所(試合の流れの付録の数値表)へ飛ばす。
        */
-      const href = `${base}/mechanics/souls/`;
+      const href = `${base}/mechanics/match/#appendix`;
       const name = "システム全体の調整";
       entities.push({
         target: "system",

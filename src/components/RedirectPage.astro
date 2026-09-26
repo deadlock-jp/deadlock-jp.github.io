@@ -1,0 +1,35 @@
+---
+/**
+ * 統合して無くなったページの転送用(静的サイトなのでサーバー側のリダイレクトが使えない)。
+ * 共有済みのURLが切れないよう、旧URLに置いて新しいページの該当箇所へ飛ばす。
+ * 検索結果には新しい方だけが出るよう noindex と canonical を付ける。
+ */
+interface Props {
+  /** 転送先(先頭スラッシュ付きのサイト内パス。#アンカー可) */
+  to: string;
+  /** 旧ページの名前(転送中の表示用) */
+  title: string;
+}
+const { to, title } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const href = `${base}${to}`;
+const canonical = new URL(href.replace(/#.*$/, ""), Astro.site).toString();
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content={`0; url=${href}`} />
+    <link rel="canonical" href={canonical} />
+    <title>{title}（移動しました） | DEADLOCK-JP DB</title>
+    <script is:inline define:vars={{ href }}>
+      location.replace(href);
+    </script>
+  </head>
+  <body style="background:#11161a;color:#f0e7cf;font-family:sans-serif;padding:24px">
+    <p>「{title}」は「試合の流れ」に統合しました。<a href={href} style="color:#5fe0a8">移動先へ</a></p>
+  </body>
+</html>

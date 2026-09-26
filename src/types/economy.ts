@@ -73,6 +73,22 @@ export interface RiftComeback {
   resistMaxCap: number | null;
 }
 
+/** 壊せる小物(箱・壺など)から出るソウル。無い版は null */
+export interface BreakableGold {
+  /** 壊したときにソウルを落とす確率(%) */
+  dropChancePct: number | null;
+  /** 1個あたりのソウル */
+  goldAmount: number | null;
+  /** 試合時間1分ごとの増加 */
+  goldPerMinute: number | null;
+}
+
+/** パワーアップ(一時バフ)の出現時刻。無い版は null */
+export interface PowerupSpawn {
+  initialSpawnSeconds: number | null;
+  respawnIntervalSeconds: number | null;
+}
+
 export interface EconomyFile {
   schemaVersion: number;
   upstreamCommit: string;
@@ -89,4 +105,7 @@ export interface EconomyFile {
   breakableSpawnTimes: BreakableSpawnTime[];
   riftComeback: RiftComeback;
   campSpawnTimes: CampSpawnTime[];
+  /** 2026-09-26 に抽出を追加。それより前に生成したスナップショットには無い */
+  breakableGold?: BreakableGold;
+  powerupSpawn?: PowerupSpawn;
 }

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "note": "試合の流れ(/mechanics/match/)のファーミング表に出す「おすすめヒーロー」。キーは heroes.json の key(hero_xxx)。名前とアイコンはデータから引くので、ここにはキーだけを書く。空配列ならその行には何も出さない。tunnel は地下トンネルの箱に入れるヒーロー(運営者の知見。ゲームデータには無い)。",
+  "recommendedHeroes": {
+    "breakables": [],
+    "weak": [],
+    "medium": [],
+    "strong": [],
+    "vaults": [],
+    "rift": [],
+    "tunnel": ["hero_familiar", "hero_krill", "hero_nano"]
+  }
+}

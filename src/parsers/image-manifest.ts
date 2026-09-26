@@ -22,6 +22,7 @@ import type { ItemsFile } from "../types/item.ts";
 import type { AbilitiesFile } from "../types/ability.ts";
 import type { HeroesFile } from "../types/hero.ts";
 import { SCALE_ICON_REFS } from "../lib/scaleIcons.ts";
+import type { MapFile } from "../types/map.ts";
 
 export interface ImageEntry {
   /** データ側の参照パス */
@@ -110,7 +111,7 @@ export function buildImageManifest(dataDir: string, repoDataDir?: string): Image
     add(h.images.minimap, `hero:${h.key}:mm`);
   }
   /*
-   * オブジェクト(/mechanics/objects/)のアイコン。
+   * オブジェクト(試合の流れ /mechanics/match/ の付録)のアイコン。
    * npc_units.vdata 側は2件しかアイコン参照を持たないので、どのオブジェクトに
    * どの絵を当てるかは data/mechanics-notes.json の icon で人が指定する。
    * 同じ絵を複数のオブジェクトが使う(トルーパー3種など)ので usedBy は複数付く。
@@ -130,7 +131,7 @@ export function buildImageManifest(dataDir: string, repoDataDir?: string): Image
     }
 
     /*
-     * ゲームシステム(/mechanics/system/)のアイコン。セクションIDごとに
+     * ゲームシステム(試合の流れ /mechanics/match/)のアイコン。セクションIDごとに
      * {icon, label} の配列を持つ。lines(文章)とは別に、アイコン付きの
      * 早見表として表示する分だけ(全項目を網羅しているわけではない)。
      */
@@ -141,6 +142,21 @@ export function buildImageManifest(dataDir: string, repoDataDir?: string): Image
       for (const [i, item] of (section.icons ?? []).entries()) {
         add(item.icon, `system:${section.id}:${i}`);
       }
+    }
+  }
+
+  /*
+   * 試合の流れ(/mechanics/match/)のマップの背景。テクスチャ名にビルドごとのハッシュが付くため
+   * file://{images}/ の規則では引けない。extract-local.mjs がマテリアル経由で解決した
+   * VPK内パスを map.json が持っているので、それをそのまま載せる。
+   */
+  const mapPath = join(dataDir, "map.json");
+  if (existsSync(mapPath)) {
+    const map = JSON.parse(readFileSync(mapPath, "utf8")) as MapFile;
+    for (const [key, image] of Object.entries(map.images)) {
+      if (!image) continue;
+      const ref = `map:${map.map}:${key}`;
+      byRef.set(ref, { ref, vpkPath: image.vpkPath, outPath: image.outPath, kind: "vtex", usedBy: [`map:${key}`] });
     }
   }
 

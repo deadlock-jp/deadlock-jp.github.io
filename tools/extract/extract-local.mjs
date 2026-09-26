@@ -93,6 +93,56 @@ function main() {
     log(`[extract-local] 警告: localization フォルダが見つかりません: ${locSrc}`);
   }
 
+  // 4. マップの配置データ(エンティティ)とミニマップ画像。「試合の流れ」のマップ表示に使う。
+  //    配置は maps/<map>.vpk の default_ents、背景は pak01 の materials/minimap/<map>.vmat が
+  //    指すテクスチャ(名前にビルドごとのハッシュが付くので、マテリアル経由で解決する)。
+  //    地下トンネルだけの絵は、背景テクスチャ名に _tunnels を付けた名前で置かれている。
+  const mapName = opt("map", "dl_midtown");
+  const mapVpk = join(installPath, "game", "citadel", "maps", `${mapName}.vpk`);
+  const mapOut = join(localRoot, "map");
+  if (existsSync(mapVpk)) {
+    log(`[extract-local] マップ ${mapName} の配置とミニマップを取り出し中...`);
+    // -o は既存フォルダでないと「出力ファイル名」と解釈されるので、先に作っておく
+    mkdirSync(mapOut, { recursive: true });
+    const run = (args) => execFileSync(cli, args, { stdio: ["ignore", "pipe", "inherit"], encoding: "utf8" });
+    run(["-i", mapVpk, "-o", mapOut, "--vpk_filepath", `maps/${mapName}/entities/default_ents.vents_c`, "-d"]);
+    run(["-i", vpk, "-o", mapOut, "--vpk_filepath", `materials/minimap/${mapName}.vmat_c`, "-d"]);
+    const vmatPath = join(mapOut, "materials", "minimap", `${mapName}.vmat`);
+    const vmat = existsSync(vmatPath) ? readFileSync(vmatPath, "utf8") : "";
+    const compiled = vmat.match(/"g_tColor"\s+"([^"]+)\.vtex"/)?.[1] ?? null; // panorama/.../minimap_midtown_mid_psd_xxxx
+    const texture = vmat.match(/"Texture"\s+"([^"]+)\.png"/)?.[1] ?? null; // panorama/.../minimap_midtown_mid
+    const images = {};
+    if (compiled) {
+      run(["-i", vpk, "-o", mapOut, "--vpk_filepath", `${compiled}.vtex_c`, "-d"]);
+      images.base = { vpkPath: `${compiled}.vtex_c`, png: join(mapOut, `${compiled}.png`) };
+    }
+    if (texture) {
+      const tunnels = `${texture}_tunnels_psd`;
+      try {
+        run(["-i", vpk, "-o", mapOut, "--vpk_filepath", `${tunnels}.vtex_c`, "-d"]);
+        images.tunnels = { vpkPath: `${tunnels}.vtex_c`, png: join(mapOut, `${tunnels}.png`) };
+      } catch {
+        log(`[extract-local] 地下トンネルのミニマップ(${tunnels}) は見つかりませんでした`);
+      }
+    }
+    for (const [k, v] of Object.entries(images)) {
+      if (!existsSync(v.png)) {
+        log(`[extract-local] 警告: ミニマップ画像(${k})の出力が見つかりません: ${v.png}`);
+        delete images[k];
+      }
+    }
+    writeFileSync(
+      join(mapOut, "_map.json"),
+      JSON.stringify(
+        { map: mapName, entities: join(mapOut, "maps", mapName, "entities", "default_ents.vents"), images },
+        null,
+        2,
+      ) + "\n",
+    );
+  } else {
+    log(`[extract-local] 警告: マップが見つかりません: ${mapVpk}`);
+  }
+
   writeFileSync(join(localRoot, "_extracted_at_utc.txt"), new Date().toISOString() + "\n");
 
   log(`[extract-local] 完了: ${localRoot}`);

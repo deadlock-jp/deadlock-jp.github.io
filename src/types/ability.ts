@@ -89,6 +89,11 @@ export interface Ability {
    * 該当なしは null。他のヒーローが変身能力を持てば同じ仕組みで拾えるはず。
    */
   alternateFormAbilities: Record<string, string> | null;
+  /**
+   * パリィだけが持つ: ボス(ガーディアン等)をパリィしたときに
+   * 近接攻撃ができなくなる秒数(noMeleeTime)と、反撃しなくなる秒数(calmTime)
+   */
+  parryBoss?: { noMeleeTime: number; calmTime: number };
 }
 
 export interface AbilitiesFile {

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "sourceVersion": "6701",
+  "generatedAt": "2026-09-26T10:44:23.486Z",
+  "values": {
+    "citadel_comeback_redirect_fraction": 0.7,
+    "citadel_deny_denied_percentage": 0,
+    "citadel_deny_denier_percentage": 1,
+    "citadel_idol_orbs_to_spawn": 10,
+    "citadel_koth_respawn_interval": 420,
+    "citadel_koth_reward_base": 1260,
+    "citadel_koth_reward_time_multiplier": 222,
+    "citadel_koth_spawn_initial_delay": 720,
+    "citadel_player_gold_reward_first_kill_bonus": 125,
+    "citadel_player_starting_gold": 600,
+    "citadel_tick_gold_payout_for_lowest": 0.025,
+    "citadel_tick_gold_payout_for_second_lowest": 0.015,
+    "citadel_tick_gold_start_time": 480,
+    "citadel_trooper_gold_reward": 100,
+    "citadel_trooper_gold_reward_bonus_per_minute": 2,
+    "citadel_trooper_instant_gold_ratio_laning": 0.5,
+    "citadel_trooper_instant_gold_ratio_postlaning": 0.5,
+    "citadel_trooper_laning_gold_rules_end_time": 8,
+    "citadel_trooper_spawn_initial": 16,
+    "citadel_trooper_spawn_interval_early": 30,
+    "citadel_trooper_spawn_interval_late": 25,
+    "citadel_trooper_spawn_interval_late_time": 20,
+    "citadel_trooper_spawn_interval_very_late": 20,
+    "citadel_trooper_spawn_interval_very_late_time": 35,
+    "citadel_trooper_squad_size": 4
+  },
+  "missing": []
+}

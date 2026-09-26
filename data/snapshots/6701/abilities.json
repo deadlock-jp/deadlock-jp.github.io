@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "upstreamCommit": "6701",
-  "generatedAt": "2026-09-26T09:00:03.648Z",
+  "generatedAt": "2026-09-26T10:44:23.445Z",
   "abilities": {
     "citadel_weapon_bosstier2_set": {
       "id": "citadel_weapon_bosstier2_set",
@@ -8663,7 +8663,11 @@
       "tooltip": [],
       "weapon": null,
       "image": null,
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "parryBoss": {
+        "noMeleeTime": 7,
+        "calmTime": 2.25
+      }
     },
     "citadel_ability_tier2boss_rocket_barrage": {
       "id": "citadel_ability_tier2boss_rocket_barrage",

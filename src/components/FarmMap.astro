@@ -1,0 +1,241 @@
+---
+/**
+ * ファーミング用のマップ(試合の流れ /mechanics/match/ のファーミング節)。
+ *
+ * 背景はゲームのミニマップ画像、点は data/snapshots/<版>/map.json の配置
+ * (maps/dl_midtown.vpk の default_ents から自動抽出。src/parsers/map.ts)。
+ * 位置はサーバー側で % に直して描き、クライアントの JS は表示の切り替えだけを行う。
+ * 「地上 / 地下トンネル」は背景画像と箱の表示を入れ替える(地下かどうかは高さで判定済み)。
+ */
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
+import type { MapFile } from "../types/map.ts";
+import { campSpawnTimes } from "../lib/objects.ts";
+import { clock, duration, TUNNEL_BREAKABLE_GROUP } from "../lib/matchFlow.ts";
+import type { EconomyFile } from "../types/economy.ts";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const DATA_DIR = join(process.cwd(), "data");
+const version = JSON.parse(readFileSync(join(DATA_DIR, "latest.json"), "utf8")).version as string;
+const mapPath = join(DATA_DIR, "snapshots", version, "map.json");
+const map: MapFile | null = existsSync(mapPath) ? (JSON.parse(readFileSync(mapPath, "utf8")) as MapFile) : null;
+const economy = JSON.parse(readFileSync(join(DATA_DIR, "snapshots", version, "economy.json"), "utf8")) as EconomyFile;
+
+const camps = Object.fromEntries(campSpawnTimes().map((c) => [c.key, c]));
+const src = (outPath: string | undefined | null): string | null =>
+  outPath && existsSync(join(process.cwd(), outPath)) ? `${base}/${outPath.replace(/^public\//, "")}` : null;
+const bgBase = src(map?.images.base?.outPath);
+const bgTunnels = src(map?.images.tunnels?.outPath);
+
+const pos = (p: { x: number; y: number }) => {
+  if (!map) return "";
+  const { minX, minY, maxX, maxY } = map.bounds;
+  const left = ((p.x - minX) / (maxX - minX)) * 100;
+  const top = ((maxY - p.y) / (maxY - minY)) * 100;
+  return `left:${left.toFixed(2)}%;top:${top.toFixed(2)}%`;
+};
+
+/** 箱の出現グループ → 初回出現と再出現(economy.json の breakableSpawnTimes) */
+const groupTime = (g: number) => {
+  const t = economy.breakableSpawnTimes[g];
+  return t ? `${clock(t.initialSpawnTime)}〜、${duration(t.respawnInterval)}ごと` : "";
+};
+
+const CAMP_LAYERS = [
+  { key: "weak", label: "小キャンプ" },
+  { key: "medium", label: "中キャンプ" },
+  { key: "strong", label: "大キャンプ" },
+  { key: "vaults", label: "罪人の生贄" },
+] as const;
+
+/** 地下トンネル(3人専用)の箱。グループの対応は src/lib/matchFlow.ts の TUNNEL_BREAKABLE_GROUP */
+const isTunnel = (b: MapFile["breakables"][number]) => b.group === TUNNEL_BREAKABLE_GROUP;
+const count = (pred: (x: MapFile["breakables"][number]) => boolean) => map?.breakables.filter(pred).length ?? 0;
+const layers = map
+  ? [
+      ...CAMP_LAYERS.map((l) => ({
+        key: l.key,
+        label: l.label,
+        icon: camps[l.key]?.icon ? `${base}/${camps[l.key]!.icon}` : null,
+        count: map.camps.filter((c) => c.type === l.key).length,
+        on: true,
+      })),
+      { key: "crate", label: "箱（ソウル）", icon: null, count: count((b) => b.kind === "crate" && !isTunnel(b)), on: false },
+      { key: "statue", label: "黄金像（パワーアップ）", icon: null, count: count((b) => b.kind === "statue" && !isTunnel(b)), on: false },
+      { key: "tunnel", label: "地下トンネルの箱（3人専用）", icon: null, count: count(isTunnel), on: false },
+      { key: "landmark", label: "建造物・目印", icon: null, count: map.landmarks.length, on: true },
+    ]
+  : [];
+
+
+const TEAM = (y: number) => (y < 0 ? "amber" : "sapphire"); // 南がアンバー、北がサファイア
+const LANDMARK_LABEL: Record<string, string> = {
+  patron: "パトロン",
+  walker: "ウォーカー",
+  baseGuardian: "ベース・ガーディアン",
+  powerup: "橋のパワーアップ",
+  rift: "不安定な裂け目",
+  urnReturn: "魂の壺の返還地点",
+  midboss: "ミッド・ボス",
+};
+---
+
+{map && bgBase && (
+  <div class="farmmap" data-farmmap data-view="ground">
+    <div class="fm-controls">
+      <div class="fm-view" role="group" aria-label="表示する階層">
+        <button type="button" class="on" data-view-btn="ground">地上</button>
+        {bgTunnels && <button type="button" data-view-btn="tunnels">地下トンネル</button>}
+      </div>
+      <div class="fm-layers">
+        {layers.map((l) => (
+          <label class:list={["fm-chip", `lay-${l.key}`]}>
+            <input type="checkbox" data-layer={l.key} checked={l.on} />
+            {l.icon ? <img src={l.icon} alt="" /> : <i class="sw" />}
+            {l.label}
+            <small>{l.count}</small>
+          </label>
+        ))}
+      </div>
+    </div>
+
+    <div class="fm-stage" data-hide={layers.filter((l) => !l.on).map((l) => l.key).join(" ")}>
+      <img class="fm-bg ground" src={bgBase} alt="マップ" loading="lazy" />
+      {bgTunnels && <img class="fm-bg tunnels" src={bgTunnels} alt="地下トンネルのマップ" loading="lazy" />}
+
+      {map.breakables.map((b) => (
+        <span
+          class:list={["mk", `mk-${b.kind}`, isTunnel(b) ? "tunnelonly" : b.underground ? "under" : "above"]}
+          data-layer={isTunnel(b) ? "tunnel" : b.kind}
+          style={pos(b)}
+          title={`${isTunnel(b) ? "地下トンネル（3人専用）の" : ""}${b.kind === "crate" ? "箱（ソウル）" : "黄金像"}：${groupTime(b.group)}`}
+        />
+      ))}
+      {map.camps.map((c) => (
+        <span
+          class:list={["mk", "mk-camp", `camp-${c.type}`, c.underground ? "under" : "above"]}
+          data-layer={c.type}
+          style={pos(c)}
+          title={`${camps[c.type]?.label ?? c.type}：${clock((camps[c.type]?.initialSpawnMinutes ?? 0) * 60)}〜、${duration((camps[c.type]?.respawnMinutes ?? 0) * 60)}ごと`}
+        >
+          {camps[c.type]?.icon && <img src={`${base}/${camps[c.type]!.icon}`} alt="" />}
+        </span>
+      ))}
+      {map.landmarks.map((l) => (
+        <span
+          class:list={["mk", "mk-lm", `lm-${l.kind}`, l.kind === "midboss" ? "both" : l.underground ? "under" : "above", TEAM(l.y)]}
+          data-layer="landmark"
+          style={pos(l)}
+          title={LANDMARK_LABEL[l.kind] ?? l.kind}
+        >
+          {l.kind === "midboss" && camps.midboss?.icon && <img src={`${base}/${camps.midboss.icon}`} alt="" />}
+        </span>
+      ))}
+    </div>
+    <p class="fm-note">
+      点にカーソルを合わせる（スマホは長押し）と、名前と出現時刻が出ます。
+      箱は壊すと一定の確率でソウル、黄金像はパワーアップを落とします。
+    </p>
+  </div>
+)}
+
+<script is:inline>
+  (() => {
+    for (const root of document.querySelectorAll("[data-farmmap]")) {
+      const stage = root.querySelector(".fm-stage");
+      const hidden = new Set((stage.dataset.hide || "").split(" ").filter(Boolean));
+      const apply = () => (stage.dataset.hide = [...hidden].join(" "));
+      for (const cb of root.querySelectorAll("input[data-layer]")) {
+        cb.addEventListener("change", () => {
+          if (cb.checked) hidden.delete(cb.dataset.layer);
+          else hidden.add(cb.dataset.layer);
+          apply();
+        });
+      }
+      for (const btn of root.querySelectorAll("[data-view-btn]")) {
+        btn.addEventListener("click", () => {
+          root.dataset.view = btn.dataset.viewBtn;
+          for (const b of root.querySelectorAll("[data-view-btn]")) b.classList.toggle("on", b === btn);
+          // 地下に切り替えたら箱を表示する(地下で見たいのはほぼ箱なので)
+          if (btn.dataset.viewBtn === "tunnels") {
+            for (const k of ["crate", "statue"]) {
+              hidden.delete(k);
+              const cb = root.querySelector(`input[data-layer="${k}"]`);
+              if (cb) cb.checked = true;
+            }
+            apply();
+          }
+        });
+      }
+    }
+  })();
+</script>
+
+<style>
+  .farmmap { margin: var(--sp-3) 0 var(--sp-4); }
+  .fm-controls { display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-3); align-items: center; margin-bottom: var(--sp-2); }
+  .fm-view { display: flex; }
+  .fm-view button {
+    font: inherit; font-size: 12px; padding: 4px 12px; cursor: pointer;
+    background: var(--c-surface); color: var(--c-text-muted); border: 1px solid var(--c-border);
+  }
+  .fm-view button:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+  .fm-view button:last-child { border-radius: 0 var(--radius) var(--radius) 0; margin-left: -1px; }
+  .fm-view button.on { color: var(--c-accent); border-color: var(--c-accent-dim); background: var(--c-accent-bg); position: relative; }
+  .fm-layers { display: flex; flex-wrap: wrap; gap: 6px; }
+  .fm-chip {
+    display: inline-flex; align-items: center; gap: 5px; cursor: pointer; user-select: none;
+    font-size: 12px; padding: 3px 9px; border: 1px solid var(--c-border); border-radius: 999px;
+    background: var(--c-surface); color: var(--c-text-muted);
+  }
+  .fm-chip input { display: none; }
+  .fm-chip:has(input:checked) { color: var(--c-text-strong); border-color: var(--c-border-strong); background: var(--c-surface-2); }
+  .fm-chip:not(:has(input:checked)) { opacity: 0.55; }
+  .fm-chip img { width: 14px; height: 14px; }
+  .fm-chip small { font-family: var(--font-mono); font-size: 10px; color: var(--c-text-faint); }
+  .fm-chip .sw { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .lay-crate .sw { background: var(--c-soul); }
+  .lay-statue .sw { background: #e8b93a; border-radius: 2px; transform: rotate(45deg); }
+  .lay-tunnel .sw { background: var(--c-spirit); }
+  .lay-landmark .sw { background: none; border: 2px solid var(--c-text-muted); border-radius: 2px; }
+
+  .fm-stage { position: relative; width: 100%; max-width: 680px; aspect-ratio: 1; margin: 0 auto; border-radius: var(--radius); overflow: hidden; background: #000; }
+  /* ゲームのミニマップは暗いので、点が埋もれないよう少し明るくする */
+  .fm-bg { position: absolute; inset: 0; width: 100%; height: 100%; filter: brightness(1.7) contrast(1.05); }
+  .fm-bg.tunnels { filter: none; }
+  .fm-bg.tunnels { display: none; }
+  [data-view="tunnels"] .fm-bg.ground { display: none; }
+  [data-view="tunnels"] .fm-bg.tunnels { display: block; }
+
+  .mk { position: absolute; transform: translate(-50%, -50%); line-height: 0; }
+  /* 地上表示では地下の点を、地下表示では地上の点を隠す(ミッド・ボスは両方に出す) */
+  [data-view="ground"] .mk.under { display: none; }
+  [data-view="tunnels"] .mk.above { display: none; }
+  .fm-stage[data-hide~="weak"] [data-layer="weak"],
+  .fm-stage[data-hide~="medium"] [data-layer="medium"],
+  .fm-stage[data-hide~="strong"] [data-layer="strong"],
+  .fm-stage[data-hide~="vaults"] [data-layer="vaults"],
+  .fm-stage[data-hide~="crate"] [data-layer="crate"],
+  .fm-stage[data-hide~="statue"] [data-layer="statue"],
+  .fm-stage[data-hide~="landmark"] [data-layer="landmark"],
+  .fm-stage[data-hide~="tunnel"] [data-layer="tunnel"] { display: none; }
+
+  .mk-crate { width: 5px; height: 5px; border-radius: 50%; background: var(--c-soul); box-shadow: 0 0 0 1px rgb(0 0 0 / 0.6); }
+  /* 3人専用トンネルの箱は、ミニマップのどちらの絵にも描かれていないので両方の表示に出す */
+  .mk.tunnelonly { background: var(--c-spirit) !important; }
+  .mk-crate.tunnelonly { width: 6px; height: 6px; }
+  .mk-statue { width: 6px; height: 6px; background: #e8b93a; transform: translate(-50%, -50%) rotate(45deg); box-shadow: 0 0 0 1px rgb(0 0 0 / 0.6); }
+  .mk-camp img { width: 20px; height: 20px; filter: drop-shadow(0 0 2px #000) drop-shadow(0 0 1px #000); }
+  .camp-strong img { width: 24px; height: 24px; }
+  .camp-vaults img { width: 22px; height: 22px; }
+  .mk-lm { width: 10px; height: 10px; border: 2px solid; background: rgb(0 0 0 / 0.5); transform: translate(-50%, -50%) rotate(45deg); }
+  .mk-lm.amber { border-color: #e0a458; }
+  .mk-lm.sapphire { border-color: #6aa6f0; }
+  .lm-patron { width: 18px; height: 18px; }
+  .lm-baseGuardian { width: 7px; height: 7px; }
+  .lm-powerup, .lm-rift, .lm-urnReturn { border-color: var(--c-spirit) !important; border-radius: 50%; transform: translate(-50%, -50%); }
+  .lm-midboss { border: none; background: none; transform: translate(-50%, -50%); }
+  .lm-midboss img { width: 22px; height: 22px; }
+
+  .fm-note { font-size: 11.5px; color: var(--c-text-faint); margin: 6px 0 0; }
+</style>

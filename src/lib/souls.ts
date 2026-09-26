@@ -1,5 +1,5 @@
 /**
- * ソウル獲得システムのリファレンス(/mechanics/souls/)が読むデータ。
+ * 試合の流れ(/mechanics/match/)の付録の数値表が読むデータ(旧ソウル獲得システムのページ)。
  *
  * アイテム価格・レベル必要ソウル・購入ボーナスは heroes.json / items.json から、
  * 建造物破壊のソウル・キル時の分配率・裂け目のカムバック補正は
@@ -49,32 +49,6 @@ export function economyTable(): EconomyTable {
   };
 }
 
-export interface ObjectiveGoldRow {
-  key: string;
-  label: string;
-  goldKill: number;
-}
-
-const OBJECTIVE_LABEL: Record<string, string> = {
-  Tier1: "ガーディアン（Tier1）",
-  Tier2: "ウォーカー（Tier2）",
-  BaseGuardians: "ベース・ガーディアン",
-  Shrines: "シュライン",
-  PatronPhase1: "パトロン（第1形態）",
-};
-
-/** 建造物を破壊した際に直接入るソウル。0のものは載せない(オーブでのみ入る) */
-export function objectiveGold(): ObjectiveGoldRow[] {
-  return economyFile.objectiveGold
-    .filter((o) => o.goldKill > 0)
-    .map((o) => ({ key: o.key, label: OBJECTIVE_LABEL[o.key] ?? o.key, goldKill: o.goldKill }));
-}
-
-/** 建造物破壊ソウルのうち、近くのプレイヤーへ配られる割合(%)。残りはチーム全体に均等配分 */
-export function objectiveGoldNearPlayerSplitPct(): number {
-  return economyFile.objectiveGoldNearPlayerSplitPct;
-}
-
 export interface KillShareRow {
   /** キルに絡んだ人数 */
   count: number;
@@ -107,22 +81,6 @@ export function riftComeback(): RiftComebackRow[] {
   add("耐性上限の増加（1分ごと）", r.resistMaxPerMinute);
   add("耐性上限の頭打ち", r.resistMaxCap);
   return rows;
-}
-
-export interface BreakableSpawnRow {
-  /** ゲーム側の配列に名前が無いので、何番目の配置かだけを出す */
-  index: number;
-  initialSpawnMinutes: number;
-  respawnMinutes: number;
-}
-
-/** 破壊可能オブジェクト(クレート)の出現時間。2026-09-16 より前の版には無いので空になる */
-export function breakableSpawnTimes(): BreakableSpawnRow[] {
-  return (economyFile.breakableSpawnTimes ?? []).map((b, i) => ({
-    index: i + 1,
-    initialSpawnMinutes: b.initialSpawnTime / 60,
-    respawnMinutes: b.respawnInterval / 60,
-  }));
 }
 
 /** キルに絡んだ人数によるソウルの取り分。人数が増えるほど1人あたりは減る */

@@ -1,5 +1,5 @@
 /**
- * オブジェクトのリファレンス(/mechanics/objects/)が読むデータ。
+ * 建造物・トルーパー・中立モンスターの数値(試合の流れ /mechanics/match/ の付録。旧 /mechanics/objects/)が読むデータ。
  *
  * 数値は data/snapshots/<版>/objects.json（ゲーム本体から抽出した npc_units.vdata）から引く。
  * data/mechanics-notes.json が持つのは「どのトピックでどのオブジェクトを出すか」と、

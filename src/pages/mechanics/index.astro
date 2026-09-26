@@ -1,95 +1,147 @@
 ---
 /**
  * 攻略情報のハブページ。
- * ゲームシステム・オブジェクト・ソウル獲得システム・キャラクターコントロール・戦略の
- * 5ページへの入り口だけを持つ(src/pages/build/index.astro + build/compare.astro と
- * 同じ、1つのナビ項目の下にサブページをぶら下げる構成)。
+ * 「試合の流れ」(旧ゲームシステム・ソウル獲得システム・戦略・オブジェクトを統合)と
+ * 「キャラクターコントロール」の2ページへの入口。文字だけのリンクだと中身が分からず
+ * 押されないので、各ページの見せ場(マップ・章立て・実演動画)をカードに出す。
+ * 章立て・動画はそれぞれのデータから引くので、ページ側を更新すればここも追従する。
  */
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import Base from "../../layouts/Base.astro";
+import { controlCategories } from "../../lib/controls.ts";
+import { matchFlow } from "../../lib/matchFlow.ts";
+import { souls } from "../../lib/data.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const f = matchFlow();
 
-const pages = [
-  {
-    href: `${base}/mechanics/system/`,
-    title: "ゲームシステム",
-    lead: "勝利条件、レーンの進行順、ディナイやバックドア保護といったルール。",
-  },
-  {
-    href: `${base}/mechanics/objects/`,
-    title: "オブジェクト",
-    lead: "ガーディアン・ウォーカー・シュライン・パトロン、トルーパー、ニュートラルのHPと挙動。",
-  },
-  {
-    href: `${base}/mechanics/souls/`,
-    title: "ソウル獲得システム",
-    lead: "アイテム価格・レベル必要ソウル・購入ボーナスと、建造物破壊やキルで得るソウル。",
-  },
-  {
-    href: `${base}/mechanics/controls/`,
-    title: "キャラクターコントロール",
-    lead: "ダッシュ・二段ジャンプなど共通の操作と、それらを組み合わせた発展的な移動テクニック、ヒーローごとの数値差。",
-  },
-  {
-    href: `${base}/mechanics/strategy/`,
-    title: "戦略",
-    lead: "レーニング・マクロ・ミクロ・エコノミーの考え方をまとめた解説記事。",
-  },
+/* 試合の流れ: 背景のミニマップと章 */
+const mapImg = existsSync(join(process.cwd(), "public/images/minimap/dl_midtown.png"))
+  ? `${base}/images/minimap/dl_midtown.png`
+  : null;
+const chapters = [
+  { id: "overview", label: "全体像" },
+  { id: "pregame", label: "準備フェーズ" },
+  { id: "laning", label: "レーン戦" },
+  { id: "postlane", label: "レーン後・中盤" },
+  { id: "farming", label: "ファーミング" },
+  { id: "lategame", label: "終盤" },
 ];
+
+/* キャラクターコントロール: 実演動画つきのテクニック */
+const categories = controlCategories();
+const videos = categories.flatMap((c) =>
+  c.techniques.flatMap((t) => (typeof t === "string" ? [] : [{ ...t, categoryId: c.id }])),
+);
 ---
 
 <Base
   title="攻略情報"
-  description="Deadlock（デッドロック）の勝利条件・レーンのルール・ソウル獲得システム・キャラクター操作・戦略をまとめた日本語リファレンス。"
+  description="Deadlock（デッドロック）の試合の流れ（レーン戦・ファーミング・中盤・終盤）と、ダッシュやマントルなどキャラクター操作の実演動画つき解説。"
   breadcrumbs={[{ name: "攻略情報", path: `${base}/mechanics/` }]}
 >
   <h1>攻略情報</h1>
-  <p class="lead">
-    「キャラクターコントロール」の操作説明とテクニック、「戦略」は手書きの解説記事、
-    それ以外はヒーローやアイテムと同じくゲーム本体から抽出したデータをそのまま出しています。
-    名前もゲーム内の表記をそのまま使っています。
-  </p>
 
-  <div class="cards">
-    {pages.map((p) => (
-      <a class="card panel" href={p.href}>
-        <h2>{p.title}</h2>
-        <p>{p.lead}</p>
+  <div class="hub">
+    {/* ---------- 試合の流れ ---------- */}
+    <a class="feature panel match" href={`${base}/mechanics/match/`}>
+      {mapImg && <img class="mapbg" src={mapImg} alt="" loading="lazy" />}
+      <div class="fbody">
+        <span class="kicker">試合の流れ</span>
+        <h2>準備からパトロン破壊まで、<br />数字で追う1試合</h2>
+        <ul class="facts">
+          {f.firstWave && (
+            <li><b>{souls(f.firstWave.afterFull)}</b><span>ディナイされなければ最初のウェーブ後の所持ソウル</span></li>
+          )}
+          {f.ultimate?.totalGold && (
+            <li><b>{souls(f.ultimate.totalGold)}</b><span>アルティメットが解放される所持ソウル</span></li>
+          )}
+        </ul>
+        <ul class="chips">
+          {chapters.map((c) => <li>{c.label}</li>)}
+        </ul>
+        <p class="more">キャンプ・箱・地下トンネルのマップ、ソウル推移のグラフつき →</p>
+      </div>
+    </a>
+
+    {/* ---------- キャラクターコントロール ---------- */}
+    <section class="feature panel controls">
+      <a class="fhead" href={`${base}/mechanics/controls/`}>
+        <span class="kicker">キャラクターコントロール</span>
+        <h2>ダッシュ・マントル・パリィ。<br />動画で見る移動テクニック</h2>
+        {videos.length > 0 && <span class="badge">▶ 実演動画 {videos.length}本</span>}
       </a>
-    ))}
+      {videos.length > 0 && (
+        <ul class="thumbs">
+          {videos.map((v) => (
+            <li>
+              <a href={`${base}/mechanics/controls/#${v.categoryId}`}>
+                <span class="thumb">
+                  <img src={`https://i.ytimg.com/vi/${v.videoId}/oardefault.jpg`} alt="" loading="lazy" />
+                  <span class="play" aria-hidden="true">▶</span>
+                </span>
+                <span class="tname">{v.title}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+      <a class="more" href={`${base}/mechanics/controls/`}>
+        {categories.map((c) => c.title.replace(/（.*?）/g, "")).slice(0, 4).join("・")} ほか{categories.length}項目 ／ ヒーロー別の移動数値 →
+      </a>
+    </section>
   </div>
 
   <style>
-    .lead {
-      color: var(--c-text-muted);
-      line-height: 1.8;
+    .hub { margin-top: var(--sp-5); display: grid; gap: var(--sp-5); }
+    .feature { position: relative; overflow: hidden; display: block; color: inherit; text-decoration: none; }
+    .feature:hover { text-decoration: none; }
+    .kicker { font-size: 11px; letter-spacing: 0.1em; color: var(--c-accent); }
+    .feature h2 { margin: 4px 0 var(--sp-3); font-size: 22px; line-height: 1.45; color: var(--c-text-strong); border: none; padding: 0; }
+    .more { display: inline-block; margin: var(--sp-3) 0 0; font-size: 12.5px; color: var(--c-accent); }
+
+    /* 試合の流れ: 右側にミニマップを大きく敷く */
+    .match { min-height: 300px; transition: border-color 0.15s; }
+    .match:hover { border-color: var(--c-accent-dim); }
+    .mapbg {
+      position: absolute; right: -40px; top: 50%; transform: translateY(-50%);
+      width: 420px; height: 420px; opacity: 0.55; filter: brightness(1.8);
+      mask-image: radial-gradient(circle at 60% 50%, #000 45%, transparent 72%);
+      -webkit-mask-image: radial-gradient(circle at 60% 50%, #000 45%, transparent 72%);
+      pointer-events: none;
     }
-    .cards {
-      margin-top: var(--sp-5);
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: var(--sp-4);
+    .fbody { position: relative; max-width: 480px; }
+    .facts { list-style: none; padding: 0; margin: 0 0 var(--sp-3); display: flex; flex-wrap: wrap; gap: var(--sp-3) var(--sp-5); }
+    .facts li { display: flex; flex-direction: column; }
+    .facts b { font-family: var(--font-mono); font-size: 26px; font-weight: 600; color: var(--c-soul); line-height: 1.1; }
+    .facts span { font-size: 11.5px; color: var(--c-text-muted); max-width: 16em; }
+    .chips { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+    .chips li { font-size: 12px; padding: 3px 10px; border: 1px solid var(--c-border-strong); border-radius: 999px; background: var(--c-surface); color: var(--c-text); }
+
+    /* キャラクターコントロール: 縦長サムネイルを並べる */
+    .fhead { display: block; color: inherit; }
+    .fhead:hover { text-decoration: none; }
+    .fhead:hover h2 { color: var(--c-accent); }
+    .badge { display: inline-block; font-size: 12px; padding: 3px 10px; border-radius: var(--radius); background: var(--c-accent-bg); color: var(--c-accent); }
+    .thumbs { list-style: none; padding: 0; margin: var(--sp-4) 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: var(--sp-3); }
+    .thumbs a { display: flex; flex-direction: column; gap: 6px; color: var(--c-text); }
+    .thumbs a:hover { text-decoration: none; }
+    .thumb { position: relative; display: block; aspect-ratio: 9 / 16; border-radius: var(--radius); overflow: hidden; background: #000; border: 1px solid var(--c-border); transition: border-color 0.15s; }
+    /* Shorts の縦長サムネイル(oardefault)。比率がずれても枠いっぱいに収める */
+    .thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .play {
+      position: absolute; inset: 0; margin: auto; width: 40px; height: 40px; border-radius: 50%;
+      display: grid; place-items: center; font-size: 15px; padding-left: 3px;
+      background: rgb(0 0 0 / 0.55); color: #fff; border: 1px solid rgb(255 255 255 / 0.4);
     }
-    .card {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      transition: border-color 0.15s, background 0.15s;
-    }
-    .card:hover {
-      border-color: var(--c-border-strong);
-      background: var(--c-surface-2);
-    }
-    .card h2 {
-      margin: 0 0 var(--sp-2);
-      font-size: 15px;
-      color: var(--c-text-strong);
-    }
-    .card p {
-      margin: 0;
-      font-size: 13px;
-      color: var(--c-text-muted);
-      line-height: 1.7;
+    .thumbs a:hover .thumb { border-color: var(--c-accent); }
+    .tname { font-size: 12.5px; line-height: 1.4; }
+
+    @media (max-width: 640px) {
+      .mapbg { width: 300px; height: 300px; right: -90px; opacity: 0.35; }
+      .feature h2 { font-size: 19px; }
+      .thumbs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
   </style>
 </Base>
