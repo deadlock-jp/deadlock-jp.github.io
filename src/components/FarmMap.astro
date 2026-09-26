@@ -11,49 +11,28 @@
  * 位置はサーバー側で % に直して描き、クライアントの JS は拡大・移動と表示の切り替えだけを行う。
  * 拡大は地図の要素そのものの大きさを変える(CSS の scale で拡大すると点がぼやけるため)。
  */
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import { join } from "node:path";
-import type { MapFile, MapLandmark } from "../types/map.ts";
-import { campSpawnTimes } from "../lib/objects.ts";
-import { clock, duration, TUNNEL_BREAKABLE_GROUP } from "../lib/matchFlow.ts";
-import type { EconomyFile } from "../types/economy.ts";
+import type { MapFile } from "../types/map.ts";
+import { clock, duration } from "../lib/matchFlow.ts";
+import { loadMap, mapView, campInfo, isTunnelBreakable as isTunnel } from "../lib/mapView.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const DATA_DIR = join(process.cwd(), "data");
-const version = JSON.parse(readFileSync(join(DATA_DIR, "latest.json"), "utf8")).version as string;
-const mapPath = join(DATA_DIR, "snapshots", version, "map.json");
-const map: MapFile | null = existsSync(mapPath) ? (JSON.parse(readFileSync(mapPath, "utf8")) as MapFile) : null;
-const economy = JSON.parse(readFileSync(join(DATA_DIR, "snapshots", version, "economy.json"), "utf8")) as EconomyFile;
+const loaded = loadMap();
+const map = loaded?.map ?? null;
+const economy = loaded?.economy;
+const view = loaded ? mapView(loaded.map, loaded.economy) : null;
+const pos = view?.pos ?? (() => "");
 
-const camps = Object.fromEntries(campSpawnTimes().map((c) => [c.key, c]));
+const camps = campInfo();
 const src = (outPath: string | undefined | null): string | null =>
   outPath && existsSync(join(process.cwd(), outPath)) ? `${base}/${outPath.replace(/^public\//, "")}` : null;
 const bgBase = src(map?.images.base?.outPath);
 const bgTunnels = src(map?.images.tunnels?.outPath);
-const bgHidden = src(map?.images.hiddenTunnels?.outPath);
-
-/** ゲーム座標 → 地図上の割合(0〜1) */
-const frac = (p: { x: number; y: number }) => {
-  const { minX, minY, maxX, maxY } = map!.bounds;
-  return { u: (p.x - minX) / (maxX - minX), v: (maxY - p.y) / (maxY - minY) };
-};
-const pos = (p: { x: number; y: number }) => {
-  const { u, v } = frac(p);
-  return `left:${(u * 100).toFixed(2)}%;top:${(v * 100).toFixed(2)}%`;
-};
-
-/** 敵陣の色(ゲームのミニマップで敵側のレーン・建造物に使われる赤) */
-const ENEMY = "#d9553a";
-/** 自陣のパトロン・シュラインの色(ゲームでは白っぽく描かれる) */
-const OWN_BASE = "#e6ddc8";
-const laneColor = (lane: number | null) => {
-  const c = lane !== null ? economy.lanes[lane]?.color : null;
-  return c && (c[0] || c[1] || c[2]) ? `rgb(${c[0]} ${c[1]} ${c[2]})` : OWN_BASE;
-};
 
 /** 箱の出現グループ → 初回出現と再出現(economy.json の breakableSpawnTimes) */
 const groupTime = (g: number) => {
-  const t = economy.breakableSpawnTimes[g];
+  const t = economy?.breakableSpawnTimes[g];
   return t ? `${clock(t.initialSpawnTime)}〜、${duration(t.respawnInterval)}ごと` : "";
 };
 
@@ -64,14 +43,12 @@ const CAMP_LAYERS = [
   { key: "vaults", label: "罪人の生贄" },
 ] as const;
 
-/** 地下トンネル(3人専用)の箱。グループの対応は src/lib/matchFlow.ts の TUNNEL_BREAKABLE_GROUP */
-const isTunnel = (b: MapFile["breakables"][number]) => b.group === TUNNEL_BREAKABLE_GROUP;
 const count = (pred: (x: MapFile["breakables"][number]) => boolean) => map?.breakables.filter(pred).length ?? 0;
 
-/** 建造物(レーンの上に並ぶもの)と、それ以外の目印 */
-const STRUCTURES = new Set(["patron", "shrine", "baseGuardian", "walker", "guardian"]);
-const structures = (map?.landmarks ?? []).filter((l) => STRUCTURES.has(l.kind));
-const markers = (map?.landmarks ?? []).filter((l) => !STRUCTURES.has(l.kind));
+const structures = view?.structures ?? [];
+const markers = view?.markers ?? [];
+const laneLines = view?.laneLines ?? [];
+const structureColor = view?.structureColor ?? (() => "");
 
 const layers = map
   ? [
@@ -84,26 +61,10 @@ const layers = map
       })),
       { key: "crate", label: "箱（ソウル）", icon: null, count: count((b) => b.kind === "crate" && !isTunnel(b)), on: false },
       { key: "statue", label: "黄金像（パワーアップ）", icon: null, count: count((b) => b.kind === "statue" && !isTunnel(b)), on: false },
-      { key: "tunnel", label: "地下トンネルの箱と入口（3人専用）", icon: null, count: count(isTunnel), on: false },
+      { key: "tunnel", label: "地下トンネルの箱（3人専用）", icon: null, count: count(isTunnel), on: false },
       { key: "marker", label: "橋バフ・裂け目・壺", icon: null, count: markers.length, on: true },
     ]
   : [];
-
-/**
- * レーンの線。自陣側(南)はレーンの色、中央(y=0)を越えた先は敵陣として赤で描く。
- * 経路は南の拠点から北の拠点へ向かっているので、最初に y が 0 以上になった点で分ける。
- */
-const laneLines = (map?.lanes ?? []).flatMap((l) => {
-  const toStr = (pts: { x: number; y: number }[]) =>
-    pts.map((p) => { const { u, v } = frac(p); return `${(u * 1000).toFixed(1)},${(v * 1000).toFixed(1)}`; }).join(" ");
-  const cut = l.points.findIndex((p) => p.y >= 0);
-  const own = cut < 0 ? l.points : l.points.slice(0, cut + 1);
-  const enemy = cut < 0 ? [] : l.points.slice(cut);
-  return [
-    { key: `${l.lane}-own`, color: laneColor(l.lane), points: toStr(own) },
-    ...(enemy.length > 1 ? [{ key: `${l.lane}-enemy`, color: ENEMY, points: toStr(enemy) }] : []),
-  ];
-});
 
 const STRUCTURE_LABEL: Record<string, string> = {
   patron: "パトロン",
@@ -118,8 +79,6 @@ const MARKER_LABEL: Record<string, string> = {
   urnReturn: "魂の壺の返還地点",
   midboss: "ミッド・ボス",
 };
-const structureColor = (l: MapLandmark) =>
-  l.team === "sapphire" ? ENEMY : l.kind === "patron" || l.kind === "shrine" ? OWN_BASE : laneColor(l.lane);
 ---
 
 {map && bgBase && (
@@ -128,7 +87,6 @@ const structureColor = (l: MapLandmark) =>
       <div class="fm-view" role="group" aria-label="表示する階層">
         <button type="button" class="on" data-view-btn="ground">地上</button>
         {bgTunnels && <button type="button" data-view-btn="tunnels">地下（共用）</button>}
-        {bgHidden && <button type="button" data-view-btn="hidden">地下トンネル（3人専用）</button>}
       </div>
       <div class="fm-layers">
         {layers.map((l) => (
@@ -151,7 +109,6 @@ const structureColor = (l: MapLandmark) =>
       <div class="fm-world">
         <img class="fm-bg ground" src={bgBase} alt="マップ" loading="lazy" draggable="false" />
         {bgTunnels && <img class="fm-bg tunnels" src={bgTunnels} alt="共用地下のマップ" loading="lazy" draggable="false" />}
-        {bgHidden && <img class="fm-bg hiddentn" src={bgHidden} alt="地下トンネル（3人専用）の範囲" loading="lazy" draggable="false" />}
 
         {laneLines.length > 0 && (
           <svg class="fm-lanes" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
@@ -173,14 +130,6 @@ const structureColor = (l: MapLandmark) =>
             data-layer={isTunnel(b) ? "tunnel" : b.kind}
             style={pos(b)}
             title={`${isTunnel(b) ? "地下トンネル（3人専用）の" : ""}${b.kind === "crate" ? "箱（ソウル）" : "黄金像"}：${groupTime(b.group)}`}
-          />
-        ))}
-        {(map.tunnelEntrances ?? []).map((e) => (
-          <span
-            class:list={["mk", "ent", `ent-${e.from}`, "above"]}
-            data-layer="tunnel"
-            style={pos(e)}
-            title={e.from === "midboss" ? "地下トンネルの入口（ミッド・ボスの部屋から）" : "地下トンネルの入口（地上から）"}
           />
         ))}
         {map.camps.map((c) => (
@@ -206,13 +155,6 @@ const structureColor = (l: MapLandmark) =>
       </div>
     </div>
     <p class="fm-info" aria-live="polite"></p>
-    <p class="fm-note">
-      ホイール（スマホは2本指）で拡大、ドラッグで移動できます。点にカーソルを合わせるかタップすると、名前と出現時刻が出ます。
-      自チームを南（下）側として、中央から先の敵陣のレーンと建造物を赤で表しています。
-      紫の点は地下トンネル（3人専用）の箱で、ミニマップの絵には描かれていない場所です。
-      「地下トンネル（3人専用）」の紫の範囲は、地形の当たり判定とトンネルの箱の位置から推定したもので、形はおおよそです。
-      白縁の丸は地上からの入口、金縁の丸はミッド・ボスの部屋からの入口です（小さい姿でだけ通れる壁の位置）。
-    </p>
   </div>
 )}
 
@@ -326,7 +268,7 @@ const structureColor = (l: MapLandmark) =>
           for (const b of root.querySelectorAll("[data-view-btn]")) b.classList.toggle("on", b === btn);
           // 地下に切り替えたら箱を表示する(地下で見たいのはほぼ箱なので)
           if (btn.dataset.viewBtn !== "ground") {
-            for (const k of btn.dataset.viewBtn === "hidden" ? ["tunnel"] : ["crate", "statue"]) {
+            for (const k of ["crate", "statue"]) {
               hidden.delete(k);
               const cb = root.querySelector(`input[data-layer="${k}"]`);
               if (cb) cb.checked = true;
@@ -379,13 +321,6 @@ const structureColor = (l: MapLandmark) =>
   .fm-bg.tunnels { display: none; }
   [data-view="tunnels"] .fm-bg.ground { display: none; }
   [data-view="tunnels"] .fm-bg.tunnels { display: block; }
-  /* 専用トンネル: 地上の絵を暗くして、推定したトンネルの範囲(紫)と、そこにある箱だけを出す */
-  .fm-bg.hiddentn { display: none; }
-  [data-view="hidden"] .fm-bg.hiddentn { display: block; }
-  [data-view="hidden"] .fm-bg.ground { filter: brightness(0.55); }
-  [data-view="hidden"] .fm-lanes, [data-view="hidden"] .st { opacity: 0.35; }
-  [data-view="hidden"] .mk:not(.tunnelonly):not(.st):not(.ent) { display: none; }
-  [data-view="hidden"] .mk.ent { display: block; }
   .fm-lanes { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
   .fm-lanes polyline { fill: none; stroke-width: 4; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
   [data-view="tunnels"] .fm-lanes, [data-view="tunnels"] .st { opacity: 0.25; }
@@ -422,9 +357,6 @@ const structureColor = (l: MapLandmark) =>
   /* 3人専用トンネルの箱は、ミニマップのどちらの絵にも描かれていないので両方の表示に出す */
   .mk.tunnelonly { background: var(--c-spirit) !important; }
   .mk-crate.tunnelonly { width: 6px; height: 6px; }
-  /* 地下トンネルの入口(小さい姿でだけ通れる壁)。ミッド・ボスの部屋からの入口は縁を金色に */
-  .ent { width: 12px; height: 12px; border-radius: 50%; background: var(--c-spirit); border: 2px solid #fff; box-shadow: 0 0 0 1.5px rgb(0 0 0 / 0.7); }
-  .ent-midboss { border-color: #f2c14e; }
   .mk-statue { width: 6px; height: 6px; background: #e8b93a; transform: translate(-50%, -50%) rotate(45deg); box-shadow: 0 0 0 1px rgb(0 0 0 / 0.6); }
   .mk-camp img { width: 20px; height: 20px; filter: drop-shadow(0 0 2px #000) drop-shadow(0 0 1px #000); }
   .camp-strong img { width: 24px; height: 24px; }
@@ -434,5 +366,4 @@ const structureColor = (l: MapLandmark) =>
   .lm-midboss img { width: 24px; height: 24px; }
 
   .fm-info { min-height: 1.6em; margin: 6px 0 0; font-size: 12.5px; color: var(--c-text-strong); text-align: center; }
-  .fm-note { font-size: 11.5px; color: var(--c-text-faint); margin: 6px 0 0; }
 </style>

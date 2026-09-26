@@ -27,8 +27,6 @@ import { parseLocalization } from "./localization.ts";
 import { parseConvars } from "./convars.ts";
 import { parseMap } from "./map.ts";
 import { renderGroundMinimap } from "./minimapImage.ts";
-import { renderHiddenTunnels } from "./hiddenTunnels.ts";
-import { TUNNEL_BREAKABLE_GROUP } from "./map.ts";
 import type { MapImage } from "../types/map.ts";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -185,7 +183,6 @@ function writeMap(snapDir: string, localRoot: string): void {
     map: string;
     entities: string;
     images: Record<string, { vpkPath: string; png: string }>;
-    physics?: string | null;
   };
   const copyImage = (key: "base" | "tunnels", suffix: string): MapImage | null => {
     const src = info.images[key];
@@ -202,21 +199,6 @@ function writeMap(snapDir: string, localRoot: string): void {
     base: copyImage("base", ""),
     tunnels: copyImage("tunnels", "_tunnels"),
   }, info.images.tunnels?.png && existsSync(info.images.tunnels.png) ? info.images.tunnels.png : null);
-  // 専用トンネル(ミニマップに描かれていない地下)を地形の当たり判定から推定する
-  if (info.physics && existsSync(info.physics) && info.images.base) {
-    const outPath = `public/images/minimap/${info.map}_hidden_tunnels.png`;
-    const r = renderHiddenTunnels({
-      glbPath: info.physics,
-      map,
-      basePngPath: info.images.base.png,
-      tunnelsPngPath: info.images.tunnels?.png ?? null,
-      seedGroup: TUNNEL_BREAKABLE_GROUP,
-      outPath: join(REPO_ROOT, outPath),
-    });
-    map.images.hiddenTunnels = { vpkPath: `maps/${info.map}/world_physics.vmdl_c`, outPath };
-    map.tunnelEntrances = r.entrances;
-    console.log(`  ${outPath}(専用トンネル ${r.cells} マス。トンネルの箱 ${r.seedsInside}/${r.seeds} が範囲内。入口 地上 ${r.entrances.filter((e) => e.from === "street").length} / ミッド・ボス ${r.entrances.filter((e) => e.from === "midboss").length})`);
-  }
   writeJsonTo(snapDir, "map.json", map);
   console.log(
     `マップ ${map.map}: キャンプ ${map.camps.length} / 箱・黄金像 ${map.breakables.length}` +

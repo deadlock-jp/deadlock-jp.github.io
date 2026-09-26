@@ -175,12 +175,6 @@ export function parseMap(
     }
   }
 
-  // 小さい姿でだけ通れる壁。地下トンネルの入口はこれで塞がれている(入口かどうかの判定は hiddenTunnels.ts)
-  const passages = ents
-    .filter((e) => e.classname === "citadel_passthrough_fake_wall" && e.allow_tiny_characters === "true")
-    .map((e) => { const p = origin(e); return { x: Math.round(p.x), y: Math.round(p.y), z: Math.round(p.z) }; })
-    .sort((a, b) => a.y - b.y || a.x - b.x);
-
   const camps: MapCamp[] = [];
   const breakables: MapBreakable[] = [];
   const landmarks: MapLandmark[] = [];
@@ -225,7 +219,5 @@ export function parseMap(
     breakables: breakables.map(roundPoint).sort((a, b) => a.kind.localeCompare(b.kind) || a.group - b.group || byXY(a, b)),
     landmarks: landmarks.map(roundPoint).sort((a, b) => a.kind.localeCompare(b.kind) || byXY(a, b)),
     lanes,
-    passages,
-    tunnelEntrances: [],
   };
 }

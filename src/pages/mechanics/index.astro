@@ -9,6 +9,7 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import Base from "../../layouts/Base.astro";
+import MapPreview from "../../components/MapPreview.astro";
 import { controlCategories } from "../../lib/controls.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -21,11 +22,9 @@ const chapters = [
   { id: "pregame", title: "準備フェーズ", body: "レーンの割り振りと、編成の偏りを直すレーン交代", img: img("images/npcs/trooper.png") },
   { id: "laning", title: "レーン戦", body: "ウェーブのソウル、ディナイ、ラストヒットの目安、3つのシナリオのソウル推移グラフ", img: img("images/npcs/tier_2_boss.png") },
   { id: "laning", title: "橋バフ", body: "出現時刻と4種類の効果", img: img("images/hud/icons/powerup_spirit.svg") },
-  { id: "farming", title: "ファーミング", body: "キャンプ・箱・罪人の生贄の報酬と出現時刻、地下トンネル（3人専用）", img: img("images/minimap/neutral_medium.png") },
+  { id: "farming", title: "ファーミング", body: "キャンプ・箱・罪人の生贄の報酬と出現時刻、地下トンネルの箱（3人専用）", img: img("images/minimap/neutral_medium.png") },
   { id: "lategame", title: "終盤", body: "シュライン・パトロンの攻略と、劣勢側への補正", img: img("images/npcs/patron.png") },
 ];
-const mapImg = img("images/minimap/dl_midtown.png");
-const tunnelImg = img("images/minimap/dl_midtown_hidden_tunnels.png");
 
 /* キャラクターコントロール: 実演動画つきのテクニックと、全カテゴリ */
 const categories = controlCategories();
@@ -45,16 +44,11 @@ const videos = categories.flatMap((c) =>
   <section class="panel hubsec">
     <h2><a href={match}>試合の流れ</a></h2>
     <div class="matchgrid">
-      {mapImg && (
-        <a class="mapcard" href={`${match}#farming`}>
-          <span class="mapimg">
-            <img src={mapImg} alt="" loading="lazy" />
-            {tunnelImg && <img class="tn" src={tunnelImg} alt="" loading="lazy" />}
-          </span>
-          <span class="tt">マップ</span>
-          <span class="tb">キャンプ・箱・黄金像の位置、地下トンネル（3人専用）の範囲と入口。拡大・移動できます。</span>
-        </a>
-      )}
+      <a class="mapcard" href={`${match}#map`}>
+        <MapPreview />
+        <span class="tt">マップ</span>
+        <span class="tb">キャンプ・箱・黄金像・橋バフの位置。拡大と、地上・地下の切り替えができます。</span>
+      </a>
       <ul class="tiles">
         {chapters.map((c) => (
           <li>
@@ -109,8 +103,7 @@ const videos = categories.flatMap((c) =>
     .matchgrid { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: var(--sp-4); align-items: start; }
     .mapcard { display: block; color: inherit; }
     .mapcard:hover { text-decoration: none; }
-    .mapimg { position: relative; display: block; aspect-ratio: 1; margin-bottom: var(--sp-2); }
-    .mapimg img { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .mapcard :global(.mp) { margin-bottom: var(--sp-2); }
     .mapcard:hover .tt { color: var(--c-accent); }
     .tiles { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--sp-2); }
     .tiles a {

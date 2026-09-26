@@ -49,18 +49,11 @@ export interface MapFile {
   map: string;
   /** ミニマップ画像が表す範囲(citadel_minimap_boundary の2点) */
   bounds: { minX: number; minY: number; maxX: number; maxY: number };
-  /** base = 地上(地面を灰色に描き直したもの) / tunnels = 共用地下 / hiddenTunnels = 専用トンネル(推定。src/parsers/hiddenTunnels.ts) */
-  images: { base: MapImage | null; tunnels: MapImage | null; hiddenTunnels?: MapImage | null };
+  /** base = 地上(地面を灰色に描き直したもの) / tunnels = 共用地下 */
+  images: { base: MapImage | null; tunnels: MapImage | null };
   camps: MapCamp[];
   breakables: MapBreakable[];
   landmarks: MapLandmark[];
   /** レーンの経路(ベジェを折れ線にしたもの)。lane は economy.json の lanes の添字(色もそこから引く) */
   lanes: { lane: number; points: { x: number; y: number }[] }[];
-  /** 小さい姿でだけ通れる壁(citadel_passthrough_fake_wall)の位置 */
-  passages: { x: number; y: number; z: number }[];
-  /**
-   * 地下トンネル(3人専用)の入口。passages のうち、推定したトンネルに接するもの。
-   * street = 道路の高さから入る入口 / midboss = ミッド・ボスの部屋からの入口
-   */
-  tunnelEntrances: { x: number; y: number; z: number; from: "street" | "midboss" }[];
 }

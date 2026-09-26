@@ -1,0 +1,51 @@
+---
+/**
+ * 入口ページ(トップ・攻略情報)に置く、地上のオブジェクトを全部載せた静的なマップ。
+ * 操作はできない(拡大・切り替えは試合の流れの FarmMap)。描き方は FarmMap と同じ src/lib/mapView.ts。
+ * 点の大きさは地図の幅に対する割合(cqw)なので、置く場所の大きさが変わっても見た目の比率は同じ。
+ */
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+import { loadMap, mapView, campInfo, isTunnelBreakable } from "../lib/mapView.ts";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const loaded = loadMap();
+const map = loaded?.map ?? null;
+const view = loaded ? mapView(loaded.map, loaded.economy) : null;
+const bgPath = map?.images.base?.outPath;
+const bg = bgPath && existsSync(join(process.cwd(), bgPath)) ? `${base}/${bgPath.replace(/^public\//, "")}` : null;
+const camps = campInfo();
+const onGround = <T extends { underground: boolean }>(xs: T[]) => xs.filter((x) => !x.underground);
+---
+
+{map && view && bg && (
+  <span class="mp" aria-hidden="true">
+    <img class="mp-bg" src={bg} alt="" loading="lazy" />
+    <svg class="mp-lanes" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+      {view.laneLines.map((l) => <polyline points={l.points} stroke={l.color} />)}
+    </svg>
+    {view.structures.map((l) => <i class={`st st-${l.kind}`} style={`${view.pos(l)};--c:${view.structureColor(l)}`} />)}
+    {onGround(map.breakables).filter((b) => !isTunnelBreakable(b)).map((b) => <i class={`bk bk-${b.kind}`} style={view.pos(b)} />)}
+    {onGround(map.camps).map((c) => camps[c.type]?.icon && <img class={`cp cp-${c.type}`} src={`${base}/${camps[c.type]!.icon}`} alt="" loading="lazy" style={view.pos(c)} />)}
+    {view.markers.filter((l) => l.kind !== "midboss" && !l.underground).map((l) => <i class="lm" style={view.pos(l)} />)}
+  </span>
+)}
+
+<style>
+  .mp { position: relative; display: block; aspect-ratio: 1; container-type: inline-size; }
+  .mp > * { position: absolute; }
+  .mp-bg, .mp-lanes { inset: 0; width: 100%; height: 100%; }
+  .mp-lanes polyline { fill: none; stroke-linejoin: round; stroke-linecap: round; stroke-width: max(1.5px, 0.55cqw); vector-effect: non-scaling-stroke; }
+  .mp i, .mp .cp { transform: translate(-50%, -50%); }
+  .st { width: 1.9cqw; height: 1.9cqw; background: var(--c); transform: translate(-50%, -50%) rotate(45deg) !important; box-shadow: 0 0 0 1px rgb(0 0 0 / 0.7); }
+  .st-patron { width: 3.6cqw; height: 3.6cqw; }
+  .st-walker { width: 3cqw; height: 3cqw; background: rgb(20 22 21); border: 0.55cqw solid var(--c); box-sizing: border-box; }
+  .st-baseGuardian { width: 1.5cqw; height: 1.5cqw; background: rgb(20 22 21); border: 0.4cqw solid var(--c); box-sizing: border-box; }
+  .st-shrine { width: 1.4cqw; height: 1.4cqw; }
+  .bk-crate { width: max(2px, 0.6cqw); height: max(2px, 0.6cqw); border-radius: 50%; background: var(--c-soul); }
+  .bk-statue { width: max(2px, 0.75cqw); height: max(2px, 0.75cqw); background: #e8b93a; transform: translate(-50%, -50%) rotate(45deg) !important; }
+  .cp { width: 2.7cqw; height: 2.7cqw; filter: drop-shadow(0 0 1px #000); }
+  .cp-strong { width: 3.2cqw; height: 3.2cqw; }
+  .cp-vaults { width: 3cqw; height: 3cqw; }
+  .lm { width: 1.5cqw; height: 1.5cqw; border: max(1px, 0.3cqw) solid var(--c-accent); border-radius: 50%; background: rgb(0 0 0 / 0.5); box-sizing: border-box; }
+</style>

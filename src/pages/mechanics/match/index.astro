@@ -403,13 +403,6 @@ const toc = [
             </tbody>
           </table>
         </div>
-        <p class="cap">
-          2人レーンで、ウェーブはトルーパーの出現時刻に到着し、{ASSUMPTIONS.waveSeconds}秒かけて倒すものとしています。
-          箱は1個{ASSUMPTIONS.crateSeconds}秒、小キャンプは{ASSUMPTIONS.campSeconds}秒、キルとガーディアン破壊は一瞬で入ります（処理は1つずつ順番）。
-          報酬の額・出現時刻・分配率はゲームのデータです。キル報酬は最低額（{f.heroKillMin ?? "—"}）＋ファーストブラッドのボーナス、
-          箱は落とす確率をかけた期待値、ガーディアンはレーンの2人と味方全員への配分で計算しています。
-          どう動いたか（各シナリオの説明）はこちらで置いた想定です。
-        </p>
       </figure>
     )}
 
@@ -569,7 +562,7 @@ const toc = [
       未回収のソウルは時間とともに自動で確保されていくので、ファーム直後に無理な戦闘をしないことが大切です。
     </p>
 
-    <h3>マップ</h3>
+    <h3 id="map">マップ</h3>
     <p>キャンプ・箱・黄金像の場所です。種類ごとに表示を切り替えられ、「地下（共用）」で誰でも入れる地下も見られます。</p>
     <FarmMap />
 
@@ -892,7 +885,6 @@ const toc = [
     .chart path.ln.behind { stroke: var(--c-nerf); }
     .chart .ev circle { stroke: var(--c-bg); stroke-width: 1.5; fill: var(--c-soul); }
     .chart .ev text { font-size: 10.5px; fill: var(--c-text-strong); paint-order: stroke; stroke: var(--c-surface); stroke-width: 3px; }
-    .chart .cap { font-size: 11.5px; color: var(--c-text-faint); line-height: 1.7; margin: var(--sp-2) 0 0; }
     table.miles { margin-top: var(--sp-3); }
     .tip { border-color: var(--c-accent-dim); }
     .buff { margin: var(--sp-3) 0; padding: var(--sp-3) var(--sp-4); background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); }

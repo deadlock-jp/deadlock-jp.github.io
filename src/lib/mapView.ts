@@ -1,0 +1,81 @@
+/**
+ * マップ(data/snapshots/<版>/map.json)を画面に描くための共通データ。
+ * 操作できる地図(src/components/FarmMap.astro)と、入口ページ用の静的な地図
+ * (src/components/MapPreview.astro)の両方がここから描く。
+ *
+ * 見た目はゲーム内のミニマップに合わせる: 自チームを南(アンバー)側として、
+ * 自陣のレーン・建造物はレーンの色、中央から先の敵陣は赤。
+ */
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
+import type { MapFile, MapLandmark } from "../types/map.ts";
+import type { EconomyFile } from "../types/economy.ts";
+import { campSpawnTimes } from "./objects.ts";
+import { TUNNEL_BREAKABLE_GROUP } from "../parsers/map.ts";
+
+const DATA_DIR = join(process.cwd(), "data");
+
+export function loadMap(): { map: MapFile; economy: EconomyFile } | null {
+  const version = JSON.parse(readFileSync(join(DATA_DIR, "latest.json"), "utf8")).version as string;
+  const mapPath = join(DATA_DIR, "snapshots", version, "map.json");
+  if (!existsSync(mapPath)) return null;
+  return {
+    map: JSON.parse(readFileSync(mapPath, "utf8")) as MapFile,
+    economy: JSON.parse(readFileSync(join(DATA_DIR, "snapshots", version, "economy.json"), "utf8")) as EconomyFile,
+  };
+}
+
+/** 敵陣の色(ゲームのミニマップで敵側のレーン・建造物に使われる赤) */
+export const ENEMY = "#d9553a";
+/** 自陣のパトロン・シュラインの色(ゲームでは白っぽく描かれる) */
+export const OWN_BASE = "#e6ddc8";
+
+/** 建造物(レーンの上に並ぶもの)。それ以外の目印(橋バフ・裂け目・壺・ミッド・ボス)と分けて描く */
+export const STRUCTURES = new Set(["patron", "shrine", "baseGuardian", "walker", "guardian"]);
+
+export const campInfo = () => Object.fromEntries(campSpawnTimes().map((c) => [c.key, c]));
+
+/** 地下トンネル(3人専用)の箱 */
+export const isTunnelBreakable = (b: MapFile["breakables"][number]) => b.group === TUNNEL_BREAKABLE_GROUP;
+
+export function mapView(map: MapFile, economy: EconomyFile) {
+  /** ゲーム座標 → 地図上の割合(0〜1) */
+  const frac = (p: { x: number; y: number }) => {
+    const { minX, minY, maxX, maxY } = map.bounds;
+    return { u: (p.x - minX) / (maxX - minX), v: (maxY - p.y) / (maxY - minY) };
+  };
+  const pos = (p: { x: number; y: number }) => {
+    const { u, v } = frac(p);
+    return `left:${(u * 100).toFixed(2)}%;top:${(v * 100).toFixed(2)}%`;
+  };
+  const laneColor = (lane: number | null) => {
+    const c = lane !== null ? economy.lanes[lane]?.color : null;
+    return c && (c[0] || c[1] || c[2]) ? `rgb(${c[0]} ${c[1]} ${c[2]})` : OWN_BASE;
+  };
+  const structureColor = (l: MapLandmark) =>
+    l.team === "sapphire" ? ENEMY : l.kind === "patron" || l.kind === "shrine" ? OWN_BASE : laneColor(l.lane);
+
+  /**
+   * レーンの線(viewBox 0 0 1000 1000 の polyline)。自陣側(南)はレーンの色、中央(y=0)を越えた先は敵陣として赤。
+   * 経路は南の拠点から北の拠点へ向かっているので、最初に y が 0 以上になった点で分ける。
+   */
+  const laneLines = map.lanes.flatMap((l) => {
+    const toStr = (pts: { x: number; y: number }[]) =>
+      pts.map((p) => { const { u, v } = frac(p); return `${(u * 1000).toFixed(1)},${(v * 1000).toFixed(1)}`; }).join(" ");
+    const cut = l.points.findIndex((p) => p.y >= 0);
+    const own = cut < 0 ? l.points : l.points.slice(0, cut + 1);
+    const enemy = cut < 0 ? [] : l.points.slice(cut);
+    return [
+      { key: `${l.lane}-own`, color: laneColor(l.lane), points: toStr(own) },
+      ...(enemy.length > 1 ? [{ key: `${l.lane}-enemy`, color: ENEMY, points: toStr(enemy) }] : []),
+    ];
+  });
+
+  return {
+    pos,
+    structureColor,
+    laneLines,
+    structures: map.landmarks.filter((l) => STRUCTURES.has(l.kind)),
+    markers: map.landmarks.filter((l) => !STRUCTURES.has(l.kind)),
+  };
+}

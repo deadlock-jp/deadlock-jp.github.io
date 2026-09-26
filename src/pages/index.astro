@@ -8,6 +8,7 @@ import HeroHoverCard from "../components/HeroHoverCard.astro";
 import ItemHoverCard from "../components/ItemHoverCard.astro";
 import BalanceChips from "../components/BalanceChips.astro";
 import AbilityHoverCards from "../components/AbilityHoverCards.astro";
+import MapPreview from "../components/MapPreview.astro";
 import {
   releasedHeroes,
   shopItems,
@@ -165,11 +166,21 @@ const balanceAbilityKeys = [
       攻略情報
       <a class="more" href={`${base}/mechanics/`}>リファレンスを見る →</a>
     </h2>
-    <p class="syslead">
-      勝利条件・レーンのルール、ガーディアン・ウォーカー・シュライン・パトロンのHPと挙動、
-      ソウル獲得システム、ヒーローの操作。ヒーローやアイテムと同じく、
-      すべてゲーム本体から抽出した数値です。
-    </p>
+    <div class="guide">
+      <a class="guidemap" href={`${base}/mechanics/match/#map`}>
+        <MapPreview />
+      </a>
+      <div class="guidetx">
+        <a class="guidett" href={`${base}/mechanics/match/#map`}>マップ</a>
+        <p class="syslead">キャンプ・箱・黄金像・橋バフの位置。拡大と、地上・地下の切り替えができます。</p>
+        <ul class="guidelinks">
+          <li><a href={`${base}/mechanics/match/#laning`}>レーン戦</a></li>
+          <li><a href={`${base}/mechanics/match/#farming`}>ファーミング</a></li>
+          <li><a href={`${base}/mechanics/match/#lategame`}>終盤</a></li>
+          <li><a href={`${base}/mechanics/controls/`}>キャラクターコントロール</a></li>
+        </ul>
+      </div>
+    </div>
   </section>
 
   {/* ヒーロー/アイテム/スキルのホバー詳細(共通コンポーネント) */}
@@ -226,6 +237,17 @@ const balanceAbilityKeys = [
       font-weight: 400;
       white-space: nowrap;
     }
+
+    /* ---- 攻略情報: マップを大きく ---- */
+    .guide { display: grid; grid-template-columns: minmax(0, 560px) minmax(0, 1fr); gap: var(--sp-5); align-items: center; }
+    .guidemap { display: block; }
+    .guidemap:hover { filter: brightness(1.08); }
+    .guidett { display: inline-block; margin-bottom: var(--sp-2); font-size: 20px; font-weight: 700; color: var(--c-text-strong); }
+    .guidett:hover { color: var(--c-accent); text-decoration: none; }
+    .guidelinks { list-style: none; padding: 0; margin: var(--sp-4) 0 0; display: flex; flex-wrap: wrap; gap: 6px; }
+    .guidelinks a { display: inline-block; font-size: 12.5px; padding: 4px 12px; border: 1px solid var(--c-border); border-radius: 999px; background: var(--c-surface); color: var(--c-text); }
+    .guidelinks a:hover { border-color: var(--c-accent-dim); color: var(--c-accent); text-decoration: none; }
+    @media (max-width: 720px) { .guide { grid-template-columns: 1fr; } }
 
     .syslead {
       margin: 0;
