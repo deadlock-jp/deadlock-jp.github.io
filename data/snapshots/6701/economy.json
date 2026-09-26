@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 1,
+  "upstreamCommit": "6701",
+  "generatedAt": "2026-09-26T02:45:54.893Z",
+  "lanes": [
+    {
+      "name": "White",
+      "cssClass": "whiteLane",
+      "color": [
+        200,
+        200,
+        200
+      ]
+    },
+    {
+      "name": "Yellow",
+      "cssClass": "yellowLane",
+      "color": [
+        241,
+        204,
+        48
+      ]
+    },
+    {
+      "name": "Yellow + Orange",
+      "cssClass": null,
+      "color": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Green",
+      "cssClass": "greenLane",
+      "color": [
+        255,
+        20,
+        147
+      ]
+    },
+    {
+      "name": "Blue",
+      "cssClass": "blueLane",
+      "color": [
+        41,
+        177,
+        204
+      ]
+    },
+    {
+      "name": " + Purple",
+      "cssClass": null,
+      "color": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Purple",
+      "cssClass": "purpleLane",
+      "color": [
+        89,
+        178,
+        71
+      ]
+    }
+  ],
+  "objectiveGold": [
+    {
+      "key": "Tier1",
+      "goldKill": 1375,
+      "goldOrbs": 0
+    },
+    {
+      "key": "Tier2",
+      "goldKill": 3675,
+      "goldOrbs": 0
+    },
+    {
+      "key": "BaseGuardians",
+      "goldKill": 1000,
+      "goldOrbs": 0
+    },
+    {
+      "key": "Shrines",
+      "goldKill": 2000,
+      "goldOrbs": 0
+    },
+    {
+      "key": "PatronPhase1",
+      "goldKill": 0,
+      "goldOrbs": 0
+    }
+  ],
+  "trooperKillGoldShareFrac": [
+    1,
+    0.54,
+    0.36,
+    0.25,
+    0.2,
+    0.16
+  ],
+  "heroKillGoldShareFrac": [
+    1.25,
+    0.575,
+    0.283,
+    0.175,
+    0.11,
+    0.083
+  ],
+  "objectiveGoldNearPlayerSplitPct": 25,
+  "rejuv": {
+    "buffDuration": 180,
+    "expirationWarningTiming": 30,
+    "trooperHealthMult": [
+      1.7,
+      2,
+      2.3
+    ],
+    "playerRespawnMult": [
+      0.5,
+      0.4,
+      0.3
+    ]
+  },
+  "breakableSpawnTimes": [
+    {
+      "initialSpawnTime": 180,
+      "respawnInterval": 180
+    },
+    {
+      "initialSpawnTime": 300,
+      "respawnInterval": 300
+    },
+    {
+      "initialSpawnTime": 600,
+      "respawnInterval": 180
+    }
+  ],
+  "riftComeback": {
+    "bounty": null,
+    "techResist": null,
+    "bulletResist": null,
+    "statusResist": null,
+    "resistMaxAtStart": 10,
+    "resistMaxPerMinute": 1,
+    "resistMaxCap": 40
+  },
+  "campSpawnTimes": [
+    {
+      "key": "weak",
+      "initialSpawnSeconds": 120,
+      "respawnIntervalSeconds": 85,
+      "intervalChangeSeconds": 0,
+      "intervalMinSeconds": 0
+    },
+    {
+      "key": "medium",
+      "initialSpawnSeconds": 300,
+      "respawnIntervalSeconds": 290,
+      "intervalChangeSeconds": 0,
+      "intervalMinSeconds": 0
+    },
+    {
+      "key": "strong",
+      "initialSpawnSeconds": 480,
+      "respawnIntervalSeconds": 335,
+      "intervalChangeSeconds": 0,
+      "intervalMinSeconds": 0
+    },
+    {
+      "key": "vaults",
+      "initialSpawnSeconds": 480,
+      "respawnIntervalSeconds": 300,
+      "intervalChangeSeconds": 0,
+      "intervalMinSeconds": 0
+    },
+    {
+      "key": "midboss",
+      "initialSpawnSeconds": 0,
+      "respawnIntervalSeconds": 420,
+      "intervalChangeSeconds": -60,
+      "intervalMinSeconds": 300
+    }
+  ]
+}
