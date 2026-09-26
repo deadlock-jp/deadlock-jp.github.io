@@ -1,5 +1,6 @@
 /**
- * 運営者の外部リンク(フッターと /about/ で共用)。
+ * 運営者の外部リンク。カンパ先はフッターと /about/ の両方、
+ * X・配信・コミュニティは /about/ の最下部にだけ出す。
  *
  * 非公式ファンサイトという立ち位置を崩さないため、ここに置くのは
  * 「運営している個人のリンク」と「運営コストの支援先」だけにする。
@@ -8,6 +9,7 @@
  * Ko-fi(サーバー代・ドメイン代のカンパ)を開設したら SUPPORT_LINK の
  * href を埋めるだけで、フッターと /about/ の両方に出る。
  */
+import { X_HANDLE } from "./site.ts";
 
 export interface SiteLink {
   href: string;
@@ -18,6 +20,15 @@ export interface SiteLink {
 
 const svg = (path: string): string =>
   `<svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true">${path}</svg>`;
+
+/** 運営者のX(更新のお知らせ・ご意見の窓口)。ハンドルは twitter:site と共通 */
+const X: SiteLink = {
+  href: `https://x.com/${X_HANDLE.replace(/^@/, "")}`,
+  label: `X (${X_HANDLE})`,
+  icon: svg(
+    '<path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/>',
+  ),
+};
 
 /** 配信 */
 const TWITCH: SiteLink = {
@@ -50,7 +61,7 @@ const SUPPORT_LINK: SiteLink = {
 };
 
 /** 開設済みのものだけを返す */
-export const COMMUNITY_LINKS: SiteLink[] = [TWITCH, DISCORD];
+export const COMMUNITY_LINKS: SiteLink[] = [X, TWITCH, DISCORD];
 export const SUPPORT_LINKS: SiteLink[] = [SUPPORT_LINK].filter((l) => l.href !== "");
 /** カンパ先が使えるか(文言の出し分けに使う) */
 export const HAS_SUPPORT_LINK = SUPPORT_LINKS.length > 0;

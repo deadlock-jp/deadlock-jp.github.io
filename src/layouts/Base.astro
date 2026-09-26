@@ -1,7 +1,7 @@
 ---
 import "../styles/global.css";
 import { heroesFile } from "../lib/data.ts";
-import { COMMUNITY_LINKS, SUPPORT_LINKS } from "../lib/links.ts";
+import { SUPPORT_LINKS } from "../lib/links.ts";
 import { X_HANDLE, CF_BEACON_TOKEN, GOOGLE_SITE_VERIFICATION } from "../lib/site.ts";
 
 interface Crumb {
@@ -236,11 +236,11 @@ if (crumbs.length > 1) {
           <a href={`${base}/about/`}>このサイトについて</a>
         </p>
         {/*
-          運営者のリンク。権利表示より下に置き、目立たせない。
-          Ko-fi(サーバー代・ドメイン代のカンパ)は開設後にここへ1行足す。
+          カンパ先だけを権利表示より下に置き、目立たせない。
+          X・Twitch・Discord は /about/ の最下部にまとめている。
         */}
         <p class="links">
-          {[...SUPPORT_LINKS, ...COMMUNITY_LINKS].map((l) => (
+          {SUPPORT_LINKS.map((l) => (
             <a href={l.href} rel="noopener" target="_blank">
               <span class="ico" set:html={l.icon} />
               {l.label}
