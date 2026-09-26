@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "sourceVersion": "6701",
-  "generatedAt": "2026-09-26T10:44:23.486Z",
+  "generatedAt": "2026-09-26T14:54:34.044Z",
   "values": {
     "citadel_comeback_redirect_fraction": 0.7,
     "citadel_deny_denied_percentage": 0,
@@ -12,6 +12,7 @@
     "citadel_koth_reward_time_multiplier": 222,
     "citadel_koth_spawn_initial_delay": 720,
     "citadel_player_gold_reward_first_kill_bonus": 125,
+    "citadel_player_gold_reward_min": 200,
     "citadel_player_starting_gold": 600,
     "citadel_tick_gold_payout_for_lowest": 0.025,
     "citadel_tick_gold_payout_for_second_lowest": 0.015,

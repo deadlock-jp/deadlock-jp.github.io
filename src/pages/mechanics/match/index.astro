@@ -15,6 +15,7 @@ import HeroPortrait from "../../../components/HeroPortrait.astro";
 import FarmMap from "../../../components/FarmMap.astro";
 import farmingNotes from "../../../../data/farming-notes.json" with { type: "json" };
 import { matchFlow, clock, duration } from "../../../lib/matchFlow.ts";
+import { laneScenarios, ASSUMPTIONS } from "../../../lib/laneScenarios.ts";
 import { economyTable, killShareFrac, riftComeback } from "../../../lib/souls.ts";
 import { objectTopics } from "../../../lib/objects.ts";
 import { gameSystemSections } from "../../../lib/gameSystem.ts";
@@ -76,34 +77,40 @@ function heroesFor(key: string): { id: number; name: string; icon: string | null
 }
 const tunnelHeroes = heroesFor("tunnel");
 
-/* ---- ソウル推移のグラフ(レーンのウェーブだけで稼いだ場合) ---- */
+/* ---- ソウル推移のグラフ(3つのシナリオ。src/lib/laneScenarios.ts) ---- */
+const scenarios = laneScenarios();
+const scenarioHero = (key: string) => {
+  const h = Object.values(heroesFile.heroes).find((x) => x.key === key);
+  return h ? { id: h.id, name: t(h.nameToken, key), icon: h.images.iconSmall } : null;
+};
 const chart = (() => {
-  if (!f.trooper || f.startingGold === null || !f.firstWave) return null;
-  const tr = f.trooper;
-  const share = f.firstWave.shareDuo;
-  const waves = 16;
-  const scenarios = [
-    { key: "full", label: "ディナイされない", keep: 1 },
-    { key: "half", label: "オーブの半分をディナイされる", keep: tr.instantRatio + (1 - tr.instantRatio) / 2 },
-    { key: "none", label: "オーブを全部ディナイされる", keep: tr.instantRatio },
+  if (!scenarios) return null;
+  const end = ASSUMPTIONS.endSeconds;
+  const top = Math.max(...scenarios.map((s) => s.final), f.ultimate?.totalGold ?? 0);
+  const step = f.tier1Price || 800;
+  const yMax = Math.ceil((top + 200) / step) * step;
+  const W = 680, H = 340, L = 50, R = 14, T = 12, B = 34;
+  const X = (sec: number) => L + (sec / end) * (W - L - R);
+  const Y = (v: number) => T + (1 - v / yMax) * (H - T - B);
+  // 処理時間のあいだは斜めに上がり、それ以外は平らになる(点をそのまま直線でつなぐ)
+  const path = (pts: { t: number; total: number }[]) =>
+    pts.map((p, i) => `${i === 0 ? "M" : "L"}${X(Math.min(p.t, end)).toFixed(1)},${Y(p.total).toFixed(1)}`).join("");
+  const lines = [
+    ...Array.from({ length: Math.floor(yMax / step) }, (_, i) => ({ v: (i + 1) * step, kind: "buy" })),
+    ...(f.ultimate?.totalGold ? [{ v: f.ultimate.totalGold, kind: "ult" }] : []),
   ];
-  const series = scenarios.map((s) => {
-    let total = f.startingGold!;
-    const pts: { x: number; y: number }[] = [{ x: 0, y: total }];
-    for (let w = 1; w <= waves; w++) {
-      const sec = (tr.firstWaveSeconds ?? 0) + tr.intervalEarly * (w - 1);
-      const per = tr.gold + tr.goldPerMinute * (sec / 60);
-      total += tr.squadSize * per * share * s.keep;
-      pts.push({ x: w, y: Math.round(total) });
-    }
-    return { ...s, pts };
-  });
-  const yMax = Math.ceil(Math.max(...series[0]!.pts.map((p) => p.y), (f.ultimate?.totalGold ?? 0) + 200) / 400) * 400;
-  const W = 640, H = 300, L = 48, R = 12, T = 12, B = 34;
-  const X = (x: number) => L + (x / waves) * (W - L - R);
-  const Y = (y: number) => T + (1 - y / yMax) * (H - T - B);
-  const lines = [...f.buySteps.map((v) => ({ v, kind: "buy" })), ...(f.ultimate?.totalGold ? [{ v: f.ultimate.totalGold, kind: "ult" }] : [])];
-  return { W, H, L, R, T, B, X, Y, waves, yMax, series, lines, lastWaveSec: (tr.firstWaveSeconds ?? 0) + tr.intervalEarly * (waves - 1) };
+  const minutes = Array.from({ length: Math.floor(end / 60) + 1 }, (_, i) => i);
+  return { W, H, L, R, T, B, X, Y, path, lines, minutes, yMax };
+})();
+
+/* ---- TIPS: トロフィーコレクター(効果の数値はアイテムのデータから) ---- */
+const trophy = (() => {
+  const it = item("upgrade_trophy_collector");
+  if (!it) return null;
+  const perStack = it.properties["StackingGoldPerMinute"]?.value;
+  const maxStacks = it.properties["MaxStacks"]?.value;
+  if (perStack == null || maxStacks == null) return null;
+  return { id: it.id, name: t(it.nameToken, it.id), price: it.cost, perStack, maxStacks };
 })();
 
 /* ---- レーン中のタイムライン ---- */
@@ -111,7 +118,7 @@ const events = [
   { sec: f.trooper?.firstWaveSeconds ?? null, label: "最初のウェーブ" },
   { sec: f.camps.weak?.initial ?? null, label: "小キャンプ" },
   { sec: f.breakable.firstSeconds, label: "箱・黄金像" },
-  { sec: f.powerup.initial, label: "橋のパワーアップ" },
+  { sec: f.powerup.initial, label: "橋バフ" },
   { sec: f.camps.medium?.initial ?? null, label: "中キャンプ" },
   { sec: f.camps.strong?.initial ?? null, label: "大キャンプ" },
   { sec: f.camps.vaults?.initial ?? null, label: N.vault },
@@ -306,15 +313,16 @@ const toc = [
             <span class="num">{f.trooper!.squadSize}体 × {f.trooper!.gold} × {pct(f.firstWave.shareDuo)} = +{f.firstWave.full} → 所持 <b>{souls(f.firstWave.afterFull)}</b></span>
           </div>
           <div>
-            <span>オーブを全部ディナイされた場合</span>
-            <span class="num">+{f.firstWave.allDenied} → 所持 <b>{souls(f.firstWave.afterAllDenied)}</b></span>
+            <span>オーブを<b>1つ</b>ディナイされた場合</span>
+            <span class="num">−{f.firstWave.perOrb} → 所持 <b class={f.firstWave.afterOneDeny < f.tier1Price ? "miss" : ""}>{souls(f.firstWave.afterOneDeny)}</b></span>
           </div>
         </div>
         <p class="calcnote">
           {f.firstWave.afterFull >= f.tier1Price
             ? `ディナイされなければ、最初のウェーブだけでティア1アイテム（${souls(f.tier1Price)}）が買えます。`
             : `最初のウェーブだけではティア1アイテム（${souls(f.tier1Price)}）に届きません。`}
-          {f.firstWave.afterAllDenied < f.tier1Price && "オーブを全部ディナイされると届きません。"}
+          {f.firstWave.deniesToMiss === 1 && <strong class="warn">ところが、オーブを1つディナイされるだけで届かなくなります。最序盤で最も重大なポイントです。</strong>}
+          {f.firstWave.deniesToMiss > 1 && `オーブを${f.firstWave.deniesToMiss}つディナイされると届かなくなります。`}
         </p>
         <p class="calcsrc">
           トルーパー1体の報酬は「{f.trooper!.gold} ＋ {f.trooper!.goldPerMinute} × 経過分数」で増えていきます。最初のウェーブ（{clock(f.trooper!.firstWaveSeconds)}）はほぼ{f.trooper!.gold}なので、ここでは{f.trooper!.gold}で計算しています。
@@ -336,9 +344,23 @@ const toc = [
       </p>
     )}
 
-    {chart && (
+    <h3>レーン戦のソウル推移</h3>
+    <p>同じ8分間でも、動き方しだいで買い物とアルティメットのタイミングは大きく変わります。</p>
+    {chart && scenarios && (
       <figure class="chart">
-        <svg viewBox={`0 0 ${chart.W} ${chart.H}`} role="img" aria-label="レーンのウェーブだけで稼いだ場合の所持ソウルの推移">
+        <figcaption class="lgds">
+          {scenarios.map((s, i) => {
+            const h = scenarioHero(s.heroKey);
+            return (
+              <span class={`lgd ${s.key}`}>
+                <i class={`sw ${s.key}`} />
+                {h && <HeroPortrait name={h.name} image={h.icon} size={24} />}
+                <span><b>{["①", "②", "③"][i]} {s.title}</b><small>{s.summary}</small></span>
+              </span>
+            );
+          })}
+        </figcaption>
+        <svg viewBox={`0 0 ${chart.W} ${chart.H}`} role="img" aria-label="レーン戦の所持ソウルの推移（3つのシナリオ）">
           {chart.lines.map((l) => (
             <g class={`hl ${l.kind}`}>
               <line x1={chart.L} x2={chart.W - chart.R} y1={chart.Y(l.v)} y2={chart.Y(l.v)} />
@@ -346,25 +368,60 @@ const toc = [
             </g>
           ))}
           <line class="axis" x1={chart.L} x2={chart.W - chart.R} y1={chart.H - chart.B} y2={chart.H - chart.B} />
-          {[0, 4, 8, 12, 16].map((w) => (
-            <text class="tick" x={chart.X(w)} y={chart.H - chart.B + 16} text-anchor="middle">{w === 0 ? "開始" : `${w}波`}</text>
+          {chart.minutes.map((m) => (
+            <text class="tick" x={chart.X(m * 60)} y={chart.H - chart.B + 16} text-anchor="middle">{m}:00</text>
           ))}
-          {chart.series.map((s) => (
-            <polyline class={`ln ${s.key}`} points={s.pts.map((p) => `${chart.X(p.x)},${chart.Y(p.y)}`).join(" ")} />
-          ))}
-          {chart.series.map((s) => (
-            <circle class={`end ${s.key}`} cx={chart.X(s.pts.at(-1)!.x)} cy={chart.Y(s.pts.at(-1)!.y)} r="3" />
-          ))}
+          {scenarios.map((s) => <path class={`ln ${s.key}`} d={chart.path(s.points)} />)}
+          {scenarios.flatMap((s) =>
+            s.points
+              .filter((p) => p.note === "ファーストブラッド" || p.note === "ガーディアン破壊")
+              .map((p) => (
+                <g class={`ev ${s.key}`}>
+                  <circle cx={chart.X(p.t)} cy={chart.Y(p.total)} r="4" />
+                  <text x={chart.X(p.t) - 6} y={chart.Y(p.total) - 8} text-anchor="end">{p.note}</text>
+                </g>
+              )),
+          )}
         </svg>
-        <figcaption>
-          <span class="lgd"><i class="sw full" />ディナイされない</span>
-          <span class="lgd"><i class="sw half" />オーブの半分をディナイされる</span>
-          <span class="lgd"><i class="sw none" />オーブを全部ディナイされる</span>
-          <span class="lgd"><i class="sw buy" />買い物の目安</span>
-          {f.ultimate?.totalGold && <span class="lgd"><i class="sw ult" />アルティメット解放</span>}
-          <span class="cap">2人レーンで、トルーパーのウェーブだけで稼いだ場合（キル・キャンプ・箱は含まない）。{chart.waves}ウェーブ目は約{clock(chart.lastWaveSec)}。</span>
-        </figcaption>
+        <div class="tablewrap">
+          <table class="miles">
+            <thead>
+              <tr>
+                <th>到達時刻</th>
+                {scenarios[0]!.milestones.map((m) => <th>{souls(m.gold)}{m.gold === f.ultimate?.totalGold ? "（アルティメット）" : ""}</th>)}
+                <th>{clock(ASSUMPTIONS.endSeconds)}時点の所持</th>
+              </tr>
+            </thead>
+            <tbody>
+              {scenarios.map((s, i) => (
+                <tr>
+                  <td><i class={`sw ${s.key}`} /> {["①", "②", "③"][i]} {s.title}</td>
+                  {s.milestones.map((m) => <td class="n">{m.t === null ? "届かない" : clock(m.t)}</td>)}
+                  <td class="n">{souls(s.final)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="cap">
+          2人レーンで、ウェーブはトルーパーの出現時刻に到着し、{ASSUMPTIONS.waveSeconds}秒かけて倒すものとしています。
+          箱は1個{ASSUMPTIONS.crateSeconds}秒、小キャンプは{ASSUMPTIONS.campSeconds}秒、キルとガーディアン破壊は一瞬で入ります（処理は1つずつ順番）。
+          報酬の額・出現時刻・分配率はゲームのデータです。キル報酬は最低額（{f.heroKillMin ?? "—"}）＋ファーストブラッドのボーナス、
+          箱は落とす確率をかけた期待値、ガーディアンはレーンの2人と味方全員への配分で計算しています。
+          どう動いたか（各シナリオの説明）はこちらで置いた想定です。
+        </p>
       </figure>
+    )}
+
+    {trophy && (
+      <div class="calc tip">
+        <span class="calclabel">TIPS</span>
+        <p class="calcnote">
+          <a href={`${base}/items/${trophy.id}/`}>{trophy.name}</a>（{souls(trophy.price)}）を序盤から買うと、
+          キルかアシストのたびに毎分 <b class="num">+{trophy.perStack}</b> のソウル生成が積み上がり（最大{trophy.maxStacks}回・デスしても消えない）、
+          ソウルの伸びをブーストできる可能性があります。
+        </p>
+      </div>
     )}
 
     <h3>倒されない意識</h3>
@@ -386,11 +443,6 @@ const toc = [
     )}
 
     <h3>レーン中に起きること</h3>
-    {sys["powerups"]?.icons.length ? (
-      <ul class="icongrid">
-        {sys["powerups"].icons.map((ic) => <li><img src={`${base}/${ic.src}`} alt="" loading="lazy" /><span>{ic.label}</span></li>)}
-      </ul>
-    ) : null}
     <div class="timeline" style={`--max: ${timelineMax}`}>
       {timeline.map((e) => (
         <div class="tev" style={`--at: ${e.sec}`}>
@@ -402,13 +454,25 @@ const toc = [
     <ul class="notes">
       <li>
         小キャンプや箱から出るソウルもレーン中は差につながります。
-        {f.powerup.interval !== null && `橋のパワーアップは${clock(f.powerup.initial)}から${duration(f.powerup.interval)}ごとに出現し、近接強攻撃で獲得します。`}
-      </li>
-      <li>
-        パワーアップはキャスト系（スピリットパワーとクールダウン短縮）・ガン系（連射速度と弾数）・移動系（スタミナ・スプリント速度・スタミナ回復・ジップライン速度）・
-        生存系（ボーナスHPとHP回復）の4種類で、時間がたつほど効果が強くなります。倒されると失います。
       </li>
     </ul>
+    <div class="buff">
+      <p>
+        <b>橋バフ（ブリッジバフ）</b>：{f.powerup.interval !== null && `${clock(f.powerup.initial)}から${duration(f.powerup.interval)}ごとに`}横レーンの橋の上に出現し、近接強攻撃で獲得します。
+        次の4種類で、時間がたつほど効果が強くなります。倒されると失います。
+      </p>
+      {sys["powerups"]?.icons.length ? (
+        <ul class="icongrid">
+          {sys["powerups"].icons.map((ic) => <li><img src={`${base}/${ic.src}`} alt="" loading="lazy" /><span>{ic.label}</span></li>)}
+        </ul>
+      ) : null}
+      <ul class="notes">
+        <li>キャスト系：スピリットパワーとクールダウン短縮</li>
+        <li>ガン系：連射速度と弾数</li>
+        <li>移動系：スタミナ・スプリント速度・スタミナ回復・ジップライン速度</li>
+        <li>生存系：ボーナスHPとHP回復</li>
+      </ul>
+    </div>
 
     <h3>ガーディアンとパリィ</h3>
     <p>
@@ -506,7 +570,7 @@ const toc = [
     </p>
 
     <h3>マップ</h3>
-    <p>キャンプ・箱・黄金像の場所です。種類ごとに表示を切り替えられ、「地下トンネル」で地下の箱も見られます。</p>
+    <p>キャンプ・箱・黄金像の場所です。種類ごとに表示を切り替えられ、「地下（共用）」で誰でも入れる地下も見られます。</p>
     <FarmMap />
 
     {f.waveByMinute.length > 0 && (
@@ -759,20 +823,6 @@ const toc = [
     .chart .hl text, .chart .tick { font-size: 10px; fill: var(--c-text-faint); font-family: var(--font-mono); }
     .chart .hl.ult text { fill: var(--c-spirit); }
     .chart .axis { stroke: var(--c-border-strong); }
-    .chart .ln { fill: none; stroke-width: 2; }
-    .chart .ln.full, .chart .end.full { stroke: var(--c-soul); fill: var(--c-soul); }
-    .chart .ln.half, .chart .end.half { stroke: var(--c-mixed); fill: var(--c-mixed); }
-    .chart .ln.none, .chart .end.none { stroke: var(--c-nerf); fill: var(--c-nerf); }
-    .chart .ln { fill: none; }
-    .chart figcaption { display: flex; flex-wrap: wrap; gap: 4px var(--sp-3); margin-top: 6px; font-size: 11px; color: var(--c-text-muted); }
-    .chart .lgd { display: inline-flex; align-items: center; gap: 5px; }
-    .chart .sw { display: inline-block; width: 14px; height: 0; border-top: 2px solid; }
-    .chart .sw.full { border-color: var(--c-soul); }
-    .chart .sw.half { border-color: var(--c-mixed); }
-    .chart .sw.none { border-color: var(--c-nerf); }
-    .chart .sw.buy { border-top: 2px dashed var(--c-border-strong); }
-    .chart .sw.ult { border-top: 2px dashed var(--c-spirit); }
-    .chart .cap { flex-basis: 100%; color: var(--c-text-faint); }
 
     .chips { list-style: none; padding: 0; margin: 0 0 var(--sp-3); display: flex; flex-wrap: wrap; gap: 6px; }
     .chips a { display: inline-block; font-size: 12px; padding: 3px 10px; border: 1px solid var(--c-vitality); border-radius: var(--radius); color: var(--c-vitality); background: var(--c-surface); }
@@ -825,6 +875,29 @@ const toc = [
     .icongrid { list-style: none; padding: 0; margin: var(--sp-2) 0 var(--sp-3); display: flex; flex-wrap: wrap; gap: var(--sp-2); }
     .icongrid li { display: flex; align-items: center; gap: 6px; font-size: 12px; padding: 3px 10px 3px 4px; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); }
     .icongrid img { width: 22px; height: 22px; object-fit: contain; }
+
+    .calc b.miss { color: var(--c-nerf); }
+    .calc .warn { display: block; margin-top: 4px; color: var(--c-nerf); }
+    .chart .lgds { display: grid; gap: 6px; margin: 0 0 var(--sp-2); }
+    .chart .lgd { display: flex; align-items: center; gap: 8px; font-size: 12.5px; }
+    .chart .lgd > span:last-child { display: flex; flex-direction: column; }
+    .chart .lgd small { font-size: 11.5px; color: var(--c-text-muted); }
+    .sw { display: inline-block; width: 16px; height: 0; border-top: 3px solid; vertical-align: middle; }
+    .sw.ideal { border-color: var(--c-soul); }
+    .sw.basic { border-color: var(--c-mixed); }
+    .sw.behind { border-color: var(--c-nerf); }
+    .chart path.ln { fill: none; stroke-width: 2.2; }
+    .chart path.ln.ideal { stroke: var(--c-soul); }
+    .chart path.ln.basic { stroke: var(--c-mixed); }
+    .chart path.ln.behind { stroke: var(--c-nerf); }
+    .chart .ev circle { stroke: var(--c-bg); stroke-width: 1.5; fill: var(--c-soul); }
+    .chart .ev text { font-size: 10.5px; fill: var(--c-text-strong); paint-order: stroke; stroke: var(--c-surface); stroke-width: 3px; }
+    .chart .cap { font-size: 11.5px; color: var(--c-text-faint); line-height: 1.7; margin: var(--sp-2) 0 0; }
+    table.miles { margin-top: var(--sp-3); }
+    .tip { border-color: var(--c-accent-dim); }
+    .buff { margin: var(--sp-3) 0; padding: var(--sp-3) var(--sp-4); background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); }
+    .buff p { margin: 0 0 var(--sp-2); font-size: 13.5px; }
+    .buff .notes { margin-bottom: 0; }
 
     .foot { margin-top: var(--sp-5); font-size: 12px; color: var(--c-text-faint); }
 

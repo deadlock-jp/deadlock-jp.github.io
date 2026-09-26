@@ -2,14 +2,18 @@
 /**
  * ファーミング用のマップ(試合の流れ /mechanics/match/ のファーミング節)。
  *
- * 背景はゲームのミニマップ画像、点は data/snapshots/<版>/map.json の配置
+ * 背景はゲームのミニマップ画像を「地面が灰色」に描き直したもの(src/parsers/minimapImage.ts)。
+ * レーン・建造物・キャンプ・箱は data/snapshots/<版>/map.json の配置
  * (maps/dl_midtown.vpk の default_ents から自動抽出。src/parsers/map.ts)。
- * 位置はサーバー側で % に直して描き、クライアントの JS は表示の切り替えだけを行う。
- * 「地上 / 地下トンネル」は背景画像と箱の表示を入れ替える(地下かどうかは高さで判定済み)。
+ *
+ * 見た目はゲーム内のミニマップに合わせる: 自チームを南(アンバー)側として、
+ * 自陣のレーン・建造物はレーンの色、中央から先の敵陣は赤。
+ * 位置はサーバー側で % に直して描き、クライアントの JS は拡大・移動と表示の切り替えだけを行う。
+ * 拡大は地図の要素そのものの大きさを変える(CSS の scale で拡大すると点がぼやけるため)。
  */
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import type { MapFile } from "../types/map.ts";
+import type { MapFile, MapLandmark } from "../types/map.ts";
 import { campSpawnTimes } from "../lib/objects.ts";
 import { clock, duration, TUNNEL_BREAKABLE_GROUP } from "../lib/matchFlow.ts";
 import type { EconomyFile } from "../types/economy.ts";
@@ -26,13 +30,25 @@ const src = (outPath: string | undefined | null): string | null =>
   outPath && existsSync(join(process.cwd(), outPath)) ? `${base}/${outPath.replace(/^public\//, "")}` : null;
 const bgBase = src(map?.images.base?.outPath);
 const bgTunnels = src(map?.images.tunnels?.outPath);
+const bgHidden = src(map?.images.hiddenTunnels?.outPath);
 
+/** ゲーム座標 → 地図上の割合(0〜1) */
+const frac = (p: { x: number; y: number }) => {
+  const { minX, minY, maxX, maxY } = map!.bounds;
+  return { u: (p.x - minX) / (maxX - minX), v: (maxY - p.y) / (maxY - minY) };
+};
 const pos = (p: { x: number; y: number }) => {
-  if (!map) return "";
-  const { minX, minY, maxX, maxY } = map.bounds;
-  const left = ((p.x - minX) / (maxX - minX)) * 100;
-  const top = ((maxY - p.y) / (maxY - minY)) * 100;
-  return `left:${left.toFixed(2)}%;top:${top.toFixed(2)}%`;
+  const { u, v } = frac(p);
+  return `left:${(u * 100).toFixed(2)}%;top:${(v * 100).toFixed(2)}%`;
+};
+
+/** 敵陣の色(ゲームのミニマップで敵側のレーン・建造物に使われる赤) */
+const ENEMY = "#d9553a";
+/** 自陣のパトロン・シュラインの色(ゲームでは白っぽく描かれる) */
+const OWN_BASE = "#e6ddc8";
+const laneColor = (lane: number | null) => {
+  const c = lane !== null ? economy.lanes[lane]?.color : null;
+  return c && (c[0] || c[1] || c[2]) ? `rgb(${c[0]} ${c[1]} ${c[2]})` : OWN_BASE;
 };
 
 /** 箱の出現グループ → 初回出現と再出現(economy.json の breakableSpawnTimes) */
@@ -51,6 +67,12 @@ const CAMP_LAYERS = [
 /** 地下トンネル(3人専用)の箱。グループの対応は src/lib/matchFlow.ts の TUNNEL_BREAKABLE_GROUP */
 const isTunnel = (b: MapFile["breakables"][number]) => b.group === TUNNEL_BREAKABLE_GROUP;
 const count = (pred: (x: MapFile["breakables"][number]) => boolean) => map?.breakables.filter(pred).length ?? 0;
+
+/** 建造物(レーンの上に並ぶもの)と、それ以外の目印 */
+const STRUCTURES = new Set(["patron", "shrine", "baseGuardian", "walker", "guardian"]);
+const structures = (map?.landmarks ?? []).filter((l) => STRUCTURES.has(l.kind));
+const markers = (map?.landmarks ?? []).filter((l) => !STRUCTURES.has(l.kind));
+
 const layers = map
   ? [
       ...CAMP_LAYERS.map((l) => ({
@@ -62,22 +84,42 @@ const layers = map
       })),
       { key: "crate", label: "箱（ソウル）", icon: null, count: count((b) => b.kind === "crate" && !isTunnel(b)), on: false },
       { key: "statue", label: "黄金像（パワーアップ）", icon: null, count: count((b) => b.kind === "statue" && !isTunnel(b)), on: false },
-      { key: "tunnel", label: "地下トンネルの箱（3人専用）", icon: null, count: count(isTunnel), on: false },
-      { key: "landmark", label: "建造物・目印", icon: null, count: map.landmarks.length, on: true },
+      { key: "tunnel", label: "地下トンネルの箱と入口（3人専用）", icon: null, count: count(isTunnel), on: false },
+      { key: "marker", label: "橋バフ・裂け目・壺", icon: null, count: markers.length, on: true },
     ]
   : [];
 
+/**
+ * レーンの線。自陣側(南)はレーンの色、中央(y=0)を越えた先は敵陣として赤で描く。
+ * 経路は南の拠点から北の拠点へ向かっているので、最初に y が 0 以上になった点で分ける。
+ */
+const laneLines = (map?.lanes ?? []).flatMap((l) => {
+  const toStr = (pts: { x: number; y: number }[]) =>
+    pts.map((p) => { const { u, v } = frac(p); return `${(u * 1000).toFixed(1)},${(v * 1000).toFixed(1)}`; }).join(" ");
+  const cut = l.points.findIndex((p) => p.y >= 0);
+  const own = cut < 0 ? l.points : l.points.slice(0, cut + 1);
+  const enemy = cut < 0 ? [] : l.points.slice(cut);
+  return [
+    { key: `${l.lane}-own`, color: laneColor(l.lane), points: toStr(own) },
+    ...(enemy.length > 1 ? [{ key: `${l.lane}-enemy`, color: ENEMY, points: toStr(enemy) }] : []),
+  ];
+});
 
-const TEAM = (y: number) => (y < 0 ? "amber" : "sapphire"); // 南がアンバー、北がサファイア
-const LANDMARK_LABEL: Record<string, string> = {
+const STRUCTURE_LABEL: Record<string, string> = {
   patron: "パトロン",
-  walker: "ウォーカー",
+  shrine: "シュライン",
   baseGuardian: "ベース・ガーディアン",
-  powerup: "橋のパワーアップ",
+  walker: "ウォーカー",
+  guardian: "ガーディアン",
+};
+const MARKER_LABEL: Record<string, string> = {
+  powerup: "橋バフ",
   rift: "不安定な裂け目",
   urnReturn: "魂の壺の返還地点",
   midboss: "ミッド・ボス",
 };
+const structureColor = (l: MapLandmark) =>
+  l.team === "sapphire" ? ENEMY : l.kind === "patron" || l.kind === "shrine" ? OWN_BASE : laneColor(l.lane);
 ---
 
 {map && bgBase && (
@@ -85,7 +127,8 @@ const LANDMARK_LABEL: Record<string, string> = {
     <div class="fm-controls">
       <div class="fm-view" role="group" aria-label="表示する階層">
         <button type="button" class="on" data-view-btn="ground">地上</button>
-        {bgTunnels && <button type="button" data-view-btn="tunnels">地下トンネル</button>}
+        {bgTunnels && <button type="button" data-view-btn="tunnels">地下（共用）</button>}
+        {bgHidden && <button type="button" data-view-btn="hidden">地下トンネル（3人専用）</button>}
       </div>
       <div class="fm-layers">
         {layers.map((l) => (
@@ -100,41 +143,75 @@ const LANDMARK_LABEL: Record<string, string> = {
     </div>
 
     <div class="fm-stage" data-hide={layers.filter((l) => !l.on).map((l) => l.key).join(" ")}>
-      <img class="fm-bg ground" src={bgBase} alt="マップ" loading="lazy" />
-      {bgTunnels && <img class="fm-bg tunnels" src={bgTunnels} alt="地下トンネルのマップ" loading="lazy" />}
+      <div class="fm-zoom" aria-label="地図の拡大縮小">
+        <button type="button" data-zoom="in" aria-label="拡大">＋</button>
+        <button type="button" data-zoom="out" aria-label="縮小">−</button>
+        <button type="button" data-zoom="reset" aria-label="全体を表示">⤢</button>
+      </div>
+      <div class="fm-world">
+        <img class="fm-bg ground" src={bgBase} alt="マップ" loading="lazy" draggable="false" />
+        {bgTunnels && <img class="fm-bg tunnels" src={bgTunnels} alt="共用地下のマップ" loading="lazy" draggable="false" />}
+        {bgHidden && <img class="fm-bg hiddentn" src={bgHidden} alt="地下トンネル（3人専用）の範囲" loading="lazy" draggable="false" />}
 
-      {map.breakables.map((b) => (
-        <span
-          class:list={["mk", `mk-${b.kind}`, isTunnel(b) ? "tunnelonly" : b.underground ? "under" : "above"]}
-          data-layer={isTunnel(b) ? "tunnel" : b.kind}
-          style={pos(b)}
-          title={`${isTunnel(b) ? "地下トンネル（3人専用）の" : ""}${b.kind === "crate" ? "箱（ソウル）" : "黄金像"}：${groupTime(b.group)}`}
-        />
-      ))}
-      {map.camps.map((c) => (
-        <span
-          class:list={["mk", "mk-camp", `camp-${c.type}`, c.underground ? "under" : "above"]}
-          data-layer={c.type}
-          style={pos(c)}
-          title={`${camps[c.type]?.label ?? c.type}：${clock((camps[c.type]?.initialSpawnMinutes ?? 0) * 60)}〜、${duration((camps[c.type]?.respawnMinutes ?? 0) * 60)}ごと`}
-        >
-          {camps[c.type]?.icon && <img src={`${base}/${camps[c.type]!.icon}`} alt="" />}
-        </span>
-      ))}
-      {map.landmarks.map((l) => (
-        <span
-          class:list={["mk", "mk-lm", `lm-${l.kind}`, l.kind === "midboss" ? "both" : l.underground ? "under" : "above", TEAM(l.y)]}
-          data-layer="landmark"
-          style={pos(l)}
-          title={LANDMARK_LABEL[l.kind] ?? l.kind}
-        >
-          {l.kind === "midboss" && camps.midboss?.icon && <img src={`${base}/${camps.midboss.icon}`} alt="" />}
-        </span>
-      ))}
+        {laneLines.length > 0 && (
+          <svg class="fm-lanes" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
+            {laneLines.map((l) => <polyline points={l.points} stroke={l.color} />)}
+          </svg>
+        )}
+
+        {structures.map((l) => (
+          <span
+            class:list={["mk", "st", `st-${l.kind}`]}
+            style={`${pos(l)};--c:${structureColor(l)}`}
+            title={`${l.team === "sapphire" ? "敵の" : "味方の"}${STRUCTURE_LABEL[l.kind] ?? l.kind}`}
+          />
+        ))}
+
+        {map.breakables.map((b) => (
+          <span
+            class:list={["mk", `mk-${b.kind}`, isTunnel(b) ? "tunnelonly" : b.underground ? "under" : "above"]}
+            data-layer={isTunnel(b) ? "tunnel" : b.kind}
+            style={pos(b)}
+            title={`${isTunnel(b) ? "地下トンネル（3人専用）の" : ""}${b.kind === "crate" ? "箱（ソウル）" : "黄金像"}：${groupTime(b.group)}`}
+          />
+        ))}
+        {(map.tunnelEntrances ?? []).map((e) => (
+          <span
+            class:list={["mk", "ent", `ent-${e.from}`, "above"]}
+            data-layer="tunnel"
+            style={pos(e)}
+            title={e.from === "midboss" ? "地下トンネルの入口（ミッド・ボスの部屋から）" : "地下トンネルの入口（地上から）"}
+          />
+        ))}
+        {map.camps.map((c) => (
+          <span
+            class:list={["mk", "mk-camp", `camp-${c.type}`, c.underground ? "under" : "above"]}
+            data-layer={c.type}
+            style={pos(c)}
+            title={`${camps[c.type]?.label ?? c.type}（${c.units}体）：${clock((camps[c.type]?.initialSpawnMinutes ?? 0) * 60)}〜、${duration((camps[c.type]?.respawnMinutes ?? 0) * 60)}ごと`}
+          >
+            {camps[c.type]?.icon && <img src={`${base}/${camps[c.type]!.icon}`} alt="" draggable="false" />}
+          </span>
+        ))}
+        {markers.map((l) => (
+          <span
+            class:list={["mk", "mk-lm", `lm-${l.kind}`, l.kind === "midboss" ? "both" : l.underground ? "under" : "above"]}
+            data-layer="marker"
+            style={pos(l)}
+            title={MARKER_LABEL[l.kind] ?? l.kind}
+          >
+            {l.kind === "midboss" && camps.midboss?.icon && <img src={`${base}/${camps.midboss.icon}`} alt="" draggable="false" />}
+          </span>
+        ))}
+      </div>
     </div>
+    <p class="fm-info" aria-live="polite"></p>
     <p class="fm-note">
-      点にカーソルを合わせる（スマホは長押し）と、名前と出現時刻が出ます。
-      箱は壊すと一定の確率でソウル、黄金像はパワーアップを落とします。
+      ホイール（スマホは2本指）で拡大、ドラッグで移動できます。点にカーソルを合わせるかタップすると、名前と出現時刻が出ます。
+      自チームを南（下）側として、中央から先の敵陣のレーンと建造物を赤で表しています。
+      紫の点は地下トンネル（3人専用）の箱で、ミニマップの絵には描かれていない場所です。
+      「地下トンネル（3人専用）」の紫の範囲は、地形の当たり判定とトンネルの箱の位置から推定したもので、形はおおよそです。
+      白縁の丸は地上からの入口、金縁の丸はミッド・ボスの部屋からの入口です（小さい姿でだけ通れる壁の位置）。
     </p>
   </div>
 )}
@@ -152,13 +229,104 @@ const LANDMARK_LABEL: Record<string, string> = {
           apply();
         });
       }
+
+      // ---- 拡大縮小・移動(ホイール / ドラッグ / 2本指) ----
+      // 地図の要素そのものの幅・高さを変える。点は % で置いてあるので、大きさを保ったまま位置だけ広がる
+      const world = stage.querySelector(".fm-world");
+      const info = root.querySelector(".fm-info");
+      const MAX = 6;
+      let scale = 1, tx = 0, ty = 0;
+      const size = () => stage.clientWidth;
+      const render = () => {
+        const w = size();
+        tx = Math.min(0, Math.max(w - w * scale, tx));
+        ty = Math.min(0, Math.max(w - w * scale, ty));
+        world.style.left = `${tx}px`;
+        world.style.top = `${ty}px`;
+        world.style.width = world.style.height = `${w * scale}px`;
+        stage.classList.toggle("zoomed", scale > 1.01);
+      };
+      // (px, py) = ステージ内の座標を中心に factor 倍する
+      const zoomAt = (px, py, factor) => {
+        const next = Math.min(MAX, Math.max(1, scale * factor));
+        const k = next / scale;
+        tx = px - (px - tx) * k;
+        ty = py - (py - ty) * k;
+        scale = next;
+        render();
+      };
+      const local = (e) => {
+        const r = stage.getBoundingClientRect();
+        return [e.clientX - r.left, e.clientY - r.top];
+      };
+      stage.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        const [x, y] = local(e);
+        zoomAt(x, y, Math.exp(-e.deltaY * 0.0015));
+      }, { passive: false });
+
+      const pointers = new Map();
+      let pinch = null;
+      let moved = 0;
+      stage.addEventListener("pointerdown", (e) => {
+        if (e.target.closest(".fm-zoom")) return;
+        stage.setPointerCapture(e.pointerId);
+        pointers.set(e.pointerId, local(e));
+        moved = 0;
+        if (pointers.size === 2) {
+          const [a, b] = [...pointers.values()];
+          pinch = { dist: Math.hypot(a[0] - b[0], a[1] - b[1]) };
+        }
+      });
+      stage.addEventListener("pointermove", (e) => {
+        if (!pointers.has(e.pointerId)) return;
+        const prev = pointers.get(e.pointerId);
+        const cur = local(e);
+        pointers.set(e.pointerId, cur);
+        if (pointers.size === 2 && pinch) {
+          const [a, b] = [...pointers.values()];
+          const dist = Math.hypot(a[0] - b[0], a[1] - b[1]);
+          zoomAt((a[0] + b[0]) / 2, (a[1] + b[1]) / 2, dist / pinch.dist);
+          pinch.dist = dist;
+          moved += 10;
+        } else if (pointers.size === 1) {
+          tx += cur[0] - prev[0];
+          ty += cur[1] - prev[1];
+          moved += Math.abs(cur[0] - prev[0]) + Math.abs(cur[1] - prev[1]);
+          render();
+        }
+      });
+      const end = (e) => {
+        pointers.delete(e.pointerId);
+        if (pointers.size < 2) pinch = null;
+      };
+      stage.addEventListener("pointerup", (e) => {
+        // ほとんど動かさずに離したらタップとみなし、点の情報を出す
+        if (moved < 6 && pointers.size === 1) {
+          const mk = document.elementFromPoint(e.clientX, e.clientY)?.closest(".mk");
+          info.textContent = mk ? mk.getAttribute("title") : "";
+        }
+        end(e);
+      });
+      stage.addEventListener("pointercancel", end);
+      for (const b of root.querySelectorAll("[data-zoom]")) {
+        b.addEventListener("click", () => {
+          const c = size() / 2;
+          if (b.dataset.zoom === "in") zoomAt(c, c, 1.6);
+          else if (b.dataset.zoom === "out") zoomAt(c, c, 1 / 1.6);
+          else { scale = 1; tx = 0; ty = 0; render(); }
+        });
+      }
+      window.addEventListener("resize", render);
+      render();
+
       for (const btn of root.querySelectorAll("[data-view-btn]")) {
         btn.addEventListener("click", () => {
           root.dataset.view = btn.dataset.viewBtn;
           for (const b of root.querySelectorAll("[data-view-btn]")) b.classList.toggle("on", b === btn);
           // 地下に切り替えたら箱を表示する(地下で見たいのはほぼ箱なので)
-          if (btn.dataset.viewBtn === "tunnels") {
-            for (const k of ["crate", "statue"]) {
+          if (btn.dataset.viewBtn !== "ground") {
+            for (const k of btn.dataset.viewBtn === "hidden" ? ["tunnel"] : ["crate", "statue"]) {
               hidden.delete(k);
               const cb = root.querySelector(`input[data-layer="${k}"]`);
               if (cb) cb.checked = true;
@@ -197,17 +365,39 @@ const LANDMARK_LABEL: Record<string, string> = {
   .lay-crate .sw { background: var(--c-soul); }
   .lay-statue .sw { background: #e8b93a; border-radius: 2px; transform: rotate(45deg); }
   .lay-tunnel .sw { background: var(--c-spirit); }
-  .lay-landmark .sw { background: none; border: 2px solid var(--c-text-muted); border-radius: 2px; }
+  .lay-marker .sw { background: none; border: 2px solid var(--c-accent); }
 
-  .fm-stage { position: relative; width: 100%; max-width: 680px; aspect-ratio: 1; margin: 0 auto; border-radius: var(--radius); overflow: hidden; background: #000; }
-  /* ゲームのミニマップは暗いので、点が埋もれないよう少し明るくする */
-  .fm-bg { position: absolute; inset: 0; width: 100%; height: 100%; filter: brightness(1.7) contrast(1.05); }
-  .fm-bg.tunnels { filter: none; }
+  /* 円の外は透明(地図の画像自体が円で、外側は透過している) */
+  .fm-stage {
+    position: relative; width: 100%; max-width: 720px; aspect-ratio: 1; margin: 0 auto;
+    overflow: hidden; touch-action: none; cursor: grab; user-select: none;
+  }
+  .fm-stage.zoomed { border-radius: var(--radius); outline: 1px solid var(--c-border); }
+  .fm-stage:active { cursor: grabbing; }
+  .fm-world { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+  .fm-bg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
   .fm-bg.tunnels { display: none; }
   [data-view="tunnels"] .fm-bg.ground { display: none; }
   [data-view="tunnels"] .fm-bg.tunnels { display: block; }
+  /* 専用トンネル: 地上の絵を暗くして、推定したトンネルの範囲(紫)と、そこにある箱だけを出す */
+  .fm-bg.hiddentn { display: none; }
+  [data-view="hidden"] .fm-bg.hiddentn { display: block; }
+  [data-view="hidden"] .fm-bg.ground { filter: brightness(0.55); }
+  [data-view="hidden"] .fm-lanes, [data-view="hidden"] .st { opacity: 0.35; }
+  [data-view="hidden"] .mk:not(.tunnelonly):not(.st):not(.ent) { display: none; }
+  [data-view="hidden"] .mk.ent { display: block; }
+  .fm-lanes { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .fm-lanes polyline { fill: none; stroke-width: 4; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+  [data-view="tunnels"] .fm-lanes, [data-view="tunnels"] .st { opacity: 0.25; }
 
-  .mk { position: absolute; transform: translate(-50%, -50%); line-height: 0; }
+  .fm-zoom { position: absolute; right: 8px; top: 8px; z-index: 2; display: flex; flex-direction: column; gap: 4px; }
+  .fm-zoom button {
+    width: 32px; height: 32px; font: inherit; font-size: 16px; line-height: 1; cursor: pointer;
+    background: rgb(12 17 22 / 0.85); color: var(--c-text-strong); border: 1px solid var(--c-border-strong); border-radius: var(--radius);
+  }
+  .fm-zoom button:hover { border-color: var(--c-accent); color: var(--c-accent); }
+
+  .mk { position: absolute; transform: translate(-50%, -50%); line-height: 0; cursor: pointer; }
   /* 地上表示では地下の点を、地下表示では地上の点を隠す(ミッド・ボスは両方に出す) */
   [data-view="ground"] .mk.under { display: none; }
   [data-view="tunnels"] .mk.above { display: none; }
@@ -217,25 +407,32 @@ const LANDMARK_LABEL: Record<string, string> = {
   .fm-stage[data-hide~="vaults"] [data-layer="vaults"],
   .fm-stage[data-hide~="crate"] [data-layer="crate"],
   .fm-stage[data-hide~="statue"] [data-layer="statue"],
-  .fm-stage[data-hide~="landmark"] [data-layer="landmark"],
+  .fm-stage[data-hide~="marker"] [data-layer="marker"],
   .fm-stage[data-hide~="tunnel"] [data-layer="tunnel"] { display: none; }
+
+  /* 建造物: ゲームのミニマップと同じ菱形。色は --c(自陣=レーン色 / 敵陣=赤) */
+  .st { width: 14px; height: 14px; background: var(--c); transform: translate(-50%, -50%) rotate(45deg); box-shadow: 0 0 0 1.5px rgb(0 0 0 / 0.7); }
+  .st-patron { width: 26px; height: 26px; }
+  .st-walker { width: 22px; height: 22px; background: rgb(20 22 21); border: 4px solid var(--c); box-sizing: border-box; }
+  .st-guardian { width: 15px; height: 15px; }
+  .st-baseGuardian { width: 11px; height: 11px; background: rgb(20 22 21); border: 3px solid var(--c); box-sizing: border-box; }
+  .st-shrine { width: 10px; height: 10px; }
 
   .mk-crate { width: 5px; height: 5px; border-radius: 50%; background: var(--c-soul); box-shadow: 0 0 0 1px rgb(0 0 0 / 0.6); }
   /* 3人専用トンネルの箱は、ミニマップのどちらの絵にも描かれていないので両方の表示に出す */
   .mk.tunnelonly { background: var(--c-spirit) !important; }
   .mk-crate.tunnelonly { width: 6px; height: 6px; }
+  /* 地下トンネルの入口(小さい姿でだけ通れる壁)。ミッド・ボスの部屋からの入口は縁を金色に */
+  .ent { width: 12px; height: 12px; border-radius: 50%; background: var(--c-spirit); border: 2px solid #fff; box-shadow: 0 0 0 1.5px rgb(0 0 0 / 0.7); }
+  .ent-midboss { border-color: #f2c14e; }
   .mk-statue { width: 6px; height: 6px; background: #e8b93a; transform: translate(-50%, -50%) rotate(45deg); box-shadow: 0 0 0 1px rgb(0 0 0 / 0.6); }
   .mk-camp img { width: 20px; height: 20px; filter: drop-shadow(0 0 2px #000) drop-shadow(0 0 1px #000); }
   .camp-strong img { width: 24px; height: 24px; }
   .camp-vaults img { width: 22px; height: 22px; }
-  .mk-lm { width: 10px; height: 10px; border: 2px solid; background: rgb(0 0 0 / 0.5); transform: translate(-50%, -50%) rotate(45deg); }
-  .mk-lm.amber { border-color: #e0a458; }
-  .mk-lm.sapphire { border-color: #6aa6f0; }
-  .lm-patron { width: 18px; height: 18px; }
-  .lm-baseGuardian { width: 7px; height: 7px; }
-  .lm-powerup, .lm-rift, .lm-urnReturn { border-color: var(--c-spirit) !important; border-radius: 50%; transform: translate(-50%, -50%); }
-  .lm-midboss { border: none; background: none; transform: translate(-50%, -50%); }
-  .lm-midboss img { width: 22px; height: 22px; }
+  .mk-lm { width: 11px; height: 11px; border: 2px solid var(--c-accent); border-radius: 50%; background: rgb(0 0 0 / 0.5); }
+  .lm-midboss { border: none; background: none; }
+  .lm-midboss img { width: 24px; height: 24px; }
 
+  .fm-info { min-height: 1.6em; margin: 6px 0 0; font-size: 12.5px; color: var(--c-text-strong); text-align: center; }
   .fm-note { font-size: 11.5px; color: var(--c-text-faint); margin: 6px 0 0; }
 </style>

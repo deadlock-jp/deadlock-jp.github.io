@@ -38,15 +38,9 @@ function cv(name: string): number | null {
 
 const round = (n: number): number => Math.round(n);
 
-/**
- * 地下トンネル(レム・モー＆クリル・キャリコだけが入れる)の箱が属する出現グループ。
- * ゲームデータは出現グループに名前を持たないので、公式ノートで対応を確かめている:
- * 2026-09-16 のノート「Breakables in the underground tunnels initial spawn time increased
- * from 3m to 5m / respawn rate increased from 3m to 5m」と、economy.json の
- * breakableSpawnTimes[1](初回300秒・再出現300秒)が一致する。配置もこのグループだけが
- * 地面より深い場所に集まっている(map.json)。
- */
-export const TUNNEL_BREAKABLE_GROUP = 1;
+// 地下トンネルの箱の出現グループ(根拠は src/parsers/map.ts)
+export { TUNNEL_BREAKABLE_GROUP } from "../parsers/map.ts";
+import { TUNNEL_BREAKABLE_GROUP } from "../parsers/map.ts";
 
 /** 4回目のアビリティ解放(=アルティメット)が来るレベルと、そこまでに稼ぐソウル */
 function ultimateUnlock(): { level: number; earnedGold: number } | null {
@@ -76,6 +70,8 @@ export interface MatchFlow {
   convarVersion: string | null;
   startingGold: number | null;
   firstKillBonus: number | null;
+  /** ヒーローキル報酬の最低額(convar。実際の額は時間などで増える) */
+  heroKillMin: number | null;
   trooper: {
     gold: number;
     goldPerMinute: number;
@@ -92,13 +88,17 @@ export interface MatchFlow {
   /** キルに絡んだ人数ごとの分配率(添字0が1人) */
   trooperShare: number[];
   deny: { denierPct: number; deniedPct: number } | null;
-  /** 2人レーンで最初のウェーブから入るソウル(ディナイなし / オーブを全部ディナイされた場合) */
+  /** 2人レーンで最初のウェーブから入るソウル */
   firstWave: {
     shareDuo: number;
+    /** ディナイされなかった場合に入る額 */
     full: number;
-    allDenied: number;
+    /** オーブ1つをディナイされると失う額 */
+    perOrb: number;
     afterFull: number;
-    afterAllDenied: number;
+    afterOneDeny: number;
+    /** ティア1アイテムに届かなくなるディナイ回数(0 = ディナイが無くても届かない) */
+    deniesToMiss: number;
   } | null;
   tier1Price: number;
   /** レーン中の買い物の節目(ティア1アイテムの価格の倍数) */
@@ -169,8 +169,18 @@ export function matchFlow(): MatchFlow {
   if (trooper && startingGold !== null && trooperShare[1] !== undefined) {
     const shareDuo = trooperShare[1];
     const full = round(trooper.squadSize * trooper.gold * shareDuo);
-    const allDenied = round(trooper.squadSize * trooper.gold * trooper.instantRatio * shareDuo);
-    firstWave = { shareDuo, full, allDenied, afterFull: startingGold + full, afterAllDenied: startingGold + allDenied };
+    // オーブ1つ(=トルーパー1体の浮き上がる分)をディナイされると失う額
+    const perOrb = round(trooper.gold * (1 - trooper.instantRatio) * shareDuo);
+    // 最初のウェーブ後にティア1アイテムに届かなくなるディナイ回数
+    const deniesToMiss = full + startingGold >= tier1Price ? Math.floor((startingGold + full - tier1Price) / perOrb) + 1 : 0;
+    firstWave = {
+      shareDuo,
+      full,
+      perOrb,
+      afterFull: startingGold + full,
+      afterOneDeny: startingGold + full - perOrb,
+      deniesToMiss,
+    };
   }
 
   const ult = ultimateUnlock();
@@ -188,6 +198,7 @@ export function matchFlow(): MatchFlow {
     convarVersion: convarsFile?.sourceVersion ?? null,
     startingGold,
     firstKillBonus: cv("citadel_player_gold_reward_first_kill_bonus"),
+    heroKillMin: cv("citadel_player_gold_reward_min"),
     trooper,
     trooperShare,
     deny,

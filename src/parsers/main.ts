@@ -26,6 +26,9 @@ import { parseEconomy } from "./economy.ts";
 import { parseLocalization } from "./localization.ts";
 import { parseConvars } from "./convars.ts";
 import { parseMap } from "./map.ts";
+import { renderGroundMinimap } from "./minimapImage.ts";
+import { renderHiddenTunnels } from "./hiddenTunnels.ts";
+import { TUNNEL_BREAKABLE_GROUP } from "./map.ts";
 import type { MapImage } from "../types/map.ts";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -182,13 +185,16 @@ function writeMap(snapDir: string, localRoot: string): void {
     map: string;
     entities: string;
     images: Record<string, { vpkPath: string; png: string }>;
+    physics?: string | null;
   };
   const copyImage = (key: "base" | "tunnels", suffix: string): MapImage | null => {
     const src = info.images[key];
     if (!src || !existsSync(src.png)) return null;
     const outPath = `public/images/minimap/${info.map}${suffix}.png`;
     mkdirSync(join(REPO_ROOT, "public/images/minimap"), { recursive: true });
-    copyFileSync(src.png, join(REPO_ROOT, outPath));
+    // 地上の絵は、地面が灰色に見えるよう描き直す(src/parsers/minimapImage.ts)。地下はそのまま
+    if (key === "base") renderGroundMinimap(src.png, join(REPO_ROOT, outPath));
+    else copyFileSync(src.png, join(REPO_ROOT, outPath));
     console.log(`  ${outPath}`);
     return { vpkPath: src.vpkPath, outPath };
   };
@@ -196,6 +202,21 @@ function writeMap(snapDir: string, localRoot: string): void {
     base: copyImage("base", ""),
     tunnels: copyImage("tunnels", "_tunnels"),
   }, info.images.tunnels?.png && existsSync(info.images.tunnels.png) ? info.images.tunnels.png : null);
+  // 専用トンネル(ミニマップに描かれていない地下)を地形の当たり判定から推定する
+  if (info.physics && existsSync(info.physics) && info.images.base) {
+    const outPath = `public/images/minimap/${info.map}_hidden_tunnels.png`;
+    const r = renderHiddenTunnels({
+      glbPath: info.physics,
+      map,
+      basePngPath: info.images.base.png,
+      tunnelsPngPath: info.images.tunnels?.png ?? null,
+      seedGroup: TUNNEL_BREAKABLE_GROUP,
+      outPath: join(REPO_ROOT, outPath),
+    });
+    map.images.hiddenTunnels = { vpkPath: `maps/${info.map}/world_physics.vmdl_c`, outPath };
+    map.tunnelEntrances = r.entrances;
+    console.log(`  ${outPath}(専用トンネル ${r.cells} マス。トンネルの箱 ${r.seedsInside}/${r.seeds} が範囲内。入口 地上 ${r.entrances.filter((e) => e.from === "street").length} / ミッド・ボス ${r.entrances.filter((e) => e.from === "midboss").length})`);
+  }
   writeJsonTo(snapDir, "map.json", map);
   console.log(
     `マップ ${map.map}: キャンプ ${map.camps.length} / 箱・黄金像 ${map.breakables.length}` +

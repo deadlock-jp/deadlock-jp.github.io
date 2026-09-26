@@ -2,34 +2,32 @@
 /**
  * 攻略情報のハブページ。
  * 「試合の流れ」(旧ゲームシステム・ソウル獲得システム・戦略・オブジェクトを統合)と
- * 「キャラクターコントロール」の2ページへの入口。文字だけのリンクだと中身が分からず
- * 押されないので、各ページの見せ場(マップ・章立て・実演動画)をカードに出す。
- * 章立て・動画はそれぞれのデータから引くので、ページ側を更新すればここも追従する。
+ * 「キャラクターコントロール」の2ページへの入口。
+ * 見出しで煽らず、各ページに入っている中身(章・マップ・グラフ・実演動画)を、
+ * サイトで使っているゲーム画像と一緒にそのまま並べる。タイルは各章へ直接飛ぶ。
  */
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import Base from "../../layouts/Base.astro";
 import { controlCategories } from "../../lib/controls.ts";
-import { matchFlow } from "../../lib/matchFlow.ts";
-import { souls } from "../../lib/data.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const f = matchFlow();
+const img = (p: string): string | null => (existsSync(join(process.cwd(), "public", p)) ? `${base}/${p}` : null);
+const match = `${base}/mechanics/match/`;
 
-/* 試合の流れ: 背景のミニマップと章 */
-const mapImg = existsSync(join(process.cwd(), "public/images/minimap/dl_midtown.png"))
-  ? `${base}/images/minimap/dl_midtown.png`
-  : null;
+/* 試合の流れ: 章と、その章の中身(画像はサイトで既に使っているもの) */
 const chapters = [
-  { id: "overview", label: "全体像" },
-  { id: "pregame", label: "準備フェーズ" },
-  { id: "laning", label: "レーン戦" },
-  { id: "postlane", label: "レーン後・中盤" },
-  { id: "farming", label: "ファーミング" },
-  { id: "lategame", label: "終盤" },
+  { id: "overview", title: "全体像", body: "ガーディアンからパトロンまでの破壊の順番と、それぞれの報酬", img: img("images/npcs/tier_1_boss.png") },
+  { id: "pregame", title: "準備フェーズ", body: "レーンの割り振りと、編成の偏りを直すレーン交代", img: img("images/npcs/trooper.png") },
+  { id: "laning", title: "レーン戦", body: "ウェーブのソウル、ディナイ、ラストヒットの目安、3つのシナリオのソウル推移グラフ", img: img("images/npcs/tier_2_boss.png") },
+  { id: "laning", title: "橋バフ", body: "出現時刻と4種類の効果", img: img("images/hud/icons/powerup_spirit.svg") },
+  { id: "farming", title: "ファーミング", body: "キャンプ・箱・罪人の生贄の報酬と出現時刻、地下トンネル（3人専用）", img: img("images/minimap/neutral_medium.png") },
+  { id: "lategame", title: "終盤", body: "シュライン・パトロンの攻略と、劣勢側への補正", img: img("images/npcs/patron.png") },
 ];
+const mapImg = img("images/minimap/dl_midtown.png");
+const tunnelImg = img("images/minimap/dl_midtown_hidden_tunnels.png");
 
-/* キャラクターコントロール: 実演動画つきのテクニック */
+/* キャラクターコントロール: 実演動画つきのテクニックと、全カテゴリ */
 const categories = controlCategories();
 const videos = categories.flatMap((c) =>
   c.techniques.flatMap((t) => (typeof t === "string" ? [] : [{ ...t, categoryId: c.id }])),
@@ -38,109 +36,113 @@ const videos = categories.flatMap((c) =>
 
 <Base
   title="攻略情報"
-  description="Deadlock（デッドロック）の試合の流れ（レーン戦・ファーミング・中盤・終盤）と、ダッシュやマントルなどキャラクター操作の実演動画つき解説。"
+  description="Deadlock（デッドロック）の試合の流れ（レーン戦・ファーミング・終盤）と、ダッシュやマントルなどキャラクター操作の実演動画つき解説。"
   breadcrumbs={[{ name: "攻略情報", path: `${base}/mechanics/` }]}
 >
   <h1>攻略情報</h1>
 
-  <div class="hub">
-    {/* ---------- 試合の流れ ---------- */}
-    <a class="feature panel match" href={`${base}/mechanics/match/`}>
-      {mapImg && <img class="mapbg" src={mapImg} alt="" loading="lazy" />}
-      <div class="fbody">
-        <span class="kicker">試合の流れ</span>
-        <h2>準備からパトロン破壊まで、<br />数字で追う1試合</h2>
-        <ul class="facts">
-          {f.firstWave && (
-            <li><b>{souls(f.firstWave.afterFull)}</b><span>ディナイされなければ最初のウェーブ後の所持ソウル</span></li>
-          )}
-          {f.ultimate?.totalGold && (
-            <li><b>{souls(f.ultimate.totalGold)}</b><span>アルティメットが解放される所持ソウル</span></li>
-          )}
-        </ul>
-        <ul class="chips">
-          {chapters.map((c) => <li>{c.label}</li>)}
-        </ul>
-        <p class="more">キャンプ・箱・地下トンネルのマップ、ソウル推移のグラフつき →</p>
-      </div>
-    </a>
-
-    {/* ---------- キャラクターコントロール ---------- */}
-    <section class="feature panel controls">
-      <a class="fhead" href={`${base}/mechanics/controls/`}>
-        <span class="kicker">キャラクターコントロール</span>
-        <h2>ダッシュ・マントル・パリィ。<br />動画で見る移動テクニック</h2>
-        {videos.length > 0 && <span class="badge">▶ 実演動画 {videos.length}本</span>}
-      </a>
-      {videos.length > 0 && (
-        <ul class="thumbs">
-          {videos.map((v) => (
-            <li>
-              <a href={`${base}/mechanics/controls/#${v.categoryId}`}>
-                <span class="thumb">
-                  <img src={`https://i.ytimg.com/vi/${v.videoId}/oardefault.jpg`} alt="" loading="lazy" />
-                  <span class="play" aria-hidden="true">▶</span>
-                </span>
-                <span class="tname">{v.title}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
+  {/* ---------- 試合の流れ ---------- */}
+  <section class="panel hubsec">
+    <h2><a href={match}>試合の流れ</a></h2>
+    <div class="matchgrid">
+      {mapImg && (
+        <a class="mapcard" href={`${match}#farming`}>
+          <span class="mapimg">
+            <img src={mapImg} alt="" loading="lazy" />
+            {tunnelImg && <img class="tn" src={tunnelImg} alt="" loading="lazy" />}
+          </span>
+          <span class="tt">マップ</span>
+          <span class="tb">キャンプ・箱・黄金像の位置、地下トンネル（3人専用）の範囲と入口。拡大・移動できます。</span>
+        </a>
       )}
-      <a class="more" href={`${base}/mechanics/controls/`}>
-        {categories.map((c) => c.title.replace(/（.*?）/g, "")).slice(0, 4).join("・")} ほか{categories.length}項目 ／ ヒーロー別の移動数値 →
-      </a>
-    </section>
-  </div>
+      <ul class="tiles">
+        {chapters.map((c) => (
+          <li>
+            <a href={`${match}#${c.id}`}>
+              <span class="ti">{c.img && <img src={c.img} alt="" loading="lazy" />}</span>
+              <span class="tx">
+                <span class="tt">{c.title}</span>
+                <span class="tb">{c.body}</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  {/* ---------- キャラクターコントロール ---------- */}
+  <section class="panel hubsec">
+    <h2><a href={`${base}/mechanics/controls/`}>キャラクターコントロール</a></h2>
+    {videos.length > 0 && (
+      <ul class="thumbs">
+        {videos.map((v) => (
+          <li>
+            <a href={`${base}/mechanics/controls/#${v.categoryId}`}>
+              <span class="thumb">
+                <img src={`https://i.ytimg.com/vi/${v.videoId}/oardefault.jpg`} alt="" loading="lazy" />
+                <span class="play" aria-hidden="true">▶</span>
+              </span>
+              <span class="tt">{v.title}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+    <ul class="cats">
+      {categories.map((c) => (
+        <li><a href={`${base}/mechanics/controls/#${c.id}`}>{c.title}</a></li>
+      ))}
+      <li><a href={`${base}/mechanics/controls/`}>ヒーロー別の移動数値</a></li>
+    </ul>
+  </section>
 
   <style>
-    .hub { margin-top: var(--sp-5); display: grid; gap: var(--sp-5); }
-    .feature { position: relative; overflow: hidden; display: block; color: inherit; text-decoration: none; }
-    .feature:hover { text-decoration: none; }
-    .kicker { font-size: 11px; letter-spacing: 0.1em; color: var(--c-accent); }
-    .feature h2 { margin: 4px 0 var(--sp-3); font-size: 22px; line-height: 1.45; color: var(--c-text-strong); border: none; padding: 0; }
-    .more { display: inline-block; margin: var(--sp-3) 0 0; font-size: 12.5px; color: var(--c-accent); }
+    .hubsec { margin-top: var(--sp-5); }
+    .hubsec h2 { margin: 0 0 var(--sp-4); font-size: 18px; }
+    .hubsec h2 a { color: var(--c-text-strong); }
+    .hubsec h2 a:hover { color: var(--c-accent); text-decoration: none; }
+    .tt { display: block; font-size: 14px; font-weight: 600; color: var(--c-text-strong); }
+    .tb { display: block; margin-top: 2px; font-size: 12.5px; line-height: 1.6; color: var(--c-text-muted); }
 
-    /* 試合の流れ: 右側にミニマップを大きく敷く */
-    .match { min-height: 300px; transition: border-color 0.15s; }
-    .match:hover { border-color: var(--c-accent-dim); }
-    .mapbg {
-      position: absolute; right: -40px; top: 50%; transform: translateY(-50%);
-      width: 420px; height: 420px; opacity: 0.55; filter: brightness(1.8);
-      mask-image: radial-gradient(circle at 60% 50%, #000 45%, transparent 72%);
-      -webkit-mask-image: radial-gradient(circle at 60% 50%, #000 45%, transparent 72%);
-      pointer-events: none;
+    /* 試合の流れ: 左にマップ、右に章のタイル */
+    .matchgrid { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: var(--sp-4); align-items: start; }
+    .mapcard { display: block; color: inherit; }
+    .mapcard:hover { text-decoration: none; }
+    .mapimg { position: relative; display: block; aspect-ratio: 1; margin-bottom: var(--sp-2); }
+    .mapimg img { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .mapcard:hover .tt { color: var(--c-accent); }
+    .tiles { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--sp-2); }
+    .tiles a {
+      display: flex; gap: var(--sp-3); align-items: center; height: 100%; padding: var(--sp-2) var(--sp-3);
+      background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); color: inherit;
     }
-    .fbody { position: relative; max-width: 480px; }
-    .facts { list-style: none; padding: 0; margin: 0 0 var(--sp-3); display: flex; flex-wrap: wrap; gap: var(--sp-3) var(--sp-5); }
-    .facts li { display: flex; flex-direction: column; }
-    .facts b { font-family: var(--font-mono); font-size: 26px; font-weight: 600; color: var(--c-soul); line-height: 1.1; }
-    .facts span { font-size: 11.5px; color: var(--c-text-muted); max-width: 16em; }
-    .chips { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
-    .chips li { font-size: 12px; padding: 3px 10px; border: 1px solid var(--c-border-strong); border-radius: 999px; background: var(--c-surface); color: var(--c-text); }
+    .tiles a:hover { border-color: var(--c-accent-dim); text-decoration: none; }
+    .tiles a:hover .tt { color: var(--c-accent); }
+    .ti { flex: 0 0 48px; height: 48px; display: grid; place-items: center; }
+    .ti img { max-width: 48px; max-height: 48px; object-fit: contain; }
 
-    /* キャラクターコントロール: 縦長サムネイルを並べる */
-    .fhead { display: block; color: inherit; }
-    .fhead:hover { text-decoration: none; }
-    .fhead:hover h2 { color: var(--c-accent); }
-    .badge { display: inline-block; font-size: 12px; padding: 3px 10px; border-radius: var(--radius); background: var(--c-accent-bg); color: var(--c-accent); }
-    .thumbs { list-style: none; padding: 0; margin: var(--sp-4) 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: var(--sp-3); }
-    .thumbs a { display: flex; flex-direction: column; gap: 6px; color: var(--c-text); }
+    /* キャラクターコントロール: 縦長サムネイルとカテゴリ */
+    .thumbs { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: var(--sp-3); }
+    .thumbs a { display: flex; flex-direction: column; gap: 6px; color: inherit; }
     .thumbs a:hover { text-decoration: none; }
-    .thumb { position: relative; display: block; aspect-ratio: 9 / 16; border-radius: var(--radius); overflow: hidden; background: #000; border: 1px solid var(--c-border); transition: border-color 0.15s; }
-    /* Shorts の縦長サムネイル(oardefault)。比率がずれても枠いっぱいに収める */
+    .thumbs a:hover .tt { color: var(--c-accent); }
+    .thumb { position: relative; display: block; aspect-ratio: 9 / 16; border-radius: var(--radius); overflow: hidden; background: #000; border: 1px solid var(--c-border); }
     .thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .thumbs a:hover .thumb { border-color: var(--c-accent); }
     .play {
       position: absolute; inset: 0; margin: auto; width: 40px; height: 40px; border-radius: 50%;
       display: grid; place-items: center; font-size: 15px; padding-left: 3px;
       background: rgb(0 0 0 / 0.55); color: #fff; border: 1px solid rgb(255 255 255 / 0.4);
     }
-    .thumbs a:hover .thumb { border-color: var(--c-accent); }
-    .tname { font-size: 12.5px; line-height: 1.4; }
+    .thumbs .tt { font-size: 12.5px; font-weight: 500; }
+    .cats { list-style: none; padding: 0; margin: var(--sp-4) 0 0; display: flex; flex-wrap: wrap; gap: 6px; }
+    .cats a { display: inline-block; font-size: 12.5px; padding: 4px 12px; border: 1px solid var(--c-border); border-radius: 999px; background: var(--c-surface); color: var(--c-text); }
+    .cats a:hover { border-color: var(--c-accent-dim); color: var(--c-accent); text-decoration: none; }
 
-    @media (max-width: 640px) {
-      .mapbg { width: 300px; height: 300px; right: -90px; opacity: 0.35; }
-      .feature h2 { font-size: 19px; }
+    @media (max-width: 720px) {
+      .matchgrid { grid-template-columns: 1fr; }
+      .mapcard { max-width: 360px; }
       .thumbs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
   </style>

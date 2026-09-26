@@ -125,6 +125,17 @@ function main() {
         log(`[extract-local] 地下トンネルのミニマップ(${tunnels}) は見つかりませんでした`);
       }
     }
+    // 地形の当たり判定(床の高さ)。ミニマップに描かれていない地下トンネル(潜れるヒーロー専用)を
+    // 割り出すのに使う(src/parsers/hiddenTunnels.ts)。glb で数百MBになるが、抽出ルートにだけ置く
+    let physics = null;
+    try {
+      run(["-i", mapVpk, "-o", mapOut, "--vpk_filepath", `maps/${mapName}/world_physics.vmdl_c`, "-d", "--gltf_export_format", "glb"]);
+      const glb = join(mapOut, "maps", mapName, "world_physics_physics.glb");
+      if (existsSync(glb)) physics = glb;
+    } catch {
+      log(`[extract-local] 地形の当たり判定(world_physics)を書き出せませんでした`);
+    }
+
     for (const [k, v] of Object.entries(images)) {
       if (!existsSync(v.png)) {
         log(`[extract-local] 警告: ミニマップ画像(${k})の出力が見つかりません: ${v.png}`);
@@ -134,7 +145,7 @@ function main() {
     writeFileSync(
       join(mapOut, "_map.json"),
       JSON.stringify(
-        { map: mapName, entities: join(mapOut, "maps", mapName, "entities", "default_ents.vents"), images },
+        { map: mapName, entities: join(mapOut, "maps", mapName, "entities", "default_ents.vents"), images, physics },
         null,
         2,
       ) + "\n",

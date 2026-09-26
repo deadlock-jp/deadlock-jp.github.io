@@ -21,6 +21,7 @@ export const CONVAR_KEYS = [
   // 初期所持・キル
   "citadel_player_starting_gold",
   "citadel_player_gold_reward_first_kill_bonus",
+  "citadel_player_gold_reward_min",
   // レーンのトルーパー
   "citadel_trooper_gold_reward",
   "citadel_trooper_gold_reward_bonus_per_minute",
