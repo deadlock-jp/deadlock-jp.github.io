@@ -262,10 +262,19 @@ const categories = controlCategories();
       .techsplit.split {
         flex-direction: column;
       }
+      /* スマホこそ縦動画が映えるので、画面幅いっぱい近くまで大きくする。
+         複数本あるときは横スワイプで送る */
       .techvideos {
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-self: center;
+        align-self: stretch;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        justify-content: safe center;
+        padding-bottom: var(--sp-2);
+      }
+      .techvideo {
+        flex: 0 0 min(78vw, 360px);
+        width: min(78vw, 360px);
+        scroll-snap-align: center;
       }
     }
 

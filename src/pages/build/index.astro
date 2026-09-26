@@ -1551,7 +1551,8 @@ const payload = {
 
     /* ---- 左: TYPE別ボックス ---- */
     .box {
-      background: var(--cat-bg);
+      /* --cat-bg は半透明の色味だけなので、不透明の --c-surface に重ねて背景キャンバスを透かさない */
+      background: linear-gradient(var(--cat-bg), var(--cat-bg)), var(--c-surface);
       border: 1px solid var(--cat);
       border-radius: var(--radius-lg);
       padding: var(--sp-3) var(--sp-4) var(--sp-4);
