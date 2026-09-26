@@ -51,7 +51,7 @@ const details = Object.fromEntries(allForHover.map((i) => [i.id, itemHoverData(i
                     const iname = t(i.nameToken, i.id);
                     const idesc = describe(i.descToken, i.properties);
                     return (
-                      <li data-id={i.id} data-find={`${iname} ${idesc} ${i.id}`.toLowerCase()}>
+                      <li data-id={i.id} data-find={`${iname} ${idesc} ${i.id}`}>
                         <a href={`${base}/items/${i.id}/`} data-itemcard={i.id}>
                           <ItemIcon
                             name={iname}
@@ -63,7 +63,7 @@ const details = Object.fromEntries(allForHover.map((i) => [i.id, itemHoverData(i
                             size={40}
                           />
                           <span class="body">
-                            <span class="iname">{iname}</span>
+                            <span class="iname">{iname}<span class="rel" hidden>関連</span></span>
                             <span class="idesc">{idesc}</span>
                           </span>
                         </a>
@@ -90,7 +90,7 @@ const details = Object.fromEntries(allForHover.map((i) => [i.id, itemHoverData(i
           const iname = t(i.nameToken, i.id);
           const idesc = describe(i.descToken, i.properties);
           return (
-            <li data-find={`${iname} ${idesc} ${i.id}`.toLowerCase()}>
+            <li data-find={`${iname} ${idesc} ${i.id}`}>
               <a href={`${base}/items/${i.id}/`} data-itemcard={i.id}>
                 <ItemIcon
                   name={iname}
@@ -101,7 +101,7 @@ const details = Object.fromEntries(allForHover.map((i) => [i.id, itemHoverData(i
                   isImbue={i.isImbue}
                   size={52}
                 />
-                <span class="iname">{iname}</span>
+                <span class="iname">{iname}<span class="rel" hidden>関連</span></span>
               </a>
             </li>
           );
@@ -113,25 +113,40 @@ const details = Object.fromEntries(allForHover.map((i) => [i.id, itemHoverData(i
   {/* ホバー時の詳細カード(ビルド画面・トップと共通コンポーネント) */}
   <ItemHoverCard details={details} />
 
+  <script src={`${base}/js/item-search.js`} is:inline></script>
   <script is:inline>
     // 追加ライブラリなしのクライアント側フィルタ。
-    // 各行が data-find に「名前 + 説明 + 内部ID」を小文字で持っている。
+    // 各行が data-find に「名前 + 説明 + 内部ID」を持っている。
+    // 言い換え・関連語の広げ方は public/js/item-search.js(ビルドページと共用)。
     (() => {
       const q = document.getElementById("q");
       const hits = document.getElementById("hits");
       // ショップのティア一覧と、下部のレジェンダリー枠の両方を対象にする
-      const rows = [...document.querySelectorAll(".tier li, .leggrid li")];
+      const rows = [...document.querySelectorAll(".tier li, .leggrid li")].map((li) => ({
+        li,
+        hay: window.itemSearch.prepare(li.dataset.find),
+        rel: li.querySelector(".rel"),
+      }));
       const total = rows.length;
       const legendary = document.querySelector(".legendary");
 
       function apply() {
-        const words = q.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
-        let shown = 0;
-        for (const li of rows) {
-          const hay = li.dataset.find;
-          const ok = words.every((w) => hay.includes(w));
-          li.hidden = !ok;
-          if (ok) shown++;
+        const cq = window.itemSearch.compile(q.value);
+        let direct = 0;
+        let related = 0;
+        const labels = new Set();
+        for (const { li, hay, rel } of rows) {
+          const m = cq ? window.itemSearch.match(cq, hay) : [];
+          li.hidden = m === null;
+          rel.hidden = !(m && m.length > 0);
+          if (m === null) continue;
+          if (m.length > 0) {
+            related++;
+            m.forEach((l) => labels.add(l));
+            rel.title = `関連: ${m.join("・")}`;
+          } else {
+            direct++;
+          }
         }
         // レジェンダリー枠も、中身が全部消えたら見出しごと隠す
         if (legendary) {
@@ -147,7 +162,7 @@ const details = Object.fromEntries(allForHover.map((i) => [i.id, itemHoverData(i
           // カテゴリ見出しの件数も絞り込みに合わせる
           col.querySelector(".count").textContent = String(visible.length);
         }
-        hits.textContent = words.length === 0 ? "" : `${shown} / ${total} 件`;
+        hits.textContent = cq ? window.itemSearch.summary(direct, related, labels, total) : "";
       }
 
       q.addEventListener("input", apply);
@@ -222,6 +237,12 @@ const details = Object.fromEntries(allForHover.map((i) => [i.id, itemHoverData(i
     .search input:focus { outline: none; border-color: var(--c-accent); }
     .hits { font-size: 12px; color: var(--c-text-muted); font-family: var(--font-mono); }
     .iname { font-weight: 600; color: var(--c-text-strong); font-size: 14px; }
+    /* 関連語(item-search.js の GROUPS)で当たった行の印。直接ヒットと見分ける */
+    .rel {
+      margin-left: 6px; padding: 0 5px; border: 1px solid var(--c-border-strong); border-radius: 3px;
+      font-size: 10px; font-weight: 400; color: var(--c-text-muted); vertical-align: 1px;
+    }
+    .rel[hidden] { display: none; }
     .tag {
       font-size: 10px; letter-spacing: .06em; color: var(--cat);
       border: 1px solid var(--cat); border-radius: 3px; padding: 0 4px; margin-left: var(--sp-2);

@@ -276,6 +276,11 @@ const payload = {
               </button>
             ))
           }
+          {/* 3TYPEを縦に並べて全件表示。長くなるのでティアごとに畳める */}
+          <button class="tab" data-slot="all">
+            すべて
+            <small>{items.length}</small>
+          </button>
         </div>
 
         {/* ヒーローを選ぶまでは出す統計が無いので隠しておく */}
@@ -288,6 +293,18 @@ const payload = {
         </div>
       </div>
 
+      {/* 検索中は選択中のTYPEに関係なく全TYPEから探す(item-search.js を /items/ と共用) */}
+      <div class="shopsearch">
+        <input
+          type="search"
+          id="shopq"
+          placeholder="アイテム名・効果で絞り込む"
+          autocomplete="off"
+          aria-label="ショップのアイテムを絞り込む"
+        />
+        <span class="shophits" id="shophits"></span>
+      </div>
+
       {
         slots.map((slot, idx) => {
           const meta = SLOT_META[slot];
@@ -298,13 +315,19 @@ const payload = {
               hidden={idx !== 0}
               style={`--cat: var(--c-${meta.cssVar}); --cat-bg: var(--c-${meta.cssVar}-bg)`}
             >
+              {/* 「すべて」表示と検索中だけ出るTYPE見出し */}
+              <h2 class="catname">{meta.label}</h2>
               {tiers.map((tier) => {
                 const rows = items.filter((i) => i.slotType === slot && i.tier === tier);
                 if (rows.length === 0) return null;
                 return (
-                  <div class="tier">
+                  <div class="tier" data-tier={tier}>
                     <h3>
-                      ティア{tier}
+                      {/* 開閉状態は全TYPE共通(ティア4を畳めば全TYPEのティア4が畳まれる) */}
+                      <button class="tiertoggle" data-tier={tier} aria-expanded="true">
+                        ティア{tier}
+                        <small class="tcount">{rows.length}</small>
+                      </button>
                       <span class="price">{souls(itemsFile.itemPricePerTier[tier] ?? 0)}</span>
                     </h3>
                     <div class="grid">
@@ -325,6 +348,7 @@ const payload = {
                             size={48}
                           />
                           <span class="cname">{t(i.nameToken, i.id)}</span>
+                          <span class="crel" hidden>関連</span>
                           {/* 人気率・勝率。中身はヒーロー選択時にJSが入れる */}
                           <span class="cstat" hidden>
                             <span class="crow"><i>人気</i><b class="cpick">—</b></span>
@@ -346,6 +370,7 @@ const payload = {
   {/* ホバー時の詳細カード。中身はクライアントで組み立てる */}
   <div class="hovercard" id="hovercard" role="tooltip" hidden></div>
 
+  <script src={`${base}/js/item-search.js`} is:inline></script>
   <script is:inline define:vars={{ payload, base }}>
     /** 購入順を保持する。同じアイテムは1つまで */
     let picked = [];
@@ -1412,16 +1437,97 @@ const payload = {
       });
     }
 
+    // ---- ショップの表示(TYPE切り替え・ティアの開閉・検索) -------------------
+    /** 表示中のTYPE。"all" は3TYPEを縦に並べた全件表示 */
+    let shopSlot = "WeaponMod";
+    const TIER_KEY = "dljp-build-collapsed-tiers";
+    /** 畳んでいるティア。全TYPE共通。localStorage が使えなければその場限り */
+    const collapsedTiers = new Set();
+    try {
+      for (const t of JSON.parse(localStorage.getItem(TIER_KEY) ?? "[]")) collapsedTiers.add(String(t));
+    } catch {}
+    const shopq = $("shopq");
+    /** 検索対象の文字列(名前 + 説明 + 内部ID)。カードごとに1回だけ作る */
+    const shopHay = Object.fromEntries(
+      Object.entries(payload.items).map(([id, it]) =>
+        [id, window.itemSearch.prepare(`${it.name} ${it.desc} ${id}`)]),
+    );
+
+    function applyShop() {
+      const cq = window.itemSearch.compile(shopq.value);
+      let direct = 0;
+      let related = 0;
+      const labels = new Set();
+      for (const cat of document.querySelectorAll(".cat")) {
+        const inView = shopSlot === "all" || cat.dataset.slot === shopSlot;
+        let catHits = 0;
+        // :scope > で直下に限る(ItemIcon の中にもティア数字の span.tier がある)
+        for (const tier of cat.querySelectorAll(":scope > .tier")) {
+          let tierHits = 0;
+          for (const card of tier.querySelectorAll(".card")) {
+            const m = cq ? window.itemSearch.match(cq, shopHay[card.dataset.id]) : [];
+            card.hidden = m === null;
+            const rel = card.querySelector(".crel");
+            rel.hidden = !(m && m.length > 0);
+            if (m === null) continue;
+            tierHits++;
+            if (m.length > 0) {
+              related++;
+              m.forEach((l) => labels.add(l));
+              rel.title = `関連: ${m.join("・")}`;
+            } else {
+              direct++;
+            }
+          }
+          tier.hidden = tierHits === 0;
+          // 検索中は畳んだティアも開く(当たったのに見えない、を避ける)
+          const collapsed = !cq && collapsedTiers.has(tier.dataset.tier);
+          tier.classList.toggle("collapsed", collapsed);
+          const btn = tier.querySelector(".tiertoggle");
+          btn.setAttribute("aria-expanded", String(!collapsed));
+          btn.disabled = !!cq;
+          catHits += tierHits;
+        }
+        // 検索中はTYPEの選択に関係なく、当たりのあるTYPEをすべて出す
+        cat.hidden = cq ? catHits === 0 : !inView;
+      }
+      document.querySelector(".shop").classList.toggle("multi", !!cq || shopSlot === "all");
+      for (const x of document.querySelectorAll(".tab")) {
+        x.classList.toggle("current", x.dataset.slot === shopSlot);
+      }
+      document.querySelector(".tabs").classList.toggle("searching", !!cq);
+      $("shophits").textContent = cq ? window.itemSearch.summary(direct, related, labels, 0) : "";
+    }
+
     for (const tab of document.querySelectorAll(".tab")) {
       tab.addEventListener("click", () => {
-        for (const x of document.querySelectorAll(".tab")) x.classList.remove("current");
-        tab.classList.add("current");
-        for (const c of document.querySelectorAll(".cat")) {
-          c.hidden = c.dataset.slot !== tab.dataset.slot;
-        }
+        shopSlot = tab.dataset.slot;
+        // 検索中にTYPEを押したら、検索をやめてそのTYPEを見たいとみなす
+        shopq.value = "";
+        applyShop();
         hideCard();
       });
     }
+
+    for (const btn of document.querySelectorAll(".tiertoggle")) {
+      btn.addEventListener("click", () => {
+        const t = btn.dataset.tier;
+        if (collapsedTiers.has(t)) collapsedTiers.delete(t);
+        else collapsedTiers.add(t);
+        try {
+          localStorage.setItem(TIER_KEY, JSON.stringify([...collapsedTiers]));
+        } catch {}
+        applyShop();
+        hideCard();
+      });
+    }
+
+    shopq.addEventListener("input", () => {
+      applyShop();
+      hideCard();
+    });
+    // ブラウザが入力値を復元した場合や、保存済みの開閉状態を反映するため初回も走らせる
+    applyShop();
 
     window.addEventListener("hashchange", () => {
       readUrl();
@@ -1650,8 +1756,48 @@ const payload = {
     .tab.current small { color: var(--cat); }
     .tier h3 {
       font-size: 11px; letter-spacing: .08em; color: var(--c-text-muted); text-transform: uppercase;
-      display: flex; justify-content: space-between; margin: 0 0 var(--sp-2); border: none; padding: 0;
+      display: flex; justify-content: space-between; align-items: baseline; margin: 0 0 var(--sp-2); border: none; padding: 0;
     }
+    /* ティア見出し = 開閉ボタン。畳むと件数だけ残す */
+    .tiertoggle {
+      display: inline-flex; align-items: baseline; gap: 6px;
+      background: none; border: none; padding: 0; cursor: pointer;
+      font: inherit; letter-spacing: inherit; color: inherit;
+    }
+    .tiertoggle::before { content: "▾"; font-size: 10px; color: var(--c-text-faint); }
+    .tiertoggle[aria-expanded="false"]::before { content: "▸"; }
+    .tiertoggle:hover:not(:disabled) { color: var(--c-text); }
+    .tiertoggle:disabled { cursor: default; }
+    .tcount { font-family: var(--font-mono); font-size: 10px; color: var(--c-text-faint); }
+    .tier.collapsed { margin-bottom: var(--sp-3); }
+    .tier.collapsed .grid { display: none; }
+
+    /* 「すべて」表示・検索中だけ出すTYPE見出し */
+    .catname { display: none; }
+    .shop.multi .catname {
+      display: block; font-size: 13px; letter-spacing: .04em; color: var(--cat);
+      margin: 0 0 var(--sp-3); padding: 0 0 var(--sp-1); border-bottom: 1px solid var(--cat);
+    }
+    .shop.multi .cat + .cat { margin-top: var(--sp-5); }
+    /* 検索中はTYPEタブの選択が効かないので控えめにする(押すと検索を消してそのTYPEへ) */
+    .tabs.searching .tab.current { color: var(--c-text-muted); border-color: var(--c-border); background: var(--c-surface); }
+    .tabs.searching .tab.current small { color: var(--c-text-faint); }
+
+    .shopsearch { display: flex; align-items: center; flex-wrap: wrap; gap: var(--sp-2) var(--sp-3); margin-bottom: var(--sp-4); }
+    .shopsearch input {
+      flex: 1 1 220px; max-width: 360px;
+      background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius);
+      color: var(--c-text); font: inherit; font-size: 13px; padding: 6px 10px;
+    }
+    .shopsearch input:focus { outline: none; border-color: var(--c-accent); }
+    .shophits { font-size: 12px; color: var(--c-text-muted); font-family: var(--font-mono); }
+
+    /* 関連語で当たったカードの印(item-search.js の GROUPS) */
+    .crel {
+      font-size: 9px; line-height: 1.4; padding: 0 4px;
+      border: 1px solid var(--c-border-strong); border-radius: 3px; color: var(--c-text-muted);
+    }
+    .crel[hidden] { display: none; }
     .tier { margin-bottom: var(--sp-5); }
     .price { font-family: var(--font-mono); color: var(--c-soul); opacity: .85; }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: var(--sp-2); }
@@ -1665,6 +1811,8 @@ const payload = {
     .card:hover { background: var(--cat-bg); border-color: var(--cat); color: var(--c-text); }
     .card.on { border-color: var(--cat); background: var(--cat-bg); color: var(--c-text-strong); box-shadow: inset 0 0 0 1px var(--cat); }
     /* 上位アイテムに内包されているもの。単体で持つ意味がないので選べない */
+    /* display:flex が hidden 属性より強いので、絞り込みで隠すときのために明示する */
+    .card[hidden] { display: none; }
     .card.covered { opacity: 0.32; cursor: not-allowed; }
     .card.covered:hover { background: var(--c-surface); border-color: var(--c-border); }
     .cname { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
