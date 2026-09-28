@@ -10,11 +10,25 @@ interface Props {
   details: Record<string, unknown>;
 }
 const { details } = Astro.props;
+const { L, term } = Astro.locals.i18n;
+/** カード内の文言。{n} は数値の差し込み位置 */
+const c = L().itemCard;
+const T = {
+  tier: L().common.tier("{n}"),
+  cost: c.cost,
+  slotCost: c.slotCost,
+  passives: c.passives,
+  conditional: c.conditional,
+  components: term("componentsOf"),
+  usedIn: term("upgradesTo"),
+  sep: L().common.listSep,
+  dot: L().common.dot,
+};
 ---
 
 <div class="hovercard" id="hovercard" role="tooltip" hidden></div>
 
-<script is:inline define:vars={{ details }}>
+<script is:inline define:vars={{ details, T }}>
   (() => {
     const card = document.getElementById("hovercard");
     if (!card) return;
@@ -37,13 +51,13 @@ const { details } = Astro.props;
       card.innerHTML =
         `<div class="hc-head"><span class="hc-name">${esc(it.name)}</span>` +
         `${it.badge ? `<span class="hc-badge">${esc(it.badge)}</span>` : ""}</div>` +
-        `<div class="hc-meta">${esc(it.slotLabel)}・ティア${it.tier}・` +
-        `<span class="hc-soul">${fmt(it.cost)}ソウル</span>・枠${it.slotCost}</div>` +
+        `<div class="hc-meta">${esc(it.slotLabel)}${T.dot}${esc(T.tier.replace("{n}", it.tier))}${T.dot}` +
+        `<span class="hc-soul">${esc(T.cost.replace("{n}", fmt(it.cost)))}</span>${T.dot}${esc(T.slotCost.replace("{n}", it.slotCost))}</div>` +
         (it.desc ? `<p class="hc-desc">${esc(it.desc)}</p>` : "") +
-        (it.passives.length ? `<div class="hc-sec">常時パッシブ</div>${rows(it.passives, "hc-rows")}` : "") +
-        (it.conditional.length ? `<div class="hc-sec">条件付き</div>${rows(it.conditional, "hc-rows")}` : "") +
-        (it.components.length ? `<div class="hc-rel">素材: ${esc(it.components.join("、"))}</div>` : "") +
-        (it.usedIn.length ? `<div class="hc-rel">上位: ${esc(it.usedIn.join("、"))}</div>` : "");
+        (it.passives.length ? `<div class="hc-sec">${esc(T.passives)}</div>${rows(it.passives, "hc-rows")}` : "") +
+        (it.conditional.length ? `<div class="hc-sec">${esc(T.conditional)}</div>${rows(it.conditional, "hc-rows")}` : "") +
+        (it.components.length ? `<div class="hc-rel">${esc(T.components)}: ${esc(it.components.join(T.sep))}</div>` : "") +
+        (it.usedIn.length ? `<div class="hc-rel">${esc(T.usedIn)}: ${esc(it.usedIn.join(T.sep))}</div>` : "");
       card.hidden = false;
 
       const place = () => {

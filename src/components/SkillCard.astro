@@ -26,6 +26,7 @@ export interface Props {
   href?: string;
 }
 const { abilityKey, ab, card, notes, heroName, href } = Astro.props;
+const { L, term } = Astro.locals.i18n;
 const isUlt = ab.kind === "Ultimate";
 const isPassive = !isUlt && ab.activation === "PASSIVE";
 const name = t(abilityKey, abilityKey);
@@ -44,8 +45,8 @@ const fmtScale = (n: number) => (Math.round(n * 100) / 100).toString();
     <div class="stitle">
       <div class="snamerow">
         {href ? <a href={href}>{name}</a> : <span class="sname-plain">{name}</span>}
-        {isUlt && <span class="tag ult-tag">アルティメット</span>}
-        {isPassive && <span class="tag passive-tag">パッシブ</span>}
+        {isUlt && <span class="tag ult-tag">{L().common.ultimate}</span>}
+        {isPassive && <span class="tag passive-tag">{term("passive")}</span>}
       </div>
       {card.meta.length > 0 && (
         <ul class="smeta">
@@ -67,7 +68,7 @@ const fmtScale = (n: number) => (Math.round(n * 100) / 100).toString();
     </div>
   </header>
 
-  <p class="sdesc">{describe(`${abilityKey}_desc`, ab.properties, "（説明なし）", { hero_name: heroName })}</p>
+  <p class="sdesc">{describe(`${abilityKey}_desc`, ab.properties, L().common.noDesc, { hero_name: heroName })}</p>
 
   {card.tiles.length > 0 && (
     <div class="stiles">
@@ -135,7 +136,7 @@ const fmtScale = (n: number) => (Math.round(n * 100) / 100).toString();
 
   {notes.length > 0 && (
     <div class="snotes">
-      <span class="nt">メモ</span>
+      <span class="nt">{L().common.memo}</span>
       <ul>
         {notes.map((note) => (
           <li>{note}</li>

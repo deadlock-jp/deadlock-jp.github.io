@@ -21,9 +21,11 @@ import { balanceUpdates } from "../lib/balance.ts";
 import { heroRanks, pickRows } from "../lib/herorank.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const { L, langPath } = Astro.locals.i18n;
+const T = L();
 const ranks = heroRanks();
 
-const BOON_LABEL = { hp: "HP成長", weapon: "武器成長", spirit: "スピリット成長" } as const;
+const BOON_LABEL = { hp: T.rank.boonHp, weapon: T.rank.boonWeapon, spirit: T.rank.boonSpirit } as const;
 
 const heroes = releasedHeroes().map((h) => {
   const key = h.key.replace(/^hero_/, "");
@@ -63,25 +65,22 @@ const balanceAbilityKeys = [
 ];
 ---
 
-<Base
-  title="トップ"
-  description="Deadlock（デッドロック）のヒーロー・アイテム・スキルの数値を日本語で引ける非公式データベース。ヒーローの基礎ステータス、ショップアイテムの効果と価格、スキルのダメージとスピリット係数を、ゲームの生データから自動生成。ビルドシミュレーターつき。"
->
+<Base title={T.top.title} description={T.top.description}>
   <div class="herohead">
     <span class="eyebrow">Unofficial Database</span>
-    <h1>DEADLOCK 日本語データベース</h1>
+    <h1>{T.top.h1}</h1>
   </div>
 
   <section class="block panel first">
     <h2>
-      ヒーロー
-      <a class="more" href={`${base}/heroes/`}>一覧を見る →</a>
+      {T.nav.heroes}
+      <a class="more" href={`${base}${langPath("/heroes/")}`}>{T.top.seeAll}</a>
     </h2>
     <ul class="herogrid">
       {
         heroes.map(({ h, name, vertical }) => (
           <li>
-            <a href={`${base}/heroes/${h.id}/`} data-herocard={h.id}>
+            <a href={`${base}${langPath(`/heroes/${h.id}/`)}`} data-herocard={h.id}>
               <span class="hcard">
                 {vertical ? (
                   <img src={vertical} alt="" width="280" height="380" loading="lazy" />
@@ -101,8 +100,8 @@ const balanceAbilityKeys = [
 
   <section class="block panel">
     <h2>
-      アイテム
-      <a class="more" href={`${base}/items/`}>一覧を見る →</a>
+      {T.nav.items}
+      <a class="more" href={`${base}${langPath("/items/")}`}>{T.top.seeAll}</a>
     </h2>
     {
       slots.map((slot) => {
@@ -118,7 +117,7 @@ const balanceAbilityKeys = [
               {list.map((i) => (
                 <li>
                   <a
-                    href={`${base}/items/${i.id}/`}
+                    href={`${base}${langPath(`/items/${i.id}/`)}`}
                     title={t(i.nameToken, i.id)}
                     data-itemcard={i.id}
                   >
@@ -143,8 +142,8 @@ const balanceAbilityKeys = [
 
   <section class="block panel">
     <h2>
-      バランス調整
-      <a class="more" href={`${base}/patch-notes/`}>すべてのアップデート →</a>
+      {T.adjust.historyTitle}
+      <a class="more" href={`${base}/patch-notes/`}>{T.top.allUpdates}</a>
     </h2>
     <div class="bal">
       {
@@ -163,21 +162,21 @@ const balanceAbilityKeys = [
 
   <section class="block panel">
     <h2>
-      攻略情報
-      <a class="more" href={`${base}/mechanics/`}>リファレンスを見る →</a>
+      {T.nav.mechanics}
+      <a class="more" href={`${base}/mechanics/`}>{T.top.seeReference}</a>
     </h2>
     <div class="guide">
       <a class="guidemap" href={`${base}/mechanics/match/#map`}>
         <MapPreview />
       </a>
       <div class="guidetx">
-        <a class="guidett" href={`${base}/mechanics/match/#map`}>マップ</a>
-        <p class="syslead">キャンプ・箱・黄金像・橋バフの位置。拡大と、地上・地下の切り替えができます。</p>
+        <a class="guidett" href={`${base}/mechanics/match/#map`}>{T.top.map}</a>
+        <p class="syslead">{T.top.mapLead}</p>
         <ul class="guidelinks">
-          <li><a href={`${base}/mechanics/match/#laning`}>レーン戦</a></li>
-          <li><a href={`${base}/mechanics/match/#farming`}>ファーミング</a></li>
-          <li><a href={`${base}/mechanics/match/#lategame`}>終盤</a></li>
-          <li><a href={`${base}/mechanics/controls/`}>キャラクターコントロール</a></li>
+          <li><a href={`${base}/mechanics/match/#laning`}>{T.top.laning}</a></li>
+          <li><a href={`${base}/mechanics/match/#farming`}>{T.top.farming}</a></li>
+          <li><a href={`${base}/mechanics/match/#lategame`}>{T.top.lategame}</a></li>
+          <li><a href={`${base}/mechanics/controls/`}>{T.top.controls}</a></li>
         </ul>
       </div>
     </div>

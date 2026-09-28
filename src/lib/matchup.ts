@@ -20,6 +20,9 @@ import { heroRanks } from "./herorank.ts";
 import type { Hero } from "../types/hero.ts";
 import type { Item } from "../types/item.ts";
 import type { ItemSlotType } from "../types/hero.ts";
+import { L } from "../i18n/index.ts";
+import { term } from "../i18n/terms.ts";
+import { currentLang } from "../i18n/context.ts";
 
 /* ------------------------------------------------------------------ *
  * 対応表
@@ -97,11 +100,30 @@ export function healingAbilities(hero: Hero): { name: string; amount: number }[]
  * ------------------------------------------------------------------ */
 
 const SLOTS = ["WeaponMod", "Armor", "Tech"] as const satisfies readonly ItemSlotType[];
+/** カテゴリの表示名(描いているページの言語で引く getter) */
 export const SLOT_SHARE_LABEL: Record<ItemSlotType, string> = {
-  WeaponMod: "武器",
-  Armor: "生命力",
-  Tech: "スピリット",
+  get WeaponMod() {
+    return term("weapon");
+  },
+  get Armor() {
+    return term("vitality");
+  },
+  get Tech() {
+    return term("spirit");
+  },
 };
+
+/**
+ * 対応表の見出し・根拠の文。日本語は data/matchup-rules.json が原本で、
+ * ほかの言語は辞書(src/i18n/ui/ の matchup.rules)をルールIDで引く。
+ * 辞書に無いルールがあれば、画面に日本語が漏れる前にビルドを止める。
+ */
+function ruleText(rule: Rule): { title: string; why: string } {
+  if (currentLang() === "ja") return { title: rule.title, why: rule.why };
+  const text = (L().matchup.rules as Record<string, { title: string; why: string } | undefined>)[rule.id];
+  if (!text) throw new Error(`matchup-rules.json のルール "${rule.id}" の訳が辞書(${currentLang()})にありません`);
+  return text;
+}
 
 const shopById = new Map(shopItems().map((i) => [i.id, i]));
 
@@ -199,7 +221,8 @@ function selectItems(sel: ItemSelector, max = 6): MatchupItem[] {
     }
     if (!best) continue;
     seen.add(it.id);
-    const label = sel.label ?? statLabel(best.name);
+    // label(こちらで付けた短い名前)は日本語だけ。ほかの言語はプロパティのトークンで引く
+    const label = (currentLang() === "ja" ? sel.label : undefined) ?? statLabel(best.name);
     out.push({ item: it, note: `${label} ${best.value}%`, value: best.value });
   }
   out.sort((a, b) => (b.value ?? 0) - (a.value ?? 0));
@@ -295,19 +318,28 @@ export function heroMatchup(hero: Hero): HeroMatchup {
       if (pctText(p) > (w.topPercent ?? 100)) continue;
       evidence =
         w.kit === "healing"
-          ? `${healingAbilities(hero).map((x) => `${x.name} ${x.amount}`).join(" / ")}（回復を持つ${pool.length}体中 上位${pctText(p)}%）`
-          : `スタン・睡眠・拘束 合計 ${Math.round(value * 100) / 100}秒（${pool.length}体中 上位${pctText(p)}%）`;
+          ? L().matchup.evidenceHealing(
+              healingAbilities(hero).map((x) => `${x.name} ${x.amount}`).join(" / "),
+              pool.length,
+              pctText(p),
+            )
+          : L().matchup.evidenceCc(String(Math.round(value * 100) / 100), pool.length, pctText(p));
     } else if (w.composition) {
       if (!sig?.comp) continue;
       const share = sig.comp[w.composition];
       const p = percentileOf(signals.comp[w.composition], share);
       if (pctText(p) > (w.topPercent ?? 100)) continue;
-      evidence = `${SLOT_SHARE_LABEL[w.composition]}構成比 ${Math.round(share * 100)}%（全${signals.comp[w.composition].length}体中 上位${pctText(p)}%）`;
+      evidence = L().matchup.evidenceComposition(
+        SLOT_SHARE_LABEL[w.composition],
+        Math.round(share * 100),
+        signals.comp[w.composition].length,
+        pctText(p),
+      );
     }
 
     const items = selectItems(rule.items);
     if (items.length === 0) continue;
-    counters.push({ id: rule.id, title: rule.title, why: rule.why, evidence, manual, items });
+    counters.push({ id: rule.id, ...ruleText(rule), evidence, manual, items });
   }
 
   return { strengths, noStandout, shares, counters };

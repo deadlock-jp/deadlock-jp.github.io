@@ -32,6 +32,42 @@ const items = shopItems();
 const slots = ["WeaponMod", "Armor", "Tech"] as const;
 const tiers = [1, 2, 3, 4];
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const { L, term, langPath, currentLang, LANG_META } = Astro.locals.i18n;
+const T = L();
+const isJa = currentLang() === "ja";
+/** ビルドページ内のリンクの接頭辞(日本語は "") */
+const lbase = base + langPath("/").slice(0, -1);
+/** 各カテゴリのステータス欄の見出し(ゲームのステータス画面の表記) */
+const SLOT_STATS = {
+  WeaponMod: term("weaponStats"),
+  Armor: term("vitalityStats"),
+  Tech: term("spiritStats"),
+} as const;
+/**
+ * ショップの検索。日本語版は言い換え・関連語つきの item-search.js、
+ * ほかの言語はその言語の名前と英語名で探す item-search-intl.js
+ */
+const searchScript = isJa ? "item-search.js" : "item-search-intl.js";
+/** クライアント側の文言。{n} などは差し込み位置 */
+const B = {
+  ...T.build.client,
+  heroNotSelected: T.common.heroNotSelected,
+  related: T.common.related,
+  tier: T.common.tier("{n}"),
+  cost: T.itemCard.cost,
+  slotCost: T.itemCard.slotCost,
+  passives: T.itemCard.passives,
+  conditional: T.itemCard.conditional,
+  components: term("componentsOf"),
+  usedIn: term("upgradesTo"),
+  sep: T.common.listSep,
+  dot: T.common.dot,
+  spiritPower: term("spiritPower"),
+  maxHealth: term("maxHealth"),
+  /** ビルド画像に書く書体(その言語の Noto Sans) */
+  font: LANG_META[currentLang()].font ?? "Noto Sans JP",
+  searchSummary: T.search,
+};
 
 /*
  * ヒーロー×アイテムの人気率・勝率(tools/fetch-item-stats.mjs が deadlock-api.com から取得)。
@@ -94,6 +130,8 @@ const payload = {
       i.id,
       {
         name: t(i.nameToken, i.id),
+        /* 日本語以外では英語名でも検索できるようにする */
+        ...(isJa ? {} : { nameEn: t(i.nameToken, i.id, "en") }),
         tier: i.tier,
         slot: i.slotType,
         cost: i.cost,
@@ -144,41 +182,41 @@ const payload = {
 };
 ---
 
-<Base title="ビルドシミュレーター" description="アイテムを選んでビルドを組み、URLで共有する">
-  <h1>ビルドシミュレーター</h1>
+<Base title={T.build.title} description={T.build.description}>
+  <h1>{T.build.title}</h1>
   {/* ヒーロー選択と操作ボタンは見出しの下に一列で置く */}
   <div class="head">
     <label class="heropick">
-      ヒーロー
+      {T.build.hero}
       <select id="hero">
-        <option value="">選択してください</option>
+        <option value="">{T.build.choose}</option>
         {heroes.map((h) => <option value={h.id}>{t(h.nameToken, h.key)}</option>)}
       </select>
     </label>
     <span class="acts">
-      <button class="share" id="share">共有URLをコピー</button>
+      <button class="share" id="share">{T.build.client.copyUrl}</button>
       {/* localStorage が使えない環境では JS 側で丸ごと隠す */}
       <button class="savetoggle" id="savetoggle" aria-expanded="false" hidden>
-        保存 / 呼び出し<span class="savecount" id="savecount"></span>
+        {T.build.saveLoad}<span class="savecount" id="savecount"></span>
       </button>
-      <button class="cardbtn" id="cardbtn">画像を保存</button>
-      <a class="compare" id="compare" href={`${base}/build/compare/`}>バージョン比較</a>
-      <button class="clear" id="clear">クリア</button>
+      <button class="cardbtn" id="cardbtn">{T.build.saveImage}</button>
+      <a class="compare" id="compare" href={`${lbase}/build/compare/`}>{T.build.compare}</a>
+      <button class="clear" id="clear">{T.build.clear}</button>
     </span>
   </div>
 
   {/* 保存パネル。既定は閉じていて、保存済みがあれば開いた状態で始める */}
   <div class="savepanel" id="savepanel" hidden>
     <div class="savebar">
-      <label class="savelabel" for="savename">ビルド名</label>
+      <label class="savelabel" for="savename">{T.build.buildName}</label>
       <input
         id="savename"
         type="text"
         maxlength="40"
-        placeholder="例: 序盤スピリット型（画像にも載ります）"
+        placeholder={T.build.buildNamePlaceholder}
         autocomplete="off"
       />
-      <button class="savebtn" id="savebtn">＋ 保存</button>
+      <button class="savebtn" id="savebtn">{T.build.save}</button>
       <span class="savenote" id="savenote"></span>
     </div>
     <ul class="savedlist" id="savedlist"></ul>
@@ -195,7 +233,7 @@ const payload = {
             </span>
           ))
         }
-        <span class="hname" id="hname">ヒーロー未選択</span>
+        <span class="hname" id="hname">{T.common.heroNotSelected}</span>
       </div>
 
       {/*
@@ -210,17 +248,14 @@ const payload = {
           <span class="soulcost">
             <SoulIcon size={15} />
             <b id="t-souls">0</b>
-            <small>ソウル</small>
+            <small>{term("souls")}</small>
           </span>
         </div>
         <div class="cells" data-cells>
           {Array.from({ length: 12 }, () => <span class="cell" />)}
         </div>
       </div>
-      <p class="slotnote">
-        枠のアイコンをタップすると外れます。ショップはタップで詳細、もう一度タップで追加します。
-        枠はゲームと同じく12個です。
-      </p>
+      <p class="slotnote">{T.build.slotNote}</p>
 
       {/* TYPE別ステータス */}
       {
@@ -231,7 +266,7 @@ const payload = {
             style={`--cat: var(--c-${SLOT_META[s].cssVar}); --cat-bg: var(--c-${SLOT_META[s].cssVar}-bg)`}
           >
             <header class="bhead">
-              <h2>{SLOT_META[s].label}ステータス</h2>
+              <h2>{SLOT_STATS[s]}</h2>
               <span class="bhl" data-headline={s} />
             </header>
             <div class="bbody">
@@ -239,13 +274,13 @@ const payload = {
               <ul class="brows" data-rows={s} />
               {s === "Tech" && (
                 <div class="spirit" data-spirit>
-                  <h3>スピリットパワーの影響値</h3>
+                  <h3>{T.build.spiritImpact}</h3>
                   <ul class="alist" data-abilities />
                 </div>
               )}
               </div>
               <div class="invest">
-                <h3>投資額</h3>
+                <h3>{T.build.invested}</h3>
                 <ol class="ladder" data-ladder={s} />
               </div>
             </div>
@@ -254,7 +289,7 @@ const payload = {
       }
 
       <section class="box plain">
-        <header class="bhead"><h2>合計ステータス</h2></header>
+        <header class="bhead"><h2>{T.build.totalStats}</h2></header>
         <ul class="stats" id="stats"><li class="empty">—</li></ul>
       </section>
     </section>
@@ -278,17 +313,17 @@ const payload = {
           }
           {/* 3TYPEを縦に並べて全件表示。長くなるのでティアごとに畳める */}
           <button class="tab" data-slot="all">
-            すべて
+            {T.build.all}
             <small>{items.length}</small>
           </button>
         </div>
 
         {/* ヒーローを選ぶまでは出す統計が無いので隠しておく */}
         <div class="sortbar" id="sortbar" hidden>
-          <span class="sortlabel">並び替え</span>
+          <span class="sortlabel">{T.build.sort}</span>
           <div class="sortbtns" role="group">
-            <button class="sortbtn current" data-sort="pick">人気率</button>
-            <button class="sortbtn" data-sort="win">勝率</button>
+            <button class="sortbtn current" data-sort="pick">{T.build.popularity}</button>
+            <button class="sortbtn" data-sort="win">{T.heroes.winRate}</button>
           </div>
         </div>
       </div>
@@ -298,9 +333,9 @@ const payload = {
         <input
           type="search"
           id="shopq"
-          placeholder="アイテム名・効果で絞り込む"
+          placeholder={T.items.searchPlaceholder}
           autocomplete="off"
-          aria-label="ショップのアイテムを絞り込む"
+          aria-label={T.build.shopSearchAria}
         />
         <span class="shophits" id="shophits"></span>
       </div>
@@ -325,7 +360,7 @@ const payload = {
                     <h3>
                       {/* 開閉状態は全TYPE共通(ティア4を畳めば全TYPEのティア4が畳まれる) */}
                       <button class="tiertoggle" data-tier={tier} aria-expanded="true">
-                        ティア{tier}
+                        {T.common.tier(tier)}
                         <small class="tcount">{rows.length}</small>
                       </button>
                       <span class="price">{souls(itemsFile.itemPricePerTier[tier] ?? 0)}</span>
@@ -348,11 +383,11 @@ const payload = {
                             size={48}
                           />
                           <span class="cname">{t(i.nameToken, i.id)}</span>
-                          <span class="crel" hidden>関連</span>
+                          <span class="crel" hidden>{T.common.related}</span>
                           {/* 人気率・勝率。中身はヒーロー選択時にJSが入れる */}
                           <span class="cstat" hidden>
-                            <span class="crow"><i>人気</i><b class="cpick">—</b></span>
-                            <span class="crow"><i>勝率</i><b class="cwin">—</b></span>
+                            <span class="crow"><i>{T.build.pickShort}</i><b class="cpick">—</b></span>
+                            <span class="crow"><i>{T.heroes.winRate}</i><b class="cwin">—</b></span>
                           </span>
                         </button>
                       ))}
@@ -370,8 +405,8 @@ const payload = {
   {/* ホバー時の詳細カード。中身はクライアントで組み立てる */}
   <div class="hovercard" id="hovercard" role="tooltip" hidden></div>
 
-  <script src={`${base}/js/item-search.js`} is:inline></script>
-  <script is:inline define:vars={{ payload, base }}>
+  <script src={`${base}/js/${searchScript}`} is:inline data-summary={isJa ? undefined : JSON.stringify(T.search)}></script>
+  <script is:inline define:vars={{ payload, base, lbase, B }}>
     /** 購入順を保持する。同じアイテムは1つまで */
     let picked = [];
     let heroId = null;
@@ -453,7 +488,7 @@ const payload = {
       const url = location.pathname + location.search + hash;
       if (replace) history.replaceState(null, "", url);
       else history.pushState(null, "", url);
-      $("compare").href = base + "/build/compare/" + hash;
+      $("compare").href = lbase + "/build/compare/" + hash;
     }
 
     // ---- 保存(localStorage) -------------------------------------------
@@ -519,7 +554,7 @@ const payload = {
       $("savecount").textContent = list.length ? String(list.length) : "";
       const box = $("savedlist");
       if (!list.length) {
-        box.innerHTML = `<li class="savedempty">まだ保存がありません。ビルドを組んで「＋ 保存」を押すと、この端末にだけ残ります。</li>`;
+        box.innerHTML = `<li class="savedempty">${esc(B.savedEmpty)}</li>`;
         return;
       }
       box.innerHTML = list
@@ -531,10 +566,10 @@ const payload = {
           return (
             `<li data-id="${esc(b.id)}">` +
             `<span class="sv-mini">${bars}</span>` +
-            `<span class="sv-name">${esc(b.label || "（無題）")}</span>` +
-            `<span class="sv-meta">${h ? esc(h.name) + " / " : ""}${b.count}個 / ${fmt(b.souls ?? 0)}</span>` +
-            `<button class="sv-load" data-act="load">呼び出し</button>` +
-            `<button class="sv-del" data-act="del">削除</button>` +
+            `<span class="sv-name">${esc(b.label || B.untitled)}</span>` +
+            `<span class="sv-meta">${h ? esc(h.name) + " / " : ""}${esc(B.savedMeta.replace("{n}", b.count).replace("{souls}", fmt(b.souls ?? 0)))}</span>` +
+            `<button class="sv-load" data-act="load">${esc(B.load)}</button>` +
+            `<button class="sv-del" data-act="del">${esc(B.del)}</button>` +
             `</li>`
           );
         })
@@ -549,27 +584,27 @@ const payload = {
 
     function saveCurrent() {
       if (heroId === null && !picked.length) {
-        flashNote("保存するものがありません");
+        flashNote(B.nothingToSave);
         return;
       }
       const list = loadSaved();
       if (list.length >= SAVE_MAX) {
-        flashNote(`保存は${SAVE_MAX}件までです。古いものを削除してください`);
+        flashNote(B.saveLimit.replace("{n}", SAVE_MAX));
         return;
       }
       const typed = $("savename").value.trim();
       const h = payload.heroes.find((x) => x.id === heroId);
-      const label = typed || `${h ? h.name : "ビルド"} ${picked.length}個`;
+      const label = typed || B.defaultLabel.replace("{name}", h ? h.name : B.buildWord).replace("{n}", picked.length);
       const b = currentBuild(label);
       b.types = typeMarks();
       list.unshift(b);
       if (!storeSaved(list)) {
-        flashNote("保存できませんでした（保存領域がいっぱいの可能性）");
+        flashNote(B.saveFailed);
         return;
       }
       $("savename").value = label;
       renderSaved();
-      flashNote("保存しました");
+      flashNote(B.saved);
     }
 
     let noteTimer = 0;
@@ -611,7 +646,7 @@ const payload = {
         const cell = document.createElement("button");
         cell.className = "cell filled";
         cell.dataset.id = id;
-        cell.title = `${item.name}（${fmt(item.cost)}ソウル） — クリックで外す`;
+        cell.title = B.cellTitle.replace("{name}", item.name).replace("{cost}", fmt(item.cost));
         if (meta) cell.style.setProperty("--cat", `var(--c-${meta.cssVar})`);
         const src = document.querySelector(`.card[data-id="${CSS.escape(id)}"] .icon`);
         if (src) cell.append(src.cloneNode(true));
@@ -623,7 +658,7 @@ const payload = {
 
     function renderHero() {
       const h = hero();
-      $("hname").textContent = h ? h.name : "ヒーロー未選択";
+      $("hname").textContent = h ? h.name : B.heroNotSelected;
       for (const el of document.querySelectorAll(".hp")) {
         el.hidden = !h || Number(el.dataset.hero) !== h.id;
       }
@@ -719,7 +754,7 @@ const payload = {
         const ladder = document.querySelector(`[data-ladder="${slot}"]`);
 
         if (!h) {
-          rows.innerHTML = '<li class="empty">ヒーローを選ぶと表示されます</li>';
+          rows.innerHTML = `<li class="empty">${esc(B.pickHero)}</li>`;
           head.textContent = "";
           ladder.innerHTML = "";
           continue;
@@ -732,32 +767,32 @@ const payload = {
         rows.innerHTML = h.rows[slot]
           .map((r) => {
             let value = r.value;
-            if (mh && r.label === "最大HP") value = String(Math.round(mh.total));
-            if (wd && r.label === "弾薬ダメージ") value = String(round1(wd.perBullet));
+            if (mh && r.key === "maxHealth") value = String(Math.round(mh.total));
+            if (wd && r.key === "bulletDamage") value = String(round1(wd.perBullet));
             return `<li><span class="l">${esc(r.label)}</span><span class="v">${esc(value)}</span></li>`;
           })
           .join("");
 
         if (slot === "WeaponMod" && h.weaponHead) {
           const dps = wd && wd.dps !== null ? Math.round(wd.dps) : h.weaponHead.dps;
-          const pctNote = wd && wd.pct ? ` / 武器 +${round1(wd.pct)}%` : "";
+          const pctNote = wd && wd.pct ? B.weaponPct.replace("{n}", round1(wd.pct)) : "";
           head.innerHTML =
             `<b>${esc(dps)}</b> DPS` +
-            `<small>${esc(h.weaponName)} / 減衰 ${esc(h.weaponHead.falloffStart)} → ${esc(h.weaponHead.falloffEnd)}${esc(pctNote)}</small>`;
+            `<small>${esc(h.weaponName)} / ${esc(B.falloff)} ${esc(h.weaponHead.falloffStart)} → ${esc(h.weaponHead.falloffEnd)}${esc(pctNote)}</small>`;
         } else if (slot === "Tech") {
           const sp = spiritPower(cost, level);
           const fromLevel = boonCount(level) * h.calc.techPowerPerBoon;
           const fromBonus = costBonusStep("Tech", cost.Tech)?.bonus ?? 0;
           const fromItems = sp - fromLevel - fromBonus;
           head.innerHTML =
-            `<b>${round1(sp)}</b> スピリットパワー` +
-            `<small>レベル ${round1(fromLevel)} + 購入ボーナス ${fromBonus} + アイテム ${round1(fromItems)}</small>`;
+            `<b>${round1(sp)}</b> ${esc(B.spiritPower)}` +
+            `<small>${esc(B.spiritBreakdown.replace("{level}", round1(fromLevel)).replace("{bonus}", fromBonus).replace("{items}", round1(fromItems)))}</small>`;
         } else if (slot === "Armor" && mh) {
-          const parts = [`基礎 ${Math.round(mh.base)}`];
+          const parts = [`${B.base} ${Math.round(mh.base)}`];
           if (mh.boon) parts.push(`Boon +${Math.round(mh.boon)}`);
           if (mh.pct) parts.push(`×(1+${round1(mh.pct)}%)`);
-          if (mh.flat) parts.push(`平坦 +${Math.round(mh.flat)}`);
-          head.innerHTML = `<b>${Math.round(mh.total)}</b> 最大HP<small>${esc(parts.join(" "))}</small>`;
+          if (mh.flat) parts.push(`${B.flat} +${Math.round(mh.flat)}`);
+          head.innerHTML = `<b>${Math.round(mh.total)}</b> ${esc(B.maxHealth)}<small>${esc(parts.join(" "))}</small>`;
         } else {
           head.textContent = "";
         }
@@ -801,7 +836,7 @@ const payload = {
                   )
                   .join("")}</span>`
               : "";
-            let v = '<span class="l">ダメージなし</span><span class="v">—</span>';
+            let v = `<span class="l">${esc(B.noDamage)}</span><span class="v">—</span>`;
             if (a.damage) {
               const apAdd = lvl > 0 ? a.damage.apBonus[lvl - 1] : 0;
               const dmg = Math.round((a.damage.base + apAdd + sp * a.damage.scale) * 10) / 10;
@@ -872,7 +907,7 @@ const payload = {
           const low = n < payload.stats.lowSampleMatches;
           box.hidden = false;
           box.classList.toggle("low", low);
-          box.title = low ? `サンプル ${n}試合(少ないため参考値)` : `サンプル ${fmt(n)}試合`;
+          box.title = (low ? B.sampleLow : B.sample).replace("{n}", low ? n : fmt(n));
           c.querySelector(".cpick").textContent = (pick / 10).toFixed(1) + "%";
           const winEl = c.querySelector(".cwin");
           winEl.textContent = (win / 10).toFixed(1) + "%";
@@ -999,19 +1034,19 @@ const payload = {
       c.shadowColor = "rgba(0,0,0,.9)";
       c.shadowBlur = 18;
       c.fillStyle = "#fcf0d8";
-      c.font = '900 40px "Noto Sans JP", sans-serif';
-      c.fillText(h ? h.name : "ヒーロー未選択", 34, 62);
+      c.font = `900 40px "${B.font}", sans-serif`;
+      c.fillText(h ? h.name : B.heroNotSelected, 34, 62);
       const label = $("savename") ? $("savename").value.trim() : "";
       if (label) {
         c.fillStyle = "#cfe3dc";
-        c.font = '500 19px "Noto Sans JP", sans-serif';
+        c.font = `500 19px "${B.font}", sans-serif`;
         c.fillText(label, 34, 90);
       }
 
       // 右上: サイト名
       c.textAlign = "right";
       c.fillStyle = "#fcf0d8";
-      c.font = '700 15px "Noto Sans JP", sans-serif';
+      c.font = `700 15px "${B.font}", sans-serif`;
       c.fillText("DEADLOCK-JP DB", CARD_W - 34, 48);
       c.fillStyle = "#8fa39d";
       c.font = '500 12px "JetBrains Mono", monospace';
@@ -1065,8 +1100,8 @@ const payload = {
       c.fillText(fmt(spent), amountX, lvY + 18);
       const amountW = c.measureText(fmt(spent)).width;
       c.fillStyle = "#e9f2ef";
-      c.font = '700 19px "Noto Sans JP", sans-serif';
-      c.fillText("アイテム価値", amountX + amountW + 14, lvY + 18);
+      c.font = `700 19px "${B.font}", sans-serif`;
+      c.fillText(B.itemValue, amountX + amountW + 14, lvY + 18);
       c.shadowBlur = 0;
 
       // 投資メーター(武器/生命力/スピリット)。高さはアイテム2段ぶんに合わせる
@@ -1171,7 +1206,7 @@ const payload = {
         } else {
           // 画像が無いアイテムは頭文字で代替(ItemIcon のプレースホルダと同じ考え方)
           c.fillStyle = "rgba(255,255,255,.75)";
-          c.font = '700 20px "Noto Sans JP", sans-serif';
+          c.font = `700 20px "${B.font}", sans-serif`;
           c.textAlign = "center";
           c.fillText(it.name.slice(0, 2), x + cell / 2, y + cell / 2 + 7);
           c.textAlign = "left";
@@ -1206,7 +1241,7 @@ const payload = {
       const btn = $("cardbtn");
       const label = btn.textContent;
       btn.disabled = true;
-      btn.textContent = "作成中…";
+      btn.textContent = B.creating;
       try {
         // Webフォントが来る前に描くと別書体になるので待つ
         if (document.fonts && document.fonts.ready) await document.fonts.ready;
@@ -1225,7 +1260,7 @@ const payload = {
         a.remove();
         setTimeout(() => URL.revokeObjectURL(url), 5000);
       } catch (e) {
-        btn.textContent = "作成できませんでした";
+        btn.textContent = B.createFailed;
         setTimeout(() => (btn.textContent = label), 2400);
         return;
       }
@@ -1251,12 +1286,12 @@ const payload = {
       card.innerHTML =
         `<div class="hc-head"><span class="hc-name">${esc(it.name)}</span>` +
         `${badge ? `<span class="hc-badge">${badge}</span>` : ""}</div>` +
-        `<div class="hc-meta">${esc(meta.label)}・ティア${it.tier}・<span class="hc-soul">${fmt(it.cost)}ソウル</span>・枠${it.slotCost}</div>` +
+        `<div class="hc-meta">${esc(meta.label)}${B.dot}${esc(B.tier.replace("{n}", it.tier))}${B.dot}<span class="hc-soul">${esc(B.cost.replace("{n}", fmt(it.cost)))}</span>${B.dot}${esc(B.slotCost.replace("{n}", it.slotCost))}</div>` +
         (it.desc ? `<p class="hc-desc">${esc(it.desc)}</p>` : "") +
-        (it.passives.length ? `<div class="hc-sec">常時パッシブ</div>${rows(it.passives, "hc-rows")}` : "") +
-        (it.conditional.length ? `<div class="hc-sec">条件付き</div>${rows(it.conditional, "hc-rows")}` : "") +
-        (it.components.length ? `<div class="hc-rel">素材: ${esc(it.components.join("、"))}</div>` : "") +
-        (it.usedIn.length ? `<div class="hc-rel">上位: ${esc(it.usedIn.join("、"))}</div>` : "");
+        (it.passives.length ? `<div class="hc-sec">${esc(B.passives)}</div>${rows(it.passives, "hc-rows")}` : "") +
+        (it.conditional.length ? `<div class="hc-sec">${esc(B.conditional)}</div>${rows(it.conditional, "hc-rows")}` : "") +
+        (it.components.length ? `<div class="hc-rel">${esc(B.components)}: ${esc(it.components.join(B.sep))}</div>` : "") +
+        (it.usedIn.length ? `<div class="hc-rel">${esc(B.usedIn)}: ${esc(it.usedIn.join(B.sep))}</div>` : "");
       card.hidden = false;
 
       /*
@@ -1406,7 +1441,7 @@ const payload = {
         readUrl();
         $("savename").value = b.label ?? "";
         render();
-        $("compare").href = base + "/build/compare/" + (b.hash ? "#" + b.hash : "");
+        $("compare").href = lbase + "/build/compare/" + (b.hash ? "#" + b.hash : "");
       });
       renderSaved();
       // 保存済みがあるときは開いた状態で始める
@@ -1419,11 +1454,11 @@ const payload = {
       const btn = $("share");
       try {
         await navigator.clipboard.writeText(location.href);
-        btn.textContent = "コピーしました";
+        btn.textContent = B.copied;
       } catch {
         btn.textContent = location.href;
       }
-      setTimeout(() => (btn.textContent = "共有URLをコピー"), 2000);
+      setTimeout(() => (btn.textContent = B.copyUrl), 2000);
     });
 
     for (const btn of document.querySelectorAll(".sortbtn")) {
@@ -1450,7 +1485,7 @@ const payload = {
     /** 検索対象の文字列(名前 + 説明 + 内部ID)。カードごとに1回だけ作る */
     const shopHay = Object.fromEntries(
       Object.entries(payload.items).map(([id, it]) =>
-        [id, window.itemSearch.prepare(`${it.name} ${it.desc} ${id}`)]),
+        [id, window.itemSearch.prepare(`${it.name} ${it.nameEn ?? ""} ${it.desc} ${id}`)]),
     );
 
     function applyShop() {
@@ -1474,7 +1509,7 @@ const payload = {
             if (m.length > 0) {
               related++;
               m.forEach((l) => labels.add(l));
-              rel.title = `関連: ${m.join("・")}`;
+              rel.title = `${B.related}: ${m.join(B.dot)}`;
             } else {
               direct++;
             }

@@ -16,21 +16,23 @@ interface Props {
 }
 const { matchup, base } = Astro.props;
 const { strengths, noStandout, shares, counters } = matchup;
+const { L, langPath } = Astro.locals.i18n;
+const M = L().matchup;
 ---
 
 <section class="matchup">
-  <h2>強みと対策</h2>
+  <h2>{M.title}</h2>
 
   <div class="head">
-    <h3>特徴</h3>
-    <span>{noStandout ? "突出した軸はありません。上位3軸を出しています" : "全38体の中で上位12.5%に入る軸"}</span>
+    <h3>{M.features}</h3>
+    <span>{noStandout ? M.noStandout : M.standout}</span>
   </div>
   <ul class="chips">
     {strengths.map((s) => (
       <li>
         <span class="lb">{s.label}</span>
         <span class="vl">{s.value}</span>
-        <span class="pc">上位{s.topPercent}%</span>
+        <span class="pc">{M.topPercent(s.topPercent)}</span>
       </li>
     ))}
   </ul>
@@ -39,9 +41,9 @@ const { strengths, noStandout, shares, counters } = matchup;
     <ul class="chips shares">
       {shares.map((s, i) => (
         <li>
-          {i === 0 && <span class="lb">よく積まれるアイテム</span>}
+          {i === 0 && <span class="lb">{M.sharesLabel}</span>}
           <span class="vl">{s.label} {s.percent}%</span>
-          <span class="pc">上位{s.topPercent}%</span>
+          <span class="pc">{M.topPercent(s.topPercent)}</span>
         </li>
       ))}
     </ul>
@@ -50,8 +52,8 @@ const { strengths, noStandout, shares, counters } = matchup;
   {counters.length > 0 && (
     <>
       <div class="head">
-        <h3>対策</h3>
-        <span>スキルの中身と実際のビルド構成から</span>
+        <h3>{M.counters}</h3>
+        <span>{M.countersNote}</span>
       </div>
       <div class="rules">
         {counters.map((c) => (
@@ -59,15 +61,15 @@ const { strengths, noStandout, shares, counters } = matchup;
             <p class="rhead">
               <b>{c.title}</b>
               <span class="why">
-                根拠: {c.why}
+                {M.why}{c.why}
                 {c.evidence && <em> — {c.evidence}</em>}
-                {c.manual && <em class="manual"> — 手動タグ</em>}
+                {c.manual && <em class="manual"> — {M.manualTag}</em>}
               </span>
             </p>
             <ul class="items">
               {c.items.map((mi) => (
                 <li>
-                  <a href={`${base}/items/${mi.item.id}/`} data-itemcard={mi.item.id}>
+                  <a href={`${base}${langPath(`/items/${mi.item.id}/`)}`} data-itemcard={mi.item.id}>
                     <ItemIcon
                       name={t(mi.item.nameToken, mi.item.id)}
                       slotType={mi.item.slotType}
@@ -79,8 +81,8 @@ const { strengths, noStandout, shares, counters } = matchup;
                     />
                   </a>
                   <span class="inm">
-                    <a href={`${base}/items/${mi.item.id}/`}>{t(mi.item.nameToken, mi.item.id)}</a>
-                    <small>{mi.note ?? "手動タグ"}</small>
+                    <a href={`${base}${langPath(`/items/${mi.item.id}/`)}`}>{t(mi.item.nameToken, mi.item.id)}</a>
+                    <small>{mi.note ?? M.manualTag}</small>
                   </span>
                 </li>
               ))}
@@ -92,8 +94,8 @@ const { strengths, noStandout, shares, counters } = matchup;
   )}
 
   <p class="foot">
-    全ヒーロー中の順位・スキルの数値・実際のビルドの構成比から機械的に出しています。
-    <a href={`${base}/about/`}>算出方法</a>
+    {M.foot}
+    <a href={`${base}/about/`}>{M.method}</a>
   </p>
 </section>
 

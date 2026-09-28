@@ -21,6 +21,10 @@ import {
   type PatchNoteEntry,
 } from "./data.ts";
 import type { Item } from "../types/item.ts";
+import { L } from "../i18n/index.ts";
+import { term } from "../i18n/terms.ts";
+import { langPath } from "../i18n/routes.ts";
+import { currentLang } from "../i18n/context.ts";
 
 /*
  * URL の接頭辞は呼び出し側(Astroページ)から渡す。plain .ts では import.meta.env に
@@ -75,6 +79,19 @@ export interface BalanceUpdate {
   changeCount: number;
 }
 
+/**
+ * アップデートの題。data/updates.json の title は公式ノートの題(Steam のニュースを
+ * 日本語で取ったもの)なので、日本語版ではそのまま出す。ほかの言語では日本語の題を
+ * 出さず、種類だけを辞書の文言で出す(本文のページは日本語のみ)。
+ */
+export function updateTitle(title: string): string {
+  if (currentLang() === "ja") return title;
+  const a = L().adjust;
+  if (/^(マイナー\s*アップデート|Minor Update)/i.test(title)) return a.minorUpdate;
+  if (title === "初回データ取り込み") return a.initialImport;
+  return /[\u3040-\u30ff\u4e00-\u9fff]/.test(title) ? a.update : title;
+}
+
 const EMPTY_COUNTS = (): Record<AdjustmentKind, number> => ({
   buff: 0,
   nerf: 0,
@@ -98,7 +115,7 @@ function toUpdate(u: SiteUpdate, base: string): BalanceUpdate {
       const it = item(a.key);
       if (!it) continue;
       const name = t(it.nameToken, it.id);
-      const href = `${base}/items/${it.id}/`;
+      const href = `${base}${langPath(`/items/${it.id}/`)}`;
       entities.push({
         target: "item",
         key: a.key,
@@ -131,7 +148,7 @@ function toUpdate(u: SiteUpdate, base: string): BalanceUpdate {
        * 数値が今どうなっているかを確認できる場所(試合の流れの付録の数値表)へ飛ばす。
        */
       const href = `${base}/mechanics/match/#appendix`;
-      const name = "システム全体の調整";
+      const name = L().adjust.system;
       entities.push({
         target: "system",
         key: a.key,
@@ -161,7 +178,7 @@ function toUpdate(u: SiteUpdate, base: string): BalanceUpdate {
     const hero = heroByKey(a.key);
     if (!hero) continue;
     const heroName = t(hero.nameToken, hero.key);
-    const heroHref = `${base}/heroes/${hero.id}/`;
+    const heroHref = `${base}${langPath(`/heroes/${hero.id}/`)}`;
     entities.push({
       target: "hero",
       key: a.key,
@@ -183,8 +200,8 @@ function toUpdate(u: SiteUpdate, base: string): BalanceUpdate {
         abilityImage: g.scope === "ability" ? g.image : null,
         abilityKey: g.abilityKey,
         item: null,
-        tag: g.scope === "stat" ? "基礎" : g.scope === "weapon" ? "武器" : null,
-        href: g.scope === "ability" && g.abilityKey ? `${base}/abilities/${g.abilityKey}/` : heroHref,
+        tag: g.scope === "stat" ? L().adjust.tagBase : g.scope === "weapon" ? term("weapon") : null,
+        href: g.scope === "ability" && g.abilityKey ? `${base}${langPath(`/abilities/${g.abilityKey}/`)}` : heroHref,
         changeCount: g.rows.length,
       });
     }
@@ -192,7 +209,7 @@ function toUpdate(u: SiteUpdate, base: string): BalanceUpdate {
 
   return {
     date: u.date,
-    title: u.title,
+    title: updateTitle(u.title),
     fromVersion: u.fromVersion ?? null,
     toVersion: u.toVersion ?? null,
     note: patchNoteByDate(u.date),
@@ -245,7 +262,7 @@ function historyFrom(
     if (!groups || groups.length === 0) continue;
     out.push({
       date: u.date,
-      title: u.title,
+      title: updateTitle(u.title),
       href: `${base}/patch-notes/${u.date}/`,
       kind: kindOf(u, groups),
       groups,

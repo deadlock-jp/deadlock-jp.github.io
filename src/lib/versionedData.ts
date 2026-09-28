@@ -13,6 +13,8 @@ import type { ItemsFile } from "../types/item.ts";
 import type { AbilitiesFile } from "../types/ability.ts";
 import updatesJson from "../../data/updates.json" with { type: "json" };
 import { patchNoteByDate, type PatchNoteEntry } from "./patchNotes.ts";
+import { updateTitle } from "./balance.ts";
+import { L } from "../i18n/index.ts";
 
 const DATA_DIR = join(process.cwd(), "data");
 
@@ -100,8 +102,8 @@ export function snapshotInfo(version: string): SnapshotInfo {
   const updateDate = updateByToVersion.get(version);
   const note = updateDate ? (patchNoteByDate(updateDate) ?? null) : null;
   const label = note
-    ? `${note.date} ${note.title.replace(/\s*-\s*\d{4}年.*$/, "")}`
-    : `build ${version}${date ? `・${date} 抽出` : ""}`;
+    ? `${note.date} ${updateTitle(note.title).replace(/\s*-\s*\d{4}年.*$/, "")}`
+    : L().compare.snapshotLabel(version, date);
   return { version, date, note, label };
 }
 

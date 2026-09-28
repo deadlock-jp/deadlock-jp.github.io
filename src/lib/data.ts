@@ -14,9 +14,14 @@ import type { ItemsFile, Item } from "../types/item.ts";
 import type { AbilitiesFile, Ability } from "../types/ability.ts";
 import type { LocalizationFile } from "../types/localization.ts";
 import type { AdjustmentKind, AdjustmentChange, Adjustment } from "./adjustments.ts";
+import { t, localizationFile, gameLocalization } from "../i18n/game.ts";
+import { term, type TermKey } from "../i18n/terms.ts";
+import { L } from "../i18n/index.ts";
+import { currentLang } from "../i18n/context.ts";
+import type { Lang } from "../i18n/langs.ts";
 import {
   economyBucketOf,
-  ECONOMY_BUCKET_LABEL,
+  economyBucketLabel,
   economyFieldLabel,
   economyValueText,
   type EconomyBucket,
@@ -39,9 +44,9 @@ const DATA_DIR = join(process.cwd(), "data");
 const readJson = <T>(path: string): T => JSON.parse(readFileSync(path, "utf8")) as T;
 
 /**
- * data/snapshots/<version>/ からヒーロー・アイテム・アビリティを、
- * data/localization/ からローカライズ(常に最新版の1セット)を読む。
+ * data/snapshots/<version>/ からヒーロー・アイテム・アビリティを読む。
  * version を省略すると data/latest.json が指す最新版。
+ * ローカライズ(data/localization/)は src/i18n/game.ts が言語ごとに読む。
  * 複数バージョンの比較は src/lib/versionedData.ts が別に持つ
  * (architecture.html「データレイアウト」参照)。
  */
@@ -49,8 +54,6 @@ function loadSnapshot(version?: string): {
   heroes: HeroesFile;
   items: ItemsFile;
   abilities: AbilitiesFile;
-  localization: LocalizationFile;
-  localizationEn: LocalizationFile;
 } {
   const v = version ?? readJson<{ version: string }>(join(DATA_DIR, "latest.json")).version;
   const dir = join(DATA_DIR, "snapshots", v);
@@ -58,8 +61,6 @@ function loadSnapshot(version?: string): {
     heroes: readJson<HeroesFile>(join(dir, "heroes.json")),
     items: readJson<ItemsFile>(join(dir, "items.json")),
     abilities: readJson<AbilitiesFile>(join(dir, "abilities.json")),
-    localization: readJson<LocalizationFile>(join(DATA_DIR, "localization", "japanese.json")),
-    localizationEn: readJson<LocalizationFile>(join(DATA_DIR, "localization", "english.json")),
   };
 }
 
@@ -67,18 +68,17 @@ const snapshot = loadSnapshot();
 export const heroesFile = snapshot.heroes;
 export const itemsFile = snapshot.items;
 export const abilitiesFile = snapshot.abilities;
-export const localization = snapshot.localization;
+/** 日本語のローカライズ(about ページのトークン数表示用) */
+export const localization: LocalizationFile = localizationFile("japanese");
 /** ゲーム内日本語が用意されていないトークン用の予備。約100件がこちらに落ちる */
-export const localizationEn = snapshot.localizationEn;
+export const localizationEn: LocalizationFile = localizationFile("english");
 
 /**
- * トークンID から表示テキストを引く。
- * ゲーム内の日本語を優先し、無ければ英語、それも無ければフォールバック。
+ * トークンID から表示テキストを引く(実体は src/i18n/game.ts)。
+ * いま描いているページの言語を優先し、無ければ英語、それも無ければフォールバック。
  * 訳文はゲーム本体から取り出したものをそのまま使い、こちらで訳し直さない。
  */
-export function t(token: string, fallback = ""): string {
-  return localization.tokens[token]?.text ?? localizationEn.tokens[token]?.text ?? fallback;
-}
+export { t };
 
 /** 説明文に含まれる装飾タグを落として素のテキストにする */
 export function plain(token: string, fallback = ""): string {
@@ -106,20 +106,32 @@ function humanize(name: string): string {
  * (HealingPerCast_Label / DOTDuration_Label など)。describe() が {s:X} の参照で
  * 大文字小文字を無視して再探索しているのと同じ理由で、ここでも両方見る。
  */
-const labelTokenIndex = new Map<string, string>();
-for (const file of [localization, localizationEn]) {
-  for (const key of Object.keys(file.tokens)) {
-    const lower = key.toLowerCase();
-    if (lower.endsWith("_label") && !labelTokenIndex.has(lower)) labelTokenIndex.set(lower, key);
+const labelTokenIndexes = new Map<Lang, Map<string, string>>();
+function labelTokenIndex(lang: Lang = currentLang()): Map<string, string> {
+  let index = labelTokenIndexes.get(lang);
+  if (index) return index;
+  index = new Map<string, string>();
+  for (const file of [gameLocalization(lang), localizationEn]) {
+    for (const key of Object.keys(file.tokens)) {
+      const lower = key.toLowerCase();
+      if (lower.endsWith("_label") && !index.has(lower)) index.set(lower, key);
+    }
   }
+  labelTokenIndexes.set(lang, index);
+  return index;
 }
-/** ゲーム側に日本語が1つも無いプロパティの自前の名前(data/property-labels.json) */
-const ownLabels = (propertyLabelsJson as unknown as { labels: Record<string, string> }).labels;
+/**
+ * ゲーム側にどの言語の表示名も無いプロパティの自前の名前。
+ * 日本語は data/property-labels.json、ほかの言語は辞書(src/i18n/ui/)。
+ */
+const ownLabelsJa = (propertyLabelsJson as unknown as { labels: Record<string, string> }).labels;
+const ownLabels = (): Record<string, string> =>
+  currentLang() === "ja" ? ownLabelsJa : (L().propertyLabels as Record<string, string>);
 
 export function statLabel(name: string, fallback?: string): string {
   const exact = t(`${name}_label`, "");
   if (exact) return exact;
-  const key = labelTokenIndex.get(`${name}_label`.toLowerCase());
+  const key = labelTokenIndex().get(`${name}_label`.toLowerCase());
   const viaLabel = key ? t(key, "") : "";
   if (viaLabel) return viaLabel;
   /*
@@ -127,10 +139,10 @@ export function statLabel(name: string, fallback?: string): string {
    * 1223件あり "_label"(1108件)より多く、中身は同じ日本語なので流用する。
    * これを見ていなかったため「BouncePadExtendDuration」のような内部名が出ていた。
    */
-  const pvKey = labelTokenIndex.get(`${name}_postvalue_label`.toLowerCase());
+  const pvKey = labelTokenIndex().get(`${name}_postvalue_label`.toLowerCase());
   const viaPostvalue = pvKey ? t(pvKey, "") : "";
   if (viaPostvalue) return viaPostvalue;
-  return ownLabels[name] ?? fallback ?? humanize(name);
+  return ownLabels()[name] ?? fallback ?? humanize(name);
 }
 
 /**
@@ -326,23 +338,33 @@ function buildModifierLabels(): Map<string, string> {
   return out;
 }
 
-export const modifierLabels = buildModifierLabels();
+/** 言語ごとに1回だけ作る(投票に使うラベルがその言語のトークンなので) */
+const modifierLabelsByLang = new Map<Lang, Map<string, string>>();
+function modifierLabels(): Map<string, string> {
+  const lang = currentLang();
+  let labels = modifierLabelsByLang.get(lang);
+  if (!labels) {
+    labels = buildModifierLabels();
+    modifierLabelsByLang.set(lang, labels);
+  }
+  return labels;
+}
 
 /**
  * レベルアップの成長値だけに使われるキー。
  * ショップに並ぶアイテムがこれらを供給しないため上の投票では拾えず、
  * ゲームのローカライズにも対応する文字列が無い(Valveが画面に出していない)。
- * 表示のためにこちらで名前を与えたもので、ゲーム内表記ではない。
+ * 同じ意味のステータスのトークン(src/i18n/terms.ts)を当て、それも無いものだけ辞書から引く。
  */
-const LEVEL_GROWTH_LABELS: Record<string, string> = {
-  MODIFIER_VALUE_BASE_HEALTH_FROM_LEVEL: "最大HP",
-  MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL: "1発ダメージ",
-  MODIFIER_VALUE_BASE_MELEE_DAMAGE_FROM_LEVEL: "近接ダメージ",
-  MODIFIER_VALUE_BOON_COUNT: "恩恵",
+const LEVEL_GROWTH_LABELS: Record<string, () => string> = {
+  MODIFIER_VALUE_BASE_HEALTH_FROM_LEVEL: () => term("maxHealth"),
+  MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL: () => term("bulletDamageShort"),
+  MODIFIER_VALUE_BASE_MELEE_DAMAGE_FROM_LEVEL: () => term("meleeDamage"),
+  MODIFIER_VALUE_BOON_COUNT: () => term("boon"),
   // 一部ヒーローだけがレベルで得る成長。ゲームの表示名が無いので付けたもの
-  MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL_ALT_FIRE: "サブ射撃1発ダメージ",
-  MODIFIER_VALUE_BONUS_ATTACK_RANGE: "攻撃射程",
-  MODIFIER_VALUE_TECH_RESIST: "スピリット耐性",
+  MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL_ALT_FIRE: () => L().gameTerms.altFireBulletDamage,
+  MODIFIER_VALUE_BONUS_ATTACK_RANGE: () => L().gameTerms.attackRange,
+  MODIFIER_VALUE_TECH_RESIST: () => term("spiritResist"),
 };
 
 /**
@@ -355,9 +377,9 @@ const LEVEL_GROWTH_LABELS: Record<string, string> = {
 export function modifierLabel(type: string): string {
   // t() は未定義でも "" を返すので ?? ではなく || でつなぐ
   return (
-    modifierLabels.get(type) ||
+    modifierLabels().get(type) ||
     t(`${type}_label`, "") ||
-    LEVEL_GROWTH_LABELS[type] ||
+    LEVEL_GROWTH_LABELS[type]?.() ||
     type.replace("MODIFIER_VALUE_", "")
   );
 }
@@ -465,6 +487,38 @@ export function objectNotes(objectId: string): string[] {
   return objectNotesFile.notes[objectId] ?? [];
 }
 
+/**
+ * スキル詳細ページ(/abilities/<実ID>/)を作るスキルと、その持ち主。
+ * 実装済み全ヒーローの Signature/Ultimate スキルと、変身で入れ替わるスキル
+ * (今のところシルバーのみ。architecture.html参照)。
+ * src/pages/abilities/[id].astro・その多言語版・sitemap.xml が同じものを使う。
+ */
+export interface AbilityOwner {
+  hero: Hero;
+  slot: string;
+  /** シルバーの人狼形態のように、既定ではなく変身後のスロットで持つスキルか */
+  isAlternate: boolean;
+}
+export function abilityOwners(): Map<string, AbilityOwner> {
+  const owners = new Map<string, AbilityOwner>();
+  for (const hero of releasedHeroes()) {
+    for (const a of hero.abilities) {
+      if (!a.slot.startsWith("Signature")) continue;
+      if (!owners.has(a.abilityKey)) owners.set(a.abilityKey, { hero, slot: a.slot, isAlternate: false });
+    }
+    const transformAbility = hero.abilities
+      .map((a) => ability(a.abilityKey))
+      .find((ab): ab is NonNullable<typeof ab> => !!ab?.alternateFormAbilities);
+    if (transformAbility) {
+      for (const [slot, key] of Object.entries(transformAbility.alternateFormAbilities!)) {
+        if (!slot.startsWith("Signature")) continue;
+        if (!owners.has(key)) owners.set(key, { hero, slot, isAlternate: true });
+      }
+    }
+  }
+  return owners;
+}
+
 /** ショップに並ぶアイテムを ティア → 名前 順で返す */
 export function shopItems(): Item[] {
   return Object.values(itemsFile.items)
@@ -517,11 +571,20 @@ export function usedIn(id: string): Item[] {
     .filter((x): x is Item => Boolean(x) && x.inShop);
 }
 
-/** アイテムTYPEの日本語表記とCSS変数名 */
+/**
+ * アイテムTYPEの表記とCSS変数名。
+ * label は描いているページの言語で引く getter(JSON にするとその時点の文字列になる)。
+ */
+const slotMeta = (key: TermKey, cssVar: "weapon" | "vitality" | "spirit") => ({
+  get label(): string {
+    return term(key);
+  },
+  cssVar,
+});
 export const SLOT_META = {
-  WeaponMod: { label: "武器", cssVar: "weapon" },
-  Armor: { label: "生命力", cssVar: "vitality" },
-  Tech: { label: "スピリット", cssVar: "spirit" },
+  WeaponMod: slotMeta("weapon", "weapon"),
+  Armor: slotMeta("vitality", "vitality"),
+  Tech: slotMeta("spirit", "spirit"),
 } as const;
 
 /**
@@ -578,7 +641,26 @@ export function souls(n: number): string {
  *   updates.json へ手で書く上書き(数値ではなく分類ラベルなのでルール6の対象外)
  */
 export type { AdjustmentKind, AdjustmentChange, Adjustment } from "./adjustments.ts";
-export { ADJUSTMENT_LABEL, classifyChanges, combineKinds } from "./adjustments.ts";
+export { classifyChanges, combineKinds } from "./adjustments.ts";
+
+/** バフ/ナーフなどの表示名。描いているページの言語で引く getter */
+export const ADJUSTMENT_LABEL: Record<AdjustmentKind, string> = {
+  get buff() {
+    return L().adjust.kind.buff;
+  },
+  get nerf() {
+    return L().adjust.kind.nerf;
+  },
+  get mixed() {
+    return L().adjust.kind.mixed;
+  },
+  get neutral() {
+    return L().adjust.kind.neutral;
+  },
+  get rework() {
+    return L().adjust.kind.rework;
+  },
+};
 export interface SiteUpdate {
   date: string;
   upstreamCommit: string | null;
@@ -657,26 +739,49 @@ const UNITS_PER_METER = 39.37;
  * スタミナはヒーローページでは 1÷値 を「スタミナクールダウン」として見せているが、
  * ここで出すのは変換前の生の値なので「スタミナ回復」と呼び分ける。
  */
-const BASE_STAT_LABEL: Record<string, string> = {
-  EMaxHealth: "最大HP",
-  EBaseHealthRegen: "HPリジェネ",
-  EMaxMoveSpeed: "移動速度",
-  ESprintSpeed: "スプリント速度",
-  ECrouchSpeed: "しゃがみ速度",
-  EStamina: "スタミナ",
-  EStaminaRegenPerSecond: "スタミナ回復",
-  ELightMeleeDamage: "近接弱攻撃",
-  EHeavyMeleeDamage: "近接強攻撃",
-  EGroundDashDistanceInMeters: "地上ダッシュ距離",
-  EGroundDashDuration: "地上ダッシュ時間",
-  EAirDashDistanceInMeters: "空中ダッシュ距離",
-  EAirDashDuration: "空中ダッシュ時間",
+const BASE_STAT_LABEL: Record<string, () => string> = {
+  EMaxHealth: () => term("maxHealth"),
+  EBaseHealthRegen: () => term("healthRegen"),
+  EMaxMoveSpeed: () => term("moveSpeed"),
+  ESprintSpeed: () => term("sprintSpeed"),
+  ECrouchSpeed: () => L().gameTerms.crouchSpeed,
+  EStamina: () => term("stamina"),
+  EStaminaRegenPerSecond: () => term("staminaRecovery"),
+  ELightMeleeDamage: () => term("lightMelee"),
+  EHeavyMeleeDamage: () => term("heavyMelee"),
+  EGroundDashDistanceInMeters: () => L().gameTerms.groundDashDistance,
+  EGroundDashDuration: () => L().gameTerms.groundDashDuration,
+  EAirDashDistanceInMeters: () => L().gameTerms.airDashDistance,
+  EAirDashDuration: () => L().gameTerms.airDashDuration,
 };
 
 /** プロパティ名から表示ラベルを引く。m_strLocTokenOverride があればそちら優先 */
 function adjustmentLabel(name: string, source: Ability | Item | undefined): string {
   const override = source?.properties?.[name]?.labelOverride ?? null;
-  return statLabel(override ?? name, BASE_STAT_LABEL[name] ?? humanize(name));
+  return statLabel(override ?? name, BASE_STAT_LABEL[name]?.() ?? humanize(name));
+}
+
+/**
+ * 主武器の生の数値(ability.weapon)の表示名と単位。
+ * 対応表(ラベルの原本と単位)は src/lib/adjustments.ts の WEAPON_FIELDS。
+ * ゲームのステータス画面と同じ意味のものはトークンで、それ以外は辞書で引く。
+ */
+const WEAPON_FIELD_TERMS: Record<string, TermKey> = {
+  bulletDamage: "bulletDamage",
+  clipSize: "ammo",
+  reloadDuration: "reloadTime",
+  bulletSpeed: "bulletVelocity",
+};
+function weaponFieldLabel(field: string): string | null {
+  const key = WEAPON_FIELD_TERMS[field];
+  if (key) return term(key);
+  return (L().gameTerms.weaponFields as Record<string, string>)[field] ?? null;
+}
+/** WEAPON_FIELDS の単位(日本語の原本)をいまの言語の表記にする */
+function unitText(unit: string): string {
+  if (unit === "秒") return L().common.sec;
+  if (unit === "m／秒") return L().common.mps;
+  return unit;
 }
 
 /**
@@ -733,7 +838,7 @@ export function adjustmentGroups(a: Adjustment): AdjustmentGroup[] {
       groups.push({
         scope: "system",
         abilityKey: null,
-        name: ECONOMY_BUCKET_LABEL[b],
+        name: economyBucketLabel(b),
         image: null,
         kind: classifyChanges(rows),
         rows: rows.map((c) => adjustmentRow(c, undefined)),
@@ -753,7 +858,7 @@ export function adjustmentGroups(a: Adjustment): AdjustmentGroup[] {
     groups.push({
       scope: "stat",
       abilityKey: null,
-      name: "基礎ステータス",
+      name: L().adjust.baseStats,
       image: null,
       kind: classifyChanges(statChanges),
       rows: statChanges.map((c) => adjustmentRow(c, undefined)),
@@ -769,7 +874,7 @@ export function adjustmentGroups(a: Adjustment): AdjustmentGroup[] {
     groups.push({
       scope: "weapon",
       abilityKey: null,
-      name: t(`citadel_weapon_hero_${heroKey}_set`, "主武器"),
+      name: t(`citadel_weapon_hero_${heroKey}_set`, L().adjust.mainWeapon),
       image: null,
       kind: classifyChanges(weaponChanges),
       rows: weaponChanges.map((c) => adjustmentRow(c, undefined)),
@@ -821,11 +926,11 @@ function adjustmentRow(
       if (v === null) return null;
       const n = spec?.meters ? v / UNITS_PER_METER : v;
       const body = Number.isInteger(n) ? String(n) : String(Math.round(n * 100) / 100);
-      return `${body}${spec?.unit ?? ""}`;
+      return `${body}${unitText(spec?.unit ?? "")}`;
     };
     return {
       path: c.path,
-      label: spec?.label ?? humanize(weaponField.replace(".", " ")),
+      label: weaponFieldLabel(weaponField) ?? spec?.label ?? humanize(weaponField.replace(".", " ")),
       tier: null,
       isScale: false,
       fromText: text(c.from),
@@ -842,7 +947,7 @@ function adjustmentRow(
     const comp = item(componentId);
     return {
       path: c.path,
-      label: "構成素材",
+      label: L().adjust.components,
       tier: null,
       isScale: false,
       fromText: c.from === null ? null : (comp ? t(comp.nameToken, componentId) : componentId),
@@ -893,10 +998,10 @@ function adjustmentRow(
    * 判定は値の大小ではなく出現順(#2 以降)で行う。
    */
   const scale = isScalePath(c.path) || (upgrade && /#\d+$/.test(c.path));
-  const base = name === "cost" ? "価格" : adjustmentLabel(name, source);
+  const base = name === "cost" ? L().gameTerms.price : adjustmentLabel(name, source);
   return {
     path: c.path,
-    label: scale ? `${base}のスピリット倍率` : base,
+    label: scale ? L().adjust.spiritScale(base) : base,
     tier: isItem ? null : upgradeTierOf(c.path),
     isScale: scale,
     fromText: adjustmentValueText(name, c.from, source, upgrade, scale),

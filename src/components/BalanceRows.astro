@@ -14,6 +14,7 @@ interface Props {
   rows: AdjustmentRow[];
 }
 const { rows } = Astro.props;
+const { L } = Astro.locals.i18n;
 const goodClass = (good: boolean | null) => (good === null ? "flat" : good ? "good" : "bad");
 ---
 
@@ -22,8 +23,8 @@ const goodClass = (good: boolean | null) => (good === null ? "flat" : good ? "go
     <li class={goodClass(r.good)}>
       {r.tier && <span class="tier">T{r.tier}</span>}
       <span class="rlabel">{r.label}</span>
-      <span class="to">{r.toText ?? "削除"}</span>
-      <span class="from">{r.fromText === null ? "(新規)" : `(${r.fromText})`}</span>
+      <span class="to">{r.toText ?? L().adjust.deleted}</span>
+      <span class="from">{r.fromText === null ? L().adjust.added : L().adjust.before(r.fromText)}</span>
     </li>
   ))}
 </ul>

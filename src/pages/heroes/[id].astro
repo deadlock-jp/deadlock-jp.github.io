@@ -26,6 +26,8 @@ export function getStaticPaths() {
 }
 const { hero } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const { L, term, langPath } = Astro.locals.i18n;
+const T = L();
 const name = t(hero.nameToken, hero.key);
 const tags = heroTags(hero);
 const radar = heroRadar(hero.id);
@@ -79,8 +81,8 @@ const altSkills = transformAbility
   : null;
 const skillGroups = altSkills
   ? [
-      { form: "human", label: t("ability_header_human", "人間時").replace(/[：:]$/, ""), list: skills },
-      { form: "werewolf", label: t("ability_header_werewolf", "人狼時").replace(/[：:]$/, ""), list: altSkills },
+      { form: "human", label: t("ability_header_human", T.heroPage.formHuman).replace(/[：:]$/, ""), list: skills },
+      { form: "werewolf", label: t("ability_header_werewolf", T.heroPage.formWerewolf).replace(/[：:]$/, ""), list: altSkills },
     ]
   : [{ form: null, label: null, list: skills }];
 
@@ -93,11 +95,13 @@ const altWeaponRadar = altWeapon ? radarAxesForWeapon(altWeapon) : null;
 const adjRows = heroBalanceHistory(hero.key, base);
 const matchup = heroMatchup(hero);
 const skillNames = skills.map((s) => t(s.key, "")).filter(Boolean);
-const metaDesc =
-  `Deadlock（デッドロック）のヒーロー「${name}」の基礎ステータス・スキル・レベル成長を日本語で。` +
-  `最大HP ${hero.startingStats.EMaxHealth}／移動速度 ${hero.startingStats.EMaxMoveSpeed}m。` +
-  (tags.length ? `特徴: ${tags.join("・")}。` : "") +
-  (skillNames.length ? `スキル: ${skillNames.join("・")}。` : "");
+const metaDesc = T.heroPage.metaDesc(
+  name,
+  hero.startingStats.EMaxHealth,
+  hero.startingStats.EMaxMoveSpeed,
+  tags,
+  skillNames,
+);
 
 /*
  * XやDiscordに貼ったときのプレビュー画像。ビルドカードの背景に使っている
@@ -116,12 +120,12 @@ const ogImage = existsSync(join(process.cwd(), "public", cardRel)) ? `/${cardRel
   ogImageWidth={ogImage ? 1200 : undefined}
   ogImageHeight={ogImage ? 675 : undefined}
   breadcrumbs={[
-    { name: "ヒーロー", path: "/heroes/" },
-    { name, path: `/heroes/${hero.id}/` },
+    { name: T.nav.heroes, path: langPath("/heroes/") },
+    { name, path: langPath(`/heroes/${hero.id}/`) },
   ]}
 >
   <HeroStrip current={hero.id} />
-  <a class="back" href={`${base}/heroes/`}>← ヒーロー一覧</a>
+  <a class="back" href={`${base}${langPath("/heroes/")}`}>{T.heroPage.back}</a>
   <HeroRender name={name} heroKey={hero.key} />
   <h1>{name}</h1>
   {tags.length > 0 && (
@@ -143,26 +147,26 @@ const ogImage = existsSync(join(process.cwd(), "public", cardRel)) ? `/${cardRel
     </div>
   )}
 
-  <h2>ステータス</h2>
+  <h2>{T.heroPage.stats}</h2>
   <div class="radars">
     {altWeaponRadar ? (
       <>
         <div class="formpanel" data-form="human">
-          {radar.weapon.length > 0 && <StatRadar axes={radar.weapon} cssVar="weapon" title="武器" />}
+          {radar.weapon.length > 0 && <StatRadar axes={radar.weapon} cssVar="weapon" title={term("weapon")} />}
         </div>
         <div class="formpanel" data-form="werewolf" hidden>
-          <StatRadar axes={altWeaponRadar} cssVar="weapon" title="武器" />
+          <StatRadar axes={altWeaponRadar} cssVar="weapon" title={term("weapon")} />
         </div>
       </>
     ) : (
-      radar.weapon.length > 0 && <StatRadar axes={radar.weapon} cssVar="weapon" title="武器" />
+      radar.weapon.length > 0 && <StatRadar axes={radar.weapon} cssVar="weapon" title={term("weapon")} />
     )}
-    <StatRadar axes={radar.base} cssVar="vitality" title="生命力" />
-    <StatRadar axes={radar.growth} cssVar="spirit" title="成長度／Lv" />
+    <StatRadar axes={radar.base} cssVar="vitality" title={term("vitality")} />
+    <StatRadar axes={radar.growth} cssVar="spirit" title={T.heroPage.growthRadar} />
   </div>
   {miscRows.length > 0 && (
     <ul class="msrow">
-      <li class="hd">その他</li>
+      <li class="hd">{T.heroPage.misc}</li>
       {miscRows.map((r) => (
         <li>
           <span class="l">{r.label}</span>
@@ -172,14 +176,10 @@ const ogImage = existsSync(join(process.cwd(), "public", cardRel)) ? `/${cardRel
     </ul>
   )}
   {extraGrowth.length > 0 && (
-    <p class="radarnote extra">
-      このヒーローは成長度の4項目に加えて、レベルごとに
-      {extraGrowth.map(([k, v]) => `${modifierLabel(k)} +${v}`).join(" / ")}
-      も上がります。
-    </p>
+    <p class="radarnote extra">{T.heroPage.extraGrowth(extraGrowth.map(([k, v]) => `${modifierLabel(k)} +${v}`).join(" / "))}</p>
   )}
 
-  <h2>スキル</h2>
+  <h2>{T.heroPage.skills}</h2>
   <div class="skills">
     {skillGroups.map((g) => g.list.map((s) => (
       <div data-form={g.form} hidden={g.form === "werewolf"}>
@@ -189,7 +189,7 @@ const ogImage = existsSync(join(process.cwd(), "public", cardRel)) ? `/${cardRel
           card={s.card}
           notes={s.notes}
           heroName={name}
-          href={`${base}/abilities/${s.key}/`}
+          href={`${base}${langPath(`/abilities/${s.key}/`)}`}
         />
       </div>
     )))}

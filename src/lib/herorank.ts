@@ -12,6 +12,10 @@ import type { Hero } from "../types/hero.ts";
 import type { WeaponInfo } from "../types/ability.ts";
 import { releasedHeroes, ability } from "./data.ts";
 import { toMeters, num } from "./gamestats.ts";
+import { L } from "../i18n/index.ts";
+import { term } from "../i18n/terms.ts";
+import { currentLang } from "../i18n/context.ts";
+import type { Lang } from "../i18n/langs.ts";
 
 export interface RankRow {
   key: string;
@@ -35,7 +39,8 @@ export interface HeroRank {
 
 type Metric = {
   key: string;
-  label: string;
+  /** 表示名。描いているページの言語で引く(getter) */
+  readonly label: string;
   group: "weapon" | "vitality" | "spirit" | "growth";
   /** そのヒーローの生値。取れなければ null */
   get: (h: Hero) => number | null;
@@ -97,83 +102,83 @@ function skillScaleAvg(h: Hero): number | null {
 
 const METRICS: Metric[] = [
   // --- 武器 ---
-  { key: "dps", label: "DPS", group: "weapon", get: weaponMetric("dps"), fmt: (v) => num(v, 0) },
-  { key: "bullet", label: "1発ダメージ", group: "weapon", get: weaponMetric("bullet"), fmt: (v) => num(v, 1) },
-  { key: "firerate", label: "連射", group: "weapon", get: weaponMetric("firerate"), fmt: (v) => `${num(v, 1)}発/秒` },
-  { key: "clip", label: "装弾数", group: "weapon", get: weaponMetric("clip"), fmt: (v) => num(v, 0) },
+  { key: "dps", get label() { return term("dps"); }, group: "weapon", get: weaponMetric("dps"), fmt: (v) => num(v, 0) },
+  { key: "bullet", get label() { return term("bulletDamageShort"); }, group: "weapon", get: weaponMetric("bullet"), fmt: (v) => num(v, 1) },
+  { key: "firerate", get label() { return term("fireRateShort"); }, group: "weapon", get: weaponMetric("firerate"), fmt: (v) => `${num(v, 1)}${L().common.shotsPerSec}` },
+  { key: "clip", get label() { return term("ammoShort"); }, group: "weapon", get: weaponMetric("clip"), fmt: (v) => num(v, 0) },
   {
     key: "reload",
-    label: "リロード",
+    get label() { return term("reloadShort"); },
     group: "weapon",
     lowerIsBetter: true,
     get: weaponMetric("reload"),
-    fmt: (v) => `${num(v, 2)}秒`,
+    fmt: (v) => `${num(v, 2)}${L().common.sec}`,
   },
-  { key: "velocity", label: "弾速", group: "weapon", get: weaponMetric("velocity"), fmt: (v) => `${num(v, 0)}m/秒` },
+  { key: "velocity", get label() { return term("bulletVelocity"); }, group: "weapon", get: weaponMetric("velocity"), fmt: (v) => `${num(v, 0)}${L().common.mpsShort}` },
   {
     key: "range",
-    label: "減衰開始",
+    get label() { return L().gameTerms.falloffStart; },
     group: "weapon",
     get: weaponMetric("range"),
     fmt: (v) => `${num(v, 0)}m`,
   },
   {
     key: "rangeEnd",
-    label: "減衰終了",
+    get label() { return L().gameTerms.falloffEnd; },
     group: "weapon",
     get: weaponMetric("rangeEnd"),
     fmt: (v) => `${num(v, 0)}m`,
   },
-  { key: "lmelee", label: "軽近接", group: "weapon", get: (h) => h.startingStats.ELightMeleeDamage ?? null, fmt: (v) => num(v, 0) },
-  { key: "hmelee", label: "重近接", group: "weapon", get: (h) => h.startingStats.EHeavyMeleeDamage ?? null, fmt: (v) => num(v, 0) },
+  { key: "lmelee", get label() { return term("lightMeleeShort"); }, group: "weapon", get: (h) => h.startingStats.ELightMeleeDamage ?? null, fmt: (v) => num(v, 0) },
+  { key: "hmelee", get label() { return term("heavyMeleeShort"); }, group: "weapon", get: (h) => h.startingStats.EHeavyMeleeDamage ?? null, fmt: (v) => num(v, 0) },
   // --- 生命力 ---
-  { key: "hp", label: "最大HP", group: "vitality", get: (h) => h.startingStats.EMaxHealth ?? null, fmt: (v) => num(v, 0) },
-  { key: "regen", label: "HP回復", group: "vitality", get: (h) => h.startingStats.EBaseHealthRegen ?? null, fmt: (v) => num(v, 1) },
-  { key: "move", label: "移動速度", group: "vitality", get: (h) => h.startingStats.EMaxMoveSpeed ?? null, fmt: (v) => `${num(v, 1)}m` },
-  { key: "sprint", label: "スプリント速度", group: "vitality", get: (h) => h.startingStats.ESprintSpeed ?? null, fmt: (v) => `+${num(v, 1)}m` },
-  { key: "dash", label: "ダッシュ速度", group: "vitality", get: dashSpeed, fmt: (v) => `${num(v, 1)}m` },
-  { key: "stam", label: "スタミナ", group: "vitality", get: (h) => h.startingStats.EStamina ?? null, fmt: (v) => num(v, 0) },
+  { key: "hp", get label() { return term("maxHealth"); }, group: "vitality", get: (h) => h.startingStats.EMaxHealth ?? null, fmt: (v) => num(v, 0) },
+  { key: "regen", get label() { return term("healthRegenShort"); }, group: "vitality", get: (h) => h.startingStats.EBaseHealthRegen ?? null, fmt: (v) => num(v, 1) },
+  { key: "move", get label() { return term("moveSpeed"); }, group: "vitality", get: (h) => h.startingStats.EMaxMoveSpeed ?? null, fmt: (v) => `${num(v, 1)}m` },
+  { key: "sprint", get label() { return term("sprintSpeed"); }, group: "vitality", get: (h) => h.startingStats.ESprintSpeed ?? null, fmt: (v) => `+${num(v, 1)}m` },
+  { key: "dash", get label() { return term("dashSpeed"); }, group: "vitality", get: dashSpeed, fmt: (v) => `${num(v, 1)}m` },
+  { key: "stam", get label() { return term("stamina"); }, group: "vitality", get: (h) => h.startingStats.EStamina ?? null, fmt: (v) => num(v, 0) },
   {
     key: "stamcd",
-    label: "スタミナCD",
+    get label() { return term("staminaCooldownShort"); },
     group: "vitality",
     lowerIsBetter: true,
     get: (h) => {
       const x = h.startingStats.EStaminaRegenPerSecond;
       return x ? 1 / x : null;
     },
-    fmt: (v) => `${num(v, 1)}秒`,
+    fmt: (v) => `${num(v, 1)}${L().common.sec}`,
   },
   // --- スピリット(初期スタッツは全員共通なので、成長と係数で表す) ---
-  { key: "skillscale", label: "スキル係数", group: "spirit", get: skillScaleAvg, fmt: (v) => `×${num(v, 2)}` },
+  { key: "skillscale", get label() { return L().gameTerms.skillScale; }, group: "spirit", get: skillScaleAvg, fmt: (v) => `×${num(v, 2)}` },
   // --- 成長度(標準レベルアップ1回ごと。全38体が持つ4つ) ---
   {
     key: "gwdmg",
-    label: "武器ダメージ",
+    get label() { return term("weaponDamage"); },
     group: "growth",
     get: (h) => h.levelUpBonuses.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL ?? null,
-    fmt: (v) => `+${num(v, 3)}/Lv`,
+    fmt: (v) => `+${num(v, 3)}${L().common.perLv}`,
   },
   {
     key: "ghp",
-    label: "最大HP",
+    get label() { return term("maxHealth"); },
     group: "growth",
     get: (h) => h.levelUpBonuses.MODIFIER_VALUE_BASE_HEALTH_FROM_LEVEL ?? null,
-    fmt: (v) => `+${num(v, 1)}/Lv`,
+    fmt: (v) => `+${num(v, 1)}${L().common.perLv}`,
   },
   {
     key: "gmelee",
-    label: "近接ダメージ",
+    get label() { return term("meleeDamage"); },
     group: "growth",
     get: (h) => h.levelUpBonuses.MODIFIER_VALUE_BASE_MELEE_DAMAGE_FROM_LEVEL ?? null,
-    fmt: (v) => `+${num(v, 2)}/Lv`,
+    fmt: (v) => `+${num(v, 2)}${L().common.perLv}`,
   },
   {
     key: "gspower",
-    label: "スピリットパワー",
+    get label() { return term("spiritPower"); },
     group: "growth",
     get: (h) => h.levelUpBonuses.MODIFIER_VALUE_TECH_POWER ?? null,
-    fmt: (v) => `+${num(v, 1)}/Lv`,
+    fmt: (v) => `+${num(v, 1)}${L().common.perLv}`,
   },
 ];
 
@@ -191,10 +196,12 @@ function percentileOf(sorted: number[], v: number): number {
 
 const starsFromPct = (pct: number): number => Math.min(5, Math.max(1, Math.round(pct * 4) + 1));
 
-let cache: Record<number, HeroRank> | null = null;
+/** ラベル・単位が言語で変わるので、言語ごとに1回だけ作る */
+const cache = new Map<Lang, Record<number, HeroRank>>();
 
 export function heroRanks(): Record<number, HeroRank> {
-  if (cache) return cache;
+  const cached = cache.get(currentLang());
+  if (cached) return cached;
   const heroes = releasedHeroes();
 
   // 各メトリクスの全ヒーロー値(昇順)
@@ -232,7 +239,7 @@ export function heroRanks(): Record<number, HeroRank> {
     out[h.id] = rank;
   });
 
-  cache = out;
+  cache.set(currentLang(), out);
   return out;
 }
 
@@ -332,9 +339,9 @@ export function heroMiscRows(heroId: number): RankRow[] {
 
 export interface TierMetric {
   key: string;
-  label: string;
+  readonly label: string;
   /** セレクトの optgroup 見出し */
-  group: string;
+  readonly group: string;
 }
 export interface TierEntry {
   id: number;
@@ -346,31 +353,31 @@ export interface TierEntry {
 
 /** 選べる項目。key は heroRanks の RankRow.key、group はセレクトの見出し */
 const TIER_METRICS: Array<TierMetric & { rankGroup: "weapon" | "vitality" | "spirit" | "growth" }> = [
-  { key: "dps", label: "DPS", group: "武器", rankGroup: "weapon" },
-  { key: "bullet", label: "1発ダメージ", group: "武器", rankGroup: "weapon" },
-  { key: "firerate", label: "連射(発/秒)", group: "武器", rankGroup: "weapon" },
-  { key: "clip", label: "装弾数", group: "武器", rankGroup: "weapon" },
-  { key: "reload", label: "リロード(速い順)", group: "武器", rankGroup: "weapon" },
-  { key: "velocity", label: "弾速", group: "武器", rankGroup: "weapon" },
-  { key: "range", label: "減衰開始", group: "武器", rankGroup: "weapon" },
+  { key: "dps", get label() { return term("dps"); }, get group() { return term("weapon"); }, rankGroup: "weapon" },
+  { key: "bullet", get label() { return term("bulletDamageShort"); }, get group() { return term("weapon"); }, rankGroup: "weapon" },
+  { key: "firerate", get label() { return L().rank.withNote(term("fireRateShort"), L().common.shotsPerSec); }, get group() { return term("weapon"); }, rankGroup: "weapon" },
+  { key: "clip", get label() { return term("ammoShort"); }, get group() { return term("weapon"); }, rankGroup: "weapon" },
+  { key: "reload", get label() { return L().rank.withNote(term("reloadShort"), L().rank.fasterFirst); }, get group() { return term("weapon"); }, rankGroup: "weapon" },
+  { key: "velocity", get label() { return term("bulletVelocity"); }, get group() { return term("weapon"); }, rankGroup: "weapon" },
+  { key: "range", get label() { return L().gameTerms.falloffStart; }, get group() { return term("weapon"); }, rankGroup: "weapon" },
   // 「射程」の実質的な指標。減衰開始距離は間合いの近さとは関係ない
   // (近接寄りの武器でも遠くまで届くことがある)。減衰が下げ止まる距離の方が
   // 「ダメージが実質的に届く距離」に近い
-  { key: "rangeEnd", label: "射程(減衰終了)", group: "武器", rankGroup: "weapon" },
-  { key: "lmelee", label: "軽近接", group: "武器", rankGroup: "weapon" },
-  { key: "hmelee", label: "重近接", group: "武器", rankGroup: "weapon" },
-  { key: "hp", label: "最大HP", group: "生命力", rankGroup: "vitality" },
-  { key: "regen", label: "HP回復", group: "生命力", rankGroup: "vitality" },
-  { key: "move", label: "移動速度", group: "生命力", rankGroup: "vitality" },
-  { key: "sprint", label: "スプリント速度", group: "生命力", rankGroup: "vitality" },
-  { key: "dash", label: "ダッシュ速度", group: "生命力", rankGroup: "vitality" },
-  { key: "stam", label: "スタミナ", group: "生命力", rankGroup: "vitality" },
-  { key: "stamcd", label: "スタミナCD(速い順)", group: "生命力", rankGroup: "vitality" },
-  { key: "gwdmg", label: "武器ダメージ成長/Lv", group: "成長度", rankGroup: "growth" },
-  { key: "ghp", label: "最大HP成長/Lv", group: "成長度", rankGroup: "growth" },
-  { key: "gmelee", label: "近接ダメージ成長/Lv", group: "成長度", rankGroup: "growth" },
-  { key: "gspower", label: "スピリットパワー成長/Lv", group: "成長度", rankGroup: "growth" },
-  { key: "skillscale", label: "スキルのスピリット係数", group: "スピリット", rankGroup: "spirit" },
+  { key: "rangeEnd", get label() { return L().rank.withNote(L().gameTerms.range, L().gameTerms.falloffEnd); }, get group() { return term("weapon"); }, rankGroup: "weapon" },
+  { key: "lmelee", get label() { return term("lightMeleeShort"); }, get group() { return term("weapon"); }, rankGroup: "weapon" },
+  { key: "hmelee", get label() { return term("heavyMeleeShort"); }, get group() { return term("weapon"); }, rankGroup: "weapon" },
+  { key: "hp", get label() { return term("maxHealth"); }, get group() { return term("vitality"); }, rankGroup: "vitality" },
+  { key: "regen", get label() { return term("healthRegenShort"); }, get group() { return term("vitality"); }, rankGroup: "vitality" },
+  { key: "move", get label() { return term("moveSpeed"); }, get group() { return term("vitality"); }, rankGroup: "vitality" },
+  { key: "sprint", get label() { return term("sprintSpeed"); }, get group() { return term("vitality"); }, rankGroup: "vitality" },
+  { key: "dash", get label() { return term("dashSpeed"); }, get group() { return term("vitality"); }, rankGroup: "vitality" },
+  { key: "stam", get label() { return term("stamina"); }, get group() { return term("vitality"); }, rankGroup: "vitality" },
+  { key: "stamcd", get label() { return L().rank.withNote(term("staminaCooldownShort"), L().rank.fasterFirst); }, get group() { return term("vitality"); }, rankGroup: "vitality" },
+  { key: "gwdmg", get label() { return L().rank.growthPerLv(term("weaponDamage")); }, get group() { return L().gameTerms.growth; }, rankGroup: "growth" },
+  { key: "ghp", get label() { return L().rank.growthPerLv(term("maxHealth")); }, get group() { return L().gameTerms.growth; }, rankGroup: "growth" },
+  { key: "gmelee", get label() { return L().rank.growthPerLv(term("meleeDamage")); }, get group() { return L().gameTerms.growth; }, rankGroup: "growth" },
+  { key: "gspower", get label() { return L().rank.growthPerLv(term("spiritPower")); }, get group() { return L().gameTerms.growth; }, rankGroup: "growth" },
+  { key: "skillscale", get label() { return L().gameTerms.skillSpiritScale; }, get group() { return term("spirit"); }, rankGroup: "spirit" },
 ];
 
 /**

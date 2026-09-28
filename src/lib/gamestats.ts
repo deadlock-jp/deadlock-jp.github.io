@@ -16,6 +16,8 @@
 import type { Hero, StatKey } from "../types/hero.ts";
 import type { Ability, WeaponInfo } from "../types/ability.ts";
 import { t, ability } from "./data.ts";
+import { L } from "../i18n/index.ts";
+import { term } from "../i18n/terms.ts";
 
 /** Source の距離単位(inch)をメートルに直す */
 export const UNITS_PER_METER = 39.37;
@@ -30,6 +32,11 @@ export function num(n: number | null | undefined, digits = 2): string {
 }
 
 export interface StatRow {
+  /**
+   * 行の識別子。ビルド画面が「最大HP」「弾薬ダメージ」の行だけを実測式の値に
+   * 差し替えるのに使う(表示名は言語で変わるので、表示名では探さない)
+   */
+  key: string;
   label: string;
   value: string;
 }
@@ -41,15 +48,16 @@ export function weaponRows(hero: Hero, weapon: WeaponInfo | null): StatRow[] {
   const rows: StatRow[] = [];
   if (weapon) {
     const perSec = weapon.cycleTime ? 1 / weapon.cycleTime : 0;
-    rows.push({ label: "弾薬ダメージ", value: num(weapon.bulletDamage) });
-    rows.push({ label: "弾／秒", value: num(perSec) });
-    rows.push({ label: "弾数", value: num(weapon.clipSize) });
-    rows.push({ label: "リロード時間", value: `${num(weapon.reloadDuration)}秒` });
-    rows.push({ label: "弾速", value: `${num(toMeters(weapon.bulletSpeed), 0)}m／秒` });
-    rows.push({ label: "ヘッドショット倍率", value: `×${num(weapon.crit.bonusStart)}` });
+    const c = L().common;
+    rows.push({ key: "bulletDamage", label: term("bulletDamage"), value: num(weapon.bulletDamage) });
+    rows.push({ key: "bulletsPerSec", label: term("bulletsPerSec"), value: num(perSec) });
+    rows.push({ key: "ammo", label: term("ammo"), value: num(weapon.clipSize) });
+    rows.push({ key: "reloadTime", label: term("reloadTime"), value: `${num(weapon.reloadDuration)}${c.sec}` });
+    rows.push({ key: "bulletVelocity", label: term("bulletVelocity"), value: `${num(toMeters(weapon.bulletSpeed), 0)}${c.mps}` });
+    rows.push({ key: "headshot", label: L().gameTerms.headshotMultiplier, value: `×${num(weapon.crit.bonusStart)}` });
   }
-  rows.push({ label: "近接弱攻撃", value: num(S(hero, "ELightMeleeDamage")) });
-  rows.push({ label: "近接強攻撃", value: num(S(hero, "EHeavyMeleeDamage")) });
+  rows.push({ key: "lightMelee", label: term("lightMelee"), value: num(S(hero, "ELightMeleeDamage")) });
+  rows.push({ key: "heavyMelee", label: term("heavyMelee"), value: num(S(hero, "EHeavyMeleeDamage")) });
   return rows;
 }
 
@@ -84,20 +92,22 @@ export function vitalityRows(hero: Hero): StatRow[] {
   const staminaCd = S(hero, "EStaminaRegenPerSecond");
   const dashDur = S(hero, "EGroundDashDuration");
   return [
-    { label: "最大HP", value: num(S(hero, "EMaxHealth")) },
-    { label: "HPリジェネ", value: num(S(hero, "EBaseHealthRegen")) },
-    { label: "移動速度", value: `${num(S(hero, "EMaxMoveSpeed"))}m` },
-    { label: "スプリント速度", value: `${num(S(hero, "ESprintSpeed"))}m` },
-    { label: "スタミナ", value: num(S(hero, "EStamina")) },
+    { key: "maxHealth", label: term("maxHealth"), value: num(S(hero, "EMaxHealth")) },
+    { key: "healthRegen", label: term("healthRegen"), value: num(S(hero, "EBaseHealthRegen")) },
+    { key: "moveSpeed", label: term("moveSpeed"), value: `${num(S(hero, "EMaxMoveSpeed"))}m` },
+    { key: "sprintSpeed", label: term("sprintSpeed"), value: `${num(S(hero, "ESprintSpeed"))}m` },
+    { key: "stamina", label: term("stamina"), value: num(S(hero, "EStamina")) },
     {
-      label: "スタミナクールダウン",
-      value: staminaCd ? `${num(1 / staminaCd, 1)}秒` : "—",
+      key: "staminaCooldown",
+      label: term("staminaCooldown"),
+      value: staminaCd ? `${num(1 / staminaCd, 1)}${L().common.sec}` : "—",
     },
     {
-      label: "ダッシュ速度",
+      key: "dashSpeed",
+      label: term("dashSpeed"),
       value: dashDur ? `${num(S(hero, "EGroundDashDistanceInMeters") / dashDur, 1)}m` : "—",
     },
-    { label: "しゃがみ速度", value: `${num(S(hero, "ECrouchSpeed"))}m` },
+    { key: "crouchSpeed", label: L().gameTerms.crouchSpeed, value: `${num(S(hero, "ECrouchSpeed"))}m` },
   ];
 }
 
@@ -184,9 +194,9 @@ export function abilityDamages(hero: Hero): AbilityDamage[] {
 /** スピリット側のステータス。基礎値がそのまま出るものだけ */
 export function spiritRows(hero: Hero): StatRow[] {
   return [
-    { label: "アビリティ継続時間", value: `×${num(S(hero, "ETechDuration"))}` },
-    { label: "アビリティ範囲", value: `×${num(S(hero, "ETechRange"))}` },
-    { label: "武器パワー", value: num(S(hero, "EWeaponPower")) },
-    { label: "リロード速度", value: `×${num(S(hero, "EReloadSpeed"))}` },
+    { key: "abilityDuration", label: term("abilityDuration"), value: `×${num(S(hero, "ETechDuration"))}` },
+    { key: "abilityRange", label: term("abilityRange"), value: `×${num(S(hero, "ETechRange"))}` },
+    { key: "weaponPower", label: L().gameTerms.weaponPower, value: num(S(hero, "EWeaponPower")) },
+    { key: "reloadSpeed", label: L().gameTerms.reloadSpeed, value: `×${num(S(hero, "EReloadSpeed"))}` },
   ];
 }

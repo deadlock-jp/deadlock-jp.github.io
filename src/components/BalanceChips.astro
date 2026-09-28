@@ -21,6 +21,7 @@ interface Props {
   max?: number;
 }
 const { chips, max = 24 } = Astro.props;
+const { L } = Astro.locals.i18n;
 
 const rows = CHIP_ORDER.map((kind) => ({
   kind,
@@ -41,7 +42,7 @@ const rows = CHIP_ORDER.map((kind) => ({
           <a
             class="chip"
             href={c.href}
-            title={c.heroName ? `${c.heroName}｜${c.name}` : c.name}
+            title={c.heroName ? `${c.heroName}${L().common.titleSep}${c.name}` : c.name}
             data-itemcard={c.item ? c.item.id : undefined}
             data-abilitycard={c.abilityKey ?? undefined}
           >
@@ -67,7 +68,7 @@ const rows = CHIP_ORDER.map((kind) => ({
             {c.tag && <span class="tag">{c.tag}</span>}
           </a>
         ))}
-        {row.chips.length > max && <span class="more">ほか {row.chips.length - max} 件</span>}
+        {row.chips.length > max && <span class="more">{L().adjust.more(row.chips.length - max)}</span>}
       </span>
     </div>
   ))}

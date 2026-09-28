@@ -9,40 +9,17 @@ import { join } from "node:path";
 import Base from "../../layouts/Base.astro";
 import SkillCard from "../../components/SkillCard.astro";
 import BalanceHistory from "../../components/BalanceHistory.astro";
-import { releasedHeroes, t, ability, heroNotes } from "../../lib/data.ts";
+import { t, ability, heroNotes, abilityOwners, type AbilityOwner } from "../../lib/data.ts";
 import { skillCard } from "../../lib/skillcard.ts";
 import { abilityBalanceHistory } from "../../lib/balance.ts";
-import type { Hero } from "../../types/hero.ts";
-
-interface Owner {
-  hero: Hero;
-  slot: string;
-  /** シルバーの人狼形態のように、既定ではなく変身後のスロットで持つスキルか */
-  isAlternate: boolean;
-}
+type Owner = AbilityOwner;
 
 export function getStaticPaths() {
-  // 実装済み全ヒーローの Signature/Ultimate スキルと、その持ち主を集める。
-  // (buildOwnerMap を外に切り出すと、Astro の getStaticPaths 抽出時のバンドルで
-  //  シンボルが欠落する問題があったため、この関数の中にそのまま置く)
-  const owners = new Map<string, Owner>();
-  for (const hero of releasedHeroes()) {
-    for (const a of hero.abilities) {
-      if (!a.slot.startsWith("Signature")) continue;
-      if (!owners.has(a.abilityKey)) owners.set(a.abilityKey, { hero, slot: a.slot, isAlternate: false });
-    }
-    // 変身で入れ替わるスキル(今のところシルバーのみ。architecture.html参照)
-    const transformAbility = hero.abilities
-      .map((a) => ability(a.abilityKey))
-      .find((ab): ab is NonNullable<typeof ab> => !!ab?.alternateFormAbilities);
-    if (transformAbility) {
-      for (const [slot, key] of Object.entries(transformAbility.alternateFormAbilities!)) {
-        if (!slot.startsWith("Signature")) continue;
-        if (!owners.has(key)) owners.set(key, { hero, slot, isAlternate: true });
-      }
-    }
-  }
-  return [...owners.entries()].map(([abilityKey, owner]) => ({
+  // 実装済み全ヒーローの Signature/Ultimate スキルと、その持ち主(data.ts の abilityOwners)。
+  // 多言語版(src/pages/[lang]/abilities/[id].astro)と sitemap も同じ関数を使う。
+  // (関数をこの .astro ファイルの中で外に切り出すと、Astro の getStaticPaths 抽出時の
+  //  バンドルでシンボルが欠落する問題があったため、別モジュールに置いている)
+  return [...abilityOwners().entries()].map(([abilityKey, owner]) => ({
     params: { id: abilityKey },
     props: { abilityKey, owner },
   }));
@@ -56,11 +33,11 @@ const name = t(abilityKey, abilityKey);
 const card = skillCard(ab, heroName);
 const notes = heroNotes(abilityKey);
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const { L, langPath } = Astro.locals.i18n;
+const T = L();
 const history = abilityBalanceHistory(abilityKey, base);
 
-const metaDesc =
-  `Deadlock（デッドロック）のスキル「${name}」（${heroName}）の効果・数値・` +
-  `アップグレード・バランス調整を日本語で。`;
+const metaDesc = T.abilityPage.metaDesc(name, heroName);
 
 /*
  * プレビュー画像は持ち主のヒーロー画像(16:9)。スキルアイコン自体は137x137前後で、
@@ -78,14 +55,14 @@ const ogImage = existsSync(join(process.cwd(), "public", cardRel)) ? `/${cardRel
   ogImageWidth={ogImage ? 1200 : undefined}
   ogImageHeight={ogImage ? 675 : undefined}
   breadcrumbs={[
-    { name: "ヒーロー", path: "/heroes/" },
-    { name: heroName, path: `/heroes/${hero.id}/` },
-    { name, path: `/abilities/${abilityKey}/` },
+    { name: T.nav.heroes, path: langPath("/heroes/") },
+    { name: heroName, path: langPath(`/heroes/${hero.id}/`) },
+    { name, path: langPath(`/abilities/${abilityKey}/`) },
   ]}
 >
-  <a class="back" href={`${base}/heroes/${hero.id}/`}>← {heroName}</a>
+  <a class="back" href={`${base}${langPath(`/heroes/${hero.id}/`)}`}>{`← ${heroName}`}</a>
 
-  {owner.isAlternate && <p class="formnote">人狼形態(シルバー)のスキルです</p>}
+  {owner.isAlternate && <p class="formnote">{T.abilityPage.altForm(heroName)}</p>}
 
   <SkillCard abilityKey={abilityKey} ab={ab} card={card} notes={notes} heroName={heroName} />
 

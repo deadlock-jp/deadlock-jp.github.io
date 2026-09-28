@@ -19,12 +19,13 @@ interface Props {
   grouped?: boolean;
 }
 const { entries, grouped = false } = Astro.props;
+const { L, langPath } = Astro.locals.i18n;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 {entries.length > 0 && (
   <section class="balhist">
-    <h2>バランス調整</h2>
+    <h2>{L().adjust.historyTitle}</h2>
     <ol>
       {entries.map((e) => (
         <li>
@@ -38,7 +39,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
               {grouped && (
                 <p class="gname">
                   {g.scope === "ability" && g.image && g.abilityKey ? (
-                    <a href={`${base}/abilities/${g.abilityKey}/`} data-abilitycard={g.abilityKey}>
+                    <a href={`${base}${langPath(`/abilities/${g.abilityKey}/`)}`} data-abilitycard={g.abilityKey}>
                       <AbilityIcon name={g.name} image={g.image} size={20} />
                       <span>{ability(g.abilityKey) ? g.name : g.name}</span>
                     </a>
@@ -53,10 +54,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
         </li>
       ))}
     </ol>
-    <p class="note">
-      ゲームデータの差分から自動生成しています。公式の文面に無い変更も含みます。
-      サーバー側だけの調整はここに出ないことがあります。
-    </p>
+    <p class="note">{L().adjust.historyNote}</p>
   </section>
 )}
 

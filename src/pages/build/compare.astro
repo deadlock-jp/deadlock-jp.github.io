@@ -23,6 +23,22 @@ import { comparableSnapshots, loadVersionedSnapshot } from "../../lib/versionedD
 import { COST_BONUS_TARGET } from "../../types/hero.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const { L, term, langPath } = Astro.locals.i18n;
+const T = L();
+/** クライアント側の文言。{n} などは差し込み位置 */
+const C = {
+  ...T.compare.client,
+  heroNotSelected: T.common.heroNotSelected,
+  weaponPct: T.build.client.weaponPct,
+  falloff: T.build.client.falloff,
+  base: T.build.client.base,
+  flat: T.build.client.flat,
+  spiritBreakdown: T.build.client.spiritBreakdown,
+  totalStats: T.build.totalStats,
+  maxHealth: term("maxHealth"),
+  spiritPower: term("spiritPower"),
+  statsTitle: { WeaponMod: term("weaponStats"), Armor: term("vitalityStats"), Tech: term("spiritStats") },
+};
 /*
  * 選択肢に出すのは公式アップデートに対応する版と最新の抽出版だけ(versionedData.ts)。
  * ラベルは ClientVersion ではなく公式アップデートの日付。比較に使う内部キーは
@@ -136,19 +152,16 @@ for (const v of versions) {
 for (const c of Object.values(COST_BONUS_TARGET)) allModTypes.add(c.valueType);
 const labels = Object.fromEntries([...allModTypes].map((type) => [type, modifierLabel(type)]));
 
-const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間の数値差分で比較する。";
+const metaDesc = T.compare.description;
 ---
 
-<Base title="ビルド比較" description={metaDesc}>
+<Base title={T.compare.title} description={metaDesc}>
   <div class="head">
-    <h1>ビルド比較</h1>
-    <a class="back" id="backlink" href={`${base}/build/`}>← ビルドに戻る</a>
+    <h1>{T.compare.title}</h1>
+    <a class="back" id="backlink" href={`${base}${langPath("/build/")}`}>{T.compare.back}</a>
   </div>
 
-  <p class="lead" id="nobuild" hidden>
-    比較するビルドがありません。<a href={`${base}/build/`}>ビルドシミュレーター</a>
-    でヒーローとアイテムを選んでから、このページへの導線を使ってください。
-  </p>
+  <p class="lead" id="nobuild" hidden>{T.compare.noBuildBefore}<a href={`${base}${langPath("/build/")}`}>{T.build.title}</a>{T.compare.noBuildAfter}</p>
 
   <div id="app" hidden>
     <div class="topbar">
@@ -156,10 +169,7 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
       <div class="cells" id="cells"></div>
     </div>
 
-    <p class="missingnote" id="missingnote" hidden>
-      ⚠ 一部のアイテムは OLDER 側のバージョンに存在しません(未実装または削除済み)。
-      該当アイテムはグレーアウトし、合計値には含めていません。
-    </p>
+    <p class="missingnote" id="missingnote" hidden>{T.compare.missing}</p>
 
     <div class="comparegrid">
       <div class="vercard older">
@@ -183,10 +193,7 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
       </div>
     </div>
 
-    <p class="caveat">
-      表示しているのはクライアント側のデータです。サーバー側だけで調整された変更は、
-      ここには反映されないことがあります。
-    </p>
+    <p class="caveat">{T.compare.caveat}</p>
   </div>
 
   {/* アイコンの供給元。表示はせず、クローン元としてだけ使う(build/index.astro と同じ手法) */}
@@ -230,6 +237,7 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
       labels,
       costBonusTarget: COST_BONUS_TARGET,
       slotMeta: SLOT_META,
+      C,
     }}
   >
     (() => {
@@ -254,7 +262,8 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
       $("app").hidden = false;
 
       // ---- 計算(src/pages/build/index.astro と同じ式。直したら両方直す) ----
-      const LOWER_IS_BETTER_LABELS = new Set(["リロード時間", "スタミナクールダウン"]);
+      /** 小さいほど良い行(gamestats.ts の StatRow.key) */
+      const LOWER_IS_BETTER_KEYS = new Set(["reloadTime", "staminaCooldown"]);
 
       function boonCount(h, level) {
         let n = 0;
@@ -349,31 +358,31 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
           const wd = weaponDamageFull(payload, h, cost, level);
           dps = wd && wd.dps !== null ? Math.round(wd.dps) : h.weaponHead ? Number(h.weaponHead.dps) : null;
           if (h.weaponHead) {
-            const pctNote = wd && wd.pct ? ` / 武器 +${round1(wd.pct)}%` : "";
-            weaponNote = `${h.weaponName} / 減衰 ${h.weaponHead.falloffStart} → ${h.weaponHead.falloffEnd}${pctNote}`;
+            const pctNote = wd && wd.pct ? C.weaponPct.replace("{n}", round1(wd.pct)) : "";
+            weaponNote = `${h.weaponName} / ${C.falloff} ${h.weaponHead.falloffStart} → ${h.weaponHead.falloffEnd}${pctNote}`;
           }
 
           const mh = maxHealthFull(payload, h, cost, level);
           healthTotal = mh.total;
-          const parts = [`基礎 ${Math.round(mh.base)}`];
+          const parts = [`${C.base} ${Math.round(mh.base)}`];
           if (mh.boon) parts.push(`Boon +${Math.round(mh.boon)}`);
           if (mh.pct) parts.push(`×(1+${round1(mh.pct)}%)`);
-          if (mh.flat) parts.push(`平坦 +${Math.round(mh.flat)}`);
+          if (mh.flat) parts.push(`${C.flat} +${Math.round(mh.flat)}`);
           healthNote = parts.join(" ");
 
           spiritTotal = spiritPower(payload, h, cost, level);
           const fromLevel = boonCount(h, level) * h.calc.techPowerPerBoon;
           const fromBonus = costBonusStep(h, "Tech", cost.Tech)?.bonus ?? 0;
           const fromItems = spiritTotal - fromLevel - fromBonus;
-          spiritNote = `レベル ${round1(fromLevel)} + 購入ボーナス ${fromBonus} + アイテム ${round1(fromItems)}`;
+          spiritNote = C.spiritBreakdown.replace("{level}", round1(fromLevel)).replace("{bonus}", fromBonus).replace("{items}", round1(fromItems));
 
           for (const slot of ["WeaponMod", "Armor", "Tech"]) {
             rows[slot] = h.rows[slot].map((r) => {
               let value = r.value;
-              if (slot === "Armor" && r.label === "最大HP") value = String(Math.round(healthTotal));
-              if (slot === "WeaponMod" && r.label === "弾薬ダメージ" && wd && wd.perBullet !== null)
+              if (slot === "Armor" && r.key === "maxHealth") value = String(Math.round(healthTotal));
+              if (slot === "WeaponMod" && r.key === "bulletDamage" && wd && wd.perBullet !== null)
                 value = String(round1(wd.perBullet));
-              return { label: r.label, value };
+              return { key: r.key, label: r.label, value };
             });
           }
         }
@@ -402,11 +411,11 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
         const n = typeof v === "number" ? v : Number.parseFloat(String(v));
         return Number.isNaN(n) ? null : n;
       }
-      function deltaHtml(label, before, after) {
+      function deltaHtml(key, before, after) {
         const b = numOf(before);
         const a = numOf(after);
         if (b === null || a === null || b === a) return "";
-        const lowerBetter = LOWER_IS_BETTER_LABELS.has(label);
+        const lowerBetter = LOWER_IS_BETTER_KEYS.has(key);
         const up = a > b;
         const good = lowerBetter ? !up : up;
         const arrow = up ? "▲" : "▼";
@@ -417,10 +426,11 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
       function rowLinePlain(label, value) {
         return `<li><span class="l">${esc(label)}</span><span class="v">${esc(disp(value))}</span></li>`;
       }
-      function rowLine(label, before, after) {
+      /** key は小さいほど良い行の判定に使う(表示名は言語で変わるので使わない) */
+      function rowLine(label, before, after, key) {
         return (
           `<li><span class="l">${esc(label)}</span>` +
-          `<span class="v">${deltaHtml(label, before, after)}${esc(disp(after))}</span></li>`
+          `<span class="v">${deltaHtml(key, before, after)}${esc(disp(after))}</span></li>`
         );
       }
 
@@ -431,13 +441,13 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
           return `<b>${mark}${esc(disp(r.dps))}</b> DPS<small>${esc(r.weaponNote)}</small>`;
         }
         if (slot === "Armor") {
-          const mark = prev ? deltaHtml("最大HP", prev.healthTotal, r.healthTotal) : "";
+          const mark = prev ? deltaHtml("maxHealth", prev.healthTotal, r.healthTotal) : "";
           const val = r.healthTotal !== null ? Math.round(r.healthTotal) : null;
-          return `<b>${mark}${esc(disp(val))}</b> 最大HP<small>${esc(r.healthNote)}</small>`;
+          return `<b>${mark}${esc(disp(val))}</b> ${esc(C.maxHealth)}<small>${esc(r.healthNote)}</small>`;
         }
         if (slot === "Tech") {
-          const mark = prev ? deltaHtml("スピリットパワー", prev.spiritTotal, r.spiritTotal) : "";
-          return `<b>${mark}${esc(disp(round1(r.spiritTotal)))}</b> スピリットパワー<small>${esc(r.spiritNote)}</small>`;
+          const mark = prev ? deltaHtml("spiritPower", prev.spiritTotal, r.spiritTotal) : "";
+          return `<b>${mark}${esc(disp(round1(r.spiritTotal)))}</b> ${esc(C.spiritPower)}<small>${esc(r.spiritNote)}</small>`;
         }
         return "";
       }
@@ -449,14 +459,14 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
       function categoryBox(slot, r, prev) {
         const meta = slotMeta[slot];
         const rows = r.rows[slot] ?? [];
-        const byLabel = prev ? new Map((prev.rows[slot] ?? []).map((x) => [x.label, x.value])) : null;
+        const byKey = prev ? new Map((prev.rows[slot] ?? []).map((x) => [x.key, x.value])) : null;
         const rowsHtml =
           rows
-            .map((row) => (prev ? rowLine(row.label, byLabel.get(row.label) ?? null, row.value) : rowLinePlain(row.label, row.value)))
-            .join("") || '<li class="empty">ヒーロー未選択</li>';
+            .map((row) => (prev ? rowLine(row.label, byKey.get(row.key) ?? null, row.value, row.key) : rowLinePlain(row.label, row.value)))
+            .join("") || `<li class="empty">${esc(C.heroNotSelected)}</li>`;
         const style = `--cat: var(--c-${meta.cssVar}); --cat-bg: var(--c-${meta.cssVar}-bg)`;
         return (
-          `<div class="box" style="${style}"><div class="bhead"><h2>${esc(meta.label)}ステータス</h2></div>` +
+          `<div class="box" style="${style}"><div class="bhead"><h2>${esc(C.statsTitle[slot])}</h2></div>` +
           `<div class="bhl">${boxHeadline(slot, r, prev)}</div>` +
           `<ul class="brows">${rowsHtml}</ul></div>`
         );
@@ -470,10 +480,10 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
           const v = r.totals.get(k) ?? 0;
           const pv = prev ? (prev.totals.get(k) ?? 0) : v;
           if (v === 0 && pv === 0) continue;
-          lines += prev ? rowLine(label, pv, v) : rowLinePlain(label, v);
+          lines += prev ? rowLine(label, pv, v, k) : rowLinePlain(label, v);
         }
         return (
-          `<div class="box plain"><div class="bhead"><h2>合計ステータス</h2></div>` +
+          `<div class="box plain"><div class="bhead"><h2>${esc(C.totalStats)}</h2></div>` +
           `<ul class="brows">${lines || '<li class="empty">—</li>'}</ul></div>`
         );
       }
@@ -515,8 +525,9 @@ const metaDesc = "Deadlock（デッドロック）のビルドを、パッチ間
       }
 
       function renderVerInfo(older, newer) {
-        $("olderinfo").textContent = older.hero ? `Lv${older.level}・${fmtSouls(older.spent)}ソウル` : "";
-        $("newerinfo").textContent = newer.hero ? `Lv${newer.level}・${fmtSouls(newer.spent)}ソウル` : "";
+        const verInfo = (r) => C.verInfo.replace("{lv}", r.level).replace("{souls}", fmtSouls(r.spent));
+        $("olderinfo").textContent = older.hero ? verInfo(older) : "";
+        $("newerinfo").textContent = newer.hero ? verInfo(newer) : "";
       }
 
       function populateSelect(el, selected) {

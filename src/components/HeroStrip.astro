@@ -15,6 +15,7 @@ interface Props {
   current?: number;
 }
 const { current } = Astro.props;
+const { L, langPath } = Astro.locals.i18n;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const heroes = releasedHeroes().map((h) => ({
   id: h.id,
@@ -23,14 +24,14 @@ const heroes = releasedHeroes().map((h) => ({
 }));
 ---
 
-<nav class="herostrip" aria-label="ヒーローを切り替え">
+<nav class="herostrip" aria-label={L().heroPage.switchHero}>
   <div class="hs-track" id="hs-track">
     {[0, 1].map((dup) => (
       <ul aria-hidden={dup === 1 ? "true" : undefined}>
         {heroes.map((h) => (
           <li>
             <a
-              href={`${base}/heroes/${h.id}/`}
+              href={`${base}${langPath(`/heroes/${h.id}/`)}`}
               class:list={["hs-item", { on: h.id === current }]}
               title={h.name}
               tabindex={dup === 1 ? -1 : undefined}

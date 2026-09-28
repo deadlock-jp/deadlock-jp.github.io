@@ -1,0 +1,17 @@
+---
+/** 多言語版のスキル詳細。実装は src/pages/abilities/[id].astro(説明は src/pages/[lang]/index.astro) */
+import Page from "../../abilities/[id].astro";
+import { PREFIXED_LANGS } from "../../../i18n/langs.ts";
+import { abilityOwners } from "../../../lib/data.ts";
+
+export function getStaticPaths() {
+  return PREFIXED_LANGS.flatMap((lang) =>
+    [...abilityOwners().entries()].map(([abilityKey, owner]) => ({
+      params: { lang, id: abilityKey },
+      props: { abilityKey, owner },
+    })),
+  );
+}
+---
+
+<Page {...Astro.props} />

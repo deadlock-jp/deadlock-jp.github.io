@@ -1,0 +1,14 @@
+---
+/** 多言語版のヒーロー詳細。実装は src/pages/heroes/[id].astro(説明は src/pages/[lang]/index.astro) */
+import Page from "../../heroes/[id].astro";
+import { PREFIXED_LANGS } from "../../../i18n/langs.ts";
+import { releasedHeroes } from "../../../lib/data.ts";
+
+export function getStaticPaths() {
+  return PREFIXED_LANGS.flatMap((lang) =>
+    releasedHeroes().map((h) => ({ params: { lang, id: String(h.id) }, props: { hero: h } })),
+  );
+}
+---
+
+<Page {...Astro.props} />

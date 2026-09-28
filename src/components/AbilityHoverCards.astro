@@ -15,6 +15,7 @@ interface Props {
   abilityKeys: string[];
 }
 const { abilityKeys } = Astro.props;
+const { L } = Astro.locals.i18n;
 
 /** {s:hero_name} を解決するのに持ち主の名前が要る */
 const ownerName = new Map<string, string>();
@@ -36,7 +37,7 @@ for (const key of abilityKeys) {
     isUlt: ab.kind === "Ultimate",
     isPassive: ab.kind !== "Ultimate" && ab.activation === "PASSIVE",
     meta: card.meta,
-    desc: describe(`${key}_desc`, ab.properties, "（説明なし）", { hero_name: heroName }),
+    desc: describe(`${key}_desc`, ab.properties, L().common.noDesc, { hero_name: heroName }),
     tiles: card.tiles,
     secondaryRows: card.secondaryRows,
     upgrades: card.upgrades,

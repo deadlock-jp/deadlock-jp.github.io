@@ -19,6 +19,7 @@ interface Props {
   title?: string;
 }
 const { axes, size = 280, cssVar = "accent", title } = Astro.props;
+const { L, currentLang } = Astro.locals.i18n;
 
 const M = 64; // ラベルぶんの余白(viewBox を外側に広げる)
 const cx = size / 2;
@@ -35,6 +36,16 @@ const COMPOUND_BREAK: Record<string, [string, string]> = {
   スピリットパワー: ["スピリット", "パワー"],
 };
 function labelLines(s: string): string[] {
+  /*
+   * 日本語以外で語の区切り(空白)を持つものは、真ん中に近い空白で折る
+   * (英語・韓国語は長い語が多く、文字数で半分に割ると単語の途中で切れる)
+   */
+  if (currentLang() !== "ja" && s.length > 10 && s.includes(" ")) {
+    const mid = s.length / 2;
+    const spaces = [...s.matchAll(/ /g)].map((m) => m.index);
+    const at = spaces.sort((a, b) => Math.abs(a - mid) - Math.abs(b - mid))[0]!;
+    return [s.slice(0, at), s.slice(at + 1)];
+  }
   if (s.length <= 6) return [s];
   if (COMPOUND_BREAK[s]) return COMPOUND_BREAK[s];
   const m = s.match(/^([゠-ヿ]{3,})([^゠-ヿ].*)$/);
@@ -60,7 +71,7 @@ const heroPoly = poly((i) => Math.max(0.04, axes[i].value));
 
 <figure class="radar" style={`--cat: var(--c-${cssVar}); --cat-bg: var(--c-${cssVar}-bg)`}>
   {title && <figcaption>{title}</figcaption>}
-  <svg viewBox={`${-M} ${-M} ${size + M * 2} ${size + M * 2}`} role="img" aria-label={title ?? "レーダーチャート"}>
+  <svg viewBox={`${-M} ${-M} ${size + M * 2} ${size + M * 2}`} role="img" aria-label={title ?? L().common.radarChart}>
     {/* グリッド */}
     {rings.map((r) => (
       <polygon points={poly(r)} class="ring" />

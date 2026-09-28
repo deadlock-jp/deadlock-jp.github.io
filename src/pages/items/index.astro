@@ -8,6 +8,14 @@ const items = shopItems();
 const slots = ["WeaponMod", "Armor", "Tech"] as const;
 const tiers = [...new Set(items.map((i) => i.tier))].sort();
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const { L, langPath, currentLang } = Astro.locals.i18n;
+const T = L();
+const isJa = currentLang() === "ja";
+/** 絞り込みの対象にする名前。日本語以外では英語名でも当たるようにする */
+const findName = (i: { nameToken: string; id: string }) =>
+  isJa ? t(i.nameToken, i.id) : `${t(i.nameToken, i.id)} ${t(i.nameToken, i.id, "en")}`;
+/** クライアント側の文言 */
+const I = { related: T.common.related, dot: T.common.dot };
 
 const legendary = legendaryItems();
 /* ゲーム内の表記(t()) をそのまま使う。自前で「伝説級」等に訳し直さない */
@@ -19,16 +27,16 @@ const allForHover = [...items, ...legendary];
 const details = Object.fromEntries(allForHover.map((i) => [i.id, itemHoverData(i)]));
 ---
 
-<Base title="アイテム一覧" description="Deadlockのショップアイテムの効果と価格">
-  <h1>アイテム</h1>
+<Base title={T.items.title} description={T.items.description}>
+  <h1>{T.nav.items}</h1>
 
   <div class="search">
     <input
       type="search"
       id="q"
-      placeholder="アイテム名・効果で絞り込む"
+      placeholder={T.items.searchPlaceholder}
       autocomplete="off"
-      aria-label="アイテムの絞り込み"
+      aria-label={T.items.searchAria}
     />
     <span class="hits" id="hits"></span>
   </div>
@@ -45,14 +53,14 @@ const details = Object.fromEntries(allForHover.map((i) => [i.id, itemHoverData(i
             if (rows.length === 0) return null;
             return (
               <div class="tier">
-                <h3>ティア{tier}<span class="price">{souls(itemsFile.itemPricePerTier[tier] ?? 0)}</span></h3>
+                <h3>{T.common.tier(tier)}<span class="price">{souls(itemsFile.itemPricePerTier[tier] ?? 0)}</span></h3>
                 <ul>
                   {rows.map((i) => {
                     const iname = t(i.nameToken, i.id);
                     const idesc = describe(i.descToken, i.properties);
                     return (
-                      <li data-id={i.id} data-find={`${iname} ${idesc} ${i.id}`}>
-                        <a href={`${base}/items/${i.id}/`} data-itemcard={i.id}>
+                      <li data-id={i.id} data-find={`${findName(i)} ${idesc} ${i.id}`}>
+                        <a href={`${base}${langPath(`/items/${i.id}/`)}`} data-itemcard={i.id}>
                           <ItemIcon
                             name={iname}
                             slotType={i.slotType}
@@ -63,7 +71,7 @@ const details = Object.fromEntries(allForHover.map((i) => [i.id, itemHoverData(i
                             size={40}
                           />
                           <span class="body">
-                            <span class="iname">{iname}<span class="rel" hidden>関連</span></span>
+                            <span class="iname">{iname}<span class="rel" hidden>{T.common.related}</span></span>
                             <span class="idesc">{idesc}</span>
                           </span>
                         </a>
@@ -83,15 +91,15 @@ const details = Object.fromEntries(allForHover.map((i) => [i.id, itemHoverData(i
     <section class="panel legendary">
       <h2 class="cat legcat">
         {legendaryLabel}
-        <span class="legnote">{streetBrawlLabel}のランダムビルドドラフトに出現</span>
+        <span class="legnote">{T.items.legendaryNote(streetBrawlLabel)}</span>
       </h2>
       <ul class="leggrid">
         {legendary.map((i) => {
           const iname = t(i.nameToken, i.id);
           const idesc = describe(i.descToken, i.properties);
           return (
-            <li data-find={`${iname} ${idesc} ${i.id}`}>
-              <a href={`${base}/items/${i.id}/`} data-itemcard={i.id}>
+            <li data-find={`${findName(i)} ${idesc} ${i.id}`}>
+              <a href={`${base}${langPath(`/items/${i.id}/`)}`} data-itemcard={i.id}>
                 <ItemIcon
                   name={iname}
                   slotType={i.slotType}
@@ -101,7 +109,7 @@ const details = Object.fromEntries(allForHover.map((i) => [i.id, itemHoverData(i
                   isImbue={i.isImbue}
                   size={52}
                 />
-                <span class="iname">{iname}<span class="rel" hidden>関連</span></span>
+                <span class="iname">{iname}<span class="rel" hidden>{T.common.related}</span></span>
               </a>
             </li>
           );
@@ -113,8 +121,8 @@ const details = Object.fromEntries(allForHover.map((i) => [i.id, itemHoverData(i
   {/* ホバー時の詳細カード(ビルド画面・トップと共通コンポーネント) */}
   <ItemHoverCard details={details} />
 
-  <script src={`${base}/js/item-search.js`} is:inline></script>
-  <script is:inline>
+  <script src={`${base}/js/${isJa ? "item-search.js" : "item-search-intl.js"}`} is:inline data-summary={isJa ? undefined : JSON.stringify(T.search)}></script>
+  <script is:inline define:vars={{ I }}>
     // 追加ライブラリなしのクライアント側フィルタ。
     // 各行が data-find に「名前 + 説明 + 内部ID」を持っている。
     // 言い換え・関連語の広げ方は public/js/item-search.js(ビルドページと共用)。
@@ -143,7 +151,7 @@ const details = Object.fromEntries(allForHover.map((i) => [i.id, itemHoverData(i
           if (m.length > 0) {
             related++;
             m.forEach((l) => labels.add(l));
-            rel.title = `関連: ${m.join("・")}`;
+            rel.title = `${I.related}: ${m.join(I.dot)}`;
           } else {
             direct++;
           }

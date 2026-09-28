@@ -1,0 +1,18 @@
+---
+/**
+ * 多言語版(/en/ /ko/ /zh-cn/)のトップ。
+ *
+ * src/pages/[lang]/ の下は、日本語版のページ実装(src/pages/ 直下)をそのまま描くだけの入口。
+ * 言語は URL から src/middleware.ts が決め、文言・ゲーム内表記はその言語で引かれる。
+ * ページ本体をここへコピーしないこと(直すのは日本語版のファイル1つ)。
+ * どの言語を生成するかは src/i18n/langs.ts の BUILT_LANGS。
+ */
+import Page from "../index.astro";
+import { PREFIXED_LANGS } from "../../i18n/langs.ts";
+
+export function getStaticPaths() {
+  return PREFIXED_LANGS.map((lang) => ({ params: { lang } }));
+}
+---
+
+<Page />

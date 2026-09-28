@@ -12,11 +12,19 @@ interface Props {
   heroDetail: Record<number, unknown>;
 }
 const { heroDetail } = Astro.props;
+const { L, term } = Astro.locals.i18n;
+/** カード内の見出し(クライアント側で組み立てるので文字列で渡す) */
+const T = {
+  weapon: term("weapon"),
+  vitality: term("vitality"),
+  growthSpirit: L().heroCard.growthSpirit,
+  boonHigh: L().heroCard.boonHigh,
+};
 ---
 
 <div class="herocard" id="herocard" role="tooltip" hidden></div>
 
-<script is:inline define:vars={{ heroDetail }}>
+<script is:inline define:vars={{ heroDetail, T }}>
   (() => {
     const card = document.getElementById("herocard");
     if (!card) return;
@@ -43,10 +51,10 @@ const { heroDetail } = Astro.props;
         (d.tags.length
           ? `<ul class="hc-tags">${d.tags.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`
           : "") +
-        `<div class="hc-grp" style="--hc-cat:var(--c-weapon)">武器</div><ul class="hc-rows">${rows(d.weapon)}</ul>` +
-        `<div class="hc-grp" style="--hc-cat:var(--c-vitality)">生命力</div><ul class="hc-rows">${rows(d.vitality)}</ul>` +
-        `<div class="hc-grp" style="--hc-cat:var(--c-spirit)">成長/スピリット</div><ul class="hc-rows">${rows(d.spirit)}</ul>` +
-        (d.boon.length ? `<div class="hc-boon">成長が高い: <b>${esc(d.boon.join(" / "))}</b></div>` : "") +
+        `<div class="hc-grp" style="--hc-cat:var(--c-weapon)">${esc(T.weapon)}</div><ul class="hc-rows">${rows(d.weapon)}</ul>` +
+        `<div class="hc-grp" style="--hc-cat:var(--c-vitality)">${esc(T.vitality)}</div><ul class="hc-rows">${rows(d.vitality)}</ul>` +
+        `<div class="hc-grp" style="--hc-cat:var(--c-spirit)">${esc(T.growthSpirit)}</div><ul class="hc-rows">${rows(d.spirit)}</ul>` +
+        (d.boon.length ? `<div class="hc-boon">${esc(T.boonHigh)}<b>${esc(d.boon.join(" / "))}</b></div>` : "") +
         `</div>`;
       card.hidden = false;
 

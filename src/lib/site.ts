@@ -6,6 +6,18 @@
  * ドメインは astro.config.mjs の site が唯一の出どころなので、ここには書かない。
  */
 
+import type { Lang } from "../i18n/langs.ts";
+
+/**
+ * 検索に出す言語。ここに入っていない言語のページは
+ * <meta name="robots" content="noindex, follow"> を出し、sitemap.xml と hreflang に載せない。
+ * 入っている言語どうしでは、各ページに hreflang(自分を含む全言語版)と
+ * x-default(英語版。"en" が入っているときだけ)を出し、sitemap に alternate を載せる。
+ *
+ * 多言語版の表示と翻訳を確認したら、ここに "en" "ko" "zh-cn" を足すだけで検索に出る。
+ */
+export const INDEXED_LANGS: readonly Lang[] = ["ja"];
+
 /** Xのカードに発信元として出すアカウント。空なら twitter:site を出さない */
 export const X_HANDLE = "@moromisocial";
 

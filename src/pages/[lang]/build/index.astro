@@ -1,0 +1,11 @@
+---
+/** 多言語版のビルドシミュレーター。実装は src/pages/build/index.astro(説明は src/pages/[lang]/index.astro) */
+import Page from "../../build/index.astro";
+import { PREFIXED_LANGS } from "../../../i18n/langs.ts";
+
+export function getStaticPaths() {
+  return PREFIXED_LANGS.map((lang) => ({ params: { lang } }));
+}
+---
+
+<Page />

@@ -1,0 +1,15 @@
+---
+/** 多言語版のアイテム詳細。実装は src/pages/items/[id].astro(説明は src/pages/[lang]/index.astro) */
+import Page from "../../items/[id].astro";
+import { PREFIXED_LANGS } from "../../../i18n/langs.ts";
+import { shopItems, legendaryItems } from "../../../lib/data.ts";
+
+export function getStaticPaths() {
+  // 実IDは "upgrade_clip_size" のような文字列。連番に振り直さない
+  return PREFIXED_LANGS.flatMap((lang) =>
+    [...shopItems(), ...legendaryItems()].map((i) => ({ params: { lang, id: i.id }, props: { item: i } })),
+  );
+}
+---
+
+<Page {...Astro.props} />

@@ -33,11 +33,13 @@ const { details } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 /** SkillCard.astro / StatIcon.astro と同じ「spirit/weapon は実画像優先」をJS側でも再現する */
 const scaleIcons = { spirit: scaleIconSrc("spirit"), weapon: scaleIconSrc("weapon") };
+const { L, term } = Astro.locals.i18n;
+const T = { ultimate: L().common.ultimate, passive: term("passive"), memo: L().common.memo };
 ---
 
 <div class="hovercard" id="abilityhovercard" role="tooltip" hidden></div>
 
-<script is:inline define:vars={{ details, iconPaths: STAT_ICON_PATHS, scaleIcons, base }}>
+<script is:inline define:vars={{ details, iconPaths: STAT_ICON_PATHS, scaleIcons, base, T }}>
   (() => {
     const card = document.getElementById("abilityhovercard");
     if (!card) return;
@@ -91,8 +93,8 @@ const scaleIcons = { spirit: scaleIconSrc("spirit"), weapon: scaleIconSrc("weapo
         `<div class="hc-head">` +
         `<span class="hc-icon">${iconSrc ? iconSrc.outerHTML : ""}</span>` +
         `<div class="hc-title"><span class="snamerow"><span class="hc-name">${esc(d.name)}</span>` +
-        (d.isUlt ? `<span class="tag ult-tag">アルティメット</span>` : "") +
-        (d.isPassive ? `<span class="tag passive-tag">パッシブ</span>` : "") +
+        (d.isUlt ? `<span class="tag ult-tag">${esc(T.ultimate)}</span>` : "") +
+        (d.isPassive ? `<span class="tag passive-tag">${esc(T.passive)}</span>` : "") +
         `</span>` +
         (d.meta.length ? `<ul class="smeta">${d.meta.map(metaRow).join("")}</ul>` : "") +
         `</div></div>` +
@@ -101,7 +103,7 @@ const scaleIcons = { spirit: scaleIconSrc("spirit"), weapon: scaleIconSrc("weapo
         (d.secondaryRows.length ? `<div class="ssecondary">${d.secondaryRows.map(secondaryRow).join("")}</div>` : "") +
         (d.upgrades.length ? `<div class="supg">${d.upgrades.map(upgradeCell).join("")}</div>` : "") +
         (d.notes.length
-          ? `<div class="snotes"><span class="nt">メモ</span><ul>${d.notes.map((n) => `<li>${esc(n)}</li>`).join("")}</ul></div>`
+          ? `<div class="snotes"><span class="nt">${esc(T.memo)}</span><ul>${d.notes.map((n) => `<li>${esc(n)}</li>`).join("")}</ul></div>`
           : "");
       card.hidden = false;
 

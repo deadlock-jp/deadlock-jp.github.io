@@ -6,29 +6,20 @@
  * lastmod はページごとに出す。アップデートのページはその投稿日、それ以外は
  * データの生成日。全URLを同じ日付にすると、実際には動いていないページまで
  * 「更新された」と伝えることになる。
+ *
+ * 多言語版は、検索に出す言語(src/lib/site.ts の INDEXED_LANGS)のぶんだけ載せ、
+ * 言語版どうしを xhtml:link の alternate で結ぶ(src/i18n/seo.ts の alternatesFor)。
+ * 検索に出す言語が日本語だけのあいだは、多言語版も alternate も出さない。
  */
 import type { APIRoute } from "astro";
-import { releasedHeroes, shopItems, legendaryItems, itemsFile, ability, patchNotes } from "../lib/data.ts";
+import { releasedHeroes, shopItems, legendaryItems, itemsFile, abilityOwners, patchNotes } from "../lib/data.ts";
+import { BUILT_LANGS } from "../i18n/langs.ts";
+import { langPath, isLocalizedPath } from "../i18n/routes.ts";
+import { alternatesFor, isIndexed } from "../i18n/seo.ts";
 
-/**
- * スキル詳細ページが生成される実ID。src/pages/abilities/[id].astro の
- * getStaticPaths と同じ条件(実装済みヒーローの Signature スロット + 変身後の形態)。
- * あちらは Astro のバンドルの都合で関数を外に出せないため、条件はここに再掲する。
- */
+/** スキル詳細ページが生成される実ID(src/pages/abilities/[id].astro と同じ) */
 function abilityIds(): string[] {
-  const ids = new Set<string>();
-  for (const hero of releasedHeroes()) {
-    for (const a of hero.abilities) {
-      if (a.slot.startsWith("Signature")) ids.add(a.abilityKey);
-    }
-    const transform = hero.abilities
-      .map((a) => ability(a.abilityKey))
-      .find((ab) => !!ab?.alternateFormAbilities);
-    for (const [slot, key] of Object.entries(transform?.alternateFormAbilities ?? {})) {
-      if (slot.startsWith("Signature")) ids.add(key);
-    }
-  }
-  return [...ids];
+  return [...abilityOwners().keys()];
 }
 
 export const GET: APIRoute = ({ site }) => {
@@ -65,13 +56,31 @@ export const GET: APIRoute = ({ site }) => {
     })),
   ];
 
+  /*
+   * 多言語版。日本語版のパス1つにつき、検索に出す言語のぶんだけ URL を並べる。
+   * 日本語のみのページ(攻略情報・パッチノート・about)は日本語版だけ。
+   */
+  const otherLangs = BUILT_LANGS.filter((l) => l !== "ja" && isIndexed(l));
+  const entries = paths.flatMap((p) => [
+    { ...p, alternates: alternatesFor(p.loc) },
+    ...(isLocalizedPath(p.loc)
+      ? otherLangs.map((lang) => ({ ...p, loc: langPath(p.loc, lang), alternates: alternatesFor(p.loc) }))
+      : []),
+  ]);
+  const hasAlternates = entries.some((e) => e.alternates.length > 0);
+
   const body =
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
-    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
-    paths
+    (hasAlternates
+      ? `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`
+      : `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`) +
+    entries
       .map(
         (p) =>
           `  <url><loc>${SITE}${p.loc}</loc>` +
+          p.alternates
+            .map((a) => `<xhtml:link rel="alternate" hreflang="${a.hreflang}" href="${SITE}${a.path}"/>`)
+            .join("") +
           `<lastmod>${p.lastmod}</lastmod>` +
           `<priority>${p.priority}</priority></url>`,
       )

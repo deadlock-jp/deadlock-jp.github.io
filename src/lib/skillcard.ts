@@ -13,6 +13,8 @@ import type { AbilityProperty } from "../types/property.ts";
 import { t, formatProperty, describe, dedupedTail } from "./data.ts";
 import { resolveImagePath } from "../parsers/image-manifest.ts";
 import { SCALE_ICON_REFS, scaleKindOf } from "./scaleIcons.ts";
+import { L } from "../i18n/index.ts";
+import { term, type TermKey } from "../i18n/terms.ts";
 
 export interface CardRow {
   label: string;
@@ -60,14 +62,14 @@ export interface SkillCard {
   upgrades: UpgradeTier[];
 }
 
-/** 見出しに出すメタ項目。ここに挙げた順で、値が実質ゼロでないものだけ出す */
-const META: Array<[prop: string, label: string]> = [
-  ["AbilityCharges", "チャージ"],
-  ["AbilityCooldown", "クールダウン"],
-  ["AbilityCastRange", "射程"],
-  ["AbilityDuration", "効果時間"],
-  ["AbilityCastDelay", "詠唱ディレイ"],
-  ["AbilityChannelTime", "チャネル時間"],
+/** 見出しに出すメタ項目。ここに挙げた順で、値が実質ゼロでないものだけ出す(表示名はゲームのトークン) */
+const META: Array<[prop: string, label: TermKey]> = [
+  ["AbilityCharges", "charges"],
+  ["AbilityCooldown", "cooldown"],
+  ["AbilityCastRange", "castRange"],
+  ["AbilityDuration", "duration"],
+  ["AbilityCastDelay", "castDelay"],
+  ["AbilityChannelTime", "channelTime"],
 ];
 const META_NAMES = new Set(META.map(([p]) => p));
 const AP_BY_TIER = [1, 2, 5];
@@ -184,7 +186,7 @@ export function skillCard(ab: Ability, heroName = ""): SkillCard {
     if (!p) continue;
     if (isZero(p) && !(prop === "AbilityCharges" && chargeFromUpgrade)) continue;
     const { value, unit } = formatProperty(prop, p);
-    meta.push({ label, value, unit, icon: iconFor(p) });
+    meta.push({ label: term(label), value, unit, icon: iconFor(p) });
   }
 
   const damage: DamageRow[] = [];
@@ -192,7 +194,7 @@ export function skillCard(ab: Ability, heroName = ""): SkillCard {
     if (!p.isAbilityDamage || p.value === null) continue;
     const f = formatProperty(name, p);
     damage.push({
-      label: t(`${p.labelOverride ?? name}_label`, "ダメージ"),
+      label: t(`${p.labelOverride ?? name}_label`, L().gameTerms.damage),
       value: f.value,
       unit: f.unit,
       scale: p.scale?.statScale ?? null,

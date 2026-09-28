@@ -2,6 +2,8 @@
 import "../styles/global.css";
 import { heroesFile } from "../lib/data.ts";
 import { SUPPORT_LINKS } from "../lib/links.ts";
+/* カンパ先の文言だけは言語ごと(ほかのリンクはサービス名なので共通) */
+const SUPPORT_LINK_HREF = SUPPORT_LINKS[0]?.href;
 import { X_HANDLE, CF_BEACON_TOKEN, GOOGLE_SITE_VERIFICATION } from "../lib/site.ts";
 
 interface Crumb {
@@ -14,7 +16,7 @@ interface Props {
   description?: string;
   /** OGP タイプ。トップは website、詳細ページは article 相当 */
   ogType?: string;
-  /** パンくず（構造化データにも使う）。先頭に「トップ」は自動で付く */
+  /** パンくず（構造化データにも使う）。先頭に「トップ」は自動で付く。path はその言語版のパス */
   breadcrumbs?: Crumb[];
   /** 日付を持つページ(アップデートごとのページ)。ISO の日付。構造化データに出す */
   datePublished?: string;
@@ -48,14 +50,20 @@ const {
   noindex = false,
 } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const { L, currentLang, langPath, splitLangPath, LANG_META, alternatesFor, isIndexed } = Astro.locals.i18n;
+const lang = currentLang();
+const langMeta = LANG_META[lang];
+const T = L();
 const nav = [
-  { href: `${base}/heroes/`, label: "ヒーロー" },
-  { href: `${base}/items/`, label: "アイテム" },
-  { href: `${base}/build/`, label: "ビルド" },
-  { href: `${base}/mechanics/`, label: "攻略情報" },
-  { href: `${base}/patch-notes/`, label: "パッチノート" },
+  { href: `${base}${langPath("/heroes/")}`, label: T.nav.heroes },
+  { href: `${base}${langPath("/items/")}`, label: T.nav.items },
+  { href: `${base}${langPath("/build/")}`, label: T.nav.build },
+  { href: `${base}${langPath("/mechanics/")}`, label: T.nav.mechanics },
+  { href: `${base}${langPath("/patch-notes/")}`, label: T.nav.patchNotes },
 ];
 const path = Astro.url.pathname;
+/** 言語の接頭辞を外したパス(どの言語版でも同じページなら同じ値) */
+const pagePath = splitLangPath(path).path;
 
 const SITE_NAME = "DEADLOCK-JP DB";
 /* ドメインは astro.config.mjs の site が唯一の出どころ(ここに直書きしない) */
@@ -66,12 +74,21 @@ const ogImageUrl = new URL(ogImage ?? `${base}/images/ogp.jpg`, SITE).href;
 const ogSize = ogImage
   ? { w: ogImageWidth, h: ogImageHeight }
   : { w: 1200, h: 630 };
-const isHome = path === "/" || path === base + "/";
+const isHome = pagePath === "/" || pagePath === base + "/";
 /* トップは「トップ | DEADLOCK-JP DB」と重複するので、サイト名だけにする */
 const fullTitle = isHome ? SITE_NAME : `${title} | ${SITE_NAME}`;
-const desc =
-  description ??
-  "Valve『Deadlock（デッドロック）』のヒーロー・アイテム・スキルの数値を日本語で引ける非公式データベース。";
+const desc = description ?? T.site.description;
+/*
+ * 検索に出していない言語のページは noindex にする(リンクはたどらせる)。
+ * noindex を明示したページ(運用用の非公開ページ)は従来どおり nofollow も付ける。
+ */
+const robots = noindex
+  ? "noindex, nofollow"
+  : isIndexed(lang)
+    ? "index, follow, max-image-preview:large"
+    : "noindex, follow";
+/* hreflang。検索に出す言語版が2つ以上あるページだけ(src/i18n/seo.ts) */
+const alternates = noindex ? [] : alternatesFor(pagePath);
 
 /* 構造化データ（SEO / 生成AI検索対策）。値はサイトの事実のみ。 */
 const jsonLd: Record<string, unknown>[] = [
@@ -79,15 +96,14 @@ const jsonLd: Record<string, unknown>[] = [
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: SITE_NAME,
-    alternateName: "Deadlock 日本語データベース",
-    url: SITE.href,
-    inLanguage: "ja",
-    description:
-      "Deadlock（デッドロック）のヒーロー・アイテム・スキルの数値を日本語で引けるデータベースとビルドシミュレーター。数値はゲームの生データから自動生成した非公式ファンサイト。",
+    alternateName: T.site.ldAlternateName,
+    url: new URL(langPath("/"), SITE).href,
+    inLanguage: langMeta.htmlLang,
+    description: T.site.ldDescription,
     about: {
       "@type": "VideoGame",
       name: "Deadlock",
-      alternateName: "デッドロック",
+      ...(T.site.gameAltName ? { alternateName: T.site.gameAltName } : {}),
       publisher: { "@type": "Organization", name: "Valve Corporation" },
     },
     isFamilyFriendly: true,
@@ -104,13 +120,13 @@ if (datePublished) {
     headline: title,
     datePublished,
     dateModified: datePublished,
-    inLanguage: "ja",
+    inLanguage: langMeta.htmlLang,
     mainEntityOfPage: canonical,
     description,
     isAccessibleForFree: true,
   });
 }
-const crumbs: Crumb[] = [{ name: "トップ", path: "/" }, ...breadcrumbs];
+const crumbs: Crumb[] = [{ name: T.site.crumbTop, path: langPath("/") }, ...breadcrumbs];
 if (crumbs.length > 1) {
   jsonLd.push({
     "@context": "https://schema.org",
@@ -126,17 +142,17 @@ if (crumbs.length > 1) {
 ---
 
 <!doctype html>
-<html lang="ja">
+<html lang={langMeta.htmlLang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={desc} />
-    <meta
-      name="robots"
-      content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large"}
-    />
+    <meta name="robots" content={robots} />
     <link rel="canonical" href={canonical} />
+    {alternates.map((a) => (
+      <link rel="alternate" hreflang={a.hreflang} href={new URL(a.path, SITE).href} />
+    ))}
     {GOOGLE_SITE_VERIFICATION && (
       <meta name="google-site-verification" content={GOOGLE_SITE_VERIFICATION} />
     )}
@@ -150,7 +166,7 @@ if (crumbs.length > 1) {
 
     {/* Open Graph / Twitter（SNS・チャット・生成AIのプレビュー用） */}
     <meta property="og:site_name" content={SITE_NAME} />
-    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:locale" content={langMeta.ogLocale} />
     <meta property="og:type" content={isHome ? "website" : ogType} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={desc} />
@@ -159,7 +175,7 @@ if (crumbs.length > 1) {
     <meta property="og:image" content={ogImageUrl} />
     {ogSize.w && <meta property="og:image:width" content={String(ogSize.w)} />}
     {ogSize.h && <meta property="og:image:height" content={String(ogSize.h)} />}
-    <meta property="og:image:alt" content={ogImage ? title : `${SITE_NAME} — Deadlock 日本語データベース`} />
+    <meta property="og:image:alt" content={ogImage ? title : `${SITE_NAME} — ${T.site.ogAlt}`} />
     <meta name="twitter:card" content={twitterCard} />
     {X_HANDLE && <meta name="twitter:site" content={X_HANDLE} />}
     <meta name="twitter:title" content={fullTitle} />
@@ -176,6 +192,16 @@ if (crumbs.length > 1) {
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&family=Cinzel:wght@700&display=swap"
     />
+    {/* 韓国語・簡体字中国語のページだけ、その言語の Noto Sans を足して先頭に置く */}
+    {langMeta.font && (
+      <link
+        rel="stylesheet"
+        href={`https://fonts.googleapis.com/css2?family=${langMeta.font.replace(/ /g, "+")}:wght@400;500;700&display=swap`}
+      />
+    )}
+    {langMeta.font && (
+      <style is:inline set:html={`:root{--font-sans:"${langMeta.font}","Noto Sans JP","Segoe UI",sans-serif}`} />
+    )}
 
     <script
       type="application/ld+json"
@@ -225,16 +251,8 @@ if (crumbs.length > 1) {
 
     <footer class="site-footer">
       <div class="inner">
-        <p>
-          データ出典: ゲーム本体クライアントから直接抽出 (ClientVersion{" "}
-          <code>{heroesFile.upstreamCommit}</code>)。数値はゲームの生データから自動抽出しています。
-        </p>
-        <p class="muted">
-          本サイトはファンによる非公式サイトで、Valve Corporation とは関係がなく、許諾も受けていません。
-          『Deadlock』および本サイトが表示するデータ・画像・テキストの著作権は
-          Valve Corporation に帰属します。
-          <a href={`${base}/about/`}>このサイトについて</a>
-        </p>
+        <p>{T.footer.sourceBefore}<code>{heroesFile.upstreamCommit}</code>{T.footer.sourceAfter}</p>
+        <p class="muted">{T.footer.disclaimer}<a href={`${base}/about/`}>{T.footer.about}</a></p>
         {/*
           カンパ先だけを権利表示より下に置き、目立たせない。
           X・Twitch・Discord は /about/ の最下部にまとめている。
@@ -243,7 +261,7 @@ if (crumbs.length > 1) {
           {SUPPORT_LINKS.map((l) => (
             <a href={l.href} rel="noopener" target="_blank">
               <span class="ico" set:html={l.icon} />
-              {l.label}
+              {l.href === SUPPORT_LINK_HREF ? T.footer.support : l.label}
             </a>
           ))}
         </p>

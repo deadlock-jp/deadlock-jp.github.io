@@ -12,9 +12,14 @@ import { heroRanks, pickRows, topRankRows, heroTierTable } from "../../lib/heror
 import { skillCard } from "../../lib/skillcard.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const { L, t: tIn, term, langPath, currentLang } = Astro.locals.i18n;
+const T = L();
+const isJa = currentLang() === "ja";
+/** ヒーローへのリンクの接頭辞(日本語は "") */
+const linkBase = base + langPath("/").slice(0, -1);
 const ranks = heroRanks();
 const tier = heroTierTable();
-const BOON_LABEL: Record<string, string> = { hp: "HP成長", weapon: "武器成長", spirit: "スピリット成長" };
+const BOON_LABEL: Record<string, string> = { hp: T.rank.boonHp, weapon: T.rank.boonWeapon, spirit: T.rank.boonSpirit };
 
 /** トップページと同じホバーカードのデータ + 正方形アイコンのURL */
 const heroMeta: Record<number, { name: string; sm: string | null }> = {};
@@ -46,6 +51,8 @@ for (const h of releasedHeroes()) {
 const heroes = releasedHeroes().map((h) => ({
   hero: h,
   name: t(h.nameToken, h.key),
+  /** 日本語以外では英語名でも絞り込めるようにする(日本語版は従来どおり) */
+  findName: isJa ? t(h.nameToken, h.key) : `${t(h.nameToken, h.key)} ${tIn(h.nameToken, h.key, "en")}`,
   role: t(h.roleToken, ""),
   topStats: topRankRows(ranks[h.id], 2),
   skills: h.abilities
@@ -73,7 +80,7 @@ for (const h of releasedHeroes()) {
       isUlt: ab.kind === "Ultimate",
       isPassive: ab.kind !== "Ultimate" && ab.activation === "PASSIVE",
       meta: card.meta,
-      desc: describe(`${a.abilityKey}_desc`, ab.properties, "（説明なし）", { hero_name: heroName }),
+      desc: describe(`${a.abilityKey}_desc`, ab.properties, T.common.noDesc, { hero_name: heroName }),
       tiles: card.tiles,
       secondaryRows: card.secondaryRows,
       upgrades: card.upgrades,
@@ -92,10 +99,10 @@ const rankBuckets = Object.keys(heroStats.buckets)
   .map(Number)
   .sort((a, b) => a - b);
 const rankOptions = [
-  { key: "all", label: "全ランク" },
+  { key: "all", label: T.heroes.allRanks },
   ...rankBuckets.map((tier) => ({
     key: String(tier),
-    label: t(`Citadel_ranks_rank${tier - 1}`, `ランク${tier}`),
+    label: t(`Citadel_ranks_rank${tier - 1}`, T.heroes.rankN(tier)),
   })),
 ];
 const statsPayload = {
@@ -104,20 +111,33 @@ const statsPayload = {
   banRateNote: heroStats.banRateNote,
   buckets: heroStats.buckets,
 };
+/** クライアント側の文言 */
+const H = {
+  related: T.common.related,
+  /** 絞り込み件数の表示で「件」を「人」に言い換える */
+  countFrom: T.heroes.countFrom,
+  countTo: T.heroes.countTo,
+};
+const H2 = {
+  empty: T.heroes.tierEmpty,
+  note: T.heroes.statsNote,
+  ban: T.heroes.banNote,
+  low: T.heroes.lowSample,
+  titleSep: T.common.titleSep,
+  /** BAN率の注記。日本語は data/hero-stats.json の文をそのまま使う */
+  banRateNote: isJa ? null : T.heroes.banRateNote,
+};
 ---
 
-<Base
-  title="ヒーロー一覧"
-  description="Deadlock（デッドロック）の実装済みヒーロー全員の基礎ステータス（最大HP・移動速度・スタミナ）とスキル、項目別ステータスランクを日本語で。レベル1・アイテムなしの素の数値。"
->
-  <h1>ヒーロー</h1>
+<Base title={T.heroes.title} description={T.heroes.description}>
+  <h1>{T.nav.heroes}</h1>
 
   {/* ------------ 最上部: ランク帯別の使用状況(実際の対戦記録) ------------ */}
   <section class="hs panel">
     <div class="hs-head">
-      <h2>使用状況</h2>
+      <h2>{T.heroes.usage}</h2>
       <label class="rankpick">
-        <span class="rplabel">ランク帯</span>
+        <span class="rplabel">{T.heroes.rankBand}</span>
         <select id="rank">
           {rankOptions.map((r) => <option value={r.key}>{r.label}</option>)}
         </select>
@@ -126,9 +146,9 @@ const statsPayload = {
     <div class="hs-cols">
       {
         [
-          { key: "pick", label: "ピック率", cssVar: "weapon" },
-          { key: "win", label: "勝率", cssVar: "vitality" },
-          { key: "ban", label: "BAN率", cssVar: "spirit" },
+          { key: "pick", label: T.heroes.pickRate, cssVar: "weapon" },
+          { key: "win", label: T.heroes.winRate, cssVar: "vitality" },
+          { key: "ban", label: T.heroes.banRate, cssVar: "spirit" },
         ].map((c) => (
           <div class="hs-col" data-metric={c.key} style={`--cat: var(--c-${c.cssVar})`}>
             <h3>{c.label}</h3>
@@ -143,9 +163,9 @@ const statsPayload = {
   {/* ------------ 上部: 項目別ステータスランク ------------ */}
   <section class="tt panel">
     <div class="tt-head">
-      <h2>ステータスランク</h2>
+      <h2>{T.heroes.statusRank}</h2>
       <label class="metricpick">
-        <span class="mplabel">項目</span>
+        <span class="mplabel">{T.heroes.metric}</span>
         <select id="metric">
           {
             [...new Set(tier.metrics.map((m) => m.group))].map((g) => (
@@ -165,7 +185,7 @@ const statsPayload = {
   </section>
 
   {/* ------------ 下部: 一覧 ------------ */}
-  <h2 class="listh">一覧</h2>
+  <h2 class="listh">{T.heroes.list}</h2>
 
   {/*
     スキル効果での絞り込み。検索辞書(言い換え・関連語)は /items/・ビルドページと共用の
@@ -175,23 +195,23 @@ const statsPayload = {
     <input
       type="search"
       id="heroq"
-      placeholder="ヒーロー名・スキルの効果で絞り込む(例: サイレンス)"
+      placeholder={T.heroes.searchPlaceholder}
       autocomplete="off"
-      aria-label="ヒーローの絞り込み"
+      aria-label={T.heroes.searchAria}
     />
     <span class="herohits" id="herohits"></span>
     <span class="herolegend" id="herolegend" hidden>
-      <i class="lg lg-base"></i>基本の効果
-      <i class="lg lg-up"></i>AP強化で付く効果
-      <i class="lg lg-rel"></i>関連
+      <i class="lg lg-base"></i>{T.heroes.legendBase}
+      <i class="lg lg-up"></i>{T.heroes.legendUp}
+      <i class="lg lg-rel"></i>{T.common.related}
     </span>
   </div>
 
   <ul class="grid" id="herogrid">
     {
-      heroes.map(({ hero: h, name, role, skills, topStats }) => (
-        <li data-find={`${name} ${role} ${h.key}`}>
-          <a href={`${base}/heroes/${h.id}/`} data-herocard={h.id}>
+      heroes.map(({ hero: h, name, findName, role, skills, topStats }) => (
+        <li data-find={`${findName} ${role} ${h.key}`}>
+          <a href={`${linkBase}/heroes/${h.id}/`} data-herocard={h.id}>
             <span class="head">
               <HeroPortrait name={name} image={h.images.iconSmall} size={44} />
               <span class="who">
@@ -229,7 +249,7 @@ const statsPayload = {
               {topStats.map((r) => (
                 <span class="top"><b>{r.value}</b> {r.label}</span>
               ))}
-              <span class="cx">複雑さ {"●".repeat(cx(h.complexity))}<span class="dim">{"●".repeat(3 - cx(h.complexity))}</span></span>
+              <span class="cx">{`${term("complexity")} ${"●".repeat(cx(h.complexity))}`}<span class="dim">{"●".repeat(3 - cx(h.complexity))}</span></span>
             </span>
           </a>
         </li>
@@ -252,8 +272,8 @@ const statsPayload = {
   <HeroHoverCard heroDetail={heroDetail} />
   <AbilityHoverCard details={abilityDetails} />
 
-  <script src={`${base}/js/item-search.js`} is:inline></script>
-  <script is:inline>
+  <script src={`${base}/js/${isJa ? "item-search.js" : "item-search-intl.js"}`} is:inline data-summary={isJa ? undefined : JSON.stringify(T.search)}></script>
+  <script is:inline define:vars={{ H }}>
     // 一覧の絞り込み。ヒーロー名・ロール・スキル名・スキル説明・AP強化の説明のどれかで当たったヒーローを残し、
     // 当たったスキルのアイコンを強調する(基本の効果=実線、AP強化で付く効果=点線+AP表示)。
     (() => {
@@ -308,7 +328,7 @@ const statsPayload = {
             // 関連語(デバフ対策など)だけで当たったスキルは、検索語そのものの効果と見分ける
             if (sm.length > 0) {
               s.el.classList.add("rel");
-              s.mark.textContent = "関連";
+              s.mark.textContent = H.related;
               s.mark.hidden = false;
             } else if (ap !== null) {
               s.el.classList.add("hitup");
@@ -321,7 +341,7 @@ const statsPayload = {
           // ヒーロー名だけで当たったときは、スキルを薄くしない
           if (any) for (const s of skills) if (!s.el.matches(".hit, .hitup, .rel")) s.el.classList.add("miss");
         }
-        hits.textContent = cq ? S.summary(direct, related, labels, total).replace(/件/g, "人") : "";
+        hits.textContent = cq ? S.summary(direct, related, labels, total).split(H.countFrom).join(H.countTo) : "";
         legend.hidden = !cq;
         document.getElementById("herogrid").classList.toggle("searching", !!cq);
       }
@@ -331,7 +351,7 @@ const statsPayload = {
     })();
   </script>
 
-  <script is:inline define:vars={{ heroMeta, tierData: tier.data, base, statsPayload }}>
+  <script is:inline define:vars={{ heroMeta, tierData: tier.data, base: linkBase, statsPayload, H2 }}>
     (() => {
       const esc = (s) =>
         String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
@@ -355,13 +375,13 @@ const statsPayload = {
                   : `<span class="ph">${esc(m.name.slice(0, 1))}</span>`;
                 return (
                   `<a class="tt-hero" data-herocard="${r.id}" href="${base}/heroes/${r.id}/" ` +
-                  `title="${esc(m.name)}｜${esc(r.value)}">${img}</a>`
+                  `title="${esc(m.name)}${esc(H2.titleSep)}${esc(r.value)}">${img}</a>`
                 );
               })
               .join("");
             return (
               `<div class="tt-row tier-${L}"><span class="tt-rank">${L}</span>` +
-              `<div class="tt-icons">${icons || '<span class="tt-empty">該当なし</span>'}</div></div>`
+              `<div class="tt-icons">${icons || `<span class="tt-empty">${esc(H2.empty)}</span>`}</div></div>`
             );
           })
           .join("");
@@ -410,9 +430,9 @@ const statsPayload = {
         const d = new Date(statsPayload.fetchedAt);
         const stamp = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
         hsNote.textContent =
-          `直近30日 / ${bucket.matches.toLocaleString("en-US")}試合 / ${stamp}時点。` +
-          `BAN率は${statsPayload.banRateNote}。` +
-          (low ? "　※このランク帯は母数が少なく、数値がぶれます。" : "");
+          H2.note.replace("{n}", bucket.matches.toLocaleString("en-US")).replace("{date}", stamp) +
+          H2.ban.replace("{note}", H2.banRateNote ?? statsPayload.banRateNote) +
+          (low ? H2.low : "");
         hsNote.classList.toggle("low", low);
       }
 
