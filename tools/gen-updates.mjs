@@ -77,22 +77,19 @@ const oldEconomy = tryLoad(OLD_DIR, "economy.json");
 const newEconomy = tryLoad(NEW_DIR, "economy.json");
 
 /**
- * note(1行の要約)に使う表示名。after 側のスナップショットから引く。
- * 日本語が無い版(GameTracking由来のバックフィル)では英語に落ちる。
- * サイトの表示は常に最新版のローカライズを使うので、ここはあくまで
+ * note(1行の要約)に使う表示名。data/localization/(常に最新版の1セット)から引き、
+ * 日本語が無いトークンは英語に落ちる。表示名はパッチ間でまず変わらないうえ、
+ * サイトの表示も常に最新版のローカライズを使うので、ここはあくまで
  * updates.json を人が読むときの手掛かり。
  */
-const tokens = (() => {
-  for (const file of ["localization.japanese.json", "localization.english.json"]) {
-    try {
-      return load(NEW_DIR, file).tokens ?? {};
-    } catch {
-      /* その言語が無い版もある */
-    }
+const [tokensJa, tokensEn] = ["japanese", "english"].map((lang) => {
+  try {
+    return load("data/localization", `${lang}.json`).tokens ?? {};
+  } catch {
+    return {};
   }
-  return {};
-})();
-const label = (token, fallback) => tokens[token]?.text ?? fallback;
+});
+const label = (token, fallback) => tokensJa[token]?.text ?? tokensEn[token]?.text ?? fallback;
 
 /** 差分1行を Adjustment.changes の要素にする */
 const toChange = (row) => ({

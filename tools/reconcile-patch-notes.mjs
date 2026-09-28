@@ -74,22 +74,15 @@ const heroes = read("heroes.json").heroes;
 const items = read("items.json").items;
 const abilities = read("abilities.json").abilities;
 /*
- * GameTracking からバックフィルした版には日本語ローカライズが無い(英語だけ)。
- * 日本語が無いと公式ノート(日本語)と名前で突き合わせられず、全件が
- * 「ノート未記載」に落ちてレポートの意味が無くなるので、最新版の日本語で補う。
- * 表示名はパッチ間でまず変わらないうえ、ここは人が読む確認用レポート専用。
+ * ローカライズはスナップショットの外(data/localization/)に最新版の1セットだけある。
+ * 過去版と名前で突き合わせるのにも最新版の日本語を使う。表示名はパッチ間で
+ * まず変わらないうえ、ここは人が読む確認用レポート専用。
  */
 const readTokensFrom = (dir, name) =>
   existsSync(join(dir, name)) ? JSON.parse(readFileSync(join(dir, name), "utf8")).tokens : {};
-const latestVersion = JSON.parse(
-  readFileSync(join(REPO_ROOT, "data", "latest.json"), "utf8"),
-).version;
-const latestDir = join(REPO_ROOT, "data", "snapshots", latestVersion);
-const loc = {
-  ...readTokensFrom(latestDir, "localization.japanese.json"),
-  ...readTokensFrom(snapDir, "localization.japanese.json"),
-};
-const locEn = readTokensFrom(snapDir, "localization.english.json");
+const locDir = join(REPO_ROOT, "data", "localization");
+const loc = readTokensFrom(locDir, "japanese.json");
+const locEn = readTokensFrom(locDir, "english.json");
 const t = (token) => loc[token]?.text ?? locEn[token]?.text ?? token;
 
 // --- ノート本文を集める ---

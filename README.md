@@ -47,6 +47,10 @@ MIT ライセンスが及ぶのはコードだけで、`data/` と `public/image
 
 パッチごとのスナップショットは `data/snapshots/<ClientVersion>/` に保存し、
 `data/latest.json` が現在サイトに出ている版を指します。
+最新版のスナップショットは全ファイルを持ち、過去版はバージョン比較と差分生成に使う
+ヒーロー・アイテム・スキル・経済の数値（`heroes` `items` `abilities` `economy` `meta`）だけを残します。
+表示テキスト（ローカライズ）はスナップショットの外、`data/localization/<言語>.json` に
+最新版の1セットだけを置きます。
 [GameTracking-Deadlock](https://github.com/SteamDatabase/GameTracking-Deadlock) は
 検算と過去バージョンの補完に使う副次ソースです。
 
@@ -66,7 +70,7 @@ npm run typecheck  # 型チェック
 
 ```bash
 node tools/extract/extract-local.mjs   # ローカル抽出ルートを作る(パスを標準出力に出す)
-npm run parse -- --local <上記のパス>   # data/snapshots/<ClientVersion>/ を生成
+npm run parse -- --local <上記のパス>   # data/snapshots/<ClientVersion>/ と data/localization/ を生成
 ```
 
 検算や過去バージョンの補完には、別途 clone した GameTracking-Deadlock も使えます。

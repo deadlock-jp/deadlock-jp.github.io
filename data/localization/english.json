@@ -1,7 +1,8 @@
 {
   "schemaVersion": 1,
-  "upstreamCommit": "6697",
-  "generatedAt": "2026-09-18T09:00:03.155Z",
+  "clientVersion": "6701",
+  "upstreamCommit": "6701",
+  "generatedAt": "2026-09-28T17:14:32.281Z",
   "language": "English",
   "groupCounts": {
     "citadel_gc_hero_names": 189,

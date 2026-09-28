@@ -12,9 +12,21 @@
  *       (tools/extract/extract-local.mjs の出力。steam.inf / scripts/ / localization/ を持つ)
  *       から data/snapshots/<ClientVersion>/*.json を生成し、data/latest.json を更新する。
  *       これが現在の一次ソース(architecture.html 参照)。
+ *
+ * ローカライズはスナップショットの外、data/localization/<lang>.json に最新版の1セットだけを置く
+ * (過去版の文字列はサイトが使わないため。言語は LOCALIZATION_LANGS)。
+ * 最新版以外のスナップショットは PAST_SNAPSHOT_FILES だけを残す(prunePastSnapshots)。
  */
 
-import { writeFileSync, mkdirSync, existsSync, readFileSync, copyFileSync } from "node:fs";
+import {
+  writeFileSync,
+  mkdirSync,
+  existsSync,
+  readFileSync,
+  copyFileSync,
+  readdirSync,
+  unlinkSync,
+} from "node:fs";
 import { execFileSync } from "node:child_process";
 import { resolve, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -31,6 +43,31 @@ import type { MapImage } from "../types/map.ts";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(HERE, "../..");
+const SNAPSHOT_ROOT = join(REPO_ROOT, "data", "snapshots");
+const LOCALIZATION_DIR = join(REPO_ROOT, "data", "localization");
+
+/**
+ * data/localization/<lang>.json に書き出す言語(ゲーム側のファイル名に付く言語名)。
+ * 言語を増やすときはここに1つ足すだけでよい(例: "koreana", "schinese")。
+ */
+const LOCALIZATION_LANGS = ["japanese", "english"] as const;
+
+/**
+ * 最新版以外のスナップショットに残すファイル。
+ * - heroes / items / abilities … ビルド比較(src/lib/versionedData.ts)と差分生成
+ *   (tools/gen-snapshot-diff.mjs・gen-updates.mjs)が過去版でも読む
+ * - economy … 差分生成がシステム全体の調整を出すのに過去版でも読む
+ * - meta … ビルド比較が版の抽出日を出すのに読む
+ * objects / map / convars はサイトが最新版でしか読まないので、過去版からは消す。
+ */
+const PAST_SNAPSHOT_FILES = new Set(["heroes.json", "items.json", "abilities.json", "economy.json", "meta.json"]);
+
+/** data/latest.json が指す版。無ければ null */
+function readLatestVersion(): string | null {
+  const path = join(REPO_ROOT, "data", "latest.json");
+  if (!existsSync(path)) return null;
+  return (JSON.parse(readFileSync(path, "utf8")) as { version: string }).version;
+}
 
 function argValue(name: string): string | undefined {
   const i = process.argv.indexOf(`--${name}`);
@@ -139,6 +176,62 @@ function reportLocalization(localization: ReturnType<typeof parseLocalization>, 
 }
 
 /**
+ * data/localization/<lang>.json を LOCALIZATION_LANGS の全言語ぶん書く。
+ *
+ * ここに置くのは常に「最新版」の1セットなので、最新版でない版(GameTracking からの
+ * 過去版バックフィルなど)を parse しているときは何も書かない。古い版の文字列で
+ * 最新版が上書きされるのを防ぐため。isLatest は呼び出し側が決める(--local は常に最新版)。
+ * トークンが1つも取れなかった言語(GameTracking に日本語は無い)は書かずに既存を残す。
+ */
+function writeLocalizations(locRoot: string, clientVersion: string, isLatest: boolean): void {
+  if (!isLatest) {
+    console.log(
+      `  ※ ローカライズは書きません: ${clientVersion} は最新版(${readLatestVersion()})ではないため\n` +
+        "     (data/localization/ は最新版の1セットだけを置く)",
+    );
+    return;
+  }
+  for (const lang of LOCALIZATION_LANGS) {
+    const localization = parseLocalization(locRoot, lang, clientVersion);
+    if (Object.keys(localization.tokens).length === 0) {
+      console.log(`  ※ ${lang} のファイルが見つからないので省略(既存の data/localization/${lang}.json を残す)`);
+      continue;
+    }
+    // どの版から作ったかを先頭近くに残す
+    const { schemaVersion, ...rest } = localization;
+    writeJsonTo(LOCALIZATION_DIR, `${lang}.json`, { schemaVersion, clientVersion, ...rest });
+    reportLocalization(localization, lang);
+  }
+}
+
+/**
+ * 最新版以外のスナップショットから、PAST_SNAPSHOT_FILES 以外のファイルを消す。
+ * 新しい版を --local で取り込むと、1つ前の最新版がここで過去版の形になる。
+ * 消すのは差分生成(gen-snapshot-diff / gen-updates)が読まないファイルだけなので、
+ * parse の直後に消してから差分を作ってよい。
+ */
+function prunePastSnapshots(): void {
+  const latest = readLatestVersion();
+  if (!latest || !existsSync(SNAPSHOT_ROOT)) return;
+  for (const entry of readdirSync(SNAPSHOT_ROOT, { withFileTypes: true })) {
+    if (!entry.isDirectory() || entry.name === latest) continue;
+    const dir = join(SNAPSHOT_ROOT, entry.name);
+    for (const file of readdirSync(dir)) {
+      if (PAST_SNAPSHOT_FILES.has(file)) continue;
+      unlinkSync(join(dir, file));
+      console.log(`  削除(過去版には不要): data/snapshots/${entry.name}/${file}`);
+    }
+  }
+}
+
+/** GameTracking の steam.inf の ClientVersion。無ければ null */
+function gameTrackingClientVersion(gtPath: string): string | null {
+  const infPath = join(gtPath, "game/citadel/steam.inf");
+  if (!existsSync(infPath)) return null;
+  return readFileSync(infPath, "utf8").match(/^ClientVersion=(\S+)/m)?.[1] ?? null;
+}
+
+/**
  * convars.json を書く。convar はクライアントの pak に無いので、GameTracking-Deadlock の
  * DumpSource2/convars.txt から読む(src/parsers/convars.ts)。
  * GameTracking の版が expectedVersion と違うときは警告だけ出して、その版の値のまま書く
@@ -244,12 +337,18 @@ function runGameTracking(): void {
   writeJsonTo(dataDir, "objects.json", objects);
   writeJsonTo(dataDir, "economy.json", economy);
 
-  // 英語は GameTracking-Deadlock に含まれる。日本語はゲーム本体から取得して
-  // 同じ場所に置けば、--lang japanese で同じパーサーが読む。
-  const lang = argValue("lang") ?? "english";
-  const localization = parseLocalization(join(gt, "game/citadel/resource/localization"), lang, sha);
-  writeJsonTo(dataDir, `localization.${lang}.json`, localization);
-  reportLocalization(localization, lang);
+  // ローカライズは data/localization/ に書く(最新版と同じ版のときだけ。writeLocalizations)。
+  // GameTracking に含まれるのは英語だけ。
+  const clientVersion = gameTrackingClientVersion(gt);
+  if (clientVersion) {
+    writeLocalizations(
+      join(gt, "game/citadel/resource/localization"),
+      clientVersion,
+      clientVersion === readLatestVersion(),
+    );
+  } else {
+    console.log("  ※ ローカライズは書きません: steam.inf が無く、版を判定できないため");
+  }
 }
 
 /**
@@ -287,16 +386,12 @@ function runGameTrackingSnapshot(): void {
   writeJsonTo(snapDir, "economy.json", economy);
   writeConvars(snapDir, gt, clientVersion);
 
-  const locRoot = join(gt, "game/citadel/resource/localization");
-  for (const lang of ["japanese", "english"] as const) {
-    const localization = parseLocalization(locRoot, lang, clientVersion);
-    if (Object.keys(localization.tokens).length === 0) {
-      console.log(`  ※ ${lang} は GameTracking に含まれないので省略`);
-      continue;
-    }
-    writeJsonTo(snapDir, `localization.${lang}.json`, localization);
-    reportLocalization(localization, lang);
-  }
+  // 過去版のバックフィルなら書かない(最新版のローカライズを古い文字列で上書きしない)
+  writeLocalizations(
+    join(gt, "game/citadel/resource/localization"),
+    clientVersion,
+    clientVersion === readLatestVersion(),
+  );
 
   writeJsonTo(snapDir, "meta.json", {
     clientVersion,
@@ -306,6 +401,7 @@ function runGameTrackingSnapshot(): void {
     upstreamCommit: sha,
   });
   console.log(`\n  data/latest.json は更新しません(過去版のバックフィル)`);
+  prunePastSnapshots();
 }
 
 /**
@@ -341,12 +437,8 @@ function runLocal(localRoot: string): void {
   writeConvars(snapDir, optionalGameTrackingPath(), clientVersion);
   writeMap(snapDir, localRoot);
 
-  const locRoot = join(localRoot, "localization");
-  for (const lang of ["japanese", "english"] as const) {
-    const localization = parseLocalization(locRoot, lang, clientVersion);
-    writeJsonTo(snapDir, `localization.${lang}.json`, localization);
-    reportLocalization(localization, lang);
-  }
+  // --local で取り込む版は常に最新版になる(下で data/latest.json をこの版にする)
+  writeLocalizations(join(localRoot, "localization"), clientVersion, true);
 
   const meta = {
     clientVersion,
@@ -360,6 +452,7 @@ function runLocal(localRoot: string): void {
   const latestPath = join(REPO_ROOT, "data", "latest.json");
   writeFileSync(latestPath, JSON.stringify({ version: clientVersion }, null, 2) + "\n", "utf8");
   console.log(`\n  data/latest.json -> ${clientVersion}`);
+  prunePastSnapshots();
 }
 
 function main(): void {

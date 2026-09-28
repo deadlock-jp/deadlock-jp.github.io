@@ -69,7 +69,8 @@ function codenameFor(ref) {
 const latestVersion = JSON.parse(readFileSync(join(repoRoot, "data/latest.json"), "utf8")).version;
 const snapDir = join(repoRoot, "data/snapshots", latestVersion);
 const heroes = JSON.parse(readFileSync(join(snapDir, "heroes.json"), "utf8"));
-const enLoc = JSON.parse(readFileSync(join(snapDir, "localization.english.json"), "utf8"));
+// ローカライズはスナップショットの外に最新版の1セットだけある
+const enLoc = JSON.parse(readFileSync(join(repoRoot, "data/localization/english.json"), "utf8"));
 const enName = (nameToken) => enLoc.tokens[nameToken]?.text ?? null;
 
 const srcFiles = existsSync(SRC) ? readdirSync(SRC) : [];

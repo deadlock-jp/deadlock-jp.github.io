@@ -1,5 +1,5 @@
 /**
- * ローカライズファイル(Valve KeyValues形式) → localization.<lang>.json
+ * ローカライズファイル(Valve KeyValues形式) → data/localization/<lang>.json
  *
  *   "lang"
  *   {

@@ -39,9 +39,10 @@ const DATA_DIR = join(process.cwd(), "data");
 const readJson = <T>(path: string): T => JSON.parse(readFileSync(path, "utf8")) as T;
 
 /**
- * data/snapshots/<version>/ からヒーロー・アイテム・アビリティ・日本語ローカライズを読む。
+ * data/snapshots/<version>/ からヒーロー・アイテム・アビリティを、
+ * data/localization/ からローカライズ(常に最新版の1セット)を読む。
  * version を省略すると data/latest.json が指す最新版。
- * ビルドページに複数バージョン比較 UI を足すときは、ここに version を渡すだけでよい
+ * 複数バージョンの比較は src/lib/versionedData.ts が別に持つ
  * (architecture.html「データレイアウト」参照)。
  */
 function loadSnapshot(version?: string): {
@@ -57,8 +58,8 @@ function loadSnapshot(version?: string): {
     heroes: readJson<HeroesFile>(join(dir, "heroes.json")),
     items: readJson<ItemsFile>(join(dir, "items.json")),
     abilities: readJson<AbilitiesFile>(join(dir, "abilities.json")),
-    localization: readJson<LocalizationFile>(join(dir, "localization.japanese.json")),
-    localizationEn: readJson<LocalizationFile>(join(dir, "localization.english.json")),
+    localization: readJson<LocalizationFile>(join(DATA_DIR, "localization", "japanese.json")),
+    localizationEn: readJson<LocalizationFile>(join(DATA_DIR, "localization", "english.json")),
   };
 }
 

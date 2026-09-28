@@ -15,6 +15,11 @@ export interface LocalizedToken {
 
 export interface LocalizationFile {
   schemaVersion: number;
+  /**
+   * どの版から作ったか。data/localization/<lang>.json(常に最新版の1セット)に
+   * パーサーが書き足す(src/parsers/main.ts の writeLocalizations)
+   */
+  clientVersion?: string;
   upstreamCommit: string;
   generatedAt: string;
   /** english / japanese など */
