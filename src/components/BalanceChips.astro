@@ -41,7 +41,7 @@ const rows = CHIP_ORDER.map((kind) => ({
         {row.chips.slice(0, max).map((c) => (
           <a
             class="chip"
-            href={c.href}
+            href={c.href || undefined}
             title={c.heroName ? `${c.heroName}${L().common.titleSep}${c.name}` : c.name}
             data-itemcard={c.item ? c.item.id : undefined}
             data-abilitycard={c.abilityKey ?? undefined}

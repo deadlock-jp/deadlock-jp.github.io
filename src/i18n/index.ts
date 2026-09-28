@@ -8,12 +8,15 @@
 import { currentLang } from "./context.ts";
 import type { Lang } from "./langs.ts";
 import { ja, type Dict } from "./ui/ja.ts";
+import { en } from "./ui/en.ts";
+import { ko } from "./ui/ko.ts";
+import { zhCn } from "./ui/zh-cn.ts";
 
-const DICTS: Partial<Record<Lang, Dict>> = { ja };
+const DICTS: Record<Lang, Dict> = { ja, en, ko, "zh-cn": zhCn };
 
 /** その言語の辞書(引数を省くといま描いているページの言語) */
 export function L(lang: Lang = currentLang()): Dict {
-  return DICTS[lang] ?? ja;
+  return DICTS[lang];
 }
 
 /** "{n}件" のような置き換え付き文字列を埋める(クライアント側と同じ書式) */

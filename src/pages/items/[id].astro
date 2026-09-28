@@ -33,7 +33,7 @@ const isLegendary = item.tier === 5;
 const name = t(item.nameToken, item.id);
 const meta = item.slotType ? SLOT_META[item.slotType] : null;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const { L, term, langPath } = Astro.locals.i18n;
+const { L, term, langPath, currentLang } = Astro.locals.i18n;
 const T = L();
 
 /**
@@ -235,8 +235,8 @@ const ogImage =
   )}
 
   {notes.length > 0 && (
-    <div class="inotes">
-      <span class="nt">{T.common.memo}</span>
+    <div class="inotes" lang="ja">
+      <span class="nt" lang={currentLang() === "ja" ? undefined : T.langTag}>{T.common.memo}</span>{currentLang() !== "ja" && <span class="jaonly" lang={T.langTag}>{T.jaOnly}</span>}
       <ul>
         {notes.map((note) => (
           <li>{note}</li>

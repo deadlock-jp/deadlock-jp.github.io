@@ -323,7 +323,15 @@ export function heroMatchup(hero: Hero): HeroMatchup {
               pool.length,
               pctText(p),
             )
-          : L().matchup.evidenceCc(String(Math.round(value * 100) / 100), pool.length, pctText(p));
+          : L().matchup.evidenceCc(
+              // 行動阻害の種類はゲームの状態異常名(日本語版は以前からの表記を辞書側で持つ)
+              ["Citadel_StatusEffectStun", "Citadel_StatusEffectSleep", "Citadel_StatusEffectImmobilize"]
+                .map((token) => t(token, token))
+                .join(L().common.dot),
+              String(Math.round(value * 100) / 100),
+              pool.length,
+              pctText(p),
+            );
     } else if (w.composition) {
       if (!sig?.comp) continue;
       const share = sig.comp[w.composition];

@@ -781,6 +781,7 @@ function weaponFieldLabel(field: string): string | null {
 function unitText(unit: string): string {
   if (unit === "秒") return L().common.sec;
   if (unit === "m／秒") return L().common.mps;
+  if (unit === "m") return L().common.meter;
   return unit;
 }
 

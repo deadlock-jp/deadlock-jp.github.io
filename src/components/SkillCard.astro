@@ -26,7 +26,7 @@ export interface Props {
   href?: string;
 }
 const { abilityKey, ab, card, notes, heroName, href } = Astro.props;
-const { L, term } = Astro.locals.i18n;
+const { L, term, currentLang } = Astro.locals.i18n;
 const isUlt = ab.kind === "Ultimate";
 const isPassive = !isUlt && ab.activation === "PASSIVE";
 const name = t(abilityKey, abilityKey);
@@ -135,8 +135,8 @@ const fmtScale = (n: number) => (Math.round(n * 100) / 100).toString();
   )}
 
   {notes.length > 0 && (
-    <div class="snotes">
-      <span class="nt">{L().common.memo}</span>
+    <div class="snotes" lang="ja">
+      <span class="nt" lang={currentLang() === "ja" ? undefined : L().langTag}>{L().common.memo}</span>{currentLang() !== "ja" && <span class="jaonly" lang={L().langTag}>{L().jaOnly}</span>}
       <ul>
         {notes.map((note) => (
           <li>{note}</li>

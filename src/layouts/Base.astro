@@ -50,20 +50,36 @@ const {
   noindex = false,
 } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const { L, currentLang, langPath, splitLangPath, LANG_META, alternatesFor, isIndexed } = Astro.locals.i18n;
+const { L, currentLang, langPath, splitLangPath, LANG_META, alternatesFor, isIndexed, isLocalizedPath, isJaOnlyFrom, BUILT_LANGS } =
+  Astro.locals.i18n;
 const lang = currentLang();
 const langMeta = LANG_META[lang];
 const T = L();
 const nav = [
-  { href: `${base}${langPath("/heroes/")}`, label: T.nav.heroes },
-  { href: `${base}${langPath("/items/")}`, label: T.nav.items },
-  { href: `${base}${langPath("/build/")}`, label: T.nav.build },
-  { href: `${base}${langPath("/mechanics/")}`, label: T.nav.mechanics },
-  { href: `${base}${langPath("/patch-notes/")}`, label: T.nav.patchNotes },
+  { href: `${base}${langPath("/heroes/")}`, label: T.nav.heroes, jaOnly: false },
+  { href: `${base}${langPath("/items/")}`, label: T.nav.items, jaOnly: false },
+  { href: `${base}${langPath("/build/")}`, label: T.nav.build, jaOnly: false },
+  { href: `${base}${langPath("/mechanics/")}`, label: T.nav.mechanics, jaOnly: isJaOnlyFrom("/mechanics/") },
+  { href: `${base}${langPath("/patch-notes/")}`, label: T.nav.patchNotes, jaOnly: isJaOnlyFrom("/patch-notes/") },
 ];
 const path = Astro.url.pathname;
 /** 言語の接頭辞を外したパス(どの言語版でも同じページなら同じ値) */
 const pagePath = splitLangPath(path).path;
+
+/*
+ * 言語切り替え。多言語版があるページは同じページの各言語版へ、日本語のみのページは
+ * 各言語のトップへ(その言語の辞書で「このページは日本語のみ」を添える)。
+ * 国旗は public/images/flags/ の SVG(Windows は国旗の絵文字を表示できないため)。
+ */
+const pageIsLocalized = isLocalizedPath(pagePath);
+const langOptions = BUILT_LANGS.map((l) => ({
+  lang: l,
+  meta: LANG_META[l],
+  href: `${base}${pageIsLocalized || l === "ja" ? langPath(pagePath, l) : langPath("/", l)}`,
+  /** 日本語のみのページで、その言語を選ぶとトップへ移る */
+  note: !pageIsLocalized && l !== "ja" ? L(l).langSwitch.jaOnlyPage : null,
+  current: l === lang,
+}));
 
 const SITE_NAME = "DEADLOCK-JP DB";
 /* ドメインは astro.config.mjs の site が唯一の出どころ(ここに直書きしない) */
@@ -200,7 +216,10 @@ if (crumbs.length > 1) {
       />
     )}
     {langMeta.font && (
-      <style is:inline set:html={`:root{--font-sans:"${langMeta.font}","Noto Sans JP","Segoe UI",sans-serif}`} />
+      <style
+        is:inline
+        set:html={`html[lang="${langMeta.htmlLang}"]{--font-sans:"${langMeta.font}","Noto Sans JP","Segoe UI",sans-serif}`}
+      />
     )}
 
     <script
@@ -238,10 +257,45 @@ if (crumbs.length > 1) {
             nav.map((n) => (
               <a href={n.href} class:list={[{ current: path.startsWith(n.href) }]}>
                 {n.label}
+                {n.jaOnly && <span class="jaonly">{T.jaOnly}</span>}
               </a>
             ))
           }
         </nav>
+        <div class="langsw" id="langsw">
+          <button
+            type="button"
+            class="langbtn"
+            id="langbtn"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="langmenu"
+            aria-label={T.langSwitch.label}
+          >
+            <img src={`${base}/images/flags/${langMeta.flag}.svg`} alt="" width="20" height="14" />
+            <span class="langname">{langMeta.nativeName}</span>
+            <span class="caret" aria-hidden="true"></span>
+          </button>
+          <ul class="langmenu" id="langmenu" hidden>
+            {langOptions.map((o) => (
+              <li>
+                <a
+                  href={o.href}
+                  hreflang={o.meta.htmlLang}
+                  lang={o.meta.htmlLang}
+                  aria-current={o.current ? "true" : undefined}
+                  data-samepage={o.note ? undefined : ""}
+                >
+                  <img src={`${base}/images/flags/${o.meta.flag}.svg`} alt="" width="20" height="14" />
+                  <span class="lm-body">
+                    <span class="lm-name">{o.meta.nativeName}</span>
+                    {o.note && <span class="lm-note">{o.note}</span>}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </header>
 
@@ -252,7 +306,7 @@ if (crumbs.length > 1) {
     <footer class="site-footer">
       <div class="inner">
         <p>{T.footer.sourceBefore}<code>{heroesFile.upstreamCommit}</code>{T.footer.sourceAfter}</p>
-        <p class="muted">{T.footer.disclaimer}<a href={`${base}/about/`}>{T.footer.about}</a></p>
+        <p class="muted">{T.footer.disclaimer}<a href={`${base}/about/`}>{T.footer.about}</a>{isJaOnlyFrom("/about/") && <span class="jaonly">{T.jaOnly}</span>}</p>
         {/*
           カンパ先だけを権利表示より下に置き、目立たせない。
           X・Twitch・Discord は /about/ の最下部にまとめている。
@@ -268,6 +322,63 @@ if (crumbs.length > 1) {
       </div>
     </footer>
 
+    <script is:inline>
+      // 言語切り替えメニュー。ボタンで開閉し、キーボード(↓↑・Home/End・Esc)と外側クリックに対応する
+      (() => {
+        const btn = document.getElementById("langbtn");
+        const menu = document.getElementById("langmenu");
+        if (!btn || !menu) return;
+        const items = () => [...menu.querySelectorAll("a")];
+        const open = (focusFirst) => {
+          // 同じページの別言語版へは、ビルドの共有URLなどのハッシュを引き継ぐ
+          for (const a of menu.querySelectorAll("a[data-samepage]")) {
+            a.href = a.href.split("#")[0] + location.hash;
+          }
+          menu.hidden = false;
+          btn.setAttribute("aria-expanded", "true");
+          if (focusFirst) (menu.querySelector('a[aria-current="true"]') ?? items()[0])?.focus();
+        };
+        const close = (focusBtn) => {
+          menu.hidden = true;
+          btn.setAttribute("aria-expanded", "false");
+          if (focusBtn) btn.focus();
+        };
+        btn.addEventListener("click", () => (menu.hidden ? open(false) : close(false)));
+        btn.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+            e.preventDefault();
+            open(true);
+          } else if (e.key === "Escape") {
+            close(false);
+          }
+        });
+        menu.addEventListener("keydown", (e) => {
+          const list = items();
+          const i = list.indexOf(document.activeElement);
+          if (e.key === "ArrowDown") {
+            e.preventDefault();
+            list[(i + 1) % list.length].focus();
+          } else if (e.key === "ArrowUp") {
+            e.preventDefault();
+            list[(i - 1 + list.length) % list.length].focus();
+          } else if (e.key === "Home") {
+            e.preventDefault();
+            list[0].focus();
+          } else if (e.key === "End") {
+            e.preventDefault();
+            list[list.length - 1].focus();
+          } else if (e.key === "Escape") {
+            e.preventDefault();
+            close(true);
+          } else if (e.key === "Tab") {
+            close(false);
+          }
+        });
+        document.addEventListener("click", (e) => {
+          if (!menu.hidden && !document.getElementById("langsw").contains(e.target)) close(false);
+        });
+      })();
+    </script>
     <script src={`${base}/js/deadlock-bg.js`} is:inline></script>
     <script is:inline>
       (() => {
@@ -386,6 +497,121 @@ if (crumbs.length > 1) {
         color: var(--c-accent);
         border-bottom-color: var(--c-accent);
       }
+      /* 日本語版にしか無いページへのリンク・日本語のままの補足メモに添える印(日本語版では出さない) */
+      :global(.jaonly) {
+        display: inline-block;
+        margin-left: 5px;
+        padding: 0 4px;
+        border: 1px solid var(--c-border-strong);
+        border-radius: 3px;
+        font-size: 9.5px;
+        font-weight: 400;
+        line-height: 1.5;
+        letter-spacing: 0;
+        text-transform: none;
+        color: var(--c-text-faint);
+        vertical-align: 1px;
+        white-space: nowrap;
+      }
+
+      /* ---- 言語切り替え(右上) ---- */
+      .langsw {
+        position: relative;
+        flex: 0 0 auto;
+        margin-left: auto;
+      }
+      .langbtn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        height: 32px;
+        padding: 0 8px;
+        border: 1px solid var(--c-border-strong);
+        border-radius: var(--radius);
+        background: var(--c-surface);
+        color: var(--c-text);
+        font: inherit;
+        font-size: 12.5px;
+        cursor: pointer;
+      }
+      .langbtn:hover,
+      .langbtn[aria-expanded="true"] {
+        border-color: var(--c-accent-dim);
+        color: var(--c-text-strong);
+      }
+      .langbtn:focus-visible,
+      .langmenu a:focus-visible {
+        outline: 2px solid var(--c-accent);
+        outline-offset: 1px;
+      }
+      .langsw img {
+        display: block;
+        width: 20px;
+        height: 14px;
+        border-radius: 2px;
+        box-shadow: 0 0 0 1px rgb(255 255 255 / 0.18);
+        object-fit: cover;
+      }
+      .caret {
+        width: 0;
+        height: 0;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-top: 5px solid currentColor;
+        opacity: 0.7;
+      }
+      .langbtn[aria-expanded="true"] .caret {
+        transform: rotate(180deg);
+      }
+      .langmenu {
+        position: absolute;
+        right: 0;
+        top: calc(100% + 6px);
+        z-index: 50;
+        min-width: 190px;
+        max-width: min(280px, calc(100vw - 24px));
+        margin: 0;
+        padding: 4px;
+        list-style: none;
+        background: var(--c-surface);
+        border: 1px solid var(--c-border-strong);
+        border-radius: var(--radius);
+        box-shadow: 0 10px 30px rgb(0 0 0 / 0.5);
+      }
+      .langmenu[hidden] {
+        display: none;
+      }
+      .langmenu a {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 7px 10px;
+        border-radius: calc(var(--radius) - 2px);
+        color: var(--c-text);
+        font-size: 13px;
+        text-decoration: none;
+      }
+      .langmenu a img {
+        margin-top: 2px;
+        flex: 0 0 auto;
+      }
+      .langmenu a:hover {
+        background: var(--c-surface-2);
+        color: var(--c-text-strong);
+      }
+      .langmenu a[aria-current="true"] {
+        color: var(--c-accent);
+      }
+      .lm-body {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+      }
+      .lm-note {
+        font-size: 11px;
+        color: var(--c-text-faint);
+        line-height: 1.4;
+      }
       .site-main {
         position: relative;
         /*
@@ -452,6 +678,14 @@ if (crumbs.length > 1) {
         nav {
           gap: var(--sp-3);
           font-size: 12px;
+        }
+        /* スマホは国旗とつまみだけにして右上に収める */
+        .langname {
+          display: none;
+        }
+        .langbtn {
+          padding: 0 6px;
+          gap: 4px;
         }
       }
     </style>

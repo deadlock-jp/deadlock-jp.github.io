@@ -21,7 +21,7 @@ import { balanceUpdates } from "../lib/balance.ts";
 import { heroRanks, pickRows } from "../lib/herorank.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const { L, langPath } = Astro.locals.i18n;
+const { L, langPath, isJaOnlyFrom } = Astro.locals.i18n;
 const T = L();
 const ranks = heroRanks();
 
@@ -143,14 +143,14 @@ const balanceAbilityKeys = [
   <section class="block panel">
     <h2>
       {T.adjust.historyTitle}
-      <a class="more" href={`${base}/patch-notes/`}>{T.top.allUpdates}</a>
+      <a class="more" href={`${base}/patch-notes/`}>{T.top.allUpdates}{isJaOnlyFrom("/patch-notes/") && <span class="jaonly">{T.jaOnly}</span>}</a>
     </h2>
     <div class="bal">
       {
         balance.map((u) => (
           <div class="balrow">
             <div class="baldate">
-              <a href={u.href}>{u.date}</a>
+              <a href={u.href}>{u.date}{isJaOnlyFrom("/patch-notes/") && <span class="jaonly">{T.jaOnly}</span>}</a>
               <span>{u.title.replace(/\s*-\s*\d{4}年.*$/, "")}</span>
             </div>
             <BalanceChips chips={u.chips} max={18} />
@@ -163,20 +163,20 @@ const balanceAbilityKeys = [
   <section class="block panel">
     <h2>
       {T.nav.mechanics}
-      <a class="more" href={`${base}/mechanics/`}>{T.top.seeReference}</a>
+      <a class="more" href={`${base}/mechanics/`}>{T.top.seeReference}{isJaOnlyFrom("/mechanics/") && <span class="jaonly">{T.jaOnly}</span>}</a>
     </h2>
     <div class="guide">
       <a class="guidemap" href={`${base}/mechanics/match/#map`}>
         <MapPreview />
       </a>
       <div class="guidetx">
-        <a class="guidett" href={`${base}/mechanics/match/#map`}>{T.top.map}</a>
+        <a class="guidett" href={`${base}/mechanics/match/#map`}>{T.top.map}{isJaOnlyFrom("/mechanics/") && <span class="jaonly">{T.jaOnly}</span>}</a>
         <p class="syslead">{T.top.mapLead}</p>
         <ul class="guidelinks">
-          <li><a href={`${base}/mechanics/match/#laning`}>{T.top.laning}</a></li>
-          <li><a href={`${base}/mechanics/match/#farming`}>{T.top.farming}</a></li>
-          <li><a href={`${base}/mechanics/match/#lategame`}>{T.top.lategame}</a></li>
-          <li><a href={`${base}/mechanics/controls/`}>{T.top.controls}</a></li>
+          <li><a href={`${base}/mechanics/match/#laning`}>{T.top.laning}{isJaOnlyFrom("/mechanics/") && <span class="jaonly">{T.jaOnly}</span>}</a></li>
+          <li><a href={`${base}/mechanics/match/#farming`}>{T.top.farming}{isJaOnlyFrom("/mechanics/") && <span class="jaonly">{T.jaOnly}</span>}</a></li>
+          <li><a href={`${base}/mechanics/match/#lategame`}>{T.top.lategame}{isJaOnlyFrom("/mechanics/") && <span class="jaonly">{T.jaOnly}</span>}</a></li>
+          <li><a href={`${base}/mechanics/controls/`}>{T.top.controls}{isJaOnlyFrom("/mechanics/") && <span class="jaonly">{T.jaOnly}</span>}</a></li>
         </ul>
       </div>
     </div>

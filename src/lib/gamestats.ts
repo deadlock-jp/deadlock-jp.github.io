@@ -82,8 +82,8 @@ export function weaponHeadline(
   if (!weapon || !weapon.cycleTime || weapon.bulletDamage === null) return null;
   return {
     dps: num((weapon.bulletDamage / weapon.cycleTime) * (weapon.bulletsPerShot || 1), 0),
-    falloffStart: `${num(toMeters(weapon.falloff.startRange), 0)}m`,
-    falloffEnd: `${num(toMeters(weapon.falloff.endRange), 0)}m`,
+    falloffStart: `${num(toMeters(weapon.falloff.startRange), 0)}${L().common.meter}`,
+    falloffEnd: `${num(toMeters(weapon.falloff.endRange), 0)}${L().common.meter}`,
   };
 }
 
@@ -94,8 +94,8 @@ export function vitalityRows(hero: Hero): StatRow[] {
   return [
     { key: "maxHealth", label: term("maxHealth"), value: num(S(hero, "EMaxHealth")) },
     { key: "healthRegen", label: term("healthRegen"), value: num(S(hero, "EBaseHealthRegen")) },
-    { key: "moveSpeed", label: term("moveSpeed"), value: `${num(S(hero, "EMaxMoveSpeed"))}m` },
-    { key: "sprintSpeed", label: term("sprintSpeed"), value: `${num(S(hero, "ESprintSpeed"))}m` },
+    { key: "moveSpeed", label: term("moveSpeed"), value: `${num(S(hero, "EMaxMoveSpeed"))}${L().common.meter}` },
+    { key: "sprintSpeed", label: term("sprintSpeed"), value: `${num(S(hero, "ESprintSpeed"))}${L().common.meter}` },
     { key: "stamina", label: term("stamina"), value: num(S(hero, "EStamina")) },
     {
       key: "staminaCooldown",
@@ -105,9 +105,9 @@ export function vitalityRows(hero: Hero): StatRow[] {
     {
       key: "dashSpeed",
       label: term("dashSpeed"),
-      value: dashDur ? `${num(S(hero, "EGroundDashDistanceInMeters") / dashDur, 1)}m` : "—",
+      value: dashDur ? `${num(S(hero, "EGroundDashDistanceInMeters") / dashDur, 1)}${L().common.meter}` : "—",
     },
-    { key: "crouchSpeed", label: L().gameTerms.crouchSpeed, value: `${num(S(hero, "ECrouchSpeed"))}m` },
+    { key: "crouchSpeed", label: L().gameTerms.crouchSpeed, value: `${num(S(hero, "ECrouchSpeed"))}${L().common.meter}` },
   ];
 }
 

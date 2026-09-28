@@ -46,6 +46,7 @@ export interface BalanceChip {
   item: Item | null;
   /** 「基礎」「武器」のような小さな札。スキル・アイテムでは null */
   tag: string | null;
+  /** 空ならリンクしない(日本語以外で、飛び先が日本語のみのページのとき) */
   href: string;
   changeCount: number;
 }
@@ -147,7 +148,8 @@ function toUpdate(u: SiteUpdate, base: string): BalanceUpdate {
        * ヒーロー・アイテムどちらにも属さない全体調整。専用ページを持たないので、
        * 数値が今どうなっているかを確認できる場所(試合の流れの付録の数値表)へ飛ばす。
        */
-      const href = `${base}/mechanics/match/#appendix`;
+      // 日本語版以外ではリンクしない(飛び先の試合の流れは日本語のみのページ)
+      const href = currentLang() === "ja" ? `${base}/mechanics/match/#appendix` : "";
       const name = L().adjust.system;
       entities.push({
         target: "system",

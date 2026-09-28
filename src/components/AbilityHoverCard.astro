@@ -34,7 +34,14 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 /** SkillCard.astro / StatIcon.astro と同じ「spirit/weapon は実画像優先」をJS側でも再現する */
 const scaleIcons = { spirit: scaleIconSrc("spirit"), weapon: scaleIconSrc("weapon") };
 const { L, term } = Astro.locals.i18n;
-const T = { ultimate: L().common.ultimate, passive: term("passive"), memo: L().common.memo };
+const T = {
+  ultimate: L().common.ultimate,
+  passive: term("passive"),
+  memo: L().common.memo,
+  /** 補足メモは日本語のまま出す。日本語以外のページでは「日本語のみ」を添え、見出しにはページの言語を付ける */
+  jaOnly: L().langTag === "ja" ? "" : L().jaOnly,
+  pageLang: L().langTag,
+};
 ---
 
 <div class="hovercard" id="abilityhovercard" role="tooltip" hidden></div>
@@ -103,7 +110,9 @@ const T = { ultimate: L().common.ultimate, passive: term("passive"), memo: L().c
         (d.secondaryRows.length ? `<div class="ssecondary">${d.secondaryRows.map(secondaryRow).join("")}</div>` : "") +
         (d.upgrades.length ? `<div class="supg">${d.upgrades.map(upgradeCell).join("")}</div>` : "") +
         (d.notes.length
-          ? `<div class="snotes"><span class="nt">${esc(T.memo)}</span><ul>${d.notes.map((n) => `<li>${esc(n)}</li>`).join("")}</ul></div>`
+          ? `<div class="snotes" lang="ja"><span class="nt"${T.jaOnly ? ` lang="${T.pageLang}"` : ""}>${esc(T.memo)}</span>` +
+            (T.jaOnly ? `<span class="jaonly" lang="${T.pageLang}">${esc(T.jaOnly)}</span>` : "") +
+            `<ul>${d.notes.map((n) => `<li>${esc(n)}</li>`).join("")}</ul></div>`
           : "");
       card.hidden = false;
 

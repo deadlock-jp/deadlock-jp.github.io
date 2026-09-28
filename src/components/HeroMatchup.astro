@@ -16,7 +16,8 @@ interface Props {
 }
 const { matchup, base } = Astro.props;
 const { strengths, noStandout, shares, counters } = matchup;
-const { L, langPath } = Astro.locals.i18n;
+const { L, langPath, isJaOnlyFrom } = Astro.locals.i18n;
+const T = L();
 const M = L().matchup;
 ---
 
@@ -95,7 +96,7 @@ const M = L().matchup;
 
   <p class="foot">
     {M.foot}
-    <a href={`${base}/about/`}>{M.method}</a>
+    <a href={`${base}/about/`}>{M.method}{isJaOnlyFrom("/about/") && <span class="jaonly">{T.jaOnly}</span>}</a>
   </p>
 </section>
 

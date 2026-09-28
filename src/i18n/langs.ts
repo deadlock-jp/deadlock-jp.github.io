@@ -13,7 +13,7 @@ export type Lang = (typeof LANGS)[number];
  * 実際にページを生成する言語。ja 以外はここに入っていなければ /<lang>/ を作らない。
  * (多言語版の準備段階で、日本語版の出力を変えずに作りだけ入れるための切り替え)
  */
-export const BUILT_LANGS: readonly Lang[] = ["ja"];
+export const BUILT_LANGS: readonly Lang[] = ["ja", "en", "ko", "zh-cn"];
 
 /** ja 以外で生成する言語(src/pages/[lang]/ の getStaticPaths が使う) */
 export const PREFIXED_LANGS = BUILT_LANGS.filter((l): l is Exclude<Lang, "ja"> => l !== "ja");

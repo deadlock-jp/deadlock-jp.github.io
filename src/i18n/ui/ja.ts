@@ -45,6 +45,8 @@ export const ja = {
   },
   /** 日本語版にしか無いページへのリンク・日本語のままの補足メモに添える印(日本語版では出さない) */
   jaOnly: "日本語のみ",
+  /** この辞書の言語の lang 属性値(lang="ja" の中にページの言語の文言を置くときに使う) */
+  langTag: "ja",
   langSwitch: {
     /** 切り替えボタンの読み上げ名 */
     label: "言語を切り替える",
@@ -71,6 +73,8 @@ export const ja = {
     mps: "m／秒",
     shotsPerSec: "発/秒",
     perLv: "/Lv",
+    /** 距離の単位(ゲームの表記。中国語は「米」) */
+    meter: "m",
     /** ホバー時の title「ヒーロー名｜スキル名」の区切り */
     titleSep: "｜",
     radarChart: "レーダーチャート",
@@ -363,7 +367,8 @@ export const ja = {
     method: "算出方法",
     evidenceHealing: (abilities: string, pool: number, top: number) =>
       `${abilities}（回復を持つ${pool}体中 上位${top}%）`,
-    evidenceCc: (seconds: string, pool: number, top: number) =>
+    /** cc はゲームの状態異常名を並べたもの。日本語版は以前からの表記(スタン・睡眠・拘束)のまま */
+    evidenceCc: (_cc: string, seconds: string, pool: number, top: number) =>
       `スタン・睡眠・拘束 合計 ${seconds}秒（${pool}体中 上位${top}%）`,
     evidenceComposition: (slot: string, percent: number, pool: number, top: number) =>
       `${slot}構成比 ${percent}%（全${pool}体中 上位${top}%）`,

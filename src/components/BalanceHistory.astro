@@ -19,7 +19,8 @@ interface Props {
   grouped?: boolean;
 }
 const { entries, grouped = false } = Astro.props;
-const { L, langPath } = Astro.locals.i18n;
+const { L, langPath, isJaOnlyFrom } = Astro.locals.i18n;
+const T = L();
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
@@ -30,7 +31,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
       {entries.map((e) => (
         <li>
           <div class="head">
-            <a class="date" href={e.href}>{e.date}</a>
+            <a class="date" href={e.href}>{e.date}{isJaOnlyFrom("/patch-notes/") && <span class="jaonly">{T.jaOnly}</span>}</a>
             <span class="title">{e.title.replace(/\s*-\s*\d{4}年.*$/, "")}</span>
             <span class="kind" data-kind={e.kind}>{ADJUSTMENT_LABEL[e.kind]}</span>
           </div>

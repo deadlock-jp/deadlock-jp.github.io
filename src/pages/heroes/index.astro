@@ -108,7 +108,8 @@ const rankOptions = [
 const statsPayload = {
   fetchedAt: heroStats.fetchedAt,
   lowSampleMatches: heroStats.lowSampleMatches,
-  banRateNote: heroStats.banRateNote,
+  // 注記の文は data/hero-stats.json(日本語)。日本語以外ではその言語の辞書の文に差し替える
+  banRateNote: isJa ? heroStats.banRateNote : T.heroes.banRateNote,
   buckets: heroStats.buckets,
 };
 /** クライアント側の文言 */
