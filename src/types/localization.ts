@@ -6,9 +6,7 @@ export interface LocalizedToken {
   /** 取得元のファイルグループ(citadel_gc_mod_names など)。更新時の再読み込みに使う */
   group: string;
   /**
-   * text の短いハッシュ。
-   * 日本語の対訳辞書(data/i18n/ja.json)は翻訳時のこの値を保持し、
-   * 更新でハッシュが変われば「要再翻訳」として自動検出する。
+   * text の短いハッシュ。版をまたいで同じ文言かどうかを見分けるのに使える。
    */
   hash: string;
 }

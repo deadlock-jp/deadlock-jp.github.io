@@ -50,7 +50,7 @@ const LOCALIZATION_DIR = join(REPO_ROOT, "data", "localization");
  * data/localization/<lang>.json に書き出す言語(ゲーム側のファイル名に付く言語名)。
  * 言語を増やすときはここに1つ足すだけでよい(例: "koreana", "schinese")。
  */
-const LOCALIZATION_LANGS = ["japanese", "english"] as const;
+const LOCALIZATION_LANGS = ["japanese", "english", "koreana", "schinese"] as const;
 
 /**
  * 最新版以外のスナップショットに残すファイル。

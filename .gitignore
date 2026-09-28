@@ -8,7 +8,7 @@ Thumbs.db
 GameTracking-Deadlock/
 
 # ゲーム本体から取り出した生のローカライズファイル。
-# data/localization/<lang>.json と data/i18n/ja.json に変換済みで、
+# data/localization/<lang>.json に変換済みで、
 # サイトのビルドにも再パースにも中間ファイルは要らないため追跡しない。
 # 取り出し手順は docs/ゲーム本体からの抽出-実施記録.md にある。
 game-localization/
