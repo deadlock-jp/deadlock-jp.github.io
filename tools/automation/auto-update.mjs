@@ -18,6 +18,8 @@
  *      ゲームの根幹が変わる大型アップデート(マップ改変・ヒーロー追加・ショップ改修など)で、
  *      パーサーが黙って誤った data/ を公開しないよう、人手の作業に切り替えるためのスイッチ。
  *      再開は _paused.txt を消すだけ。
+ *      parse の結果に新しく解禁されたヒーローがいた場合も、結果を捨ててこのスイッチを自動で入れる
+ *      (ヒーローページの画像は tools/hero-images.mjs を人手で回す必要があるため)。
  *   5. 失敗したら push せず・_lastversion.txt も更新せず終了(次回また試みる)。
  *      成功/失敗どちらも _autolog.txt に記録する。
  *
@@ -86,6 +88,20 @@ function releaseLock() {
   }
 }
 
+/** prev → next で新たに released になったヒーローのキー。どちらかの heroes.json が無ければ空 */
+function newlyReleasedHeroes(prevVersion, nextVersion) {
+  if (!prevVersion || prevVersion === nextVersion) return [];
+  const read = (v) => {
+    const p = join(REPO_ROOT, "data", "snapshots", v, "heroes.json");
+    return existsSync(p) ? Object.values(JSON.parse(readFileSync(p, "utf8")).heroes) : null;
+  };
+  const before = read(prevVersion);
+  const after = read(nextVersion);
+  if (!before || !after) return [];
+  const known = new Set(before.filter((h) => h.released).map((h) => h.id));
+  return after.filter((h) => h.released && !known.has(h.id)).map((h) => h.key);
+}
+
 function main() {
   acquireLock();
   try {
@@ -142,6 +158,20 @@ function main() {
 
     log(`parse中 (--local ${localRoot})...`);
     run("node", ["--experimental-strip-types", "src/parsers/main.ts", "--local", localRoot]);
+
+    // 新ヒーローの解禁は自動で公開しない。ヒーローページのアイコン・肖像は
+    // tools/hero-images.mjs を人手で回さないと揃わず、絵の無いページが出てしまうため。
+    // parse の結果を捨てて一時停止に切り替え、人手の作業に回す(_lastversion.txt も据え置き)。
+    const newlyReleased = newlyReleasedHeroes(prevVersion, clientVersion);
+    if (newlyReleased.length > 0) {
+      run("git", ["checkout", "--", "data/", "public/images/minimap/"]);
+      run("git", ["clean", "-fdq", "--", "data/", "public/images/minimap/"]);
+      const reason = `${new Date().toISOString().slice(0, 10)} 新ヒーロー解禁(${newlyReleased.join(", ")})。画像の用意が要るので自動取り込みを止めた`;
+      writeFileSync(PAUSED, reason + "\n");
+      writeFileSync(DETECTED, `${clientVersion}\n${new Date().toISOString()}\n`);
+      log(`${reason}。parse の結果は破棄し、push はしません。`);
+      return;
+    }
 
     if (prevVersion && prevVersion !== clientVersion) {
       log(`差分生成中 (${prevVersion} -> ${clientVersion})...`);

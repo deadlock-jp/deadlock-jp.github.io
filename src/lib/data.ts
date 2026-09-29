@@ -1088,7 +1088,7 @@ export function heroesAnnouncedIn(fromVersion: string | null, toVersion: string 
     .filter((h) => h.preRelease === true && !known.has(h.id))
     .sort((a, b) => a.id - b.id)
     .map((h) => {
-      const now = heroesFile.heroes[h.key] ?? h;
+      const now = heroesFile.heroes[String(h.id)] ?? h;
       return { hero: now, released: now.released };
     });
 }
