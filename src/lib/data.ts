@@ -1002,7 +1002,12 @@ function adjustmentRow(
   const base = name === "cost" ? L().gameTerms.price : adjustmentLabel(name, source);
   return {
     path: c.path,
-    label: scale ? L().adjust.spiritScale(base) : base,
+    // アイテムの upgrades は段階強化(T1〜T3)ではなく、ストリートブロウルのエンハンスド版のボーナス
+    label: scale
+      ? L().adjust.spiritScale(base)
+      : isItem && upgrade
+        ? L().adjust.enhanced(base, t("Citadel_ItemDraft_Enhanced", "Enhanced"))
+        : base,
     tier: isItem ? null : upgradeTierOf(c.path),
     isScale: scale,
     fromText: adjustmentValueText(name, c.from, source, upgrade, scale),

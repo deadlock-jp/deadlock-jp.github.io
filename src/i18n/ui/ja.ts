@@ -150,6 +150,8 @@ export const ja = {
     components: "構成素材",
     /** 「(AP強化の)〜のスピリット倍率」 */
     spiritScale: (label: string) => `${label}のスピリット倍率`,
+    /** アイテムの upgrades(ストリートブロウルのエンハンスド版のボーナス)の項目名 */
+    enhanced: (label: string, enhanced: string) => `${enhanced}時の${label}`,
     system: "システム全体の調整",
     tagBase: "基礎",
     deleted: "削除",

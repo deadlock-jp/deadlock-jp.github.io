@@ -158,6 +158,7 @@ export const zhCn: Dict = {
     mainWeapon: "主武器",
     components: "合成材料",
     spiritScale: (label) => `${label}元灵系数`,
+    enhanced: (label, enhanced) => `${enhanced}时的${label}`,
     system: "全局调整",
     tagBase: "基础",
     deleted: "已移除",

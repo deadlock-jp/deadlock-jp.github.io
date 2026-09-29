@@ -159,6 +159,7 @@ export const ko: Dict = {
     mainWeapon: "주 무기",
     components: "구성 아이템",
     spiritScale: (label) => `${label} 마력 계수`,
+    enhanced: (label, enhanced) => `${enhanced} 시 ${label}`,
     system: "시스템 전체 조정",
     tagBase: "기본",
     deleted: "삭제",

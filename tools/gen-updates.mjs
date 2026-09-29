@@ -104,7 +104,7 @@ const toChange = (row) => ({
 const fmtN = (n) => (n === null ? "—" : Number.isInteger(n) ? String(n) : String(Math.round(n * 1000) / 1000));
 
 /** 表示フォールバック用の1行要約。詳細は changes に入っているので3件まで */
-function noteFor(changes, max = 3) {
+function noteFor(changes, max = 3, isItem = false) {
   const head = changes
     .slice(0, max)
     .map((c) => {
@@ -116,7 +116,12 @@ function noteFor(changes, max = 3) {
       }
       const name = fieldNameOf(c.path);
       const nm = name === "cost" ? "価格" : label(`${name}_label`, label(`${name}_postvalue_label`, ownLabels[name] ?? name));
-      const tier = isUpgradePath(c.path) ? `T${/upgrades\.T(\d+)\./.exec(c.path)?.[1]}強化 ` : "";
+      // アイテムの upgrades はストリートブロウルでのエンハンスド版のボーナス。T1〜T3 の段階強化はアビリティだけ
+      const tier = !isUpgradePath(c.path)
+        ? ""
+        : isItem
+          ? `${label("Citadel_ItemDraft_Enhanced", "エンハンスド")}時 `
+          : `T${/upgrades\.T(\d+)\./.exec(c.path)?.[1]}強化 `;
       if (c.from === null) return `${tier}${nm} ${fmtN(c.to)} を追加`;
       if (c.to === null) return `${tier}${nm} を削除`;
       return `${tier}${nm} ${fmtN(c.from)}→${fmtN(c.to)}`;
@@ -190,7 +195,7 @@ for (const id of Object.keys(newI)) {
     kind: classifyChanges(changes),
     target: "item",
     key: ni.id,
-    note: noteFor(changes),
+    note: noteFor(changes, 3, true),
     changes,
   });
 }

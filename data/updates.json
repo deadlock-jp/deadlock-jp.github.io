@@ -233,7 +233,7 @@
           "kind": "buff",
           "target": "item",
           "key": "upgrade_phantom_strike",
-          "note": "T1強化 スピリットパワー 12→22",
+          "note": "エンハンスド時 スピリットパワー 12→22",
           "changes": [
             {
               "path": "upgrades.T1.TechPower",
@@ -299,7 +299,7 @@
           "kind": "nerf",
           "target": "item",
           "key": "upgrade_veil_walker",
-          "note": "T1強化 ベール通過時の回復 300→250",
+          "note": "エンハンスド時 ベール通過時の回復 300→250",
           "changes": [
             {
               "path": "upgrades.T1.HealOnVeil",
@@ -1425,7 +1425,7 @@
           "kind": "nerf",
           "target": "item",
           "key": "upgrade_aoe_root",
-          "note": "ダッシュ距離 -40→-36 / 移動速度 35→28 / T1強化 移動速度 15→12",
+          "note": "ダッシュ距離 -40→-36 / 移動速度 35→28 / エンハンスド時 移動速度 15→12",
           "changes": [
             {
               "path": "properties.GroundDashReductionPercent",
@@ -1565,7 +1565,7 @@
           "kind": "nerf",
           "target": "item",
           "key": "upgrade_close_quarter_combat",
-          "note": "移動速度 25→20 / T1強化 移動速度 5→4",
+          "note": "移動速度 25→20 / エンハンスド時 移動速度 5→4",
           "changes": [
             {
               "path": "properties.SlowPercent",
@@ -1787,7 +1787,7 @@
           "kind": "nerf",
           "target": "item",
           "key": "upgrade_magic_slow",
-          "note": "ダッシュ距離 -12→-10 / 移動速度 30→24 / T1強化 移動速度 15→12",
+          "note": "ダッシュ距離 -12→-10 / 移動速度 30→24 / エンハンスド時 移動速度 15→12",
           "changes": [
             {
               "path": "properties.GroundDashReductionPercent",
@@ -1941,7 +1941,7 @@
           "kind": "nerf",
           "target": "item",
           "key": "upgrade_slowing_bullets",
-          "note": "ダッシュ距離 -22→-20 / 移動速度 30→24 / T1強化 ダッシュ距離 -10→-8 ほか",
+          "note": "ダッシュ距離 -22→-20 / 移動速度 30→24 / エンハンスド時 ダッシュ距離 -10→-8 ほか",
           "changes": [
             {
               "path": "properties.GroundDashReductionPercent",
@@ -2085,7 +2085,7 @@
           "kind": "nerf",
           "target": "item",
           "key": "upgrade_weighted_shots",
-          "note": "ダッシュ距離 -22→-20 / 移動速度 30→24 / T1強化 ダッシュ距離 -10→-8 ほか",
+          "note": "ダッシュ距離 -22→-20 / 移動速度 30→24 / エンハンスド時 ダッシュ距離 -10→-8 ほか",
           "changes": [
             {
               "path": "properties.GroundDashReductionPercent",

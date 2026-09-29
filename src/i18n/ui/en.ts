@@ -154,6 +154,7 @@ export const en: Dict = {
     mainWeapon: "Primary Weapon",
     components: "Components",
     spiritScale: (label) => `${label} Spirit Scaling`,
+    enhanced: (label, enhanced) => `${label} (${enhanced})`,
     system: "Global Changes",
     tagBase: "Base",
     deleted: "Removed",
