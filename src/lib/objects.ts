@@ -93,7 +93,7 @@ const STATS: Record<string, StatSpec> = {
   goldPercent: { label: "弱点1つぶんのソウル割合" },
   damageOnDeath: { label: "破壊時のダメージ" },
 
-  // 罪人の生贄
+  // 罪人の供物
   retaliateDamage: { label: "殴ったときの反撃ダメージ" },
   vaultMiniGameTime: { label: "確保にかかる時間", unit: "秒" },
   vaultMiniGameHitWindow: { label: "成功判定の受付", unit: "秒" },
@@ -166,7 +166,7 @@ const CAMP_LABELS: Record<string, string> = {
   weak: "弱い中立モンスター",
   medium: "中程度の中立モンスター",
   strong: "強い中立モンスター",
-  vaults: "罪人の生贄",
+  vaults: "罪人の供物",
   midboss: "ミッドボス",
 };
 

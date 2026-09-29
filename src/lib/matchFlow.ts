@@ -5,7 +5,7 @@
  * - convars.json … 初期ソウル・トルーパー報酬・ウェーブ間隔・ディナイ・裂け目など
  *   (GameTracking-Deadlock の convar ダンプ由来。src/parsers/convars.ts)
  * - economy.json … 建造物報酬・分配率・キャンプ/箱/パワーアップの出現時刻
- * - objects.json … 中立モンスター・罪人の生贄の報酬
+ * - objects.json … 中立モンスター・罪人の供物の報酬
  * - heroes.json / items.json / abilities.json … レベル表・アイテム価格・パリィ
  *
  * 「1ウェーブで800を超える」のような結論も、ここで計算して出す。パッチで数値が

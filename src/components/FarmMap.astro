@@ -41,7 +41,7 @@ const CAMP_LAYERS = [
   { key: "weak", label: "小キャンプ" },
   { key: "medium", label: "中キャンプ" },
   { key: "strong", label: "大キャンプ" },
-  { key: "vaults", label: "罪人の生贄" },
+  { key: "vaults", label: "罪人の供物" },
 ] as const;
 
 const count = (pred: (x: MapFile["breakables"][number]) => boolean) => map?.breakables.filter(pred).length ?? 0;
