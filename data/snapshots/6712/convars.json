@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "sourceVersion": "6701",
-  "generatedAt": "2026-09-26T18:36:21.030Z",
+  "sourceVersion": "6712",
+  "generatedAt": "2026-09-29T20:53:44.103Z",
   "values": {
     "citadel_comeback_redirect_fraction": 0.7,
     "citadel_deny_denied_percentage": 0,

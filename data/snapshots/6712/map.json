@@ -1,0 +1,8625 @@
+{
+  "schemaVersion": 1,
+  "map": "dl_midtown",
+  "bounds": {
+    "minX": null,
+    "minY": null,
+    "maxX": null,
+    "maxY": null
+  },
+  "images": {
+    "base": null,
+    "tunnels": null
+  },
+  "camps": [
+    {
+      "type": "medium",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "medium",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "medium",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "medium",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "medium",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "medium",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "medium",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "medium",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "medium",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "medium",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "medium",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "medium",
+      "name": "nw_market_upstairs_camp",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "medium",
+      "name": "sw_bodega_upstairs_camp",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "medium",
+      "name": "ne_theater_upstairs_camp",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "medium",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "medium",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "medium",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "medium",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "medium",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "medium",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "medium",
+      "name": "nw_bank_camp",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "medium",
+      "name": "sw_asylum_camp",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "medium",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "medium",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "medium",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "strong",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "strong",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "strong",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "strong",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "strong",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "strong",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "strong",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "strong",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "strong",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "strong",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "strong",
+      "name": "camp_mid_roof_W",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "vaults",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "vaults",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "vaults",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "vaults",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "vaults",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "vaults",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "vaults",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "vaults",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "vaults",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "vaults",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "vaults",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "weak",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "weak",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "weak",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "type": "weak",
+      "name": "",
+      "units": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    }
+  ],
+  "breakables": [
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 2,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 2,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 3,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 3,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 3,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 3,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 3,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "crate",
+      "group": 3,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 1,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 2,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 2,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 2,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 2,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 2,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 2,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 2,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 2,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 3,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 3,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 3,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 3,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 3,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "statue",
+      "group": 3,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    }
+  ],
+  "landmarks": [
+    {
+      "kind": "baseGuardian",
+      "lane": 4,
+      "team": "amber",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "baseGuardian",
+      "lane": 4,
+      "team": "amber",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "baseGuardian",
+      "lane": 6,
+      "team": "amber",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "baseGuardian",
+      "lane": 6,
+      "team": "amber",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "baseGuardian",
+      "lane": 1,
+      "team": "amber",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "baseGuardian",
+      "lane": 1,
+      "team": "amber",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "baseGuardian",
+      "lane": 4,
+      "team": "sapphire",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "baseGuardian",
+      "lane": 4,
+      "team": "sapphire",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "baseGuardian",
+      "lane": 1,
+      "team": "sapphire",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "baseGuardian",
+      "lane": 1,
+      "team": "sapphire",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "baseGuardian",
+      "lane": 6,
+      "team": "sapphire",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "baseGuardian",
+      "lane": 6,
+      "team": "sapphire",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "guardian",
+      "lane": 1,
+      "team": "amber",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "guardian",
+      "lane": 6,
+      "team": "amber",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "guardian",
+      "lane": 6,
+      "team": "sapphire",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "guardian",
+      "lane": 1,
+      "team": "sapphire",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "guardian",
+      "lane": 4,
+      "team": "amber",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "guardian",
+      "lane": 4,
+      "team": "sapphire",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "midboss",
+      "lane": null,
+      "team": null,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "patron",
+      "lane": 3,
+      "team": "sapphire",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "patron",
+      "lane": 3,
+      "team": "amber",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "powerup",
+      "lane": null,
+      "team": null,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "powerup",
+      "lane": null,
+      "team": null,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "rift",
+      "lane": null,
+      "team": null,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "rift",
+      "lane": null,
+      "team": null,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "shrine",
+      "lane": 6,
+      "team": "amber",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "shrine",
+      "lane": 6,
+      "team": "sapphire",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "shrine",
+      "lane": 1,
+      "team": "sapphire",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "shrine",
+      "lane": 1,
+      "team": "amber",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "urnReturn",
+      "lane": null,
+      "team": null,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "urnReturn",
+      "lane": null,
+      "team": null,
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "walker",
+      "lane": 1,
+      "team": "sapphire",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "walker",
+      "lane": 6,
+      "team": "sapphire",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "walker",
+      "lane": 6,
+      "team": "amber",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "walker",
+      "lane": 1,
+      "team": "amber",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "walker",
+      "lane": 4,
+      "team": "amber",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    },
+    {
+      "kind": "walker",
+      "lane": 4,
+      "team": "sapphire",
+      "underground": true,
+      "x": null,
+      "y": null,
+      "z": null
+    }
+  ],
+  "lanes": [
+    {
+      "lane": 1,
+      "points": [
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        }
+      ]
+    },
+    {
+      "lane": 4,
+      "points": [
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        }
+      ]
+    },
+    {
+      "lane": 6,
+      "points": [
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        },
+        {
+          "x": null,
+          "y": null
+        }
+      ]
+    }
+  ]
+}

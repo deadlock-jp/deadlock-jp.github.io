@@ -1,0 +1,319 @@
+{
+  "from": "6701",
+  "to": "6712",
+  "generatedAt": "2026-09-29T20:54:32.490Z",
+  "entries": [
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "12",
+      "path": "ability_ice_grenade.properties.AuraHPS@scale",
+      "before": null,
+      "after": 0.8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "12",
+      "path": "ability_ice_grenade.properties.AuraSlowAmount",
+      "before": null,
+      "after": -75
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "12",
+      "path": "ability_icebeam.properties.BeamHealPerSecond@scale",
+      "before": null,
+      "after": 0.6
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "12",
+      "path": "ability_icepath.properties.ExplodeDamage@scale",
+      "before": null,
+      "after": 0.8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "12",
+      "path": "ability_icepath.properties.ExplodeInterval",
+      "before": null,
+      "after": 0.15
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "12",
+      "path": "ability_icepath.properties.ExplodeRadius",
+      "before": null,
+      "after": 5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "13",
+      "path": "ability_bullet_flurry.properties.MinRoundsPerSecond",
+      "before": null,
+      "after": 5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "14",
+      "path": "ability_gravity_lasso.properties.FollowDampingFactor",
+      "before": 8,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "14",
+      "path": "ability_gravity_lasso.properties.LassoTargetMaxSpeed",
+      "before": 55,
+      "after": null
+    },
+    {
+      "kind": "removed",
+      "type": "hero",
+      "id": "47"
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "50",
+      "path": "synth_plasma_flux.properties.AbilityCooldown",
+      "before": 25,
+      "after": 26
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "52",
+      "path": "mirage_fire_beetles.properties.NumBeetles",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "52",
+      "path": "mirage_fire_beetles.properties.SpreadAngleDegrees",
+      "before": null,
+      "after": 60
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "60",
+      "path": "growth.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL_ALT_FIRE",
+      "before": 0,
+      "after": 0.55
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "64",
+      "path": "drifter_shadow_mark.properties.TeleportDamage@scale",
+      "before": 0.5,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "66",
+      "path": "ability_frank_painaura.properties.ToggleOffDelay",
+      "before": 0.5,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "67",
+      "path": "ability_bookworm_knightcharge.properties.AllyHeight",
+      "before": 20,
+      "after": 10
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "67",
+      "path": "ability_bookworm_knightcharge.properties.KnightChargeHeight",
+      "before": 3.5,
+      "after": 6
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "7",
+      "path": "citadel_ability_psychic_lift.properties.AbilityChannelTime",
+      "before": 0.65,
+      "after": 1.25
+    },
+    {
+      "kind": "added",
+      "type": "hero",
+      "id": "73"
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "76",
+      "path": "stat.EBuildUpRate",
+      "before": -50,
+      "after": null
+    },
+    {
+      "kind": "added",
+      "type": "hero",
+      "id": "78"
+    },
+    {
+      "kind": "added",
+      "type": "hero",
+      "id": "82"
+    },
+    {
+      "kind": "added",
+      "type": "hero",
+      "id": "83"
+    },
+    {
+      "kind": "added",
+      "type": "hero",
+      "id": "84"
+    },
+    {
+      "kind": "added",
+      "type": "hero",
+      "id": "85"
+    },
+    {
+      "kind": "added",
+      "type": "hero",
+      "id": "86"
+    },
+    {
+      "kind": "added",
+      "type": "hero",
+      "id": "87"
+    },
+    {
+      "kind": "added",
+      "type": "hero",
+      "id": "88"
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_ability_power_shard",
+      "path": "properties.ImbuedCooldownMultiplier",
+      "before": 1,
+      "after": 100
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_phantom_strike",
+      "path": "upgrades.T1.TechPower",
+      "before": 12,
+      "after": 22
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_ricochet",
+      "path": "properties.RicochetTargets",
+      "before": null,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_ricochet",
+      "path": "properties.RicochetTargetsTooltipOnly",
+      "before": 2,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_rocket_booster",
+      "path": "properties.VelocityPitchScaleMax",
+      "before": null,
+      "after": 1.8
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_rocket_booster",
+      "path": "properties.VelocityPitchScaleMin",
+      "before": null,
+      "after": 0.8
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_rocket_booster",
+      "path": "properties.VelocityVolScaleMax",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_rocket_booster",
+      "path": "properties.VelocityVolScaleMin",
+      "before": null,
+      "after": 0.25
+    },
+    {
+      "kind": "removed",
+      "type": "item",
+      "id": "upgrade_stabilizing_tripod"
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_veil_walker",
+      "path": "upgrades.T1.HealOnVeil",
+      "before": 300,
+      "after": 250
+    },
+    {
+      "kind": "changed",
+      "type": "system",
+      "id": "economy",
+      "path": "breakableSpawnTimes.2.initialSpawnTime",
+      "before": 300,
+      "after": 180
+    },
+    {
+      "kind": "changed",
+      "type": "system",
+      "id": "economy",
+      "path": "breakableSpawnTimes.2.respawnInterval",
+      "before": 300,
+      "after": 180
+    },
+    {
+      "kind": "changed",
+      "type": "system",
+      "id": "economy",
+      "path": "breakableSpawnTimes.4.initialSpawnTime",
+      "before": null,
+      "after": 300
+    },
+    {
+      "kind": "changed",
+      "type": "system",
+      "id": "economy",
+      "path": "breakableSpawnTimes.4.respawnInterval",
+      "before": null,
+      "after": 180
+    }
+  ],
+  "excludedFieldCount": 26
+}

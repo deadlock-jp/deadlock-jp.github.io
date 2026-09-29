@@ -4,6 +4,348 @@
   "upstreamRepo": "https://github.com/SteamDatabase/GameTracking-Deadlock",
   "entries": [
     {
+      "date": "2026-09-29",
+      "upstreamCommit": null,
+      "title": "City Never Sleeps",
+      "fromVersion": "6701",
+      "toVersion": "6712",
+      "changes": [
+        "ヒーロー・アイテムの数値差分から自動生成 (バフ 6 / ナーフ 6 / 混在 4、変更項目 32)"
+      ],
+      "adjustments": [
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_astro",
+          "note": "FollowDampingFactor を削除 / LassoTargetMaxSpeed を削除",
+          "changes": [
+            {
+              "path": "ability_gravity_lasso.properties.FollowDampingFactor",
+              "from": 8,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "ability_gravity_lasso.properties.LassoTargetMaxSpeed",
+              "from": 55,
+              "to": null,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_bookworm",
+          "note": "AllyHeight 20→10 / KnightChargeHeight 3.5→6",
+          "changes": [
+            {
+              "path": "ability_bookworm_knightcharge.properties.AllyHeight",
+              "from": 20,
+              "to": 10,
+              "good": false
+            },
+            {
+              "path": "ability_bookworm_knightcharge.properties.KnightChargeHeight",
+              "from": 3.5,
+              "to": 6,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_drifter",
+          "note": "TeleportDamage を削除",
+          "changes": [
+            {
+              "path": "drifter_shadow_mark.properties.TeleportDamage@scale",
+              "from": 0.5,
+              "to": null,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_frank",
+          "note": "ToggleOffDelay を削除",
+          "changes": [
+            {
+              "path": "ability_frank_painaura.properties.ToggleOffDelay",
+              "from": 0.5,
+              "to": null,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_haze",
+          "note": "MinRoundsPerSecond 5 を追加",
+          "changes": [
+            {
+              "path": "ability_bullet_flurry.properties.MinRoundsPerSecond",
+              "from": null,
+              "to": 5,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_kelvin",
+          "note": "AuraHPS 0.8 を追加 / AuraSlowAmount -75 を追加 / BeamHealPerSecond 0.6 を追加 ほか",
+          "changes": [
+            {
+              "path": "ability_ice_grenade.properties.AuraHPS@scale",
+              "from": null,
+              "to": 0.8,
+              "good": true
+            },
+            {
+              "path": "ability_ice_grenade.properties.AuraSlowAmount",
+              "from": null,
+              "to": -75,
+              "good": false
+            },
+            {
+              "path": "ability_icebeam.properties.BeamHealPerSecond@scale",
+              "from": null,
+              "to": 0.6,
+              "good": true
+            },
+            {
+              "path": "ability_icepath.properties.ExplodeDamage@scale",
+              "from": null,
+              "to": 0.8,
+              "good": true
+            },
+            {
+              "path": "ability_icepath.properties.ExplodeInterval",
+              "from": null,
+              "to": 0.15,
+              "good": true
+            },
+            {
+              "path": "ability_icepath.properties.ExplodeRadius",
+              "from": null,
+              "to": 5,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_magician",
+          "note": "MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL_ALT_FIRE 0→0.55",
+          "changes": [
+            {
+              "path": "growth.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL_ALT_FIRE",
+              "from": 0,
+              "to": 0.55,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_mirage",
+          "note": "NumBeetles 1 を追加 / SpreadAngleDegrees 60 を追加",
+          "changes": [
+            {
+              "path": "mirage_fire_beetles.properties.NumBeetles",
+              "from": null,
+              "to": 1,
+              "good": true
+            },
+            {
+              "path": "mirage_fire_beetles.properties.SpreadAngleDegrees",
+              "from": null,
+              "to": 60,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_necro",
+          "note": "EBuildUpRate を削除",
+          "changes": [
+            {
+              "path": "stat.EBuildUpRate",
+              "from": -50,
+              "to": null,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_synth",
+          "note": "クールダウン 25→26",
+          "changes": [
+            {
+              "path": "synth_plasma_flux.properties.AbilityCooldown",
+              "from": 25,
+              "to": 26,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_wraith",
+          "note": "詠唱時間 0.65→1.25",
+          "changes": [
+            {
+              "path": "citadel_ability_psychic_lift.properties.AbilityChannelTime",
+              "from": 0.65,
+              "to": 1.25,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_ability_power_shard",
+          "note": "エンチャントアビリティ クールダウン 1→100",
+          "changes": [
+            {
+              "path": "properties.ImbuedCooldownMultiplier",
+              "from": 1,
+              "to": 100,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_phantom_strike",
+          "note": "T1強化 スピリットパワー 12→22",
+          "changes": [
+            {
+              "path": "upgrades.T1.TechPower",
+              "from": 12,
+              "to": 22,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "item",
+          "key": "upgrade_ricochet",
+          "note": "RicochetTargets 2 を追加 / 跳弾対象 を削除",
+          "changes": [
+            {
+              "path": "properties.RicochetTargets",
+              "from": null,
+              "to": 2,
+              "good": true
+            },
+            {
+              "path": "properties.RicochetTargetsTooltipOnly",
+              "from": 2,
+              "to": null,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_rocket_booster",
+          "note": "VelocityPitchScaleMax 1.8 を追加 / VelocityPitchScaleMin 0.8 を追加 / VelocityVolScaleMax 1 を追加 ほか",
+          "changes": [
+            {
+              "path": "properties.VelocityPitchScaleMax",
+              "from": null,
+              "to": 1.8,
+              "good": true
+            },
+            {
+              "path": "properties.VelocityPitchScaleMin",
+              "from": null,
+              "to": 0.8,
+              "good": true
+            },
+            {
+              "path": "properties.VelocityVolScaleMax",
+              "from": null,
+              "to": 1,
+              "good": true
+            },
+            {
+              "path": "properties.VelocityVolScaleMin",
+              "from": null,
+              "to": 0.25,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_veil_walker",
+          "note": "T1強化 HealOnVeil 300→250",
+          "changes": [
+            {
+              "path": "upgrades.T1.HealOnVeil",
+              "from": 300,
+              "to": 250,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "neutral",
+          "target": "system",
+          "key": "economy",
+          "note": "破壊可能オブジェクトの初回出現（配置2） 5分→3分 / 破壊可能オブジェクトの再出現間隔（配置2） 5分→3分 / 破壊可能オブジェクトの初回出現（配置4） 5分 を追加 ほか",
+          "changes": [
+            {
+              "path": "breakableSpawnTimes.2.initialSpawnTime",
+              "from": 300,
+              "to": 180,
+              "good": null
+            },
+            {
+              "path": "breakableSpawnTimes.2.respawnInterval",
+              "from": 300,
+              "to": 180,
+              "good": null
+            },
+            {
+              "path": "breakableSpawnTimes.4.initialSpawnTime",
+              "from": null,
+              "to": 300,
+              "good": null
+            },
+            {
+              "path": "breakableSpawnTimes.4.respawnInterval",
+              "from": null,
+              "to": 180,
+              "good": null
+            }
+          ]
+        }
+      ],
+      "sourceTitle": "City Never Sleeps",
+      "sourceUrl": "https://store.steampowered.com/news/app/1422450/view/694273194214819790"
+    },
+    {
       "date": "2026-09-16",
       "upstreamCommit": null,
       "title": "Minor Update - 09-16-2026",
