@@ -44,6 +44,16 @@ function isTunnelFloor(img: DecodedPng, px: number, py: number): boolean {
  */
 export const TUNNEL_BREAKABLE_GROUP = 1;
 
+/**
+ * サイトの表示に使える map.json か。ミニマップの背景(地上)が取れていない版は
+ * 地上・地下の判定も崩れる(トンネル画像で判定するため)ので、使わずに「改修対応中」と出す。
+ * 6712(2026-09-29 のマップ改修)で、画像を取り出すツールが新しいシェーダー形式に
+ * 未対応だったのが最初の実例。
+ */
+export function isMapReady(map: MapFile): boolean {
+  return map.images.base !== null;
+}
+
 type Ent = Record<string, string>;
 
 function readEntities(path: string): Ent[] {

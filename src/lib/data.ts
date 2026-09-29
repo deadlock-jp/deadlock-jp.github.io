@@ -1,6 +1,6 @@
 /** data/snapshots/<version>/*.json の読み込みと、表示名の解決 */
 
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import updatesJson from "../../data/updates.json" with { type: "json" };
 import heroNotesJson from "../../data/hero-notes.json" with { type: "json" };
@@ -1060,3 +1060,35 @@ export interface HeroStatsFile {
   >;
 }
 export const heroStats = heroStatsJson as unknown as HeroStatsFile;
+
+/** そのアップデートで新しく発表された(解禁前として初めてデータに入った)ヒーロー */
+export interface AnnouncedHero {
+  hero: Hero;
+  /** 最新版で解禁済みか。解禁済みならヒーローページがある */
+  released: boolean;
+}
+
+/**
+ * fromVersion → toVersion の間に preRelease(データは名前と投票画面の絵だけの解禁前ヒーロー)として
+ * 初めて現れたヒーローを、最新版での状態つきで返す。アップデートのページの「近日追加」に使う。
+ * 解禁されると最新版で released になるので、同じページのまま「追加済み」に変わる。
+ * 過去版を読むが versionedData.ts には置かない(ページ側に import を足さないため。src/i18n/locals.ts 参照)。
+ */
+export function heroesAnnouncedIn(fromVersion: string | null, toVersion: string | null): AnnouncedHero[] {
+  if (!fromVersion || !toVersion) return [];
+  const read = (v: string): Hero[] | null => {
+    const p = join(DATA_DIR, "snapshots", v, "heroes.json");
+    return existsSync(p) ? Object.values((JSON.parse(readFileSync(p, "utf8")) as HeroesFile).heroes) : null;
+  };
+  const before = read(fromVersion);
+  const after = read(toVersion);
+  if (!before || !after) return [];
+  const known = new Set(before.filter((h) => h.released || h.preRelease === true).map((h) => h.id));
+  return after
+    .filter((h) => h.preRelease === true && !known.has(h.id))
+    .sort((a, b) => a.id - b.id)
+    .map((h) => {
+      const now = heroesFile.heroes[h.key] ?? h;
+      return { hero: now, released: now.released };
+    });
+}

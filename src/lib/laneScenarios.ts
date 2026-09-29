@@ -13,6 +13,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { matchFlow } from "./matchFlow.ts";
 import type { MapFile } from "../types/map.ts";
+import { isMapReady } from "../parsers/map.ts";
 
 /** シナリオの前提(ゲームデータではなく、こちらで置いた想定) */
 export const ASSUMPTIONS = {
@@ -57,7 +58,8 @@ function weakCampUnits(): number | null {
   const path = join(DATA_DIR, "snapshots", v, "map.json");
   if (!existsSync(path)) return null;
   const map = JSON.parse(readFileSync(path, "utf8")) as MapFile;
-  const weak = map.camps.filter((c) => c.type === "weak");
+  if (!isMapReady(map)) return null;
+  const weak =map.camps.filter((c) => c.type === "weak");
   if (weak.length === 0) return null;
   // 小キャンプはどれも同じ体数(違えば最小に寄せる)
   return Math.min(...weak.map((c) => c.units));

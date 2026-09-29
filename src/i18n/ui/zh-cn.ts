@@ -163,6 +163,7 @@ export const zhCn: Dict = {
     seeReference: "查看资料 →",
     map: "地图",
     mapLead: "营地、箱子、金色雕像和桥梁增益的位置。可放大，并可在地上与地下之间切换。",
+    mapRenovating: "正在适配新地图",
     laning: "对线期",
     // 要確認: ファーミングの訳語(发育/刷钱)
     farming: "发育",

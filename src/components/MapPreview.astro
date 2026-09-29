@@ -6,7 +6,7 @@
  */
 import { existsSync } from "node:fs";
 import { join } from "node:path";
-import { loadMap, mapView, campInfo, isTunnelBreakable } from "../lib/mapView.ts";
+import { loadMap, mapView, mapRenovating, campInfo, isTunnelBreakable } from "../lib/mapView.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const loaded = loadMap();
@@ -15,6 +15,8 @@ const view = loaded ? mapView(loaded.map, loaded.economy) : null;
 const bgPath = map?.images.base?.outPath;
 const bg = bgPath && existsSync(join(process.cwd(), bgPath)) ? `${base}/${bgPath.replace(/^public\//, "")}` : null;
 const camps = campInfo();
+const { L } = Astro.locals.i18n;
+const renovating = mapRenovating();
 const onGround = <T extends { underground: boolean }>(xs: T[]) => xs.filter((x) => !x.underground);
 ---
 
@@ -31,9 +33,17 @@ const onGround = <T extends { underground: boolean }>(xs: T[]) => xs.filter((x) 
   </span>
 )}
 
+{renovating && (
+  <span class="mp mp-wip">
+    <span>{L().top.mapRenovating}</span>
+  </span>
+)}
+
 <style>
   .mp { position: relative; display: block; aspect-ratio: 1; container-type: inline-size; }
   .mp > * { position: absolute; }
+  .mp-wip { display: grid; place-items: center; background: rgb(0 0 0 / 0.35); color: var(--c-text-muted); font-size: 0.9rem; }
+  .mp-wip > span { position: static; padding: 0 1em; text-align: center; }
   .mp-bg, .mp-lanes { inset: 0; width: 100%; height: 100%; }
   .mp-lanes polyline { fill: none; stroke-linejoin: round; stroke-linecap: round; stroke-width: max(1.5px, 0.55cqw); vector-effect: non-scaling-stroke; }
   .mp i, .mp .cp { transform: translate(-50%, -50%); }

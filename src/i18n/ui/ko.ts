@@ -165,6 +165,7 @@ export const ko: Dict = {
     seeReference: "레퍼런스 보기 →",
     map: "지도",
     mapLead: "캠프, 상자, 황금 조각상, 다리 버프의 위치. 확대와 지상·지하 전환이 가능합니다.",
+    mapRenovating: "맵 개편 대응 중입니다",
     laning: "라인전",
     farming: "파밍",
     lategame: "후반",

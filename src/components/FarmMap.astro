@@ -15,10 +15,11 @@ import { existsSync } from "node:fs";
 import { join } from "node:path";
 import type { MapFile } from "../types/map.ts";
 import { clock, duration } from "../lib/matchFlow.ts";
-import { loadMap, mapView, campInfo, isTunnelBreakable as isTunnel } from "../lib/mapView.ts";
+import { loadMap, mapView, mapRenovating, campInfo, isTunnelBreakable as isTunnel } from "../lib/mapView.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const loaded = loadMap();
+const renovating = mapRenovating();
 const map = loaded?.map ?? null;
 const economy = loaded?.economy;
 const view = loaded ? mapView(loaded.map, loaded.economy) : null;
@@ -80,6 +81,10 @@ const MARKER_LABEL: Record<string, string> = {
   midboss: "ミッド・ボス",
 };
 ---
+
+{renovating && (
+  <p class="fm-wip">マップ改修（2026年9月29日）に対応中です。新しいマップの配置は準備ができしだい掲載します。</p>
+)}
 
 {map && bgBase && (
   <div class="farmmap" data-farmmap data-view="ground">
@@ -282,6 +287,12 @@ const MARKER_LABEL: Record<string, string> = {
 </script>
 
 <style>
+  .fm-wip {
+    padding: var(--sp-5) var(--sp-4);
+    background: rgb(0 0 0 / 0.35);
+    color: var(--c-text-muted);
+    text-align: center;
+  }
   .farmmap { margin: var(--sp-3) 0 var(--sp-4); }
   .fm-controls { display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-3); align-items: center; margin-bottom: var(--sp-2); }
   .fm-view { display: flex; }

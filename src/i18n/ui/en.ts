@@ -160,6 +160,7 @@ export const en: Dict = {
     seeReference: "Open the reference →",
     map: "Map",
     mapLead: "Locations of camps, crates, golden statues, and bridge buffs. You can zoom in and switch between the surface and the underground.",
+    mapRenovating: "Updating for the new map",
     laning: "Laning",
     farming: "Farming",
     lategame: "Late Game",

@@ -11,18 +11,31 @@ import { join } from "node:path";
 import type { MapFile, MapLandmark } from "../types/map.ts";
 import type { EconomyFile } from "../types/economy.ts";
 import { campSpawnTimes } from "./objects.ts";
-import { TUNNEL_BREAKABLE_GROUP } from "../parsers/map.ts";
+import { TUNNEL_BREAKABLE_GROUP, isMapReady } from "../parsers/map.ts";
 
 const DATA_DIR = join(process.cwd(), "data");
 
-export function loadMap(): { map: MapFile; economy: EconomyFile } | null {
+function readLatestMap(): { version: string; map: MapFile } | null {
   const version = JSON.parse(readFileSync(join(DATA_DIR, "latest.json"), "utf8")).version as string;
   const mapPath = join(DATA_DIR, "snapshots", version, "map.json");
   if (!existsSync(mapPath)) return null;
+  return { version, map: JSON.parse(readFileSync(mapPath, "utf8")) as MapFile };
+}
+
+/** 表示に使えるマップ。改修対応中(isMapReady が偽)の版は null */
+export function loadMap(): { map: MapFile; economy: EconomyFile } | null {
+  const latest = readLatestMap();
+  if (!latest || !isMapReady(latest.map)) return null;
   return {
-    map: JSON.parse(readFileSync(mapPath, "utf8")) as MapFile,
-    economy: JSON.parse(readFileSync(join(DATA_DIR, "snapshots", version, "economy.json"), "utf8")) as EconomyFile,
+    map: latest.map,
+    economy: JSON.parse(readFileSync(join(DATA_DIR, "snapshots", latest.version, "economy.json"), "utf8")) as EconomyFile,
   };
+}
+
+/** 最新版に map.json はあるが、表示に使えない(マップ改修に対応中) */
+export function mapRenovating(): boolean {
+  const latest = readLatestMap();
+  return latest !== null && !isMapReady(latest.map);
 }
 
 /** 敵陣の色(ゲームのミニマップで敵側のレーン・建造物に使われる赤) */
