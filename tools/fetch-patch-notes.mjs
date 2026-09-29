@@ -82,7 +82,10 @@ function parseBody(contents) {
   for (const block of raw) {
     const heading = /^\[[bu]\]\[?\s*(.*?)\s*\]?\[\/[bu]\]$/.exec(block.trim());
     if (heading) {
-      const h = heading[1].trim();
+      // 見出しの中にも [url=...] などのタグが入ることがある("City Never Sleeps" の告知)
+      // [b][u]…[/u][/b] や末尾の [/url] は、"[" か "]" だけ上の正規表現に食べられて
+      // "u]…" "[/url" の形で残るので、先に落とす
+      const h = cleanLine(heading[1].replace(/^[bu]\]/i, "").replace(/\[\/[a-z]+$/i, "")) ?? "";
       if (h) lines.push(`## ${h}`);
       continue;
     }

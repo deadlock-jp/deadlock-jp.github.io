@@ -13,7 +13,7 @@ import BalanceDetail from "../../components/BalanceDetail.astro";
 import AbilityHoverCards from "../../components/AbilityHoverCards.astro";
 import { patchNotes, ADJUSTMENT_LABEL, heroesAnnouncedIn, t } from "../../lib/data.ts";
 import { balanceUpdateByDate } from "../../lib/balance.ts";
-import { updateNoteSections } from "../../lib/updateNotes.ts";
+import { updateNoteSections, updateNoteSources } from "../../lib/updateNotes.ts";
 
 export function getStaticPaths() {
   return patchNotes().map((n) => ({ params: { date: n.date }, props: { note: n } }));
@@ -27,6 +27,8 @@ const announced = heroesAnnouncedIn(update?.fromVersion ?? null, update?.toVersi
 
 /* General 節のうち、対応する数値がゲームデータに無くて差分に出てこない変更 */
 const generalSections = updateNoteSections(note.date);
+/* その手書きを書くときに読んだ、パッチノート以外の告知(特設ページなど) */
+const noteSources = updateNoteSources(note.date);
 
 /** "## 見出し" 行と通常行を分けて、見出しごとの塊にする(一覧ページと同じ規則) */
 function toSections(lines: string[]): { heading: string | null; items: string[] }[] {
@@ -127,10 +129,10 @@ const ogImage = existsSync(join(process.cwd(), "public", ogRel)) ? `/${ogRel}` :
 
   {generalSections.length > 0 && (
     <section class="block panel">
-      <h2>全体の変更</h2>
+      <h2>変更点のまとめ</h2>
       <p class="note">
-        ヒーロー・アイテムのどちらにも属さない変更のうち、ゲームデータに数値が無く
-        下のバランス調整に出てこないものです。公式パッチノートを読んで手で書いています。
+        ゲームデータに数値が無く、下のバランス調整に出てこない変更です。
+        公式の告知を読んで、日本語で手書きしています。
       </p>
       {generalSections.map((s) => (
         <div class="gsection">
@@ -142,6 +144,18 @@ const ogImage = existsSync(join(process.cwd(), "public", ogRel)) ? `/${ogRel}` :
           </ul>
         </div>
       ))}
+      {noteSources.length > 0 && (
+        <p class="src">
+          出典：
+          {noteSources.map((src, i) => (
+            <>
+              {i > 0 && "、"}
+              <a href={src.url} rel="noopener" target="_blank">{src.label}</a>
+            </>
+          ))}
+          、公式パッチノート（下）
+        </p>
+      )}
     </section>
   )}
 

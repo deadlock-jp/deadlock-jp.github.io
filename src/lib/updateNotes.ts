@@ -24,3 +24,15 @@ const notes = (updateNotesJson as unknown as { notes: Record<string, UpdateNoteS
 export function updateNoteSections(date: string): UpdateNoteSection[] {
   return notes[date] ?? [];
 }
+
+export interface UpdateNoteSource {
+  label: string;
+  url: string;
+}
+
+const sources = (updateNotesJson as unknown as { sources?: Record<string, UpdateNoteSource[]> }).sources ?? {};
+
+/** その日付の手書きメモを書くときに読んだ告知(特設ページなど)。無ければ空配列 */
+export function updateNoteSources(date: string): UpdateNoteSource[] {
+  return sources[date] ?? [];
+}
