@@ -90,6 +90,8 @@ const [tokensJa, tokensEn] = ["japanese", "english"].map((lang) => {
   }
 });
 const label = (token, fallback) => tokensJa[token]?.text ?? tokensEn[token]?.text ?? fallback;
+/** 公式の表示名が無い項目にこちらで付けた名前(data/property-labels.json)。サイトの statLabel と同じ順で引く */
+const ownLabels = JSON.parse(readFileSync(join(REPO_ROOT, "data/property-labels.json"), "utf8")).labels ?? {};
 
 /** 差分1行を Adjustment.changes の要素にする */
 const toChange = (row) => ({
@@ -113,7 +115,7 @@ function noteFor(changes, max = 3) {
         return c.to === null ? `構成素材 ${itemName} を除外` : `構成素材 ${itemName} を追加`;
       }
       const name = fieldNameOf(c.path);
-      const nm = name === "cost" ? "価格" : label(`${name}_label`, name);
+      const nm = name === "cost" ? "価格" : label(`${name}_label`, label(`${name}_postvalue_label`, ownLabels[name] ?? name));
       const tier = isUpgradePath(c.path) ? `T${/upgrades\.T(\d+)\./.exec(c.path)?.[1]}強化 ` : "";
       if (c.from === null) return `${tier}${nm} ${fmtN(c.to)} を追加`;
       if (c.to === null) return `${tier}${nm} を削除`;

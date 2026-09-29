@@ -62,7 +62,9 @@ export function parseProperties(v: Kv3Value | undefined): Record<string, Ability
       scale: parseScale(e["m_subclassScaleFunction"]),
       // このスキルの「主ダメージ」。ゲーム内のスピリットパワー影響値の一覧はこれを並べている
       isAbilityDamage: e["m_bIsAbilityDamageProperty"] === true,
-      labelOverride: str(e["m_strLocTokenOverride"]),
+      // "#VeilWalker_Heal" のように先頭に # が付くことがある(トークン名そのものは VeilWalker_Heal)。
+      // 付いたままだと "VeilWalker_Heal_label" が引けず、内部名が表示に出ていた
+      labelOverride: str(e["m_strLocTokenOverride"])?.replace(/^#/, "") ?? null,
     };
   }
   return out;

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "upstreamCommit": "6712",
-  "generatedAt": "2026-09-29T21:13:45.397Z",
+  "generatedAt": "2026-09-29T21:22:54.796Z",
   "itemPricePerTier": [
     0,
     800,
@@ -14394,7 +14394,7 @@
             "scalingStats": []
           },
           "isAbilityDamage": false,
-          "labelOverride": "#SilenceDuration"
+          "labelOverride": "SilenceDuration"
         },
         "AbilityCastRange": {
           "name": "AbilityCastRange",
@@ -26039,7 +26039,7 @@
           "cssClass": "tech_armor_up",
           "scale": null,
           "isAbilityDamage": false,
-          "labelOverride": "#TechResist"
+          "labelOverride": "TechResist"
         },
         "OutOfCombatHealthRegen": {
           "name": "OutOfCombatHealthRegen",
@@ -26326,7 +26326,7 @@
           "cssClass": "bullet_armor_up",
           "scale": null,
           "isAbilityDamage": false,
-          "labelOverride": "#BulletResist"
+          "labelOverride": "BulletResist"
         },
         "OutOfCombatHealthRegen": {
           "name": "OutOfCombatHealthRegen",
@@ -67916,7 +67916,7 @@
           "cssClass": "move_speed",
           "scale": null,
           "isAbilityDamage": false,
-          "labelOverride": "#VeilWalker_MoveSpeed"
+          "labelOverride": "VeilWalker_MoveSpeed"
         },
         "HealOnVeil": {
           "name": "HealOnVeil",
@@ -67933,7 +67933,7 @@
             "scalingStats": []
           },
           "isAbilityDamage": false,
-          "labelOverride": "#VeilWalker_Heal"
+          "labelOverride": "VeilWalker_Heal"
         }
       },
       "upgrades": [

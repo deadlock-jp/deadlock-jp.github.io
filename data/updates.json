@@ -17,7 +17,7 @@
           "kind": "nerf",
           "target": "hero",
           "key": "hero_astro",
-          "note": "FollowDampingFactor を削除 / LassoTargetMaxSpeed を削除",
+          "note": "追従の減衰係数 を削除 / 捕まえた対象の最大速度 を削除",
           "changes": [
             {
               "path": "ability_gravity_lasso.properties.FollowDampingFactor",
@@ -37,7 +37,7 @@
           "kind": "mixed",
           "target": "hero",
           "key": "hero_bookworm",
-          "note": "AllyHeight 20→10 / KnightChargeHeight 3.5→6",
+          "note": "味方の高さ 20→10 / 騎士の突進の高さ 3.5→6",
           "changes": [
             {
               "path": "ability_bookworm_knightcharge.properties.AllyHeight",
@@ -71,7 +71,7 @@
           "kind": "nerf",
           "target": "hero",
           "key": "hero_frank",
-          "note": "ToggleOffDelay を削除",
+          "note": "解除までの遅延 を削除",
           "changes": [
             {
               "path": "ability_frank_painaura.properties.ToggleOffDelay",
@@ -85,7 +85,7 @@
           "kind": "buff",
           "target": "hero",
           "key": "hero_haze",
-          "note": "MinRoundsPerSecond 5 を追加",
+          "note": "最低 弾／秒 5 を追加",
           "changes": [
             {
               "path": "ability_bullet_flurry.properties.MinRoundsPerSecond",
@@ -99,7 +99,7 @@
           "kind": "mixed",
           "target": "hero",
           "key": "hero_kelvin",
-          "note": "AuraHPS 0.8 を追加 / AuraSlowAmount -75 を追加 / BeamHealPerSecond 0.6 を追加 ほか",
+          "note": "AuraHPS 0.8 を追加 / オーラのスロウ -75 を追加 / BeamHealPerSecond 0.6 を追加 ほか",
           "changes": [
             {
               "path": "ability_ice_grenade.properties.AuraHPS@scale",
@@ -157,7 +157,7 @@
           "kind": "mixed",
           "target": "hero",
           "key": "hero_mirage",
-          "note": "NumBeetles 1 を追加 / SpreadAngleDegrees 60 を追加",
+          "note": "スカラベの数 1 を追加 / 拡散角度 60 を追加",
           "changes": [
             {
               "path": "mirage_fire_beetles.properties.NumBeetles",
@@ -177,7 +177,7 @@
           "kind": "buff",
           "target": "hero",
           "key": "hero_necro",
-          "note": "EBuildUpRate を削除",
+          "note": "蓄積速度 を削除",
           "changes": [
             {
               "path": "stat.EBuildUpRate",
@@ -267,7 +267,7 @@
           "kind": "buff",
           "target": "item",
           "key": "upgrade_rocket_booster",
-          "note": "VelocityPitchScaleMax 1.8 を追加 / VelocityPitchScaleMin 0.8 を追加 / VelocityVolScaleMax 1 を追加 ほか",
+          "note": "速度による効果音の高さ（最大） 1.8 を追加 / 速度による効果音の高さ（最小） 0.8 を追加 / 速度による効果音の音量（最大） 1 を追加 ほか",
           "changes": [
             {
               "path": "properties.VelocityPitchScaleMax",
@@ -299,7 +299,7 @@
           "kind": "nerf",
           "target": "item",
           "key": "upgrade_veil_walker",
-          "note": "T1強化 HealOnVeil 300→250",
+          "note": "T1強化 ベール通過時の回復 300→250",
           "changes": [
             {
               "path": "upgrades.T1.HealOnVeil",
