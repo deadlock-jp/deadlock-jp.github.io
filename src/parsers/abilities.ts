@@ -125,7 +125,10 @@ export function parseAbilities(abilitiesPath: string, upstreamCommit: string): A
       passiveProperties: parsePassiveProperties(e["m_AutoIntrinsicModifiers"]),
       upgrades: parseUpgrades(e["m_vecAbilityUpgrades"]),
       tooltip: parseTooltip(e["m_vecTooltipSectionInfo"]),
-      weapon: kind === "Weapon" ? parseWeapon(e["m_WeaponInfo"]) : null,
+      // 6711 で m_WeaponInfo が m_mapWeaponInfos.primary に移った(中身の形は同じ)。
+      // 今のところ primary 以外のキーは無い
+      weapon:
+        kind === "Weapon" ? parseWeapon(e["m_WeaponInfo"] ?? obj(e["m_mapWeaponInfos"])["primary"]) : null,
       image: str(e["m_strAbilityImage"]),
       alternateFormAbilities: parseAlternateFormAbilities(e),
       // パリィ(citadel_ability_melee_parry)だけが持つ、ガーディアン等のボスをパリィしたときの効果。

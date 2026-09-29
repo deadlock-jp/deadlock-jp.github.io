@@ -83,10 +83,21 @@ export interface Hero {
   disabled: boolean;
   inDevelopment: boolean;
   /**
+   * m_eHeroDevelopmentState の値(EHeroDevState_Release / _PreRelease / _DebugOnly)。
+   * 6711(2026-09-29)で m_bPlayerSelectable がこれに置き換わった。それより前の版では null。
+   */
+  devState: string | null;
+  /**
    * 実際にゲームで遊べるヒーローか。
+   * devState があればそれが Release かどうかで決める。無い旧版では
    * playerSelectable が true でも開発中・無効のものがあるため、この3つを合わせて判定する。
    */
   released: boolean;
+  /**
+   * データは揃っているが、まだ解禁されていない新ヒーロー(devState = PreRelease)。
+   * 投票順に数日おきで Release に変わる。サイトには NEW 付きで載せる。
+   */
+  preRelease: boolean;
   /** 1〜3 の難易度表記 */
   complexity: number;
   /** 基礎ステータス。キーは E* 形式 */

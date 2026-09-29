@@ -133,9 +133,17 @@ export function parseHeroes(vdataPath: string, upstreamCommit: string): HeroesFi
 
     const shop = obj(h["m_ShopStatDisplay"]);
 
-    const playerSelectable = h["m_bPlayerSelectable"] === true;
+    // 6711 で m_bPlayerSelectable が消え、m_eHeroDevelopmentState に置き換わった。
+    // 旧版(GameTracking からのバックフィル)は従来どおり3つのフラグで判定する。
+    const devState = typeof h["m_eHeroDevelopmentState"] === "string" ? h["m_eHeroDevelopmentState"] : null;
+    const playerSelectable =
+      devState !== null
+        ? devState === "EHeroDevState_Release" || devState === "EHeroDevState_PreRelease"
+        : h["m_bPlayerSelectable"] === true;
     const disabled = h["m_bDisabled"] === true;
     const inDevelopment = h["m_bInDevelopment"] === true;
+    const released =
+      devState !== null ? devState === "EHeroDevState_Release" : playerSelectable && !disabled && !inDevelopment;
 
     const hero: Hero = {
       id,
@@ -149,7 +157,9 @@ export function parseHeroes(vdataPath: string, upstreamCommit: string): HeroesFi
       playerSelectable,
       disabled,
       inDevelopment,
-      released: playerSelectable && !disabled && !inDevelopment,
+      devState,
+      released,
+      preRelease: devState === "EHeroDevState_PreRelease",
       complexity: num(h["m_nComplexity"]),
       startingStats: Object.fromEntries(
         Object.entries(obj(h["m_mapStartingStats"])).map(([k, v]) => [k, num(v)]),

@@ -97,7 +97,10 @@ const [eventsEn, eventsJa] = await Promise.all([fetchEvents(null), fetchEvents("
 
 const jaByGid = new Map(eventsJa.map((e) => [e.gid, e]));
 
-const isPatchNote = (e) => /update/i.test(e.event_name ?? "") && e.announcement_body?.body;
+// 大型アップデートは題に "Update" を含まないことがある("City Never Sleeps")。
+// Steam のイベント種別 14 = 大型アップデート(12 = パッチノート、13 = 通常のアップデート)も拾う
+const isPatchNote = (e) =>
+  (/update/i.test(e.event_name ?? "") || e.event_type === 14) && e.announcement_body?.body;
 const candidates = eventsEn.filter(isPatchNote);
 console.error(`${eventsEn.length} 件中 ${candidates.length} 件がパッチノート候補`);
 

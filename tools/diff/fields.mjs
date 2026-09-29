@@ -205,6 +205,13 @@ export function diffFieldMaps(before, after) {
     const b = after[k];
     if (a === undefined && b === undefined) continue;
     if (a !== undefined && b !== undefined && Math.abs(a - b) < EPS) continue;
+    /*
+     * 「無い」と「0」はゲーム上同じなので、片側が無く、もう片側が 0 なら変化なしとみなす。
+     * 6712(2026-09-29)でスキーマが大きく変わった際、全ヒーローに
+     * 「burstShotCooldown 0 を削除」「非戦闘時リジェネ 0 を追加」が並び、168件中136件がこれだった。
+     */
+    if (a === undefined && Math.abs(b) < EPS) continue;
+    if (b === undefined && Math.abs(a) < EPS) continue;
     rows.push({ path: k, before: a ?? null, after: b ?? null });
   }
   return rows.sort((x, y) => x.path.localeCompare(y.path));

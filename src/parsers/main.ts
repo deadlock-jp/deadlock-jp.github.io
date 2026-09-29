@@ -134,10 +134,11 @@ function parseAll(
 
   const heroTotal = Object.keys(heroes.heroes).length;
   const released = Object.values(heroes.heroes).filter((h) => h.released).length;
+  const preRelease = Object.values(heroes.heroes).filter((h) => h.preRelease).length;
   const itemList = Object.values(items.items);
   const inShop = itemList.filter((i) => i.inShop);
 
-  console.log(`\nヒーロー ${heroTotal} 件 (実装済み ${released} 件)`);
+  console.log(`\nヒーロー ${heroTotal} 件 (実装済み ${released} 件 / 解禁前 ${preRelease} 件)`);
   console.log(`アイテム ${itemList.length} 件 (ショップ掲載 ${inShop.length} 件)`);
   for (const slot of ["WeaponMod", "Armor", "Tech"] as const) {
     const n = inShop.filter((i) => i.slotType === slot).length;
