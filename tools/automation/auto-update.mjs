@@ -13,6 +13,11 @@
  *   4. 違えば: extract-local.mjs → GameTracking を git pull → parse --local → gen-snapshot-diff --write
  *      → git commit → push(fine-grained PAT 経由。deploy key は組織ポリシーで
  *      無効化されているため使えない)
+ *   4'. <WORK>\_paused.txt があれば、新バージョンを検出しても 4. に進まない。
+ *      検出したことを _autolog.txt と <WORK>\_detected.txt に残すだけ(_lastversion.txt も据え置き)。
+ *      ゲームの根幹が変わる大型アップデート(マップ改変・ヒーロー追加・ショップ改修など)で、
+ *      パーサーが黙って誤った data/ を公開しないよう、人手の作業に切り替えるためのスイッチ。
+ *      再開は _paused.txt を消すだけ。
  *   5. 失敗したら push せず・_lastversion.txt も更新せず終了(次回また試みる)。
  *      成功/失敗どちらも _autolog.txt に記録する。
  *
@@ -38,6 +43,8 @@ const WORK = "C:\\Users\\nogud\\Downloads\\deadlock-extract";
 const LOCK = join(WORK, "_update.lock");
 const LASTVERSION = join(WORK, "_lastversion.txt");
 const AUTOLOG = join(WORK, "_autolog.txt");
+const PAUSED = join(WORK, "_paused.txt");
+const DETECTED = join(WORK, "_detected.txt");
 const TOKEN_PATH = join(homedir(), ".deadlock-jp-token.txt");
 const ASKPASS = join(HERE, "askpass.cmd");
 const REPO_URL = "https://github.com/deadlock-jp/deadlock-jp.github.io.git";
@@ -91,6 +98,13 @@ function main() {
       return;
     }
     log(`新しいバージョンを検出: ${lastVersion ?? "(初回)"} -> ${clientVersion}`);
+
+    if (existsSync(PAUSED)) {
+      const reason = readFileSync(PAUSED, "utf8").trim();
+      log(`一時停止中(${PAUSED}${reason ? `: ${reason}` : ""})。抽出・parse・push は行いません。`);
+      writeFileSync(DETECTED, `${clientVersion}\n${new Date().toISOString()}\n`);
+      return;
+    }
 
     if (!existsSync(TOKEN_PATH)) {
       throw new Error(
