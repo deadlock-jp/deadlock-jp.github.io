@@ -106,11 +106,15 @@ function main() {
     mkdirSync(mapOut, { recursive: true });
     const run = (args) => execFileSync(cli, args, { stdio: ["ignore", "pipe", "inherit"], encoding: "utf8" });
     run(["-i", mapVpk, "-o", mapOut, "--vpk_filepath", `maps/${mapName}/entities/default_ents.vents_c`, "-d"]);
-    run(["-i", vpk, "-o", mapOut, "--vpk_filepath", `materials/minimap/${mapName}.vmat_c`, "-d"]);
-    const vmatPath = join(mapOut, "materials", "minimap", `${mapName}.vmat`);
-    const vmat = existsSync(vmatPath) ? readFileSync(vmatPath, "utf8") : "";
-    const compiled = vmat.match(/"g_tColor"\s+"([^"]+)\.vtex"/)?.[1] ?? null; // panorama/.../minimap_midtown_mid_psd_xxxx
-    const texture = vmat.match(/"Texture"\s+"([^"]+)\.png"/)?.[1] ?? null; // panorama/.../minimap_midtown_mid
+    // マテリアルは decompile せず、DATA ブロックを表示させて g_tColor を読む。decompile は
+    // シェーダーの読み込みを伴い、6712(2026-09-29)でエンジンのシェーダー形式が上がったときに
+    // CLI が未対応で失敗した(画像そのものは今の CLI でも取り出せる)。
+    const vmatData = run(["-i", vpk, "--vpk_filepath", `materials/minimap/${mapName}.vmat_c`, "-b", "DATA"]);
+    const compiled =
+      /m_name = "g_tColor"\s+m_pValue = resource:"([^"]+)\.vtex"/.exec(vmatData)?.[1] ?? null; // panorama/.../minimap_midtown_mid_psd_xxxx
+    // 元画像の名前(ハッシュと _psd を除いたもの)。地下トンネルの絵はこれに _tunnels_psd を付けた名前
+    const texture = compiled ? compiled.replace(/_psd_[0-9a-f]+$/, "") : null; // panorama/.../minimap_midtown_mid
+    if (!compiled) log(`[extract-local] 警告: ${mapName}.vmat_c から g_tColor を読めませんでした`);
     const images = {};
     if (compiled) {
       run(["-i", vpk, "-o", mapOut, "--vpk_filepath", `${compiled}.vtex_c`, "-d"]);

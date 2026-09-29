@@ -11,7 +11,7 @@ import { join } from "node:path";
 import type { MapFile, MapLandmark } from "../types/map.ts";
 import type { EconomyFile } from "../types/economy.ts";
 import { campSpawnTimes } from "./objects.ts";
-import { TUNNEL_BREAKABLE_GROUP, isMapReady } from "../parsers/map.ts";
+import { TUNNEL_BREAKABLE_GROUP, isMapReady, hasTunnelGroup } from "../parsers/map.ts";
 
 const DATA_DIR = join(process.cwd(), "data");
 
@@ -49,7 +49,14 @@ export const STRUCTURES = new Set(["patron", "shrine", "baseGuardian", "walker",
 export const campInfo = () => Object.fromEntries(campSpawnTimes().map((c) => [c.key, c]));
 
 /** 地下トンネル(3人専用)の箱 */
-export const isTunnelBreakable = (b: MapFile["breakables"][number]) => b.group === TUNNEL_BREAKABLE_GROUP;
+let tunnelGroupOk: boolean | null = null;
+export const isTunnelBreakable = (b: MapFile["breakables"][number]) => {
+  if (tunnelGroupOk === null) {
+    const loaded = loadMap();
+    tunnelGroupOk = loaded ? hasTunnelGroup(loaded.map) : false;
+  }
+  return tunnelGroupOk && b.group === TUNNEL_BREAKABLE_GROUP;
+};
 
 export function mapView(map: MapFile, economy: EconomyFile) {
   /** ゲーム座標 → 地図上の割合(0〜1) */

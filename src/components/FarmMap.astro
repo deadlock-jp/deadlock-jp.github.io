@@ -62,7 +62,10 @@ const layers = map
       })),
       { key: "crate", label: "箱（ソウル）", icon: null, count: count((b) => b.kind === "crate" && !isTunnel(b)), on: false },
       { key: "statue", label: "黄金像（パワーアップ）", icon: null, count: count((b) => b.kind === "statue" && !isTunnel(b)), on: false },
-      { key: "tunnel", label: "地下トンネルの箱（3人専用）", icon: null, count: count(isTunnel), on: false },
+      // 3人専用トンネルのグループが確かめられない版(src/parsers/map.ts の hasTunnelGroup)では出さない
+      ...(count(isTunnel) > 0
+        ? [{ key: "tunnel", label: "地下トンネルの箱（3人専用）", icon: null, count: count(isTunnel), on: false }]
+        : []),
       { key: "marker", label: "橋バフ・裂け目・壺", icon: null, count: markers.length, on: true },
     ]
   : [];

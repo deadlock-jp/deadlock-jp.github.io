@@ -45,6 +45,17 @@ function isTunnelFloor(img: DecodedPng, px: number, py: number): boolean {
 export const TUNNEL_BREAKABLE_GROUP = 1;
 
 /**
+ * そのマップで TUNNEL_BREAKABLE_GROUP が本当に地下トンネルのグループか(大半が地下にあるか)。
+ * 6712(2026-09-29 のマップ改修)で出現グループの割り当てが変わり、グループ1の大半が地上に移った
+ * (地上75・地下3)。どのグループがトンネルになったかは公式ノートでまだ確かめられていないので、
+ * 確かめられるまでは「3人専用トンネルの箱」として扱わない(普通の箱として出す)。
+ */
+export function hasTunnelGroup(map: MapFile): boolean {
+  const inGroup = map.breakables.filter((b) => b.group === TUNNEL_BREAKABLE_GROUP);
+  return inGroup.length > 0 && inGroup.filter((b) => b.underground).length / inGroup.length >= 0.8;
+}
+
+/**
  * サイトの表示に使える map.json か。ミニマップの背景(地上)が取れていない版は
  * 地上・地下の判定も崩れる(トンネル画像で判定するため)ので、使わずに「改修対応中」と出す。
  * 6712(2026-09-29 のマップ改修)で、画像を取り出すツールが新しいシェーダー形式に
@@ -113,7 +124,8 @@ function lanePoints(e: Ent): { x: number; y: number }[] {
 const LANE_SLOT = "1";
 
 function origin(e: Ent): { x: number; y: number; z: number } {
-  const [x = 0, y = 0, z = 0] = (e.origin ?? "").split(" ").map(Number);
+  // 6701 までは "x y z" の文字列、6711 以降は [ x, y, z ] の配列で出てくる。どちらも数値だけ拾う
+  const [x = 0, y = 0, z = 0] = (e.origin ?? "").match(/-?\d+(?:\.\d+)?(?:e-?\d+)?/gi)?.map(Number) ?? [];
   return { x, y, z };
 }
 
