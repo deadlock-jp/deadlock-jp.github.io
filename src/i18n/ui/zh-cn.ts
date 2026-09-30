@@ -137,6 +137,9 @@ export const zhCn: Dict = {
     VelocityVolScaleMin: "随速度变化的音效音量(最小)",
     HealOnVeil: "穿过帷幕时治疗",
     BounceRadius: "弹跳范围",
+    AuraHPS: "光环每秒治疗",
+    BeamHealPerSecond: "光束每秒治疗",
+    TeleportDamage: "传送伤害",
   },
   rank: {
     withNote: (label, note) => `${label}（${note}）`,

@@ -10,7 +10,7 @@
       "fromVersion": "6701",
       "toVersion": "6712",
       "changes": [
-        "ヒーロー・アイテムの数値差分から自動生成 (バフ 6 / ナーフ 6 / 混在 4、変更項目 32)"
+        "ヒーロー・アイテムの数値差分から自動生成 (バフ 6 / ナーフ 5 / 混在 4、変更項目 31)"
       ],
       "adjustments": [
         {
@@ -57,7 +57,7 @@
           "kind": "nerf",
           "target": "hero",
           "key": "hero_drifter",
-          "note": "TeleportDamage を削除",
+          "note": "テレポート時のダメージ を削除",
           "changes": [
             {
               "path": "drifter_shadow_mark.properties.TeleportDamage@scale",
@@ -99,7 +99,7 @@
           "kind": "mixed",
           "target": "hero",
           "key": "hero_kelvin",
-          "note": "AuraHPS 0.8 を追加 / オーラのスロウ -75 を追加 / BeamHealPerSecond 0.6 を追加 ほか",
+          "note": "オーラの回復／秒 0.8 を追加 / オーラのスロウ -75 を追加 / ビームの回復／秒 0.6 を追加 ほか",
           "changes": [
             {
               "path": "ability_ice_grenade.properties.AuraHPS@scale",
@@ -212,20 +212,6 @@
               "from": 0.65,
               "to": 1.25,
               "good": true
-            }
-          ]
-        },
-        {
-          "kind": "nerf",
-          "target": "item",
-          "key": "upgrade_ability_power_shard",
-          "note": "エンチャントアビリティ クールダウン 1→100",
-          "changes": [
-            {
-              "path": "properties.ImbuedCooldownMultiplier",
-              "from": 1,
-              "to": 100,
-              "good": false
             }
           ]
         },

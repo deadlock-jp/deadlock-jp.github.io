@@ -1128,17 +1128,26 @@ export function latestChangeMarks(): LatestChangeMarks | null {
   const heroes = new Map<string, AdjustmentKind>();
   const items = new Map<string, AdjustmentKind>();
   for (const a of u.adjustments ?? []) {
-    const real = (a.changes ?? []).some(
-      (c) =>
-        c.from !== null &&
-        c.to !== null &&
-        c.from !== c.to &&
-        !(a.target === "item" && c.path.startsWith("upgrades.")),
-    );
-    if (!real) continue;
+    if (!hasRealChange(a)) continue;
     if (a.target === "hero") heroes.set(a.key, a.kind);
     else if (a.target === "item") items.set(a.key, a.kind);
   }
   const title = currentLang() === "ja" ? u.title : (patchNoteByDateLocal(u.date)?.titleEn ?? L().adjust.update);
   return { title, date: u.date, heroes, items };
+}
+
+/**
+ * その調整に「変更前も変更後も値があり、実際に変わった項目」があるか。
+ * 項目の追加・削除だけ(null ↔ 値)はゲーム側のデータの書き方が変わっただけのことが多く、
+ * アイテムの upgrades.* はストリートブロウルのエンハンスド版のボーナスで通常のアイテムは変わらない。
+ * 一覧の札(latestChangeMarks)と、アップデートのページの description の「主な対象」が使う。
+ */
+export function hasRealChange(a: Adjustment): boolean {
+  return (a.changes ?? []).some(
+    (c) =>
+      c.from !== null &&
+      c.to !== null &&
+      c.from !== c.to &&
+      !(a.target === "item" && c.path.startsWith("upgrades.")),
+  );
 }

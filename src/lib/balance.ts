@@ -15,6 +15,7 @@ import {
   item,
   t,
   patchNoteByDate,
+  hasRealChange,
   type SiteUpdate,
   type AdjustmentGroup,
   type AdjustmentKind,
@@ -62,6 +63,8 @@ export interface BalanceEntity {
   heroImage: string | null;
   item: Item | null;
   groups: AdjustmentGroup[];
+  /** 変更前も変更後も値があって実際に変わった項目を持つか(data.ts の hasRealChange) */
+  realChange: boolean;
 }
 
 export interface BalanceUpdate {
@@ -135,6 +138,7 @@ function toUpdate(u: SiteUpdate, base: string): BalanceUpdate {
         heroImage: null,
         item: it,
         groups,
+        realChange: hasRealChange(a),
       });
       counts[a.kind]++;
       chips.push({
@@ -169,6 +173,7 @@ function toUpdate(u: SiteUpdate, base: string): BalanceUpdate {
         heroImage: null,
         item: null,
         groups,
+        realChange: hasRealChange(a),
       });
       counts[a.kind]++;
       chips.push({
@@ -199,6 +204,7 @@ function toUpdate(u: SiteUpdate, base: string): BalanceUpdate {
       heroImage: hero.images.iconSmall,
       item: null,
       groups,
+      realChange: hasRealChange(a),
     });
     // 一覧に出るのはヒーローではなくスキル。分類もスキルごとのものを使う
     for (const g of groups) {

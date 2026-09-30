@@ -138,6 +138,9 @@ export const ko: Dict = {
     VelocityVolScaleMin: "속도에 따른 효과음 음량(최소)",
     HealOnVeil: "베일 통과 시 회복",
     BounceRadius: "튕김 범위",
+    AuraHPS: "오라 초당 회복",
+    BeamHealPerSecond: "빔 초당 회복",
+    TeleportDamage: "순간이동 피해",
   },
   rank: {
     withNote: (label, note) => `${label}(${note})`,

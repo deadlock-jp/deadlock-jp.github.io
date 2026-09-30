@@ -133,6 +133,9 @@ export const en: Dict = {
     VelocityVolScaleMin: "Speed-Based Sound Volume (Min)",
     HealOnVeil: "Heal on Veil",
     BounceRadius: "Bounce Radius",
+    AuraHPS: "Aura Heal per Second",
+    BeamHealPerSecond: "Beam Heal per Second",
+    TeleportDamage: "Teleport Damage",
   },
   rank: {
     withNote: (label, note) => `${label} (${note})`,

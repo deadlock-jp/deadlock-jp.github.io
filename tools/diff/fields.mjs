@@ -197,6 +197,19 @@ export function economyFieldMap(economy) {
  * (2026-08-22 の「T2強化にスピリットスケーリング+0.45を追加」がこれに当たる。
  *  以前は両方に有る項目しか見ておらず、追加・削除が丸ごと落ちていた)。
  */
+/**
+ * 値の意味は同じまま、表し方(単位)だけが変わった項目 → 変更前に掛ける倍率。
+ * 数値そのものは書き換えず、差分に「変化」として出さないためだけに使う。根拠を必ず書くこと。
+ */
+const UNIT_RESCALE = {
+  /*
+   * エコーシャード。6701 までは表示名の無い倍率(1 = 付与したスキルのクールダウンの1倍ぶん延びる)、
+   * 6712 からは公式の表示名「エンチャントアビリティ クールダウン」と接尾辞 "%" が付き、値が 100 になった。
+   * アイテムの説明文(このアイテムのクールダウンは付与したスキルのクールダウンぶん延びる)は両版で同じ
+   */
+  ImbuedCooldownMultiplier: 100,
+};
+
 export function diffFieldMaps(before, after) {
   const keys = new Set([...Object.keys(before), ...Object.keys(after)]);
   const rows = [];
@@ -212,6 +225,9 @@ export function diffFieldMaps(before, after) {
      */
     if (a === undefined && Math.abs(b) < EPS) continue;
     if (b === undefined && Math.abs(a) < EPS) continue;
+    // 表し方だけが変わった項目(UNIT_RESCALE)。変更前×倍率が変更後と同じなら、値の意味は変わっていない
+    const rescale = UNIT_RESCALE[fieldNameOf(k)];
+    if (rescale && a !== undefined && b !== undefined && Math.abs(a * rescale - b) < EPS) continue;
     rows.push({ path: k, before: a ?? null, after: b ?? null });
   }
   return rows.sort((x, y) => x.path.localeCompare(y.path));

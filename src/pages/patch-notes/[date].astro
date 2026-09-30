@@ -84,9 +84,13 @@ const summary = update
       .map((k) => `${ADJUSTMENT_LABEL[k]} ${update.counts[k]}`)
       .join(" / ")
   : null;
-/** description に入れる主な対象(バフ・ナーフ・リワーク・混在のヒーロー/アイテム。先頭から4つ) */
+/*
+ * description に入れる主な対象。実際に値が変わったヒーロー/アイテムを先に(項目の追加・削除だけのものは
+ * データの書き方の変化のことが多いので後ろに回す)、その中で先頭から4つ
+ */
 const mainNames = (update?.entities ?? [])
   .filter((e) => e.target !== "system" && e.kind !== "neutral")
+  .sort((x, y) => Number(y.realChange) - Number(x.realChange))
   .slice(0, 4)
   .map((e) => e.name);
 

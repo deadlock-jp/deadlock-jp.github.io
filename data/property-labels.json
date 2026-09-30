@@ -38,7 +38,10 @@
     "VelocityVolScaleMax": "速度による効果音の音量（最大）",
     "VelocityVolScaleMin": "速度による効果音の音量（最小）",
     "HealOnVeil": "ベール通過時の回復",
-    "BounceRadius": "跳ね返りの範囲"
+    "BounceRadius": "跳ね返りの範囲",
+    "AuraHPS": "オーラの回復／秒",
+    "BeamHealPerSecond": "ビームの回復／秒",
+    "TeleportDamage": "テレポート時のダメージ"
   },
   "context": {
     "BulletResistReductionDuration": "ホリデイ クラックショット",
@@ -77,6 +80,9 @@
     "VelocityVolScaleMax": "マジェスティックリープ",
     "VelocityVolScaleMin": "マジェスティックリープ",
     "HealOnVeil": "ベールウォーカー",
-    "BounceRadius": "セレステ シャイニングワンダー"
+    "BounceRadius": "セレステ シャイニングワンダー",
+    "AuraHPS": "ケルビン フロストグレネード",
+    "BeamHealPerSecond": "ケルビン アークティックビーム",
+    "TeleportDamage": "ドリフター 追跡者の刻印"
   }
 }
