@@ -1,0 +1,635 @@
+---
+/**
+ * マップとファーム。地図(FarmMap)→ ソウルの仕組み → 稼ぎ方 → 数値表 の順。
+ * 文章・図・表は旧・試合の流れ(/mechanics/match/)のファーミング節・レーン戦のソウルの節・
+ * 中盤のソウル差の節・付録の数値表から、書き換えずに移したもの。
+ * 文中の数値はすべて src/lib/matchFlow.ts ほかがスナップショットから引いたもの(ルール6)。
+ */
+import Base from "../../../layouts/Base.astro";
+import HeroPortrait from "../../../components/HeroPortrait.astro";
+import FarmMap from "../../../components/FarmMap.astro";
+import farmingNotes from "../../../../data/farming-notes.json" with { type: "json" };
+import { matchFlow, clock, duration } from "../../../lib/matchFlow.ts";
+import { laneScenarios, ASSUMPTIONS } from "../../../lib/laneScenarios.ts";
+import { economyTable, killShareFrac } from "../../../lib/souls.ts";
+import { gameSystemSections } from "../../../lib/gameSystem.ts";
+import { souls, t, item, heroesFile } from "../../../lib/data.ts";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const f = matchFlow();
+const economy = economyTable();
+const shareFrac = killShareFrac();
+const sys = Object.fromEntries(gameSystemSections().map((s) => [s.id, s]));
+
+const pct = (n: number): string => `${Math.round(n * 100)}%`;
+
+/* ---- ゲーム内の呼び名(ルール1) ---- */
+const N = {
+  midboss: t("Objective_MidBoss", "ミッド・ボス"),
+  rift: "不安定な裂け目", // ping_koth などの文中表記。単独の名前トークンが無い
+  urn: t("ability_golden_idol", "魂の壺"),
+  statue: t("Citadel_ShopStats_GoldenStatues", "黄金像"),
+  vault: t("neutral_sinners", "罪人の供物"),
+};
+
+/* ---- おすすめヒーロー(data/farming-notes.json。キーだけ手書きし、名前とアイコンはデータから) ---- */
+const recommended = (farmingNotes as { recommendedHeroes: Record<string, string[]> }).recommendedHeroes;
+function heroesFor(key: string): { id: number; name: string; icon: string | null }[] {
+  return (recommended[key] ?? []).flatMap((heroKey) => {
+    const h = Object.values(heroesFile.heroes).find((x) => x.key === heroKey);
+    return h ? [{ id: h.id, name: t(h.nameToken, heroKey), icon: h.images.iconSmall }] : [];
+  });
+}
+const tunnelHeroes = heroesFor("tunnel");
+
+/* ---- ソウル推移のグラフ(3つのシナリオ。src/lib/laneScenarios.ts) ---- */
+const scenarios = laneScenarios();
+const scenarioHero = (key: string) => {
+  const h = Object.values(heroesFile.heroes).find((x) => x.key === key);
+  return h ? { id: h.id, name: t(h.nameToken, key), icon: h.images.iconSmall } : null;
+};
+const chart = (() => {
+  if (!scenarios) return null;
+  const end = ASSUMPTIONS.endSeconds;
+  const top = Math.max(...scenarios.map((s) => s.final), f.ultimate?.totalGold ?? 0);
+  const step = f.tier1Price || 800;
+  const yMax = Math.ceil((top + 200) / step) * step;
+  const W = 680, H = 340, L = 50, R = 14, T = 12, B = 34;
+  const X = (sec: number) => L + (sec / end) * (W - L - R);
+  const Y = (v: number) => T + (1 - v / yMax) * (H - T - B);
+  // 処理時間のあいだは斜めに上がり、それ以外は平らになる(点をそのまま直線でつなぐ)
+  const path = (pts: { t: number; total: number }[]) =>
+    pts.map((p, i) => `${i === 0 ? "M" : "L"}${X(Math.min(p.t, end)).toFixed(1)},${Y(p.total).toFixed(1)}`).join("");
+  const lines = [
+    ...Array.from({ length: Math.floor(yMax / step) }, (_, i) => ({ v: (i + 1) * step, kind: "buy" })),
+    ...(f.ultimate?.totalGold ? [{ v: f.ultimate.totalGold, kind: "ult" }] : []),
+  ];
+  const minutes = Array.from({ length: Math.floor(end / 60) + 1 }, (_, i) => i);
+  return { W, H, L, R, T, B, X, Y, path, lines, minutes, yMax };
+})();
+
+/* ---- TIPS: トロフィーコレクター(効果の数値はアイテムのデータから) ---- */
+const trophy = (() => {
+  const it = item("upgrade_trophy_collector");
+  if (!it) return null;
+  const perStack = it.properties["StackingGoldPerMinute"]?.value;
+  const maxStacks = it.properties["MaxStacks"]?.value;
+  if (perStack == null || maxStacks == null) return null;
+  return { id: it.id, name: t(it.nameToken, it.id), price: it.cost, perStack, maxStacks };
+})();
+
+/* ---- ファーミング: 報酬と難易度 ---- */
+const growth = f.neutralReward.weak?.growthPct ?? 0;
+const farm = [
+  {
+    key: "breakables",
+    name: "箱・壺などの小物",
+    reward: f.breakable.gold !== null ? `${f.breakable.gold}（${f.breakable.dropChancePct}%の確率）` : "—",
+    growth: f.breakable.goldPerMinute !== null ? `+${f.breakable.goldPerMinute}／分` : "—",
+    first: clock(f.breakable.firstSeconds),
+    respawn: duration(f.breakable.respawnSeconds),
+  },
+  {
+    key: "weak",
+    name: "小キャンプ（1体あたり）",
+    reward: f.neutralReward.weak ? String(f.neutralReward.weak.gold) : "—",
+    growth: `+${growth}%／分`,
+    first: clock(f.camps.weak?.initial),
+    respawn: duration(f.camps.weak?.interval),
+  },
+  {
+    key: "medium",
+    name: "中キャンプ（1体あたり）",
+    reward: f.neutralReward.normal ? String(f.neutralReward.normal.gold) : "—",
+    growth: `+${growth}%／分`,
+    first: clock(f.camps.medium?.initial),
+    respawn: duration(f.camps.medium?.interval),
+  },
+  {
+    key: "strong",
+    name: "大キャンプ（1体あたり）",
+    reward: f.neutralReward.strong ? String(f.neutralReward.strong.gold) : "—",
+    growth: `+${growth}%／分`,
+    first: clock(f.camps.strong?.initial),
+    respawn: duration(f.camps.strong?.interval),
+  },
+  {
+    key: "vaults",
+    name: `${N.vault}（スロット）`,
+    reward: f.neutralReward.vault ? String(f.neutralReward.vault.gold) : "—",
+    growth: `+${f.neutralReward.vault?.growthPct ?? 0}%／分`,
+    first: clock(f.camps.vaults?.initial),
+    respawn: duration(f.camps.vaults?.interval),
+  },
+  {
+    key: "rift",
+    name: N.rift,
+    reward: f.rift ? `${souls(f.rift.rewardBase)}〜（時間で増える）` : "—",
+    growth: "—",
+    first: clock(f.rift?.initial),
+    respawn: duration(f.rift?.interval),
+  },
+];
+
+const toc = [
+  { id: "map", label: "マップ" },
+  { id: "souls", label: "ソウルの仕組み" },
+  { id: "farming", label: "稼ぎ方" },
+  { id: "tables", label: "数値表" },
+];
+---
+
+<Base
+  title="マップとファーム"
+  description="Deadlock（デッドロック）のマップ（キャンプ・箱・黄金像・ヒーリングスナックの位置）と、ソウルの稼ぎ方。ウェーブのソウル、ディナイ、中立キャンプの報酬と出現時刻、アイテム価格やレベルの数値表まで、ゲームの生データの数値つき。"
+  breadcrumbs={[
+    { name: "攻略情報", path: `${base}/mechanics/` },
+    { name: "マップとファーム", path: `${base}/mechanics/farm/` },
+  ]}
+>
+  <h1>マップとファーム</h1>
+
+  <nav class="toc" aria-label="目次">
+    {toc.map((c) => <a href={`#${c.id}`}>{c.label}</a>)}
+  </nav>
+
+  {/* ================= マップ ================= */}
+  <section class="chapter panel" id="map">
+    <h2>マップ</h2>
+    <p>キャンプ・箱・黄金像の場所です。種類ごとに表示を切り替えられ、「地下（共用）」で誰でも入れる地下も見られます。</p>
+    <FarmMap />
+  </section>
+
+  {/* ================= ソウルの仕組み ================= */}
+  <section class="chapter panel" id="souls">
+    <h2>ソウルの仕組み</h2>
+    {f.trooper && f.startingGold !== null && (
+      <>
+        <h3>ソウルの入り方</h3>
+        <ul class="notes">
+          <li>試合開始時の所持ソウルは <b class="num">{souls(f.startingGold)}</b>。</li>
+          <li>
+            トルーパーは <b class="num">{f.trooper.squadSize}体</b>で1ウェーブとなり、序盤は <b class="num">{f.trooper.intervalEarly}秒</b>ごとに来ます。
+            1体の報酬は <b class="num">{f.trooper.gold}</b>（試合時間1分ごとに <b class="num">+{f.trooper.goldPerMinute}</b>）。
+          </li>
+          <li>
+            倒した瞬間に入るのは報酬の<b>{pct(f.trooper.instantRatio)}</b>だけです。残りは<b>ソウルオーブ</b>として浮き上がるので、撃って回収します。
+            回収しないまま少したつと近くの味方に入り、味方がいなければ消えてしまいます。
+          </li>
+          <li>
+            <b>近接攻撃</b>（スキルによる近接ダメージを含む）でトルーパーを倒すとオーブが浮かばず、その分もすぐに入ります。
+          </li>
+          <li>
+            2人レーンでは、近くにいる人数に応じて報酬が分けられ、1人あたり <b class="num">{pct(f.trooperShare[1] ?? 0)}</b> になります
+            （{f.trooperShare.map((s, i) => `${i + 1}人 ${pct(s)}`).join("、")}）。
+          </li>
+        </ul>
+        <div class="calc">
+          <span class="calclabel">ラストヒットの目安：トルーパーのHPバー</span>
+          <ul class="notes lh">
+            <li><b>濃い赤が薄くなった</b> … ヘビーメレーで倒せる</li>
+            <li><b>薄い赤が点滅している</b> … ライトメレーで倒せる</li>
+            <li><b>トルーパー自体が点滅している</b> … 1ダメージでも与えれば倒せる</li>
+          </ul>
+        </div>
+      </>
+    )}
+
+    {f.deny && (
+      <>
+        <h3>ディナイで差が倍に開く</h3>
+        <p>
+          相手のトルーパーから浮き上がったオーブを先に撃つと<b>ディナイ</b>になり、そのオーブのソウルは
+          <b class="num">{f.deny.denierPct}%</b>が自分に入り、相手には<b class="num">{f.deny.deniedPct}%</b>しか入りません。
+          相手のマイナスと自分のプラスが同時に起きるので、1回ごとに差が倍になって効いてきます。
+        </p>
+      </>
+    )}
+
+    {f.firstWave && (
+      <div class="calc">
+        <span class="calclabel">計算：最初のウェーブ（2人レーン）</span>
+        <div class="calcrows">
+          <div>
+            <span>ディナイされなかった場合</span>
+            <span class="num">{f.trooper!.squadSize}体 × {f.trooper!.gold} × {pct(f.firstWave.shareDuo)} = +{f.firstWave.full} → 所持 <b>{souls(f.firstWave.afterFull)}</b></span>
+          </div>
+          <div>
+            <span>オーブを<b>1つ</b>ディナイされた場合</span>
+            <span class="num">−{f.firstWave.perOrb} → 所持 <b class={f.firstWave.afterOneDeny < f.tier1Price ? "miss" : ""}>{souls(f.firstWave.afterOneDeny)}</b></span>
+          </div>
+        </div>
+        <p class="calcnote">
+          {f.firstWave.afterFull >= f.tier1Price
+            ? `ディナイされなければ、最初のウェーブだけでティア1アイテム（${souls(f.tier1Price)}）が買えます。`
+            : `最初のウェーブだけではティア1アイテム（${souls(f.tier1Price)}）に届きません。`}
+          {f.firstWave.deniesToMiss === 1 && <strong class="warn">ところが、オーブを1つディナイされるだけで届かなくなります。最序盤で最も重大なポイントです。</strong>}
+          {f.firstWave.deniesToMiss > 1 && `オーブを${f.firstWave.deniesToMiss}つディナイされると届かなくなります。`}
+        </p>
+        <p class="calcsrc">
+          トルーパー1体の報酬は「{f.trooper!.gold} ＋ {f.trooper!.goldPerMinute} × 経過分数」で増えていきます。最初のウェーブ（{clock(f.trooper!.firstWaveSeconds)}）はほぼ{f.trooper!.gold}なので、ここでは{f.trooper!.gold}で計算しています。
+          オーブ分も同じ割合で分けられるものとして計算しています。
+        </p>
+      </div>
+    )}
+
+    <h3>未回収ソウルに注意</h3>
+    <p>
+      中立モンスター・{N.vault}・箱から得たソウルは、しばらく<b>未回収</b>の扱いで、その間に倒されると落としてしまいます。
+      未回収ソウルを一定以上持ったまま倒されると、その場に<b>ソウルコンテナ</b>が残り、敵味方の誰でもヘビーメレーで拾えます。
+      未回収のソウルは時間とともに自動で確保されていくので、ファーム直後に無理な戦闘をしないことが大切です。
+    </p>
+  </section>
+
+  {/* ================= 稼ぎ方 ================= */}
+  <section class="chapter panel" id="farming">
+    <h2>稼ぎ方</h2>
+    <h3>ファーミング</h3>
+    <p>
+      レーンのウェーブ以外のソウル源です。どれを回るかは、得られるソウルと出現・再出現の時間を見て判断しましょう。
+      報酬は試合時間とともに増えます。
+    </p>
+    <div class="tablewrap">
+      <table class="farm">
+        <thead><tr><th>対象</th><th>ソウル</th><th>増加</th><th>初回</th><th>再出現</th><th>おすすめヒーロー</th></tr></thead>
+        <tbody>
+          {farm.map((r) => (
+            <tr>
+              <td>{r.name}</td>
+              <td class="n">{r.reward}</td>
+              <td class="n">{r.growth}</td>
+              <td class="n">{r.first}</td>
+              <td class="n">{r.respawn}</td>
+              <td class="rec">
+                {heroesFor(r.key).map((h) => (
+                  <a href={`${base}/heroes/${h.id}/`} title={h.name}><HeroPortrait name={h.name} image={h.icon} size={22} /></a>
+                ))}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    {f.waveByMinute.length > 0 && (
+      <>
+        <h3>レーンのウェーブ</h3>
+        <p>1ウェーブ（全員分）のソウルは時間とともに増えます。レーンに残ってウェーブを取り続けることも立派なファームです。</p>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>経過時間</th><th>1体</th><th>1ウェーブ</th><th>ウェーブ間隔</th></tr></thead>
+            <tbody>
+              {f.waveByMinute.map((w) => (
+                <tr>
+                  <td>{w.minute}分</td>
+                  <td class="n">{w.perTrooper}</td>
+                  <td class="n">{w.perWave}</td>
+                  <td class="n">
+                    {w.minute >= f.trooper!.intervalVeryLateMinutes
+                      ? f.trooper!.intervalVeryLate
+                      : w.minute >= f.trooper!.intervalLateMinutes
+                        ? f.trooper!.intervalLate
+                        : f.trooper!.intervalEarly}秒
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </>
+    )}
+
+    {tunnelHeroes.length > 0 && (
+      <div class="special">
+        <span class="speciallabel">特別枠</span>
+        <h3>地下トンネルの箱</h3>
+        <p>
+          地下トンネルの中にも箱があり、トンネルに入れるのは次の{tunnelHeroes.length}人だけです。
+          入れるヒーローが限られた、特別なソウル源です。
+        </p>
+        {f.tunnel && (
+          <ul class="notes">
+            <li>
+              箱 <b class="num">{f.tunnel.crates}</b>個・黄金像 <b class="num">{f.tunnel.statues}</b>個。
+              {clock(f.tunnel.firstSeconds)}に出現し、壊してから{duration(f.tunnel.respawnSeconds)}で再出現します（地上の箱より遅め）。
+            </li>
+            {f.breakable.gold !== null && (
+              <li>箱から出るソウルは地上と同じで、{f.breakable.dropChancePct}%の確率で <b class="num">{f.breakable.gold}</b>（1分ごとに+{f.breakable.goldPerMinute}）。</li>
+            )}
+            <li>場所は上のマップの「地下トンネルの箱（3人専用）」で確認できます。</li>
+          </ul>
+        )}
+        <ul class="heroes">
+          {tunnelHeroes.map((h) => (
+            <li>
+              <a href={`${base}/heroes/${h.id}/`}>
+                <HeroPortrait name={h.name} image={h.icon} size={40} />
+                <span>{h.name}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    <h3>レーン戦のソウル推移</h3>
+    <p>同じ8分間でも、動き方しだいで買い物とアルティメットのタイミングは大きく変わります。</p>
+    {chart && scenarios && (
+      <figure class="chart">
+        <figcaption class="lgds">
+          {scenarios.map((s, i) => {
+            const h = scenarioHero(s.heroKey);
+            return (
+              <span class={`lgd ${s.key}`}>
+                <i class={`sw ${s.key}`} />
+                {h && <HeroPortrait name={h.name} image={h.icon} size={24} />}
+                <span><b>{["①", "②", "③"][i]} {s.title}</b><small>{s.summary}</small></span>
+              </span>
+            );
+          })}
+        </figcaption>
+        <svg viewBox={`0 0 ${chart.W} ${chart.H}`} role="img" aria-label="レーン戦の所持ソウルの推移（3つのシナリオ）">
+          {chart.lines.map((l) => (
+            <g class={`hl ${l.kind}`}>
+              <line x1={chart.L} x2={chart.W - chart.R} y1={chart.Y(l.v)} y2={chart.Y(l.v)} />
+              <text x={chart.L - 6} y={chart.Y(l.v) + 4} text-anchor="end">{souls(l.v)}</text>
+            </g>
+          ))}
+          <line class="axis" x1={chart.L} x2={chart.W - chart.R} y1={chart.H - chart.B} y2={chart.H - chart.B} />
+          {chart.minutes.map((m) => (
+            <text class="tick" x={chart.X(m * 60)} y={chart.H - chart.B + 16} text-anchor="middle">{m}:00</text>
+          ))}
+          {scenarios.map((s) => <path class={`ln ${s.key}`} d={chart.path(s.points)} />)}
+          {scenarios.flatMap((s) =>
+            s.points
+              .filter((p) => p.note === "ファーストブラッド" || p.note === "ガーディアン破壊")
+              .map((p) => (
+                <g class={`ev ${s.key}`}>
+                  <circle cx={chart.X(p.t)} cy={chart.Y(p.total)} r="4" />
+                  <text x={chart.X(p.t) - 6} y={chart.Y(p.total) - 8} text-anchor="end">{p.note}</text>
+                </g>
+              )),
+          )}
+        </svg>
+        <div class="tablewrap">
+          <table class="miles">
+            <thead>
+              <tr>
+                <th>到達時刻</th>
+                {scenarios[0]!.milestones.map((m) => <th>{souls(m.gold)}{m.gold === f.ultimate?.totalGold ? "（アルティメット）" : ""}</th>)}
+                <th>{clock(ASSUMPTIONS.endSeconds)}時点の所持</th>
+              </tr>
+            </thead>
+            <tbody>
+              {scenarios.map((s, i) => (
+                <tr>
+                  <td><i class={`sw ${s.key}`} /> {["①", "②", "③"][i]} {s.title}</td>
+                  {s.milestones.map((m) => <td class="n">{m.t === null ? "届かない" : clock(m.t)}</td>)}
+                  <td class="n">{souls(s.final)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </figure>
+    )}
+
+    {trophy && (
+      <div class="calc tip">
+        <span class="calclabel">TIPS</span>
+        <p class="calcnote">
+          <a href={`${base}/items/${trophy.id}/`}>{trophy.name}</a>（{souls(trophy.price)}）を序盤から買うと、
+          キルかアシストのたびに毎分 <b class="num">+{trophy.perStack}</b> のソウル生成が積み上がり（最大{trophy.maxStacks}回・デスしても消えない）、
+          ソウルの伸びをブーストできる可能性があります。
+        </p>
+      </div>
+    )}
+
+    <h3>ソウル差を広げる考え方</h3>
+    <ul class="notes">
+      <li><b>テンポ</b>：必要のないアイテムを削って、重要な強化に人より早く届くほど有利になります。</li>
+      <li><b>カウンター</b>：相手の強みに合わせてアイテムを選びます。ヒーローごとの対策は各ヒーローページの「強みと対策」へ。</li>
+      <li><b>ファネリング</b>：チームで意図的に1人へソウルを集め、早く強くする作戦もあります。</li>
+      <li>
+        撃ち合いでは<b>遮蔽物</b>の使い方が大切です。角ぎりぎりに体を寄せると頭だけ出して撃ち合えます。
+        カメラが肩越しに固定されているので、遮蔽物のどちら側から撃つかで、自分と相手の見え方に差が出ます。
+      </li>
+    </ul>
+
+    <h3>ウェーブのフリーズ</h3>
+    <p>
+      味方のトルーパーがたまっている状態で、敵のトルーパーを利用してウェーブをその場に留め、
+      溜まった味方のトルーパーを一気に流す<b>フリーズ</b>という技術があります。押し込みすぎると自陣から離れて危険になるため、
+      あえてウェーブを動かさない判断も必要です。
+    </p>
+  </section>
+
+  {/* ================= 数値表 ================= */}
+  <section class="chapter panel" id="tables">
+    <h2>数値表</h2>
+
+    <details class="apx" open>
+      <summary>キルの分配率</summary>
+      <table>
+        <thead><tr><th>絡んだ人数</th><th>トルーパー</th><th>ヒーロー</th></tr></thead>
+        <tbody>
+          {shareFrac.map((r) => (
+            <tr><td>{r.count}人</td><td class="n">{pct(r.trooperFrac)}</td><td class="n">{pct(r.heroFrac)}</td></tr>
+          ))}
+        </tbody>
+      </table>
+    </details>
+
+    <details class="apx">
+      <summary>アイテム価格・レベル・購入ボーナス</summary>
+      <div class="econ">
+        <div>
+          <h4>ティアごとのアイテム価格</h4>
+          <table>
+            <thead><tr><th>ティア</th><th>価格</th></tr></thead>
+            <tbody>{economy.itemPrices.map((p) => <tr><td>T{p.tier}</td><td class="n">{souls(p.cost)}</td></tr>)}</tbody>
+          </table>
+        </div>
+        <div>
+          <h4>レベルに必要な累計ソウル</h4>
+          <p class="sub">初期の{souls(f.startingGold ?? 0)}を含まない、試合中に稼いだ分。</p>
+          <table>
+            <thead><tr><th>Lv</th><th>累計</th></tr></thead>
+            <tbody>{economy.levels.map((l) => <tr><td>{l.level}</td><td class="n">{souls(l.requiredGold)}</td></tr>)}</tbody>
+          </table>
+        </div>
+        <div class="wide">
+          <h4>購入ボーナス</h4>
+          <p class="sub">そのカテゴリに投資した累計ソウルが閾値を超えるたびに、対応するステータスが上がります。全ヒーロー共通です。</p>
+          <div class="tablewrap">
+            <table>
+              <thead><tr><th>累計投資額</th>{economy.costBonuses.map((c) => <th>{c.label}</th>)}</tr></thead>
+              <tbody>
+                {(economy.costBonuses[0]?.rows ?? []).map((_, i) => (
+                  <tr>
+                    <td class="n">{souls(economy.costBonuses[0]!.rows[i]!.goldThreshold)}</td>
+                    {economy.costBonuses.map((c) => <td class="n">+{c.rows[i]?.bonus ?? "—"}</td>)}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details class="apx">
+      <summary>{sys["minimap"]?.title ?? "ミニマップ"}</summary>
+      {["minimap"].map((id) => sys[id] && (
+        <div class="topic">
+          {sys[id]!.icons.length > 0 && (
+            <ul class="icongrid">
+              {sys[id]!.icons.map((ic) => <li><img src={`${base}/${ic.src}`} alt="" loading="lazy" /><span>{ic.label}</span></li>)}
+            </ul>
+          )}
+          <ul class="notes">{sys[id]!.lines.map((line) => <li>{line}</li>)}</ul>
+        </div>
+      ))}
+    </details>
+  </section>
+
+  <p class="foot">
+    数値はゲーム本体のデータ（<code>generic_data.vdata</code> / <code>misc.vdata</code> / <code>npc_units.vdata</code>）と、
+    ゲームの設定変数（convar）から自動で出しています。<a href={`${base}/about/`}>このサイトについて</a>
+  </p>
+
+  <style>
+    .toc { display: flex; flex-wrap: wrap; gap: 6px; margin: var(--sp-3) 0 var(--sp-5); }
+    .toc a {
+      font-size: 12px; padding: 4px 10px; border: 1px solid var(--c-border); border-radius: 999px;
+      background: var(--c-surface); color: var(--c-text-muted);
+    }
+    .toc a:hover { color: var(--c-accent); border-color: var(--c-accent-dim); text-decoration: none; }
+
+    .chapter { margin-top: var(--sp-5); scroll-margin-top: 72px; }
+    .chapter h2 { margin-top: 0; }
+    .chapter h3 { margin: var(--sp-5) 0 var(--sp-2); font-size: 15px; color: var(--c-text-strong); }
+    .chapter p { line-height: 1.9; font-size: 14px; margin: 0 0 var(--sp-3); }
+    .chapter p.small { font-size: 13px; color: var(--c-text-muted); }
+    .chapter b { color: var(--c-text-strong); }
+    .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+    b.num { color: var(--c-soul); }
+    .notes { margin: 0 0 var(--sp-3); padding-left: 1.2em; font-size: 13.5px; line-height: 1.9; }
+
+    /* 全体像: 建造物の連なり */
+    .chain { list-style: none; padding: 0; margin: var(--sp-3) 0 var(--sp-4); display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+    .chain li { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 96px; padding: var(--sp-2) var(--sp-3); background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); }
+    .chain .cicon { width: 48px; height: 48px; display: grid; place-items: center; }
+    .chain .cicon img { max-width: 48px; max-height: 48px; }
+    .chain .ph { width: 32px; height: 32px; border-radius: 50%; border: 1px dashed var(--c-border-strong); }
+    .chain .cname { font-size: 12px; color: var(--c-text-strong); white-space: nowrap; }
+    .chain .cgold { font-family: var(--font-mono); font-size: 12px; color: var(--c-soul); }
+    .chain .cgold.win { color: var(--c-accent); }
+    .chain .arrow { position: absolute; right: -9px; top: 50%; transform: translateY(-50%); color: var(--c-text-faint); font-size: 14px; z-index: 1; }
+
+    /* 計算ボックス */
+    .calc { margin: var(--sp-3) 0 var(--sp-4); padding: var(--sp-3) var(--sp-4); background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); }
+    .calclabel { font-size: 11px; letter-spacing: .06em; color: var(--c-text-muted); }
+    .calcrows { margin-top: var(--sp-2); display: grid; gap: 4px; }
+    .calcrows > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px var(--sp-3); font-size: 13px; }
+    .calcrows b { color: var(--c-soul); }
+    .calc .calcnote { margin: var(--sp-2) 0 0; font-size: 13px; color: var(--c-text-strong); }
+    .calc .lh { margin: var(--sp-2) 0 0; }
+    .calc .calcsrc { margin: 2px 0 0; font-size: 11px; color: var(--c-text-faint); }
+
+    /* ソウル推移 */
+    .chart { margin: var(--sp-3) 0 var(--sp-4); }
+    .chart svg { width: 100%; height: auto; display: block; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); }
+    .chart .hl line { stroke: var(--c-border-strong); stroke-dasharray: 3 4; }
+    .chart .hl.ult line { stroke: var(--c-spirit); stroke-dasharray: 6 3; }
+    .chart .hl text, .chart .tick { font-size: 10px; fill: var(--c-text-faint); font-family: var(--font-mono); }
+    .chart .hl.ult text { fill: var(--c-spirit); }
+    .chart .axis { stroke: var(--c-border-strong); }
+
+    .chips { list-style: none; padding: 0; margin: 0 0 var(--sp-3); display: flex; flex-wrap: wrap; gap: 6px; }
+    .chips a { display: inline-block; font-size: 12px; padding: 3px 10px; border: 1px solid var(--c-vitality); border-radius: var(--radius); color: var(--c-vitality); background: var(--c-surface); }
+    .chips a:hover { text-decoration: none; background: var(--c-surface-2); }
+
+    /* タイムライン */
+    .timeline { position: relative; margin: var(--sp-3) 0 var(--sp-3); padding-left: 64px; border-left: none; }
+    .timeline::before { content: ""; position: absolute; left: 52px; top: 4px; bottom: 4px; width: 2px; background: var(--c-border-strong); }
+    .tev { position: relative; display: flex; gap: var(--sp-3); align-items: baseline; padding: 4px 0; }
+    .tev::before { content: ""; position: absolute; left: -16px; top: 11px; width: 8px; height: 8px; border-radius: 50%; background: var(--c-soul); }
+    .tclock { position: absolute; left: -64px; width: 40px; text-align: right; font-family: var(--font-mono); font-size: 12px; color: var(--c-soul); }
+    .tlabels { display: flex; flex-wrap: wrap; gap: 4px; }
+    .tlabels span { font-size: 12.5px; padding: 1px 8px; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); }
+
+    /* 表 */
+    .tablewrap { overflow-x: auto; }
+    table { border-collapse: collapse; font-size: 12.5px; margin-bottom: var(--sp-3); }
+    th, td { text-align: left; padding: 5px 14px 5px 0; border-bottom: 1px solid var(--c-border); white-space: nowrap; }
+    th { font-size: 11px; font-weight: 500; color: var(--c-text-faint); }
+    td.n { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--c-text-strong); }
+    td.rec { display: flex; gap: 3px; }
+    td.rec a { line-height: 0; }
+
+    /* 特別枠(地下トンネル) */
+    .special { margin: var(--sp-4) 0 var(--sp-3); padding: var(--sp-3) var(--sp-4); border: 1px solid var(--c-spirit); border-radius: var(--radius); background: var(--c-surface); }
+    .speciallabel { font-size: 11px; letter-spacing: .06em; color: var(--c-spirit); }
+    .special h3 { margin-top: 2px; }
+    .special .heroes { list-style: none; padding: 0; margin: 0 0 var(--sp-2); display: flex; flex-wrap: wrap; gap: var(--sp-3); }
+    .special .heroes a { display: flex; align-items: center; gap: 8px; color: var(--c-text-strong); font-size: 13px; }
+    .special .heroes a:hover { text-decoration: none; color: var(--c-accent); }
+
+    /* 付録 */
+    .apx { border-top: 1px solid var(--c-border); padding: var(--sp-3) 0; }
+    .apx summary { cursor: pointer; font-size: 14px; color: var(--c-text-strong); }
+    .apx[open] summary { margin-bottom: var(--sp-3); }
+    .apx h4 { margin: var(--sp-3) 0 var(--sp-2); font-size: 13px; color: var(--c-text-strong); }
+    .apx .sub { font-size: 12px; color: var(--c-text-faint); margin: 0 0 var(--sp-2); }
+    .econ { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--sp-4); align-items: start; }
+    .econ .wide { grid-column: 1 / -1; }
+    .objs { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--sp-3); }
+    .obj { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); padding: var(--sp-2) var(--sp-3); }
+    .obj h5 { display: flex; align-items: center; gap: 6px; margin: 0 0 var(--sp-2); font-size: 13px; color: var(--c-text-strong); }
+    .oicon { width: 24px; height: 24px; object-fit: contain; }
+    .haunts { list-style: none; margin: var(--sp-3) 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: var(--sp-2); }
+    .haunts li { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: var(--sp-2); background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); text-align: center; }
+    .haunts img { width: 72px; height: 72px; object-fit: contain; }
+    .haunts b { font-size: 13px; color: var(--c-text-strong); line-height: 1.4; }
+    .haunts small { font-size: 11px; color: var(--c-text-muted); }
+    .obj dl { margin: 0; font-size: 12px; }
+    .obj .row { display: flex; justify-content: space-between; gap: var(--sp-3); padding: 2px 0; border-bottom: 1px solid var(--c-border); }
+    .obj dt { color: var(--c-text-muted); }
+    .obj dd { margin: 0; font-family: var(--font-mono); color: var(--c-text-strong); }
+    .otips { margin: var(--sp-2) 0 0; padding-left: 1.1em; font-size: 11.5px; color: var(--c-text-muted); line-height: 1.7; }
+
+    .icongrid { list-style: none; padding: 0; margin: var(--sp-2) 0 var(--sp-3); display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+    .icongrid li { display: flex; align-items: center; gap: 6px; font-size: 12px; padding: 3px 10px 3px 4px; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); }
+    .icongrid img { width: 22px; height: 22px; object-fit: contain; }
+
+    .calc b.miss { color: var(--c-nerf); }
+    .calc .warn { display: block; margin-top: 4px; color: var(--c-nerf); }
+    .chart .lgds { display: grid; gap: 6px; margin: 0 0 var(--sp-2); }
+    .chart .lgd { display: flex; align-items: center; gap: 8px; font-size: 12.5px; }
+    .chart .lgd > span:last-child { display: flex; flex-direction: column; }
+    .chart .lgd small { font-size: 11.5px; color: var(--c-text-muted); }
+    .sw { display: inline-block; width: 16px; height: 0; border-top: 3px solid; vertical-align: middle; }
+    .sw.ideal { border-color: var(--c-soul); }
+    .sw.basic { border-color: var(--c-mixed); }
+    .sw.behind { border-color: var(--c-nerf); }
+    .chart path.ln { fill: none; stroke-width: 2.2; }
+    .chart path.ln.ideal { stroke: var(--c-soul); }
+    .chart path.ln.basic { stroke: var(--c-mixed); }
+    .chart path.ln.behind { stroke: var(--c-nerf); }
+    .chart .ev circle { stroke: var(--c-bg); stroke-width: 1.5; fill: var(--c-soul); }
+    .chart .ev text { font-size: 10.5px; fill: var(--c-text-strong); paint-order: stroke; stroke: var(--c-surface); stroke-width: 3px; }
+    table.miles { margin-top: var(--sp-3); }
+    .tip { border-color: var(--c-accent-dim); }
+    .buff { margin: var(--sp-3) 0; padding: var(--sp-3) var(--sp-4); background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); }
+    .buff p { margin: 0 0 var(--sp-2); font-size: 13.5px; }
+    .buff .notes { margin-bottom: 0; }
+
+    .foot { margin-top: var(--sp-5); font-size: 12px; color: var(--c-text-faint); }
+
+    @media (max-width: 640px) {
+      .chain li { min-width: 0; flex: 1 1 40%; }
+      .chain .arrow { display: none; }
+    }
+  </style>
+</Base>

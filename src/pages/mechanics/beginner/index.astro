@@ -1,113 +1,176 @@
 ---
 /**
- * オブジェクト。建造物・トルーパー・シュライン・中立モンスター(ホーント)の数値と、マップ上の目標物。
- * 旧・試合の流れ(/mechanics/match/)の付録から、書き換えずに移したもの(さらに前は独立した /mechanics/objects/ だった)。
- * 位置はマップとファームの地図へ、その種類だけを表示した状態で飛ばす(FarmMap の ?show=)。
+ * はじめての Deadlock(初めて遊ぶ人向けの入口)。
+ * 「全体像」「準備フェーズ」は旧・試合の流れ(/mechanics/match/)から文章を変えずに移したもの(見出しの番号だけ外した)。
+ * 最初に覚える3つのこと・用語は、このページのために書いた文章(他サイトの文章は使わない。ルール3)。
+ * 数値はすべてスナップショットから引く(ルール6)。
  */
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import Base from "../../../layouts/Base.astro";
-import { objectTopics, hauntSpecies } from "../../../lib/objects.ts";
-import { gameSystemSections } from "../../../lib/gameSystem.ts";
-import { objectNotes } from "../../../lib/data.ts";
-import { resolveImagePath } from "../../../parsers/image-manifest.ts";
+import { matchFlow, duration } from "../../../lib/matchFlow.ts";
+import { economyTable } from "../../../lib/souls.ts";
+import { souls, t } from "../../../lib/data.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const topics = objectTopics();
-/* 中立モンスター(ホーント)の種類。HP・ソウルは段ごとに共通なので、種類は絵と名前だけ並べる */
-const haunts = hauntSpecies();
-const sys = Object.fromEntries(gameSystemSections().map((s) => [s.id, s]));
+const f = matchFlow();
+const economy = economyTable();
+const objGold = (key: string): number => f.objectives.find((o) => o.key === key)?.gold ?? 0;
+const img = (p: string): string | null => (existsSync(join(process.cwd(), "public", p)) ? `${base}/${p}` : null);
 
-/** アイコン参照を public/ の実ファイルに解決する。無いものは null(絵を出さない) */
-function iconSrc(ref: string | null): string | null {
-  if (!ref) return null;
-  const resolved = resolveImagePath(ref);
-  if (!resolved || !existsSync(join(process.cwd(), resolved.outPath))) return null;
-  return `${base}/${resolved.outPath.replace(/^public\//, "")}`;
-}
+/* ---- 全体像: 防衛建造物の順番 ---- */
+const chain = [
+  { key: "Tier1", name: t("Citadel_Hud_KillFeedGuardian", "ガーディアン"), icon: img("images/npcs/tier_1_boss.png") },
+  { key: "Tier2", name: t("Citadel_Hud_KillFeedWalker", "ウォーカー"), icon: img("images/npcs/tier_2_boss.png") },
+  { key: "BaseGuardians", name: t("Citadel_Hud_KillFeedBarracksBoss", "ベース・ガーディアン"), icon: null },
+  { key: "Shrines", name: t("Citadel_Hud_KillFeedShieldName", "シュライン"), icon: img("images/npcs/shield_generator.png") },
+  { key: "PatronPhase1", name: t("Citadel_Hud_KillFeedTitan", "パトロン"), icon: img("images/npcs/patron.png") },
+];
 
-/**
- * 章ごとの「マップで位置を見る」で表示する種類(FarmMap の layer の key)。
- * 空文字は建造物だけ(建造物は切り替えの対象外で常に出ている)。トルーパーは地図に置かれていないので無し
- */
-const MAP_LINK: Record<string, string | undefined> = {
-  lane: "",
-  shrine: "",
-  neutral: "weak,medium,strong,vaults",
+/* ---- ゲーム内の呼び名(ルール1) ---- */
+const N = {
+  midboss: t("Objective_MidBoss", "ミッド・ボス"),
+  rift: "不安定な裂け目", // ping_koth などの文中表記。単独の名前トークンが無い
+  urn: t("ability_golden_idol", "魂の壺"),
+  statue: t("Citadel_ShopStats_GoldenStatues", "黄金像"),
+  vault: t("neutral_sinners", "罪人の供物"),
 };
 
+const farm = `${base}/mechanics/farm/`;
+const match = `${base}/mechanics/match/`;
 const toc = [
-  ...topics.map((tp) => ({ id: tp.id, label: tp.title })),
-  ...(sys["map-objects"] ? [{ id: "map-objects", label: sys["map-objects"].title }] : []),
+  { id: "overview", label: "全体像" },
+  { id: "pregame", label: "準備フェーズ" },
+  { id: "first", label: "最初に覚える3つのこと" },
+  { id: "terms", label: "用語" },
 ];
 ---
 
 <Base
-  title="オブジェクト"
-  description="Deadlock（デッドロック）のガーディアン・ウォーカー・パトロンなどレーンの建造物、トルーパー、シュライン、中立モンスター（ホーント）のHP・ダメージ・報酬と、マップ上の目標物の一覧。ゲームの生データから自動で抽出した数値です。"
+  title="はじめての Deadlock"
+  description="Deadlock（デッドロック）の初心者向けガイド。勝利条件、試合の全体像、最初に覚える3つのこと（ソウルを集める・倒されない・ショップで買う）と、よく出る用語を、ゲームのデータの数値つきでまとめています。"
   breadcrumbs={[
     { name: "攻略情報", path: `${base}/mechanics/` },
-    { name: "オブジェクト", path: `${base}/mechanics/objects/` },
+    { name: "はじめての Deadlock", path: `${base}/mechanics/beginner/` },
   ]}
 >
-  <h1>オブジェクト</h1>
+  <h1>はじめての Deadlock</h1>
 
   <nav class="toc" aria-label="目次">
     {toc.map((c) => <a href={`#${c.id}`}>{c.label}</a>)}
   </nav>
 
-      {topics.map((topic) => (
-        <section class="chapter panel topic" id={topic.id}>
-          <h2>{topic.title}</h2>
-          {MAP_LINK[topic.id] !== undefined && (
-            <p class="maplink"><a href={`${base}/mechanics/farm/?show=${MAP_LINK[topic.id]}#map`}>マップで位置を見る</a></p>
-          )}
-          <div class="objs">
-            {topic.objects.map((o) => {
-              const src = iconSrc(o.icon);
-              const tips = objectNotes(o.id);
-              return (
-                <div class="obj">
-                  <h5>{src && <img class="oicon" src={src} alt="" loading="lazy" />}{o.name}</h5>
-                  <dl>
-                    {o.stats.map((s) => <div class="row"><dt>{s.label}</dt><dd>{s.value}</dd></div>)}
-                  </dl>
-                  {tips.length > 0 && <ul class="otips">{tips.map((tip) => <li>{tip}</li>)}</ul>}
-                </div>
-              );
-            })}
-          </div>
-          {topic.id === "neutral" && haunts.length > 0 && (
-            <ul class="haunts">
-              {haunts.map((h) => (
-                <li>
-                  {h.icon && <img src={`${base}/${h.icon}`} alt="" loading="lazy" />}
-                  <b>{h.name}</b>
-                  <small>マップに{h.placed}体</small>
-                </li>
-              ))}
-            </ul>
-          )}
-          {topic.lines.length > 0 && <ul class="notes">{topic.lines.map((line) => <li>{line}</li>)}</ul>}
-        </section>
-      ))}
 
-      {["map-objects"].map((id) => sys[id] && (
-        <section class="chapter panel topic" id={id}>
-          <h2>{sys[id]!.title}</h2>
-          <p class="maplink"><a href={`${base}/mechanics/farm/?show=marker,facility,broker#map`}>マップで位置を見る</a></p>
-          {sys[id]!.icons.length > 0 && (
-            <ul class="icongrid">
-              {sys[id]!.icons.map((ic) => <li><img src={`${base}/${ic.src}`} alt="" loading="lazy" /><span>{ic.label}</span></li>)}
-            </ul>
-          )}
-          <ul class="notes">{sys[id]!.lines.map((line) => <li>{line}</li>)}</ul>
-        </section>
+  <section class="chapter panel" id="overview">
+    <h2>全体像</h2>
+    <p>
+      敵の<b>パトロン</b>を破壊したチームが勝ちます。パトロンまでの道のりには防衛建造物が並んでいて、
+      手前から順に壊さないと奥には攻撃が届きません。数字は破壊したときに入るソウルです。
+    </p>
+    <ol class="chain">
+      {chain.map((c, i) => (
+        <li>
+          <span class="cicon">{c.icon ? <img src={c.icon} alt="" loading="lazy" /> : <span class="ph" />}</span>
+          <span class="cname">{c.name}</span>
+          {objGold(c.key) > 0 ? <span class="cgold">+{souls(objGold(c.key))}</span> : <span class="cgold win">勝利</span>}
+          {i < chain.length - 1 && <span class="arrow" aria-hidden="true">›</span>}
+        </li>
       ))}
+    </ol>
+    <p class="small">
+      建造物のソウルは、そのうち{f.objectiveNearPlayerPct}%が破壊に関わった近くのプレイヤーへ、残りはチーム全員に均等に入ります。
+      パトロンは左右の<b>シュライン</b>を両方壊すまで攻撃を受け付けません。
+      また防衛建造物には「バックドア保護」があり、範囲内に守る側のプレイヤーがいない状態がしばらく続くと無敵が解けます（範囲は<a href={`${base}/mechanics/objects/#lane`}>付録の建造物の数値</a>へ）。
+      中央には{N.midboss}がいて、試合開始時から出現しています（倒されると{duration(f.camps.midboss?.interval)}後に再出現、
+      以後{duration(Math.abs(f.camps.midboss?.change ?? 0))}ずつ短くなり最短{duration(f.camps.midboss?.min)}）。
+    </p>
+    <p class="small">
+      試合は大きく <a href={`${base}/mechanics/match/#laning`}>レーン戦</a> → <a href={`${base}/mechanics/match/#postlane`}>レーン後・中盤</a> → <a href={`${base}/mechanics/match/#lategame`}>終盤</a> と進みます。
+      レーン戦は、自分のレーンのガーディアンが倒れた時点で終わります。
+    </p>
+  </section>
 
-  <p class="foot">
-    数値はゲーム本体のデータ（<code>npc_units.vdata</code> ほか）から自動で出しています。<a href={`${base}/about/`}>このサイトについて</a>
-  </p>
+  {/* ================= 1. 準備フェーズ ================= */}
+  <section class="chapter panel" id="pregame">
+    <h2>準備フェーズ</h2>
+    <p>
+      試合が始まる前の短い準備時間で、どのレーンに誰が行くかが決まります。ここで意識したいのは<b>編成のバランス</b>です。
+      同じレーンにサポート役が2人、近接で戦うヒーローが2人、といった偏りがあると、そのレーンは苦しくなります。
+    </p>
+    <ul class="notes">
+      <li>偏りがあれば、画面上部の他プレイヤーのポートレートから<b>レーンの交代</b>を持ちかけられます。</li>
+      <li>ランクマッチでは、まだ誰にも選ばれていないヒーローへの変更もこの間にできます。</li>
+      <li>ストリートブロールでは、この時間にアイテムの選択とスキルポイントの割り振りを行います。</li>
+    </ul>
+  </section>
+
+  {/* ================= 最初に覚える3つのこと(新しく書いた文) ================= */}
+  <section class="chapter panel" id="first">
+    <h2>最初に覚える3つのこと</h2>
+    <ol class="three">
+      <li>
+        <h3>ソウルを拾う・ディナイする</h3>
+        <p>
+          ソウルはアイテムを買うためのお金です。トルーパーを倒すと<b>ソウルオーブ</b>が浮き上がるので、撃って回収します。
+          相手のトルーパーのオーブを先に撃つと<b>ディナイ</b>になり、相手の取り分を減らせます。
+          {f.deny && <>（自分に{f.deny.denierPct}%、相手には{f.deny.deniedPct}%）</>}
+        </p>
+        <p class="small">詳しくは<a href={`${farm}#souls`}>マップとファーム「ソウルの仕組み」</a>へ。</p>
+      </li>
+      <li>
+        <h3>倒されない</h3>
+        <p>
+          倒されている間はウェーブのソウルを取れず、相手にはキルのソウルが入ります。
+          HPが減ったら無理をせずに下がり、撃ち合いで負け続けるなら回復アイテムで立て直しましょう。
+        </p>
+        <p class="small">詳しくは<a href={`${match}#laning`}>試合の流れ「レーン戦」</a>へ。</p>
+      </li>
+      <li>
+        <h3>ショップで買う</h3>
+        <p>
+          ソウルがたまったら、ショップ（商店）でアイテムを買います。
+          最初は <b class="num">{souls(economy.itemPrices[0]?.cost ?? 0)}</b> のティア1アイテムを何個かそろえるのが基本です。
+          試合開始時の所持ソウルは <b class="num">{souls(f.startingGold ?? 0)}</b> です。
+        </p>
+        <p class="small">
+          商店の場所は<a href={`${farm}?show=facility#map`}>マップ</a>で、買う組み合わせは<a href={`${base}/build/`}>ビルドシミュレーター</a>で試せます。
+        </p>
+      </li>
+    </ol>
+  </section>
+
+  {/* ================= 用語(新しく書いた文) ================= */}
+  <section class="chapter panel" id="terms">
+    <h2>用語</h2>
+    <dl class="terms">
+      <div>
+        <dt>ソウル</dt>
+        <dd>アイテムを買うための資源です。稼いだ累計に応じてレベルも上がります（必要な量は<a href={`${farm}#tables`}>数値表</a>へ）。</dd>
+      </div>
+      <div>
+        <dt>ティア</dt>
+        <dd>アイテムの段階です。{economy.itemPrices.map((p) => `T${p.tier} ${souls(p.cost)}`).join("、")}。</dd>
+      </div>
+      <div>
+        <dt>トルーパー</dt>
+        <dd>レーンを自動で進む兵士です。数体ずつのウェーブとして一定の間隔でやってきます。</dd>
+      </div>
+      <div>
+        <dt>ガーディアン</dt>
+        <dd>各レーンで最初に立ちはだかる防衛建造物です。倒れると、そのレーンのレーン戦が終わります。</dd>
+      </div>
+      <div>
+        <dt>中立モンスター（ホーント）</dt>
+        <dd>レーンの外にいる、どちらのチームにも属さない敵です。倒すとソウルが入ります。</dd>
+      </div>
+      {f.ultimate?.totalGold && (
+        <div>
+          <dt>アルティメット</dt>
+          <dd>ヒーローごとの最も強力なアビリティです。所持ソウルの総額が <b class="num">{souls(f.ultimate.totalGold)}</b> に達すると解放されます。</dd>
+        </div>
+      )}
+    </dl>
+  </section>
 
   <style>
     .toc { display: flex; flex-wrap: wrap; gap: 6px; margin: var(--sp-3) 0 var(--sp-5); }
@@ -242,7 +305,19 @@ const toc = [
       .chain li { min-width: 0; flex: 1 1 40%; }
       .chain .arrow { display: none; }
     }
-    .topic h2 { margin-bottom: var(--sp-2); }
-    .maplink { margin: 0 0 var(--sp-3); font-size: 13px; }
+
+    .three { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--sp-3); counter-reset: three; }
+    .three > li { counter-increment: three; padding: var(--sp-3) var(--sp-4); background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); }
+    .three h3 { margin: 0 0 var(--sp-2); }
+    .three h3::before { content: counter(three) ". "; color: var(--c-accent); }
+    .three p { margin: 0 0 var(--sp-2); }
+    .three p:last-child { margin-bottom: 0; }
+    .terms { margin: 0; display: grid; gap: 0; }
+    .terms > div { display: grid; grid-template-columns: 11em minmax(0, 1fr); gap: var(--sp-3); padding: var(--sp-2) 0; border-bottom: 1px solid var(--c-border); }
+    .terms dt { font-weight: 600; color: var(--c-text-strong); font-size: 13.5px; }
+    .terms dd { margin: 0; font-size: 13.5px; line-height: 1.8; }
+    @media (max-width: 640px) {
+      .terms > div { grid-template-columns: 1fr; gap: 2px; }
+    }
   </style>
 </Base>

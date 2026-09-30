@@ -1,57 +1,27 @@
 ---
 /**
- * 試合の流れ。旧「ゲームシステム」「ソウル獲得システム」「戦略」「オブジェクト」を、
- * 試合の時間軸(全体像 → 準備 → レーン戦 → レーン後 → 終盤)に沿った1本の記事にまとめたもの。
+ * 試合の流れ。レーン戦 → 中盤 → 終盤の進め方と立ち回り。
+ *
+ * 2026-10 に目的別のページへ分けた。全体像・準備フェーズは「はじめての Deadlock」(/mechanics/beginner/)、
+ * ソウルの仕組み・ファーミング・マップと付録の数値表の大半は「マップとファーム」(/mechanics/farm/)、
+ * 建造物などの数値は「オブジェクト」(/mechanics/objects/)へ移し、ここには要約とリンクだけを残す。
+ * 外部から貼られている旧アンカー(#overview #pregame #farming #map)は、下の script で移動先へ飛ばす。
  *
  * 文章は手書き(運営者と相談して練ったもの。deadlock.wiki の文章は使わない。ルール3)。
- * 文中の数値はすべて src/lib/matchFlow.ts ほかがスナップショットから引いたもので、
- * 「1ウェーブで800を超える」のような結論も計算で出している(ルール6)。
- * 付録の数値表は旧ページの表をそのまま移したもの。
+ * 文中の数値はすべて src/lib/matchFlow.ts ほかがスナップショットから引いたもの(ルール6)。
  */
-import { existsSync } from "node:fs";
-import { join } from "node:path";
 import Base from "../../../layouts/Base.astro";
-import HeroPortrait from "../../../components/HeroPortrait.astro";
-import FarmMap from "../../../components/FarmMap.astro";
-import farmingNotes from "../../../../data/farming-notes.json" with { type: "json" };
 import { matchFlow, clock, duration } from "../../../lib/matchFlow.ts";
-import { laneScenarios, ASSUMPTIONS } from "../../../lib/laneScenarios.ts";
-import { economyTable, killShareFrac, riftComeback } from "../../../lib/souls.ts";
-import { objectTopics, hauntSpecies } from "../../../lib/objects.ts";
+import { riftComeback } from "../../../lib/souls.ts";
 import { gameSystemSections } from "../../../lib/gameSystem.ts";
-import { souls, t, item, heroesFile, objectNotes } from "../../../lib/data.ts";
-import { resolveImagePath } from "../../../parsers/image-manifest.ts";
+import { souls, t, item } from "../../../lib/data.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const f = matchFlow();
-const economy = economyTable();
-const shareFrac = killShareFrac();
 const rift = riftComeback();
-const topics = objectTopics();
-/* 中立モンスター(ホーント)の種類。HP・ソウルは段ごとに共通なので、種類は絵と名前だけ並べる */
-const haunts = hauntSpecies();
 const sys = Object.fromEntries(gameSystemSections().map((s) => [s.id, s]));
 
-const pct = (n: number): string => `${Math.round(n * 100)}%`;
 const objGold = (key: string): number => f.objectives.find((o) => o.key === key)?.gold ?? 0;
-
-/** アイコン参照を public/ の実ファイルに解決する。無いものは null(絵を出さない) */
-function iconSrc(ref: string | null): string | null {
-  if (!ref) return null;
-  const resolved = resolveImagePath(ref);
-  if (!resolved || !existsSync(join(process.cwd(), resolved.outPath))) return null;
-  return `${base}/${resolved.outPath.replace(/^public\//, "")}`;
-}
-const img = (p: string): string | null => (existsSync(join(process.cwd(), "public", p)) ? `${base}/${p}` : null);
-
-/* ---- 0. 全体像: 防衛建造物の順番 ---- */
-const chain = [
-  { key: "Tier1", name: t("Citadel_Hud_KillFeedGuardian", "ガーディアン"), icon: img("images/npcs/tier_1_boss.png") },
-  { key: "Tier2", name: t("Citadel_Hud_KillFeedWalker", "ウォーカー"), icon: img("images/npcs/tier_2_boss.png") },
-  { key: "BaseGuardians", name: t("Citadel_Hud_KillFeedBarracksBoss", "ベース・ガーディアン"), icon: null },
-  { key: "Shrines", name: t("Citadel_Hud_KillFeedShieldName", "シュライン"), icon: img("images/npcs/shield_generator.png") },
-  { key: "PatronPhase1", name: t("Citadel_Hud_KillFeedTitan", "パトロン"), icon: img("images/npcs/patron.png") },
-];
 
 /* ---- ゲーム内の呼び名(ルール1) ---- */
 const N = {
@@ -62,58 +32,12 @@ const N = {
   vault: t("neutral_sinners", "罪人の供物"),
 };
 
-/* ---- 2. レーン戦: 回復アイテム(運営者が選んだもの。価格や効果はデータから) ---- */
+/* ---- 1. レーン戦: 回復アイテム(運営者が選んだもの。価格や効果はデータから) ---- */
 const HEAL_ITEMS = ["upgrade_endurance", "upgrade_health_stimpak", "upgrade_grit", "upgrade_medic_bullets"];
 const healItems = HEAL_ITEMS.flatMap((id) => {
   const it = item(id);
   return it ? [{ id, name: t(it.nameToken, id) }] : [];
 });
-
-/* ---- おすすめヒーロー(data/farming-notes.json。キーだけ手書きし、名前とアイコンはデータから) ---- */
-const recommended = (farmingNotes as { recommendedHeroes: Record<string, string[]> }).recommendedHeroes;
-function heroesFor(key: string): { id: number; name: string; icon: string | null }[] {
-  return (recommended[key] ?? []).flatMap((heroKey) => {
-    const h = Object.values(heroesFile.heroes).find((x) => x.key === heroKey);
-    return h ? [{ id: h.id, name: t(h.nameToken, heroKey), icon: h.images.iconSmall }] : [];
-  });
-}
-const tunnelHeroes = heroesFor("tunnel");
-
-/* ---- ソウル推移のグラフ(3つのシナリオ。src/lib/laneScenarios.ts) ---- */
-const scenarios = laneScenarios();
-const scenarioHero = (key: string) => {
-  const h = Object.values(heroesFile.heroes).find((x) => x.key === key);
-  return h ? { id: h.id, name: t(h.nameToken, key), icon: h.images.iconSmall } : null;
-};
-const chart = (() => {
-  if (!scenarios) return null;
-  const end = ASSUMPTIONS.endSeconds;
-  const top = Math.max(...scenarios.map((s) => s.final), f.ultimate?.totalGold ?? 0);
-  const step = f.tier1Price || 800;
-  const yMax = Math.ceil((top + 200) / step) * step;
-  const W = 680, H = 340, L = 50, R = 14, T = 12, B = 34;
-  const X = (sec: number) => L + (sec / end) * (W - L - R);
-  const Y = (v: number) => T + (1 - v / yMax) * (H - T - B);
-  // 処理時間のあいだは斜めに上がり、それ以外は平らになる(点をそのまま直線でつなぐ)
-  const path = (pts: { t: number; total: number }[]) =>
-    pts.map((p, i) => `${i === 0 ? "M" : "L"}${X(Math.min(p.t, end)).toFixed(1)},${Y(p.total).toFixed(1)}`).join("");
-  const lines = [
-    ...Array.from({ length: Math.floor(yMax / step) }, (_, i) => ({ v: (i + 1) * step, kind: "buy" })),
-    ...(f.ultimate?.totalGold ? [{ v: f.ultimate.totalGold, kind: "ult" }] : []),
-  ];
-  const minutes = Array.from({ length: Math.floor(end / 60) + 1 }, (_, i) => i);
-  return { W, H, L, R, T, B, X, Y, path, lines, minutes, yMax };
-})();
-
-/* ---- TIPS: トロフィーコレクター(効果の数値はアイテムのデータから) ---- */
-const trophy = (() => {
-  const it = item("upgrade_trophy_collector");
-  if (!it) return null;
-  const perStack = it.properties["StackingGoldPerMinute"]?.value;
-  const maxStacks = it.properties["MaxStacks"]?.value;
-  if (perStack == null || maxStacks == null) return null;
-  return { id: it.id, name: t(it.nameToken, it.id), price: it.cost, perStack, maxStacks };
-})();
 
 /* ---- レーン中のタイムライン ---- */
 const events = [
@@ -133,205 +57,71 @@ const timeline = [...new Map(events.map((e) => [e.sec, [] as string[]])).keys()]
   .map((sec) => ({ sec, labels: events.filter((e) => e.sec === sec).map((e) => e.label) }));
 const timelineMax = Math.max(...timeline.map((e) => e.sec)) + 60;
 
-/* ---- ファーミング: 報酬と難易度 ---- */
-const growth = f.neutralReward.weak?.growthPct ?? 0;
-const farm = [
-  {
-    key: "breakables",
-    name: "箱・壺などの小物",
-    reward: f.breakable.gold !== null ? `${f.breakable.gold}（${f.breakable.dropChancePct}%の確率）` : "—",
-    growth: f.breakable.goldPerMinute !== null ? `+${f.breakable.goldPerMinute}／分` : "—",
-    first: clock(f.breakable.firstSeconds),
-    respawn: duration(f.breakable.respawnSeconds),
-  },
-  {
-    key: "weak",
-    name: "小キャンプ（1体あたり）",
-    reward: f.neutralReward.weak ? String(f.neutralReward.weak.gold) : "—",
-    growth: `+${growth}%／分`,
-    first: clock(f.camps.weak?.initial),
-    respawn: duration(f.camps.weak?.interval),
-  },
-  {
-    key: "medium",
-    name: "中キャンプ（1体あたり）",
-    reward: f.neutralReward.normal ? String(f.neutralReward.normal.gold) : "—",
-    growth: `+${growth}%／分`,
-    first: clock(f.camps.medium?.initial),
-    respawn: duration(f.camps.medium?.interval),
-  },
-  {
-    key: "strong",
-    name: "大キャンプ（1体あたり）",
-    reward: f.neutralReward.strong ? String(f.neutralReward.strong.gold) : "—",
-    growth: `+${growth}%／分`,
-    first: clock(f.camps.strong?.initial),
-    respawn: duration(f.camps.strong?.interval),
-  },
-  {
-    key: "vaults",
-    name: `${N.vault}（スロット）`,
-    reward: f.neutralReward.vault ? String(f.neutralReward.vault.gold) : "—",
-    growth: `+${f.neutralReward.vault?.growthPct ?? 0}%／分`,
-    first: clock(f.camps.vaults?.initial),
-    respawn: duration(f.camps.vaults?.interval),
-  },
-  {
-    key: "rift",
-    name: N.rift,
-    reward: f.rift ? `${souls(f.rift.rewardBase)}〜（時間で増える）` : "—",
-    growth: "—",
-    first: clock(f.rift?.initial),
-    respawn: duration(f.rift?.interval),
-  },
-];
+const beginner = `${base}/mechanics/beginner/`;
+const farm = `${base}/mechanics/farm/`;
+const objects = `${base}/mechanics/objects/`;
+/** 移した節の旧アンカー → 移動先(外部から貼られたリンク用) */
+const moved: Record<string, string> = {
+  overview: `${beginner}#overview`,
+  pregame: `${beginner}#pregame`,
+  farming: `${farm}#farming`,
+  map: `${farm}#map`,
+};
 
 const toc = [
-  { id: "overview", label: "0. 全体像" },
-  { id: "pregame", label: "1. 準備フェーズ" },
-  { id: "laning", label: "2. レーン戦" },
-  { id: "postlane", label: "3. レーン後・中盤" },
-  { id: "farming", label: "ファーミング" },
-  { id: "lategame", label: "4. 終盤" },
-  { id: "appendix", label: "付録：数値表" },
+  { id: "laning", label: "1. レーン戦" },
+  { id: "postlane", label: "2. レーン後・中盤" },
+  { id: "lategame", label: "3. 終盤" },
+  { id: "appendix", label: "付録" },
 ];
 ---
 
 <Base
   title="試合の流れ"
-  description="Deadlock（デッドロック）の試合を、準備フェーズ・レーン戦・中盤・終盤の順に解説。初期ソウル、ウェーブのソウル、ディナイ、アイテム購入の目安、中立キャンプの報酬まで、ゲームの生データの数値つき。"
+  description="Deadlock（デッドロック）の試合の進め方を、レーン戦・中盤・終盤の順に解説。買い物の目安、ファーストブラッド、橋バフ、ガーディアンのパリィ、中盤のマクロ、終盤のカムバック補正まで、ゲームの生データの数値つき。"
   breadcrumbs={[
     { name: "攻略情報", path: `${base}/mechanics/` },
     { name: "試合の流れ", path: `${base}/mechanics/match/` },
   ]}
 >
+  <script is:inline define:vars={{ moved }}>
+    const to = moved[location.hash.slice(1)];
+    if (to) location.replace(to);
+  </script>
+
   <h1>試合の流れ</h1>
+  <p class="lead">初めての方は <a href={beginner}>はじめての Deadlock</a> へ。</p>
 
   <nav class="toc" aria-label="目次">
     {toc.map((c) => <a href={`#${c.id}`}>{c.label}</a>)}
   </nav>
 
-  {/* ================= 0. 全体像 ================= */}
-  <section class="chapter panel" id="overview">
-    <h2>0. 全体像</h2>
+  {/* ================= 0〜1(移動先の要約) ================= */}
+  <section class="chapter panel moved" id="overview">
+    <h2>全体像・準備フェーズ</h2>
     <p>
-      敵の<b>パトロン</b>を破壊したチームが勝ちます。パトロンまでの道のりには防衛建造物が並んでいて、
-      手前から順に壊さないと奥には攻撃が届きません。数字は破壊したときに入るソウルです。
+      敵のパトロンを破壊したチームの勝ちです。ガーディアンからパトロンまでの防衛建造物の順番と報酬は
+      <a href={`${beginner}#overview`}>はじめての Deadlock「全体像」</a>にまとめています。
     </p>
-    <ol class="chain">
-      {chain.map((c, i) => (
-        <li>
-          <span class="cicon">{c.icon ? <img src={c.icon} alt="" loading="lazy" /> : <span class="ph" />}</span>
-          <span class="cname">{c.name}</span>
-          {objGold(c.key) > 0 ? <span class="cgold">+{souls(objGold(c.key))}</span> : <span class="cgold win">勝利</span>}
-          {i < chain.length - 1 && <span class="arrow" aria-hidden="true">›</span>}
-        </li>
-      ))}
-    </ol>
-    <p class="small">
-      建造物のソウルは、そのうち{f.objectiveNearPlayerPct}%が破壊に関わった近くのプレイヤーへ、残りはチーム全員に均等に入ります。
-      パトロンは左右の<b>シュライン</b>を両方壊すまで攻撃を受け付けません。
-      また防衛建造物には「バックドア保護」があり、範囲内に守る側のプレイヤーがいない状態がしばらく続くと無敵が解けます（範囲は付録の建造物の数値へ）。
-      中央には{N.midboss}がいて、試合開始時から出現しています（倒されると{duration(f.camps.midboss?.interval)}後に再出現、
-      以後{duration(Math.abs(f.camps.midboss?.change ?? 0))}ずつ短くなり最短{duration(f.camps.midboss?.min)}）。
-    </p>
-    <p class="small">
-      試合は大きく <a href="#laning">レーン戦</a> → <a href="#postlane">レーン後・中盤</a> → <a href="#lategame">終盤</a> と進みます。
-      レーン戦は、自分のレーンのガーディアンが倒れた時点で終わります。
+    <p id="pregame">
+      試合前のレーンの割り振りと、編成の偏りを直すレーン交代は <a href={`${beginner}#pregame`}>「準備フェーズ」</a>へ。
     </p>
   </section>
 
-  {/* ================= 1. 準備フェーズ ================= */}
-  <section class="chapter panel" id="pregame">
-    <h2>1. 準備フェーズ</h2>
-    <p>
-      試合が始まる前の短い準備時間で、どのレーンに誰が行くかが決まります。ここで意識したいのは<b>編成のバランス</b>です。
-      同じレーンにサポート役が2人、近接で戦うヒーローが2人、といった偏りがあると、そのレーンは苦しくなります。
-    </p>
-    <ul class="notes">
-      <li>偏りがあれば、画面上部の他プレイヤーのポートレートから<b>レーンの交代</b>を持ちかけられます。</li>
-      <li>ランクマッチでは、まだ誰にも選ばれていないヒーローへの変更もこの間にできます。</li>
-      <li>ストリートブロールでは、この時間にアイテムの選択とスキルポイントの割り振りを行います。</li>
-    </ul>
-  </section>
-
-  {/* ================= 2. レーン戦 ================= */}
+  {/* ================= 1. レーン戦 ================= */}
   <section class="chapter panel" id="laning">
-    <h2>2. レーン戦</h2>
+    <h2>1. レーン戦</h2>
     <p>
       試合開始から、自分のレーンの<b>ガーディアン</b>が倒れるまでがレーン戦です。
       目的は相手より多くソウルを集めて、先にアイテムとアビリティをそろえることです。
     </p>
 
-    {f.trooper && f.startingGold !== null && (
-      <>
-        <h3>ソウルの入り方</h3>
-        <ul class="notes">
-          <li>試合開始時の所持ソウルは <b class="num">{souls(f.startingGold)}</b>。</li>
-          <li>
-            トルーパーは <b class="num">{f.trooper.squadSize}体</b>で1ウェーブとなり、序盤は <b class="num">{f.trooper.intervalEarly}秒</b>ごとに来ます。
-            1体の報酬は <b class="num">{f.trooper.gold}</b>（試合時間1分ごとに <b class="num">+{f.trooper.goldPerMinute}</b>）。
-          </li>
-          <li>
-            倒した瞬間に入るのは報酬の<b>{pct(f.trooper.instantRatio)}</b>だけです。残りは<b>ソウルオーブ</b>として浮き上がるので、撃って回収します。
-            回収しないまま少したつと近くの味方に入り、味方がいなければ消えてしまいます。
-          </li>
-          <li>
-            <b>近接攻撃</b>（スキルによる近接ダメージを含む）でトルーパーを倒すとオーブが浮かばず、その分もすぐに入ります。
-          </li>
-          <li>
-            2人レーンでは、近くにいる人数に応じて報酬が分けられ、1人あたり <b class="num">{pct(f.trooperShare[1] ?? 0)}</b> になります
-            （{f.trooperShare.map((s, i) => `${i + 1}人 ${pct(s)}`).join("、")}）。
-          </li>
-        </ul>
-        <div class="calc">
-          <span class="calclabel">ラストヒットの目安：トルーパーのHPバー</span>
-          <ul class="notes lh">
-            <li><b>濃い赤が薄くなった</b> … ヘビーメレーで倒せる</li>
-            <li><b>薄い赤が点滅している</b> … ライトメレーで倒せる</li>
-            <li><b>トルーパー自体が点滅している</b> … 1ダメージでも与えれば倒せる</li>
-          </ul>
-        </div>
-      </>
-    )}
-
-    {f.deny && (
-      <>
-        <h3>ディナイで差が倍に開く</h3>
-        <p>
-          相手のトルーパーから浮き上がったオーブを先に撃つと<b>ディナイ</b>になり、そのオーブのソウルは
-          <b class="num">{f.deny.denierPct}%</b>が自分に入り、相手には<b class="num">{f.deny.deniedPct}%</b>しか入りません。
-          相手のマイナスと自分のプラスが同時に起きるので、1回ごとに差が倍になって効いてきます。
-        </p>
-      </>
-    )}
-
-    {f.firstWave && (
-      <div class="calc">
-        <span class="calclabel">計算：最初のウェーブ（2人レーン）</span>
-        <div class="calcrows">
-          <div>
-            <span>ディナイされなかった場合</span>
-            <span class="num">{f.trooper!.squadSize}体 × {f.trooper!.gold} × {pct(f.firstWave.shareDuo)} = +{f.firstWave.full} → 所持 <b>{souls(f.firstWave.afterFull)}</b></span>
-          </div>
-          <div>
-            <span>オーブを<b>1つ</b>ディナイされた場合</span>
-            <span class="num">−{f.firstWave.perOrb} → 所持 <b class={f.firstWave.afterOneDeny < f.tier1Price ? "miss" : ""}>{souls(f.firstWave.afterOneDeny)}</b></span>
-          </div>
-        </div>
-        <p class="calcnote">
-          {f.firstWave.afterFull >= f.tier1Price
-            ? `ディナイされなければ、最初のウェーブだけでティア1アイテム（${souls(f.tier1Price)}）が買えます。`
-            : `最初のウェーブだけではティア1アイテム（${souls(f.tier1Price)}）に届きません。`}
-          {f.firstWave.deniesToMiss === 1 && <strong class="warn">ところが、オーブを1つディナイされるだけで届かなくなります。最序盤で最も重大なポイントです。</strong>}
-          {f.firstWave.deniesToMiss > 1 && `オーブを${f.firstWave.deniesToMiss}つディナイされると届かなくなります。`}
-        </p>
-        <p class="calcsrc">
-          トルーパー1体の報酬は「{f.trooper!.gold} ＋ {f.trooper!.goldPerMinute} × 経過分数」で増えていきます。最初のウェーブ（{clock(f.trooper!.firstWaveSeconds)}）はほぼ{f.trooper!.gold}なので、ここでは{f.trooper!.gold}で計算しています。
-          オーブ分も同じ割合で分けられるものとして計算しています。
-        </p>
-      </div>
-    )}
+    <div class="calc moved">
+      <p class="calcnote">
+        ウェーブのソウルの入り方、ディナイで差が倍に開く仕組み、3つのシナリオで見るレーン戦のソウル推移は
+        <a href={`${farm}#souls`}>マップとファーム</a>にまとめています。
+      </p>
+    </div>
 
     <h3>買い物の目安</h3>
     <p>
@@ -344,79 +134,6 @@ const toc = [
         （初期の{souls(f.startingGold ?? 0)}＋稼いだ{souls(f.ultimate.earnedGold)}。Lv{f.ultimate.level}）。
         レーンの力関係が大きく変わる節目なので、<b>敵と味方のソウル</b>はこまめに確認しましょう。
       </p>
-    )}
-
-    <h3>レーン戦のソウル推移</h3>
-    <p>同じ8分間でも、動き方しだいで買い物とアルティメットのタイミングは大きく変わります。</p>
-    {chart && scenarios && (
-      <figure class="chart">
-        <figcaption class="lgds">
-          {scenarios.map((s, i) => {
-            const h = scenarioHero(s.heroKey);
-            return (
-              <span class={`lgd ${s.key}`}>
-                <i class={`sw ${s.key}`} />
-                {h && <HeroPortrait name={h.name} image={h.icon} size={24} />}
-                <span><b>{["①", "②", "③"][i]} {s.title}</b><small>{s.summary}</small></span>
-              </span>
-            );
-          })}
-        </figcaption>
-        <svg viewBox={`0 0 ${chart.W} ${chart.H}`} role="img" aria-label="レーン戦の所持ソウルの推移（3つのシナリオ）">
-          {chart.lines.map((l) => (
-            <g class={`hl ${l.kind}`}>
-              <line x1={chart.L} x2={chart.W - chart.R} y1={chart.Y(l.v)} y2={chart.Y(l.v)} />
-              <text x={chart.L - 6} y={chart.Y(l.v) + 4} text-anchor="end">{souls(l.v)}</text>
-            </g>
-          ))}
-          <line class="axis" x1={chart.L} x2={chart.W - chart.R} y1={chart.H - chart.B} y2={chart.H - chart.B} />
-          {chart.minutes.map((m) => (
-            <text class="tick" x={chart.X(m * 60)} y={chart.H - chart.B + 16} text-anchor="middle">{m}:00</text>
-          ))}
-          {scenarios.map((s) => <path class={`ln ${s.key}`} d={chart.path(s.points)} />)}
-          {scenarios.flatMap((s) =>
-            s.points
-              .filter((p) => p.note === "ファーストブラッド" || p.note === "ガーディアン破壊")
-              .map((p) => (
-                <g class={`ev ${s.key}`}>
-                  <circle cx={chart.X(p.t)} cy={chart.Y(p.total)} r="4" />
-                  <text x={chart.X(p.t) - 6} y={chart.Y(p.total) - 8} text-anchor="end">{p.note}</text>
-                </g>
-              )),
-          )}
-        </svg>
-        <div class="tablewrap">
-          <table class="miles">
-            <thead>
-              <tr>
-                <th>到達時刻</th>
-                {scenarios[0]!.milestones.map((m) => <th>{souls(m.gold)}{m.gold === f.ultimate?.totalGold ? "（アルティメット）" : ""}</th>)}
-                <th>{clock(ASSUMPTIONS.endSeconds)}時点の所持</th>
-              </tr>
-            </thead>
-            <tbody>
-              {scenarios.map((s, i) => (
-                <tr>
-                  <td><i class={`sw ${s.key}`} /> {["①", "②", "③"][i]} {s.title}</td>
-                  {s.milestones.map((m) => <td class="n">{m.t === null ? "届かない" : clock(m.t)}</td>)}
-                  <td class="n">{souls(s.final)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </figure>
-    )}
-
-    {trophy && (
-      <div class="calc tip">
-        <span class="calclabel">TIPS</span>
-        <p class="calcnote">
-          <a href={`${base}/items/${trophy.id}/`}>{trophy.name}</a>（{souls(trophy.price)}）を序盤から買うと、
-          キルかアシストのたびに毎分 <b class="num">+{trophy.perStack}</b> のソウル生成が積み上がり（最大{trophy.maxStacks}回・デスしても消えない）、
-          ソウルの伸びをブーストできる可能性があります。
-        </p>
-      </div>
     )}
 
     <h3>倒されない意識</h3>
@@ -486,9 +203,9 @@ const toc = [
     </p>
   </section>
 
-  {/* ================= 3. レーン後・中盤 ================= */}
+  {/* ================= 2. レーン後・中盤 ================= */}
   <section class="chapter panel" id="postlane">
-    <h2>3. レーン後・中盤</h2>
+    <h2>2. レーン後・中盤</h2>
     <p>
       ガーディアンが落ちると、レーンを離れて自由に動けるようになります。よくある分担は
       <b>1人がレーンに残ってウェーブのソウルを取り続け、もう1人がガンクや中立キャンプに向かう</b>形です。
@@ -503,137 +220,33 @@ const toc = [
         {f.rift && `${N.rift}は${clock(f.rift.initial)}から${duration(f.rift.interval)}ごとに出現します。`}
         {f.urnOrbs !== null && `${N.urn}は持ち帰るとソウルオーブが${f.urnOrbs}個出ます。`}
       </li>
-      <li><b>ウェーブ・中立キャンプ・{N.vault}を管理する。</b>それぞれ出現と再出現の時間が決まっているので、空いた時間を作らずに回るほどソウルが増えます。数値は<a href="#farming">ファーミング</a>へ。</li>
+      <li><b>ウェーブ・中立キャンプ・{N.vault}を管理する。</b>それぞれ出現と再出現の時間が決まっているので、空いた時間を作らずに回るほどソウルが増えます。数値は<a href={`${base}/mechanics/farm/#farming`}>ファーミング</a>へ。</li>
       <li>
         マップ全体で「今どこで何をすべきか」を考えるのがマクロです。自分がどれだけ試合に貢献し続けているか（稼働率）を意識すると、
         リスポーン待ちや目的のない移動が減り、次の一手を決めやすくなります。
       </li>
     </ul>
-    <h3>ソウル差を広げる考え方</h3>
-    <ul class="notes">
-      <li><b>テンポ</b>：必要のないアイテムを削って、重要な強化に人より早く届くほど有利になります。</li>
-      <li><b>カウンター</b>：相手の強みに合わせてアイテムを選びます。ヒーローごとの対策は各ヒーローページの「強みと対策」へ。</li>
-      <li><b>ファネリング</b>：チームで意図的に1人へソウルを集め、早く強くする作戦もあります。</li>
-      <li>
-        撃ち合いでは<b>遮蔽物</b>の使い方が大切です。角ぎりぎりに体を寄せると頭だけ出して撃ち合えます。
-        カメラが肩越しに固定されているので、遮蔽物のどちら側から撃つかで、自分と相手の見え方に差が出ます。
-      </li>
-    </ul>
 
-    <h3>ウェーブのフリーズ</h3>
-    <p>
-      味方のトルーパーがたまっている状態で、敵のトルーパーを利用してウェーブをその場に留め、
-      溜まった味方のトルーパーを一気に流す<b>フリーズ</b>という技術があります。押し込みすぎると自陣から離れて危険になるため、
-      あえてウェーブを動かさない判断も必要です。
-    </p>
+    <div class="calc moved">
+      <p class="calcnote">
+        ソウル差を広げる考え方（テンポ・カウンター・ファネリング）と、ウェーブのフリーズは
+        <a href={`${farm}#farming`}>マップとファーム「稼ぎ方」</a>へ。
+      </p>
+    </div>
   </section>
 
-  {/* ================= ファーミング ================= */}
-  <section class="chapter panel" id="farming">
+  {/* ================= ファーミング(移動先の要約) ================= */}
+  <section class="chapter panel moved" id="farming">
     <h2>ファーミング</h2>
     <p>
-      レーンのウェーブ以外のソウル源です。どれを回るかは、得られるソウルと出現・再出現の時間を見て判断しましょう。
-      報酬は試合時間とともに増えます。
+      中立キャンプ・箱・{N.vault}の報酬と出現時刻、地下トンネルの箱は <a href={`${farm}#farming`}>マップとファーム「稼ぎ方」</a>、
+      キャンプや箱の位置は <a href={`${farm}#map`} id="map">マップ</a> で確認できます。
     </p>
-    <div class="tablewrap">
-      <table class="farm">
-        <thead><tr><th>対象</th><th>ソウル</th><th>増加</th><th>初回</th><th>再出現</th><th>おすすめヒーロー</th></tr></thead>
-        <tbody>
-          {farm.map((r) => (
-            <tr>
-              <td>{r.name}</td>
-              <td class="n">{r.reward}</td>
-              <td class="n">{r.growth}</td>
-              <td class="n">{r.first}</td>
-              <td class="n">{r.respawn}</td>
-              <td class="rec">
-                {heroesFor(r.key).map((h) => (
-                  <a href={`${base}/heroes/${h.id}/`} title={h.name}><HeroPortrait name={h.name} image={h.icon} size={22} /></a>
-                ))}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-
-    <h3>未回収ソウルに注意</h3>
-    <p>
-      中立モンスター・{N.vault}・箱から得たソウルは、しばらく<b>未回収</b>の扱いで、その間に倒されると落としてしまいます。
-      未回収ソウルを一定以上持ったまま倒されると、その場に<b>ソウルコンテナ</b>が残り、敵味方の誰でもヘビーメレーで拾えます。
-      未回収のソウルは時間とともに自動で確保されていくので、ファーム直後に無理な戦闘をしないことが大切です。
-    </p>
-
-    <h3 id="map">マップ</h3>
-    <p>キャンプ・箱・黄金像の場所です。種類ごとに表示を切り替えられ、「地下（共用）」で誰でも入れる地下も見られます。</p>
-    <FarmMap />
-
-    {f.waveByMinute.length > 0 && (
-      <>
-        <h3>レーンのウェーブ</h3>
-        <p>1ウェーブ（全員分）のソウルは時間とともに増えます。レーンに残ってウェーブを取り続けることも立派なファームです。</p>
-        <div class="tablewrap">
-          <table>
-            <thead><tr><th>経過時間</th><th>1体</th><th>1ウェーブ</th><th>ウェーブ間隔</th></tr></thead>
-            <tbody>
-              {f.waveByMinute.map((w) => (
-                <tr>
-                  <td>{w.minute}分</td>
-                  <td class="n">{w.perTrooper}</td>
-                  <td class="n">{w.perWave}</td>
-                  <td class="n">
-                    {w.minute >= f.trooper!.intervalVeryLateMinutes
-                      ? f.trooper!.intervalVeryLate
-                      : w.minute >= f.trooper!.intervalLateMinutes
-                        ? f.trooper!.intervalLate
-                        : f.trooper!.intervalEarly}秒
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </>
-    )}
-
-    {tunnelHeroes.length > 0 && (
-      <div class="special">
-        <span class="speciallabel">特別枠</span>
-        <h3>地下トンネルの箱</h3>
-        <p>
-          地下トンネルの中にも箱があり、トンネルに入れるのは次の{tunnelHeroes.length}人だけです。
-          入れるヒーローが限られた、特別なソウル源です。
-        </p>
-        {f.tunnel && (
-          <ul class="notes">
-            <li>
-              箱 <b class="num">{f.tunnel.crates}</b>個・黄金像 <b class="num">{f.tunnel.statues}</b>個。
-              {clock(f.tunnel.firstSeconds)}に出現し、壊してから{duration(f.tunnel.respawnSeconds)}で再出現します（地上の箱より遅め）。
-            </li>
-            {f.breakable.gold !== null && (
-              <li>箱から出るソウルは地上と同じで、{f.breakable.dropChancePct}%の確率で <b class="num">{f.breakable.gold}</b>（1分ごとに+{f.breakable.goldPerMinute}）。</li>
-            )}
-            <li>場所は上のマップの「地下トンネルの箱（3人専用）」で確認できます。</li>
-          </ul>
-        )}
-        <ul class="heroes">
-          {tunnelHeroes.map((h) => (
-            <li>
-              <a href={`${base}/heroes/${h.id}/`}>
-                <HeroPortrait name={h.name} image={h.icon} size={40} />
-                <span>{h.name}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    )}
-
   </section>
 
-  {/* ================= 4. 終盤 ================= */}
+  {/* ================= 3. 終盤 ================= */}
   <section class="chapter panel" id="lategame">
-    <h2>4. 終盤</h2>
+    <h2>3. 終盤</h2>
     <p>
       大きなソウル差がついたり、複数のウォーカーが落ちたりすると、試合は終盤に入ります。
       マップ上のオブジェクトを取り合い、敵の拠点を攻め落としにいく段階です。リスポーンまでの時間が長くなっていくため、
@@ -662,56 +275,11 @@ const toc = [
   {/* ================= 付録 ================= */}
   <section class="chapter panel" id="appendix">
     <h2>付録：数値表</h2>
-
-    <details class="apx" open>
-      <summary>キルの分配率</summary>
-      <table>
-        <thead><tr><th>絡んだ人数</th><th>トルーパー</th><th>ヒーロー</th></tr></thead>
-        <tbody>
-          {shareFrac.map((r) => (
-            <tr><td>{r.count}人</td><td class="n">{pct(r.trooperFrac)}</td><td class="n">{pct(r.heroFrac)}</td></tr>
-          ))}
-        </tbody>
-      </table>
-    </details>
-
-    <details class="apx">
-      <summary>アイテム価格・レベル・購入ボーナス</summary>
-      <div class="econ">
-        <div>
-          <h4>ティアごとのアイテム価格</h4>
-          <table>
-            <thead><tr><th>ティア</th><th>価格</th></tr></thead>
-            <tbody>{economy.itemPrices.map((p) => <tr><td>T{p.tier}</td><td class="n">{souls(p.cost)}</td></tr>)}</tbody>
-          </table>
-        </div>
-        <div>
-          <h4>レベルに必要な累計ソウル</h4>
-          <p class="sub">初期の{souls(f.startingGold ?? 0)}を含まない、試合中に稼いだ分。</p>
-          <table>
-            <thead><tr><th>Lv</th><th>累計</th></tr></thead>
-            <tbody>{economy.levels.map((l) => <tr><td>{l.level}</td><td class="n">{souls(l.requiredGold)}</td></tr>)}</tbody>
-          </table>
-        </div>
-        <div class="wide">
-          <h4>購入ボーナス</h4>
-          <p class="sub">そのカテゴリに投資した累計ソウルが閾値を超えるたびに、対応するステータスが上がります。全ヒーロー共通です。</p>
-          <div class="tablewrap">
-            <table>
-              <thead><tr><th>累計投資額</th>{economy.costBonuses.map((c) => <th>{c.label}</th>)}</tr></thead>
-              <tbody>
-                {(economy.costBonuses[0]?.rows ?? []).map((_, i) => (
-                  <tr>
-                    <td class="n">{souls(economy.costBonuses[0]!.rows[i]!.goldThreshold)}</td>
-                    {economy.costBonuses.map((c) => <td class="n">+{c.rows[i]?.bonus ?? "—"}</td>)}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </details>
+    <p class="small">数値表は内容ごとに、次のページへ移しました。</p>
+    <ul class="notes">
+      <li>キルの分配率・アイテム価格・レベルに必要な累計ソウル・購入ボーナス・ミニマップ … <a href={`${farm}#tables`}>マップとファーム「数値表」</a></li>
+      <li>レーンの建造物・トルーパー・シュライン・中立モンスター（ホーント）・マップ上の目標物 … <a href={objects}>オブジェクト</a></li>
+    </ul>
 
     {rift.length > 0 && (
       <details class="apx">
@@ -724,46 +292,9 @@ const toc = [
     )}
 
     <details class="apx">
-      <summary>建造物・トルーパー・中立モンスターの数値</summary>
-      {topics.map((topic) => (
+      <summary>{sys["pause"]?.title ?? "ポーズ"}</summary>
+      {["pause"].map((id) => sys[id] && (
         <div class="topic">
-          <h4>{topic.title}</h4>
-          <div class="objs">
-            {topic.objects.map((o) => {
-              const src = iconSrc(o.icon);
-              const tips = objectNotes(o.id);
-              return (
-                <div class="obj">
-                  <h5>{src && <img class="oicon" src={src} alt="" loading="lazy" />}{o.name}</h5>
-                  <dl>
-                    {o.stats.map((s) => <div class="row"><dt>{s.label}</dt><dd>{s.value}</dd></div>)}
-                  </dl>
-                  {tips.length > 0 && <ul class="otips">{tips.map((tip) => <li>{tip}</li>)}</ul>}
-                </div>
-              );
-            })}
-          </div>
-          {topic.id === "neutral" && haunts.length > 0 && (
-            <ul class="haunts">
-              {haunts.map((h) => (
-                <li>
-                  {h.icon && <img src={`${base}/${h.icon}`} alt="" loading="lazy" />}
-                  <b>{h.name}</b>
-                  <small>マップに{h.placed}体</small>
-                </li>
-              ))}
-            </ul>
-          )}
-          {topic.lines.length > 0 && <ul class="notes">{topic.lines.map((line) => <li>{line}</li>)}</ul>}
-        </div>
-      ))}
-    </details>
-
-    <details class="apx">
-      <summary>その他のルール（ミニマップ・移動手段・ポーズ）</summary>
-      {["map-objects", "minimap", "pause"].map((id) => sys[id] && (
-        <div class="topic">
-          <h4>{sys[id]!.title}</h4>
           {sys[id]!.icons.length > 0 && (
             <ul class="icongrid">
               {sys[id]!.icons.map((ic) => <li><img src={`${base}/${ic.src}`} alt="" loading="lazy" /><span>{ic.label}</span></li>)}
@@ -915,5 +446,7 @@ const toc = [
       .chain li { min-width: 0; flex: 1 1 40%; }
       .chain .arrow { display: none; }
     }
+    .lead { font-size: 14px; color: var(--c-text-muted); }
+    .moved p:last-child { margin-bottom: 0; }
   </style>
 </Base>

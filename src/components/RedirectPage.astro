@@ -9,8 +9,10 @@ interface Props {
   to: string;
   /** 旧ページの名前(転送中の表示用) */
   title: string;
+  /** 移動先のページの名前(転送中の表示用) */
+  destName?: string;
 }
-const { to, title } = Astro.props;
+const { to, title, destName = "試合の流れ" } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const href = `${base}${to}`;
 const canonical = new URL(href.replace(/#.*$/, ""), Astro.site).toString();
@@ -30,6 +32,6 @@ const canonical = new URL(href.replace(/#.*$/, ""), Astro.site).toString();
     </script>
   </head>
   <body style="background:#11161a;color:#f0e7cf;font-family:sans-serif;padding:24px">
-    <p>「{title}」は「試合の流れ」に統合しました。<a href={href} style="color:#5fe0a8">移動先へ</a></p>
+    <p>「{title}」は「{destName}」に統合しました。<a href={href} style="color:#5fe0a8">移動先へ</a></p>
   </body>
 </html>

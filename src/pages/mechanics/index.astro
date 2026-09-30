@@ -1,10 +1,9 @@
 ---
 /**
- * 攻略情報のハブページ。
- * 「試合の流れ」(旧ゲームシステム・ソウル獲得システム・戦略・オブジェクトを統合)と
- * 「キャラクターコントロール」の2ページへの入口。
- * 見出しで煽らず、各ページに入っている中身(章・マップ・グラフ・実演動画)を、
- * サイトで使っているゲーム画像と一緒にそのまま並べる。タイルは各章へ直接飛ぶ。
+ * 攻略情報のハブページ。目的から選ぶカードで、目的別の5ページへの入口にする(2026-10)。
+ *   はじめての Deadlock / 試合の流れ / マップとファーム / オブジェクト / キャラクターコントロール
+ * 見出しで煽らず、各ページに入っている中身を、サイトで使っているゲーム画像と一緒にそのまま並べる。
+ * 小さな地図(MapPreview)は「マップとファーム」への入口。
  */
 import { existsSync } from "node:fs";
 import { join } from "node:path";
@@ -14,18 +13,14 @@ import { controlCategories } from "../../lib/controls.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const img = (p: string): string | null => (existsSync(join(process.cwd(), "public", p)) ? `${base}/${p}` : null);
-const match = `${base}/mechanics/match/`;
+const M = `${base}/mechanics`;
 
-/* 試合の流れ: 章と、その章の中身(画像はサイトで既に使っているもの) */
-const chapters = [
-  { id: "overview", title: "全体像", body: "ガーディアンからパトロンまでの破壊の順番と、それぞれの報酬", img: img("images/npcs/tier_1_boss.png") },
-  { id: "pregame", title: "準備フェーズ", body: "レーンの割り振りと、編成の偏りを直すレーン交代", img: img("images/npcs/trooper.png") },
-  { id: "laning", title: "レーン戦", body: "ウェーブのソウル、ディナイ、ラストヒットの目安、3つのシナリオのソウル推移グラフ", img: img("images/npcs/tier_2_boss.png") },
-  { id: "laning", title: "橋バフ", body: "出現時刻と4種類の効果", img: img("images/hud/icons/powerup_spirit.svg") },
-  { id: "farming", title: "ファーミング", body: "キャンプ・箱・罪人の供物の報酬と出現時刻、地下トンネルの箱（3人専用）", img: img("images/minimap/neutral_medium.png") },
-  { id: "lategame", title: "終盤", body: "シュライン・パトロンの攻略と、劣勢側への補正", img: img("images/npcs/patron.png") },
+/* 目的から選ぶカード(画像はサイトで既に使っているもの) */
+const purposes = [
+  { href: `${M}/beginner/`, title: "初めて遊ぶ", page: "はじめての Deadlock", body: "勝利条件と試合の全体像、最初に覚える3つのこと、よく出る用語", img: img("images/npcs/trooper.png") },
+  { href: `${M}/match/`, title: "試合の進め方を知りたい", page: "試合の流れ", body: "レーン戦・中盤・終盤で意識すること、買い物の目安、橋バフ、ガーディアンのパリィ", img: img("images/npcs/tier_1_boss.png") },
+  { href: `${M}/objects/`, title: "建造物や敵の数値を知りたい", page: "オブジェクト", body: "ガーディアン・ウォーカー・シュライン・トルーパー・ホーントのHPや報酬", img: img("images/npcs/tier_2_boss.png") },
 ];
-
 /* キャラクターコントロール: 実演動画つきのテクニックと、全カテゴリ */
 const categories = controlCategories();
 const videos = categories.flatMap((c) =>
@@ -35,39 +30,48 @@ const videos = categories.flatMap((c) =>
 
 <Base
   title="攻略情報"
-  description="Deadlock（デッドロック）の試合の流れ（レーン戦・ファーミング・終盤）と、ダッシュやマントルなどキャラクター操作の実演動画つき解説。"
+  description="Deadlock（デッドロック）の攻略情報。初心者向けのはじめてのガイド、試合の流れ（レーン戦・中盤・終盤）、マップとファーム、建造物やトルーパーの数値、ダッシュやマントルなどキャラクター操作の実演動画つき解説。"
   breadcrumbs={[{ name: "攻略情報", path: `${base}/mechanics/` }]}
 >
   <h1>攻略情報</h1>
 
-  {/* ---------- 試合の流れ ---------- */}
-  <section class="panel hubsec">
-    <h2><a href={match}>試合の流れ</a></h2>
-    <div class="matchgrid">
-      <a class="mapcard" href={`${match}#map`}>
-        <MapPreview />
-        <span class="tt">マップ</span>
-        <span class="tb">キャンプ・箱・黄金像・橋バフの位置。拡大と、地上・地下の切り替えができます。</span>
+  <p class="lead">目的に合わせて、読むページを選んでください。</p>
+
+  <div class="purposes">
+    {purposes.slice(0, 1).map((c) => (
+      <a class="pcard" href={c.href}>
+        <span class="ti">{c.img && <img src={c.img} alt="" loading="lazy" />}</span>
+        <span class="tx">
+          <span class="tt">{c.title}</span>
+          <span class="pg">{c.page}</span>
+          <span class="tb">{c.body}</span>
+        </span>
       </a>
-      <ul class="tiles">
-        {chapters.map((c) => (
-          <li>
-            <a href={`${match}#${c.id}`}>
-              <span class="ti">{c.img && <img src={c.img} alt="" loading="lazy" />}</span>
-              <span class="tx">
-                <span class="tt">{c.title}</span>
-                <span class="tb">{c.body}</span>
-              </span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
+    ))}
+    {/* ---------- マップとファーム(地図つきの大きいカード。広い画面では左の列を縦に占める) ---------- */}
+    <a class="pcard mapcard" href={`${M}/farm/`}>
+      <MapPreview />
+      <span class="tx">
+        <span class="tt">ファームを上達したい・マップを覚えたい</span>
+        <span class="pg">マップとファーム</span>
+        <span class="tb">キャンプ・箱・黄金像・ヒーリングスナックの位置、ソウルの入り方、中立キャンプの報酬と出現時刻、アイテム価格やレベルの数値表</span>
+      </span>
+    </a>
+    {purposes.slice(1).map((c) => (
+      <a class="pcard" href={c.href}>
+        <span class="ti">{c.img && <img src={c.img} alt="" loading="lazy" />}</span>
+        <span class="tx">
+          <span class="tt">{c.title}</span>
+          <span class="pg">{c.page}</span>
+          <span class="tb">{c.body}</span>
+        </span>
+      </a>
+    ))}
+  </div>
 
   {/* ---------- キャラクターコントロール ---------- */}
   <section class="panel hubsec">
-    <h2><a href={`${base}/mechanics/controls/`}>キャラクターコントロール</a></h2>
+    <h2><a href={`${base}/mechanics/controls/`}>操作を上達したい <small>キャラクターコントロール</small></a></h2>
     {videos.length > 0 && (
       <ul class="thumbs">
         {videos.map((v) => (
@@ -99,21 +103,24 @@ const videos = categories.flatMap((c) =>
     .tt { display: block; font-size: 14px; font-weight: 600; color: var(--c-text-strong); }
     .tb { display: block; margin-top: 2px; font-size: 12.5px; line-height: 1.6; color: var(--c-text-muted); }
 
-    /* 試合の流れ: 左にマップ、右に章のタイル */
-    .matchgrid { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: var(--sp-4); align-items: start; }
-    .mapcard { display: block; color: inherit; }
-    .mapcard:hover { text-decoration: none; }
-    .mapcard :global(.mp) { margin-bottom: var(--sp-2); }
-    .mapcard:hover .tt { color: var(--c-accent); }
-    .tiles { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--sp-2); }
-    .tiles a {
-      display: flex; gap: var(--sp-3); align-items: center; height: 100%; padding: var(--sp-2) var(--sp-3);
+    .lead { color: var(--c-text-muted); font-size: 14px; }
+    .hubsec h2 small { font-size: 12.5px; font-weight: 500; color: var(--c-text-muted); margin-left: 6px; }
+
+    /* 目的から選ぶカード。マップとファームだけ地図つきで2行分の高さ */
+    .purposes { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); grid-auto-rows: auto; gap: var(--sp-3); margin-top: var(--sp-3); }
+    .pcard {
+      display: flex; gap: var(--sp-3); align-items: center; padding: var(--sp-3) var(--sp-4);
       background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); color: inherit;
     }
-    .tiles a:hover { border-color: var(--c-accent-dim); text-decoration: none; }
-    .tiles a:hover .tt { color: var(--c-accent); }
-    .ti { flex: 0 0 48px; height: 48px; display: grid; place-items: center; }
-    .ti img { max-width: 48px; max-height: 48px; object-fit: contain; }
+    .pcard:hover { border-color: var(--c-accent-dim); text-decoration: none; }
+    .pcard:hover .tt { color: var(--c-accent); }
+    .pcard { grid-column: 2; }
+    .mapcard { grid-column: 1; grid-row: 1 / span 3; flex-direction: column; align-items: stretch; }
+    .mapcard :global(.mp) { width: 100%; max-width: 360px; margin: 0 auto var(--sp-2); }
+    .tx { display: flex; flex-direction: column; min-width: 0; }
+    .pg { display: block; margin-top: 2px; font-size: 12px; color: var(--c-accent); }
+    .ti { flex: 0 0 56px; height: 56px; display: grid; place-items: center; }
+    .ti img { max-width: 56px; max-height: 56px; object-fit: contain; }
 
     /* キャラクターコントロール: 縦長サムネイルとカテゴリ */
     .thumbs { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: var(--sp-3); }
@@ -134,8 +141,8 @@ const videos = categories.flatMap((c) =>
     .cats a:hover { border-color: var(--c-accent-dim); color: var(--c-accent); text-decoration: none; }
 
     @media (max-width: 720px) {
-      .matchgrid { grid-template-columns: 1fr; }
-      .mapcard { max-width: 360px; }
+      .purposes { grid-template-columns: 1fr; }
+      .pcard, .mapcard { grid-column: auto; grid-row: auto; }
       .thumbs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
   </style>

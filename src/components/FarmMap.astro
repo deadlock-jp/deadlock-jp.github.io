@@ -1,6 +1,6 @@
 ---
 /**
- * ファーミング用のマップ(試合の流れ /mechanics/match/ のファーミング節)。
+ * ファーミング用のマップ(マップとファーム /mechanics/farm/ の冒頭)。
  *
  * 背景はゲームのミニマップ画像を「地面が灰色」に描き直したもの(src/parsers/minimapImage.ts)。
  * レーン・建造物・キャンプ・箱は data/snapshots/<版>/map.json の配置
@@ -273,6 +273,20 @@ const MARKER_LABEL: Record<string, string> = {
       const stage = root.querySelector(".fm-stage");
       const hidden = new Set((stage.dataset.hide || "").split(" ").filter(Boolean));
       const apply = () => (stage.dataset.hide = [...hidden].join(" "));
+      /*
+       * ?show=weak,medium のように種類を指定して開いたときは、その種類だけを表示する
+       * (オブジェクトのページから「この種類の場所」を開く用)。show= が空なら建造物だけ
+       */
+      const show = new URLSearchParams(location.search).get("show");
+      if (show !== null) {
+        const keep = new Set(show.split(",").filter(Boolean));
+        for (const cb of root.querySelectorAll("input[data-layer]")) {
+          cb.checked = keep.has(cb.dataset.layer);
+          if (cb.checked) hidden.delete(cb.dataset.layer);
+          else hidden.add(cb.dataset.layer);
+        }
+        apply();
+      }
       for (const cb of root.querySelectorAll("input[data-layer]")) {
         cb.addEventListener("change", () => {
           if (cb.checked) hidden.delete(cb.dataset.layer);

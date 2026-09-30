@@ -102,6 +102,18 @@ const balanceAbilityKeys = [
     </a>
   )}
 
+  {/* はじめての方への入口(攻略情報は日本語のみなので、日本語版のトップにだけ出す) */}
+  {lang === "ja" && (
+    <a class="beginner panel" href={`${base}/mechanics/beginner/`}>
+      <img src={`${base}/images/npcs/trooper.png`} alt="" width="44" height="44" loading="lazy" />
+      <span class="bg-tx">
+        <span class="bg-title">はじめての方へ</span>
+        <span class="bg-body">勝利条件と試合の全体像、最初に覚える3つのこと、よく出る用語</span>
+      </span>
+      <span class="bg-link">はじめての Deadlock →</span>
+    </a>
+  )}
+
   <section class="block panel first">
     <h2>
       {T.nav.heroes}
@@ -197,15 +209,15 @@ const balanceAbilityKeys = [
       <a class="more" href={`${base}/mechanics/`}>{T.top.seeReference}{isJaOnlyFrom("/mechanics/") && <span class="jaonly">{T.jaOnly}</span>}</a>
     </h2>
     <div class="guide">
-      <a class="guidemap" href={`${base}/mechanics/match/#map`}>
+      <a class="guidemap" href={`${base}/mechanics/farm/#map`}>
         <MapPreview />
       </a>
       <div class="guidetx">
-        <a class="guidett" href={`${base}/mechanics/match/#map`}>{T.top.map}{isJaOnlyFrom("/mechanics/") && <span class="jaonly">{T.jaOnly}</span>}</a>
+        <a class="guidett" href={`${base}/mechanics/farm/#map`}>{T.top.map}{isJaOnlyFrom("/mechanics/") && <span class="jaonly">{T.jaOnly}</span>}</a>
         <p class="syslead">{T.top.mapLead}</p>
         <ul class="guidelinks">
           <li><a href={`${base}/mechanics/match/#laning`}>{T.top.laning}{isJaOnlyFrom("/mechanics/") && <span class="jaonly">{T.jaOnly}</span>}</a></li>
-          <li><a href={`${base}/mechanics/match/#farming`}>{T.top.farming}{isJaOnlyFrom("/mechanics/") && <span class="jaonly">{T.jaOnly}</span>}</a></li>
+          <li><a href={`${base}/mechanics/farm/#farming`}>{T.top.farming}{isJaOnlyFrom("/mechanics/") && <span class="jaonly">{T.jaOnly}</span>}</a></li>
           <li><a href={`${base}/mechanics/match/#lategame`}>{T.top.lategame}{isJaOnlyFrom("/mechanics/") && <span class="jaonly">{T.jaOnly}</span>}</a></li>
           <li><a href={`${base}/mechanics/controls/`}>{T.top.controls}{isJaOnlyFrom("/mechanics/") && <span class="jaonly">{T.jaOnly}</span>}</a></li>
         </ul>
@@ -219,6 +231,23 @@ const balanceAbilityKeys = [
   <AbilityHoverCards abilityKeys={balanceAbilityKeys} />
 
   <style>
+    /* はじめての方への入口(日本語版のみ) */
+    .beginner {
+      display: flex; align-items: center; gap: var(--sp-3); margin: 0 0 var(--sp-4); padding: var(--sp-3) var(--sp-4);
+      color: inherit; text-decoration: none;
+    }
+    .beginner:hover { text-decoration: none; border-color: var(--c-accent-dim); }
+    .beginner img { flex: none; object-fit: contain; }
+    .bg-tx { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
+    .bg-title { font-size: 17px; font-weight: 800; color: var(--c-text-strong); }
+    .bg-body { font-size: 12.5px; color: var(--c-text-muted); }
+    .bg-link { flex: none; font-size: 13px; color: var(--c-accent); }
+    .beginner:hover .bg-link { color: var(--c-accent-hover); }
+    @media (max-width: 560px) {
+      .beginner { flex-wrap: wrap; }
+      .bg-link { width: 100%; text-align: right; }
+    }
+
     /* 最新アップデートの入口(トップの見出しのすぐ下) */
     .latest {
       display: grid;
