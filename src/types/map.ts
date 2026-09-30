@@ -19,6 +19,11 @@ export interface MapCamp extends MapPoint {
   name: string | null;
   /** 出現する中立の体数(info_neutral_trooper_spawn の数) */
   units: number;
+  /**
+   * 出現するホーントの内訳(objects.json のキー → 体数)。出現地点が種類を指定しているぶんだけ。
+   * 6712(2026-09-29)より前の版は種類を持たないので空
+   */
+  haunts?: Record<string, number>;
 }
 
 export interface MapBreakable extends MapPoint {

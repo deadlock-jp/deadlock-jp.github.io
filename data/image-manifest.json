@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-26T15:54:44.168Z",
+  "generatedAt": "2026-09-30T02:46:36.914Z",
   "sourceVpk": "game/citadel/pak01_dir.vpk",
   "entries": [
     {
@@ -1038,18 +1038,8 @@
         "ability:ability_trigger_base",
         "ability:citadel_ability_fissure_wall_cancel",
         "ability:synth_plasma_flux_trigger",
-        "ability:tokamak_heat_sinks_inherent",
         "ability:ability_wrecking_ball_throw",
         "ability:ability_magician_cloneturret_trigger"
-      ]
-    },
-    {
-      "ref": "file://{images}/hud/abilities/ability_cancel.psd",
-      "vpkPath": "panorama/images/hud/abilities/ability_cancel_psd.vtex_c",
-      "outPath": "public/images/hud/abilities/ability_cancel.png",
-      "kind": "vtex",
-      "usedBy": [
-        "ability:ability_nano_catform_trigger"
       ]
     },
     {
@@ -1067,7 +1057,6 @@
       "outPath": "public/images/hud/abilities/archer/archer_guided_arrow.png",
       "kind": "vtex",
       "usedBy": [
-        "ability:ability_hat_trick",
         "ability:ability_guided_arrow"
       ]
     },
@@ -1087,6 +1076,15 @@
       "kind": "vtex",
       "usedBy": [
         "ability:ability_immobilize_trap"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/astro/bounce_pad.psd",
+      "vpkPath": "panorama/images/hud/abilities/astro/bounce_pad_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/astro/bounce_pad.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_boho_skipgrenade"
       ]
     },
     {
@@ -1132,15 +1130,6 @@
       "kind": "vtex",
       "usedBy": [
         "ability:ability_gravity_lasso"
-      ]
-    },
-    {
-      "ref": "file://{images}/hud/abilities/astro/shotgun.psd",
-      "vpkPath": "panorama/images/hud/abilities/astro/shotgun_psd.vtex_c",
-      "outPath": "public/images/hud/abilities/astro/shotgun.png",
-      "kind": "vtex",
-      "usedBy": [
-        "ability:ability_astro_shotgun_toggle"
       ]
     },
     {
@@ -1393,6 +1382,15 @@
       ]
     },
     {
+      "ref": "file://{images}/hud/abilities/drifter/drifter_teleport.psd",
+      "vpkPath": "panorama/images/hud/abilities/drifter/drifter_teleport_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/drifter/drifter_teleport.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:drifter_shadow_mark_teleport"
+      ]
+    },
+    {
       "ref": "file://{images}/hud/abilities/drifter/drifter_terror.psd",
       "vpkPath": "panorama/images/hud/abilities/drifter/drifter_terror_psd.vtex_c",
       "outPath": "public/images/hud/abilities/drifter/drifter_terror.png",
@@ -1409,15 +1407,6 @@
       "kind": "vtex",
       "usedBy": [
         "ability:ability_drifter_hunger"
-      ]
-    },
-    {
-      "ref": "file://{images}/hud/abilities/drifter/stalkers_mark_teleport.psd",
-      "vpkPath": "panorama/images/hud/abilities/drifter/stalkers_mark_teleport_psd.vtex_c",
-      "outPath": "public/images/hud/abilities/drifter/stalkers_mark_teleport.png",
-      "kind": "vtex",
-      "usedBy": [
-        "ability:drifter_shadow_mark_teleport"
       ]
     },
     {
@@ -1475,13 +1464,12 @@
       "outPath": "public/images/hud/abilities/engineer_rockets.png",
       "kind": "vtex",
       "usedBy": [
+        "ability:yakuza_shakedown",
         "ability:trooper_boss_grenade",
-        "ability:trooper_neutral_grenade",
         "ability:citadel_ability_tier2boss_rocket_barrage",
         "ability:citadel_ability_tier2boss_laser_beam",
         "ability:citadel_ability_tier3boss_laser_beam",
         "ability:citadel_ability_tier3boss_rocket_barrage",
-        "ability:yakuza_shakedown",
         "ability:citadel_ability_rocket_barrage"
       ]
     },
@@ -1774,10 +1762,8 @@
       "outPath": "public/images/hud/abilities/hornet/hornet_assassinate.png",
       "kind": "vtex",
       "usedBy": [
-        "ability:ability_astro_rifle",
         "ability:citadel_ability_hornet_snipe",
-        "ability:gunslinger_demonMark",
-        "ability:ability_priest_barrage"
+        "ability:gunslinger_demonMark"
       ]
     },
     {
@@ -1795,7 +1781,8 @@
       "outPath": "public/images/hud/abilities/hornet/vindicta_flight.png",
       "kind": "vtex",
       "usedBy": [
-        "ability:citadel_ability_hornet_leap"
+        "ability:citadel_ability_hornet_leap",
+        "ability:ability_boho_ridebroom"
       ]
     },
     {
@@ -2001,6 +1988,9 @@
       "outPath": "public/images/hud/abilities/melee_damage.png",
       "kind": "vtex",
       "usedBy": [
+        "ability:melee_base",
+        "ability:citadel_hold_melee",
+        "ability:citadel_ability_melee_genericperson",
         "ability:ability_melee_butcher",
         "ability:citadel_ability_melee_kali",
         "ability:citadel_ability_melee_butcher",
@@ -2008,9 +1998,6 @@
         "ability:citadel_ability_melee_yakuza",
         "ability:citadel_ability_melee_thumper",
         "ability:citadel_ability_melee_architect",
-        "ability:melee_base",
-        "ability:citadel_hold_melee",
-        "ability:citadel_ability_melee_genericperson",
         "ability:ability_melee_astro",
         "ability:citadel_ability_melee_bull",
         "ability:citadel_ability_melee_bebop",
@@ -2034,7 +2021,6 @@
         "ability:citadel_ability_melee_shiv",
         "ability:ability_melee_shieldguy",
         "ability:citadel_ability_melee_tengu",
-        "ability:citadel_ability_melee_tokamak",
         "ability:ability_melee_viscous",
         "ability:citadel_ability_melee_warden",
         "ability:citadel_ability_melee_wraith",
@@ -2048,6 +2034,7 @@
         "ability:ability_melee_boho",
         "ability:ability_melee_swan",
         "ability:ability_melee_skyrunner",
+        "ability:ability_melee_druid",
         "ability:ability_melee_graf",
         "ability:ability_melee_fortuna",
         "ability:ability_melee_frank",
@@ -2055,6 +2042,7 @@
         "ability:ability_melee_doorman",
         "ability:ability_melee_punkgoat",
         "ability:ability_melee_drifter",
+        "ability:ability_melee_opera",
         "ability:ability_melee_priest",
         "ability:ability_melee_familiar",
         "ability:ability_melee_fencer",
@@ -2147,6 +2135,15 @@
       ]
     },
     {
+      "ref": "file://{images}/hud/abilities/nano/nano_humanform.psd",
+      "vpkPath": "panorama/images/hud/abilities/nano/nano_humanform_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/nano/nano_humanform.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_nano_catform_trigger"
+      ]
+    },
+    {
       "ref": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd",
       "vpkPath": "panorama/images/hud/abilities/nano/nano_roller_bomb_psd.vtex_c",
       "outPath": "public/images/hud/abilities/nano/nano_roller_bomb.png",
@@ -2158,14 +2155,20 @@
         "ability:ability_shieldguy_ability01",
         "ability:ability_shieldguy_ability02",
         "ability:ability_shieldguy_ability03",
-        "ability:ability_boho_ability01",
         "ability:ability_boho_ability02",
+        "ability:ability_boho_ability03",
+        "ability:ability_boho_ability04",
+        "ability:ability_druid_leech_seed",
+        "ability:ability_druid_helicopter_seeds",
         "ability:ability_graf_ability01",
         "ability:ability_graf_ability02",
         "ability:ability_graf_ability03",
         "ability:ability_fortuna_ability01",
         "ability:ability_fortuna_ability02",
-        "ability:ability_fortuna_ability03"
+        "ability:ability_fortuna_ability03",
+        "ability:ability_opera_ability01",
+        "ability:ability_opera_ability02",
+        "ability:ability_opera_ability03"
       ]
     },
     {
@@ -2187,8 +2190,10 @@
         "ability:ability_shieldguy_ult",
         "ability:ability_swan_ult",
         "ability:ability_skyrunner_ult",
+        "ability:ability_druid_ult",
         "ability:ability_graf_ult",
-        "ability:ability_fortuna_ult"
+        "ability:ability_fortuna_ult",
+        "ability:ability_opera_ult"
       ]
     },
     {
@@ -2539,13 +2544,13 @@
       "outPath": "public/images/hud/abilities/sumo/sumo_stomp.png",
       "kind": "vtex",
       "usedBy": [
-        "ability:citadel_ability_tier2boss_stomp",
-        "ability:citadel_ability_tier2boss_aoe_wave",
-        "ability:citadel_ability_tier3boss_aoe_wave",
         "ability:gunslinger_rapid_fire",
         "ability:gunslinger_rocket_launcher",
         "ability:gunslinger_tenacity",
         "ability:gunslinger_sleep_bomb",
+        "ability:citadel_ability_tier2boss_stomp",
+        "ability:citadel_ability_tier2boss_aoe_wave",
+        "ability:citadel_ability_tier3boss_aoe_wave",
         "ability:citadel_ability_stomp"
       ]
     },
@@ -2753,27 +2758,8 @@
       "outPath": "public/images/hud/abilities/tokamak/tokamak_blinding_radiance.png",
       "kind": "vtex",
       "usedBy": [
-        "ability:tokamak_radiance",
         "ability:ability_viper_ult",
         "ability:ability_vandal_pillar"
-      ]
-    },
-    {
-      "ref": "file://{images}/hud/abilities/tokamak/tokamak_breach.psd",
-      "vpkPath": "panorama/images/hud/abilities/tokamak/tokamak_breach_psd.vtex_c",
-      "outPath": "public/images/hud/abilities/tokamak/tokamak_breach.png",
-      "kind": "vtex",
-      "usedBy": [
-        "ability:tokamak_breach"
-      ]
-    },
-    {
-      "ref": "file://{images}/hud/abilities/tokamak/tokamak_crimson_cannon.psd",
-      "vpkPath": "panorama/images/hud/abilities/tokamak/tokamak_crimson_cannon_psd.vtex_c",
-      "outPath": "public/images/hud/abilities/tokamak/tokamak_crimson_cannon.png",
-      "kind": "vtex",
-      "usedBy": [
-        "ability:tokamak_crimson_cannon"
       ]
     },
     {
@@ -2782,17 +2768,7 @@
       "outPath": "public/images/hud/abilities/tokamak/tokamak_dying_star.png",
       "kind": "vtex",
       "usedBy": [
-        "ability:fathom_breach",
-        "ability:tokamak_dying_star"
-      ]
-    },
-    {
-      "ref": "file://{images}/hud/abilities/tokamak/tokamak_heat_sinks.psd",
-      "vpkPath": "panorama/images/hud/abilities/tokamak/tokamak_heat_sinks_psd.vtex_c",
-      "outPath": "public/images/hud/abilities/tokamak/tokamak_heat_sinks.png",
-      "kind": "vtex",
-      "usedBy": [
-        "ability:tokamak_heat_sinks"
+        "ability:fathom_breach"
       ]
     },
     {
@@ -2801,7 +2777,6 @@
       "outPath": "public/images/hud/abilities/tokamak/tokamak_hot_shot.png",
       "kind": "vtex",
       "usedBy": [
-        "ability:tokamak_hot_shot",
         "ability:ability_gunslinger_salvo",
         "ability:gunslinger_knockbackblast",
         "ability:ability_necro_nukemap"
@@ -3034,25 +3009,21 @@
       "outPath": "public/images/hud/abilities/weapon_damage.png",
       "kind": "vtex",
       "usedBy": [
-        "ability:citadel_weapon_bosstier2_set",
-        "ability:citadel_weapon_bosstier3_set",
-        "ability:citadel_weapon_base_defense_turret",
+        "ability:weapon_base",
+        "ability:hero_weapon_base",
+        "ability:hero_shotgun_base",
+        "ability:weapon_alternative_rmb_activate",
+        "ability:weapon_alternative_rmb+lmb_activate",
         "ability:citadel_weapon_rutger_set",
         "ability:citadel_weapon_kali_set",
         "ability:citadel_weapon_gunslinger_set",
         "ability:citadel_weapon_yakuza_set",
         "ability:citadel_weapon_architect_set",
         "ability:citadel_weapon_thumper_set",
-        "ability:weapon_base",
-        "ability:hero_weapon_base",
-        "ability:hero_shotgun_base",
-        "ability:weapon_alternative_rmb_activate",
-        "ability:weapon_alternative_rmb+lmb_activate",
+        "ability:citadel_weapon_base_defense_turret",
+        "ability:citadel_weapon_bosstier2_set",
+        "ability:citadel_weapon_bosstier3_set",
         "ability:citadel_weapon_astro_set",
-        "ability:citadel_weapon_astro_set_shotgun_shared_base",
-        "ability:citadel_weapon_astro_set_shotgun",
-        "ability:citadel_weapon_astro_set_shotgun_backwards",
-        "ability:citadel_weapon_astro_hand_cannon",
         "ability:citadel_weapon_bull_set",
         "ability:citadel_weapon_bebop_set",
         "ability:citadel_weapon_bomber_set",
@@ -3081,7 +3052,6 @@
         "ability:citadel_weapon_slork_set",
         "ability:citadel_weapon_synth_set",
         "ability:citadel_weapon_tengu_set",
-        "ability:citadel_weapon_tokamak_set",
         "ability:citadel_weapon_viscous_set",
         "ability:citadel_weapon_viscous_set_2",
         "ability:citadel_weapon_warden_set",
@@ -3101,6 +3071,7 @@
         "ability:citadel_weapon_swan_set",
         "ability:citadel_weapon_skyrunner_set",
         "ability:citadel_weapon_skyrunner_alt",
+        "ability:citadel_weapon_druid_set",
         "ability:citadel_weapon_graf_set",
         "ability:citadel_weapon_fortuna_set",
         "ability:citadel_weapon_frank_set2",
@@ -3111,6 +3082,7 @@
         "ability:citadel_weapon_punkgoat_set",
         "ability:citadel_weapon_drifter_set",
         "ability:citadel_weapon_drifter_alt",
+        "ability:citadel_weapon_opera_set",
         "ability:citadel_weapon_priest_set",
         "ability:citadel_weapon_priest_crossbow",
         "ability:ability_familiar_alt_weapon",
@@ -3348,6 +3320,15 @@
       ]
     },
     {
+      "ref": "file://{images}/icons/icon_star.svg",
+      "vpkPath": "panorama/images/icons/icon_star.vsvg_c",
+      "outPath": "public/images/icons/icon_star.svg",
+      "kind": "vsvg",
+      "usedBy": [
+        "ability:cosmetic_ability_emote"
+      ]
+    },
+    {
       "ref": "file://{images}/icons/properties/zipline.svg",
       "vpkPath": "panorama/images/icons/properties/zipline.vsvg_c",
       "outPath": "public/images/icons/properties/zipline.svg",
@@ -3561,6 +3542,24 @@
       "kind": "vtex",
       "usedBy": [
         "item:upgrade_unstable_concoction"
+      ]
+    },
+    {
+      "ref": "file://{images}/items/seasonal/2025_snowball.psd",
+      "vpkPath": "panorama/images/items/seasonal/2025_snowball_psd.vtex_c",
+      "outPath": "public/images/items/seasonal/2025_snowball.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:cosmetic_ability_snowball"
+      ]
+    },
+    {
+      "ref": "file://{images}/items/seasonal/voting_poster.psd",
+      "vpkPath": "panorama/images/items/seasonal/voting_poster_psd.vtex_c",
+      "outPath": "public/images/items/seasonal/voting_poster.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:cosmetic_ability_voting_poster"
       ]
     },
     {
@@ -5072,6 +5071,87 @@
       ]
     },
     {
+      "ref": "file://{images}/npcs/neutrals/neutral_barrel_heavy.psd",
+      "vpkPath": "panorama/images/npcs/neutrals/neutral_barrel_heavy_psd.vtex_c",
+      "outPath": "public/images/npcs/neutrals/neutral_barrel_heavy.png",
+      "kind": "vtex",
+      "usedBy": [
+        "haunt:neutral_barrel"
+      ]
+    },
+    {
+      "ref": "file://{images}/npcs/neutrals/neutral_book_normal.psd",
+      "vpkPath": "panorama/images/npcs/neutrals/neutral_book_normal_psd.vtex_c",
+      "outPath": "public/images/npcs/neutrals/neutral_book_normal.png",
+      "kind": "vtex",
+      "usedBy": [
+        "haunt:neutral_books"
+      ]
+    },
+    {
+      "ref": "file://{images}/npcs/neutrals/neutral_drain_creature_weak.psd",
+      "vpkPath": "panorama/images/npcs/neutrals/neutral_drain_creature_weak_psd.vtex_c",
+      "outPath": "public/images/npcs/neutrals/neutral_drain_creature_weak.png",
+      "kind": "vtex",
+      "usedBy": [
+        "haunt:neutral_trash"
+      ]
+    },
+    {
+      "ref": "file://{images}/npcs/neutrals/neutral_lantern_normal.psd",
+      "vpkPath": "panorama/images/npcs/neutrals/neutral_lantern_normal_psd.vtex_c",
+      "outPath": "public/images/npcs/neutrals/neutral_lantern_normal.png",
+      "kind": "vtex",
+      "usedBy": [
+        "haunt:neutral_lanterns"
+      ]
+    },
+    {
+      "ref": "file://{images}/npcs/neutrals/neutral_mushroom_normal.psd",
+      "vpkPath": "panorama/images/npcs/neutrals/neutral_mushroom_normal_psd.vtex_c",
+      "outPath": "public/images/npcs/neutrals/neutral_mushroom_normal.png",
+      "kind": "vtex",
+      "usedBy": [
+        "haunt:neutral_mushrooms"
+      ]
+    },
+    {
+      "ref": "file://{images}/npcs/neutrals/neutral_plant_normal.psd",
+      "vpkPath": "panorama/images/npcs/neutrals/neutral_plant_normal_psd.vtex_c",
+      "outPath": "public/images/npcs/neutrals/neutral_plant_normal.png",
+      "kind": "vtex",
+      "usedBy": [
+        "haunt:neutral_plants"
+      ]
+    },
+    {
+      "ref": "file://{images}/npcs/neutrals/neutral_specimen_weak.psd",
+      "vpkPath": "panorama/images/npcs/neutrals/neutral_specimen_weak_psd.vtex_c",
+      "outPath": "public/images/npcs/neutrals/neutral_specimen_weak.png",
+      "kind": "vtex",
+      "usedBy": [
+        "haunt:neutral_specimens"
+      ]
+    },
+    {
+      "ref": "file://{images}/npcs/neutrals/neutral_stagehand_normal.psd",
+      "vpkPath": "panorama/images/npcs/neutrals/neutral_stagehand_normal_psd.vtex_c",
+      "outPath": "public/images/npcs/neutrals/neutral_stagehand_normal.png",
+      "kind": "vtex",
+      "usedBy": [
+        "haunt:neutral_puppets"
+      ]
+    },
+    {
+      "ref": "file://{images}/npcs/neutrals/neutral_underground_normal.psd",
+      "vpkPath": "panorama/images/npcs/neutrals/neutral_underground_normal_psd.vtex_c",
+      "outPath": "public/images/npcs/neutrals/neutral_underground_normal.png",
+      "kind": "vtex",
+      "usedBy": [
+        "haunt:neutral_underhand"
+      ]
+    },
+    {
       "ref": "file://{images}/npcs/patron.psd",
       "vpkPath": "panorama/images/npcs/patron_psd.vtex_c",
       "outPath": "public/images/npcs/patron.png",
@@ -5182,15 +5262,6 @@
       "usedBy": [
         "ability:ability_perched_predator",
         "ability:ability_rolling_fireball"
-      ]
-    },
-    {
-      "ref": "file://{images}/upgrades/mods_weapon/longshot.psd",
-      "vpkPath": "panorama/images/upgrades/mods_weapon/longshot_psd.vtex_c",
-      "outPath": "public/images/upgrades/mods_weapon/longshot.png",
-      "kind": "vtex",
-      "usedBy": [
-        "ability:ability_target_practice"
       ]
     },
     {

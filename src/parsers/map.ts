@@ -191,11 +191,25 @@ export function parseMap(
 
   // キャンプごとの体数。info_neutral_trooper_spawn が campname でキャンプを指している
   const unitsByCamp = new Map<string, number>();
+  const hauntsByCamp = new Map<string, Record<string, number>>();
   for (const e of ents) {
     if (e.classname === "info_neutral_trooper_spawn" && e.campname) {
       unitsByCamp.set(e.campname, (unitsByCamp.get(e.campname) ?? 0) + 1);
+      // 6712 から出現地点がホーントの種類(npc_units のキー)を指定する
+      if (e.neutralsubclass) {
+        const h = hauntsByCamp.get(e.campname) ?? {};
+        h[e.neutralsubclass] = (h[e.neutralsubclass] ?? 0) + 1;
+        hauntsByCamp.set(e.campname, h);
+      }
     }
   }
+  /*
+   * 出現地点(campname)とキャンプの結び付け。6701 まではキャンプ側の campname、
+   * 6712 からはキャンプ側の targetname が出現地点の campname と一致する
+   * (6712 でキャンプの campname は空か別名で、そのままだと全キャンプ0体になっていた)
+   */
+  const campKey = (e: Ent): string =>
+    [e.targetname, e.campname].find((k) => k && unitsByCamp.has(k)) ?? "";
 
   const camps: MapCamp[] = [];
   const breakables: MapBreakable[] = [];
@@ -206,7 +220,17 @@ export function parseMap(
       const type = CAMP_TYPE[e.subclass_name ?? ""];
       if (!type) continue;
       if (type === "midboss") landmarks.push({ kind: "midboss", lane: null, team: null, underground: true, ...p });
-      else camps.push({ type, name: e.campname ?? null, units: unitsByCamp.get(e.campname ?? "") ?? 0, underground: underground(p), ...p });
+      else {
+        const key = campKey(e);
+        camps.push({
+          type,
+          name: key || e.campname || null,
+          units: unitsByCamp.get(key) ?? 0,
+          haunts: hauntsByCamp.get(key) ?? {},
+          underground: underground(p),
+          ...p,
+        });
+      }
     } else if (e.classname === "citadel_breakable_prop") {
       const kind = BREAKABLE_KIND[e.subclass_name ?? ""];
       if (!kind) continue;

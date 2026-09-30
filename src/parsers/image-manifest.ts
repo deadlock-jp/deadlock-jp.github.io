@@ -23,6 +23,8 @@ import type { AbilitiesFile } from "../types/ability.ts";
 import type { HeroesFile } from "../types/hero.ts";
 import { SCALE_ICON_REFS } from "../lib/scaleIcons.ts";
 import type { MapFile } from "../types/map.ts";
+import type { ObjectsFile } from "../types/object.ts";
+import { groupHaunts } from "./objects.ts";
 
 export interface ImageEntry {
   /** データ側の参照パス */
@@ -128,6 +130,18 @@ export function buildImageManifest(dataDir: string, repoDataDir?: string): Image
     }
     for (const [key, icon] of Object.entries(mechanics.campIcons ?? {})) {
       add(icon, `camp:${key}`);
+    }
+    /*
+     * ホーント(中立モンスター)の種類ごとの絵。6712 から npc_units.vdata が
+     * ユニットアイコン(m_strCustomUnitIcon)を持つので人の指定は要らない。
+     * 付録に並べるのは groupHaunts が選ぶ1種類1枚だけ。
+     */
+    const objectsPath = join(dataDir, "objects.json");
+    const mapPath = join(dataDir, "map.json");
+    if (existsSync(objectsPath) && existsSync(mapPath)) {
+      const objects = (JSON.parse(readFileSync(objectsPath, "utf8")) as ObjectsFile).objects;
+      const camps = (JSON.parse(readFileSync(mapPath, "utf8")) as MapFile).camps;
+      for (const s of groupHaunts(objects, camps.map((c) => c.haunts ?? {}))) add(s.icon, `haunt:${s.tokenBase}`);
     }
 
     /*

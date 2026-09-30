@@ -52,6 +52,9 @@ export function parseObjects(npcUnitsPath: string, upstreamCommit: string): Obje
       baseKey: str(root[key] !== null && typeof root[key] === "object" ? (root[key] as Kv3Object)["_base"] : undefined),
       stats,
       flags,
+      nameToken: str(e["m_sLocUnitName"])?.replace(/^#/, "") ?? null,
+      icon: str(e["m_strCustomUnitIcon"]),
+      neutralType: str(e["m_eNeutralType"]),
     };
   }
 
@@ -61,4 +64,48 @@ export function parseObjects(npcUnitsPath: string, upstreamCommit: string): Obje
     generatedAt: new Date().toISOString(),
     objects,
   };
+}
+
+export interface HauntSpecies {
+  /** 名前トークンの共通部分(neutral_specimens など)。_1/_2/_3 が小・中・大 */
+  tokenBase: string;
+  /** 小・中・大それぞれの名前トークン(データに無い段は含まない) */
+  tokens: string[];
+  /** マップに配置されている体数(map.json のキャンプの内訳の合計) */
+  placed: number;
+  /** 代表のアイコン参照(マップに一番多く置かれているユニットのもの)。無ければ null */
+  icon: string | null;
+}
+
+/**
+ * ホーント(6712 で入れ替わった中立モンスター)を種類ごとにまとめる。
+ * npc_units のキーは種類とモデルの組み合わせで分かれている(neutral_barrel_01 / _02 など)ので、
+ * ゲーム内の表示名トークン(neutral_barrel_1 → 小)の共通部分で束ねる。
+ * マップに1体も置かれていない種類は、試合で見かけないので落とす。
+ */
+export function groupHaunts(
+  objects: Record<string, GameObject>,
+  campHaunts: Record<string, number>[],
+): HauntSpecies[] {
+  const placedByUnit: Record<string, number> = {};
+  for (const h of campHaunts) for (const [k, n] of Object.entries(h)) placedByUnit[k] = (placedByUnit[k] ?? 0) + n;
+
+  const groups = new Map<string, { tokens: Set<string>; units: GameObject[] }>();
+  for (const o of Object.values(objects)) {
+    if (o.className !== "npc_trooper_neutral" || !o.nameToken) continue;
+    const m = /^(.+)_(\d)$/.exec(o.nameToken);
+    if (!m) continue;
+    const g = groups.get(m[1]!) ?? { tokens: new Set<string>(), units: [] };
+    g.tokens.add(o.nameToken);
+    g.units.push(o);
+    groups.set(m[1]!, g);
+  }
+  return [...groups.entries()]
+    .map(([tokenBase, g]) => {
+      const placed = g.units.reduce((s, u) => s + (placedByUnit[u.id] ?? 0), 0);
+      const top = [...g.units].filter((u) => u.icon).sort((a, b) => (placedByUnit[b.id] ?? 0) - (placedByUnit[a.id] ?? 0))[0];
+      return { tokenBase, tokens: [...g.tokens].sort(), placed, icon: top?.icon ?? null };
+    })
+    .filter((s) => s.placed > 0)
+    .sort((a, b) => b.placed - a.placed);
 }

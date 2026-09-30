@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "upstreamCommit": "6712",
-  "generatedAt": "2026-09-29T21:22:54.939Z",
+  "generatedAt": "2026-09-30T02:45:12.162Z",
   "objects": {
     "weapon_base": {
       "id": "weapon_base",
@@ -10,7 +10,10 @@
       "stats": {},
       "flags": {
         "trackOutOfCombatStatus": false
-      }
+      },
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "trooper_base": {
       "id": "trooper_base",
@@ -39,7 +42,10 @@
         "trackOutOfCombatStatus": true,
         "outlineThroughWalls": true,
         "outlineWhenVisible": true
-      }
+      },
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "trooper_zipline_container": {
       "id": "trooper_zipline_container",
@@ -69,7 +75,10 @@
         "outlineThroughWalls": true,
         "outlineWhenVisible": true,
         "spawnBreakablesOnDeath": false
-      }
+      },
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "trooper_normal": {
       "id": "trooper_normal",
@@ -103,7 +112,10 @@
         "outlineThroughWalls": true,
         "outlineWhenVisible": true,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "trooper_medic": {
       "id": "trooper_medic",
@@ -137,7 +149,10 @@
         "outlineThroughWalls": true,
         "outlineWhenVisible": true,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "trooper_melee": {
       "id": "trooper_melee",
@@ -171,7 +186,10 @@
         "outlineThroughWalls": true,
         "outlineWhenVisible": true,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "npc_boss_tier1": {
       "id": "npc_boss_tier1",
@@ -208,7 +226,10 @@
         "outlineWhenVisible": true,
         "useTeamRelativeMaterialGroups": false,
         "spawnOnGround": true
-      }
+      },
+      "nameToken": "guardian_unit",
+      "icon": null,
+      "neutralType": null
     },
     "npc_barrack_boss": {
       "id": "npc_barrack_boss",
@@ -248,7 +269,10 @@
         "outlineThroughWalls": false,
         "outlineWhenVisible": false,
         "spawnOnGround": true
-      }
+      },
+      "nameToken": "boss_barracks_unit",
+      "icon": null,
+      "neutralType": null
     },
     "npc_barrack_boss_amber": {
       "id": "npc_barrack_boss_amber",
@@ -288,7 +312,10 @@
         "outlineThroughWalls": false,
         "outlineWhenVisible": false,
         "spawnOnGround": true
-      }
+      },
+      "nameToken": "boss_barracks_unit",
+      "icon": null,
+      "neutralType": null
     },
     "npc_barrack_boss_sapphire": {
       "id": "npc_barrack_boss_sapphire",
@@ -328,7 +355,10 @@
         "outlineThroughWalls": false,
         "outlineWhenVisible": false,
         "spawnOnGround": true
-      }
+      },
+      "nameToken": "boss_barracks_unit",
+      "icon": null,
+      "neutralType": null
     },
     "destroyable_building": {
       "id": "destroyable_building",
@@ -341,7 +371,10 @@
         "trooperJumpRange": 700,
         "enemyTrooperProtectionRange": 1575
       },
-      "flags": {}
+      "flags": {},
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "alt_npc_boss_tier1": {
       "id": "alt_npc_boss_tier1",
@@ -378,7 +411,10 @@
         "outlineWhenVisible": true,
         "useTeamRelativeMaterialGroups": false,
         "spawnOnGround": true
-      }
+      },
+      "nameToken": "guardian_unit",
+      "icon": null,
+      "neutralType": null
     },
     "npc_super_neutral": {
       "id": "npc_super_neutral",
@@ -397,7 +433,10 @@
       "flags": {
         "trackOutOfCombatStatus": false,
         "spawnOnGround": true
-      }
+      },
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "neutral_base": {
       "id": "neutral_base",
@@ -422,7 +461,10 @@
         "outlineThroughWalls": true,
         "noMelee": false,
         "onlyMelee": false
-      }
+      },
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "neutral_trooper_weak": {
       "id": "neutral_trooper_weak",
@@ -458,7 +500,10 @@
         "outlineThroughWalls": true,
         "noMelee": false,
         "onlyMelee": false
-      }
+      },
+      "nameToken": "neutral_trash_1",
+      "icon": null,
+      "neutralType": "NEUTRAL_NPC_WEAK"
     },
     "neutral_trooper_normal": {
       "id": "neutral_trooper_normal",
@@ -495,7 +540,10 @@
         "outlineThroughWalls": true,
         "noMelee": false,
         "onlyMelee": false
-      }
+      },
+      "nameToken": "neutral_trash_2",
+      "icon": null,
+      "neutralType": "NEUTRAL_NPC_NORMAL"
     },
     "neutral_trooper_strong": {
       "id": "neutral_trooper_strong",
@@ -533,7 +581,10 @@
         "outlineThroughWalls": true,
         "noMelee": false,
         "onlyMelee": false
-      }
+      },
+      "nameToken": "neutral_trash_3",
+      "icon": null,
+      "neutralType": "NEUTRAL_NPC_STRONG"
     },
     "neutral_drain_creature_weak": {
       "id": "neutral_drain_creature_weak",
@@ -574,7 +625,10 @@
         "onlyMelee": false,
         "useSleepPoseWhenNoTarget": true,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_trash_1",
+      "icon": "file://{images}/npcs/neutrals/neutral_drain_creature_weak.psd",
+      "neutralType": "NEUTRAL_NPC_WEAK"
     },
     "neutral_drain_creature_normal": {
       "id": "neutral_drain_creature_normal",
@@ -616,7 +670,10 @@
         "onlyMelee": false,
         "useSleepPoseWhenNoTarget": true,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_trash_2",
+      "icon": "file://{images}/npcs/neutrals/neutral_drain_creature_normal.psd",
+      "neutralType": "NEUTRAL_NPC_NORMAL"
     },
     "neutral_drain_creature_strong": {
       "id": "neutral_drain_creature_strong",
@@ -659,7 +716,10 @@
         "onlyMelee": false,
         "useSleepPoseWhenNoTarget": true,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_trash_3",
+      "icon": "file://{images}/npcs/neutrals/neutral_drain_creature_strong.psd",
+      "neutralType": "NEUTRAL_NPC_STRONG"
     },
     "neutral_sinners_sacrifice": {
       "id": "neutral_sinners_sacrifice",
@@ -699,7 +759,10 @@
         "damagedByAbilities": false,
         "fixedMeleeDamage": true,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_sinners",
+      "icon": null,
+      "neutralType": "NEUTRAL_SINNERS_SACRIFICE"
     },
     "npc_neutral_sinners_sacrifice_hideout": {
       "id": "npc_neutral_sinners_sacrifice_hideout",
@@ -740,7 +803,10 @@
         "damagedByAbilities": false,
         "fixedMeleeDamage": true,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_sinners",
+      "icon": null,
+      "neutralType": "NEUTRAL_SINNERS_SACRIFICE"
     },
     "npc_neutral_bug": {
       "id": "npc_neutral_bug",
@@ -755,7 +821,10 @@
       },
       "flags": {
         "outlineThroughWalls": false
-      }
+      },
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "npc_boss_tier2": {
       "id": "npc_boss_tier2",
@@ -803,7 +872,10 @@
         "outlineWhenVisible": true,
         "useTeamRelativeMaterialGroups": false,
         "spawnOnGround": false
-      }
+      },
+      "nameToken": "walker_unit",
+      "icon": null,
+      "neutralType": null
     },
     "alt_npc_boss_tier2": {
       "id": "alt_npc_boss_tier2",
@@ -851,7 +923,10 @@
         "outlineWhenVisible": true,
         "useTeamRelativeMaterialGroups": false,
         "spawnOnGround": false
-      }
+      },
+      "nameToken": "walker_unit",
+      "icon": null,
+      "neutralType": null
     },
     "npc_boss_tier2_weak": {
       "id": "npc_boss_tier2_weak",
@@ -899,7 +974,10 @@
         "outlineWhenVisible": true,
         "useTeamRelativeMaterialGroups": false,
         "spawnOnGround": false
-      }
+      },
+      "nameToken": "walker_unit",
+      "icon": null,
+      "neutralType": null
     },
     "alt_npc_boss_tier2_weak": {
       "id": "alt_npc_boss_tier2_weak",
@@ -947,7 +1025,10 @@
         "outlineWhenVisible": true,
         "useTeamRelativeMaterialGroups": false,
         "spawnOnGround": false
-      }
+      },
+      "nameToken": "walker_unit",
+      "icon": null,
+      "neutralType": null
     },
     "npc_boss_tier3": {
       "id": "npc_boss_tier3",
@@ -991,7 +1072,10 @@
       },
       "flags": {
         "spawnOnGround": false
-      }
+      },
+      "nameToken": null,
+      "icon": "file://{images}/npcs/patron_hiddenking.psd",
+      "neutralType": null
     },
     "alt_npc_boss_tier3": {
       "id": "alt_npc_boss_tier3",
@@ -1035,7 +1119,10 @@
       },
       "flags": {
         "spawnOnGround": false
-      }
+      },
+      "nameToken": null,
+      "icon": "file://{images}/npcs/patron_archmother.psd",
+      "neutralType": null
     },
     "npc_shielded_sentry": {
       "id": "npc_shielded_sentry",
@@ -1048,7 +1135,10 @@
         "nearDeathDuration": 0.8,
         "zShootPostionOffset": 25
       },
-      "flags": {}
+      "flags": {},
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "npc_yakuza_gangster": {
       "id": "npc_yakuza_gangster",
@@ -1058,7 +1148,10 @@
         "sightRange": 1600,
         "meleeAttemptRange": 0
       },
-      "flags": {}
+      "flags": {},
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "citadel_viscous_ball": {
       "id": "citadel_viscous_ball",
@@ -1067,7 +1160,10 @@
       "stats": {
         "physicsRadius": 40
       },
-      "flags": {}
+      "flags": {},
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "npc_base_defense_sentry": {
       "id": "npc_base_defense_sentry",
@@ -1079,7 +1175,10 @@
         "timeToEndScale": 50,
         "maxScale": 2
       },
-      "flags": {}
+      "flags": {},
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "npc_player_bot_brain": {
       "id": "npc_player_bot_brain",
@@ -1116,7 +1215,10 @@
         "disengageFromEnemyToLaneDist": 1200,
         "defendBaseSearchRadius": 1800
       },
-      "flags": {}
+      "flags": {},
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "citadel_spider_animating": {
       "id": "citadel_spider_animating",
@@ -1125,7 +1227,10 @@
       "stats": {
         "modelScale": 0.001
       },
-      "flags": {}
+      "flags": {},
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "shield_escort": {
       "id": "shield_escort",
@@ -1147,7 +1252,10 @@
       },
       "flags": {
         "spawnOnGround": true
-      }
+      },
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "citadel_hideout_shootable_target_spawner": {
       "id": "citadel_hideout_shootable_target_spawner",
@@ -1160,7 +1268,10 @@
         "ballMaxDist": 3000,
         "ballGoalThresHold": 40
       },
-      "flags": {}
+      "flags": {},
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "npc_neutral_flying_pigeon": {
       "id": "npc_neutral_flying_pigeon",
@@ -1172,7 +1283,10 @@
         "respawnTime": 30,
         "modelScale": 0.4
       },
-      "flags": {}
+      "flags": {},
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "npc_neutral_hideout_cat": {
       "id": "npc_neutral_hideout_cat",
@@ -1192,7 +1306,10 @@
         "runSpeed": 320,
         "walkSpeed": 150
       },
-      "flags": {}
+      "flags": {},
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "npc_neutral_hideout_rabbit": {
       "id": "npc_neutral_hideout_rabbit",
@@ -1212,7 +1329,10 @@
         "runSpeed": 390,
         "walkSpeed": 100
       },
-      "flags": {}
+      "flags": {},
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "citadel_hideout_clock": {
       "id": "citadel_hideout_clock",
@@ -1221,7 +1341,10 @@
       "stats": {
         "hourChimeInterval": 2.3
       },
-      "flags": {}
+      "flags": {},
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "citadel_hideout_ball": {
       "id": "citadel_hideout_ball",
@@ -1242,7 +1365,10 @@
         "fl_MaxExtraGravityScale": 0.9,
         "minJugglesBeforeDisplay": 2
       },
-      "flags": {}
+      "flags": {},
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "citadel_basketball": {
       "id": "citadel_basketball",
@@ -1264,7 +1390,10 @@
         "minJugglesBeforeDisplay": 2,
         "vPhysicsForceMul": 650
       },
-      "flags": {}
+      "flags": {},
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "npc_necro_skele": {
       "id": "npc_necro_skele",
@@ -1287,7 +1416,10 @@
         "outlineWhenVisible": true,
         "outlineThroughWalls": true,
         "spawnOnGround": true
-      }
+      },
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "npc_familiar_helper": {
       "id": "npc_familiar_helper",
@@ -1304,7 +1436,10 @@
       },
       "flags": {
         "outlineWhenVisible": false
-      }
+      },
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "neutral_dock_creature_strong": {
       "id": "neutral_dock_creature_strong",
@@ -1342,7 +1477,10 @@
         "outlineThroughWalls": true,
         "noMelee": false,
         "onlyMelee": false
-      }
+      },
+      "nameToken": "neutral_trash_3",
+      "icon": null,
+      "neutralType": "NEUTRAL_NPC_STRONG"
     },
     "neutral_rooftop_pigeon_weak": {
       "id": "neutral_rooftop_pigeon_weak",
@@ -1378,7 +1516,10 @@
         "outlineThroughWalls": true,
         "noMelee": false,
         "onlyMelee": false
-      }
+      },
+      "nameToken": "neutral_overseer_1",
+      "icon": null,
+      "neutralType": "NEUTRAL_NPC_WEAK"
     },
     "neutral_rooftop_pigeon_normal": {
       "id": "neutral_rooftop_pigeon_normal",
@@ -1415,7 +1556,10 @@
         "outlineThroughWalls": true,
         "noMelee": false,
         "onlyMelee": false
-      }
+      },
+      "nameToken": "neutral_overseer_2",
+      "icon": null,
+      "neutralType": "NEUTRAL_NPC_NORMAL"
     },
     "neutral_rooftop_pigeon_strong": {
       "id": "neutral_rooftop_pigeon_strong",
@@ -1453,7 +1597,10 @@
         "outlineThroughWalls": true,
         "noMelee": false,
         "onlyMelee": false
-      }
+      },
+      "nameToken": "neutral_overseer_3",
+      "icon": null,
+      "neutralType": "NEUTRAL_NPC_STRONG"
     },
     "neutral_underground_weak": {
       "id": "neutral_underground_weak",
@@ -1490,7 +1637,10 @@
         "noMelee": true,
         "onlyMelee": false,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_underhand_1",
+      "icon": null,
+      "neutralType": "NEUTRAL_NPC_WEAK"
     },
     "neutral_underground_normal": {
       "id": "neutral_underground_normal",
@@ -1528,7 +1678,10 @@
         "noMelee": true,
         "onlyMelee": false,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_underhand_2",
+      "icon": "file://{images}/npcs/neutrals/neutral_underground_normal.psd",
+      "neutralType": "NEUTRAL_NPC_NORMAL"
     },
     "neutral_underground_strong": {
       "id": "neutral_underground_strong",
@@ -1567,7 +1720,10 @@
         "noMelee": true,
         "onlyMelee": false,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_underhand_3",
+      "icon": "file://{images}/npcs/neutrals/neutral_underground_heavy.psd",
+      "neutralType": "NEUTRAL_NPC_STRONG"
     },
     "neutral_park_watcher_weak": {
       "id": "neutral_park_watcher_weak",
@@ -1603,7 +1759,10 @@
         "outlineThroughWalls": true,
         "noMelee": false,
         "onlyMelee": false
-      }
+      },
+      "nameToken": "neutral_trash_1",
+      "icon": null,
+      "neutralType": "NEUTRAL_NPC_WEAK"
     },
     "neutral_park_watcher_normal": {
       "id": "neutral_park_watcher_normal",
@@ -1640,7 +1799,10 @@
         "outlineThroughWalls": true,
         "noMelee": false,
         "onlyMelee": false
-      }
+      },
+      "nameToken": "neutral_trash_2",
+      "icon": null,
+      "neutralType": "NEUTRAL_NPC_NORMAL"
     },
     "neutral_park_watcher_strong": {
       "id": "neutral_park_watcher_strong",
@@ -1678,7 +1840,10 @@
         "outlineThroughWalls": true,
         "noMelee": false,
         "onlyMelee": false
-      }
+      },
+      "nameToken": "neutral_trash_3",
+      "icon": null,
+      "neutralType": "NEUTRAL_NPC_STRONG"
     },
     "neutral_dock_creature_weak": {
       "id": "neutral_dock_creature_weak",
@@ -1714,7 +1879,10 @@
         "outlineThroughWalls": true,
         "noMelee": false,
         "onlyMelee": false
-      }
+      },
+      "nameToken": "neutral_trash_1",
+      "icon": null,
+      "neutralType": "NEUTRAL_NPC_WEAK"
     },
     "neutral_dock_creature_normal": {
       "id": "neutral_dock_creature_normal",
@@ -1751,7 +1919,10 @@
         "outlineThroughWalls": true,
         "noMelee": false,
         "onlyMelee": false
-      }
+      },
+      "nameToken": "neutral_trash_2",
+      "icon": null,
+      "neutralType": "NEUTRAL_NPC_NORMAL"
     },
     "neutral_plant_weak": {
       "id": "neutral_plant_weak",
@@ -1792,7 +1963,10 @@
         "onlyMelee": false,
         "useSleepPoseWhenNoTarget": true,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_plants_1",
+      "icon": "file://{images}/npcs/neutrals/neutral_plant_weak.psd",
+      "neutralType": "NEUTRAL_NPC_WEAK"
     },
     "neutral_plant_normal": {
       "id": "neutral_plant_normal",
@@ -1833,7 +2007,10 @@
         "onlyMelee": false,
         "useSleepPoseWhenNoTarget": true,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_plants_2",
+      "icon": "file://{images}/npcs/neutrals/neutral_plant_normal.psd",
+      "neutralType": "NEUTRAL_NPC_NORMAL"
     },
     "neutral_plant_strong": {
       "id": "neutral_plant_strong",
@@ -1875,7 +2052,10 @@
         "onlyMelee": false,
         "useSleepPoseWhenNoTarget": true,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_plants_3",
+      "icon": "file://{images}/npcs/neutrals/neutral_plant_heavy.psd",
+      "neutralType": "NEUTRAL_NPC_STRONG"
     },
     "neutral_lantern_weak": {
       "id": "neutral_lantern_weak",
@@ -1912,7 +2092,10 @@
         "noMelee": true,
         "onlyMelee": false,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_lanterns_1",
+      "icon": null,
+      "neutralType": "NEUTRAL_NPC_WEAK"
     },
     "neutral_lantern_normal": {
       "id": "neutral_lantern_normal",
@@ -1950,7 +2133,10 @@
         "noMelee": true,
         "onlyMelee": false,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_lanterns_2",
+      "icon": "file://{images}/npcs/neutrals/neutral_lantern_normal.psd",
+      "neutralType": "NEUTRAL_NPC_NORMAL"
     },
     "neutral_lantern_strong": {
       "id": "neutral_lantern_strong",
@@ -1989,7 +2175,10 @@
         "noMelee": true,
         "onlyMelee": false,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_lanterns_3",
+      "icon": "file://{images}/npcs/neutrals/neutral_lantern_strong.psd",
+      "neutralType": "NEUTRAL_NPC_STRONG"
     },
     "neutral_specimen_normal": {
       "id": "neutral_specimen_normal",
@@ -2028,7 +2217,10 @@
         "onlyMelee": false,
         "useSleepPoseWhenNoTarget": true,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_specimens_2",
+      "icon": "file://{images}/npcs/neutrals/neutral_specimen_normal.psd",
+      "neutralType": "NEUTRAL_NPC_NORMAL"
     },
     "neutral_specimen_strong": {
       "id": "neutral_specimen_strong",
@@ -2068,7 +2260,10 @@
         "onlyMelee": false,
         "useSleepPoseWhenNoTarget": true,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_specimens_3",
+      "icon": null,
+      "neutralType": "NEUTRAL_NPC_STRONG"
     },
     "neutral_specimen_weak": {
       "id": "neutral_specimen_weak",
@@ -2106,7 +2301,10 @@
         "onlyMelee": false,
         "useSleepPoseWhenNoTarget": true,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_specimens_1",
+      "icon": "file://{images}/npcs/neutrals/neutral_specimen_weak.psd",
+      "neutralType": "NEUTRAL_NPC_WEAK"
     },
     "neutral_theater_normal": {
       "id": "neutral_theater_normal",
@@ -2144,7 +2342,10 @@
         "noMelee": false,
         "onlyMelee": false,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_puppets_2",
+      "icon": "file://{images}/npcs/neutrals/neutral_stagehand_normal.psd",
+      "neutralType": "NEUTRAL_NPC_NORMAL"
     },
     "neutral_theater_strong": {
       "id": "neutral_theater_strong",
@@ -2183,7 +2384,10 @@
         "noMelee": false,
         "onlyMelee": false,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_puppets_3",
+      "icon": "file://{images}/npcs/neutrals/neutral_stagehand_heavy.psd",
+      "neutralType": "NEUTRAL_NPC_STRONG"
     },
     "neutral_theater_weak": {
       "id": "neutral_theater_weak",
@@ -2220,7 +2424,10 @@
         "noMelee": false,
         "onlyMelee": false,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_puppets_1",
+      "icon": null,
+      "neutralType": "NEUTRAL_NPC_WEAK"
     },
     "neutral_street_trash_weak": {
       "id": "neutral_street_trash_weak",
@@ -2256,7 +2463,10 @@
         "outlineThroughWalls": true,
         "noMelee": false,
         "onlyMelee": false
-      }
+      },
+      "nameToken": "neutral_trash_1",
+      "icon": null,
+      "neutralType": "NEUTRAL_NPC_WEAK"
     },
     "neutral_street_trash_normal": {
       "id": "neutral_street_trash_normal",
@@ -2293,7 +2503,10 @@
         "outlineThroughWalls": true,
         "noMelee": false,
         "onlyMelee": false
-      }
+      },
+      "nameToken": "neutral_trash_2",
+      "icon": null,
+      "neutralType": "NEUTRAL_NPC_NORMAL"
     },
     "neutral_street_trash_strong": {
       "id": "neutral_street_trash_strong",
@@ -2331,7 +2544,10 @@
         "outlineThroughWalls": true,
         "noMelee": false,
         "onlyMelee": false
-      }
+      },
+      "nameToken": "neutral_trash_3",
+      "icon": null,
+      "neutralType": "NEUTRAL_NPC_STRONG"
     },
     "neutral_library_weak": {
       "id": "neutral_library_weak",
@@ -2369,7 +2585,10 @@
         "onlyMelee": false,
         "useSleepPoseWhenNoTarget": true,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_books_1",
+      "icon": "file://{images}/npcs/neutrals/neutral_book_weak.psd",
+      "neutralType": "NEUTRAL_NPC_WEAK"
     },
     "neutral_library_normal": {
       "id": "neutral_library_normal",
@@ -2407,7 +2626,10 @@
         "noMelee": false,
         "onlyMelee": true,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_books_2",
+      "icon": "file://{images}/npcs/neutrals/neutral_book_normal.psd",
+      "neutralType": "NEUTRAL_NPC_NORMAL"
     },
     "neutral_library_strong": {
       "id": "neutral_library_strong",
@@ -2446,7 +2668,10 @@
         "noMelee": false,
         "onlyMelee": true,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_books_3",
+      "icon": null,
+      "neutralType": "NEUTRAL_NPC_STRONG"
     },
     "neutral_mushroom_normal": {
       "id": "neutral_mushroom_normal",
@@ -2484,7 +2709,10 @@
         "noMelee": false,
         "onlyMelee": false,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_mushrooms_2",
+      "icon": "file://{images}/npcs/neutrals/neutral_mushroom_normal.psd",
+      "neutralType": "NEUTRAL_NPC_NORMAL"
     },
     "neutral_mushroom_strong": {
       "id": "neutral_mushroom_strong",
@@ -2523,7 +2751,10 @@
         "noMelee": false,
         "onlyMelee": false,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_mushrooms_3",
+      "icon": "file://{images}/npcs/neutrals/neutral_mushroom_heavy.psd",
+      "neutralType": "NEUTRAL_NPC_STRONG"
     },
     "neutral_mushroom_weak": {
       "id": "neutral_mushroom_weak",
@@ -2560,7 +2791,10 @@
         "noMelee": false,
         "onlyMelee": false,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_mushrooms_1",
+      "icon": null,
+      "neutralType": "NEUTRAL_NPC_WEAK"
     },
     "neutral_barrel_01_normal": {
       "id": "neutral_barrel_01_normal",
@@ -2599,7 +2833,10 @@
         "onlyMelee": false,
         "useSleepPoseWhenNoTarget": true,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_barrel_2",
+      "icon": "file://{images}/npcs/neutrals/neutral_barrel_heavy.psd",
+      "neutralType": "NEUTRAL_NPC_NORMAL"
     },
     "neutral_barrel_01_strong": {
       "id": "neutral_barrel_01_strong",
@@ -2639,7 +2876,10 @@
         "onlyMelee": false,
         "useSleepPoseWhenNoTarget": true,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_barrel_3",
+      "icon": "file://{images}/npcs/neutrals/neutral_barrel_heavy.psd",
+      "neutralType": "NEUTRAL_NPC_STRONG"
     },
     "neutral_barrel_01_weak": {
       "id": "neutral_barrel_01_weak",
@@ -2677,7 +2917,10 @@
         "onlyMelee": false,
         "useSleepPoseWhenNoTarget": true,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_barrel_1",
+      "icon": "file://{images}/npcs/neutrals/neutral_barrel_heavy.psd",
+      "neutralType": "NEUTRAL_NPC_WEAK"
     },
     "neutral_barrel_02_normal": {
       "id": "neutral_barrel_02_normal",
@@ -2716,7 +2959,10 @@
         "onlyMelee": false,
         "useSleepPoseWhenNoTarget": true,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_barrel_2",
+      "icon": "file://{images}/npcs/neutrals/neutral_barrel_normal.psd",
+      "neutralType": "NEUTRAL_NPC_NORMAL"
     },
     "neutral_barrel_02_strong": {
       "id": "neutral_barrel_02_strong",
@@ -2756,7 +3002,10 @@
         "onlyMelee": false,
         "useSleepPoseWhenNoTarget": true,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_barrel_3",
+      "icon": "file://{images}/npcs/neutrals/neutral_barrel_normal.psd",
+      "neutralType": "NEUTRAL_NPC_STRONG"
     },
     "neutral_barrel_02_weak": {
       "id": "neutral_barrel_02_weak",
@@ -2794,7 +3043,10 @@
         "onlyMelee": false,
         "useSleepPoseWhenNoTarget": true,
         "spawnBreakablesOnDeath": true
-      }
+      },
+      "nameToken": "neutral_barrel_1",
+      "icon": "file://{images}/npcs/neutrals/neutral_barrel_normal.psd",
+      "neutralType": "NEUTRAL_NPC_WEAK"
     }
   }
 }

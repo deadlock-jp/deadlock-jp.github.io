@@ -19,6 +19,15 @@ export interface GameObject {
   stats: Record<string, number>;
   /** 真偽値パラメータ。キーの変換規則は stats と同じ */
   flags: Record<string, boolean>;
+  /**
+   * ゲーム内の表示名トークン(m_sLocUnitName から先頭の # を除いたもの。例: neutral_specimens_1)。
+   * 6712(2026-09-29)のホーントから入った。持たないオブジェクトは null
+   */
+  nameToken?: string | null;
+  /** ゲーム内のユニットアイコン(m_strCustomUnitIcon。file://{images}/... の参照)。無ければ null */
+  icon?: string | null;
+  /** 中立の強さ(m_eNeutralType。NEUTRAL_NPC_WEAK / _NORMAL / _STRONG)。中立以外は null */
+  neutralType?: string | null;
 }
 
 export interface ObjectsFile {
