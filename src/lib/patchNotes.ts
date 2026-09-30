@@ -18,6 +18,23 @@ export interface PatchNoteEntry {
   url: string;
   /** BBCodeから変換済みの行。"## " で始まる行は見出し */
   lines: string[];
+  /**
+   * 英語の原文の題と本文(日本語以外のページで出す。翻訳はしない)。
+   * title / lines は日本語版が公開されていれば日本語、無ければ英語。
+   * 古い patch-notes.json には無いので undefined のことがある
+   */
+  titleEn?: string;
+  linesEn?: string[];
+}
+
+/** その言語で出す題。日本語は title、それ以外は英語の原文の題 */
+export function noteTitle(n: PatchNoteEntry, lang: string): string {
+  return lang === "ja" ? n.title : (n.titleEn ?? n.title);
+}
+
+/** その言語で出す本文。日本語は lines、それ以外は英語の原文 */
+export function noteLines(n: PatchNoteEntry, lang: string): string[] {
+  return lang === "ja" ? n.lines : (n.linesEn ?? n.lines);
 }
 
 const file = patchNotesJson as unknown as { entries: PatchNoteEntry[] };

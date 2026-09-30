@@ -131,6 +131,9 @@ const entries = candidates.map((en) => {
     title: (ja.event_name ?? en.event_name).trim(),
     url: `https://store.steampowered.com/news/app/${APPID}/view/${en.gid}`,
     lines: parseBody(body),
+    // 日本語以外のページは英語の原文を出す(翻訳しない)。日本語版は上の title / lines のまま
+    titleEn: en.event_name.trim(),
+    linesEn: parseBody(en.announcement_body.body),
   };
 });
 entries.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
