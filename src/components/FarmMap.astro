@@ -74,8 +74,9 @@ const layers = map
 const hasLabels = !!map?.breakables.some((b) => breakableLabel(b));
 
 type Camp = MapFile["camps"][number];
-/** 「中程度の中立モンスター（3体）」。体数が分からないキャンプは体数を省く */
-const campTitle = (c: Camp) => `${camps[c.type]?.label ?? c.type}${c.units > 0 ? `（${c.units}体）` : ""}`;
+/** 「中程度の中立モンスター（3体）」。罪人の供物(スロット)は「台」。体数が分からないキャンプは体数を省く */
+const campTitle = (c: Camp) =>
+  `${camps[c.type]?.label ?? c.type}${c.units > 0 ? `（${c.units}${c.type === "vaults" ? "台" : "体"}）` : ""}`;
 const campTiming = (c: Camp) =>
   `${clock((camps[c.type]?.initialSpawnMinutes ?? 0) * 60)}〜、${duration((camps[c.type]?.respawnMinutes ?? 0) * 60)}ごと`;
 

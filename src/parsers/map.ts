@@ -189,17 +189,24 @@ export function parseMap(
     return isTunnelFloor(tunnelImg, px, py);
   };
 
+  /*
+   * プレハブから置かれた名前には "[PR#]" が付く(6712)。出現地点側だけ付いていてキャンプ側には
+   * 付いていないことがある(四隅の中キャンプ: "[PR#]nw_bank_camp" と "nw_bank_camp")ので外して比べる
+   */
+  const nameKey = (s: string | undefined): string => (s ?? "").replace(/^\[PR#\]/, "");
+
   // キャンプごとの体数。info_neutral_trooper_spawn が campname でキャンプを指している
   const unitsByCamp = new Map<string, number>();
   const hauntsByCamp = new Map<string, Record<string, number>>();
   for (const e of ents) {
-    if (e.classname === "info_neutral_trooper_spawn" && e.campname) {
-      unitsByCamp.set(e.campname, (unitsByCamp.get(e.campname) ?? 0) + 1);
+    const k = nameKey(e.campname);
+    if (e.classname === "info_neutral_trooper_spawn" && k) {
+      unitsByCamp.set(k, (unitsByCamp.get(k) ?? 0) + 1);
       // 6712 から出現地点がホーントの種類(npc_units のキー)を指定する
       if (e.neutralsubclass) {
-        const h = hauntsByCamp.get(e.campname) ?? {};
+        const h = hauntsByCamp.get(k) ?? {};
         h[e.neutralsubclass] = (h[e.neutralsubclass] ?? 0) + 1;
-        hauntsByCamp.set(e.campname, h);
+        hauntsByCamp.set(k, h);
       }
     }
   }
@@ -209,7 +216,7 @@ export function parseMap(
    * (6712 でキャンプの campname は空か別名で、そのままだと全キャンプ0体になっていた)
    */
   const campKey = (e: Ent): string =>
-    [e.targetname, e.campname].find((k) => k && unitsByCamp.has(k)) ?? "";
+    [nameKey(e.targetname), nameKey(e.campname)].find((k) => k && unitsByCamp.has(k)) ?? "";
 
   const camps: MapCamp[] = [];
   const breakables: MapBreakable[] = [];

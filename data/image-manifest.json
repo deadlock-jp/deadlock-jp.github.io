@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-30T02:46:36.914Z",
+  "generatedAt": "2026-09-30T03:51:52.287Z",
   "sourceVpk": "game/citadel/pak01_dir.vpk",
   "entries": [
     {
@@ -5008,6 +5008,7 @@
       "outPath": "public/images/minimap/neutral_large.png",
       "kind": "vtex",
       "usedBy": [
+        "object:neutral_trooper_strong",
         "camp:strong"
       ]
     },
@@ -5017,6 +5018,7 @@
       "outPath": "public/images/minimap/neutral_medium.png",
       "kind": "vtex",
       "usedBy": [
+        "object:neutral_trooper_normal",
         "camp:medium"
       ]
     },
@@ -5026,6 +5028,7 @@
       "outPath": "public/images/minimap/neutral_small.png",
       "kind": "vtex",
       "usedBy": [
+        "object:neutral_trooper_weak",
         "camp:weak"
       ]
     },
@@ -5057,17 +5060,6 @@
       "usedBy": [
         "object:npc_super_neutral",
         "camp:midboss"
-      ]
-    },
-    {
-      "ref": "file://{images}/npcs/neutral_bot.psd",
-      "vpkPath": "panorama/images/npcs/neutral_bot_psd.vtex_c",
-      "outPath": "public/images/npcs/neutral_bot.png",
-      "kind": "vtex",
-      "usedBy": [
-        "object:neutral_trooper_weak",
-        "object:neutral_trooper_normal",
-        "object:neutral_trooper_strong"
       ]
     },
     {
