@@ -242,17 +242,55 @@ export interface HauntEntry {
 }
 
 /** マップに置かれているホーントの種類。多く置かれている順 */
+let hauntSpeciesCache: HauntEntry[] | null = null;
 export function hauntSpecies(): HauntEntry[] {
-  return groupHaunts(objectsFile.objects as Record<string, GameObject>, mapCampHaunts).map((s) => {
+  if (hauntSpeciesCache) return hauntSpeciesCache;
+  return (hauntSpeciesCache = groupHaunts(objectsFile.objects as Record<string, GameObject>, mapCampHaunts).map((s) => {
     const resolved = s.icon ? resolveImagePath(s.icon) : null;
     const icon = resolved && existsSync(join(process.cwd(), resolved.outPath)) ? resolved.outPath.replace(/^public\//, "") : null;
     const tierNames = s.tokens.map((tk) => t(tk, tk));
     return { key: s.tokenBase, name: stripTier(tierNames[0] ?? s.tokenBase), tierNames, placed: s.placed, icon };
-  });
+  }));
 }
 
 /** npc_units のキー(neutral_specimen_weak など)からゲーム内の表示名。無ければ null */
 export function hauntName(unitKey: string): string | null {
   const tk = (objectsFile.objects[unitKey] as GameObject | undefined)?.nameToken;
   return tk ? t(tk, "") || null : null;
+}
+
+export interface HauntUnitInfo {
+  /** ゲーム内の表示名(段の数字つき。例: スペシメン II) */
+  name: string;
+  /** 種類の絵(public/ からの相対パス)。無ければ null */
+  icon: string | null;
+  maxHealth: number | null;
+  /** 試合開始時の獲得ソウル */
+  gold: number | null;
+  /** 獲得ソウルの毎分の増加率(%) */
+  goldGrowthPct: number | null;
+}
+
+/** キャンプの内訳(npc_units のキー)1件ぶんの表示用情報。絵は種類の代表の1枚を使う */
+export function hauntUnitInfo(unitKey: string): HauntUnitInfo | null {
+  const o = objectsFile.objects[unitKey] as GameObject | undefined;
+  if (!o?.nameToken) return null;
+  const base = /^(.+)_\d$/.exec(o.nameToken)?.[1];
+  const species = base ? hauntSpecies().find((s) => s.key === base) : undefined;
+  return {
+    name: t(o.nameToken, "") || unitKey,
+    icon: species?.icon ?? null,
+    maxHealth: Number.isFinite(o.stats.maxHealth) ? o.stats.maxHealth! : null,
+    gold: Number.isFinite(o.stats.goldReward) ? o.stats.goldReward! : null,
+    goldGrowthPct: Number.isFinite(o.stats.goldRewardBonusPercentPerMinute) ? o.stats.goldRewardBonusPercentPerMinute! : null,
+  };
+}
+
+/** 罪人の供物(スロット)の獲得ソウルと毎分の増加率 */
+export function vaultReward(): { gold: number | null; growthPct: number | null } {
+  const s = objectsFile.objects["neutral_sinners_sacrifice"]?.stats ?? {};
+  return {
+    gold: Number.isFinite(s.goldReward) ? s.goldReward! : null,
+    growthPct: Number.isFinite(s.goldRewardBonusPercentPerMinute) ? s.goldRewardBonusPercentPerMinute! : null,
+  };
 }

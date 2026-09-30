@@ -10,7 +10,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import type { MapFile, MapLandmark } from "../types/map.ts";
 import type { EconomyFile } from "../types/economy.ts";
-import { campSpawnTimes, hauntName } from "./objects.ts";
+import { campSpawnTimes, hauntName, hauntUnitInfo, vaultReward } from "./objects.ts";
 import { TUNNEL_BREAKABLE_GROUP, isMapReady, hasTunnelGroup } from "../parsers/map.ts";
 
 const DATA_DIR = join(process.cwd(), "data");
@@ -106,4 +106,34 @@ export function campHauntText(c: MapFile["camps"][number]): string {
     .sort((a, b) => b[1] - a[1])
     .map(([unit, n]) => `${hauntName(unit) ?? unit} ×${n}`)
     .join("、");
+}
+
+/** キャンプ1つぶんのカード(ホバーと、クリックで地図の下に出す詳細)の中身 */
+export interface CampCard {
+  /** 内訳1行 = 出現するユニット1種類 */
+  rows: { name: string; icon: string | null; count: number; maxHealth: number | null; gold: number | null }[];
+  /** 種類の絵(重複を除く)。多い順 */
+  pictures: string[];
+  /** キャンプ全体の試合開始時の獲得ソウル。内訳が分からなければ null */
+  totalGold: number | null;
+  /** 獲得ソウルの毎分の増加率(%) */
+  growthPct: number | null;
+}
+
+export function campCard(c: MapFile["camps"][number]): CampCard {
+  if (c.type === "vaults") {
+    const v = vaultReward();
+    return { rows: [], pictures: [], totalGold: v.gold, growthPct: v.growthPct };
+  }
+  const rows = Object.entries(c.haunts ?? {})
+    .sort((a, b) => b[1] - a[1])
+    .map(([unit, count]) => {
+      const info = hauntUnitInfo(unit);
+      return { name: info?.name ?? unit, icon: info?.icon ?? null, count, maxHealth: info?.maxHealth ?? null, gold: info?.gold ?? null };
+    });
+  const pictures = [...new Set(rows.map((r) => r.icon).filter((x): x is string => !!x))];
+  const known = rows.length > 0 && rows.every((r) => r.gold !== null);
+  const totalGold = known ? rows.reduce((sum, r) => sum + r.count * r.gold!, 0) : null;
+  const firstUnit = Object.keys(c.haunts ?? {})[0];
+  return { rows, pictures, totalGold, growthPct: firstUnit ? (hauntUnitInfo(firstUnit)?.goldGrowthPct ?? null) : null };
 }

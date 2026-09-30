@@ -15,7 +15,7 @@ import { existsSync } from "node:fs";
 import { join } from "node:path";
 import type { MapFile } from "../types/map.ts";
 import { clock, duration } from "../lib/matchFlow.ts";
-import { loadMap, mapView, mapRenovating, campInfo, campHauntText, isTunnelBreakable as isTunnel } from "../lib/mapView.ts";
+import { loadMap, mapView, mapRenovating, campInfo, campHauntText, campCard, isTunnelBreakable as isTunnel } from "../lib/mapView.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const loaded = loadMap();
@@ -69,6 +69,12 @@ const layers = map
       { key: "marker", label: "橋バフ・裂け目・壺", icon: null, count: markers.length, on: true },
     ]
   : [];
+
+type Camp = MapFile["camps"][number];
+/** 「中程度の中立モンスター（3体）」。体数が分からないキャンプは体数を省く */
+const campTitle = (c: Camp) => `${camps[c.type]?.label ?? c.type}${c.units > 0 ? `（${c.units}体）` : ""}`;
+const campTiming = (c: Camp) =>
+  `${clock((camps[c.type]?.initialSpawnMinutes ?? 0) * 60)}〜、${duration((camps[c.type]?.respawnMinutes ?? 0) * 60)}ごと`;
 
 const STRUCTURE_LABEL: Record<string, string> = {
   patron: "パトロン",
@@ -140,13 +146,14 @@ const MARKER_LABEL: Record<string, string> = {
             title={`${isTunnel(b) ? "地下トンネル（3人専用）の" : ""}${b.kind === "crate" ? "箱（ソウル）" : "黄金像"}：${groupTime(b.group)}`}
           />
         ))}
-        {map.camps.map((c) => (
+        {map.camps.map((c, i) => (
           <span
             class:list={["mk", "mk-camp", `camp-${c.type}`, c.underground ? "under" : "above"]}
             data-layer={c.type}
+            data-camp={i}
             style={pos(c)}
-            title={`${camps[c.type]?.label ?? c.type}${c.units > 0 ? `（${c.units}体）` : ""}：${clock((camps[c.type]?.initialSpawnMinutes ?? 0) * 60)}〜、${duration((camps[c.type]?.respawnMinutes ?? 0) * 60)}ごと${campHauntText(c) ? `
-${campHauntText(c)}` : ""}`}
+            aria-label={`${campTitle(c)}：${campTiming(c)}${campHauntText(c) ? `／${campHauntText(c)}` : ""}`}
+            role="button"
           >
             {camps[c.type]?.icon && <img src={`${base}/${camps[c.type]!.icon}`} alt="" draggable="false" />}
           </span>
@@ -164,6 +171,59 @@ ${campHauntText(c)}` : ""}`}
       </div>
     </div>
     <p class="fm-info" aria-live="polite"></p>
+    <div class="fm-hover" hidden></div>
+    <div class="fm-detail" aria-live="polite" hidden></div>
+
+    {/* キャンプごとのカード。ホバーでは短い版を地図の上に、クリックでは詳しい版を地図の下に出す */}
+    {map.camps.map((c, i) => {
+      const card = campCard(c);
+      const title = campTitle(c);
+      const icon = camps[c.type]?.icon ? `${base}/${camps[c.type]!.icon}` : null;
+      return (
+        <>
+          <template data-camp-card={i}>
+            <div class="cc">
+              {card.pictures.length > 0 && (
+                <div class="cc-pics">{card.pictures.slice(0, 3).map((p) => <img src={`${base}/${p}`} alt="" />)}</div>
+              )}
+              <div class="cc-body">
+                <b class="cc-title">{icon && <img src={icon} alt="" />}{title}</b>
+                <span class="cc-time">{campTiming(c)}</span>
+                {card.rows.length > 0 && <span class="cc-units">{card.rows.map((r) => `${r.name} ×${r.count}`).join("、")}</span>}
+                {card.totalGold !== null && <span class="cc-gold"><b>{card.totalGold}</b> ソウル</span>}
+              </div>
+            </div>
+          </template>
+          <template data-camp-detail={i}>
+            <div class="cd">
+              <div class="cd-head">
+                <b class="cc-title">{icon && <img src={icon} alt="" />}{title}</b>
+                <span class="cc-time">{campTiming(c)}</span>
+                <button type="button" class="cd-close" aria-label="閉じる">×</button>
+              </div>
+              {card.rows.length > 0 && (
+                <ul class="cd-rows">
+                  {card.rows.map((r) => (
+                    <li>
+                      {r.icon ? <img src={`${base}/${r.icon}`} alt="" /> : <i />}
+                      <span class="cd-name">{r.name}<small>×{r.count}</small></span>
+                      <span class="cd-stat"><small>HP</small>{r.maxHealth ?? "—"}</span>
+                      <span class="cd-stat"><small>ソウル</small>{r.gold ?? "—"}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {card.totalGold !== null && (
+                <p class="cd-total">
+                  {c.type === "vaults" ? "1回あたり" : "キャンプ全体"} <b>{card.totalGold}</b> ソウル
+                  {card.growthPct !== null && <small>（試合開始時の値。毎分 +{card.growthPct}%）</small>}
+                </p>
+              )}
+            </div>
+          </template>
+        </>
+      );
+    })}
   </div>
 )}
 
@@ -251,14 +311,64 @@ ${campHauntText(c)}` : ""}`}
         pointers.delete(e.pointerId);
         if (pointers.size < 2) pinch = null;
       };
+      // ---- キャンプのカード: ホバーで短い版を地図の上に、タップ(クリック)で詳しい版を地図の下に ----
+      const hover = root.querySelector(".fm-hover");
+      const detail = root.querySelector(".fm-detail");
+      const fill = (box, sel) => {
+        const tpl = root.querySelector(sel);
+        box.replaceChildren(tpl ? tpl.content.cloneNode(true) : "");
+      };
+      const showHover = (mk) => {
+        fill(hover, `template[data-camp-card="${mk.dataset.camp}"]`);
+        hover.hidden = false;
+        const r = root.getBoundingClientRect();
+        const m = mk.getBoundingClientRect();
+        const w = hover.offsetWidth, h = hover.offsetHeight;
+        // 点の右上に出す。はみ出すなら左・下へ回す
+        let x = m.right - r.left + 10;
+        if (x + w > r.width) x = m.left - r.left - w - 10;
+        let y = m.top - r.top - h - 6;
+        if (y < 0) y = m.bottom - r.top + 6;
+        hover.style.left = `${Math.max(0, x)}px`;
+        hover.style.top = `${y}px`;
+      };
+      const hideHover = () => (hover.hidden = true);
+      let selected = null;
+      const showDetail = (mk) => {
+        if (selected) selected.classList.remove("sel");
+        selected = mk;
+        mk.classList.add("sel");
+        fill(detail, `template[data-camp-detail="${mk.dataset.camp}"]`);
+        detail.hidden = false;
+        detail.querySelector(".cd-close")?.addEventListener("click", () => {
+          detail.hidden = true;
+          mk.classList.remove("sel");
+          selected = null;
+        });
+      };
+      stage.addEventListener("pointerover", (e) => {
+        if (e.pointerType !== "mouse" || pointers.size) return;
+        const mk = e.target.closest(".mk-camp");
+        if (mk) showHover(mk);
+      });
+      stage.addEventListener("pointerout", (e) => {
+        if (e.target.closest(".mk-camp") && !e.relatedTarget?.closest?.(".mk-camp")) hideHover();
+      });
+
       stage.addEventListener("pointerup", (e) => {
-        // ほとんど動かさずに離したらタップとみなし、点の情報を出す
+        // ほとんど動かさずに離したらタップとみなす。キャンプは詳細カード、それ以外は点の名前を出す
         if (moved < 6 && pointers.size === 1) {
           const mk = document.elementFromPoint(e.clientX, e.clientY)?.closest(".mk");
-          info.textContent = mk ? mk.getAttribute("title") : "";
+          if (mk?.dataset.camp !== undefined) {
+            showDetail(mk);
+            info.textContent = "";
+          } else {
+            info.textContent = mk ? mk.getAttribute("title") : "";
+          }
         }
         end(e);
       });
+      stage.addEventListener("pointerdown", hideHover);
       stage.addEventListener("pointercancel", end);
       for (const b of root.querySelectorAll("[data-zoom]")) {
         b.addEventListener("click", () => {
@@ -381,4 +491,51 @@ ${campHauntText(c)}` : ""}`}
   .lm-midboss img { width: 24px; height: 24px; }
 
   .fm-info { min-height: 1.6em; margin: 6px 0 0; font-size: 12.5px; color: var(--c-text-strong); text-align: center; }
+  .mk-camp.sel img { filter: drop-shadow(0 0 3px var(--c-accent)) drop-shadow(0 0 1px #000); }
+
+  /* キャンプのカード(ホバー)。地図の上に浮かせる */
+  .farmmap { position: relative; }
+  .fm-hover {
+    position: absolute; z-index: 5; pointer-events: none; width: max-content; max-width: 320px;
+    background: rgb(12 17 22 / 0.96); border: 1px solid var(--c-border-strong); border-radius: var(--radius);
+    box-shadow: 0 10px 28px rgb(0 0 0 / 0.55); padding: 8px 10px;
+  }
+  .fm-hover[hidden], .fm-detail[hidden] { display: none; }
+  .cc { display: flex; gap: 10px; align-items: center; }
+  .cc-pics { display: flex; }
+  .cc-pics img { width: 64px; height: 64px; object-fit: contain; }
+  .cc-pics img + img { margin-left: -18px; }
+  .cc-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .cc-title { display: flex; align-items: center; gap: 5px; font-size: 13px; color: var(--c-text-strong); }
+  .cc-title img { width: 16px; height: 16px; }
+  .cc-time { font-size: 11.5px; color: var(--c-text-muted); font-family: var(--font-mono); }
+  .cc-units { font-size: 12px; color: var(--c-text); line-height: 1.5; }
+  .cc-gold { font-size: 12px; color: var(--c-text-muted); }
+  .cc-gold b { color: var(--c-soul); font-family: var(--font-mono); }
+
+  /* キャンプの詳細(クリック)。地図の下に出す */
+  .fm-detail {
+    max-width: 720px; margin: var(--sp-2) auto 0; padding: var(--sp-3);
+    background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius);
+  }
+  .cd-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+  .cd-head .cc-title { font-size: 14px; }
+  .cd-close {
+    margin-left: auto; font: inherit; font-size: 16px; line-height: 1; cursor: pointer; padding: 2px 8px;
+    background: none; color: var(--c-text-muted); border: 1px solid var(--c-border); border-radius: var(--radius);
+  }
+  .cd-close:hover { color: var(--c-accent); border-color: var(--c-accent-dim); }
+  .cd-rows { list-style: none; margin: var(--sp-3) 0 0; padding: 0; display: grid; gap: 6px; }
+  .cd-rows li {
+    display: grid; grid-template-columns: 56px 1fr auto auto; align-items: center; gap: 12px;
+    padding: 4px 10px 4px 4px; background: var(--c-surface-2); border-radius: var(--radius);
+  }
+  .cd-rows img, .cd-rows i { width: 56px; height: 56px; object-fit: contain; }
+  .cd-name { font-size: 14px; color: var(--c-text-strong); }
+  .cd-name small { margin-left: 6px; font-family: var(--font-mono); color: var(--c-text-muted); }
+  .cd-stat { display: flex; flex-direction: column; align-items: flex-end; font-family: var(--font-mono); font-size: 14px; color: var(--c-text-strong); min-width: 52px; }
+  .cd-stat small { font-family: inherit; font-size: 10px; color: var(--c-text-faint); }
+  .cd-total { margin: var(--sp-3) 0 0; font-size: 13px; color: var(--c-text); }
+  .cd-total b { color: var(--c-soul); font-family: var(--font-mono); font-size: 16px; }
+  .cd-total small { margin-left: 4px; color: var(--c-text-muted); }
 </style>
