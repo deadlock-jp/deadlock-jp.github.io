@@ -25,6 +25,8 @@ export interface PatchNoteEntry {
    */
   titleEn?: string;
   linesEn?: string[];
+  /** Steam のお知らせの投稿時刻(unix 秒)。統計の集計期間の起点に使う。古いファイルには無い */
+  postedAt?: number | null;
 }
 
 /** その言語で出す題。日本語は title、それ以外は英語の原文の題 */

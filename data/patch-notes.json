@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "source": "https://store.steampowered.com/events/ajaxgetpartnereventspageable/?appid=1422450",
-  "fetchedAt": "2026-09-30T07:11:59.587Z",
+  "fetchedAt": "2026-09-30T08:58:07.443Z",
   "entries": [
     {
       "gid": "694273194214819790",
@@ -24,7 +24,8 @@
         "After the Old Gods New Blood update, we felt that there was still a good amount of work we wanted to do on the core game itself before we moved onto more polish phases of the game development (like updating older hero artwork). Unlike previous updates where our efforts were more singularly focused on the key parts of that update, this year we've been working on several different things in parallel. A good number of those are things you can see in today's update. Some others are things we've been working on in the last few months alongside this update. This even includes things like progression and hero/hideout customizations, as we feel those are features we want to be able to adjust and significantly change based on feedback before the game is fully released. There are also other things we've been working on recently that are more speculative (as in we aren't 100% sure if they will be released or not based on how playtesting goes, though results so far have been promising) like large item redesigns/additions and alternate game modes that expand the scope of the game.",
         "Then there are other things like Midboss (both the model and the layout to a degree), Guardians and Walkers, which we do consider important but just haven't gotten to yet and will be focusing on for upcoming updates. On the other hand, things like hero remodels were in our heads as something we'd get to later, towards the end of early development, after other core aspects of the game were more fleshed out. That doesn't mean we don't think they are important by any means, just that they are more of a known quantity to us that don't necessarily need to be done earlier than other things. That being said, we will likely be gradually working on them in the near future for inclusion in upcoming updates alongside other work.",
         "We hope you will like this update. Thank you all for your continued support so far during development, and don't forget to Vote!"
-      ]
+      ],
+      "postedAt": 1790713511
     },
     {
       "gid": "698776157349216434",
@@ -287,7 +288,8 @@
         "Wraith: Full Auto spirit damage per bullet scaling increased from 0.03 to 0.045",
         "Yamato: Crimson Slash T3 now also increases the heal spirit scaling by +0.4",
         "Yamato: Flying Slash light melee scaling increased from 1.0 to 1.2"
-      ]
+      ],
+      "postedAt": 1789589803
     },
     {
       "gid": "676255623445218601",
@@ -322,7 +324,8 @@
         "Celeste: Shining Wonder damage reduced from 165 to 140",
         "Celeste: Shining Wonder spirit scaling reduced from 0.9 to 0.6",
         "Celeste: Shining Wonder T2 now also increases spirit scaling by +0.45"
-      ]
+      ],
+      "postedAt": 1787434846
     },
     {
       "gid": "708906085669405228",
@@ -335,7 +338,8 @@
       "titleEn": "Minor Update - 08-12-2026",
       "linesEn": [
         "Apollo: Riposte melee resist reduction increased from -22% to -25%\n- Apollo: Riposte T2 changed from \"-30% Melee Resist\" to \"-25% Melee Resist and +0.4s Stun Duration\"\n- Apollo: Riposte T3 increased from 60% Lifesteal for 7s to 75% Lifesteal for 13s\n- Apollo: Fixed Itani Lo Sahn being canceled with movement abilities\n- Billy: Base health regen reduced from 2.5 to 2.0\n- Billy: Rising Ram T3 changed from \"On Impact: Deal 7% max health as spirit damage\" to \"On hero hit: +10% Max HP for 16s\"\n- Billy: Chain Gang spirit scaling reduced from 1 to 0.7\n- Doorman: Doorway range reduced from 70m to 65m\n- Doorman: Walker will no longer consider Luggage Cart dragged enemies as valid targets to trigger the stomp on until soon after they are dropped off\n- Doorman: Similar to the Walker change above, the turrets in the healing area in base now also wait on considering valid targets\n- Drifter: Rend spirit scaling reduced from 1.7 to 1.4\n- Drifter: Stalker's Mark cooldown increased from 24s to 26s\n- Drifter: Stalker's Mark T2 reduced from -12s Cooldown to -10s\n- Holliday: Powder Keg now does half its damage immediately and half over 3s as a damage over time burn (same overall damage, multiple instances stack)\n- Ivy: Stone Form T3 stun duration reduced from +1s to +0.75s\n- Lash: Falloff range reduced from 20m->58m to 18m->54m\n- McGinnis: Bullet damage base and growth values reduced by 5%\n- McGinnis: Spirit Resist per boon reduced from +0.625% to +0.35%\n- McGinnis: Mini Turrets no longer shoots heroes on ziplines\n- McGinnis: Mini Turrets no longer have 80% decaying resist for the first 6s\n- McGinnis: Mini Turrets health increased from 90 + 7.8/boon to 100 + 9/boon\n- McGinnis: Medicinal Specter T1 changed from \"Provides +40% Spirit Resist\" to \"+1.5s Duration\"\n- McGinnis: Medicinal Specter T3 no longer increases duration by +1.5s\n- McGinnis: Medicinal Specter T3 now also increases spirit resistance by +40%\n- Paige: Plot Armor weapon damage scaling increased from 0.2 to 0.3\n- Seven: Lightning Ball T3 radius increased from +1.5m to +1.75m\n- Vindicta: Stake T1 reduced from +65 Damage to +45\n- Vyper: Petrifying Bola radius increased from 8m to 12m\n- Vyper: Petrifying Bola petrify duration increased from 2s to 2.2s\n- Wraith: Card Trick Heart heal spirit scaling reduced from 1 to 0.75\n- Wraith: Full Auto T3 spirit scaling reduced from +0.06 to +0.045"
-      ]
+      ],
+      "postedAt": 1786575464
     },
     {
       "gid": "680756685198854910",
@@ -434,7 +438,8 @@
         "This update includes a few changes to the requirements to appear on the leaderboards. For the global leaderboard, the game count requirement in the last 30 days has increased from 50 to 75. For the hero specific leaderboards, the game count requirement on that hero in the last 30 days has increased from 20 to 30. There is also a new requirement for hero specific leaderboards where you must have at least 100 lifetime wins on that hero to be considered.",
         "## ROLLOUT",
         "This new system is live right now. However we expect the next week or so to be very rocky, as the Ranked matchmaking pool will start off very thin with most players not having the unlock requirements done yet. This will have a significant effect on queue times and match quality until things stabilize. It will also take some time for players to calibrate and move into the appropriate spots. We will be closely monitoring the matchmaker during this time, but we want players to be aware that both queue times, match quality and team composition quality will need some time to ramp up. Given the large rewrite involved with this update, we are also expecting that it will take a couple of days to iron out bugs."
-      ]
+      ],
+      "postedAt": 1785438877
     },
     {
       "gid": "680756685198855508",
@@ -651,7 +656,8 @@
         "Yamato: Flying Slash T2 reduced from +40 Spirit Power to +35",
         "Yamato: Flying Slash T3 charges from +2 to +1",
         "Yamato: Flying Slash T3 Charge Time increased from 4s to 5s"
-      ]
+      ],
+      "postedAt": 1785270275
     },
     {
       "gid": "688635449342696590",
@@ -770,7 +776,8 @@
         "Yamato: Flying Slash range reduced from 28m to 26m",
         "Yamato: Flying Slash T3 Charge Delay increased from 3s to 4s",
         "Yamato: Flying Slash T3 Ally Targeting now requires alt cast input"
-      ]
+      ],
+      "postedAt": 1783625215
     },
     {
       "gid": "688635449342693095",
@@ -791,7 +798,8 @@
         "Shiv: Slice and Dice is now back to doing spirit damage and reducing Spirit Resistance from enemies",
         "Shiv: Slice and Dice damage increased from 60 to 75",
         "Shiv: Killing Blow T3 reduced from +10% Enemy Health Threshold to +8%"
-      ]
+      ],
+      "postedAt": 1782946499
     },
     {
       "gid": "688635449342692003",
@@ -1102,7 +1110,8 @@
         "Warden: Bullet damage per boon reduced from 0.34 to 0.28",
         "Warden: Willpower T2 increased from -22s Cooldown to -24s",
         "Warden: Willpower T3 increased from +2.5 spirit power scaling to +2.7"
-      ]
+      ],
+      "postedAt": 1782840134
     },
     {
       "gid": "667242081733838158",
@@ -1277,7 +1286,8 @@
         "Warden: Last Stand lifesteal increased from 65% to 75%",
         "Warden: Last Stand T2 increased from -30s Cooldown to -35s",
         "Warden: Last Stand T3 increased from +3s Duration to +4s"
-      ]
+      ],
+      "postedAt": 1781225958
     },
     {
       "gid": "714529243732640268",
@@ -1320,7 +1330,8 @@
         "Urn comeback resistance now also grants +35% Debuff Resistance ontop of the 35% Bullet and Spirit Resistance",
         "Urn comeback resistance aura reduced from 60m to match the 20m progress radius",
         "Drop off location is above the bridges on the side lanes, rather than below."
-      ]
+      ],
+      "postedAt": 1780594211
     },
     {
       "gid": "668366713382766678",
@@ -1373,7 +1384,8 @@
         "Victor: Shocking Reanimation T3 reduced from -130s Cooldown to -120s",
         "Yamato: Power Slash spirit scaling reduced from 2.1 to 1.85",
         "Yamato: Flying Slash cast range reduced from 30m to 28m"
-      ]
+      ],
+      "postedAt": 1780256754
     },
     {
       "gid": "668366713382765310",
@@ -1408,7 +1420,8 @@
         "If the Urn held timer is over 45s (keeping in mind this timer is frozen if there are nearby enemies), the next time it is dropped it will immediately run back home if there are no nearby enemies.",
         "Parrying a trooper no longer resets your parry cooldown (however it won't end your parry early like a hero hit does)",
         "Parrying a trooper now stuns the trooper"
-      ]
+      ],
+      "postedAt": 1779988499
     },
     {
       "gid": "668366713382765308",
@@ -1421,7 +1434,8 @@
       "titleEn": "Minor Update - 05-25-2026",
       "linesEn": [
         "Urn drop off point is moved from the above bridge in the mid lane to under the bridge in the side lane\n- Urn timer extension when contested increased from 1.25s to 3s\n- Urn deposit timers for favored/neutral/unfavored increased from 3/5/10s to 5/10/15s\n- Urn comeback bullet and spirit resist auras reduced from 50% to 35%\n- Urn pickup spot is now where the old comeback drop off spots were for when your team is behind\n- Urn runner no longer has sprint disabled\n- Urn runner now has max sprint acceleration\n- Urn runner now gains +2m Sprint, +1 Stamina, +10% Dash Distance and +15% Stamina Regen\n- Urn runner for the team that is behind now gains an extra +4m Sprint\n- Urn collision radius increased by 20%\n- Various smaller urn holding timers and variables adjusted to account for the new location\n\nPlease continue to give feedback on the Urn as we work through iterations on it."
-      ]
+      ],
+      "postedAt": 1779985724
     },
     {
       "gid": "670617878982034052",
@@ -2060,7 +2074,8 @@
         "Yamato: Shadow Transformation T1 increased from +5 Weapon Damage to +7",
         "## \\[ Street Brawl",
         "Fixed the following Enhanced Items not maintaining their stats from components: Opening Rounds, Tankbuster, Kinetic Dash, Radiant Regeneration, Burst Fire, Veil Walker, Arcane Surge, Fury Trance, Leech"
-      ]
+      ],
+      "postedAt": 1779486662
     },
     {
       "gid": "664986477286916766",
@@ -2403,7 +2418,8 @@
         "Enhanced Escalating Exposure: Amp per stack from +2 to +1.5",
         "Enhanced Escalating Exposure: Base shred from +8 to +10 (matching enhanced mystic invul)",
         "Fixed Enhanced Weighted Shots not maintaining the benefits from Enhanced Slowing Bullets"
-      ]
+      ],
+      "postedAt": 1777592743
     },
     {
       "gid": "519740319207522795",
@@ -4782,7 +4798,8 @@
         "Shrink Ray: Now grants +20% Fire Rate while shrunk",
         "Brawl Victor: Aura of Suffering aura radius reduced by 2m",
         "Brawl Bebop: Hyper Beam duration from -4s to -5s"
-      ]
+      ],
+      "postedAt": 1772833020
     },
     {
       "gid": "519736513892714181",
@@ -4797,7 +4814,8 @@
       "linesEn": [
         "The ritual takes form... Overhauled Patrons and bases, six new heroes, a fast-paced game mode 'Street Brawl', HUD updates, many quality-of-life additions, revamped postgame with an MVP screen and more.",
         "View the Old Gods, New Blood update page."
-      ]
+      ],
+      "postedAt": 1769122593
     },
     {
       "gid": "608676906483582637",
@@ -5308,7 +5326,8 @@
         "Yamato: Power Slash medium charge damage from 60% to 50%",
         "Yamato: Crimson Slash cooldown increased from 11.5s to 15s",
         "Yamato: Crimson Slash T3 increased from -5.75s Cooldown to -9s"
-      ]
+      ],
+      "postedAt": 1763765629
     },
     {
       "gid": "669466707009471267",
@@ -5341,7 +5360,8 @@
         "Every time you complete a game you will earn a vote which you can cast by visiting the voting booth in the Hideout. Who do you want to see unlocked next?",
         "As a note, while developing this new set of heroes, we paused work on hero labs. In the future, we may revisit some of the hero labs heroes as we understand there are some elements of them that players like.",
         "Killing enemies has never looked better. Mina is a glass cannon that delivers quick bursts of Spirit damage at range with her passive, Love Bites. She can transform into bats and escape when things get a bit too messy. Each time you trigger Love Bites, your vampiric powers grow stronger for the rest of the match. This builds toward your ultimate, Nox Nostra, which unleashes a massive swarm of bats that hunt down and silence nearby enemies. - ‘Who got blood on my brand new shirt?’"
-      ]
+      ],
+      "postedAt": 1755549740
     },
     {
       "gid": "524216645064852902",
@@ -6448,7 +6468,8 @@
         "Fix various cases where Magic Carpet would get cancelled if any enemy stepped in to your debuff (IE Viscous Goo, Inferno FlameDash, Ivy Kudzu).",
         "Fixed a bug where some item and ability interactions were accidentally being reduced by Debuff Reducer, like Viscous' Ball Stun prevention and some kill trackers.",
         "Fix Vindicta flight and Wraith Full Auto spirit damage not working if the enemy has a barrier."
-      ]
+      ],
+      "postedAt": 1746732792
     },
     {
       "gid": "530965072572320687",
@@ -7289,7 +7310,8 @@
         "Fixed Cancel button not working when waiting to spectate a match.",
         "Prevented cooldown timers from displaying 0.0 briefly at the end of the countdown.",
         "Fixed an issue causing extraneous blank lines to be appended to pings when individual lines of ping text were long."
-      ]
+      ],
+      "postedAt": 1740520159
     },
     {
       "gid": "788789909363099413",
@@ -7302,7 +7324,8 @@
       "titleEn": "Winter Visual Update",
       "linesEn": [
         "Season's Greetings! Today's winter-themed visual update will be our last patch for the year, but we'll continue to ship bug fixes and any urgent balance adjustments as needed throughout the break. Thanks to everyone for all the useful feedback that you've given us this year, we're looking forward to sharing more of what's to come for Deadlock in 2025. For now, we hope that everyone has a magical season full of joy, souls, and surprises..."
-      ]
+      ],
+      "postedAt": 1734468800
     },
     {
       "gid": "510692079688483543",
@@ -7875,7 +7898,8 @@
         "Yamato: Shadow Transformation cast time reduced from 2s to 1.5s.",
         "Yamato: Shadow Transformation no longer has a 0.6s post cast time.",
         "Yamato: Shadow Transformation T3 now also increases Resist by 15%."
-      ]
+      ],
+      "postedAt": 1733516709
     },
     {
       "gid": "4454716818605473961",
@@ -8356,7 +8380,8 @@
         "Yamato: Shadow Transformation now grants +60% Bullet and Spirit Resist.",
         "Yamato: Shadow Transformation now heals for 30% hp (done after the dispel).",
         "Yamato: Shadow Transformation duration now extends by 2s whenever you get a kill in it (for that session)."
-      ]
+      ],
+      "postedAt": 1731027988
     },
     {
       "gid": "4535780256628343049",
@@ -8373,7 +8398,8 @@
         "Today's update adds Hero Labs (a new experimental hero matchmaking mode that adds six new in-progress heroes), player commends, as well as updates to character shaders and environment lighting, among the usual assortment of improvements, fixes, and balance adjustments.",
         "For the full patch notes, visit the Deadlock forums here: https://forums.playdeadlock.com/threads/10-24-2024-update.40951/",
         "Example of the new character shader changes:"
-      ]
+      ],
+      "postedAt": 1729814181
     }
   ]
 }

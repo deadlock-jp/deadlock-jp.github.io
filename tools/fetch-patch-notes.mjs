@@ -134,6 +134,9 @@ const entries = candidates.map((en) => {
     // 日本語以外のページは英語の原文を出す(翻訳しない)。日本語版は上の title / lines のまま
     titleEn: en.event_name.trim(),
     linesEn: parseBody(en.announcement_body.body),
+    // 投稿時刻(unix 秒)。統計の集計期間の起点に使う(tools/stats-window.mjs)。
+    // rtime32_start_time はイベントの開始予定で投稿と数十秒〜数日ずれることがあるので、投稿そのものの時刻を取る
+    postedAt: en.announcement_body.posttime ?? null,
   };
 });
 entries.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
