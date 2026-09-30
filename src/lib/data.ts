@@ -1036,9 +1036,20 @@ import { patchNoteByDate as patchNoteByDateLocal } from "./patchNotes.ts";
  * items の値は [人気率, 勝率, サンプル試合数]。率は 0.1% 刻みの整数(503 = 50.3%)。
  * キーはヒーローの実ID(数値)を文字列にしたもの。
  */
+/** 統計の集計期間の起点(tools/stats-window.mjs)。window が "sincePatch" のときに入っている */
+export interface StatsWindowPatch {
+  date: string;
+  titleEn: string | null;
+  titleJa: string | null;
+}
 export interface ItemStatsFile {
   fetchedAt: string;
+  /** "sincePatch"(最新のバランス変更以降) か、古いファイルの "last30days" */
   window: string;
+  windowStart?: string;
+  windowPatch?: StatsWindowPatch;
+  /** 集計期間の全体の試合数 */
+  totalMatches?: number;
   lowSampleMatches: number;
   heroes: Record<string, { matches: number; items: Record<string, [number, number, number]> }>;
 }
@@ -1058,6 +1069,8 @@ export const itemStats = itemStatsJson as unknown as ItemStatsFile;
 export interface HeroStatsFile {
   fetchedAt: string;
   window: string;
+  windowStart?: string;
+  windowPatch?: StatsWindowPatch;
   lowSampleMatches: number;
   banRateNote: string;
   buckets: Record<
@@ -1150,4 +1163,55 @@ export function hasRealChange(a: Adjustment): boolean {
       c.from !== c.to &&
       !(a.target === "item" && c.path.startsWith("upgrades.")),
   );
+}
+
+/* ------------------------------------------------------------------ *
+ * 統計(deadlock-api.com 由来)の集計期間の表示と、ヒーローページの「人気のアイテム」
+ * ------------------------------------------------------------------ */
+
+/**
+ * 統計の集計期間の文(「2026-09-29 のアップデート（City Never Sleeps）以降」)。
+ * 題は日本語版なら日本語の題(あれば)、ほかの言語は英語の原題。古い "last30days" のファイルなら「直近30日」
+ */
+export function statsPeriodLabel(file: { window: string; windowPatch?: StatsWindowPatch }): string {
+  const S = L().stats;
+  const p = file.window === "sincePatch" ? file.windowPatch : undefined;
+  if (!p) return S.last30;
+  const title = (currentLang() === "ja" ? (p.titleJa ?? p.titleEn) : p.titleEn) ?? "";
+  return S.period(p.date, title);
+}
+
+export interface PopularItemRow {
+  item: Item;
+  /** 採用率・勝率(0.1% 刻みの整数。503 = 50.3%) */
+  pick: number;
+  win: number;
+  matches: number;
+  /** サンプル少(item-stats.json の lowSampleMatches 未満) */
+  low: boolean;
+}
+
+/**
+ * そのヒーローで採用率の高いアイテムを、ティア(T1〜T4)ごとに上位 perTier 件。
+ * ショップ掲載アイテムのみ(レジェンダリー T5 は入らない)。並べ替えは採用率。
+ * 統計が無いヒーロー(試合がまだ無い)は null
+ */
+export function heroPopularItems(
+  heroId: number,
+  perTier = 4,
+): { tier: number; price: number; rows: PopularItemRow[] }[] | null {
+  const h = itemStats.heroes[String(heroId)];
+  if (!h || Object.keys(h.items).length === 0) return null;
+  const tiers = [1, 2, 3, 4];
+  return tiers.map((tier) => {
+    const rows = shopItems()
+      .filter((i) => i.tier === tier && h.items[i.id])
+      .map((i) => {
+        const [pick, win, matches] = h.items[i.id]!;
+        return { item: i, pick, win, matches, low: matches < itemStats.lowSampleMatches };
+      })
+      .sort((a, b) => b.pick - a.pick)
+      .slice(0, perTier);
+    return { tier, price: itemsFile.itemPricePerTier[tier] ?? 0, rows };
+  });
 }

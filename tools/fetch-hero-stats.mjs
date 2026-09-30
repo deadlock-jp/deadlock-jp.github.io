@@ -25,7 +25,10 @@
  * hero-stats の matches は「そのヒーローが使われた試合数」。1試合12人(6v6)なので
  * 全ヒーローの合計 ÷ 12 が総試合数になる。これを分母にする。
  *
- * TODO: 集計期間はAPIの既定(直近30日)。パッチ単位で区切るなら min_unix_timestamp を渡す。
+ * ■ 集計期間
+ * 「最新のバランス変更があったアップデート以降」(tools/stats-window.mjs。fetch-item-stats.mjs と同じ起点)。
+ * hero-stats・hero-ban-stats とも min_unix_timestamp が効くことを 2026-09-30 に確認
+ * (hero-stats のヒーロー枠 30日 1548万 → 39万、BAN 6.7万 → 626)。
  *
  * 使い方:
  *   node tools/fetch-hero-stats.mjs             (dry-run)
@@ -35,6 +38,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { statsWindow } from "./stats-window.mjs";
 
 const REPO_ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
 const OUT_PATH = join(REPO_ROOT, "data", "hero-stats.json");
@@ -50,11 +54,29 @@ const LOW_SAMPLE = 1000;
 const args = process.argv.slice(2);
 const flag = (name) => args.includes(`--${name}`);
 
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+/** 失敗したら少し待って2回まで取り直す。それでも失敗すれば例外で止まる(書き込まない) */
 async function getJson(url) {
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`HTTP ${res.status}: ${url}`);
-  return res.json();
+  for (let attempt = 1; ; attempt++) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`HTTP ${res.status}: ${url}`);
+      return await res.json();
+    } catch (e) {
+      if (attempt >= 3) throw e;
+      console.error(`  取得に失敗(${attempt}回目)。取り直す: ${e instanceof Error ? e.message : e}`);
+      await sleep(2000 * attempt);
+    }
+  }
 }
+
+/** 集計期間の起点(最新のバランス変更があったアップデートの投稿時刻) */
+const WINDOW = statsWindow(REPO_ROOT);
+const SINCE = `min_unix_timestamp=${WINDOW.start}`;
+console.error(
+  `集計期間: ${WINDOW.startIso} 以降(${WINDOW.patch.date} ${WINDOW.patch.titleEn} / 起点の取り方: ${WINDOW.source})`,
+);
 
 /** 小数を 0.1% 刻みの整数にする(0.5034 → 503) */
 const permille = (v) => Math.round(v * 1000);
@@ -74,8 +96,8 @@ const releasedIds = new Set(
 
 console.error("ランク帯別のヒーロー統計を取得中...");
 const [heroRows, banRows] = await Promise.all([
-  getJson(`${API}/analytics/hero-stats?bucket=avg_badge`),
-  getJson(`${API}/analytics/hero-ban-stats?bucket=avg_badge`),
+  getJson(`${API}/analytics/hero-stats?bucket=avg_badge&${SINCE}`),
+  getJson(`${API}/analytics/hero-ban-stats?bucket=avg_badge&${SINCE}`),
 ]);
 console.error(`  hero-stats ${heroRows.length}行 / hero-ban-stats ${banRows.length}行`);
 
@@ -138,7 +160,11 @@ const doc = {
   source: `${API}/analytics/hero-stats`,
   banSource: `${API}/analytics/hero-ban-stats`,
   fetchedAt: new Date().toISOString(),
-  window: "last30days",
+  /** 集計期間。最新のバランス変更があったアップデート以降(tools/stats-window.mjs) */
+  window: "sincePatch",
+  windowStart: WINDOW.startIso,
+  windowSource: WINDOW.source,
+  windowPatch: WINDOW.patch,
   lowSampleMatches: LOW_SAMPLE,
   /** heroes の値は [ピック率, 勝率, BAN率, 試合数]。率は 0.1% 刻みの整数 */
   format: "[pickPermille, winPermille, banSharePermille, matches]",
@@ -148,9 +174,17 @@ const doc = {
   buckets: out,
 };
 
+/*
+ * 無人実行で上書きするので、API が一部落ちていたときは書き込まない。
+ *   - リクエストの失敗は getJson が取り直したうえで例外にする(ここまで来れば両方成功している)
+ *   - 全体("all")に試合数が出ているヒーローが実装済みの9割未満なら中止(空に近い応答を見分ける)
+ * 以前は「ランク帯が5つ以上」で判定していたが、パッチ直後は試合の少ない上位帯が
+ * まだ無いことがあるので、帯の数では判定しない。
+ */
 const tiers = Object.keys(out).filter((k) => k !== "all");
-if (!out.all || tiers.length < 5) {
-  console.error(`取得結果が少なすぎるので中止: ランク帯 ${tiers.length} 件`);
+const coveredHeroes = out.all ? Object.keys(out.all.heroes).length : 0;
+if (!out.all || coveredHeroes < releasedIds.size * 0.9) {
+  console.error(`取得結果が少なすぎるので中止: 試合数のあるヒーロー ${coveredHeroes}/${releasedIds.size}`);
   process.exit(1);
 }
 

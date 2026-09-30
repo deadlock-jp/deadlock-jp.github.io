@@ -213,6 +213,19 @@ export const en: Dict = {
     latestLink: "See what changed →",
     changedIn: (title: string, date: string) => `Changed in ${title} (${date})`,
   },
+  stats: {
+    last30: "Last 30 days",
+    period: (date: string, title: string) => `Since the ${date} update (${title})`,
+    matches: (n: string) => `${n} matches`,
+    pickRate: "Pick rate",
+    winRate: "Win rate",
+    lowSample: "Low sample",
+    popularLead: "The items bought most often in each tier, in matches played with this hero (pick rate).",
+    winNote:
+      "Win rates run higher for pricier tiers, because the team that is already ahead can afford more expensive items.",
+    noData: "No stats for this period yet.",
+    source: "Match stats: deadlock-api.com (updated every 6 hours)",
+  },
   top: {
     title: "Home",
     description:
@@ -250,7 +263,7 @@ export const en: Dict = {
     countFrom: "results",
     countTo: "heroes",
     tierEmpty: "None",
-    statsNote: "Last 30 days / {n} matches / as of {date}. ",
+    statsNote: "{period} / {n} matches / as of {date}. ",
     banNote: "Ban rate is {note}.",
     lowSample: " * This rank has a small sample, so the numbers fluctuate.",
     banRateNote: "each hero's share of all bans in matches where ban data was available",

@@ -12,6 +12,9 @@ import {
   modifierLabel,
   heroTags,
   heroNotes,
+  heroPopularItems,
+  statsPeriodLabel,
+  itemStats,
 } from "../../lib/data.ts";
 import { heroRadar, heroMiscRows, radarAxesForWeapon } from "../../lib/herorank.ts";
 import { heroBalanceHistory } from "../../lib/balance.ts";
@@ -94,6 +97,17 @@ const altWeaponRadar = altWeapon ? radarAxesForWeapon(altWeapon) : null;
 
 const adjRows = heroBalanceHistory(hero.key, base);
 const matchup = heroMatchup(hero);
+/*
+ * 人気のアイテム(deadlock-api.com の対戦統計。ビルド時に埋め込み、Actions の6時間おきの更新で入れ替わる)。
+ * 描画は HeroMatchup.astro(このページに import を足さないため、既にある部品に渡す)。
+ * 見出しはゲーム内の表記「人気のアイテム」(ショップのタブ名)
+ */
+const popular = {
+  title: t("Citadel_Shop_NavTab_Recommended", "Popular Items"),
+  period: statsPeriodLabel(itemStats),
+  matches: itemStats.heroes[String(hero.id)]?.matches ?? 0,
+  tiers: heroPopularItems(hero.id),
+};
 const skillNames = skills.map((s) => t(s.key, "")).filter(Boolean);
 const metaDesc = T.heroPage.metaDesc(
   name,
@@ -211,7 +225,7 @@ const ogImage = existsSync(join(process.cwd(), "public", cardRel)) ? `/${cardRel
     </script>
   )}
 
-  <HeroMatchup matchup={matchup} base={base} />
+  <HeroMatchup matchup={matchup} base={base} popular={popular} />
 
   <BalanceHistory entries={adjRows} grouped />
 

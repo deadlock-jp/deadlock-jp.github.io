@@ -213,6 +213,19 @@ export const zhCn: Dict = {
     latestLink: "查看改动 →",
     changedIn: (title: string, date: string) => `${title}(${date})中有改动`,
   },
+  /** 待确认: 统计相关的文字接近直译 */
+  stats: {
+    last30: "最近 30 天",
+    period: (date: string, title: string) => `${date} 更新(${title})以来`,
+    matches: (n: string) => `${n} 场比赛`,
+    pickRate: "购买率",
+    winRate: "胜率",
+    lowSample: "样本少",
+    popularLead: "在使用该英雄的比赛中,各阶物品被购买的比例(购买率)排名靠前的物品。",
+    winNote: "由于占优势的一方更买得起昂贵的物品,胜率在越高阶的物品上越容易偏高。",
+    noData: "这段时间还没有统计数据。",
+    source: "对战统计:deadlock-api.com(每 6 小时更新)",
+  },
   top: {
     title: "首页",
     description:
@@ -250,7 +263,7 @@ export const zhCn: Dict = {
     countFrom: "项",
     countTo: "名",
     tierEmpty: "无",
-    statsNote: "最近 30 天 / {n} 场比赛 / 截至 {date}。",
+    statsNote: "{period} / {n} 场比赛 / 截至 {date}。",
     banNote: "禁用率为{note}。",
     lowSample: "　※该段位样本较少，数值波动较大。",
     banRateNote: "在有禁用数据的比赛中，该英雄占全部禁用的比例",

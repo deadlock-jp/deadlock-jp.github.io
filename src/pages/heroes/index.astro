@@ -6,7 +6,7 @@ import AbilityIcon from "../../components/AbilityIcon.astro";
 import HeroPortrait from "../../components/HeroPortrait.astro";
 import HeroHoverCard from "../../components/HeroHoverCard.astro";
 import AbilityHoverCard, { type AbilityHoverDetail } from "../../components/AbilityHoverCard.astro";
-import { releasedHeroes, t, ability, heroTags, describe, heroNotes, heroStats, latestChangeMarks, ADJUSTMENT_LABEL } from "../../lib/data.ts";
+import { releasedHeroes, t, ability, heroTags, describe, heroNotes, heroStats, latestChangeMarks, ADJUSTMENT_LABEL, statsPeriodLabel } from "../../lib/data.ts";
 import { resolveImagePath } from "../../parsers/image-manifest.ts";
 import { heroRanks, pickRows, topRankRows, heroTierTable } from "../../lib/herorank.ts";
 import { skillCard } from "../../lib/skillcard.ts";
@@ -124,7 +124,8 @@ const H = {
 };
 const H2 = {
   empty: T.heroes.tierEmpty,
-  note: T.heroes.statsNote,
+  // 集計期間(「〜のアップデート以降」)はビルド時に埋める。{n} と {date} はランク帯を切り替えるたびに JS が埋める
+  note: T.heroes.statsNote.replace("{period}", statsPeriodLabel(heroStats)),
   ban: T.heroes.banNote,
   low: T.heroes.lowSample,
   titleSep: T.common.titleSep,

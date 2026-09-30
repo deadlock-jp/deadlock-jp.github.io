@@ -216,6 +216,19 @@ export const ko: Dict = {
     latestLink: "변경 사항 보기 →",
     changedIn: (title: string, date: string) => `${title} (${date})에서 변경`,
   },
+  /** 요확인: 통계 관련 문구는 직역에 가깝다 */
+  stats: {
+    last30: "최근 30일",
+    period: (date: string, title: string) => `${date} 업데이트(${title}) 이후`,
+    matches: (n: string) => `${n}경기`,
+    pickRate: "채택률",
+    winRate: "승률",
+    lowSample: "표본 적음",
+    popularLead: "이 영웅이 사용된 경기에서 각 티어의 아이템이 구매된 비율(채택률) 상위입니다.",
+    winNote: "승률은 이미 유리한 쪽일수록 비싼 아이템을 살 수 있기 때문에, 상위 티어일수록 높게 나오기 쉽습니다.",
+    noData: "이 기간의 통계가 아직 없습니다.",
+    source: "대전 통계: deadlock-api.com (6시간마다 갱신)",
+  },
   top: {
     title: "홈",
     description:
@@ -253,7 +266,7 @@ export const ko: Dict = {
     countFrom: "개",
     countTo: "명",
     tierEmpty: "해당 없음",
-    statsNote: "최근 30일 / {n}경기 / {date} 기준. ",
+    statsNote: "{period} / {n}경기 / {date} 기준. ",
     banNote: "밴률은 {note}입니다.",
     lowSample: " ※ 이 랭크 구간은 표본이 적어 수치 변동이 큽니다.",
     banRateNote: "밴 데이터가 있는 경기에서 전체 밴 중 해당 영웅이 차지하는 비율",

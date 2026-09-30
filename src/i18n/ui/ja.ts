@@ -217,6 +217,23 @@ export const ja = {
     /** ヒーロー・アイテム一覧の札に添える説明(マウスを重ねると出る) */
     changedIn: (title: string, date: string) => `${title}（${date}）で変更`,
   },
+  /**
+   * 対戦統計(deadlock-api.com 由来)の期間と、ヒーローページの「人気のアイテム」。
+   * 見出しの「人気のアイテム」はゲーム内の表記(Citadel_Shop_NavTab_Recommended)を使うので、ここには無い
+   */
+  stats: {
+    /** 古い統計ファイル(集計期間が直近30日)のときだけ使う */
+    last30: "直近30日",
+    period: (date: string, title: string) => `${date} のアップデート（${title}）以降`,
+    matches: (n: string) => `${n}試合`,
+    pickRate: "採用率",
+    winRate: "勝率",
+    lowSample: "サンプル少",
+    popularLead: "このヒーローが使われた試合で、各ティアのアイテムが買われた割合（採用率）の上位です。",
+    winNote: "勝率は、試合を優勢に進めている側ほど高価なアイテムを買えるため、上位ティアほど高く出やすい数値です。",
+    noData: "この期間の統計はまだありません。",
+    source: "対戦統計: deadlock-api.com（6時間ごとに更新）",
+  },
   /** トップページ(src/pages/index.astro) */
   top: {
     /** <title> と パンくず。トップは <title> がサイト名だけになる */
@@ -261,7 +278,7 @@ export const ja = {
     countTo: "人",
     tierEmpty: "該当なし",
     /** {n} 試合数 / {date} 取得日 */
-    statsNote: "直近30日 / {n}試合 / {date}時点。",
+    statsNote: "{period} / {n}試合 / {date}時点。",
     banNote: "BAN率は{note}。",
     lowSample: "　※このランク帯は母数が少なく、数値がぶれます。",
     /** BAN率の注記(日本語版は data/hero-stats.json の banRateNote をそのまま使う) */
