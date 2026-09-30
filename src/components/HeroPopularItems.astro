@@ -1,0 +1,103 @@
+---
+/**
+ * ヒーローページの「人気のアイテム」。ティアごとの採用率上位(deadlock-api.com の対戦統計。
+ * ビルド時に埋め込み、Actions の6時間おきの更新で入れ替わる)。
+ * 見出しはゲーム内の表記「人気のアイテム」(ショップのタブ名)。
+ */
+import ItemIcon from "./ItemIcon.astro";
+import { t, souls, itemStats, heroPopularItems, statsPeriodLabel } from "../lib/data.ts";
+
+interface Props {
+  heroId: number;
+  base: string;
+}
+const { heroId, base } = Astro.props;
+const { L, langPath } = Astro.locals.i18n;
+const T = L();
+const S = L().stats;
+const popular = {
+  title: t("Citadel_Shop_NavTab_Recommended", "Popular Items"),
+  period: statsPeriodLabel(itemStats),
+  matches: itemStats.heroes[String(heroId)]?.matches ?? 0,
+  /** null ならこの期間の統計がまだ無い */
+  tiers: heroPopularItems(heroId),
+};
+/** 0.1% 刻みの整数 → "50.3%" */
+const pct = (permille: number) => `${(permille / 10).toFixed(1)}%`;
+---
+
+<section class="popular">
+  <h2>{popular.title}</h2>
+  <p class="pp-meta">{popular.period} / {S.matches(popular.matches.toLocaleString("en-US"))}</p>
+  {popular.tiers ? (
+    <>
+      <p class="pp-lead">{S.popularLead}</p>
+      <div class="pp-tiers">
+        {popular.tiers.map((g) => (
+          <div class="pp-tier">
+            <h3>{T.common.tier(g.tier)}<span class="pp-price">{souls(g.price)}</span></h3>
+            <ol>
+              {g.rows.map((r) => (
+                <li>
+                  <a class="pp-item" href={`${base}${langPath(`/items/${r.item.id}/`)}`} data-itemcard={r.item.id}>
+                    <ItemIcon
+                      name={t(r.item.nameToken, r.item.id)}
+                      slotType={r.item.slotType}
+                      tier={r.item.tier}
+                      shopIcon={r.item.shopIcon}
+                      activation={r.item.activation}
+                      isImbue={r.item.isImbue}
+                      size={32}
+                    />
+                    <span class="pp-name">{t(r.item.nameToken, r.item.id)}</span>
+                  </a>
+                  <span class="pp-bar" aria-hidden="true"><i style={`width:${Math.min(100, r.pick / 10)}%`}></i></span>
+                  <span class="pp-pick" title={S.pickRate}>{pct(r.pick)}</span>
+                  <span class="pp-win">
+                    {S.winRate} {pct(r.win)}
+                    {r.low && <b class="pp-low">{S.lowSample}</b>}
+                  </span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))}
+      </div>
+      <p class="pp-note">{S.winNote} {S.source}</p>
+    </>
+  ) : (
+    <p class="pp-note">{S.noData}</p>
+  )}
+</section>
+
+<style>
+  /* 人気のアイテム(ヒーローページ)。主役は採用率(太字の数値とバー)、勝率は小さく */
+  .popular { margin-top: var(--sp-5); }
+  .popular h2 { margin-bottom: var(--sp-1); }
+  .pp-meta { margin: 0 0 var(--sp-2); font-size: 12px; color: var(--c-text-muted); }
+  .pp-lead { margin: 0 0 var(--sp-3); font-size: 13px; color: var(--c-text); }
+  .pp-tiers { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: var(--sp-3); }
+  .pp-tier { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); padding: var(--sp-2) var(--sp-3); }
+  .pp-tier h3 {
+    display: flex; align-items: baseline; gap: 8px; margin: 0 0 6px; padding: 0; border: none;
+    font-size: 13px; color: var(--c-text-strong);
+  }
+  .pp-price { margin-left: auto; font-family: var(--font-mono); font-size: 11px; color: var(--c-soul); }
+  .pp-tier ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .pp-tier li {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "item pick" "bar bar" "win win";
+    gap: 2px 8px; align-items: center;
+  }
+  .pp-item { grid-area: item; display: flex; align-items: center; gap: 8px; min-width: 0; color: var(--c-text-strong); text-decoration: none; }
+  .pp-item:hover .pp-name { text-decoration: underline; }
+  .pp-name { font-size: 13px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pp-pick { grid-area: pick; font-family: var(--font-mono); font-size: 15px; font-weight: 700; color: var(--c-text-strong); }
+  .pp-bar { grid-area: bar; height: 4px; border-radius: 2px; background: var(--c-surface-3); overflow: hidden; }
+  .pp-bar i { display: block; height: 100%; background: var(--c-accent); }
+  .pp-win { grid-area: win; font-size: 11px; color: var(--c-text-faint); font-family: var(--font-mono); }
+  .pp-low {
+    margin-left: 6px; padding: 0 4px; border-radius: 3px; font-weight: 600; font-family: inherit;
+    border: 1px solid var(--c-border-strong); color: var(--c-text-muted);
+  }
+  .pp-note { margin: var(--sp-3) 0 0; font-size: 12px; color: var(--c-text-faint); line-height: 1.7; }
+</style>

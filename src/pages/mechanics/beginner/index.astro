@@ -8,6 +8,8 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import Base from "../../../layouts/Base.astro";
+import MechanicsNav from "../../../components/MechanicsNav.astro";
+import MechanicsNext from "../../../components/MechanicsNext.astro";
 import { matchFlow, duration } from "../../../lib/matchFlow.ts";
 import { economyTable } from "../../../lib/souls.ts";
 import { souls, t } from "../../../lib/data.ts";
@@ -54,6 +56,7 @@ const toc = [
     { name: "はじめての Deadlock", path: `${base}/mechanics/beginner/` },
   ]}
 >
+  <MechanicsNav />
   <h1>はじめての Deadlock</h1>
 
   <nav class="toc" aria-label="目次">
@@ -320,4 +323,5 @@ const toc = [
       .terms > div { grid-template-columns: 1fr; gap: 2px; }
     }
   </style>
+  <MechanicsNext />
 </Base>

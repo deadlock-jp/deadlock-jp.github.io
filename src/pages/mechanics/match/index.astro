@@ -11,6 +11,8 @@
  * 文中の数値はすべて src/lib/matchFlow.ts ほかがスナップショットから引いたもの(ルール6)。
  */
 import Base from "../../../layouts/Base.astro";
+import MechanicsNav from "../../../components/MechanicsNav.astro";
+import MechanicsNext from "../../../components/MechanicsNext.astro";
 import { matchFlow, clock, duration } from "../../../lib/matchFlow.ts";
 import { riftComeback } from "../../../lib/souls.ts";
 import { gameSystemSections } from "../../../lib/gameSystem.ts";
@@ -89,6 +91,7 @@ const toc = [
     if (to) location.replace(to);
   </script>
 
+  <MechanicsNav />
   <h1>試合の流れ</h1>
   <p class="lead">初めての方は <a href={beginner}>はじめての Deadlock</a> へ。</p>
 
@@ -449,4 +452,5 @@ const toc = [
     .lead { font-size: 14px; color: var(--c-text-muted); }
     .moved p:last-child { margin-bottom: 0; }
   </style>
+  <MechanicsNext />
 </Base>

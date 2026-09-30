@@ -7,6 +7,8 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import Base from "../../../layouts/Base.astro";
+import MechanicsNav from "../../../components/MechanicsNav.astro";
+import MechanicsNext from "../../../components/MechanicsNext.astro";
 import { objectTopics, hauntSpecies } from "../../../lib/objects.ts";
 import { gameSystemSections } from "../../../lib/gameSystem.ts";
 import { objectNotes } from "../../../lib/data.ts";
@@ -50,6 +52,7 @@ const toc = [
     { name: "オブジェクト", path: `${base}/mechanics/objects/` },
   ]}
 >
+  <MechanicsNav />
   <h1>オブジェクト</h1>
 
   <nav class="toc" aria-label="目次">
@@ -245,4 +248,5 @@ const toc = [
     .topic h2 { margin-bottom: var(--sp-2); }
     .maplink { margin: 0 0 var(--sp-3); font-size: 13px; }
   </style>
+  <MechanicsNext />
 </Base>

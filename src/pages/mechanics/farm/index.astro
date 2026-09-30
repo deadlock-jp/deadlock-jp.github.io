@@ -6,6 +6,8 @@
  * 文中の数値はすべて src/lib/matchFlow.ts ほかがスナップショットから引いたもの(ルール6)。
  */
 import Base from "../../../layouts/Base.astro";
+import MechanicsNav from "../../../components/MechanicsNav.astro";
+import MechanicsNext from "../../../components/MechanicsNext.astro";
 import HeroPortrait from "../../../components/HeroPortrait.astro";
 import FarmMap from "../../../components/FarmMap.astro";
 import farmingNotes from "../../../../data/farming-notes.json" with { type: "json" };
@@ -147,6 +149,7 @@ const toc = [
     { name: "マップとファーム", path: `${base}/mechanics/farm/` },
   ]}
 >
+  <MechanicsNav />
   <h1>マップとファーム</h1>
 
   <nav class="toc" aria-label="目次">
@@ -632,4 +635,5 @@ const toc = [
       .chain .arrow { display: none; }
     }
   </style>
+  <MechanicsNext />
 </Base>

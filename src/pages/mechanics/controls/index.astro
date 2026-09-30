@@ -9,6 +9,8 @@
  * ヒーロー別の数値は heroes.json の startingStats から自動で出す(src/lib/controls.ts)。
  */
 import Base from "../../../layouts/Base.astro";
+import MechanicsNav from "../../../components/MechanicsNav.astro";
+import MechanicsNext from "../../../components/MechanicsNext.astro";
 import HeroPortrait from "../../../components/HeroPortrait.astro";
 import { heroControlStats, controlCategories } from "../../../lib/controls.ts";
 
@@ -25,6 +27,7 @@ const categories = controlCategories();
     { name: "キャラクターコントロール", path: `${base}/mechanics/controls/` },
   ]}
 >
+  <MechanicsNav />
   <h1>キャラクターコントロール</h1>
   <p class="lead">
     どのヒーローにも共通する操作と、それらを組み合わせた発展的な移動テクニックを、
@@ -354,4 +357,5 @@ const categories = controlCategories();
       color: inherit;
     }
   </style>
+  <MechanicsNext />
 </Base>

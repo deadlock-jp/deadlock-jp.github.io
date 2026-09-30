@@ -13,13 +13,14 @@ import {
   heroTags,
   heroNotes,
   heroPopularItems,
-  statsPeriodLabel,
-  itemStats,
+  itemHoverData,
 } from "../../lib/data.ts";
 import { heroRadar, heroMiscRows, radarAxesForWeapon } from "../../lib/herorank.ts";
 import { heroBalanceHistory } from "../../lib/balance.ts";
 import { heroMatchup } from "../../lib/matchup.ts";
 import HeroMatchup from "../../components/HeroMatchup.astro";
+import HeroPopularItems from "../../components/HeroPopularItems.astro";
+import ItemHoverCard from "../../components/ItemHoverCard.astro";
 import { skillCard } from "../../lib/skillcard.ts";
 import BalanceHistory from "../../components/BalanceHistory.astro";
 import HeroStrip from "../../components/HeroStrip.astro";
@@ -97,17 +98,12 @@ const altWeaponRadar = altWeapon ? radarAxesForWeapon(altWeapon) : null;
 
 const adjRows = heroBalanceHistory(hero.key, base);
 const matchup = heroMatchup(hero);
-/*
- * 人気のアイテム(deadlock-api.com の対戦統計。ビルド時に埋め込み、Actions の6時間おきの更新で入れ替わる)。
- * 描画は HeroMatchup.astro(このページに import を足さないため、既にある部品に渡す)。
- * 見出しはゲーム内の表記「人気のアイテム」(ショップのタブ名)
- */
-const popular = {
-  title: t("Citadel_Shop_NavTab_Recommended", "Popular Items"),
-  period: statsPeriodLabel(itemStats),
-  matches: itemStats.heroes[String(hero.id)]?.matches ?? 0,
-  tiers: heroPopularItems(hero.id),
-};
+/* アイテムのホバー詳細は、このページに出すアイテム(人気のアイテムと対策のアイテム)の分だけ作る */
+const hoverItems = [
+  ...(heroPopularItems(hero.id) ?? []).flatMap((g) => g.rows.map((r) => r.item)),
+  ...matchup.counters.flatMap((c) => c.items.map((mi) => mi.item)),
+];
+const itemDetails = Object.fromEntries(hoverItems.map((i) => [i.id, itemHoverData(i)]));
 const skillNames = skills.map((s) => t(s.key, "")).filter(Boolean);
 const metaDesc = T.heroPage.metaDesc(
   name,
@@ -225,7 +221,8 @@ const ogImage = existsSync(join(process.cwd(), "public", cardRel)) ? `/${cardRel
     </script>
   )}
 
-  <HeroMatchup matchup={matchup} base={base} popular={popular} />
+  <HeroPopularItems heroId={hero.id} base={base} />
+  <HeroMatchup matchup={matchup} base={base} />
 
   <BalanceHistory entries={adjRows} grouped />
 
@@ -316,4 +313,5 @@ const ogImage = existsSync(join(process.cwd(), "public", cardRel)) ? `/${cardRel
       .radars { gap: var(--sp-4); }
     }
   </style>
+  <ItemHoverCard details={itemDetails} />
 </Base>
