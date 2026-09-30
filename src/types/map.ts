@@ -27,8 +27,8 @@ export interface MapCamp extends MapPoint {
 }
 
 export interface MapBreakable extends MapPoint {
-  /** "crate" = ソウルを落とす木箱 / "statue" = パワーアップを落とす黄金像 */
-  kind: "crate" | "statue";
+  /** "crate" = ソウルを落とす木箱 / "statue" = パワーアップを落とす黄金像 / "tough" = 頑丈な箱(近接強攻撃で壊す) */
+  kind: "crate" | "statue" | "tough";
   /** 出現グループ。economy.json の breakableSpawnTimes の添字 */
   group: number;
   /**
@@ -39,7 +39,7 @@ export interface MapBreakable extends MapPoint {
 }
 
 export interface MapLandmark extends MapPoint {
-  /** "patron" | "shrine" | "baseGuardian" | "walker" | "guardian" | "powerup" | "rift" | "urnReturn" | "midboss" */
+  /** "patron" | "shrine" | "baseGuardian" | "walker" | "guardian" | "powerup" | "rift" | "urnReturn" | "midboss" | "shop" | "teleporter" | "broker" | "snack" | "bell" */
   kind: string;
   /** 建造物のレーン(economy.json の lanes の添字)。レーンに属さないものは null */
   lane: number | null;

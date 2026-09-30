@@ -22,6 +22,7 @@ import type { ItemsFile } from "../types/item.ts";
 import type { AbilitiesFile } from "../types/ability.ts";
 import type { HeroesFile } from "../types/hero.ts";
 import { SCALE_ICON_REFS } from "../lib/scaleIcons.ts";
+import { MAP_MARKER_ICON_REFS } from "../lib/mapIcons.ts";
 import type { MapFile } from "../types/map.ts";
 import type { ObjectsFile } from "../types/object.ts";
 import { groupHaunts } from "./objects.ts";
@@ -95,6 +96,10 @@ export function buildImageManifest(dataDir: string, repoDataDir?: string): Image
   // スキルカードのスケーリング表示(★の代わりに使う武器/スピリットアイコン)
   for (const [kind, ref] of Object.entries(SCALE_ICON_REFS)) {
     add(ref, `scaleicon:${kind}`);
+  }
+  // マップの目印(商店・テレポーター・ブローカーなど)。src/lib/mapIcons.ts
+  for (const [kind, ref] of Object.entries(MAP_MARKER_ICON_REFS)) {
+    add(ref, `mapmarker:${kind}`);
   }
 
   for (const item of Object.values(items.items)) {

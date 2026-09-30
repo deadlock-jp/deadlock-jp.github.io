@@ -138,9 +138,11 @@ const CAMP_TYPE: Record<string, string> = {
 };
 
 /** 箱の種類。misc.vdata で wooden_crate はソウル、item_container はパワーアップを落とす */
-const BREAKABLE_KIND: Record<string, "crate" | "statue"> = {
+const BREAKABLE_KIND: Record<string, "crate" | "statue" | "tough"> = {
   citadel_breakable_prop_wooden_crate: "crate",
   citadel_breakable_item_container: "statue",
+  // 頑丈な箱(Tough Crate)。近接強攻撃でしか壊せない。6712 で追加
+  citadel_breakable_prop_tough_crate: "tough",
 };
 
 const LANDMARK_KIND: Record<string, string> = {
@@ -151,6 +153,16 @@ const LANDMARK_KIND: Record<string, string> = {
   info_koth_spawn_location: "rift",
   citadel_trigger_idol_return: "urnReturn",
   destroyable_building: "shrine",
+  // 以下 6712(2026-09-29)から載せる施設
+  citadel_shop_prop_dynamic: "shop", // レーン沿いの商店(拠点の商店はこの形では置かれていない)
+  citadel_trigger_teleport: "teleporter",
+  citadel_trigger_corrupted_item_shop: "broker", // ブローカー(期間限定の商人)の店が出る場所
+};
+
+/** subclass_name で種類が決まるもの(classname だけでは区別できない) */
+const LANDMARK_SUBCLASS: Record<string, string> = {
+  citadel_pickup_floating_health: "snack", // ヒーリングスナック
+  citadel_breakable_bell_chinatown: "bell", // チャイナタウンの鐘楼の鐘(鳴らすとソウル)
 };
 
 /** teamnumber → チーム。2 がアンバー(南)、3 がサファイア(北) */
@@ -238,6 +250,8 @@ export function parseMap(
           ...p,
         });
       }
+    } else if (LANDMARK_SUBCLASS[e.subclass_name ?? ""]) {
+      landmarks.push({ kind: LANDMARK_SUBCLASS[e.subclass_name!]!, lane: null, team: null, underground: underground(p), ...p });
     } else if (e.classname === "citadel_breakable_prop") {
       const kind = BREAKABLE_KIND[e.subclass_name ?? ""];
       if (!kind) continue;

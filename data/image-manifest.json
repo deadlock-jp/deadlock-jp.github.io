@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-30T03:51:52.287Z",
+  "generatedAt": "2026-09-30T03:57:22.595Z",
   "sourceVpk": "game/citadel/pak01_dir.vpk",
   "entries": [
     {
@@ -4985,12 +4985,40 @@
       ]
     },
     {
+      "ref": "file://{images}/minimap/health_pad.psd",
+      "vpkPath": "panorama/images/minimap/health_pad_psd.vtex_c",
+      "outPath": "public/images/minimap/health_pad.png",
+      "kind": "vtex",
+      "usedBy": [
+        "mapmarker:snack"
+      ]
+    },
+    {
+      "ref": "file://{images}/minimap/minimap_icon_broker.svg",
+      "vpkPath": "panorama/images/minimap/minimap_icon_broker.vsvg_c",
+      "outPath": "public/images/minimap/minimap_icon_broker.svg",
+      "kind": "vsvg",
+      "usedBy": [
+        "mapmarker:broker"
+      ]
+    },
+    {
       "ref": "file://{images}/minimap/minimap_icon_koth.svg",
       "vpkPath": "panorama/images/minimap/minimap_icon_koth.vsvg_c",
       "outPath": "public/images/minimap/minimap_icon_koth.svg",
       "kind": "vsvg",
       "usedBy": [
+        "mapmarker:rift",
         "system:map-objects:1"
+      ]
+    },
+    {
+      "ref": "file://{images}/minimap/minimap_shop.psd",
+      "vpkPath": "panorama/images/minimap/minimap_shop_psd.vtex_c",
+      "outPath": "public/images/minimap/minimap_shop.png",
+      "kind": "vtex",
+      "usedBy": [
+        "mapmarker:shop"
       ]
     },
     {
@@ -4999,6 +5027,7 @@
       "outPath": "public/images/minimap/minimap_teleporter_highlight.svg",
       "kind": "vsvg",
       "usedBy": [
+        "mapmarker:teleporter",
         "system:map-objects:3"
       ]
     },
@@ -5050,6 +5079,15 @@
       "kind": "vtex",
       "usedBy": [
         "system:map-objects:0"
+      ]
+    },
+    {
+      "ref": "file://{images}/minimap/soul_jar_marker_return.psd",
+      "vpkPath": "panorama/images/minimap/soul_jar_marker_return_psd.vtex_c",
+      "outPath": "public/images/minimap/soul_jar_marker_return.png",
+      "kind": "vtex",
+      "usedBy": [
+        "mapmarker:urnReturn"
       ]
     },
     {

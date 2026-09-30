@@ -17,6 +17,8 @@ const bg = bgPath && existsSync(join(process.cwd(), bgPath)) ? `${base}/${bgPath
 const camps = campInfo();
 const { L } = Astro.locals.i18n;
 const renovating = mapRenovating();
+/* 入口ページの小さい地図には、昔からの目印(橋バフ・裂け目・壺)だけ出す。商店やスナックまで出すと点で埋まる */
+const PREVIEW_MARKERS = new Set(["powerup", "rift", "urnReturn"]);
 const onGround = <T extends { underground: boolean }>(xs: T[]) => xs.filter((x) => !x.underground);
 ---
 
@@ -27,9 +29,9 @@ const onGround = <T extends { underground: boolean }>(xs: T[]) => xs.filter((x) 
       {view.laneLines.map((l) => <polyline points={l.points} stroke={l.color} />)}
     </svg>
     {view.structures.map((l) => <i class={`st st-${l.kind}`} style={`${view.pos(l)};--c:${view.structureColor(l)}`} />)}
-    {onGround(map.breakables).filter((b) => !isTunnelBreakable(b)).map((b) => <i class={`bk bk-${b.kind}`} style={view.pos(b)} />)}
+    {onGround(map.breakables).filter((b) => b.kind !== "tough" && !isTunnelBreakable(b)).map((b) => <i class={`bk bk-${b.kind}`} style={view.pos(b)} />)}
     {onGround(map.camps).map((c) => camps[c.type]?.icon && <img class={`cp cp-${c.type}`} src={`${base}/${camps[c.type]!.icon}`} alt="" loading="lazy" style={view.pos(c)} />)}
-    {view.markers.filter((l) => l.kind !== "midboss" && !l.underground).map((l) => <i class="lm" style={view.pos(l)} />)}
+    {view.markers.filter((l) => PREVIEW_MARKERS.has(l.kind) && !l.underground).map((l) => <i class="lm" style={view.pos(l)} />)}
   </span>
 )}
 

@@ -15,7 +15,7 @@ import { existsSync } from "node:fs";
 import { join } from "node:path";
 import type { MapFile } from "../types/map.ts";
 import { clock, duration } from "../lib/matchFlow.ts";
-import { loadMap, mapView, mapRenovating, campInfo, campHauntText, campCard, breakableLabel, isTunnelBreakable as isTunnel } from "../lib/mapView.ts";
+import { loadMap, mapView, mapRenovating, campInfo, campHauntText, campCard, breakableLabel, markerIcon, isTunnelBreakable as isTunnel } from "../lib/mapView.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const loaded = loadMap();
@@ -51,6 +51,16 @@ const markers = view?.markers ?? [];
 const laneLines = view?.laneLines ?? [];
 const structureColor = view?.structureColor ?? (() => "");
 
+/** 目印の種類 → 表示の切り替え(layers の key) */
+const MARKER_LAYER: Record<string, string> = {
+  shop: "facility",
+  teleporter: "facility",
+  broker: "broker",
+  snack: "snack",
+};
+const markerLayer = (kind: string) => MARKER_LAYER[kind] ?? "marker";
+const markerCount = (layer: string) => markers.filter((l) => markerLayer(l.kind) === layer).length;
+
 const layers = map
   ? [
       ...CAMP_LAYERS.map((l) => ({
@@ -66,7 +76,13 @@ const layers = map
       ...(count(isTunnel) > 0
         ? [{ key: "tunnel", label: "地下トンネルの箱（3人専用）", icon: null, count: count(isTunnel), on: false }]
         : []),
-      { key: "marker", label: "橋バフ・裂け目・壺", icon: null, count: markers.length, on: true },
+      { key: "tough", label: "頑丈な箱", icon: null, count: count((b) => b.kind === "tough"), on: false },
+      { key: "snack", label: "ヒーリングスナック", icon: markerIcon("snack") ? `${base}/${markerIcon("snack")}` : null, count: markerCount("snack"), on: false },
+      { key: "marker", label: "橋バフ・裂け目・壺・鐘楼", icon: null, count: markerCount("marker"), on: true },
+      { key: "facility", label: "商店・テレポーター", icon: markerIcon("shop") ? `${base}/${markerIcon("shop")}` : null, count: markerCount("facility"), on: true },
+      ...(markerCount("broker") > 0
+        ? [{ key: "broker", label: "ブローカー（期間限定）", icon: markerIcon("broker") ? `${base}/${markerIcon("broker")}` : null, count: markerCount("broker"), on: true }]
+        : []),
     ]
   : [];
 
@@ -92,6 +108,11 @@ const MARKER_LABEL: Record<string, string> = {
   rift: "不安定な裂け目",
   urnReturn: "魂の壺の返還地点",
   midboss: "ミッド・ボス",
+  bell: "鐘楼の鐘（鳴らすとソウル。鐘の音がマップ全体に響く）",
+  shop: "商店",
+  teleporter: "テレポーター",
+  broker: "ブローカーの店（期間限定。来ている間だけ）",
+  snack: "ヒーリングスナック",
 };
 ---
 
@@ -156,7 +177,7 @@ const MARKER_LABEL: Record<string, string> = {
               class:list={["mk", `mk-${b.kind}`, isTunnel(b) ? "tunnelonly" : b.underground ? "under" : "above"]}
               data-layer={isTunnel(b) ? "tunnel" : b.kind}
               style={pos(b)}
-              title={`${label ? `${label} ` : ""}${isTunnel(b) ? "地下トンネル（3人専用）の" : ""}${b.kind === "crate" ? "箱（ソウル）" : "黄金像"}：${groupTime(b.group)}`}
+              title={`${label ? `${label} ` : ""}${isTunnel(b) ? "地下トンネル（3人専用）の" : ""}${b.kind === "crate" ? "箱（ソウル）" : b.kind === "tough" ? "頑丈な箱（近接強攻撃で壊す）" : "黄金像"}：${groupTime(b.group)}`}
             >
               {label && <b class="bl">{label}</b>}
             </span>
@@ -174,16 +195,19 @@ const MARKER_LABEL: Record<string, string> = {
             {camps[c.type]?.icon && <img src={`${base}/${camps[c.type]!.icon}`} alt="" draggable="false" />}
           </span>
         ))}
-        {markers.map((l) => (
-          <span
-            class:list={["mk", "mk-lm", `lm-${l.kind}`, l.kind === "midboss" ? "both" : l.underground ? "under" : "above"]}
-            data-layer="marker"
-            style={pos(l)}
-            title={MARKER_LABEL[l.kind] ?? l.kind}
-          >
-            {l.kind === "midboss" && camps.midboss?.icon && <img src={`${base}/${camps.midboss.icon}`} alt="" draggable="false" />}
-          </span>
-        ))}
+        {markers.map((l) => {
+          const icon = l.kind === "midboss" ? camps.midboss?.icon ?? null : markerIcon(l.kind);
+          return (
+            <span
+              class:list={["mk", "mk-lm", `lm-${l.kind}`, icon && "has-icon", l.kind === "midboss" ? "both" : l.underground ? "under" : "above"]}
+              data-layer={markerLayer(l.kind)}
+              style={pos(l)}
+              title={MARKER_LABEL[l.kind] ?? l.kind}
+            >
+              {icon && <img src={`${base}/${icon}`} alt="" draggable="false" />}
+            </span>
+          );
+        })}
       </div>
     </div>
     <p class="fm-info" aria-live="polite"></p>
@@ -260,7 +284,7 @@ const MARKER_LABEL: Record<string, string> = {
       root.querySelector("input[data-labels]")?.addEventListener("change", (e) => {
         stage.classList.toggle("labels", e.target.checked);
         if (e.target.checked) {
-          for (const k of ["crate", "statue"]) {
+          for (const k of ["crate", "statue", "tough"]) {
             hidden.delete(k);
             const cb = root.querySelector(`input[data-layer="${k}"]`);
             if (cb) cb.checked = true;
@@ -415,7 +439,7 @@ const MARKER_LABEL: Record<string, string> = {
           for (const b of root.querySelectorAll("[data-view-btn]")) b.classList.toggle("on", b === btn);
           // 地下に切り替えたら箱を表示する(地下で見たいのはほぼ箱なので)
           if (btn.dataset.viewBtn !== "ground") {
-            for (const k of ["crate", "statue"]) {
+            for (const k of ["crate", "statue", "tough"]) {
               hidden.delete(k);
               const cb = root.querySelector(`input[data-layer="${k}"]`);
               if (cb) cb.checked = true;
@@ -496,7 +520,11 @@ const MARKER_LABEL: Record<string, string> = {
   .fm-stage[data-hide~="crate"] [data-layer="crate"],
   .fm-stage[data-hide~="statue"] [data-layer="statue"],
   .fm-stage[data-hide~="marker"] [data-layer="marker"],
-  .fm-stage[data-hide~="tunnel"] [data-layer="tunnel"] { display: none; }
+  .fm-stage[data-hide~="tunnel"] [data-layer="tunnel"],
+  .fm-stage[data-hide~="tough"] [data-layer="tough"],
+  .fm-stage[data-hide~="snack"] [data-layer="snack"],
+  .fm-stage[data-hide~="facility"] [data-layer="facility"],
+  .fm-stage[data-hide~="broker"] [data-layer="broker"] { display: none; }
 
   /* 建造物: ゲームのミニマップと同じ菱形。色は --c(自陣=レーン色 / 敵陣=赤) */
   .st { width: 14px; height: 14px; background: var(--c); transform: translate(-50%, -50%) rotate(45deg); box-shadow: 0 0 0 1.5px rgb(0 0 0 / 0.7); }
@@ -515,6 +543,14 @@ const MARKER_LABEL: Record<string, string> = {
   .camp-strong img { width: 24px; height: 24px; }
   .camp-vaults img { width: 22px; height: 22px; }
   .mk-lm { width: 11px; height: 11px; border: 2px solid var(--c-accent); border-radius: 50%; background: rgb(0 0 0 / 0.5); }
+  .mk-tough { width: 7px; height: 7px; background: #c98a4b; border-radius: 1px; box-shadow: 0 0 0 1px rgb(0 0 0 / 0.7); }
+  .lay-tough .sw { background: #c98a4b; border-radius: 1px; }
+  /* 絵のある目印(商店・テレポーター・ブローカー・スナック・裂け目・壺)は丸枠を外して絵だけ出す */
+  .mk-lm.has-icon { width: auto; height: auto; border: none; background: none; }
+  .mk-lm.has-icon img { width: 18px; height: 18px; filter: drop-shadow(0 0 2px #000) drop-shadow(0 0 1px #000); }
+  .lm-snack.has-icon img { width: 11px; height: 11px; }
+  .lm-broker.has-icon img, .lm-shop.has-icon img { width: 20px; height: 20px; }
+  .lm-bell { border-color: #e8b93a; }
   .lm-midboss { border: none; background: none; }
   .lm-midboss img { width: 24px; height: 24px; }
 

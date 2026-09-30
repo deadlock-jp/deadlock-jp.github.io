@@ -12,6 +12,8 @@ import type { MapFile, MapLandmark } from "../types/map.ts";
 import type { EconomyFile } from "../types/economy.ts";
 import { campSpawnTimes, hauntName, hauntUnitInfo, vaultReward } from "./objects.ts";
 import { TUNNEL_BREAKABLE_GROUP, isMapReady, hasTunnelGroup } from "../parsers/map.ts";
+import { resolveImagePath } from "../parsers/image-manifest.ts";
+import { MAP_MARKER_ICON_REFS } from "./mapIcons.ts";
 
 const DATA_DIR = join(process.cwd(), "data");
 
@@ -147,3 +149,10 @@ const breakableLabels: Record<string, string> = (() => {
   return existsSync(p) ? ((JSON.parse(readFileSync(p, "utf8")) as { labels: Record<string, string> }).labels ?? {}) : {};
 })();
 export const breakableLabel = (b: MapFile["breakables"][number]): string | null => (b.hid ? breakableLabels[b.hid] ?? null : null);
+
+/** 目印(landmarks[].kind)のアイコン。public/ からの相対パス。絵が無い目印は null(丸印で描く) */
+export function markerIcon(kind: string): string | null {
+  const ref = MAP_MARKER_ICON_REFS[kind];
+  const resolved = ref ? resolveImagePath(ref) : null;
+  return resolved && existsSync(join(process.cwd(), resolved.outPath)) ? resolved.outPath.replace(/^public\//, "") : null;
+}
