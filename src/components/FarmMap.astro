@@ -15,7 +15,7 @@ import { existsSync } from "node:fs";
 import { join } from "node:path";
 import type { MapFile } from "../types/map.ts";
 import { clock, duration } from "../lib/matchFlow.ts";
-import { loadMap, mapView, mapRenovating, campInfo, isTunnelBreakable as isTunnel } from "../lib/mapView.ts";
+import { loadMap, mapView, mapRenovating, campInfo, campHauntText, isTunnelBreakable as isTunnel } from "../lib/mapView.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const loaded = loadMap();
@@ -145,7 +145,8 @@ const MARKER_LABEL: Record<string, string> = {
             class:list={["mk", "mk-camp", `camp-${c.type}`, c.underground ? "under" : "above"]}
             data-layer={c.type}
             style={pos(c)}
-            title={`${camps[c.type]?.label ?? c.type}（${c.units}体）：${clock((camps[c.type]?.initialSpawnMinutes ?? 0) * 60)}〜、${duration((camps[c.type]?.respawnMinutes ?? 0) * 60)}ごと`}
+            title={`${camps[c.type]?.label ?? c.type}${c.units > 0 ? `（${c.units}体）` : ""}：${clock((camps[c.type]?.initialSpawnMinutes ?? 0) * 60)}〜、${duration((camps[c.type]?.respawnMinutes ?? 0) * 60)}ごと${campHauntText(c) ? `
+${campHauntText(c)}` : ""}`}
           >
             {camps[c.type]?.icon && <img src={`${base}/${camps[c.type]!.icon}`} alt="" draggable="false" />}
           </span>

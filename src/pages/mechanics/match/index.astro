@@ -17,7 +17,7 @@ import farmingNotes from "../../../../data/farming-notes.json" with { type: "jso
 import { matchFlow, clock, duration } from "../../../lib/matchFlow.ts";
 import { laneScenarios, ASSUMPTIONS } from "../../../lib/laneScenarios.ts";
 import { economyTable, killShareFrac, riftComeback } from "../../../lib/souls.ts";
-import { objectTopics } from "../../../lib/objects.ts";
+import { objectTopics, hauntSpecies } from "../../../lib/objects.ts";
 import { gameSystemSections } from "../../../lib/gameSystem.ts";
 import { souls, t, item, heroesFile, objectNotes } from "../../../lib/data.ts";
 import { resolveImagePath } from "../../../parsers/image-manifest.ts";
@@ -28,6 +28,8 @@ const economy = economyTable();
 const shareFrac = killShareFrac();
 const rift = riftComeback();
 const topics = objectTopics();
+/* 中立モンスター(ホーント)の種類。HP・ソウルは段ごとに共通なので、種類は絵と名前だけ並べる */
+const haunts = hauntSpecies();
 const sys = Object.fromEntries(gameSystemSections().map((s) => [s.id, s]));
 
 const pct = (n: number): string => `${Math.round(n * 100)}%`;
@@ -57,7 +59,7 @@ const N = {
   rift: "不安定な裂け目", // ping_koth などの文中表記。単独の名前トークンが無い
   urn: t("ability_golden_idol", "魂の壺"),
   statue: t("Citadel_ShopStats_GoldenStatues", "黄金像"),
-  vault: "罪人の供物",
+  vault: t("neutral_sinners", "罪人の供物"),
 };
 
 /* ---- 2. レーン戦: 回復アイテム(運営者が選んだもの。価格や効果はデータから) ---- */
@@ -741,6 +743,17 @@ const toc = [
               );
             })}
           </div>
+          {topic.id === "neutral" && haunts.length > 0 && (
+            <ul class="haunts">
+              {haunts.map((h) => (
+                <li>
+                  {h.icon && <img src={`${base}/${h.icon}`} alt="" loading="lazy" />}
+                  <b>{h.name}</b>
+                  <small>マップに{h.placed}体</small>
+                </li>
+              ))}
+            </ul>
+          )}
           {topic.lines.length > 0 && <ul class="notes">{topic.lines.map((line) => <li>{line}</li>)}</ul>}
         </div>
       ))}
@@ -859,6 +872,11 @@ const toc = [
     .obj { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); padding: var(--sp-2) var(--sp-3); }
     .obj h5 { display: flex; align-items: center; gap: 6px; margin: 0 0 var(--sp-2); font-size: 13px; color: var(--c-text-strong); }
     .oicon { width: 24px; height: 24px; object-fit: contain; }
+    .haunts { list-style: none; margin: var(--sp-3) 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: var(--sp-2); }
+    .haunts li { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: var(--sp-2); background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); text-align: center; }
+    .haunts img { width: 72px; height: 72px; object-fit: contain; }
+    .haunts b { font-size: 13px; color: var(--c-text-strong); line-height: 1.4; }
+    .haunts small { font-size: 11px; color: var(--c-text-muted); }
     .obj dl { margin: 0; font-size: 12px; }
     .obj .row { display: flex; justify-content: space-between; gap: var(--sp-3); padding: 2px 0; border-bottom: 1px solid var(--c-border); }
     .obj dt { color: var(--c-text-muted); }

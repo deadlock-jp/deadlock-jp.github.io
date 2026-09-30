@@ -10,7 +10,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import type { MapFile, MapLandmark } from "../types/map.ts";
 import type { EconomyFile } from "../types/economy.ts";
-import { campSpawnTimes } from "./objects.ts";
+import { campSpawnTimes, hauntName } from "./objects.ts";
 import { TUNNEL_BREAKABLE_GROUP, isMapReady, hasTunnelGroup } from "../parsers/map.ts";
 
 const DATA_DIR = join(process.cwd(), "data");
@@ -98,4 +98,12 @@ export function mapView(map: MapFile, economy: EconomyFile) {
     structures: map.landmarks.filter((l) => STRUCTURES.has(l.kind)),
     markers: map.landmarks.filter((l) => !STRUCTURES.has(l.kind)),
   };
+}
+
+/** キャンプに出るホーントの内訳(「スペシメン I ×3、ガターグール II ×2」)。種類が分からない版は空文字 */
+export function campHauntText(c: MapFile["camps"][number]): string {
+  return Object.entries(c.haunts ?? {})
+    .sort((a, b) => b[1] - a[1])
+    .map(([unit, n]) => `${hauntName(unit) ?? unit} ×${n}`)
+    .join("、");
 }

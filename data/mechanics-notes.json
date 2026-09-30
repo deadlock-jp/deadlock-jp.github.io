@@ -85,26 +85,26 @@
     },
     {
       "id": "neutral",
-      "title": "ニュートラル",
-      "lead": "レーン外のキャンプ。弱点を撃つと追加ダメージとソウルが入る。",
+      "title": "中立モンスター（ホーント）",
+      "lead": "レーン外のキャンプにいる中立モンスター。2026年9月29日のアップデートで、ホーントと呼ばれる新しい種類に総入れ替えされた。",
       "objects": [
         {
           "id": "neutral_trooper_weak",
           "nameToken": "",
           "name": "中立モンスター（小）",
-          "icon": "file://{images}/npcs/neutral_bot.psd"
+          "icon": "file://{images}/minimap/neutral_small.psd"
         },
         {
           "id": "neutral_trooper_normal",
           "nameToken": "",
           "name": "中立モンスター（中）",
-          "icon": "file://{images}/npcs/neutral_bot.psd"
+          "icon": "file://{images}/minimap/neutral_medium.psd"
         },
         {
           "id": "neutral_trooper_strong",
           "nameToken": "",
           "name": "中立モンスター（大）",
-          "icon": "file://{images}/npcs/neutral_bot.psd"
+          "icon": "file://{images}/minimap/neutral_large.psd"
         },
         {
           "id": "npc_super_neutral",
@@ -112,19 +112,8 @@
           "icon": "file://{images}/minimap/super_neutral_marker.psd"
         },
         {
-          "id": "npc_neutral_weakpoint",
-          "nameToken": "",
-          "name": "弱点"
-        },
-        {
-          "id": "npc_neutral_weakpoint_strong",
-          "nameToken": "",
-          "name": "弱点（大）"
-        },
-        {
           "id": "neutral_sinners_sacrifice",
-          "nameToken": "",
-          "name": "罪人の供物",
+          "nameToken": "neutral_sinners",
           "excludeStats": [
             "sightRangePlayers",
             "maxHealthBarDrawDistance",
@@ -141,13 +130,10 @@
         }
       ],
       "lines": [
+        "見た目と動きは種類ごとに違うが、HPと獲得ソウルは種類によらず小・中・大の段ごとに共通。上の数値は段ごとの値。",
         "獲得ソウルは時間で増える。データ上は「毎分の増加率」として持たれていて、試合開始時の値に掛かる。",
-        "弱点は壊すと一定時間後に戻る。弱点1つを壊すごとに本体のソウルの一部が先に入る。",
-        "目を撃つとクリティカルダメージが入る。",
-        "「潜伏」している個体はプレイヤーが近づくまで無敵で姿を見せない。左右対称に見えるキャンプでも、潜伏している個体の配置が同じとは限らない。",
-        "射程内でも壁の陰にいる相手には、横に体を傾けて狙ってくる。完全に届かない相手には棒立ちで反撃しない。",
-        "大型の個体は近接攻撃のダメージを軽減する。",
-        "罪人の供物はニュートラルとは別枠の設置物で、殴るとHPと引き換えにソウルがもらえる。"
+        "撃つと追加ダメージとソウルが入る「弱点」は、この入れ替えでデータから無くなった。",
+        "罪人の供物は中立モンスターとは別枠の設置物で、殴るとHPと引き換えにソウルがもらえる。"
       ]
     }
   ],

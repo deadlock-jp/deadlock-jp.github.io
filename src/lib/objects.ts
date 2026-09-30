@@ -15,6 +15,9 @@ import mechanicsJson from "../../data/mechanics-notes.json" with { type: "json" 
 import { t } from "./data.ts";
 import type { EconomyFile } from "../types/economy.ts";
 import { resolveImagePath } from "../parsers/image-manifest.ts";
+import { groupHaunts } from "../parsers/objects.ts";
+import type { GameObject } from "../types/object.ts";
+import type { MapFile } from "../types/map.ts";
 
 const DATA_DIR = join(process.cwd(), "data");
 
@@ -212,4 +215,44 @@ export function objectTopics(): ObjectTopic[] {
       return stats.length ? [{ id: o.id, name, icon: o.icon ?? null, stats }] : [];
     }),
   }));
+}
+
+/* ---------------- ホーント(6712 で入れ替わった中立モンスター) ---------------- */
+
+const mapCampHaunts: Record<string, number>[] = (() => {
+  const v = JSON.parse(readFileSync(join(DATA_DIR, "latest.json"), "utf8")).version as string;
+  const p = join(DATA_DIR, "snapshots", v, "map.json");
+  if (!existsSync(p)) return [];
+  return (JSON.parse(readFileSync(p, "utf8")) as MapFile).camps.map((c) => c.haunts ?? {});
+})();
+
+/** "スペシメン I" → "スペシメン"。種類の名前は小(_1)の表記から段の数字を外して作る */
+const stripTier = (name: string): string => name.replace(/\s*(?:I{1,3}|Ⅰ|Ⅱ|Ⅲ)$/, "");
+
+export interface HauntEntry {
+  key: string;
+  /** ゲーム内の表記(段の数字を除いたもの) */
+  name: string;
+  /** 小・中・大それぞれのゲーム内表記 */
+  tierNames: string[];
+  /** マップに置かれている体数 */
+  placed: number;
+  /** public/ からの相対パス。画像が無ければ null */
+  icon: string | null;
+}
+
+/** マップに置かれているホーントの種類。多く置かれている順 */
+export function hauntSpecies(): HauntEntry[] {
+  return groupHaunts(objectsFile.objects as Record<string, GameObject>, mapCampHaunts).map((s) => {
+    const resolved = s.icon ? resolveImagePath(s.icon) : null;
+    const icon = resolved && existsSync(join(process.cwd(), resolved.outPath)) ? resolved.outPath.replace(/^public\//, "") : null;
+    const tierNames = s.tokens.map((tk) => t(tk, tk));
+    return { key: s.tokenBase, name: stripTier(tierNames[0] ?? s.tokenBase), tierNames, placed: s.placed, icon };
+  });
+}
+
+/** npc_units のキー(neutral_specimen_weak など)からゲーム内の表示名。無ければ null */
+export function hauntName(unitKey: string): string | null {
+  const tk = (objectsFile.objects[unitKey] as GameObject | undefined)?.nameToken;
+  return tk ? t(tk, "") || null : null;
 }
