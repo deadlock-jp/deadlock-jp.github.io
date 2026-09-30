@@ -16,12 +16,15 @@ import {
   heroTags,
   itemHoverData,
   SLOT_META,
+  ADJUSTMENT_LABEL,
+  patchNotes,
+  noteTitle,
 } from "../lib/data.ts";
 import { balanceUpdates } from "../lib/balance.ts";
 import { heroRanks, pickRows } from "../lib/herorank.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const { L, langPath, isJaOnlyFrom } = Astro.locals.i18n;
+const { L, langPath, isJaOnlyFrom, currentLang } = Astro.locals.i18n;
 const T = L();
 const ranks = heroRanks();
 
@@ -58,6 +61,20 @@ const itemDetails = Object.fromEntries(items.map((i) => [i.id, itemHoverData(i)]
 
 /* 直近のバランス調整。詳細は各アップデートのページに置き、ここは一覧だけ */
 const balance = balanceUpdates(base).slice(0, 3);
+
+/*
+ * 最新アップデートの入口。題・日付・リンクは公式ノート(patch-notes.json)の先頭、件数は
+ * 同じ日付のバランス調整(updates.json)から。次のパッチでも手作業なしで入れ替わる。
+ * 題は日本語版なら公式ノートの日本語の題、ほかの言語は英語の原文の題。
+ */
+const lang = currentLang();
+const latestNote = patchNotes()[0] ?? null;
+const latestUpdate = latestNote ? (balanceUpdates(base).find((u) => u.date === latestNote.date) ?? null) : null;
+const latestCounts = latestUpdate
+  ? (["buff", "nerf", "mixed", "rework"] as const)
+      .filter((k) => latestUpdate.counts[k] > 0)
+      .map((k) => ({ kind: k, label: ADJUSTMENT_LABEL[k], n: latestUpdate.counts[k] }))
+  : [];
 const balanceAbilityKeys = [
   ...new Set(
     balance.flatMap((u) => u.chips.map((c) => c.abilityKey).filter((k): k is string => !!k)),
@@ -70,6 +87,20 @@ const balanceAbilityKeys = [
     <span class="eyebrow">Unofficial Database</span>
     <h1>{T.top.h1}</h1>
   </div>
+
+  {latestNote && (
+    <a class="latest panel" href={`${base}${langPath(`/patch-notes/${latestNote.date}/`)}`}>
+      <span class="lt-eyebrow">{T.patchPage.latest}</span>
+      <span class="lt-title" lang={lang === "ja" || lang === "en" ? undefined : "en"}>{noteTitle(latestNote, lang)}</span>
+      <time class="lt-date" datetime={latestNote.date}>{latestNote.date}</time>
+      {latestCounts.length > 0 && (
+        <span class="lt-counts">
+          {latestCounts.map((c) => <span class="lt-count" data-kind={c.kind}>{c.label} <b>{c.n}</b></span>)}
+        </span>
+      )}
+      <span class="lt-link">{T.patchPage.latestLink}</span>
+    </a>
+  )}
 
   <section class="block panel first">
     <h2>
@@ -143,7 +174,7 @@ const balanceAbilityKeys = [
   <section class="block panel">
     <h2>
       {T.adjust.historyTitle}
-      <a class="more" href={`${base}/patch-notes/`}>{T.top.allUpdates}{isJaOnlyFrom("/patch-notes/") && <span class="jaonly">{T.jaOnly}</span>}</a>
+      <a class="more" href={`${base}${langPath("/patch-notes/")}`}>{T.top.allUpdates}{isJaOnlyFrom("/patch-notes/") && <span class="jaonly">{T.jaOnly}</span>}</a>
     </h2>
     <div class="bal">
       {
@@ -188,6 +219,36 @@ const balanceAbilityKeys = [
   <AbilityHoverCards abilityKeys={balanceAbilityKeys} />
 
   <style>
+    /* 最新アップデートの入口(トップの見出しのすぐ下) */
+    .latest {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-areas: "eye eye" "title date" "counts link";
+      gap: 4px var(--sp-3);
+      align-items: baseline;
+      margin: 0 0 var(--sp-4);
+      padding: var(--sp-3) var(--sp-4);
+      color: inherit;
+      text-decoration: none;
+    }
+    .latest:hover { text-decoration: none; border-color: var(--c-accent-dim); }
+    .latest:hover .lt-link { color: var(--c-accent-hover); }
+    .lt-eyebrow { grid-area: eye; font-size: 11px; letter-spacing: 0.08em; color: var(--c-accent); font-weight: 700; }
+    .lt-title { grid-area: title; font-size: 20px; font-weight: 800; color: var(--c-text-strong); }
+    .lt-date { grid-area: date; font-family: var(--font-mono); font-size: 12px; color: var(--c-text-muted); }
+    .lt-counts { grid-area: counts; display: flex; flex-wrap: wrap; gap: 6px; }
+    .lt-count { font-size: 12px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--c-border); color: var(--c-text-muted); }
+    .lt-count b { font-family: var(--font-mono); color: var(--c-text-strong); }
+    .lt-count[data-kind="buff"] { border-color: var(--c-buff-dim); }
+    .lt-count[data-kind="buff"] b { color: var(--c-buff); }
+    .lt-count[data-kind="nerf"] { border-color: var(--c-nerf-dim); }
+    .lt-count[data-kind="nerf"] b { color: var(--c-nerf); }
+    .lt-count[data-kind="mixed"] b,
+    .lt-count[data-kind="rework"] b { color: var(--c-mixed); }
+    .lt-link { grid-area: link; font-size: 12px; color: var(--c-accent); white-space: nowrap; }
+    @media (max-width: 560px) {
+      .latest { grid-template-columns: 1fr; grid-template-areas: "eye" "title" "date" "counts" "link"; }
+    }
     /* ---- ヒーロー見出し(背景演出「Halftone Press」) ---- */
     .herohead {
       position: relative;

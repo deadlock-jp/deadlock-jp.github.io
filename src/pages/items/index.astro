@@ -2,7 +2,7 @@
 import Base from "../../layouts/Base.astro";
 import ItemIcon from "../../components/ItemIcon.astro";
 import ItemHoverCard from "../../components/ItemHoverCard.astro";
-import { shopItems, legendaryItems, t, describe, itemsFile, SLOT_META, souls, itemHoverData } from "../../lib/data.ts";
+import { shopItems, legendaryItems, t, describe, itemsFile, SLOT_META, souls, itemHoverData, latestChangeMarks, ADJUSTMENT_LABEL } from "../../lib/data.ts";
 
 const items = shopItems();
 const slots = ["WeaponMod", "Armor", "Tech"] as const;
@@ -16,6 +16,9 @@ const findName = (i: { nameToken: string; id: string }) =>
   isJa ? t(i.nameToken, i.id) : `${t(i.nameToken, i.id)} ${t(i.nameToken, i.id, "en")}`;
 /** クライアント側の文言 */
 const I = { related: T.common.related, dot: T.common.dot };
+/** 最新アップデートで数値が変わったアイテムの札 */
+const marks = latestChangeMarks();
+const markTitle = marks ? T.patchPage.changedIn(marks.title, marks.date) : "";
 
 const legendary = legendaryItems();
 /* ゲーム内の表記(t()) をそのまま使う。自前で「伝説級」等に訳し直さない */
@@ -71,7 +74,9 @@ const details = Object.fromEntries(allForHover.map((i) => [i.id, itemHoverData(i
                             size={40}
                           />
                           <span class="body">
-                            <span class="iname">{iname}<span class="rel" hidden>{T.common.related}</span></span>
+                            <span class="iname">{iname}{marks?.items.has(i.id) && (
+                              <span class="chg" data-kind={marks.items.get(i.id)} title={markTitle}>{ADJUSTMENT_LABEL[marks.items.get(i.id)!]}</span>
+                            )}<span class="rel" hidden>{T.common.related}</span></span>
                             <span class="idesc">{idesc}</span>
                           </span>
                         </a>
@@ -180,6 +185,16 @@ const details = Object.fromEntries(allForHover.map((i) => [i.id, itemHoverData(i
   </script>
 
   <style>
+    /* 最新アップデートで数値が変わったものの札(src/lib/data.ts の latestChangeMarks) */
+    .chg {
+      display: inline-block; margin-left: 6px; padding: 0 5px; border-radius: 3px; vertical-align: 1px;
+      font-size: 10px; font-weight: 700; line-height: 1.5; letter-spacing: 0.02em;
+      border: 1px solid var(--c-border-strong); color: var(--c-text-muted);
+    }
+    .chg[data-kind="buff"] { color: var(--c-buff); border-color: var(--c-buff-dim); }
+    .chg[data-kind="nerf"] { color: var(--c-nerf); border-color: var(--c-nerf-dim); }
+    .chg[data-kind="mixed"],
+    .chg[data-kind="rework"] { color: var(--c-mixed); border-color: var(--c-mixed); }
     .lead { color: var(--c-text-muted); margin-bottom: var(--sp-5); font-size: 13px; }
     /*
      * auto-fit ではなく auto-fill にする。auto-fit は「実際に並ぶ要素数」が

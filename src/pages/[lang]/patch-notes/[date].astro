@@ -1,0 +1,14 @@
+---
+/** 多言語版のアップデート個別ページ。実装は src/pages/patch-notes/[date].astro(説明は src/pages/[lang]/index.astro) */
+import Page from "../../patch-notes/[date].astro";
+import { PREFIXED_LANGS } from "../../../i18n/langs.ts";
+import { patchNotes } from "../../../lib/data.ts";
+
+export function getStaticPaths() {
+  return PREFIXED_LANGS.flatMap((lang) =>
+    patchNotes().map((n) => ({ params: { lang, date: n.date }, props: { note: n } })),
+  );
+}
+---
+
+<Page {...Astro.props} />

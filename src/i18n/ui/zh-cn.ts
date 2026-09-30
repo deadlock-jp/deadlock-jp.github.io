@@ -171,6 +171,45 @@ export const zhCn: Dict = {
     historyTitle: "平衡性调整",
     historyNote: "根据游戏数据的差异自动生成，包含官方说明中未提及的改动。仅在服务器端进行的调整可能不会显示在这里。",
   },
+  /** 待确认: 补丁说明相关的文字接近直译,建议由母语者确认 */
+  patchPage: {
+    indexTitle: "更新日志",
+    indexDescription: "Deadlock 官方更新一览。从游戏数据中提取平衡性调整,按英雄、技能、物品整理。",
+    leadBefore: "取自 Steam 官方新闻(",
+    leadAfter: ")的 Valve 官方公告,以及根据游戏数据差异自动生成的平衡性调整。选择日期即可查看该次更新的数值变化和官方原文。",
+    empty: "还没有获取到更新。",
+    noData: "没有数值变化(该时期没有游戏数据快照)",
+    pageTitle: (title: string, date: string) => `Deadlock 更新日志:${title}(${date})`,
+    pageDescription: (p: { title: string; date: string; summary: string | null; names: string[] }) =>
+      `Deadlock ${p.title}(${p.date})更新日志${p.summary ? `:${p.summary}` : ""}。${
+        p.names.length ? `${p.names.join("、")}等有改动。` : ""
+      }从游戏数据中提取的数值变化,以及 Valve 官方公告。`,
+    newHeroes: "新英雄",
+    newHeroesNote: "本次更新公布的英雄。正式上线前游戏数据中只有名字和图片,属性和技能将在上线后刊登。",
+    released: "已上线",
+    upcoming: "即将上线",
+    summaryTitle: "改动概要",
+    summaryNote: "游戏数据中没有数值、因此不会出现在下方平衡性调整中的改动。根据官方公告手工整理。",
+    sources: "来源:",
+    sourcesSep: "、",
+    sourcesTail: "、官方更新日志(下方)",
+    balanceNote: "根据游戏数据的差异自动生成,包含官方说明中未提及的改动。",
+    legendGood: "向有利方向变化的项目",
+    legendBad: "向不利方向变化的项目",
+    legendFlat: "未判定方向的项目",
+    noBalance: "这次更新还没有数值变化(缺少更新前后的游戏数据)。",
+    officialTitle: "官方更新日志",
+    officialNote: "取自 Steam 官方新闻的 Valve 官方公告原文(英文)。并非第三方的摘要或翻译。",
+    viewOriginal: "在 Steam 查看原文 →",
+    allUpdates: "全部更新",
+    /** 待确认: 单字标记(武器·全体·基础) */
+    markWeapon: "枪",
+    markSystem: "全",
+    markStat: "基",
+    latest: "最新更新",
+    latestLink: "查看改动 →",
+    changedIn: (title: string, date: string) => `${title}(${date})中有改动`,
+  },
   top: {
     title: "首页",
     description:

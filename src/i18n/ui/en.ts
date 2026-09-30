@@ -168,6 +168,48 @@ export const en: Dict = {
     historyNote:
       "Generated automatically from differences in the game data, so it includes changes not mentioned in the official notes. Server-side-only changes may not appear here.",
   },
+  patchPage: {
+    indexTitle: "Patch Notes",
+    indexDescription:
+      "Every official Deadlock update, with the balance changes broken down by hero, ability, and item, extracted from the game data.",
+    leadBefore: "Valve's official posts from Steam news (",
+    leadAfter:
+      "), with balance changes generated automatically from the game data. Pick a date to see the changed numbers and the official post for that update.",
+    empty: "No updates have been fetched yet.",
+    noData: "No numeric changes (no game data snapshots for this period).",
+    pageTitle: (title: string, date: string) => `Deadlock Patch Notes: ${title} (${date})`,
+    pageDescription: (p: { title: string; date: string; summary: string | null; names: string[] }) =>
+      `Deadlock patch notes for ${p.title} (${p.date})${p.summary ? `: ${p.summary}` : ""}.${
+        p.names.length ? ` Changes to ${p.names.join(", ")} and more.` : ""
+      } Every changed number is extracted from the game data, alongside Valve's official post.`,
+    newHeroes: "New Heroes",
+    newHeroesNote:
+      "Heroes announced in this update. Until they are released, the game data only has their names and art, so their stats and abilities will be added after release.",
+    released: "Released",
+    upcoming: "Coming soon",
+    summaryTitle: "Summary of Changes",
+    summaryNote:
+      "Changes that have no numbers in the game data and so do not appear in the balance changes below. Written by hand from the official announcements.",
+    sources: "Sources: ",
+    sourcesSep: ", ",
+    sourcesTail: ", official patch notes (below)",
+    balanceNote:
+      "Generated automatically from differences in the game data, so it includes changes not mentioned in the official notes.",
+    legendGood: "Changed in a favorable direction",
+    legendBad: "Changed in an unfavorable direction",
+    legendFlat: "Direction not judged",
+    noBalance: "No numeric changes for this update yet (there are no game data snapshots from before and after it).",
+    officialTitle: "Official Patch Notes",
+    officialNote: "Valve's original post, fetched from the official Steam news. Not a third-party summary or translation.",
+    viewOriginal: "View the original on Steam →",
+    allUpdates: "All updates",
+    markWeapon: "W",
+    markSystem: "S",
+    markStat: "B",
+    latest: "Latest Update",
+    latestLink: "See what changed →",
+    changedIn: (title: string, date: string) => `Changed in ${title} (${date})`,
+  },
   top: {
     title: "Home",
     description:

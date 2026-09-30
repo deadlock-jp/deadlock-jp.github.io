@@ -103,8 +103,11 @@ const robots = noindex
   : isIndexed(lang)
     ? "index, follow, max-image-preview:large"
     : "noindex, follow";
-/* hreflang。検索に出す言語版が2つ以上あるページだけ(src/i18n/seo.ts) */
-const alternates = noindex ? [] : alternatesFor(pagePath);
+/*
+ * hreflang。検索に出す言語版が2つ以上あるページだけ(src/i18n/seo.ts)。
+ * 検索に出さない言語のページ(noindex)には出さない。出すと自分を含まない組を名乗ることになる
+ */
+const alternates = noindex || !isIndexed(lang) ? [] : alternatesFor(pagePath);
 
 /* 構造化データ（SEO / 生成AI検索対策）。値はサイトの事実のみ。 */
 const jsonLd: Record<string, unknown>[] = [

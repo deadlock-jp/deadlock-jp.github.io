@@ -18,6 +18,9 @@ interface Props {
   entities: BalanceEntity[];
 }
 const { entities } = Astro.props;
+const { L, langPath } = Astro.locals.i18n;
+const P = L().patchPage;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 <ol class="entities">
@@ -54,12 +57,12 @@ const { entities } = Astro.props;
               <div class="ghead">
                 <span class="gicon">
                   {g.scope === "ability" && g.image ? (
-                    <a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/abilities/${g.abilityKey}/`} data-abilitycard={g.abilityKey}>
+                    <a href={`${base}${langPath(`/abilities/${g.abilityKey}/`)}`} data-abilitycard={g.abilityKey}>
                       <AbilityIcon name={g.name} image={g.image} size={26} />
                     </a>
                   ) : (
                     <span class="gmark">
-                      {g.scope === "weapon" ? "銃" : g.scope === "system" ? "全" : "基"}
+                      {g.scope === "weapon" ? P.markWeapon : g.scope === "system" ? P.markSystem : P.markStat}
                     </span>
                   )}
                 </span>

@@ -173,6 +173,46 @@ export const ko: Dict = {
     historyNote:
       "게임 데이터의 차이에서 자동으로 생성했습니다. 공식 패치 노트에 없는 변경도 포함합니다. 서버에서만 이루어진 조정은 여기에 나오지 않을 수 있습니다.",
   },
+  /** 요확인: 패치 노트 관련 문구는 기계적인 번역에 가깝다. 원어민 확인 권장 */
+  patchPage: {
+    indexTitle: "패치 노트",
+    indexDescription: "Deadlock의 공식 업데이트 목록. 밸런스 조정을 영웅·스킬·아이템 단위로 게임 데이터에서 추출해 정리했습니다.",
+    leadBefore: "Steam 공식 뉴스(",
+    leadAfter:
+      ")에서 가져온 Valve 공식 게시물과, 게임 데이터의 차이에서 자동으로 생성한 밸런스 조정입니다. 날짜를 고르면 그 업데이트의 수치 변경과 공식 본문을 볼 수 있습니다.",
+    empty: "아직 가져온 업데이트가 없습니다.",
+    noData: "수치 변경이 없습니다 (이 기간의 게임 데이터가 없습니다)",
+    pageTitle: (title: string, date: string) => `Deadlock 패치 노트: ${title} (${date})`,
+    pageDescription: (p: { title: string; date: string; summary: string | null; names: string[] }) =>
+      `Deadlock ${p.title} (${p.date}) 패치 노트${p.summary ? `: ${p.summary}` : ""}.${
+        p.names.length ? ` ${p.names.join(", ")} 등이 변경되었습니다.` : ""
+      } 게임 데이터에서 추출한 수치 변경과 Valve 공식 게시물.`,
+    newHeroes: "새 영웅",
+    newHeroesNote: "이번 업데이트에서 발표된 영웅입니다. 출시 전에는 게임 데이터에 이름과 그림만 있어, 능력치와 스킬은 출시 후에 게재합니다.",
+    released: "출시됨",
+    upcoming: "출시 예정",
+    summaryTitle: "변경 사항 요약",
+    summaryNote: "게임 데이터에 수치가 없어 아래 밸런스 조정에 나오지 않는 변경입니다. 공식 공지를 읽고 직접 작성했습니다.",
+    sources: "출처: ",
+    sourcesSep: ", ",
+    sourcesTail: ", 공식 패치 노트(아래)",
+    balanceNote: "게임 데이터의 차이에서 자동으로 생성했습니다. 공식 패치 노트에 없는 변경도 포함합니다.",
+    legendGood: "유리한 방향으로 바뀐 항목",
+    legendBad: "불리한 방향으로 바뀐 항목",
+    legendFlat: "방향을 판정하지 않은 항목",
+    noBalance: "이 업데이트의 수치 변경은 아직 없습니다 (전후의 게임 데이터가 없는 기간입니다).",
+    officialTitle: "공식 패치 노트",
+    officialNote: "Steam 공식 뉴스에서 가져온 Valve 공식 게시물 원문(영어)입니다. 제3자의 요약이나 번역이 아닙니다.",
+    viewOriginal: "Steam에서 원문 보기 →",
+    allUpdates: "업데이트 목록",
+    /** 요확인: 1글자 표시(무기·전체·기본) */
+    markWeapon: "무",
+    markSystem: "전",
+    markStat: "기",
+    latest: "최신 업데이트",
+    latestLink: "변경 사항 보기 →",
+    changedIn: (title: string, date: string) => `${title} (${date})에서 변경`,
+  },
   top: {
     title: "홈",
     description:

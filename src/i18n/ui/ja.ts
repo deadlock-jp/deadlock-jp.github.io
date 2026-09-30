@@ -167,6 +167,56 @@ export const ja = {
     historyNote:
       "ゲームデータの差分から自動生成しています。公式の文面に無い変更も含みます。 サーバー側だけの調整はここに出ないことがあります。",
   },
+  /**
+   * アップデートのページ(src/pages/patch-notes/)と、トップ・一覧に出す最新アップデートの表示。
+   * 日本語の値は、辞書に移す前にページへ直書きしていた文をそのまま(出力を変えないため)。
+   * 改行で折り返していた文は、HTML で空白1つになっていたので、その空白も残している。
+   */
+  patchPage: {
+    indexTitle: "アップデート",
+    indexDescription:
+      "Deadlock（デッドロック）の公式アップデート一覧。バランス調整の内容をヒーロー・スキル・アイテム単位で日本語で確認できます。",
+    /** 一覧の説明。前後の文の間に Steam のニュースへのリンク(Deadlock — News)が入る */
+    leadBefore: "Steamの公式ニュース（",
+    leadAfter:
+      "）から取得した Valve公式の投稿と、ゲームデータの差分から自動生成したバランス調整です。 日付を選ぶと、そのアップデートの数値の変更点と公式の本文が読めます。",
+    empty: "まだ取得したアップデートがありません。",
+    noData: "数値の差分はありません（スナップショットが揃っていない期間です）",
+    /** 個別ページの <title>。日本語版は公式ノートの題そのまま */
+    pageTitle: (title: string, _date: string) => title,
+    /** 個別ページの description。summary は「バフ 8 / ナーフ 6」の形(件数が無いときは null) */
+    pageDescription: (p: { title: string; date: string; summary: string | null; names: string[] }) =>
+      `Deadlock（デッドロック）${p.date} のアップデート。${p.summary ? `${p.summary}。` : ""}ゲームデータから抽出した数値の変更点と、Valve公式のパッチノート本文。`,
+    newHeroes: "新ヒーロー",
+    newHeroesNote:
+      "このアップデートで発表されたヒーローです。解禁されるまではゲームデータに名前と絵しかないため、 ステータスとスキルは解禁後に掲載します。",
+    released: "追加済み",
+    upcoming: "近日追加",
+    summaryTitle: "変更点のまとめ",
+    summaryNote:
+      "ゲームデータに数値が無く、下のバランス調整に出てこない変更です。 公式の告知を読んで、日本語で手書きしています。",
+    sources: "出典：",
+    sourcesSep: "、",
+    sourcesTail: "、公式パッチノート（下）",
+    balanceNote: "ゲームデータの差分から自動生成しています。公式の文面に無い変更も含みます。",
+    legendGood: "有利な向きに動いた項目",
+    legendBad: "不利な向きに動いた項目",
+    legendFlat: "向きを判定していない項目",
+    noBalance: "このアップデートの数値差分はまだありません（前後のスナップショットが揃っていない期間のものです）。",
+    officialTitle: "公式パッチノート",
+    officialNote: "Steamの公式ニュースから取得した、Valve公式の投稿本文です。第三者の要約や翻訳ではありません。",
+    viewOriginal: "Steamで原文を見る →",
+    allUpdates: "アップデート一覧",
+    /** バランス調整の見出しに付く1文字の札(主武器・全体の調整・基礎ステータス) */
+    markWeapon: "銃",
+    markSystem: "全",
+    markStat: "基",
+    /** トップの「最新アップデート」のカード */
+    latest: "最新アップデート",
+    latestLink: "変更点を見る →",
+    /** ヒーロー・アイテム一覧の札に添える説明(マウスを重ねると出る) */
+    changedIn: (title: string, date: string) => `${title}（${date}）で変更`,
+  },
   /** トップページ(src/pages/index.astro) */
   top: {
     /** <title> と パンくず。トップは <title> がサイト名だけになる */

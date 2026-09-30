@@ -5,15 +5,23 @@
  * 公式の投稿本文は各アップデートのページ(/patch-notes/<日付>/)にだけ置く。
  * ここに全文も載せると同じ文章がサイト内で二重になり、検索側にどちらを出すか
  * 委ねることになるため、一覧はタイトル・日付・バランス調整のアイコンだけにする。
+ *
+ * 多言語版(/en/patch-notes/ など)も同じ実装。題は英語の原文(lang="en")。
  */
 import Base from "../../layouts/Base.astro";
 import BalanceChips from "../../components/BalanceChips.astro";
 import ItemHoverCard from "../../components/ItemHoverCard.astro";
 import AbilityHoverCards from "../../components/AbilityHoverCards.astro";
-import { patchNotes, shopItems, itemHoverData } from "../../lib/data.ts";
+import { patchNotes, shopItems, itemHoverData, noteTitle } from "../../lib/data.ts";
 import { balanceUpdates } from "../../lib/balance.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const { L, currentLang, langPath } = Astro.locals.i18n;
+const T = L();
+const P = T.patchPage;
+const lang = currentLang();
+/** 英語の原文の題に付ける lang。英語版・日本語版では付けない */
+const enLang = lang === "ja" || lang === "en" ? undefined : "en";
 const updates = new Map(balanceUpdates(base).map((u) => [u.date, u]));
 const entries = patchNotes().map((n) => ({ note: n, update: updates.get(n.date) ?? null }));
 
@@ -28,30 +36,26 @@ const abilityKeys = [
 ---
 
 <Base
-  title="アップデート"
-  description="Deadlock（デッドロック）の公式アップデート一覧。バランス調整の内容をヒーロー・スキル・アイテム単位で日本語で確認できます。"
-  breadcrumbs={[{ name: "パッチノート", path: `${base}/patch-notes/` }]}
+  title={P.indexTitle}
+  description={P.indexDescription}
+  breadcrumbs={[{ name: T.nav.patchNotes, path: `${base}${langPath("/patch-notes/")}` }]}
 >
-  <h1>アップデート</h1>
-  <p class="lead">
-    Steamの公式ニュース（<a href="https://store.steampowered.com/news/app/1422450" rel="noopener">Deadlock — News</a>）から取得した
-    Valve公式の投稿と、ゲームデータの差分から自動生成したバランス調整です。
-    日付を選ぶと、そのアップデートの数値の変更点と公式の本文が読めます。
-  </p>
+  <h1>{P.indexTitle}</h1>
+  <p class="lead">{P.leadBefore}<a href="https://store.steampowered.com/news/app/1422450" rel="noopener">Deadlock — News</a>{P.leadAfter}</p>
 
-  {entries.length === 0 && <p class="empty">まだ取得したアップデートがありません。</p>}
+  {entries.length === 0 && <p class="empty">{P.empty}</p>}
 
   <ol class="updates">
     {entries.map(({ note, update }) => (
       <li class="update panel">
         <div class="uhead">
-          <a class="utitle" href={`${base}/patch-notes/${note.date}/`}>{note.title}</a>
+          <a class="utitle" href={`${base}${langPath(`/patch-notes/${note.date}/`)}`} lang={enLang}>{noteTitle(note, lang)}</a>
           <time class="udate" datetime={note.date}>{note.date}</time>
         </div>
         {update ? (
           <BalanceChips chips={update.chips} max={16} />
         ) : (
-          <p class="nodata">数値の差分はありません（スナップショットが揃っていない期間です）</p>
+          <p class="nodata">{P.noData}</p>
         )}
       </li>
     ))}

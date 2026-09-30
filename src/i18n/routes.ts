@@ -1,8 +1,10 @@
 /**
  * 言語ごとの URL。
  *
- * 多言語版があるのはトップ・ヒーロー・アイテム・スキル・ビルドだけで、
- * それ以外(攻略情報・パッチノート・about・tools)は日本語のみ。
+ * 多言語版があるのはトップ・ヒーロー・アイテム・スキル・ビルド・パッチノートだけで、
+ * それ以外(攻略情報・about・tools)は日本語のみ。
+ * パッチノートの多言語版は、バランス調整をその言語で組み立て、公式の本文は英語の原文を出す
+ * (手書きの補足は日本語のまま、lang="ja" と「日本語のみ」を付ける)。
  * 日本語のみのページへのリンクは、どの言語から張っても日本語版の URL のまま。
  */
 import { BUILT_LANGS, LANG_META, LANGS, type Lang } from "./langs.ts";
@@ -15,7 +17,8 @@ export function isLocalizedPath(path: string): boolean {
     path.startsWith("/heroes/") ||
     path.startsWith("/items/") ||
     path.startsWith("/abilities/") ||
-    path.startsWith("/build/")
+    path.startsWith("/build/") ||
+    path.startsWith("/patch-notes/")
   );
 }
 

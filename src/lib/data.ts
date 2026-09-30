@@ -1025,7 +1025,8 @@ function adjustmentRow(
  * 共有するため、data.ts からは切り出してある。ここは従来どおりの入り口。
  */
 export type { PatchNoteEntry } from "./patchNotes.ts";
-export { patchNotes, patchNoteByDate, nearestPatchNote } from "./patchNotes.ts";
+export { patchNotes, patchNoteByDate, nearestPatchNote, noteTitle, noteLines } from "./patchNotes.ts";
+import { patchNoteByDate as patchNoteByDateLocal } from "./patchNotes.ts";
 
 /**
  * ヒーロー×アイテムの人気率・勝率。data/item-stats.json
@@ -1096,4 +1097,48 @@ export function heroesAnnouncedIn(fromVersion: string | null, toVersion: string 
       const now = heroesFile.heroes[String(h.id)] ?? h;
       return { hero: now, released: now.released };
     });
+}
+
+/* ------------------------------------------------------------------ *
+ * ヒーロー一覧・アイテム一覧に付ける「最新アップデートで変わった」札
+ * (一覧のページは balance.ts を読んでいないので、.astro に import を足さずに済むようここに置く)
+ * ------------------------------------------------------------------ */
+
+export interface LatestChangeMarks {
+  /** 札のマウスオーバーに出す、そのアップデートの題と日付 */
+  title: string;
+  date: string;
+  /** ヒーローのキー(hero_inferno など) → 分類 */
+  heroes: Map<string, AdjustmentKind>;
+  /** アイテムの実ID → 分類 */
+  items: Map<string, AdjustmentKind>;
+}
+
+/**
+ * 最新のアップデート(updates.json の先頭)で数値が変わったヒーロー・アイテム。
+ * 札を付けるのは「変更前も変更後も値があり、実際に変わった項目」を1つ以上持つものだけ:
+ *   - 項目の追加・削除だけ(null ↔ 値)は、ゲーム側のデータの書き方が変わっただけのことが多い
+ *     (6712 では効果音の項目や、表示用の項目の付け替えがバフ・混在に分類されていた)
+ *   - アイテムの upgrades.* はストリートブロウルのエンハンスド版のボーナスで、通常のアイテムは変わらない
+ * 題は日本語版なら updates.json の題、ほかの言語は公式ノートの英語の原文の題。
+ */
+export function latestChangeMarks(): LatestChangeMarks | null {
+  const u = siteUpdates()[0];
+  if (!u) return null;
+  const heroes = new Map<string, AdjustmentKind>();
+  const items = new Map<string, AdjustmentKind>();
+  for (const a of u.adjustments ?? []) {
+    const real = (a.changes ?? []).some(
+      (c) =>
+        c.from !== null &&
+        c.to !== null &&
+        c.from !== c.to &&
+        !(a.target === "item" && c.path.startsWith("upgrades.")),
+    );
+    if (!real) continue;
+    if (a.target === "hero") heroes.set(a.key, a.kind);
+    else if (a.target === "item") items.set(a.key, a.kind);
+  }
+  const title = currentLang() === "ja" ? u.title : (patchNoteByDateLocal(u.date)?.titleEn ?? L().adjust.update);
+  return { title, date: u.date, heroes, items };
 }

@@ -5,13 +5,19 @@
  * 上にゲームデータから抽出したバランス調整、下に Valve 公式の投稿本文。
  * 本文はここにしか置かない(一覧ページにも載せると同じ文章がサイト内で
  * 二重になり、検索側にどちらを出すか委ねることになる)。
+ *
+ * 多言語版(/en/patch-notes/<日付>/ など。入口は src/pages/[lang]/patch-notes/)も同じ実装で描く。
+ *   - バランス調整は changes[] からその言語で組み立てる(updates.json の note の日本語文は使わない)
+ *   - 公式の本文と題は英語の原文(翻訳しない)。lang="en" を付ける
+ *   - 手書きの補足(update-notes.json)は日本語のまま、lang="ja" と「日本語のみ」を付ける
+ * 日本語版の出力は多言語化の前と変えない(文言は辞書 patchPage に移しただけ)。
  */
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import Base from "../../layouts/Base.astro";
 import BalanceDetail from "../../components/BalanceDetail.astro";
 import AbilityHoverCards from "../../components/AbilityHoverCards.astro";
-import { patchNotes, ADJUSTMENT_LABEL, heroesAnnouncedIn, t } from "../../lib/data.ts";
+import { patchNotes, ADJUSTMENT_LABEL, heroesAnnouncedIn, t, noteTitle, noteLines } from "../../lib/data.ts";
 import { balanceUpdateByDate } from "../../lib/balance.ts";
 import { updateNoteSections, updateNoteSources } from "../../lib/updateNotes.ts";
 
@@ -21,6 +27,17 @@ export function getStaticPaths() {
 
 const { note } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const { L, currentLang, langPath } = Astro.locals.i18n;
+const T = L();
+const P = T.patchPage;
+const lang = currentLang();
+const isJa = lang === "ja";
+/** 英語の原文を出す要素に付ける lang。英語版のページでは不要なので付けない(日本語版では出さない) */
+const enLang = isJa || lang === "en" ? undefined : "en";
+/** 日本語の手書きを出す要素に付ける lang(日本語版では付けない) */
+const jaLang = isJa ? undefined : "ja";
+const pageLink = (p: string) => `${base}${langPath(p)}`;
+
 const update = balanceUpdateByDate(note.date, base);
 /* このアップデートで発表された新ヒーロー(解禁前はデータが名前と絵だけなので、カードだけ出す) */
 const announced = heroesAnnouncedIn(update?.fromVersion ?? null, update?.toVersion ?? null);
@@ -43,7 +60,8 @@ function toSections(lines: string[]): { heading: string | null; items: string[] 
   }
   return sections.filter((s) => s.items.length > 0);
 }
-const sections = toSections(note.lines);
+const sections = toSections(noteLines(note, lang));
+const title = noteTitle(note, lang);
 
 /* 前後のアップデートへの導線。日付の新しい順に並んでいる */
 const all = patchNotes();
@@ -66,32 +84,36 @@ const summary = update
       .map((k) => `${ADJUSTMENT_LABEL[k]} ${update.counts[k]}`)
       .join(" / ")
   : null;
+/** description に入れる主な対象(バフ・ナーフ・リワーク・混在のヒーロー/アイテム。先頭から4つ) */
+const mainNames = (update?.entities ?? [])
+  .filter((e) => e.target !== "system" && e.kind !== "neutral")
+  .slice(0, 4)
+  .map((e) => e.name);
 
 /*
  * XやDiscordに貼ったときのプレビュー画像。そのアップデートの「注目トピック」を
  * 手作りした 1600x900 を public/images/patch-notes/<日付>.jpg に置いておくと拾う。
  * 無ければ Base 側の既定(images/ogp.jpg)に落ちる。heroes/[id].astro と同じ規約。
+ * 画像の文字は日本語なので、日本語版でだけ使う。
  */
 const ogRel = `images/patch-notes/${note.date}.jpg`;
-const ogImage = existsSync(join(process.cwd(), "public", ogRel)) ? `/${ogRel}` : undefined;
+const ogImage = isJa && existsSync(join(process.cwd(), "public", ogRel)) ? `/${ogRel}` : undefined;
 ---
 
 <Base
-  title={note.title}
-  description={`Deadlock（デッドロック）${note.date} のアップデート。${
-    summary ? `${summary}。` : ""
-  }ゲームデータから抽出した数値の変更点と、Valve公式のパッチノート本文。`}
+  title={P.pageTitle(title, note.date)}
+  description={P.pageDescription({ title, date: note.date, summary, names: mainNames })}
   ogType="article"
   ogImage={ogImage}
   ogImageWidth={ogImage ? 1600 : undefined}
   ogImageHeight={ogImage ? 900 : undefined}
   datePublished={note.date}
   breadcrumbs={[
-    { name: "パッチノート", path: `${base}/patch-notes/` },
-    { name: note.title, path: `${base}/patch-notes/${note.date}/` },
+    { name: T.nav.patchNotes, path: pageLink("/patch-notes/") },
+    { name: title, path: pageLink(`/patch-notes/${note.date}/`) },
   ]}
 >
-  <h1>{note.title}</h1>
+  <h1 lang={enLang}>{title}</h1>
   <p class="meta">
     <time datetime={note.date}>{note.date}</time>
     {update?.fromVersion && update?.toVersion && (
@@ -102,11 +124,8 @@ const ogImage = existsSync(join(process.cwd(), "public", ogRel)) ? `/${ogRel}` :
 
   {announced.length > 0 && (
     <section class="block panel">
-      <h2>新ヒーロー</h2>
-      <p class="note">
-        このアップデートで発表されたヒーローです。解禁されるまではゲームデータに名前と絵しかないため、
-        ステータスとスキルは解禁後に掲載します。
-      </p>
+      <h2>{P.newHeroes}</h2>
+      <p class="note">{P.newHeroesNote}</p>
       <ul class="newheroes">
         {announced.map(({ hero, released }) => {
           const key = hero.key.replace(/^hero_/, "");
@@ -114,12 +133,12 @@ const ogImage = existsSync(join(process.cwd(), "public", ogRel)) ? `/${ogRel}` :
             <>
               <img src={`${base}/images/heroes/upcoming/${key}.webp`} alt="" width="240" height="567" loading="lazy" />
               <span class="nh-name">{t(hero.nameToken)}</span>
-              <span class={released ? "nh-tag done" : "nh-tag"}>{released ? "追加済み" : "近日追加"}</span>
+              <span class={released ? "nh-tag done" : "nh-tag"}>{released ? P.released : P.upcoming}</span>
             </>
           );
           return (
             <li>
-              {released ? <a class="nh" href={`${base}/heroes/${hero.id}/`}>{body}</a> : <div class="nh">{body}</div>}
+              {released ? <a class="nh" href={pageLink(`/heroes/${hero.id}/`)}>{body}</a> : <div class="nh">{body}</div>}
             </li>
           );
         })}
@@ -129,13 +148,10 @@ const ogImage = existsSync(join(process.cwd(), "public", ogRel)) ? `/${ogRel}` :
 
   {generalSections.length > 0 && (
     <section class="block panel">
-      <h2>変更点のまとめ</h2>
-      <p class="note">
-        ゲームデータに数値が無く、下のバランス調整に出てこない変更です。
-        公式の告知を読んで、日本語で手書きしています。
-      </p>
+      <h2>{P.summaryTitle}{!isJa && <span class="jaonly">{T.jaOnly}</span>}</h2>
+      <p class="note">{P.summaryNote}</p>
       {generalSections.map((s) => (
-        <div class="gsection">
+        <div class="gsection" lang={jaLang}>
           <h3>{s.title}</h3>
           <ul>
             {s.lines.map((line) => (
@@ -146,14 +162,14 @@ const ogImage = existsSync(join(process.cwd(), "public", ogRel)) ? `/${ogRel}` :
       ))}
       {noteSources.length > 0 && (
         <p class="src">
-          出典：
+          {P.sources}
           {noteSources.map((src, i) => (
             <>
-              {i > 0 && "、"}
-              <a href={src.url} rel="noopener" target="_blank">{src.label}</a>
+              {i > 0 && P.sourcesSep}
+              <a href={src.url} rel="noopener" target="_blank" lang={jaLang}>{src.label}</a>
             </>
           ))}
-          、公式パッチノート（下）
+          {P.sourcesTail}
         </p>
       )}
     </section>
@@ -161,30 +177,24 @@ const ogImage = existsSync(join(process.cwd(), "public", ogRel)) ? `/${ogRel}` :
 
   {update ? (
     <section class="block panel">
-      <h2>バランス調整</h2>
-      <p class="note">
-        ゲームデータの差分から自動生成しています。公式の文面に無い変更も含みます。
-      </p>
+      <h2>{T.adjust.historyTitle}</h2>
+      <p class="note">{P.balanceNote}</p>
       <BalanceDetail entities={update.entities} />
       <ul class="legend">
-        <li class="good">有利な向きに動いた項目</li>
-        <li class="bad">不利な向きに動いた項目</li>
-        <li class="flat">向きを判定していない項目</li>
+        <li class="good">{P.legendGood}</li>
+        <li class="bad">{P.legendBad}</li>
+        <li class="flat">{P.legendFlat}</li>
       </ul>
     </section>
   ) : (
-    <p class="none">
-      このアップデートの数値差分はまだありません（前後のスナップショットが揃っていない期間のものです）。
-    </p>
+    <p class="none">{P.noBalance}</p>
   )}
 
   <section class="block panel">
-    <h2>公式パッチノート</h2>
-    <p class="note">
-      Steamの公式ニュースから取得した、Valve公式の投稿本文です。第三者の要約や翻訳ではありません。
-    </p>
+    <h2>{P.officialTitle}</h2>
+    <p class="note">{P.officialNote}</p>
     {sections.map((s) => (
-      <div class="psection">
+      <div class="psection" lang={isJa ? undefined : "en"}>
         {s.heading && <h3>{s.heading}</h3>}
         <ul>
           {s.items.map((line) => (
@@ -194,18 +204,18 @@ const ogImage = existsSync(join(process.cwd(), "public", ogRel)) ? `/${ogRel}` :
       </div>
     ))}
     <p class="src">
-      <a href={note.url} rel="noopener" target="_blank">Steamで原文を見る →</a>
+      <a href={note.url} rel="noopener" target="_blank">{P.viewOriginal}</a>
     </p>
   </section>
 
   <nav class="pager">
     {older ? (
-      <a href={`${base}/patch-notes/${older.date}/`}>← {older.title}</a>
+      <a href={pageLink(`/patch-notes/${older.date}/`)} lang={enLang}>← {noteTitle(older, lang)}</a>
     ) : (
       <span></span>
     )}
-    <a class="all" href={`${base}/patch-notes/`}>アップデート一覧</a>
-    {newer ? <a href={`${base}/patch-notes/${newer.date}/`}>{newer.title} →</a> : <span></span>}
+    <a class="all" href={pageLink("/patch-notes/")}>{P.allUpdates}</a>
+    {newer ? <a href={pageLink(`/patch-notes/${newer.date}/`)} lang={enLang}>{noteTitle(newer, lang)} →</a> : <span></span>}
   </nav>
 
   <AbilityHoverCards abilityKeys={abilityKeys} />

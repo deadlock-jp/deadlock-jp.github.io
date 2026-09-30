@@ -93,7 +93,16 @@ export function updateTitle(title: string): string {
   return /[\u3040-\u30ff\u4e00-\u9fff]/.test(title) ? a.update : title;
 }
 
-const EMPTY_COUNTS = (): Record<AdjustmentKind, number> => ({
+/**
+ * アップデートの題をその言語で。日本語は updates.json の題(公式ノートの日本語の題)、
+ * ほかの言語は公式ノートの英語の原文の題。英語の題が取れない投稿だけ updateTitle の汎用の題
+ */
+export function siteUpdateTitle(u: SiteUpdate): string {
+  if (currentLang() === "ja") return u.title;
+  return patchNoteByDate(u.date)?.titleEn ?? updateTitle(u.title);
+}
+
+const EMPTY_COUNTS =(): Record<AdjustmentKind, number> => ({
   buff: 0,
   nerf: 0,
   mixed: 0,
@@ -211,12 +220,12 @@ function toUpdate(u: SiteUpdate, base: string): BalanceUpdate {
 
   return {
     date: u.date,
-    title: updateTitle(u.title),
+    title: siteUpdateTitle(u),
     fromVersion: u.fromVersion ?? null,
     toVersion: u.toVersion ?? null,
     note: patchNoteByDate(u.date),
     sourceUrl: u.sourceUrl ?? null,
-    href: `${base}/patch-notes/${u.date}/`,
+    href: `${base}${langPath(`/patch-notes/${u.date}/`)}`,
     entities,
     chips,
     counts,
@@ -264,8 +273,8 @@ function historyFrom(
     if (!groups || groups.length === 0) continue;
     out.push({
       date: u.date,
-      title: updateTitle(u.title),
-      href: `${base}/patch-notes/${u.date}/`,
+      title: siteUpdateTitle(u),
+      href: `${base}${langPath(`/patch-notes/${u.date}/`)}`,
       kind: kindOf(u, groups),
       groups,
     });

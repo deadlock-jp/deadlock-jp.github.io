@@ -16,7 +16,7 @@ import type { Lang } from "../i18n/langs.ts";
  *
  * 多言語版の表示と翻訳を確認したら、ここに "en" "ko" "zh-cn" を足すだけで検索に出る。
  */
-export const INDEXED_LANGS: readonly Lang[] = ["ja"];
+export const INDEXED_LANGS: readonly Lang[] = ["ja", "en"];
 
 /** Xのカードに発信元として出すアカウント。空なら twitter:site を出さない */
 export const X_HANDLE = "@moromisocial";
