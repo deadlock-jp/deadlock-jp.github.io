@@ -31,6 +31,11 @@ export interface MapBreakable extends MapPoint {
   kind: "crate" | "statue";
   /** 出現グループ。economy.json の breakableSpawnTimes の添字 */
   group: number;
+  /**
+   * ゲーム内部の配置ID(hammeruniqueid。例 "15126:2")。箱の識別番号(data/breakable-labels.json)の
+   * 対応付けに使う。これを持たない古い map.json では undefined
+   */
+  hid?: string | null;
 }
 
 export interface MapLandmark extends MapPoint {

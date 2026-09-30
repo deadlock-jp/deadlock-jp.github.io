@@ -234,7 +234,7 @@ export function parseMap(
     } else if (e.classname === "citadel_breakable_prop") {
       const kind = BREAKABLE_KIND[e.subclass_name ?? ""];
       if (!kind) continue;
-      breakables.push({ kind, group: Number(e.breakable_spawn_group ?? 0), underground: underground(p), ...p });
+      breakables.push({ kind, group: Number(e.breakable_spawn_group ?? 0), hid: e.hammeruniqueid ?? null, underground: underground(p), ...p });
     } else if (e.classname === "info_super_trooper_spawn" && /_t1_/.test(e.bossname ?? "")) {
       // ガーディアン(Tier1)は配置データに本体が無く、倒されたあとに強化トルーパーが出る地点
       // (bossname=boss_<陣営>_t1_<レーン色>)がその場所になっている

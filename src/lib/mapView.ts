@@ -137,3 +137,13 @@ export function campCard(c: MapFile["camps"][number]): CampCard {
   const firstUnit = Object.keys(c.haunts ?? {})[0];
   return { rows, pictures, totalGold, growthPct: firstUnit ? (hauntUnitInfo(firstUnit)?.goldGrowthPct ?? null) : null };
 }
+
+/**
+ * 箱・黄金像の識別番号(data/breakable-labels.json。tools/gen-breakable-labels.mjs が作る)。
+ * 味方陣営の分だけあり、それ以外は null
+ */
+const breakableLabels: Record<string, string> = (() => {
+  const p = join(DATA_DIR, "breakable-labels.json");
+  return existsSync(p) ? ((JSON.parse(readFileSync(p, "utf8")) as { labels: Record<string, string> }).labels ?? {}) : {};
+})();
+export const breakableLabel = (b: MapFile["breakables"][number]): string | null => (b.hid ? breakableLabels[b.hid] ?? null : null);

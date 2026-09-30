@@ -15,7 +15,7 @@ import { existsSync } from "node:fs";
 import { join } from "node:path";
 import type { MapFile } from "../types/map.ts";
 import { clock, duration } from "../lib/matchFlow.ts";
-import { loadMap, mapView, mapRenovating, campInfo, campHauntText, campCard, isTunnelBreakable as isTunnel } from "../lib/mapView.ts";
+import { loadMap, mapView, mapRenovating, campInfo, campHauntText, campCard, breakableLabel, isTunnelBreakable as isTunnel } from "../lib/mapView.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const loaded = loadMap();
@@ -70,6 +70,9 @@ const layers = map
     ]
   : [];
 
+/** 箱の識別番号(味方陣営の分だけ)。1つでもあれば「箱の番号」の切り替えを出す */
+const hasLabels = !!map?.breakables.some((b) => breakableLabel(b));
+
 type Camp = MapFile["camps"][number];
 /** 「中程度の中立モンスター（3体）」。体数が分からないキャンプは体数を省く */
 const campTitle = (c: Camp) => `${camps[c.type]?.label ?? c.type}${c.units > 0 ? `（${c.units}体）` : ""}`;
@@ -111,6 +114,13 @@ const MARKER_LABEL: Record<string, string> = {
             <small>{l.count}</small>
           </label>
         ))}
+        {hasLabels && (
+          <label class="fm-chip lay-labels">
+            <input type="checkbox" data-labels />
+            <i class="sw" />
+            箱の番号
+          </label>
+        )}
       </div>
     </div>
 
@@ -138,14 +148,19 @@ const MARKER_LABEL: Record<string, string> = {
           />
         ))}
 
-        {map.breakables.map((b) => (
-          <span
-            class:list={["mk", `mk-${b.kind}`, isTunnel(b) ? "tunnelonly" : b.underground ? "under" : "above"]}
-            data-layer={isTunnel(b) ? "tunnel" : b.kind}
-            style={pos(b)}
-            title={`${isTunnel(b) ? "地下トンネル（3人専用）の" : ""}${b.kind === "crate" ? "箱（ソウル）" : "黄金像"}：${groupTime(b.group)}`}
-          />
-        ))}
+        {map.breakables.map((b) => {
+          const label = breakableLabel(b);
+          return (
+            <span
+              class:list={["mk", `mk-${b.kind}`, isTunnel(b) ? "tunnelonly" : b.underground ? "under" : "above"]}
+              data-layer={isTunnel(b) ? "tunnel" : b.kind}
+              style={pos(b)}
+              title={`${label ? `${label} ` : ""}${isTunnel(b) ? "地下トンネル（3人専用）の" : ""}${b.kind === "crate" ? "箱（ソウル）" : "黄金像"}：${groupTime(b.group)}`}
+            >
+              {label && <b class="bl">{label}</b>}
+            </span>
+          );
+        })}
         {map.camps.map((c, i) => (
           <span
             class:list={["mk", "mk-camp", `camp-${c.type}`, c.underground ? "under" : "above"]}
@@ -240,6 +255,18 @@ const MARKER_LABEL: Record<string, string> = {
           apply();
         });
       }
+      // 箱の番号: 出すときは箱と黄金像も表示する(番号だけ出ても意味が無いので)
+      root.querySelector("input[data-labels]")?.addEventListener("change", (e) => {
+        stage.classList.toggle("labels", e.target.checked);
+        if (e.target.checked) {
+          for (const k of ["crate", "statue"]) {
+            hidden.delete(k);
+            const cb = root.querySelector(`input[data-layer="${k}"]`);
+            if (cb) cb.checked = true;
+          }
+          apply();
+        }
+      });
 
       // ---- 拡大縮小・移動(ホイール / ドラッグ / 2本指) ----
       // 地図の要素そのものの幅・高さを変える。点は % で置いてあるので、大きさを保ったまま位置だけ広がる
@@ -491,6 +518,15 @@ const MARKER_LABEL: Record<string, string> = {
   .lm-midboss img { width: 24px; height: 24px; }
 
   .fm-info { min-height: 1.6em; margin: 6px 0 0; font-size: 12.5px; color: var(--c-text-strong); text-align: center; }
+  /* 箱の識別番号。「箱の番号」をオンにしたときだけ、点の右上に出す */
+  .bl {
+    display: none; position: absolute; left: 100%; bottom: 100%; margin: 0 0 -2px 1px;
+    font: 700 9px/1 var(--font-mono); color: #fff; white-space: nowrap; pointer-events: none;
+    text-shadow: 0 0 2px #000, 0 0 2px #000, 0 0 3px #000;
+  }
+  .fm-stage.labels .bl { display: block; }
+  .fm-stage.labels.zoomed .bl { font-size: 11px; }
+  .lay-labels .sw { background: none; border: 1.5px solid var(--c-text-muted); border-radius: 2px; }
   .mk-camp.sel img { filter: drop-shadow(0 0 3px var(--c-accent)) drop-shadow(0 0 1px #000); }
 
   /* キャンプのカード(ホバー)。地図の上に浮かせる */
