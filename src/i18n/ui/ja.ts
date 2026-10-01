@@ -383,6 +383,7 @@ export const ja = {
     popularity: "人気率",
     /** ショップのカードに出す短い表記 */
     pickShort: "人気",
+    winShort: "勝率",
     shopSearchAria: "ショップのアイテムを絞り込む",
     /** 人気のビルド(ゲーム内の公開ビルド。ビルド名などの文章は使わず、ID と使用数だけ出す) */
     popularBuilds: "人気のビルド",

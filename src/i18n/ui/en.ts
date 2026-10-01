@@ -360,6 +360,7 @@ export const en: Dict = {
     sort: "Sort",
     popularity: "Popularity",
     pickShort: "Pick",
+    winShort: "Win",
     shopSearchAria: "Filter shop items",
     popularBuilds: "Popular builds",
     pbNone: "None (whole shop)",

@@ -359,6 +359,7 @@ export const zhCn: Dict = {
     sort: "排序",
     popularity: "热度",
     pickShort: "热度",
+    winShort: "胜率",
     shopSearchAria: "筛选商店物品",
     popularBuilds: "热门出装",
     pbNone: "不选择(整个商店)",

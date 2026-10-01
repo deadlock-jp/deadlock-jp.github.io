@@ -362,6 +362,7 @@ export const ko: Dict = {
     sort: "정렬",
     popularity: "인기도",
     pickShort: "인기",
+    winShort: "승률",
     shopSearchAria: "상점 아이템 필터",
     popularBuilds: "인기 빌드",
     pbNone: "선택 안 함 (상점 전체)",
