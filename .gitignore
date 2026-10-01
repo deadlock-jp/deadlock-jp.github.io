@@ -44,3 +44,5 @@ HANDOFF-claude-code.md
 
 # 小さく表示する画像の縮小版(WebP)。元画像から npm run build / dev の前に tools/gen-thumbs.mjs が作る
 public/images/_t/
+# 自前配信のフォント(サイトで使う文字だけに絞ったもの)。npm run build の後に tools/gen-fonts.mjs が dist/fonts/ に作り、開発用にここへ写す
+public/fonts/

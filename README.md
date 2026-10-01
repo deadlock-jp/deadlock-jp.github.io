@@ -34,6 +34,8 @@ Deadlock、Steam、Valve は Valve Corporation の商標または登録商標で
 MIT ライセンスが及ぶのはコードだけで、`data/` と `public/images/` に置かれている
 ゲーム由来のデータ・画像は対象外です。これらの権利は上記のとおり Valve Corporation にあります。
 
+`fonts/` のフォント（Noto Sans JP・JetBrains Mono・Cinzel）も MIT の対象外で、SIL Open Font License 1.1 です（`fonts/OFL-*.txt`）。
+
 ## データの出どころ
 
 | 種類 | 出どころ |

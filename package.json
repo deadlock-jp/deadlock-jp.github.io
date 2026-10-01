@@ -17,10 +17,14 @@
     "dev": "astro dev",
     "prebuild": "node tools/gen-thumbs.mjs",
     "build": "astro build",
+    "postbuild": "node tools/gen-fonts.mjs",
     "preview": "astro preview"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
+    "fontverter": "^2.0.0",
+    "harfbuzzjs": "^1.6.2",
+    "subset-font": "^2.9.0",
     "typescript": "^5.7.2"
   },
   "dependencies": {

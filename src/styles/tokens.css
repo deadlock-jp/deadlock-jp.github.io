@@ -82,8 +82,12 @@
    * Base.astro で Google Fonts から読み込んでいる。
    * 読み込みに失敗した環境では、以下の端末内蔵フォントに落ちる。
    */
+  /*
+   * "Noto Sans JP Fallback" は、フォントが届くまでの代わり(端末の日本語書体を Noto Sans JP の寸法に合わせたもの。
+   * tools/gen-fonts.mjs の fonts.css で定義)。差し替わったときに行の位置がずれないようにする
+   */
   --font-sans:
-    "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Segoe UI",
+    "Noto Sans JP", "Noto Sans JP Fallback", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Segoe UI",
     system-ui, sans-serif;
   /* 2026-09-13: 背景演出のデザイン提案に合わせて Roboto Mono → JetBrains Mono */
   --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;

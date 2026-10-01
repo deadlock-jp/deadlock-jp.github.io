@@ -213,13 +213,26 @@ jsonLd.push(...extraJsonLd);
     <link rel="sitemap" type="application/xml" href={`${base}/sitemap.xml`} />
 
     {/* ゲーム内表記に合わせて Noto Sans JP を使う。数字用に等幅も1書体だけ入れる。
-        Cinzel はトップページの見出し専用(背景演出「Halftone Press」の書体) */}
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&family=Cinzel:wght@700&display=swap"
-    />
+        Cinzel はトップページの見出し専用(背景演出「Halftone Press」の書体)。
+        日本語・英語のページは、サイトで使う文字だけに絞ったフォントを自前で配信する(tools/gen-fonts.mjs が
+        ビルドの後に dist/fonts/ に作る)。本文の 400 の基本ファイルは先に読み始める(ファイル名はビルド後に差し替わる)。
+        韓国語・簡体字中国語のページは、これまでどおり Google Fonts */}
+    {!langMeta.font && (
+      <>
+        <link rel="preload" href={`${base}/fonts/__FONT_PRELOAD_NOTO400__`} as="font" type="font/woff2" crossorigin />
+        <link rel="stylesheet" href={`${base}/fonts/fonts.css`} />
+      </>
+    )}
+    {langMeta.font && (
+      <>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&family=Cinzel:wght@700&display=swap"
+        />
+      </>
+    )}
     {/* 韓国語・簡体字中国語のページだけ、その言語の Noto Sans を足して先頭に置く */}
     {langMeta.font && (
       <link
