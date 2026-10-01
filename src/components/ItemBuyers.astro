@@ -1,0 +1,94 @@
+---
+/**
+ * アイテムページの「よく買うヒーロー」。ヒーローページの「人気のアイテム」(HeroPopularItems.astro)の逆引きで、
+ * 同じ item-stats.json(deadlock-api.com の対戦統計)から作る。行の部品も同じ PickRateRow。
+ * 採用率の上位 TOP_N 人を出し、残りは「すべて表示」で開く(details なので JS 無しで動く)。
+ * 統計の無いアイテム(レジェンダリーなど)ではセクションごと出さない。
+ *
+ * ヒーローのホバーカードは付けない。全ヒーローの詳細データを全アイテムページに埋め込むことになり重いため。
+ */
+import HeroPortrait from "./HeroPortrait.astro";
+import PickRateRow from "./PickRateRow.astro";
+import { t, itemStats, itemBuyers, statsPeriodLabel } from "../lib/data.ts";
+
+interface Props {
+  itemId: string;
+  base: string;
+}
+const TOP_N = 8;
+const { itemId, base } = Astro.props;
+const { L, langPath } = Astro.locals.i18n;
+const S = L().stats;
+const buyers = itemBuyers(itemId);
+const pct = (permille: number) => `${(permille / 10).toFixed(1)}%`;
+const top = buyers ? buyers.rows.slice(0, TOP_N) : [];
+const rest = buyers ? buyers.rows.slice(TOP_N) : [];
+---
+
+{buyers && (
+  <section class="buyers">
+    <h2>{S.buyers}</h2>
+    <p class="by-meta">
+      <span class="by-overall">{S.overallPick} <b>{pct(buyers.overall)}</b></span>
+      <span>{statsPeriodLabel(itemStats)} / {S.matches((itemStats.totalMatches ?? 0).toLocaleString("en-US"))}</span>
+    </p>
+    <p class="by-lead">{S.buyersLead}</p>
+    <div class="by-box">
+      <ol class="by-list">
+        {top.map((r) => (
+          <PickRateRow
+            id={r.hero.id}
+            name={t(r.hero.nameToken, r.hero.key)}
+            href={`${base}${langPath(`/heroes/${r.hero.id}/`)}`}
+            pick={r.pick}
+            win={r.win}
+            low={r.low}
+          >
+            <HeroPortrait name={t(r.hero.nameToken, r.hero.key)} image={r.hero.images.iconSmall} size={32} />
+          </PickRateRow>
+        ))}
+      </ol>
+      {rest.length > 0 && (
+        <details class="by-more">
+          <summary>{S.showAll(rest.length)}</summary>
+          <ol class="by-list">
+            {rest.map((r) => (
+              <PickRateRow
+                id={r.hero.id}
+                name={t(r.hero.nameToken, r.hero.key)}
+                href={`${base}${langPath(`/heroes/${r.hero.id}/`)}`}
+                pick={r.pick}
+                win={r.win}
+                low={r.low}
+              >
+                <HeroPortrait name={t(r.hero.nameToken, r.hero.key)} image={r.hero.images.iconSmall} size={32} />
+              </PickRateRow>
+            ))}
+          </ol>
+        </details>
+      )}
+    </div>
+    <p class="by-note">{S.buyersWinNote} {S.source}</p>
+  </section>
+)}
+
+<style>
+  /* 見た目はヒーローページの「人気のアイテム」(HeroPopularItems.astro)にそろえる */
+  .buyers { margin-top: var(--sp-5); }
+  .buyers h2 { margin-bottom: var(--sp-1); }
+  .by-meta {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px var(--sp-3);
+    margin: 0 0 var(--sp-2); font-size: 12px; color: var(--c-text-muted);
+  }
+  .by-overall b { font-family: var(--font-mono); font-size: 15px; color: var(--c-text-strong); margin-left: 4px; }
+  .by-lead { margin: 0 0 var(--sp-3); font-size: 13px; color: var(--c-text); }
+  .by-box { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); padding: var(--sp-3); }
+  .by-list {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 10px var(--sp-4);
+  }
+  .by-more { margin-top: var(--sp-3); border-top: 1px solid var(--c-border); padding-top: var(--sp-2); }
+  .by-more summary { cursor: pointer; font-size: 12px; color: var(--c-accent); margin-bottom: var(--sp-2); }
+  .by-more:not([open]) summary { margin-bottom: 0; }
+  .by-note { margin: var(--sp-3) 0 0; font-size: 12px; color: var(--c-text-faint); line-height: 1.7; }
+</style>

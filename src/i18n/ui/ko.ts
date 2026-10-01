@@ -228,6 +228,11 @@ export const ko: Dict = {
     winNote: "승률은 이미 유리한 쪽일수록 비싼 아이템을 살 수 있기 때문에, 상위 티어일수록 높게 나오기 쉽습니다.",
     noData: "이 기간의 통계가 아직 없습니다.",
     source: "대전 통계: deadlock-api.com (6시간마다 갱신)",
+    buyers: "자주 구매하는 영웅",
+    overallPick: "전체 채택률",
+    buyersLead: "각 영웅이 사용된 경기 중 이 아이템이 구매된 비율(채택률)이 높은 순입니다.",
+    buyersWinNote: "승률은 이미 유리한 쪽일수록 비싼 아이템을 살 수 있기 때문에, 비싼 아이템일수록 높게 나오기 쉽습니다.",
+    showAll: (n: number) => `모두 보기 (나머지 ${n}명)`,
   },
   top: {
     title: "홈",

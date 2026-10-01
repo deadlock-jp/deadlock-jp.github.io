@@ -1,0 +1,58 @@
+---
+/**
+ * 採用率の1行(ヒーローページの「人気のアイテム」と、アイテムページの「よく買うヒーロー」で共用)。
+ * 主役は採用率(太字の数値とバー)、勝率は小さく、サンプルが少ないものには印を付ける。
+ * アイコンは呼び出し側が slot で渡す(ItemIcon / HeroPortrait)。
+ *
+ * ランク帯を切り替えると JS(RankBandPicker の rankband イベント)が数値を書き換えるので、
+ * 書き換える場所に data-pr-* を付けてある。数値の書式は fmtPermille と同じ(50.3%)。
+ */
+interface Props {
+  /** 行の対象の ID(アイテムの実ID / ヒーローの実ID) */
+  id: string | number;
+  name: string;
+  href: string;
+  /** 0.1% 刻みの整数(503 = 50.3%) */
+  pick: number;
+  win: number;
+  low: boolean;
+  /** ホバーカードの配線(data-itemcard / data-herocard)。不要なら省く */
+  card?: { kind: "item" | "hero"; id: string | number };
+}
+const { id, name, href, pick, win, low, card } = Astro.props;
+const S = Astro.locals.i18n.L().stats;
+const pct = (permille: number) => `${(permille / 10).toFixed(1)}%`;
+const cardAttr = card ? { [card.kind === "item" ? "data-itemcard" : "data-herocard"]: String(card.id) } : {};
+---
+
+<li class="pr" data-pr-id={String(id)}>
+  <a class="pr-item" href={href} {...cardAttr}>
+    <slot />
+    <span class="pr-name">{name}</span>
+  </a>
+  <span class="pr-bar" aria-hidden="true"><i data-pr-bar style={`width:${Math.min(100, pick / 10)}%`}></i></span>
+  <span class="pr-pick" title={S.pickRate} data-pr-pick>{pct(pick)}</span>
+  <span class="pr-win">
+    {S.winRate} <span data-pr-win>{pct(win)}</span>
+    <b class="pr-low" data-pr-low hidden={!low}>{S.lowSample}</b>
+  </span>
+</li>
+
+<style>
+  .pr {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "item pick" "bar bar" "win win";
+    gap: 2px 8px; align-items: center;
+  }
+  .pr-item { grid-area: item; display: flex; align-items: center; gap: 8px; min-width: 0; color: var(--c-text-strong); text-decoration: none; }
+  .pr-item:hover .pr-name { text-decoration: underline; }
+  .pr-name { font-size: 13px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pr-pick { grid-area: pick; font-family: var(--font-mono); font-size: 15px; font-weight: 700; color: var(--c-text-strong); }
+  .pr-bar { grid-area: bar; height: 4px; border-radius: 2px; background: var(--c-surface-3); overflow: hidden; }
+  .pr-bar i { display: block; height: 100%; background: var(--c-accent); }
+  .pr-win { grid-area: win; font-size: 11px; color: var(--c-text-faint); font-family: var(--font-mono); }
+  .pr-low {
+    margin-left: 6px; padding: 0 4px; border-radius: 3px; font-weight: 600; font-family: inherit;
+    border: 1px solid var(--c-border-strong); color: var(--c-text-muted);
+  }
+  .pr-low[hidden] { display: none; }
+</style>

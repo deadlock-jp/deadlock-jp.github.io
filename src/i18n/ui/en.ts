@@ -225,6 +225,12 @@ export const en: Dict = {
       "Win rates run higher for pricier tiers, because the team that is already ahead can afford more expensive items.",
     noData: "No stats for this period yet.",
     source: "Match stats: deadlock-api.com (updated every 6 hours)",
+    buyers: "Heroes Who Buy It",
+    overallPick: "Overall pick rate",
+    buyersLead: "Heroes ranked by how often this item is bought in their matches (pick rate).",
+    buyersWinNote:
+      "Win rates run higher for pricier items, because the team that is already ahead can afford more expensive items.",
+    showAll: (n: number) => `Show all (${n} more)`,
   },
   top: {
     title: "Home",

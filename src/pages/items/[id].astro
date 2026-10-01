@@ -20,6 +20,7 @@ import {
   dedupedTail,
 } from "../../lib/data.ts";
 import BalanceHistory from "../../components/BalanceHistory.astro";
+import ItemBuyers from "../../components/ItemBuyers.astro";
 import { itemBalanceHistory } from "../../lib/balance.ts";
 
 export function getStaticPaths() {
@@ -298,6 +299,8 @@ const ogImage =
       </div>
     </>
   )}
+
+  <ItemBuyers itemId={item.id} base={base} />
 
   <BalanceHistory entries={adjRows} />
 

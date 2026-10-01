@@ -1215,3 +1215,37 @@ export function heroPopularItems(
     return { tier, price: itemsFile.itemPricePerTier[tier] ?? 0, rows };
   });
 }
+
+export interface ItemBuyerRow {
+  hero: Hero;
+  /** そのヒーローの試合のうち、このアイテムを買った割合・買った試合の勝率(0.1% 刻みの整数) */
+  pick: number;
+  win: number;
+  matches: number;
+  low: boolean;
+}
+
+/**
+ * アイテムページの「よく買うヒーロー」。item-stats.json をアイテム側から逆引きする
+ * (ヒーローページの「人気のアイテム」の逆)。採用率の高い順に、統計のある全ヒーロー。
+ * overall は全ヒーローを通した採用率(このアイテムを買ったヒーロー枠の数 ÷ 全ヒーロー枠の数)で、
+ * 丸めた‰値ではなく試合数そのものから出す。統計が1件も無いアイテム(レジェンダリーなど)は null
+ */
+export function itemBuyers(itemId: string): { overall: number; rows: ItemBuyerRow[] } | null {
+  let bought = 0;
+  let slots = 0;
+  const rows: ItemBuyerRow[] = [];
+  for (const [heroId, h] of Object.entries(itemStats.heroes)) {
+    const hero = heroesFile.heroes[heroId];
+    if (!hero?.released) continue;
+    slots += h.matches;
+    const st = h.items[itemId];
+    if (!st) continue;
+    const [pick, win, matches] = st;
+    bought += matches;
+    rows.push({ hero, pick, win, matches, low: matches < itemStats.lowSampleMatches });
+  }
+  if (rows.length === 0 || slots === 0) return null;
+  rows.sort((a, b) => b.pick - a.pick || b.matches - a.matches);
+  return { overall: Math.round((bought / slots) * 1000), rows };
+}
