@@ -9,6 +9,7 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { resolveImagePath } from "../parsers/image-manifest.ts";
+import { smallImage } from "../lib/thumbs.ts";
 import { SLOT_META } from "../lib/data.ts";
 import type { ItemSlotType } from "../types/hero.ts";
 
@@ -32,7 +33,8 @@ let src: string | null = null;
 if (shopIcon) {
   const resolved = resolveImagePath(shopIcon);
   if (resolved && existsSync(join(process.cwd(), resolved.outPath))) {
-    src = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/${resolved.outPath.replace(/^public\//, "")}`;
+    // 小さく出すので、縮小版(src/lib/thumbs.ts)があればそちら
+    src = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/${smallImage(resolved.outPath, size)}`;
   }
 }
 

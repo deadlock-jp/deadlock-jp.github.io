@@ -10,9 +10,9 @@
  * AbilityIcon.astro の画像解決ロジックをここで重複させない。
  *
  * `[data-abilitycard="<abilityKey>"]` を持つ要素に自動でホバー/フォーカスを張る。
+ * データは全スキルぶんを別ファイル(/hover/abilities.json。src/lib/hoverData.ts)にし、必要になってから読む。
  */
 import { STAT_ICON_PATHS, scaleIconSrc, type CardRow, type DamageRow, type UpgradeTier } from "../lib/skillcard.ts";
-import { abilityEffects } from "../lib/effects.ts";
 
 export interface AbilityHoverDetail {
   name: string;
@@ -26,18 +26,8 @@ export interface AbilityHoverDetail {
   notes: string[];
 }
 
-interface Props {
-  /** abilityKey → AbilityHoverDetail */
-  details: Record<string, AbilityHoverDetail>;
-}
-const { details: rawDetails } = Astro.props;
-/* 持っている状態異常・効果(src/lib/effects.ts)を足す。ページ側のデータの作り方は変えない */
-const details = Object.fromEntries(
-  Object.entries(rawDetails).map(([key, d]) => [
-    key,
-    { ...d, effects: abilityEffects(key).map((b) => ({ n: b.name, c: b.category, v: b.value, ap: b.viaUpgrade })) },
-  ]),
-);
+/** データの URL(言語ごと)。中身は src/lib/hoverData.ts、配るのは src/pages/hover/[kind].json.ts */
+const dataUrl = `${import.meta.env.BASE_URL.replace(/\/$/, "")}${Astro.locals.i18n.LANG_META[Astro.locals.i18n.currentLang()].prefix}/hover/abilities.json`;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 /** SkillCard.astro / StatIcon.astro と同じ「spirit/weapon は実画像優先」をJS側でも再現する */
 const scaleIcons = { spirit: scaleIconSrc("spirit"), weapon: scaleIconSrc("weapon") };
@@ -57,10 +47,25 @@ const T = {
 
 <div class="hovercard" id="abilityhovercard" role="tooltip" hidden></div>
 
-<script is:inline define:vars={{ details, iconPaths: STAT_ICON_PATHS, scaleIcons, base, T }}>
+<script is:inline define:vars={{ dataUrl, iconPaths: STAT_ICON_PATHS, scaleIcons, base, T }}>
   (() => {
     const card = document.getElementById("abilityhovercard");
     if (!card) return;
+    /*
+     * データ(src/lib/hoverData.ts)は別ファイル。マウスのある広い画面だけ、手が空いたときに先に読んでおく。
+     * 読み終わる前にカードを出そうとしたら、読み終わってから(まだ同じ所にマウスがあれば)出す
+     */
+    let details = null;
+    let loading = null;
+    let waiting = null;
+    const load = () =>
+      (loading ??= fetch(dataUrl)
+        .then((r) => (r.ok ? r.json() : {}))
+        .catch(() => ({}))
+        .then((d) => (details = d)));
+    if (matchMedia("(min-width: 1001px) and (hover: hover)").matches) {
+      (window.requestIdleCallback || ((f) => setTimeout(f, 1500)))(() => load());
+    }
     const esc = (s) =>
       String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
@@ -102,6 +107,11 @@ const T = {
     }
 
     function show(key, anchor) {
+      if (!details) {
+        waiting = anchor;
+        load().then(() => waiting === anchor && show(key, anchor));
+        return;
+      }
       const d = details[key];
       if (!d) return;
       const iconSrc = document.querySelector(`.hcicon-src[data-ability="${CSS.escape(key)}"] .aicon`);
@@ -154,7 +164,10 @@ const T = {
       place();
       requestAnimationFrame(place);
     }
-    const hide = () => (card.hidden = true);
+    const hide = () => {
+      waiting = null;
+      card.hidden = true;
+    };
 
     function wire(root) {
       const scope = root || document;

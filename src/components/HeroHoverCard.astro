@@ -5,14 +5,12 @@
  * `[data-herocard="<heroId>"]` を持つ要素に自動でホバー/フォーカスを張る。
  * 後から innerHTML で足したアイコン(ティア表)には
  * `window.heroHoverCard.wire(親要素)` を呼んで張り直す。
+ * データは全ヒーローぶんを別ファイル(/hover/heroes.json。src/lib/hoverData.ts)にし、必要になってから読む。
  * 中身は JS で組み立てるので CSS は :global。
  */
-interface Props {
-  /** heroId → { name, gloat, tags, weapon[], vitality[], spirit[], boon[] } */
-  heroDetail: Record<number, unknown>;
-}
-const { heroDetail } = Astro.props;
 const { L, term } = Astro.locals.i18n;
+/** データの URL(言語ごと)。中身は src/lib/hoverData.ts、配るのは src/pages/hover/[kind].json.ts */
+const dataUrl = `${import.meta.env.BASE_URL.replace(/\/$/, "")}${Astro.locals.i18n.LANG_META[Astro.locals.i18n.currentLang()].prefix}/hover/heroes.json`;
 /** カード内の見出し(クライアント側で組み立てるので文字列で渡す) */
 const T = {
   weapon: term("weapon"),
@@ -24,10 +22,25 @@ const T = {
 
 <div class="herocard" id="herocard" role="tooltip" hidden></div>
 
-<script is:inline define:vars={{ heroDetail, T }}>
+<script is:inline define:vars={{ dataUrl, T }}>
   (() => {
     const card = document.getElementById("herocard");
     if (!card) return;
+    /*
+     * データ(src/lib/hoverData.ts)は別ファイル。マウスのある広い画面だけ、手が空いたときに先に読んでおく。
+     * 読み終わる前にカードを出そうとしたら、読み終わってから(まだ同じ所にマウスがあれば)出す
+     */
+    let heroDetail = null;
+    let loading = null;
+    let waiting = null;
+    const load = () =>
+      (loading ??= fetch(dataUrl)
+        .then((r) => (r.ok ? r.json() : {}))
+        .catch(() => ({}))
+        .then((d) => (heroDetail = d)));
+    if (matchMedia("(min-width: 1001px) and (hover: hover)").matches) {
+      (window.requestIdleCallback || ((f) => setTimeout(f, 1500)))(() => load());
+    }
     const esc = (s) =>
       String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
     const stars = (n) =>
@@ -42,6 +55,11 @@ const T = {
         .join("");
 
     function show(id, anchor) {
+      if (!heroDetail) {
+        waiting = anchor;
+        load().then(() => waiting === anchor && show(id, anchor));
+        return;
+      }
       const d = heroDetail[id];
       if (!d) return;
       card.innerHTML =
@@ -76,7 +94,10 @@ const T = {
       place();
       requestAnimationFrame(place);
     }
-    const hide = () => (card.hidden = true);
+    const hide = () => {
+      waiting = null;
+      card.hidden = true;
+    };
 
     function wire(root) {
       const scope = root || document;

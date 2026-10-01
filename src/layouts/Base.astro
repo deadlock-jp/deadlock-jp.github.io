@@ -169,6 +169,11 @@ jsonLd.push(...extraJsonLd);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {/*
+      スマホの背景の静止画(global.css の .dlbg)を先に読み始める。CSS を読み終えてからだと、
+      それまで背景が真っ暗なままになる。横向きのタブレット等で使う横長の絵は対象外(出す端末が少ない)
+    */}
+    <link rel="preload" as="image" href={`${base}/images/bg/bg-tall.webp`} type="image/webp" media="(max-width: 820px)" fetchpriority="high" />
     <title>{fullTitle}</title>
     <meta name="description" content={desc} />
     <meta name="robots" content={robots} />
@@ -429,6 +434,16 @@ jsonLd.push(...extraJsonLd);
       @supports not (backdrop-filter: blur(1px)) {
         .site-header {
           background: rgb(17 22 26 / 0.96);
+        }
+      }
+      /*
+       * スマホ(背景を静止画にする条件と同じ)では、ぼかしをやめる。色は tokens.css で不透明にしてある。
+       * スクロールのたびに後ろをぼかし直すのが、iPhone の Safari では重かった
+       */
+      @media (max-width: 820px), (pointer: coarse), (prefers-reduced-motion: reduce) {
+        .site-header {
+          backdrop-filter: none;
+          -webkit-backdrop-filter: none;
         }
       }
       .inner {

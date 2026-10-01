@@ -7,10 +7,11 @@ import HeroPortrait from "../../components/HeroPortrait.astro";
 import HeroHoverCard from "../../components/HeroHoverCard.astro";
 import AbilityHoverCard, { type AbilityHoverDetail } from "../../components/AbilityHoverCard.astro";
 import RankBandPicker from "../../components/RankBandPicker.astro";
-import { releasedHeroes, t, ability, heroTags, describe, heroNotes, heroStats, hasHeroStats, latestChangeMarks, ADJUSTMENT_LABEL, statsPeriodLabel } from "../../lib/data.ts";
+import { releasedHeroes, t, ability, describe, heroNotes, heroStats, hasHeroStats, latestChangeMarks, ADJUSTMENT_LABEL, statsPeriodLabel } from "../../lib/data.ts";
 import { resolveImagePath } from "../../parsers/image-manifest.ts";
-import { heroRanks, pickRows, topRankRows, heroTierTable } from "../../lib/herorank.ts";
+import { heroRanks, topRankRows, heroTierTable } from "../../lib/herorank.ts";
 import { skillCard } from "../../lib/skillcard.ts";
+import { smallImage } from "../../lib/thumbs.ts";
 import { EFFECT_CATEGORIES, effectIndex, effectName, effectHeroAbilities } from "../../lib/effects.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -30,30 +31,17 @@ const isJa = currentLang() === "ja";
 const linkBase = base + langPath("/").slice(0, -1);
 const ranks = heroRanks();
 const tier = heroTierTable();
-const BOON_LABEL: Record<string, string> = { hp: T.rank.boonHp, weapon: T.rank.boonWeapon, spirit: T.rank.boonSpirit };
 
-/** トップページと同じホバーカードのデータ + 正方形アイコンのURL */
+/** 正方形アイコンのURL(ホバーカードのデータは別ファイル。src/lib/hoverData.ts) */
 const heroMeta: Record<number, { name: string; sm: string | null }> = {};
-const heroDetail: Record<number, unknown> = {};
 for (const h of releasedHeroes()) {
   const name = t(h.nameToken, h.key);
-  const key = h.key.replace(/^hero_/, "");
-  const gloatRel = `images/heroes/gloat/${key}.webp`;
   const smResolved = resolveImagePath(h.images.iconSmall);
   const smRel = smResolved ? smResolved.outPath.replace(/^public\//, "") : null;
-  const r = ranks[h.id];
   heroMeta[h.id] = {
     name,
-    sm: smRel && existsSync(join(process.cwd(), "public", smRel)) ? `${base}/${smRel}` : null,
-  };
-  heroDetail[h.id] = {
-    name,
-    gloat: existsSync(join(process.cwd(), "public", gloatRel)) ? `${base}/${gloatRel}` : null,
-    tags: heroTags(h),
-    weapon: pickRows(r.weapon, ["dps", "bullet", "clip", "range"]),
-    vitality: pickRows(r.vitality, ["hp", "regen", "move", "stam"]),
-    spirit: pickRows(r.growth, ["gspower"]).concat(pickRows(r.spirit, ["skillscale"])),
-    boon: r.boonAccent.map((a) => BOON_LABEL[a]),
+    // ティア表・使用状況で 28〜40px で出すので、縮小版(src/lib/thumbs.ts)があればそちら
+    sm: smRel && existsSync(join(process.cwd(), "public", smRel)) ? `${base}/${smallImage(smRel, 40)}` : null,
   };
 }
 
@@ -126,6 +114,63 @@ const H = {
   countFrom: T.heroes.countFrom,
   countTo: T.heroes.countTo,
 };
+/*
+ * ティア表と使用状況の最初の表示(項目は先頭の DPS、ランク帯は全ランク)をサーバー側でも描いておく。
+ * 中身が JS で入るまで空だと、入った瞬間に下の内容が大きく押し下げられていた(モバイルの CLS 0.58)。
+ * マークアップは下のスクリプトの render() / renderRank() と同じにすること(JS は同じ形で描き直す)
+ */
+const escHtml = (s: string) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]!);
+const heroImgHtml = (id: number | string) => {
+  const m = heroMeta[Number(id)] ?? { name: "?", sm: null };
+  return m.sm ? `<img src="${m.sm}" alt="" width="40" height="40" loading="lazy">` : `<span class="ph">${escHtml(m.name.slice(0, 1))}</span>`;
+};
+const TIER_LETTER = ["", "D", "C", "B", "A", "S"];
+const initialTierHtml = (() => {
+  const key = tier.metrics[0]?.key;
+  const list = (key ? tier.data[key] : null) ?? [];
+  const bucket: Record<number, typeof list> = { 5: [], 4: [], 3: [], 2: [], 1: [] };
+  for (const r of list) (bucket[r.tier] ?? bucket[1]!).push(r);
+  return [5, 4, 3, 2, 1]
+    .map((tn) => {
+      const L = TIER_LETTER[tn];
+      const icons = bucket[tn]!
+        .map((r) => {
+          const m = heroMeta[r.id] ?? { name: "?", sm: null };
+          return `<a class="tt-hero" data-herocard="${r.id}" href="${linkBase}/heroes/${r.id}/" title="${escHtml(m.name)}${escHtml(T.common.titleSep)}${escHtml(String(r.value))}">${heroImgHtml(r.id)}</a>`;
+        })
+        .join("");
+      return `<div class="tt-row tier-${L}"><span class="tt-rank">${L}</span><div class="tt-icons">${icons || `<span class="tt-empty">${escHtml(T.heroes.tierEmpty)}</span>`}</div></div>`;
+    })
+    .join("");
+})();
+const METRIC_IDX: Record<string, number> = { pick: 0, win: 1, ban: 2 };
+const initialRankHtml = (metric: string): string => {
+  const bucket = (heroStats.buckets as Record<string, { heroes: Record<string, (number | null)[]> }>).all;
+  if (!bucket) return "";
+  const idx = METRIC_IDX[metric]!;
+  return Object.entries(bucket.heroes)
+    .filter(([, v]) => v[idx] !== null && v[idx] !== undefined)
+    .sort((a, b) => (b[1][idx] as number) - (a[1][idx] as number))
+    .slice(0, 5)
+    .map(([id, v]) => {
+      const m = heroMeta[Number(id)] ?? { name: "?", sm: null };
+      return `<li><a class="hs-hero" data-herocard="${id}" href="${linkBase}/heroes/${id}/">${heroImgHtml(id)}<span class="hs-name">${escHtml(m.name)}</span><span class="hs-val">${((v[idx] as number) / 10).toFixed(1)}%</span></a></li>`;
+    })
+    .join("");
+};
+/** 使用状況の注記の最初の表示(下のスクリプトの renderRank() と同じ組み立て) */
+const initialNote = (() => {
+  const b = (heroStats.buckets as Record<string, { matches: number }>).all;
+  if (!b || !heroStats.fetchedAt) return "";
+  const d = new Date(heroStats.fetchedAt);
+  const stamp = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  const low = b.matches < heroStats.lowSampleMatches;
+  return (
+    T.heroes.statsNote.replace("{period}", statsPeriodLabel(heroStats)).replace("{n}", b.matches.toLocaleString("en-US")).replace("{date}", stamp) +
+    T.heroes.banNote.replace("{note}", isJa ? heroStats.banRateNote : T.heroes.banRateNote) +
+    (low ? T.heroes.lowSample : "")
+  );
+})();
 const H2 = {
   empty: T.heroes.tierEmpty,
   // 集計期間(「〜のアップデート以降」)はビルド時に埋める。{n} と {date} はランク帯を切り替えるたびに JS が埋める
@@ -157,12 +202,12 @@ const H2 = {
         ].map((c) => (
           <div class="hs-col" data-metric={c.key} style={`--cat: var(--c-${c.cssVar})`}>
             <h3>{c.label}</h3>
-            <ol class="hs-list"></ol>
+            <ol class="hs-list" set:html={initialRankHtml(c.key)}></ol>
           </div>
         ))
       }
     </div>
-    <p class="hs-note" id="hs-note"></p>
+    <p class="hs-note" id="hs-note">{initialNote}</p>
   </section>
   )}
 
@@ -187,7 +232,7 @@ const H2 = {
         </select>
       </label>
     </div>
-    <div class="tt-body" id="ttbody"></div>
+    <div class="tt-body" id="ttbody" set:html={initialTierHtml}></div>
   </section>
 
   {/* ------------ 下部: 一覧 ------------ */}
@@ -290,8 +335,8 @@ const H2 = {
   </div>
 
   {/* ホバー詳細カード(トップページと共通コンポーネント + スキルアイコン用) */}
-  <HeroHoverCard heroDetail={heroDetail} />
-  <AbilityHoverCard details={abilityDetails} />
+  <HeroHoverCard />
+  <AbilityHoverCard />
 
   <script src={`${base}/js/${isJa ? "item-search.js" : "item-search-intl.js"}`} is:inline data-summary={isJa ? undefined : JSON.stringify(T.search)}></script>
   <script is:inline define:vars={{ H, EFF: effectHeroes }}>
@@ -426,7 +471,7 @@ const H2 = {
               .map((r) => {
                 const m = heroMeta[r.id] ?? { name: "?", sm: null };
                 const img = m.sm
-                  ? `<img src="${m.sm}" alt="" loading="lazy">`
+                  ? `<img src="${m.sm}" alt="" width="40" height="40" loading="lazy">`
                   : `<span class="ph">${esc(m.name.slice(0, 1))}</span>`;
                 return (
                   `<a class="tt-hero" data-herocard="${r.id}" href="${base}/heroes/${r.id}/" ` +
@@ -469,7 +514,7 @@ const H2 = {
             .map(([id, v]) => {
               const m = heroMeta[id] ?? { name: "?", sm: null };
               const img = m.sm
-                ? `<img src="${m.sm}" alt="" loading="lazy">`
+                ? `<img src="${m.sm}" alt="" width="40" height="40" loading="lazy">`
                 : `<span class="ph">${esc(m.name.slice(0, 1))}</span>`;
               return (
                 `<li><a class="hs-hero" data-herocard="${id}" href="${base}/heroes/${id}/">` +

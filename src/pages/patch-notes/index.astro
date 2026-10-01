@@ -12,7 +12,7 @@ import Base from "../../layouts/Base.astro";
 import BalanceChips from "../../components/BalanceChips.astro";
 import ItemHoverCard from "../../components/ItemHoverCard.astro";
 import AbilityHoverCards from "../../components/AbilityHoverCards.astro";
-import { patchNotes, shopItems, itemHoverData, noteTitle } from "../../lib/data.ts";
+import { patchNotes, noteTitle } from "../../lib/data.ts";
 import { balanceUpdates } from "../../lib/balance.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -25,7 +25,6 @@ const enLang = lang === "ja" || lang === "en" ? undefined : "en";
 const updates = new Map(balanceUpdates(base).map((u) => [u.date, u]));
 const entries = patchNotes().map((n) => ({ note: n, update: updates.get(n.date) ?? null }));
 
-const itemDetails = Object.fromEntries(shopItems().map((i) => [i.id, itemHoverData(i)]));
 const abilityKeys = [
   ...new Set(
     [...updates.values()].flatMap((u) =>
@@ -61,7 +60,7 @@ const abilityKeys = [
     ))}
   </ol>
 
-  <ItemHoverCard details={itemDetails} />
+  <ItemHoverCard />
   <AbilityHoverCards abilityKeys={abilityKeys} />
 
   <style>

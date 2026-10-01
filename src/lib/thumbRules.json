@@ -1,0 +1,10 @@
+{
+  "//": "小さく表示する画像の縮小版の規則(tools/gen-thumbs.mjs と src/lib/thumbs.ts が読む)。上から順に最初に当てはまったもの。widths は縮小版の幅(px)。先頭が基本の幅、2つ目以降は小さく出す場所用",
+  "rules": [
+    { "dir": "images/items", "widths": [144, 104], "//": "アイテムアイコン 200px。一覧・ショップ・カードで 20〜56px(トップの一覧は 40px)" },
+    { "dir": "images/hud/abilities", "widths": [144], "//": "スキルアイコン 137px(一部 1370px)。18〜48px" },
+    { "dir": "images/npcs", "widths": [192], "//": "NPC・建造物 285px。24〜72px" },
+    { "dir": "images/heroes", "match": "^images/heroes/[^/]+_sm[.]png$", "widths": [128, 64], "//": "ヒーローの正方形アイコン 128px。14〜56px" },
+    { "dir": "images/heroes/card", "widths": [210], "//": "トップの縦長カード 280×380。スマホでは 66px 幅前後(絵は約 82px)で出すので、スマホだけこちら" }
+  ]
+}

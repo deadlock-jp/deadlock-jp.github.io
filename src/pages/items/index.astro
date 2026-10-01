@@ -2,7 +2,7 @@
 import Base from "../../layouts/Base.astro";
 import ItemIcon from "../../components/ItemIcon.astro";
 import ItemHoverCard from "../../components/ItemHoverCard.astro";
-import { shopItems, legendaryItems, t, describe, itemsFile, SLOT_META, souls, itemHoverData, latestChangeMarks, ADJUSTMENT_LABEL } from "../../lib/data.ts";
+import { shopItems, legendaryItems, t, describe, itemsFile, SLOT_META, souls, latestChangeMarks, ADJUSTMENT_LABEL } from "../../lib/data.ts";
 
 const items = shopItems();
 const slots = ["WeaponMod", "Armor", "Tech"] as const;
@@ -25,9 +25,6 @@ const legendary = legendaryItems();
 const legendaryLabel = t("Citadel_ItemDraft_Legendary", "Legendary");
 const streetBrawlLabel = t("Citadel_Play_StreetBrawl_Title", "Street Brawl");
 
-/* マウスオーバーで出る詳細カード用データ(ビルド画面・トップと共通) */
-const allForHover = [...items, ...legendary];
-const details = Object.fromEntries(allForHover.map((i) => [i.id, itemHoverData(i)]));
 ---
 
 <Base title={T.items.title} description={T.items.description}>
@@ -124,7 +121,7 @@ const details = Object.fromEntries(allForHover.map((i) => [i.id, itemHoverData(i
   )}
 
   {/* ホバー時の詳細カード(ビルド画面・トップと共通コンポーネント) */}
-  <ItemHoverCard details={details} />
+  <ItemHoverCard />
 
   <script src={`${base}/js/${isJa ? "item-search.js" : "item-search-intl.js"}`} is:inline data-summary={isJa ? undefined : JSON.stringify(T.search)}></script>
   <script is:inline define:vars={{ I }}>

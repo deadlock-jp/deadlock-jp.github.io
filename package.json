@@ -11,8 +11,11 @@
     "gen:updates": "node --experimental-strip-types tools/gen-updates.mjs",
     "audit:matchup": "node --experimental-strip-types tools/audit-matchup.mjs",
     "fetch:stats": "node tools/fetch-stats.mjs",
+    "gen:thumbs": "node tools/gen-thumbs.mjs",
     "typecheck": "tsc --noEmit",
+    "predev": "node tools/gen-thumbs.mjs",
     "dev": "astro dev",
+    "prebuild": "node tools/gen-thumbs.mjs",
     "build": "astro build",
     "preview": "astro preview"
   },

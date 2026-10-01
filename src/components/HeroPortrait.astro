@@ -9,6 +9,7 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { resolveImagePath } from "../parsers/image-manifest.ts";
+import { smallImage } from "../lib/thumbs.ts";
 
 interface Props {
   name: string;
@@ -23,7 +24,8 @@ let src: string | null = null;
 if (image) {
   const resolved = resolveImagePath(image);
   if (resolved && existsSync(join(process.cwd(), resolved.outPath))) {
-    src = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/${resolved.outPath.replace(/^public\//, "")}`;
+    // 小さく出すので、縮小版(src/lib/thumbs.ts)があればそちら
+    src = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/${smallImage(resolved.outPath, size)}`;
   }
 }
 
@@ -41,7 +43,7 @@ const initial = /^[\x20-\x7e]+$/.test(name)
 <span class="portrait" style={`--size: ${size}px`} title={name}>
   {
     src ? (
-      <img src={src} alt="" loading="lazy" />
+      <img src={src} alt="" width={size} height={size} loading="lazy" />
     ) : (
       <span class="ph" aria-hidden="true">
         {initial}

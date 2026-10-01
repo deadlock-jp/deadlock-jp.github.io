@@ -12,6 +12,7 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { resolveImagePath } from "../parsers/image-manifest.ts";
+import { smallImage } from "../lib/thumbs.ts";
 
 interface Props {
   name: string;
@@ -29,7 +30,8 @@ let src: string | null = null;
 if (image) {
   const resolved = resolveImagePath(image);
   if (resolved && existsSync(join(process.cwd(), resolved.outPath))) {
-    src = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/${resolved.outPath.replace(/^public\//, "")}`;
+    // 小さく出すので、縮小版(src/lib/thumbs.ts)があればそちら
+    src = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/${smallImage(resolved.outPath, size)}`;
   }
 }
 

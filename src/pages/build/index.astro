@@ -29,6 +29,7 @@ import {
   abilityDamages,
 } from "../../lib/gamestats.ts";
 import { COST_BONUS_TARGET, type ItemSlotType } from "../../types/hero.ts";
+import { smallImage } from "../../lib/thumbs.ts";
 
 const heroes = releasedHeroes();
 const items = shopItems();
@@ -1758,7 +1759,7 @@ const payload = {
         abilityDamages(h).map((a) => (
           <span class="aicon-src" data-ab={a.key} set:html={
             a.image
-              ? `<img src="${base}/${(a.image.replace("file://{images}/", "images/")).replace(/\.[a-z0-9]+$/i, ".png")}" alt="" width="26" height="26" loading="lazy">`
+              ? `<img src="${base}/${smallImage(a.image.replace("file://{images}/", "images/").replace(/\.[a-z0-9]+$/i, ".png"), 26)}" alt="" width="26" height="26" loading="lazy">`
               : ""
           } />
         )),
@@ -2217,13 +2218,12 @@ const payload = {
       }
       /*
        * スマホはホバーが無いのでチップはタップで出す(JS)。
-       * 2回目のタップ位置(裏のアイコン)が見えるよう背景を少し透過し、
-       * 文字が読めるようすりガラスにする。
+       * 2回目のタップ位置(裏のアイコン)がうっすら見えるよう背景を少しだけ透過する。
+       * すりガラス(backdrop-filter)は iPhone の Safari で重いのでやめ、代わりに透過を弱めて文字を読めるようにする
        */
       .hovercard {
         width: min(280px, calc(100vw - 16px));
-        background: color-mix(in srgb, var(--c-surface) 82%, transparent);
-        backdrop-filter: blur(8px);
+        background: color-mix(in srgb, var(--c-surface) 90%, transparent);
       }
     }
   </style>

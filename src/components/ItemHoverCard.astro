@@ -3,26 +3,12 @@
  * アイテムのマウスオーバー詳細カード(ビルド画面・アイテム一覧・トップで共用)。
  *
  * `[data-itemcard="<itemId>"]` を持つ要素に自動でホバー/フォーカスを張る。
- * データは data.ts の itemHoverData() で作る。中身は JS 組み立てなので CSS は :global。
+ * データは全アイテムぶんを別ファイル(/hover/items.json。src/lib/hoverData.ts)にし、必要になってから読む。
+ * 中身は JS 組み立てなので CSS は :global。
  */
-import { itemEffects } from "../lib/effects.ts";
-
-interface Props {
-  /** itemId → itemHoverData() の戻り値 */
-  details: Record<string, unknown>;
-}
-const { details: rawDetails } = Astro.props;
 const { L, term } = Astro.locals.i18n;
-/*
- * 持っている状態異常・効果(src/lib/effects.ts)を足す。ページから渡されるデータ(itemHoverData)は
- * data.ts で作るが、data.ts から effects.ts を読むと循環するので、ここで足す
- */
-const details = Object.fromEntries(
-  Object.entries(rawDetails).map(([id, d]) => [
-    id,
-    { ...(d as object), effects: itemEffects(id).map((b) => ({ n: b.name, c: b.category, v: b.value })) },
-  ]),
-);
+/** データの URL(言語ごと)。中身は src/lib/hoverData.ts、配るのは src/pages/hover/[kind].json.ts */
+const dataUrl = `${import.meta.env.BASE_URL.replace(/\/$/, "")}${Astro.locals.i18n.LANG_META[Astro.locals.i18n.currentLang()].prefix}/hover/items.json`;
 /** カード内の文言。{n} は数値の差し込み位置 */
 const c = L().itemCard;
 const T = {
@@ -43,10 +29,25 @@ const T = {
 
 <div class="hovercard" id="hovercard" role="tooltip" hidden></div>
 
-<script is:inline define:vars={{ details, T }}>
+<script is:inline define:vars={{ dataUrl, T }}>
   (() => {
     const card = document.getElementById("hovercard");
     if (!card) return;
+    /*
+     * データ(src/lib/hoverData.ts)は別ファイル。マウスのある広い画面だけ、手が空いたときに先に読んでおく。
+     * 読み終わる前にカードを出そうとしたら、読み終わってから(まだ同じ所にマウスがあれば)出す
+     */
+    let details = null;
+    let loading = null;
+    let waiting = null;
+    const load = () =>
+      (loading ??= fetch(dataUrl)
+        .then((r) => (r.ok ? r.json() : {}))
+        .catch(() => ({}))
+        .then((d) => (details = d)));
+    if (matchMedia("(min-width: 1001px) and (hover: hover)").matches) {
+      (window.requestIdleCallback || ((f) => setTimeout(f, 1500)))(() => load());
+    }
     const esc = (s) =>
       String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
     const fmt = (n) => Number(n).toLocaleString("en-US");
@@ -59,6 +60,11 @@ const T = {
         : "";
 
     function show(id, anchor) {
+      if (!details) {
+        waiting = anchor;
+        load().then(() => waiting === anchor && show(id, anchor));
+        return;
+      }
       const it = details[id];
       if (!it) return;
       card.style.setProperty("--cat", `var(--c-${it.cssVar})`);
@@ -98,7 +104,10 @@ const T = {
       place();
       requestAnimationFrame(place);
     }
-    const hide = () => (card.hidden = true);
+    const hide = () => {
+      waiting = null;
+      card.hidden = true;
+    };
 
     function wire(root) {
       const scope = root || document;

@@ -13,6 +13,7 @@ import { objectTopics, hauntSpecies } from "../../../lib/objects.ts";
 import { gameSystemSections } from "../../../lib/gameSystem.ts";
 import { objectNotes } from "../../../lib/data.ts";
 import { resolveImagePath } from "../../../parsers/image-manifest.ts";
+import { smallImage } from "../../../lib/thumbs.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const topics = objectTopics();
@@ -25,7 +26,8 @@ function iconSrc(ref: string | null): string | null {
   if (!ref) return null;
   const resolved = resolveImagePath(ref);
   if (!resolved || !existsSync(join(process.cwd(), resolved.outPath))) return null;
-  return `${base}/${resolved.outPath.replace(/^public\//, "")}`;
+  // 24px で出すので、縮小版(src/lib/thumbs.ts)があればそちら
+  return `${base}/${smallImage(resolved.outPath, 24)}`;
 }
 
 /**

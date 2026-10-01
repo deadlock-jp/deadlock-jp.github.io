@@ -41,3 +41,6 @@ HANDOFF-claude-code.md
 
 # Claude Code のローカル設定(devサーバー起動設定など。人により変わる)
 .claude/
+
+# 小さく表示する画像の縮小版(WebP)。元画像から npm run build / dev の前に tools/gen-thumbs.mjs が作る
+public/images/_t/

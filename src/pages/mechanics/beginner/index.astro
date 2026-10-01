@@ -13,12 +13,14 @@ import MechanicsNext from "../../../components/MechanicsNext.astro";
 import { matchFlow, duration } from "../../../lib/matchFlow.ts";
 import { economyTable } from "../../../lib/souls.ts";
 import { souls, t } from "../../../lib/data.ts";
+import { smallImage } from "../../../lib/thumbs.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const f = matchFlow();
 const economy = economyTable();
 const objGold = (key: string): number => f.objectives.find((o) => o.key === key)?.gold ?? 0;
-const img = (p: string): string | null => (existsSync(join(process.cwd(), "public", p)) ? `${base}/${p}` : null);
+/* 48px の枠に出すので、縮小版(src/lib/thumbs.ts)があればそちら */
+const img = (p: string): string | null => (existsSync(join(process.cwd(), "public", p)) ? `${base}/${smallImage(p, 48)}` : null);
 
 /* ---- 全体像: 防衛建造物の順番 ---- */
 const chain = [
