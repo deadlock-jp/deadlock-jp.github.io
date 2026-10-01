@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6722",
-  "upstreamCommit": "6722",
-  "generatedAt": "2026-09-30T07:26:05.393Z",
+  "clientVersion": "6726",
+  "upstreamCommit": "6726",
+  "generatedAt": "2026-10-01T00:44:00.650Z",
   "language": "koreana",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
@@ -11,7 +11,7 @@
     "citadel_heroes": 3331,
     "citadel_attributes": 1980,
     "citadel_gc": 214,
-    "citadel_main": 5052
+    "citadel_main": 5144
   },
   "tokens": {
     "hero_vampire:n": {
@@ -21880,9 +21880,9 @@
       "hash": "5744c579cf56"
     },
     "Citadel_Chessmaster_HeroTag_2": {
-      "text": "현자",
+      "text": "정밀",
       "group": "citadel_heroes",
-      "hash": "a3255cc75d42"
+      "hash": "f705a801f0ab"
     },
     "Citadel_Chessmaster_HeroTag_3": {
       "text": "체크메이트",
@@ -33855,9 +33855,9 @@
       "hash": "26f3d4337ae4"
     },
     "GameUI_ServerRejectBadChallenge": {
-      "text": "잘못된 시도입니다.\n",
+      "text": "잘못된 인증 요청입니다.\n",
       "group": "citadel_main",
-      "hash": "63a7bf918a6a"
+      "hash": "0a8bb8a4f0ff"
     },
     "GameUI_ServerRejectLANRestrict": {
       "text": "로컬 서버는 로컬 클라이언트(클래스 C)로만 제한됩니다.\n",
@@ -35165,9 +35165,9 @@
       "hash": "a677c460aab2"
     },
     "Citadel_Hud_DebugStats_Detailed": {
-      "text": "매치: {s:match_id}\n클라이언트 FPS: {s:client_framerate}  핑: {s:ping}\n서버 CPU: {s:server_frametime_avg_pct}%(최고: {s:server_frametime_max_pct}%)",
+      "text": "매치: {s:match_id}\n클라이언트 FPS: {s:client_framerate}  핑: {s:ping}\n서버 CPU: {s:server_frametime_avg_pct}% (최고: {s:server_frametime_max_pct}%)",
       "group": "citadel_main",
-      "hash": "119b1bc8a20c"
+      "hash": "b9d8a92be475"
     },
     "Citadel_Hud_DeathCam": {
       "text": "사망 캠",
@@ -45839,6 +45839,16 @@
       "group": "citadel_main",
       "hash": "3c7dbce65d69"
     },
+    "citadel_settings_video_options_confirm_reset": {
+      "text": "정말 비디오 옵션을 초기화할까요?",
+      "group": "citadel_main",
+      "hash": "dfebed808592"
+    },
+    "citadel_settings_video_options_reset_tooltip": {
+      "text": "비디오 옵션을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "cc01d15a0ef9"
+    },
     "citadel_settings_video": {
       "text": "비디오",
       "group": "citadel_main",
@@ -45984,6 +45994,16 @@
       "group": "citadel_main",
       "hash": "5d8d334b8883"
     },
+    "citadel_settings_chatwheel_confirm_reset": {
+      "text": "정말 채팅 휠 설정을 초기화할까요?",
+      "group": "citadel_main",
+      "hash": "0fcf6dee831c"
+    },
+    "citadel_settings_chatwheel_reset_tooltip": {
+      "text": "채팅 휠 설정을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "207886afc512"
+    },
     "citadel_settings_communication_permissions": {
       "text": "대화 권한",
       "group": "citadel_main",
@@ -45998,6 +46018,16 @@
       "text": "기본 소통 유형을 선택합니다. Esc 메뉴에서 개별 플레이어에 음소거를 적용할 수도 있습니다. 핑을 비활성화하면 해당 플레이어의 채팅 휠과 미니맵 작전 표시도 비활성화됩니다.",
       "group": "citadel_main",
       "hash": "d2b623a7f224"
+    },
+    "citadel_settings_communication_permissions_confirm_reset": {
+      "text": "정말 대화 권한을 초기화할까요?",
+      "group": "citadel_main",
+      "hash": "7c334717cf7d"
+    },
+    "citadel_settings_communication_permissions_reset_tooltip": {
+      "text": "대화 권한을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "e92a39da36de"
     },
     "citadel_settings_communication_party": {
       "text": "파티원",
@@ -46044,10 +46074,30 @@
       "group": "citadel_main",
       "hash": "06329c668422"
     },
+    "citadel_settings_volume_confirm_reset": {
+      "text": "정말 음량 설정을 초기화할까요?",
+      "group": "citadel_main",
+      "hash": "fd5a95b32b57"
+    },
+    "citadel_settings_volume_reset_tooltip": {
+      "text": "음량 설정을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "53efde247a32"
+    },
     "citadel_settings_audio_output": {
       "text": "출력",
       "group": "citadel_main",
       "hash": "2df41b9a3adc"
+    },
+    "citadel_settings_audio_output_confirm_reset": {
+      "text": "정말 오디오 출력 설정을 초기화할까요?",
+      "group": "citadel_main",
+      "hash": "80f97d11697c"
+    },
+    "citadel_settings_audio_output_reset_tooltip": {
+      "text": "오디오 출력 설정을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "9a63ee93c92e"
     },
     "citadel_settings_audio_options": {
       "text": "옵션",
@@ -46059,15 +46109,35 @@
       "group": "citadel_main",
       "hash": "c612854b8f8b"
     },
+    "citadel_settings_voice_confirm_reset": {
+      "text": "정말 음성 채팅용 마이크 설정을 초기화할까요?",
+      "group": "citadel_main",
+      "hash": "7605cf05e3da"
+    },
+    "citadel_settings_voice_reset_tooltip": {
+      "text": "음성 채팅용 마이크 설정을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "ca5a8e0bde0c"
+    },
     "citadel_settings_game": {
       "text": "게임",
       "group": "citadel_main",
       "hash": "d7fa83fc0493"
     },
+    "citadel_settings_reset_game_tooltip": {
+      "text": "게임 설정을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "dae5e21a869e"
+    },
     "citadel_reset_game": {
       "text": "게임 설정을 초기화할까요?",
       "group": "citadel_main",
       "hash": "62b65949a6bc"
+    },
+    "citadel_confirm_reset_game": {
+      "text": "정말 게임 설정을 초기화할까요?",
+      "group": "citadel_main",
+      "hash": "448907b13367"
     },
     "citadel_settings_game_options": {
       "text": "옵션",
@@ -46079,6 +46149,11 @@
       "group": "citadel_main",
       "hash": "3e8de8a95b34"
     },
+    "citadel_settings_game_abilities_items_reset_tooltip": {
+      "text": "능력 및 아이템 설정을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "a01d35a74ae6"
+    },
     "citadel_settings_skill_rating": {
       "text": "스킬 등급",
       "group": "citadel_main",
@@ -46088,6 +46163,11 @@
       "text": "정말 스킬 등급 설정을 기본값으로 되돌릴까요?",
       "group": "citadel_main",
       "hash": "a594ad590bc7"
+    },
+    "citadel_settings_skill_rating_reset_tooltip": {
+      "text": "스킬 등급 설정을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "fbe34ec2d55b"
     },
     "citadel_settings_skill_rating_notification": {
       "text": "등급 변경 알림",
@@ -46548,6 +46628,16 @@
       "text": "{d:r:display_width}x{d:r:display_height} ({s:refresh_rate_label})",
       "group": "citadel_main",
       "hash": "c37f8b6a492c"
+    },
+    "citadel_settings_display_confirm_reset": {
+      "text": "정말 디스플레이 설정을 초기화할까요?<br><br>디스플레이가 기본 해상도로 설정됩니다.",
+      "group": "citadel_main",
+      "hash": "abdb7b0262ce"
+    },
+    "citadel_settings_display_reset_tooltip": {
+      "text": "디스플레이 설정을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "d753a96bca69"
     },
     "citadel_settings_display_choice": {
       "text": "모니터 {d:displayNumber} - {s:displayName}",
@@ -47064,10 +47154,30 @@
       "group": "citadel_main",
       "hash": "e2e78d14d47a"
     },
+    "citadel_settings_camera_confirm_reset": {
+      "text": "정말 카메라 설정을 초기화할까요?",
+      "group": "citadel_main",
+      "hash": "303ae95a9c8c"
+    },
+    "citadel_settings_camera_reset_tooltip": {
+      "text": "카메라 설정을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "863268b0a6b1"
+    },
     "citadel_settings_spectator_camera": {
       "text": "관전 & 리플레이 카메라",
       "group": "citadel_main",
       "hash": "c970ab3c7857"
+    },
+    "citadel_settings_spectator_camera_confirm_reset": {
+      "text": "정말 관전 및 리플레이 카메라 설정을 초기화할까요?",
+      "group": "citadel_main",
+      "hash": "ca24e119bfa2"
+    },
+    "citadel_settings_spectator_camera_reset_tooltip": {
+      "text": "관전 및 리플레이 카메라 설정을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "1e37c06bc18c"
     },
     "citadel_settings_spectator_auto_target_view": {
       "text": "관전 중인 플레이어 시점 따라가기",
@@ -47269,15 +47379,45 @@
       "group": "citadel_main",
       "hash": "7aa12ac33f4c"
     },
+    "citadel_settings_interface_confirm_reset": {
+      "text": "정말 인터페이스 설정을 초기화할까요?",
+      "group": "citadel_main",
+      "hash": "1703fa332c0e"
+    },
+    "citadel_settings_interface_reset_tooltip": {
+      "text": "인터페이스 설정을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "60cca042869f"
+    },
     "citadel_settings_shop": {
       "text": "상점",
       "group": "citadel_main",
       "hash": "9f66ded32686"
     },
+    "citadel_settings_shop_confirm_reset": {
+      "text": "정말 상점 설정을 초기화할까요?",
+      "group": "citadel_main",
+      "hash": "0a09f55cb757"
+    },
+    "citadel_settings_shop_reset_tooltip": {
+      "text": "상점 설정을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "16c1f78af2ba"
+    },
     "citadel_settings_hero_specific_confirm_reset": {
       "text": "정말 영웅별 설정을 비활성화할까요?<br><br>나중에 다시 활성화할 경우를 대비해 영웅별 맞춤 설정은 유지됩니다.",
       "group": "citadel_main",
       "hash": "cb0ac425392e"
+    },
+    "citadel_settings_hero_specific_confirm_reset_disabled": {
+      "text": "정말 영웅별 설정을 초기화할까요?",
+      "group": "citadel_main",
+      "hash": "7ca0cf1e39e8"
+    },
+    "citadel_settings_hero_specific_reset_tooltip": {
+      "text": "영웅별 설정을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "1d5aa4f433b2"
     },
     "citadel_enable_ping_indicator": {
       "text": "HUD 핑 표시",
@@ -48179,6 +48319,16 @@
       "group": "citadel_main",
       "hash": "ac9db973a551"
     },
+    "citadel_settings_confirm_reset_global": {
+      "text": "선택한 카테고리의 모든 설정을 초기화할까요?<br><br><span color=\"darkorange\">이 작업은 실행 취소할 수 없습니다.</span>",
+      "group": "citadel_main",
+      "hash": "36969f9059f8"
+    },
+    "citadel_settings_confirm_reset_global_base": {
+      "text": "선택한 카테고리의 기본 설정을 기본값으로 초기화할까요?<br><br>영웅별 맞춤 설정은 유지됩니다.",
+      "group": "citadel_main",
+      "hash": "c39279317527"
+    },
     "citadel_settings_confirm_reset_global_all_heroes": {
       "text": "선택한 카테고리에서 모든 영웅의 맞춤 설정을 제거할까요? 모든 영웅이 다시 기본 설정을 사용하게 됩니다.<br><br>기본 설정에는 영향을 주지 않습니다.<br><br><span color=\"darkorange\">이 작업은 실행 취소할 수 없습니다.</span>",
       "group": "citadel_main",
@@ -48254,6 +48404,11 @@
       "group": "citadel_main",
       "hash": "50e23fe9886c"
     },
+    "citadel_settings_reset_row_tooltip": {
+      "text": "설정을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "d0c0db7c3118"
+    },
     "citadel_settings_clear_keybind_tooltip": {
       "text": "단축키 제거",
       "group": "citadel_main",
@@ -48273,6 +48428,11 @@
       "text": "비디오 설정을 초기화할까요?",
       "group": "citadel_main",
       "hash": "e5178cd1cd47"
+    },
+    "citadel_confirm_reset_video": {
+      "text": "정말 비디오 설정을 초기화할까요?<br><br>디스플레이가 기본 해상도로 설정됩니다.",
+      "group": "citadel_main",
+      "hash": "212ef3d1ea00"
     },
     "citadel_settings_resolution_size": {
       "text": "해상도",
@@ -48325,9 +48485,9 @@
       "hash": "882a96d92db6"
     },
     "citadel_settings_chat_openmic_team_desc": {
-      "text": "음성 채팅(팀)에 할당된 키를 누르고 있지 않아도 언제나 자신의 음성을 언제나 팀원들에게 전송합니다.",
+      "text": "음성 채팅(팀)에 할당된 키를 누르고 있지 않아도 언제나 자신의 음성을 팀원들에게 전송합니다.",
       "group": "citadel_main",
-      "hash": "127b0922c9ba"
+      "hash": "71ca3ca79d14"
     },
     "citadel_settings_chat_openmic_party": {
       "text": "공개 마이크(파티)",
@@ -48349,10 +48509,20 @@
       "group": "citadel_main",
       "hash": "dae7072f62fe"
     },
+    "citadel_settings_reset_audio_tooltip": {
+      "text": "오디오 설정을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "5baf0639b32c"
+    },
     "citadel_reset_audio": {
       "text": "오디오 설정을 초기화할까요?",
       "group": "citadel_main",
       "hash": "38fdc023be5a"
+    },
+    "citadel_confirm_reset_audio": {
+      "text": "정말 오디오 설정을 초기화할까요?",
+      "group": "citadel_main",
+      "hash": "398b3f1ba683"
     },
     "citadel_settings_mousesensitivity": {
       "text": "마우스 감도",
@@ -48389,65 +48559,130 @@
       "group": "citadel_main",
       "hash": "4f1bf1fb5c7c"
     },
+    "citadel_settings_keybinddefaults": {
+      "text": "모든 단축키를 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "7457e9b00ac2"
+    },
     "citadel_settings_pingwheeldefaults": {
       "text": "채팅 휠 설정 초기화",
       "group": "citadel_main",
       "hash": "009d432ec846"
+    },
+    "citadel_settings_keybind_category_confirm_reset": {
+      "text": "<span color=\"darkorange\">다른 그룹의 단축키가 현재 이 그룹의 기본 단축키와 같은 키에 지정되어 있다면 해당 단축키가 해제될 수 있습니다.</span><br><br>정말 이 그룹의 모든 단축키를 초기화할까요?",
+      "group": "citadel_main",
+      "hash": "3197941c517e"
     },
     "citadel_settings_movementkeybinds": {
       "text": "이동",
       "group": "citadel_main",
       "hash": "c686d05434a6"
     },
+    "citadel_settings_movementkeybinds_reset_tooltip": {
+      "text": "이동 단축키를 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "cedabbf56093"
+    },
     "citadel_settings_combatkeybinds": {
       "text": "전투",
       "group": "citadel_main",
       "hash": "204685219ce0"
+    },
+    "citadel_settings_combatkeybinds_reset_tooltip": {
+      "text": "전투 단축키를 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "e501a1841e7c"
     },
     "citadel_settings_abilitieskeybinds": {
       "text": "능력",
       "group": "citadel_main",
       "hash": "8f2a42309461"
     },
+    "citadel_settings_abilitieskeybinds_reset_tooltip": {
+      "text": "능력 단축키를 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "c48c50965a2c"
+    },
     "citadel_settings_itemkeybinds": {
       "text": "아이템",
       "group": "citadel_main",
       "hash": "b62250fe8db0"
+    },
+    "citadel_settings_itemkeybinds_reset_tooltip": {
+      "text": "아이템 단축키와 아이템 시전 모드를 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "e0183b7f2bc1"
     },
     "citadel_settings_ingamemenukeybinds": {
       "text": "게임 내 메뉴",
       "group": "citadel_main",
       "hash": "6ea84eb280d0"
     },
+    "citadel_settings_ingamemenukeybinds_reset_tooltip": {
+      "text": "게임 내 메뉴 단축키를 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "2cc69253e3bd"
+    },
     "citadel_settings_hideoutkeybinds": {
       "text": "은신처",
       "group": "citadel_main",
       "hash": "a88cb9ca2b38"
+    },
+    "citadel_settings_hideoutkeybinds_reset_tooltip": {
+      "text": "은신처 단축키를 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "68db19f07648"
     },
     "citadel_settings_audiokeybinds": {
       "text": "오디오",
       "group": "citadel_main",
       "hash": "295e3a868b88"
     },
+    "citadel_settings_audiokeybinds_reset_tooltip": {
+      "text": "오디오 단축키를 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "85d5fe7d3ae5"
+    },
     "citadel_settings_misckeybinds": {
       "text": "기타",
       "group": "citadel_main",
       "hash": "44650a9694ba"
+    },
+    "citadel_settings_misckeybinds_reset_tooltip": {
+      "text": "기타 단축키를 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "a30d7ac9f004"
     },
     "citadel_settings_communicationkeybinds": {
       "text": "대화",
       "group": "citadel_main",
       "hash": "c65f61d601b4"
     },
+    "citadel_settings_communicationkeybinds_reset_tooltip": {
+      "text": "대화 단축키를 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "8d16eb74102b"
+    },
     "citadel_settings_spectatorkeybinds": {
       "text": "관전자/리플레이",
       "group": "citadel_main",
       "hash": "77cdd9baa2fb"
     },
+    "citadel_settings_spectatorkeybinds_reset_tooltip": {
+      "text": "관전자/리플레이 단축키를 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "b41b21e3eef8"
+    },
     "citadel_settings_replaykeybinds": {
       "text": "리플레이 전용",
       "group": "citadel_main",
       "hash": "473a2739cce7"
+    },
+    "citadel_settings_replaykeybinds_reset_tooltip": {
+      "text": "리플레이 전용 단축키를 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "d1b313b59911"
     },
     "citadel_settings_hero_specific": {
       "text": "영웅별 설정",
@@ -48549,10 +48784,20 @@
       "group": "citadel_main",
       "hash": "83fb8500ff74"
     },
+    "citadel_settings_reset_language_tooltip": {
+      "text": "언어 설정을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "cf0f38374b85"
+    },
     "citadel_reset_language": {
       "text": "언어 설정을 초기화할까요?",
       "group": "citadel_main",
       "hash": "ff5f588dfaf2"
+    },
+    "citadel_confirm_reset_language": {
+      "text": "정말 언어 설정을 초기화할까요?<br><br>게임 내 기본 텍스트 언어는 변경되지 않습니다.",
+      "group": "citadel_main",
+      "hash": "f9f948133424"
     },
     "citadel_settings_ui_language": {
       "text": "게임 내 텍스트",
@@ -48619,20 +48864,50 @@
       "group": "citadel_main",
       "hash": "41bdaadfa8c9"
     },
+    "citadel_settings_reset_accessibility_tooltip": {
+      "text": "접근성 설정을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "b89291a8cd66"
+    },
     "citadel_reset_accessibility": {
       "text": "접근성 설정을 초기화할까요?",
       "group": "citadel_main",
       "hash": "f5341af12b81"
+    },
+    "citadel_confirm_reset_accessibility": {
+      "text": "정말 접근성 설정을 초기화할까요?",
+      "group": "citadel_main",
+      "hash": "d09411505053"
     },
     "citadel_reset_advanced": {
       "text": "고급 설정을 초기화할까요?",
       "group": "citadel_main",
       "hash": "d28209ae423a"
     },
+    "citadel_confirm_reset_advanced": {
+      "text": "정말 고급 설정을 초기화할까요?<br><br>영웅별 설정 옵션에는 영향을 주지 않습니다.",
+      "group": "citadel_main",
+      "hash": "76f5a30c310a"
+    },
+    "citadel_settings_reset_advanced_tooltip": {
+      "text": "고급 설정을 초기화합니다. 영웅별 설정 옵션에는 영향을 주지 않습니다.",
+      "group": "citadel_main",
+      "hash": "37cae4189c8a"
+    },
+    "citadel_settings_reset_communication_tooltip": {
+      "text": "채팅 휠과 대화 옵션을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "3d904fc65b5f"
+    },
     "citadel_reset_communication": {
       "text": "대화 설정을 초기화할까요?",
       "group": "citadel_main",
       "hash": "6680012bd2f3"
+    },
+    "citadel_confirm_reset_communication": {
+      "text": "정말 대화 설정을 초기화할까요?",
+      "group": "citadel_main",
+      "hash": "0e39c25dd9b1"
     },
     "citadel_settings_chat": {
       "text": "채팅",
@@ -48773,6 +49048,16 @@
       "text": "이제 조준점의 선과 중앙점, 테두리 두께, 간격, 채우기 색상, 중앙점 크기를 맞춤 설정할 수 있습니다.",
       "group": "citadel_main",
       "hash": "a8d6ceb43da9"
+    },
+    "citadel_settings_crosshair_confirm_reset": {
+      "text": "정말 조준점 설정을 초기화할까요?",
+      "group": "citadel_main",
+      "hash": "bec46cccd3a7"
+    },
+    "citadel_settings_crosshair_reset_tooltip": {
+      "text": "조준점 설정을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "2009941ab128"
     },
     "citadel_settings_crosshair_size": {
       "text": "조준선",
@@ -48948,6 +49233,11 @@
       "text": "정말 렌더링 품질 설정을 기본값으로 되돌릴까요?",
       "group": "citadel_main",
       "hash": "fc41695ec9ff"
+    },
+    "citadel_settings_rendering_reset_tooltip": {
+      "text": "렌더링 품질 설정을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "8d716a510b3d"
     },
     "citadel_settings_videopreset": {
       "text": "렌더링 품질",
@@ -49609,20 +49899,60 @@
       "group": "citadel_main",
       "hash": "298b6285f6ff"
     },
+    "citadel_settings_reset_mouse_tooltip": {
+      "text": "마우스 설정을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "b8dd9154d2ac"
+    },
     "citadel_reset_mouse": {
       "text": "마우스 설정을 초기화할까요?",
       "group": "citadel_main",
       "hash": "4c46530e036f"
+    },
+    "citadel_confirm_reset_mouse": {
+      "text": "정말 마우스 설정을 초기화할까요?",
+      "group": "citadel_main",
+      "hash": "d9f83f75c5c5"
+    },
+    "citadel_settings_mouse_options_confirm_reset": {
+      "text": "정말 마우스 옵션을 초기화할까요?",
+      "group": "citadel_main",
+      "hash": "0dc30b27691c"
+    },
+    "citadel_settings_mouse_options_reset_tooltip": {
+      "text": "마우스 옵션을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "8ba146afacc1"
+    },
+    "citadel_settings_mouse_sensitivity_confirm_reset": {
+      "text": "정말 마우스 감도 설정을 초기화할까요?",
+      "group": "citadel_main",
+      "hash": "90121b23e17c"
+    },
+    "citadel_settings_mouse_sensitivity_reset_tooltip": {
+      "text": "마우스 감도 설정을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "af5ed05ec932"
     },
     "citadel_settings_controller": {
       "text": "컨트롤러",
       "group": "citadel_main",
       "hash": "7831dd12a70a"
     },
+    "citadel_settings_reset_controller_tooltip": {
+      "text": "컨트롤러 설정을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "5a351545e7e2"
+    },
     "citadel_reset_controller": {
       "text": "컨트롤러 설정을 초기화할까요?",
       "group": "citadel_main",
       "hash": "b1516a550ede"
+    },
+    "citadel_confirm_reset_controller": {
+      "text": "정말 컨트롤러 설정을 초기화할까요?",
+      "group": "citadel_main",
+      "hash": "31b7c2a24fa6"
     },
     "citadel_settings_steam_input_config:f": {
       "text": "컨트롤러 {d:controller_count}개",
@@ -49753,6 +50083,16 @@
       "text": "원격 분석 데이터 HUD",
       "group": "citadel_main",
       "hash": "6af13700c5e0"
+    },
+    "Citadel_Settings_Telemetry_SectionHeader_confirm_reset": {
+      "text": "정말 원격 분석 데이터 설정을 초기화할까요?",
+      "group": "citadel_main",
+      "hash": "f616ea23f61b"
+    },
+    "Citadel_Settings_Telemetry_SectionHeader_reset_tooltip": {
+      "text": "원격 분석 데이터 설정을 초기화합니다.",
+      "group": "citadel_main",
+      "hash": "968ff3004e80"
     },
     "Citadel_Settings_Rendering_Interface": {
       "text": "인터페이스",
@@ -50368,6 +50708,11 @@
       "text": "기본 설정을 초기화할까요?",
       "group": "citadel_main",
       "hash": "fef74e0149c9"
+    },
+    "citadel_confirm_reset_keybindings": {
+      "text": "정말 단축키와 관련 설정을 초기화할까요?",
+      "group": "citadel_main",
+      "hash": "4baab568ce04"
     },
     "citadel_confirm_reset_hero_settings": {
       "text": "{s:selected_hero_name}의 모든 단축키 및 맞춤 설정을 제거할까요?<br><br>{s:selected_hero_name}(이)가 다시 기본 설정을 사용합니다. 다른 영웅과 기본 설정에는 영향을 주지 않습니다.",
@@ -51060,9 +51405,9 @@
       "hash": "98ac9141d972"
     },
     "guide_upgrades_killing_guardians_desc": {
-      "text": "영혼을 획득하면 능력 포인트를 받습니다.<br><br> {g:citadel_binding:'Scoreboard'} 키를 길게 누르면 이 포인트를 사용하여 능력을 업그레이드할 수 있습니다.",
+      "text": "영혼을 획득하면 능력 포인트를 받습니다.<br><br>{g:citadel_binding:'Scoreboard'} 키를 길게 누르면 이 포인트를 사용하여 능력을 업그레이드할 수 있습니다.",
       "group": "citadel_main",
-      "hash": "e7584ac10ace"
+      "hash": "159299e5c528"
     },
     "guide_upgrades_going_home_header": {
       "text": "상점",
@@ -51240,9 +51585,9 @@
       "hash": "2a87c14e4abc"
     },
     "guide_advanced_parry_desc": {
-      "text": "{g:citadel_binding:'HeldItem'} 키를 눌러 적군의 근거리 공격을 방어하세요.<br><br>적군이 기절하며 근거리 피해를 더 많이 받게 됩니다.",
+      "text": "{g:citadel_binding:'HeldItem'} 키를 눌러 적군의 근거리 공격을 방어하세요.<br><br>적군이 기절하며 근거리 공격 피해를 더 많이 받게 됩니다.",
       "group": "citadel_main",
-      "hash": "4ca3a207b224"
+      "hash": "11e7a4eb1df7"
     },
     "guide_basics_abilities_header": {
       "text": "능력",
@@ -52074,6 +52419,11 @@
       "group": "citadel_main",
       "hash": "44650a9694ba"
     },
+    "citadel_voicelines_soul_urn": {
+      "text": "영혼 단지",
+      "group": "citadel_main",
+      "hash": "7498ffe3eeb0"
+    },
     "citadel_voicelines_line_count": {
       "text": "음성 대사 {d:voice_line_count}개",
       "group": "citadel_main",
@@ -52124,6 +52474,11 @@
       "group": "citadel_main",
       "hash": "b62250fe8db0"
     },
+    "citadel_voicelines_category_levelup": {
+      "text": "레벨 상승",
+      "group": "citadel_main",
+      "hash": "d932cf45416f"
+    },
     "citadel_voicelines_category_kills": {
       "text": "처치",
       "group": "citadel_main",
@@ -52149,6 +52504,31 @@
       "group": "citadel_main",
       "hash": "fffc1f70895e"
     },
+    "citadel_voicelines_category_urn_waiting": {
+      "text": "대기 중",
+      "group": "citadel_main",
+      "hash": "ec425b26f23e"
+    },
+    "citadel_voicelines_category_urn_carried": {
+      "text": "운반 중",
+      "group": "citadel_main",
+      "hash": "1a07c39fec13"
+    },
+    "citadel_voicelines_category_urn_delivered": {
+      "text": "전달 완료",
+      "group": "citadel_main",
+      "hash": "a370e0549999"
+    },
+    "citadel_voicelines_category_urn_expired": {
+      "text": "만료",
+      "group": "citadel_main",
+      "hash": "36009eb0a0b4"
+    },
+    "citadel_voicelines_category_streetbrawl": {
+      "text": "길거리 난투",
+      "group": "citadel_main",
+      "hash": "5b00765e1799"
+    },
     "citadel_voicelines_category_tutorial": {
       "text": "튜토리얼",
       "group": "citadel_main",
@@ -52163,6 +52543,11 @@
       "text": "핑",
       "group": "citadel_main",
       "hash": "75afe4d08454"
+    },
+    "citadel_voicelines_category_seasonal": {
+      "text": "시즌",
+      "group": "citadel_main",
+      "hash": "b3000412c887"
     },
     "citadel_voicelines_category_other": {
       "text": "기타",
@@ -52210,9 +52595,9 @@
       "hash": "19cecb14709b"
     },
     "menu_play_low_priority_matchmaking:f": {
-      "text": "플레이어 또는 파티원 중 한 명이 게임을 포기했거나 다른 플레이어에게 부적절한 행동으로 신고되어 낮은 우선순위 매치메이킹 대기열에 배정되었습니다. <br><br>낮은 우선순위 대기열에서 <span class=\"LowPriGamesText\">{i:low_pri_games_remaining}</span>회 승리하거나, 제재를 받은 파티원을 파티에서 제외하면 정상 매치메이킹으로 복귀할 수 있습니다.",
+      "text": "플레이어 또는 파티원 중 한 명이 게임을 포기했거나 다른 플레이어에게 부적절한 행동으로 신고되어 낮은 우선순위 매치메이킹 대기열에 배정되었습니다.<br><br>낮은 우선순위 대기열에서 <span class=\"LowPriGamesText\">{i:low_pri_games_remaining}</span>회 승리하거나, 제재를 받은 파티원을 파티에서 제외하면 정상 매치메이킹으로 복귀할 수 있습니다.",
       "group": "citadel_main",
-      "hash": "f39fbf9613b2"
+      "hash": "43f8756ded61"
     },
     "menu_learn_incomplete": {
       "text": "미완료",
@@ -53220,9 +53605,9 @@
       "hash": "e58abfac1374"
     },
     "Citadel_PriorityToken_Desc": {
-      "text": "매치를 플레이하면 영웅 우선 토큰을 획득하세요.<br><br>토큰을 잠금 해제하고 영웅 카드로 드래그하면 특정 영웅을 얻을 확률을 최대로 높일 수 있습니다. 토큰은 해당 영웅을 얻었을 경우에만 소모됩니다. <br><br>매치메이킹 풀에 신규 영웅이 더 많이 추가될수록 토큰 획득 속도도 증가합니다.",
+      "text": "매치를 플레이하면 영웅 우선 토큰을 획득하세요.<br><br>토큰을 잠금 해제하고 영웅 카드로 드래그하면 특정 영웅을 얻을 확률을 최대로 높일 수 있습니다. 토큰은 해당 영웅을 얻었을 경우에만 소모됩니다.<br><br>매치메이킹 풀에 신규 영웅이 더 많이 추가될수록 토큰 획득 속도도 증가합니다.",
       "group": "citadel_main",
-      "hash": "976fdacc5cf8"
+      "hash": "8b746053bd8c"
     },
     "Citadel_PriorityToken_Available": {
       "text": "사용 가능",
@@ -53394,6 +53779,16 @@
       "group": "citadel_main",
       "hash": "b0d2f92ea9ef"
     },
+    "HeroTesting_HideHealthBars": {
+      "text": "체력 막대 숨기기",
+      "group": "citadel_main",
+      "hash": "aab3c55707be"
+    },
+    "HeroTesting_HideOwnHealth": {
+      "text": "내 체력 막대 숨기기",
+      "group": "citadel_main",
+      "hash": "cf25318de4f9"
+    },
     "HeroTesting_LockCamera": {
       "text": "카메라 고정",
       "group": "citadel_main",
@@ -53434,6 +53829,11 @@
       "group": "citadel_main",
       "hash": "c4b25fe2ac50"
     },
+    "HeroTesting_LegendaryItems": {
+      "text": "전설 아이템",
+      "group": "citadel_main",
+      "hash": "c6da24da8413"
+    },
     "HeroTesting_ToggleCorruptedItems": {
       "text": "타락한 아이템",
       "group": "citadel_main",
@@ -53455,9 +53855,9 @@
       "hash": "4ecd2e188cc8"
     },
     "HeroTesting_HeroControl": {
-      "text": "봇 기본 설정",
+      "text": "봇 기본 조작",
       "group": "citadel_main",
-      "hash": "8f76806d4057"
+      "hash": "55bc95ee9b7a"
     },
     "HeroTesting_TakeControl": {
       "text": "영웅 컨트롤",
@@ -54254,10 +54654,20 @@
       "group": "citadel_main",
       "hash": "ee5febbe3c84"
     },
+    "HeroTesting_HideUI_Desc": {
+      "text": "내 체력 막대를 제외한 HUD와 윤곽선을 숨깁니다. TAB 키를 길게 누르면 다시 표시됩니다.",
+      "group": "citadel_main",
+      "hash": "e2124ebfb3d3"
+    },
     "HeroTesting_HideHealthBars_Desc": {
       "text": "영웅과 유닛 위의 체력 바를 숨깁니다.",
       "group": "citadel_main",
       "hash": "b6ad72141263"
+    },
+    "HeroTesting_HideOwnHealth_Desc": {
+      "text": "HUD에서 내 체력 바를 숨깁니다.",
+      "group": "citadel_main",
+      "hash": "2cb8bb29633d"
     },
     "HeroTesting_LockCamera_Desc": {
       "text": "영웅을 계속 조작하면서 카메라를 현재 위치에 고정합니다.",
@@ -54268,6 +54678,11 @@
       "text": "구매한 아이템이 강화되며 상점에 강화 버전이 표시됩니다.",
       "group": "citadel_main",
       "hash": "b8a19856e707"
+    },
+    "HeroTesting_LegendaryItems_Desc": {
+      "text": "상점의 모든 아이템 탭 하단에 길거리 난투 전설 아이템을 추가합니다.",
+      "group": "citadel_main",
+      "hash": "5c113052effd"
     },
     "HeroTesting_ToggleCorruptedItems_Desc": {
       "text": "구매한 아이템이 타락하며 상점에 타락 버전이 표시됩니다.",
@@ -56564,6 +56979,36 @@
       "group": "citadel_main",
       "hash": "d51eb263f079"
     },
+    "citadel_chatwheel_label_GoingToRat": {
+      "text": "빈 전선 밀기",
+      "group": "citadel_main",
+      "hash": "9a593cafa471"
+    },
+    "citadel_chatwheel_message_GoingToRat": {
+      "text": "빈 전선을 밀겠다!",
+      "group": "citadel_main",
+      "hash": "fc287663dcc2"
+    },
+    "citadel_chatwheel_label_OK": {
+      "text": "확인",
+      "group": "citadel_main",
+      "hash": "468266d639b5"
+    },
+    "citadel_chatwheel_message_OK": {
+      "text": "알겠어",
+      "group": "citadel_main",
+      "hash": "d5c2eee605bc"
+    },
+    "citadel_chatwheel_label_LookHere": {
+      "text": "여기 주목",
+      "group": "citadel_main",
+      "hash": "6064c1d4a87f"
+    },
+    "citadel_chatwheel_message_LookHere": {
+      "text": "여기 봐!",
+      "group": "citadel_main",
+      "hash": "5638820593fe"
+    },
     "citadel_chatwheel_label_going_shop": {
       "text": "상점",
       "group": "citadel_main",
@@ -56579,30 +57024,15 @@
       "group": "citadel_main",
       "hash": "5e52f3733fe8"
     },
-    "citadel_chatwheel_message_going_corrupted_shop": {
-      "text": "타락한 상점으로 이동 중",
-      "group": "citadel_main",
-      "hash": "e0cc17fdff3e"
-    },
     "citadel_chatwheel_label_visit_corrupted_shop": {
       "text": "상점 방문",
       "group": "citadel_main",
       "hash": "74a3c6f53da4"
     },
-    "citadel_chatwheel_message_visit_corrupted_shop": {
-      "text": "타락한 상점에 들러",
-      "group": "citadel_main",
-      "hash": "b3f6d1b0eb4b"
-    },
     "citadel_chatwheel_label_ignore_corrupted_shop": {
       "text": "상점 무시",
       "group": "citadel_main",
       "hash": "8d462789deaa"
-    },
-    "citadel_chatwheel_message_ignore_corrupted_shop": {
-      "text": "타락한 상점은 무시해",
-      "group": "citadel_main",
-      "hash": "f84f0f429785"
     },
     "citadel_chatwheel_label_going_farm": {
       "text": "영혼 수집",
@@ -57203,6 +57633,21 @@
       "text": "여기 있다, 체력 {s:param_2}",
       "group": "citadel_main",
       "hash": "7fd02449da74"
+    },
+    "ping_enemy_count_small": {
+      "text": "적군이 둘 있다",
+      "group": "citadel_main",
+      "hash": "afd99c2f6fe1"
+    },
+    "ping_enemy_count_big": {
+      "text": "적군이 많다",
+      "group": "citadel_main",
+      "hash": "0f1ccaf13fda"
+    },
+    "ping_enemy_count_all": {
+      "text": "전부 여기 있다",
+      "group": "citadel_main",
+      "hash": "ea4738418ae4"
     },
     "Ping_Low_Health": {
       "text": "체력 낮음",
@@ -58574,6 +59019,11 @@
       "group": "citadel_main",
       "hash": "e2e0a1e77db6"
     },
+    "map_district_chinatown_d": {
+      "text": "차이나 타운 :",
+      "group": "citadel_main",
+      "hash": "4b3da96f47ab"
+    },
     "map_district_fairfax": {
       "text": "광장",
       "group": "citadel_main",
@@ -58593,6 +59043,11 @@
       "text": "운하:",
       "group": "citadel_main",
       "hash": "cdfb58ed9072"
+    },
+    "map_district_sunkenplaza": {
+      "text": "가라앉은 광장",
+      "group": "citadel_main",
+      "hash": "308864fd3c7b"
     },
     "map_district_building_base": {
       "text": "기지",
@@ -58658,6 +59113,11 @@
       "text": "캠퍼스",
       "group": "citadel_main",
       "hash": "dcb8130dbf2f"
+    },
+    "map_district_building_belltower": {
+      "text": "종탑",
+      "group": "citadel_main",
+      "hash": "e7b029e62a68"
     }
   }
 }

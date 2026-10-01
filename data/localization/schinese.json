@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6722",
-  "upstreamCommit": "6722",
-  "generatedAt": "2026-09-30T07:26:05.424Z",
+  "clientVersion": "6726",
+  "upstreamCommit": "6726",
+  "generatedAt": "2026-10-01T00:44:00.680Z",
   "language": "schinese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 618,
-    "citadel_heroes": 3330,
+    "citadel_heroes": 3333,
     "citadel_attributes": 1980,
     "citadel_gc": 214,
-    "citadel_main": 5140
+    "citadel_main": 5143
   },
   "tokens": {
     "hero_vampire:n": {
@@ -6120,9 +6120,9 @@
       "hash": "a00d40ca630c"
     },
     "citadel_ability_static_charge_t3_desc": {
-      "text": "<span class=\"highlight\">+{s:StunDuration}秒</span>眩晕时间<br><span class=\"highlight\">+{s:Damage}米</span>伤害",
+      "text": "<span class=\"highlight\">+{s:StunDuration}秒</span>眩晕时间<br><span class=\"highlight\">+{s:Damage}</span>伤害",
       "group": "citadel_heroes",
-      "hash": "22452566cd98"
+      "hash": "92cfd16f2dfa"
     },
     "citadel_ability_static_charge_v2": {
       "text": "静态电荷",
@@ -20604,6 +20604,21 @@
       "group": "citadel_heroes",
       "hash": "a9106b54936f"
     },
+    "BounceRadius_label": {
+      "text": "弹跳距离",
+      "group": "citadel_heroes",
+      "hash": "20cb009358b6"
+    },
+    "BounceRadius_postvalue_label": {
+      "text": "弹跳距离",
+      "group": "citadel_heroes",
+      "hash": "20cb009358b6"
+    },
+    "BounceRadius_postfix": {
+      "text": "米",
+      "group": "citadel_heroes",
+      "hash": "ee7f305751a5"
+    },
     "ability_unicorn_luminousstrike": {
       "text": "明辉匕首",
       "group": "citadel_heroes",
@@ -21875,9 +21890,9 @@
       "hash": "59ecc5e0b357"
     },
     "Citadel_Chessmaster_HeroTag_2": {
-      "text": "棋  圣",
+      "text": "全 神 贯 注",
       "group": "citadel_heroes",
-      "hash": "c5f3ab4a1815"
+      "hash": "4ced9c05b887"
     },
     "Citadel_Chessmaster_HeroTag_3": {
       "text": "将  军",
@@ -22555,9 +22570,9 @@
       "hash": "359d79ff7c84"
     },
     "Citadel_StatusEffectCurse": {
-      "text": "扰动 raodong 羊刀 yangdao",
+      "text": "扰动",
       "group": "citadel_attributes",
-      "hash": "cec35ee2cf2d"
+      "hash": "89e921a24ade"
     },
     "modifier_citadel_in_fountain": {
       "text": "主基地",
@@ -44170,9 +44185,9 @@
       "hash": "0dae5bfe8c23"
     },
     "neutral_mushrooms_3": {
-      "text": "贫民窟菇菌 III",
+      "text": "贫民窟蘑菇 III",
       "group": "citadel_main",
-      "hash": "fdfacbde5e25"
+      "hash": "33fbc2e90a6a"
     },
     "neutral_plants_1": {
       "text": "包菜蟹壶 I",
@@ -44745,9 +44760,9 @@
       "hash": "359d79ff7c84"
     },
     "EShopFilterStatus_Curse": {
-      "text": "扰动 raodong 羊刀 yangdao",
+      "text": "扰动",
       "group": "citadel_main",
-      "hash": "cec35ee2cf2d"
+      "hash": "89e921a24ade"
     },
     "EShopFilterStatus_Immobilize": {
       "text": "定身",
@@ -52475,9 +52490,9 @@
       "hash": "2e8e70958c4a"
     },
     "citadel_voicelines_category_kills": {
-      "text": "击败次数",
+      "text": "击败",
       "group": "citadel_main",
-      "hash": "a1f47ba18e03"
+      "hash": "344fa13b33ea"
     },
     "citadel_voicelines_category_allies": {
       "text": "队友",
@@ -54705,9 +54720,9 @@
       "hash": "af087d2bcab1"
     },
     "citadel_keybind_noclip": {
-      "text": "没有视频",
+      "text": "穿墙模式",
       "group": "citadel_main",
-      "hash": "d596b4ecc530"
+      "hash": "2e1260fd71dc"
     },
     "citadel_keybind_botrecord": {
       "text": "录制",
@@ -57019,30 +57034,15 @@
       "group": "citadel_main",
       "hash": "50de52fd42a2"
     },
-    "citadel_chatwheel_message_going_corrupted_shop": {
-      "text": "前往异化商店",
-      "group": "citadel_main",
-      "hash": "ff1e3e1f0714"
-    },
     "citadel_chatwheel_label_visit_corrupted_shop": {
       "text": "访问商店",
       "group": "citadel_main",
       "hash": "eab73c03776f"
     },
-    "citadel_chatwheel_message_visit_corrupted_shop": {
-      "text": "访问异化商店",
-      "group": "citadel_main",
-      "hash": "d363042e3eae"
-    },
     "citadel_chatwheel_label_ignore_corrupted_shop": {
       "text": "忽略商店",
       "group": "citadel_main",
       "hash": "fab7c67e0573"
-    },
-    "citadel_chatwheel_message_ignore_corrupted_shop": {
-      "text": "忽略异化商店",
-      "group": "citadel_main",
-      "hash": "1b10b4f4d3e5"
     },
     "citadel_chatwheel_label_going_farm": {
       "text": "去打钱了",
@@ -57638,6 +57638,21 @@
       "text": "在这里，{s:param_2}点生命",
       "group": "citadel_main",
       "hash": "babc8d92bcaf"
+    },
+    "ping_enemy_count_small": {
+      "text": "他们来了两个人",
+      "group": "citadel_main",
+      "hash": "6066d73b4be3"
+    },
+    "ping_enemy_count_big": {
+      "text": "他们来了很多人",
+      "group": "citadel_main",
+      "hash": "4abf6ba64129"
+    },
+    "ping_enemy_count_all": {
+      "text": "他们全在这里",
+      "group": "citadel_main",
+      "hash": "28038a255ee2"
     },
     "Ping_Low_Health": {
       "text": "低",
@@ -58235,9 +58250,9 @@
       "hash": "6d0f55813e88"
     },
     "Citadel_News_CityNeverSleeps_Title": {
-      "text": "纽约不眠夜",
+      "text": "不夜之城",
       "group": "citadel_main",
-      "hash": "7d7b503ca272"
+      "hash": "f1afe1afe61c"
     },
     "Citadel_StartupPause_Title": {
       "text": "暂停启动",
@@ -59009,6 +59024,11 @@
       "group": "citadel_main",
       "hash": "6fd410f38c01"
     },
+    "map_district_chinatown_d": {
+      "text": "唐人街：",
+      "group": "citadel_main",
+      "hash": "dc3940530980"
+    },
     "map_district_fairfax": {
       "text": "广场",
       "group": "citadel_main",
@@ -59028,6 +59048,11 @@
       "text": "运河：",
       "group": "citadel_main",
       "hash": "25fa47d89215"
+    },
+    "map_district_sunkenplaza": {
+      "text": "沉没广场",
+      "group": "citadel_main",
+      "hash": "d9c8c886e97d"
     },
     "map_district_building_base": {
       "text": "基础",
@@ -59093,6 +59118,11 @@
       "text": "校园",
       "group": "citadel_main",
       "hash": "d2eb0e3e82c1"
+    },
+    "map_district_building_belltower": {
+      "text": "钟楼",
+      "group": "citadel_main",
+      "hash": "242bfc347b2b"
     }
   }
 }

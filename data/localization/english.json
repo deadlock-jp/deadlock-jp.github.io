@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6722",
-  "upstreamCommit": "6722",
-  "generatedAt": "2026-09-30T07:26:05.351Z",
+  "clientVersion": "6726",
+  "upstreamCommit": "6726",
+  "generatedAt": "2026-10-01T00:44:00.611Z",
   "language": "English",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 622,
-    "citadel_heroes": 3339,
+    "citadel_heroes": 3342,
     "citadel_attributes": 2012,
     "citadel_gc": 214,
-    "citadel_main": 5167
+    "citadel_main": 5202
   },
   "tokens": {
     "hero_vampire:n": {
@@ -20668,6 +20668,21 @@
       "text": "",
       "group": "citadel_heroes",
       "hash": "da39a3ee5e6b"
+    },
+    "BounceRadius_label": {
+      "text": "Bounce Range",
+      "group": "citadel_heroes",
+      "hash": "1625bf7a3f65"
+    },
+    "BounceRadius_postvalue_label": {
+      "text": "Bounce Range",
+      "group": "citadel_heroes",
+      "hash": "1625bf7a3f65"
+    },
+    "BounceRadius_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
     },
     "ability_unicorn_luminousstrike": {
       "text": "Radiant Daggers",
@@ -46689,6 +46704,11 @@
       "group": "citadel_main",
       "hash": "d10f98bddbe9"
     },
+    "citadel_hotkeys_tooltip_down_dash": {
+      "text": "Dash straight down while airborne, the same as double-tapping Crouch.",
+      "group": "citadel_main",
+      "hash": "397810187255"
+    },
     "citadel_hotkeys_tooltip_held_item": {
       "text": "Parry an incoming melee attack. If you are carrying an item such as the Soul Urn, this command throws it instead.",
       "group": "citadel_main",
@@ -46798,6 +46818,51 @@
       "text": "Show the view of the spectated player's team on the minimap.",
       "group": "citadel_main",
       "hash": "10da7e876a50"
+    },
+    "citadel_hotkeys_tooltip_shop_purchase_search_match": {
+      "text": "When your shop search has narrowed the results to a single item, buy it, or sell it if you already own it. Works while typing in the search box.",
+      "group": "citadel_main",
+      "hash": "7b7de716a4a1"
+    },
+    "citadel_hotkeys_tooltip_shop_tab_build": {
+      "text": "Switch to the Builds tab of the shop.",
+      "group": "citadel_main",
+      "hash": "f73c460775a2"
+    },
+    "citadel_hotkeys_tooltip_shop_tab_recommended": {
+      "text": "Switch to the Popular Items tab of the shop.",
+      "group": "citadel_main",
+      "hash": "9a3a7de79b64"
+    },
+    "citadel_hotkeys_tooltip_shop_tab_all_items": {
+      "text": "Switch to the All Items tab of the shop.",
+      "group": "citadel_main",
+      "hash": "805f7a97bffc"
+    },
+    "citadel_hotkeys_tooltip_shop_tab_weapon": {
+      "text": "Switch to the Weapon Items tab of the shop.",
+      "group": "citadel_main",
+      "hash": "bd16fd41a6f9"
+    },
+    "citadel_hotkeys_tooltip_shop_tab_spirit": {
+      "text": "Switch to the Spirit Items tab of the shop.",
+      "group": "citadel_main",
+      "hash": "606b74ee7c9a"
+    },
+    "citadel_hotkeys_tooltip_shop_tab_vitality": {
+      "text": "Switch to the Vitality Items tab of the shop.",
+      "group": "citadel_main",
+      "hash": "836736380f8f"
+    },
+    "citadel_hotkeys_tooltip_shop_tier_up": {
+      "text": "Scroll the shop up one price tier.<br><br>If you have disabled the Snap Scrolling to Price Tiers option, this scrolls a small amount instead.",
+      "group": "citadel_main",
+      "hash": "e37714b1fbf2"
+    },
+    "citadel_hotkeys_tooltip_shop_tier_down": {
+      "text": "Scroll the shop down one price tier.<br><br>If you have disabled the Snap Scrolling to Price Tiers option, this scrolls a small amount instead.",
+      "group": "citadel_main",
+      "hash": "e9afe2065ba1"
     },
     "citadel_settings_monitor_mic_desc": {
       "text": "Turn this on to listen to your microphone while adjusting voice settings.",
@@ -46989,6 +47054,26 @@
       "group": "citadel_main",
       "hash": "1ae175e831ec"
     },
+    "citadel_settings_enemy_damage_delta_color": {
+      "text": "Enemy damage color",
+      "group": "citadel_main",
+      "hash": "ad43b9c4d4a8"
+    },
+    "citadel_settings_enemy_damage_delta_color_tooltip": {
+      "text": "The color that briefly marks the health an enemy just lost when you damage them.",
+      "group": "citadel_main",
+      "hash": "d62db6e29dcf"
+    },
+    "citadel_settings_enemy_zipline_color": {
+      "text": "Enemy zipline color",
+      "group": "citadel_main",
+      "hash": "744f351b128f"
+    },
+    "citadel_settings_enemy_zipline_color_tooltip": {
+      "text": "The color used for enemy ziplines, and for enemy objectives on the minimap.",
+      "group": "citadel_main",
+      "hash": "4b45d3bf03d6"
+    },
     "citadel_settings_video_preview": {
       "text": "Preview rendering changes",
       "group": "citadel_main",
@@ -47153,6 +47238,31 @@
       "text": "Show text and animations on health bars of enemies with critical health levels.",
       "group": "citadel_main",
       "hash": "23643ff4eb43"
+    },
+    "citadel_settings_unit_status_hero_name": {
+      "text": "Name above health bars",
+      "group": "citadel_main",
+      "hash": "26b2baa33278"
+    },
+    "citadel_settings_unit_status_hero_name_tooltip": {
+      "text": "What to show above other heroes' health bars.",
+      "group": "citadel_main",
+      "hash": "82685dba57ff"
+    },
+    "citadel_settings_unit_status_hero_name_player": {
+      "text": "Player name",
+      "group": "citadel_main",
+      "hash": "2e4f5ba7b9a5"
+    },
+    "citadel_settings_unit_status_hero_name_hero": {
+      "text": "Hero name",
+      "group": "citadel_main",
+      "hash": "d3b4a0f11eb0"
+    },
+    "citadel_settings_unit_status_hero_name_none": {
+      "text": "None",
+      "group": "citadel_main",
+      "hash": "6eef6648406c"
     },
     "citadel_settings_damage_text_cumulative": {
       "text": "Show cumulative damage",
@@ -48903,6 +49013,26 @@
       "text": "Reset Hideout keybinds.",
       "group": "citadel_main",
       "hash": "fd516ef0ba02"
+    },
+    "citadel_settings_shopkeybinds": {
+      "text": "Shop",
+      "group": "citadel_main",
+      "hash": "55de88709232"
+    },
+    "citadel_settings_shopkeybinds_reset_tooltip": {
+      "text": "Reset shop keybinds.",
+      "group": "citadel_main",
+      "hash": "3975b4efb721"
+    },
+    "citadel_settings_shop_keybinds_new_setting": {
+      "text": "Shop Keybinds",
+      "group": "citadel_main",
+      "hash": "5be546c6fb63"
+    },
+    "citadel_settings_shop_keybinds_new_setting_desc": {
+      "text": "The shop hotkeys can now be rebound. While the shop is open they take priority over your other keybinds.",
+      "group": "citadel_main",
+      "hash": "cffa1fcc9f00"
     },
     "citadel_settings_audiokeybinds": {
       "text": "Audio",
@@ -50954,6 +51084,11 @@
       "group": "citadel_main",
       "hash": "6609c9cc7360"
     },
+    "citadel_keybind_down_dash": {
+      "text": "Down dash",
+      "group": "citadel_main",
+      "hash": "8166deed26a1"
+    },
     "citadel_keybind_push_to_talk": {
       "text": "Voice chat (team)",
       "group": "citadel_main",
@@ -51503,6 +51638,16 @@
       "text": "You can now choose whether health bars should display health numbers, how to display damage dealt cumulatively, and whether to show text and animations on the health bars of enemies with critical health.",
       "group": "citadel_main",
       "hash": "dffb5560881d"
+    },
+    "citadel_settings_unit_status_hero_name_new_setting": {
+      "text": "Health Bar Names",
+      "group": "citadel_main",
+      "hash": "b4b59dd69ec5"
+    },
+    "citadel_settings_unit_status_hero_name_new_setting_desc": {
+      "text": "You can now choose whether other heroes' health bars show the player's name, the hero's name, or no name.",
+      "group": "citadel_main",
+      "hash": "065bfcfa45bd"
     },
     "guide_get_started_title": {
       "text": "Get Started",
@@ -57340,9 +57485,9 @@
       "hash": "9e7e0ecc259a"
     },
     "citadel_chatwheel_message_going_corrupted_shop": {
-      "text": "Going to Corrupted Shop",
+      "text": "Going to The Broker",
       "group": "citadel_main",
-      "hash": "fee21857251f"
+      "hash": "a5fd3ecdb862"
     },
     "citadel_chatwheel_label_visit_corrupted_shop": {
       "text": "Visit Shop",
@@ -57350,9 +57495,9 @@
       "hash": "8cdbb235356b"
     },
     "citadel_chatwheel_message_visit_corrupted_shop": {
-      "text": "Visit the Corrupted Shop",
+      "text": "Visit the The Broker",
       "group": "citadel_main",
-      "hash": "e54b222b8ad5"
+      "hash": "e0eacde07693"
     },
     "citadel_chatwheel_label_ignore_corrupted_shop": {
       "text": "Ignore Shop",
@@ -57360,9 +57505,9 @@
       "hash": "258405d3d637"
     },
     "citadel_chatwheel_message_ignore_corrupted_shop": {
-      "text": "Ignore the Corrupted Shop",
+      "text": "Ignore the The Broker",
       "group": "citadel_main",
-      "hash": "1617d901ff5a"
+      "hash": "c350d3b7ff81"
     },
     "citadel_chatwheel_label_going_farm": {
       "text": "Going to farm",
@@ -58508,6 +58653,51 @@
       "text": "Survey Skip",
       "group": "citadel_main",
       "hash": "6c557a82791a"
+    },
+    "citadel_keybind_shop_purchase_search_match": {
+      "text": "Buy/sell search result",
+      "group": "citadel_main",
+      "hash": "0e963f04140f"
+    },
+    "citadel_keybind_shop_tab_build": {
+      "text": "Builds tab",
+      "group": "citadel_main",
+      "hash": "92a3cc79ab82"
+    },
+    "citadel_keybind_shop_tab_recommended": {
+      "text": "Popular Items tab",
+      "group": "citadel_main",
+      "hash": "6d9bf831173b"
+    },
+    "citadel_keybind_shop_tab_all_items": {
+      "text": "All Items tab",
+      "group": "citadel_main",
+      "hash": "24405d94f2f1"
+    },
+    "citadel_keybind_shop_tab_weapon": {
+      "text": "Weapon tab",
+      "group": "citadel_main",
+      "hash": "2d775a1eecc5"
+    },
+    "citadel_keybind_shop_tab_spirit": {
+      "text": "Spirit tab",
+      "group": "citadel_main",
+      "hash": "1baac09fd6b3"
+    },
+    "citadel_keybind_shop_tab_vitality": {
+      "text": "Vitality tab",
+      "group": "citadel_main",
+      "hash": "4b871b70de39"
+    },
+    "citadel_keybind_shop_tier_up": {
+      "text": "Scroll up",
+      "group": "citadel_main",
+      "hash": "4d07e752d987"
+    },
+    "citadel_keybind_shop_tier_down": {
+      "text": "Scroll down",
+      "group": "citadel_main",
+      "hash": "3a2e1ba7f898"
     },
     "Citadel_News_MajorUpdate": {
       "text": "Major Update",

@@ -1,0 +1,24 @@
+{
+  "from": "6722",
+  "to": "6726",
+  "generatedAt": "2026-10-01T00:44:00.858Z",
+  "entries": [
+    {
+      "kind": "changed",
+      "type": "system",
+      "id": "economy",
+      "path": "breakableSpawnTimes.2.initialSpawnTime",
+      "before": 180,
+      "after": 300
+    },
+    {
+      "kind": "changed",
+      "type": "system",
+      "id": "economy",
+      "path": "breakableSpawnTimes.2.respawnInterval",
+      "before": 180,
+      "after": 300
+    }
+  ],
+  "excludedFieldCount": 26
+}
