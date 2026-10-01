@@ -1,13 +1,29 @@
 name: Deploy to GitHub Pages
 
-# main に push するたびにビルドして公開する。
-# Actions タブから手動実行もできる。
+# ビルドして GitHub Pages に公開する。起動するのは:
+#   - main への push
+#   - Actions タブからの手動実行
+#   - 6時間おきの定期実行(対戦統計を新しくするため。deadlock-api.com の統計は6時間キャッシュ)
+#
+# 対戦統計(data/item-stats.json・hero-stats.json・hero-builds.json)は Git に入れず、
+# ここでビルドの直前に API から取る(tools/fetch-stats.mjs)。リポジトリへの push はしないので
+# contents: write は持たない。
+# 取得に失敗したファイルは、actions/cache に残した前回成功分を使い、それも無ければ統計なしでビルドする
+# (ビルドは止めない。どれがどうなったかはジョブの要約に出る)。
 on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      simulate_fail:
+        description: "失敗の経路を試す: 取得しなかったことにするファイル(item-stats,hero-stats,hero-builds のカンマ区切り / all)"
+        required: false
+        default: ""
+  schedule:
+    # 6時間おき(UTC)。JSTで 09/15/21/03 時ごろ
+    - cron: "0 0,6,12,18 * * *"
 
-# GITHUB_TOKEN に Pages への配信権限を与える
+# GITHUB_TOKEN に Pages への配信権限を与える(リポジトリは読むだけ)
 permissions:
   contents: read
   pages: write
@@ -34,6 +50,29 @@ jobs:
 
       # 型が通らないものは公開しない
       - run: npm run typecheck
+
+      # 前回成功した統計(取得に失敗したときの控え)。キーは実行ごとに違うので、restore-keys で一番新しいものを拾う
+      - name: Restore previous stats
+        uses: actions/cache/restore@v4
+        with:
+          path: .stats-cache
+          key: stats-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: stats-
+
+      # 3ファイルを取得。失敗したものはキャッシュ → なし の順に埋める。この手順自体は失敗しない
+      - name: Fetch stats
+        id: stats
+        env:
+          STATS_SIMULATE_FAIL: ${{ github.event.inputs.simulate_fail }}
+        run: node tools/fetch-stats.mjs --fallback .stats-cache
+
+      # 1つでも新しく取れたら、今そろっているファイルを次回の控えとして保存する
+      - name: Save stats
+        if: steps.stats.outputs.fresh == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .stats-cache
+          key: stats-${{ github.run_id }}-${{ github.run_attempt }}
 
       - run: npm run build
 

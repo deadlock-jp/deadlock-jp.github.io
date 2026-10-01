@@ -4,6 +4,15 @@ dist/
 .DS_Store
 Thumbs.db
 
+# 対戦統計(deadlock-api.com 由来)。「今の値」だけあればよいので Git には入れず、
+# デプロイのたびに API から取る(.github/workflows/deploy.yml → tools/fetch-stats.mjs)。
+# 手元では `npm run fetch:stats` で取る。無くてもビルドは通る(統計の欄が出ないだけ)
+data/item-stats.json
+data/hero-stats.json
+data/hero-builds.json
+# CI で前回成功分を actions/cache から復元・保存するフォルダ
+.stats-cache/
+
 # 参照専用の外部リポジトリ。別フォルダにcloneして --gt で指定する
 GameTracking-Deadlock/
 

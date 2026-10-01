@@ -7,8 +7,6 @@ import heroNotesJson from "../../data/hero-notes.json" with { type: "json" };
 import itemNotesJson from "../../data/item-notes.json" with { type: "json" };
 import objectNotesJson from "../../data/object-notes.json" with { type: "json" };
 import propertyLabelsJson from "../../data/property-labels.json" with { type: "json" };
-import itemStatsJson from "../../data/item-stats.json" with { type: "json" };
-import heroStatsJson from "../../data/hero-stats.json" with { type: "json" };
 import type { HeroesFile, Hero } from "../types/hero.ts";
 import type { RankBandKey } from "./rankBands.ts";
 import type { ItemsFile, Item } from "../types/item.ts";
@@ -1037,6 +1035,21 @@ import { patchNoteByDate as patchNoteByDateLocal } from "./patchNotes.ts";
  * items の値は [人気率, 勝率, サンプル試合数]。率は 0.1% 刻みの整数(503 = 50.3%)。
  * キーはヒーローの実ID(数値)を文字列にしたもの。
  */
+/**
+ * 統計ファイル(data/item-stats.json・hero-stats.json・hero-builds.json)を読む。無ければ null。
+ * 統計は Git に入れず、デプロイのたびに API から取る(tools/fetch-stats.mjs)。取得に失敗した回や、
+ * 手元でまだ取っていないときはファイルが無いので、そのまま「統計なし」としてビルドを通す。
+ */
+function readStatsFile<T>(name: string): T | null {
+  const p = join(DATA_DIR, name);
+  if (!existsSync(p)) return null;
+  try {
+    return JSON.parse(readFileSync(p, "utf8")) as T;
+  } catch {
+    return null; // 壊れたファイルも「統計なし」として扱う
+  }
+}
+
 /** 統計の集計期間の起点(tools/stats-window.mjs)。window が "sincePatch" のときに入っている */
 export interface StatsWindowPatch {
   date: string;
@@ -1063,13 +1076,19 @@ export interface ItemStatsFile {
   bands: { all: ItemStatsBand } & Partial<Record<RankBandKey, ItemStatsBand>>;
 }
 export const itemStats: ItemStatsFile = (() => {
-  const raw = itemStatsJson as unknown as ItemStatsFile & {
-    heroes?: ItemStatsBand["heroes"];
-    totalMatches?: number;
-  };
+  const raw = readStatsFile<
+    ItemStatsFile & {
+      heroes?: ItemStatsBand["heroes"];
+      totalMatches?: number;
+    }
+  >("item-stats.json");
+  // 統計が無いときは空(各セクションは hasItemStats を見て出さない)
+  if (!raw) return { fetchedAt: "", window: "none", lowSampleMatches: 20, bands: { all: { matches: 0, heroes: {} } } };
   if (raw.bands) return raw;
   return { ...raw, bands: { all: { matches: raw.totalMatches ?? 0, heroes: raw.heroes ?? {} } } };
 })();
+/** アイテムの統計(data/item-stats.json)があるか。無ければ統計を使うセクションは出さない */
+export const hasItemStats = Object.keys(itemStats.bands.all.heroes).length > 0;
 /** その帯の統計。帯が無いファイルなら null */
 export const itemStatsBand = (band: RankBandKey): ItemStatsBand | null => itemStats.bands[band] ?? null;
 
@@ -1097,7 +1116,15 @@ export interface HeroStatsFile {
     { matches: number; bans: number; heroes: Record<string, [number, number, number | null, number]> }
   >;
 }
-export const heroStats = heroStatsJson as unknown as HeroStatsFile;
+export const heroStats: HeroStatsFile = readStatsFile<HeroStatsFile>("hero-stats.json") ?? {
+  fetchedAt: "",
+  window: "none",
+  lowSampleMatches: 1000,
+  banRateNote: "",
+  buckets: {},
+};
+/** ヒーローの統計(data/hero-stats.json)があるか。無ければヒーロー一覧の「使用状況」は出さない */
+export const hasHeroStats = Object.keys(heroStats.buckets.all?.heroes ?? {}).length > 0;
 
 /**
  * ゲーム内で公開されているビルドのうち、最近の試合でよく使われているもの。data/hero-builds.json
@@ -1122,12 +1149,11 @@ export interface HeroBuildsFile {
   windowDays: number;
   heroes: Record<string, HeroBuild[]>;
 }
-export const heroBuilds: HeroBuildsFile = (() => {
-  const p = join(DATA_DIR, "hero-builds.json");
-  return existsSync(p)
-    ? (JSON.parse(readFileSync(p, "utf8")) as HeroBuildsFile)
-    : { fetchedAt: null, windowDays: 0, heroes: {} };
-})();
+export const heroBuilds: HeroBuildsFile = readStatsFile<HeroBuildsFile>("hero-builds.json") ?? {
+  fetchedAt: null,
+  windowDays: 0,
+  heroes: {},
+};
 
 /** そのアップデートで新しく発表された(解禁前として初めてデータに入った)ヒーロー */
 export interface AnnouncedHero {

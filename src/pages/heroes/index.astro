@@ -7,7 +7,7 @@ import HeroPortrait from "../../components/HeroPortrait.astro";
 import HeroHoverCard from "../../components/HeroHoverCard.astro";
 import AbilityHoverCard, { type AbilityHoverDetail } from "../../components/AbilityHoverCard.astro";
 import RankBandPicker from "../../components/RankBandPicker.astro";
-import { releasedHeroes, t, ability, heroTags, describe, heroNotes, heroStats, latestChangeMarks, ADJUSTMENT_LABEL, statsPeriodLabel } from "../../lib/data.ts";
+import { releasedHeroes, t, ability, heroTags, describe, heroNotes, heroStats, hasHeroStats, latestChangeMarks, ADJUSTMENT_LABEL, statsPeriodLabel } from "../../lib/data.ts";
 import { resolveImagePath } from "../../parsers/image-manifest.ts";
 import { heroRanks, pickRows, topRankRows, heroTierTable } from "../../lib/herorank.ts";
 import { skillCard } from "../../lib/skillcard.ts";
@@ -131,7 +131,8 @@ const H2 = {
 <Base title={T.heroes.title} description={T.heroes.description}>
   <h1>{T.nav.heroes}</h1>
 
-  {/* ------------ 最上部: ランク帯別の使用状況(実際の対戦記録) ------------ */}
+  {/* ------------ 最上部: ランク帯別の使用状況(実際の対戦記録)。統計ファイルが無いビルドでは出さない ------------ */}
+  {hasHeroStats && (
   <section class="hs panel">
     <div class="hs-head">
       <h2>{T.heroes.usage}</h2>
@@ -153,6 +154,7 @@ const H2 = {
     </div>
     <p class="hs-note" id="hs-note"></p>
   </section>
+  )}
 
   {/* ------------ 上部: 項目別ステータスランク ------------ */}
   <section class="tt panel">
@@ -395,7 +397,8 @@ const H2 = {
 
       function renderRank(key) {
         const bucket = statsPayload.buckets[key];
-        if (!bucket) return;
+        // 統計が無いビルドでは使用状況のセクション自体が無い
+        if (!bucket || !hsNote) return;
         const low = bucket.matches < statsPayload.lowSampleMatches;
 
         for (const col of document.querySelectorAll(".hs-col")) {

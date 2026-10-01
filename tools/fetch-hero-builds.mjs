@@ -98,12 +98,15 @@ for (const hero of heroes) {
   requests++;
   await sleep(ANALYTICS_DELAY_MS);
   const top = [...stats].sort((a, b) => b.matches - a.matches).slice(0, PER_HERO);
+  // ビルド検索は 100req/s まで使えるので、1ヒーロー分(最大 PER_HERO 件)はまとめて並行に引く
+  const found = await Promise.all(
+    top.map((s) => getJson(`${API}/builds?build_id=${s.hero_build_id}&only_latest=true&limit=1`)),
+  );
+  requests += top.length;
+  await sleep(BUILDS_DELAY_MS);
   const builds = [];
-  for (const s of top) {
-    const found = await getJson(`${API}/builds?build_id=${s.hero_build_id}&only_latest=true&limit=1`);
-    requests++;
-    await sleep(BUILDS_DELAY_MS);
-    const b = found[0]?.hero_build;
+  for (const [i, s] of top.entries()) {
+    const b = found[i][0]?.hero_build;
     if (!b || b.hero_id !== hero.id) continue;
     // カテゴリーは名前を捨て、並びと「任意(optional)」の印だけ残す
     const groups = [];

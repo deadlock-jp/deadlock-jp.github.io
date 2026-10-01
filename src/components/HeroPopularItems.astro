@@ -15,6 +15,7 @@ import {
   t,
   souls,
   itemStats,
+  hasItemStats,
   itemStatsBand,
   heroPopularItems,
   heroPopularCandidates,
@@ -69,6 +70,8 @@ const iconOf = (i: Item) => ({
 });
 ---
 
+{/* 統計ファイルが無いビルド(取得に失敗した回・手元で未取得)ではセクションごと出さない */}
+{hasItemStats && (
 <section class="popular" id={sectionId}>
   <h2>{popular.title}</h2>
   <div class="pp-head">
@@ -141,6 +144,7 @@ const iconOf = (i: Item) => ({
     <p class="pp-note">{S.noData}</p>
   )}
 </section>
+)}
 
 <style>
   /* 人気のアイテム(ヒーローページ)。主役は採用率(太字の数値とバー)、勝率は小さく */

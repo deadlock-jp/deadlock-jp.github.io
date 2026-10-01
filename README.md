@@ -54,6 +54,20 @@ MIT ライセンスが及ぶのはコードだけで、`data/` と `public/image
 [GameTracking-Deadlock](https://github.com/SteamDatabase/GameTracking-Deadlock) は
 検算と過去バージョンの補完に使う副次ソースです。
 
+### 対戦統計（ゲーム本体由来ではないもの）
+
+アイテムの採用率・勝率、ヒーローのピック率・勝率・BAN率、人気のビルドは
+[deadlock-api.com](https://deadlock-api.com/) の公開APIから取る数値です（文章は取り込みません）。
+「今の値」だけあればよいので **Git には入れず**（`.gitignore`）、デプロイのたびに
+`.github/workflows/deploy.yml` が API から取ってビルドに使います（main への push・手動実行・6時間おきの定期実行）。
+取得に失敗したファイルは、前回成功分（actions/cache）を使い、それも無ければ統計なしでビルドします。
+
+| ファイル | 取得スクリプト |
+|---|---|
+| `data/item-stats.json` | `tools/fetch-item-stats.mjs` |
+| `data/hero-stats.json` | `tools/fetch-hero-stats.mjs` |
+| `data/hero-builds.json` | `tools/fetch-hero-builds.mjs` |
+
 ## 開発
 
 Node.js 22.6 以上が必要です。
@@ -63,7 +77,10 @@ npm ci
 npm run dev        # ローカルプレビュー
 npm run build      # dist/ に静的サイトを出力
 npm run typecheck  # 型チェック
+npm run fetch:stats  # 対戦統計を deadlock-api.com から取る(1分ほど。Git には入らない)
 ```
+
+対戦統計のファイルが無くても `dev` / `build` は通ります（統計を使う欄が出ないだけ）。
 
 データの再生成は、このゲームがインストールされたPC上で行います
 (`tools/extract/extract-local.mjs` が Steam のインストール先から `.vdata` を decompile します)。
