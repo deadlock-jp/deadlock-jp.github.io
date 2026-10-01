@@ -78,7 +78,8 @@ async function getJson(url) {
 
 /** 集計期間の起点(最新のバランス変更があったアップデートの投稿時刻) */
 const WINDOW = statsWindow(REPO_ROOT);
-const SINCE = `min_unix_timestamp=${WINDOW.start}`;
+/** 集計期間。終点(max_unix_timestamp)はすべての問い合わせで同じ値にする(理由は tools/stats-window.mjs) */
+const SINCE = `min_unix_timestamp=${WINDOW.start}&max_unix_timestamp=${WINDOW.end}`;
 console.error(
   `集計期間: ${WINDOW.startIso} 以降(${WINDOW.patch.date} ${WINDOW.patch.titleEn} / 起点の取り方: ${WINDOW.source})`,
 );
@@ -179,6 +180,8 @@ const doc = {
   /** 集計期間。最新のバランス変更があったアップデート以降(tools/stats-window.mjs) */
   window: "sincePatch",
   windowStart: WINDOW.startIso,
+  /** 集計の終点(取得した時刻)。分母と分子をこの時点にそろえて取っている */
+  windowEnd: WINDOW.endIso,
   windowSource: WINDOW.source,
   windowPatch: WINDOW.patch,
   lowSampleMatches: LOW_SAMPLE,

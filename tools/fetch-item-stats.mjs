@@ -80,7 +80,8 @@ async function getJson(url) {
 
 /** 集計期間の起点(最新のバランス変更があったアップデートの投稿時刻) */
 const WINDOW = statsWindow(REPO_ROOT);
-const SINCE = `min_unix_timestamp=${WINDOW.start}`;
+/** 集計期間。終点(max_unix_timestamp)はすべての問い合わせで同じ値にする(理由は tools/stats-window.mjs) */
+const SINCE = `min_unix_timestamp=${WINDOW.start}&max_unix_timestamp=${WINDOW.end}`;
 console.error(
   `集計期間: ${WINDOW.startIso} 以降(${WINDOW.patch.date} ${WINDOW.patch.titleEn} / 起点の取り方: ${WINDOW.source})`,
 );
@@ -167,6 +168,9 @@ async function fetchBand(key, filter) {
   console.error(
     `  ${matches.toLocaleString("en-US")}試合 / アイテムの統計があるヒーロー ${okHeroes}/${heroes.length} / ${totalRows} 行`,
   );
+  // 採用率は 100% を超えないはず。超えたら分母と分子の時点がずれている(tools/stats-window.mjs の終点)
+  const over = Object.values(out).flatMap((h) => Object.values(h.items)).filter((v) => v[0] > 1000).length;
+  if (over > 0) console.error(`  警告: 採用率が100%を超える行が ${over} 件ある。分母と分子の集計時点を確認すること`);
   return { band: { matches, heroes: out }, okHeroes, totalRows };
 }
 
@@ -191,6 +195,8 @@ const doc = {
   /** 集計期間。最新のバランス変更があったアップデート以降(tools/stats-window.mjs) */
   window: "sincePatch",
   windowStart: WINDOW.startIso,
+  /** 集計の終点(取得した時刻)。分母と分子をこの時点にそろえて取っている */
+  windowEnd: WINDOW.endIso,
   /** 起点の取り方。postedAt = お知らせの投稿時刻 / dateMidnightUtc = 投稿時刻が無く日付の 00:00 UTC */
   windowSource: WINDOW.source,
   /** 起点のアップデート。titleEn は英語の原題、titleJa は日本語の題(英語と別のときだけ) */

@@ -9,13 +9,19 @@
  *   - 同じ日付の投稿が無い/postedAt が無い投稿だけ、その日付の 00:00 UTC にする(source で区別)
  * 実行のたびにここで決めるので、新しいバランス変更が updates.json に入れば、次の取得から自動で切り替わる。
  * 手で日付を書き換える運用にしない。
+ *
+ * 終点(end)は呼んだ時刻。取得するすべての問い合わせに max_unix_timestamp として同じ値を付ける。
+ * deadlock-api.com は hero-stats と item-stats で直近の試合が反映される時刻がずれており、
+ * 終点を付けないと採用率の分母(hero-stats)が分子(item-stats)より古いことがあって、
+ * 採用率が100%を超えていた(2026-10-01 に確認。上位帯で最大 105%)。終点をそろえると0件になる。
+ * 付けた値は毎回違うので、API の6時間キャッシュに当たらず、分母と分子が同じ時点の集計になる。
  */
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
 /**
  * @param {string} repoRoot
- * @returns {{ start: number, startIso: string, source: "postedAt" | "dateMidnightUtc",
+ * @returns {{ start: number, startIso: string, end: number, endIso: string, source: "postedAt" | "dateMidnightUtc",
  *   patch: { date: string, titleEn: string | null, titleJa: string | null } }}
  */
 export function statsWindow(repoRoot) {
@@ -34,9 +40,12 @@ export function statsWindow(repoRoot) {
   /** 日本語の題(日本語版のお知らせがあるときだけ。英語と同じなら null) */
   const titleEn = note?.titleEn ?? note?.title ?? null;
   const titleJa = note && note.title !== titleEn ? note.title : null;
+  const end = Math.floor(Date.now() / 1000);
   return {
     start,
     startIso: new Date(start * 1000).toISOString(),
+    end,
+    endIso: new Date(end * 1000).toISOString(),
     source: posted !== null ? "postedAt" : "dateMidnightUtc",
     patch: { date: latest.date, titleEn, titleJa },
   };
