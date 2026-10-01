@@ -1,7 +1,8 @@
 ---
 /**
- * 攻略情報のハブページ。目的から選ぶカードで、目的別の5ページへの入口にする(2026-10)。
- *   はじめての Deadlock / 試合の流れ / マップとファーム / オブジェクト / キャラクターコントロール
+ * 攻略情報のハブページ。目的から選ぶカードで、目的別の7ページへの入口にする(2026-10)。
+ *   はじめての Deadlock / 試合の流れ / マップとファーム / オブジェクト / 状態異常・効果 / 用語集 /
+ *   キャラクターコントロール
  * 見出しで煽らず、各ページに入っている中身を、サイトで使っているゲーム画像と一緒にそのまま並べる。
  * 小さな地図(MapPreview)は「マップとファーム」への入口。
  */
@@ -10,16 +11,26 @@ import { join } from "node:path";
 import Base from "../../layouts/Base.astro";
 import MapPreview from "../../components/MapPreview.astro";
 import { controlCategories } from "../../lib/controls.ts";
+import { item } from "../../lib/data.ts";
+import { resolveImagePath } from "../../parsers/image-manifest.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const img = (p: string): string | null => (existsSync(join(process.cwd(), "public", p)) ? `${base}/${p}` : null);
 const M = `${base}/mechanics`;
+/* アイテムのショップアイコン(サイトで既に使っているもの) */
+const itemImg = (id: string): string | null => {
+  const icon = item(id)?.shopIcon;
+  const r = icon ? resolveImagePath(icon) : null;
+  return r && existsSync(join(process.cwd(), r.outPath)) ? `${base}/${r.outPath.replace(/^public\//, "")}` : null;
+};
 
 /* 目的から選ぶカード(画像はサイトで既に使っているもの) */
 const purposes = [
   { href: `${M}/beginner/`, title: "初めて遊ぶ", page: "はじめての Deadlock", body: "勝利条件と試合の全体像、最初に覚える3つのこと、よく出る用語", img: img("images/npcs/trooper.png") },
   { href: `${M}/match/`, title: "試合の進め方を知りたい", page: "試合の流れ", body: "レーン戦・中盤・終盤で意識すること、買い物の目安、橋バフ、ガーディアンのパリィ", img: img("images/npcs/tier_1_boss.png") },
   { href: `${M}/objects/`, title: "建造物や敵の数値を知りたい", page: "オブジェクト", body: "ガーディアン・ウォーカー・シュライン・トルーパー・ホーントのHPや報酬", img: img("images/npcs/tier_2_boss.png") },
+  { href: `${M}/effects/`, title: "状態異常と対策を知りたい", page: "状態異常・効果", body: "スタン・サイレンス・スロウなどを持つスキルとアイテム、デバフ解除やデバフ耐性などの対策", img: itemImg("upgrade_unstoppable") },
+  { href: `${M}/glossary/`, title: "用語の意味を調べたい", page: "用語集", body: "ゲーム内用語、ガンク・ディナイなどのMOBA・FPS用語、CC・DPSなどの略語", img: img("images/npcs/patron.png") },
 ];
 /* キャラクターコントロール: 実演動画つきのテクニックと、全カテゴリ */
 const categories = controlCategories();
@@ -115,7 +126,7 @@ const videos = categories.flatMap((c) =>
     .pcard:hover { border-color: var(--c-accent-dim); text-decoration: none; }
     .pcard:hover .tt { color: var(--c-accent); }
     .pcard { grid-column: 2; }
-    .mapcard { grid-column: 1; grid-row: 1 / span 3; flex-direction: column; align-items: stretch; }
+    .mapcard { grid-column: 1; grid-row: 1 / span 5; flex-direction: column; align-items: stretch; }
     .mapcard :global(.mp) { width: 100%; max-width: 360px; margin: 0 auto var(--sp-2); }
     .tx { display: flex; flex-direction: column; min-width: 0; }
     .pg { display: block; margin-top: 2px; font-size: 12px; color: var(--c-accent); }

@@ -8,6 +8,8 @@ export const MECH_PAGES: { path: string; label: string; title: string; body: str
   { path: "/mechanics/farm/", label: "マップとファーム", title: "マップとファーム", body: "マップ・ソウルの仕組み・稼ぎ方・数値表" },
   { path: "/mechanics/objects/", label: "オブジェクト", title: "オブジェクト", body: "建造物・トルーパー・ホーントの数値" },
   { path: "/mechanics/controls/", label: "キャラクターコントロール", title: "キャラクターコントロール", body: "ダッシュ・マントルなど操作の実演動画" },
+  { path: "/mechanics/effects/", label: "状態異常・効果", title: "状態異常・効果", body: "スタン・サイレンス・スロウなどを持つスキルとアイテム、対策" },
+  { path: "/mechanics/glossary/", label: "用語集", title: "用語集", body: "ゲーム内用語・MOBA・FPS の用語・略語" },
 ];
 
 /** 各ページの末尾に出す「次に読む」(2〜3件) */
@@ -17,4 +19,6 @@ export const MECH_NEXT: Record<string, string[]> = {
   "/mechanics/farm/": ["/mechanics/objects/", "/mechanics/match/"],
   "/mechanics/objects/": ["/mechanics/farm/", "/mechanics/match/"],
   "/mechanics/controls/": ["/mechanics/beginner/", "/mechanics/match/"],
+  "/mechanics/effects/": ["/mechanics/glossary/", "/mechanics/match/"],
+  "/mechanics/glossary/": ["/mechanics/effects/", "/mechanics/beginner/"],
 };

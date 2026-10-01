@@ -151,6 +151,16 @@ function parsePowerupSpawn(misc: ReturnType<typeof readVdata>): PowerupSpawn {
   };
 }
 
+/**
+ * マップに置かれた回復アイテム(ヒーリングスナック)の回復量。misc.vdata の
+ * citadel_pickup_health_float_in_world(ワールドに浮いている回復アイテム)の m_flRegenMaxHealthPercent。
+ * 最大HPに対する割合(%)
+ */
+function parseHealingSnack(misc: ReturnType<typeof readVdata>): { maxHealthPercent: number | null } {
+  const p = obj(misc["citadel_pickup_health_float_in_world"]);
+  return { maxHealthPercent: optNum(obj(p["m_flRegenMaxHealthPercent"])["m_flBase"]) };
+}
+
 export function parseEconomy(
   genericDataPath: string,
   miscPath: string,
@@ -180,5 +190,6 @@ export function parseEconomy(
     campSpawnTimes: parseCampSpawnTimes(misc),
     breakableGold: parseBreakableGold(misc),
     powerupSpawn: parsePowerupSpawn(misc),
+    healingSnack: parseHealingSnack(misc),
   };
 }

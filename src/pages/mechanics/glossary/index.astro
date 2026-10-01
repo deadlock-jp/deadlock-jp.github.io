@@ -1,0 +1,191 @@
+---
+/**
+ * 用語集(日本語のみ)。中身は src/lib/glossary.ts(表記・説明の約束もそこに書いてある)。
+ * 各項目に id があるので /mechanics/glossary/#ガンクの id のように直接リンクできる。
+ * 絞り込みの入力欄は JS で項目を隠すだけで、JS が無くても全項目が読める。
+ */
+import Base from "../../../layouts/Base.astro";
+import MechanicsNav from "../../../components/MechanicsNav.astro";
+import MechanicsNext from "../../../components/MechanicsNext.astro";
+import HeroPortrait from "../../../components/HeroPortrait.astro";
+import AbilityIcon from "../../../components/AbilityIcon.astro";
+import ItemIcon from "../../../components/ItemIcon.astro";
+import { glossary, GLOSSARY_CATEGORIES } from "../../../lib/glossary.ts";
+import { t, heroesFile, ability, item } from "../../../lib/data.ts";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const SITE = Astro.site ?? new URL(import.meta.env.SITE);
+const entries = glossary();
+const groups = GLOSSARY_CATEGORIES.map((c) => ({ ...c, entries: entries.filter((e) => e.category === c.id) }));
+const pageUrl = new URL(`${base}/mechanics/glossary/`, SITE).href;
+
+/* 構造化データ: 用語集全体を DefinedTermSet、各項目を DefinedTerm として出す */
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "DefinedTermSet",
+    "@id": pageUrl,
+    name: "Deadlock 用語集",
+    inLanguage: "ja",
+    hasDefinedTerm: entries.map((e) => ({
+      "@type": "DefinedTerm",
+      "@id": `${pageUrl}#${e.id}`,
+      name: e.term,
+      ...(e.en ? { alternateName: e.en } : {}),
+      description: e.note ? `${e.desc} ${e.note}` : e.desc,
+      url: `${pageUrl}#${e.id}`,
+      inDefinedTermSet: pageUrl,
+    })),
+  },
+];
+---
+
+<Base
+  title="Deadlock 用語集（ゲーム内用語・MOBA用語・略語）"
+  description="Deadlock（デッドロック）の用語集。ソウル・ガーディアン・パトロンなどのゲーム内用語、スピリットパワーや減衰などのシステム用語、ガンク・ディナイ・フリーズなどのMOBA・FPS用語、CC・DPS・AoEなどの略語を、初心者向けに説明しています。"
+  breadcrumbs={[
+    { name: "攻略情報", path: `${base}/mechanics/` },
+    { name: "用語集", path: `${base}/mechanics/glossary/` },
+  ]}
+  extraJsonLd={jsonLd}
+>
+  <MechanicsNav />
+  <h1>用語集</h1>
+  <p class="lead">
+    Deadlock の中の呼び名と、プレイヤーの間でよく使われる言葉をまとめました。
+    ゲーム内に説明文がある用語は、その文をそのまま載せています（<span class="srcmark">ゲーム内</span>の印）。
+  </p>
+
+  <div class="gfilter">
+    <input type="search" id="gq" placeholder="用語を絞り込む（例: ガンク、スタン、CC）" autocomplete="off" aria-label="用語の絞り込み" />
+    <span class="ghits" id="ghits"></span>
+  </div>
+
+  <nav class="toc" aria-label="分類">
+    {groups.map((g) => <a href={`#cat-${g.id}`}>{g.label}<small>{g.entries.length}</small></a>)}
+  </nav>
+
+  {groups.map((g) => (
+    <section class="gcat panel" id={`cat-${g.id}`}>
+      <h2>{g.label}</h2>
+      <p class="glead">{g.lead}</p>
+      <dl class="terms">
+        {g.entries.map((e) => (
+          <div class="term" id={e.id} data-find={`${e.term} ${e.en ?? ""} ${e.desc} ${e.note ?? ""}`.toLowerCase()}>
+            <dt>
+              <a class="anchor" href={`#${e.id}`}>{e.term}</a>
+              {e.en && <span class="en">（{e.en}）</span>}
+              {e.source === "game" && <span class="srcmark">ゲーム内</span>}
+            </dt>
+            <dd>
+              <p>{e.desc}</p>
+              {e.note && <p class="gnote">{e.note}</p>}
+              {e.related && (
+                <ul class="icons">
+                  {(e.related.heroes ?? []).map((id) => {
+                    const h = heroesFile.heroes[String(id)];
+                    return h ? (
+                      <li><a href={`${base}/heroes/${id}/`} title={t(h.nameToken, h.key)}><HeroPortrait name={t(h.nameToken, h.key)} image={h.images.iconSmall} size={28} /></a></li>
+                    ) : null;
+                  })}
+                  {(e.related.abilities ?? []).map((k) => {
+                    const a = ability(k);
+                    return a ? (
+                      <li><a href={`${base}/abilities/${k}/`} title={t(k, k)}><AbilityIcon name={t(k, k)} image={a.image} size={28} cssVar={a.kind === "Ultimate" ? "spirit" : "accent"} /></a></li>
+                    ) : null;
+                  })}
+                  {(e.related.items ?? []).map((id) => {
+                    const it = item(id);
+                    return it ? (
+                      <li>
+                        <a href={`${base}/items/${id}/`} title={t(it.nameToken, id)}>
+                          <ItemIcon name={t(it.nameToken, id)} slotType={it.slotType} tier={it.tier} shopIcon={it.shopIcon} activation={it.activation} isImbue={it.isImbue} size={28} />
+                        </a>
+                      </li>
+                    ) : null;
+                  })}
+                </ul>
+              )}
+              {e.links.length > 0 && (
+                <ul class="links">
+                  {e.links.map((l) => (
+                    <li><a href={`${base}${l.path}`}>{l.label}</a></li>
+                  ))}
+                </ul>
+              )}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  ))}
+
+  <p class="note">
+    説明のうち「ゲーム内」の印が無いものは、このサイトで書いた文です。数値はゲームのデータから引いています。
+  </p>
+
+  <MechanicsNext />
+
+  <script is:inline>
+    (() => {
+      const q = document.getElementById("gq");
+      const hits = document.getElementById("ghits");
+      const terms = [...document.querySelectorAll(".term")];
+      const sections = [...document.querySelectorAll(".gcat")];
+      const norm = (s) => s.toLowerCase().normalize("NFKC");
+      const hay = terms.map((el) => norm(el.dataset.find || ""));
+      q.addEventListener("input", () => {
+        const w = norm(q.value.trim());
+        let n = 0;
+        terms.forEach((el, i) => {
+          const ok = !w || hay[i].includes(w);
+          el.hidden = !ok;
+          if (ok) n++;
+        });
+        for (const s of sections) s.hidden = !!w && !s.querySelector(".term:not([hidden])");
+        hits.textContent = w ? `${n} 件` : "";
+      });
+    })();
+  </script>
+
+  <style>
+    .lead { color: var(--c-text-muted); font-size: 14px; line-height: 1.8; max-width: 70ch; }
+    .gfilter { display: flex; align-items: center; gap: var(--sp-3); margin: var(--sp-3) 0; flex-wrap: wrap; }
+    .gfilter input {
+      flex: 1 1 240px; max-width: 420px; background: var(--c-surface); border: 1px solid var(--c-border);
+      border-radius: var(--radius); color: var(--c-text); font: inherit; font-size: 14px; padding: 7px 10px;
+    }
+    .gfilter input:focus { outline: none; border-color: var(--c-accent); }
+    .ghits { font-size: 12px; color: var(--c-text-muted); font-family: var(--font-mono); }
+    .toc { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 var(--sp-4); }
+    .toc a { font-size: 12.5px; padding: 4px 12px; border: 1px solid var(--c-border); border-radius: 999px; background: var(--c-surface); color: var(--c-text-muted); }
+    .toc a small { margin-left: 5px; font-family: var(--font-mono); color: var(--c-text-faint); }
+    .toc a:hover { color: var(--c-accent); border-color: var(--c-accent-dim); text-decoration: none; }
+
+    .gcat { margin-top: var(--sp-4); scroll-margin-top: 72px; }
+    .gcat[hidden] { display: none; }
+    .gcat h2 { margin-top: 0; }
+    .glead { margin: 0 0 var(--sp-2); font-size: 12.5px; color: var(--c-text-muted); }
+    .terms { margin: 0; }
+    .term { display: grid; grid-template-columns: 13em minmax(0, 1fr); gap: var(--sp-3); padding: var(--sp-2) 0; border-bottom: 1px solid var(--c-border); scroll-margin-top: 72px; }
+    .term[hidden] { display: none; }
+    .term:target { background: var(--c-accent-bg); }
+    .term dt { font-weight: 600; font-size: 14px; color: var(--c-text-strong); }
+    .anchor { color: inherit; }
+    .anchor:hover { color: var(--c-accent); text-decoration: none; }
+    .en { display: block; font-weight: 400; font-size: 12px; color: var(--c-text-muted); }
+    .srcmark { display: inline-block; margin-left: 6px; padding: 0 5px; font-size: 10px; font-weight: 600; border: 1px solid var(--c-border-strong); border-radius: 3px; color: var(--c-text-muted); vertical-align: 1px; }
+    .term dd { margin: 0; }
+    .term dd p { margin: 0; font-size: 13.5px; line-height: 1.8; }
+    .gnote { margin-top: 4px !important; color: var(--c-text); }
+    .gnote::before { content: "補足: "; color: var(--c-text-muted); font-size: 12px; }
+    .icons { list-style: none; padding: 0; margin: 6px 0 0; display: flex; flex-wrap: wrap; gap: 4px; }
+    .icons a { display: block; line-height: 0; }
+    .icons a:hover { opacity: 0.8; }
+    .links { list-style: none; padding: 0; margin: 4px 0 0; display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12.5px; }
+    .note { margin-top: var(--sp-4); font-size: 12px; color: var(--c-text-faint); }
+    @media (max-width: 640px) {
+      .term { grid-template-columns: 1fr; gap: 2px; }
+    }
+  </style>
+</Base>

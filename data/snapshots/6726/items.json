@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "upstreamCommit": "6726",
-  "generatedAt": "2026-10-01T00:44:00.096Z",
+  "generatedAt": "2026-10-01T07:22:47.645Z",
   "itemPricePerTier": [
     0,
     800,
@@ -220,7 +220,14 @@
       },
       "upgrades": [],
       "tooltip": [],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_base": {
       "id": "upgrade_base",
@@ -4479,7 +4486,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/alchemical_fire.psd"
+      "shopIcon": "file://{images}/items/weapon/alchemical_fire.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_thermal_detonator_thinker"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "item_projectile_test_02": {
       "id": "item_projectile_test_02",
@@ -4729,7 +4744,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/alchemical_fire.psd"
+      "shopIcon": "file://{images}/items/weapon/alchemical_fire.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_thermal_detonator_thinker"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "item_projectile_test_03": {
       "id": "item_projectile_test_03",
@@ -4979,7 +5002,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/alchemical_fire.psd"
+      "shopIcon": "file://{images}/items/weapon/alchemical_fire.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_thermal_detonator_thinker"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "item_projectile_test_04": {
       "id": "item_projectile_test_04",
@@ -5229,7 +5260,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/alchemical_fire.psd"
+      "shopIcon": "file://{images}/items/weapon/alchemical_fire.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_thermal_detonator_thinker"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "item_projectile_test_05": {
       "id": "item_projectile_test_05",
@@ -5479,7 +5518,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/alchemical_fire.psd"
+      "shopIcon": "file://{images}/items/weapon/alchemical_fire.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_thermal_detonator_thinker"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "item_projectile_test_06": {
       "id": "item_projectile_test_06",
@@ -5729,7 +5776,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/alchemical_fire.psd"
+      "shopIcon": "file://{images}/items/weapon/alchemical_fire.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_thermal_detonator_thinker"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_clip_size": {
       "id": "upgrade_clip_size",
@@ -5984,7 +6039,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/basic_magazine.psd"
+      "shopIcon": "file://{images}/items/weapon/basic_magazine.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_non_player_bonus": {
       "id": "upgrade_non_player_bonus",
@@ -6261,7 +6323,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/monster_rounds.psd"
+      "shopIcon": "file://{images}/items/weapon/monster_rounds.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_non_player_bonus_sacrifice": {
       "id": "upgrade_non_player_bonus_sacrifice",
@@ -6641,7 +6710,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/cultist_sacrifice.psd"
+      "shopIcon": "file://{images}/items/weapon/cultist_sacrifice.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_ammo_scavenger": {
       "id": "upgrade_ammo_scavenger",
@@ -6915,7 +6992,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_ammo_scavenger_buff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_clip_size_fixed": {
       "id": "upgrade_clip_size_fixed",
@@ -7148,7 +7232,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_clip_size_fixed_t3": {
       "id": "upgrade_clip_size_fixed_t3",
@@ -7373,7 +7464,14 @@
       },
       "upgrades": [],
       "tooltip": [],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_chain_lightning": {
       "id": "upgrade_chain_lightning",
@@ -7709,7 +7807,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/tesla_bullets.psd"
+      "shopIcon": "file://{images}/items/weapon/tesla_bullets.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_chain_lightning",
+          "modifier_citadel_chain_lightningeffect"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_capacitor": {
       "id": "upgrade_capacitor",
@@ -8129,7 +8235,21 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/capacitor.psd"
+      "shopIcon": "file://{images}/items/weapon/capacitor.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_chain_lightning",
+          "modifier_citadel_chain_lightningeffect",
+          "modifier_intrinsic_base",
+          "modifier_weapon_capacitor_slow"
+        ],
+        "states": [
+          "DASH_DISABLED_DEBUFF",
+          "SILENCE_MOVEMENT_ABILITES",
+          "SLOWED"
+        ],
+        "purges": false
+      }
     },
     "upgrade_galvanic_storm": {
       "id": "upgrade_galvanic_storm",
@@ -8556,7 +8676,16 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_galvanic_storm_effect",
+          "modifier_galvanic_storm"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_hollow_point_rounds": {
       "id": "upgrade_hollow_point_rounds",
@@ -8878,7 +9007,18 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/hollow_point.psd"
+      "shopIcon": "file://{images}/items/weapon/hollow_point.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_hollow_point_proc",
+          "modifier_intrinsic_base"
+        ],
+        "states": [
+          "HAS_HOLLOW_POINT_BULLETS"
+        ],
+        "purges": false
+      }
     },
     "upgrade_pristine_emblem": {
       "id": "upgrade_pristine_emblem",
@@ -9177,7 +9317,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/opening_rounds.psd"
+      "shopIcon": "file://{images}/items/weapon/opening_rounds.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base",
+          "modifier_pristine_emblem"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_stabilizer": {
       "id": "upgrade_stabilizer",
@@ -9435,7 +9583,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_high_velocity_mag": {
       "id": "upgrade_high_velocity_mag",
@@ -9694,7 +9849,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/high_velocity_rounds.psd"
+      "shopIcon": "file://{images}/items/weapon/high_velocity_rounds.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_lifestrike_gauntlets": {
       "id": "upgrade_lifestrike_gauntlets",
@@ -9986,7 +10148,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/melee_lifesteal.psd"
+      "shopIcon": "file://{images}/items/vitality/melee_lifesteal.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_lifestrike_gauntlets"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_melee_rebuttal": {
       "id": "upgrade_melee_rebuttal",
@@ -10319,7 +10488,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/rebuttal.psd"
+      "shopIcon": "file://{images}/items/vitality/rebuttal.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_rebuttal_watcher"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_counterspell": {
       "id": "upgrade_counterspell",
@@ -10668,7 +10845,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/counterspell.psd"
+      "shopIcon": "file://{images}/items/vitality/counterspell.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_counterspell_watcher"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_weighted_shots": {
       "id": "upgrade_weighted_shots",
@@ -11068,7 +11253,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/weighted_shots.psd"
+      "shopIcon": "file://{images}/items/weapon/weighted_shots.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_base_buildup",
+          "modifier_intrinsic_base",
+          "modifier_slow_base",
+          "modifier_slowing_bullets_proc"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_ancient_shield": {
       "id": "upgrade_ancient_shield",
@@ -11362,7 +11557,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/brawl/ancient_shielding.psd"
+      "shopIcon": "file://{images}/items/brawl/ancient_shielding.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_close_range": {
       "id": "upgrade_close_range",
@@ -11639,7 +11841,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/close_quarters.psd"
+      "shopIcon": "file://{images}/items/weapon/close_quarters.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_long_range": {
       "id": "upgrade_long_range",
@@ -11942,7 +12151,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/long_range.psd"
+      "shopIcon": "file://{images}/items/weapon/long_range.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_slowing_bullets": {
       "id": "upgrade_slowing_bullets",
@@ -12244,7 +12460,16 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/slowing_bullets.psd"
+      "shopIcon": "file://{images}/items/weapon/slowing_bullets.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_base_buildup",
+          "modifier_slow_base",
+          "modifier_slowing_bullets_proc"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_inhibitor": {
       "id": "upgrade_inhibitor",
@@ -12604,7 +12829,16 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/inhibitor.psd"
+      "shopIcon": "file://{images}/items/vitality/inhibitor.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_base_buildup",
+          "modifier_inhibitor_proc"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_small_attack_speed": {
       "id": "upgrade_small_attack_speed",
@@ -12837,7 +13071,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_tech_defense_shredders": {
       "id": "upgrade_tech_defense_shredders",
@@ -13113,7 +13354,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/spirit_shredder_bullets.psd"
+      "shopIcon": "file://{images}/items/weapon/spirit_shredder_bullets.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_tech_defense_shredders_proc"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_attack_speed_1": {
       "id": "upgrade_attack_speed_1",
@@ -13346,7 +13595,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_nearby_enemy_boost": {
       "id": "upgrade_nearby_enemy_boost",
@@ -13665,7 +13921,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_nearby_enemy_boost",
+          "modifier_team_relative_particle"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_dps_aura": {
       "id": "upgrade_dps_aura",
@@ -14015,7 +14279,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/heroic_aura.psd"
+      "shopIcon": "file://{images}/items/weapon/heroic_aura.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_base_aura",
+          "modifier_dps_aura_active",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_weapon_detention_ammo": {
       "id": "upgrade_weapon_detention_ammo",
@@ -14341,7 +14615,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_base_buildup",
+          "modifier_citadel_containment_victim",
+          "modifier_upgrade_detention_ammo"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_targeted_silence": {
       "id": "upgrade_targeted_silence",
@@ -14662,7 +14946,16 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/silence_glyph.psd"
+      "shopIcon": "file://{images}/items/spirit/silence_glyph.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_silenced",
+          "modifier_cone_wave_projectile",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_haunting_scream": {
       "id": "upgrade_haunting_scream",
@@ -14991,7 +15284,21 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/brawl/haunting_scream.psd"
+      "shopIcon": "file://{images}/items/brawl/haunting_scream.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_cone_wave_projectile",
+          "modifier_glitch_debuff",
+          "modifier_intrinsic_base"
+        ],
+        "states": [
+          "DISARMED",
+          "GLITCHED",
+          "MUTED",
+          "SILENCED"
+        ],
+        "purges": false
+      }
     },
     "upgrade_proc_silence": {
       "id": "upgrade_proc_silence",
@@ -15341,7 +15648,19 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/silencer.psd"
+      "shopIcon": "file://{images}/items/weapon/silencer.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_silence_buildup",
+          "modifier_citadel_silence_proc_debuff",
+          "modifier_citadel_silence_proc_immunity",
+          "modifier_citadel_silence_proc_watcher",
+          "modifier_citadel_silenced"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_silencer": {
       "id": "upgrade_silencer",
@@ -15599,7 +15918,16 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/silencer.psd"
+      "shopIcon": "file://{images}/items/weapon/silencer.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_silenced",
+          "modifier_intrinsic_base",
+          "modifier_silencer_proc_active"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_proc_disarm": {
       "id": "upgrade_proc_disarm",
@@ -15862,7 +16190,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_base_buildup",
+          "modifier_citadel_disarm_proc",
+          "modifier_citadel_disarm_proc_watcher"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_berserker": {
       "id": "upgrade_berserker",
@@ -16172,7 +16510,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/berserker.psd"
+      "shopIcon": "file://{images}/items/weapon/berserker.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_berserker",
+          "modifier_berserker_damage_stack"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_fervor": {
       "id": "upgrade_fervor",
@@ -16513,7 +16859,16 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/frenzy.psd"
+      "shopIcon": "file://{images}/items/weapon/frenzy.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_fervor",
+          "modifier_fervor_bonuses",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_siphon_bullets": {
       "id": "upgrade_siphon_bullets",
@@ -16890,7 +17245,21 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/siphon_bullets.psd"
+      "shopIcon": "file://{images}/items/vitality/siphon_bullets.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_siphon_bullets",
+          "modifier_siphon_bullets_health_loss",
+          "modifier_siphon_bullets_restore_health",
+          "modifier_siphon_bullets_watcher"
+        ],
+        "states": [
+          "DO_NOT_ADJUST_HEALTH_ON_MAXHEALTH_CHANGE",
+          "SIPHON_BULLET_LOSS"
+        ],
+        "purges": false
+      }
     },
     "upgrade_headshot_booster": {
       "id": "upgrade_headshot_booster",
@@ -17161,7 +17530,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/headshot_booster.psd"
+      "shopIcon": "file://{images}/items/weapon/headshot_booster.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_headshot_booster_watcher",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_headshot_booster2": {
       "id": "upgrade_headshot_booster2",
@@ -17502,7 +17879,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/weakening_headshot.psd"
+      "shopIcon": "file://{images}/items/weapon/weakening_headshot.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_headshot_damage_debuff",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_sharpshooter": {
       "id": "upgrade_sharpshooter",
@@ -17861,7 +18246,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/sharp_shooter.psd"
+      "shopIcon": "file://{images}/items/weapon/sharp_shooter.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_headhunter": {
       "id": "upgrade_headhunter",
@@ -18209,7 +18601,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/headhunter.psd"
+      "shopIcon": "file://{images}/items/weapon/headhunter.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_headhunter_watcher",
+          "modifier_upgrade_headhunter_headshot_buff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_spellslinger_headshots": {
       "id": "upgrade_spellslinger_headshots",
@@ -18560,7 +18960,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/spellslinger_headshots.psd"
+      "shopIcon": "file://{images}/items/weapon/spellslinger_headshots.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_intrinsic_base",
+          "modifier_spellslinger_headshots_debuff",
+          "modifier_tech_defense_shredders_proc"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_banshee_slugs": {
       "id": "upgrade_banshee_slugs",
@@ -18914,7 +19324,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/crippling_headshot.psd"
+      "shopIcon": "file://{images}/items/weapon/crippling_headshot.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_headshot_damage_debuff",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_proc_tech_damage": {
       "id": "upgrade_proc_tech_damage",
@@ -19214,7 +19632,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_tech_damage_proc_watcher"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_crackshot": {
       "id": "upgrade_crackshot",
@@ -19523,7 +19948,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/mystic_shot.psd"
+      "shopIcon": "file://{images}/items/weapon/mystic_shot.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_mystic_shot"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_critshot": {
       "id": "upgrade_critshot",
@@ -19819,7 +20252,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/lucky_shot.psd"
+      "shopIcon": "file://{images}/items/weapon/lucky_shot.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_crit_shot"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_close_quarter_combat": {
       "id": "upgrade_close_quarter_combat",
@@ -20150,7 +20590,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/point_blank.psd"
+      "shopIcon": "file://{images}/items/weapon/point_blank.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_close_range_proc",
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_clip_size_2": {
       "id": "upgrade_clip_size_2",
@@ -20375,7 +20823,14 @@
       },
       "upgrades": [],
       "tooltip": [],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_clip_size_3": {
       "id": "upgrade_clip_size_3",
@@ -20608,7 +21063,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_toxic_bullets": {
       "id": "upgrade_toxic_bullets",
@@ -20954,7 +21416,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/toxic_bullets.psd"
+      "shopIcon": "file://{images}/items/weapon/toxic_bullets.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_base_buildup",
+          "modifier_intrinsic_base",
+          "modifier_item_bleeding_bullets_active",
+          "modifier_item_bleeding_bullets_damageovertime"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_attack_speed_2": {
       "id": "upgrade_attack_speed_2",
@@ -21187,7 +21659,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_drum_magazine": {
       "id": "upgrade_drum_magazine",
@@ -21425,7 +21904,14 @@
       },
       "upgrades": [],
       "tooltip": [],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_ricochet": {
       "id": "upgrade_ricochet",
@@ -21718,7 +22204,16 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/ricochet.psd"
+      "shopIcon": "file://{images}/items/weapon/ricochet.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_ricochet_proc"
+        ],
+        "states": [
+          "RICOCHET_ACTIVE"
+        ],
+        "purges": false
+      }
     },
     "upgrade_apex_combat": {
       "id": "upgrade_apex_combat",
@@ -22027,7 +22522,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/brawl/apex_combat.psd"
+      "shopIcon": "file://{images}/items/brawl/apex_combat.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_apex_combat_proc",
+          "modifier_crit_shot"
+        ],
+        "states": [
+          "RICOCHET_ACTIVE"
+        ],
+        "purges": false
+      }
     },
     "upgrade_health": {
       "id": "upgrade_health",
@@ -22267,7 +22772,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/extra_health.psd"
+      "shopIcon": "file://{images}/items/vitality/extra_health.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_health_2": {
       "id": "upgrade_health_2",
@@ -22500,7 +23012,14 @@
           ]
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_toughness_3": {
       "id": "upgrade_toughness_3",
@@ -22747,7 +23266,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_bullet_armor": {
       "id": "upgrade_bullet_armor",
@@ -22980,7 +23506,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/bullet_resilience.psd"
+      "shopIcon": "file://{images}/items/vitality/bullet_resilience.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_tech_armor": {
       "id": "upgrade_tech_armor",
@@ -23213,7 +23746,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/spirit_resilience.psd"
+      "shopIcon": "file://{images}/items/vitality/spirit_resilience.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_health_regen_1": {
       "id": "upgrade_health_regen_1",
@@ -23446,7 +23986,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_vampire": {
       "id": "upgrade_vampire",
@@ -23724,7 +24271,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/bullet_lifesteal.psd"
+      "shopIcon": "file://{images}/items/vitality/bullet_lifesteal.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_double_jump": {
       "id": "upgrade_double_jump",
@@ -24242,7 +24796,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_item_healing_pulse_tracker"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_debuff_reducer": {
       "id": "upgrade_debuff_reducer",
@@ -24502,7 +25063,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/debuff_reducer.psd"
+      "shopIcon": "file://{images}/items/vitality/debuff_reducer.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_reduce_debuff_duration": {
       "id": "upgrade_reduce_debuff_duration",
@@ -24805,7 +25373,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/debuff_remover.psd"
+      "shopIcon": "file://{images}/items/vitality/debuff_remover.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": true
+      }
     },
     "upgrade_high_impact_armor": {
       "id": "upgrade_high_impact_armor",
@@ -25251,7 +25827,14 @@
       },
       "upgrades": [],
       "tooltip": [],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_slow_immunity"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_weapon_power_and_health_drain": {
       "id": "upgrade_weapon_power_and_health_drain",
@@ -25508,7 +26091,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_item_weapon_power_for_health"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_active_bullet_shield": {
       "id": "upgrade_active_bullet_shield",
@@ -25795,7 +26385,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_tech_purge": {
       "id": "upgrade_tech_purge",
@@ -26082,7 +26679,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/spirit_resilience.psd"
+      "shopIcon": "file://{images}/items/vitality/spirit_resilience.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base",
+          "modifier_spirit_resilience"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_improved_bullet_armor": {
       "id": "upgrade_improved_bullet_armor",
@@ -26369,7 +26974,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/bullet_resilience.psd"
+      "shopIcon": "file://{images}/items/vitality/bullet_resilience.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_bullet_resilience",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_metal_skin": {
       "id": "upgrade_metal_skin",
@@ -26655,7 +27268,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/metal_skin.psd"
+      "shopIcon": "file://{images}/items/vitality/metal_skin.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_metal_skin",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_healing_booster": {
       "id": "upgrade_healing_booster",
@@ -26950,7 +27571,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/healing_booster.psd"
+      "shopIcon": "file://{images}/items/vitality/healing_booster.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_chonky": {
       "id": "upgrade_chonky",
@@ -27262,7 +27890,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/fortitude.psd"
+      "shopIcon": "file://{images}/items/vitality/fortitude.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_apex_watcher",
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_damage_recycler": {
       "id": "upgrade_damage_recycler",
@@ -27576,7 +28212,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/leech.psd"
+      "shopIcon": "file://{images}/items/vitality/leech.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_bullet_damage_reduction_aura": {
       "id": "upgrade_bullet_damage_reduction_aura",
@@ -27825,7 +28468,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_base_aura"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_sprint_booster": {
       "id": "upgrade_sprint_booster",
@@ -28084,7 +28735,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/sprint_boots.psd"
+      "shopIcon": "file://{images}/items/vitality/sprint_boots.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_trophy_collector": {
       "id": "upgrade_trophy_collector",
@@ -28461,7 +29119,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/trophy_collector.psd"
+      "shopIcon": "file://{images}/items/vitality/trophy_collector.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base",
+          "modifier_trophy_collector"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_cardio_calibrator": {
       "id": "upgrade_cardio_calibrator",
@@ -28744,7 +29410,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/enduring_speed.psd"
+      "shopIcon": "file://{images}/items/vitality/enduring_speed.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_superior_stamina": {
       "id": "upgrade_superior_stamina",
@@ -29027,7 +29700,16 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/stamina_mastery.psd"
+      "shopIcon": "file://{images}/items/vitality/stamina_mastery.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [
+          "ADDITIONAL_AIR_MOVES"
+        ],
+        "purges": false
+      }
     },
     "upgrade_aerial_supremacy": {
       "id": "upgrade_aerial_supremacy",
@@ -29310,7 +29992,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/brawl/aerial_mastery.psd"
+      "shopIcon": "file://{images}/items/brawl/aerial_mastery.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [
+          "UNLIMITED_AIR_DASHES",
+          "UNLIMITED_AIR_JUMPS"
+        ],
+        "purges": false
+      }
     },
     "upgrade_rapid_rounds": {
       "id": "upgrade_rapid_rounds",
@@ -29550,7 +30242,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/rapid_rounds.psd"
+      "shopIcon": "file://{images}/items/weapon/rapid_rounds.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_improved_stamina": {
       "id": "upgrade_improved_stamina",
@@ -29809,7 +30508,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/extra_stamina.psd"
+      "shopIcon": "file://{images}/items/vitality/extra_stamina.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_bullet_armor_reduction_aura": {
       "id": "upgrade_bullet_armor_reduction_aura",
@@ -30135,7 +30841,16 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/hunters_aura.psd"
+      "shopIcon": "file://{images}/items/weapon/hunters_aura.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base_aura",
+          "modifier_hunter_aura_target",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_camouflage": {
       "id": "upgrade_camouflage",
@@ -30677,7 +31392,14 @@
       },
       "upgrades": [],
       "tooltip": [],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_grit": {
       "id": "upgrade_grit",
@@ -30962,7 +31684,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/grit.psd"
+      "shopIcon": "file://{images}/items/vitality/grit.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_weapon_shielding": {
       "id": "upgrade_weapon_shielding",
@@ -31296,7 +32025,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/weapon_shielding.psd"
+      "shopIcon": "file://{images}/items/vitality/weapon_shielding.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_spirit_bubble": {
       "id": "upgrade_spirit_bubble",
@@ -31630,7 +32366,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/spirit_shielding.psd"
+      "shopIcon": "file://{images}/items/vitality/spirit_shielding.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_regenerating_bullet_shield": {
       "id": "upgrade_regenerating_bullet_shield",
@@ -31938,7 +32681,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/battle_vest.psd"
+      "shopIcon": "file://{images}/items/vitality/battle_vest.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_magic_shield": {
       "id": "upgrade_magic_shield",
@@ -32234,7 +32984,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/enchanters_emblem.psd"
+      "shopIcon": "file://{images}/items/vitality/enchanters_emblem.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_magic_shield_spirit_buff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_improved_spirit": {
       "id": "upgrade_improved_spirit",
@@ -32462,7 +33219,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/extra_spirit.psd"
+      "shopIcon": "file://{images}/items/spirit/extra_spirit.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_mystic_regeneration": {
       "id": "upgrade_mystic_regeneration",
@@ -32747,7 +33511,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/mystic_regen.psd"
+      "shopIcon": "file://{images}/items/spirit/mystic_regen.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_soaring_spirit": {
       "id": "upgrade_soaring_spirit",
@@ -33020,7 +33791,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/improved_spirit.psd"
+      "shopIcon": "file://{images}/items/spirit/improved_spirit.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_tech_overflow": {
       "id": "upgrade_tech_overflow",
@@ -33407,7 +34185,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/spiritual_overflow.psd"
+      "shopIcon": "file://{images}/items/weapon/spiritual_overflow.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_base_buildup",
+          "modifier_intrinsic_base",
+          "modifier_tech_overflow_proc_watcher"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_return_fire": {
       "id": "upgrade_return_fire",
@@ -33696,7 +34484,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/return_fire.psd"
+      "shopIcon": "file://{images}/items/vitality/return_fire.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_armor_return_fire",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_tech_range": {
       "id": "upgrade_tech_range",
@@ -33979,7 +34775,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/greater_expansion.psd"
+      "shopIcon": "file://{images}/items/spirit/greater_expansion.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_magic_reach": {
       "id": "upgrade_magic_reach",
@@ -34236,7 +35039,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/mystic_reach.psd"
+      "shopIcon": "file://{images}/items/spirit/mystic_reach.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_extra_charge": {
       "id": "upgrade_extra_charge",
@@ -34495,7 +35305,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/extra_charge.psd"
+      "shopIcon": "file://{images}/items/spirit/extra_charge.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_health_stealing_magic": {
       "id": "upgrade_health_stealing_magic",
@@ -34777,7 +35594,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/spirit_lifesteal.psd"
+      "shopIcon": "file://{images}/items/vitality/spirit_lifesteal.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_disarm": {
       "id": "upgrade_disarm",
@@ -35060,7 +35884,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_active_disarm_spirit_steal",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_bullet_resist_shredder": {
       "id": "upgrade_bullet_resist_shredder",
@@ -35341,7 +36173,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/bullet_resist_shredder.psd"
+      "shopIcon": "file://{images}/items/spirit/bullet_resist_shredder.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_bullet_armor_shredder_proc"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_mystic_reverb": {
       "id": "upgrade_mystic_reverb",
@@ -35692,7 +36532,16 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/mystic_reverb.psd"
+      "shopIcon": "file://{images}/items/spirit/mystic_reverb.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_mystic_reverb_explosion",
+          "modifier_mystic_reverb_proc",
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_magic_burst": {
       "id": "upgrade_magic_burst",
@@ -35966,7 +36815,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/mystic_burst.psd"
+      "shopIcon": "file://{images}/items/spirit/mystic_burst.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_ui_ability_hud_notification",
+          "modifier_tech_burst_proc"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_magic_shock": {
       "id": "upgrade_magic_shock",
@@ -36295,7 +37152,18 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/tankbuster.psd"
+      "shopIcon": "file://{images}/items/spirit/tankbuster.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_ui_ability_hud_notification",
+          "modifier_magicshock_proc_immune_watcher",
+          "modifier_tech_burst_proc"
+        ],
+        "states": [
+          "IS_MAGIC_SHOCK_IMMUNE"
+        ],
+        "purges": false
+      }
     },
     "upgrade_arcane_medallion": {
       "id": "upgrade_arcane_medallion",
@@ -36526,7 +37394,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_arcane_medallion",
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_magic_vulnerability": {
       "id": "upgrade_magic_vulnerability",
@@ -36789,7 +37665,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/mystic_vulnerability.psd"
+      "shopIcon": "file://{images}/items/spirit/mystic_vulnerability.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_apply_debuff_proc",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_healbane": {
       "id": "upgrade_healbane",
@@ -37077,7 +37961,16 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/healbane.psd"
+      "shopIcon": "file://{images}/items/vitality/healbane.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_apply_debuff_proc",
+          "modifier_healbane_debuff",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_magic_slow": {
       "id": "upgrade_magic_slow",
@@ -37374,7 +38267,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/mystic_slow.psd"
+      "shopIcon": "file://{images}/items/spirit/mystic_slow.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_apply_debuff_proc",
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_escalating_exposure": {
       "id": "upgrade_escalating_exposure",
@@ -37691,7 +38592,16 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/escalating_exposure.psd"
+      "shopIcon": "file://{images}/items/spirit/escalating_exposure.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_apply_debuff_proc",
+          "modifier_escalating_exposure",
+          "modifier_escalating_exposure_proc_watcher"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_rapid_recharge": {
       "id": "upgrade_rapid_recharge",
@@ -37988,7 +38898,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/rapid_recharge.psd"
+      "shopIcon": "file://{images}/items/spirit/rapid_recharge.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_omnicharge_pendant": {
       "id": "upgrade_omnicharge_pendant",
@@ -38311,7 +39228,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/brawl/omnicharge_pendant.psd"
+      "shopIcon": "file://{images}/items/brawl/omnicharge_pendant.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_magic_tempo": {
       "id": "upgrade_magic_tempo",
@@ -38551,7 +39475,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/improved_cooldown.psd"
+      "shopIcon": "file://{images}/items/spirit/improved_cooldown.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_cooldown_reduction": {
       "id": "upgrade_cooldown_reduction",
@@ -38817,7 +39748,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/superior_cooldown.psd"
+      "shopIcon": "file://{images}/items/spirit/superior_cooldown.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_transcendent_cooldown": {
       "id": "upgrade_transcendent_cooldown",
@@ -39101,7 +40039,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/transcendent_cooldown.psd"
+      "shopIcon": "file://{images}/items/spirit/transcendent_cooldown.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_timeless_emblem": {
       "id": "upgrade_timeless_emblem",
@@ -39414,7 +40359,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/brawl/timeless_emblem.psd"
+      "shopIcon": "file://{images}/items/brawl/timeless_emblem.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_shadow_step": {
       "id": "upgrade_shadow_step",
@@ -39699,7 +40651,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/brawl/shadow_step.psd"
+      "shopIcon": "file://{images}/items/brawl/shadow_step.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_duration_extender": {
       "id": "upgrade_duration_extender",
@@ -39935,7 +40894,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_slowing_tech": {
       "id": "upgrade_slowing_tech",
@@ -40183,7 +41149,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_slow_base",
+          "modifier_slowing_tech_proc"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_containment": {
       "id": "upgrade_containment",
@@ -40464,7 +41438,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/slowing_hex.psd"
+      "shopIcon": "file://{images}/items/spirit/slowing_hex.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base",
+          "modifier_slow_base"
+        ],
+        "states": [
+          "SILENCE_MOVEMENT_ABILITES"
+        ],
+        "purges": false
+      }
     },
     "upgrade_spirit_sap": {
       "id": "upgrade_spirit_sap",
@@ -40748,7 +41732,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/spirit_sap.psd"
+      "shopIcon": "file://{images}/items/spirit/spirit_sap.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_focus_lens": {
       "id": "upgrade_focus_lens",
@@ -41074,7 +42065,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/focus_lens.psd"
+      "shopIcon": "file://{images}/items/spirit/focus_lens.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_silenced",
+          "modifier_focus_lens_damage",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_withering_whip": {
       "id": "upgrade_withering_whip",
@@ -41373,7 +42374,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/rusted_barrel.psd"
+      "shopIcon": "file://{images}/items/spirit/rusted_barrel.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_greater_withering_whip": {
       "id": "upgrade_greater_withering_whip",
@@ -41658,7 +42667,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/disarming_hex.psd"
+      "shopIcon": "file://{images}/items/spirit/disarming_hex.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_intrinsic_base"
+        ],
+        "states": [
+          "DISARMED"
+        ],
+        "purges": false
+      }
     },
     "upgrade_rescue_beam": {
       "id": "upgrade_rescue_beam",
@@ -42001,7 +43020,16 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/rescue_beam.psd"
+      "shopIcon": "file://{images}/items/vitality/rescue_beam.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_rescue_beam",
+          "modifier_intrinsic_base",
+          "modifier_succor_move"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_personal_rejuvenator": {
       "id": "upgrade_personal_rejuvenator",
@@ -42511,7 +43539,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_long_range_slowing_tech": {
       "id": "upgrade_long_range_slowing_tech",
@@ -42794,7 +43829,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_long_range_slowing_tech_proc",
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_full_spectrum": {
       "id": "upgrade_full_spectrum",
@@ -43090,7 +44133,16 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_full_spectrum",
+          "modifier_full_spectrum_damage",
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_tech_cleave": {
       "id": "upgrade_tech_cleave",
@@ -43357,7 +44409,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_tech_cleave",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_bonus_ability_charge_3": {
       "id": "upgrade_bonus_ability_charge_3",
@@ -43590,7 +44650,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_charge_mastery": {
       "id": "upgrade_charge_mastery",
@@ -43866,7 +44933,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_rupture": {
       "id": "upgrade_rupture",
@@ -44193,7 +45267,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/decay.psd"
+      "shopIcon": "file://{images}/items/spirit/decay.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base",
+          "modifier_vitality_suppressor_debuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_discord": {
       "id": "upgrade_discord",
@@ -44541,7 +45623,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/scourge.psd"
+      "shopIcon": "file://{images}/items/spirit/scourge.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_discord_aura",
+          "modifier_discord_enemy",
+          "modifier_discord_friendly",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_aoe_tech_shield": {
       "id": "upgrade_aoe_tech_shield",
@@ -44781,7 +45873,14 @@
       },
       "upgrades": [],
       "tooltip": [],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_target_stun": {
       "id": "upgrade_target_stun",
@@ -45132,7 +46231,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/knockdown.psd"
+      "shopIcon": "file://{images}/items/spirit/knockdown.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_delayed_stun",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_phantom_strike": {
       "id": "upgrade_phantom_strike",
@@ -45441,7 +46548,18 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/phantom_strike.psd"
+      "shopIcon": "file://{images}/items/vitality/phantom_strike.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_pulldown_to_ground",
+          "modifier_intrinsic_base",
+          "modifier_slow_base"
+        ],
+        "states": [
+          "DISARMED"
+        ],
+        "purges": false
+      }
     },
     "upgrade_warp_stone": {
       "id": "upgrade_warp_stone",
@@ -45705,7 +46823,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/warp_stone.psd"
+      "shopIcon": "file://{images}/items/vitality/warp_stone.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_warp_stone_caster"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_aoe_root": {
       "id": "upgrade_aoe_root",
@@ -46067,7 +47193,18 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/vortex_web.psd"
+      "shopIcon": "file://{images}/items/spirit/vortex_web.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_containment_victim",
+          "modifier_intrinsic_base",
+          "modifier_slow_base"
+        ],
+        "states": [
+          "SILENCE_MOVEMENT_ABILITES"
+        ],
+        "purges": false
+      }
     },
     "upgrade_ability_refresher": {
       "id": "upgrade_ability_refresher",
@@ -46317,7 +47454,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/refresher.psd"
+      "shopIcon": "file://{images}/items/spirit/refresher.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_ability_power_shard": {
       "id": "upgrade_ability_power_shard",
@@ -46635,7 +47779,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/echo_shard.psd"
+      "shopIcon": "file://{images}/items/spirit/echo_shard.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_tech_damage_pulse": {
       "id": "upgrade_tech_damage_pulse",
@@ -46935,7 +48086,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/torment_pulse.psd"
+      "shopIcon": "file://{images}/items/spirit/torment_pulse.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_cheat_death": {
       "id": "upgrade_cheat_death",
@@ -47279,7 +48437,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/cheat_death.psd"
+      "shopIcon": "file://{images}/items/vitality/cheat_death.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_cheat_death_immunity",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_reload_speed": {
       "id": "upgrade_reload_speed",
@@ -47504,7 +48670,14 @@
       },
       "upgrades": [],
       "tooltip": [],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_cloaking_device": {
       "id": "upgrade_cloaking_device",
@@ -47811,7 +48984,15 @@
       },
       "upgrades": [],
       "tooltip": [],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_passive_cloak",
+          "modifier_invis"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_cloaking_device_active": {
       "id": "upgrade_cloaking_device_active",
@@ -48241,7 +49422,16 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/shadow_weave.psd"
+      "shopIcon": "file://{images}/items/weapon/shadow_weave.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_cloaking_device_active_ambush",
+          "modifier_intrinsic_base",
+          "modifier_invis"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_fire_rate_aura": {
       "id": "upgrade_fire_rate_aura",
@@ -48503,7 +49693,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base_aura",
+          "modifier_fire_rate_aura_target"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_weapon_overdrive_clip": {
       "id": "upgrade_weapon_overdrive_clip",
@@ -48777,7 +49975,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_upgrade_overdrive_clip",
+          "modifier_upgrade_overdrive_clip_reload"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_rocket_boots": {
       "id": "upgrade_rocket_boots",
@@ -49060,7 +50266,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_intrinsic_base"
+        ],
+        "states": [
+          "ABILITY_MOVEMENT"
+        ],
+        "purges": false
+      }
     },
     "upgrade_rocket_booster": {
       "id": "upgrade_rocket_booster",
@@ -49544,7 +50760,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/majestic_leap.psd"
+      "shopIcon": "file://{images}/items/vitality/majestic_leap.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_slow_base"
+        ],
+        "states": [
+          "ABILITY_MOVEMENT"
+        ],
+        "purges": false
+      }
     },
     "upgrade_aerial_assault": {
       "id": "upgrade_aerial_assault",
@@ -49890,7 +51116,19 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_aerial_assault",
+          "modifier_aerial_assault_watcher",
+          "modifier_base",
+          "modifier_intrinsic_base"
+        ],
+        "states": [
+          "INFINITE_CLIP"
+        ],
+        "purges": false
+      }
     },
     "upgrade_health_nova": {
       "id": "upgrade_health_nova",
@@ -50238,7 +51476,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/healing_nova.psd"
+      "shopIcon": "file://{images}/items/vitality/healing_nova.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_health_nova",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_restorative_locket": {
       "id": "upgrade_restorative_locket",
@@ -50568,7 +51814,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/restorative_locket.psd"
+      "shopIcon": "file://{images}/items/vitality/restorative_locket.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_health_stimpak": {
       "id": "upgrade_health_stimpak",
@@ -50845,7 +52098,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/healing_rite.psd"
+      "shopIcon": "file://{images}/items/vitality/healing_rite.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base",
+          "modifier_stimpak_regen"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_shrink_ray": {
       "id": "upgrade_shrink_ray",
@@ -51154,7 +52415,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/brawl/shrink_ray.psd"
+      "shopIcon": "file://{images}/items/brawl/shrink_ray.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base",
+          "modifier_shrink_ray"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_infuser": {
       "id": "upgrade_infuser",
@@ -51496,7 +52765,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/infuser.psd"
+      "shopIcon": "file://{images}/items/vitality/infuser.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_infuser",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_guardian_ward": {
       "id": "upgrade_guardian_ward",
@@ -51844,7 +53121,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/guardian_ward.psd"
+      "shopIcon": "file://{images}/items/vitality/guardian_ward.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_guardian_ward",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_divine_barrier": {
       "id": "upgrade_divine_barrier",
@@ -52183,7 +53468,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/divine_barrier.psd"
+      "shopIcon": "file://{images}/items/vitality/divine_barrier.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_divine_barrier",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": true
+      }
     },
     "upgrade_aoe_smoke_bomb": {
       "id": "upgrade_aoe_smoke_bomb",
@@ -52519,7 +53812,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_invis",
+          "modifier_item_smokebomb_precast"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_thermal_detonator": {
       "id": "upgrade_thermal_detonator",
@@ -52902,7 +54203,16 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/alchemical_fire.psd"
+      "shopIcon": "file://{images}/items/weapon/alchemical_fire.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_thermal_detonator_debuff",
+          "modifier_citadel_thermal_detonator_thinker",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_blood_tribute": {
       "id": "upgrade_blood_tribute",
@@ -53275,7 +54585,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/blood_tribute.psd"
+      "shopIcon": "file://{images}/items/weapon/blood_tribute.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_blood_tribute",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_fleetfoot_boots": {
       "id": "upgrade_fleetfoot_boots",
@@ -53615,7 +54933,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/fleetfoot.psd"
+      "shopIcon": "file://{images}/items/weapon/fleetfoot.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_kinetic_sash": {
       "id": "upgrade_kinetic_sash",
@@ -53915,7 +55241,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/kinetic_dash.psd"
+      "shopIcon": "file://{images}/items/weapon/kinetic_dash.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_kinetic_sash",
+          "modifier_kinetic_sash_triggered"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_arcane_surge": {
       "id": "upgrade_arcane_surge",
@@ -54259,7 +55593,16 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/arcane_surge.psd"
+      "shopIcon": "file://{images}/items/spirit/arcane_surge.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_arcane_surge",
+          "modifier_arcane_surge_ability_watcher",
+          "modifier_kinetic_sash_triggered"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_weapon_eater": {
       "id": "upgrade_weapon_eater",
@@ -54536,7 +55879,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_weapon_instant_reload": {
       "id": "upgrade_weapon_instant_reload",
@@ -54761,7 +56111,14 @@
       },
       "upgrades": [],
       "tooltip": [],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_unstoppable": {
       "id": "upgrade_unstoppable",
@@ -55036,7 +56393,20 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/unstoppable.psd"
+      "shopIcon": "file://{images}/items/vitality/unstoppable.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_unstoppable"
+        ],
+        "states": [
+          "KNOCKDOWN_IMMUNE",
+          "SLOW_IMMUNE",
+          "STATUS_IMMUNE",
+          "UNSTOPPABLE"
+        ],
+        "purges": false
+      }
     },
     "upgrade_colossus": {
       "id": "upgrade_colossus",
@@ -55436,7 +56806,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/colossus.psd"
+      "shopIcon": "file://{images}/items/vitality/colossus.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_base_aura",
+          "modifier_colossus_active",
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_cold_front": {
       "id": "upgrade_cold_front",
@@ -55791,7 +57171,16 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/cold_front.psd"
+      "shopIcon": "file://{images}/items/spirit/cold_front.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_item_cold_front_aoe",
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_arctic_blast": {
       "id": "upgrade_arctic_blast",
@@ -56198,7 +57587,19 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/arctic_blast.psd"
+      "shopIcon": "file://{images}/items/spirit/arctic_blast.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_arctic_blast_freeze",
+          "modifier_base",
+          "modifier_item_arctic_blast_aoe",
+          "modifier_slow_base"
+        ],
+        "states": [
+          "STAMINA_REGEN_PAUSED"
+        ],
+        "purges": false
+      }
     },
     "upgrade_aoe_silence": {
       "id": "upgrade_aoe_silence",
@@ -56517,7 +57918,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_silenced",
+          "modifier_intrinsic_base",
+          "modifier_item_aoe_silence_aura",
+          "modifier_item_aoe_silence_target"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_self_bubble": {
       "id": "upgrade_self_bubble",
@@ -56853,7 +58264,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/ethereal_shift.psd"
+      "shopIcon": "file://{images}/items/spirit/ethereal_shift.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_bubble"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_stasis_bomb": {
       "id": "upgrade_stasis_bomb",
@@ -57279,7 +58698,19 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_base_buildup",
+          "modifier_citadel_bubble",
+          "modifier_citadel_silence_proc_watcher",
+          "modifier_citadel_silenced",
+          "modifier_stasis_bomb_aura"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_quarantine": {
       "id": "upgrade_quarantine",
@@ -57500,7 +58931,20 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_quarantine",
+          "modifier_citadel_silenced"
+        ],
+        "states": [
+          "DISARMED",
+          "INVULNERABLE",
+          "MELEE_DISABLED",
+          "SILENCED"
+        ],
+        "purges": false
+      }
     },
     "upgrade_glitch": {
       "id": "upgrade_glitch",
@@ -57769,7 +59213,20 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/curse.psd"
+      "shopIcon": "file://{images}/items/spirit/curse.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_glitch_debuff"
+        ],
+        "states": [
+          "DISARMED",
+          "GLITCHED",
+          "MUTED",
+          "SILENCED"
+        ],
+        "purges": false
+      }
     },
     "upgrade_imbued_ability": {
       "id": "upgrade_imbued_ability",
@@ -58068,7 +59525,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_slow_base",
+          "modifier_slowing_tech_proc"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_arcane_extension": {
       "id": "upgrade_arcane_extension",
@@ -58308,7 +59773,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/duration_extender.psd"
+      "shopIcon": "file://{images}/items/spirit/duration_extender.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_imbued_duration_extender": {
       "id": "upgrade_imbued_duration_extender",
@@ -58574,7 +60046,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/superior_duration.psd"
+      "shopIcon": "file://{images}/items/spirit/superior_duration.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_glass_cannon": {
       "id": "upgrade_glass_cannon",
@@ -58931,7 +60410,16 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/glass_cannon.psd"
+      "shopIcon": "file://{images}/items/weapon/glass_cannon.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_ui_ability_hud_notification",
+          "modifier_glass_cannon_kill_bonus",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_fury_trance": {
       "id": "upgrade_fury_trance",
@@ -59274,7 +60762,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/fury_trance.psd"
+      "shopIcon": "file://{images}/items/vitality/fury_trance.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_silenced",
+          "modifier_fury_trance",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_surging_power": {
       "id": "upgrade_surging_power",
@@ -59629,7 +61127,18 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/vampiric_burst.psd"
+      "shopIcon": "file://{images}/items/vitality/vampiric_burst.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_intrinsic_base",
+          "modifier_surging_power"
+        ],
+        "states": [
+          "VAMPIRE"
+        ],
+        "purges": false
+      }
     },
     "upgrade_mod_disruptor": {
       "id": "upgrade_mod_disruptor",
@@ -59945,7 +61454,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_mod_disruptor"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_frenzy": {
       "id": "upgrade_frenzy",
@@ -60266,7 +61782,16 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_frenzy_aura",
+          "modifier_frenzy_move_speed"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_burst_fire_actuator": {
       "id": "upgrade_burst_fire_actuator",
@@ -60603,7 +62128,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_burst_fire_actuator"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_boxing_glove": {
       "id": "upgrade_boxing_glove",
@@ -60963,7 +62495,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/lifestrike.psd"
+      "shopIcon": "file://{images}/items/vitality/lifestrike.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_boxing_glove",
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_acolytes_glove": {
       "id": "upgrade_acolytes_glove",
@@ -61235,7 +62775,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/spirit_strike.psd"
+      "shopIcon": "file://{images}/items/spirit/spirit_strike.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_acolytes_glove",
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_spirit_snatch": {
       "id": "upgrade_spirit_snatch",
@@ -61592,7 +63140,16 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/spirit_snatch.psd"
+      "shopIcon": "file://{images}/items/spirit/spirit_snatch.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_spirit_snatch",
+          "modifier_upgrade_spirit_snatch_buff",
+          "modifier_upgrade_spirit_snatch_debuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_melee_charge": {
       "id": "upgrade_melee_charge",
@@ -61888,7 +63445,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/melee_charge.psd"
+      "shopIcon": "file://{images}/items/weapon/melee_charge.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_melee_charge"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_crushing_fists": {
       "id": "upgrade_crushing_fists",
@@ -62296,7 +63861,18 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/crushing_fists.psd"
+      "shopIcon": "file://{images}/items/weapon/crushing_fists.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_ui_ability_hud_notification",
+          "modifier_crushing_fists_debuff",
+          "modifier_crushing_fists_watcher",
+          "modifier_melee_charge"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_charmed_wraps": {
       "id": "upgrade_charmed_wraps",
@@ -62540,7 +64116,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_charmed_wraps"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_belt_fed_magazine": {
       "id": "upgrade_belt_fed_magazine",
@@ -62833,7 +64416,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_belt_fed_magazine"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_diviners_kevlar": {
       "id": "upgrade_diviners_kevlar",
@@ -63136,7 +64726,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/diviners_kevlar.psd"
+      "shopIcon": "file://{images}/items/vitality/diviners_kevlar.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_diviners_kevlar_buff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_resonant_healing": {
       "id": "upgrade_resonant_healing",
@@ -63468,7 +65066,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/radiant_regeneration.psd"
+      "shopIcon": "file://{images}/items/spirit/radiant_regeneration.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_boundless_spirit": {
       "id": "upgrade_boundless_spirit",
@@ -63753,7 +65358,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/boundless_spirit.psd"
+      "shopIcon": "file://{images}/items/spirit/boundless_spirit.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_burst_fire": {
       "id": "upgrade_burst_fire",
@@ -64057,7 +65669,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/burst_fire.psd"
+      "shopIcon": "file://{images}/items/weapon/burst_fire.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_resilience": {
       "id": "upgrade_resilience",
@@ -64310,7 +65930,14 @@
           ]
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_endurance": {
       "id": "upgrade_endurance",
@@ -64565,7 +66192,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/extra_regen.psd"
+      "shopIcon": "file://{images}/items/vitality/extra_regen.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_magic_clarity": {
       "id": "upgrade_magic_clarity",
@@ -64844,7 +66478,16 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_magic_clarity_buff",
+          "modifier_magic_clarity_watcher"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_magic_storm": {
       "id": "upgrade_magic_storm",
@@ -65160,7 +66803,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/surge_of_power.psd"
+      "shopIcon": "file://{images}/items/spirit/surge_of_power.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_magic_storm_watcher",
+          "modifier_upgrade_magic_storm"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_suppressor": {
       "id": "upgrade_suppressor",
@@ -65427,7 +67078,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/suppressor.psd"
+      "shopIcon": "file://{images}/items/spirit/suppressor.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_apply_debuff_proc",
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_quick_silver": {
       "id": "upgrade_quick_silver",
@@ -65730,7 +67389,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/quicksilver_reload.psd"
+      "shopIcon": "file://{images}/items/spirit/quicksilver_reload.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_quick_silver_buff",
+          "modifier_quick_silver_watcher"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_ethereal_bullets": {
       "id": "upgrade_ethereal_bullets",
@@ -66080,7 +67747,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/mercurial_magnum.psd"
+      "shopIcon": "file://{images}/items/spirit/mercurial_magnum.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_ethereal_bullets_buff",
+          "modifier_ethereal_bullets_bullet_buff",
+          "modifier_ethereal_bullets_watcher",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_arcane_eater": {
       "id": "upgrade_arcane_eater",
@@ -66391,7 +68068,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_arcane_eater_debuff",
+          "modifier_arcane_eater_proc",
+          "modifier_arcane_eater_watcher",
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_predator_precision": {
       "id": "upgrade_predator_precision",
@@ -66653,7 +68340,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_predator_precision"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_intensifying_clip": {
       "id": "upgrade_intensifying_clip",
@@ -66939,7 +68633,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/intensifying_magazine.psd"
+      "shopIcon": "file://{images}/items/weapon/intensifying_magazine.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intensifying_clip",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_reinforcing_casings": {
       "id": "upgrade_reinforcing_casings",
@@ -67270,7 +68972,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/escalating_resilience.psd"
+      "shopIcon": "file://{images}/items/weapon/escalating_resilience.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_reinforcing_casings"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_blitz_bullets": {
       "id": "upgrade_blitz_bullets",
@@ -67532,7 +69242,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/swift_striker.psd"
+      "shopIcon": "file://{images}/items/weapon/swift_striker.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_veil_walker": {
       "id": "upgrade_veil_walker",
@@ -67990,7 +69707,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/veil_walker.psd"
+      "shopIcon": "file://{images}/items/vitality/veil_walker.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_invis",
+          "modifier_veil_walker_movespeed",
+          "modifier_veil_walker_watcher"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_vex_barrier": {
       "id": "upgrade_vex_barrier",
@@ -68261,7 +69988,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/reactive_barrier.psd"
+      "shopIcon": "file://{images}/items/vitality/reactive_barrier.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_auto_cleanse": {
       "id": "upgrade_auto_cleanse",
@@ -68581,7 +70316,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/indomitable.psd"
+      "shopIcon": "file://{images}/items/vitality/indomitable.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": true
+      }
     },
     "upgrade_medic_bullets": {
       "id": "upgrade_medic_bullets",
@@ -68895,7 +70638,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/restorative_shot.psd"
+      "shopIcon": "file://{images}/items/weapon/restorative_shot.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_medic_bullets"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_titan_round": {
       "id": "upgrade_titan_round",
@@ -69156,7 +70907,14 @@
           ]
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/titanic_magazine.psd"
+      "shopIcon": "file://{images}/items/weapon/titanic_magazine.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_split_shot": {
       "id": "upgrade_split_shot",
@@ -69499,7 +71257,16 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/split_shot.psd"
+      "shopIcon": "file://{images}/items/weapon/split_shot.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_intrinsic_base",
+          "modifier_splitshot_weapon_damage"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_active_reload": {
       "id": "upgrade_active_reload",
@@ -69800,7 +71567,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/active_reload.psd"
+      "shopIcon": "file://{images}/items/weapon/active_reload.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_intrinsic_base"
+        ],
+        "states": [
+          "ALLOW_RELOAD_WHEN_FULL"
+        ],
+        "purges": false
+      }
     },
     "upgrade_magic_carpet": {
       "id": "upgrade_magic_carpet",
@@ -70144,7 +71921,21 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/magic_carpet.psd"
+      "shopIcon": "file://{images}/items/spirit/magic_carpet.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_hero_gravity",
+          "modifier_intrinsic_base",
+          "modifier_magiccarpet_summon"
+        ],
+        "states": [
+          "FORCE_ANIM_DUCK",
+          "FORCE_ANIM_KEEP_STILL",
+          "SLOW_IMMUNE"
+        ],
+        "purges": false
+      }
     },
     "upgrade_spellshield": {
       "id": "upgrade_spellshield",
@@ -70408,7 +72199,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_spellshield_buff"
+        ],
+        "states": [
+          "HAS_SPELLSHIELD"
+        ],
+        "purges": false
+      }
     },
     "upgrade_superacolytes_glove": {
       "id": "upgrade_superacolytes_glove",
@@ -70693,7 +72494,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base",
+          "modifier_superacolytes_glove"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_magic_missile": {
       "id": "upgrade_magic_missile",
@@ -71021,7 +72830,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_heal_on_level": {
       "id": "upgrade_heal_on_level",
@@ -71288,7 +73104,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_spirit_burn": {
       "id": "upgrade_spirit_burn",
@@ -71740,7 +73563,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/spirit_burn.psd"
+      "shopIcon": "file://{images}/items/spirit/spirit_burn.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_spirit_burn_dot",
+          "modifier_spirit_burn_enemy_tracker",
+          "modifier_spirit_burn_proc_watcher"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_ultimate_burst": {
       "id": "upgrade_ultimate_burst",
@@ -72110,7 +73943,20 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/lightning_scroll.psd"
+      "shopIcon": "file://{images}/items/spirit/lightning_scroll.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_apply_debuff_proc",
+          "modifier_base",
+          "modifier_citadel_knockdown",
+          "modifier_intrinsic_base",
+          "modifier_slow_base",
+          "modifier_ultimate_burst_delayed_effect",
+          "modifier_ultimate_burst_proc"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_corpse_explosion": {
       "id": "upgrade_corpse_explosion",
@@ -72438,7 +74284,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_corpse_explosion_thinker"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_absorbing_armor": {
       "id": "upgrade_absorbing_armor",
@@ -72732,7 +74586,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/witchmail.psd"
+      "shopIcon": "file://{images}/items/vitality/witchmail.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_absorbing_armor"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_healbuff": {
       "id": "upgrade_healbuff",
@@ -73110,7 +74971,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/healing_tempo.psd"
+      "shopIcon": "file://{images}/items/vitality/healing_tempo.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_healbuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_infinitemagazine": {
       "id": "upgrade_infinitemagazine",
@@ -73390,7 +75259,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_infinite_magazine_active"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_glass_cannon2": {
       "id": "upgrade_glass_cannon2",
@@ -73723,7 +75600,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": null
+      "shopIcon": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_aprounds": {
       "id": "upgrade_aprounds",
@@ -74004,7 +75888,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/armor_piercing_rounds.psd"
+      "shopIcon": "file://{images}/items/weapon/armor_piercing_rounds.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_aprounds"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_infinite_rounds": {
       "id": "upgrade_infinite_rounds",
@@ -74288,7 +76179,16 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/brawl/infinite_rounds.psd"
+      "shopIcon": "file://{images}/items/brawl/infinite_rounds.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_aprounds"
+        ],
+        "states": [
+          "INFINITE_CLIP"
+        ],
+        "purges": false
+      }
     },
     "upgrade_deflecting_armor": {
       "id": "upgrade_deflecting_armor",
@@ -74573,7 +76473,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/plated_armor.psd"
+      "shopIcon": "file://{images}/items/vitality/plated_armor.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_deflectingarmor",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_spellbreaker": {
       "id": "upgrade_spellbreaker",
@@ -74884,7 +76792,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/spellbreaker.psd"
+      "shopIcon": "file://{images}/items/vitality/spellbreaker.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_spellbreaker"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_juggernaut": {
       "id": "upgrade_juggernaut",
@@ -75221,7 +77136,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/vitality/juggernaut.psd"
+      "shopIcon": "file://{images}/items/vitality/juggernaut.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_apply_modifier_on_damage_taken",
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_enchanted_holsters": {
       "id": "upgrade_enchanted_holsters",
@@ -75530,7 +77453,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/spell_slinger.psd"
+      "shopIcon": "file://{images}/items/weapon/spell_slinger.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_enchanted_holsters_buff",
+          "modifier_enchanted_holsters_watcher"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_weapon_backstabber": {
       "id": "upgrade_weapon_backstabber",
@@ -75903,7 +77834,20 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/backstabber.psd"
+      "shopIcon": "file://{images}/items/weapon/backstabber.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_backstabber_debuff",
+          "modifier_backstabber_watcher",
+          "modifier_base",
+          "modifier_citadel_ui_ability_hud_notification"
+        ],
+        "states": [
+          "FOOTSTEP_SOUNDS_QUIETED",
+          "GLOW_THROUGH_WALLS_TO_ENEMY"
+        ],
+        "purges": false
+      }
     },
     "upgrade_express_shot": {
       "id": "upgrade_express_shot",
@@ -76239,7 +78183,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/express_shot.psd"
+      "shopIcon": "file://{images}/items/weapon/express_shot.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_ui_ability_hud_notification",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_icarus_wings": {
       "id": "upgrade_icarus_wings",
@@ -76557,7 +78509,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/brawl/icarus_wings.psd"
+      "shopIcon": "file://{images}/items/brawl/icarus_wings.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_icarus_wings"
+        ],
+        "states": [
+          "UNLIMITED_AIR_DASHES",
+          "UNLIMITED_AIR_JUMPS"
+        ],
+        "purges": false
+      }
     },
     "upgrade_mystical_piano": {
       "id": "upgrade_mystical_piano",
@@ -76863,7 +78825,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/brawl/mystical_piano.psd"
+      "shopIcon": "file://{images}/items/brawl/mystical_piano.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_dazed",
+          "modifier_citadel_knockdown",
+          "modifier_mystical_piano_aura"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_nullification_aura": {
       "id": "upgrade_nullification_aura",
@@ -77212,7 +79184,19 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/brawl/nullification_aura.psd"
+      "shopIcon": "file://{images}/items/brawl/nullification_aura.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_intrinsic_base",
+          "modifier_item_nullification_aura_aoe"
+        ],
+        "states": [
+          "DASH_DISABLED_DEBUFF",
+          "HEALING_DISABLED"
+        ],
+        "purges": false
+      }
     },
     "upgrade_celestial_guidance": {
       "id": "upgrade_celestial_guidance",
@@ -77529,7 +79513,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/brawl/celestial_guidance.psd"
+      "shopIcon": "file://{images}/items/brawl/celestial_guidance.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": true
+      }
     },
     "upgrade_eternal_gift": {
       "id": "upgrade_eternal_gift",
@@ -77784,7 +79775,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/brawl/eternal_gift.psd"
+      "shopIcon": "file://{images}/items/brawl/eternal_gift.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_eternal_gift"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_patrons_blessing": {
       "id": "upgrade_patrons_blessing",
@@ -78156,7 +80154,18 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/brawl/patrons_blessing.psd"
+      "shopIcon": "file://{images}/items/brawl/patrons_blessing.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_ui_ability_hud_notification",
+          "modifier_patrons_blessing_aura",
+          "modifier_patrons_blessing_enemy_tracker",
+          "modifier_patrons_blessing_proc_watcher",
+          "modifier_patrons_blessing_target"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_eldritch_shot": {
       "id": "upgrade_eldritch_shot",
@@ -78552,7 +80561,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/brawl/eldritch_shot.psd"
+      "shopIcon": "file://{images}/items/brawl/eldritch_shot.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_eldritch_shot"
+        ],
+        "states": [
+          "SLOWED"
+        ],
+        "purges": false
+      }
     },
     "upgrade_cloak_of_opportunity": {
       "id": "upgrade_cloak_of_opportunity",
@@ -78846,7 +80865,21 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/brawl/cloak_of_opportunity.psd"
+      "shopIcon": "file://{images}/items/brawl/cloak_of_opportunity.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_cloak_of_opportunity_watcher",
+          "modifier_unstoppable"
+        ],
+        "states": [
+          "KNOCKDOWN_IMMUNE",
+          "SLOW_IMMUNE",
+          "STATUS_IMMUNE",
+          "UNSTOPPABLE"
+        ],
+        "purges": false
+      }
     },
     "upgrade_runed_gauntlets": {
       "id": "upgrade_runed_gauntlets",
@@ -79159,7 +81192,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/brawl/runed_gauntlets.psd"
+      "shopIcon": "file://{images}/items/brawl/runed_gauntlets.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_runed_gauntlets"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_electric_slippers": {
       "id": "upgrade_electric_slippers",
@@ -79516,7 +81556,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/brawl/electric_slippers.psd"
+      "shopIcon": "file://{images}/items/brawl/electric_slippers.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_electric_slippers"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_prism_blast": {
       "id": "upgrade_prism_blast",
@@ -79840,7 +81887,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/brawl/prism_blast.psd"
+      "shopIcon": "file://{images}/items/brawl/prism_blast.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_bubble"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_unstable_concoction": {
       "id": "upgrade_unstable_concoction",
@@ -80170,7 +82225,21 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/brawl/unstable_concoction.psd"
+      "shopIcon": "file://{images}/items/brawl/unstable_concoction.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_unstable_concoction",
+          "modifier_unstoppable"
+        ],
+        "states": [
+          "KNOCKDOWN_IMMUNE",
+          "SLOW_IMMUNE",
+          "STATUS_IMMUNE",
+          "UNSTOPPABLE"
+        ],
+        "purges": false
+      }
     },
     "upgrade_shivas_bracelet": {
       "id": "upgrade_shivas_bracelet",
@@ -80466,7 +82535,17 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/brawl/frostbite.psd"
+      "shopIcon": "file://{images}/items/brawl/frostbite.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_shivas_bracelet_watcher"
+        ],
+        "states": [
+          "IMMOBILIZED"
+        ],
+        "purges": false
+      }
     },
     "upgrade_shadow_strike": {
       "id": "upgrade_shadow_strike",
@@ -80897,7 +82976,18 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/brawl/shadow_strike.psd"
+      "shopIcon": "file://{images}/items/brawl/shadow_strike.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_intrinsic_base",
+          "modifier_shadow_strike_debuff",
+          "modifier_shadow_strike_invis",
+          "modifier_shadow_strike_watcher"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_bulletshredimbue": {
       "id": "upgrade_bulletshredimbue",
@@ -81198,7 +83288,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/alchemical_seal.psd"
+      "shopIcon": "file://{images}/items/weapon/alchemical_seal.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_bulletshredimbue_proc"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_rechargingbullets": {
       "id": "upgrade_rechargingbullets",
@@ -81492,7 +83590,15 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/weapon/recharging_rounds.psd"
+      "shopIcon": "file://{images}/items/weapon/recharging_rounds.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_ui_ability_hud_notification"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "upgrade_goose_egg": {
       "id": "upgrade_goose_egg",
@@ -81830,7 +83936,14 @@
           "elevatedProperties": []
         }
       ],
-      "shopIcon": "file://{images}/items/spirit/goose_egg.psd"
+      "shopIcon": "file://{images}/items/spirit/goose_egg.psd",
+      "modifiers": {
+        "classes": [
+          "modifier_gooseegg_passivegold"
+        ],
+        "states": [],
+        "purges": false
+      }
     }
   }
 }

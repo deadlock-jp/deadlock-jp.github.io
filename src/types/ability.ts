@@ -1,6 +1,7 @@
 /** abilities.json のスキーマ定義(アイテム以外のスキル・武器) */
 
 import type { AbilityProperty, PropertyUpgrade, TooltipSection } from "./property.ts";
+import type { ModifierRefs } from "../parsers/modifiers.ts";
 
 /** abilities.vdata 上のキー文字列が実ID */
 export type AbilityId = string;
@@ -94,6 +95,8 @@ export interface Ability {
    * 近接攻撃ができなくなる秒数(noMeleeTime)と、反撃しなくなる秒数(calmTime)
    */
   parryBoss?: { noMeleeTime: number; calmTime: number };
+  /** 効果(状態異常・バフ)の判定材料。src/parsers/modifiers.ts。無ければ項目ごと無い */
+  modifiers?: ModifierRefs;
 }
 
 export interface AbilitiesFile {

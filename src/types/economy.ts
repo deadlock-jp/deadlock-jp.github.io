@@ -108,4 +108,6 @@ export interface EconomyFile {
   /** 2026-09-26 に抽出を追加。それより前に生成したスナップショットには無い */
   breakableGold?: BreakableGold;
   powerupSpawn?: PowerupSpawn;
+  /** 2026-10-01 に抽出を追加。ヒーリングスナック1つの回復量(最大HPに対する %) */
+  healingSnack?: { maxHealthPercent: number | null };
 }

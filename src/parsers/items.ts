@@ -2,6 +2,7 @@
 
 import type { Kv3Object } from "./kv3.ts";
 import { readVdata, resolveEntry, num, tierNumber, stripEnumPrefix } from "./vdata.ts";
+import { withModifierRefs } from "./modifiers.ts";
 import {
   arr,
   str,
@@ -84,6 +85,8 @@ export function parseItems(
       upgrades: parseUpgrades(e["m_vecAbilityUpgrades"]),
       tooltip: parseTooltip(e["m_vecTooltipSectionInfo"]),
       shopIcon,
+      // 効果(状態異常・バフ)の判定材料。無ければ項目ごと付けない(src/parsers/modifiers.ts)
+      ...withModifierRefs(e),
     };
   }
 

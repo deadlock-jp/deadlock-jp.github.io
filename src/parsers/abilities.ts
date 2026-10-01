@@ -2,6 +2,7 @@
 
 import type { Kv3Object, Kv3Value } from "./kv3.ts";
 import { readVdata, resolveEntry, stripEnumPrefix, num } from "./vdata.ts";
+import { withModifierRefs } from "./modifiers.ts";
 import {
   obj,
   str,
@@ -131,6 +132,8 @@ export function parseAbilities(abilitiesPath: string, upstreamCommit: string): A
         kind === "Weapon" ? parseWeapon(e["m_WeaponInfo"] ?? obj(e["m_mapWeaponInfos"])["primary"]) : null,
       image: str(e["m_strAbilityImage"]),
       alternateFormAbilities: parseAlternateFormAbilities(e),
+      // 効果(状態異常・バフ)の判定材料。無ければ項目ごと付けない(src/parsers/modifiers.ts)
+      ...withModifierRefs(e),
       // パリィ(citadel_ability_melee_parry)だけが持つ、ガーディアン等のボスをパリィしたときの効果。
       // 他のアビリティには付けない(全アビリティに null が並ぶと差分が騒がしくなる)
       ...(e["m_flBossVictimNoMeleeTime"] !== undefined

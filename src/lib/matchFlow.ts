@@ -131,6 +131,8 @@ export interface MatchFlow {
   tickGoldStartSeconds: number | null;
   rift: { initial: number; interval: number; rewardBase: number } | null;
   urnOrbs: number | null;
+  /** ヒーリングスナック1つの回復量(最大HPに対する %)。economy.json の healingSnack */
+  healingSnackPct: number | null;
   /** カムバック(劣勢側への補正)のうち convar で分かるもの */
   comeback: { redirectPct: number | null; tickStartSeconds: number | null; lowestPct: number | null; secondLowestPct: number | null };
   /** 地下トンネル(地下に潜れるヒーローだけが入れる)の箱。map.json が無い版は null */
@@ -241,6 +243,7 @@ export function matchFlow(): MatchFlow {
       ? { initial: riftInitial, interval: riftInterval, rewardBase: riftBase }
       : null,
     urnOrbs: cv("citadel_idol_orbs_to_spawn"),
+    healingSnackPct: economy.healingSnack?.maxHealthPercent ?? null,
     comeback: {
       redirectPct: (() => { const v = cv("citadel_comeback_redirect_fraction"); return v === null ? null : round(v * 100); })(),
       tickStartSeconds: cv("citadel_tick_gold_start_time"),

@@ -36,6 +36,8 @@ interface Props {
   twitterCard?: "summary" | "summary_large_image";
   /** 検索避け。運用用の非公開ページ(SNSカード生成など)で使う */
   noindex?: boolean;
+  /** そのページ固有の構造化データ(用語集の DefinedTermSet など)。サイト共通のものの後ろに足す */
+  extraJsonLd?: Record<string, unknown>[];
 }
 const {
   title,
@@ -48,6 +50,7 @@ const {
   ogImageHeight,
   twitterCard = "summary_large_image",
   noindex = false,
+  extraJsonLd = [],
 } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const { L, currentLang, langPath, splitLangPath, LANG_META, alternatesFor, isIndexed, isLocalizedPath, isJaOnlyFrom, BUILT_LANGS } =
@@ -158,6 +161,7 @@ if (crumbs.length > 1) {
     })),
   });
 }
+jsonLd.push(...extraJsonLd);
 ---
 
 <!doctype html>

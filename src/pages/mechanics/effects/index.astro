@@ -1,0 +1,173 @@
+---
+/**
+ * 状態異常・効果の一覧(全言語)。効果の定義と判定は src/lib/effects.ts で、ここに手書きの一覧は無い。
+ * パッチでスキル・アイテムのデータが変われば自動で追従する。
+ * 各効果に id(= src/lib/effects.ts の id)を付けているので、用語集やヒーロー一覧から直接リンクできる。
+ * 攻略情報のサブメニューは日本語版だけ(ほかの攻略ページは日本語のみのため)。
+ */
+import Base from "../../../layouts/Base.astro";
+import MechanicsNav from "../../../components/MechanicsNav.astro";
+import HeroPortrait from "../../../components/HeroPortrait.astro";
+import ItemIcon from "../../../components/ItemIcon.astro";
+import { t } from "../../../lib/data.ts";
+import { EFFECT_CATEGORIES, effectIndex, effectName } from "../../../lib/effects.ts";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const { L, langPath, currentLang } = Astro.locals.i18n;
+const E = L().effects;
+const isJa = currentLang() === "ja";
+const index = effectIndex();
+const byId = new Map(index.map((e) => [e.def.id, e]));
+const groups = EFFECT_CATEGORIES.map((cat) => ({ cat, entries: index.filter((e) => e.def.category === cat) }));
+const desc = E.desc as Record<string, string>;
+---
+
+<Base
+  title={E.title}
+  description={E.description}
+  breadcrumbs={isJa
+    ? [
+        { name: "攻略情報", path: `${base}/mechanics/` },
+        { name: E.h1, path: `${base}/mechanics/effects/` },
+      ]
+    : [{ name: E.h1, path: `${base}${langPath("/mechanics/effects/")}` }]}
+>
+  {isJa && <MechanicsNav />}
+  <h1>{E.h1}</h1>
+  <p class="lead">{E.lead}</p>
+
+  <nav class="toc panel" aria-label={E.toc}>
+    {groups.map((g) => (
+      <div class="tocgroup">
+        <a class="tochead" href={`#cat-${g.cat}`}>{E.categories[g.cat]}</a>
+        <ul>
+          {g.entries.map((e) => (
+            <li><a href={`#${e.def.id}`}>{effectName(e.def)}</a></li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </nav>
+
+  {groups.map((g) => (
+    <section class="cat" id={`cat-${g.cat}`}>
+      <h2>{E.categories[g.cat]}</h2>
+      {g.entries.map((e) => (
+        <article class="eff panel" id={e.def.id}>
+          <header class="effhead">
+            <h3>{effectName(e.def)}</h3>
+            <span class="effcount">{E.count(e.abilities.length, e.items.length)}</span>
+          </header>
+          <p class="effdesc">{desc[e.def.id]}</p>
+
+          <div class="cols">
+            <div class="col">
+              <h4>{E.skills}</h4>
+              {e.abilities.length === 0 ? (
+                <p class="none">{E.none}</p>
+              ) : (
+                <ul class="rows">
+                  {e.abilities.map((r) => (
+                    <li>
+                      <a href={`${base}${langPath(`/abilities/${r.abilityKey}/`)}`}>
+                        <HeroPortrait name={t(r.hero.nameToken, r.hero.key)} image={r.hero.images.iconSmall} size={22} />
+                        <span class="who">{t(r.hero.nameToken, r.hero.key)}</span>
+                        <span class="what">{t(r.abilityKey, r.abilityKey)}</span>
+                      </a>
+                      {r.via === "upgrade" && <span class="ap">{E.viaUpgrade}</span>}
+                      {r.values.length > 0 && <span class="vals">{r.values.join(" / ")}</span>}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <div class="col">
+              <h4>{E.items}</h4>
+              {e.items.length === 0 ? (
+                <p class="none">{E.none}</p>
+              ) : (
+                <ul class="rows">
+                  {e.items.map((r) => (
+                    <li>
+                      <a href={`${base}${langPath(`/items/${r.item.id}/`)}`}>
+                        <ItemIcon
+                          name={t(r.item.nameToken, r.item.id)}
+                          slotType={r.item.slotType}
+                          tier={r.item.tier}
+                          shopIcon={r.item.shopIcon}
+                          activation={r.item.activation}
+                          isImbue={r.item.isImbue}
+                          size={22}
+                        />
+                        <span class="what">{t(r.item.nameToken, r.item.id)}</span>
+                      </a>
+                      {r.values.length > 0 && <span class="vals">{r.values.join(" / ")}</span>}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+
+          {(e.def.counters ?? []).length > 0 && (
+            <div class="counters">
+              <span class="clabel">{E.counters}</span>
+              {(e.def.counters ?? []).map((id) => {
+                const c = byId.get(id);
+                return c ? (
+                  <a class="chip" href={`#${id}`}>
+                    {effectName(c.def)}<small>{E.counterCount(c.abilities.length, c.items.length)}</small>
+                  </a>
+                ) : null;
+              })}
+            </div>
+          )}
+
+          {e.abilities.length > 0 && (
+            <a class="herolink" href={`${base}${langPath("/heroes/")}?effect=${e.def.id}`}>{E.heroLink} →</a>
+          )}
+        </article>
+      ))}
+    </section>
+  ))}
+
+  <p class="method">{E.method}</p>
+
+  <style>
+    .lead { color: var(--c-text-muted); font-size: 14px; line-height: 1.8; max-width: 70ch; }
+    .toc { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: var(--sp-3) var(--sp-4); margin: var(--sp-4) 0 var(--sp-5); }
+    .tochead { display: block; font-size: 12.5px; font-weight: 700; color: var(--c-text-strong); margin-bottom: 4px; }
+    .tocgroup ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 10px; }
+    .tocgroup li a { font-size: 13px; }
+
+    .cat { margin-top: var(--sp-5); }
+    .cat > h2 { scroll-margin-top: 72px; }
+    .eff { margin-top: var(--sp-3); scroll-margin-top: 72px; }
+    .eff:target { border-color: var(--c-accent); }
+    .effhead { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px var(--sp-3); }
+    .effhead h3 { margin: 0; font-size: 17px; color: var(--c-text-strong); }
+    .effcount { font-size: 12px; color: var(--c-text-muted); font-family: var(--font-mono); }
+    .effdesc { margin: var(--sp-2) 0 var(--sp-3); font-size: 13.5px; line-height: 1.8; }
+
+    .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: var(--sp-3) var(--sp-5); }
+    .col h4 { margin: 0 0 6px; font-size: 12px; letter-spacing: 0.06em; color: var(--c-text-muted); }
+    .none { margin: 0; font-size: 12.5px; color: var(--c-text-faint); }
+    .rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 3px; }
+    .rows li { display: flex; align-items: center; flex-wrap: wrap; gap: 2px 8px; font-size: 13px; }
+    .rows a { display: inline-flex; align-items: center; gap: 6px; min-width: 0; color: var(--c-text); }
+    .rows a:hover { color: var(--c-accent); text-decoration: none; }
+    .who { color: var(--c-text-muted); font-size: 12px; }
+    .what { color: var(--c-text-strong); }
+    .rows a:hover .what { color: var(--c-accent); }
+    .ap { font-size: 10.5px; padding: 0 5px; border: 1px dashed var(--c-border-strong); border-radius: 3px; color: var(--c-text-muted); }
+    .vals { font-size: 11.5px; font-family: var(--font-mono); color: var(--c-text-muted); }
+
+    .counters { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: var(--sp-3); padding-top: var(--sp-2); border-top: 1px solid var(--c-border); }
+    .clabel { font-size: 12px; font-weight: 700; color: var(--c-text-muted); margin-right: 4px; }
+    .chip { font-size: 12.5px; padding: 3px 10px; border: 1px solid var(--c-border); border-radius: 999px; background: var(--c-surface-2); color: var(--c-text); }
+    .chip small { color: var(--c-text-faint); margin-left: 2px; }
+    .chip:hover { border-color: var(--c-accent-dim); color: var(--c-accent); text-decoration: none; }
+    .herolink { display: inline-block; margin-top: var(--sp-3); font-size: 13px; }
+    .method { margin-top: var(--sp-5); font-size: 12px; color: var(--c-text-faint); line-height: 1.8; max-width: 80ch; }
+  </style>
+</Base>

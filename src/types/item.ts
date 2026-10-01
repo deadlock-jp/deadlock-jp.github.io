@@ -1,6 +1,7 @@
 /** items.json のスキーマ定義 */
 
 import type { ItemSlotType } from "./hero.ts";
+import type { ModifierRefs } from "../parsers/modifiers.ts";
 import type { AbilityProperty, PropertyUpgrade, TooltipSection } from "./property.ts";
 
 /**
@@ -52,6 +53,8 @@ export interface Item {
   upgrades: PropertyUpgrade[][];
   tooltip: TooltipSection[];
   shopIcon: string | null;
+  /** 効果(状態異常・バフ)の判定材料。src/parsers/modifiers.ts。無ければ項目ごと無い */
+  modifiers?: ModifierRefs;
 }
 
 export interface ItemsFile {

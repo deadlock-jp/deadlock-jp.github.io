@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "upstreamCommit": "6726",
-  "generatedAt": "2026-10-01T00:44:00.224Z",
+  "generatedAt": "2026-10-01T07:22:47.795Z",
   "abilities": {
     "ability_golden_idol": {
       "id": "ability_golden_idol",
@@ -450,7 +450,23 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/wraith_lift.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_holding_golden_idol",
+          "modifier_idol_return_timer",
+          "modifier_intrinsic_base"
+        ],
+        "states": [
+          "HOLDING_IDOL",
+          "MODIFIER_ATTRIBUTE_CANNOT_BE_PURGED",
+          "PARRY_DISABLED",
+          "RETURNING_IDOL",
+          "TELEPORTER_DISABLED",
+          "ZIPLINE_DISABLED"
+        ],
+        "purges": false
+      }
     },
     "citadel_ability_zip_line": {
       "id": "citadel_ability_zip_line",
@@ -890,7 +906,20 @@
       "tooltip": [],
       "weapon": null,
       "image": null,
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_diminishing_slow",
+          "modifier_zipline_knockdown_immune",
+          "modifier_zipline_speed"
+        ],
+        "states": [
+          "ZIPLINE_INTRO",
+          "ZIPLINE_LOCKED"
+        ],
+        "purges": false
+      }
     },
     "citadel_ability_zipline_boost": {
       "id": "citadel_ability_zipline_boost",
@@ -1097,7 +1126,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/upgrades/mods_utility/zipline_mastery.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_zipline_boost"
+        ],
+        "states": [
+          "USING_ZIPLINE_BOOST"
+        ],
+        "purges": false
+      }
     },
     "citadel_ability_mantle": {
       "id": "citadel_ability_mantle",
@@ -1304,7 +1342,14 @@
       "tooltip": [],
       "weapon": null,
       "image": null,
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_ramp_slow"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_climb_rope": {
       "id": "citadel_ability_climb_rope",
@@ -1511,7 +1556,15 @@
       "tooltip": [],
       "weapon": null,
       "image": null,
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_climb_rope_slow",
+          "modifier_ramp_slow"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_jump": {
       "id": "citadel_ability_jump",
@@ -1807,7 +1860,14 @@
       "tooltip": [],
       "weapon": null,
       "image": null,
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_sprint": {
       "id": "citadel_ability_sprint",
@@ -2233,7 +2293,14 @@
       "tooltip": [],
       "weapon": null,
       "image": null,
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_stamina_regen_jump_reduction"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_slide": {
       "id": "citadel_ability_slide",
@@ -2452,7 +2519,14 @@
       "tooltip": [],
       "weapon": null,
       "image": null,
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_slide_debuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_melee_parry": {
       "id": "citadel_ability_melee_parry",
@@ -2696,6 +2770,18 @@
       "weapon": null,
       "image": null,
       "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_parried_stun",
+          "modifier_citadel_parry"
+        ],
+        "states": [
+          "AI_FORCE_CALM",
+          "MELEE_DISABLED"
+        ],
+        "purges": false
+      },
       "parryBoss": {
         "noMeleeTime": 7,
         "calmTime": 2.25
@@ -7488,7 +7574,14 @@
         "bulletLifetime": 2
       },
       "image": "file://{images}/hud/abilities/weapon_damage.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_thumper_bullet_watcher"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_melee_butcher": {
       "id": "ability_melee_butcher",
@@ -9544,7 +9637,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/rutger/rutger_rocket_launcher.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "rutger_force_field": {
       "id": "rutger_force_field",
@@ -9900,7 +10000,21 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/rutger/rutger_force_field.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_rutger_force_field_aura",
+          "modifier_rutger_force_field_push_out",
+          "modifier_slow_base"
+        ],
+        "states": [
+          "AIR_DUCKING_FORCED",
+          "COMMAND_RESTRICTED",
+          "SILENCED"
+        ],
+        "purges": false
+      }
     },
     "rutger_cheat_death": {
       "id": "rutger_cheat_death",
@@ -10167,7 +10281,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/rutger/rutger_cheat_death.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_rutger_cheat_death_activated"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "rutger_pulse": {
       "id": "rutger_pulse",
@@ -10502,7 +10623,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/rutger/rutger_pulse.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_rutger_pulse_aura",
+          "modifier_rutger_pulse_target"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_kali_spinning_blade": {
       "id": "citadel_ability_kali_spinning_blade",
@@ -10914,7 +11043,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/kali/kali_oscilloblade.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_kali_dust_storm": {
       "id": "ability_kali_dust_storm",
@@ -11351,7 +11487,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/kali/kali_whirling_blade.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_dust_storm_aura",
+          "modifier_citadel_dust_storm_aura_apply",
+          "modifier_citadel_dust_storm_thrown"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_kali_disruptive_charge": {
       "id": "citadel_ability_kali_disruptive_charge",
@@ -11647,7 +11793,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/kali/kali_speed_burst.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_disruptive_charge"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_kali_trappers_bolo": {
       "id": "ability_kali_trappers_bolo",
@@ -12048,7 +12201,19 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/bebop/bebop_sticky_bomb.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_bolo",
+          "modifier_citadel_bolo_leech",
+          "modifier_citadel_root"
+        ],
+        "states": [
+          "GLOW_THROUGH_WALLS_TO_PROVIDER",
+          "GLOW_TO_PROVIDER"
+        ],
+        "purges": false
+      }
     },
     "gunslinger_rapid_fire": {
       "id": "gunslinger_rapid_fire",
@@ -12351,7 +12516,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/sumo/sumo_stomp.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_rapid_fire"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "gunslinger_rocket_launcher": {
       "id": "gunslinger_rocket_launcher",
@@ -13175,7 +13347,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/sumo/sumo_stomp.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_sleep_bomb_asleep",
+          "modifier_sleep_bomb_aura"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "yakuza_kobun": {
       "id": "yakuza_kobun",
@@ -13485,7 +13665,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/theboss/the_boss_hired_muscle.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_hero_clone"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "yakuza_shakedown_target": {
       "id": "yakuza_shakedown_target",
@@ -13817,7 +14004,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/theboss/the_boss_shakedown.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_shakedown_pulse"
+        ],
+        "states": [
+          "IMMOBILIZED"
+        ],
+        "purges": false
+      }
     },
     "yakuza_shakedown": {
       "id": "yakuza_shakedown",
@@ -14378,7 +14575,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/theboss/the_boss_setting_sun.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_setting_sun_thinker"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "yakuza_gang_activity": {
       "id": "yakuza_gang_activity",
@@ -14585,7 +14789,14 @@
       "tooltip": [],
       "weapon": null,
       "image": null,
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_gang_activity_swap_abilities"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "yakuza_gang_activity_cancel": {
       "id": "yakuza_gang_activity_cancel",
@@ -15218,7 +15429,14 @@
       "tooltip": [],
       "weapon": null,
       "image": null,
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "yakuza_fealty": {
       "id": "yakuza_fealty",
@@ -15449,7 +15667,16 @@
       "tooltip": [],
       "weapon": null,
       "image": null,
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_fealty_target"
+        ],
+        "states": [
+          "IMMOBILIZED"
+        ],
+        "purges": false
+      }
     },
     "yakuza_protection_racket": {
       "id": "yakuza_protection_racket",
@@ -16475,7 +16702,18 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/thumper/thumper_ability_2.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_thumper_ability_2",
+          "modifier_thumper_ability_2_aura"
+        ],
+        "states": [
+          "GLOW_THROUGH_WALLS_TO_ENEMY",
+          "SLOWED"
+        ],
+        "purges": false
+      }
     },
     "thumper_ability_3": {
       "id": "thumper_ability_3",
@@ -16742,7 +16980,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/thumper/thumper_ability_3.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_thumper_drone"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "thumper_ability_4": {
       "id": "thumper_ability_4",
@@ -17076,7 +17321,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/thumper/thumper_ability_4.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_thumper_enemy_pulled",
+          "modifier_thumper_pull_aoe"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_weapon_base_defense_turret": {
       "id": "citadel_weapon_base_defense_turret",
@@ -19643,7 +19896,20 @@
       "tooltip": [],
       "weapon": null,
       "image": null,
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_diminishing_slow",
+          "modifier_zipline_knockdown_immune",
+          "modifier_zipline_speed"
+        ],
+        "states": [
+          "ZIPLINE_INTRO",
+          "ZIPLINE_LOCKED"
+        ],
+        "purges": false
+      }
     },
     "citadel_ability_tier2boss_rocket_barrage": {
       "id": "citadel_ability_tier2boss_rocket_barrage",
@@ -20054,7 +20320,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/engineer_rockets.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_tier2boss_rocket_damage_aura",
+          "modifier_tier2boss_rocket_damage_aura_debuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_tier2boss_laser_beam": {
       "id": "citadel_ability_tier2boss_laser_beam",
@@ -20345,7 +20619,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/engineer_rockets.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_tier2boss_electric_beam",
+          "modifier_tier2boss_laser_charge"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_tier2boss_stomp": {
       "id": "citadel_ability_tier2boss_stomp",
@@ -20843,7 +21125,18 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/sumo/sumo_stomp.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_disarmed",
+          "modifier_citadel_silenced",
+          "modifier_slow_base",
+          "modifier_t2boss_aoe_wave_target",
+          "modifier_t2boss_wave_aura"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_tier3boss_laser_beam": {
       "id": "citadel_ability_tier3boss_laser_beam",
@@ -21098,7 +21391,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/engineer_rockets.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_tier3boss_electric_beam",
+          "modifier_tier3boss_laser_aura",
+          "modifier_tier3boss_laser_debuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_tier3boss_aoe_wave": {
       "id": "citadel_ability_tier3boss_aoe_wave",
@@ -21401,7 +21703,22 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/sumo/sumo_stomp.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_glitch_debuff",
+          "modifier_t3boss_aoe_wave_target",
+          "modifier_t3boss_wave_aura",
+          "modifier_t3boss_wave_beam_preview"
+        ],
+        "states": [
+          "DISARMED",
+          "GLITCHED",
+          "MUTED",
+          "SILENCED"
+        ],
+        "purges": false
+      }
     },
     "citadel_ability_tier3boss_drop_bombs": {
       "id": "citadel_ability_tier3boss_drop_bombs",
@@ -21632,7 +21949,19 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/spectre/blood_bomb.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_glitch_debuff"
+        ],
+        "states": [
+          "DISARMED",
+          "GLITCHED",
+          "MUTED",
+          "SILENCED"
+        ],
+        "purges": false
+      }
     },
     "citadel_ability_tier3boss_rocket_barrage": {
       "id": "citadel_ability_tier3boss_rocket_barrage",
@@ -22031,7 +22360,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/engineer_rockets.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_tier2boss_rocket_damage_aura",
+          "modifier_tier2boss_rocket_damage_aura_debuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "vanguard_aoe_buff": {
       "id": "vanguard_aoe_buff",
@@ -22339,7 +22676,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/npcs/vanguard_aoe_buff.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_health_nova"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_npc_shield": {
       "id": "ability_npc_shield",
@@ -23535,7 +23880,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/astro/holliday_powder_keg.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base_dot"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_bounce_pad": {
       "id": "ability_bounce_pad",
@@ -23977,7 +24329,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/astro/holliday_bounce_pad.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_bounce_pad_ally",
+          "modifier_citadel_bounce_pad_stomp"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_gravity_lasso": {
       "id": "ability_gravity_lasso",
@@ -24412,7 +24773,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/astro/holliday_spirit_lasso.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_gravity_lasso_enemy",
+          "modifier_citadel_gravity_lasso_self"
+        ],
+        "states": [
+          "ABILITY_MOVEMENT_DEBUFF"
+        ],
+        "purges": false
+      }
     },
     "ability_crackshot": {
       "id": "ability_crackshot",
@@ -24778,7 +25149,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/astro/holliday_crackshot.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_diminishing_slow"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_weapon_bull_set": {
       "id": "citadel_weapon_bull_set",
@@ -25703,7 +26082,27 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/bull_charge.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_bull_charging",
+          "modifier_drag",
+          "modifier_slow_base"
+        ],
+        "states": [
+          "ABILITY_MOVEMENT",
+          "ABILITY_MOVEMENT_DEBUFF",
+          "DUCKING_DISABLED",
+          "FORCE_CAN_PARRY",
+          "MANTLE_DISABLED",
+          "MELEE_DISABLED",
+          "MOVEMENT_ABILITY_ACTIVATION_RESTRICTED",
+          "MOVEMENT_INPUT_DISABLED",
+          "SLIDING_DISABLED"
+        ],
+        "purges": false
+      }
     },
     "citadel_ability_passive_beefy": {
       "id": "citadel_ability_passive_beefy",
@@ -26043,7 +26442,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/bull_beef.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_infernal_resilience_melee",
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_bull_leap": {
       "id": "citadel_ability_bull_leap",
@@ -26411,7 +26818,24 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/bull_jump.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_bull_leap_boosting",
+          "modifier_citadel_bull_leap_boosting_crash",
+          "modifier_citadel_bull_leap_landing_bonuses",
+          "modifier_drag",
+          "modifier_unstoppable"
+        ],
+        "states": [
+          "KNOCKDOWN_IMMUNE",
+          "SLOW_IMMUNE",
+          "STATUS_IMMUNE",
+          "UNSTOPPABLE"
+        ],
+        "purges": false
+      }
     },
     "citadel_ability_bull_heal": {
       "id": "citadel_ability_bull_heal",
@@ -26725,7 +27149,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/bull_drain.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_bull_heal_aura",
+          "modifier_bull_heal_target"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_weapon_bebop_set": {
       "id": "citadel_weapon_bebop_set",
@@ -27748,7 +28180,19 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/bebop/bebop_uppercut.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_uppercutted",
+          "modifier_uppercut_buff",
+          "modifier_uppercut_clipsize"
+        ],
+        "states": [
+          "NO_WINDUP"
+        ],
+        "purges": false
+      }
     },
     "citadel_ability_sticky_bomb": {
       "id": "citadel_ability_sticky_bomb",
@@ -28221,7 +28665,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/bebop/bebop_sticky_bomb.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_sticky_bomb_attached",
+          "modifier_citadel_sticky_bomb_on_ground"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_bebop_laser_beam": {
       "id": "citadel_ability_bebop_laser_beam",
@@ -28680,7 +29133,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/bebop/bebop_hyper_beam.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_hook": {
       "id": "citadel_ability_hook",
@@ -29052,7 +29512,26 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/bebop/bebop_hook.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_bebop_hook_bullet_amp",
+          "modifier_citadel_hookself",
+          "modifier_citadel_hooktarget",
+          "modifier_intrinsic_base",
+          "modifier_slow_base"
+        ],
+        "states": [
+          "AIR_JUMPS_DISABLED",
+          "CASTING_HOOK",
+          "DASH_DISABLED",
+          "MOVEMENT_ABILITY_ACTIVATION_RESTRICTED",
+          "MOVEMENT_INPUT_DISABLED",
+          "SILENCE_MOVEMENT_ABILITES",
+          "SLOWED"
+        ],
+        "purges": false
+      }
     },
     "ability_bebop_stickybomb2": {
       "id": "ability_bebop_stickybomb2",
@@ -29463,7 +29942,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/bebop/bebop_sticky_bomb.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_slow_base",
+          "modifier_warden_crowd_control_debuff"
+        ],
+        "states": [
+          "SLOWED"
+        ],
+        "purges": false
+      }
     },
     "citadel_weapon_bomber_set": {
       "id": "citadel_weapon_bomber_set",
@@ -30246,7 +30735,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/bebop/bebop_sticky_bomb.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_charged_bomb"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_charged_bomb_throw": {
       "id": "ability_charged_bomb_throw",
@@ -31418,7 +31914,14 @@
         "bulletLifetime": 2
       },
       "image": "file://{images}/hud/abilities/weapon_damage.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_cadence_gun_spikes"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_melee_cadence": {
       "id": "citadel_ability_melee_cadence",
@@ -31933,7 +32436,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/cadence/cadence_ability_1.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_cadence_anthem_aoe",
+          "modifier_cadence_anthem_buff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "cadence_ability_lullaby": {
       "id": "cadence_ability_lullaby",
@@ -32239,7 +32750,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/cadence/cadence_ability_3.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_cadence_sleep_aoe",
+          "modifier_cadence_sleeping"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "cadence_ability_silencecontraptions": {
       "id": "cadence_ability_silencecontraptions",
@@ -32547,7 +33066,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/cadence/cadence_ability_2.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_cadence_silence_contraptions",
+          "modifier_cadence_silence_contraptions_debuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "cadence_ability_grandfinale": {
       "id": "cadence_ability_grandfinale",
@@ -32879,7 +33406,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/cadence/cadence_ability_4.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_cadence_grandfinale_aoe",
+          "modifier_cadence_grandfinale_buff",
+          "modifier_citadel_base_buildup"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "cadence_ability_crescendo": {
       "id": "cadence_ability_crescendo",
@@ -33168,7 +33704,22 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/cadence/cadence_ability_4.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_cadence_crescendo_aoe",
+          "modifier_cadence_crescendo_in_aoe",
+          "modifier_cadence_crescendo_post_aoe"
+        ],
+        "states": [
+          "COMMAND_RESTRICTED",
+          "DISARMED",
+          "INVULNERABLE",
+          "MELEE_DISABLED_DEBUFF",
+          "SILENCED"
+        ],
+        "purges": false
+      }
     },
     "citadel_weapon_chrono_set": {
       "id": "citadel_weapon_chrono_set",
@@ -33998,7 +34549,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/chrono/chrono_time_bomb.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_chrono_pulse_grenade_debuff",
+          "modifier_chrono_pulse_grenade_pulse_area",
+          "modifier_pulsegrenade_timeslow"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_chrono_time_wall": {
       "id": "citadel_ability_chrono_time_wall",
@@ -34399,7 +34959,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/chrono/chrono_time_wall.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_chrono_time_wall_aura",
+          "modifier_citadel_chrono_time_wall_effect",
+          "modifier_citadel_silenced"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_chrono_kinetic_carbine": {
       "id": "citadel_ability_chrono_kinetic_carbine",
@@ -34867,7 +35436,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/duo/duo_attack.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_chrono_kinetic_carbine",
+          "modifier_chrono_kinetic_carbine_slow"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_chrono_swap": {
       "id": "citadel_ability_chrono_swap",
@@ -35261,7 +35838,20 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/chrono/chrono_swap.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_chrono_swap_bubble_move"
+        ],
+        "states": [
+          "AIR_DUCKING_FORCED",
+          "CHRONO_SWAPPING",
+          "COMMAND_RESTRICTED",
+          "SILENCE_MOVEMENT_ABILITES"
+        ],
+        "purges": false
+      }
     },
     "citadel_weapon_sumo_set": {
       "id": "citadel_weapon_sumo_set",
@@ -36186,7 +36776,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/sumo/sumo_stomp.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_slow_base",
+          "modifier_stomp_debuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_void_sphere": {
       "id": "citadel_ability_void_sphere",
@@ -36500,7 +37098,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/sumo/sumo_quantum.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_void_sphere",
+          "modifier_voidsphere_buff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_charged_tackle": {
       "id": "citadel_ability_charged_tackle",
@@ -36926,7 +37532,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/sumo/sumo_charge.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_charge_pull_enemy",
+          "modifier_citadel_charged_tackle_active",
+          "modifier_citadel_charged_tackle_prepare"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_nikuman": {
       "id": "citadel_ability_nikuman",
@@ -37268,7 +37883,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/sumo/sumo_pork_bun.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_nikuman"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_self_vacuum": {
       "id": "citadel_ability_self_vacuum",
@@ -37600,7 +38223,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/sumo/sumo_vacuum.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_vacuumaura",
+          "modifier_vacuumaura_target"
+        ],
+        "states": [
+          "MOD_NO_CLEANSE"
+        ],
+        "purges": false
+      }
     },
     "citadel_weapon_engineer_set": {
       "id": "citadel_weapon_engineer_set",
@@ -38424,7 +39057,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/engineer_resupply.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_mobile_resupply",
+          "modifier_mobile_resupply_aura"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_shieldedsentry": {
       "id": "citadel_ability_shieldedsentry",
@@ -38957,7 +39598,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/engineer_turret.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_forge_mini_turret_innate_modifier",
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_fissure_wall": {
       "id": "citadel_ability_fissure_wall",
@@ -39416,7 +40065,19 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/engineer_fissure_2.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_bonus_damage_percent",
+          "modifier_fissure_wall",
+          "modifier_slow_base"
+        ],
+        "states": [
+          "GLOW_THROUGH_WALLS_TO_ENEMY"
+        ],
+        "purges": false
+      }
     },
     "citadel_ability_fissure_wall_trigger": {
       "id": "citadel_ability_fissure_wall_trigger",
@@ -40331,7 +40992,19 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/engineer_rockets.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_rocket_barrage_volley",
+          "modifier_slow_base"
+        ],
+        "states": [
+          "ALLOW_DASH_WHEN_CHANNELING",
+          "DISARMED",
+          "SINCLAIR_TAX_ULT_ACTIVE"
+        ],
+        "purges": false
+      }
     },
     "citadel_weapon_genericperson_set": {
       "id": "citadel_weapon_genericperson_set",
@@ -43685,7 +44358,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/spectre/blood_bomb.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_spilled_blood_thinker"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_blood_shards": {
       "id": "ability_blood_shards",
@@ -44054,7 +44734,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/spectre/geist_dagger.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_blood_shard_debuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_life_drain": {
       "id": "ability_life_drain",
@@ -44375,7 +45062,18 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/spectre/life_drain.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_silenced",
+          "modifier_life_drain"
+        ],
+        "states": [
+          "FAMILIAR_ABILITY_KEEPALIVE"
+        ],
+        "purges": false
+      }
     },
     "ability_death_tax": {
       "id": "ability_death_tax",
@@ -45092,7 +45790,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/spectre/blood_exchange.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_silenced",
+          "modifier_health_swap_debuff",
+          "modifier_healthswap_precast"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_weapon_gigawatt_set": {
       "id": "citadel_weapon_gigawatt_set",
@@ -45900,7 +46608,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/giga_ball.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_lightningball",
+          "modifier_intrinsic_base",
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_static_charge": {
       "id": "citadel_ability_static_charge",
@@ -46221,7 +46938,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/giga_static.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_staticcharge"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_static_charge_v2": {
       "id": "citadel_ability_static_charge_v2",
@@ -46525,7 +47249,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/giga_static.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_staticcharge"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_chain_lightning": {
       "id": "citadel_ability_chain_lightning",
@@ -46809,7 +47540,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/giga_chain.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_lightning_bullet"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_power_surge": {
       "id": "ability_power_surge",
@@ -47175,7 +47913,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/giga_chain.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_power_surge",
+          "modifier_power_surge_chain_lightning"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_storm_cloud": {
       "id": "citadel_ability_storm_cloud",
@@ -47618,7 +48365,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/giga_storm.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_stormcloud",
+          "modifier_lightning_strike_area"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_weapon_haze_set": {
       "id": "citadel_weapon_haze_set",
@@ -48581,7 +49336,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/haze/haze_sleep_dagger.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_sleep_dagger_asleep",
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_smoke_bomb": {
       "id": "ability_smoke_bomb",
@@ -49017,7 +49781,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/haze/haze_smoke_bomb.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_smoke_bomb_invis"
+        ],
+        "states": [
+          "INVULNERABLE"
+        ],
+        "purges": true
+      }
     },
     "ability_stacking_damage": {
       "id": "ability_stacking_damage",
@@ -49378,7 +50152,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/haze/haze_fixation.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_passive_haze_stacking_damage",
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_bullet_flurry": {
       "id": "ability_bullet_flurry",
@@ -49729,7 +50511,18 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/haze/haze_bullet_flurry.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_bullet_flurry",
+          "modifier_citadel_bullet_flurry_windup"
+        ],
+        "states": [
+          "INFINITE_CLIP",
+          "SILENCED_HIDDEN"
+        ],
+        "purges": false
+      }
     },
     "citadel_weapon_hornet_set": {
       "id": "citadel_weapon_hornet_set",
@@ -50545,7 +51338,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/hornet/vindicta_stake.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_disarmed",
+          "modifier_citadel_hornet_chain_connection"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_hornet_leap": {
       "id": "citadel_ability_hornet_leap",
@@ -50928,7 +51729,21 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/hornet/vindicta_flight.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_hornet_leap"
+        ],
+        "states": [
+          "ABILITY_MOVEMENT",
+          "DISABLE_AIR_SPREAD_PENALTY",
+          "JUMP_DISABLED",
+          "UNLIMITED_AIR_DASHES",
+          "ZIPLINE_DISABLED"
+        ],
+        "purges": false
+      }
     },
     "citadel_ability_hornet_sting": {
       "id": "citadel_ability_hornet_sting",
@@ -51329,7 +52144,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/hornet/hornet_crow.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_hornet_sting_debuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_hornet_snipe": {
       "id": "citadel_ability_hornet_snipe",
@@ -51721,7 +52543,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/hornet/hornet_assassinate.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_hornet_snipe",
+          "modifier_hornet_snipe_kill_bonus",
+          "modifier_low_health_glow"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_weapon_inferno_set": {
       "id": "citadel_weapon_inferno_set",
@@ -52568,7 +53400,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/inferno_bomb.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_firebomb",
+          "modifier_firebomb_buff",
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_flame_dash": {
       "id": "ability_flame_dash",
@@ -53002,7 +53844,23 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/inferno_dash.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_flamedash",
+          "modifier_flamedash_burn",
+          "modifier_flamedash_ground_aura"
+        ],
+        "states": [
+          "ABILITY_MOVEMENT",
+          "DUCKING_DISABLED",
+          "MANTLE_DISABLED",
+          "MELEE_DISABLED",
+          "SLIDING_DISABLED"
+        ],
+        "purges": false
+      }
     },
     "ability_incendiary_projectile": {
       "id": "ability_incendiary_projectile",
@@ -53412,7 +54270,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/inferno_molotov.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_cone_wave_projectile",
+          "modifier_incendiary_debuff",
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_afterburn": {
       "id": "ability_afterburn",
@@ -53773,7 +54640,18 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/inferno_deflect.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_afterburn_dot",
+          "modifier_afterburn_watcher",
+          "modifier_citadel_base_buildup"
+        ],
+        "states": [
+          "AFTERBURNING"
+        ],
+        "purges": false
+      }
     },
     "citadel_weapon_kelvin_set": {
       "id": "citadel_weapon_kelvin_set",
@@ -54728,7 +55606,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/kelvin/ice_beam.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_icebeam_stacking_slow"
+        ],
+        "states": [
+          "SLOWED"
+        ],
+        "purges": false
+      }
     },
     "ability_icepath": {
       "id": "ability_icepath",
@@ -55277,7 +56165,19 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/kelvin/ice_path.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base_aura",
+          "modifier_citadel_ice_path_explode",
+          "modifier_icepath",
+          "modifier_icepath_tech_power_linger"
+        ],
+        "states": [
+          "ABILITY_MOVEMENT"
+        ],
+        "purges": false
+      }
     },
     "ability_ice_grenade": {
       "id": "ability_ice_grenade",
@@ -55657,7 +56557,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/kelvin/freezing_grenade.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base_aura",
+          "modifier_citadel_basic_health_regen",
+          "modifier_citadel_ice_grenade_chill",
+          "modifier_icegrenade_debuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_ice_dome": {
       "id": "ability_ice_dome",
@@ -56026,7 +56936,22 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/kelvin/frozen_shelter.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_base_aura",
+          "modifier_ice_dome",
+          "modifier_ice_dome_friendly",
+          "modifier_icedome_auramodifier_base"
+        ],
+        "states": [
+          "COMMAND_RESTRICTED",
+          "SINCLAIR_TAX_ULT_ACTIVE",
+          "SLOWED"
+        ],
+        "purges": true
+      }
     },
     "ability_ice_dome_trigger": {
       "id": "ability_ice_dome_trigger",
@@ -57075,7 +58000,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/lash/lash_lash.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_grapple_air_control"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_lash_down_strike": {
       "id": "citadel_ability_lash_down_strike",
@@ -57494,7 +58427,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/lash/lash_death_slam.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_drag",
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_lash_ultimate": {
       "id": "citadel_ability_lash_ultimate",
@@ -57992,7 +58934,18 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/lash/lash_counter_lash.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_lash_grapple_enemy_debuff",
+          "modifier_lash_grapple_target",
+          "modifier_slow_base"
+        ],
+        "states": [
+          "ABILITY_MOVEMENT_DEBUFF"
+        ],
+        "purges": false
+      }
     },
     "ability_lash_flog": {
       "id": "ability_lash_flog",
@@ -58342,7 +59295,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/lash/lash_flog.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_lash_flog_debuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_weapon_mirage_set": {
       "id": "citadel_weapon_mirage_set",
@@ -59364,7 +60324,29 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/mirage/mirage_tornado.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_mirage_tornado_aura",
+          "modifier_mirage_tornado_aura_apply",
+          "modifier_mirage_tornado_evasion",
+          "modifier_mirage_tornado_hold_in_place",
+          "modifier_mirage_tornado_lift",
+          "modifier_mirage_tornado_mover",
+          "modifier_slow_base"
+        ],
+        "states": [
+          "DASH_DISABLED_DEBUFF",
+          "DUCKING_DISABLED",
+          "IMMOBILIZED",
+          "JUMP_DISABLED",
+          "MANTLE_DISABLED",
+          "MOVEMENT_ABILITY_ACTIVATION_RESTRICTED",
+          "SILENCE_MOVEMENT_ABILITES",
+          "ZIPLINE_DISABLED"
+        ],
+        "purges": true
+      }
     },
     "mirage_sand_phantom": {
       "id": "mirage_sand_phantom",
@@ -59784,7 +60766,20 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/mirage/mirage_sand_phantom.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_diminishing_slow",
+          "modifier_mirage_sand_phantom_passive_victim",
+          "modifier_mirage_sand_phantom_proc",
+          "modifier_mirage_sand_phantom_proc_ready"
+        ],
+        "states": [
+          "VISIBLE_TO_ENEMY"
+        ],
+        "purges": false
+      }
     },
     "mirage_fire_beetles": {
       "id": "mirage_fire_beetles",
@@ -60100,7 +61095,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/mirage/mirage_fire_beetles.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_mirage_fire_scarabs_health_loss"
+        ],
+        "states": [
+          "HAS_FIREBEETLES_DEBUFF"
+        ],
+        "purges": false
+      }
     },
     "mirage_teleport": {
       "id": "mirage_teleport",
@@ -60466,7 +61470,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/mirage/mirage_teleport.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_mirage_traveler_movement_speed"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_weapon_digger_set": {
       "id": "citadel_weapon_digger_set",
@@ -61491,7 +62503,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/grappler/grappler_regen.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intimidate_debuff",
+          "modifier_intimidated"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_burrow": {
       "id": "ability_burrow",
@@ -61908,7 +62928,28 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/grappler/grappler_spin.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_burrow",
+          "modifier_slow_base",
+          "modifier_spin"
+        ],
+        "states": [
+          "AIR_JUMPS_DISABLED",
+          "ALLOW_IN_TUNNELS_NO_DUCK",
+          "DAMAGE_MOVEMENT_PENALTY_IMMUNE",
+          "DASH_DISABLED",
+          "DUCKING_DISABLED",
+          "IS_TINY_CHARACTER",
+          "MANTLE_DISABLED",
+          "MELEE_DISABLED",
+          "SHRUNK_CHARACTER",
+          "SPRINTING",
+          "ZIPLINE_DISABLED"
+        ],
+        "purges": false
+      }
     },
     "ability_throw_sand": {
       "id": "ability_throw_sand",
@@ -62242,7 +63283,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/grappler/grappler_throw_sand.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_throw_sand_debuff",
+          "modifier_cone_wave_projectile"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_ult_combo": {
       "id": "ability_ult_combo",
@@ -62543,7 +63592,20 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/grappler/grappler_combo.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_drag_custom",
+          "modifier_ult_combo_bonus_health",
+          "modifier_ult_combo_self",
+          "modifier_ult_combo_target"
+        ],
+        "states": [
+          "FORCE_CAN_PARRY"
+        ],
+        "purges": false
+      }
     },
     "citadel_weapon_digger_set2": {
       "id": "citadel_weapon_digger_set2",
@@ -63876,7 +64938,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/upgrades/mods_weapon/high_velocity_mag.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_perched_predator_drag"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_perched_predator_trigger": {
       "id": "ability_perched_predator_trigger",
@@ -64753,7 +65822,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/nano/nano_warp.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_nano_pounce_self",
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_nano_pounce_instant": {
       "id": "ability_nano_pounce_instant",
@@ -65163,7 +66241,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/nano/nano_warp.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_nano_pounce_self",
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_nano_proximity_ritual": {
       "id": "ability_nano_proximity_ritual",
@@ -65679,7 +66766,21 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_invis",
+          "modifier_nano_predatory_statue",
+          "modifier_nano_predatory_statue_target"
+        ],
+        "states": [
+          "NANO_RECENT_DAMAGE",
+          "PREDATORY_STATUE_TARGET",
+          "VISIBLE_TO_ENEMY"
+        ],
+        "purges": false
+      }
     },
     "ability_nano_shadow_step": {
       "id": "ability_nano_shadow_step",
@@ -66147,7 +67248,21 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/slork/slork_invis.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_base_aura",
+          "modifier_citadel_silenced",
+          "modifier_nano_shadow_debuff",
+          "modifier_nano_shadow_step",
+          "modifier_slow_base"
+        ],
+        "states": [
+          "GLOW_TO_PROVIDER"
+        ],
+        "purges": false
+      }
     },
     "ability_nano_catform": {
       "id": "ability_nano_catform",
@@ -66522,7 +67637,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/nano/nano_catform.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_nano_catform",
+          "modifier_nano_damageamp"
+        ],
+        "states": [
+          "IS_TINY_CHARACTER"
+        ],
+        "purges": false
+      }
     },
     "ability_nano_catform_trigger": {
       "id": "ability_nano_catform_trigger",
@@ -67356,7 +68481,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/nano/nano_clustergrenade.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_nano_cluster_grenade_debuff",
+          "modifier_perched_predator_drag"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_nano_shadow_pulse": {
       "id": "ability_nano_shadow_pulse",
@@ -67754,7 +68887,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/nano/nano_shadow_pulse.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [
+          "DO_NOT_DRAW_MODEL"
+        ],
+        "purges": false
+      }
     },
     "ability_nano_dash": {
       "id": "ability_nano_dash",
@@ -68212,7 +69354,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/nano/nano_dash.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_shiv_dash",
+          "modifier_nano_bounty"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_weapon_archer_set": {
       "id": "citadel_weapon_archer_set",
@@ -68994,7 +70144,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/archer/archer_charged_shot.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_power_jump": {
       "id": "ability_power_jump",
@@ -69455,7 +70612,23 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/archer/archer_power_jump.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_air_raid",
+          "modifier_power_jump",
+          "modifier_slow_base"
+        ],
+        "states": [
+          "ABILITY_MOVEMENT",
+          "DISABLE_AIR_SPREAD_PENALTY",
+          "FLYING",
+          "JUMP_DISABLED",
+          "UNLIMITED_AIR_DASHES",
+          "ZIPLINE_DISABLED"
+        ],
+        "purges": false
+      }
     },
     "ability_immobilize_trap": {
       "id": "ability_immobilize_trap",
@@ -69913,7 +71086,20 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/archer/imobolize_trap.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_glitch_debuff"
+        ],
+        "states": [
+          "DISARMED",
+          "GLITCHED",
+          "MUTED",
+          "SILENCED"
+        ],
+        "purges": false
+      }
     },
     "ability_guided_arrow": {
       "id": "ability_guided_arrow",
@@ -70214,7 +71400,23 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/archer/archer_guided_arrow.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_guided_arrow_tech_power_boost",
+          "modifier_guiding_arrow",
+          "modifier_guiding_arrow_killcheck",
+          "modifier_low_health_glow",
+          "modifier_projectile_pitching_loop_sound_thinker"
+        ],
+        "states": [
+          "AIR_JUMPS_DISABLED",
+          "DASH_DISABLED",
+          "JUMP_DISABLED",
+          "ZIPLINE_DISABLED"
+        ],
+        "purges": false
+      }
     },
     "citadel_weapon_shiv_set": {
       "id": "citadel_weapon_shiv_set",
@@ -71242,7 +72444,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/shiv/shiv_toss.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_shiv_thrown_shiv_damage_debuff",
+          "modifier_shiv_thrown_shiv_slow_debuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_shiv_dash": {
       "id": "citadel_ability_shiv_dash",
@@ -71691,7 +72901,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/shiv/shiv_flash.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_shiv_dash"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_shiv_defer_damage": {
       "id": "citadel_ability_shiv_defer_damage",
@@ -71970,7 +73188,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/shiv/shiv_bloodletting.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_shiv_killing_blow": {
       "id": "citadel_ability_shiv_killing_blow",
@@ -72442,7 +73667,21 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/shiv/shiv_killing_blow.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_shiv_killingblow_leap",
+          "modifier_citadel_shiv_killingblow_recastwindow",
+          "modifier_citadel_shiv_rage_drain",
+          "modifier_citadel_shiv_rage_drain_suppressed",
+          "modifier_killing_blow_glow"
+        ],
+        "states": [
+          "SHIV_FRENZIED"
+        ],
+        "purges": false
+      }
     },
     "citadel_weapon_shieldguy_set": {
       "id": "citadel_weapon_shieldguy_set",
@@ -74366,7 +75605,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/slork/slork_scald.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_fathom_scalding_spray_aura",
+          "modifier_fathom_scalding_spray_target",
+          "modifier_fathom_scalding_spray_weapon_damage"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "fathom_breach": {
       "id": "fathom_breach",
@@ -74662,7 +75910,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/tokamak/tokamak_dying_star.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [
+          "AIR_JUMPS_DISABLED",
+          "DASH_DISABLED"
+        ],
+        "purges": false
+      }
     },
     "fathom_defer_damage": {
       "id": "fathom_defer_damage",
@@ -74936,7 +76194,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/rutger/rutger_cheat_death.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "fathom_reefdweller_harpoon": {
       "id": "fathom_reefdweller_harpoon",
@@ -75262,7 +76527,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/haze/haze_sleep_dagger.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_reefdweller_harpoon_detach_buff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "fathom_lurkers_ambush": {
       "id": "fathom_lurkers_ambush",
@@ -75678,7 +76950,18 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/slork/slork_invis.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_fathom_lurkers_ambush_debuff",
+          "modifier_lurkers_ambush_invis"
+        ],
+        "states": [
+          "SLOWED"
+        ],
+        "purges": false
+      }
     },
     "citadel_weapon_synth_set": {
       "id": "citadel_weapon_synth_set",
@@ -76243,7 +77526,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/synth/synth_plasma_flux.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_synth_plasma_flux_weapon_damage"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "synth_plasma_flux_trigger": {
       "id": "synth_plasma_flux_trigger",
@@ -76779,7 +78069,21 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/synth/synth_pulse.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_synth_pulse_escape"
+        ],
+        "states": [
+          "AIR_JUMPS_DISABLED",
+          "DASH_DISABLED",
+          "DUCKING_DISABLED",
+          "MANTLE_DISABLED",
+          "MELEE_DISABLED"
+        ],
+        "purges": false
+      }
     },
     "synth_barrage": {
       "id": "synth_barrage",
@@ -77195,7 +78499,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/synth/synth_barrage.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_intrinsic_base",
+          "modifier_slow_base",
+          "modifier_synth_barrage_amp",
+          "modifier_synth_barrage_caster"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "synth_affliction": {
       "id": "synth_affliction",
@@ -77561,7 +78875,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/synth/synth_affliction.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_synth_affliction_debuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_weapon_tengu_set": {
       "id": "citadel_weapon_tengu_set",
@@ -77800,7 +79121,14 @@
         "bulletLifetime": 2
       },
       "image": "file://{images}/hud/abilities/weapon_damage.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_hero_gravity"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_melee_tengu": {
       "id": "citadel_ability_melee_tengu",
@@ -78393,7 +79721,18 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/tengu/tengu_tether.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_tether_no_connection"
+        ],
+        "states": [
+          "COOP_TETHER_ACTIVE",
+          "COOP_TETHER_LOCKED_TARGET"
+        ],
+        "purges": false
+      }
     },
     "citadel_ability_tangotether_trigger": {
       "id": "citadel_ability_tangotether_trigger",
@@ -78933,7 +80272,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/tengu/tengu_storm_flask.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_root",
+          "modifier_citadel_tengu_urn_aura",
+          "modifier_urn_debuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_tengu_stone_form": {
       "id": "citadel_ability_tengu_stone_form",
@@ -79308,7 +80656,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/tengu/tengu_stone_form.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_drag"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_tengu_airlift": {
       "id": "citadel_ability_tengu_airlift",
@@ -79777,7 +81132,32 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/tengu/tengu_lightning_crash.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_airlift_exploding_ally",
+          "modifier_airlift_grab",
+          "modifier_base",
+          "modifier_citadel_silenced",
+          "modifier_slow_base"
+        ],
+        "states": [
+          "ABILITY_MOVEMENT",
+          "AIM_FORWARD_WITH_PITCH",
+          "AIR_JUMPS_DISABLED",
+          "DASH_DISABLED",
+          "DUCKING_DISABLED",
+          "FLYING",
+          "HIDE_CROSSHAIR",
+          "JUMP_DISABLED",
+          "MANTLE_DISABLED",
+          "MELEE_DISABLED",
+          "SHOOTING_DISABLED",
+          "SLIDING_DISABLED",
+          "SPRINTING"
+        ],
+        "purges": false
+      }
     },
     "citadel_weapon_viscous_set": {
       "id": "citadel_weapon_viscous_set",
@@ -80884,7 +82264,18 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/viscous/viscous_goo_ball.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_base_aura",
+          "modifier_slow_base",
+          "modifier_viscous_goo_aura",
+          "modifier_viscous_goo_grenade_debuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "viscous_restorative_goo": {
       "id": "viscous_restorative_goo",
@@ -81333,7 +82724,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/viscous/viscous_restorative_goo.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_restorative_goo"
+        ],
+        "states": [
+          "DO_NOT_DRAW_MODEL"
+        ],
+        "purges": false
+      }
     },
     "viscous_goo_bowling_ball": {
       "id": "viscous_goo_bowling_ball",
@@ -81799,7 +83200,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/viscous/viscous_goo_sphere.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_viscous_ball"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "viscous_telepunch": {
       "id": "viscous_telepunch",
@@ -82282,7 +83691,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/viscous/viscous_goo_punch.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_weapon_warden_set": {
       "id": "citadel_weapon_warden_set",
@@ -83119,7 +84536,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/warden/warden_lock_down.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_root",
+          "modifier_citadel_silenced",
+          "modifier_lockdown_bullet_resist",
+          "modifier_warden_lockdown_debuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_warden_high_alert": {
       "id": "ability_warden_high_alert",
@@ -83406,7 +84833,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/warden/warden_high_alert.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_warden_high_alert"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_warden_crowd_control": {
       "id": "ability_warden_crowd_control",
@@ -83813,7 +85247,18 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/warden/warden_crowd_control.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_slow_base",
+          "modifier_warden_crowd_control_debuff",
+          "modifier_warden_crowd_control_fire_rate"
+        ],
+        "states": [
+          "SLOWED"
+        ],
+        "purges": false
+      }
     },
     "ability_warden_riot_protocol": {
       "id": "ability_warden_riot_protocol",
@@ -84207,7 +85652,24 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/warden/warden_riot_protocol.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_unstoppable",
+          "modifier_warden_riot_protocol",
+          "modifier_warden_riot_protocol_castdelay",
+          "modifier_warden_riot_protocol_enemy_debuff"
+        ],
+        "states": [
+          "KNOCKDOWN_IMMUNE",
+          "SINCLAIR_TAX_KEEP_MODEL_SWAP",
+          "SINCLAIR_TAX_ULT_ACTIVE",
+          "SLOW_IMMUNE",
+          "STATUS_IMMUNE",
+          "UNSTOPPABLE"
+        ],
+        "purges": false
+      }
     },
     "citadel_weapon_wraith_set": {
       "id": "citadel_weapon_wraith_set",
@@ -85026,7 +86488,24 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/wraith_lift.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_disarmed",
+          "modifier_citadel_psychiclift",
+          "modifier_citadel_silenced",
+          "modifier_slow_base"
+        ],
+        "states": [
+          "DASH_DISABLED_DEBUFF",
+          "DISARMED",
+          "SILENCED",
+          "SILENCE_MOVEMENT_ABILITES",
+          "SLOWED",
+          "STUNNED"
+        ],
+        "purges": false
+      }
     },
     "citadel_ability_projectmind": {
       "id": "citadel_ability_projectmind",
@@ -85318,7 +86797,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/wraith_teleport.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_projectmind",
+          "modifier_wraith_project_mind_shield"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_wraith_rapidfire": {
       "id": "citadel_ability_wraith_rapidfire",
@@ -85656,7 +87143,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/wraith_aura.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_rapidfire"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_card_toss": {
       "id": "citadel_ability_card_toss",
@@ -86217,7 +87711,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/wraith_card_trick.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_ability_resource_pool",
+          "modifier_cardtoss_stacking_resist_shred",
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_weapon_wrecker_set": {
       "id": "citadel_weapon_wrecker_set",
@@ -87000,7 +88503,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/wrecker/wrecking_ball.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_wrecking_ball_auto_throw"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_wrecking_ball_throw": {
       "id": "ability_wrecking_ball_throw",
@@ -87559,7 +89069,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/wrecker/salvage.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_stunned",
+          "modifier_wrecker_salvage",
+          "modifier_wrecker_salvage_buff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_scrap_blast": {
       "id": "ability_scrap_blast",
@@ -87843,7 +89362,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/wrecker/scrap_blast.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_scrap_blast_debuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_wrecker_ultimate": {
       "id": "ability_wrecker_ultimate",
@@ -88262,7 +89788,24 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/wrecker/wrecking_crew.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_damage_on_hit_ground",
+          "modifier_wrecker_ultimate",
+          "modifier_wrecker_ultimate_grab_enemy",
+          "modifier_wrecker_ultimate_invincible",
+          "modifier_wrecker_ultimate_throw_enemy"
+        ],
+        "states": [
+          "IGNORE_BULLETS",
+          "IGNORE_MELEE",
+          "INVULNERABLE",
+          "TECH_UNTARGETABLE",
+          "UNIT_STATUS_HEALTH_HIDDEN"
+        ],
+        "purges": false
+      }
     },
     "ability_wrecker_teleport": {
       "id": "ability_wrecker_teleport",
@@ -88551,7 +90094,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/wrecker/wrecking_crew.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_projectile_pitching_loop_sound_thinker",
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_wrecker_garbage_suck": {
       "id": "citadel_ability_wrecker_garbage_suck",
@@ -88933,7 +90485,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/mirage/mirage_sunfire_cataclysm.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_garbageaura"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_wrecker_bouldergrenade": {
       "id": "citadel_ability_wrecker_bouldergrenade",
@@ -90410,7 +91970,20 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/yamato/yamato_power_slash.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_slow_base",
+          "modifier_unstoppable"
+        ],
+        "states": [
+          "KNOCKDOWN_IMMUNE",
+          "SLOW_IMMUNE",
+          "STATUS_IMMUNE",
+          "UNSTOPPABLE"
+        ],
+        "purges": false
+      }
     },
     "citadel_ability_flying_strike": {
       "id": "citadel_ability_flying_strike",
@@ -90739,7 +92312,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/yamato/yamato_flying_strike.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_flying_strike",
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_healing_slash": {
       "id": "citadel_ability_healing_slash",
@@ -91103,7 +92685,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/yamato/yamato_crimson_slash.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_infinity_slash": {
       "id": "citadel_ability_infinity_slash",
@@ -91452,7 +93041,26 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/yamato/yamato_blinding_steel.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_yamato_infinity_slash_buff_timer"
+        ],
+        "states": [
+          "IGNORE_BULLETS",
+          "IGNORE_MELEE",
+          "INVULNERABLE",
+          "KNOCKDOWN_IMMUNE",
+          "SLOW_IMMUNE",
+          "STATUS_IMMUNE",
+          "TECH_UNTARGETABLE",
+          "UNIT_STATUS_HEALTH_HIDDEN",
+          "UNSTOPPABLE",
+          "YAMATO_SHADOW_FORM"
+        ],
+        "purges": false
+      }
     },
     "citadel_weapon_viper_set": {
       "id": "citadel_weapon_viper_set",
@@ -92288,7 +93896,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/shiv/shiv_toss.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_viper_snakedash": {
       "id": "ability_viper_snakedash",
@@ -92611,7 +94226,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/viper/viper_snakedash.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_viper_slidebuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_viper_venom": {
       "id": "ability_viper_venom",
@@ -93002,7 +94625,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/viper/viper_venom.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_base_buildup",
+          "modifier_citadel_viper_venom_proc_watcher",
+          "modifier_viper_venom"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_viper_ult": {
       "id": "ability_viper_ult",
@@ -93325,7 +94957,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/tokamak/tokamak_blinding_radiance.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_petrify"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_viper_slide": {
       "id": "ability_viper_slide",
@@ -93922,7 +95561,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/viper/viper_debuffdagger.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_viper_stackingdebuff",
+          "modifier_diminishing_slow"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_viper_petrifybola": {
       "id": "ability_viper_petrifybola",
@@ -94257,7 +95904,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/viper/viper_petrifybola.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_petrify"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_weapon_vandal_set": {
       "id": "citadel_weapon_vandal_set",
@@ -94999,7 +96654,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/wraith_lift.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_vandalsurge"
+        ],
+        "states": [
+          "STUNNED"
+        ],
+        "purges": false
+      }
     },
     "ability_vandal_pillar": {
       "id": "ability_vandal_pillar",
@@ -95317,7 +96981,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/tokamak/tokamak_blinding_radiance.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_petrify"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_haunt": {
       "id": "ability_haunt",
@@ -95642,7 +97313,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/inferno_deflect.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_afterburn_dot",
+          "modifier_afterburn_watcher",
+          "modifier_citadel_base_buildup"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_vandal_overflow": {
       "id": "citadel_ability_vandal_overflow",
@@ -95909,7 +97589,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/wraith_lift.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_vandaloverflow"
+        ],
+        "states": [
+          "STUNNED"
+        ],
+        "purges": false
+      }
     },
     "citadel_weapon_magician_set": {
       "id": "citadel_weapon_magician_set",
@@ -96799,7 +98488,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/magician/magician_magicbolt.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_ability_magewalk": {
       "id": "citadel_ability_magewalk",
@@ -97178,7 +98874,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/shiv/shiv_gather_foes.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_magewalk"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_magician_animalcurse": {
       "id": "ability_magician_animalcurse",
@@ -97486,7 +99190,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/magician/magician_animalcurse.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_airdamp",
+          "modifier_citadel_animalcurse"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_magician_shadowclone": {
       "id": "ability_magician_shadowclone",
@@ -97789,7 +99501,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/rutger/rutger_cheat_death.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_shadowclone"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_magician_magicbolt_trigger": {
       "id": "ability_magician_magicbolt_trigger",
@@ -98138,7 +99857,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/magician/magician_cloneturret.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_magician_cloneturret_trigger": {
       "id": "ability_magician_cloneturret_trigger",
@@ -98509,7 +100235,19 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/kelvin/frozen_shelter.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base_aura",
+          "modifier_ice_dome",
+          "modifier_ice_dome_friendly",
+          "modifier_icedome_auramodifier_base"
+        ],
+        "states": [
+          "SLOWED"
+        ],
+        "purges": false
+      }
     },
     "ability_magician_bigbolt": {
       "id": "ability_magician_bigbolt",
@@ -98929,7 +100667,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/upgrades/mods_tech/return_fire.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_diminishing_slow"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_magician_escape": {
       "id": "ability_magician_escape",
@@ -99287,7 +101033,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/mirage/mirage_sand_phantom.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_invis"
+        ],
+        "states": [
+          "SPRINTING"
+        ],
+        "purges": false
+      }
     },
     "ability_magician_copyult": {
       "id": "ability_magician_copyult",
@@ -99539,7 +101294,19 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/magician/magician_copyult.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_copiedult_spawnedentity",
+          "modifier_citadel_copyult",
+          "modifier_citadel_copyultpending"
+        ],
+        "states": [
+          "MATERIAL_OVERRIDE"
+        ],
+        "purges": false
+      }
     },
     "ability_magician_animalhexarea": {
       "id": "ability_magician_animalhexarea",
@@ -99892,7 +101659,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/magician/magician_animalcurse.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_animalcurse",
+          "modifier_magician_animalcurse_hexarea"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_weapon_trapper_set": {
       "id": "citadel_weapon_trapper_set",
@@ -100692,7 +102467,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/trapper/trapper_poison_jar.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_silenced",
+          "modifier_citadel_trapper_poisonjar_aura"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_trapper_spiderwave": {
       "id": "ability_trapper_spiderwave",
@@ -101174,7 +102957,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/trapper/trapper_spider_wave.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_trapper_stealspirit_debuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_trapper_spidershield": {
       "id": "ability_trapper_spidershield",
@@ -101487,7 +103277,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/trapper/trapper_spider_shield.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_trapper_spidershield"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_trapper_fear": {
       "id": "ability_trapper_fear",
@@ -101778,7 +103576,21 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/upgrades/mods_tech/healbane.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_base_buildup",
+          "modifier_fear_watcher",
+          "modifier_trapper_immobilize"
+        ],
+        "states": [
+          "GLOW_THROUGH_WALLS_TO_ENEMY",
+          "GLOW_THROUGH_WALLS_TO_PROVIDER",
+          "GLOW_TO_PROVIDER",
+          "IMMOBILIZED"
+        ],
+        "purges": false
+      }
     },
     "ability_trapper_webwall": {
       "id": "ability_trapper_webwall",
@@ -102172,7 +103984,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/trapper/trapper_web_wall.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_silenced",
+          "modifier_webwall_debuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_trapper_fear1": {
       "id": "ability_trapper_fear1",
@@ -102463,7 +104283,21 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/upgrades/mods_tech/healbane.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_base_buildup",
+          "modifier_fear_watcher",
+          "modifier_trapper_immobilize"
+        ],
+        "states": [
+          "GLOW_THROUGH_WALLS_TO_ENEMY",
+          "GLOW_THROUGH_WALLS_TO_PROVIDER",
+          "GLOW_TO_PROVIDER",
+          "IMMOBILIZED"
+        ],
+        "purges": false
+      }
     },
     "citadel_weapon_operative_set": {
       "id": "citadel_weapon_operative_set",
@@ -103034,7 +104868,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/upgrades/mods_utility/springy_boots.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_operative_umbrella_maneuver_air_hang"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "operative_blindside": {
       "id": "operative_blindside",
@@ -103347,7 +105188,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/operative/operative_blindside.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_operative_blindside_enemy_debuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "operative_revelation": {
       "id": "operative_revelation",
@@ -103701,7 +105549,22 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/sumo/sumo_pork_bun.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_glitch_debuff",
+          "modifier_operative_revelation_aura",
+          "modifier_operative_revelation_caster",
+          "modifier_operative_revelation_target"
+        ],
+        "states": [
+          "DISARMED",
+          "GLITCHED",
+          "MUTED",
+          "SILENCED"
+        ],
+        "purges": false
+      }
     },
     "citadel_weapon_gunslinger2_set": {
       "id": "citadel_weapon_gunslinger2_set",
@@ -104274,7 +106137,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/inferno_passive.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_spreadingfire_dot"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_empowerbullet": {
       "id": "ability_empowerbullet",
@@ -104622,7 +106492,19 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/inferno_molotov.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_diminishing_slow",
+          "modifier_empower_bullet",
+          "modifier_stomp_debuff"
+        ],
+        "states": [
+          "GLOW_THROUGH_WALLS_TO_PROVIDER",
+          "SILENCE_MOVEMENT_ABILITES"
+        ],
+        "purges": false
+      }
     },
     "ability_gunslinger_demon_carbine": {
       "id": "ability_gunslinger_demon_carbine",
@@ -104991,7 +106873,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/duo/duo_attack.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_chrono_kinetic_carbine_slow",
+          "modifier_gunslinger_demon_carbine"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_gunslinger_salvo": {
       "id": "ability_gunslinger_salvo",
@@ -105301,7 +107191,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/tokamak/tokamak_hot_shot.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_salvo_bullet"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "gunslinger_demonMark": {
       "id": "gunslinger_demonMark",
@@ -105657,7 +107555,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/hornet/hornet_assassinate.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_gunslinger_demonmark"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "gunslinger_knockbackblast": {
       "id": "gunslinger_knockbackblast",
@@ -105948,7 +107854,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/tokamak/tokamak_hot_shot.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_diminishing_slow"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_weapon_vampirebat_set": {
       "id": "citadel_weapon_vampirebat_set",
@@ -106187,7 +108100,16 @@
         "bulletLifetime": 2
       },
       "image": "file://{images}/hud/abilities/weapon_damage.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [
+          "VAMPIRE"
+        ],
+        "purges": false
+      }
     },
     "ability_melee_vampirebat": {
       "id": "ability_melee_vampirebat",
@@ -106770,7 +108692,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/vampirebat/vampirebat_sanguine_retreat.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_vampirebat_lovebites": {
       "id": "ability_vampirebat_lovebites",
@@ -107217,7 +109146,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/vampirebat/vampirebat_love_bites.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_base_buildup",
+          "modifier_slow_base",
+          "modifier_vampirebat_lovebitesproc"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_vampirebat_batswarm": {
       "id": "ability_vampirebat_batswarm",
@@ -107825,7 +109764,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/vampirebat/vampirebat_nox_nostra.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_silenced"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_vampirebat_batblink_trigger": {
       "id": "ability_vampirebat_batblink_trigger",
@@ -108364,7 +110310,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/vampirebat/vampirebat_nox_nostra.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_vampirebat_batcloud_self"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_vampirebat_steallife": {
       "id": "ability_vampirebat_steallife",
@@ -108776,7 +110729,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/vampirebat/vampirebat_rake.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_weapon_vampirebat_set2": {
       "id": "citadel_weapon_vampirebat_set2",
@@ -109798,7 +111758,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/synth/synth_grasp.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_boho_damageshare"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_boho_bouncyprojectile": {
       "id": "ability_boho_bouncyprojectile",
@@ -110448,7 +112415,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/shiv/shiv_prison_dance.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_boho_doublehit_buff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_boho_channeltether": {
       "id": "ability_boho_channeltether",
@@ -110802,7 +112776,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/mirage/mirage_djinns_reach.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_boho_channeltether_tether",
+          "modifier_bookworm_immobilize"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_boho_skipgrenade": {
       "id": "ability_boho_skipgrenade",
@@ -111100,7 +113083,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/astro/bounce_pad.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_diminishing_slow"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_boho_ability02": {
       "id": "ability_boho_ability02",
@@ -112161,7 +114151,21 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/hornet/vindicta_flight.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_hornet_leap"
+        ],
+        "states": [
+          "ABILITY_MOVEMENT",
+          "DISABLE_AIR_SPREAD_PENALTY",
+          "JUMP_DISABLED",
+          "UNLIMITED_AIR_DASHES",
+          "ZIPLINE_DISABLED"
+        ],
+        "purges": false
+      }
     },
     "citadel_weapon_swan_set": {
       "id": "citadel_weapon_swan_set",
@@ -113208,7 +115212,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/bull_jump.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_swan_acrobat": {
       "id": "ability_swan_acrobat",
@@ -113470,7 +115481,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/kelvin/ice_path.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_swan_acrobat"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_swan_ult": {
       "id": "ability_swan_ult",
@@ -114536,7 +116554,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/upgrades/mods_weapon/ricochet.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_skyrunner_magic_beam": {
       "id": "ability_skyrunner_magic_beam",
@@ -114810,7 +116835,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/kelvin/freezing_grenade.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_magic_beam"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_skyrunner_swingline": {
       "id": "ability_skyrunner_swingline",
@@ -115060,7 +117092,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/lash/lash_flog.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_skyrunner_ult": {
       "id": "ability_skyrunner_ult",
@@ -116291,7 +118330,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/nano/nano_roller_bomb.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_druid_leech_seed"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_druid_helicopter_seeds": {
       "id": "ability_druid_helicopter_seeds",
@@ -117433,7 +119479,15 @@
       "tooltip": [],
       "weapon": null,
       "image": null,
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_druid_invis",
+          "modifier_druid_invis_aura"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_druid_plant_branch_wall": {
       "id": "ability_druid_plant_branch_wall",
@@ -117909,7 +119963,16 @@
       "tooltip": [],
       "weapon": null,
       "image": null,
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_base_aura",
+          "modifier_heal_entity"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_druid_plant_something": {
       "id": "ability_druid_plant_something",
@@ -121264,7 +123327,16 @@
         "bulletLifetime": 2
       },
       "image": "file://{images}/hud/abilities/weapon_damage.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [
+          "HIDE_SPINUP"
+        ],
+        "purges": false
+      }
     },
     "ability_melee_frank": {
       "id": "ability_melee_frank",
@@ -121819,7 +123891,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/frank/frank_jump_start.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_frank_selfzap"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_frank_painaura": {
       "id": "ability_frank_painaura",
@@ -122227,7 +124306,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/frank/frank_aura_of_suffering.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_frank_painaura",
+          "modifier_frank_painaura_target"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_frank_revive": {
       "id": "ability_frank_revive",
@@ -122724,7 +124812,22 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/frank/frank_shocking_reanimation.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_diminishing_slow",
+          "modifier_frank_reviving",
+          "modifier_frank_zombie"
+        ],
+        "states": [
+          "HIDE_AMMO",
+          "HIDE_CROSSHAIR",
+          "HIDE_STAMINA",
+          "INVULNERABLE"
+        ],
+        "purges": false
+      }
     },
     "ability_frank_shocktarget2": {
       "id": "ability_frank_shocktarget2",
@@ -123163,7 +125266,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/frank/frank_pain_battery.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_ability_resource_pool",
+          "modifier_diminishing_slow",
+          "modifier_frank_shockfullycharged",
+          "modifier_frank_shocktarget"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_weapon_bookworm_set": {
       "id": "citadel_weapon_bookworm_set",
@@ -124246,7 +126359,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/bookworm/bookworm_dragon.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_bookworm_dragonfire",
+          "modifier_dragonfire_ground_aura"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_bookworm_aoemagic": {
       "id": "ability_bookworm_aoemagic",
@@ -124613,7 +126734,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/bookworm/bookworm_blindinglight.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_bookworm_aoemagic_areamodifier",
+          "modifier_bookworm_immobilize",
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_bookworm_knightbarrier": {
       "id": "ability_bookworm_knightbarrier",
@@ -125019,7 +127150,18 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/bookworm/bookworm_defendandfight.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_bookworm_knightbarrier",
+          "modifier_citadel_disarm_proc"
+        ],
+        "states": [
+          "MELEE_DISABLED"
+        ],
+        "purges": false
+      }
     },
     "ability_bookworm_knightcharge": {
       "id": "ability_bookworm_knightcharge",
@@ -125742,7 +127884,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/bookworm/bookworm_charge.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_bookworm_knightcharge_buff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_weapon_bookworm_set2": {
       "id": "citadel_weapon_bookworm_set2",
@@ -127003,7 +129152,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/doorman/doorman_doorway.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_doorman_doorway_close": {
       "id": "ability_doorman_doorway_close",
@@ -127499,7 +129655,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/doorman/doorman_luggagetrolley.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_luggage_drag"
+        ],
+        "states": [
+          "DOORMAN_LUGGAGE_DRAGGED"
+        ],
+        "purges": false
+      }
     },
     "ability_doorman_bomb": {
       "id": "ability_doorman_bomb",
@@ -127893,7 +130059,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/doorman/doorman_bell.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_dooman_bomb_debuff",
+          "modifier_doorman_bell_aura",
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_doorman_hotel": {
       "id": "ability_doorman_hotel",
@@ -128250,7 +130425,32 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/doorman/doorman_elevator.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_doorman_diminishing_timestop",
+          "modifier_doorman_hotel_imposter",
+          "modifier_doorman_hotel_imposter_fx",
+          "modifier_doorman_hotel_teleport_fx",
+          "modifier_doorman_hotel_transition_freeze",
+          "modifier_doorman_hotel_victim",
+          "modifier_unstoppable"
+        ],
+        "states": [
+          "DO_NOT_DRAW_MODEL",
+          "IGNORED_BY_NPC_TARGETING",
+          "IGNORE_OUT_OF_PLAY_AREA_CHECK",
+          "INVALID_TELEPORT_TARGET",
+          "KNOCKDOWN_IMMUNE",
+          "OUT_OF_GAME",
+          "SLOW_IMMUNE",
+          "STATUS_IMMUNE",
+          "UNIT_STATUS_HIDDEN",
+          "UNSTOPPABLE"
+        ],
+        "purges": false
+      }
     },
     "citadel_weapon_punkgoat_set": {
       "id": "citadel_weapon_punkgoat_set",
@@ -128708,7 +130908,14 @@
       "tooltip": [],
       "weapon": null,
       "image": null,
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_slide_debuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_melee_punkgoat": {
       "id": "ability_melee_punkgoat",
@@ -129448,7 +131655,19 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/punkgoat/goat_blasted.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_punkgoat_blastedactive",
+          "modifier_punkgoat_blastedhealth",
+          "modifier_punkgoat_blastedhealthwatcher",
+          "modifier_punkgoat_blastedpassive",
+          "modifier_punkgoat_blastedshred"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_punkgoat_tether": {
       "id": "ability_punkgoat_tether",
@@ -129930,7 +132149,23 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/punkgoat/goat_chaingang.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_punkgoat_tether",
+          "modifier_punkgoat_tether_pull",
+          "modifier_punkgoat_tether_waiting",
+          "modifier_unstoppable"
+        ],
+        "states": [
+          "KNOCKDOWN_IMMUNE",
+          "SLOW_IMMUNE",
+          "STATUS_IMMUNE",
+          "UNSTOPPABLE"
+        ],
+        "purges": false
+      }
     },
     "ability_punkgoat_goatflip": {
       "id": "ability_punkgoat_goatflip",
@@ -130543,7 +132778,19 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/punkgoat/goat_risingram.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_goat_charging",
+          "modifier_punkgoat_goatflip_damagebuff",
+          "modifier_punkgoat_goatflip_empowermelee",
+          "modifier_punkgoat_goatflip_maxhealthbuff",
+          "modifier_punkgoat_goatgoingup",
+          "modifier_punkgoat_goatgoingup_aircontrol"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_punkgoat_ult": {
       "id": "ability_punkgoat_ult",
@@ -131079,7 +133326,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/punkgoat/goat_sigilslam.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_diminishing_slow",
+          "modifier_drag",
+          "modifier_punkgoat_sigil_aura"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_weapon_drifter_set": {
       "id": "citadel_weapon_drifter_set",
@@ -131371,7 +133628,16 @@
         "bulletLifetime": 0.054
       },
       "image": "file://{images}/hud/abilities/weapon_damage.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [
+          "VAMPIRE"
+        ],
+        "purges": false
+      }
     },
     "citadel_weapon_drifter_alt": {
       "id": "citadel_weapon_drifter_alt",
@@ -132299,7 +134565,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/drifter/drifter_claw.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_silenced",
+          "modifier_drifter_rend_bullet_lifesteal"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "drifter_shadow_mark": {
       "id": "drifter_shadow_mark",
@@ -132744,7 +135018,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/drifter/drifter_stalkersmark.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_drifter_shadow_mark_target",
+          "modifier_drifter_stalkers_mark_post_teleport"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "drifter_shadow_mark_teleport": {
       "id": "drifter_shadow_mark_teleport",
@@ -133451,7 +135734,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/drifter/drifter_thehunger.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_drifter_hunger_kill_bonus",
+          "modifier_hunger_target",
+          "modifier_invis"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "drifter_darkness": {
       "id": "drifter_darkness",
@@ -133859,7 +136152,21 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/drifter/darkness.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_drifter_darkness_caster",
+          "modifier_drifter_darkness_target",
+          "modifier_drifter_darkness_target_boundary_unit"
+        ],
+        "states": [
+          "GLOW_THROUGH_WALLS_TO_PROVIDER",
+          "SINCLAIR_TAX_ULT_ACTIVE",
+          "VISIBLE_TO_ENEMY"
+        ],
+        "purges": false
+      }
     },
     "citadel_weapon_opera_set": {
       "id": "citadel_weapon_opera_set",
@@ -135742,7 +138049,14 @@
       ],
       "weapon": null,
       "image": "file://{images}/items/seasonal/2025_snowball.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "cosmetic_ability_voting_poster": {
       "id": "cosmetic_ability_voting_poster",
@@ -136174,7 +138488,14 @@
       ],
       "weapon": null,
       "image": "file://{images}/icons/icon_star.svg",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_emote"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_weapon_priest_set": {
       "id": "citadel_weapon_priest_set",
@@ -137089,7 +139410,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/priest/priest_shotgun.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_diminishing_slow",
+          "modifier_priest_knockback_buff",
+          "modifier_priestknockback"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_priest_selfheal": {
       "id": "ability_priest_selfheal",
@@ -137380,7 +139711,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/upgrades/mods_tech/healbane.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [
+          "DISARMED"
+        ],
+        "purges": false
+      }
     },
     "ability_priest_stackingdefense": {
       "id": "ability_priest_stackingdefense",
@@ -137683,7 +140023,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/upgrades/mods_armor/advanced_armor.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_priest_stackingdefense"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_weapon_priest_crossbow": {
       "id": "citadel_weapon_priest_crossbow",
@@ -137934,7 +140281,16 @@
         "bulletLifetime": 2
       },
       "image": "file://{images}/hud/abilities/weapon_damage.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [
+          "ASSASSINATE_LOWHEALTH_TARGET"
+        ],
+        "purges": false
+      }
     },
     "ability_priest_weaponswap": {
       "id": "ability_priest_weaponswap",
@@ -138339,7 +140695,18 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/priest/priest_crossbow.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_diminishing_slow",
+          "modifier_priest_crossbowequipped"
+        ],
+        "states": [
+          "AMMO_CHANGES_DISABLED",
+          "SINCLAIR_TAX_ULT_ACTIVE"
+        ],
+        "purges": false
+      }
     },
     "ability_priest_smokegrenade": {
       "id": "ability_priest_smokegrenade",
@@ -138714,7 +141081,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/warden/warden_crowd_control.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_base_aura",
+          "modifier_smokegrenade"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_priest_antispiritvest": {
       "id": "ability_priest_antispiritvest",
@@ -139038,7 +141414,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/upgrades/upgrade_shield.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_priest_stackingdefense"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_priest_silencebomb": {
       "id": "ability_priest_silencebomb",
@@ -139380,7 +141764,18 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/warden/warden_crowd_control.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_base_aura",
+          "modifier_citadel_priest_silencebomb_aura",
+          "modifier_silencebomb_debuff",
+          "modifier_smokegrenade"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_priest_flashbang": {
       "id": "ability_priest_flashbang",
@@ -139847,7 +142242,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/priest/priest_grenade.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_priest_flashbangburn",
+          "modifier_priest_flashbangburnaura"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_priest_beartrap": {
       "id": "ability_priest_beartrap",
@@ -140294,7 +142697,21 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/priest/priest_trap.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_priest_beartrap_debuff",
+          "modifier_priest_immobilize",
+          "modifier_priest_tether"
+        ],
+        "states": [
+          "GLOW_THROUGH_WALLS_TO_ENEMY",
+          "IGNORED_BY_NPC_TARGETING",
+          "VISIBLE_TO_ENEMY"
+        ],
+        "purges": false
+      }
     },
     "ability_familiar_alt_weapon": {
       "id": "ability_familiar_alt_weapon",
@@ -140808,7 +143225,14 @@
         "bulletLifetime": 2
       },
       "image": "file://{images}/hud/abilities/weapon_damage.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_tiny_character"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_melee_familiar": {
       "id": "ability_melee_familiar",
@@ -141401,7 +143825,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/familiar/familiar_pillow.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_diminishing_slow"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_familiar_ability01": {
       "id": "ability_familiar_ability01",
@@ -141807,7 +144239,20 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/familiar/familiar_sleep.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_unstoppable"
+        ],
+        "states": [
+          "KNOCKDOWN_IMMUNE",
+          "SLOW_IMMUNE",
+          "STATUS_IMMUNE",
+          "UNSTOPPABLE"
+        ],
+        "purges": false
+      }
     },
     "ability_familiar_helpinghands": {
       "id": "ability_familiar_helpinghands",
@@ -142339,7 +144784,19 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/familiar/familiar_helpers.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_familiar_ai_physics",
+          "modifier_familiar_helper_invis_watcher",
+          "modifier_neutral_aggro"
+        ],
+        "states": [
+          "FAMILIAR_INFEST_WAITING"
+        ],
+        "purges": false
+      }
     },
     "ability_familiar_attach": {
       "id": "ability_familiar_attach",
@@ -142813,7 +145270,22 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/familiar/familiar_tag_along.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_familiar_replicatedbarrier",
+          "modifier_familiar_attach_heal",
+          "modifier_familiar_attach_launchoff",
+          "modifier_familiar_attached",
+          "modifier_familiar_attachhost",
+          "modifier_familiar_camdummy",
+          "modifier_familiar_hopoutlockout",
+          "modifier_familiar_movingtoattach"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_familiar_attach_trigger": {
       "id": "ability_familiar_attach_trigger",
@@ -144225,7 +146697,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/fencer/fencer_sigil.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_slow_base"
+        ],
+        "states": [
+          "DISARMED"
+        ],
+        "purges": false
+      }
     },
     "ability_fencer_riposte_target_select": {
       "id": "ability_fencer_riposte_target_select",
@@ -144994,7 +147476,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/fencer/fencer_riposte.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_fencer_riposte_target_lifesteal"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_fencer_lunge": {
       "id": "ability_fencer_lunge",
@@ -145595,7 +148085,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/fencer/fencer_lungingstab.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_fencer_ultimate": {
       "id": "ability_fencer_ultimate",
@@ -146232,7 +148729,29 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/fencer/fencer_ult.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_fencer_ultimate_caster",
+          "modifier_fencer_ultimate_target"
+        ],
+        "states": [
+          "CAMERA_TRANSITION_ALWAYS",
+          "DASH_DISABLED_DEBUFF",
+          "DISARMED",
+          "HEALING_DISABLED",
+          "HIDE_AMMO",
+          "HIDE_CROSSHAIR",
+          "HIDE_STAMINA",
+          "MOD_NO_CLEANSE",
+          "MUTED",
+          "SILENCED",
+          "SILENCE_MOVEMENT_ABILITES",
+          "SINCLAIR_TAX_ULT_ACTIVE"
+        ],
+        "purges": false
+      }
     },
     "citadel_weapon_necro_set": {
       "id": "citadel_weapon_necro_set",
@@ -146591,7 +149110,16 @@
         "bulletLifetime": 2
       },
       "image": "file://{images}/hud/abilities/weapon_damage.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_necro_gun_searching",
+          "modifier_necro_gun_tether"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_melee_necro": {
       "id": "ability_melee_necro",
@@ -147311,7 +149839,18 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/necro/necro_hands.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_root",
+          "modifier_necro_zombiewall_debuff",
+          "modifier_necro_zombiewall_tether",
+          "modifier_zombiewall_ground_aura"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_necro_hauntingskull": {
       "id": "ability_necro_hauntingskull",
@@ -148156,7 +150695,22 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/necro/necro_skull.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_ability_resource_pool",
+          "modifier_barrier_tracker",
+          "modifier_base",
+          "modifier_necro_hauntingskull_area",
+          "modifier_necro_hauntingskull_stackingdebuff",
+          "modifier_slow_base"
+        ],
+        "states": [
+          "IGNORED_BY_NPC_TARGETING",
+          "IS_SMALL_DEPLOYABLE"
+        ],
+        "purges": false
+      }
     },
     "ability_necro_gravestone": {
       "id": "ability_necro_gravestone",
@@ -149030,7 +151584,26 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/necro/necro_gravestone.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_gravestone",
+          "modifier_necro_summondecay",
+          "modifier_necro_summonzombies_area"
+        ],
+        "states": [
+          "COMMAND_RESTRICTED",
+          "DO_NOT_DRAW_MODEL",
+          "IGNORED_BY_NPC_TARGETING",
+          "IMMOBILIZED",
+          "NEAR_HEAVY_PUNCHABLE_DESTROY",
+          "TECH_UNTARGETABLE_BY_ENEMIES",
+          "UNIT_STATUS_HEALTH_HIDDEN",
+          "UNIT_STATUS_HIDDEN"
+        ],
+        "purges": false
+      }
     },
     "ability_necro_killsummon": {
       "id": "ability_necro_killsummon",
@@ -149547,7 +152120,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/tokamak/tokamak_hot_shot.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_necro_killsummon_trigger": {
       "id": "ability_necro_killsummon_trigger",
@@ -149871,7 +152451,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/punkgoat/punkgoat_capricious.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_tengu_urn_aura",
+          "modifier_urn_debuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_necro_coffin": {
       "id": "ability_necro_coffin",
@@ -150206,7 +152794,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/necro/necro_coffin.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_root"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_necro_fear": {
       "id": "ability_necro_fear",
@@ -150677,7 +153273,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/necro/necro_siphon.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_necro_fear_stolen_stats",
+          "modifier_necro_rampup"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_necro_haunt": {
       "id": "ability_necro_haunt",
@@ -151170,7 +153774,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/trapper/trapper_spider_wave.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_diminishing_slow",
+          "modifier_necro_hauntingspirits"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_necro_wither": {
       "id": "ability_necro_wither",
@@ -151726,7 +154338,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/necro/necro_skull.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_barrier_tracker",
+          "modifier_base",
+          "modifier_necro_hauntingskull_area",
+          "modifier_necro_hauntingskull_stackingdebuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_melee_werewolf": {
       "id": "ability_melee_werewolf",
@@ -152937,7 +155559,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/werewolf/werewolf_slamfire.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_werewolf_unloadgun2"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_werewolf_kickflip": {
       "id": "ability_werewolf_kickflip",
@@ -153457,7 +156087,22 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/werewolf/werewolf_jumpback.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_disarmed",
+          "modifier_citadel_root",
+          "modifier_citadel_werewolf_leaping",
+          "modifier_werewolf_kickflip_bonusdamage",
+          "modifier_werewolf_kickflip_success_self"
+        ],
+        "states": [
+          "COMMAND_RESTRICTED",
+          "IMMOBILIZED"
+        ],
+        "purges": false
+      }
     },
     "ability_werewolf_maulingleap": {
       "id": "ability_werewolf_maulingleap",
@@ -153825,7 +156470,15 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/werewolf/werewolf_wolfforward.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_werewolf_leaping",
+          "modifier_citadel_werewolf_maulingleapdebuff"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_werewolf_netshot": {
       "id": "ability_werewolf_netshot",
@@ -154199,7 +156852,23 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/werewolf/werewolf_bola.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_root",
+          "modifier_werewolf_bola"
+        ],
+        "states": [
+          "DASH_DISABLED_DEBUFF",
+          "PULLDOWN_TO_GROUND",
+          "SILENCE_MOVEMENT_ABILITES",
+          "SLOWED",
+          "SPRINT_DISABLED",
+          "STAMINA_REGEN_PAUSED"
+        ],
+        "purges": false
+      }
     },
     "ability_werewolf_cripplingslash": {
       "id": "ability_werewolf_cripplingslash",
@@ -154574,7 +157243,18 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/werewolf/werewolf_tailwhack.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_citadel_disarmed",
+          "modifier_diminishing_slow",
+          "modifier_slow_base"
+        ],
+        "states": [
+          "SLOWED"
+        ],
+        "purges": false
+      }
     },
     "ability_werewolf_trackingbomb": {
       "id": "ability_werewolf_trackingbomb",
@@ -155045,7 +157725,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/drifter/drifter_terror.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_slow_base",
+          "modifier_werewolf_trackingbomb"
+        ],
+        "states": [
+          "SLOWED"
+        ],
+        "purges": false
+      }
     },
     "ability_werewolf_transformation": {
       "id": "ability_werewolf_transformation",
@@ -155683,6 +158373,18 @@
         "Signature_2": "ability_werewolf_maulingleap",
         "Signature_1": "ability_werewolf_frenzy",
         "Signature_3": "ability_werewolf_cripplingslash"
+      },
+      "modifiers": {
+        "classes": [
+          "modifier_ability_resource_pool",
+          "modifier_base",
+          "modifier_werewolf",
+          "modifier_werewolf_stackingbuff"
+        ],
+        "states": [
+          "WEREWOLF_READY"
+        ],
+        "purges": false
       }
     },
     "ability_werewolf_hunt": {
@@ -155974,7 +158676,17 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/phalanx_beef.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_base_aura",
+          "modifier_citadel_stunned",
+          "modifier_werewolf_huntaura_werewolf"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_werewolf_passive": {
       "id": "ability_werewolf_passive",
@@ -156497,7 +159209,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/drifter/drifter_terror.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_werewolf_onthehunt"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_werewolf_transformation_trigger": {
       "id": "ability_werewolf_transformation_trigger",
@@ -157000,7 +159719,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/werewolf/werewolf_bite.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_drifter_rend_bullet_lifesteal"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_werewolf_leap": {
       "id": "ability_werewolf_leap",
@@ -157495,7 +160221,16 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/werewolf/werewolf_wolfforward.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_citadel_werewolf_leaping",
+          "modifier_slow_base"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "citadel_weapon_unicorn_set": {
       "id": "citadel_weapon_unicorn_set",
@@ -157761,7 +160496,14 @@
         "bulletLifetime": 5
       },
       "image": "file://{images}/hud/abilities/weapon_damage.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_hero_gravity"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_melee_unicorn": {
       "id": "ability_melee_unicorn",
@@ -158322,7 +161064,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/unicorn/unicorn_flare.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_unicorn_radiant_flare_damage"
+        ],
+        "states": [],
+        "purges": false
+      }
     },
     "ability_unicorn_prismaticguard": {
       "id": "ability_unicorn_prismaticguard",
@@ -158660,7 +161409,18 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/unicorn/unicorn_shield.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_intrinsic_base",
+          "modifier_unicorn_prismatic_guard"
+        ],
+        "states": [
+          "SILENCED"
+        ],
+        "purges": false
+      }
     },
     "ability_unicorn_dazzlingorb": {
       "id": "ability_unicorn_dazzlingorb",
@@ -159033,7 +161793,20 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/unicorn/unicorn_orb.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_base",
+          "modifier_dazzling_orb_watcher",
+          "modifier_slow_base",
+          "modifier_unicorn_dazzling_orb_next_target"
+        ],
+        "states": [
+          "PRISMATIC_GUARDED",
+          "SLOWED"
+        ],
+        "purges": false
+      }
     },
     "ability_unicorn_luminousstrike": {
       "id": "ability_unicorn_luminousstrike",
@@ -159443,7 +162216,14 @@
       "tooltip": [],
       "weapon": null,
       "image": "file://{images}/hud/abilities/unicorn/unicorn_luminousflux.psd",
-      "alternateFormAbilities": null
+      "alternateFormAbilities": null,
+      "modifiers": {
+        "classes": [
+          "modifier_unicorn_luminousstrike_buff"
+        ],
+        "states": [],
+        "purges": false
+      }
     }
   }
 }

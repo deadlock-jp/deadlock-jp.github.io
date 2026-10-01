@@ -11,10 +11,20 @@ import { releasedHeroes, t, ability, heroTags, describe, heroNotes, heroStats, h
 import { resolveImagePath } from "../../parsers/image-manifest.ts";
 import { heroRanks, pickRows, topRankRows, heroTierTable } from "../../lib/herorank.ts";
 import { skillCard } from "../../lib/skillcard.ts";
+import { EFFECT_CATEGORIES, effectIndex, effectName, effectHeroAbilities } from "../../lib/effects.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const { L, t: tIn, term, langPath, currentLang } = Astro.locals.i18n;
 const T = L();
+
+/* 効果での絞り込みの選択肢と判定(状態異常・効果ページと同じ src/lib/effects.ts)。スキルで持つ効果だけ */
+const effectHeroes = effectHeroAbilities();
+const effectGroups = EFFECT_CATEGORIES.map((cat) => ({
+  label: T.effects.categories[cat],
+  options: effectIndex()
+    .filter((e) => e.def.category === cat && effectHeroes[e.def.id])
+    .map((e) => ({ id: e.def.id, name: effectName(e.def) })),
+})).filter((g) => g.options.length > 0);
 const isJa = currentLang() === "ja";
 /** ヒーローへのリンクの接頭辞(日本語は "") */
 const linkBase = base + langPath("/").slice(0, -1);
@@ -195,6 +205,19 @@ const H2 = {
       autocomplete="off"
       aria-label={T.heroes.searchAria}
     />
+    {/* 効果(状態異常など)での絞り込み。?effect=<id> でも指定できる。判定は src/lib/effects.ts(状態異常・効果ページと共通) */}
+    <label class="effpick">
+      <span>{T.heroes.effectFilter}</span>
+      <select id="heroeffect">
+        <option value="">{T.heroes.effectAll}</option>
+        {effectGroups.map((g) => (
+          <optgroup label={g.label}>
+            {g.options.map((o) => <option value={o.id}>{o.name}</option>)}
+          </optgroup>
+        ))}
+      </select>
+    </label>
+    <a class="effectslink" href={`${base}${langPath("/mechanics/effects/")}`}>{T.heroes.effectsLink} →</a>
     <span class="herohits" id="herohits"></span>
     <span class="herolegend" id="herolegend" hidden>
       <i class="lg lg-base"></i>{T.heroes.legendBase}
@@ -206,7 +229,7 @@ const H2 = {
   <ul class="grid" id="herogrid">
     {
       heroes.map(({ hero: h, name, findName, role, skills, topStats }) => (
-        <li data-find={`${findName} ${role} ${h.key}`}>
+        <li data-find={`${findName} ${role} ${h.key}`} data-hero={h.id}>
           <a href={`${linkBase}/heroes/${h.id}/`} data-herocard={h.id}>
             <span class="head">
               <HeroPortrait name={name} image={h.images.iconSmall} size={44} />
@@ -271,7 +294,7 @@ const H2 = {
   <AbilityHoverCard details={abilityDetails} />
 
   <script src={`${base}/js/${isJa ? "item-search.js" : "item-search-intl.js"}`} is:inline data-summary={isJa ? undefined : JSON.stringify(T.search)}></script>
-  <script is:inline define:vars={{ H }}>
+  <script is:inline define:vars={{ H, EFF: effectHeroes }}>
     // 一覧の絞り込み。ヒーロー名・ロール・スキル名・スキル説明・AP強化の説明のどれかで当たったヒーローを残し、
     // 当たったスキルのアイコンを強調する(基本の効果=実線、AP強化で付く効果=点線+AP表示)。
     (() => {
@@ -292,19 +315,41 @@ const H2 = {
       });
       const total = rows.length;
 
+      // 効果での絞り込み(?effect=<id>)。EFF は 効果 id → ヒーローID → [[スキルの実ID, AP強化なら1], …]
+      const eff = document.getElementById("heroeffect");
+      const fromUrl = new URLSearchParams(location.search).get("effect");
+      if (fromUrl && EFF[fromUrl]) eff.value = fromUrl;
+
       function apply() {
         const cq = S.compile(q.value);
+        const em = eff.value ? EFF[eff.value] : null;
         let direct = 0;
         let related = 0;
+        let shown = 0;
         const labels = new Set();
         for (const { li, skills, all } of rows) {
-          const m = cq ? S.match(cq, all) : [];
+          const effKeys = em ? em[li.dataset.hero] : null;
+          const m = em && !effKeys ? null : cq ? S.match(cq, all) : [];
           li.hidden = m === null;
           for (const s of skills) {
             s.el.classList.remove("hit", "hitup", "rel", "miss");
             s.mark.hidden = true;
           }
           if (m === null) continue;
+          shown++;
+          // 効果で絞っているときは、その効果を持つスキルを強調する(AP強化で付くものは点線 + AP)
+          if (effKeys && !cq) {
+            for (const s of skills) {
+              const hit = effKeys.find(([k]) => k === s.el.dataset.abilitycard);
+              if (!hit) s.el.classList.add("miss");
+              else if (hit[1]) {
+                s.el.classList.add("hitup");
+                s.mark.textContent = "AP";
+                s.mark.hidden = false;
+              } else s.el.classList.add("hit");
+            }
+            continue;
+          }
           if (m.length > 0) {
             related++;
             m.forEach((l) => labels.add(l));
@@ -339,12 +384,24 @@ const H2 = {
           // ヒーロー名だけで当たったときは、スキルを薄くしない
           if (any) for (const s of skills) if (!s.el.matches(".hit, .hitup, .rel")) s.el.classList.add("miss");
         }
-        hits.textContent = cq ? S.summary(direct, related, labels, total).split(H.countFrom).join(H.countTo) : "";
-        legend.hidden = !cq;
-        document.getElementById("herogrid").classList.toggle("searching", !!cq);
+        hits.textContent = cq
+          ? S.summary(direct, related, labels, total).split(H.countFrom).join(H.countTo)
+          : em
+            ? `${shown} / ${total}${H.countTo}`
+            : "";
+        legend.hidden = !cq && !em;
+        document.getElementById("herogrid").classList.toggle("searching", !!cq || !!em);
       }
 
       q.addEventListener("input", apply);
+      eff.addEventListener("change", () => {
+        // 絞り込みを URL に残す(共有・再読み込みで同じ表示になるように)
+        const u = new URL(location.href);
+        if (eff.value) u.searchParams.set("effect", eff.value);
+        else u.searchParams.delete("effect");
+        history.replaceState(null, "", u);
+        apply();
+      });
       apply();
     })();
   </script>
@@ -630,6 +687,13 @@ const H2 = {
     }
     .herosearch input:focus { outline: none; border-color: var(--c-accent); }
     .herohits { font-size: 12px; color: var(--c-text-muted); font-family: var(--font-mono); }
+    .effpick { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--c-text-muted); }
+    .effpick select {
+      background: var(--c-surface); color: var(--c-text-strong); border: 1px solid var(--c-border);
+      border-radius: var(--radius); padding: 6px 8px; font: inherit; font-size: 13px; max-width: 100%;
+    }
+    .effpick select:focus { outline: none; border-color: var(--c-accent); }
+    .effectslink { font-size: 12.5px; }
     .herolegend { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: var(--c-text-muted); }
     .herolegend[hidden] { display: none; }
     .lg { display: inline-block; width: 12px; height: 12px; border-radius: 3px; }

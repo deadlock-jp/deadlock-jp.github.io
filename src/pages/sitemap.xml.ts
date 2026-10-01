@@ -42,6 +42,9 @@ export const GET: APIRoute = ({ site }) => {
     { loc: "/mechanics/farm/", priority: "0.8", lastmod: dataDate },
     { loc: "/mechanics/objects/", priority: "0.7", lastmod: dataDate },
     { loc: "/mechanics/controls/", priority: "0.7", lastmod: dataDate },
+  // 状態異常・効果は多言語(検索に出す ja / en)。用語集は日本語のみ
+  { loc: "/mechanics/effects/", priority: "0.7", lastmod: dataDate },
+  { loc: "/mechanics/glossary/", priority: "0.7", lastmod: dataDate },
     { loc: "/about/", priority: "0.3", lastmod: dataDate },
     ...releasedHeroes().map((h) => ({ loc: `/heroes/${h.id}/`, priority: "0.7", lastmod: dataDate })),
     ...shopItems().map((i) => ({ loc: `/items/${i.id}/`, priority: "0.6", lastmod: dataDate })),
