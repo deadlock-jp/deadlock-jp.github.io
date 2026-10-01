@@ -6,6 +6,10 @@
  *
  * 分類は色だけでなく先頭の記号でも見分けられるようにし(■行動を止める ▼弱める ◆守る・強める ↺解除・軽減)、
  * ホバーで分類名が出る(title)。読み上げでは aria-label に分類名を含める。
+ *
+ * static = リンクにしない表示だけのバッジ(ビルドページのショップのカード)。カード自体が
+ * <button>(押すとビルドに入れる)なので、中にリンクを置くと押す操作とぶつかり、HTMLとしても不正になる。
+ * そのため要素はすべて <span>(ボタンの中に置ける要素)にし、値は省いて記号と効果名だけにする(値は title に残す)。
  */
 import { abilityEffects, itemEffects, type EffectCategory } from "../lib/effects.ts";
 
@@ -14,8 +18,10 @@ interface Props {
   id: string;
   /** small = スキルカードの中など、詰めて並べるとき */
   size?: "normal" | "small";
+  /** リンクにせず、記号と効果名だけを出す */
+  static?: boolean;
 }
-const { kind, id, size = "normal" } = Astro.props;
+const { kind, id, size = "normal", static: isStatic = false } = Astro.props;
 const { L, langPath } = Astro.locals.i18n;
 const E = L().effects;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -24,7 +30,20 @@ const GLYPH: Record<EffectCategory, string> = { control: "■", weaken: "▼", p
 const href = (effectId: string) => `${base}${langPath("/mechanics/effects/")}#${effectId}`;
 ---
 
-{badges.length > 0 && (
+{badges.length > 0 && isStatic && (
+  <span class:list={["effbadges", "small", "static"]}>
+    {badges.map((b) => {
+      const label = `${E.categories[b.category]}: ${b.name}${b.value ? ` ${b.value}` : ""}${b.viaUpgrade ? ` (${E.viaUpgrade})` : ""}`;
+      return (
+        <span class={`eb eb-${b.category}`} title={label} data-cat={b.category}>
+          <span class="g" aria-hidden="true">{GLYPH[b.category]}</span>
+          <span class="n">{b.name}</span>
+        </span>
+      );
+    })}
+  </span>
+)}
+{badges.length > 0 && !isStatic && (
   <ul class:list={["effbadges", size]}>
     {badges.map((b) => {
       const label = `${E.categories[b.category]}: ${b.name}${b.value ? ` ${b.value}` : ""}${b.viaUpgrade ? ` (${E.viaUpgrade})` : ""}`;
@@ -62,4 +81,8 @@ const href = (effectId: string) => `${base}${langPath("/mechanics/effects/")}#${
   .eb-counter { --eb: var(--c-accent); }
   .small .eb { padding: 1px 6px; font-size: 11px; }
   .small .v { font-size: 10px; }
+  .static { justify-content: center; gap: 3px; }
+  .static .eb { padding: 0 5px; font-size: 9.5px; gap: 3px; color: var(--c-text); }
+  .static .eb:hover { background: var(--c-surface-2); }
+  .static .g { font-size: 8px; }
 </style>

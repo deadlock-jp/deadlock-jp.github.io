@@ -96,6 +96,12 @@ export const en: Dict = {
     },
   },
   propertyLabels: {
+    HealAmpRegenPercent: "Health Regen Healing",
+    SlideTurnScale: "Slide Turning",
+    MoveWhileShootingSpeedPenaltyReductionPercent: "Move Speed Penalty Reduction While Shooting",
+    MoveWhileZoomedSpeedPenaltyReductionPercent: "Move Speed Penalty Reduction While Zoomed",
+    EnableAbilityCharges: "Ability Charges Enabled",
+    DamageThresholdDuration: "Damage Threshold Duration",
     BulletResistReductionDuration: "Bullet Resist Reduction Duration",
     EnemyDashSlowPercent: "Enemy Dash Distance Reduction",
     MoveSlowPercent: "Movement Slow",

@@ -99,6 +99,12 @@ export const zhCn: Dict = {
     },
   },
   propertyLabels: {
+    HealAmpRegenPercent: "生命再生治疗量",
+    SlideTurnScale: "滑铲时转向",
+    MoveWhileShootingSpeedPenaltyReductionPercent: "射击时移速惩罚减免",
+    MoveWhileZoomedSpeedPenaltyReductionPercent: "瞄准时移速惩罚减免",
+    EnableAbilityCharges: "技能充能化",
+    DamageThresholdDuration: "伤害阈值持续时间",
     BulletResistReductionDuration: "子弹抗性降低持续时间",
     EnemyDashSlowPercent: "敌方冲刺距离降低",
     MoveSlowPercent: "移动减速",

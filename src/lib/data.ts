@@ -127,9 +127,41 @@ const ownLabelsJa = (propertyLabelsJson as unknown as { labels: Record<string, s
 const ownLabels = (): Record<string, string> =>
   currentLang() === "ja" ? ownLabelsJa : (L().propertyLabels as Record<string, string>);
 
+/**
+ * キー割り当ての名前(ゲーム内の設定画面の表記)。説明文の {g:citadel_binding:'X'} と用語集が使う。
+ * トークン名の書き方がばらばらなので順に試す:
+ *   Mantle → citadel_keybind_mantle / HeldItem → citadel_keybind_held_item /
+ *   AbilityMelee → citadel_keybind_melee / AltCast → citadel_keybind_alt_cast / MoveForward → citadel_keybind_forward
+ * どれも無ければ `${key}_label`、それも無ければ内部名を読める形にする
+ */
+export function bindingName(key: string): string {
+  const snake = key.replace(/([a-z0-9])([A-Z])/g, "$1_$2").toLowerCase();
+  for (const c of [key.toLowerCase(), snake, snake.replace(/^ability_/, ""), snake.replace(/^move_/, "")]) {
+    const v = t(`citadel_keybind_${c}`, "");
+    if (v) return v;
+  }
+  return t(`${key}_label`, humanize(key));
+}
+
+/**
+ * 自分のラベルを持たないが、同じ意味の公式ラベルがあるプロパティ(内部名 → 公式ラベルを持つ内部名)。
+ * 自前の訳(property-labels.json)より先に見るので、どの言語でもゲームの表記になる。
+ *   LiftDuration … レイスのテレキネシスで敵を持ち上げる時間。EnemyLiftDuration(ノックアップ時間)と同じ意味
+ */
+const LABEL_ALIASES: Record<string, string> = {
+  LiftDuration: "EnemyLiftDuration",
+};
+
+/** 単位(_postfix)。ラベルと同じく、別名があればそちらの単位も見る */
+function postfixOf(name: string): string {
+  return t(`${name}_postfix`, "") || (LABEL_ALIASES[name] ? t(`${LABEL_ALIASES[name]}_postfix`, "") : "");
+}
+
 export function statLabel(name: string, fallback?: string): string {
   const exact = t(`${name}_label`, "");
   if (exact) return exact;
+  const alias = LABEL_ALIASES[name] ? t(`${LABEL_ALIASES[name]}_label`, "") : "";
+  if (alias) return alias;
   const key = labelTokenIndex().get(`${name}_label`.toLowerCase());
   const viaLabel = key ? t(key, "") : "";
   if (viaLabel) return viaLabel;
@@ -259,7 +291,7 @@ export function describe(
     }
     const valUnit = trailingUnit(val);
     if (valUnit) {
-      const postfix = t(`${prop}_postfix`, "");
+      const postfix = postfixOf(prop);
       const candidates = [...new Set([postfix, postfix.trim(), valUnit])].filter(Boolean);
       for (const cand of candidates) {
         const idx = cand.indexOf(valUnit);
@@ -284,11 +316,8 @@ export function describe(
           ? ""
           : t(`InlineAttribute_${attr}`, t(`${attr}_label`, humanize(attr))),
     )
-    // キーバインドの参照は [前進] のように括って示す
-    .replace(
-      /\{g:citadel_binding:'([A-Za-z0-9_]+)'\}/g,
-      (_m, key: string) => `[${t(`${key}_label`, humanize(key))}]`,
-    )
+    // キーバインドの参照は [前移動] のように、ゲーム内のキー割り当ての名前で括って示す
+    .replace(/\{g:citadel_binding:'([A-Za-z0-9_]+)'\}/g, (_m, key: string) => `[${bindingName(key)}]`)
     // 上記以外の {x:...} 形式は最後の引数だけを読める形にして残す
     .replace(/\{[a-z]+:([^}]*)\}/g, (_m, inner: string) => {
       const last = inner.split(":").pop() ?? inner;
@@ -406,7 +435,7 @@ export function formatProperty(
   // 素直に足すと "対NPC武器ダメージ対NPC" になる)。buildModifierLabels() と同じ回避
   const label = cond && !baseLabel.includes(cond) ? baseLabel + cond : baseLabel;
   const prefix = t(`${lookupName}_prefix`, "");
-  const postfix = t(`${lookupName}_postfix`, "");
+  const postfix = postfixOf(lookupName);
 
   // rawValue は "15m" のように単位付きのことがある。
   // その場合 postfix("m")を足すと "15mm" になるので、重複ぶんは足さない。
@@ -800,7 +829,7 @@ function adjustmentValueText(
   /* 基礎値の倍率は "×0.6"、AP強化ぶんの倍率は増分なので "+0.45" と出す */
   if (isScale) return isUpgrade ? `${value >= 0 ? "+" : ""}${body}` : `×${body}`;
   const override = source?.properties?.[name]?.labelOverride ?? null;
-  const postfix = t(`${override ?? name}_postfix`, "").trim();
+  const postfix = postfixOf(override ?? name).trim();
   const sign = isUpgrade && value >= 0 ? "+" : "";
   return `${sign}${body}${dedupedTail(body, postfix)}`;
 }

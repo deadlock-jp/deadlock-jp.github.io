@@ -4,6 +4,7 @@ import ItemIcon from "../../components/ItemIcon.astro";
 import HeroPortrait from "../../components/HeroPortrait.astro";
 import SoulIcon from "../../components/SoulIcon.astro";
 import RankBandPicker from "../../components/RankBandPicker.astro";
+import EffectBadges from "../../components/EffectBadges.astro";
 import { RANK_BANDS } from "../../lib/rankBands.ts";
 import {
   releasedHeroes,
@@ -422,6 +423,8 @@ const payload = {
                           />
                           <span class="cname">{t(i.nameToken, i.id)}</span>
                           <span class="crel" hidden>{T.common.related}</span>
+                          {/* 状態異常・効果。カードは押すとビルドに入れるボタンなので、リンクにせず表示だけ */}
+                          <EffectBadges kind="item" id={i.id} static />
                           {/* 人気率・勝率。中身はヒーロー選択時にJSが入れる */}
                           <span class="cstat" hidden>
                             <span class="crow"><i>{T.build.pickShort}</i><b class="cpick">—</b></span>
@@ -701,6 +704,20 @@ const payload = {
         if (meta) cell.style.setProperty("--cat", `var(--c-${meta.cssVar})`);
         const src = document.querySelector(`.card[data-id="${CSS.escape(id)}"] .icon`);
         if (src) cell.append(src.cloneNode(true));
+        // 状態異常・効果。ショップのカードのバッジから記号だけを写す(名前と値はホバーの title)
+        const fx = document.querySelectorAll(`.card[data-id="${CSS.escape(id)}"] .eb`);
+        if (fx.length) {
+          const box = document.createElement("span");
+          box.className = "cfx";
+          for (const b of fx) {
+            const g = document.createElement("span");
+            g.className = "cfx-g cfx-" + b.dataset.cat;
+            g.textContent = b.querySelector(".g")?.textContent ?? "";
+            g.title = b.title;
+            box.append(g);
+          }
+          cell.append(box);
+        }
         // 12枠を超えた分。ゲームでは持てない数であることを示す
         if (i >= SLOT_TOTAL) cell.classList.add("over");
         cells.append(cell);
@@ -1866,6 +1883,20 @@ const payload = {
     /* 12枠を超えた分。ゲームでは持てない数であることを示す */
     .cells :global(.cell.over) { outline: 2px solid #d08a3e; outline-offset: 1px; }
     .cells :global(.cell.filled .icon) { width: 100%; height: 100%; border: none; border-radius: 4px; }
+    /* 枠の状態異常・効果の記号(EffectBadges と同じ記号・同じ色。左下に重ねる) */
+    .cells :global(.cell.filled) { position: relative; }
+    .cells :global(.cfx) {
+      position: absolute; left: 1px; bottom: 1px; display: flex; gap: 1px;
+      line-height: 1; pointer-events: none;
+    }
+    .cells :global(.cfx-g) {
+      font-size: 8px; padding: 1px 2px; border-radius: 3px; pointer-events: auto;
+      background: color-mix(in srgb, var(--c-bg) 80%, transparent); color: var(--c-accent);
+    }
+    .cells :global(.cfx-control) { color: var(--c-nerf); }
+    .cells :global(.cfx-weaken) { color: var(--c-weapon); }
+    .cells :global(.cfx-protect) { color: var(--c-buff); }
+    .cells :global(.cfx-counter) { color: var(--c-accent); }
     .slotnote { font-size: 11px; color: var(--c-text-faint); margin: var(--sp-2) 0 var(--sp-4); }
 
     /* ---- 左: TYPE別ボックス ---- */

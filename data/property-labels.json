@@ -41,7 +41,13 @@
     "BounceRadius": "跳ね返りの範囲",
     "AuraHPS": "オーラの回復／秒",
     "BeamHealPerSecond": "ビームの回復／秒",
-    "TeleportDamage": "テレポート時のダメージ"
+    "TeleportDamage": "テレポート時のダメージ",
+    "HealAmpRegenPercent": "HPリジェネによる回復量",
+    "SlideTurnScale": "スライディング中の旋回",
+    "MoveWhileShootingSpeedPenaltyReductionPercent": "射撃中の移動速度低下の軽減",
+    "MoveWhileZoomedSpeedPenaltyReductionPercent": "ズーム中の移動速度低下の軽減",
+    "EnableAbilityCharges": "アビリティのチャージ化",
+    "DamageThresholdDuration": "ダメージしきい値の継続時間"
   },
   "context": {
     "BulletResistReductionDuration": "ホリデイ クラックショット",
@@ -83,6 +89,12 @@
     "BounceRadius": "セレステ シャイニングワンダー",
     "AuraHPS": "ケルビン フロストグレネード",
     "BeamHealPerSecond": "ケルビン アークティックビーム",
-    "TeleportDamage": "ドリフター 追跡者の刻印"
+    "TeleportDamage": "ドリフター 追跡者の刻印",
+    "HealAmpRegenPercent": "ヒーリングテンポ・ヒーリングブースター",
+    "SlideTurnScale": "エレクトリックブーツ",
+    "MoveWhileShootingSpeedPenaltyReductionPercent": "フリートフット",
+    "MoveWhileZoomedSpeedPenaltyReductionPercent": "フリートフット",
+    "EnableAbilityCharges": "オムニチャージ",
+    "DamageThresholdDuration": "ミスティックコンジット"
   }
 }

@@ -11,7 +11,7 @@
  *   - 数値はゲームデータから引く(ルール6)。手で書かない
  *   - 状態異常は説明を短くして、状態異常・効果ページ(src/lib/effects.ts)の該当箇所へリンクする
  */
-import { t, souls, heroesFile, item } from "./data.ts";
+import { t, souls, heroesFile, item, bindingName } from "./data.ts";
 import { matchFlow, clock, duration } from "./matchFlow.ts";
 import { economyTable } from "./souls.ts";
 import { effectIndex, effectName } from "./effects.ts";
@@ -45,19 +45,6 @@ export interface GlossaryEntry {
   links: GlossaryLink[];
   /** 関連するヒーロー・スキル・アイテム(アイコンを並べて各ページへリンクする) */
   related?: { heroes?: number[]; abilities?: string[]; items?: string[] };
-}
-
-/**
- * キー割り当ての名前(ゲーム内の設定画面の表記)。トークン名の書き方がばらばらなので順に試す:
- * Mantle → citadel_keybind_mantle / HeldItem → citadel_keybind_held_item / AbilityMelee → citadel_keybind_melee
- */
-function bindingName(key: string): string {
-  const snake = key.replace(/([a-z0-9])([A-Z])/g, "$1_$2").toLowerCase();
-  for (const c of [key.toLowerCase(), snake, snake.replace(/^ability_/, "")]) {
-    const v = t(`citadel_keybind_${c}`, "");
-    if (v) return v;
-  }
-  return key;
 }
 
 /** ゲーム内の文。キー割り当ての差し込みは [ジャンプ／乗り越え] のように、ゲーム内のキー名で読める形にする */

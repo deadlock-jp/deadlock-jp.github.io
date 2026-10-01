@@ -24,7 +24,7 @@ export const GLOSSARY_LINK_PAGES = new Set([
   "/mechanics/farm/",
   "/mechanics/objects/",
   "/mechanics/controls/",
-  "/mechanics/effects/",
+  // 状態異常・効果ページは対象外。効果の名前が用語集へリンクし、用語集から効果ページへ戻るだけになるため
 ]);
 
 /** この中のテキストにはリンクを付けない要素 */

@@ -100,6 +100,12 @@ export const ko: Dict = {
     },
   },
   propertyLabels: {
+    HealAmpRegenPercent: "체력 재생에 의한 치유량",
+    SlideTurnScale: "슬라이딩 중 방향 전환",
+    MoveWhileShootingSpeedPenaltyReductionPercent: "사격 중 이동 속도 감소 완화",
+    MoveWhileZoomedSpeedPenaltyReductionPercent: "줌 중 이동 속도 감소 완화",
+    EnableAbilityCharges: "스킬 충전화",
+    DamageThresholdDuration: "피해 임계값 지속 시간",
     BulletResistReductionDuration: "총탄 저항 감소 지속 시간",
     EnemyDashSlowPercent: "적 대시 거리 감소",
     MoveSlowPercent: "이동 속도 둔화",
