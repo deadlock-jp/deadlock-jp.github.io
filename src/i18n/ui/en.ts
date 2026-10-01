@@ -231,6 +231,9 @@ export const en: Dict = {
     buyersWinNote:
       "Win rates run higher for pricier items, because the team that is already ahead can afford more expensive items.",
     showAll: (n: number) => `Show all (${n} more)`,
+    bands: { low: "Lower", mid: "Middle", high: "Upper" },
+    bandRange: (label: string, from: string, to: string) => `${label} (${from}–${to})`,
+    byRank: "By rank",
   },
   top: {
     title: "Home",

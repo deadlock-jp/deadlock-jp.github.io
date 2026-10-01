@@ -233,6 +233,9 @@ export const ko: Dict = {
     buyersLead: "각 영웅이 사용된 경기 중 이 아이템이 구매된 비율(채택률)이 높은 순입니다.",
     buyersWinNote: "승률은 이미 유리한 쪽일수록 비싼 아이템을 살 수 있기 때문에, 비싼 아이템일수록 높게 나오기 쉽습니다.",
     showAll: (n: number) => `모두 보기 (나머지 ${n}명)`,
+    bands: { low: "하위", mid: "중위", high: "상위" },
+    bandRange: (label: string, from: string, to: string) => `${label} (${from}~${to})`,
+    byRank: "랭크별",
   },
   top: {
     title: "홈",

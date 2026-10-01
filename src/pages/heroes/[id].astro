@@ -12,7 +12,7 @@ import {
   modifierLabel,
   heroTags,
   heroNotes,
-  heroPopularItems,
+  heroPopularCandidates,
   itemHoverData,
 } from "../../lib/data.ts";
 import { heroRadar, heroMiscRows, radarAxesForWeapon } from "../../lib/herorank.ts";
@@ -98,9 +98,12 @@ const altWeaponRadar = altWeapon ? radarAxesForWeapon(altWeapon) : null;
 
 const adjRows = heroBalanceHistory(hero.key, base);
 const matchup = heroMatchup(hero);
-/* アイテムのホバー詳細は、このページに出すアイテム(人気のアイテムと対策のアイテム)の分だけ作る */
+/*
+ * アイテムのホバー詳細は、このページに出すアイテム(人気のアイテムと対策のアイテム)の分だけ作る。
+ * 人気のアイテムはランク帯を切り替えると入れ替わるので、どれかの帯で出うるもの全部
+ */
 const hoverItems = [
-  ...(heroPopularItems(hero.id) ?? []).flatMap((g) => g.rows.map((r) => r.item)),
+  ...heroPopularCandidates(hero.id),
   ...matchup.counters.flatMap((c) => c.items.map((mi) => mi.item)),
 ];
 const itemDetails = Object.fromEntries(hoverItems.map((i) => [i.id, itemHoverData(i)]));

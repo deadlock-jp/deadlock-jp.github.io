@@ -1,0 +1,7 @@
+{
+  "bands": [
+    { "key": "low", "minTier": 1, "maxTier": 4, "minBadge": 11, "maxBadge": 46 },
+    { "key": "mid", "minTier": 5, "maxTier": 8, "minBadge": 51, "maxBadge": 86 },
+    { "key": "high", "minTier": 9, "maxTier": 11, "minBadge": 91, "maxBadge": 116 }
+  ]
+}

@@ -133,7 +133,8 @@ const shopById = new Map(shopItems().map((i) => [i.id, i]));
  * 1試合あたりの枠数ではなく「どのカテゴリがよく積まれるか」の比率。
  */
 function composition(heroId: number): Record<ItemSlotType, number> | null {
-  const st = itemStats.heroes[String(heroId)];
+  // 相性の判定はランク帯で変えない(常に全ランクの統計)
+  const st = itemStats.bands.all.heroes[String(heroId)];
   if (!st) return null;
   const sum: Record<ItemSlotType, number> = { WeaponMod: 0, Armor: 0, Tech: 0 };
   for (const [id, v] of Object.entries(st.items ?? {})) {

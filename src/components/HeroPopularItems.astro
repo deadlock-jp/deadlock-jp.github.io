@@ -3,10 +3,25 @@
  * ヒーローページの「人気のアイテム」。ティアごとの採用率上位(deadlock-api.com の対戦統計。
  * ビルド時に埋め込み、Actions の6時間おきの更新で入れ替わる)。
  * 見出しはゲーム内の表記「人気のアイテム」(ショップのタブ名)。
+ *
+ * HTML に書き出すのは全ランクの表示。ランク帯(RankBandPicker)を切り替えると、
+ * 埋め込んだこのヒーローの分の帯別データで JS が行を並べ直す。全ランクの上位に入らないが
+ * 他の帯では上位に入るアイテムの行は <template> に控えておく(画面にも検索エンジンにも出ない)。
  */
 import ItemIcon from "./ItemIcon.astro";
 import PickRateRow from "./PickRateRow.astro";
-import { t, souls, itemStats, heroPopularItems, statsPeriodLabel } from "../lib/data.ts";
+import RankBandPicker from "./RankBandPicker.astro";
+import {
+  t,
+  souls,
+  itemStats,
+  itemStatsBand,
+  heroPopularItems,
+  heroPopularCandidates,
+  statsPeriodLabel,
+} from "../lib/data.ts";
+import type { Item } from "../types/item.ts";
+import type { RankBandKey } from "../lib/rankBands.ts";
 
 interface Props {
   heroId: number;
@@ -16,26 +31,58 @@ const { heroId, base } = Astro.props;
 const { L, langPath } = Astro.locals.i18n;
 const T = L();
 const S = L().stats;
+const period = statsPeriodLabel(itemStats);
+const metaOf = (band: RankBandKey) =>
+  `${period} / ${S.matches((itemStatsBand(band)?.heroes[String(heroId)]?.matches ?? 0).toLocaleString("en-US"))}`;
 const popular = {
   title: t("Citadel_Shop_NavTab_Recommended", "Popular Items"),
-  period: statsPeriodLabel(itemStats),
-  matches: itemStats.heroes[String(heroId)]?.matches ?? 0,
+  meta: metaOf("all"),
   /** null ならこの期間の統計がまだ無い */
   tiers: heroPopularItems(heroId),
 };
+
+/** 帯ごとの表示内容(このヒーローの分だけ)。tiers はティアごとの [アイテムID, 採用率, 勝率, サンプル少] */
+const bandData = Object.fromEntries(
+  (Object.keys(itemStats.bands) as RankBandKey[]).map((band) => {
+    const tiers = heroPopularItems(heroId, 4, band);
+    return [
+      band,
+      {
+        meta: metaOf(band),
+        tiers: tiers ? tiers.map((g) => g.rows.map((r) => [r.item.id, r.pick, r.win, r.low ? 1 : 0])) : null,
+      },
+    ];
+  }),
+);
+/** 全ランクの表示には無いが、他の帯で出うるアイテム(行を <template> に控える) */
+const shown = new Set((popular.tiers ?? []).flatMap((g) => g.rows.map((r) => r.item.id)));
+const spare = heroPopularCandidates(heroId).filter((i) => !shown.has(i.id));
+const sectionId = `pp-${heroId}`;
+const iconOf = (i: Item) => ({
+  name: t(i.nameToken, i.id),
+  slotType: i.slotType,
+  tier: i.tier,
+  shopIcon: i.shopIcon,
+  activation: i.activation,
+  isImbue: i.isImbue,
+  size: 32,
+});
 ---
 
-<section class="popular">
+<section class="popular" id={sectionId}>
   <h2>{popular.title}</h2>
-  <p class="pp-meta">{popular.period} / {S.matches(popular.matches.toLocaleString("en-US"))}</p>
+  <div class="pp-head">
+    <p class="pp-meta" data-pp-meta>{popular.meta}</p>
+    {popular.tiers && <RankBandPicker />}
+  </div>
   {popular.tiers ? (
     <>
       <p class="pp-lead">{S.popularLead}</p>
-      <div class="pp-tiers">
+      <div class="pp-tiers" data-pp-tiers>
         {popular.tiers.map((g) => (
           <div class="pp-tier">
             <h3>{T.common.tier(g.tier)}<span class="pp-price">{souls(g.price)}</span></h3>
-            <ol>
+            <ol data-pp-tier>
               {g.rows.map((r) => (
                 <PickRateRow
                   id={r.item.id}
@@ -46,22 +93,49 @@ const popular = {
                   low={r.low}
                   card={{ kind: "item", id: r.item.id }}
                 >
-                  <ItemIcon
-                    name={t(r.item.nameToken, r.item.id)}
-                    slotType={r.item.slotType}
-                    tier={r.item.tier}
-                    shopIcon={r.item.shopIcon}
-                    activation={r.item.activation}
-                    isImbue={r.item.isImbue}
-                    size={32}
-                  />
+                  <ItemIcon {...iconOf(r.item)} />
                 </PickRateRow>
               ))}
             </ol>
           </div>
         ))}
       </div>
+      <p class="pp-note" data-pp-none hidden>{S.noData}</p>
+      <template>
+        {spare.map((i) => (
+          <PickRateRow
+            id={i.id}
+            name={t(i.nameToken, i.id)}
+            href={`${base}${langPath(`/items/${i.id}/`)}`}
+            pick={0}
+            win={0}
+            low={false}
+            card={{ kind: "item", id: i.id }}
+          >
+            <ItemIcon {...iconOf(i)} />
+          </PickRateRow>
+        ))}
+      </template>
       <p class="pp-note">{S.winNote} {S.source}</p>
+      <script is:inline define:vars={{ sectionId, bandData }}>
+        (() => {
+          const root = document.getElementById(sectionId);
+          let rows = null;
+          document.addEventListener("rankband", (e) => {
+            const api = window.rankBand;
+            if (!root || !api) return;
+            rows ??= api.pool(root);
+            const d = bandData[e.detail.band] ?? null;
+            root.querySelector("[data-pp-meta]").textContent = d ? d.meta : bandData.all.meta;
+            const tiers = d && d.tiers;
+            root.querySelector("[data-pp-tiers]").hidden = !tiers;
+            root.querySelector("[data-pp-none]").hidden = !!tiers;
+            if (!tiers) return;
+            root.querySelectorAll("ol[data-pp-tier]").forEach((ol, i) => api.fill(ol, tiers[i] ?? [], rows));
+            window.itemHoverCard?.wire(root);
+          });
+        })();
+      </script>
     </>
   ) : (
     <p class="pp-note">{S.noData}</p>
@@ -72,9 +146,14 @@ const popular = {
   /* 人気のアイテム(ヒーローページ)。主役は採用率(太字の数値とバー)、勝率は小さく */
   .popular { margin-top: var(--sp-5); }
   .popular h2 { margin-bottom: var(--sp-1); }
-  .pp-meta { margin: 0 0 var(--sp-2); font-size: 12px; color: var(--c-text-muted); }
+  .pp-head {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: var(--sp-2) var(--sp-3); margin: 0 0 var(--sp-2);
+  }
+  .pp-meta { margin: 0; font-size: 12px; color: var(--c-text-muted); }
   .pp-lead { margin: 0 0 var(--sp-3); font-size: 13px; color: var(--c-text); }
   .pp-tiers { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: var(--sp-3); }
+  .pp-tiers[hidden] { display: none; }
   .pp-tier { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); padding: var(--sp-2) var(--sp-3); }
   .pp-tier h3 {
     display: flex; align-items: baseline; gap: 8px; margin: 0 0 6px; padding: 0; border: none;

@@ -10,6 +10,7 @@ import propertyLabelsJson from "../../data/property-labels.json" with { type: "j
 import itemStatsJson from "../../data/item-stats.json" with { type: "json" };
 import heroStatsJson from "../../data/hero-stats.json" with { type: "json" };
 import type { HeroesFile, Hero } from "../types/hero.ts";
+import type { RankBandKey } from "./rankBands.ts";
 import type { ItemsFile, Item } from "../types/item.ts";
 import type { AbilitiesFile, Ability } from "../types/ability.ts";
 import type { LocalizationFile } from "../types/localization.ts";
@@ -1042,24 +1043,42 @@ export interface StatsWindowPatch {
   titleEn: string | null;
   titleJa: string | null;
 }
+/** ランク帯1つ分のヒーロー×アイテム統計 */
+export interface ItemStatsBand {
+  /** その帯の全体の試合数 */
+  matches: number;
+  heroes: Record<string, { matches: number; items: Record<string, [number, number, number]> }>;
+}
 export interface ItemStatsFile {
   fetchedAt: string;
   /** "sincePatch"(最新のバランス変更以降) か、古いファイルの "last30days" */
   window: string;
   windowStart?: string;
   windowPatch?: StatsWindowPatch;
-  /** 集計期間の全体の試合数 */
-  totalMatches?: number;
   lowSampleMatches: number;
-  heroes: Record<string, { matches: number; items: Record<string, [number, number, number]> }>;
+  /**
+   * ランク帯ごと(src/lib/rankBands.ts)。all は必ずある。帯は取得できた版だけにある
+   * (帯を分ける前の古いファイル(schemaVersion 1)は all だけに読み替える)
+   */
+  bands: { all: ItemStatsBand } & Partial<Record<RankBandKey, ItemStatsBand>>;
 }
-export const itemStats = itemStatsJson as unknown as ItemStatsFile;
+export const itemStats: ItemStatsFile = (() => {
+  const raw = itemStatsJson as unknown as ItemStatsFile & {
+    heroes?: ItemStatsBand["heroes"];
+    totalMatches?: number;
+  };
+  if (raw.bands) return raw;
+  return { ...raw, bands: { all: { matches: raw.totalMatches ?? 0, heroes: raw.heroes ?? {} } } };
+})();
+/** その帯の統計。帯が無いファイルなら null */
+export const itemStatsBand = (band: RankBandKey): ItemStatsBand | null => itemStats.bands[band] ?? null;
 
 /**
  * ランク帯別のヒーロー統計。data/hero-stats.json
  * (tools/fetch-hero-stats.mjs が deadlock-api.com から取得)。
  *
- * buckets のキーは "all"(全ランク)と ランクtier("1"〜"11")。
+ * buckets のキーは "all"(全ランク)、ランクtier("1"〜"11")、tier をまとめた帯("low" / "mid" / "high"。
+ * src/lib/rankBands.ts)。
  * tier はゲーム内のランク名トークン Citadel_ranks_rank<tier-1> に対応する。
  * heroes の値は [ピック率, 勝率, BAN率, 試合数] で、率は 0.1% 刻みの整数。
  *
@@ -1194,13 +1213,14 @@ export interface PopularItemRow {
 /**
  * そのヒーローで採用率の高いアイテムを、ティア(T1〜T4)ごとに上位 perTier 件。
  * ショップ掲載アイテムのみ(レジェンダリー T5 は入らない)。並べ替えは採用率。
- * 統計が無いヒーロー(試合がまだ無い)は null
+ * 統計が無いヒーロー(その帯で試合がまだ無い)は null
  */
 export function heroPopularItems(
   heroId: number,
   perTier = 4,
+  band: RankBandKey = "all",
 ): { tier: number; price: number; rows: PopularItemRow[] }[] | null {
-  const h = itemStats.heroes[String(heroId)];
+  const h = itemStatsBand(band)?.heroes[String(heroId)];
   if (!h || Object.keys(h.items).length === 0) return null;
   const tiers = [1, 2, 3, 4];
   return tiers.map((tier) => {
@@ -1214,6 +1234,18 @@ export function heroPopularItems(
       .slice(0, perTier);
     return { tier, price: itemsFile.itemPricePerTier[tier] ?? 0, rows };
   });
+}
+
+/**
+ * ヒーローページの「人気のアイテム」に、どれかのランク帯で出うるアイテム(重複なし)。
+ * 帯を切り替えたときの行の控えと、ホバーカードのデータをこの分だけ用意するのに使う
+ */
+export function heroPopularCandidates(heroId: number, perTier = 4): Item[] {
+  const seen = new Map<string, Item>();
+  for (const band of Object.keys(itemStats.bands) as RankBandKey[]) {
+    for (const g of heroPopularItems(heroId, perTier, band) ?? []) for (const r of g.rows) seen.set(r.item.id, r.item);
+  }
+  return [...seen.values()];
 }
 
 export interface ItemBuyerRow {
@@ -1231,11 +1263,14 @@ export interface ItemBuyerRow {
  * overall は全ヒーローを通した採用率(このアイテムを買ったヒーロー枠の数 ÷ 全ヒーロー枠の数)で、
  * 丸めた‰値ではなく試合数そのものから出す。統計が1件も無いアイテム(レジェンダリーなど)は null
  */
-export function itemBuyers(itemId: string): { overall: number; rows: ItemBuyerRow[] } | null {
+export function itemBuyers(
+  itemId: string,
+  band: RankBandKey = "all",
+): { overall: number; rows: ItemBuyerRow[] } | null {
   let bought = 0;
   let slots = 0;
   const rows: ItemBuyerRow[] = [];
-  for (const [heroId, h] of Object.entries(itemStats.heroes)) {
+  for (const [heroId, h] of Object.entries(itemStatsBand(band)?.heroes ?? {})) {
     const hero = heroesFile.heroes[heroId];
     if (!hero?.released) continue;
     slots += h.matches;

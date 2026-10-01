@@ -13,6 +13,11 @@
  * (tier1 = rank0 = オブスキュラス 〜 tier11 = rank10)。表示名は画面側でこのトークンから引く。
  * bucket=0 はランク情報が無い試合。ランク別には使わず、全体集計にだけ含める。
  *
+ * tier をまとめた帯(src/lib/rankBands.json の low / mid / high)も出す。
+ * 帯は追加のリクエストをせず、同じ応答の avg_badge ごとの生の試合数・勝利数・BAN数を足して作る
+ * (丸めた‰値を足すのではないので誤差は積み重ならない)。avg_badge で絞って API から取った値と
+ * 一致することを 2026-10-01 に確認済み(上位帯: 36,077 ヒーロー枠)。
+ *
  * ■ BAN率について(重要)
  * hero-ban-stats はデモ解析でBANを取り出せた試合だけが対象で、
  * 「BANデータのある試合数」はAPIから取得できない(全体127万試合に対しBAN総数は18万程度)。
@@ -82,6 +87,12 @@ console.error(
 const permille = (v) => Math.round(v * 1000);
 /** avg_badge(11〜116) → ランクtier(1〜11) */
 const tierOf = (badge) => Math.floor(badge / 10);
+/** ランク帯の定義(画面側の src/lib/rankBands.ts と共有) */
+const RANK_BANDS = JSON.parse(
+  readFileSync(join(dirname(fileURLToPath(import.meta.url)), "..", "src", "lib", "rankBands.json"), "utf8"),
+).bands;
+/** avg_badge → それを含む帯のキー(どこにも入らなければ null) */
+const bandOf = (badge) => RANK_BANDS.find((b) => badge >= b.minBadge && badge <= b.maxBadge)?.key ?? null;
 
 // --- 実装済みヒーローだけを対象にする ---
 const latest = JSON.parse(readFileSync(join(REPO_ROOT, "data", "latest.json"), "utf8"));
@@ -118,15 +129,20 @@ for (const r of heroRows) {
   addTo(all.matches, r.hero_id, r.matches);
   addTo(all.wins, r.hero_id, r.wins);
   if (!r.bucket) continue; // bucket=0 はランク不明
-  const t = bucketFor(String(tierOf(r.bucket)));
-  addTo(t.matches, r.hero_id, r.matches);
-  addTo(t.wins, r.hero_id, r.wins);
+  for (const key of [String(tierOf(r.bucket)), bandOf(r.bucket)]) {
+    if (!key) continue;
+    const t = bucketFor(key);
+    addTo(t.matches, r.hero_id, r.matches);
+    addTo(t.wins, r.hero_id, r.wins);
+  }
 }
 for (const r of banRows) {
   if (!releasedIds.has(r.hero_id)) continue;
   addTo(bucketFor("all").bans, r.hero_id, r.bans);
   if (!r.bucket) continue;
-  addTo(bucketFor(String(tierOf(r.bucket))).bans, r.hero_id, r.bans);
+  for (const key of [String(tierOf(r.bucket)), bandOf(r.bucket)]) {
+    if (key) addTo(bucketFor(key).bans, r.hero_id, r.bans);
+  }
 }
 
 /** 各バケットを [ピック率, 勝率, BAN率(全BANに占める割合), 試合数] に変換する */
@@ -170,32 +186,39 @@ const doc = {
   format: "[pickPermille, winPermille, banSharePermille, matches]",
   /** BAN率の定義。画面にもこの旨を出す */
   banRateNote: "BANデータが取れた試合のうち、全BANに占めるそのヒーローの割合",
-  /** キーは "all" と ランクtier(1〜11)。tier は Citadel_ranks_rank<tier-1> に対応 */
+  /**
+   * キーは "all"、ランクtier("1"〜"11")、tier をまとめた帯(src/lib/rankBands.json の "low" / "mid" / "high")。
+   * tier は Citadel_ranks_rank<tier-1> に対応
+   */
   buckets: out,
 };
 
 /*
  * 無人実行で上書きするので、API が一部落ちていたときは書き込まない。
  *   - リクエストの失敗は getJson が取り直したうえで例外にする(ここまで来れば両方成功している)
- *   - 全体("all")に試合数が出ているヒーローが実装済みの9割未満なら中止(空に近い応答を見分ける)
- * 以前は「ランク帯が5つ以上」で判定していたが、パッチ直後は試合の少ない上位帯が
- * まだ無いことがあるので、帯の数では判定しない。
+ *   - 全体("all")と帯(low / mid / high)のそれぞれで、試合数が出ているヒーローが実装済みの9割未満なら中止
+ *     (空に近い応答を見分ける)。1帯でも満たさなければ書き込まない
+ * tier ごと(1〜11)は判定しない。パッチ直後は試合の少ない上位 tier がまだ無いことがあるため。
  */
-const tiers = Object.keys(out).filter((k) => k !== "all");
-const coveredHeroes = out.all ? Object.keys(out.all.heroes).length : 0;
-if (!out.all || coveredHeroes < releasedIds.size * 0.9) {
-  console.error(`取得結果が少なすぎるので中止: 試合数のあるヒーロー ${coveredHeroes}/${releasedIds.size}`);
+const bandKeys = ["all", ...RANK_BANDS.map((b) => b.key)];
+const tiers = Object.keys(out).filter((k) => !bandKeys.includes(k));
+const short = bandKeys.filter((k) => Object.keys(out[k]?.heroes ?? {}).length < releasedIds.size * 0.9);
+if (short.length > 0) {
+  for (const k of short) {
+    console.error(`[${k}] 試合数のあるヒーローが少なすぎる: ${Object.keys(out[k]?.heroes ?? {}).length}/${releasedIds.size}`);
+  }
+  console.error("取得結果が少なすぎるので中止");
   process.exit(1);
 }
 
 if (flag("write")) {
   writeFileSync(OUT_PATH, JSON.stringify(doc) + "\n");
   console.error(
-    `data/hero-stats.json を更新: ランク帯 ${tiers.length} + 全体 (${Math.round(JSON.stringify(doc).length / 1024)}KB)`,
+    `data/hero-stats.json を更新: ランクtier ${tiers.length} + 帯 ${bandKeys.length - 1} + 全体 (${Math.round(JSON.stringify(doc).length / 1024)}KB)`,
   );
 } else {
-  for (const k of ["all", ...tiers.sort((a, b) => Number(a) - Number(b))]) {
-    console.error(`  ${k.padStart(3)}: ${out[k].matches.toLocaleString("en-US")}試合 / BAN ${out[k].bans.toLocaleString("en-US")}`);
+  for (const k of [...bandKeys, ...tiers.sort((a, b) => Number(a) - Number(b))]) {
+    console.error(`  ${k.padStart(4)}: ${out[k].matches.toLocaleString("en-US")}試合 / BAN ${out[k].bans.toLocaleString("en-US")}`);
   }
   console.error(`(dry-run) --write で保存します`);
 }

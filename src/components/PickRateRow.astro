@@ -4,8 +4,8 @@
  * 主役は採用率(太字の数値とバー)、勝率は小さく、サンプルが少ないものには印を付ける。
  * アイコンは呼び出し側が slot で渡す(ItemIcon / HeroPortrait)。
  *
- * ランク帯を切り替えると JS(RankBandPicker の rankband イベント)が数値を書き換えるので、
- * 書き換える場所に data-pr-* を付けてある。数値の書式は fmtPermille と同じ(50.3%)。
+ * ランク帯を切り替えると JS が行を並べ直して数値を書き換える(RankBandPicker.astro の
+ * window.rankBand.fill)ので、書き換える場所に data-pr-* を付けてある。数値の書式は下の pct と同じ(50.3%)。
  */
 interface Props {
   /** 行の対象の ID(アイテムの実ID / ヒーローの実ID) */

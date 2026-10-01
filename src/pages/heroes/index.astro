@@ -6,6 +6,7 @@ import AbilityIcon from "../../components/AbilityIcon.astro";
 import HeroPortrait from "../../components/HeroPortrait.astro";
 import HeroHoverCard from "../../components/HeroHoverCard.astro";
 import AbilityHoverCard, { type AbilityHoverDetail } from "../../components/AbilityHoverCard.astro";
+import RankBandPicker from "../../components/RankBandPicker.astro";
 import { releasedHeroes, t, ability, heroTags, describe, heroNotes, heroStats, latestChangeMarks, ADJUSTMENT_LABEL, statsPeriodLabel } from "../../lib/data.ts";
 import { resolveImagePath } from "../../parsers/image-manifest.ts";
 import { heroRanks, pickRows, topRankRows, heroTierTable } from "../../lib/herorank.ts";
@@ -94,20 +95,13 @@ for (const h of releasedHeroes()) {
 
 /*
  * ランク帯別のピック率・勝率・BAN率(deadlock-api.com 由来)。
- * ランク名はゲーム内のトークン Citadel_ranks_rank<N> をそのまま使う。
- * tier1 が rank0(オブスキュラス)なので、トークン番号は tier-1。
+ * 選択肢は 全ランク / 下位・中位・上位(src/lib/rankBands.ts)/ ランクtier ごと。部品は RankBandPicker。
+ * ランク名はゲーム内のトークン Citadel_ranks_rank<N> をそのまま使う(tier1 が rank0 なので N は tier-1)。
  */
-const rankBuckets = Object.keys(heroStats.buckets)
-  .filter((k) => k !== "all")
+const rankTiers = Object.keys(heroStats.buckets)
+  .filter((k) => /^\d+$/.test(k))
   .map(Number)
   .sort((a, b) => a - b);
-const rankOptions = [
-  { key: "all", label: T.heroes.allRanks },
-  ...rankBuckets.map((tier) => ({
-    key: String(tier),
-    label: t(`Citadel_ranks_rank${tier - 1}`, T.heroes.rankN(tier)),
-  })),
-];
 const statsPayload = {
   fetchedAt: heroStats.fetchedAt,
   lowSampleMatches: heroStats.lowSampleMatches,
@@ -141,12 +135,7 @@ const H2 = {
   <section class="hs panel">
     <div class="hs-head">
       <h2>{T.heroes.usage}</h2>
-      <label class="rankpick">
-        <span class="rplabel">{T.heroes.rankBand}</span>
-        <select id="rank">
-          {rankOptions.map((r) => <option value={r.key}>{r.label}</option>)}
-        </select>
-      </label>
+      <RankBandPicker tiers={rankTiers} />
     </div>
     <div class="hs-cols">
       {
@@ -399,7 +388,6 @@ const H2 = {
       render(sel.value);
 
       // ---- ランク帯別の使用状況(ピック率 / 勝率 / BAN率) ----
-      const rankSel = document.getElementById("rank");
       const hsNote = document.getElementById("hs-note");
       /** 指標ごとの、値の取り出し位置。[ピック率, 勝率, BAN率, 試合数] */
       const METRIC_IDX = { pick: 0, win: 1, ban: 2 };
@@ -443,8 +431,12 @@ const H2 = {
         hsNote.classList.toggle("low", low);
       }
 
-      rankSel.addEventListener("change", () => renderRank(rankSel.value));
-      renderRank(rankSel.value);
+      // 切り替えは RankBandPicker が "rankband" イベントで知らせる(覚えている値があれば読み込み後にも来る)。
+      // このページは tier ごとにも選べるので、帯に直す前の key を使う。データが無い値なら帯に直す
+      document.addEventListener("rankband", (e) =>
+        renderRank(statsPayload.buckets[e.detail.key] ? e.detail.key : e.detail.band),
+      );
+      renderRank("all");
     })();
   </script>
 
@@ -468,18 +460,6 @@ const H2 = {
       flex-wrap: wrap; gap: var(--sp-3); margin-bottom: var(--sp-3);
     }
     .hs-head h2 { margin: 0; border: none; padding: 0; }
-    .rankpick {
-      display: flex; align-items: center; gap: var(--sp-2);
-      background: var(--c-accent-bg); border: 1px solid var(--c-accent-dim);
-      border-radius: var(--radius); padding: 5px 6px 5px 12px;
-    }
-    .rplabel { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; color: var(--c-accent); }
-    .rankpick select {
-      background: var(--c-surface); color: var(--c-text-strong);
-      border: 1px solid var(--c-accent-dim); border-radius: var(--radius);
-      padding: 6px 10px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
-    }
-    .rankpick select:hover { border-color: var(--c-accent); }
 
     .hs-cols {
       display: grid;

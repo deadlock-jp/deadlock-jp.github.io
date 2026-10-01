@@ -1,0 +1,145 @@
+---
+/**
+ * 統計のランク帯の切り替え(ヒーロー一覧・ヒーロー詳細・アイテム詳細・ビルドで共用)。
+ *
+ * 選べるのは 全ランク / 下位 / 中位 / 上位(src/lib/rankBands.ts)。ヒーロー一覧だけは tiers を渡して
+ * ランクtier(1〜11)も個別に選べるようにする。
+ *
+ * 選んだ値はサイト全体で覚える(localStorage。読み書きは try/catch で囲み、使えない環境では覚えないだけ)。
+ * tier を選んで覚えた値は、帯しか選べないページではその tier を含む帯として扱う。
+ * HTML は常に全ランクで書き出し、覚えている値があれば読み込み後に JS で切り替える。
+ * 切り替えは document に "rankband" イベント(detail: { key, band })を投げて知らせる。
+ *   key  … 選ばれた値そのもの("all" / "low" / "mid" / "high" / "1"〜"11")
+ *   band … 帯に直した値("all" / "low" / "mid" / "high")
+ * 各ページの描画スクリプトはこれを受けて表示を差し替える。今の値は window.rankBand.current() でも取れる。
+ */
+import { t } from "../lib/data.ts";
+import { RANK_BANDS } from "../lib/rankBands.ts";
+
+interface Props {
+  /** 個別に選べるランクtier(ヒーロー一覧のみ)。省けば帯だけ */
+  tiers?: number[];
+}
+const { tiers = [] } = Astro.props;
+const { L } = Astro.locals.i18n;
+const T = L();
+const S = T.stats;
+const rankName = (tier: number) => t(`Citadel_ranks_rank${tier - 1}`, T.heroes.rankN(tier));
+const bandOptions = [
+  { key: "all", label: T.heroes.allRanks },
+  ...RANK_BANDS.map((b) => ({
+    key: b.key,
+    label: S.bandRange(S.bands[b.key], rankName(b.minTier), rankName(b.maxTier)),
+  })),
+];
+---
+
+<label class="rankpick">
+  <span class="rplabel">{T.heroes.rankBand}</span>
+  <select data-rankband data-bands={JSON.stringify(RANK_BANDS)}>
+    {bandOptions.map((o) => <option value={o.key}>{o.label}</option>)}
+    {tiers.length > 0 && (
+      <optgroup label={S.byRank}>
+        {tiers.map((tier) => <option value={String(tier)}>{rankName(tier)}</option>)}
+      </optgroup>
+    )}
+  </select>
+</label>
+
+<script>
+  const STORE_KEY = "dljp.rankBand";
+  type Band = { key: string; minTier: number; maxTier: number };
+  type RankBandApi = {
+    current: () => { key: string; band: string };
+    pool: typeof pool;
+    fill: typeof fill;
+  };
+
+  const selects = [...document.querySelectorAll<HTMLSelectElement>("select[data-rankband]")];
+  const bands: Band[] = selects[0] ? JSON.parse(selects[0].dataset.bands ?? "[]") : [];
+
+  const read = (): string | null => {
+    try {
+      return localStorage.getItem(STORE_KEY);
+    } catch {
+      return null;
+    }
+  };
+  const write = (v: string) => {
+    try {
+      localStorage.setItem(STORE_KEY, v);
+    } catch {
+      /* 覚えられない環境では、このページの中だけで切り替える */
+    }
+  };
+  /** 選ばれた値 → 帯。tier("1"〜"11")はそれを含む帯に、知らない値は all にする */
+  const bandOf = (key: string | null): string => {
+    if (!key || key === "all") return "all";
+    if (bands.some((b) => b.key === key)) return key;
+    const tier = Number(key);
+    return bands.find((b) => tier >= b.minTier && tier <= b.maxTier)?.key ?? "all";
+  };
+
+  /*
+   * 採用率の行(PickRateRow.astro)を並べ直す手伝い。HeroPopularItems / ItemBuyers が使う。
+   * pool(root) … root の中の行(表示中のものと <template> に控えてあるもの)を ID で引ける表にする
+   * fill(list, entries, rows) … entries([ID, 採用率, 勝率, サンプル少 0/1])の順に行を並べ、数値を書き換える。
+   *   行は作り直さず移動するだけなので、ホバーカードなどの配線はそのまま残る
+   * 切り替えのイベントより先に用意しておく必要があるので、この部品のスクリプトに置いている
+   */
+  type Entry = [string | number, number, number, number];
+  const pct = (permille: number) => `${(permille / 10).toFixed(1)}%`;
+  function pool(root: ParentNode): Map<string, HTMLElement> {
+    const map = new Map<string, HTMLElement>();
+    const take = (scope: ParentNode) => {
+      for (const li of scope.querySelectorAll<HTMLElement>("[data-pr-id]")) map.set(li.dataset.prId!, li);
+    };
+    take(root);
+    for (const tpl of root.querySelectorAll("template")) take(tpl.content);
+    return map;
+  }
+  function fill(list: HTMLElement, entries: Entry[], rows: Map<string, HTMLElement>) {
+    const nodes: HTMLElement[] = [];
+    for (const [id, pick, win, low] of entries) {
+      const li = rows.get(String(id));
+      if (!li) continue;
+      li.querySelector<HTMLElement>("[data-pr-bar]")!.style.width = `${Math.min(100, pick / 10)}%`;
+      li.querySelector("[data-pr-pick]")!.textContent = pct(pick);
+      li.querySelector("[data-pr-win]")!.textContent = pct(win);
+      li.querySelector<HTMLElement>("[data-pr-low]")!.hidden = !low;
+      nodes.push(li);
+    }
+    list.replaceChildren(...nodes);
+  }
+
+  let current = { key: "all", band: "all" };
+  function apply(key: string, store: boolean) {
+    current = { key, band: bandOf(key) };
+    for (const sel of selects) {
+      // そのページの選択肢にある値ならそのまま、無ければ帯に直して選ぶ
+      sel.value = [...sel.options].some((o) => o.value === key) ? key : current.band;
+    }
+    if (store) write(key);
+    document.dispatchEvent(new CustomEvent("rankband", { detail: current }));
+  }
+
+  (window as unknown as { rankBand: RankBandApi }).rankBand = { current: () => current, pool, fill };
+  for (const sel of selects) sel.addEventListener("change", () => apply(sel.value, true));
+  const saved = read();
+  if (saved && saved !== "all") apply(saved, false);
+</script>
+
+<style>
+  .rankpick {
+    display: inline-flex; align-items: center; gap: var(--sp-2);
+    background: var(--c-accent-bg); border: 1px solid var(--c-accent-dim);
+    border-radius: var(--radius); padding: 5px 6px 5px 12px;
+  }
+  .rplabel { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; color: var(--c-accent); white-space: nowrap; }
+  .rankpick select {
+    background: var(--c-surface); color: var(--c-text-strong);
+    border: 1px solid var(--c-accent-dim); border-radius: var(--radius);
+    padding: 6px 10px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; max-width: 100%;
+  }
+  .rankpick select:hover { border-color: var(--c-accent); }
+</style>

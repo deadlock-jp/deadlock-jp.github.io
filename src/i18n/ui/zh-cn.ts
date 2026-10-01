@@ -230,6 +230,9 @@ export const zhCn: Dict = {
     buyersLead: "按在各英雄的比赛中购买该物品的比例(购买率)从高到低排列。",
     buyersWinNote: "由于占优势的一方更买得起昂贵的物品,胜率在越昂贵的物品上越容易偏高。",
     showAll: (n: number) => `显示全部(其余 ${n} 位)`,
+    bands: { low: "低段位", mid: "中段位", high: "高段位" },
+    bandRange: (label: string, from: string, to: string) => `${label}(${from}~${to})`,
+    byRank: "按段位",
   },
   top: {
     title: "首页",

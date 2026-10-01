@@ -5,11 +5,17 @@
  * 採用率の上位 TOP_N 人を出し、残りは「すべて表示」で開く(details なので JS 無しで動く)。
  * 統計の無いアイテム(レジェンダリーなど)ではセクションごと出さない。
  *
+ * HTML に書き出すのは全ランクの表示。ランク帯(RankBandPicker)を切り替えると、
+ * 埋め込んだこのアイテムの分の帯別データで JS が行を並べ直す。
+ *
  * ヒーローのホバーカードは付けない。全ヒーローの詳細データを全アイテムページに埋め込むことになり重いため。
  */
 import HeroPortrait from "./HeroPortrait.astro";
 import PickRateRow from "./PickRateRow.astro";
-import { t, itemStats, itemBuyers, statsPeriodLabel } from "../lib/data.ts";
+import RankBandPicker from "./RankBandPicker.astro";
+import { t, itemStats, itemStatsBand, itemBuyers, statsPeriodLabel, type ItemBuyerRow } from "../lib/data.ts";
+import type { Hero } from "../types/hero.ts";
+import type { RankBandKey } from "../lib/rankBands.ts";
 
 interface Props {
   itemId: string;
@@ -19,56 +25,107 @@ const TOP_N = 8;
 const { itemId, base } = Astro.props;
 const { L, langPath } = Astro.locals.i18n;
 const S = L().stats;
-const buyers = itemBuyers(itemId);
 const pct = (permille: number) => `${(permille / 10).toFixed(1)}%`;
+const period = statsPeriodLabel(itemStats);
+const matchesOf = (band: RankBandKey) => S.matches((itemStatsBand(band)?.matches ?? 0).toLocaleString("en-US"));
+
+const buyers = itemBuyers(itemId);
 const top = buyers ? buyers.rows.slice(0, TOP_N) : [];
 const rest = buyers ? buyers.rows.slice(TOP_N) : [];
+
+/** 帯ごとの表示内容(このアイテムの分だけ)。top / rest は [ヒーローID, 採用率, 勝率, サンプル少] */
+const entry = (r: ItemBuyerRow) => [r.hero.id, r.pick, r.win, r.low ? 1 : 0];
+const bandHeroes = new Map<number, Hero>();
+const bandData = Object.fromEntries(
+  (Object.keys(itemStats.bands) as RankBandKey[]).map((band) => {
+    const b = itemBuyers(itemId, band);
+    for (const r of b?.rows ?? []) bandHeroes.set(r.hero.id, r.hero);
+    return [
+      band,
+      {
+        matches: matchesOf(band),
+        overall: b ? pct(b.overall) : "—",
+        top: b ? b.rows.slice(0, TOP_N).map(entry) : null,
+        rest: b ? b.rows.slice(TOP_N).map(entry) : [],
+        showAll: S.showAll(b ? Math.max(0, b.rows.length - TOP_N) : 0),
+      },
+    ];
+  }),
+);
+/** 全ランクには無いが、他の帯にはいるヒーロー(行を <template> に控える) */
+const shown = new Set((buyers?.rows ?? []).map((r) => r.hero.id));
+const spare = [...bandHeroes.values()].filter((h) => !shown.has(h.id));
+const sectionId = `by-${itemId}`;
+const heroRow = (hero: Hero, r: { pick: number; win: number; low: boolean }) => ({
+  id: hero.id,
+  name: t(hero.nameToken, hero.key),
+  href: `${base}${langPath(`/heroes/${hero.id}/`)}`,
+  pick: r.pick,
+  win: r.win,
+  low: r.low,
+});
 ---
 
 {buyers && (
-  <section class="buyers">
+  <section class="buyers" id={sectionId}>
     <h2>{S.buyers}</h2>
-    <p class="by-meta">
-      <span class="by-overall">{S.overallPick} <b>{pct(buyers.overall)}</b></span>
-      <span>{statsPeriodLabel(itemStats)} / {S.matches((itemStats.totalMatches ?? 0).toLocaleString("en-US"))}</span>
-    </p>
+    <div class="by-head">
+      <p class="by-meta">
+        <span class="by-overall">{S.overallPick} <b data-by-overall>{pct(buyers.overall)}</b></span>
+        <span>{period} / <span data-by-matches>{matchesOf("all")}</span></span>
+      </p>
+      <RankBandPicker />
+    </div>
     <p class="by-lead">{S.buyersLead}</p>
     <div class="by-box">
-      <ol class="by-list">
+      <ol class="by-list" data-by-top>
         {top.map((r) => (
-          <PickRateRow
-            id={r.hero.id}
-            name={t(r.hero.nameToken, r.hero.key)}
-            href={`${base}${langPath(`/heroes/${r.hero.id}/`)}`}
-            pick={r.pick}
-            win={r.win}
-            low={r.low}
-          >
+          <PickRateRow {...heroRow(r.hero, r)}>
             <HeroPortrait name={t(r.hero.nameToken, r.hero.key)} image={r.hero.images.iconSmall} size={32} />
           </PickRateRow>
         ))}
       </ol>
-      {rest.length > 0 && (
-        <details class="by-more">
-          <summary>{S.showAll(rest.length)}</summary>
-          <ol class="by-list">
-            {rest.map((r) => (
-              <PickRateRow
-                id={r.hero.id}
-                name={t(r.hero.nameToken, r.hero.key)}
-                href={`${base}${langPath(`/heroes/${r.hero.id}/`)}`}
-                pick={r.pick}
-                win={r.win}
-                low={r.low}
-              >
-                <HeroPortrait name={t(r.hero.nameToken, r.hero.key)} image={r.hero.images.iconSmall} size={32} />
-              </PickRateRow>
-            ))}
-          </ol>
-        </details>
-      )}
+      <p class="by-none" data-by-none hidden>{S.noData}</p>
+      <details class="by-more" data-by-more hidden={rest.length === 0}>
+        <summary data-by-showall>{S.showAll(rest.length)}</summary>
+        <ol class="by-list" data-by-rest>
+          {rest.map((r) => (
+            <PickRateRow {...heroRow(r.hero, r)}>
+              <HeroPortrait name={t(r.hero.nameToken, r.hero.key)} image={r.hero.images.iconSmall} size={32} />
+            </PickRateRow>
+          ))}
+        </ol>
+      </details>
+      <template>
+        {spare.map((h) => (
+          <PickRateRow {...heroRow(h, { pick: 0, win: 0, low: false })}>
+            <HeroPortrait name={t(h.nameToken, h.key)} image={h.images.iconSmall} size={32} />
+          </PickRateRow>
+        ))}
+      </template>
     </div>
     <p class="by-note">{S.buyersWinNote} {S.source}</p>
+    <script is:inline define:vars={{ sectionId, bandData }}>
+      (() => {
+        const root = document.getElementById(sectionId);
+        let rows = null;
+        document.addEventListener("rankband", (e) => {
+          const api = window.rankBand;
+          if (!root || !api) return;
+          rows ??= api.pool(root);
+          const d = bandData[e.detail.band] ?? bandData.all;
+          const $ = (sel) => root.querySelector(sel);
+          $("[data-by-overall]").textContent = d.overall;
+          $("[data-by-matches]").textContent = d.matches;
+          $("[data-by-top]").hidden = !d.top;
+          $("[data-by-none]").hidden = !!d.top;
+          $("[data-by-more]").hidden = d.rest.length === 0;
+          $("[data-by-showall]").textContent = d.showAll;
+          api.fill($("[data-by-top]"), d.top ?? [], rows);
+          api.fill($("[data-by-rest]"), d.rest, rows);
+        });
+      })();
+    </script>
   </section>
 )}
 
@@ -76,9 +133,13 @@ const rest = buyers ? buyers.rows.slice(TOP_N) : [];
   /* 見た目はヒーローページの「人気のアイテム」(HeroPopularItems.astro)にそろえる */
   .buyers { margin-top: var(--sp-5); }
   .buyers h2 { margin-bottom: var(--sp-1); }
+  .by-head {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: var(--sp-2) var(--sp-3); margin: 0 0 var(--sp-2);
+  }
   .by-meta {
     display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px var(--sp-3);
-    margin: 0 0 var(--sp-2); font-size: 12px; color: var(--c-text-muted);
+    margin: 0; font-size: 12px; color: var(--c-text-muted);
   }
   .by-overall b { font-family: var(--font-mono); font-size: 15px; color: var(--c-text-strong); margin-left: 4px; }
   .by-lead { margin: 0 0 var(--sp-3); font-size: 13px; color: var(--c-text); }
@@ -87,6 +148,8 @@ const rest = buyers ? buyers.rows.slice(TOP_N) : [];
     list-style: none; margin: 0; padding: 0;
     display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 10px var(--sp-4);
   }
+  .by-list[hidden], .by-more[hidden] { display: none; }
+  .by-none { margin: 0; font-size: 12px; color: var(--c-text-faint); }
   .by-more { margin-top: var(--sp-3); border-top: 1px solid var(--c-border); padding-top: var(--sp-2); }
   .by-more summary { cursor: pointer; font-size: 12px; color: var(--c-accent); margin-bottom: var(--sp-2); }
   .by-more:not([open]) summary { margin-bottom: 0; }

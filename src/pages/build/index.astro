@@ -3,6 +3,8 @@ import Base from "../../layouts/Base.astro";
 import ItemIcon from "../../components/ItemIcon.astro";
 import HeroPortrait from "../../components/HeroPortrait.astro";
 import SoulIcon from "../../components/SoulIcon.astro";
+import RankBandPicker from "../../components/RankBandPicker.astro";
+import { RANK_BANDS } from "../../lib/rankBands.ts";
 import {
   releasedHeroes,
   shopItems,
@@ -172,12 +174,18 @@ const payload = {
   ),
   costBonusTarget: COST_BONUS_TARGET,
   slotMeta: SLOT_META,
-  /** ヒーロー×アイテムの人気率・勝率。ショップの並び替えと数値表示に使う */
+  /**
+   * ヒーロー×アイテムの人気率・勝率。ショップの並び替えと数値表示に使う。
+   * 埋め込むのは全ランクだけ。他のランク帯は選ばれたときに bandUrls から読む(ページを重くしないため)
+   */
   stats: {
     fetchedAt: itemStats.fetchedAt,
     window: itemStats.window,
     lowSampleMatches: itemStats.lowSampleMatches,
-    heroes: itemStats.heroes,
+    heroes: itemStats.bands.all.heroes,
+    bandUrls: Object.fromEntries(
+      RANK_BANDS.filter((b) => itemStats.bands[b.key]).map((b) => [b.key, `${base}/stats/item-stats-${b.key}.json`]),
+    ),
   },
 };
 ---
@@ -325,6 +333,7 @@ const payload = {
             <button class="sortbtn current" data-sort="pick">{T.build.popularity}</button>
             <button class="sortbtn" data-sort="win">{T.heroes.winRate}</button>
           </div>
+          <RankBandPicker />
         </div>
       </div>
 
@@ -412,8 +421,14 @@ const payload = {
     let heroId = null;
     /** ショップの並び替え基準。"pick" = 人気率 / "win" = 勝率 */
     let sortKey = "pick";
-    /** 直近に並べ替えた (ヒーロー, 基準)。同じなら組み直さない */
+    /** 直近に並べ替えた (ヒーロー, 基準, ランク帯)。同じなら組み直さない */
     let statsApplied = "";
+    /**
+     * ショップの人気率・勝率に使うランク帯。ページに埋め込んであるのは全ランク(all)だけで、
+     * 他の帯は選ばれたときに帯ごとの JSON(src/pages/stats/item-stats-[band].json.ts)を読み込む
+     */
+    let statsBand = "all";
+    const bandStats = { all: payload.stats.heroes };
     /** スキルごとの AP 段(0〜3)。スキルダメージ表示に反映する */
     const apLevel = {};
     const SLOTS = ["WeaponMod", "Armor", "Tech"];
@@ -887,11 +902,11 @@ const payload = {
      * ノードを移動するだけにする(移動ならハンドラは保たれる)。
      */
     function renderShopStats() {
-      const key = `${heroId ?? ""}:${sortKey}`;
+      const key = `${heroId ?? ""}:${sortKey}:${statsBand}`;
       if (key === statsApplied) return;
       statsApplied = key;
 
-      const hs = heroId === null ? null : payload.stats.heroes[String(heroId)];
+      const hs = heroId === null ? null : (bandStats[statsBand] ?? payload.stats.heroes)[String(heroId)];
       $("sortbar").hidden = !hs;
 
       for (const grid of document.querySelectorAll(".cat .grid")) {
@@ -1472,6 +1487,26 @@ const payload = {
       });
     }
 
+    // ランク帯の切り替え(RankBandPicker が "rankband" イベントで知らせる)
+    document.addEventListener("rankband", async (e) => {
+      const band = e.detail.band;
+      if (!bandStats[band]) {
+        const url = payload.stats.bandUrls[band];
+        if (!url) return;
+        try {
+          const res = await fetch(url);
+          if (!res.ok) throw new Error(String(res.status));
+          bandStats[band] = (await res.json()).heroes;
+        } catch {
+          return; // 読み込めなければ今の表示のまま
+        }
+      }
+      // 読み込みの間に別の帯が選ばれていたら、最後に選ばれたものだけ反映する
+      if (window.rankBand && window.rankBand.current().band !== band) return;
+      statsBand = band;
+      renderShopStats();
+    });
+
     // ---- ショップの表示(TYPE切り替え・ティアの開閉・検索) -------------------
     /** 表示中のTYPE。"all" は3TYPEを縦に並べた全件表示 */
     let shopSlot = "WeaponMod";
@@ -1918,7 +1953,7 @@ const payload = {
     }
     /* ---- 人気率・勝率(ヒーロー選択中だけ出る) ---- */
     .sortbar {
-      display: flex; align-items: center; gap: var(--sp-2);
+      display: flex; align-items: center; flex-wrap: wrap; gap: var(--sp-2);
       margin-left: auto;
     }
     .sortlabel { font-size: 11px; color: var(--c-text-muted); }

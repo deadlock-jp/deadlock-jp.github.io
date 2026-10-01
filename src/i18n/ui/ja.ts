@@ -240,6 +240,11 @@ export const ja = {
     buyersLead: "各ヒーローが使われた試合のうち、このアイテムが買われた割合（採用率）の高い順です。",
     buyersWinNote: "勝率は、試合を優勢に進めている側ほど高価なアイテムを買えるため、高価なアイテムほど高く出やすい数値です。",
     showAll: (n: number) => `すべて表示（残り${n}人）`,
+    /** ランク帯(src/lib/rankBands.ts)。表示は「上位（<tier9のランク名>〜<tier11のランク名>）」 */
+    bands: { low: "下位", mid: "中位", high: "上位" },
+    bandRange: (label: string, from: string, to: string) => `${label}（${from}〜${to}）`,
+    /** ヒーロー一覧の選択肢で、ランクを1つずつ選ぶ側の見出し */
+    byRank: "ランク別",
   },
   /** トップページ(src/pages/index.astro) */
   top: {
