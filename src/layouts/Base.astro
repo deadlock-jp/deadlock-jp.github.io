@@ -386,17 +386,27 @@ jsonLd.push(...extraJsonLd);
         });
       })();
     </script>
-    <script src={`${base}/js/deadlock-bg.js`} is:inline></script>
-    <script is:inline>
+    <script is:inline define:vars={{ bgScript: `${base}/js/deadlock-bg.js` }}>
       (() => {
         const el = document.getElementById("dlbg");
-        if (!el || !window.DeadlockBG) return;
-        // UI全体のリンク色(--c-accent)ではなく、暗いキャンバス上で見えるよう
-        // 明るくした背景専用のアクセント(--c-bg-accent)を使う
-        const accent = getComputedStyle(document.documentElement)
-          .getPropertyValue("--c-bg-accent")
-          .trim();
-        window.DeadlockBG.mount(el, { accent: accent || undefined, glow: 0.5 });
+        if (!el) return;
+        /*
+         * スマホ・タッチ操作が主の端末・「視差効果を減らす」が有効な環境は、背景のアニメーションを使わず
+         * 静止画にする(global.css の .dlbg)。スクリプト自体を読み込まない。条件は global.css と同じにしておくこと
+         */
+        if (matchMedia("(max-width: 820px), (pointer: coarse), (prefers-reduced-motion: reduce)").matches) return;
+        const s = document.createElement("script");
+        s.src = bgScript;
+        s.onload = () => {
+          if (!window.DeadlockBG) return;
+          // UI全体のリンク色(--c-accent)ではなく、暗いキャンバス上で見えるよう
+          // 明るくした背景専用のアクセント(--c-bg-accent)を使う
+          const accent = getComputedStyle(document.documentElement)
+            .getPropertyValue("--c-bg-accent")
+            .trim();
+          window.DeadlockBG.mount(el, { accent: accent || undefined, glow: 0.5 });
+        };
+        document.body.append(s);
       })();
     </script>
 

@@ -132,6 +132,8 @@ const bandOptions = [
 <style>
   .rankpick {
     display: inline-flex; align-items: center; gap: var(--sp-2);
+    /* 選択肢の文字列が長いと375px幅の画面からはみ出し、スマホがページ全体を縮小表示してしまう(2026-10-01) */
+    max-width: 100%; box-sizing: border-box;
     background: var(--c-accent-bg); border: 1px solid var(--c-accent-dim);
     border-radius: var(--radius); padding: 5px 6px 5px 12px;
   }
@@ -139,7 +141,7 @@ const bandOptions = [
   .rankpick select {
     background: var(--c-surface); color: var(--c-text-strong);
     border: 1px solid var(--c-accent-dim); border-radius: var(--radius);
-    padding: 6px 10px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; max-width: 100%;
+    padding: 6px 10px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; max-width: 100%; min-width: 0; text-overflow: ellipsis;
   }
   .rankpick select:hover { border-color: var(--c-accent); }
 </style>

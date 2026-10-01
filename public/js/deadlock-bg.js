@@ -83,6 +83,8 @@
       H = el.clientHeight || 720;
       canvas.width = Math.round(W * dpr);
       canvas.height = Math.round(H * dpr);
+      // 表示の高さは描いた高さに固定(要素の高さに合わせて伸び縮みさせない。上端に揃える)
+      canvas.style.height = grain.style.height = H + "px";
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       far = makeSkyline(W, { y: H * 0.68, h: H * 0.3, w: [42, 100] }, 5051);
       near = makeSkyline(W, { y: H * 1.02, h: H * 0.49, w: [76, 180] }, 1223);
@@ -190,14 +192,25 @@
       raf = root.requestAnimationFrame(frame);
     }
 
-    var ro = null, onResize = null;
+    // 描き直すのは、幅が変わったとき・高さが伸びたとき・高さが大きく縮んだときだけ。
+    // ビルの位置は高さに比例するので、高さの小さな変化(ツールバーの出入りなど)で描き直すと背景がずれる。
+    // 小さく縮んだだけなら描き直さず、上端に揃えたまま下を切る。続けて来る変化は落ち着いてから1回にまとめる
+    var SHRINK_TOLERANCE = 120, DEBOUNCE_MS = 150;
+    var ro = null, onResize = null, pending = 0;
+    function maybeLayout() {
+      pending = 0;
+      var w = el.clientWidth, h = el.clientHeight;
+      if (w !== W || h > H || H - h > SHRINK_TOLERANCE) layout();
+    }
+    function schedule() {
+      if (pending) root.clearTimeout(pending);
+      pending = root.setTimeout(maybeLayout, DEBOUNCE_MS);
+    }
     if (root.ResizeObserver) {
-      ro = new root.ResizeObserver(function () {
-        if (el.clientWidth !== W || el.clientHeight !== H) layout();
-      });
+      ro = new root.ResizeObserver(schedule);
       ro.observe(el);
     } else {
-      onResize = function () { layout(); };
+      onResize = schedule;
       root.addEventListener("resize", onResize);
     }
 
@@ -208,6 +221,7 @@
       setOptions: function (partial) { for (var n in (partial || {})) opts[n] = partial[n]; },
       destroy: function () {
         root.cancelAnimationFrame(raf);
+        if (pending) root.clearTimeout(pending);
         if (ro) ro.disconnect();
         if (onResize) root.removeEventListener("resize", onResize);
         if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
