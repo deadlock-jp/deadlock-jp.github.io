@@ -20,6 +20,7 @@
  * --date <ISO>    エントリの日付。公式パッチノートの投稿日を入れる(既定: 今日)
  * --commit <sha>  上流コミット(任意)
  * --title <str>   エントリ見出し(既定: 近い公式ノートの題、無ければ "<date> データ更新")
+ * --no-source     公式ノートを出典に紐付けない(告知の無いサイレント更新用)
  * --write         data/updates.json の先頭に書き込む(既定: stdout に JSON を出すだけ)
  */
 
@@ -55,7 +56,8 @@ if (!OLD_DIR || !NEW_DIR) {
 }
 const DATE = opt("date", new Date().toISOString().slice(0, 10));
 const COMMIT = opt("commit");
-const sourceNote = nearestPatchNote(DATE);
+/* 公式ノートの無いサイレント更新は、日付の近い別のノートを出典にしてしまわないよう --no-source で外す */
+const sourceNote = flag("no-source") ? null : nearestPatchNote(DATE);
 const TITLE = opt("title", sourceNote?.title ?? `${DATE} データ更新`);
 
 const load = (dir, file) => JSON.parse(readFileSync(join(REPO_ROOT, dir, file), "utf8"));

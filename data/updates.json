@@ -4,6 +4,38 @@
   "upstreamRepo": "https://github.com/SteamDatabase/GameTracking-Deadlock",
   "entries": [
     {
+      "date": "2026-09-30",
+      "upstreamCommit": "cc57a5a4117382375d0c1189873474ce4b901260",
+      "title": "告知なしの調整 (6726)",
+      "fromVersion": "6722",
+      "toVersion": "6726",
+      "changes": [
+        "ヒーロー・アイテムの数値差分から自動生成 (バフ 0 / ナーフ 0 / 混在 0、変更項目 2)"
+      ],
+      "adjustments": [
+        {
+          "kind": "neutral",
+          "target": "system",
+          "key": "economy",
+          "note": "破壊可能オブジェクトの初回出現（配置2） 3分→5分 / 破壊可能オブジェクトの再出現間隔（配置2） 3分→5分",
+          "changes": [
+            {
+              "path": "breakableSpawnTimes.2.initialSpawnTime",
+              "from": 180,
+              "to": 300,
+              "good": null
+            },
+            {
+              "path": "breakableSpawnTimes.2.respawnInterval",
+              "from": 180,
+              "to": 300,
+              "good": null
+            }
+          ]
+        }
+      ]
+    },
+    {
       "date": "2026-09-29",
       "upstreamCommit": null,
       "title": "City Never Sleeps",
