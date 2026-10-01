@@ -242,7 +242,7 @@ export const en: Dict = {
     h1: "Status Effects",
     lead: "Effects from abilities and items, grouped by type: which hero ability and which item applies each one, and what can remove or reduce it. Everything is detected automatically from the game data.",
     method:
-      "Detection is based on each ability's and item's data (the states it applies and properties such as durations). Effects that only appear in description text are not included. Knock-ups cannot be told apart from self-launches in the data, so abilities that launch yourself are included too.",
+      "Detection is based on each ability's and item's data (the states it applies and properties such as durations). Effects that only appear in description text are not included. For effects like knock-ups, where the data does not say whether the target is an enemy or yourself, abilities that launch yourself or carry allies were checked against their descriptions and left out.",
     categories: {
       control: "Crowd control",
       weaken: "Debuffs",

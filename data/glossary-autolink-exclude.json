@@ -1,0 +1,5 @@
+{
+  "schemaVersion": 1,
+  "note": "攻略ページの本文から用語集への自動リンク(src/lib/glossaryLinks.ts)を付けない語。用語集の表記(term)のまま書く。付けてみて不自然だった語をここに足す。",
+  "terms": []
+}

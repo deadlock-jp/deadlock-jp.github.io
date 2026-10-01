@@ -14,6 +14,7 @@ import type { SkillCard as SkillCardData } from "../lib/skillcard.ts";
 import { t, describe } from "../lib/data.ts";
 import AbilityIcon from "./AbilityIcon.astro";
 import StatIcon from "./StatIcon.astro";
+import EffectBadges from "./EffectBadges.astro";
 
 export interface Props {
   abilityKey: string;
@@ -48,6 +49,8 @@ const fmtScale = (n: number) => (Math.round(n * 100) / 100).toString();
         {isUlt && <span class="tag ult-tag">{L().common.ultimate}</span>}
         {isPassive && <span class="tag passive-tag">{term("passive")}</span>}
       </div>
+      {/* 持っている状態異常・効果(src/lib/effects.ts の判定。状態異常・効果ページへのリンク) */}
+      <div class="seffects"><EffectBadges kind="ability" id={abilityKey} size="small" /></div>
       {card.meta.length > 0 && (
         <ul class="smeta">
           {card.meta.map((m) => {
@@ -174,6 +177,7 @@ const fmtScale = (n: number) => (Math.round(n * 100) / 100).toString();
   .ult-tag { color: var(--c-spirit); background: var(--c-spirit-bg); border: 1px solid var(--c-spirit); }
   .passive-tag { color: var(--c-text-muted); background: var(--c-surface-2); border: 1px solid var(--c-border-strong); }
 
+  .seffects:not(:empty) { margin-top: 6px; }
   .smeta {
     list-style: none; padding: 0; margin: var(--sp-2) 0 0;
     display: flex; flex-wrap: wrap; gap: 6px;

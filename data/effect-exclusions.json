@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "note": "状態異常・効果の自動判定(src/lib/effects.ts)から、データで区別できない誤判定だけを外す手動リスト。kit-tags.json と同じく文章ではなく実IDの配列で持ち、なぜ外すかの短い根拠(どのフィールド・説明文で判断したか)を添える。\n\nknockup: 打ち上げの判定はプロパティ名(TossSpeed / LiftHeight など)で行っているが、これらは「敵を打ち上げる」ときにも「自分が跳ぶ・物を投げる」ときにも使われていて、データ上は区別できない。説明文で自分が跳ぶ・味方を運ぶ・投げる速さだと分かるものを外す。",
+  "effects": {
+    "knockup": [
+      { "id": "citadel_ability_bull_leap", "field": "TossSpeed", "why": "説明文「空中に高く飛び上がり地面に勢いよく着地」。自分が跳ぶ速さ" },
+      { "id": "ability_bounce_pad", "field": "TossSpeed", "why": "説明文「触れたヒーローを射出する」。自分・味方を飛ばすパッド" },
+      { "id": "citadel_ability_tengu_stone_form", "field": "LiftHeight", "why": "説明文「石像に変身して地面に急降下」。自分が浮き上がる高さ" },
+      { "id": "citadel_ability_tengu_airlift", "field": "modifier_airlift_grab", "why": "説明文「味方をつかみ共に飛行する」。味方を運ぶ" },
+      { "id": "ability_nano_clustergrenade", "field": "TossSpeed", "why": "説明文「爆弾を複数投げる」に打ち上げの記述なし。爆弾を投げる速さ" },
+      { "id": "ability_fencer_riposte", "field": "LiftHeight", "why": "説明文「指定したヒーローに向かって素早くダッシュ」に打ち上げの記述なし。自分の移動" },
+      { "id": "upgrade_rocket_booster", "field": "TossSpeed", "why": "説明文「空中高くに自身を射出」。自分が跳ぶ" },
+      { "id": "upgrade_self_bubble", "field": "LiftHeight", "why": "説明文「即座にヴォイド状態となって短時間無敵状態になる」。自分が浮く" }
+    ]
+  }
+}

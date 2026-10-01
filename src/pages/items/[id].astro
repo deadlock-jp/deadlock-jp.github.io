@@ -21,6 +21,7 @@ import {
 } from "../../lib/data.ts";
 import BalanceHistory from "../../components/BalanceHistory.astro";
 import ItemBuyers from "../../components/ItemBuyers.astro";
+import EffectBadges from "../../components/EffectBadges.astro";
 import { itemBalanceHistory } from "../../lib/balance.ts";
 
 export function getStaticPaths() {
@@ -160,6 +161,8 @@ const ogImage =
         )}
         {badge && <li class="badge">{badge}</li>}
       </ul>
+      {/* 持っている状態異常・効果(src/lib/effects.ts の判定。状態異常・効果ページへのリンク) */}
+      <div class="ieffects"><EffectBadges kind="item" id={item.id} /></div>
     </div>
   </header>
 
@@ -335,6 +338,7 @@ const ogImage =
     .facts .legendary { color: #e8b93a; border-color: #e8b93a; }
     .facts .cost { font-family: var(--font-mono); color: var(--c-text-strong); }
     .facts .badge { color: var(--c-text-strong); letter-spacing: 0.06em; font-weight: 700; }
+    .ieffects:not(:empty) { margin-top: var(--sp-2); }
     .desc {
       margin: var(--sp-4) 0 0;
       line-height: 1.7;

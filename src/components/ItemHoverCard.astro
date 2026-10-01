@@ -5,12 +5,24 @@
  * `[data-itemcard="<itemId>"]` を持つ要素に自動でホバー/フォーカスを張る。
  * データは data.ts の itemHoverData() で作る。中身は JS 組み立てなので CSS は :global。
  */
+import { itemEffects } from "../lib/effects.ts";
+
 interface Props {
   /** itemId → itemHoverData() の戻り値 */
   details: Record<string, unknown>;
 }
-const { details } = Astro.props;
+const { details: rawDetails } = Astro.props;
 const { L, term } = Astro.locals.i18n;
+/*
+ * 持っている状態異常・効果(src/lib/effects.ts)を足す。ページから渡されるデータ(itemHoverData)は
+ * data.ts で作るが、data.ts から effects.ts を読むと循環するので、ここで足す
+ */
+const details = Object.fromEntries(
+  Object.entries(rawDetails).map(([id, d]) => [
+    id,
+    { ...(d as object), effects: itemEffects(id).map((b) => ({ n: b.name, c: b.category, v: b.value })) },
+  ]),
+);
 /** カード内の文言。{n} は数値の差し込み位置 */
 const c = L().itemCard;
 const T = {
@@ -23,6 +35,9 @@ const T = {
   usedIn: term("upgradesTo"),
   sep: L().common.listSep,
   dot: L().common.dot,
+  /** 効果の分類名(バッジの title)と記号。EffectBadges.astro と同じ */
+  effCat: L().effects.categories,
+  effGlyph: { control: "■", weaken: "▼", protect: "◆", counter: "↺" },
 };
 ---
 
@@ -53,6 +68,11 @@ const T = {
         `${it.badge ? `<span class="hc-badge">${esc(it.badge)}</span>` : ""}</div>` +
         `<div class="hc-meta">${esc(it.slotLabel)}${T.dot}${esc(T.tier.replace("{n}", it.tier))}${T.dot}` +
         `<span class="hc-soul">${esc(T.cost.replace("{n}", fmt(it.cost)))}</span>${T.dot}${esc(T.slotCost.replace("{n}", it.slotCost))}</div>` +
+        (it.effects && it.effects.length
+          ? `<div class="hc-eff">${it.effects
+              .map((e) => `<span class="hce hce-${e.c}" title="${esc(T.effCat[e.c])}"><i>${T.effGlyph[e.c]}</i>${esc(e.n)}${e.v ? ` <b>${esc(e.v)}</b>` : ""}</span>`)
+              .join("")}</div>`
+          : "") +
         (it.desc ? `<p class="hc-desc">${esc(it.desc)}</p>` : "") +
         (it.passives.length ? `<div class="hc-sec">${esc(T.passives)}</div>${rows(it.passives, "hc-rows")}` : "") +
         (it.conditional.length ? `<div class="hc-sec">${esc(T.conditional)}</div>${rows(it.conditional, "hc-rows")}` : "") +
@@ -124,6 +144,17 @@ const T = {
     font-size: 11px; color: var(--cat, var(--c-accent)); margin-top: 2px; font-family: var(--font-mono);
   }
   .hovercard :global(.hc-soul) { color: var(--c-soul); }
+  /* 状態異常・効果(EffectBadges.astro と同じ色分け) */
+  .hovercard :global(.hc-eff) { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 6px; }
+  .hovercard :global(.hce) {
+    --eb: var(--c-accent); display: inline-flex; align-items: baseline; gap: 3px;
+    font-size: 10.5px; padding: 0 6px; border: 1px solid var(--eb); border-radius: 999px; color: var(--c-text-strong);
+  }
+  .hovercard :global(.hce i) { font-style: normal; font-size: 8px; color: var(--eb); }
+  .hovercard :global(.hce b) { font-weight: 400; font-family: var(--font-mono); color: var(--c-text-muted); }
+  .hovercard :global(.hce-control) { --eb: var(--c-nerf); border-radius: 3px; }
+  .hovercard :global(.hce-weaken) { --eb: var(--c-weapon); border-style: dashed; }
+  .hovercard :global(.hce-protect) { --eb: var(--c-buff); }
   .hovercard :global(.hc-desc) { font-size: 12px; color: var(--c-text); line-height: 1.6; margin: var(--sp-2) 0 0; }
   .hovercard :global(.hc-sec) {
     font-size: 10px; letter-spacing: .08em; text-transform: uppercase;

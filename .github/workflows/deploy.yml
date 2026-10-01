@@ -20,8 +20,9 @@ on:
         required: false
         default: ""
   schedule:
-    # 6時間おき(UTC)。JSTで 09/15/21/03 時ごろ
-    - cron: "0 0,6,12,18 * * *"
+    # 6時間おき(UTC)。JSTで 09/15/21/03 時ごろ。
+    # 毎時0分は GitHub の定期実行が混み合って数時間遅れることがあるので、17分にずらしている
+    - cron: "17 0,6,12,18 * * *"
 
 # GITHUB_TOKEN に Pages への配信権限を与える(リポジトリは読むだけ)
 permissions:

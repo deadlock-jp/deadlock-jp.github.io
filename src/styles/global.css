@@ -121,6 +121,18 @@ a:hover {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+/* 攻略ページの本文から用語集への自動リンク(src/lib/glossaryLinks.ts)。通常のリンクより控えめに */
+a.glink {
+  color: inherit;
+  text-decoration: underline dotted;
+  text-decoration-color: var(--c-text-faint);
+  text-underline-offset: 3px;
+  cursor: help;
+}
+a.glink:hover {
+  color: var(--c-accent);
+  text-decoration-color: var(--c-accent);
+}
 
 code {
   font-family: var(--font-mono);

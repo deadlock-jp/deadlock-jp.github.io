@@ -70,7 +70,7 @@ const toc = [
       敵の<b>パトロン</b>を破壊したチームが勝ちます。パトロンまでの道のりには防衛建造物が並んでいて、
       手前から順に壊さないと奥には攻撃が届きません。数字は破壊したときに入るソウルです。
     </p>
-    <ol class="chain">
+    <ol class="chain" data-noautolink>
       {chain.map((c, i) => (
         <li>
           <span class="cicon">{c.icon ? <img src={c.icon} alt="" loading="lazy" /> : <span class="ph" />}</span>

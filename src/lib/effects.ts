@@ -20,6 +20,7 @@
  * トークンが無いものだけ辞書(src/i18n/ui/<lang>.ts の effects.names)に書く。
  */
 import { t, ability, shopItems, releasedHeroes, formatProperty } from "./data.ts";
+import exclusionsJson from "../../data/effect-exclusions.json" with { type: "json" };
 import { L } from "../i18n/index.ts";
 import { currentLang } from "../i18n/context.ts";
 import type { Hero } from "../types/hero.ts";
@@ -245,6 +246,17 @@ export const EFFECTS: EffectDef[] = [
   },
 ];
 
+/**
+ * データで区別できない誤判定を外す手動リスト(data/effect-exclusions.json)。効果 id → 外す実ID。
+ * 今はノックアップの「自分が跳ぶ・味方を運ぶ・物を投げる」ものだけ
+ */
+const EXCLUDED: Record<string, Set<string>> = Object.fromEntries(
+  Object.entries((exclusionsJson as { effects: Record<string, { id: string }[]> }).effects).map(([k, list]) => [
+    k,
+    new Set(list.map((x) => x.id)),
+  ]),
+);
+
 const BY_ID = new Map(EFFECTS.map((e) => [e.id, e]));
 export const effectById = (id: string): EffectDef | undefined => BY_ID.get(id);
 
@@ -287,15 +299,21 @@ export function effectMatch(e: EffectDef, s: Subject): { via: "base" | "upgrade"
 }
 
 /** 添える数値(「継続時間 1.5秒」など)。値が 0 のものは出さない */
-function shownValues(e: EffectDef, props: Record<string, AbilityProperty>): string[] {
+function shownValues(e: EffectDef, props: Record<string, AbilityProperty>): EffectValue[] {
   if (!e.show) return [];
-  const out: string[] = [];
+  const out: EffectValue[] = [];
   for (const [name, p] of Object.entries(props)) {
     if (!e.show.test(name) || p.value === null || !Number.isFinite(p.value) || p.value === 0) continue;
     const f = formatProperty(name, p);
-    out.push(`${f.label} ${f.value}`);
+    out.push({ label: f.label, value: f.value });
   }
   return out.slice(0, 2);
+}
+
+/** 添える数値1つ(「スタン継続時間」「1.25秒」) */
+export interface EffectValue {
+  label: string;
+  value: string;
 }
 
 export interface EffectAbilityRow {
@@ -304,12 +322,12 @@ export interface EffectAbilityRow {
   via: "base" | "upgrade";
   /** 当たった判定材料(クラス名・状態・プロパティ名)。検算用 */
   reason: string;
-  values: string[];
+  values: EffectValue[];
 }
 export interface EffectItemRow {
   item: Item;
   reason: string;
-  values: string[];
+  values: EffectValue[];
 }
 export interface EffectEntry {
   def: EffectDef;
@@ -336,7 +354,7 @@ export function effectIndex(): EffectEntry[] {
     for (const hero of heroes) {
       for (const key of signatureAbilities(hero)) {
         const a = ability(key);
-        if (!a) continue;
+        if (!a || EXCLUDED[def.id]?.has(key)) continue;
         const hit = effectMatch(def, a);
         if (hit) {
           abilities.push({ hero, abilityKey: key, via: hit.via, reason: hit.reason, values: shownValues(def, a.properties) });
@@ -345,6 +363,7 @@ export function effectIndex(): EffectEntry[] {
     }
     const itemRows: EffectItemRow[] = [];
     for (const it of items) {
+      if (EXCLUDED[def.id]?.has(it.id)) continue;
       const hit = effectMatch(def, it);
       if (hit) itemRows.push({ item: it, reason: hit.reason, values: shownValues(def, it.properties) });
     }
@@ -353,6 +372,48 @@ export function effectIndex(): EffectEntry[] {
   cache.set(lang, built);
   return built;
 }
+
+/** スキル・アイテムの各ページに出すバッジ1つ分 */
+export interface EffectBadge {
+  /** 効果の id(効果ページの #id) */
+  id: string;
+  category: EffectCategory;
+  name: string;
+  /** 効果ページに出している数値の先頭(「1.25秒」)。無ければ null */
+  value: string | null;
+  /** AP強化で付く効果(スキルのみ) */
+  viaUpgrade: boolean;
+}
+
+const badgeCache = new Map<string, { abilities: Map<string, EffectBadge[]>; items: Map<string, EffectBadge[]> }>();
+/** 実ID → そのスキル・アイテムが持つ効果。effectIndex() を裏返したもので、判定は増やさない */
+function badgeIndex() {
+  const lang = currentLang();
+  const hit = badgeCache.get(lang);
+  if (hit) return hit;
+  const abilities = new Map<string, EffectBadge[]>();
+  const items = new Map<string, EffectBadge[]>();
+  for (const e of effectIndex()) {
+    const base = { id: e.def.id, category: e.def.category, name: effectName(e.def) };
+    for (const r of e.abilities) {
+      const list = abilities.get(r.abilityKey) ?? [];
+      if (!list.some((b) => b.id === base.id)) list.push({ ...base, value: r.values[0]?.value ?? null, viaUpgrade: r.via === "upgrade" });
+      abilities.set(r.abilityKey, list);
+    }
+    for (const r of e.items) {
+      const list = items.get(r.item.id) ?? [];
+      list.push({ ...base, value: r.values[0]?.value ?? null, viaUpgrade: false });
+      items.set(r.item.id, list);
+    }
+  }
+  const built = { abilities, items };
+  badgeCache.set(lang, built);
+  return built;
+}
+/** そのスキルが持つ効果(効果ページの並び順) */
+export const abilityEffects = (abilityKey: string): EffectBadge[] => badgeIndex().abilities.get(abilityKey) ?? [];
+/** そのアイテムが持つ効果(効果ページの並び順) */
+export const itemEffects = (itemId: string): EffectBadge[] => badgeIndex().items.get(itemId) ?? [];
 
 /**
  * ヒーロー一覧の絞り込み用: 効果 id → ヒーローID → [スキルの実ID, AP強化で付くなら 1]。

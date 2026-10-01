@@ -487,7 +487,7 @@ const toc = [
       {["minimap"].map((id) => sys[id] && (
         <div class="topic">
           {sys[id]!.icons.length > 0 && (
-            <ul class="icongrid">
+            <ul class="icongrid" data-noautolink>
               {sys[id]!.icons.map((ic) => <li><img src={`${base}/${ic.src}`} alt="" loading="lazy" /><span>{ic.label}</span></li>)}
             </ul>
           )}

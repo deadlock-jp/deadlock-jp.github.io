@@ -100,7 +100,7 @@ const toc = [
           <h2>{sys[id]!.title}</h2>
           <p class="maplink"><a href={`${base}/mechanics/farm/?show=marker,facility,broker#map`}>マップで位置を見る</a></p>
           {sys[id]!.icons.length > 0 && (
-            <ul class="icongrid">
+            <ul class="icongrid" data-noautolink>
               {sys[id]!.icons.map((ic) => <li><img src={`${base}/${ic.src}`} alt="" loading="lazy" /><span>{ic.label}</span></li>)}
             </ul>
           )}

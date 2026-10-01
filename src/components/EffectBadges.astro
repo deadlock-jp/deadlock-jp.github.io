@@ -1,0 +1,65 @@
+---
+/**
+ * スキル・アイテムが持つ状態異常・効果のバッジ(スキル詳細・ヒーロー詳細のスキルカード・アイテム詳細で共用)。
+ * 判定は src/lib/effects.ts をそのまま使い、ここでは新しい判定をしない。
+ * 各バッジは、その言語の状態異常・効果ページの該当箇所(#id)へのリンク。
+ *
+ * 分類は色だけでなく先頭の記号でも見分けられるようにし(■行動を止める ▼弱める ◆守る・強める ↺解除・軽減)、
+ * ホバーで分類名が出る(title)。読み上げでは aria-label に分類名を含める。
+ */
+import { abilityEffects, itemEffects, type EffectCategory } from "../lib/effects.ts";
+
+interface Props {
+  kind: "ability" | "item";
+  id: string;
+  /** small = スキルカードの中など、詰めて並べるとき */
+  size?: "normal" | "small";
+}
+const { kind, id, size = "normal" } = Astro.props;
+const { L, langPath } = Astro.locals.i18n;
+const E = L().effects;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const badges = kind === "ability" ? abilityEffects(id) : itemEffects(id);
+const GLYPH: Record<EffectCategory, string> = { control: "■", weaken: "▼", protect: "◆", counter: "↺" };
+const href = (effectId: string) => `${base}${langPath("/mechanics/effects/")}#${effectId}`;
+---
+
+{badges.length > 0 && (
+  <ul class:list={["effbadges", size]}>
+    {badges.map((b) => {
+      const label = `${E.categories[b.category]}: ${b.name}${b.value ? ` ${b.value}` : ""}${b.viaUpgrade ? ` (${E.viaUpgrade})` : ""}`;
+      return (
+        <li>
+          <a class={`eb eb-${b.category}`} href={href(b.id)} title={label} aria-label={label}>
+            <span class="g" aria-hidden="true">{GLYPH[b.category]}</span>
+            <span class="n">{b.name}</span>
+            {b.value && <span class="v">{b.value}</span>}
+            {b.viaUpgrade && <span class="ap">AP</span>}
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+)}
+
+<style>
+  .effbadges { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px; }
+  .eb {
+    --eb: var(--c-accent);
+    display: inline-flex; align-items: baseline; gap: 4px;
+    padding: 2px 8px; font-size: 12px; line-height: 1.5; text-decoration: none;
+    color: var(--c-text-strong); background: var(--c-surface-2);
+    border: 1px solid var(--eb); border-radius: 999px;
+  }
+  .eb:hover { background: var(--c-surface-3); text-decoration: none; }
+  .g { font-size: 9px; color: var(--eb); }
+  .v { font-family: var(--font-mono); font-size: 11px; color: var(--c-text-muted); }
+  .ap { font-size: 9.5px; padding: 0 3px; border: 1px dashed var(--c-border-strong); border-radius: 3px; color: var(--c-text-muted); }
+  /* 分類ごと: 行動を止める=角ばった赤、弱める=点線の橙、守る・強める=緑、解除・軽減=アクセント */
+  .eb-control { --eb: var(--c-nerf); border-radius: 3px; }
+  .eb-weaken { --eb: var(--c-weapon); border-style: dashed; }
+  .eb-protect { --eb: var(--c-buff); }
+  .eb-counter { --eb: var(--c-accent); }
+  .small .eb { padding: 1px 6px; font-size: 11px; }
+  .small .v { font-size: 10px; }
+</style>

@@ -12,6 +12,7 @@
  * `[data-abilitycard="<abilityKey>"]` を持つ要素に自動でホバー/フォーカスを張る。
  */
 import { STAT_ICON_PATHS, scaleIconSrc, type CardRow, type DamageRow, type UpgradeTier } from "../lib/skillcard.ts";
+import { abilityEffects } from "../lib/effects.ts";
 
 export interface AbilityHoverDetail {
   name: string;
@@ -29,7 +30,14 @@ interface Props {
   /** abilityKey → AbilityHoverDetail */
   details: Record<string, AbilityHoverDetail>;
 }
-const { details } = Astro.props;
+const { details: rawDetails } = Astro.props;
+/* 持っている状態異常・効果(src/lib/effects.ts)を足す。ページ側のデータの作り方は変えない */
+const details = Object.fromEntries(
+  Object.entries(rawDetails).map(([key, d]) => [
+    key,
+    { ...d, effects: abilityEffects(key).map((b) => ({ n: b.name, c: b.category, v: b.value, ap: b.viaUpgrade })) },
+  ]),
+);
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 /** SkillCard.astro / StatIcon.astro と同じ「spirit/weapon は実画像優先」をJS側でも再現する */
 const scaleIcons = { spirit: scaleIconSrc("spirit"), weapon: scaleIconSrc("weapon") };
@@ -41,6 +49,9 @@ const T = {
   /** 補足メモは日本語のまま出す。日本語以外のページでは「日本語のみ」を添え、見出しにはページの言語を付ける */
   jaOnly: L().langTag === "ja" ? "" : L().jaOnly,
   pageLang: L().langTag,
+  /** 効果の分類名(バッジの title)と記号。EffectBadges.astro と同じ */
+  effCat: L().effects.categories,
+  effGlyph: { control: "■", weaken: "▼", protect: "◆", counter: "↺" },
 };
 ---
 
@@ -104,6 +115,15 @@ const T = {
         (d.isPassive ? `<span class="tag passive-tag">${esc(T.passive)}</span>` : "") +
         `</span>` +
         (d.meta.length ? `<ul class="smeta">${d.meta.map(metaRow).join("")}</ul>` : "") +
+        (d.effects && d.effects.length
+          ? `<div class="hc-eff">${d.effects
+              .map(
+                (e) =>
+                  `<span class="hce hce-${e.c}" title="${esc(T.effCat[e.c])}"><i>${T.effGlyph[e.c]}</i>${esc(e.n)}` +
+                  `${e.v ? ` <b>${esc(e.v)}</b>` : ""}${e.ap ? ` <b>AP</b>` : ""}</span>`,
+              )
+              .join("")}</div>`
+          : "") +
         `</div></div>` +
         `<p class="sdesc">${esc(d.desc)}</p>` +
         (d.tiles.length ? `<div class="stiles">${d.tiles.map(tile).join("")}</div>` : "") +
@@ -181,6 +201,17 @@ const T = {
   .hovercard :global(.ult-tag) { color: var(--c-spirit); background: var(--c-spirit-bg); border: 1px solid var(--c-spirit); }
   .hovercard :global(.passive-tag) { color: var(--c-text-muted); background: var(--c-surface-2); border: 1px solid var(--c-border-strong); }
 
+  /* 状態異常・効果(EffectBadges.astro と同じ色分け) */
+  .hovercard :global(.hc-eff) { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 6px; }
+  .hovercard :global(.hce) {
+    --eb: var(--c-accent); display: inline-flex; align-items: baseline; gap: 3px;
+    font-size: 10.5px; padding: 0 6px; border: 1px solid var(--eb); border-radius: 999px; color: var(--c-text-strong);
+  }
+  .hovercard :global(.hce i) { font-style: normal; font-size: 8px; color: var(--eb); }
+  .hovercard :global(.hce b) { font-weight: 400; font-family: var(--font-mono); color: var(--c-text-muted); }
+  .hovercard :global(.hce-control) { --eb: var(--c-nerf); border-radius: 3px; }
+  .hovercard :global(.hce-weaken) { --eb: var(--c-weapon); border-style: dashed; }
+  .hovercard :global(.hce-protect) { --eb: var(--c-buff); }
   .hovercard :global(.smeta) { list-style: none; padding: 0; margin: var(--sp-2) 0 0; display: flex; flex-wrap: wrap; gap: 5px; }
   .hovercard :global(.smeta li) {
     display: inline-flex; align-items: center; gap: 4px;

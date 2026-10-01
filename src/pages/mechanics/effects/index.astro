@@ -56,7 +56,7 @@ const desc = E.desc as Record<string, string>;
         <article class="eff panel" id={e.def.id}>
           <header class="effhead">
             <h3>{effectName(e.def)}</h3>
-            <span class="effcount">{E.count(e.abilities.length, e.items.length)}</span>
+            <span class="effcount" data-noautolink>{E.count(e.abilities.length, e.items.length)}</span>
           </header>
           <p class="effdesc">{desc[e.def.id]}</p>
 
@@ -66,7 +66,7 @@ const desc = E.desc as Record<string, string>;
               {e.abilities.length === 0 ? (
                 <p class="none">{E.none}</p>
               ) : (
-                <ul class="rows">
+                <ul class="rows" data-noautolink>
                   {e.abilities.map((r) => (
                     <li>
                       <a href={`${base}${langPath(`/abilities/${r.abilityKey}/`)}`}>
@@ -75,7 +75,7 @@ const desc = E.desc as Record<string, string>;
                         <span class="what">{t(r.abilityKey, r.abilityKey)}</span>
                       </a>
                       {r.via === "upgrade" && <span class="ap">{E.viaUpgrade}</span>}
-                      {r.values.length > 0 && <span class="vals">{r.values.join(" / ")}</span>}
+                      {r.values.length > 0 && <span class="vals">{r.values.map((v) => `${v.label} ${v.value}`).join(" / ")}</span>}
                     </li>
                   ))}
                 </ul>
@@ -86,7 +86,7 @@ const desc = E.desc as Record<string, string>;
               {e.items.length === 0 ? (
                 <p class="none">{E.none}</p>
               ) : (
-                <ul class="rows">
+                <ul class="rows" data-noautolink>
                   {e.items.map((r) => (
                     <li>
                       <a href={`${base}${langPath(`/items/${r.item.id}/`)}`}>
@@ -101,7 +101,7 @@ const desc = E.desc as Record<string, string>;
                         />
                         <span class="what">{t(r.item.nameToken, r.item.id)}</span>
                       </a>
-                      {r.values.length > 0 && <span class="vals">{r.values.join(" / ")}</span>}
+                      {r.values.length > 0 && <span class="vals">{r.values.map((v) => `${v.label} ${v.value}`).join(" / ")}</span>}
                     </li>
                   ))}
                 </ul>
@@ -110,7 +110,7 @@ const desc = E.desc as Record<string, string>;
           </div>
 
           {(e.def.counters ?? []).length > 0 && (
-            <div class="counters">
+            <div class="counters" data-noautolink>
               <span class="clabel">{E.counters}</span>
               {(e.def.counters ?? []).map((id) => {
                 const c = byId.get(id);
