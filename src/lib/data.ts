@@ -1099,6 +1099,36 @@ export interface HeroStatsFile {
 }
 export const heroStats = heroStatsJson as unknown as HeroStatsFile;
 
+/**
+ * ゲーム内で公開されているビルドのうち、最近の試合でよく使われているもの。data/hero-builds.json
+ * (tools/fetch-hero-builds.mjs が deadlock-api.com から取得)。数値と ID だけで、
+ * ビルド名・説明・カテゴリー名などプレイヤーが書いた文章は入っていない。
+ * ファイルが無い(まだ取得していない)ときは空として扱う。
+ */
+export interface HeroBuild {
+  /** ゲーム内のビルドID */
+  id: number;
+  version: number;
+  /** 最終更新(Unix 秒) */
+  updated: number | null;
+  /** 集計期間中にこのビルドで遊ばれた試合数・人数(デモ解析された試合のみ) */
+  matches: number;
+  players: number;
+  /** ビルドのカテゴリー(名前は持たない)。items はショップのアイテムの実ID */
+  groups: { optional: boolean; items: string[] }[];
+}
+export interface HeroBuildsFile {
+  fetchedAt: string | null;
+  windowDays: number;
+  heroes: Record<string, HeroBuild[]>;
+}
+export const heroBuilds: HeroBuildsFile = (() => {
+  const p = join(DATA_DIR, "hero-builds.json");
+  return existsSync(p)
+    ? (JSON.parse(readFileSync(p, "utf8")) as HeroBuildsFile)
+    : { fetchedAt: null, windowDays: 0, heroes: {} };
+})();
+
 /** そのアップデートで新しく発表された(解禁前として初めてデータに入った)ヒーロー */
 export interface AnnouncedHero {
   hero: Hero;

@@ -298,6 +298,10 @@ export const zhCn: Dict = {
     popularity: "热度",
     pickShort: "热度",
     shopSearchAria: "筛选商店物品",
+    popularBuilds: "热门出装",
+    pbNone: "不选择(整个商店)",
+    pbNote: (days: number) =>
+      `游戏内公开的出装中,按最近 ${days} 天比赛中的使用次数排序(数据来自 deadlock-api.com,仅限经过录像解析的比赛)。选择后商店只显示该出装的物品,分组即出装的分类。`,
     client: {
       copyUrl: "复制分享链接",
       copied: "已复制",
@@ -325,6 +329,11 @@ export const zhCn: Dict = {
       itemValue: "物品价值",
       creating: "生成中…",
       createFailed: "生成失败",
+      pbOption: "#{id} · {matches} 场 · {players} 人",
+      pbMeta: "版本 {version} · {date} 更新",
+      pbAll: "全部",
+      pbGroup: "分组 {n}",
+      pbOptional: "(可选)",
     },
   },
   search: {

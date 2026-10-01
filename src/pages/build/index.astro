@@ -18,6 +18,7 @@ import {
   SLOT_META,
   souls,
   itemStats as itemStatsFile,
+  heroBuilds,
 } from "../../lib/data.ts";
 import {
   weaponRows,
@@ -187,6 +188,14 @@ const payload = {
       RANK_BANDS.filter((b) => itemStats.bands[b.key]).map((b) => [b.key, `${base}/stats/item-stats-${b.key}.json`]),
     ),
   },
+  /**
+   * 人気のビルド。中身はヒーローを選んだときに url の {id} をヒーローIDにして読み込む。
+   * heroes はビルドのあるヒーローのID(無いヒーローでは読みに行かない)
+   */
+  builds: {
+    heroes: Object.keys(heroBuilds.heroes).map(Number),
+    url: `${base}/stats/hero-builds-{id}.json`,
+  },
 };
 ---
 
@@ -349,6 +358,26 @@ const payload = {
         <span class="shophits" id="shophits"></span>
       </div>
 
+      {/*
+        人気のビルド(ゲーム内で公開されているビルドのうち、最近の試合でよく使われたもの)。
+        ヒーローを選ぶと JS がそのヒーローの分を読み込んで出す。ビルドを選ぶとショップがそのビルドの
+        アイテムだけに絞られ、グループ(ビルドのカテゴリー。名前は持たないので番号)でさらに絞れる。
+        ビルド名などの文章は使わない(tools/fetch-hero-builds.mjs)
+      */}
+      <div class="pbuilds" id="pbuilds" hidden>
+        <div class="pb-head">
+          <label class="pb-pick">
+            <span class="pb-title">{T.build.popularBuilds}</span>
+            <select id="pbsel">
+              <option value="">{T.build.pbNone}</option>
+            </select>
+          </label>
+          <span class="pb-meta" id="pbmeta"></span>
+        </div>
+        <div class="pb-groups" id="pbgroups" role="group" hidden></div>
+        <p class="pb-note">{T.build.pbNote(heroBuilds.windowDays)}</p>
+      </div>
+
       {
         slots.map((slot, idx) => {
           const meta = SLOT_META[slot];
@@ -429,6 +458,13 @@ const payload = {
      */
     let statsBand = "all";
     const bandStats = { all: payload.stats.heroes };
+    /**
+     * 人気のビルドによるショップの絞り込み。null なら絞らない。
+     * buildSel は選んでいるビルド、buildGroup はそのグループの番号(-1 = すべて)
+     */
+    let buildFilter = null;
+    let buildSel = null;
+    let buildGroup = -1;
     /** スキルごとの AP 段(0〜3)。スキルダメージ表示に反映する */
     const apLevel = {};
     const SLOTS = ["WeaponMod", "Armor", "Tech"];
@@ -964,6 +1000,7 @@ const payload = {
       renderBoxes(cost, level);
       renderStats(cost);
       renderShopStats();
+      syncBuilds();
       const covered = coveredIds();
       for (const c of document.querySelectorAll(".card")) {
         const id = c.dataset.id;
@@ -1536,10 +1573,12 @@ const payload = {
           let tierHits = 0;
           for (const card of tier.querySelectorAll(".card")) {
             const m = cq ? window.itemSearch.match(cq, shopHay[card.dataset.id]) : [];
-            card.hidden = m === null;
+            // 人気のビルドを選んでいるときは、そのビルド(のグループ)のアイテムだけ
+            const outOfBuild = buildFilter !== null && !buildFilter.has(card.dataset.id);
+            card.hidden = m === null || outOfBuild;
             const rel = card.querySelector(".crel");
             rel.hidden = !(m && m.length > 0);
-            if (m === null) continue;
+            if (m === null || outOfBuild) continue;
             tierHits++;
             if (m.length > 0) {
               related++;
@@ -1550,20 +1589,21 @@ const payload = {
             }
           }
           tier.hidden = tierHits === 0;
-          // 検索中は畳んだティアも開く(当たったのに見えない、を避ける)
-          const collapsed = !cq && collapsedTiers.has(tier.dataset.tier);
+          // 検索中・ビルドで絞っているときは畳んだティアも開く(当たったのに見えない、を避ける)
+          const narrowed = !!cq || buildFilter !== null;
+          const collapsed = !narrowed && collapsedTiers.has(tier.dataset.tier);
           tier.classList.toggle("collapsed", collapsed);
           const btn = tier.querySelector(".tiertoggle");
           btn.setAttribute("aria-expanded", String(!collapsed));
-          btn.disabled = !!cq;
+          btn.disabled = narrowed;
           catHits += tierHits;
         }
-        // 検索中はTYPEの選択に関係なく、当たりのあるTYPEをすべて出す
-        cat.hidden = cq ? catHits === 0 : !inView;
+        // 検索中・ビルドで絞っているときはTYPEの選択に関係なく、当たりのあるTYPEをすべて出す
+        cat.hidden = cq || buildFilter !== null ? catHits === 0 : !inView;
       }
-      document.querySelector(".shop").classList.toggle("multi", !!cq || shopSlot === "all");
+      document.querySelector(".shop").classList.toggle("multi", !!cq || buildFilter !== null || shopSlot === "all");
       for (const x of document.querySelectorAll(".tab")) {
-        x.classList.toggle("current", x.dataset.slot === shopSlot);
+        x.classList.toggle("current", buildFilter === null && x.dataset.slot === shopSlot);
       }
       document.querySelector(".tabs").classList.toggle("searching", !!cq);
       $("shophits").textContent = cq ? window.itemSearch.summary(direct, related, labels, 0) : "";
@@ -1572,8 +1612,9 @@ const payload = {
     for (const tab of document.querySelectorAll(".tab")) {
       tab.addEventListener("click", () => {
         shopSlot = tab.dataset.slot;
-        // 検索中にTYPEを押したら、検索をやめてそのTYPEを見たいとみなす
+        // 検索中・ビルドで絞っているときにTYPEを押したら、絞り込みをやめてそのTYPEを見たいとみなす
         shopq.value = "";
+        clearBuildSelection();
         applyShop();
         hideCard();
       });
@@ -1598,6 +1639,108 @@ const payload = {
     });
     // ブラウザが入力値を復元した場合や、保存済みの開閉状態を反映するため初回も走らせる
     applyShop();
+
+    // ---- 人気のビルド(ショップの絞り込み) ------------------------------
+    /** ヒーローID → そのヒーローのビルド一覧(読み込みに失敗したら null) */
+    const buildsFor = new Map();
+    /** パネルを組んだヒーロー。render のたびに今のヒーローと比べ、替わっていたら組み直す */
+    let buildsHero = undefined;
+    const pbPanel = $("pbuilds");
+    const pbSel = $("pbsel");
+    const pbGroups = $("pbgroups");
+    const pbMeta = $("pbmeta");
+    const ymd = (unix) => {
+      if (!unix) return "—";
+      const d = new Date(unix * 1000);
+      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+    };
+
+    /** 選んでいるビルドとグループから、ショップに出すアイテムを決め直す */
+    function applyBuildFilter() {
+      const groups = !buildSel ? [] : buildGroup < 0 ? buildSel.groups : [buildSel.groups[buildGroup]];
+      buildFilter = buildSel ? new Set(groups.flatMap((g) => g.items)) : null;
+      applyShop();
+      hideCard();
+    }
+
+    function renderBuildGroups() {
+      pbGroups.hidden = !buildSel;
+      pbMeta.textContent = buildSel
+        ? B.pbMeta.replace("{version}", buildSel.version).replace("{date}", ymd(buildSel.updated))
+        : "";
+      if (!buildSel) {
+        pbGroups.innerHTML = "";
+        return;
+      }
+      const n = (items) => new Set(items).size;
+      const btn = (g, label, count) =>
+        `<button type="button" class="pb-g${g === buildGroup ? " current" : ""}" data-g="${g}">` +
+        `${esc(label)}<small>${count}</small></button>`;
+      pbGroups.innerHTML = [
+        btn(-1, B.pbAll, n(buildSel.groups.flatMap((g) => g.items))),
+        ...buildSel.groups.map((g, i) =>
+          btn(i, B.pbGroup.replace("{n}", i + 1) + (g.optional ? B.pbOptional : ""), n(g.items)),
+        ),
+      ].join("");
+    }
+
+    /** ビルドの選択をやめる(ショップ全体に戻す) */
+    function clearBuildSelection() {
+      if (!buildSel) return;
+      buildSel = null;
+      buildGroup = -1;
+      pbSel.value = "";
+      renderBuildGroups();
+      buildFilter = null;
+    }
+
+    pbSel.addEventListener("change", () => {
+      const list = buildsFor.get(buildsHero) ?? [];
+      buildSel = list.find((b) => String(b.id) === pbSel.value) ?? null;
+      buildGroup = -1;
+      renderBuildGroups();
+      applyBuildFilter();
+    });
+    pbGroups.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-g]");
+      if (!b) return;
+      buildGroup = Number(b.dataset.g);
+      renderBuildGroups();
+      applyBuildFilter();
+    });
+
+    /** ヒーローが替わったら、そのヒーローの人気のビルドを読み込んでパネルを組み直す */
+    async function syncBuilds() {
+      if (heroId === buildsHero) return;
+      buildsHero = heroId;
+      const hadFilter = buildSel !== null;
+      clearBuildSelection();
+      if (hadFilter) applyShop();
+      pbSel.length = 1; // 「選ばない」だけ残す
+      pbPanel.hidden = true;
+      if (heroId === null || !payload.builds.heroes.includes(heroId)) return;
+      if (!buildsFor.has(heroId)) {
+        try {
+          const res = await fetch(payload.builds.url.replace("{id}", String(heroId)));
+          if (!res.ok) throw new Error(String(res.status));
+          buildsFor.set(heroId, (await res.json()).builds);
+        } catch {
+          buildsFor.set(heroId, null); // 読み込めなければパネルを出さないだけ
+        }
+      }
+      // 読み込みの間に別のヒーローに替わっていたら何もしない
+      if (buildsHero !== heroId) return;
+      const list = buildsFor.get(heroId);
+      if (!list || list.length === 0) return;
+      for (const b of list) {
+        const label = B.pbOption
+          .replace("{id}", String(b.id))
+          .replace("{matches}", fmt(b.matches))
+          .replace("{players}", fmt(b.players));
+        pbSel.add(new Option(label, String(b.id)));
+      }
+      pbPanel.hidden = false;
+    }
 
     window.addEventListener("hashchange", () => {
       readUrl();
@@ -1861,6 +2004,34 @@ const payload = {
     }
     .shopsearch input:focus { outline: none; border-color: var(--c-accent); }
     .shophits { font-size: 12px; color: var(--c-text-muted); font-family: var(--font-mono); }
+
+    /* ---- 人気のビルド(ショップの絞り込み)。グループのボタンは JS が innerHTML で入れるので :global ---- */
+    .pbuilds {
+      margin: calc(-1 * var(--sp-2)) 0 var(--sp-4); padding: var(--sp-2) var(--sp-3);
+      background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius);
+    }
+    .pb-head { display: flex; align-items: center; flex-wrap: wrap; gap: var(--sp-2) var(--sp-3); }
+    .pb-pick { display: flex; align-items: center; gap: var(--sp-2); min-width: 0; }
+    .pb-title { font-size: 12px; font-weight: 700; color: var(--c-text-strong); white-space: nowrap; }
+    .pb-pick select {
+      min-width: 0; max-width: 100%;
+      background: var(--c-surface-2); color: var(--c-text-strong);
+      border: 1px solid var(--c-border-strong); border-radius: var(--radius);
+      padding: 5px 8px; font: inherit; font-size: 13px; font-family: var(--font-mono); cursor: pointer;
+    }
+    .pb-meta { font-size: 11px; color: var(--c-text-muted); font-family: var(--font-mono); }
+    .pb-groups { display: flex; flex-wrap: wrap; gap: 6px; margin-top: var(--sp-2); }
+    .pb-groups[hidden] { display: none; }
+    .pb-groups :global(.pb-g) {
+      display: inline-flex; align-items: baseline; gap: 5px;
+      background: var(--c-surface-2); color: var(--c-text-muted);
+      border: 1px solid var(--c-border); border-radius: 999px;
+      font: inherit; font-size: 12px; padding: 3px 10px; cursor: pointer;
+    }
+    .pb-groups :global(.pb-g small) { font-family: var(--font-mono); font-size: 10.5px; color: var(--c-text-faint); }
+    .pb-groups :global(.pb-g:hover) { border-color: var(--c-accent-dim); color: var(--c-text-strong); }
+    .pb-groups :global(.pb-g.current) { background: var(--c-accent-bg); border-color: var(--c-accent); color: var(--c-accent); }
+    .pb-note { margin: var(--sp-2) 0 0; font-size: 11px; color: var(--c-text-faint); line-height: 1.6; }
 
     /* 関連語で当たったカードの印(item-search.js の GROUPS) */
     .crel {

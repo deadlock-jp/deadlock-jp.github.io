@@ -301,6 +301,10 @@ export const ko: Dict = {
     popularity: "인기도",
     pickShort: "인기",
     shopSearchAria: "상점 아이템 필터",
+    popularBuilds: "인기 빌드",
+    pbNone: "선택 안 함 (상점 전체)",
+    pbNote: (days: number) =>
+      `게임 내에 공개된 빌드 중 최근 ${days}일간 경기에서 많이 사용된 순입니다 (deadlock-api.com 기준, 데모 분석된 경기만). 선택하면 상점이 그 빌드의 아이템으로 좁혀지며, 그룹은 빌드의 카테고리입니다.`,
     client: {
       copyUrl: "공유 URL 복사",
       copied: "복사했습니다",
@@ -328,6 +332,11 @@ export const ko: Dict = {
       itemValue: "아이템 가치",
       creating: "만드는 중…",
       createFailed: "만들지 못했습니다",
+      pbOption: "#{id} · {matches}경기 · {players}명",
+      pbMeta: "버전 {version} · {date} 갱신",
+      pbAll: "전체",
+      pbGroup: "그룹 {n}",
+      pbOptional: " (선택)",
     },
   },
   search: {

@@ -299,6 +299,10 @@ export const en: Dict = {
     popularity: "Popularity",
     pickShort: "Pick",
     shopSearchAria: "Filter shop items",
+    popularBuilds: "Popular builds",
+    pbNone: "None (whole shop)",
+    pbNote: (days: number) =>
+      `Builds published in-game, ordered by how many matches used them in the last ${days} days (via deadlock-api.com; demo-parsed matches only). Picking one narrows the shop to its items; groups are the build's categories.`,
     client: {
       copyUrl: "Copy share URL",
       copied: "Copied",
@@ -326,6 +330,11 @@ export const en: Dict = {
       itemValue: "Item value",
       creating: "Creating…",
       createFailed: "Could not create the image",
+      pbOption: "#{id} · {matches} matches · {players} players",
+      pbMeta: "v{version} · updated {date}",
+      pbAll: "All",
+      pbGroup: "Group {n}",
+      pbOptional: " (optional)",
     },
   },
   search: {

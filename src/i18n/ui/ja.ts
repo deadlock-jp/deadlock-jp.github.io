@@ -320,6 +320,11 @@ export const ja = {
     /** ショップのカードに出す短い表記 */
     pickShort: "人気",
     shopSearchAria: "ショップのアイテムを絞り込む",
+    /** 人気のビルド(ゲーム内の公開ビルド。ビルド名などの文章は使わず、ID と使用数だけ出す) */
+    popularBuilds: "人気のビルド",
+    pbNone: "選ばない（ショップ全体）",
+    pbNote: (days: number) =>
+      `ゲーム内で公開されているビルドのうち、直近${days}日の試合で多く使われた順です（deadlock-api.com 調べ。デモ解析された試合のみ）。選ぶとショップがそのビルドのアイテムに絞られ、グループはビルドのカテゴリーです。`,
     /** ブラウザ側の JS に渡す文言。{n} などは差し込み位置 */
     client: {
       copyUrl: "共有URLをコピー",
@@ -350,6 +355,13 @@ export const ja = {
       itemValue: "アイテム価値",
       creating: "作成中…",
       createFailed: "作成できませんでした",
+      /** 人気のビルドの選択肢。{id} ビルドID・{matches} 試合数・{players} 人数 */
+      pbOption: "#{id} · {matches}試合 · {players}人",
+      pbMeta: "版 {version} · {date} 更新",
+      pbAll: "すべて",
+      pbGroup: "グループ{n}",
+      /** ビルドの作者が「任意」にしたカテゴリーの印 */
+      pbOptional: "（任意）",
     },
   },
   /** 日本語以外の検索(public/js/item-search-intl.js)の件数表示。{n} 件数・{total} 全件 */
