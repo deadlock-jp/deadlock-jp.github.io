@@ -39,7 +39,8 @@ const recommended = (farmingNotes as { recommendedHeroes: Record<string, string[
 function heroesFor(key: string): { id: number; name: string; icon: string | null }[] {
   return (recommended[key] ?? []).flatMap((heroKey) => {
     const h = Object.values(heroesFile.heroes).find((x) => x.key === heroKey);
-    return h ? [{ id: h.id, name: t(h.nameToken, heroKey), icon: h.images.iconSmall }] : [];
+    // 解禁前(PreRelease)のヒーローはページが無いので、解禁されるまで出さない
+    return h?.released ? [{ id: h.id, name: t(h.nameToken, heroKey), icon: h.images.iconSmall }] : [];
   });
 }
 const tunnelHeroes = heroesFor("tunnel");
@@ -307,7 +308,7 @@ const toc = [
         <span class="speciallabel">特別枠</span>
         <h3>地下トンネルの箱</h3>
         <p>
-          地下トンネルの中にも箱があり、トンネルに入れるのは次の{tunnelHeroes.length}人だけです。
+          地下トンネルの中にも箱があり、トンネルに入れるのは地下に潜れるヒーロー（次の{tunnelHeroes.length}人）だけです。
           入れるヒーローが限られた、特別なソウル源です。
         </p>
         {f.tunnel && (
@@ -319,7 +320,7 @@ const toc = [
             {f.breakable.gold !== null && (
               <li>箱から出るソウルは地上と同じで、{f.breakable.dropChancePct}%の確率で <b class="num">{f.breakable.gold}</b>（1分ごとに+{f.breakable.goldPerMinute}）。</li>
             )}
-            <li>場所は上のマップの「地下トンネルの箱（3人専用）」で確認できます。</li>
+            <li>場所は上のマップの「地下トンネルの箱」で確認できます。</li>
           </ul>
         )}
         <ul class="heroes">

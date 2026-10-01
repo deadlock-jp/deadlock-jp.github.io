@@ -40,7 +40,7 @@ const round = (n: number): number => Math.round(n);
 
 // 地下トンネルの箱の出現グループ(根拠は src/parsers/map.ts)
 export { TUNNEL_BREAKABLE_GROUP } from "../parsers/map.ts";
-import { TUNNEL_BREAKABLE_GROUP, isMapReady, hasTunnelGroup } from "../parsers/map.ts";
+import { TUNNEL_BREAKABLE_GROUP, isMapReady } from "../parsers/map.ts";
 
 /** 4回目のアビリティ解放(=アルティメット)が来るレベルと、そこまでに稼ぐソウル */
 function ultimateUnlock(): { level: number; earnedGold: number } | null {
@@ -133,7 +133,7 @@ export interface MatchFlow {
   urnOrbs: number | null;
   /** カムバック(劣勢側への補正)のうち convar で分かるもの */
   comeback: { redirectPct: number | null; tickStartSeconds: number | null; lowestPct: number | null; secondLowestPct: number | null };
-  /** 地下トンネル(3人専用)の箱。map.json が無い版は null */
+  /** 地下トンネル(地下に潜れるヒーローだけが入れる)の箱。map.json が無い版は null */
   tunnel: { crates: number; statues: number; firstSeconds: number | null; respawnSeconds: number | null } | null;
   /** 経過時間ごとのトルーパー1ウェーブ(全員分)のソウル */
   waveByMinute: { minute: number; perTrooper: number; perWave: number }[];
@@ -250,7 +250,7 @@ export function matchFlow(): MatchFlow {
     tunnel: (() => {
       if (!existsSync(snap("map.json"))) return null;
       const map = JSON.parse(readFileSync(snap("map.json"), "utf8")) as MapFile;
-      if (!isMapReady(map) || !hasTunnelGroup(map)) return null;
+      if (!isMapReady(map)) return null;
       const inTunnel = map.breakables.filter((b) => b.group === TUNNEL_BREAKABLE_GROUP);
       const t = economy.breakableSpawnTimes[TUNNEL_BREAKABLE_GROUP];
       return {

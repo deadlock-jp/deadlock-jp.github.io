@@ -135,7 +135,8 @@ function parseBreakableGold(misc: ReturnType<typeof readVdata>): BreakableGold {
   const prop = obj(misc["citadel_breakable_prop_drop_gold"]);
   const pickup = obj(misc["small_gold_pickup"]);
   return {
-    dropChancePct: optNum(prop["m_flPrimaryDropChance"]),
+    // 6712 で m_flPrimaryDropChance → m_flPowerupDropChance に改名(スキーマの説明は同じ「primary reward を落とす確率」)
+    dropChancePct: optNum(prop["m_flPowerupDropChance"] ?? prop["m_flPrimaryDropChance"]),
     goldAmount: optNum(pickup["m_flGoldAmount"]),
     goldPerMinute: optNum(pickup["m_flGoldPerMinuteAmount"]),
   };

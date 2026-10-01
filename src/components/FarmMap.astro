@@ -72,9 +72,9 @@ const layers = map
       })),
       { key: "crate", label: "箱（ソウル）", icon: null, count: count((b) => b.kind === "crate" && !isTunnel(b)), on: false },
       { key: "statue", label: "黄金像（パワーアップ）", icon: null, count: count((b) => b.kind === "statue" && !isTunnel(b)), on: false },
-      // 3人専用トンネルのグループが確かめられない版(src/parsers/map.ts の hasTunnelGroup)では出さない
+      // 地下に潜れるヒーローだけが入れるトンネルの箱(src/parsers/map.ts の TUNNEL_BREAKABLE_GROUP)
       ...(count(isTunnel) > 0
-        ? [{ key: "tunnel", label: "地下トンネルの箱（3人専用）", icon: null, count: count(isTunnel), on: false }]
+        ? [{ key: "tunnel", label: "地下トンネルの箱", icon: null, count: count(isTunnel), on: false }]
         : []),
       { key: "tough", label: "頑丈な箱", icon: null, count: count((b) => b.kind === "tough"), on: false },
       { key: "snack", label: "ヒーリングスナック", icon: markerIcon("snack") ? `${base}/${markerIcon("snack")}` : null, count: markerCount("snack"), on: false },
@@ -177,7 +177,7 @@ const MARKER_LABEL: Record<string, string> = {
               class:list={["mk", `mk-${b.kind}`, isTunnel(b) ? "tunnelonly" : b.underground ? "under" : "above"]}
               data-layer={isTunnel(b) ? "tunnel" : b.kind}
               style={pos(b)}
-              title={`${label ? `${label} ` : ""}${isTunnel(b) ? "地下トンネル（3人専用）の" : ""}${b.kind === "crate" ? "箱（ソウル）" : b.kind === "tough" ? "頑丈な箱（近接強攻撃で壊す）" : "黄金像"}：${groupTime(b.group)}`}
+              title={`${label ? `${label} ` : ""}${isTunnel(b) ? "地下トンネルの" : ""}${b.kind === "crate" ? "箱（ソウル）" : b.kind === "tough" ? "頑丈な箱（近接強攻撃で壊す）" : "黄金像"}：${groupTime(b.group)}`}
             >
               {label && <b class="bl">{label}</b>}
             </span>
@@ -549,7 +549,7 @@ const MARKER_LABEL: Record<string, string> = {
   .st-shrine { width: 10px; height: 10px; }
 
   .mk-crate { width: 5px; height: 5px; border-radius: 50%; background: var(--c-soul); box-shadow: 0 0 0 1px rgb(0 0 0 / 0.6); }
-  /* 3人専用トンネルの箱は、ミニマップのどちらの絵にも描かれていないので両方の表示に出す */
+  /* 地下トンネルの箱は、ミニマップのどちらの絵にも描かれていないので両方の表示に出す */
   .mk.tunnelonly { background: var(--c-spirit) !important; }
   .mk-crate.tunnelonly { width: 6px; height: 6px; }
   .mk-statue { width: 6px; height: 6px; background: #e8b93a; transform: translate(-50%, -50%) rotate(45deg); box-shadow: 0 0 0 1px rgb(0 0 0 / 0.6); }

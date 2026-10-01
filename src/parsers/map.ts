@@ -35,25 +35,16 @@ function isTunnelFloor(img: DecodedPng, px: number, py: number): boolean {
 }
 
 /**
- * 地下トンネル(レム・モー＆クリル・キャリコだけが入れる)の箱が属する出現グループ。
+ * 地下トンネル(地下に潜れるヒーローだけが入れる)の箱が属する出現グループ。
  * ゲームデータは出現グループに名前を持たないので、公式ノートで対応を確かめている:
  * 2026-09-16 のノート「Breakables in the underground tunnels initial spawn time increased
  * from 3m to 5m / respawn rate increased from 3m to 5m」と、economy.json の
- * breakableSpawnTimes[1](初回300秒・再出現300秒)が一致する。配置もこのグループだけが
- * 地面より深い場所に集まっている(map.json)。
+ * breakableSpawnTimes[1](初回300秒・再出現300秒)が一致する。
+ * 6712(2026-09-29 のマップ改修)でこのグループは一度 180秒に戻り、6726 で再び 300秒に
+ * 直された。配置は中央付近の新しい地下通路(大半が z < 0)で、ミニマップのトンネル画像には
+ * 描かれていないため underground フラグは立たないが、グループごと地下トンネルの箱として扱う。
  */
 export const TUNNEL_BREAKABLE_GROUP = 1;
-
-/**
- * そのマップで TUNNEL_BREAKABLE_GROUP が本当に地下トンネルのグループか(大半が地下にあるか)。
- * 6712(2026-09-29 のマップ改修)で出現グループの割り当てが変わり、グループ1の大半が地上に移った
- * (地上75・地下3)。どのグループがトンネルになったかは公式ノートでまだ確かめられていないので、
- * 確かめられるまでは「3人専用トンネルの箱」として扱わない(普通の箱として出す)。
- */
-export function hasTunnelGroup(map: MapFile): boolean {
-  const inGroup = map.breakables.filter((b) => b.group === TUNNEL_BREAKABLE_GROUP);
-  return inGroup.length > 0 && inGroup.filter((b) => b.underground).length / inGroup.length >= 0.8;
-}
 
 /**
  * サイトの表示に使える map.json か。ミニマップの背景(地上)が取れていない版は
