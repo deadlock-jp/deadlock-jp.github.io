@@ -1,0 +1,189 @@
+---
+/**
+ * ヒーローページの「このヒーローがよく売るアイテム」。data/item-sales.json(アイテムページの「売却と強化」と同じ統計)から、
+ * そのヒーローで売られることの多いアイテムを、全ヒーローを通した売却の割合と並べて出す。
+ *
+ *   - 対象: そのヒーローが買った件数が MIN_N 件以上のアイテム(帯ごとに判定)
+ *   - 並び: 売却試合率(売った試合数 ÷ そのヒーローの試合数)の高い順に TOP_N 件。
+ *     ヒーローの試合数は売却と同じ問い合わせで数えたもの(data.ts の heroSalesItems)
+ *   - 行: アイコン・名前(ホバーカード付き)・ティア、売却の割合(全体の割合と、差が大きいときは ▲▼ の印)、
+ *     強化の割合(上位が無いアイテムは「—」)、時刻の小さな帯(SalesTrack)と「買う → 売る」の中央値、売る前提の印
+ * 勝率は出さない。ランク帯は4帯分を HTML に書き出して切り替える(ItemSales.astro と同じ)。
+ * 統計が無い・該当するアイテムが無いときはセクションごと出さない。
+ */
+import ItemIcon from "./ItemIcon.astro";
+import RankBandPicker from "./RankBandPicker.astro";
+import SalesTrack from "./SalesTrack.astro";
+import SellFirstFlag from "./SellFirstFlag.astro";
+import { t, usedIn, itemSales, heroSalesItems, statsPeriodLabel, type HeroSalesRow } from "../lib/data.ts";
+import { RANK_BANDS, type RankBandKey } from "../lib/rankBands.ts";
+import { salesPct as pct, mmss, salesAxisMinutes } from "../lib/salesView.ts";
+
+interface Props {
+  heroId: number;
+  base: string;
+}
+/** 対象にする最低の購入件数(帯ごと) */
+const MIN_N = 100;
+const TOP_N = 6;
+/** 全体の売却の割合との差がこれ(ポイント)以上なら ▲▼ を付ける */
+const DIFF_PT = 10;
+const { heroId, base } = Astro.props;
+const { L, langPath } = Astro.locals.i18n;
+const T = L();
+const S = T.stats;
+const SS = S.sales;
+const lowN = itemSales?.lowSampleMatches ?? 20;
+const period = itemSales ? statsPeriodLabel(itemSales) : "";
+
+const bandKeys = ["all", ...RANK_BANDS.map((b) => b.key)] as RankBandKey[];
+const panels = bandKeys
+  .map((key) => ({
+    key,
+    rows: heroSalesItems(heroId, key, MIN_N, TOP_N),
+    matches: itemSales?.bands[key]?.heroMatches?.[String(heroId)] ?? 0,
+  }))
+  .filter((p): p is { key: RankBandKey; rows: HeroSalesRow[]; matches: number } => p.rows !== null);
+const hasAll = panels.some((p) => p.key === "all");
+const axisMin = salesAxisMinutes(panels.flatMap((p) => p.rows.flatMap((r) => [r.buyMedian, r.sell?.[2]])));
+const sectionId = `hs-${heroId}`;
+
+const view = (r: HeroSalesRow) => {
+  const soldRate = r.sold / r.n;
+  const overallRate = r.overallN > 0 ? r.overallSold / r.overallN : 0;
+  const diff = (soldRate - overallRate) * 100;
+  return {
+    href: `${base}${langPath(`/items/${r.item.id}/`)}`,
+    name: t(r.item.nameToken, r.item.id),
+    sold: pct(r.sold, r.n),
+    overall: pct(r.overallSold, r.overallN),
+    mark: diff >= DIFF_PT ? "hi" : diff <= -DIFF_PT ? "lo" : null,
+    upgraded: usedIn(r.item.id).length > 0 ? pct(r.upgraded, r.n) : "—",
+    low: r.n < lowN,
+  };
+};
+---
+
+{hasAll && (
+  <section class="hsales" id={sectionId}>
+    <h2>{SS.heroTitle}</h2>
+    <div class="hs-head">
+      <p class="hs-lead">{SS.heroLead(MIN_N.toLocaleString("en-US"))}</p>
+      <RankBandPicker />
+    </div>
+
+    {panels.map((p) => (
+      <div class="hs-panel" data-hsales-band={p.key} hidden={p.key !== "all"}>
+        <p class="hs-meta">{period} / {S.matches(p.matches.toLocaleString("en-US"))}</p>
+        <ol class="hs-list">
+          {p.rows.map((r) => {
+            const v = view(r);
+            return (
+              <li class="hs-row">
+                <div class="hs-item">
+                  <a href={v.href} data-itemcard={r.item.id}>
+                    <ItemIcon
+                      name={v.name}
+                      slotType={r.item.slotType}
+                      tier={r.item.tier}
+                      shopIcon={r.item.shopIcon}
+                      activation={r.item.activation}
+                      isImbue={r.item.isImbue}
+                      size={32}
+                    />
+                    <span class="nm">{v.name}</span>
+                  </a>
+                  <small class="tier">{T.common.tier(r.item.tier)}</small>
+                  {r.item.allowGlobalSell && <SellFirstFlag small />}
+                  {v.low && <b class="hs-low">{S.lowSample}</b>}
+                </div>
+                <p class="hs-nums">
+                  <span>
+                    <i class="sw sold"></i>{SS.sold} <b>{v.sold}</b>
+                    <span class="ov">{SS.overall(v.overall)}</span>
+                    {v.mark === "hi" && <span class="mk hi" title={SS.higher}>▲<span class="sr">{SS.higher}</span></span>}
+                    {v.mark === "lo" && <span class="mk lo" title={SS.lower}>▼<span class="sr">{SS.lower}</span></span>}
+                  </span>
+                  <span><i class="sw up"></i>{SS.upgraded} <b>{v.upgraded}</b></span>
+                </p>
+                <div class="hs-time">
+                  <SalesTrack
+                    axisMinutes={axisMin}
+                    buy={r.buyMedian}
+                    sell={r.sell}
+                    compact
+                    buyLabel={SS.buy}
+                    sellLabel={SS.sell}
+                  />
+                  {r.buyMedian !== null && r.sell && (
+                    <span class="tt">{SS.buyToSell(mmss(r.buyMedian), mmss(r.sell[1]))}</span>
+                  )}
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+      </div>
+    ))}
+    <p class="hs-none" data-hsales-none hidden>{S.noData}</p>
+    <p class="hs-note">{SS.note(itemSales?.cancelSeconds ?? 10)} {SS.source}</p>
+
+    <script is:inline define:vars={{ sectionId }}>
+      (() => {
+        const root = document.getElementById(sectionId);
+        if (!root) return;
+        const show = (band) => {
+          let found = false;
+          for (const el of root.querySelectorAll("[data-hsales-band]")) {
+            el.hidden = el.dataset.hsalesBand !== band;
+            if (!el.hidden) found = true;
+          }
+          root.querySelector("[data-hsales-none]").hidden = found;
+        };
+        document.addEventListener("rankband", (e) => show(e.detail.band));
+        if (window.rankBand) show(window.rankBand.current().band);
+      })();
+    </script>
+  </section>
+)}
+
+<style>
+  .hsales { margin-top: var(--sp-5); }
+  .hsales h2 { margin-bottom: var(--sp-1); }
+  .hs-head {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: var(--sp-2) var(--sp-3); margin: 0 0 var(--sp-3);
+  }
+  .hs-lead { margin: 0; font-size: 13px; color: var(--c-text); flex: 1 1 320px; }
+  .hs-panel { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); padding: var(--sp-3) var(--sp-4); }
+  .hs-panel[hidden] { display: none; }
+  .hs-meta { margin: 0 0 var(--sp-2); font-size: 12px; color: var(--c-text-muted); }
+  .hs-list {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: var(--sp-3) var(--sp-5);
+  }
+  .hs-row { min-width: 0; }
+  .hs-item { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; min-width: 0; }
+  .hs-item a { display: flex; align-items: center; gap: 8px; min-width: 0; color: var(--c-text-strong); text-decoration: none; }
+  .hs-item a:hover .nm { text-decoration: underline; }
+  .nm { font-size: 13.5px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tier { font-size: 11px; color: var(--c-text-faint); white-space: nowrap; }
+  .hs-low { padding: 0 4px; border-radius: 3px; font-size: 11px; border: 1px solid var(--c-border-strong); color: var(--c-text-muted); }
+  .hs-nums { display: flex; flex-wrap: wrap; gap: 2px var(--sp-4); margin: 6px 0 4px; font-size: 12px; color: var(--c-text-muted); }
+  .hs-nums > span { display: inline-flex; align-items: baseline; gap: 4px; }
+  .hs-nums b { font-family: var(--font-mono); font-size: 14.5px; color: var(--c-text-strong); }
+  .ov { font-family: var(--font-mono); color: var(--c-text-muted); }
+  .sw { width: 9px; height: 9px; border-radius: 2px; display: inline-block; align-self: center; }
+  .sw.sold { background: var(--c-sale-sold); }
+  .sw.up { background: var(--c-sale-up); }
+  /* 全体との差が大きいもの。色は控えめにし、記号と読み上げの文で示す */
+  .mk { font-size: 10px; align-self: center; }
+  .mk.hi { color: var(--c-sale-sold); }
+  .mk.lo { color: var(--c-text-muted); }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .hs-time { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--sp-2); }
+  .tt { font-family: var(--font-mono); font-size: 11.5px; color: var(--c-text-muted); white-space: nowrap; }
+  .hs-none { margin: 0; font-size: 12px; color: var(--c-text-faint); }
+  .hs-none[hidden] { display: none; }
+  .hs-note { margin: var(--sp-3) 0 0; font-size: 12px; color: var(--c-text-faint); line-height: 1.7; }
+</style>

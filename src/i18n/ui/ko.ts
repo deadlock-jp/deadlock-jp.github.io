@@ -263,6 +263,14 @@ export const ko: Dict = {
       note: (s: number) =>
         `업그레이드 재료로 소모된 것은 판매에 포함하지 않습니다. 구매 후 ${s}초 이내의 판매는 잘못 구매한 것의 취소로 보고 제외했습니다.`,
       source: "경기 데이터: deadlock-api.com (6시간마다 갱신)",
+      /** 영웅 페이지의 「이 영웅이 자주 판매하는 아이템」(HeroSales.astro) */
+      heroTitle: "이 영웅이 자주 판매하는 아이템",
+      heroLead: (n: string) =>
+        `이 영웅의 경기 중 해당 아이템을 판매한 경기의 비율이 높은 순입니다(구매 ${n}건 이상인 아이템). 판매 비율은 구매한 경기 중 판매한 경기의 비율입니다.`,
+      overall: (p: string) => `(전체 ${p})`,
+      higher: "전체보다 높음",
+      lower: "전체보다 낮음",
+      buyToSell: (b: string, s: string) => `구매 ${b} → 판매 ${s}`,
     },
   },
   effects: {

@@ -18,6 +18,7 @@ import { heroBalanceHistory } from "../../lib/balance.ts";
 import { heroMatchup } from "../../lib/matchup.ts";
 import HeroMatchup from "../../components/HeroMatchup.astro";
 import HeroPopularItems from "../../components/HeroPopularItems.astro";
+import HeroSales from "../../components/HeroSales.astro";
 import ItemHoverCard from "../../components/ItemHoverCard.astro";
 import { skillCard } from "../../lib/skillcard.ts";
 import BalanceHistory from "../../components/BalanceHistory.astro";
@@ -214,6 +215,8 @@ const ogImage = existsSync(join(process.cwd(), "public", cardRel)) ? `/${cardRel
   )}
 
   <HeroPopularItems heroId={hero.id} base={base} />
+  {/* このヒーローがよく売るアイテム(data/item-sales.json)。統計が無ければ何も出さない */}
+  <HeroSales heroId={hero.id} base={base} />
   <HeroMatchup matchup={matchup} base={base} />
 
   <BalanceHistory entries={adjRows} grouped />

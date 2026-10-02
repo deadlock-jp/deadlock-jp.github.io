@@ -261,6 +261,14 @@ export const en: Dict = {
       note: (s: number) =>
         `Items consumed as components of an upgrade are not counted as sold. Sales within ${s} seconds of purchase are excluded as cancelled mis-buys.`,
       source: "Match data: deadlock-api.com (updated every 6 hours)",
+      /** Hero page "Items this hero sells most" (HeroSales.astro) */
+      heroTitle: "Items this hero sells most",
+      heroLead: (n: string) =>
+        `Items sold in the largest share of this hero's games (items with ${n}+ purchases). The sell rate is the share of games where the item was bought and then sold.`,
+      overall: (p: string) => `(all heroes ${p})`,
+      higher: "higher than all heroes",
+      lower: "lower than all heroes",
+      buyToSell: (b: string, s: string) => `buy ${b} → sell ${s}`,
     },
   },
   effects: {

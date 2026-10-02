@@ -25,6 +25,8 @@
  *               同じプレイヤーの腐敗版の購入と、アイテムIDと時刻が一致するもので見分ける。2026-10-02 の実測で全件一致)
  *       取り消し … 上のどれにも当たらない(cancelSeconds 以内の売却だけ)。件数だけ数え、割合には入れない
  *   - 時刻(秒): 購入 = その件の最初の購入(取り消しの購入は除く)、売却 = 最初の売却、保持 = その売却の保持時間
+ *   - ヒーローの試合数: 各プレイヤーの items の先頭に番兵(item_id = 0)を足し、その件数で数える。
+ *     行の itemId = 0 が「そのヒーロー(heroId = 0 なら全ヒーロー)の、その帯の試合数」(n に入る)
  *   - ランク帯: 試合の平均バッジ(average_badge)が帯の下限以上・上限以下(bandCondition の説明を参照。
  *     下限 11 以下・上限 116 以上は絞らない)。all はすべての試合
  */
@@ -100,13 +102,19 @@ FROM (
         arrayMap((x, t) -> (x, t),
           arrayFilter((x, u) -> bitAnd(u, ${CORRUPTED_BIT}) != 0, items.item_id, items.upgrade_info),
           arrayFilter((t, u) -> bitAnd(u, ${CORRUPTED_BIT}) != 0, items.game_time_s, items.upgrade_info)) AS cpairs,
-        items.item_id, items.game_time_s, items.sold_time_s, items.flags, items.upgrade_id, items.upgrade_info
+        -- 先頭に番兵(item_id = 0)を1行足す。アイテムを1つも買っていないプレイヤーも1件として残り、
+        -- 番兵の件数がそのまま「そのヒーロー(全体)の試合数」になる(問い合わせを増やさずに分母を取るため)
+        arrayPushFront(arrayMap(x -> toUInt32(x), items.item_id), toUInt32(0)) AS s_ids,
+        arrayPushFront(items.game_time_s, toUInt32(1)) AS s_ts,
+        arrayPushFront(items.sold_time_s, toUInt32(0)) AS s_sold,
+        arrayPushFront(items.flags, toUInt32(0)) AS s_flags,
+        arrayPushFront(items.upgrade_id, toUInt32(1)) AS s_up,
+        arrayPushFront(items.upgrade_info, toUInt32(0)) AS s_ui
       FROM match_player
       WHERE start_time >= toDateTime(${Math.floor(p.start)}) AND start_time <= toDateTime(${Math.floor(p.end)})
         AND match_mode = 'Ranked' AND game_mode = 'Normal'
     )
-    ARRAY JOIN \`items.item_id\` AS item_id, \`items.game_time_s\` AS t, \`items.sold_time_s\` AS sold,
-      \`items.flags\` AS flags, \`items.upgrade_id\` AS up, \`items.upgrade_info\` AS ui
+    ARRAY JOIN s_ids AS item_id, s_ts AS t, s_sold AS sold, s_flags AS flags, s_up AS up, s_ui AS ui
     WHERE up = 1 AND t > 0 AND bitAnd(ui, ${CORRUPTED_BIT}) = 0
   )
   GROUP BY match_id, account_id, hero_id, item_id

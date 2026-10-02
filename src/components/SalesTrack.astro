@@ -1,0 +1,63 @@
+---
+/**
+ * 売却と強化の「時刻の帯」(アイテムページの ItemSales.astro と、ヒーローページの HeroSales.astro で共用)。
+ * 試合時間の横の線に、購入時刻の中央値(点)と、売却時刻の四分位の範囲(帯)・中央値(点)を重ねる。
+ * 数字は呼び出し側が添える(この部品は図だけ。読み上げでは隠す)。
+ */
+import { salesPos, mmss } from "../lib/salesView.ts";
+
+interface Props {
+  /** 帯の右端(分)。salesAxisMinutes で決めた値 */
+  axisMinutes: number;
+  /** 購入時刻の中央値(秒)。無ければ点を描かない */
+  buy: number | null;
+  /** 売却時刻の [25%, 50%, 75%](秒)。売却が無ければ null */
+  sell: [number, number, number] | null;
+  /** 目盛り(10分ごと)を出すか。行ごとに並べる小さい帯では出さない */
+  ticks?: boolean;
+  /** 小さい表示(ヒーローページの行) */
+  compact?: boolean;
+  /** 点のツールチップ(「購入（中央値）」など) */
+  buyLabel: string;
+  sellLabel: string;
+}
+const { axisMinutes, buy, sell, ticks = false, compact = false, buyLabel, sellLabel } = Astro.props;
+const pos = (s: number) => salesPos(s, axisMinutes);
+const tickList = Array.from({ length: Math.floor(axisMinutes / 10) + 1 }, (_, i) => i * 10);
+---
+
+<div class:list={["st", { compact }]} aria-hidden="true">
+  <div class="st-line">
+    {sell && <i class="range" style={`left:${pos(sell[0])};width:calc(${pos(sell[2])} - ${pos(sell[0])})`}></i>}
+    {buy !== null && <i class="pt buy" style={`left:${pos(buy)}`} title={`${buyLabel} ${mmss(buy)}`}></i>}
+    {sell && <i class="pt sold" style={`left:${pos(sell[1])}`} title={`${sellLabel} ${mmss(sell[1])}`}></i>}
+  </div>
+  {ticks && (
+    <div class="st-ticks">
+      {tickList.map((m) => <span style={`left:${(m / axisMinutes) * 100}%`}>{m}:00</span>)}
+    </div>
+  )}
+</div>
+
+<style>
+  .st { position: relative; padding: 0 4px; }
+  .st-line { position: relative; height: 18px; }
+  .st-line::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px;
+    background: var(--c-border-strong); border-radius: 1px;
+  }
+  .range { position: absolute; top: 3px; bottom: 3px; background: var(--c-sale-sold-range); border-radius: 3px; }
+  .pt {
+    position: absolute; top: 50%; width: 11px; height: 11px; margin: -5.5px 0 0 -5.5px; border-radius: 50%;
+    box-shadow: 0 0 0 2px var(--c-surface);
+  }
+  .pt.buy { background: var(--c-text-strong); }
+  .pt.sold { background: var(--c-sale-sold); }
+  .compact .st-line { height: 12px; }
+  .compact .range { top: 2px; bottom: 2px; }
+  .compact .pt { width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; }
+  .st-ticks { position: relative; height: 16px; margin-top: 2px; font-family: var(--font-mono); font-size: 10.5px; color: var(--c-text-faint); }
+  .st-ticks span { position: absolute; transform: translateX(-50%); }
+  .st-ticks span:first-child { transform: none; }
+  .st-ticks span:last-child { transform: translateX(-100%); }
+</style>

@@ -59,6 +59,8 @@ const simulate = new Set(
 
 /**
  * minIntervalHours … 前回の取得(ファイルの fetchedAt)からこの時間たっていなければ取得せず、前回分を使う。
+ *   ただし前回分の schemaVersion が schemaVersion より古いときは、間隔に関係なく取り直す(ファイルの形を変えた直後に、
+ *   古い形のまま6時間使い続けないため。形を変えた後の1回だけ)。
  * retryAfterFailureMinutes … 取得に失敗してからこの時間は取り直さない(失敗の時刻は --fallback のフォルダに残す)。
  * item-sales は deadlock-api.com の SQL エンドポイントを使い、上限が 1時間20回・1分2回と厳しいので両方を付ける。
  */
@@ -66,16 +68,17 @@ const TARGETS = [
   { name: "item-stats", script: "tools/fetch-item-stats.mjs" },
   { name: "hero-stats", script: "tools/fetch-hero-stats.mjs" },
   { name: "hero-builds", script: "tools/fetch-hero-builds.mjs" },
-  { name: "item-sales", script: "tools/fetch-item-sales.mjs", minIntervalHours: 6, retryAfterFailureMinutes: 60 },
+  { name: "item-sales", script: "tools/fetch-item-sales.mjs", minIntervalHours: 6, retryAfterFailureMinutes: 60, schemaVersion: 2 },
 ];
 
-/** ファイルの fetchedAt(ミリ秒)。読めなければ null */
-function fetchedAtOf(/** @type {string} */ path) {
+/** ファイルの fetchedAt(ミリ秒)と schemaVersion。読めなければ null */
+function metaOf(/** @type {string} */ path) {
   try {
-    const t = Date.parse(JSON.parse(readFileSync(path, "utf8")).fetchedAt);
-    return Number.isFinite(t) ? t : null;
+    const j = JSON.parse(readFileSync(path, "utf8"));
+    const t = Date.parse(j.fetchedAt);
+    return { at: Number.isFinite(t) ? t : null, schema: typeof j.schemaVersion === "number" ? j.schemaVersion : 0 };
   } catch {
-    return null;
+    return { at: null, schema: 0 };
   }
 }
 /**
@@ -101,7 +104,9 @@ for (const t of TARGETS) {
   let note = "";
   // 前回分(CI はキャッシュ、手元は data/ のファイル)
   const prevPath = fallbackDir ? join(fallbackDir, `${t.name}.json`) : file;
-  const prevAt = existsSync(prevPath) ? fetchedAtOf(prevPath) : null;
+  const prevMeta = existsSync(prevPath) ? metaOf(prevPath) : { at: null, schema: 0 };
+  // 前回分の形が古ければ、間隔に関係なく取り直す
+  const prevAt = t.schemaVersion && prevMeta.schema < t.schemaVersion ? null : prevMeta.at;
   const failedAt = attempts[t.name] ? Date.parse(attempts[t.name]) : NaN;
   if (simulate.has(t.name) || simulate.has("all")) {
     note = "STATS_SIMULATE_FAIL で失敗扱い";

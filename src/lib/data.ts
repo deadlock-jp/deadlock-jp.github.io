@@ -1198,8 +1198,11 @@ export interface ItemSalesEntry {
   buy: [number, number, number] | null;
   sell: [number, number, number] | null;
   hold: [number, number, number] | null;
-  /** [ヒーローID, 件数, 売却, 強化, 保持](件数の多い順) */
-  heroes: [number, number, number, number, number][];
+  /**
+   * [ヒーローID, 件数, 売却, 強化, 保持, 購入の中央値, 売却の25%, 売却の中央値, 売却の75%](件数の多い順)。
+   * 時刻は秒で、売却が無ければ売却の3つは null
+   */
+  heroes: [number, number, number, number, number, number | null, number | null, number | null, number | null][];
 }
 export interface ItemSalesFile {
   fetchedAt: string;
@@ -1209,7 +1212,13 @@ export interface ItemSalesFile {
   /** これ以内の売却は「買い間違いの取り消し」として除いた(秒) */
   cancelSeconds: number;
   lowSampleMatches: number;
-  bands: Partial<Record<RankBandKey, { matches: number; items: Record<string, ItemSalesEntry> }>>;
+  /**
+   * matches = その帯の試合数、heroMatches = ヒーローID → そのヒーローの試合数
+   * (どちらも売却と同じ問い合わせ・同じ条件で数えたもの。ほかの統計の試合数は混ぜない)
+   */
+  bands: Partial<
+    Record<RankBandKey, { matches: number; heroMatches?: Record<string, number>; items: Record<string, ItemSalesEntry> }>
+  >;
 }
 /** 売却・強化の統計。無ければ null(アイテムページの「売却と強化」を出さない) */
 export const itemSales: ItemSalesFile | null = readStatsFile<ItemSalesFile>("item-sales.json");
@@ -1221,6 +1230,52 @@ export function itemSalesFor(itemId: string): Partial<Record<RankBandKey, ItemSa
       .map(([band, b]) => [band, b?.items[itemId]])
       .filter(([, e]) => e),
   ) as Partial<Record<RankBandKey, ItemSalesEntry>>;
+}
+
+/** ヒーローページの「このヒーローがよく売るアイテム」の1行 */
+export interface HeroSalesRow {
+  item: Item;
+  /** そのヒーローがそのアイテムを買った件数(1件 = 1試合) */
+  n: number;
+  sold: number;
+  upgraded: number;
+  /** 売却試合率(売った試合数 ÷ そのヒーローの試合数)。並べる順番 */
+  soldPerMatch: number;
+  /** 全ヒーローを通した、そのアイテムの売却率・件数(同じ帯) */
+  overallSold: number;
+  overallN: number;
+  /** 時刻(秒)。売却が無ければ sell は null */
+  buyMedian: number | null;
+  sell: [number, number, number] | null;
+}
+/**
+ * そのヒーローで売られることの多いアイテム。買った件数が minN 以上のものを、売却試合率の高い順に top 件。
+ * 統計が無い・その帯にヒーローの試合が無い・該当するアイテムが無いときは null
+ */
+export function heroSalesItems(heroId: number, band: RankBandKey, minN = 100, top = 6): HeroSalesRow[] | null {
+  const b = itemSales?.bands[band];
+  const matches = b?.heroMatches?.[String(heroId)] ?? 0;
+  if (!b || matches <= 0) return null;
+  const rows: HeroSalesRow[] = [];
+  for (const [itemId, e] of Object.entries(b.items)) {
+    const item = itemsFile.items[itemId];
+    if (!item?.inShop) continue;
+    const h = e.heroes.find((x) => x[0] === heroId);
+    if (!h || h[1] < minN || h[2] <= 0) continue;
+    rows.push({
+      item,
+      n: h[1],
+      sold: h[2],
+      upgraded: h[3],
+      soldPerMatch: h[2] / matches,
+      overallSold: e.sold,
+      overallN: e.n,
+      buyMedian: h[5],
+      sell: h[6] !== null && h[7] !== null && h[8] !== null ? [h[6], h[7], h[8]] : null,
+    });
+  }
+  rows.sort((a, b) => b.soldPerMatch - a.soldPerMatch);
+  return rows.length ? rows.slice(0, top) : null;
 }
 
 /** そのアップデートで新しく発表された(解禁前として初めてデータに入った)ヒーロー */

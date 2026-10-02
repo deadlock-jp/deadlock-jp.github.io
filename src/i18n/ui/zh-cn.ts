@@ -260,6 +260,14 @@ export const zhCn: Dict = {
       note: (s: number) =>
         `作为升级材料被消耗的不计入出售。购买后 ${s} 秒内的出售视为误购后撤销，已排除。`,
       source: "对局数据：deadlock-api.com（每 6 小时更新）",
+      /** 英雄页面的「此英雄常出售的物品」(HeroSales.astro) */
+      heroTitle: "此英雄常出售的物品",
+      heroLead: (n: string) =>
+        `按此英雄的对局中出售该物品的对局比例从高到低排列（购买 ${n} 次以上的物品）。出售比例是购买后又出售的对局所占的比例。`,
+      overall: (p: string) => `（全体 ${p}）`,
+      higher: "高于全体",
+      lower: "低于全体",
+      buyToSell: (b: string, s: string) => `购买 ${b} → 出售 ${s}`,
     },
   },
   effects: {

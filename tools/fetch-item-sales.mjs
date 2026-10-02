@@ -87,10 +87,18 @@ console.error(`SQL: ${rows.length} 行 / ${Math.round(bytes / 1024)}KB / ${secon
 const q = (/** @type {number[]} */ v, /** @type {number} */ count) =>
   count > 0 && v.length === 3 && v.every(Number.isFinite) ? v.map((x) => Math.round(x)) : null;
 
-/** @type {Record<string, { matches: number, items: Record<string, any> }>} */
+/** @type {Record<string, { matches: number, heroMatches: Record<string, number>, items: Record<string, any> }>} */
 const bands = {};
-for (const key of ["all", ...RANK_BANDS.map((b) => b.key)]) bands[key] = { matches: 0, items: {} };
+for (const key of ["all", ...RANK_BANDS.map((b) => b.key)]) bands[key] = { matches: 0, heroMatches: {}, items: {} };
 for (const r of rows) {
+  // 番兵(itemId = 0)の行は試合数。heroId = 0 は全ヒーロー(1試合12人なので試合数の12倍)
+  if (r.itemId === 0) {
+    const band = bands[r.band];
+    if (!band) continue;
+    if (r.heroId === 0) band.matches = Math.round(r.n / 12);
+    else if (releasedHeroIds.has(r.heroId)) band.heroMatches[r.heroId] = r.n;
+    continue;
+  }
   const id = idByNumeric.get(r.itemId);
   const band = bands[r.band];
   if (!id || !band) continue; // ショップ外のアイテムは載せない
@@ -107,18 +115,18 @@ for (const r of rows) {
       hold: q(r.hold, r.sold),
     });
   } else if (releasedHeroIds.has(r.heroId) && r.n > 0) {
-    // ヒーロー別は件数だけ(よく売るヒーローの並べ替えに使う)。[ヒーローID, 件数, 売却, 強化, 保持]
-    item.heroes.push([r.heroId, r.n, r.sold, r.upgraded, r.held]);
+    // ヒーロー別: [ヒーローID, 件数, 売却, 強化, 保持, 購入の中央値, 売却の25%, 売却の中央値, 売却の75%](時刻は秒。売却が無ければ null)
+    const buy = q(r.buy, r.n);
+    const sell = q(r.sell, r.sold);
+    item.heroes.push([r.heroId, r.n, r.sold, r.upgraded, r.held, buy ? buy[1] : null, sell ? sell[0] : null, sell ? sell[1] : null, sell ? sell[2] : null]);
   }
 }
 for (const band of Object.values(bands)) {
   for (const item of Object.values(band.items)) item.heroes.sort((a, b) => b[1] - a[1]);
-  // 帯の規模の目安(アイテムの件数の合計)。表示には使わず、空の帯を見分ける安全装置に使う
-  band.matches = Object.values(band.items).reduce((s, i) => s + i.n, 0);
 }
 
 const doc = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   source: "https://api.deadlock-api.com/v1/sql (match_player.items)",
   fetchedAt: new Date().toISOString(),
   window: "sincePatch",
@@ -133,13 +141,16 @@ const doc = {
    * bands.<帯>.items.<アイテムID>:
    *   n = 購入された件数(1プレイヤー×1試合。売却 + 強化 + 保持)、canceled = 除いた取り消しの件数
    *   buy / sell / hold = [25%, 50%, 75%] の秒(購入時刻・売却時刻・保持時間)。売却が無ければ sell / hold は null
-   *   heroes = [ヒーローID, 件数, 売却, 強化, 保持] の配列(件数の多い順)
+   *   heroes = [ヒーローID, 件数, 売却, 強化, 保持, 購入の中央値, 売却の25%, 売却の中央値, 売却の75%] の配列(件数の多い順)
+   * bands.<帯>.matches = その帯の試合数、heroMatches.<ヒーローID> = そのヒーローの試合数(同じ問い合わせの番兵で数えた)
    */
   bands,
 };
 
 // 安全装置: どの帯でもアイテムが半分以上そろっていること(SQL が空や途中までの応答を返したときに既存を潰さない)
-const short = Object.entries(bands).filter(([, b]) => Object.keys(b.items).length < shopItemIds.size * 0.5);
+const short = Object.entries(bands).filter(
+  ([, b]) => Object.keys(b.items).length < shopItemIds.size * 0.5 || Object.keys(b.heroMatches).length < releasedHeroIds.size * 0.9,
+);
 if (short.length > 0) {
   console.error(`アイテムがそろっていない帯: ${short.map(([k, b]) => `${k}(${Object.keys(b.items).length}件)`).join(", ")}。書き込みを中止します`);
   process.exit(1);
@@ -147,7 +158,7 @@ if (short.length > 0) {
 
 const kb = Math.round(JSON.stringify(doc).length / 1024);
 for (const [key, b] of Object.entries(bands)) {
-  console.error(`  ${key.padEnd(4)} アイテム ${Object.keys(b.items).length} 件 / 購入 ${b.matches.toLocaleString("en-US")} 件`);
+  console.error(`  ${key.padEnd(4)} アイテム ${Object.keys(b.items).length} 件 / ${b.matches.toLocaleString("en-US")} 試合 / ヒーロー ${Object.keys(b.heroMatches).length} 人`);
 }
 if (write) {
   writeFileSync(OUT_PATH, JSON.stringify(doc) + "\n");

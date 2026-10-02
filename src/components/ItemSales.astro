@@ -13,14 +13,17 @@
  * ランク帯(RankBandPicker)は4帯分を HTML に書き出しておき、切り替えで見せる帯を替える(データが小さいので
  * 埋め込みで足りる。JS が無くても全ランクは見える)。統計が無いアイテム・統計ファイルが無いときは何も出さない。
  *
- * 色は dataviz の検証済み: 強化 #199e70・売却 #d95926(暗い面 #171e22 に対し CVD ΔE 9.4)。
- * 保持は「残り」なので無彩色 #65737b(彩度の下限は意図して外す。どの区分も数字を添えて色だけに頼らない)。
+ * 色は tokens.css の --c-sale-*(dataviz の検証済み。どの区分も数字を添えて色だけに頼らない)。
  * 並びは 強化 → 売却 → 保持(保持の灰と強化の緑が隣り合うと見分けにくいため)。
+ * 時刻の帯(SalesTrack)・売る前提の印(SellFirstFlag)・書式(src/lib/salesView.ts)はヒーローページの HeroSales.astro と共用。
  */
 import HeroPortrait from "./HeroPortrait.astro";
 import RankBandPicker from "./RankBandPicker.astro";
+import SalesTrack from "./SalesTrack.astro";
+import SellFirstFlag from "./SellFirstFlag.astro";
 import { t, heroesFile, itemsFile, usedIn, itemSales, itemSalesFor, statsPeriodLabel, type ItemSalesEntry } from "../lib/data.ts";
 import { RANK_BANDS, type RankBandKey } from "../lib/rankBands.ts";
+import { salesPct as pct, mmss, salesAxisMinutes } from "../lib/salesView.ts";
 
 interface Props {
   itemId: string;
@@ -43,17 +46,8 @@ const period = itemSales ? statsPeriodLabel(itemSales) : "";
 const cancelSeconds = itemSales?.cancelSeconds ?? 10;
 
 const bandKeys = (["all", ...RANK_BANDS.map((b) => b.key)] as RankBandKey[]).filter((k) => sales?.[k]);
-const pct = (n: number, d: number) => (d > 0 ? `${((n / d) * 100).toFixed(1)}%` : "—");
-const mmss = (s: number) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, "0")}`;
-
-/** 時刻の帯の右端(分)。4帯の購入・売却の 75% のうち一番遅いものを5分単位で切り上げ、30〜60分に収める */
-const latest = Math.max(
-  0,
-  ...bandKeys.flatMap((k) => [sales![k]!.buy?.[2] ?? 0, sales![k]!.sell?.[2] ?? 0]),
-);
-const axisMin = Math.min(60, Math.max(30, Math.ceil(latest / 60 / 5) * 5));
-const ticks = Array.from({ length: Math.floor(axisMin / 10) + 1 }, (_, i) => i * 10);
-const pos = (sec: number) => `${Math.min(100, (sec / 60 / axisMin) * 100).toFixed(2)}%`;
+/** 時刻の帯の右端(分)。4帯の購入・売却の 75% のうち一番遅いもので決める */
+const axisMin = salesAxisMinutes(bandKeys.flatMap((k) => [sales![k]!.buy?.[2], sales![k]!.sell?.[2]]));
 
 /** 帯ごとの表示内容 */
 const panels = bandKeys.map((key) => {
@@ -73,7 +67,7 @@ const sectionId = `sales-${itemId}`;
   <section class="sales" id={sectionId}>
     <div class="sa-title">
       <h2>{SS.title}</h2>
-      {sellFirst && <span class="sa-flag">{SS.sellFirst}</span>}
+      {sellFirst && <SellFirstFlag />}
     </div>
     <div class="sa-head">
       <p class="sa-lead">{SS.lead}</p>
@@ -120,21 +114,14 @@ const sectionId = `sales-${itemId}`;
                 </>
               )}
             </dl>
-            <div class="sa-track" aria-hidden="true">
-              <div class="sa-line">
-                {p.hasSale && (
-                  <i
-                    class="range"
-                    style={`left:${pos(p.e.sell![0])};width:calc(${pos(p.e.sell![2])} - ${pos(p.e.sell![0])})`}
-                  ></i>
-                )}
-                <i class="pt buy" style={`left:${pos(p.e.buy[1])}`} title={`${SS.buy} ${mmss(p.e.buy[1])}`}></i>
-                {p.hasSale && <i class="pt sold" style={`left:${pos(p.e.sell![1])}`} title={`${SS.sell} ${mmss(p.e.sell![1])}`}></i>}
-              </div>
-              <div class="sa-ticks">
-                {ticks.map((m) => <span style={`left:${(m / axisMin) * 100}%`}>{m}:00</span>)}
-              </div>
-            </div>
+            <SalesTrack
+              axisMinutes={axisMin}
+              buy={p.e.buy[1]}
+              sell={p.hasSale ? p.e.sell : null}
+              ticks
+              buyLabel={SS.buy}
+              sellLabel={SS.sell}
+            />
           </div>
         )}
 
@@ -185,18 +172,9 @@ const sectionId = `sales-${itemId}`;
 )}
 
 <style>
-  .sales {
-    margin-top: var(--sp-5);
-    --sa-up: #199e70;
-    --sa-sold: #d95926;
-    --sa-held: #65737b;
-  }
+  .sales { margin-top: var(--sp-5); }
   .sa-title { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2) var(--sp-3); margin-bottom: var(--sp-1); }
   .sa-title h2 { margin: 0; }
-  .sa-flag {
-    font-size: 11.5px; padding: 2px 8px; border-radius: 999px;
-    color: var(--c-text-strong); background: rgb(217 89 38 / 0.18); border: 1px solid rgb(217 89 38 / 0.55);
-  }
   .sa-head {
     display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
     gap: var(--sp-2) var(--sp-3); margin: 0 0 var(--sp-3);
@@ -212,9 +190,9 @@ const sectionId = `sales-${itemId}`;
   .sa-bar .seg:first-child { border-radius: 4px 2px 2px 4px; }
   .sa-bar .seg:last-child { border-radius: 2px 4px 4px 2px; }
   .sa-bar .seg:only-child { border-radius: 4px; }
-  .up { background: var(--sa-up); }
-  .sold { background: var(--sa-sold); }
-  .held { background: var(--sa-held); }
+  .up { background: var(--c-sale-up); }
+  .sold { background: var(--c-sale-sold); }
+  .held { background: var(--c-sale-held); }
   .sa-legend { list-style: none; margin: var(--sp-2) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px var(--sp-4); font-size: 12.5px; color: var(--c-text); }
   .sa-legend li { display: inline-flex; align-items: center; gap: 6px; }
   .sa-legend b { font-family: var(--font-mono); font-size: 15px; color: var(--c-text-strong); }
@@ -228,26 +206,8 @@ const sectionId = `sales-${itemId}`;
   .sa-vals dd { margin: 0; font-family: var(--font-mono); font-size: 13.5px; color: var(--c-text-strong); }
   .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
   .dot.buy { background: var(--c-text-strong); }
-  .dot.sold { background: var(--sa-sold); }
-  .rng { width: 16px; height: 8px; border-radius: 2px; display: inline-block; background: rgb(217 89 38 / 0.35); }
-  .sa-track { position: relative; padding: 0 4px; }
-  .sa-line { position: relative; height: 18px; }
-  .sa-line::before {
-    content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px;
-    background: var(--c-border-strong); border-radius: 1px;
-  }
-  .sa-line .range { position: absolute; top: 3px; bottom: 3px; background: rgb(217 89 38 / 0.35); border-radius: 3px; }
-  .sa-line .pt {
-    position: absolute; top: 50%; width: 11px; height: 11px; margin: -5.5px 0 0 -5.5px; border-radius: 50%;
-    box-shadow: 0 0 0 2px var(--c-surface);
-  }
-  .sa-line .pt.buy { background: var(--c-text-strong); }
-  .sa-line .pt.sold { background: var(--sa-sold); }
-  .sa-ticks { position: relative; height: 16px; margin-top: 2px; font-family: var(--font-mono); font-size: 10.5px; color: var(--c-text-faint); }
-  .sa-ticks span { position: absolute; transform: translateX(-50%); }
-  .sa-ticks span:first-child { transform: none; }
-  .sa-ticks span:last-child { transform: translateX(-100%); }
-
+  .dot.sold { background: var(--c-sale-sold); }
+  .rng { width: 16px; height: 8px; border-radius: 2px; display: inline-block; background: var(--c-sale-sold-range); }
   .sa-sub { margin: -4px 0 var(--sp-2); font-size: 12px; color: var(--c-text-muted); }
   .sa-sellers ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); gap: 8px var(--sp-4); }
   .sa-sellers li { display: flex; align-items: center; gap: 8px; min-width: 0; }
