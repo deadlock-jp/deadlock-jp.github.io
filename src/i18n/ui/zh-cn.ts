@@ -241,6 +241,26 @@ export const zhCn: Dict = {
     bands: { low: "低段位", mid: "中段位", high: "高段位" },
     bandRange: (label: string, from: string, to: string) => `${label}(${from}~${to})`,
     byRank: "按段位",
+    /** 物品页面的「出售与升级」(ItemSales.astro) */
+    sales: {
+      title: "出售与升级",
+      sellFirst: "以出售为前提的物品",
+      lead: "在购买了此物品的对局中，出售、升级为上级物品、保留到最后的比例。",
+      sold: "出售",
+      upgraded: "升级",
+      held: "保留到最后",
+      purchases: (n: string) => `购买 ${n} 次`,
+      timeTitle: "购买与出售时间",
+      buy: "购买（中位数）",
+      sell: "出售（中位数）",
+      sellRange: "出售的中间一半（25–75%）",
+      hold: "出售前的持有时间（中位数）",
+      topSellers: "最常出售此物品的英雄",
+      topSellersLead: (n: string) => `购买 ${n} 次以上的英雄，按出售比例从高到低排列。`,
+      note: (s: number) =>
+        `作为升级材料被消耗的不计入出售。购买后 ${s} 秒内的出售视为误购后撤销，已排除。`,
+      source: "对局数据：deadlock-api.com（每 6 小时更新）",
+    },
   },
   effects: {
     title: "Deadlock 状态效果列表(眩晕·沉默·减速等)",

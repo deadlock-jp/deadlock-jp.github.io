@@ -244,6 +244,26 @@ export const ko: Dict = {
     bands: { low: "하위", mid: "중위", high: "상위" },
     bandRange: (label: string, from: string, to: string) => `${label} (${from}~${to})`,
     byRank: "랭크별",
+    /** 아이템 페이지의 「판매와 업그레이드」(ItemSales.astro) */
+    sales: {
+      title: "판매와 업그레이드",
+      sellFirst: "판매를 전제로 한 아이템",
+      lead: "이 아이템을 구매한 경기에서 판매했는지, 상위 아이템으로 업그레이드했는지, 끝까지 보유했는지의 비율입니다.",
+      sold: "판매",
+      upgraded: "업그레이드",
+      held: "끝까지 보유",
+      purchases: (n: string) => `구매 ${n}건`,
+      timeTitle: "구매·판매 시각",
+      buy: "구매(중앙값)",
+      sell: "판매(중앙값)",
+      sellRange: "판매의 중간 절반(25~75%)",
+      hold: "판매까지 보유 시간(중앙값)",
+      topSellers: "이 아이템을 자주 판매하는 영웅",
+      topSellersLead: (n: string) => `구매 ${n}건 이상인 영웅을 판매 비율이 높은 순으로 보여 줍니다.`,
+      note: (s: number) =>
+        `업그레이드 재료로 소모된 것은 판매에 포함하지 않습니다. 구매 후 ${s}초 이내의 판매는 잘못 구매한 것의 취소로 보고 제외했습니다.`,
+      source: "경기 데이터: deadlock-api.com (6시간마다 갱신)",
+    },
   },
   effects: {
     title: "Deadlock 상태 이상·효과 목록 (기절·침묵·둔화 등)",

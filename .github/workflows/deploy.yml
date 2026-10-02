@@ -5,7 +5,7 @@ name: Deploy to GitHub Pages
 #   - Actions タブからの手動実行
 #   - 6時間おきの定期実行(対戦統計を新しくするため。deadlock-api.com の統計は6時間キャッシュ)
 #
-# 対戦統計(data/item-stats.json・hero-stats.json・hero-builds.json)は Git に入れず、
+# 対戦統計(data/item-stats.json・hero-stats.json・hero-builds.json・item-sales.json)は Git に入れず、
 # ここでビルドの直前に API から取る(tools/fetch-stats.mjs)。リポジトリへの push はしないので
 # contents: write は持たない。
 # 取得に失敗したファイルは、actions/cache に残した前回成功分を使い、それも無ければ統計なしでビルドする
@@ -16,7 +16,7 @@ on:
   workflow_dispatch:
     inputs:
       simulate_fail:
-        description: "失敗の経路を試す: 取得しなかったことにするファイル(item-stats,hero-stats,hero-builds のカンマ区切り / all)"
+        description: "失敗の経路を試す: 取得しなかったことにするファイル(item-stats,hero-stats,hero-builds,item-sales のカンマ区切り / all)"
         required: false
         default: ""
   schedule:
@@ -61,7 +61,7 @@ jobs:
           key: stats-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: stats-
 
-      # 3ファイルを取得。失敗したものはキャッシュ → なし の順に埋める。この手順自体は失敗しない
+      # 4ファイルを取得(item-sales は6時間に1回だけ新しく取る)。失敗したものはキャッシュ → なし の順に埋める。この手順自体は失敗しない
       - name: Fetch stats
         id: stats
         env:

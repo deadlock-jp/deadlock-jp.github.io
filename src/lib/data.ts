@@ -1184,6 +1184,45 @@ export const heroBuilds: HeroBuildsFile = readStatsFile<HeroBuildsFile>("hero-bu
   heroes: {},
 };
 
+/**
+ * アイテムの売却・強化。data/item-sales.json(tools/fetch-item-sales.mjs が deadlock-api.com の試合データから集計)。
+ * 1件 = 1プレイヤー × 1試合 × 1アイテム。売却 + 強化 + 保持 = n(取り消しは canceled に別に数える)
+ */
+export interface ItemSalesEntry {
+  n: number;
+  sold: number;
+  upgraded: number;
+  held: number;
+  canceled: number;
+  /** [25%, 50%, 75%] の秒。購入時刻・売却時刻・売るまでの保持時間。売却が無ければ sell / hold は null */
+  buy: [number, number, number] | null;
+  sell: [number, number, number] | null;
+  hold: [number, number, number] | null;
+  /** [ヒーローID, 件数, 売却, 強化, 保持](件数の多い順) */
+  heroes: [number, number, number, number, number][];
+}
+export interface ItemSalesFile {
+  fetchedAt: string;
+  window: string;
+  windowStart?: string;
+  windowPatch?: StatsWindowPatch;
+  /** これ以内の売却は「買い間違いの取り消し」として除いた(秒) */
+  cancelSeconds: number;
+  lowSampleMatches: number;
+  bands: Partial<Record<RankBandKey, { matches: number; items: Record<string, ItemSalesEntry> }>>;
+}
+/** 売却・強化の統計。無ければ null(アイテムページの「売却と強化」を出さない) */
+export const itemSales: ItemSalesFile | null = readStatsFile<ItemSalesFile>("item-sales.json");
+/** そのアイテムの帯ごとの売却・強化。統計が無い・全ランクで1件も無いアイテムは null */
+export function itemSalesFor(itemId: string): Partial<Record<RankBandKey, ItemSalesEntry>> | null {
+  if (!itemSales || !itemSales.bands.all?.items[itemId]?.n) return null;
+  return Object.fromEntries(
+    Object.entries(itemSales.bands)
+      .map(([band, b]) => [band, b?.items[itemId]])
+      .filter(([, e]) => e),
+  ) as Partial<Record<RankBandKey, ItemSalesEntry>>;
+}
+
 /** そのアップデートで新しく発表された(解禁前として初めてデータに入った)ヒーロー */
 export interface AnnouncedHero {
   hero: Hero;

@@ -10,6 +10,8 @@ Thumbs.db
 data/item-stats.json
 data/hero-stats.json
 data/hero-builds.json
+# アイテムの売却・強化(tools/fetch-item-sales.mjs。SQL の上限があるので6時間に1回だけ新しく取る)
+data/item-sales.json
 # CI で前回成功分を actions/cache から復元・保存するフォルダ
 .stats-cache/
 

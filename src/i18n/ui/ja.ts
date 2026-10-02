@@ -247,6 +247,28 @@ export const ja = {
     bandRange: (label: string, from: string, to: string) => `${label}（${from}〜${to}）`,
     /** ヒーロー一覧の選択肢で、ランクを1つずつ選ぶ側の見出し */
     byRank: "ランク別",
+    /** アイテムページの「売却と強化」(ItemSales.astro)。試合の途中で売られたか、上位へ強化されたか */
+    sales: {
+      title: "売却と強化",
+      /** 売ることが前提のアイテム(ショップの外でも売れる設定のもの)に付ける印 */
+      sellFirst: "売ることが前提のアイテム",
+      lead: "このアイテムが買われた試合で、売ったか、上位のアイテムへ強化したか、最後まで持っていたかの割合です。",
+      sold: "売却",
+      upgraded: "強化",
+      held: "最後まで保持",
+      /** 「購入 12,345件」。1件 = 1人のプレイヤーの1試合 */
+      purchases: (n: string) => `購入 ${n}件`,
+      timeTitle: "購入と売却の時刻",
+      buy: "購入（中央値）",
+      sell: "売却（中央値）",
+      sellRange: "売却の中ほど半分（25〜75%）",
+      hold: "売るまでの保持時間（中央値）",
+      topSellers: "このアイテムをよく売るヒーロー",
+      topSellersLead: (n: string) => `購入${n}件以上のヒーローで、売却の割合が高い順です。`,
+      note: (s: number) =>
+        `強化で素材として消えたものは売却に含みません。購入から${s}秒以内の売却は、買い間違いの取り消しとして除いています。`,
+      source: "試合データ: deadlock-api.com（6時間ごとに更新）",
+    },
   },
   /**
    * 状態異常・効果ページ(src/pages/mechanics/effects/index.astro)。効果の定義と判定は src/lib/effects.ts。

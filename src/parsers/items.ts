@@ -72,6 +72,8 @@ export function parseItems(
         "CITADEL_ABILITY_ACTIVATION_",
       ),
       slotCost: num(e["m_nUpgradeSlotCost"]),
+      // ショップの外でも売れる(売ることが前提のアイテムの印)
+      allowGlobalSell: (str(e["m_AbilityBehaviorsBits"]) ?? "").includes("CITADEL_ABILITY_BEHAVIOR_ALLOW_GLOBAL_SELL"),
       isImbue: (str(e["m_TargetAbilityEffectsToApply"]) ?? "").includes("IMBUE"),
       shopFilters: parseShopFilters(str(e["m_eShopFilters"])),
       // ショップアイコンを持つものだけが購入できるアイテム。

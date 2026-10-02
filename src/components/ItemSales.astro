@@ -1,0 +1,263 @@
+---
+/**
+ * アイテムページの「売却と強化」。data/item-sales.json(tools/fetch-item-sales.mjs が deadlock-api.com の
+ * 試合データから集計)から、そのアイテムが試合の途中で売られたか・上位へ強化されたか・最後まで持たれたかを出す。
+ * ビルド画面(完成形の一覧)からは見えない、試合の途中の売り買いを見せるためのもの。
+ *
+ *   1. 割合の帯グラフ(強化・売却・保持)と数字。上位アイテムが無いアイテムは強化を「—」にする
+ *   2. 時刻の帯: 購入時刻の中央値(点)、売却時刻の四分位の範囲(帯)と中央値(点)。保持時間の中央値は文字で
+ *   3. よく売るヒーロー: 購入が MIN_HERO_N 件以上のヒーローで、売却の割合が高い順に TOP_N 人
+ *   4. 定義の注記と出典
+ * 勝率は出さない(売却と勝率の関係は誤解を招きやすいため)。
+ *
+ * ランク帯(RankBandPicker)は4帯分を HTML に書き出しておき、切り替えで見せる帯を替える(データが小さいので
+ * 埋め込みで足りる。JS が無くても全ランクは見える)。統計が無いアイテム・統計ファイルが無いときは何も出さない。
+ *
+ * 色は dataviz の検証済み: 強化 #199e70・売却 #d95926(暗い面 #171e22 に対し CVD ΔE 9.4)。
+ * 保持は「残り」なので無彩色 #65737b(彩度の下限は意図して外す。どの区分も数字を添えて色だけに頼らない)。
+ * 並びは 強化 → 売却 → 保持(保持の灰と強化の緑が隣り合うと見分けにくいため)。
+ */
+import HeroPortrait from "./HeroPortrait.astro";
+import RankBandPicker from "./RankBandPicker.astro";
+import { t, heroesFile, itemsFile, usedIn, itemSales, itemSalesFor, statsPeriodLabel, type ItemSalesEntry } from "../lib/data.ts";
+import { RANK_BANDS, type RankBandKey } from "../lib/rankBands.ts";
+
+interface Props {
+  itemId: string;
+  base: string;
+}
+/** よく売るヒーローに入れる最低の購入件数 */
+const MIN_HERO_N = 200;
+const TOP_N = 5;
+const { itemId, base } = Astro.props;
+const { L, langPath } = Astro.locals.i18n;
+const S = L().stats;
+const SS = S.sales;
+
+const sales = itemSalesFor(itemId);
+const item = itemsFile.items[itemId];
+const hasUpgrade = usedIn(itemId).length > 0;
+const sellFirst = item?.allowGlobalSell === true;
+const lowN = itemSales?.lowSampleMatches ?? 20;
+const period = itemSales ? statsPeriodLabel(itemSales) : "";
+const cancelSeconds = itemSales?.cancelSeconds ?? 10;
+
+const bandKeys = (["all", ...RANK_BANDS.map((b) => b.key)] as RankBandKey[]).filter((k) => sales?.[k]);
+const pct = (n: number, d: number) => (d > 0 ? `${((n / d) * 100).toFixed(1)}%` : "—");
+const mmss = (s: number) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, "0")}`;
+
+/** 時刻の帯の右端(分)。4帯の購入・売却の 75% のうち一番遅いものを5分単位で切り上げ、30〜60分に収める */
+const latest = Math.max(
+  0,
+  ...bandKeys.flatMap((k) => [sales![k]!.buy?.[2] ?? 0, sales![k]!.sell?.[2] ?? 0]),
+);
+const axisMin = Math.min(60, Math.max(30, Math.ceil(latest / 60 / 5) * 5));
+const ticks = Array.from({ length: Math.floor(axisMin / 10) + 1 }, (_, i) => i * 10);
+const pos = (sec: number) => `${Math.min(100, (sec / 60 / axisMin) * 100).toFixed(2)}%`;
+
+/** 帯ごとの表示内容 */
+const panels = bandKeys.map((key) => {
+  const e = sales![key] as ItemSalesEntry;
+  const sellers = e.heroes
+    .filter(([, n]) => n >= MIN_HERO_N)
+    .map(([id, n, sold]) => ({ hero: heroesFile.heroes[Object.keys(heroesFile.heroes).find((k) => heroesFile.heroes[k]!.id === id)!], n, sold }))
+    .filter((r) => r.hero)
+    .sort((a, b) => b.sold / b.n - a.sold / a.n)
+    .slice(0, TOP_N);
+  return { key, e, sellers, low: e.n < lowN, hasSale: e.sold > 0 && !!e.sell && !!e.hold };
+});
+const sectionId = `sales-${itemId}`;
+---
+
+{sales && panels.length > 0 && (
+  <section class="sales" id={sectionId}>
+    <div class="sa-title">
+      <h2>{SS.title}</h2>
+      {sellFirst && <span class="sa-flag">{SS.sellFirst}</span>}
+    </div>
+    <div class="sa-head">
+      <p class="sa-lead">{SS.lead}</p>
+      <RankBandPicker />
+    </div>
+
+    {panels.map((p) => (
+      <div class="sa-panel" data-sales-band={p.key} hidden={p.key !== "all"}>
+        <p class="sa-meta">
+          <span>{SS.purchases(p.e.n.toLocaleString("en-US"))}</span>
+          <span>{period}</span>
+          {p.low && <b class="sa-low">{S.lowSample}</b>}
+        </p>
+
+        {/* 1. 割合 */}
+        <div
+          class="sa-bar"
+          role="img"
+          aria-label={`${SS.upgraded} ${hasUpgrade ? pct(p.e.upgraded, p.e.n) : "—"} / ${SS.sold} ${pct(p.e.sold, p.e.n)} / ${SS.held} ${pct(p.e.held, p.e.n)}`}
+        >
+          {hasUpgrade && p.e.upgraded > 0 && (
+            <i class="seg up" style={`flex-grow:${p.e.upgraded}`} title={`${SS.upgraded} ${pct(p.e.upgraded, p.e.n)}`}></i>
+          )}
+          {p.e.sold > 0 && <i class="seg sold" style={`flex-grow:${p.e.sold}`} title={`${SS.sold} ${pct(p.e.sold, p.e.n)}`}></i>}
+          {p.e.held > 0 && <i class="seg held" style={`flex-grow:${p.e.held}`} title={`${SS.held} ${pct(p.e.held, p.e.n)}`}></i>}
+        </div>
+        <ul class="sa-legend">
+          <li><i class="sw up"></i>{SS.upgraded}<b>{hasUpgrade ? pct(p.e.upgraded, p.e.n) : "—"}</b></li>
+          <li><i class="sw sold"></i>{SS.sold}<b>{pct(p.e.sold, p.e.n)}</b></li>
+          <li><i class="sw held"></i>{SS.held}<b>{pct(p.e.held, p.e.n)}</b></li>
+        </ul>
+
+        {/* 2. 時刻 */}
+        {p.e.buy && (
+          <div class="sa-time">
+            <h3>{SS.timeTitle}</h3>
+            <dl class="sa-vals">
+              <div><dt><i class="dot buy"></i>{SS.buy}</dt><dd>{mmss(p.e.buy[1])}</dd></div>
+              {p.hasSale && (
+                <>
+                  <div><dt><i class="dot sold"></i>{SS.sell}</dt><dd>{mmss(p.e.sell![1])}</dd></div>
+                  <div><dt><i class="rng"></i>{SS.sellRange}</dt><dd>{mmss(p.e.sell![0])}–{mmss(p.e.sell![2])}</dd></div>
+                  <div><dt>{SS.hold}</dt><dd>{mmss(p.e.hold![1])}</dd></div>
+                </>
+              )}
+            </dl>
+            <div class="sa-track" aria-hidden="true">
+              <div class="sa-line">
+                {p.hasSale && (
+                  <i
+                    class="range"
+                    style={`left:${pos(p.e.sell![0])};width:calc(${pos(p.e.sell![2])} - ${pos(p.e.sell![0])})`}
+                  ></i>
+                )}
+                <i class="pt buy" style={`left:${pos(p.e.buy[1])}`} title={`${SS.buy} ${mmss(p.e.buy[1])}`}></i>
+                {p.hasSale && <i class="pt sold" style={`left:${pos(p.e.sell![1])}`} title={`${SS.sell} ${mmss(p.e.sell![1])}`}></i>}
+              </div>
+              <div class="sa-ticks">
+                {ticks.map((m) => <span style={`left:${(m / axisMin) * 100}%`}>{m}:00</span>)}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* 3. よく売るヒーロー */}
+        {p.sellers.length > 0 && (
+          <div class="sa-sellers">
+            <h3>{SS.topSellers}</h3>
+            <p class="sa-sub">{SS.topSellersLead(MIN_HERO_N.toLocaleString("en-US"))}</p>
+            <ol>
+              {p.sellers.map((r) => (
+                <li>
+                  <a href={`${base}${langPath(`/heroes/${r.hero.id}/`)}`}>
+                    <HeroPortrait name={t(r.hero.nameToken, r.hero.key)} image={r.hero.images.iconSmall} size={28} />
+                    <span class="nm">{t(r.hero.nameToken, r.hero.key)}</span>
+                  </a>
+                  <b>{pct(r.sold, r.n)}</b>
+                  <small>{SS.purchases(r.n.toLocaleString("en-US"))}</small>
+                </li>
+              ))}
+            </ol>
+          </div>
+        )}
+      </div>
+    ))}
+    <p class="sa-none" data-sales-none hidden>{S.noData}</p>
+
+    {/* 4. 定義と出典 */}
+    <p class="sa-note">{SS.note(cancelSeconds)} {SS.source}</p>
+
+    <script is:inline define:vars={{ sectionId }}>
+      (() => {
+        const root = document.getElementById(sectionId);
+        if (!root) return;
+        const show = (band) => {
+          let found = false;
+          for (const el of root.querySelectorAll("[data-sales-band]")) {
+            el.hidden = el.dataset.salesBand !== band;
+            if (!el.hidden) found = true;
+          }
+          root.querySelector("[data-sales-none]").hidden = found;
+        };
+        document.addEventListener("rankband", (e) => show(e.detail.band));
+        // ランク帯の部品が先に覚えている帯を選んでいたら合わせる
+        if (window.rankBand) show(window.rankBand.current().band);
+      })();
+    </script>
+  </section>
+)}
+
+<style>
+  .sales {
+    margin-top: var(--sp-5);
+    --sa-up: #199e70;
+    --sa-sold: #d95926;
+    --sa-held: #65737b;
+  }
+  .sa-title { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2) var(--sp-3); margin-bottom: var(--sp-1); }
+  .sa-title h2 { margin: 0; }
+  .sa-flag {
+    font-size: 11.5px; padding: 2px 8px; border-radius: 999px;
+    color: var(--c-text-strong); background: rgb(217 89 38 / 0.18); border: 1px solid rgb(217 89 38 / 0.55);
+  }
+  .sa-head {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: var(--sp-2) var(--sp-3); margin: 0 0 var(--sp-3);
+  }
+  .sa-lead { margin: 0; font-size: 13px; color: var(--c-text); flex: 1 1 320px; }
+  .sa-panel { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); padding: var(--sp-3) var(--sp-4); }
+  .sa-panel[hidden] { display: none; }
+  .sa-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px var(--sp-3); margin: 0 0 var(--sp-2); font-size: 12px; color: var(--c-text-muted); }
+  .sa-low { padding: 0 4px; border-radius: 3px; font-size: 11px; border: 1px solid var(--c-border-strong); color: var(--c-text-muted); }
+
+  .sa-bar { display: flex; gap: 2px; height: 14px; }
+  .sa-bar .seg { display: block; min-width: 2px; border-radius: 2px; }
+  .sa-bar .seg:first-child { border-radius: 4px 2px 2px 4px; }
+  .sa-bar .seg:last-child { border-radius: 2px 4px 4px 2px; }
+  .sa-bar .seg:only-child { border-radius: 4px; }
+  .up { background: var(--sa-up); }
+  .sold { background: var(--sa-sold); }
+  .held { background: var(--sa-held); }
+  .sa-legend { list-style: none; margin: var(--sp-2) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px var(--sp-4); font-size: 12.5px; color: var(--c-text); }
+  .sa-legend li { display: inline-flex; align-items: center; gap: 6px; }
+  .sa-legend b { font-family: var(--font-mono); font-size: 15px; color: var(--c-text-strong); }
+  .sw { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+
+  .sa-time, .sa-sellers { margin-top: var(--sp-4); }
+  .sales h3 { margin: 0 0 var(--sp-2); font-size: 13px; color: var(--c-text-strong); }
+  .sa-vals { display: flex; flex-wrap: wrap; gap: 4px var(--sp-4); margin: 0 0 var(--sp-2); font-size: 12px; }
+  .sa-vals div { display: flex; align-items: baseline; gap: 6px; }
+  .sa-vals dt { display: inline-flex; align-items: center; gap: 5px; color: var(--c-text-muted); }
+  .sa-vals dd { margin: 0; font-family: var(--font-mono); font-size: 13.5px; color: var(--c-text-strong); }
+  .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .dot.buy { background: var(--c-text-strong); }
+  .dot.sold { background: var(--sa-sold); }
+  .rng { width: 16px; height: 8px; border-radius: 2px; display: inline-block; background: rgb(217 89 38 / 0.35); }
+  .sa-track { position: relative; padding: 0 4px; }
+  .sa-line { position: relative; height: 18px; }
+  .sa-line::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px;
+    background: var(--c-border-strong); border-radius: 1px;
+  }
+  .sa-line .range { position: absolute; top: 3px; bottom: 3px; background: rgb(217 89 38 / 0.35); border-radius: 3px; }
+  .sa-line .pt {
+    position: absolute; top: 50%; width: 11px; height: 11px; margin: -5.5px 0 0 -5.5px; border-radius: 50%;
+    box-shadow: 0 0 0 2px var(--c-surface);
+  }
+  .sa-line .pt.buy { background: var(--c-text-strong); }
+  .sa-line .pt.sold { background: var(--sa-sold); }
+  .sa-ticks { position: relative; height: 16px; margin-top: 2px; font-family: var(--font-mono); font-size: 10.5px; color: var(--c-text-faint); }
+  .sa-ticks span { position: absolute; transform: translateX(-50%); }
+  .sa-ticks span:first-child { transform: none; }
+  .sa-ticks span:last-child { transform: translateX(-100%); }
+
+  .sa-sub { margin: -4px 0 var(--sp-2); font-size: 12px; color: var(--c-text-muted); }
+  .sa-sellers ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); gap: 8px var(--sp-4); }
+  .sa-sellers li { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .sa-sellers a { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1 1 auto; color: var(--c-text-strong); text-decoration: none; }
+  .sa-sellers a:hover .nm { text-decoration: underline; }
+  .sa-sellers .nm { font-size: 13px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sa-sellers b { font-family: var(--font-mono); font-size: 14px; color: var(--c-text-strong); }
+  .sa-sellers small { font-size: 11px; color: var(--c-text-faint); white-space: nowrap; }
+
+  .sa-none { margin: 0; font-size: 12px; color: var(--c-text-faint); }
+  .sa-none[hidden] { display: none; }
+  .sa-note { margin: var(--sp-3) 0 0; font-size: 12px; color: var(--c-text-faint); line-height: 1.7; }
+</style>

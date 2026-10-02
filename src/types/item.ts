@@ -34,6 +34,11 @@ export interface Item {
   isImbue: boolean;
   /** 消費するアイテム枠の数 */
   slotCost: number;
+  /**
+   * ショップの外でも売れる(m_AbilityBehaviorsBits に CITADEL_ABILITY_BEHAVIOR_ALLOW_GLOBAL_SELL)。
+   * 売ることが前提のアイテム(ゴールデングースエッグ)の印として、アイテムページの「売却と強化」で使う
+   */
+  allowGlobalSell: boolean;
   /** ショップの絞り込みタグ */
   shopFilters: string[];
   /** 実際にショップに並ぶアイテムなら true */

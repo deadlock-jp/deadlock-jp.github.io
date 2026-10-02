@@ -51,6 +51,9 @@ export const CONVAR_KEYS = [
   "citadel_koth_reward_time_multiplier",
   // ソウルアーン(内部名 idol)
   "citadel_idol_orbs_to_spawn",
+  // 購入直後の全額返金の猶予(秒)。アイテムの売却の統計で、これ以内の売却を「買い間違いの取り消し」として除く
+  // (tools/fetch-item-sales.mjs)。説明文は「ショップ外購入(Auto/Quick Buy)が有効なときの全額返金の時間」
+  "citadel_autobuy_refund_time",
 ] as const;
 
 export type ConvarKey = (typeof CONVAR_KEYS)[number];

@@ -242,6 +242,26 @@ export const en: Dict = {
     bands: { low: "Lower", mid: "Middle", high: "Upper" },
     bandRange: (label: string, from: string, to: string) => `${label} (${from}–${to})`,
     byRank: "By rank",
+    /** Item page "Selling and upgrading" (ItemSales.astro) */
+    sales: {
+      title: "Selling and Upgrading",
+      sellFirst: "Meant to be sold",
+      lead: "In games where this item was bought: how often it was sold, upgraded into a higher-tier item, or kept to the end.",
+      sold: "Sold",
+      upgraded: "Upgraded",
+      held: "Kept to the end",
+      purchases: (n: string) => `${n} purchases`,
+      timeTitle: "When it is bought and sold",
+      buy: "Bought (median)",
+      sell: "Sold (median)",
+      sellRange: "Middle half of sales (25–75%)",
+      hold: "Time held before selling (median)",
+      topSellers: "Heroes that sell it most",
+      topSellersLead: (n: string) => `Heroes with ${n}+ purchases, by share sold.`,
+      note: (s: number) =>
+        `Items consumed as components of an upgrade are not counted as sold. Sales within ${s} seconds of purchase are excluded as cancelled mis-buys.`,
+      source: "Match data: deadlock-api.com (updated every 6 hours)",
+    },
   },
   effects: {
     title: "Deadlock Status Effects: Stun, Silence, Slow and Counters",

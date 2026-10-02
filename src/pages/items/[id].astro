@@ -21,6 +21,7 @@ import {
 } from "../../lib/data.ts";
 import BalanceHistory from "../../components/BalanceHistory.astro";
 import ItemBuyers from "../../components/ItemBuyers.astro";
+import ItemSales from "../../components/ItemSales.astro";
 import EffectBadges from "../../components/EffectBadges.astro";
 import { itemBalanceHistory } from "../../lib/balance.ts";
 
@@ -304,6 +305,9 @@ const ogImage =
   )}
 
   <ItemBuyers itemId={item.id} base={base} />
+
+  {/* 売却と強化(data/item-sales.json)。統計が無ければ何も出さない */}
+  <ItemSales itemId={item.id} base={base} />
 
   <BalanceHistory entries={adjRows} />
 
