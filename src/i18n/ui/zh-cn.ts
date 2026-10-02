@@ -392,6 +392,10 @@ export const zhCn: Dict = {
       itemValue: "物品价值",
       creating: "生成中…",
       createFailed: "生成失败",
+      /** シミュレーターのデータ(別ファイルの JSON)を読み込んでいる間・読み込めなかったとき */
+      loading: "加载中…",
+      loadFailed: "无法加载数据。请重新加载页面。",
+      reload: "重新加载",
       pbOption: "#{id} · {matches} 场 · {players} 人",
       pbMeta: "版本 {version} · {date} 更新",
       pbAll: "全部",

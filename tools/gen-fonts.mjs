@@ -74,9 +74,17 @@ function charsOf(s) {
   return new Set([...s, ...decoded]);
 }
 
-/** dist/ の日本語・英語ページ側のファイル(韓国語・中国語ページと、フォント自身は除く) */
+/**
+ * dist/ の日本語・英語ページ側のファイル(韓国語・中国語ページと、フォント自身は除く)。
+ * /data/ のページ用データ(src/pages/data/[file].json.ts)は言語がファイル名にある(<種類>-<lang>.<ハッシュ>.json)
+ */
 function targetFiles() {
-  return walk(dist).filter((f) => /\.(html|json|js|css)$/.test(f) && !/^(ko|zh-cn|fonts)\//.test(rel(f)));
+  return walk(dist).filter(
+    (f) =>
+      /\.(html|json|js|css)$/.test(f) &&
+      !/^(ko|zh-cn|fonts)\//.test(rel(f)) &&
+      !/^data\/[^/]+-(ko|zh-cn)\.[^/]+$/.test(rel(f)),
+  );
 }
 
 /** dist/ で使われている文字と、HTML ページごとの出現数 */

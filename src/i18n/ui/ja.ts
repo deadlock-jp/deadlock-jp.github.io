@@ -420,6 +420,10 @@ export const ja = {
       itemValue: "アイテム価値",
       creating: "作成中…",
       createFailed: "作成できませんでした",
+      /** シミュレーターのデータ(別ファイルの JSON)を読み込んでいる間・読み込めなかったとき */
+      loading: "読み込み中…",
+      loadFailed: "データを読み込めませんでした。ページを再読み込みしてください。",
+      reload: "再読み込み",
       /** 人気のビルドの選択肢。{id} ビルドID・{matches} 試合数・{players} 人数 */
       pbOption: "#{id} · {matches}試合 · {players}人",
       pbMeta: "版 {version} · {date} 更新",

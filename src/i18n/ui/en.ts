@@ -393,6 +393,10 @@ export const en: Dict = {
       itemValue: "Item value",
       creating: "Creating…",
       createFailed: "Could not create the image",
+      /** シミュレーターのデータ(別ファイルの JSON)を読み込んでいる間・読み込めなかったとき */
+      loading: "Loading…",
+      loadFailed: "Could not load the data. Please reload the page.",
+      reload: "Reload",
       pbOption: "#{id} · {matches} matches · {players} players",
       pbMeta: "v{version} · updated {date}",
       pbAll: "All",

@@ -45,13 +45,13 @@ const cardAttr = card ? { [card.kind === "item" ? "data-itemcard" : "data-heroca
   }
   .pr-item { grid-area: item; display: flex; align-items: center; gap: 8px; min-width: 0; color: var(--c-text-strong); text-decoration: none; }
   .pr-item:hover .pr-name { text-decoration: underline; }
-  .pr-name { font-size: 13px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pr-name { font-size: 13px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .pr-pick { grid-area: pick; font-family: var(--font-mono); font-size: 15px; font-weight: 700; color: var(--c-text-strong); }
   .pr-bar { grid-area: bar; height: 4px; border-radius: 2px; background: var(--c-surface-3); overflow: hidden; }
   .pr-bar i { display: block; height: 100%; background: var(--c-accent); }
   .pr-win { grid-area: win; font-size: 11px; color: var(--c-text-faint); font-family: var(--font-mono); }
   .pr-low {
-    margin-left: 6px; padding: 0 4px; border-radius: 3px; font-weight: 600; font-family: inherit;
+    margin-left: 6px; padding: 0 4px; border-radius: 3px; font-weight: 700; font-family: inherit;
     border: 1px solid var(--c-border-strong); color: var(--c-text-muted);
   }
   .pr-low[hidden] { display: none; }

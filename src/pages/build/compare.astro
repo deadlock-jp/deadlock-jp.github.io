@@ -5,8 +5,9 @@
  * 武器・生命力・スピリットのステータスを左右ペアで並べて見せる。
  * 見た目は /build/ の各カテゴリーボックス(.box/.bhead/.bhl/.brows)をそのまま踏襲する。
  *
- * データは data/snapshots/ にある全バージョンぶんをこのページに埋め込み、
- * OLDER/NEWEST の選択はクライアント側で完結させる(ページ遷移なしで切り替え可能)。
+ * データは data/snapshots/ にある全バージョンぶんを言語ごとの JSON(src/lib/comparePayload.ts)にして
+ * <head> で preload し、スクリプトで読む。OLDER/NEWEST の選択はクライアント側で完結させる
+ * (ページ遷移なしで切り替え可能)。
  * 数値の計算式(maxHealth/weaponDamage/spiritPower)は /build/ の
  * src/pages/build/index.astro と同じもの。どちらかを直したらもう片方も直すこと。
  *
@@ -17,9 +18,8 @@
 import Base from "../../layouts/Base.astro";
 import ItemIcon from "../../components/ItemIcon.astro";
 import HeroPortrait from "../../components/HeroPortrait.astro";
-import { t, modifierLabel, SLOT_META, releasedHeroes } from "../../lib/data.ts";
-import { weaponRows, weaponHeadline, weaponName, vitalityRows, spiritRows } from "../../lib/gamestats.ts";
-import { comparableSnapshots, loadVersionedSnapshot } from "../../lib/versionedData.ts";
+import { SLOT_META } from "../../lib/data.ts";
+import { compareData, compareDataFile } from "../../lib/comparePayload.ts";
 import { COST_BONUS_TARGET } from "../../types/hero.ts";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -39,128 +39,26 @@ const C = {
   spiritPower: term("spiritPower"),
   statsTitle: { WeaponMod: term("weaponStats"), Armor: term("vitalityStats"), Tech: term("spiritStats") },
 };
-/*
- * 選択肢に出すのは公式アップデートに対応する版と最新の抽出版だけ(versionedData.ts)。
- * ラベルは ClientVersion ではなく公式アップデートの日付。比較に使う内部キーは
- * ClientVersion のまま変えない(共有URL・スナップショットの対応がずれるため)。
- */
-const snapshots = comparableSnapshots(); // 新しい順
-const versions = snapshots.map((s) => s.version);
-const versionLabels = Object.fromEntries(snapshots.map((s) => [s.version, s.label]));
-
-/** 1バージョンぶんのヒーロー・アイテムを、比較に要る数値だけの軽量な形にする */
-function buildVersionPayload(version: string) {
-  const snap = loadVersionedSnapshot(version);
-  const abilityOf = (key: string) => snap.abilitiesFile.abilities[key];
-
-  const heroes = Object.fromEntries(
-    Object.values(snap.heroesFile.heroes)
-      .filter((h) => h.released)
-      .map((h) => {
-        const weaponSlot = h.abilities.find((a) => a.slot === "Weapon_Primary");
-        const weapon = weaponSlot ? (abilityOf(weaponSlot.abilityKey)?.weapon ?? null) : null;
-        return [
-          h.id,
-          {
-            levels: h.levels.map((l) => ({
-              level: l.level,
-              requiredGold: l.requiredGold,
-              up: l.useStandardUpgrade,
-            })),
-            costBonuses: h.costBonuses,
-            weaponHead: weaponHeadline(weapon),
-            weaponName: weaponName(h),
-            rows: {
-              WeaponMod: weaponRows(h, weapon),
-              Armor: vitalityRows(h),
-              Tech: spiritRows(h),
-            },
-            calc: {
-              baseHealth: h.startingStats.EMaxHealth ?? 0,
-              healthPerBoon: h.levelUpBonuses.MODIFIER_VALUE_BASE_HEALTH_FROM_LEVEL ?? 0,
-              techPowerPerBoon: h.levelUpBonuses.MODIFIER_VALUE_TECH_POWER ?? 0,
-              bulletDamage: weapon?.bulletDamage ?? null,
-              bulletDamagePerBoon: h.levelUpBonuses.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL ?? 0,
-              cycleTime: weapon?.cycleTime ?? null,
-              bulletsPerShot: weapon?.bulletsPerShot ?? 1,
-            },
-          },
-        ];
-      }),
-  );
-
-  const items = Object.fromEntries(
-    Object.values(snap.itemsFile.items)
-      .filter((i) => i.inShop)
-      .map((i) => [
-        i.id,
-        {
-          cost: i.cost,
-          slot: i.slotType,
-          mods: i.passiveProperties
-            .map((n) => i.properties[n])
-            .filter((p) => p?.providedType && p.value !== null)
-            .map((p) => ({ type: p!.providedType!, value: p!.value! })),
-        },
-      ]),
-  );
-
-  return { heroes, items };
-}
-
-const versionPayloads = Object.fromEntries(versions.map((v) => [v, buildVersionPayload(v)]));
-
-// ヒーロー名・アイテム名はラベルなので、どのバージョンで見ても最新版の表記でよい
-const heroes = releasedHeroes();
-const heroNames = Object.fromEntries(heroes.map((h) => [h.id, t(h.nameToken, h.key)]));
-const allItemIds = new Set<string>();
-for (const v of versions) for (const id of Object.keys(versionPayloads[v].items)) allItemIds.add(id);
-const itemNames = Object.fromEntries([...allItemIds].map((id) => [id, t(id, id)]));
-
-/*
- * アイコン表示用の見た目情報(tier/slotType/shopIcon等)は数値ではなく、
- * バージョン間でまず変わらない。新しい順に見て最初に見つかったバージョンの値を使う。
- */
-const itemIconMeta: Record<
-  string,
-  { tier: number; slotType: string | null; shopIcon: string | null; activation: string; isImbue: boolean }
-> = {};
-for (const v of versions) {
-  const snap = loadVersionedSnapshot(v);
-  for (const id of allItemIds) {
-    if (itemIconMeta[id]) continue;
-    const it = snap.itemsFile.items[id];
-    if (it) {
-      itemIconMeta[id] = {
-        tier: it.tier,
-        slotType: it.slotType,
-        shopIcon: it.shopIcon,
-        activation: it.activation,
-        isImbue: it.isImbue,
-      };
-    }
-  }
-}
-
-// 合計ステータスの内訳ラベル(MODIFIER_VALUE_* → 日本語)。全バージョンの型を集める
-const allModTypes = new Set<string>();
-for (const v of versions) {
-  for (const it of Object.values(versionPayloads[v].items)) {
-    for (const m of it.mods) allModTypes.add(m.type);
-  }
-}
-for (const c of Object.values(COST_BONUS_TARGET)) allModTypes.add(c.valueType);
-const labels = Object.fromEntries([...allModTypes].map((type) => [type, modifierLabel(type)]));
+// 全バージョンぶんの数値は JSON に分ける。ここではアイコンのマークアップに要る分だけ使う
+const { heroes, heroNames, allItemIds, itemIconMeta, itemNames } = compareData();
+const dataUrl = compareDataFile(base).url;
 
 const metaDesc = T.compare.description;
 ---
 
 <Base title={T.compare.title} description={metaDesc}>
+  {/* 比較のデータ。スクリプト側の fetch と同じ要求になるよう crossorigin を付ける */}
+  <link slot="head" rel="preload" href={dataUrl} as="fetch" type="application/json" crossorigin="anonymous" />
   <div class="head">
     <h1>{T.compare.title}</h1>
     <a class="back" id="backlink" href={`${base}${langPath("/build/")}`}>{T.compare.back}</a>
   </div>
 
+  <p class="lead" id="loading">{T.build.client.loading}</p>
+  <p class="loaderr" id="loaderr" role="alert" hidden>
+    {T.build.client.loadFailed}
+    <button type="button">{T.build.client.reload}</button>
+  </p>
   <p class="lead" id="nobuild" hidden>{T.compare.noBuildBefore}<a href={`${base}${langPath("/build/")}`}>{T.build.title}</a>{T.compare.noBuildAfter}</p>
 
   <div id="app" hidden>
@@ -229,12 +127,7 @@ const metaDesc = T.compare.description;
   <script
     is:inline
     define:vars={{
-      versionPayloads,
-      versions,
-      versionLabels,
-      heroNames,
-      itemNames,
-      labels,
+      dataUrl,
       costBonusTarget: COST_BONUS_TARGET,
       slotMeta: SLOT_META,
       C,
@@ -242,11 +135,6 @@ const metaDesc = T.compare.description;
   >
     (() => {
       const $ = (id) => document.getElementById(id);
-      const esc = (s) =>
-        String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
-      const round1 = (n) => Math.round(n * 10) / 10;
-      const fmtSouls = (n) => Math.round(n).toLocaleString("en-US");
-
       // ---- URL(#h=<heroId>&i=<item,item,...>)は /build/ と同じ形式(短縮ID) ----
       const ID_PREFIX = "upgrade_";
       const expand = (s) => (s.startsWith("!") ? s.slice(1) : ID_PREFIX + s);
@@ -254,8 +142,38 @@ const metaDesc = T.compare.description;
       const heroId = p.get("h") ? Number(p.get("h")) : null;
       const picked = (p.get("i") ?? "").split(",").filter(Boolean).map(expand);
       $("backlink").href = $("backlink").href.split("#")[0] + (location.hash || "");
+      $("loaderr").querySelector("button").addEventListener("click", () => location.reload());
 
-      if (heroId === null || !heroNames[heroId]) {
+      // ヒーローの無い URL ならデータを待たずに案内を出す
+      if (heroId === null) {
+        $("loading").hidden = true;
+        $("nobuild").hidden = false;
+        return;
+      }
+      // データは別ファイルの JSON(<head> の preload で取りに行き始めている)
+      fetch(dataUrl)
+        .then((res) => {
+          if (!res.ok) throw new Error(String(res.status));
+          return res.json();
+        })
+        .then(
+          (data) => {
+            $("loading").hidden = true;
+            start(data);
+          },
+          () => {
+            $("loading").hidden = true;
+            $("loaderr").hidden = false;
+          },
+        );
+
+      function start({ versionPayloads, versions, versionLabels, heroNames, itemNames, labels }) {
+      const esc = (s) =>
+        String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+      const round1 = (n) => Math.round(n * 10) / 10;
+      const fmtSouls = (n) => Math.round(n).toLocaleString("en-US");
+
+      if (!heroNames[heroId]) {
         $("nobuild").hidden = false;
         return;
       }
@@ -554,6 +472,7 @@ const metaDesc = T.compare.description;
       $("newer").addEventListener("change", refresh);
 
       refresh();
+      }
     })();
   </script>
 
@@ -561,11 +480,23 @@ const metaDesc = T.compare.description;
     .head { display: flex; align-items: center; gap: var(--sp-4); flex-wrap: wrap; }
     .back { font-size: 13px; }
     .lead { max-width: 62ch; color: var(--c-text-muted); }
+    /* データの JSON を読み込めなかったときの案内(build/index.astro と同じ見た目) */
+    .loaderr {
+      display: flex; align-items: center; gap: var(--sp-3); flex-wrap: wrap;
+      margin: var(--sp-3) 0; padding: var(--sp-2) var(--sp-3);
+      font-size: 13px; color: var(--c-text-strong);
+      background: var(--c-surface); border: 1px solid var(--c-border-strong); border-radius: var(--radius);
+    }
+    .loaderr[hidden] { display: none; }
+    .loaderr button {
+      padding: 4px 12px; border-radius: var(--radius); font: inherit; font-size: 12px; cursor: pointer;
+      background: var(--c-accent-bg); color: var(--c-accent); border: 1px solid var(--c-accent-dim);
+    }
 
     /* ---- 上部: ビルドのヒーロー・アイテムUI(見た目は /build/ のスロットバーと同じ) ---- */
     .topbar { display: flex; align-items: center; gap: var(--sp-5); flex-wrap: wrap; margin: var(--sp-3) 0; }
     .herow :global(.herowrap) { display: flex; align-items: center; gap: var(--sp-2); }
-    .herow :global(.heroname) { font-weight: 600; color: var(--c-text-strong); font-size: 14px; }
+    .herow :global(.heroname) { font-weight: 700; color: var(--c-text-strong); font-size: 14px; }
     .cells {
       display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(2, auto);
       grid-auto-flow: column; gap: 5px; width: min(100%, 320px);
@@ -600,7 +531,7 @@ const metaDesc = T.compare.description;
       padding-bottom: var(--sp-3); margin-bottom: var(--sp-3); border-bottom: 1px solid var(--c-border);
     }
     .vertag {
-      font-size: 19px; font-weight: 800; letter-spacing: .1em; line-height: 1;
+      font-size: 19px; font-weight: 700; letter-spacing: .1em; line-height: 1;
       padding: 5px 14px; border-radius: var(--radius);
     }
     .vercard.older .vertag { color: var(--c-text-muted); background: var(--c-surface-2); border: 1px solid var(--c-border-strong); }

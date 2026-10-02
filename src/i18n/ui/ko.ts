@@ -395,6 +395,10 @@ export const ko: Dict = {
       itemValue: "아이템 가치",
       creating: "만드는 중…",
       createFailed: "만들지 못했습니다",
+      /** シミュレーターのデータ(別ファイルの JSON)を読み込んでいる間・読み込めなかったとき */
+      loading: "불러오는 중…",
+      loadFailed: "데이터를 불러오지 못했습니다. 페이지를 새로 고쳐 주세요.",
+      reload: "새로 고침",
       pbOption: "#{id} · {matches}경기 · {players}명",
       pbMeta: "버전 {version} · {date} 갱신",
       pbAll: "전체",

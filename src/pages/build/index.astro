@@ -4,32 +4,10 @@ import ItemIcon from "../../components/ItemIcon.astro";
 import HeroPortrait from "../../components/HeroPortrait.astro";
 import SoulIcon from "../../components/SoulIcon.astro";
 import RankBandPicker from "../../components/RankBandPicker.astro";
-import { RANK_BANDS } from "../../lib/rankBands.ts";
-import {
-  releasedHeroes,
-  shopItems,
-  t,
-  describe,
-  formatProperty,
-  itemsFile,
-  ability,
-  usedIn,
-  modifierLabel,
-  SLOT_META,
-  souls,
-  itemStats as itemStatsFile,
-  heroBuilds,
-} from "../../lib/data.ts";
-import {
-  weaponRows,
-  weaponHeadline,
-  weaponName,
-  vitalityRows,
-  spiritRows,
-  abilityDamages,
-} from "../../lib/gamestats.ts";
-import { COST_BONUS_TARGET, type ItemSlotType } from "../../types/hero.ts";
+import { releasedHeroes, shopItems, t, itemsFile, SLOT_META, souls, heroBuilds } from "../../lib/data.ts";
+import { abilityDamages } from "../../lib/gamestats.ts";
 import { smallImage } from "../../lib/thumbs.ts";
+import { buildDataFile } from "../../lib/buildPayload.ts";
 
 const heroes = releasedHeroes();
 const items = shopItems();
@@ -74,139 +52,22 @@ const B = {
 };
 
 /*
- * ヒーロー×アイテムの人気率・勝率(tools/fetch-item-stats.mjs が deadlock-api.com から取得)。
- * ヒーロー選択はクライアント側なので、全ヒーロー分をビルド時に埋め込む
- * (静的サイトのまま、実行時に追加の通信をしないという既存方針を維持する)。
+ * シミュレーターが使うデータ(ヒーロー・アイテム・スキルの数値など)。HTML には埋め込まず、
+ * 言語ごとの JSON(/data/build-<lang>.<ハッシュ>.json。src/lib/buildPayload.ts)を <head> で preload して
+ * スクリプトから読む。ショップのカードなどのマークアップは検索エンジンにも読ませるため HTML に残す。
  */
-const itemStats = itemStatsFile;
-
-/** ホバーカードに出す1行。ゲーム側のトークンで整形済み */
-function propRows(names: string[], item: (typeof items)[number]) {
-  return names
-    .filter((n) => item.properties[n])
-    .map((n) => formatProperty(n, item.properties[n]!));
-}
-
-/** クライアントに渡すデータ。ページ内で完結させ、追加の通信はしない */
-const payload = {
-  heroes: heroes.map((h) => {
-    const weaponSlot = h.abilities.find((a) => a.slot === "Weapon_Primary");
-    const weapon = weaponSlot ? (ability(weaponSlot.abilityKey)?.weapon ?? null) : null;
-    return {
-      id: h.id,
-      name: t(h.nameToken, h.key),
-      /* ビルドカードの背景 public/images/heroes/card16x9/<key>.webp を引くのに使う */
-      key: h.key.replace(/^hero_/, ""),
-      levels: h.levels.map((l) => ({
-        level: l.level,
-        requiredGold: l.requiredGold,
-        // 標準レベルアップ = Boon 1。Boon 数を数えるのに使う
-        up: l.useStandardUpgrade,
-      })),
-      // 購入ボーナスはカテゴリへの累計投資額で決まる階段関数
-      costBonuses: h.costBonuses,
-      weaponHead: weaponHeadline(weapon),
-      weaponName: weaponName(h),
-      rows: {
-        WeaponMod: weaponRows(h, weapon),
-        Armor: vitalityRows(h),
-        Tech: spiritRows(h),
-      },
-      /*
-       * 実測(実測チェックリストv2, 2026-09-07)で確定した式で最大HP・武器ダメージ・
-       * スピリットパワーの実数値をクライアント側で組み立てるための、素の数値。
-       */
-      calc: {
-        baseHealth: h.startingStats.EMaxHealth ?? 0,
-        healthPerBoon: h.levelUpBonuses.MODIFIER_VALUE_BASE_HEALTH_FROM_LEVEL ?? 0,
-        techPowerPerBoon: h.levelUpBonuses.MODIFIER_VALUE_TECH_POWER ?? 0,
-        bulletDamage: weapon?.bulletDamage ?? null,
-        bulletDamagePerBoon: h.levelUpBonuses.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL ?? 0,
-        cycleTime: weapon?.cycleTime ?? null,
-        bulletsPerShot: weapon?.bulletsPerShot ?? 1,
-      },
-      // ゲーム内の「スピリットパワーの影響値」と同じ並び
-      abilities: abilityDamages(h),
-    };
-  }),
-  items: Object.fromEntries(
-    items.map((i) => [
-      i.id,
-      {
-        name: t(i.nameToken, i.id),
-        /* 日本語以外では英語名でも検索できるようにする */
-        ...(isJa ? {} : { nameEn: t(i.nameToken, i.id, "en") }),
-        tier: i.tier,
-        slot: i.slotType,
-        cost: i.cost,
-        slotCost: i.slotCost,
-        activation: i.activation,
-        isImbue: i.isImbue,
-        desc: describe(i.descToken, i.properties),
-        // 常時パッシブだけを合計ステータスに足す
-        mods: i.passiveProperties
-          .map((n) => i.properties[n])
-          .filter((p) => p?.providedType && p.value !== null)
-          .map((p) => ({ type: p!.providedType!, value: p!.value! })),
-        passives: propRows(i.passiveProperties, i),
-        conditional: i.tooltip
-          .flatMap((s) => [...s.elevatedProperties, ...s.properties])
-          .filter((n, idx, a) => a.indexOf(n) === idx && !i.passiveProperties.includes(n))
-          .filter((n) => i.properties[n])
-          .map((n) => formatProperty(n, i.properties[n]!)),
-        components: i.componentItems
-          .map((c) => itemsFile.items[c])
-          .filter((c) => c !== undefined)
-          .map((c) => t(c.nameToken, c.id)),
-        // 上位アイテムを買ったときに下位を外すための参照。名前ではなくIDで持つ
-        componentIds: i.componentItems.filter((c) => itemsFile.items[c] !== undefined),
-        usedIn: usedIn(i.id).map((c) => t(c.nameToken, c.id)),
-      },
-    ]),
-  ),
-  labels: Object.fromEntries(
-    [
-      ...new Set([
-        ...items.flatMap((i) =>
-          i.passiveProperties.map((n) => i.properties[n]?.providedType).filter(Boolean),
-        ),
-        ...Object.values(COST_BONUS_TARGET).map((c) => c.valueType),
-      ]),
-    ].map((type) => [type, modifierLabel(type as string)]),
-  ),
-  costBonusTarget: COST_BONUS_TARGET,
-  slotMeta: SLOT_META,
-  /**
-   * ヒーロー×アイテムの人気率・勝率。ショップの並び替えと数値表示に使う。
-   * 埋め込むのは全ランクだけ。他のランク帯は選ばれたときに bandUrls から読む(ページを重くしないため)
-   */
-  stats: {
-    fetchedAt: itemStats.fetchedAt,
-    window: itemStats.window,
-    lowSampleMatches: itemStats.lowSampleMatches,
-    heroes: itemStats.bands.all.heroes,
-    bandUrls: Object.fromEntries(
-      RANK_BANDS.filter((b) => itemStats.bands[b.key]).map((b) => [b.key, `${base}/stats/item-stats-${b.key}.json`]),
-    ),
-  },
-  /**
-   * 人気のビルド。中身はヒーローを選んだときに url の {id} をヒーローIDにして読み込む。
-   * heroes はビルドのあるヒーローのID(無いヒーローでは読みに行かない)
-   */
-  builds: {
-    heroes: Object.keys(heroBuilds.heroes).map(Number),
-    url: `${base}/stats/hero-builds-{id}.json`,
-  },
-};
+const dataUrl = buildDataFile(base).url;
 ---
 
 <Base title={T.build.title} description={T.build.description}>
+  {/* シミュレーターのデータ。最初のスクリプトの実行と並行して取りに行く(スクリプト側の fetch と同じ要求になるよう crossorigin を付ける) */}
+  <link slot="head" rel="preload" href={dataUrl} as="fetch" type="application/json" crossorigin="anonymous" />
   <h1>{T.build.title}</h1>
   {/* ヒーロー選択と操作ボタンは見出しの下に一列で置く */}
   <div class="head">
     <label class="heropick">
       {T.build.hero}
-      <select id="hero">
+      <select id="hero" disabled>
         <option value="">{T.build.choose}</option>
         {heroes.map((h) => <option value={h.id}>{t(h.nameToken, h.key)}</option>)}
       </select>
@@ -240,9 +101,16 @@ const payload = {
     <ul class="savedlist" id="savedlist"></ul>
   </div>
 
+  {/* データの JSON を読み込めなかったときだけ出す */}
+  <p class="loaderr" id="loaderr" role="alert" hidden>
+    {T.build.client.loadFailed}
+    <button type="button">{T.build.client.reload}</button>
+  </p>
+
   <div class="layout">
     {/* ---------------- 左: ビルドの中身とステータス ---------------- */}
-    <section class="side">
+    {/* データを読み込むまでは aria-busy(数値の欄は「読み込み中」)。読み込んだらスクリプトが外す */}
+    <section class="side" aria-busy="true">
       <div class="heroline" id="heroline">
         {
           heroes.map((h) => (
@@ -289,11 +157,11 @@ const payload = {
             </header>
             <div class="bbody">
               <div class="bcol">
-              <ul class="brows" data-rows={s} />
+              <ul class="brows" data-rows={s}><li class="empty">{T.build.client.loading}</li></ul>
               {s === "Tech" && (
                 <div class="spirit" data-spirit>
                   <h3>{T.build.spiritImpact}</h3>
-                  <ul class="alist" data-abilities />
+                  <ul class="alist" data-abilities><li class="empty">—</li></ul>
                 </div>
               )}
               </div>
@@ -444,20 +312,165 @@ const payload = {
   <div class="hovercard" id="hovercard" role="tooltip" hidden></div>
 
   <script src={`${base}/js/${searchScript}`} is:inline data-summary={isJa ? undefined : JSON.stringify(T.search)}></script>
-  <script is:inline define:vars={{ payload, base, lbase, B }}>
+  <script is:inline define:vars={{ dataUrl, base, lbase, B }}>
+    /*
+     * シミュレーターのデータは別ファイルの JSON(src/lib/buildPayload.ts)。<head> の preload で
+     * 取りに行き始めているので、ここの fetch はそれを受け取るだけになる。
+     * 読み込むまではショップのカードなど HTML の部分だけが見え、数値の欄は「読み込み中」のまま。
+     * 読み込めなければ再読み込みの案内を出す(ページのほかの部分はそのまま)。
+     */
+    fetch(dataUrl)
+      .then((res) => {
+        if (!res.ok) throw new Error(String(res.status));
+        return res.json();
+      })
+      .then(start, () => {
+        $("loaderr").hidden = false;
+        document.querySelector(".side").removeAttribute("aria-busy");
+        for (const el of document.querySelectorAll("[data-rows]")) el.innerHTML = '<li class="empty">—</li>';
+      });
+    $("loaderr").querySelector("button").addEventListener("click", () => location.reload());
+
+    function $(id) {
+      return document.getElementById(id);
+    }
+
+    const fmt = (n) => n.toLocaleString("en-US");
+    const esc = (s) =>
+      String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+
+    // ---- 保存(localStorage) -------------------------------------------
+    /*
+     * 保存するのは URL のハッシュ(h=<heroId>&i=<短縮ID>)そのもの。
+     * 呼び出しは readUrl() と同じ経路を通るので、共有URLと保存の仕様が自動で揃う。
+     * count / souls / heroId は一覧表示用の控えで、hash から再計算できる。
+     *
+     * private ウィンドウなどで localStorage が使えないことがある。
+     * その場合は保存機能ごと黙って無効化し、ページの他の部分は動かす。
+     */
+    const STORE_KEY = "dljp:builds";
+    const SAVE_MAX = 20;
+    let storeOk = false;
+    try {
+      const probe = "dljp:probe";
+      localStorage.setItem(probe, "1");
+      localStorage.removeItem(probe);
+      storeOk = true;
+    } catch {
+      storeOk = false;
+    }
+
+    function loadSaved() {
+      if (!storeOk) return [];
+      try {
+        const raw = JSON.parse(localStorage.getItem(STORE_KEY) ?? "[]");
+        return Array.isArray(raw) ? raw.filter((b) => b && typeof b.hash === "string") : [];
+      } catch {
+        // 壊れた値が入っていても落とさない
+        return [];
+      }
+    }
+    function storeSaved(list) {
+      if (!storeOk) return false;
+      try {
+        localStorage.setItem(STORE_KEY, JSON.stringify(list));
+        return true;
+      } catch {
+        // 容量超過など
+        return false;
+      }
+    }
+
+    function renderSaved() {
+      const list = loadSaved();
+      // 空文字なら CSS 側(:empty)でバッジごと消える。空白を入れないこと
+      $("savecount").textContent = list.length ? String(list.length) : "";
+      const box = $("savedlist");
+      if (!list.length) {
+        box.innerHTML = `<li class="savedempty">${esc(B.savedEmpty)}</li>`;
+        return;
+      }
+      box.innerHTML = list
+        .map((b) => {
+          // ヒーロー名はヒーロー選択の選択肢から引く(データの JSON を待たずに描けるように)
+          const h = b.heroId == null ? null : $("hero").querySelector(`option[value="${b.heroId}"]`)?.textContent ?? null;
+          const bars = (b.types ?? [])
+            .map((t) => `<i class="${t}"></i>`)
+            .join("");
+          return (
+            `<li data-id="${esc(b.id)}">` +
+            `<span class="sv-mini">${bars}</span>` +
+            `<span class="sv-name">${esc(b.label || B.untitled)}</span>` +
+            `<span class="sv-meta">${h ? esc(h) + " / " : ""}${esc(B.savedMeta.replace("{n}", b.count).replace("{souls}", fmt(b.souls ?? 0)))}</span>` +
+            `<button class="sv-load" data-act="load">${esc(B.load)}</button>` +
+            `<button class="sv-del" data-act="del">${esc(B.del)}</button>` +
+            `</li>`
+          );
+        })
+        .join("");
+    }
+
+    /*
+     * 保存パネルの開閉と一覧はデータの JSON を待たずに出す(後から出すと操作ボタンの列がずれる)。
+     * 保存・呼び出し・削除の操作は、データを読み込んでから start() の中で配線する
+     */
+    if (storeOk) {
+      $("savetoggle").hidden = false;
+      const panel = $("savepanel");
+      $("savetoggle").addEventListener("click", () => {
+        const open = panel.hidden;
+        panel.hidden = !open;
+        $("savetoggle").setAttribute("aria-expanded", String(open));
+      });
+      renderSaved();
+      // 保存済みがあるときは開いた状態で始める
+      if (loadSaved().length) {
+        panel.hidden = false;
+        $("savetoggle").setAttribute("aria-expanded", "true");
+      }
+    }
+
+    function start(payload) {
+    document.querySelector(".side").removeAttribute("aria-busy");
+    $("hero").disabled = false;
     /** 購入順を保持する。同じアイテムは1つまで */
     let picked = [];
     let heroId = null;
     /** ショップの並び替え基準。"pick" = 人気率 / "win" = 勝率 */
     let sortKey = "pick";
-    /** 直近に並べ替えた (ヒーロー, 基準, ランク帯)。同じなら組み直さない */
+    /** 直近に並べ替えた (ヒーロー, 基準, ランク帯, 読み込み済みか)。同じなら組み直さない */
     let statsApplied = "";
     /**
-     * ショップの人気率・勝率に使うランク帯。ページに埋め込んであるのは全ランク(all)だけで、
-     * 他の帯は選ばれたときに帯ごとの JSON(src/pages/stats/item-stats-[band].json.ts)を読み込む
+     * ショップの人気率・勝率に使うランク帯。全ランク(all)も含め、ヒーローを選んだときに
+     * 帯ごとの JSON(src/pages/stats/item-stats-[band].json.ts)を読み込む。
+     * ランク帯の部品(RankBandPicker)が先に覚えている帯を選んでいたら、それに合わせる
      */
-    let statsBand = "all";
-    const bandStats = { all: payload.stats.heroes };
+    let statsBand = window.rankBand ? window.rankBand.current().band : "all";
+    /** 帯 → ヒーローごとの統計。読み込んだものだけ入る */
+    const bandStats = {};
+    /** 帯 → 読み込み中の Promise。同じ帯を重ねて読まない */
+    const bandLoading = {};
+    /** その帯の統計を読む。統計の無い帯なら null。失敗したら次に要るときにもう一度読む */
+    function loadBand(band) {
+      if (bandStats[band]) return Promise.resolve();
+      if (bandLoading[band]) return bandLoading[band];
+      const url = payload.stats.bandUrls[band];
+      if (!url) return null;
+      bandLoading[band] = fetch(url)
+        .then((res) => {
+          if (!res.ok) throw new Error(String(res.status));
+          return res.json();
+        })
+        .then(
+          (j) => {
+            bandStats[band] = j.heroes;
+          },
+          () => {
+            delete bandLoading[band];
+          },
+        );
+      return bandLoading[band];
+    }
     /**
      * 人気のビルドによるショップの絞り込み。null なら絞らない。
      * buildSel は選んでいるビルド、buildGroup はそのグループの番号(-1 = すべて)
@@ -473,10 +486,6 @@ const payload = {
     const ID_PREFIX = "upgrade_";
     const shorten = (id) => (id.startsWith(ID_PREFIX) ? id.slice(ID_PREFIX.length) : "!" + id);
     const expand = (s) => (s.startsWith("!") ? s.slice(1) : ID_PREFIX + s);
-    const $ = (id) => document.getElementById(id);
-    const fmt = (n) => n.toLocaleString("en-US");
-    const esc = (s) =>
-      String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
     function hero() {
       return payload.heroes.find((h) => h.id === heroId) ?? null;
@@ -542,48 +551,6 @@ const payload = {
       $("compare").href = lbase + "/build/compare/" + hash;
     }
 
-    // ---- 保存(localStorage) -------------------------------------------
-    /*
-     * 保存するのは URL のハッシュ(h=<heroId>&i=<短縮ID>)そのもの。
-     * 呼び出しは readUrl() と同じ経路を通るので、共有URLと保存の仕様が自動で揃う。
-     * count / souls / heroId は一覧表示用の控えで、hash から再計算できる。
-     *
-     * private ウィンドウなどで localStorage が使えないことがある。
-     * その場合は保存機能ごと黙って無効化し、ページの他の部分は動かす。
-     */
-    const STORE_KEY = "dljp:builds";
-    const SAVE_MAX = 20;
-    let storeOk = false;
-    try {
-      const probe = "dljp:probe";
-      localStorage.setItem(probe, "1");
-      localStorage.removeItem(probe);
-      storeOk = true;
-    } catch {
-      storeOk = false;
-    }
-
-    function loadSaved() {
-      if (!storeOk) return [];
-      try {
-        const raw = JSON.parse(localStorage.getItem(STORE_KEY) ?? "[]");
-        return Array.isArray(raw) ? raw.filter((b) => b && typeof b.hash === "string") : [];
-      } catch {
-        // 壊れた値が入っていても落とさない
-        return [];
-      }
-    }
-    function storeSaved(list) {
-      if (!storeOk) return false;
-      try {
-        localStorage.setItem(STORE_KEY, JSON.stringify(list));
-        return true;
-      } catch {
-        // 容量超過など
-        return false;
-      }
-    }
-
     /** いまのビルドの状態を保存用の形にする */
     function currentBuild(label) {
       const cost = catCost();
@@ -597,34 +564,6 @@ const payload = {
         souls: cost.WeaponMod + cost.Armor + cost.Tech,
         savedAt: new Date().toISOString().slice(0, 10),
       };
-    }
-
-    function renderSaved() {
-      const list = loadSaved();
-      // 空文字なら CSS 側(:empty)でバッジごと消える。空白を入れないこと
-      $("savecount").textContent = list.length ? String(list.length) : "";
-      const box = $("savedlist");
-      if (!list.length) {
-        box.innerHTML = `<li class="savedempty">${esc(B.savedEmpty)}</li>`;
-        return;
-      }
-      box.innerHTML = list
-        .map((b) => {
-          const h = payload.heroes.find((x) => x.id === b.heroId);
-          const bars = (b.types ?? [])
-            .map((t) => `<i class="${t}"></i>`)
-            .join("");
-          return (
-            `<li data-id="${esc(b.id)}">` +
-            `<span class="sv-mini">${bars}</span>` +
-            `<span class="sv-name">${esc(b.label || B.untitled)}</span>` +
-            `<span class="sv-meta">${h ? esc(h.name) + " / " : ""}${esc(B.savedMeta.replace("{n}", b.count).replace("{souls}", fmt(b.souls ?? 0)))}</span>` +
-            `<button class="sv-load" data-act="load">${esc(B.load)}</button>` +
-            `<button class="sv-del" data-act="del">${esc(B.del)}</button>` +
-            `</li>`
-          );
-        })
-        .join("");
     }
 
     /** TYPE構成のミニバー用。購入順に最大8個ぶん色を並べる */
@@ -938,11 +877,19 @@ const payload = {
      * ノードを移動するだけにする(移動ならハンドラは保たれる)。
      */
     function renderShopStats() {
-      const key = `${heroId ?? ""}:${sortKey}:${statsBand}`;
+      // 帯の統計が無いファイルなら全ランクで代用する
+      const band = payload.stats.bandUrls[statsBand] ? statsBand : "all";
+      const key = `${heroId ?? ""}:${sortKey}:${band}:${bandStats[band] ? 1 : 0}`;
       if (key === statsApplied) return;
       statsApplied = key;
 
-      const hs = heroId === null ? null : (bandStats[statsBand] ?? payload.stats.heroes)[String(heroId)];
+      // ヒーローを選んでいて、その帯をまだ読んでいなければ読み、届いたら並べ直す
+      if (heroId !== null && !bandStats[band]) {
+        loadBand(band)?.then(() => {
+          if (bandStats[band]) renderShopStats();
+        });
+      }
+      const hs = heroId === null || !bandStats[band] ? null : bandStats[band][String(heroId)];
       $("sortbar").hidden = !hs;
 
       for (const grid of document.querySelectorAll(".cat .grid")) {
@@ -1086,7 +1033,7 @@ const payload = {
       c.shadowColor = "rgba(0,0,0,.9)";
       c.shadowBlur = 18;
       c.fillStyle = "#fcf0d8";
-      c.font = `900 40px "${B.font}", sans-serif`;
+      c.font = `700 40px "${B.font}", sans-serif`;
       c.fillText(h ? h.name : B.heroNotSelected, 34, 62);
       const label = $("savename") ? $("savename").value.trim() : "";
       if (label) {
@@ -1464,13 +1411,6 @@ const payload = {
     // ---- 保存パネルの配線 ----
     $("cardbtn").addEventListener("click", saveCardImage);
     if (storeOk) {
-      $("savetoggle").hidden = false;
-      const panel = $("savepanel");
-      $("savetoggle").addEventListener("click", () => {
-        const open = panel.hidden;
-        panel.hidden = !open;
-        $("savetoggle").setAttribute("aria-expanded", String(open));
-      });
       $("savebtn").addEventListener("click", saveCurrent);
       $("savename").addEventListener("keydown", (e) => {
         if (e.key === "Enter") saveCurrent();
@@ -1495,12 +1435,6 @@ const payload = {
         render();
         $("compare").href = lbase + "/build/compare/" + (b.hash ? "#" + b.hash : "");
       });
-      renderSaved();
-      // 保存済みがあるときは開いた状態で始める
-      if (loadSaved().length) {
-        panel.hidden = false;
-        $("savetoggle").setAttribute("aria-expanded", "true");
-      }
     }
     $("share").addEventListener("click", async () => {
       const btn = $("share");
@@ -1527,16 +1461,12 @@ const payload = {
     // ランク帯の切り替え(RankBandPicker が "rankband" イベントで知らせる)
     document.addEventListener("rankband", async (e) => {
       const band = e.detail.band;
-      if (!bandStats[band]) {
-        const url = payload.stats.bandUrls[band];
-        if (!url) return;
-        try {
-          const res = await fetch(url);
-          if (!res.ok) throw new Error(String(res.status));
-          bandStats[band] = (await res.json()).heroes;
-        } catch {
-          return; // 読み込めなければ今の表示のまま
-        }
+      // ヒーローを選んでいなければ帯を覚えるだけ(統計はヒーローを選んだときに読む)
+      if (heroId !== null && !bandStats[band]) {
+        const p = loadBand(band);
+        if (!p) return;
+        await p;
+        if (!bandStats[band]) return; // 読み込めなければ今の表示のまま
       }
       // 読み込みの間に別の帯が選ばれていたら、最後に選ばれたものだけ反映する
       if (window.rankBand && window.rankBand.current().band !== band) return;
@@ -1750,6 +1680,7 @@ const payload = {
 
     readUrl();
     refresh(true);
+    }
   </script>
 
   {/* スキルアイコンの供給元。表示はせず、クローン元としてだけ使う */}
@@ -1816,7 +1747,7 @@ const payload = {
 
     /* ---- 左: ヒーロー行 ---- */
     .heroline { display: flex; align-items: center; gap: var(--sp-3); margin-bottom: var(--sp-3); }
-    .hname { font-weight: 600; color: var(--c-text-strong); }
+    .hname { font-weight: 700; color: var(--c-text-strong); }
 
     /* ---- 左: アイテムスロット(12枠フレックス) ---- */
     .slotbar {
@@ -1907,6 +1838,19 @@ const payload = {
       color: var(--c-text-faint); border: none; font-size: 12px; display: block;
     }
 
+    /* データの JSON を読み込めなかったときの案内 */
+    .loaderr {
+      display: flex; align-items: center; gap: var(--sp-3); flex-wrap: wrap;
+      margin: 0 0 var(--sp-4); padding: var(--sp-2) var(--sp-3);
+      font-size: 13px; color: var(--c-text-strong);
+      background: var(--c-surface); border: 1px solid var(--c-border-strong); border-radius: var(--radius);
+    }
+    .loaderr[hidden] { display: none; }
+    .loaderr button {
+      padding: 4px 12px; border-radius: var(--radius); font: inherit; font-size: 12px; cursor: pointer;
+      background: var(--c-accent-bg); color: var(--c-accent); border: 1px solid var(--c-accent-dim);
+    }
+
     /* スピリット: スキルアイコン付きの一覧 */
     .spirit h3, .invest h3 {
       font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
@@ -1928,7 +1872,7 @@ const payload = {
       overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
     .alist :global(.l) { font-size: 10px; }
-    .alist :global(li.ult .an) { color: var(--c-spirit); font-weight: 600; }
+    .alist :global(li.ult .an) { color: var(--c-spirit); font-weight: 700; }
     /* AP 段トグル(ゲームの菱形マークを模した clip-path) */
     .alist :global(.aptop) { display: flex; gap: 3px; margin: 1px 0 3px; }
     .alist :global(.apd) {
