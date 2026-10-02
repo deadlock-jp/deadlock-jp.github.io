@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6726",
-  "upstreamCommit": "6726",
-  "generatedAt": "2026-10-01T00:44:00.580Z",
+  "clientVersion": "6731",
+  "upstreamCommit": "6731",
+  "generatedAt": "2026-10-02T02:52:16.243Z",
   "language": "japanese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
@@ -11,7 +11,7 @@
     "citadel_heroes": 3334,
     "citadel_attributes": 1980,
     "citadel_gc": 214,
-    "citadel_main": 5143
+    "citadel_main": 5145
   },
   "tokens": {
     "hero_vampire:n": {
@@ -46899,6 +46899,11 @@
       "group": "citadel_main",
       "hash": "df01d27af1e4"
     },
+    "citadel_settings_unit_status_hero_name_none": {
+      "text": "なし",
+      "group": "citadel_main",
+      "hash": "1a2e920ba7c6"
+    },
     "citadel_settings_damage_text_cumulative": {
       "text": "累積ダメージの表示",
       "group": "citadel_main",
@@ -48648,6 +48653,11 @@
       "text": "ハイドアウトのキーバインドをリセットします。",
       "group": "citadel_main",
       "hash": "e0c99eb923fa"
+    },
+    "citadel_settings_shopkeybinds": {
+      "text": "ショップ",
+      "group": "citadel_main",
+      "hash": "73b87d6b76c9"
     },
     "citadel_settings_audiokeybinds": {
       "text": "オーディオ",

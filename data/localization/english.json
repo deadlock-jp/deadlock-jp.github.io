@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6726",
-  "upstreamCommit": "6726",
-  "generatedAt": "2026-10-01T00:44:00.611Z",
+  "clientVersion": "6731",
+  "upstreamCommit": "6731",
+  "generatedAt": "2026-10-02T02:52:16.278Z",
   "language": "English",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 622,
     "citadel_heroes": 3342,
-    "citadel_attributes": 2012,
+    "citadel_attributes": 2015,
     "citadel_gc": 214,
-    "citadel_main": 5202
+    "citadel_main": 5217
   },
   "tokens": {
     "hero_vampire:n": {
@@ -5700,9 +5700,9 @@
       "hash": "e2f95e62e97a"
     },
     "upgrade_eldritch_shot_desc": {
-      "text": "Your next bullet applies a powerful debuff reducing the enemy's damage output, healing and movement speed. It also deals {g:citadel_inline_attribute:'BonusSpiritDamage'} based on the targets current Health. <br><br>The bullet is larger and penetrates through targets.",
+      "text": "Your next bullet applies a powerful debuff reducing the enemy's damage output, healing and movement speed. It also deals {g:citadel_inline_attribute:'BonusSpiritDamage'} based on the target's current Health. <br><br>The bullet is larger and penetrates through targets.",
       "group": "citadel_mods",
-      "hash": "508675e8baaa"
+      "hash": "c6f4ab8aa80a"
     },
     "upgrade_cloak_of_opportunity_desc": {
       "text": "Block the next debuff that would apply <span class=\"highlight\">movement lock, Stun, Chained, Immobilize, or Sleep</span> and become <span class=\"highlight\">Unstoppable</span>. Also gain a <span class=\"highlight\">Barrier</span> and bonus {g:citadel_inline_attribute:'MoveSpeed'}",
@@ -5710,9 +5710,9 @@
       "hash": "44b06bcd11fe"
     },
     "upgrade_runed_gauntlets_desc": {
-      "text": "Everytime you land a heavy melee, your existing cooldowns get reduced.",
+      "text": "Every time you land a heavy melee, your existing cooldowns get reduced.",
       "group": "citadel_mods",
-      "hash": "b72fe765e620"
+      "hash": "09bc0836912b"
     },
     "upgrade_runed_gauntlets_parry_desc": {
       "text": "Pierces through parry.",
@@ -6935,9 +6935,9 @@
       "hash": "8d99de214210"
     },
     "citadel_ability_wraith_rapidfire_desc": {
-      "text": "Temporarily boosts your <span class=\"highlight\">fire rate</span> and deal bonus {g:citadel_inline_attribute:'SpiritDamage'}",
+      "text": "Temporarily boost your <span class=\"highlight\">fire rate</span> and deal bonus {g:citadel_inline_attribute:'SpiritDamage'}",
       "group": "citadel_heroes",
-      "hash": "8634443b379a"
+      "hash": "8b754ebdef74"
     },
     "citadel_ability_wraith_rapidfire_t2_desc": {
       "text": "<span class=\"highlight\">+{s:BonusFireRate}% Fire Rate</span> and <span class=\"highlight\">+{s:AbilityDuration}s Duration</span>",
@@ -6960,9 +6960,9 @@
       "hash": "3cdd7ced5730"
     },
     "citadel_ability_card_toss_desc": {
-      "text": "Deal weapon damage to summon cards of a random suit. Each card can be thrown, dealing damage and applying a different effect depending of its suit. Cards thrown fly towards the enemy or point under your crosshair. <br><br><span class=\"diminish\">Alt-cast to throw first card</span>",
+      "text": "Deal weapon damage to summon cards of a random suit. Each card can be thrown, dealing damage and applying a different effect depending on its suit. Cards thrown fly towards the enemy or point under your crosshair. <br><br><span class=\"diminish\">Alt-cast to throw first card</span>",
       "group": "citadel_heroes",
-      "hash": "0c7ca47ca0a0"
+      "hash": "36f317af3642"
     },
     "citadel_ability_card_toss_t2_desc": {
       "text": "+{s:Damage} Damage and increased Spirit Scaling",
@@ -7010,9 +7010,9 @@
       "hash": "65031af97069"
     },
     "ability_header_card_toss_suits_desc": {
-      "text": "<br>Each suit provides a different bonus. <span class=\"highlight\">Jokers</span> counts as all suits</span>",
+      "text": "<br>Each suit provides a different bonus. <span class=\"highlight\">Jokers</span> count as all suits.",
       "group": "citadel_heroes",
-      "hash": "2a5d71a7ddd0"
+      "hash": "6a6065b0eb17"
     },
     "ability_header_card_toss_spade": {
       "text": "Spade",
@@ -7770,9 +7770,9 @@
       "hash": "96f41ee0ab83"
     },
     "ability_incendiary_projectile_amplification": {
-      "text": "Catalyst Damage Amp",
+      "text": "Napalm Damage Amp",
       "group": "citadel_heroes",
-      "hash": "3c13f309ec69"
+      "hash": "2e4aa940980d"
     },
     "ability_incendiary_projectile_quip": {
       "text": "Spew napalm that amplifies your damage",
@@ -8535,9 +8535,9 @@
       "hash": "32970e9794ea"
     },
     "citadel_ability_stomp_t2_desc": {
-      "text": "On Hit: <span class=\"highlight\">{s:BulletResistReduction}%</span> Bullet Resist and <span class=\"highlight\">-{s:SlowPercent}%</spawn> Move Speed<span class=\"highlight\"> for {s:SlowDuration}s</span>",
+      "text": "On Hit: <span class=\"highlight\">{s:BulletResistReduction}%</span> Bullet Resist and <span class=\"highlight\">-{s:SlowPercent}%</span> Move Speed<span class=\"highlight\"> for {s:SlowDuration}s</span>",
       "group": "citadel_heroes",
-      "hash": "a17a6f2631ef"
+      "hash": "9d2be773d0e3"
     },
     "citadel_ability_stomp_t3_desc": {
       "text": "<span class=\"highlight\">+{s:Damage}</span> Damage and <span class=\"highlight\">+{s:StompRange}m</span> Cast Range",
@@ -8695,9 +8695,9 @@
       "hash": "71fd895f6437"
     },
     "citadel_ability_self_vacuum_desc": {
-      "text": "Create a singularity in your hands, dealing <{g:citadel_inline_attribute:'SpiritDPS'}, applying {g:citadel_inline_attribute:'Stun'}, and <span class=\"highlight\">pulling</span> in nearby enemies.",
+      "text": "Create a singularity in your hands, dealing {g:citadel_inline_attribute:'SpiritDPS'}, applying {g:citadel_inline_attribute:'Stun'}, and <span class=\"highlight\">pulling</span> in nearby enemies.",
       "group": "citadel_heroes",
-      "hash": "fd10b929ebd2"
+      "hash": "1e32d1a142e0"
     },
     "VacuumRadius_label": {
       "text": "Singularity Radius",
@@ -8745,9 +8745,9 @@
       "hash": "4753a83f38d8"
     },
     "citadel_ability_nikuman_t2_desc": {
-      "text": "{s:AbilityCooldown} Cooldown and +{s:AbilityChannelTime}s Duration",
+      "text": "{s:AbilityCooldown}s Cooldown and +{s:AbilityChannelTime}s Duration",
       "group": "citadel_heroes",
-      "hash": "ff55b784a493"
+      "hash": "66ce4c8b1408"
     },
     "citadel_ability_nikuman_t3_desc": {
       "text": "<span class=\"highlight\">Full move and ability use</span> and additionally heals <span class=\"highlight\">+{s:HealMaxHealthPercent}% of Max Health</span> per second",
@@ -10205,9 +10205,9 @@
       "hash": "8262996756f4"
     },
     "ability_ice_dome_desc": {
-      "text": "Target yourself or a Hero to freeze the air and create an <span class=\"highlight\">impenetrable dome</span> around them. While in the dome, allies gain rapid {g:citadel_inline_attribute:'Regen'} and enemies are <span class=\"highlight\">slowed</span>. <br><br><span class=\"diminish\">Objectives becomes Invulnerable and Frozen under Frozen Shelter</span>",
+      "text": "Target yourself or a Hero to freeze the air and create an <span class=\"highlight\">impenetrable dome</span> around them. While in the dome, allies gain rapid {g:citadel_inline_attribute:'Regen'} and enemies are <span class=\"highlight\">slowed</span>. <br><br><span class=\"diminish\">Objectives become Invulnerable and Frozen under Frozen Shelter</span>",
       "group": "citadel_heroes",
-      "hash": "73c2a846e0bd"
+      "hash": "588305757fd2"
     },
     "ability_ice_dome_t3_desc": {
       "text": "<span class=\"highlight\">Purges</span> non-ult debuffs for you and your allies. <br><span class=\"highlight\">+{s:BonusHealthRegen}</span> Health Regen and increased Spirit Scaling",
@@ -10880,14 +10880,14 @@
       "hash": "4345cb1fa278"
     },
     "ExtraTargetConeAngle_label": {
-      "text": "Targetting Cone Angle",
+      "text": "Targeting Cone Angle",
       "group": "citadel_heroes",
-      "hash": "017f5aa37ffa"
+      "hash": "d55bd4f50cec"
     },
     "ExtraTargetConeAngle_postvalue_label": {
-      "text": "Targetting Cone Angle",
+      "text": "Targeting Cone Angle",
       "group": "citadel_heroes",
-      "hash": "017f5aa37ffa"
+      "hash": "d55bd4f50cec"
     },
     "BouncePadExtendDuration_postvalue_label": {
       "text": "Extended Duration from Bounce Pad",
@@ -10920,9 +10920,9 @@
       "hash": "44d2da0bc60e"
     },
     "ability_perched_predator_desc": {
-      "text": "Send a Spirit Cat forward that grab's targets in its way.  Grabbing a Hero will cause an explosion soon after. <br>Press {g:citadel_binding:'Ability1'} to manually create the explosion.",
+      "text": "Send a Spirit Cat forward that grabs targets in its way. Grabbing a Hero will cause an explosion soon after. <br>Press {g:citadel_binding:'Ability1'} to manually create the explosion.",
       "group": "citadel_heroes",
-      "hash": "71f55c068255"
+      "hash": "797db196e0d8"
     },
     "ability_perched_predator_quip": {
       "text": "Send out a Spirit Cat to grab enemies",
@@ -10930,9 +10930,9 @@
       "hash": "37fdb6ee0809"
     },
     "CatMaxSpeed_postfix": {
-      "text": "m",
+      "text": "m/s",
       "group": "citadel_heroes",
-      "hash": "6b0d31c0d563"
+      "hash": "33132004a9db"
     },
     "CatLifetime_postfix": {
       "text": "s",
@@ -11025,9 +11025,9 @@
       "hash": "cdabd11d8304"
     },
     "ability_nano_proximity_ritual_quip": {
-      "text": "Deploy a statue that survey's an area",
+      "text": "Deploy a statue that surveys an area",
       "group": "citadel_heroes",
-      "hash": "5d07c229447d"
+      "hash": "2bd33af858f3"
     },
     "ability_nano_proximity_ritual_desc": {
       "text": "Deploy a <span class=\"highlight\">Statue</span> to track enemies in an area. The Ward will also attack enemies recently damaged by {s:hero_name}. Targeted enemies have reduced healing and <span class=\"highlight\">heal {s:hero_name}</span> when damaged.",
@@ -11445,9 +11445,9 @@
       "hash": "6b0d31c0d563"
     },
     "ability_nano_dash_t2_desc": {
-      "text": "Heros killed within {s:BountyDuration}s grant <span class=\"highlight\">+{s:BonusGoldOnKill}</span> souls",
+      "text": "Heroes killed within {s:BountyDuration}s grant <span class=\"highlight\">+{s:BonusGoldOnKill}</span> souls",
       "group": "citadel_heroes",
-      "hash": "687001abe882"
+      "hash": "dfbea83df0d4"
     },
     "ability_nano_dash_t3_desc": {
       "text": "<span class=\"highlight\">+{s:ImpactDamage}</span> Damage & On Hero Hit: <span class=\"highlight\">{s:CooldownRefundPercent}%</span> Cooldown Refund",
@@ -11665,9 +11665,9 @@
       "hash": "174eddf94c9f"
     },
     "ability_immobilize_trap/trap_debuff": {
-      "text": "Spirit Armor Reduced",
+      "text": "Bullet Resist Reduced",
       "group": "citadel_heroes",
-      "hash": "ee5c51658808"
+      "hash": "01a57c158e7d"
     },
     "ImmobilizeTrap_CurseDuration_label": {
       "text": "Curse Duration",
@@ -11905,9 +11905,9 @@
       "hash": "404f1301b2f4"
     },
     "ability_health_swap_t3_desc": {
-      "text": "On cast, <span class=\"highlight\">+{s:BonusSpirit}</span> Spirit Power, +{s:BonusFireRate}%</span> Fire Rate and +{s:TechResist}%</span> Spirit Resistance for {s:HealthSwapBuffDuration}s.",
+      "text": "On cast, <span class=\"highlight\">+{s:BonusSpirit}</span> Spirit Power, <span class=\"highlight\">+{s:BonusFireRate}%</span> Fire Rate and <span class=\"highlight\">+{s:TechResist}%</span> Spirit Resistance for {s:HealthSwapBuffDuration}s.",
       "group": "citadel_heroes",
-      "hash": "228d5c11facc"
+      "hash": "02f5a7638686"
     },
     "MinHealthTakenPct_label": {
       "text": "Min Health Received",
@@ -12530,9 +12530,9 @@
       "hash": "08c5ed000097"
     },
     "ability_throw_sand_t1_desc": {
-      "text": "<span class=\"highlight\">+{s:Damage} Damage and <span class=\"highlight\">+{s:AbilityCastRange}m Range",
+      "text": "<span class=\"highlight\">+{s:Damage}</span> Damage and <span class=\"highlight\">+{s:AbilityCastRange}m</span> Range",
       "group": "citadel_heroes",
-      "hash": "495aa58d863d"
+      "hash": "cd11e956a525"
     },
     "ability_throw_sand_t2_desc": {
       "text": "Slow targets by <span class=\"highlight\">-{s:SlowPercent}% and reduces dash distances by {s:GroundDashReductionPercent}%</span>",
@@ -12755,9 +12755,9 @@
       "hash": "06027770fcbc"
     },
     "modifier_shiv_thrown_shiv_slow_debuff": {
-      "text": "Serrated Knive",
+      "text": "Serrated Knife",
       "group": "citadel_heroes",
-      "hash": "58571c6b4872"
+      "hash": "06027770fcbc"
     },
     "BleedDPSPerStack_label": {
       "text": "Bleed DPS Per Knife",
@@ -13285,9 +13285,9 @@
       "hash": "e18b856e2294"
     },
     "synth_barrage_desc": {
-      "text": "Channel to start launching projectiles that <span class=\"highlight\">deal {g:citadel_inline_attribute:'SpiritDamage'}</span> and <span class=\"highlight\">apply {g:citadel_inline_attribute:'Slow'}</span> around their impact point. Projectiles that hit a hero grant {s:hero_name} <span class=\"highlight\">{g:citadel_inline_attribute:'DamageAmp'} that stacks</span>.<br>Casting while airborne will cause {s:hero_name} to <span class=\"highlight\">float</span>.<span class=\"diminish\"><br><br>Casting AirDash or Flying Cloaking will not cancel Barrage.</span>",
+      "text": "Channel to start launching projectiles that <span class=\"highlight\">deal {g:citadel_inline_attribute:'SpiritDamage'}</span> and <span class=\"highlight\">apply {g:citadel_inline_attribute:'Slow'}</span> around their impact point. Projectiles that hit a hero grant {s:hero_name} <span class=\"highlight\">{g:citadel_inline_attribute:'DamageAmp'} that stacks</span>.<br>Casting while airborne will cause {s:hero_name} to <span class=\"highlight\">float</span>.<span class=\"diminish\"><br><br>Casting AirDash or Flying Cloak will not cancel Barrage.</span>",
       "group": "citadel_heroes",
-      "hash": "e58eee24c737"
+      "hash": "c5cd84bad274"
     },
     "synth_barrage_t3_desc": {
       "text": "<span class=\"highlight\">+{s:AmpPercentPerStack}%</span> Amp Per Stack and <span class=\"highlight\">{s:Radius}m</span> Radius",
@@ -13385,9 +13385,9 @@
       "hash": "28e27b56b90e"
     },
     "synth_affliction_t3_desc": {
-      "text": "<span class=\"highlight\">Prevents all healing</span><br><span class=\"highlight\">+{s:DPS}</span> DPS with increase Spirit scaling",
+      "text": "<span class=\"highlight\">Prevents all healing</span><br><span class=\"highlight\">+{s:DPS}</span> DPS with increased Spirit scaling",
       "group": "citadel_heroes",
-      "hash": "e0b640d0da64"
+      "hash": "b33010e022f0"
     },
     "modifier_synth_affliction_debuff": {
       "text": "Afflicted",
@@ -13635,9 +13635,9 @@
       "hash": "eb2821817fe1"
     },
     "mirage_sand_phantom_desc": {
-      "text": "Active: <span class=\"highlight\">Consume</span> all Djinn Mark's to deal its damage now.",
+      "text": "Active: <span class=\"highlight\">Consume</span> all Djinn Marks to deal their damage now.",
       "group": "citadel_heroes",
-      "hash": "3dc51f7d75f7"
+      "hash": "2f303fa048bc"
     },
     "mirage_sand_phantom_passive_desc": {
       "text": "Passive: Your shots <span class=\"highlight\">apply a Djinn Mark</span> on the target. When the mark expires or is consumed, it deals {g:citadel_inline_attribute:'SpiritDamage'} and the target is briefly <span class=\"highlight\">revealed on the map</span>. Each added mark doubles the current damage.<br><span class=\"diminish\"><br>There is a per target Cooldown for applying additional marks</span>",
@@ -13785,9 +13785,9 @@
       "hash": "ff5ab17c184c"
     },
     "citadel_ability_tengu_urn_desc": {
-      "text": "Summon a patch of choking thorns that <span class=\"highlight\">damage</span> and <span class=\"highlight\">slows</span> enemies in its radius.",
+      "text": "Summon a patch of choking thorns that <span class=\"highlight\">damages</span> and <span class=\"highlight\">slows</span> enemies in its radius.",
       "group": "citadel_heroes",
-      "hash": "a1bfc5d6cb5d"
+      "hash": "d72a3db97519"
     },
     "citadel_ability_tengu_urn_t2_desc": {
       "text": "<span class=\"highlight\">+{s:Radius}m</span> Radius and increased DPS Spirit scaling",
@@ -16060,9 +16060,9 @@
       "hash": "85a833abb918"
     },
     "ability_magician_shadowclone": {
-      "text": "The Great Homonculus!",
+      "text": "The Great Homunculus!",
       "group": "citadel_heroes",
-      "hash": "5b4586383140"
+      "hash": "02f8d8a27680"
     },
     "ability_magician_shadowclone_desc": {
       "text": "Create a <span class=\"highlight\">Copy</span> of yourself with reduced health and damage. When the clone dies or expires it explodes, dealing Spirit Damage.<br><br><span class=\"diminish\">The Copy cannot use their Ultimate ability.</span>",
@@ -16545,9 +16545,9 @@
       "hash": "22464a54f671"
     },
     "ability_vampirebat_lovebites_desc": {
-      "text": "Your bullets apply additional {g:citadel_inline_attribute:'SpiritDamage'}. Dealing damage your abilities builds up to a vicious <span class=\"highlight\">bite</span>, dealing a burst of {g:citadel_inline_attribute:'BonusSpiritDamage'}. <br><br><span class=\"diminish\">Love Bites has a unique cooldown per target.</span>",
+      "text": "Your bullets apply additional {g:citadel_inline_attribute:'SpiritDamage'}. Dealing damage with your abilities builds up to a vicious <span class=\"highlight\">bite</span>, dealing a burst of {g:citadel_inline_attribute:'BonusSpiritDamage'}. <br><br><span class=\"diminish\">Love Bites has a unique cooldown per target.</span>",
       "group": "citadel_heroes",
-      "hash": "bacf0a587ac4"
+      "hash": "aafd5dd6b50c"
     },
     "ability_vampirebat_lovebites/lovebites_proc": {
       "text": "Love Bites",
@@ -17320,9 +17320,9 @@
       "hash": "6edbeb29896b"
     },
     "ability_doorman_luggage_cart_desc": {
-      "text": "Send out a luggage Cart that deals {g:citadel_inline_attribute:'SpiritDamage'} and {g:citadel_inline_attribute:'Pulls'} enemy heroes along its path. <br><br>Can be alt cast with {g:citadel_binding:'AltCast'} to target friendly heroes instead.",
+      "text": "Send out a Luggage Cart that deals {g:citadel_inline_attribute:'SpiritDamage'} and {g:citadel_inline_attribute:'Pulls'} enemy heroes along its path. <br><br>Can be alt cast with {g:citadel_binding:'AltCast'} to target friendly heroes instead.",
       "group": "citadel_heroes",
-      "hash": "777442fcc7d8"
+      "hash": "8816e5c98c33"
     },
     "ability_doorman_luggage_cart_t3_note": {
       "text": "If the cart collides with a wall while dragging an enemy, it will deal bonus damage to the targets.",
@@ -17785,9 +17785,9 @@
       "hash": "685688853193"
     },
     "ability_frank_selfzap_t3_desc": {
-      "text": "<span class=\"highlight\">+{s:AbilityCharges}</span> Charge<br>+{s:StatusResistancePercent}%</span> Debuff Resistance<br>Increases spirit scaling",
+      "text": "<span class=\"highlight\">+{s:AbilityCharges}</span> Charge<br><span class=\"highlight\">+{s:StatusResistancePercent}%</span> Debuff Resistance<br>Increases spirit scaling",
       "group": "citadel_heroes",
-      "hash": "c93bc9b30aea"
+      "hash": "6aced6b97560"
     },
     "ability_frank_painaura": {
       "text": "Aura of Suffering",
@@ -17835,9 +17835,9 @@
       "hash": "e2f95e62e97a"
     },
     "ability_frank_painaura/painaura/painauradebuff": {
-      "text": "Aura of Pain",
+      "text": "Aura of Suffering",
       "group": "citadel_heroes",
-      "hash": "cc3a5d1d3b35"
+      "hash": "1c12f770450a"
     },
     "ability_frank_painaura_buttonhint": {
       "text": "End Aura",
@@ -18045,9 +18045,9 @@
       "hash": "45757138e18d"
     },
     "drifter_shadow_mark_t1_desc": {
-      "text": "<span class=\"highlight\">{s:BulletResistReduction}% Bullet Resist",
+      "text": "<span class=\"highlight\">{s:BulletResistReduction}%</span> Bullet Resist",
       "group": "citadel_heroes",
-      "hash": "1ad2b28850a2"
+      "hash": "69dbdaf562bb"
     },
     "drifter_shadow_mark_t2_desc": {
       "text": "<span class=\"highlight\">{s:AbilityCooldown}s Cooldown and +{s:AbilityDuration}s</span> Duration",
@@ -19050,9 +19050,9 @@
       "hash": "201e6268f77a"
     },
     "ability_familiar_helpinghands/buff": {
-      "text": "Lil Helpers'",
+      "text": "Lil Helpers",
       "group": "citadel_heroes",
-      "hash": "521f3b88af67"
+      "hash": "918bb066306f"
     },
     "ability_familiar_helpinghands/spiritbuff": {
       "text": "Enemy Spirit Stolen",
@@ -21415,9 +21415,9 @@
       "hash": "15aa4d586560"
     },
     "citadel_weapon_forge_set_desc": {
-      "text": "Increases fire rate as the guns spins up",
+      "text": "Increases fire rate as the gun spins up",
       "group": "citadel_heroes",
-      "hash": "7890885ce892"
+      "hash": "d93a9b327667"
     },
     "citadel_weapon_bebop_set": {
       "text": "Humble Pie",
@@ -22340,9 +22340,9 @@
       "hash": "23091ba79e4d"
     },
     "hero_forge_lore": {
-      "text": "Maggie McGinnis always had a knack for building things.  At 4 she was using Lincoln Logs to recreate architectural marvels.  At 10 she built and rewired a custom light fixture for her parent's anniversary.  At 15 she designed a machine that refined the souls of the dead...that last one got a little more attention than the Lincoln Logs.\n\nNow the head of Fairfax Industries Military R&D department, McGinnis spends her time in the machine shop, not in a lab.  She's not interested in theory, to her science is magic you can touch.",
+      "text": "Maggie McGinnis always had a knack for building things. At 4 she was using Lincoln Logs to recreate architectural marvels. At 10 she built and rewired a custom light fixture for her parents' anniversary. At 15 she designed a machine that refined the souls of the dead...that last one got a little more attention than the Lincoln Logs.\n\nNow the head of Fairfax Industries Military R&D department, McGinnis spends her time in the machine shop, not in a lab. She's not interested in theory, to her science is magic you can touch.",
       "group": "citadel_heroes",
-      "hash": "f18c294adc1e"
+      "hash": "5e1d5557c94a"
     },
     "hero_ghost_lore": {
       "text": "Once, Lady Jeanne Geist was the toast of the town.  But as time passed and her beauty faded she found herself further and further from her glory days in High Society until finally she was nothing more than a frail woman in a nursing home, telling stories of a glorious past.  And that’s when Oathkeeper revealed himself.  A powerful spirit from another plane, Oathkeeper offered her a path to reclaim her past glories… he could restore her youth; all she had to do was drain the essence of the living to sustain herself. \n\nGeist was torn.  Obviously murder was ghoulish business, and undoubtedly Oathkeeper was not an entity that could be trusted… but still, the thought of having a second chance of reliving her youth was too good to pass up.  And so she concocted a plan: after making a pact with Oathkeeper she would bind and ward him, limiting his influence and pull over her.  Oathkeeper would still get fed; but on her terms, not his.\n\nHowever, as years have turned to decades; the strength of the Ward has weakened, and Oathkeeper hungers more than he ever has in the past… ",
@@ -23235,9 +23235,24 @@
       "hash": "1f187c408793"
     },
     "StatDesc_DashSpeedInMeters_postfix": {
-      "text": "m",
+      "text": "m/s",
       "group": "citadel_attributes",
-      "hash": "6b0d31c0d563"
+      "hash": "33132004a9db"
+    },
+    "StatDesc_SpiritLifestealEffectiveness": {
+      "text": "Lifesteal Effectiveness",
+      "group": "citadel_attributes",
+      "hash": "3c0d4435cb11"
+    },
+    "StatDesc_SpiritLifestealEffectiveness_postvalue_label": {
+      "text": "Lifesteal Effectiveness",
+      "group": "citadel_attributes",
+      "hash": "3c0d4435cb11"
+    },
+    "StatDesc_SpiritLifestealEffectiveness_postfix": {
+      "text": "%",
+      "group": "citadel_attributes",
+      "hash": "4345cb1fa278"
     },
     "StatDesc_BaseWeaponDamage": {
       "text": "Weapon Damage",
@@ -29660,9 +29675,9 @@
       "hash": "a0f1490a20d0"
     },
     "FinalSlow_postfix": {
-      "text": "m",
+      "text": "m/s",
       "group": "citadel_attributes",
-      "hash": "6b0d31c0d563"
+      "hash": "33132004a9db"
     },
     "WeaponPowerPerStack_prefix": {
       "text": "{s:sign}",
@@ -39169,10 +39184,10 @@
       "group": "citadel_main",
       "hash": "fcdc5de430bc"
     },
-    "Citadel_HUD_ToxicChatMute_Desc": {
-      "text": "Has been given a 30 day restriction for abusive communication, and will be muted for the remainder of the match.",
+    "Citadel_HUD_ToxicChatMute_Desc:f": {
+      "text": "Has been given an extended comms ban for abusive communication, and will be muted for the remainder of the match.",
       "group": "citadel_main",
-      "hash": "548ab7034014"
+      "hash": "2bec6ebace02"
     },
     "Citadel_HUD_Koth_Warning": {
       "text": "An Unstable Rift is Opening...",
@@ -41088,6 +41103,21 @@
       "text": "Failed to connect",
       "group": "citadel_main",
       "hash": "8a4f7f7001ab"
+    },
+    "Citadel_HideoutConnectionFailed_TooFewPlayers": {
+      "text": "Not enough players for hideout",
+      "group": "citadel_main",
+      "hash": "5031abf3a852"
+    },
+    "Citadel_HideoutConnectionFailed_PlayersInMatch": {
+      "text": "Players currently in match",
+      "group": "citadel_main",
+      "hash": "574f3cc1b977"
+    },
+    "Citadel_HideoutConnectionFailed_GCDisabled": {
+      "text": "Hidout servers are temporarily disabled",
+      "group": "citadel_main",
+      "hash": "3a62ae2676a2"
     },
     "Citadel_HideoutBallJuggle_Increment": {
       "text": "{s:value}x",
@@ -46585,9 +46615,49 @@
       "hash": "1607f7b27908"
     },
     "citadel_settings_subtitles_background_color_tooltip": {
-      "text": "The color of the field behind the subtitle text.",
+      "text": "The color of the field behind the subtitle text, or of the outline around it.",
       "group": "citadel_main",
-      "hash": "4e69005cf405"
+      "hash": "b28717b412d0"
+    },
+    "citadel_settings_subtitles_background_style": {
+      "text": "Subtitle background style",
+      "group": "citadel_main",
+      "hash": "f34bdf3f79c8"
+    },
+    "citadel_settings_subtitles_background_style_tooltip": {
+      "text": "Show subtitles on a solid field, or with an outline around the text instead.",
+      "group": "citadel_main",
+      "hash": "5b7c3b0b4324"
+    },
+    "citadel_settings_subtitles_background_style_solid": {
+      "text": "Solid",
+      "group": "citadel_main",
+      "hash": "d00635865cda"
+    },
+    "citadel_settings_subtitles_background_style_outline": {
+      "text": "Outline",
+      "group": "citadel_main",
+      "hash": "cdd6290b6b28"
+    },
+    "citadel_settings_subtitles_background_opacity": {
+      "text": "Background opacity",
+      "group": "citadel_main",
+      "hash": "f12e36bd83ed"
+    },
+    "citadel_settings_subtitles_background_opacity_tooltip": {
+      "text": "Set the opacity of the field behind the subtitle text.",
+      "group": "citadel_main",
+      "hash": "e7e726afb5f4"
+    },
+    "citadel_settings_subtitles_outline_thickness": {
+      "text": "Subtitle outline thickness",
+      "group": "citadel_main",
+      "hash": "469bc3373352"
+    },
+    "citadel_settings_subtitles_outline_thickness_tooltip": {
+      "text": "Set the thickness of the outline around the subtitle text.",
+      "group": "citadel_main",
+      "hash": "a1e2932b981c"
     },
     "citadel_settings_subtitles_font": {
       "text": "Subtitle font",
@@ -47295,14 +47365,14 @@
       "hash": "4de200aea681"
     },
     "citadel_settings_damage_text_cumulative_running_tooltip": {
-      "text": "In additional to individual damage numbers, also show the total recent damage dealt to a target, updated as you continue damaging them.",
+      "text": "In addition to individual damage numbers, also show the total recent damage dealt to a target, updated as you continue damaging them.",
       "group": "citadel_main",
-      "hash": "87bd517ce0fb"
+      "hash": "5fc27b231425"
     },
     "citadel_settings_damage_text_cumulative_final_tooltip": {
-      "text": "In additional to individual damage numbers, also show the total damage dealt to a target once you stop dealing damage to them.",
+      "text": "In addition to individual damage numbers, also show the total damage dealt to a target once you stop dealing damage to them.",
       "group": "citadel_main",
-      "hash": "7e26d1c5e3ff"
+      "hash": "be934d14fa21"
     },
     "citadel_settings_enable_console": {
       "text": "Dev command console",
@@ -48140,9 +48210,9 @@
       "hash": "114b5e6db655"
     },
     "citadel_settings_share_apply_base_tooltip": {
-      "text": "Replace your base settings with the ones in this code.<br><br>Turn this off to keep your own base settings and have the any differences applied as hero-specific overrides for these heroes.",
+      "text": "Replace your base settings with the ones in this code.<br><br>Turn this off to keep your own base settings and have any differences applied as hero-specific overrides for these heroes.",
       "group": "citadel_main",
-      "hash": "c208f2c3896d"
+      "hash": "dd802422fa89"
     },
     "citadel_settings_share_apply": {
       "text": "Apply",
@@ -54234,6 +54304,16 @@
       "group": "citadel_main",
       "hash": "9609eec7a41a"
     },
+    "HeroTesting_Photomode": {
+      "text": "Photomode",
+      "group": "citadel_main",
+      "hash": "c554e560ec7c"
+    },
+    "HeroTesting_Photomode_desc": {
+      "text": "Hide All HUD and Healthbars and the local player.",
+      "group": "citadel_main",
+      "hash": "75b723e06658"
+    },
     "HeroTesting_HideUI": {
       "text": "Hide UI",
       "group": "citadel_main",
@@ -57054,6 +57134,16 @@
       "group": "citadel_main",
       "hash": "9dd07a3ab66c"
     },
+    "citadel_chatwheel_label_someone_was_here": {
+      "text": "Someone Was Here",
+      "group": "citadel_main",
+      "hash": "42366cb1629c"
+    },
+    "citadel_chatwheel_message_someone_was_here": {
+      "text": "Someone was here",
+      "group": "citadel_main",
+      "hash": "e68d055de637"
+    },
     "citadel_chatwheel_label_shop_closed": {
       "text": "Closed",
       "group": "citadel_main",
@@ -57495,9 +57585,9 @@
       "hash": "8cdbb235356b"
     },
     "citadel_chatwheel_message_visit_corrupted_shop": {
-      "text": "Visit the The Broker",
+      "text": "Visit the Broker",
       "group": "citadel_main",
-      "hash": "e0eacde07693"
+      "hash": "a4a4c7a96359"
     },
     "citadel_chatwheel_label_ignore_corrupted_shop": {
       "text": "Ignore Shop",
@@ -57505,9 +57595,9 @@
       "hash": "258405d3d637"
     },
     "citadel_chatwheel_message_ignore_corrupted_shop": {
-      "text": "Ignore the The Broker",
+      "text": "Ignore the Broker",
       "group": "citadel_main",
-      "hash": "c350d3b7ff81"
+      "hash": "14f3c6064fd9"
     },
     "citadel_chatwheel_label_going_farm": {
       "text": "Going to farm",

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "upstreamCommit": "6726",
-  "generatedAt": "2026-10-01T00:44:00.235Z",
+  "upstreamCommit": "6731",
+  "generatedAt": "2026-10-02T02:52:15.908Z",
   "objects": {
     "weapon_base": {
       "id": "weapon_base",
@@ -864,7 +864,7 @@
         "outlineRange": 2200,
         "rangeRingShowDistance": 275.59,
         "rangeRingFadeDistance": 196.85,
-        "rangeRingAlpha": 0.8
+        "rangeRingAlpha": 0.6
       },
       "flags": {
         "beamTurnToFire": true,
@@ -915,7 +915,7 @@
         "outlineRange": 2200,
         "rangeRingShowDistance": 275.59,
         "rangeRingFadeDistance": 196.85,
-        "rangeRingAlpha": 0.8
+        "rangeRingAlpha": 0.6
       },
       "flags": {
         "beamTurnToFire": true,
@@ -966,7 +966,7 @@
         "outlineRange": 2200,
         "rangeRingShowDistance": 275.59,
         "rangeRingFadeDistance": 196.85,
-        "rangeRingAlpha": 0.8
+        "rangeRingAlpha": 0.6
       },
       "flags": {
         "beamTurnToFire": true,
@@ -1017,7 +1017,7 @@
         "outlineRange": 2200,
         "rangeRingShowDistance": 275.59,
         "rangeRingFadeDistance": 196.85,
-        "rangeRingAlpha": 0.8
+        "rangeRingAlpha": 0.6
       },
       "flags": {
         "beamTurnToFire": true,
