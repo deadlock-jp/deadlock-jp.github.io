@@ -278,6 +278,32 @@ jsonLd.push(...extraJsonLd);
   </head>
   <body>
     <div id="dlbg" class="dlbg" aria-hidden="true"></div>
+    {/*
+      スマホの背景(静止画)の高さを、端末の画面の高さで固定する。global.css の 100lvh は「アドレスバーが引っ込んだときの高さ」で
+      ふつうのブラウザでは変わらないが、アプリ内ブラウザ(Google アプリなど)では今の画面の高さとして扱われ、バーが引っ込んだ瞬間に
+      背景が伸びて絵がガクッと拡大していた(2026-10-02)。画面の高さはバーの出入りで変わらないので、それで決める。
+      測り直すのは横幅が変わったとき(端末の向きを変えたとき)だけ。条件は global.css の静止画と同じ
+    */}
+    <script is:inline>
+      (() => {
+        const el = document.getElementById("dlbg");
+        const mq = matchMedia("(max-width: 820px), (pointer: coarse), (prefers-reduced-motion: reduce)");
+        if (!el || !mq.matches || !window.screen) return;
+        let lastW = 0;
+        const fit = () => {
+          const w = window.innerWidth;
+          if (w === lastW) return; // 高さだけの変化(アドレスバーの出入り)では何もしない
+          lastW = w;
+          // 向きに合わせて、画面の長辺・短辺のどちらが高さかを決める(iPhone の screen は向きで入れ替わらない)
+          const long = Math.max(screen.width, screen.height);
+          const short = Math.min(screen.width, screen.height);
+          const h = Math.max(window.innerHeight, w > window.innerHeight ? short : long);
+          el.style.height = h + "px";
+        };
+        fit();
+        addEventListener("resize", fit, { passive: true });
+      })();
+    </script>
 
     <header class="site-header">
       <div class="inner">
