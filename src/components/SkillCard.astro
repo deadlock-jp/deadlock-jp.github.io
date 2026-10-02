@@ -114,6 +114,7 @@ const fmtScale = (n: number) => (Math.round(n * 100) / 100).toString();
 
   {card.upgrades.length > 0 && (
     <div class="supg">
+      <div class="ugrid">
       {card.upgrades.map((tier) => (
         <div class="ucell">
           <span class="uap">
@@ -134,6 +135,7 @@ const fmtScale = (n: number) => (Math.round(n * 100) / 100).toString();
           </span>
         </div>
       ))}
+      </div>
     </div>
   )}
 
@@ -221,7 +223,9 @@ const fmtScale = (n: number) => (Math.round(n * 100) / 100).toString();
   .srow .su { font-size: 10px; color: var(--c-text-muted); margin-left: 1px; }
 
   /* ---- AP強化 3列(下端に固定) ---- */
-  .supg { margin-top: auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sp-2); }
+  /* .supg は幅の判定用の入れ物(コンテナ)。並べるのは内側の .ugrid */
+  .supg { margin-top: auto; container-type: inline-size; }
+  .ugrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sp-2); }
   .ucell {
     display: flex; flex-direction: column; border: 1px solid var(--c-border);
     border-radius: var(--radius); overflow: hidden;
@@ -247,5 +251,20 @@ const fmtScale = (n: number) => (Math.round(n * 100) / 100).toString();
   @media (max-width: 420px) {
     .stiles { flex-wrap: wrap; }
     .tile { flex-basis: calc(50% - var(--sp-2)); }
+  }
+
+  /*
+   * カードが狭いとき(スマホ)は AP強化を3列に割らず、縦に積む。各段は「左に AP、右に本文(左揃え)」。
+   * 3列のままだと1列が100px前後になり、文章の強化(「ハイパービームで…」など)が1行4〜5文字で折り返されて読みにくかった。
+   * 判定は画面幅ではなく強化欄の幅(ヒーローページはカードを2列に並べる幅があるため)。
+   * 入れ物(コンテナ)はカード自体ではなく .supg にする。カードにするとカードの幅が中身から決まらなくなり、潰れる
+   */
+  @container (max-width: 400px) {
+    .ugrid { grid-template-columns: 1fr; gap: 6px; }
+    .ucell { flex-direction: row; }
+    .uap {
+      flex: 0 0 64px; border-bottom: none; border-right: 1px solid var(--c-border);
+    }
+    .ubody { padding: 8px 12px; text-align: left; }
   }
 </style>
