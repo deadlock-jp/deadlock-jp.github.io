@@ -1232,6 +1232,14 @@ export function itemSalesFor(itemId: string): Partial<Record<RankBandKey, ItemSa
   ) as Partial<Record<RankBandKey, ItemSalesEntry>>;
 }
 
+/**
+ * ヒーローページの「このヒーローがよく売るアイテム」の対象と件数(ここだけで決める)。
+ *   minN … そのヒーローが買った件数の下限(帯ごと)
+ *   minPick … 採用率(買った試合数 ÷ そのヒーローの試合数)の下限。ほとんど買われないアイテムを外す
+ *   top … 並べる件数(売る前提のアイテムは枠の外に1件だけ添える)
+ */
+export const HERO_SALES = { minN: 100, minPick: 0.03, top: 6 } as const;
+
 /** ヒーローページの「このヒーローがよく売るアイテム」の1行 */
 export interface HeroSalesRow {
   item: Item;
@@ -1239,8 +1247,10 @@ export interface HeroSalesRow {
   n: number;
   sold: number;
   upgraded: number;
-  /** 売却試合率(売った試合数 ÷ そのヒーローの試合数)。並べる順番 */
-  soldPerMatch: number;
+  /** 売却率(売った試合数 ÷ 買った試合数)。並べる順番 */
+  soldRate: number;
+  /** 採用率(買った試合数 ÷ そのヒーローの試合数) */
+  pickRate: number;
   /** 全ヒーローを通した、そのアイテムの売却率・件数(同じ帯) */
   overallSold: number;
   overallN: number;
@@ -1249,33 +1259,41 @@ export interface HeroSalesRow {
   sell: [number, number, number] | null;
 }
 /**
- * そのヒーローで売られることの多いアイテム。買った件数が minN 以上のものを、売却試合率の高い順に top 件。
+ * そのヒーローで、買ったら売られることの多いアイテム。HERO_SALES の条件(購入件数・採用率)を満たすものを、
+ * 売却率の高い順(同じなら購入件数の多い順)に top 件。
+ * 売る前提のアイテム(allowGlobalSell)は売却率が高くなりがちで上位を占めるので、rows には入れず sellFirst に1件だけ返す。
  * 統計が無い・その帯にヒーローの試合が無い・該当するアイテムが無いときは null
  */
-export function heroSalesItems(heroId: number, band: RankBandKey, minN = 100, top = 6): HeroSalesRow[] | null {
+export function heroSalesItems(
+  heroId: number,
+  band: RankBandKey,
+): { rows: HeroSalesRow[]; sellFirst: HeroSalesRow | null } | null {
   const b = itemSales?.bands[band];
   const matches = b?.heroMatches?.[String(heroId)] ?? 0;
   if (!b || matches <= 0) return null;
-  const rows: HeroSalesRow[] = [];
+  const all: HeroSalesRow[] = [];
   for (const [itemId, e] of Object.entries(b.items)) {
     const item = itemsFile.items[itemId];
     if (!item?.inShop) continue;
     const h = e.heroes.find((x) => x[0] === heroId);
-    if (!h || h[1] < minN || h[2] <= 0) continue;
-    rows.push({
+    if (!h || h[1] < HERO_SALES.minN || h[2] <= 0 || h[1] / matches < HERO_SALES.minPick) continue;
+    all.push({
       item,
       n: h[1],
       sold: h[2],
       upgraded: h[3],
-      soldPerMatch: h[2] / matches,
+      soldRate: h[2] / h[1],
+      pickRate: h[1] / matches,
       overallSold: e.sold,
       overallN: e.n,
       buyMedian: h[5],
       sell: h[6] !== null && h[7] !== null && h[8] !== null ? [h[6], h[7], h[8]] : null,
     });
   }
-  rows.sort((a, b) => b.soldPerMatch - a.soldPerMatch);
-  return rows.length ? rows.slice(0, top) : null;
+  all.sort((a, b) => b.soldRate - a.soldRate || b.n - a.n);
+  const rows = all.filter((r) => !r.item.allowGlobalSell).slice(0, HERO_SALES.top);
+  const sellFirst = all.find((r) => r.item.allowGlobalSell) ?? null;
+  return rows.length || sellFirst ? { rows, sellFirst } : null;
 }
 
 /** そのアップデートで新しく発表された(解禁前として初めてデータに入った)ヒーロー */

@@ -262,11 +262,12 @@ export const zhCn: Dict = {
       source: "对局数据：deadlock-api.com（每 6 小时更新）",
       /** 英雄页面的「此英雄常出售的物品」(HeroSales.astro) */
       heroTitle: "此英雄常出售的物品",
-      heroLead: (n: string) =>
-        `按此英雄的对局中出售该物品的对局比例从高到低排列（购买 ${n} 次以上的物品）。出售比例是购买后又出售的对局所占的比例。`,
+      heroLead: (n: string, pick: string) =>
+        `此英雄购买后常出售的物品，按出售比例（购买后又出售的对局所占比例）从高到低排列。对象为购买 ${n} 次以上、且在 ${pick} 以上的对局中购买的物品。`,
       overall: (p: string) => `（全体 ${p}）`,
       higher: "高于全体",
       lower: "低于全体",
+      pickShare: (p: string) => `${p} 的对局中购买`,
       buyToSell: (b: string, s: string) => `购买 ${b} → 出售 ${s}`,
     },
   },

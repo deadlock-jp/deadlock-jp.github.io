@@ -263,11 +263,12 @@ export const en: Dict = {
       source: "Match data: deadlock-api.com (updated every 6 hours)",
       /** Hero page "Items this hero sells most" (HeroSales.astro) */
       heroTitle: "Items this hero sells most",
-      heroLead: (n: string) =>
-        `Items sold in the largest share of this hero's games (items with ${n}+ purchases). The sell rate is the share of games where the item was bought and then sold.`,
+      heroLead: (n: string, pick: string) =>
+        `Items this hero tends to sell after buying, by sell rate (the share of games where the item was bought and then sold). Items with ${n}+ purchases, bought in at least ${pick} of the hero's games.`,
       overall: (p: string) => `(all heroes ${p})`,
       higher: "higher than all heroes",
       lower: "lower than all heroes",
+      pickShare: (p: string) => `bought in ${p} of games`,
       buyToSell: (b: string, s: string) => `buy ${b} → sell ${s}`,
     },
   },

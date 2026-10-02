@@ -3,9 +3,10 @@
  * ヒーローページの「このヒーローがよく売るアイテム」。data/item-sales.json(アイテムページの「売却と強化」と同じ統計)から、
  * そのヒーローで売られることの多いアイテムを、全ヒーローを通した売却の割合と並べて出す。
  *
- *   - 対象: そのヒーローが買った件数が MIN_N 件以上のアイテム(帯ごとに判定)
- *   - 並び: 売却試合率(売った試合数 ÷ そのヒーローの試合数)の高い順に TOP_N 件。
- *     ヒーローの試合数は売却と同じ問い合わせで数えたもの(data.ts の heroSalesItems)
+ *   - 対象: そのヒーローが買った件数と採用率(買った試合数 ÷ そのヒーローの試合数)が下限以上のアイテム(帯ごとに判定)。
+ *     下限と件数は data.ts の HERO_SALES の1か所で決める。ヒーローの試合数は売却と同じ問い合わせで数えたもの
+ *   - 並び: 売却率(売った試合数 ÷ 買った試合数)の高い順(同じなら購入件数の多い順)。全体との差を見せるのが目的のため
+ *   - 売る前提のアイテム(allowGlobalSell)は上位を占めがちなので、件数の枠の外に1件だけ、リストの最後に添える
  *   - 行: アイコン・名前(ホバーカード付き)・ティア、売却の割合(全体の割合と、差が大きいときは ▲▼ の印)、
  *     強化の割合(上位が無いアイテムは「—」)、時刻の小さな帯(SalesTrack)と「買う → 売る」の中央値、売る前提の印
  * 勝率は出さない。ランク帯は4帯分を HTML に書き出して切り替える(ItemSales.astro と同じ)。
@@ -15,7 +16,7 @@ import ItemIcon from "./ItemIcon.astro";
 import RankBandPicker from "./RankBandPicker.astro";
 import SalesTrack from "./SalesTrack.astro";
 import SellFirstFlag from "./SellFirstFlag.astro";
-import { t, usedIn, itemSales, heroSalesItems, statsPeriodLabel, type HeroSalesRow } from "../lib/data.ts";
+import { t, usedIn, itemSales, heroSalesItems, statsPeriodLabel, HERO_SALES, type HeroSalesRow } from "../lib/data.ts";
 import { RANK_BANDS, type RankBandKey } from "../lib/rankBands.ts";
 import { salesPct as pct, mmss, salesAxisMinutes } from "../lib/salesView.ts";
 
@@ -23,9 +24,6 @@ interface Props {
   heroId: number;
   base: string;
 }
-/** 対象にする最低の購入件数(帯ごと) */
-const MIN_N = 100;
-const TOP_N = 6;
 /** 全体の売却の割合との差がこれ(ポイント)以上なら ▲▼ を付ける */
 const DIFF_PT = 10;
 const { heroId, base } = Astro.props;
@@ -37,21 +35,20 @@ const lowN = itemSales?.lowSampleMatches ?? 20;
 const period = itemSales ? statsPeriodLabel(itemSales) : "";
 
 const bandKeys = ["all", ...RANK_BANDS.map((b) => b.key)] as RankBandKey[];
-const panels = bandKeys
-  .map((key) => ({
-    key,
-    rows: heroSalesItems(heroId, key, MIN_N, TOP_N),
-    matches: itemSales?.bands[key]?.heroMatches?.[String(heroId)] ?? 0,
-  }))
-  .filter((p): p is { key: RankBandKey; rows: HeroSalesRow[]; matches: number } => p.rows !== null);
+const panels = bandKeys.flatMap((key) => {
+  const r = heroSalesItems(heroId, key);
+  if (!r) return [];
+  // 売る前提のアイテムは枠の外。リストの最後に添える(extra で区切りを付ける)
+  const rows = [...r.rows.map((row) => ({ row, extra: false })), ...(r.sellFirst ? [{ row: r.sellFirst, extra: true }] : [])];
+  return [{ key, rows, matches: itemSales?.bands[key]?.heroMatches?.[String(heroId)] ?? 0 }];
+});
 const hasAll = panels.some((p) => p.key === "all");
-const axisMin = salesAxisMinutes(panels.flatMap((p) => p.rows.flatMap((r) => [r.buyMedian, r.sell?.[2]])));
+const axisMin = salesAxisMinutes(panels.flatMap((p) => p.rows.flatMap(({ row: r }) => [r.buyMedian, r.sell?.[2]])));
 const sectionId = `hs-${heroId}`;
 
 const view = (r: HeroSalesRow) => {
-  const soldRate = r.sold / r.n;
   const overallRate = r.overallN > 0 ? r.overallSold / r.overallN : 0;
-  const diff = (soldRate - overallRate) * 100;
+  const diff = (r.soldRate - overallRate) * 100;
   return {
     href: `${base}${langPath(`/items/${r.item.id}/`)}`,
     name: t(r.item.nameToken, r.item.id),
@@ -60,6 +57,7 @@ const view = (r: HeroSalesRow) => {
     mark: diff >= DIFF_PT ? "hi" : diff <= -DIFF_PT ? "lo" : null,
     upgraded: usedIn(r.item.id).length > 0 ? pct(r.upgraded, r.n) : "—",
     low: r.n < lowN,
+    pick: `${(r.pickRate * 100).toFixed(1)}%`,
   };
 };
 ---
@@ -68,7 +66,7 @@ const view = (r: HeroSalesRow) => {
   <section class="hsales" id={sectionId}>
     <h2>{SS.heroTitle}</h2>
     <div class="hs-head">
-      <p class="hs-lead">{SS.heroLead(MIN_N.toLocaleString("en-US"))}</p>
+      <p class="hs-lead">{SS.heroLead(HERO_SALES.minN.toLocaleString("en-US"), `${HERO_SALES.minPick * 100}%`)}</p>
       <RankBandPicker />
     </div>
 
@@ -76,10 +74,10 @@ const view = (r: HeroSalesRow) => {
       <div class="hs-panel" data-hsales-band={p.key} hidden={p.key !== "all"}>
         <p class="hs-meta">{period} / {S.matches(p.matches.toLocaleString("en-US"))}</p>
         <ol class="hs-list">
-          {p.rows.map((r) => {
+          {p.rows.map(({ row: r, extra }) => {
             const v = view(r);
             return (
-              <li class="hs-row">
+              <li class:list={["hs-row", { extra }]}>
                 <div class="hs-item">
                   <a href={v.href} data-itemcard={r.item.id}>
                     <ItemIcon
@@ -105,6 +103,7 @@ const view = (r: HeroSalesRow) => {
                     {v.mark === "lo" && <span class="mk lo" title={SS.lower}>▼<span class="sr">{SS.lower}</span></span>}
                   </span>
                   <span><i class="sw up"></i>{SS.upgraded} <b>{v.upgraded}</b></span>
+                  <span class="pk">{SS.pickShare(v.pick)}</span>
                 </p>
                 <div class="hs-time">
                   <SalesTrack
@@ -163,6 +162,9 @@ const view = (r: HeroSalesRow) => {
     display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: var(--sp-3) var(--sp-5);
   }
   .hs-row { min-width: 0; }
+  /* 売る前提のアイテム(件数の枠の外)。行を改めて区切る */
+  .hs-row.extra { grid-column: 1 / -1; padding-top: var(--sp-3); border-top: 1px dashed var(--c-border); }
+  .hs-row.extra .hs-time { max-width: 320px; }
   .hs-item { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; min-width: 0; }
   .hs-item a { display: flex; align-items: center; gap: 8px; min-width: 0; color: var(--c-text-strong); text-decoration: none; }
   .hs-item a:hover .nm { text-decoration: underline; }
@@ -173,6 +175,7 @@ const view = (r: HeroSalesRow) => {
   .hs-nums > span { display: inline-flex; align-items: baseline; gap: 4px; }
   .hs-nums b { font-family: var(--font-mono); font-size: 14.5px; color: var(--c-text-strong); }
   .ov { font-family: var(--font-mono); color: var(--c-text-muted); }
+  .pk { font-size: 11px; color: var(--c-text-faint); }
   .sw { width: 9px; height: 9px; border-radius: 2px; display: inline-block; align-self: center; }
   .sw.sold { background: var(--c-sale-sold); }
   .sw.up { background: var(--c-sale-up); }
