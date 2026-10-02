@@ -33,6 +33,8 @@ export const ja = {
     build: "ビルド",
     mechanics: "攻略情報",
     patchNotes: "パッチノート",
+    /** スマホのヘッダーのメニューボタン(≡)の読み上げ名 */
+    menu: "メニュー",
   },
   footer: {
     /** ClientVersion の番号の前後 */

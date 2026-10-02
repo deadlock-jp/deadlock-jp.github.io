@@ -23,6 +23,8 @@ export const ko: Dict = {
     build: "빌드",
     mechanics: "공략 정보",
     patchNotes: "패치 노트",
+    /** スマホのヘッダーのメニューボタン(≡)の読み上げ名 */
+    menu: "메뉴",
   },
   footer: {
     sourceBefore: "데이터 출처: 게임 클라이언트에서 직접 추출 (ClientVersion ",

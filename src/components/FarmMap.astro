@@ -507,7 +507,13 @@ const MARKER_LABEL: Record<string, string> = {
   }
   .fm-stage.zoomed { border-radius: var(--radius); outline: 1px solid var(--c-border); }
   .fm-stage:active { cursor: grabbing; }
-  .fm-world { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+  /*
+   * 点の大きさは地図(.fm-world)の幅に合わせる。--px は「地図の幅が 720px のときの 1px」で、
+   * PC(地図 720px)では今までの px と同じ大きさになり、スマホ(地図 300px 前後)では比例して小さくなる。
+   * 拡大すると地図と一緒に大きくなるが、どれも PC の 1.5 倍で止める(6倍まで拡大できるため)。
+   * 小さくなりすぎないよう、種類ごとに下限を置く。枠線・影も同じ比率にする(小さい点が枠で潰れないように)
+   */
+  .fm-world { position: absolute; left: 0; top: 0; width: 100%; height: 100%; container-type: inline-size; --px: calc(100cqw / 720); }
   .fm-bg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
   .fm-bg.tunnels { display: none; }
   [data-view="tunnels"] .fm-bg.ground { display: none; }
@@ -541,32 +547,47 @@ const MARKER_LABEL: Record<string, string> = {
   .fm-stage[data-hide~="broker"] [data-layer="broker"] { display: none; }
 
   /* 建造物: ゲームのミニマップと同じ菱形。色は --c(自陣=レーン色 / 敵陣=赤) */
-  .st { width: 14px; height: 14px; background: var(--c); transform: translate(-50%, -50%) rotate(45deg); box-shadow: 0 0 0 1.5px rgb(0 0 0 / 0.7); }
-  .st-patron { width: 26px; height: 26px; }
-  .st-walker { width: 22px; height: 22px; background: rgb(20 22 21); border: 4px solid var(--c); box-sizing: border-box; }
-  .st-guardian { width: 15px; height: 15px; }
-  .st-baseGuardian { width: 11px; height: 11px; background: rgb(20 22 21); border: 3px solid var(--c); box-sizing: border-box; }
-  .st-shrine { width: 10px; height: 10px; }
+  /*
+   * 大きさは --s(地図 720px のときの px 数)と --min(下限の px)で決める。枠線・影の太さは --bw / --sh。
+   * 大きさ = clamp(下限, 地図の幅に比例, PC の 1.5 倍)
+   */
+  .st, .mk-crate, .mk-statue, .mk-lm, .mk-tough, .mk-camp img, .mk-lm.has-icon img, .lm-midboss img {
+    width: clamp(calc(var(--min) * 1px), calc(var(--s) * var(--px)), calc(var(--s) * 1.5px));
+    height: clamp(calc(var(--min) * 1px), calc(var(--s) * var(--px)), calc(var(--s) * 1.5px));
+  }
+  .fm-world {
+    /* 枠線・影の太さ。下限は 0.5px(見えなくならない程度)、上限は大きさと同じく 1.5 倍 */
+    --sh1: clamp(0.5px, var(--px), 1.5px);
+    --sh15: clamp(0.5px, calc(1.5 * var(--px)), 2.25px);
+    --glow2: clamp(1px, calc(2 * var(--px)), 3px);
+    --glow3: clamp(1px, calc(3 * var(--px)), 4.5px);
+  }
+  .st { --s: 14; --min: 8; background: var(--c); transform: translate(-50%, -50%) rotate(45deg); box-shadow: 0 0 0 var(--sh15) rgb(0 0 0 / 0.7); }
+  .st-patron { --s: 26; --min: 12; }
+  .st-walker { --s: 22; --min: 11; background: rgb(20 22 21); border: clamp(2px, calc(4 * var(--px)), 6px) solid var(--c); box-sizing: border-box; }
+  .st-guardian { --s: 15; --min: 8; }
+  .st-baseGuardian { --s: 11; --min: 7; background: rgb(20 22 21); border: clamp(1.5px, calc(3 * var(--px)), 4.5px) solid var(--c); box-sizing: border-box; }
+  .st-shrine { --s: 10; --min: 6; }
 
-  .mk-crate { width: 5px; height: 5px; border-radius: 50%; background: var(--c-soul); box-shadow: 0 0 0 1px rgb(0 0 0 / 0.6); }
+  .mk-crate { --s: 5; --min: 3; border-radius: 50%; background: var(--c-soul); box-shadow: 0 0 0 var(--sh1) rgb(0 0 0 / 0.6); }
   /* 地下トンネルの箱は、ミニマップのどちらの絵にも描かれていないので両方の表示に出す */
   .mk.tunnelonly { background: var(--c-spirit) !important; }
-  .mk-crate.tunnelonly { width: 6px; height: 6px; }
-  .mk-statue { width: 6px; height: 6px; background: #e8b93a; transform: translate(-50%, -50%) rotate(45deg); box-shadow: 0 0 0 1px rgb(0 0 0 / 0.6); }
-  .mk-camp img { width: 20px; height: 20px; filter: drop-shadow(0 0 2px #000) drop-shadow(0 0 1px #000); }
-  .camp-strong img { width: 24px; height: 24px; }
-  .camp-vaults img { width: 22px; height: 22px; }
-  .mk-lm { width: 11px; height: 11px; border: 2px solid var(--c-accent); border-radius: 50%; background: rgb(0 0 0 / 0.5); }
-  .mk-tough { width: 7px; height: 7px; background: #c98a4b; border-radius: 1px; box-shadow: 0 0 0 1px rgb(0 0 0 / 0.7); }
+  .mk-crate.tunnelonly { --s: 6; --min: 3.5; }
+  .mk-statue { --s: 6; --min: 3.5; background: #e8b93a; transform: translate(-50%, -50%) rotate(45deg); box-shadow: 0 0 0 var(--sh1) rgb(0 0 0 / 0.6); }
+  .mk-camp img { --s: 20; --min: 11; filter: drop-shadow(0 0 var(--glow2) #000) drop-shadow(0 0 var(--sh1) #000); }
+  .camp-strong img { --s: 24; --min: 13; }
+  .camp-vaults img { --s: 22; --min: 12; }
+  .mk-lm { --s: 11; --min: 6; border: clamp(1px, calc(2 * var(--px)), 3px) solid var(--c-accent); border-radius: 50%; background: rgb(0 0 0 / 0.5); }
+  .mk-tough { --s: 7; --min: 4; background: #c98a4b; border-radius: 1px; box-shadow: 0 0 0 var(--sh1) rgb(0 0 0 / 0.7); }
   .lay-tough .sw { background: #c98a4b; border-radius: 1px; }
   /* 絵のある目印(商店・テレポーター・ブローカー・スナック・裂け目・壺)は丸枠を外して絵だけ出す */
   .mk-lm.has-icon { width: auto; height: auto; border: none; background: none; }
-  .mk-lm.has-icon img { width: 18px; height: 18px; filter: drop-shadow(0 0 2px #000) drop-shadow(0 0 1px #000); }
-  .lm-snack.has-icon img { width: 11px; height: 11px; }
-  .lm-broker.has-icon img, .lm-shop.has-icon img { width: 20px; height: 20px; }
+  .mk-lm.has-icon img { --s: 18; --min: 10; filter: drop-shadow(0 0 var(--glow2) #000) drop-shadow(0 0 var(--sh1) #000); }
+  .lm-snack.has-icon img { --s: 11; --min: 6; }
+  .lm-broker.has-icon img, .lm-shop.has-icon img { --s: 20; --min: 11; }
   .lm-bell { border-color: #e8b93a; }
   .lm-midboss { border: none; background: none; }
-  .lm-midboss img { width: 24px; height: 24px; }
+  .lm-midboss img { --s: 24; --min: 13; }
 
   .fm-info { min-height: 1.6em; margin: 6px 0 0; font-size: 12.5px; color: var(--c-text-strong); text-align: center; }
   /* 箱の識別番号。「箱の番号」をオンにしたときだけ、点の右上に出す */
@@ -578,7 +599,7 @@ const MARKER_LABEL: Record<string, string> = {
   .fm-stage.labels .bl { display: block; }
   .fm-stage.labels.zoomed .bl { font-size: 11px; }
   .lay-labels .sw { background: none; border: 1.5px solid var(--c-text-muted); border-radius: 2px; }
-  .mk-camp.sel img { filter: drop-shadow(0 0 3px var(--c-accent)) drop-shadow(0 0 1px #000); }
+  .mk-camp.sel img { filter: drop-shadow(0 0 var(--glow3) var(--c-accent)) drop-shadow(0 0 var(--sh1) #000); }
 
   /* キャンプのカード(ホバー)。地図の上に浮かせる */
   .farmmap { position: relative; }

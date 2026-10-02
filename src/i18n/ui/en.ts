@@ -21,6 +21,8 @@ export const en: Dict = {
     build: "Build",
     mechanics: "Guides",
     patchNotes: "Patch Notes",
+    /** スマホのヘッダーのメニューボタン(≡)の読み上げ名 */
+    menu: "Menu",
   },
   footer: {
     sourceBefore: "Data source: extracted directly from the game client (ClientVersion ",

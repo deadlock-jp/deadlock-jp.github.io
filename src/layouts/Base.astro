@@ -169,6 +169,8 @@ jsonLd.push(...extraJsonLd);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {/* JS が動く環境の印。スマホのヘッダーは、これがあるときだけメニューを ≡ に畳む(無ければ横並びのまま) */}
+    <script is:inline>document.documentElement.classList.add("js")</script>
     {/*
       スマホの背景の静止画(global.css の .dlbg)を先に読み始める。CSS を読み終えてからだと、
       それまで背景が真っ暗なままになる。横向きのタブレット等で使う横長の絵は対象外(出す端末が少ない)
@@ -279,7 +281,7 @@ jsonLd.push(...extraJsonLd);
           <span class="name">DEADLOCK-JP</span>
           <span class="sub">DB</span>
         </a>
-        <nav>
+        <nav id="sitenav">
           {
             nav.map((n) => (
               <a href={n.href} class:list={[{ current: path.startsWith(n.href) }]}>
@@ -323,6 +325,17 @@ jsonLd.push(...extraJsonLd);
             ))}
           </ul>
         </div>
+        {/* スマホ・タブレットでメニューを開くボタン(≡)。PC と JS が無い環境では出さない */}
+        <button
+          type="button"
+          class="menubtn"
+          id="menubtn"
+          aria-expanded="false"
+          aria-controls="sitenav"
+          aria-label={T.nav.menu}
+        >
+          <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+        </button>
       </div>
     </header>
 
@@ -363,6 +376,7 @@ jsonLd.push(...extraJsonLd);
           }
           menu.hidden = false;
           btn.setAttribute("aria-expanded", "true");
+          document.dispatchEvent(new CustomEvent("headermenu", { detail: "lang" }));
           if (focusFirst) (menu.querySelector('a[aria-current="true"]') ?? items()[0])?.focus();
         };
         const close = (focusBtn) => {
@@ -403,6 +417,56 @@ jsonLd.push(...extraJsonLd);
         });
         document.addEventListener("click", (e) => {
           if (!menu.hidden && !document.getElementById("langsw").contains(e.target)) close(false);
+        });
+        document.addEventListener("headermenu", (e) => {
+          if (e.detail !== "lang" && !menu.hidden) close(false);
+        });
+      })();
+
+      /*
+       * スマホ・タブレット(860px 以下)のメニュー(≡)。ヘッダーのすぐ下に全幅で開く。
+       * 閉じるのは ≡ をもう一度 / 外側のタップ / Esc / 項目を選んだとき / フォーカスがメニューの外へ出たとき。
+       * 開いたら最初の項目へ、≡ や Esc で閉じたら ≡ へフォーカスを移す。言語メニューとは同時に開かない
+       */
+      (() => {
+        const btn = document.getElementById("menubtn");
+        const nav = document.getElementById("sitenav");
+        if (!btn || !nav) return;
+        const isOpen = () => nav.classList.contains("open");
+        const open = () => {
+          nav.classList.add("open");
+          btn.setAttribute("aria-expanded", "true");
+          document.dispatchEvent(new CustomEvent("headermenu", { detail: "nav" }));
+          nav.querySelector("a")?.focus();
+        };
+        const close = (focusBtn) => {
+          if (!isOpen()) return;
+          nav.classList.remove("open");
+          btn.setAttribute("aria-expanded", "false");
+          if (focusBtn) btn.focus();
+        };
+        btn.addEventListener("click", () => (isOpen() ? close(true) : open()));
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && isOpen()) {
+            e.preventDefault();
+            close(true);
+          }
+        });
+        nav.addEventListener("click", (e) => {
+          if (e.target.closest("a")) close(false);
+        });
+        nav.addEventListener("focusout", (e) => {
+          if (e.relatedTarget && !nav.contains(e.relatedTarget) && e.relatedTarget !== btn) close(false);
+        });
+        document.addEventListener("click", (e) => {
+          if (isOpen() && !nav.contains(e.target) && !btn.contains(e.target)) close(false);
+        });
+        document.addEventListener("headermenu", (e) => {
+          if (e.detail !== "nav") close(false);
+        });
+        // PC の幅に戻ったら閉じた状態にする(開いたまま幅を広げても横並びに戻るように)
+        matchMedia("(max-width: 860px)").addEventListener("change", (e) => {
+          if (!e.matches) close(false);
         });
       })();
     </script>
@@ -707,6 +771,105 @@ jsonLd.push(...extraJsonLd);
       .site-footer .links .ico {
         display: inline-flex;
         line-height: 0;
+      }
+      /* ---- スマホ・タブレットのメニュー(≡)。PC と JS が無い環境では出さない ---- */
+      .menubtn {
+        display: none;
+      }
+      /*
+       * 860px 以下ではメニューの5項目が1行に収まらない(実測: 英語 830px・日本語 800px で溢れる)。
+       * JS がある環境では ≡ に畳み、開いたらヘッダーのすぐ下に全幅で出す
+       */
+      @media (max-width: 860px) {
+        :global(.js) .site-header .inner {
+          gap: var(--sp-3);
+        }
+        :global(.js) .menubtn {
+          display: flex;
+          flex: 0 0 auto;
+          align-items: center;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          margin-right: -6px;
+          padding: 0;
+          border: 1px solid transparent;
+          border-radius: var(--radius);
+          background: none;
+          color: var(--c-text);
+          cursor: pointer;
+        }
+        :global(.js) .menubtn:hover,
+        :global(.js) .menubtn[aria-expanded="true"] {
+          color: var(--c-text-strong);
+          border-color: var(--c-border-strong);
+        }
+        .menubtn:focus-visible,
+        :global(.js) nav a:focus-visible {
+          outline: 2px solid var(--c-accent);
+          outline-offset: -2px;
+        }
+        .bars {
+          position: relative;
+          display: block;
+          width: 20px;
+          height: 14px;
+        }
+        .bars i {
+          position: absolute;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          border-radius: 1px;
+          background: currentColor;
+          transition: transform 0.15s ease, opacity 0.15s ease;
+        }
+        .bars i:nth-child(1) { top: 0; }
+        .bars i:nth-child(2) { top: 6px; }
+        .bars i:nth-child(3) { top: 12px; }
+        /* 開いているあいだは × */
+        .menubtn[aria-expanded="true"] .bars i:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .menubtn[aria-expanded="true"] .bars i:nth-child(2) { opacity: 0; }
+        .menubtn[aria-expanded="true"] .bars i:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+        @media (prefers-reduced-motion: reduce) {
+          .bars i { transition: none; }
+        }
+        :global(.js) nav {
+          display: none;
+        }
+        :global(.js) nav.open {
+          display: flex;
+          flex-direction: column;
+          gap: 0;
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 100%;
+          overflow: visible;
+          padding: var(--sp-1) 0 var(--sp-2);
+          font-size: 15px;
+          background: var(--c-surface);
+          border-bottom: 1px solid var(--c-glass-border-strong);
+          box-shadow: 0 12px 28px rgb(0 0 0 / 0.5);
+        }
+        :global(.js) nav.open a {
+          display: flex;
+          align-items: center;
+          min-height: 48px;
+          padding: 0 var(--sp-5);
+          border-bottom: none;
+          color: var(--c-text);
+        }
+        :global(.js) nav.open a + a {
+          border-top: 1px solid var(--c-border);
+        }
+        :global(.js) nav.open a:hover {
+          background: var(--c-surface-2);
+        }
+        :global(.js) nav.open a.current {
+          color: var(--c-accent);
+          background: var(--c-accent-bg);
+        }
       }
       @media (max-width: 640px) {
         .inner {

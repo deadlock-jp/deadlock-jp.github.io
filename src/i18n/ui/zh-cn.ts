@@ -22,6 +22,8 @@ export const zhCn: Dict = {
     build: "出装",
     mechanics: "攻略",
     patchNotes: "更新日志",
+    /** スマホのヘッダーのメニューボタン(≡)の読み上げ名 */
+    menu: "菜单",
   },
   footer: {
     sourceBefore: "数据来源：直接从游戏客户端提取（ClientVersion ",
