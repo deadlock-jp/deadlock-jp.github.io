@@ -107,7 +107,20 @@ const dataUrl = buildDataFile(base).url;
     <button type="button">{T.build.client.reload}</button>
   </p>
 
-  <div class="layout">
+  <div class="layout" data-loading={T.build.client.loading}>
+    {/*
+      共有URL(ヒーロー指定)で開いたときは、データと統計を読み込んで数値の欄・ショップの並びを組み終えるまで、
+      場所は取ったまま見えなくしておく(スクリプトの releaseLayout で外す。最長5秒)。
+      組み終えてから見せないと、左の欄が伸びたりショップが人気順に並べ替わったりして、レイアウトのずれ(CLS)になる
+    */}
+    <script is:inline>
+      (() => {
+        if (!/(^|[#&])h=[0-9]/.test(location.hash)) return;
+        const el = document.currentScript.parentElement;
+        el.classList.add("pending");
+        setTimeout(() => el.classList.remove("pending"), 5000);
+      })();
+    </script>
     {/* ---------------- 左: ビルドの中身とステータス ---------------- */}
     {/* データを読み込むまでは aria-busy(数値の欄は「読み込み中」)。読み込んだらスクリプトが外す */}
     <section class="side" aria-busy="true">
@@ -325,6 +338,7 @@ const dataUrl = buildDataFile(base).url;
         return res.json();
       })
       .then(start, () => {
+        releaseLayout();
         $("loaderr").hidden = false;
         document.querySelector(".side").removeAttribute("aria-busy");
         for (const el of document.querySelectorAll("[data-rows]")) el.innerHTML = '<li class="empty">—</li>';
@@ -333,6 +347,10 @@ const dataUrl = buildDataFile(base).url;
 
     function $(id) {
       return document.getElementById(id);
+    }
+    /** 共有URLで開いたときの「組み終えるまで見せない」を外す(.layout.pending) */
+    function releaseLayout() {
+      document.querySelector(".layout")?.classList.remove("pending");
     }
 
     const fmt = (n) => n.toLocaleString("en-US");
@@ -884,9 +902,11 @@ const dataUrl = buildDataFile(base).url;
       statsApplied = key;
 
       // ヒーローを選んでいて、その帯をまだ読んでいなければ読み、届いたら並べ直す
-      if (heroId !== null && !bandStats[band]) {
-        loadBand(band)?.then(() => {
+      const waiting = heroId !== null && !bandStats[band] && !!payload.stats.bandUrls[band];
+      if (waiting) {
+        loadBand(band).then(() => {
           if (bandStats[band]) renderShopStats();
+          else releaseLayout(); // 読み込めなかった
         });
       }
       const hs = heroId === null || !bandStats[band] ? null : bandStats[band][String(heroId)];
@@ -931,6 +951,7 @@ const dataUrl = buildDataFile(base).url;
         });
         for (const c of cards) grid.appendChild(c);
       }
+      if (!waiting) releaseLayout();
     }
 
     function render() {
@@ -1320,8 +1341,8 @@ const dataUrl = buildDataFile(base).url;
         top = Math.min(top, vh - ch - M);
         top = Math.max(M, top);
 
-        card.style.left = left + "px";
-        card.style.top = top + "px";
+        // 位置は transform で動かす。left / top を書き換えると、カードが動くたびにレイアウトのずれ(CLS)として数えられる
+        card.style.transform = `translate(${left}px, ${top}px)`;
       };
       place();
       requestAnimationFrame(place);
@@ -1738,6 +1759,12 @@ const dataUrl = buildDataFile(base).url;
     .clear:hover, .savetoggle:hover, .cardbtn:hover { border-color: var(--c-border-strong); color: var(--c-text); }
     .cardbtn:disabled, .savebtn:disabled { opacity: .5; cursor: default; }
 
+    /* 共有URLで開いたとき、組み終えるまで見せない(場所は取ったまま)。読み込み中の文字だけ出す */
+    .layout.pending { visibility: hidden; position: relative; }
+    .layout.pending::after {
+      content: attr(data-loading); visibility: visible;
+      position: absolute; top: var(--sp-4); left: 0; font-size: 13px; color: var(--c-text-muted);
+    }
     .layout {
       display: grid;
       grid-template-columns: 360px minmax(0, 1fr);
@@ -2106,6 +2133,7 @@ const dataUrl = buildDataFile(base).url;
        * fixed にして、そのままビューポート座標で置く。
        */
       position: fixed; z-index: 40; width: 280px;
+      left: 0; top: 0; /* 実際の位置は JS が transform で決める */
       max-height: calc(100vh - 16px); overflow: auto;
       background: var(--c-surface); border: 1px solid var(--cat);
       border-left: 3px solid var(--cat);

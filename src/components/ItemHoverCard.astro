@@ -98,8 +98,8 @@ const T = {
         left = Math.max(M, Math.min(left, vw - cw - M));
         let top = Math.min(r.top - 4, vh - ch - M);
         top = Math.max(M, top);
-        card.style.left = left + "px";
-        card.style.top = top + "px";
+        // 位置は transform で動かす。left / top を書き換えると、カードが動くたびにレイアウトのずれ(CLS)として数えられる
+        card.style.transform = `translate(${left}px, ${top}px)`;
       };
       place();
       requestAnimationFrame(place);
@@ -131,6 +131,8 @@ const T = {
 <style>
   .hovercard {
     position: fixed;
+    left: 0;
+    top: 0; /* 実際の位置は JS が transform で決める(CLS を出さないため) */
     z-index: 40;
     width: 280px;
     max-height: calc(100vh - 16px);

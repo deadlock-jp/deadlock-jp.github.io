@@ -15,7 +15,7 @@
  *   SLICE_SIZE 字ずつの「追加」に分け、unicode-range でページに出る文字のファイルだけを読ませる(Google Fonts と同じ方式)。
  * ■ 出力
  *   dist/fonts/ に woff2(名前に中身のハッシュ)、fonts.css(@font-face)、ライセンス文。
- *   HTML の preload のプレースホルダ(__FONT_PRELOAD_NOTO400__)を、基本・400 のファイル名に置き換える。
+ *   HTML の preload のプレースホルダ(__FONT_PRELOAD_NOTO400__ / __FONT_PRELOAD_NOTO700__)を、基本・400 / 700 のファイル名に置き換える。
  *   開発用に public/fonts/ にも同じものを写す(gitignore 済み)。
  * ■ 安全装置
  *   最後に、作った woff2 を実際に読み直して、dist/ の文字のうち元のフォントにある文字が全部入っているかを確かめる。
@@ -141,6 +141,7 @@ const css = [
 /** 確かめるため: [書体, 太さ, ファイル, unicode-range の文字] */
 const made = [];
 let preload400 = null;
+let preload700 = null;
 let totalBytes = 0;
 const notInSource = new Map();
 
@@ -176,6 +177,7 @@ for (const fam of FAMILIES) {
       totalBytes += out.length;
       made.push({ family: fam.family, weight: w, file, chars });
       if (fam.family === "Noto Sans JP" && w === 400 && name === "core") preload400 = file;
+      if (fam.family === "Noto Sans JP" && w === 700 && name === "core") preload700 = file;
       css.push(
         `@font-face{font-family:"${fam.family}";font-style:normal;font-weight:${w};font-display:swap;` +
           `src:url(/fonts/${file}) format("woff2");unicode-range:${unicodeRange(chars)}}`,
@@ -187,21 +189,25 @@ for (const fam of FAMILIES) {
 
 /*
  * フォントが届く前の代わりの書体(端末の日本語書体)。縦の寸法を Noto Sans JP(ascent 1160 / descent 288、1em=1000)に
- * 合わせ、差し替わったときに行の位置がずれないようにする。和文は全角で幅が同じなので size-adjust は 100% のまま
+ * 合わせ、差し替わったときに行の位置がずれないようにする。和文は全角で幅が同じなので size-adjust は 100% のまま。
+ * 太字(700)は端末の太字の書体を別に指定する。指定が無いと通常の太さを機械的に太らせ、そのぶん1字ごとに幅が広がって、
+ * ぎりぎり1行に入る見出しが2行に折り返され、フォントが届いたときに1行に戻ってずれていた(アイテム詳細の見出し。実測 CLS 0.21)
  */
+const fallbackMetrics = `ascent-override:116%;descent-override:28.8%;line-gap-override:0%;size-adjust:100%`;
 css.push(
-  `@font-face{font-family:"Noto Sans JP Fallback";src:local("Hiragino Sans"),local("HiraginoSans-W3"),local("Hiragino Kaku Gothic ProN"),` +
-    `local("Yu Gothic"),local("YuGothic"),local("Meiryo"),local("Noto Sans CJK JP"),local("Noto Sans JP");` +
-    `ascent-override:116%;descent-override:28.8%;line-gap-override:0%;size-adjust:100%}`,
+  `@font-face{font-family:"Noto Sans JP Fallback";font-weight:100 600;src:local("Hiragino Sans"),local("HiraginoSans-W3"),local("Hiragino Kaku Gothic ProN"),` +
+    `local("Yu Gothic"),local("YuGothic"),local("Meiryo"),local("Noto Sans CJK JP"),local("Noto Sans JP");${fallbackMetrics}}`,
+  `@font-face{font-family:"Noto Sans JP Fallback";font-weight:700 900;src:local("Hiragino Sans W6"),local("HiraginoSans-W6"),local("Hiragino Kaku Gothic ProN W6"),local("HiraKakuProN-W6"),` +
+    `local("Yu Gothic Bold"),local("YuGothic-Bold"),local("Meiryo Bold"),local("Meiryo-Bold"),local("Noto Sans CJK JP Bold"),local("NotoSansCJKjp-Bold"),local("Noto Sans JP Bold");${fallbackMetrics}}`,
 );
 fs.writeFileSync(path.join(outDir, "fonts.css"), css.join("\n") + "\n");
 
-// HTML の preload を、基本・400 のファイルに差し替える
+// HTML の preload を、基本・400 / 700 のファイルに差し替える
 let rewritten = 0;
 for (const f of walk(dist).filter((x) => x.endsWith(".html"))) {
   const s = fs.readFileSync(f, "utf8");
   if (!s.includes("__FONT_PRELOAD_NOTO400__")) continue;
-  fs.writeFileSync(f, s.replaceAll("__FONT_PRELOAD_NOTO400__", preload400));
+  fs.writeFileSync(f, s.replaceAll("__FONT_PRELOAD_NOTO400__", preload400).replaceAll("__FONT_PRELOAD_NOTO700__", preload700));
   rewritten++;
 }
 

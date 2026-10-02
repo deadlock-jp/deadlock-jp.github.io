@@ -224,6 +224,11 @@ jsonLd.push(...extraJsonLd);
     {!langMeta.font && (
       <>
         <link rel="preload" href={`${base}/fonts/__FONT_PRELOAD_NOTO400__`} as="font" type="font/woff2" crossorigin />
+        {/*
+          見出し(太字)の基本ファイルも先に読む。後から届くと、ぎりぎり1行に入る見出しの折り返しが変わって、下の内容がずれる
+          (代わりの書体とは字幅が少し違うため。アイテム詳細の見出しで実測 CLS 0.21)
+        */}
+        <link rel="preload" href={`${base}/fonts/__FONT_PRELOAD_NOTO700__`} as="font" type="font/woff2" crossorigin />
         <link rel="stylesheet" href={`${base}/fonts/fonts.css`} />
       </>
     )}

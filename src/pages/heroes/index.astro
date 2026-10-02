@@ -211,6 +211,70 @@ const H2 = {
   </section>
   )}
 
+  {/*
+    使用状況の描画。この欄の直後で実行し、覚えているランク帯(RankBandPicker)で最初から描く。
+    以前はページの最後のスクリプトで描き直していたため、その時点で下のティア表がもう描かれていて、
+    この欄の高さが変わるとティア表が押し下げられていた(実測の CLS: section.panel.tt)
+  */}
+  {hasHeroStats && (
+  <script is:inline define:vars={{ heroMeta, base: linkBase, statsPayload, H2 }}>
+    (() => {
+      const esc = (s) =>
+        String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+      // ---- ランク帯別の使用状況(ピック率 / 勝率 / BAN率) ----
+      const hsNote = document.getElementById("hs-note");
+      /** 指標ごとの、値の取り出し位置。[ピック率, 勝率, BAN率, 試合数] */
+      const METRIC_IDX = { pick: 0, win: 1, ban: 2 };
+      const TOP_N = 5;
+
+      function renderRank(key) {
+        const bucket = statsPayload.buckets[key];
+        // 統計が無いビルドでは使用状況のセクション自体が無い
+        if (!bucket || !hsNote) return;
+        const low = bucket.matches < statsPayload.lowSampleMatches;
+
+        for (const col of document.querySelectorAll(".hs-col")) {
+          const idx = METRIC_IDX[col.dataset.metric];
+          const rows = Object.entries(bucket.heroes)
+            // BAN率はデータが無いランク帯もある(null)ので外す
+            .filter(([, v]) => v[idx] !== null && v[idx] !== undefined)
+            .sort((a, b) => b[1][idx] - a[1][idx])
+            .slice(0, TOP_N);
+          col.querySelector(".hs-list").innerHTML = rows
+            .map(([id, v]) => {
+              const m = heroMeta[id] ?? { name: "?", sm: null };
+              const img = m.sm
+                ? `<img src="${m.sm}" alt="" width="40" height="40" loading="lazy">`
+                : `<span class="ph">${esc(m.name.slice(0, 1))}</span>`;
+              return (
+                `<li><a class="hs-hero" data-herocard="${id}" href="${base}/heroes/${id}/">` +
+                `${img}<span class="hs-name">${esc(m.name)}</span>` +
+                `<span class="hs-val">${(v[idx] / 10).toFixed(1)}%</span></a></li>`
+              );
+            })
+            .join("");
+        }
+        // innerHTML で差し込んだので、ホバーカードを張り直す
+        window.heroHoverCard?.wire(document.querySelector(".hs-cols"));
+
+        const d = new Date(statsPayload.fetchedAt);
+        const stamp = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        hsNote.textContent =
+          H2.note.replace("{n}", bucket.matches.toLocaleString("en-US")).replace("{date}", stamp) +
+          H2.ban.replace("{note}", H2.banRateNote ?? statsPayload.banRateNote) +
+          (low ? H2.low : "");
+        hsNote.classList.toggle("low", low);
+      }
+
+      // 切り替えは RankBandPicker が "rankband" イベントで知らせる。
+      // このページは tier ごとにも選べるので、帯に直す前の key を使う。データが無い値なら帯に直す
+      const pick = (d) => (statsPayload.buckets[d.key] ? d.key : d.band);
+      document.addEventListener("rankband", (e) => renderRank(pick(e.detail)));
+      renderRank(pick(window.rankBand ? window.rankBand.current() : { key: "all", band: "all" }));
+    })();
+  </script>
+  )}
+
   {/* ------------ 上部: 項目別ステータスランク ------------ */}
   <section class="tt panel">
     <div class="tt-head">
@@ -451,7 +515,7 @@ const H2 = {
     })();
   </script>
 
-  <script is:inline define:vars={{ heroMeta, tierData: tier.data, base: linkBase, statsPayload, H2 }}>
+  <script is:inline define:vars={{ heroMeta, tierData: tier.data, base: linkBase, H2 }}>
     (() => {
       const esc = (s) =>
         String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
@@ -491,57 +555,6 @@ const H2 = {
       sel.addEventListener("change", () => render(sel.value));
       render(sel.value);
 
-      // ---- ランク帯別の使用状況(ピック率 / 勝率 / BAN率) ----
-      const hsNote = document.getElementById("hs-note");
-      /** 指標ごとの、値の取り出し位置。[ピック率, 勝率, BAN率, 試合数] */
-      const METRIC_IDX = { pick: 0, win: 1, ban: 2 };
-      const TOP_N = 5;
-
-      function renderRank(key) {
-        const bucket = statsPayload.buckets[key];
-        // 統計が無いビルドでは使用状況のセクション自体が無い
-        if (!bucket || !hsNote) return;
-        const low = bucket.matches < statsPayload.lowSampleMatches;
-
-        for (const col of document.querySelectorAll(".hs-col")) {
-          const idx = METRIC_IDX[col.dataset.metric];
-          const rows = Object.entries(bucket.heroes)
-            // BAN率はデータが無いランク帯もある(null)ので外す
-            .filter(([, v]) => v[idx] !== null && v[idx] !== undefined)
-            .sort((a, b) => b[1][idx] - a[1][idx])
-            .slice(0, TOP_N);
-          col.querySelector(".hs-list").innerHTML = rows
-            .map(([id, v]) => {
-              const m = heroMeta[id] ?? { name: "?", sm: null };
-              const img = m.sm
-                ? `<img src="${m.sm}" alt="" width="40" height="40" loading="lazy">`
-                : `<span class="ph">${esc(m.name.slice(0, 1))}</span>`;
-              return (
-                `<li><a class="hs-hero" data-herocard="${id}" href="${base}/heroes/${id}/">` +
-                `${img}<span class="hs-name">${esc(m.name)}</span>` +
-                `<span class="hs-val">${(v[idx] / 10).toFixed(1)}%</span></a></li>`
-              );
-            })
-            .join("");
-        }
-        // innerHTML で差し込んだので、ホバーカードを張り直す
-        window.heroHoverCard?.wire(document.querySelector(".hs-cols"));
-
-        const d = new Date(statsPayload.fetchedAt);
-        const stamp = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-        hsNote.textContent =
-          H2.note.replace("{n}", bucket.matches.toLocaleString("en-US")).replace("{date}", stamp) +
-          H2.ban.replace("{note}", H2.banRateNote ?? statsPayload.banRateNote) +
-          (low ? H2.low : "");
-        hsNote.classList.toggle("low", low);
-      }
-
-      // 切り替えは RankBandPicker が "rankband" イベントで知らせる(覚えている値があれば読み込み後にも来る)。
-      // このページは tier ごとにも選べるので、帯に直す前の key を使う。データが無い値なら帯に直す
-      document.addEventListener("rankband", (e) =>
-        renderRank(statsPayload.buckets[e.detail.key] ? e.detail.key : e.detail.band),
-      );
-      renderRank("all");
     })();
   </script>
 

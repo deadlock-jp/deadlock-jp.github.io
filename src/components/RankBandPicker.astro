@@ -12,6 +12,7 @@
  *   key  … 選ばれた値そのもの("all" / "low" / "mid" / "high" / "1"〜"11")
  *   band … 帯に直した値("all" / "low" / "mid" / "high")
  * 各ページの描画スクリプトはこれを受けて表示を差し替える。今の値は window.rankBand.current() でも取れる。
+ * 統計の欄は、自分の直後のスクリプトで current() を見て、描画の前に覚えている帯に合わせること(後から変えると CLS になる)。
  */
 import { t } from "../lib/data.ts";
 import { RANK_BANDS } from "../lib/rankBands.ts";
@@ -46,87 +47,104 @@ const bandOptions = [
   </select>
 </label>
 
-<script>
-  const STORE_KEY = "dljp.rankBand";
-  type Band = { key: string; minTier: number; maxTier: number };
-  type RankBandApi = {
-    current: () => { key: string; band: string };
-    pool: typeof pool;
-    fill: typeof fill;
-  };
-
-  const selects = [...document.querySelectorAll<HTMLSelectElement>("select[data-rankband]")];
-  const bands: Band[] = selects[0] ? JSON.parse(selects[0].dataset.bands ?? "[]") : [];
-
-  const read = (): string | null => {
-    try {
-      return localStorage.getItem(STORE_KEY);
-    } catch {
-      return null;
+{/*
+  このスクリプトは is:inline(<select> の直後でその場で実行)。以前は module(ページの描画の後に実行)で、
+  覚えている帯を描画の後に適用していたため、選択欄の幅や統計の欄の中身が後から変わり、レイアウトのずれ(CLS)になっていた。
+  部品を置いた数だけ出力されるので、最初の1回で共通の window.rankBand を作り、2回目以降は自分の <select> を配線するだけにする。
+  覚えている帯は、作った時点で current() に入る(イベントは描画前には投げない)。統計の欄は自分のスクリプトで
+  current() を見て最初から合わせる。イベントだけを待つ部品のために、DOMContentLoaded でも1回投げる。
+*/}
+<script is:inline>
+  (() => {
+    let api = window.rankBand;
+    if (!api) {
+      const STORE_KEY = "dljp.rankBand";
+      const first = document.querySelector("select[data-rankband]");
+      const bands = first ? JSON.parse(first.dataset.bands || "[]") : [];
+      const read = () => {
+        try {
+          return localStorage.getItem(STORE_KEY);
+        } catch {
+          return null;
+        }
+      };
+      const write = (v) => {
+        try {
+          localStorage.setItem(STORE_KEY, v);
+        } catch {
+          /* 覚えられない環境では、このページの中だけで切り替える */
+        }
+      };
+      /** 選ばれた値 → 帯。tier("1"〜"11")はそれを含む帯に、知らない値は all にする */
+      const bandOf = (key) => {
+        if (!key || key === "all") return "all";
+        if (bands.some((b) => b.key === key)) return key;
+        const tier = Number(key);
+        return bands.find((b) => tier >= b.minTier && tier <= b.maxTier)?.key ?? "all";
+      };
+      /*
+       * 採用率の行(PickRateRow.astro)を並べ直す手伝い。HeroPopularItems / ItemBuyers が使う。
+       * pool(root) … root の中の行(表示中のものと <template> に控えてあるもの)を ID で引ける表にする
+       * fill(list, entries, rows) … entries([ID, 採用率, 勝率, サンプル少 0/1])の順に行を並べ、数値を書き換える。
+       *   行は作り直さず移動するだけなので、ホバーカードなどの配線はそのまま残る
+       */
+      const pct = (permille) => `${(permille / 10).toFixed(1)}%`;
+      const pool = (root) => {
+        const map = new Map();
+        const take = (scope) => {
+          for (const li of scope.querySelectorAll("[data-pr-id]")) map.set(li.dataset.prId, li);
+        };
+        take(root);
+        for (const tpl of root.querySelectorAll("template")) take(tpl.content);
+        return map;
+      };
+      const fill = (list, entries, rows) => {
+        const nodes = [];
+        for (const [id, pick, win, low] of entries) {
+          const li = rows.get(String(id));
+          if (!li) continue;
+          li.querySelector("[data-pr-bar]").style.width = `${Math.min(100, pick / 10)}%`;
+          li.querySelector("[data-pr-pick]").textContent = pct(pick);
+          li.querySelector("[data-pr-win]").textContent = pct(win);
+          li.querySelector("[data-pr-low]").hidden = !low;
+          nodes.push(li);
+        }
+        list.replaceChildren(...nodes);
+      };
+      const selects = [];
+      /** そのページの選択肢にある値ならそのまま、無ければ帯に直して選ぶ */
+      const show = (sel) => {
+        sel.value = [...sel.options].some((o) => o.value === current.key) ? current.key : current.band;
+      };
+      const saved = read();
+      let current = { key: saved || "all", band: bandOf(saved) };
+      const apply = (key, store) => {
+        current = { key, band: bandOf(key) };
+        for (const sel of selects) show(sel);
+        if (store) write(key);
+        document.dispatchEvent(new CustomEvent("rankband", { detail: current }));
+      };
+      api = window.rankBand = {
+        current: () => current,
+        pool,
+        fill,
+        register: (sel) => {
+          selects.push(sel);
+          show(sel);
+          sel.addEventListener("change", () => apply(sel.value, true));
+        },
+      };
+      if (current.band !== "all") {
+        document.addEventListener("DOMContentLoaded", () =>
+          document.dispatchEvent(new CustomEvent("rankband", { detail: current })),
+        );
+      }
     }
-  };
-  const write = (v: string) => {
-    try {
-      localStorage.setItem(STORE_KEY, v);
-    } catch {
-      /* 覚えられない環境では、このページの中だけで切り替える */
+    for (const sel of document.querySelectorAll("select[data-rankband]:not([data-rb-wired])")) {
+      sel.dataset.rbWired = "";
+      api.register(sel);
     }
-  };
-  /** 選ばれた値 → 帯。tier("1"〜"11")はそれを含む帯に、知らない値は all にする */
-  const bandOf = (key: string | null): string => {
-    if (!key || key === "all") return "all";
-    if (bands.some((b) => b.key === key)) return key;
-    const tier = Number(key);
-    return bands.find((b) => tier >= b.minTier && tier <= b.maxTier)?.key ?? "all";
-  };
-
-  /*
-   * 採用率の行(PickRateRow.astro)を並べ直す手伝い。HeroPopularItems / ItemBuyers が使う。
-   * pool(root) … root の中の行(表示中のものと <template> に控えてあるもの)を ID で引ける表にする
-   * fill(list, entries, rows) … entries([ID, 採用率, 勝率, サンプル少 0/1])の順に行を並べ、数値を書き換える。
-   *   行は作り直さず移動するだけなので、ホバーカードなどの配線はそのまま残る
-   * 切り替えのイベントより先に用意しておく必要があるので、この部品のスクリプトに置いている
-   */
-  type Entry = [string | number, number, number, number];
-  const pct = (permille: number) => `${(permille / 10).toFixed(1)}%`;
-  function pool(root: ParentNode): Map<string, HTMLElement> {
-    const map = new Map<string, HTMLElement>();
-    const take = (scope: ParentNode) => {
-      for (const li of scope.querySelectorAll<HTMLElement>("[data-pr-id]")) map.set(li.dataset.prId!, li);
-    };
-    take(root);
-    for (const tpl of root.querySelectorAll("template")) take(tpl.content);
-    return map;
-  }
-  function fill(list: HTMLElement, entries: Entry[], rows: Map<string, HTMLElement>) {
-    const nodes: HTMLElement[] = [];
-    for (const [id, pick, win, low] of entries) {
-      const li = rows.get(String(id));
-      if (!li) continue;
-      li.querySelector<HTMLElement>("[data-pr-bar]")!.style.width = `${Math.min(100, pick / 10)}%`;
-      li.querySelector("[data-pr-pick]")!.textContent = pct(pick);
-      li.querySelector("[data-pr-win]")!.textContent = pct(win);
-      li.querySelector<HTMLElement>("[data-pr-low]")!.hidden = !low;
-      nodes.push(li);
-    }
-    list.replaceChildren(...nodes);
-  }
-
-  let current = { key: "all", band: "all" };
-  function apply(key: string, store: boolean) {
-    current = { key, band: bandOf(key) };
-    for (const sel of selects) {
-      // そのページの選択肢にある値ならそのまま、無ければ帯に直して選ぶ
-      sel.value = [...sel.options].some((o) => o.value === key) ? key : current.band;
-    }
-    if (store) write(key);
-    document.dispatchEvent(new CustomEvent("rankband", { detail: current }));
-  }
-
-  (window as unknown as { rankBand: RankBandApi }).rankBand = { current: () => current, pool, fill };
-  for (const sel of selects) sel.addEventListener("change", () => apply(sel.value, true));
-  const saved = read();
-  if (saved && saved !== "all") apply(saved, false);
+  })();
 </script>
 
 <style>

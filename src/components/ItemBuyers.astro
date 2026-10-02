@@ -109,11 +109,11 @@ const heroRow = (hero: Hero, r: { pick: number; win: number; low: boolean }) => 
       (() => {
         const root = document.getElementById(sectionId);
         let rows = null;
-        document.addEventListener("rankband", (e) => {
+        const show = (band) => {
           const api = window.rankBand;
           if (!root || !api) return;
           rows ??= api.pool(root);
-          const d = bandData[e.detail.band] ?? bandData.all;
+          const d = bandData[band] ?? bandData.all;
           const $ = (sel) => root.querySelector(sel);
           $("[data-by-overall]").textContent = d.overall;
           $("[data-by-matches]").textContent = d.matches;
@@ -123,7 +123,11 @@ const heroRow = (hero: Hero, r: { pick: number; win: number; low: boolean }) => 
           $("[data-by-showall]").textContent = d.showAll;
           api.fill($("[data-by-top]"), d.top ?? [], rows);
           api.fill($("[data-by-rest]"), d.rest, rows);
-        });
+        };
+        document.addEventListener("rankband", (e) => show(e.detail.band));
+        // 覚えているランク帯があれば、描画の前(この欄の直後)に合わせる(後から変えるとレイアウトがずれる)
+        const cur = window.rankBand?.current().band;
+        if (cur && cur !== "all") show(cur);
       })();
     </script>
   </section>

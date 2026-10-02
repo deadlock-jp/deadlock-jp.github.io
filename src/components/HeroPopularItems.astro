@@ -124,11 +124,11 @@ const iconOf = (i: Item) => ({
         (() => {
           const root = document.getElementById(sectionId);
           let rows = null;
-          document.addEventListener("rankband", (e) => {
+          const show = (band) => {
             const api = window.rankBand;
             if (!root || !api) return;
             rows ??= api.pool(root);
-            const d = bandData[e.detail.band] ?? null;
+            const d = bandData[band] ?? null;
             root.querySelector("[data-pp-meta]").textContent = d ? d.meta : bandData.all.meta;
             const tiers = d && d.tiers;
             root.querySelector("[data-pp-tiers]").hidden = !tiers;
@@ -136,7 +136,11 @@ const iconOf = (i: Item) => ({
             if (!tiers) return;
             root.querySelectorAll("ol[data-pp-tier]").forEach((ol, i) => api.fill(ol, tiers[i] ?? [], rows));
             window.itemHoverCard?.wire(root);
-          });
+          };
+          document.addEventListener("rankband", (e) => show(e.detail.band));
+          // 覚えているランク帯があれば、描画の前(この欄の直後)に合わせる(後から変えるとレイアウトがずれる)
+          const cur = window.rankBand?.current().band;
+          if (cur && cur !== "all") show(cur);
         })();
       </script>
     </>
