@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-30T03:57:22.595Z",
+  "generatedAt": "2026-10-03T14:18:13.668Z",
   "sourceVpk": "game/citadel/pak01_dir.vpk",
   "entries": [
     {
@@ -703,6 +703,33 @@
       "kind": "vtex",
       "usedBy": [
         "hero:hero_punkgoat:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/ratking_card.psd",
+      "vpkPath": "panorama/images/heroes/ratking_card_psd.vtex_c",
+      "outPath": "public/images/heroes/ratking_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_ratking:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/ratking_mm.psd",
+      "vpkPath": "panorama/images/heroes/ratking_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/ratking_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_ratking:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/ratking_sm.psd",
+      "vpkPath": "panorama/images/heroes/ratking_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/ratking_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_ratking:sm"
       ]
     },
     {
@@ -2048,7 +2075,8 @@
         "ability:ability_melee_fencer",
         "ability:ability_melee_necro",
         "ability:ability_melee_werewolf",
-        "ability:ability_melee_unicorn"
+        "ability:ability_melee_unicorn",
+        "ability:ability_melee_ratking"
       ]
     },
     {
@@ -2349,6 +2377,43 @@
       "kind": "vtex",
       "usedBy": [
         "ability:ability_necro_killsummon_trigger"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/ratking/ratking_flag.psd",
+      "vpkPath": "panorama/images/hud/abilities/ratking/ratking_flag_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/ratking/ratking_flag.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_ratking_standard_bearer"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/ratking/ratking_grenade.psd",
+      "vpkPath": "panorama/images/hud/abilities/ratking/ratking_grenade_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/ratking/ratking_grenade.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_ratking_scrap_grenade"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/ratking/ratking_shield.psd",
+      "vpkPath": "panorama/images/hud/abilities/ratking/ratking_shield_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/ratking/ratking_shield.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_ratking_ratarmor"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/ratking/ratking_swarm.psd",
+      "vpkPath": "panorama/images/hud/abilities/ratking/ratking_swarm_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/ratking/ratking_swarm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_ratking_ratnibble",
+        "ability:ability_ratking_standard_bearer_trigger"
       ]
     },
     {
@@ -3092,7 +3157,8 @@
         "ability:citadel_weapon_necro_set",
         "ability:citadel_weapon_werewolf_rifle",
         "ability:citadel_weapon_werewolf_claws",
-        "ability:citadel_weapon_unicorn_set"
+        "ability:citadel_weapon_unicorn_set",
+        "ability:citadel_weapon_ratking_set"
       ]
     },
     {

@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6731",
-  "upstreamCommit": "6731",
-  "generatedAt": "2026-10-02T02:52:16.278Z",
+  "clientVersion": "6745",
+  "upstreamCommit": "6745",
+  "generatedAt": "2026-10-03T14:16:18.968Z",
   "language": "English",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 622,
-    "citadel_heroes": 3342,
+    "citadel_heroes": 3423,
     "citadel_attributes": 2015,
-    "citadel_gc": 214,
-    "citadel_main": 5217
+    "citadel_gc": 215,
+    "citadel_main": 5224
   },
   "tokens": {
     "hero_vampire:n": {
@@ -21229,6 +21229,401 @@
       "group": "citadel_heroes",
       "hash": "4345cb1fa278"
     },
+    "citadel_weapon_ratking_set": {
+      "text": "Sovereign's Decree",
+      "group": "citadel_heroes",
+      "hash": "ce59c248bbf1"
+    },
+    "citadel_ability_jump_ratking": {
+      "text": "Jump",
+      "group": "citadel_heroes",
+      "hash": "1eba140fdd9c"
+    },
+    "ability_ratking_entertunnel": {
+      "text": "Squeezing In...",
+      "group": "citadel_heroes",
+      "hash": "2e9183a033d6"
+    },
+    "ability_ratking_scrap_grenade": {
+      "text": "Scrap Grenade",
+      "group": "citadel_heroes",
+      "hash": "f683a30637fd"
+    },
+    "ability_ratking_scrap_grenade_desc": {
+      "text": "Throw a grenade of scrap that detonates multiple times, dealing {g:citadel_inline_attribute:'BulletDamage'} and applying {g:citadel_inline_attribute:'Slow'}.<br><br><span class=\"diminish\">The grenade can be meleed to knock it away.</span>",
+      "group": "citadel_heroes",
+      "hash": "9e51ab8ac52d"
+    },
+    "ability_ratking_scrap_grenade_t3_desc": {
+      "text": "Add an additional final Bigger Detonation",
+      "group": "citadel_heroes",
+      "hash": "c5b7bf895860"
+    },
+    "ability_ratking_scrap_grenade_big_explosion_desc": {
+      "text": "The final detonation has a longer fuse but increased detonation radius, deals increased {g:citadel_inline_attribute:'BulletDamage'} and applies a stronger {g:citadel_inline_attribute:'Slow'}.",
+      "group": "citadel_heroes",
+      "hash": "85615cdaeebd"
+    },
+    "DamagePerShrapnel_postvalue_label": {
+      "text": "Detonation Damage",
+      "group": "citadel_heroes",
+      "hash": "31a1468aeef5"
+    },
+    "DamagePerShrapnel_label": {
+      "text": "Detonation Damage",
+      "group": "citadel_heroes",
+      "hash": "31a1468aeef5"
+    },
+    "Detonations_postvalue_label": {
+      "text": "Detonations",
+      "group": "citadel_heroes",
+      "hash": "a77883414fcd"
+    },
+    "ShrapnelSphereRadius_postvalue_label": {
+      "text": "Detonation Radius",
+      "group": "citadel_heroes",
+      "hash": "886de4a85d45"
+    },
+    "ShrapnelSphereRadius_label": {
+      "text": "Detonation Radius",
+      "group": "citadel_heroes",
+      "hash": "886de4a85d45"
+    },
+    "ShrapnelSphereRadius_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "BigExplosionDamage_postvalue_label": {
+      "text": "Big Detonation Damage",
+      "group": "citadel_heroes",
+      "hash": "598ad6cff0bb"
+    },
+    "BigExplosionDamage_label": {
+      "text": "Big Detonation Damage",
+      "group": "citadel_heroes",
+      "hash": "598ad6cff0bb"
+    },
+    "BigExplosionRadius_label": {
+      "text": "Big Detonation Radius",
+      "group": "citadel_heroes",
+      "hash": "a64f3b5d4fbd"
+    },
+    "BigExplosionRadius_postvalue_label": {
+      "text": "Big Detonation Radius",
+      "group": "citadel_heroes",
+      "hash": "a64f3b5d4fbd"
+    },
+    "BigExplosionRadius_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "BigExplosionSlowPercent_postvalue_label": {
+      "text": "Big Detonation Move Speed",
+      "group": "citadel_heroes",
+      "hash": "ef5de01e882e"
+    },
+    "BigExplosionSlowPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "BigExplosionSlowPercent_label": {
+      "text": "Big Detonation Move Speed",
+      "group": "citadel_heroes",
+      "hash": "ef5de01e882e"
+    },
+    "ability_ratking_ratnibble": {
+      "text": "Rat Swarm",
+      "group": "citadel_heroes",
+      "hash": "af1809f99923"
+    },
+    "ability_ratking_ratnibble_desc": {
+      "text": "Call forth a swarm of <span class=\"highlight\">rats</span> that leap onto enemies, dealing {g:citadel_inline_attribute:'SpiritDPS'} and reducing their {g:citadel_inline_attribute:'BulletResist'} with every bite. The more rats are attached, the faster they will bite the target.<br><br>Enemies can have multiple rats attached, but can shake off a <span class=\"highlight\">rat</span> early by performing a <span class=\"highlight\">ground or air dash</span>.",
+      "group": "citadel_heroes",
+      "hash": "56ee38867249"
+    },
+    "RatsAttached_postvalue_label": {
+      "text": "Rats Attached",
+      "group": "citadel_heroes",
+      "hash": "758208a2a913"
+    },
+    "BiteInterval_postvalue_label": {
+      "text": "Bite Interval",
+      "group": "citadel_heroes",
+      "hash": "dbda83e0077b"
+    },
+    "BiteInterval_label": {
+      "text": "Bite Interval per Rat",
+      "group": "citadel_heroes",
+      "hash": "18bd342a0a53"
+    },
+    "BiteInterval_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "DamagePerBite_postvalue_label": {
+      "text": "Damage per Bite",
+      "group": "citadel_heroes",
+      "hash": "1dbc3b954aaa"
+    },
+    "DamagePerBite_label": {
+      "text": "Damage per Bite",
+      "group": "citadel_heroes",
+      "hash": "1dbc3b954aaa"
+    },
+    "ArmorReductionPerBite_postvalue_label": {
+      "text": "Bullet Resist per Bite",
+      "group": "citadel_heroes",
+      "hash": "a0dd21c90780"
+    },
+    "ArmorReductionPerBite_label": {
+      "text": "Bullet Resist per Bite",
+      "group": "citadel_heroes",
+      "hash": "a0dd21c90780"
+    },
+    "ArmorReductionPerBite_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "ability_ratking_ratnibble_t2_desc": {
+      "text": "<span class=\"highlight\">Increased Swarm Size</span><br><span class=\"highlight\">+{s:DebuffDuration}s</span> Debuff Duration",
+      "group": "citadel_heroes",
+      "hash": "d4cf269b51d5"
+    },
+    "ability_ratking_ratnibble_t3_desc": {
+      "text": "<span class=\"highlight\">+{s:DamagePerBite}</span> Damage and <span class=\"highlight\">{s:ArmorReductionPerBite}%</span> Bullet Resist per Bite",
+      "group": "citadel_heroes",
+      "hash": "98f1d5a97419"
+    },
+    "ability_ratking_ratnibble/ratking_nibble_enemy": {
+      "text": "Nibble - Dash to knock off rats",
+      "group": "citadel_heroes",
+      "hash": "6bfe5ed39b32"
+    },
+    "ability_ratking_ratnibble/ratking_nibble_enemy/ratking_nibble_enemy_linger": {
+      "text": "Nibble - Bullet Armor Reduced",
+      "group": "citadel_heroes",
+      "hash": "f4110377e721"
+    },
+    "ability_ratking_ratnibble/ratking_nibble_enemy/ratking_nibble_armor_total": {
+      "text": "Nibble - Bullet Armor Reduced",
+      "group": "citadel_heroes",
+      "hash": "f4110377e721"
+    },
+    "npc_neutral_bug_rat_swarm/neutral_rat_swarm": {
+      "text": "Rat Swarm - Dash to knock off rats",
+      "group": "citadel_heroes",
+      "hash": "a94f34453e80"
+    },
+    "DamagePerRat_postvalue_label": {
+      "text": "Damage Per Rat",
+      "group": "citadel_heroes",
+      "hash": "db074fda77d0"
+    },
+    "DashSlowPercent_postvalue_label": {
+      "text": "Dash Distance",
+      "group": "citadel_heroes",
+      "hash": "0cfae2e73e20"
+    },
+    "DashSlowPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "NibbleInterval_postvalue_label": {
+      "text": "Nibble Interval",
+      "group": "citadel_heroes",
+      "hash": "a18fb9c2fc29"
+    },
+    "MaxRats_postvalue_label": {
+      "text": "Max Attached Rats",
+      "group": "citadel_heroes",
+      "hash": "2d154c6ae35e"
+    },
+    "ability_ratking_ratarmor": {
+      "text": "Royal Pestments",
+      "group": "citadel_heroes",
+      "hash": "72122f33bda4"
+    },
+    "ability_ratking_ratarmor_desc": {
+      "text": "Adorn scrappy armor, gaining {g:citadel_inline_attribute:'CombatBarrier'} based on your {g:citadel_inline_attribute:'MaxHealth'}. As long as the armor holds, bullets have a chance to be <span class=\"highlight\">deflected</span> back towards the attacker.<br><br><span class=\"diminish\">The barrier does not benefit from resists.</span>",
+      "group": "citadel_heroes",
+      "hash": "afbb5c6ea89a"
+    },
+    "ability_ratking_ratarmor_cap_desc": {
+      "text": "While wearing Royal Pestments, damage dealt to Rat King in a single hit is capped. Any damage above the cap will be reduce to the cap before being applied",
+      "group": "citadel_heroes",
+      "hash": "db9d4bb7166f"
+    },
+    "ability_ratking_ratarmor_t2_desc": {
+      "text": "<span class=\"highlight\">{s:AbilityCooldown}s</span> Cooldown<br><span class=\"highlight\">+{s:ReturnFireChance}%</span> Bullet Return Chance",
+      "group": "citadel_heroes",
+      "hash": "868d4bc62cda"
+    },
+    "ability_ratking_ratarmor_t3_desc": {
+      "text": "Reduce all damage to a max of <span class=\"highlight\">{s:MaxDamagePerHit}</span><br><span class=\"highlight\">+{s:MaxHealthPct}%</span> Max Health as Barrier",
+      "group": "citadel_heroes",
+      "hash": "3bc7552e3973"
+    },
+    "RatCount_postvalue_label": {
+      "text": "Rat Count",
+      "group": "citadel_heroes",
+      "hash": "c9f130db4cd5"
+    },
+    "MaxHealthPct_postvalue_label": {
+      "text": "Max Health as Barrier",
+      "group": "citadel_heroes",
+      "hash": "704f6cee2c2f"
+    },
+    "MaxHealthPct_label": {
+      "text": "Max Health as Barrier",
+      "group": "citadel_heroes",
+      "hash": "704f6cee2c2f"
+    },
+    "MaxHealthPct_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "MaxDamagePerHit_postvalue_label": {
+      "text": "Damage Cap",
+      "group": "citadel_heroes",
+      "hash": "2123c9cbf65b"
+    },
+    "MaxDamagePerHit_label": {
+      "text": "Damage Cap",
+      "group": "citadel_heroes",
+      "hash": "2123c9cbf65b"
+    },
+    "ability_ratking_ratarmor/ratking_armor_caster": {
+      "text": "Royal Pestments",
+      "group": "citadel_heroes",
+      "hash": "72122f33bda4"
+    },
+    "ReturnFireChance_postvalue_label": {
+      "text": "Bullet Return Chance",
+      "group": "citadel_heroes",
+      "hash": "b431200d9932"
+    },
+    "ReturnFireChance_label": {
+      "text": "Bullet Return Chance",
+      "group": "citadel_heroes",
+      "hash": "b431200d9932"
+    },
+    "ReturnFireChance_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "ability_ratking_standard_bearer": {
+      "text": "Rule, Ratannia!",
+      "group": "citadel_heroes",
+      "hash": "10c15aed9a6c"
+    },
+    "ability_ratking_standard_bearer/modifier_standard_bearrer_aura": {
+      "text": "Rule, Ratannia!",
+      "group": "citadel_heroes",
+      "hash": "10c15aed9a6c"
+    },
+    "ability_ratking_standard_bearer_charge_label": {
+      "text": "Banner Aura",
+      "group": "citadel_heroes",
+      "hash": "f7ae3aad1236"
+    },
+    "AllyDamageReduction_postvalue_label": {
+      "text": "Damage Reduction",
+      "group": "citadel_heroes",
+      "hash": "8d34a68bd448"
+    },
+    "AllyDamageReduction_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "AllyDamageReduction_label": {
+      "text": "Damage Reduction",
+      "group": "citadel_heroes",
+      "hash": "8d34a68bd448"
+    },
+    "ability_ratking_standard_bearer_desc": {
+      "text": "Charge up and summon the banner of Ratannia, granting all nearby allies increased {g:citadel_inline_attribute:'MoveSpeed'}, <span class=\"highlight\">immunity from slows</span>, and <span class=\"highlight\">reduced incoming damage</span> while near the banner.",
+      "group": "citadel_heroes",
+      "hash": "dbef89ed0532"
+    },
+    "ability_ratking_standard_bearer_t1_desc": {
+      "text": "{s:AbilityCooldown}s Cooldown and  +{s:BonusMoveSpeed}m Move Speed",
+      "group": "citadel_heroes",
+      "hash": "d14b59fe5e42"
+    },
+    "ability_ratking_standard_bearer_t2_desc": {
+      "text": "+{s:AbilityDuration}s Charge Duration<br>+{s:FlagDuration}s Flag Duration<br>+{s:Radius}m Radius",
+      "group": "citadel_heroes",
+      "hash": "c7881c234129"
+    },
+    "ability_ratking_standard_bearer_t3_desc": {
+      "text": "+{s:Damage} Damage and +{s:AllyDamageReduction}% Damage Reduction",
+      "group": "citadel_heroes",
+      "hash": "83eab2c97a04"
+    },
+    "ability_ratking_standard_bearer_slam_desc": {
+      "text": "Slam the banner into the ground causing the sewers below to violently erupt, dealing {g:citadel_inline_attribute:'BulletDamage'} while applying {g:citadel_inline_attribute:'KnockUp'} and {g:citadel_inline_attribute:'Slow'} to all enemies in the area. Rats will swarm out of the sewers, applying <span class=\"highlight\">Rat Swarm</span> to enemies they hit.",
+      "group": "citadel_heroes",
+      "hash": "add353be5780"
+    },
+    "ability_ratking_standard_bearer_slam_label": {
+      "text": "Banner Slam",
+      "group": "citadel_heroes",
+      "hash": "eed0008e072b"
+    },
+    "ability_ratking_standard_bearer_flag_desc": {
+      "text": "The planted banner provides {g:citadel_inline_attribute:'FireRate'} and <span class=\"highlight\">removes the movement slow penalty when shooting</span> for all allies in the area.",
+      "group": "citadel_heroes",
+      "hash": "4bd18ceb6882"
+    },
+    "ability_ratking_standard_bearer_flag_label": {
+      "text": "Banner Aura",
+      "group": "citadel_heroes",
+      "hash": "f7ae3aad1236"
+    },
+    "ExplodeTimer_postvalue_label": {
+      "text": "Eruption Delay",
+      "group": "citadel_heroes",
+      "hash": "cc23946a5d34"
+    },
+    "ExplodeTimer_label": {
+      "text": "Eruption Delay",
+      "group": "citadel_heroes",
+      "hash": "cc23946a5d34"
+    },
+    "ExplodeTimer_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "FlagDuration_postvalue_label": {
+      "text": "Flag Duration",
+      "group": "citadel_heroes",
+      "hash": "7e979ed380a0"
+    },
+    "FlagDuration_label": {
+      "text": "Flag Duration",
+      "group": "citadel_heroes",
+      "hash": "7e979ed380a0"
+    },
+    "FlagDuration_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "Ratking_PlantFlag_Hint": {
+      "text": "Plant Flag",
+      "group": "citadel_heroes",
+      "hash": "7f4a26ee3d30"
+    },
     "ability_header_on_hit": {
       "text": "On Hit:",
       "group": "citadel_heroes",
@@ -21825,6 +22220,11 @@
       "hash": "e00694b1e25c"
     },
     "ability_melee_necro": {
+      "text": "Melee",
+      "group": "citadel_heroes",
+      "hash": "e00694b1e25c"
+    },
+    "ability_melee_ratking": {
       "text": "Melee",
       "group": "citadel_heroes",
       "hash": "e00694b1e25c"
@@ -22503,6 +22903,11 @@
       "text": "A land of beauty, tradition and conflict; North Ixia is no stranger to brutal political violence. So when Apollo was told that it was for his own safety he was being sent to New York for school, he knew the situation was serious.\n\nAdjusting to life at Blackmore Academy didn’t come easy to Apollo. His school was supposed to be filled with The Cursed Apple’s best and brightest but all he saw, with few exceptions, was a sea of aggressive mediocrity. Electing not to waste his time with frivolous things like parties and dances, he instead put his energy on the piste, where he rigorously trains as captain of the Blackmore fencing team.\n\nHowever, at the end of the day Apollo does not fret too much on the tedium of life in New York. He knows that eventually the time will come when his father will call on him to come home and he will get to show that he is worthy of wielding his family's ancestral blade.",
       "group": "citadel_heroes",
       "hash": "b918c51e3a1c"
+    },
+    "hero_ratking_lore": {
+      "text": "The cryptid ruler of the New York Warrens,  The Rat King towers over his subjects in size, strength, and ambition.  No longer content with hiding underground, the king has revealed his bold vision for a future where he and his subjects can walk the surface without fear of the pest control vans that roam the streets of New York (or as the rats call them: human death squads)\n\nStep 1: Take control of Long Island\nStep 2: Declare Long Island as the new sovereign nation of Ratannia\nStep 3: Execute every human that refuses to leave this new rat utopia\n\nBut air tight as this plan is, the king of rats didn't want to take chances: and so he’s decided to the summon the patron to help hedge his bets.",
+      "group": "citadel_heroes",
+      "hash": "bd020e268564"
     },
     "MODIFIER_STATE_ROOTED": {
       "text": "Immobilized",
@@ -33649,6 +34054,11 @@
       "group": "citadel_gc",
       "hash": "f0e2ab3528c0"
     },
+    "Steam_Citadel_Hideout_LongIsland": {
+      "text": "Wishing the Hideout was on Long Island",
+      "group": "citadel_gc",
+      "hash": "eedf709686de"
+    },
     "Citadel_Dashboard_BuildVersion": {
       "text": "#{d:buildNumber}",
       "group": "citadel_main",
@@ -39225,9 +39635,9 @@
       "hash": "6c7502910898"
     },
     "Citadel_HUD_DamageSummary_Hint": {
-      "text": "Hold{g:citadel_binding:'Scoreboard'}to view adjustment details",
+      "text": "Hold {g:citadel_binding:'ExtraInfo'} to view modified stats",
       "group": "citadel_main",
-      "hash": "6251bf6fb7b7"
+      "hash": "e7fe57e681df"
     },
     "Citadel_HUD_AdjustedBy": {
       "text": "ADJUSTED BY",
@@ -41115,9 +41525,9 @@
       "hash": "574f3cc1b977"
     },
     "Citadel_HideoutConnectionFailed_GCDisabled": {
-      "text": "Hidout servers are temporarily disabled",
+      "text": "Hideout servers are temporarily disabled",
       "group": "citadel_main",
-      "hash": "3a62ae2676a2"
+      "hash": "835919c147ab"
     },
     "Citadel_HideoutBallJuggle_Increment": {
       "text": "{s:value}x",
@@ -46239,6 +46649,36 @@
       "group": "citadel_main",
       "hash": "4070c1a09d6f"
     },
+    "citadel_settings_default_view": {
+      "text": "Default settings view",
+      "group": "citadel_main",
+      "hash": "8552c1000e72"
+    },
+    "citadel_settings_default_view_current_hero": {
+      "text": "Current hero",
+      "group": "citadel_main",
+      "hash": "72dc8827a303"
+    },
+    "citadel_settings_default_view_base_settings": {
+      "text": "Base settings",
+      "group": "citadel_main",
+      "hash": "114b5e6db655"
+    },
+    "citadel_settings_default_view_tooltip": {
+      "text": "Choose which view appears by default when opening the Settings menu.<br><br>Current hero: Default to editing settings for your currently active hero.<br><br>Base settings: Default to editing base settings.",
+      "group": "citadel_main",
+      "hash": "5cdca2a6e473"
+    },
+    "citadel_settings_remember_selected_hero": {
+      "text": "Remember selected hero",
+      "group": "citadel_main",
+      "hash": "9b5e2978e03f"
+    },
+    "citadel_settings_remember_selected_hero_tooltip": {
+      "text": "When off, Settings opens to the view of the hero you're playing if Current Hero is your default view, and to base settings otherwise.<br><br>When on, Settings remembers the hero you selected in the hero selector and reopens to the same view. If you have chosen Current Hero as your default view, your selected hero in the Settings menu will still update whenever you swap heroes in the game.",
+      "group": "citadel_main",
+      "hash": "f2b4113c16da"
+    },
     "citadel_settings_show_all_off_notice_title": {
       "text": "Showing Hero-Specific Settings Only",
       "group": "citadel_main",
@@ -46270,9 +46710,9 @@
       "hash": "9a7ff5a90404"
     },
     "citadel_settings_hero_specific_enabled_body": {
-      "text": "To browse settings for specific heroes, click the hero icon in the upper left to open the hero selector and select a hero.<br><br>The first icon represents your base settings. Individual heroes can customize one or more of these settings, but otherwise fall back to the base settings.<br><br>Hold TAB while browsing the Settings menu to highlight the settings that can be customized per-hero. Other settings are global and will remain the same regardless of which hero you are playing.",
+      "text": "To browse settings for specific heroes, click the hero icon in the upper left to open the hero selector and select a hero.<br><br>The first icon represents your base settings. Individual heroes can customize one or more of these settings, but otherwise fall back to the base settings.<br><br>Hold {g:citadel_key:'TAB'} while browsing the Settings menu to highlight the settings that can be customized per-hero. Other settings are global and will remain the same regardless of which hero you are playing.",
       "group": "citadel_main",
-      "hash": "0871e4cad280"
+      "hash": "953262cf8a82"
     },
     "citadel_settings_hero_specific_disabled_title": {
       "text": "Global Settings Enabled",
@@ -47265,9 +47705,9 @@
       "hash": "80f770031b72"
     },
     "citadel_settings_shop_open_focus_search_tooltip": {
-      "text": "When enabled, opening the shop puts the keyboard in the search box so you can type an item name right away. Press ESCAPE to return the keyboard to the game.",
+      "text": "When enabled, opening the shop puts the keyboard in the search box so you can type an item name right away. Press {g:citadel_key:'ESCAPE'} to return the keyboard to the game.",
       "group": "citadel_main",
-      "hash": "117a454430c2"
+      "hash": "64d0e41a1b6f"
     },
     "citadel_settings_shop_scroll_snap": {
       "text": "Snap scrolling to price tiers",
@@ -48315,9 +48755,9 @@
       "hash": "cafbb92650c6"
     },
     "citadel_keybind_map_show_chords_tooltip": {
-      "text": "Hold SHIFT to see the modifier key chords bound with these keys instead of the single-key binds.",
+      "text": "Hold {g:citadel_key:'SHIFT'} to see the modifier key chords bound with these keys instead of the single-key binds.",
       "group": "citadel_main",
-      "hash": "6d4fd69187d2"
+      "hash": "fe9de1420347"
     },
     "citadel_keybind_map_chord_shift": {
       "text": "S",
@@ -48368,6 +48808,11 @@
       "text": "Other Keys",
       "group": "citadel_main",
       "hash": "5278d2940dea"
+    },
+    "citadel_keybind_map_no_command_bound": {
+      "text": "No command bound",
+      "group": "citadel_main",
+      "hash": "9bc6e46457bf"
     },
     "citadel_keybind_map_keyboard_layout": {
       "text": "Keyboard layout",

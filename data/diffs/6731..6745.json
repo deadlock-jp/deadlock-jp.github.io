@@ -1,0 +1,1184 @@
+{
+  "from": "6731",
+  "to": "6745",
+  "generatedAt": "2026-10-03T14:18:44.915Z",
+  "entries": [
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratarmor.properties.AbilityCooldown",
+      "before": null,
+      "after": 22
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratarmor.properties.AbilityCooldownBetweenCharge",
+      "before": null,
+      "after": -1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratarmor.properties.AbilityDuration",
+      "before": null,
+      "after": 6
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratarmor.properties.AbilityUnitTargetLimit",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratarmor.properties.BulletDamageReflectedPct",
+      "before": null,
+      "after": 100
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratarmor.properties.ChannelMoveSpeed",
+      "before": null,
+      "after": -1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratarmor.properties.MaxHealthPct",
+      "before": null,
+      "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratarmor.properties.RatCount",
+      "before": null,
+      "after": 7
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratarmor.properties.ReturnFireChance",
+      "before": null,
+      "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratarmor.properties.ReturnFireChance@scale",
+      "before": null,
+      "after": 0.1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratarmor.upgrades.T1.AbilityDuration",
+      "before": null,
+      "after": 4
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratarmor.upgrades.T2.AbilityCooldown",
+      "before": null,
+      "after": -8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratarmor.upgrades.T2.ReturnFireChance",
+      "before": null,
+      "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratarmor.upgrades.T3.MaxDamagePerHit",
+      "before": null,
+      "after": 250
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratarmor.upgrades.T3.MaxHealthPct",
+      "before": null,
+      "after": 10
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.properties.AbilityCastRange",
+      "before": null,
+      "after": 50
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.properties.AbilityCharges",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.properties.AbilityCooldown",
+      "before": null,
+      "after": 28
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.properties.AbilityCooldownBetweenCharge",
+      "before": null,
+      "after": 8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.properties.AbilityDuration",
+      "before": null,
+      "after": 6
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.properties.AbilityUnitTargetLimit",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.properties.ArmorReductionPerBite",
+      "before": null,
+      "after": -1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.properties.BiteInterval",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.properties.ChannelMoveSpeed",
+      "before": null,
+      "after": -1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.properties.DamagePerBite",
+      "before": null,
+      "after": 8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.properties.DamagePerBite@scale",
+      "before": null,
+      "after": 0.08
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.properties.DebuffDuration",
+      "before": null,
+      "after": 4
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.properties.MaxRats",
+      "before": null,
+      "after": 5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.properties.Radius",
+      "before": null,
+      "after": 10
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.properties.RatsAttached",
+      "before": null,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.properties.RatSwarmCols",
+      "before": null,
+      "after": 3
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.properties.RatSwarmRows",
+      "before": null,
+      "after": 3
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.properties.RatSwarmRowSpeedStep",
+      "before": null,
+      "after": 4
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.properties.RatSwarmWidth",
+      "before": null,
+      "after": 400
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.properties.ThrowAngle",
+      "before": null,
+      "after": 30
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.properties.ThrowJitterSpeed",
+      "before": null,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.properties.ThrowSpeed",
+      "before": null,
+      "after": 22
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.upgrades.T1.AbilityCharges",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.upgrades.T2.DebuffDuration",
+      "before": null,
+      "after": 4
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.upgrades.T2.RatSwarmCols",
+      "before": null,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.upgrades.T2.RatSwarmRows",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.upgrades.T2.RatSwarmWidth",
+      "before": null,
+      "after": 100
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.upgrades.T3.ArmorReductionPerBite",
+      "before": null,
+      "after": -1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.upgrades.T3.DamagePerBite",
+      "before": null,
+      "after": 8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.properties.AbilityCooldown",
+      "before": null,
+      "after": 26
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.properties.AbilityUnitTargetLimit",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.properties.AdditionalBounceDetonateTimer",
+      "before": null,
+      "after": 0.7
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.properties.ArmorReductionPerStackNonHero",
+      "before": null,
+      "after": -3
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.properties.BigExplosionSlowPercent",
+      "before": null,
+      "after": 40
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.properties.BounceGrenadeSpeed",
+      "before": null,
+      "after": 1200
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.properties.ChannelMoveSpeed",
+      "before": null,
+      "after": -1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.properties.DamagePerShrapnel",
+      "before": null,
+      "after": 65
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.properties.DamagePerShrapnel@scale",
+      "before": null,
+      "after": 0.6
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.properties.Detonations",
+      "before": null,
+      "after": 3
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.properties.FinalBounceDetonateTimer",
+      "before": null,
+      "after": 1.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.properties.FirstBounceDetonateTimer",
+      "before": null,
+      "after": 0.8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.properties.MeleeImpulseHeavy",
+      "before": null,
+      "after": 1000
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.properties.MeleeImpulseLight",
+      "before": null,
+      "after": 750
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.properties.MeleeImpulseUpScale",
+      "before": null,
+      "after": 0.45
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.properties.ShrapnelSphereRadius",
+      "before": null,
+      "after": 8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.properties.SlowDuration",
+      "before": null,
+      "after": 4
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.properties.SlowPercent",
+      "before": null,
+      "after": 20
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.properties.SlowPercent@scale",
+      "before": null,
+      "after": 0.08
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.upgrades.T1.AbilityCooldown",
+      "before": null,
+      "after": -8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.upgrades.T2.DamagePerShrapnel",
+      "before": null,
+      "after": 65
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.upgrades.T3.BigExplosionDamage",
+      "before": null,
+      "after": 300
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.upgrades.T3.BigExplosionDamage#2",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.upgrades.T3.BigExplosionRadius",
+      "before": null,
+      "after": 14
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.upgrades.T3.BigExplosionRadius#2",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.upgrades.T3.BigExplosionSlowPercent",
+      "before": null,
+      "after": 0.12
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.upgrades.T3.Detonations",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.properties.AbilityCastDelay",
+      "before": null,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.properties.AbilityCooldown",
+      "before": null,
+      "after": 130
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.properties.AbilityCooldownBetweenCharge",
+      "before": null,
+      "after": -1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.properties.AbilityDuration",
+      "before": null,
+      "after": 12
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.properties.AbilityUnitTargetLimit",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.properties.AllyDamageReduction",
+      "before": null,
+      "after": 20
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.properties.BonusMoveSpeed",
+      "before": null,
+      "after": 3
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.properties.BonusMoveSpeed@scale",
+      "before": null,
+      "after": 0.05
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.properties.Damage",
+      "before": null,
+      "after": 200
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.properties.Damage@scale",
+      "before": null,
+      "after": 1.2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.properties.DashSlowPercent",
+      "before": null,
+      "after": -20
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.properties.FlagDuration",
+      "before": null,
+      "after": 12
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.properties.Radius",
+      "before": null,
+      "after": 24
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.properties.SlowPercent",
+      "before": null,
+      "after": 40
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.properties.TossDuration",
+      "before": null,
+      "after": 1.2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.upgrades.T1.AbilityCooldown",
+      "before": null,
+      "after": -20
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.upgrades.T1.BonusMoveSpeed",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.upgrades.T2.AbilityDuration",
+      "before": null,
+      "after": 8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.upgrades.T2.FlagDuration",
+      "before": null,
+      "after": 8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.upgrades.T2.Radius",
+      "before": null,
+      "after": 8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.upgrades.T3.AllyDamageReduction",
+      "before": null,
+      "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.upgrades.T3.Damage",
+      "before": null,
+      "after": 150
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_inferno_set.weapon.bulletDamage",
+      "before": 5.5,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_inferno_set.weapon.bulletGravityScale",
+      "before": 0.8,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_inferno_set.weapon.bulletLifetime",
+      "before": 2,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_inferno_set.weapon.bulletRadius",
+      "before": 4,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_inferno_set.weapon.bulletSpeed",
+      "before": 26000,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_inferno_set.weapon.bulletsPerShot",
+      "before": 1,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_inferno_set.weapon.burstShotCount",
+      "before": 1,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_inferno_set.weapon.clipSize",
+      "before": 27,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_inferno_set.weapon.crit.bonusEnd",
+      "before": 1.65,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_inferno_set.weapon.crit.bonusStart",
+      "before": 1.65,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_inferno_set.weapon.crit.endRange",
+      "before": 1500,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_inferno_set.weapon.crit.startRange",
+      "before": 500,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_inferno_set.weapon.cycleTime",
+      "before": 0.105,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_inferno_set.weapon.falloff.bias",
+      "before": 0.5,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_inferno_set.weapon.falloff.endRange",
+      "before": 2165.35,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_inferno_set.weapon.falloff.endScale",
+      "before": 0.1,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_inferno_set.weapon.falloff.startRange",
+      "before": 708.661,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_inferno_set.weapon.falloff.startScale",
+      "before": 1,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_inferno_set.weapon.range",
+      "before": 7000,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_inferno_set.weapon.reloadDuration",
+      "before": 2.25,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_inferno_set.weapon.shootMoveSpeedPercent",
+      "before": 0.75,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_inferno_set.weapon.spread",
+      "before": 0.05,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_inferno_set.weapon.standingSpread",
+      "before": 1.5,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_ratking_set.weapon.bulletDamage",
+      "before": null,
+      "after": 6
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_ratking_set.weapon.bulletLifetime",
+      "before": null,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_ratking_set.weapon.bulletRadius",
+      "before": null,
+      "after": 5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_ratking_set.weapon.bulletSpeed",
+      "before": null,
+      "after": 8000
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_ratking_set.weapon.bulletsPerShot",
+      "before": null,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_ratking_set.weapon.burstShotCount",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_ratking_set.weapon.clipSize",
+      "before": null,
+      "after": 24
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_ratking_set.weapon.crit.bonusEnd",
+      "before": null,
+      "after": 1.35
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_ratking_set.weapon.crit.bonusStart",
+      "before": null,
+      "after": 1.35
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_ratking_set.weapon.crit.endRange",
+      "before": null,
+      "after": 1500
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_ratking_set.weapon.crit.startRange",
+      "before": null,
+      "after": 500
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_ratking_set.weapon.cycleTime",
+      "before": null,
+      "after": 0.2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_ratking_set.weapon.falloff.bias",
+      "before": null,
+      "after": 0.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_ratking_set.weapon.falloff.endRange",
+      "before": null,
+      "after": 1968.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_ratking_set.weapon.falloff.endScale",
+      "before": null,
+      "after": 0.1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_ratking_set.weapon.falloff.startRange",
+      "before": null,
+      "after": 787.402
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_ratking_set.weapon.falloff.startScale",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_ratking_set.weapon.range",
+      "before": null,
+      "after": 7000
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_ratking_set.weapon.reloadDuration",
+      "before": null,
+      "after": 2.8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_ratking_set.weapon.shootMoveSpeedPercent",
+      "before": null,
+      "after": 0.75
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_ratking_set.weapon.spread",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_ratking_set.weapon.standingSpread",
+      "before": null,
+      "after": 1.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "growth.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL",
+      "before": 0.15,
+      "after": 0.18
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "growth.MODIFIER_VALUE_BASE_HEALTH_FROM_LEVEL",
+      "before": 44,
+      "after": 50
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "stat.EAirDashDuration",
+      "before": 0.47,
+      "after": 0.51
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "stat.EGroundDashDuration",
+      "before": 0.68,
+      "after": 0.72
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "stat.EHeroBulletLifestealEffectiveness",
+      "before": 1,
+      "after": 0.75
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "stat.EHeroSpiritLifestealEffectiveness",
+      "before": 1,
+      "after": 0.75
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "stat.EMaxHealth",
+      "before": 780,
+      "after": 800
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "stat.EMaxMoveSpeed",
+      "before": 7.2,
+      "after": 6.8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "stat.EStaminaRegenPerSecond",
+      "before": 0.222222,
+      "after": 0.263
+    }
+  ],
+  "excludedFieldCount": 26
+}

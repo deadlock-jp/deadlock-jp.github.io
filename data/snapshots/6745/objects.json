@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "upstreamCommit": "6731",
-  "generatedAt": "2026-10-02T02:52:15.908Z",
+  "upstreamCommit": "6745",
+  "generatedAt": "2026-10-03T14:16:18.515Z",
   "objects": {
     "weapon_base": {
       "id": "weapon_base",
@@ -816,11 +816,74 @@
         "maxHealth": 1,
         "goldReward": 1,
         "stepHeight": 32,
-        "respawnTime": 30,
-        "respawnTimeHeroTest": 2
+        "respawnTime": 15,
+        "respawnTimeHeroTest": 2,
+        "replacementChance": 0.1
       },
       "flags": {
         "outlineThroughWalls": false
+      },
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
+    },
+    "npc_neutral_bug_rat": {
+      "id": "npc_neutral_bug_rat",
+      "className": "npc_neutral_bug",
+      "baseKey": "npc_neutral_bug",
+      "stats": {
+        "maxHealth": 1,
+        "goldReward": 1,
+        "stepHeight": 32,
+        "respawnTime": 15,
+        "respawnTimeHeroTest": 2,
+        "replacementChance": 0,
+        "radius": 30,
+        "modelScale": 1.7,
+        "moveSpeedMin": 170,
+        "moveSpeedMax": 240,
+        "waitTimeMax": 0.2,
+        "deathSwarmCount": 5,
+        "deathSwarmImmuneHeroID": 84,
+        "deathSwarmSpawnDistMin": 630,
+        "deathSwarmSpawnDistMax": 866
+      },
+      "flags": {
+        "outlineThroughWalls": false,
+        "isRat": true
+      },
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
+    },
+    "npc_neutral_bug_rat_swarm": {
+      "id": "npc_neutral_bug_rat_swarm",
+      "className": "npc_neutral_bug",
+      "baseKey": "npc_neutral_bug_rat",
+      "stats": {
+        "maxHealth": 1,
+        "goldReward": 0,
+        "stepHeight": 32,
+        "respawnTime": 15,
+        "respawnTimeHeroTest": 2,
+        "replacementChance": 0,
+        "radius": 30,
+        "modelScale": 1.7,
+        "moveSpeedMin": 150,
+        "moveSpeedMax": 200,
+        "waitTimeMax": 0.2,
+        "deathSwarmCount": 0,
+        "deathSwarmImmuneHeroID": 84,
+        "deathSwarmSpawnDistMin": 630,
+        "deathSwarmSpawnDistMax": 866,
+        "dropDownRate": 800,
+        "chaseLifetime": 8,
+        "attachRadius": 64,
+        "attachHeight": 96
+      },
+      "flags": {
+        "outlineThroughWalls": false,
+        "isRat": true
       },
       "nameToken": null,
       "icon": null,
@@ -2921,6 +2984,30 @@
       "nameToken": "neutral_barrel_1",
       "icon": "file://{images}/npcs/neutrals/neutral_barrel_heavy.psd",
       "neutralType": "NEUTRAL_NPC_WEAK"
+    },
+    "npc_ratking_rat": {
+      "id": "npc_ratking_rat",
+      "className": "npc_ratking_rat",
+      "baseKey": null,
+      "stats": {
+        "probeDistance": 192,
+        "probeStepUp": 50,
+        "scurryPeriodMin": 1,
+        "scurryPeriodMax": 2,
+        "scurryAmplitudeMin": 15,
+        "scurryAmplitudeMax": 30,
+        "probeInterval": 0.1,
+        "spreadDuration": 2,
+        "moveSpeedMin": 10,
+        "moveSpeedMax": 16,
+        "modelScaleMax": 3.5
+      },
+      "flags": {
+        "debugDraw": false
+      },
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
     },
     "neutral_barrel_02_normal": {
       "id": "neutral_barrel_02_normal",

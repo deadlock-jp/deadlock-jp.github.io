@@ -2521,20 +2521,20 @@
     {
       "kind": "crate",
       "group": 0,
+      "hid": "1380427:4",
+      "underground": false,
+      "x": -7766,
+      "y": 1722,
+      "z": 642
+    },
+    {
+      "kind": "crate",
+      "group": 0,
       "hid": "1380427:27",
       "underground": false,
       "x": -5040,
       "y": 1814,
       "z": 258
-    },
-    {
-      "kind": "crate",
-      "group": 0,
-      "hid": "1380427:4",
-      "underground": false,
-      "x": -7616,
-      "y": 1832,
-      "z": 248
     },
     {
       "kind": "crate",

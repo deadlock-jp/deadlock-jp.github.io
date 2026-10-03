@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6731",
-  "upstreamCommit": "6731",
-  "generatedAt": "2026-10-02T02:52:16.346Z",
+  "clientVersion": "6745",
+  "upstreamCommit": "6745",
+  "generatedAt": "2026-10-03T14:16:19.047Z",
   "language": "schinese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 618,
     "citadel_heroes": 3333,
-    "citadel_attributes": 1980,
+    "citadel_attributes": 1983,
     "citadel_gc": 214,
-    "citadel_main": 5143
+    "citadel_main": 5189
   },
   "tokens": {
     "hero_vampire:n": {
@@ -145,9 +145,9 @@
       "hash": "014f546e26cc"
     },
     "hero_gigawatt_search:n": {
-      "text": "柒 laoqi 老七 diannan qi 电男 七",
+      "text": "柒 laoqi 老七 diannan qi 电男 七 7",
       "group": "citadel_gc_hero_names",
-      "hash": "3e87035d67da"
+      "hash": "802140f118ec"
     },
     "hero_hornet:n": {
       "text": "薇妲",
@@ -4655,9 +4655,9 @@
       "hash": "af8a237aca22"
     },
     "upgrade_spirit_burn_desc": {
-      "text": "在 {s:DamageThresholdDuration}秒内对敌人造成严重{g:citadel_inline_attribute:'SpiritDamage'}会引发爆炸，令附近敌人受到伤害并燃烧。燃烧期间，敌人会持续受到伤害，且治疗量减少。<br><span class=\"diminish\">冷却时间是根据敌人而定，每个目标在每次冷却时只能燃烧一次。对非英雄目标使用时，造成半额伤害。</span>",
+      "text": "在 {s:DamageThresholdDuration}秒内对敌人造成严重{g:citadel_inline_attribute:'SpiritDamage'}会引发爆炸，令该敌人受到伤害并燃烧。燃烧期间，敌人会持续受到伤害，且治疗量减少。<br><span class=\"diminish\">冷却时间是根据敌人而定，每个目标在每次冷却时只能燃烧一次。对非英雄目标使用时，造成半额伤害。</span>",
       "group": "citadel_mods",
-      "hash": "2b049b04c1e7"
+      "hash": "13d044ffdca5"
     },
     "modifier_spirit_burn_immunity": {
       "text": "元灵燃烧免疫",
@@ -5725,9 +5725,9 @@
       "hash": "67285c4a4e5a"
     },
     "upgrade_omnicharge_pendant_desc": {
-      "text": "加强任意主动非终极技能，使其获得<span class=\"highlight\">额外技能充能点数</span>。已加强的技能会获得更多额外充能点数。",
+      "text": "加强任意主动非终极技能，使其获得<span class=\"highlight\">额外技能充能点数</span>。充能的技能会获得更多额外充能点数。",
       "group": "citadel_mods",
-      "hash": "0685511e993f"
+      "hash": "e40d2fc45686"
     },
     "upgrade_omnicharge_pendant_charges": {
       "text": "额外充能点数",
@@ -6150,9 +6150,9 @@
       "hash": "a04b4e6d0e90"
     },
     "citadel_ability_lightning_ball_desc": {
-      "text": "发射沿直线移动的球状闪电。<span class=\"highlight\">对其半径内的所有目标造成伤害</span>。伤害敌人时会施加减速，并在撞击到环境时停止。",
+      "text": "发射沿直线移动的球状闪电。<span class=\"highlight\">对其半径内的所有目标造成伤害</span>。伤害敌人时会减速，并在撞击到环境时停止。",
       "group": "citadel_heroes",
-      "hash": "11809fc4d9a6"
+      "hash": "603c8cf37029"
     },
     "citadel_ability_lightning_ball_t2_desc": {
       "text": "<span class=\"highlight\">-{s:SlowPercent}%</span>击中目标移速<br><span class=\"highlight\">+{s:MaxLifetime}秒</span>时长",
@@ -6985,9 +6985,9 @@
       "hash": "6e1177c6c4cb"
     },
     "ability_header_card_toss_suits_desc": {
-      "text": "<br>每种花色都提供不同的加成效果。<span class=\"highlight\">小丑</span>视为所有花色</span>",
+      "text": "<br>每种花色都提供不同的加成效果。<span class=\"highlight\">小丑</span>视为所有花色。",
       "group": "citadel_heroes",
-      "hash": "fa2b27b98459"
+      "hash": "81551772db9e"
     },
     "ability_header_card_toss_spade": {
       "text": "黑桃",
@@ -7725,9 +7725,9 @@
       "hash": "f0e91bd0fd2b"
     },
     "ability_incendiary_projectile_amplification": {
-      "text": "催化剂伤害提升",
+      "text": "凝固汽油弹伤害增强",
       "group": "citadel_heroes",
-      "hash": "213b56cf1433"
+      "hash": "c32a64146e72"
     },
     "ability_incendiary_projectile_quip": {
       "text": "喷射凝固汽油弹，增强伤害输出",
@@ -8490,9 +8490,9 @@
       "hash": "5b7a36201cd8"
     },
     "citadel_ability_stomp_t2_desc": {
-      "text": "击中时：<br><span class=\"highlight\">{s:BulletResistReduction}%</span>子弹抗性和<span class=\"highlight\">-{s:SlowPercent}%</span>移动速度<span class=\"highlight\">，持续{s:SlowDuration}秒</span>",
+      "text": "击中时：<br><span class=\"highlight\">{s:BulletResistReduction}%</span>子弹抗性和<span class=\"highlight\">-{s:SlowPercent}%</span>移动速度，<span class=\"highlight\">持续{s:SlowDuration}秒</span>",
       "group": "citadel_heroes",
-      "hash": "e9eda83570c4"
+      "hash": "90570b716a09"
     },
     "citadel_ability_stomp_t3_desc": {
       "text": "<span class=\"highlight\">+{s:Damage}</span>伤害<br><span class=\"highlight\">+{s:StompRange}米</span>施法距离",
@@ -9365,9 +9365,9 @@
       "hash": "3f15a7fc0d30"
     },
     "ability_wrecker_ultimate_desc": {
-      "text": "ability_wrecker_ultimate_desc\"\t\t\"<span class=\"highlight\">抓住</span>破坏王注视的任何敌人，将他们置于<span class=\"highlight\">静止状态</span>并举在头顶。完成后，所有被捕获的敌人将被<span class=\"highlight\">眩晕</span>并<span class=\"highlight\">受到伤害</span>。任何被抓住的非玩家角色都会被<span class=\"highlight\">回收</span>。",
+      "text": "<span class=\"highlight\">抓住</span>破坏王注视的任何敌人，将他们置于<span class=\"highlight\">静止状态</span>并举在头顶。完成后，所有被捕获的敌人将被<span class=\"highlight\">眩晕</span>并<span class=\"highlight\">受到伤害</span>。任何被抓住的非玩家角色都会被<span class=\"highlight\">回收</span>。",
       "group": "citadel_heroes",
-      "hash": "beee2477f1cd"
+      "hash": "bb4707a3e0a2"
     },
     "GrabRange_postfix": {
       "text": "米",
@@ -10210,9 +10210,9 @@
       "hash": "17ee0458d851"
     },
     "citadel_ability_uppercut_t2_desc": {
-      "text": "击中英雄时：<br>获得<span class=\"highlight\">2倍武器射程和+{s:BuffBaseWeaponPct}%武器伤害</span>，持续{s:BuffDuration}秒",
+      "text": "击中英雄时：<br>获得<span class=\"highlight\">快速预热时间，2倍武器射程和+{s:BuffBaseWeaponPct}%武器伤害</span>，持续{s:BuffDuration}秒",
       "group": "citadel_heroes",
-      "hash": "f1648b98c127"
+      "hash": "f2cbb8ddba2b"
     },
     "citadel_ability_uppercut_t3_desc": {
       "text": "击中英雄时：<br><span class=\"highlight\">抓钩臂的冷却时间设为0</span>并恢复<span class=\"highlight\">+{s:MissingHPHeal}%</span>的已损失生命值",
@@ -10875,9 +10875,9 @@
       "hash": "9722ed02e88a"
     },
     "CatMaxSpeed_postfix": {
-      "text": "米",
+      "text": "米/秒",
       "group": "citadel_heroes",
-      "hash": "ee7f305751a5"
+      "hash": "ca8c4ea71eec"
     },
     "CatLifetime_postfix": {
       "text": "秒",
@@ -11610,9 +11610,9 @@
       "hash": "1d4f7aeafe4d"
     },
     "ability_immobilize_trap/trap_debuff": {
-      "text": "元灵护甲降低",
+      "text": "子弹抗性降低",
       "group": "citadel_heroes",
-      "hash": "b0a3d0fb84a6"
+      "hash": "7719c1c51233"
     },
     "ImmobilizeTrap_CurseDuration_label": {
       "text": "厄咒持续时间",
@@ -11725,9 +11725,9 @@
       "hash": "ada9b65c1d8a"
     },
     "ability_blood_bomb_t3_desc": {
-      "text": "炸弹会在地面留下毒性区域，造成原伤害量<span class=\"highlight\">{s:BloodSpillDPSPercent}%</span>的<span class=\"highlight\">伤害</span>，持续<span class=\"highlight\">{s:BloodSpillDuration}秒</span>",
+      "text": "炸弹会在地面留下毒性区域，造成原伤害量<span class=\"highlight\">{s:BloodSpillDPSPercent}%</span>的<span class=\"highlight\">每秒伤害</span>，持续<span class=\"highlight\">{s:BloodSpillDuration}秒</span>",
       "group": "citadel_heroes",
-      "hash": "cd6d217404e8"
+      "hash": "9357a1e2f485"
     },
     "ability_life_drain": {
       "text": "生命吸取",
@@ -13080,9 +13080,9 @@
       "hash": "ee7f305751a5"
     },
     "citadel_ability_shiv_killing_blow_t1_desc": {
-      "text": "怒气值满时获得<span class=\"highlight\">+{s:AbilityCastRange}米</span>距离<span class=\"highlight\">+{s:BonusMoveSpeed}米/秒</span>移动速度",
+      "text": "<span class=\"highlight\">+{s:AbilityCastRange}米</span>距离<span class=\"highlight\">怒气值满时+{s:BonusMoveSpeed}米/秒</span>移动速度",
       "group": "citadel_heroes",
-      "hash": "ca3aebc8a7f5"
+      "hash": "fd5a1962bd93"
     },
     "citadel_ability_shiv_killing_blow_t2_desc": {
       "text": "<span class=\"highlight\">+{s:BuffDamage}%</span>满怒气值时额外伤害<br><span class=\"highlight\">{s:AbilityCooldown}秒</span>冷却时间",
@@ -13230,14 +13230,14 @@
       "hash": "4ad337bbd769"
     },
     "synth_barrage_desc": {
-      "text": "持续施法，开始发出投射物，<span class=\"highlight\">造成{g:citadel_inline_attribute:'SpiritDamage'}</span>并在击中点附近<span class=\\\"highlight\\\">施加{g:citadel_inline_attribute:'Slow'}</span>。每个击中英雄的投射物都会使{s:hero_name}获得<span class=\\\"highlight\\\">可叠加的{g:citadel_inline_attribute:'DamageAmp'}</span>。<br>如果在半空中施放本技能会使{s:hero_name}<span class=\"highlight\">悬浮</span>。<span class=\"diminish\"><br><br>施放空中冲刺或飞行斗篷不会取消弹幕。",
+      "text": "持续施法，开始发出投射物，<span class=\"highlight\">造成{g:citadel_inline_attribute:'SpiritDamage'}</span>并在击中点附近<span class=\"highlight\">施加{g:citadel_inline_attribute:'Slow'}</span>。每个击中英雄的投射物都会使{s:hero_name}获得<span class=\"highlight\">可叠加的{g:citadel_inline_attribute:'DamageAmp'}</span>。<br>如果在半空中施放本技能会使{s:hero_name}<span class=\"highlight\">悬浮</span>。<span class=\"diminish\"><br><br>施放空中冲刺或飞行斗篷不会取消弹幕。</span>",
       "group": "citadel_heroes",
-      "hash": "a11428629081"
+      "hash": "de684e5afd50"
     },
     "synth_barrage_t3_desc": {
-      "text": "<span class=\"highlight\">+{s:AmpPercentPerStack}秒</span>每层叠加增强<br><span class=\"highlight\">+{s:Radius}米</span>半径",
+      "text": "<span class=\"highlight\">+{s:AmpPercentPerStack}%</span>每层叠加增强<br><span class=\"highlight\">+{s:Radius}米</span>半径",
       "group": "citadel_heroes",
-      "hash": "ce3f468bc977"
+      "hash": "d8bc3d030158"
     },
     "DamagePerProjectile_label": {
       "text": "每个投射物造成的伤害",
@@ -14855,9 +14855,9 @@
       "hash": "bea61064c178"
     },
     "viscous_goo_grenade_puddle_desc": {
-      "text": "黏液会在地上留下污渍，对踏入污渍范围的敌人施加<span class=\\\"highlight\\\">移动减速</span>效果。<br><br><span class=\"diminish\">自身和友军在黏液污渍上滑行得更快。</span>",
+      "text": "黏液会在地上留下污渍，对踏入污渍范围的敌人施加<span class=\"highlight\">移动减速</span>效果。<br><br><span class=\"diminish\">自身和友军在黏液污渍上滑行得更快。</span>",
       "group": "citadel_heroes",
-      "hash": "7fac5791fea5"
+      "hash": "8372ba55e4f0"
     },
     "viscous_goo_grenade/modifier_viscous_goo_grenade_debuff": {
       "text": "被减速",
@@ -15655,9 +15655,9 @@
       "hash": "49e7b32044de"
     },
     "ability_viper_debuffdagger_t3_desc": {
-      "text": "+<span class=\\\"highlight\\\">{s:MaxStacks}</span>最高叠加层数<br><span class=\"highlight\">{s:AbilityCooldownBetweenCharge}秒</span>充能延迟<br>击中时：返还<span class=\\\"highlight\\\">{s:CooldownRefundPercent}%</span>充能冷却",
+      "text": "+<span class=\"highlight\">{s:MaxStacks}</span>最高叠加层数<br><span class=\"highlight\">{s:AbilityCooldownBetweenCharge}秒</span>充能延迟<br>击中时：返还<span class=\"highlight\">{s:CooldownRefundPercent}%</span>充能冷却",
       "group": "citadel_heroes",
-      "hash": "258f975bfb49"
+      "hash": "0a3e6e0b75d6"
     },
     "ability_viper_debuffdagger_quip": {
       "text": "投掷出具有减速效果的匕首",
@@ -16005,9 +16005,9 @@
       "hash": "dcf942727b08"
     },
     "ability_magician_shadowclone": {
-      "text": "人造巨灵",
+      "text": "人造巨灵！",
       "group": "citadel_heroes",
-      "hash": "ae42f84b64a8"
+      "hash": "875dc8f369fb"
     },
     "ability_magician_shadowclone_desc": {
       "text": "创建另一个<span class=\"highlight\">自己</span>，但生命值和伤害更低。当克隆体死亡或失效时，它会爆炸，造成元灵伤害。<br><br><span class=\"diminish\">克隆体无法使用终极技能。</span>",
@@ -16655,14 +16655,14 @@
       "hash": "61a9f29bc102"
     },
     "ability_vampirebat_steallife_desc": {
-      "text": "<span class=\"diminish\">主动：</span>利用手中的雨伞进行挥击，造成{g:citadel_inline_attribute:'SpiritDamage'}，伤害会随着目标缺失的生命值而增加。如果挥伞击败了目标，会获得一次{g:citadel_inline_attribute:'Heal'}。<br><br><span class=\"diminish\">被动：</span>按住{g:citadel_binding:'ADS'}可以使自己短暂漂浮。<br><span class=\"diminish\">挥伞会直接击倒生命值低于{s:TrooperExecuteThreshold}点生命。</span>",
+      "text": "<span class=\"diminish\">主动：</span>利用手中的雨伞进行挥击，造成{g:citadel_inline_attribute:'SpiritDamage'}，伤害会随着目标缺失的生命值而增加。如果挥伞击败了目标，会获得一次{g:citadel_inline_attribute:'Heal'}。<br><br><span class=\"diminish\">被动：</span>按住{g:citadel_binding:'ADS'}可以使自己短暂漂浮。<br><span class=\"diminish\">挥伞会直接击倒生命值低于{s:TrooperExecuteThreshold}点生命的非英雄单位。</span>",
       "group": "citadel_heroes",
-      "hash": "8dcb8dd8175d"
+      "hash": "aaeef4968879"
     },
     "ability_vampirebat_steallife_t2_desc": {
-      "text": "<span class=\"highlight\">+{s:RakeHealPerKill}%</span>每次击倒治疗<br><span class=\"highlight\">{s:AbilityCooldown}秒</span>冷却时间",
+      "text": "<span class=\"highlight\">+{s:RakeHealPerKill}</span>每次击倒治疗<br><span class=\"highlight\">{s:AbilityCooldown}秒</span>冷却时间",
       "group": "citadel_heroes",
-      "hash": "08d1df3e183d"
+      "hash": "046ecd4677dc"
     },
     "ability_vampirebat_steallife_t3_desc": {
       "text": "<span class=\"highlight\">+{s:MissingHealthDamagePercentage}%</span>缺失生命值伤害并提升每次击倒治疗的元灵增强系数",
@@ -17730,9 +17730,9 @@
       "hash": "33a342b92d49"
     },
     "ability_frank_selfzap_t3_desc": {
-      "text": "<span class=\"highlight\">+{s:AbilityCharges}</span>充能<br>+{s:StatusResistancePercent}%</span>减益抗性<br>提升元灵增强系数",
+      "text": "<span class=\"highlight\">+{s:AbilityCharges}</span>充能<br><span class=\"highlight\">+{s:StatusResistancePercent}%</span>减益抗性<br>提升元灵增强系数",
       "group": "citadel_heroes",
-      "hash": "753acbe67a3d"
+      "hash": "0be52310b23a"
     },
     "ability_frank_painaura": {
       "text": "苦楚灵氲",
@@ -17990,9 +17990,9 @@
       "hash": "ebdbe5071814"
     },
     "drifter_shadow_mark_t1_desc": {
-      "text": "<span class=\"highlight\">{s:BulletResistReduction}%子弹抗性",
+      "text": "<span class=\"highlight\">{s:BulletResistReduction}%</span>子弹抗性",
       "group": "citadel_heroes",
-      "hash": "b1b2685757b6"
+      "hash": "9f27a6646fe5"
     },
     "drifter_shadow_mark_t2_desc": {
       "text": "<span class=\"highlight\">{s:AbilityCooldown}秒</span>冷却时间<br><span class=\"highlight\">+{s:AbilityDuration}秒</span>持续时间",
@@ -18460,14 +18460,14 @@
       "hash": "576632a54af4"
     },
     "ShoveRadius_postvalue_label": {
-      "text": "推撞半径",
+      "text": "Shove Radius",
       "group": "citadel_heroes",
-      "hash": "576632a54af4"
+      "hash": "b983e4d34d66"
     },
     "ShoveRadius_postfix": {
-      "text": "米",
+      "text": "m",
       "group": "citadel_heroes",
-      "hash": "ee7f305751a5"
+      "hash": "6b0d31c0d563"
     },
     "ability_bookworm_aoemagic": {
       "text": "迷人读物",
@@ -18970,9 +18970,9 @@
       "hash": "53971a711a67"
     },
     "ability_familiar_helpinghands_desc": {
-      "text": "派出一个帮手前来帮忙。他们可以收集箱子，触发迷失者抉择，派去支援友军和步兵。<br><br><span class=\"diminish\">跟随英雄时：</span>提供短时间的{g:citadel_inline_attribute:'SpiritResist'}爆发和不断减弱的{g:citadel_inline_attribute:'MoveSpeed'}。<br><br><span class=\"diminish\">跟随步兵时：</span>提供<span class=\"highlight\">治疗，伤害抗性并允许紧跟同伴。</span>附近没有英雄时，击倒步兵产生的魂魄会在队伍间平分。<br><br><span class=\"diminish\">可以在紧跟同伴期间施放。帮手会先小憩{s:HelperDowntimeDuration}秒再开始跟随。</span>",
+      "text": "派出一个帮手前来帮忙。他们可以收集箱子，触发迷失者抉择，派去支援友军和步兵。<br><br><span class=\"diminish\">跟随英雄时：</span>提供短时间的{g:citadel_inline_attribute:'SpiritResist'}爆发和不断减弱的{g:citadel_inline_attribute:'MoveSpeed'}。<br><br><span class=\"diminish\">跟随步兵时：</span>提供<span class=\"highlight\">治疗，伤害抗性并允许紧跟同伴。</span>附近没有英雄时，击倒步兵产生的魂魄会在队伍间平分。<br><br><span class=\"diminish\">可以在紧跟同伴期间施放。帮手跟随后会小憩{s:HelperDowntimeDuration}秒。</span>",
       "group": "citadel_heroes",
-      "hash": "3eb4d8e27c37"
+      "hash": "02f31365bd40"
     },
     "ability_familiar_helpinghands_t1_desc": {
       "text": "+{s:HelperCount}帮手<br>+{s:BonusMoveSpeed}米/秒移动速度",
@@ -19280,9 +19280,9 @@
       "hash": "75f41c02a68a"
     },
     "ability_necro_zombiewall_desc": {
-      "text": "放出一排束缚之爪，召唤一个<span class=\"highlight\">土灵</span>并留下一道裂隙。对穿过的敌人造成{g:citadel_inline_attribute:'SpiritDamage'}并施加{g:citadel_inline_attribute:'Immobilize'}。<br><br><span class=\\\"diminish\\\">副施放{g:citadel_binding:'AltCast'}会旋转墙体的方向。",
+      "text": "放出一排束缚之爪，召唤一个<span class=\"highlight\">土灵</span>并留下一道裂隙。对穿过的敌人造成{g:citadel_inline_attribute:'SpiritDamage'}并施加{g:citadel_inline_attribute:'Immobilize'}。<br><br><span class=\"diminish\">副施放{g:citadel_binding:'AltCast'}会旋转墙体的方向。",
       "group": "citadel_heroes",
-      "hash": "4657b30fe42a"
+      "hash": "d156ed03d014"
     },
     "ability_necro_zombiewall_t2_desc": {
       "text": "<span class=\"highlight\">+{s:Damage}</span>伤害<br><span class=\"highlight\">+{s:ZombieWallLength}米</span>爪墙长度",
@@ -20410,9 +20410,9 @@
       "hash": "b53afd91d43f"
     },
     "ability_priest_flashbang_desc": {
-      "text": "发射一枚在爆炸前会弹跳的榴弹，造成{g:citadel_inline_attribute:'WeaponDamage'}并把敌人点燃。<br><br>燃烧的目标对区域内所有单位造成<span class=\"highlight\">{g:citadel_inline_attribute:'PureDamage'}</span>并承受<span class=\"highlight\">治疗降低效果</span>。",
+      "text": "发射一枚在爆炸前会弹跳的榴弹，造成{g:citadel_inline_attribute:'WeaponDamage'}并把敌人点燃。<br><br>燃烧的目标对区域内敌人造成<span class=\"highlight\">{g:citadel_inline_attribute:'PureDamage'}</span>并承受<span class=\"highlight\">治疗降低效果</span>。",
       "group": "citadel_heroes",
-      "hash": "aacf05c75ef1"
+      "hash": "8d4ff391594b"
     },
     "ability_priest_flashbang_t2_desc": {
       "text": "<span class=\"highlight\">+{s:Radius}米</span>半径<br><span class=\"highlight\">+{s:BurnDuration}秒</span>烧灼时间",
@@ -21780,9 +21780,9 @@
       "hash": "b091cd287deb"
     },
     "Citadel_Fencer_HeroTag_1": {
-      "text": " 招 式 精 妙",
+      "text": "招 式 精 妙",
       "group": "citadel_heroes",
-      "hash": "da5c4ae7f6bb"
+      "hash": "4a230597fb20"
     },
     "Citadel_Fencer_HeroTag_2": {
       "text": "灵  动",
@@ -23170,9 +23170,24 @@
       "hash": "9a9175df9fe9"
     },
     "StatDesc_DashSpeedInMeters_postfix": {
-      "text": "米",
+      "text": "米/秒",
       "group": "citadel_attributes",
-      "hash": "ee7f305751a5"
+      "hash": "ca8c4ea71eec"
+    },
+    "StatDesc_SpiritLifestealEffectiveness": {
+      "text": "生命吸取威力",
+      "group": "citadel_attributes",
+      "hash": "8936a28d5e7f"
+    },
+    "StatDesc_SpiritLifestealEffectiveness_postvalue_label": {
+      "text": "生命吸取威力",
+      "group": "citadel_attributes",
+      "hash": "8936a28d5e7f"
+    },
+    "StatDesc_SpiritLifestealEffectiveness_postfix": {
+      "text": "%",
+      "group": "citadel_attributes",
+      "hash": "4345cb1fa278"
     },
     "StatDesc_BaseWeaponDamage": {
       "text": "武器伤害",
@@ -24470,9 +24485,9 @@
       "hash": "ebb91f6c40db"
     },
     "BulletArmor_postvalue_label": {
-      "text": "子弹护盾",
+      "text": "子弹护甲",
       "group": "citadel_attributes",
-      "hash": "776bb3ef13f9"
+      "hash": "ebb91f6c40db"
     },
     "MODIFIER_VALUE_BULLET_ARMOR_prefix": {
       "text": "{s:sign}",
@@ -24695,9 +24710,9 @@
       "hash": "a38f147abeee"
     },
     "TechArmor_postvalue_label": {
-      "text": "元灵护盾",
+      "text": "元灵护甲",
       "group": "citadel_attributes",
-      "hash": "dabf381be4a4"
+      "hash": "a38f147abeee"
     },
     "MODIFIER_VALUE_TECH_ARMOR_prefix": {
       "text": "{s:sign}",
@@ -24805,9 +24820,9 @@
       "hash": "ebb91f6c40db"
     },
     "BulletDamageReduction_postvalue_label": {
-      "text": "子弹护盾",
+      "text": "子弹护甲",
       "group": "citadel_attributes",
-      "hash": "776bb3ef13f9"
+      "hash": "ebb91f6c40db"
     },
     "ActiveBulletDamageReduction_prefix": {
       "text": "{s:sign}",
@@ -29475,9 +29490,9 @@
       "hash": "eb6aaba1a1ca"
     },
     "FinalSlow_postfix": {
-      "text": "米",
+      "text": "米/秒",
       "group": "citadel_attributes",
-      "hash": "ee7f305751a5"
+      "hash": "ca8c4ea71eec"
     },
     "WeaponPowerPerStack_prefix": {
       "text": "{s:sign}",
@@ -32385,9 +32400,9 @@
       "hash": "6fe7f545f142"
     },
     "AttribFormat_AdditionalNote": {
-      "text": "（%s）",
+      "text": "（%s1）",
       "group": "citadel_gc",
-      "hash": "9e143da7b201"
+      "hash": "e5a2b35339c9"
     },
     "Tag_Category_Rarity": {
       "text": "稀有度",
@@ -35620,9 +35635,9 @@
       "hash": "757f68ef851a"
     },
     "Citadel_InvalidCast_NoFullClips": {
-      "text": "无完整剪辑可重载",
+      "text": "无满弹匣可装填",
       "group": "citadel_main",
-      "hash": "82abaa85208c"
+      "hash": "2c3381fe42de"
     },
     "Citadel_MatchInfo_Mode_Ranked": {
       "text": "天梯",
@@ -36125,14 +36140,14 @@
       "hash": "2b9eceb7a86a"
     },
     "Citadel_Shop_EnterPurchase_Purchase": {
-      "text": "购买 {s: enter_purchase_item}",
+      "text": "购买 {s:enter_purchase_item}",
       "group": "citadel_main",
-      "hash": "5b3be6f21d04"
+      "hash": "52009ee0dd93"
     },
     "Citadel_Shop_EnterPurchase_Sell": {
-      "text": "出售 {s: enter_purchase_item}",
+      "text": "出售 {s:enter_purchase_item}",
       "group": "citadel_main",
-      "hash": "98a933d308e6"
+      "hash": "5d607d475975"
     },
     "Citadel_Spectate_Connecting_Title": {
       "text": "正在连接至比赛",
@@ -38380,9 +38395,9 @@
       "hash": "c01b360d5388"
     },
     "Citadel_RosterMode_PrivateBotHard": {
-      "text": "私人人机对战 - 简单",
+      "text": "私人人机对战 - 困难",
       "group": "citadel_main",
-      "hash": "278f55a1f06b"
+      "hash": "6be7b67973f0"
     },
     "Citadel_RosterMode_PrivateLobby": {
       "text": "私人房间",
@@ -38929,10 +38944,10 @@
       "group": "citadel_main",
       "hash": "5f886f1328d8"
     },
-    "Citadel_HUD_ToxicChatMute_Desc": {
-      "text": "因辱骂性交流被禁言30天，并将在比赛剩余时间内被禁言。",
+    "Citadel_HUD_ToxicChatMute_Desc:f": {
+      "text": "因辱骂性交流被延长禁言时间，并将在比赛剩余时间内被禁言。",
       "group": "citadel_main",
-      "hash": "a11b1c2a397e"
+      "hash": "fb3b24ae6fe7"
     },
     "Citadel_HUD_Koth_Warning": {
       "text": "一道不稳定的裂隙正在打开……",
@@ -38968,11 +38983,6 @@
       "text": "<b>受到</b>伤害",
       "group": "citadel_main",
       "hash": "0b3a9c112e92"
-    },
-    "Citadel_HUD_DamageSummary_Hint": {
-      "text": "按住{g:citadel_binding:'Scoreboard'}查看调整详情",
-      "group": "citadel_main",
-      "hash": "7c7f047114b8"
     },
     "Citadel_HUD_AdjustedBy": {
       "text": "调整源：",
@@ -39580,9 +39590,9 @@
       "hash": "b75bbe1b5932"
     },
     "Citadel_AttackerClass_CLASS_TROOPER_MELEE": {
-      "text": "医疗兵",
+      "text": "近战步兵",
       "group": "citadel_main",
-      "hash": "b75bbe1b5932"
+      "hash": "330ee80dd4d4"
     },
     "Citadel_AttackerClass_CLASS_TROOPER_NEUTRAL": {
       "text": "魂灵",
@@ -40848,6 +40858,16 @@
       "text": "连接失败",
       "group": "citadel_main",
       "hash": "2c056f182f42"
+    },
+    "Citadel_HideoutConnectionFailed_TooFewPlayers": {
+      "text": "大本营的玩家数量不足",
+      "group": "citadel_main",
+      "hash": "9badd3577edc"
+    },
+    "Citadel_HideoutConnectionFailed_PlayersInMatch": {
+      "text": "玩家当前在比赛中",
+      "group": "citadel_main",
+      "hash": "bb9cf60628e5"
     },
     "Citadel_HideoutBallJuggle_Increment": {
       "text": "{s:value}倍",
@@ -45964,11 +45984,6 @@
       "group": "citadel_main",
       "hash": "ddcf33952960"
     },
-    "citadel_settings_hero_specific_enabled_body": {
-      "text": "要浏览特定英雄的设置，可以点击左上角的英雄图标打开英雄选择界面，再选择英雄。<br><br>第一个图标代表基础设置。每个英雄可以自定义其中一项或多项设置，未自定义的设置将沿用基础设置。<br><br>浏览设置菜单时按住TAB键可以高亮每个英雄能自定义的设置。其他为全局设置，无论使用哪个英雄都会保持不变。",
-      "group": "citadel_main",
-      "hash": "066af95a49f0"
-    },
     "citadel_settings_hero_specific_disabled_title": {
       "text": "已启用全局设置",
       "group": "citadel_main",
@@ -46310,9 +46325,49 @@
       "hash": "1072c00ed0fd"
     },
     "citadel_settings_subtitles_background_color_tooltip": {
-      "text": "字幕文本后面的背景颜色。",
+      "text": "字幕文本后面的背景或其轮廓的颜色。",
       "group": "citadel_main",
-      "hash": "20621522d79d"
+      "hash": "90fc1e8e2a14"
+    },
+    "citadel_settings_subtitles_background_style": {
+      "text": "字幕背景样式",
+      "group": "citadel_main",
+      "hash": "c0f6aa6b13d5"
+    },
+    "citadel_settings_subtitles_background_style_tooltip": {
+      "text": "字幕可以显示在纯色背景上，也可以显示在文本周围带有轮廓线的位置。",
+      "group": "citadel_main",
+      "hash": "e208404a3c08"
+    },
+    "citadel_settings_subtitles_background_style_solid": {
+      "text": "纯色",
+      "group": "citadel_main",
+      "hash": "c502e4a090eb"
+    },
+    "citadel_settings_subtitles_background_style_outline": {
+      "text": "轮廓",
+      "group": "citadel_main",
+      "hash": "f31ae092adf4"
+    },
+    "citadel_settings_subtitles_background_opacity": {
+      "text": "背景不透明度",
+      "group": "citadel_main",
+      "hash": "d626470d5a41"
+    },
+    "citadel_settings_subtitles_background_opacity_tooltip": {
+      "text": "设置字幕文本后面背景的不透明度。",
+      "group": "citadel_main",
+      "hash": "64022277f4f7"
+    },
+    "citadel_settings_subtitles_outline_thickness": {
+      "text": "字幕轮廓粗细",
+      "group": "citadel_main",
+      "hash": "20ede98b8b51"
+    },
+    "citadel_settings_subtitles_outline_thickness_tooltip": {
+      "text": "设置字幕文本周围轮廓的粗细。",
+      "group": "citadel_main",
+      "hash": "8f1832bfa76c"
     },
     "citadel_settings_subtitles_font": {
       "text": "字幕字体",
@@ -46429,6 +46484,11 @@
       "group": "citadel_main",
       "hash": "6e0869513dd5"
     },
+    "citadel_hotkeys_tooltip_down_dash": {
+      "text": "在空中向下冲刺，效果与双击下蹲相同。",
+      "group": "citadel_main",
+      "hash": "53326b9e38f5"
+    },
     "citadel_hotkeys_tooltip_held_item": {
       "text": "格挡来袭的近战攻击。如果你携带了诸如灵瓮之类的物品，该指令会将其扔出去。",
       "group": "citadel_main",
@@ -46539,6 +46599,41 @@
       "group": "citadel_main",
       "hash": "42deb44d67ca"
     },
+    "citadel_hotkeys_tooltip_shop_purchase_search_match": {
+      "text": "商店搜索结果缩小到单个物品时可以购买；如果已经拥有该商品，则可以出售。此功能在搜索框中输入内容时有效。",
+      "group": "citadel_main",
+      "hash": "52655721f625"
+    },
+    "citadel_hotkeys_tooltip_shop_tab_build": {
+      "text": "切换到商店的出装页面。",
+      "group": "citadel_main",
+      "hash": "49d6f9ea43bb"
+    },
+    "citadel_hotkeys_tooltip_shop_tab_recommended": {
+      "text": "切换到商店的热门物品页面。",
+      "group": "citadel_main",
+      "hash": "bd83a4bc97c2"
+    },
+    "citadel_hotkeys_tooltip_shop_tab_all_items": {
+      "text": "切换到商店的所有物品页面。",
+      "group": "citadel_main",
+      "hash": "3a4b1864edf9"
+    },
+    "citadel_hotkeys_tooltip_shop_tab_weapon": {
+      "text": "切换到商店的武器物品页面。",
+      "group": "citadel_main",
+      "hash": "27695d9cfe63"
+    },
+    "citadel_hotkeys_tooltip_shop_tab_spirit": {
+      "text": "切换到商店的元灵物品页面。",
+      "group": "citadel_main",
+      "hash": "77670c9491c3"
+    },
+    "citadel_hotkeys_tooltip_shop_tab_vitality": {
+      "text": "切换到商店的活力物品页面。",
+      "group": "citadel_main",
+      "hash": "71f4ac4c82ce"
+    },
     "citadel_settings_monitor_mic_desc": {
       "text": "打开此功能可以在调整音频设置时监听你的麦克风。",
       "group": "citadel_main",
@@ -46630,9 +46725,9 @@
       "hash": "71b6771bc789"
     },
     "citadel_settings_display_refresh_rate": {
-      "text": "{d: refresh_rate} Hz",
+      "text": "{d:refresh_rate} Hz",
       "group": "citadel_main",
-      "hash": "e27ed25bea66"
+      "hash": "7f5c89ee5f7d"
     },
     "citadel_settings_display_option_label": {
       "text": "{d:r:display_width}x{d:r:display_height} ({s:refresh_rate_label})",
@@ -46728,6 +46823,26 @@
       "text": "用于在界面中显示敌人生命条和其他敌人指示器的颜色。",
       "group": "citadel_main",
       "hash": "a5708a5d4751"
+    },
+    "citadel_settings_enemy_damage_delta_color": {
+      "text": "敌人伤害颜色",
+      "group": "citadel_main",
+      "hash": "243332377c40"
+    },
+    "citadel_settings_enemy_damage_delta_color_tooltip": {
+      "text": "对敌人造成伤害时，该颜色会短暂地显示敌人刚刚损失的生命值。",
+      "group": "citadel_main",
+      "hash": "9b721683d388"
+    },
+    "citadel_settings_enemy_zipline_color": {
+      "text": "敌方滑索颜色",
+      "group": "citadel_main",
+      "hash": "f49069c51151"
+    },
+    "citadel_settings_enemy_zipline_color_tooltip": {
+      "text": "用于表示敌方滑索和敌方目标在小地图上的颜色。",
+      "group": "citadel_main",
+      "hash": "02f070e0f5ba"
     },
     "citadel_settings_video_preview": {
       "text": "预览渲染变化",
@@ -46849,11 +46964,6 @@
       "group": "citadel_main",
       "hash": "625a5ef83ad5"
     },
-    "citadel_settings_shop_open_focus_search_tooltip": {
-      "text": "启用后，打开商店会将键盘放入搜索框中，这样就可以立即键入物品名称。按ESC键后键盘会返回到游戏中。",
-      "group": "citadel_main",
-      "hash": "f99c367e50b2"
-    },
     "citadel_settings_shop_scroll_snap": {
       "text": "快速滚动查看价格档位",
       "group": "citadel_main",
@@ -46893,6 +47003,31 @@
       "text": "在生命值处于临界水平的敌人的生命条上显示文本和动画。",
       "group": "citadel_main",
       "hash": "b9bf26de48b0"
+    },
+    "citadel_settings_unit_status_hero_name": {
+      "text": "生命条上方名称",
+      "group": "citadel_main",
+      "hash": "0991b416fd6a"
+    },
+    "citadel_settings_unit_status_hero_name_tooltip": {
+      "text": "在其他英雄的生命条上方显示的内容。",
+      "group": "citadel_main",
+      "hash": "be2af1f223fd"
+    },
+    "citadel_settings_unit_status_hero_name_player": {
+      "text": "玩家名称",
+      "group": "citadel_main",
+      "hash": "2cf469e71964"
+    },
+    "citadel_settings_unit_status_hero_name_hero": {
+      "text": "英雄名称",
+      "group": "citadel_main",
+      "hash": "87019561bda9"
+    },
+    "citadel_settings_unit_status_hero_name_none": {
+      "text": "无",
+      "group": "citadel_main",
+      "hash": "72077749f794"
     },
     "citadel_settings_damage_text_cumulative": {
       "text": "显示累积伤害",
@@ -47200,9 +47335,9 @@
       "hash": "927b99715016"
     },
     "citadel_settings_camera_fade_viewed_near_opacity": {
-      "text": "观察英雄的近距离透明度",
+      "text": "观察英雄的近距离不透明度",
       "group": "citadel_main",
-      "hash": "3b0876843246"
+      "hash": "2ba0431b3ae0"
     },
     "citadel_settings_camera_fade_viewed_near_dist": {
       "text": "观察英雄的完全消失距离",
@@ -47215,9 +47350,9 @@
       "hash": "913b91ccc28e"
     },
     "citadel_settings_camera_fade_viewed_tooltip": {
-      "text": "在视角靠近观看的英雄时，英雄会逐渐消失。效果从开始消失距离开始，在完全消失距离达到近距离的透明度。透明度可以设置为100%到完全不消失。",
+      "text": "在视角靠近观看的英雄时，英雄会逐渐消失。效果从开始消失距离开始，在完全消失距离达到近距离的不透明度。不透明度可以设置为100%，使其完全不消失。",
       "group": "citadel_main",
-      "hash": "e4e71cd8c87f"
+      "hash": "92575c59c320"
     },
     "citadel_settings_camera_fade_other_near_opacity": {
       "text": "其他单位的近距离不透明度",
@@ -47235,9 +47370,9 @@
       "hash": "ce2fcfaaed3f"
     },
     "citadel_settings_camera_fade_other_tooltip": {
-      "text": "在视角靠近其他英雄、头目和圣坛时都会逐渐消失。效果从开始消失距离开始，在完全消失距离达到近距离的透明度。透明度可以设置为100%到完全不消失。",
+      "text": "在视角靠近其他英雄、头目和圣坛时都会逐渐消失。效果从开始消失距离开始，在完全消失距离达到近距离的不透明度。不透明度可以设置为100%，使其完全不消失。",
       "group": "citadel_main",
-      "hash": "54a3627351ff"
+      "hash": "b0c43a9284c1"
     },
     "citadel_settings_camera_overrides_enabled": {
       "text": "自定义观战视角",
@@ -47750,9 +47885,9 @@
       "hash": "0ee2428fab60"
     },
     "citadel_settings_share_apply_reticle_tooltip": {
-      "text": "应用代码里的准星设置。自行更改设置或关闭设置菜单可以撤销此操作。",
+      "text": "应用代码里的准星设置。在自行更改设置或关闭设置菜单之前可以撤销此操作。",
       "group": "citadel_main",
-      "hash": "3552074e0533"
+      "hash": "ff482bf8b21c"
     },
     "citadel_settings_share_apply_keybinds": {
       "text": "按键绑定",
@@ -47760,9 +47895,9 @@
       "hash": "8980da0e3b9f"
     },
     "citadel_settings_share_apply_keybinds_tooltip": {
-      "text": "应用代码里的按键绑定设置。自行更改设置或关闭设置菜单可以撤销此操作。",
+      "text": "应用代码里的按键绑定设置。在自行更改设置或关闭设置菜单之前可以撤销此操作。",
       "group": "citadel_main",
-      "hash": "9d9ca43dae31"
+      "hash": "9ad1f225eee7"
     },
     "citadel_settings_share_apply_base": {
       "text": "基础设置",
@@ -47873,11 +48008,6 @@
       "text": "查看映射",
       "group": "citadel_main",
       "hash": "77c378fdbedd"
-    },
-    "citadel_keybind_map_show_chords_tooltip": {
-      "text": "按住SHIFT键，查看绑定到这些键的修饰键组合，而不是单个键绑定。",
-      "group": "citadel_main",
-      "hash": "8b5e4ab8f0bf"
     },
     "citadel_keybind_map_chord_shift": {
       "text": "S",
@@ -48310,9 +48440,9 @@
       "hash": "70fc29387ce1"
     },
     "citadel_settings_reset_popup_selectall": {
-      "text": "选择标签",
+      "text": "选择全部",
       "group": "citadel_main",
-      "hash": "608b8e137e90"
+      "hash": "7d99bcb48dbe"
     },
     "citadel_settings_reset_popup_deselectall": {
       "text": "取消全选",
@@ -48365,14 +48495,14 @@
       "hash": "45c88d0584e2"
     },
     "citadel_settings_reset_hero_scope_shared_note": {
-      "text": "{s:selected_hero_name}的英雄专属设置将恢复为基础设置，而所有英雄共用的设置",
+      "text": "{s:selected_hero_name}的英雄专属设置将恢复为基础设置，而所有英雄共用的其他设置将恢复为游戏默认设置。其他英雄的自定义设置不受影响。",
       "group": "citadel_main",
-      "hash": "3cbaaa9ae455"
+      "hash": "8806b91898d6"
     },
     "citadel_settings_reset_hero_scope_shared_keybinds_note": {
-      "text": "{s:selected_hero_name}的英雄专属设置将恢复为基础设置，而所有英雄共用的其他设置将恢复为游戏默认设置。",
+      "text": "{s:selected_hero_name}的英雄专属设置将恢复为基础设置，而所有英雄共用的其他设置将恢复为游戏默认设置。所有英雄共用的按键绑定不会被重置。其他英雄的自定义设置不受影响。",
       "group": "citadel_main",
-      "hash": "291eaa33d8fe"
+      "hash": "efac7fde6b9d"
     },
     "citadel_settings_reset_hero_scope_keybinds_note": {
       "text": "{s:selected_hero_name}的英雄专属设置将恢复为基础设置。所有英雄共用的按键绑定不会被重置。其他英雄和基础设置不受影响。",
@@ -48525,9 +48655,9 @@
       "hash": "7c208f0491c5"
     },
     "citadel_reset_audio": {
-      "text": "重置视频设置？",
+      "text": "重置音频设置？",
       "group": "citadel_main",
-      "hash": "c30e94ae22cd"
+      "hash": "a086a073b696"
     },
     "citadel_confirm_reset_audio": {
       "text": "确定要重置音频设置吗？",
@@ -48644,6 +48774,26 @@
       "group": "citadel_main",
       "hash": "1c9372907cef"
     },
+    "citadel_settings_shopkeybinds": {
+      "text": "商店",
+      "group": "citadel_main",
+      "hash": "83eff41a2e6c"
+    },
+    "citadel_settings_shopkeybinds_reset_tooltip": {
+      "text": "重置所有商店的按键绑定。",
+      "group": "citadel_main",
+      "hash": "8ac01f506e4f"
+    },
+    "citadel_settings_shop_keybinds_new_setting": {
+      "text": "商店按键绑定",
+      "group": "citadel_main",
+      "hash": "832dc311bc28"
+    },
+    "citadel_settings_shop_keybinds_new_setting_desc": {
+      "text": "现在可以重新绑定商店快捷键。商店打开时，商店快捷键的优先级高于其他按键绑定。",
+      "group": "citadel_main",
+      "hash": "574c776c07f4"
+    },
     "citadel_settings_audiokeybinds": {
       "text": "音频",
       "group": "citadel_main",
@@ -48735,9 +48885,9 @@
       "hash": "c38bb3dbbed5"
     },
     "citadel_settings_ping_wheel_context_slot5_tooltip": {
-      "text": "启用后，聊天栏位5会自动提供适合当前情况的词组，比如",
+      "text": "启用后，聊天栏位5会自动提供适合当前情况的词组，比如附近友军生命值较低时请求治疗。关闭后可以给栏位5选择一个固定短语。",
       "group": "citadel_main",
-      "hash": "d85e6120f75f"
+      "hash": "b9820cfd402f"
     },
     "citadel_settings_ping_wheel_slot5": {
       "text": "栏位 5",
@@ -48860,9 +49010,9 @@
       "hash": "2c6bf800c5c0"
     },
     "citadel_settings_auto_queue_build_tooltip": {
-      "text": "开始游戏时，把出装里的物品自动添加到快速购，",
+      "text": "开始游戏时，把出装里的物品自动添加到快速购买队列中。",
       "group": "citadel_main",
-      "hash": "ebe1e0e16457"
+      "hash": "7c3ea7efa26e"
     },
     "citadel_settings_accessibility": {
       "text": "辅助功能",
@@ -49035,9 +49185,9 @@
       "hash": "654ffa5541f4"
     },
     "citadel_settings_secondary_language_builds_desc": {
-      "text": "除了显示以当前语言撰写的出装外，还会显示以主要语言撰写的公开出装。",
+      "text": "除了显示以主要语言撰写的出装外，还会显示以当前语言撰写的公开出装。",
       "group": "citadel_main",
-      "hash": "9a8a66e6fa96"
+      "hash": "3703da2df94d"
     },
     "citadel_settings_language_none": {
       "text": "无",
@@ -49180,9 +49330,9 @@
       "hash": "d2c44fb9e65d"
     },
     "citadel_settings_color_picker_red": {
-      "text": "举报",
+      "text": "红",
       "group": "citadel_main",
-      "hash": "3eeaade917a2"
+      "hash": "5e3127724b85"
     },
     "citadel_settings_color_picker_green": {
       "text": "绿",
@@ -50694,6 +50844,11 @@
       "group": "citadel_main",
       "hash": "a12f7c1aaf6f"
     },
+    "citadel_keybind_down_dash": {
+      "text": "向下冲刺",
+      "group": "citadel_main",
+      "hash": "d056ddd0a1ff"
+    },
     "citadel_keybind_push_to_talk": {
       "text": "语音聊天（队伍）",
       "group": "citadel_main",
@@ -51225,9 +51380,9 @@
       "hash": "e1684238dd0a"
     },
     "citadel_settings_spectate_player_hotkeys_new_setting_desc": {
-      "text": "观战或观看回放时，按下数字箭头键可以立刻在相应英雄之间跳转，或者自行设置自定义按键。回放速度的默认按键已更新为使用方括号键。",
+      "text": "观战或观看回放时，按下数字键可以立刻在相应英雄之间跳转，或者自行设置自定义按键。回放速度的默认按键已更新为使用方括号键。",
       "group": "citadel_main",
-      "hash": "4074aad9af10"
+      "hash": "68796b1b2bcb"
     },
     "citadel_settings_health_damage_display_new_setting": {
       "text": "生命值与伤害显示选项",
@@ -51238,6 +51393,16 @@
       "text": "现在可以选择是否在生命条上显示生命值数字、如何累计显示造成的伤害，以及是否在生命值极低的敌人的生命条上显示文本和动画。",
       "group": "citadel_main",
       "hash": "1b67a99dfb4a"
+    },
+    "citadel_settings_unit_status_hero_name_new_setting": {
+      "text": "生命条名称",
+      "group": "citadel_main",
+      "hash": "f0e2c85d9402"
+    },
+    "citadel_settings_unit_status_hero_name_new_setting_desc": {
+      "text": "现在可以选择其他英雄的生命条是显示玩家名称、英雄名称还是不显示名称。",
+      "group": "citadel_main",
+      "hash": "dc5c25bfbcfa"
     },
     "guide_get_started_title": {
       "text": "游戏入门",
@@ -53784,6 +53949,16 @@
       "group": "citadel_main",
       "hash": "c3efbfe007a8"
     },
+    "HeroTesting_Photomode": {
+      "text": "拍照模式",
+      "group": "citadel_main",
+      "hash": "fbafa1648fb9"
+    },
+    "HeroTesting_Photomode_desc": {
+      "text": "隐藏所有界面、生命条和本地玩家。",
+      "group": "citadel_main",
+      "hash": "3f5e42244c4d"
+    },
     "HeroTesting_HideUI": {
       "text": "隐藏界面",
       "group": "citadel_main",
@@ -56260,9 +56435,9 @@
       "hash": "ef52e6182e0d"
     },
     "citadel_chatwheel_label_defend_walker": {
-      "text": "防守分路…",
+      "text": "防守机甲…",
       "group": "citadel_main",
-      "hash": "786d1d1f451b"
+      "hash": "4198e3471d56"
     },
     "citadel_chatwheel_message_defend_walker": {
       "text": "防守机甲",
@@ -56603,6 +56778,16 @@
       "text": "这里有魂魄袋",
       "group": "citadel_main",
       "hash": "192cfe02949f"
+    },
+    "citadel_chatwheel_label_someone_was_here": {
+      "text": "有人来过这里",
+      "group": "citadel_main",
+      "hash": "3817dc5e0fff"
+    },
+    "citadel_chatwheel_message_someone_was_here": {
+      "text": "有人来过这里",
+      "group": "citadel_main",
+      "hash": "3817dc5e0fff"
     },
     "citadel_chatwheel_label_shop_closed": {
       "text": "已关闭",
@@ -57034,15 +57219,30 @@
       "group": "citadel_main",
       "hash": "50de52fd42a2"
     },
+    "citadel_chatwheel_message_going_corrupted_shop": {
+      "text": "前往经纪商",
+      "group": "citadel_main",
+      "hash": "86451c47aa06"
+    },
     "citadel_chatwheel_label_visit_corrupted_shop": {
       "text": "访问商店",
       "group": "citadel_main",
       "hash": "eab73c03776f"
     },
+    "citadel_chatwheel_message_visit_corrupted_shop": {
+      "text": "访问经纪商",
+      "group": "citadel_main",
+      "hash": "1dfd1c48cdb1"
+    },
     "citadel_chatwheel_label_ignore_corrupted_shop": {
       "text": "忽略商店",
       "group": "citadel_main",
       "hash": "fab7c67e0573"
+    },
+    "citadel_chatwheel_message_ignore_corrupted_shop": {
+      "text": "别管经纪商",
+      "group": "citadel_main",
+      "hash": "dbd3c00dc288"
     },
     "citadel_chatwheel_label_going_farm": {
       "text": "去打钱了",
@@ -58179,6 +58379,51 @@
       "group": "citadel_main",
       "hash": "0b00dbaa8190"
     },
+    "citadel_keybind_shop_purchase_search_match": {
+      "text": "购买/出售搜索结果",
+      "group": "citadel_main",
+      "hash": "9d83f830305c"
+    },
+    "citadel_keybind_shop_tab_build": {
+      "text": "出装页面",
+      "group": "citadel_main",
+      "hash": "cbe1e1d6914e"
+    },
+    "citadel_keybind_shop_tab_recommended": {
+      "text": "热门物品页面",
+      "group": "citadel_main",
+      "hash": "d20fa0e3d9eb"
+    },
+    "citadel_keybind_shop_tab_all_items": {
+      "text": "所有物品页面",
+      "group": "citadel_main",
+      "hash": "ba3e08bd77e1"
+    },
+    "citadel_keybind_shop_tab_weapon": {
+      "text": "武器页面",
+      "group": "citadel_main",
+      "hash": "0d39bcd08e18"
+    },
+    "citadel_keybind_shop_tab_spirit": {
+      "text": "元灵页面",
+      "group": "citadel_main",
+      "hash": "127f37cfdfa6"
+    },
+    "citadel_keybind_shop_tab_vitality": {
+      "text": "活力页面",
+      "group": "citadel_main",
+      "hash": "a44982517011"
+    },
+    "citadel_keybind_shop_tier_up": {
+      "text": "向上滚动",
+      "group": "citadel_main",
+      "hash": "7511f5b684f8"
+    },
+    "citadel_keybind_shop_tier_down": {
+      "text": "向下滚动",
+      "group": "citadel_main",
+      "hash": "237b9b6cca4b"
+    },
     "Citadel_News_MajorUpdate": {
       "text": "重大更新",
       "group": "citadel_main",
@@ -59055,9 +59300,9 @@
       "hash": "d9c8c886e97d"
     },
     "map_district_building_base": {
-      "text": "基础",
+      "text": "基地",
       "group": "citadel_main",
-      "hash": "5f83e7f6a1ee"
+      "hash": "f5a874378b35"
     },
     "map_district_building_docks": {
       "text": "码头",

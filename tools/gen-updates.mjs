@@ -172,7 +172,9 @@ const skipped = [];
 for (const id of Object.keys(newH)) {
   const nh = newH[id];
   const oh = oldH[id];
-  if (!oh || !nh.released) continue;
+  // 新しく解禁されたヒーロー(前の版では未解禁)はバランス調整ではないので載せない。
+  // 載せると数値がすべて「null → 値」の調整として並び、統計の集計期間(tools/stats-window.mjs)も解禁日に動いてしまう
+  if (!oh || !nh.released || !oh.released) continue;
   const rows = diffFieldMaps(heroFieldMap(oh, oldA, skipped), heroFieldMap(nh, newA, skipped));
   if (rows.length === 0) continue;
   const changes = rows.map(toChange);

@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6731",
-  "upstreamCommit": "6731",
-  "generatedAt": "2026-10-02T02:52:16.243Z",
+  "clientVersion": "6745",
+  "upstreamCommit": "6745",
+  "generatedAt": "2026-10-03T14:16:18.923Z",
   "language": "japanese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 618,
-    "citadel_heroes": 3334,
-    "citadel_attributes": 1980,
-    "citadel_gc": 214,
-    "citadel_main": 5145
+    "citadel_heroes": 3415,
+    "citadel_attributes": 1983,
+    "citadel_gc": 215,
+    "citadel_main": 5203
   },
   "tokens": {
     "hero_vampire:n": {
@@ -975,19 +975,19 @@
       "hash": "7804c13ef83e"
     },
     "hero_baba:n": {
-      "text": "ババ",
+      "text": "バーバ",
       "group": "citadel_gc_hero_names",
-      "hash": "5fe74d685bc8"
+      "hash": "ecf5cafbf011"
     },
     "hero_baba_search:n": {
-      "text": "ババ ばば baba",
+      "text": "バーバ ばーば ba-ba baba",
       "group": "citadel_gc_hero_names",
-      "hash": "313a0585a498"
+      "hash": "6dcd7a176085"
     },
     "hero_baba_sort:n": {
-      "text": "ババ",
+      "text": "バーバ",
       "group": "citadel_gc_hero_names",
-      "hash": "5fe74d685bc8"
+      "hash": "ecf5cafbf011"
     },
     "hero_chessmaster:n": {
       "text": "ソロモン",
@@ -1485,9 +1485,9 @@
       "hash": "b70656424035"
     },
     "Steam_RP_hero_baba": {
-      "text": "ババ",
+      "text": "バーバ",
       "group": "citadel_gc_hero_names",
-      "hash": "5fe74d685bc8"
+      "hash": "ecf5cafbf011"
     },
     "Steam_RP_hero_ratking": {
       "text": "ラットキング",
@@ -5680,9 +5680,9 @@
       "hash": "e2f95e62e97a"
     },
     "upgrade_eldritch_shot_desc": {
-      "text": "次に放たれる弾薬が、敵の与ダメージ、回復効果、移動速度を低下させる強力なデバフを付与する。さらに、対象の現在のHPに応じた{g:citadel_inline_attribute:'BonusSpiritDamage'}も与える。<br><br>この弾薬はサイズが大きく、対象を貫通する",
+      "text": "次に放たれる弾薬が、敵の与ダメージ、回復効果、移動速度を低下させる強力なデバフを付与する。さらに、対象の現在のHPに応じた{g:citadel_inline_attribute:'BonusSpiritDamage'}も与える<br><br>この弾薬はサイズが大きく、対象を貫通する",
       "group": "citadel_mods",
-      "hash": "6f390cf99e6a"
+      "hash": "e9d880983a2d"
     },
     "upgrade_cloak_of_opportunity_desc": {
       "text": "次に付与される<span class=\"highlight\">スタン、束縛、移動不能、睡眠</span>のいずれかのデバフを無効化し、<span class=\"highlight\">アンストッパブル</span>状態になる。さらに、<span class=\"highlight\">バリア</span>と{g:citadel_inline_attribute:'MoveSpeed'}ボーナスを獲得する",
@@ -6985,9 +6985,9 @@
       "hash": "04811891a8a2"
     },
     "ability_header_card_toss_suits_desc": {
-      "text": "<br>スートはそれぞれ異なるボーナスを発生させる。<span class=\"highlight\">ジョーカー</span>はすべてのスートとして扱われる</span>",
+      "text": "<br>スートはそれぞれ異なるボーナスを発生させる。<span class=\"highlight\">ジョーカー</span>はすべてのスートとして扱われる",
       "group": "citadel_heroes",
-      "hash": "9d2960d19ebd"
+      "hash": "a82f63f3a6fe"
     },
     "ability_header_card_toss_spade": {
       "text": "スペード",
@@ -8645,9 +8645,9 @@
       "hash": "38ccf5231133"
     },
     "citadel_ability_self_vacuum_desc": {
-      "text": "特異点を生み出し、{g:citadel_inline_attribute:'SpiritDPS'}を与えて{g:citadel_inline_attribute:'Stun'}を付与し、付近の敵を引き寄せる",
+      "text": "特異点を生み出し、{g:citadel_inline_attribute:'SpiritDPS'}を与えて{g:citadel_inline_attribute:'Stun'}を付与し、付近の敵を<span class=\"highlight\">引き寄せる</span>",
       "group": "citadel_heroes",
-      "hash": "d923ac1863b3"
+      "hash": "8877ab23937e"
     },
     "VacuumRadius_label": {
       "text": "特異点範囲",
@@ -10880,9 +10880,9 @@
       "hash": "d5df9eb46d56"
     },
     "CatMaxSpeed_postfix": {
-      "text": "m",
+      "text": "m／秒",
       "group": "citadel_heroes",
-      "hash": "6b0d31c0d563"
+      "hash": "deedee4188b4"
     },
     "CatLifetime_postfix": {
       "text": "秒",
@@ -11615,9 +11615,9 @@
       "hash": "451d84321a45"
     },
     "ability_immobilize_trap/trap_debuff": {
-      "text": "スピリットアーマー低下",
+      "text": "弾薬耐性低下",
       "group": "citadel_heroes",
-      "hash": "57ccd95fc969"
+      "hash": "3f4cd302bac9"
     },
     "ImmobilizeTrap_CurseDuration_label": {
       "text": "カース継続時間",
@@ -13235,9 +13235,9 @@
       "hash": "c23009b68297"
     },
     "synth_barrage_desc": {
-      "text": "着弾地点周辺の敵に<span class=\"highlight\">{g:citadel_inline_attribute:'SpiritDamage'}</span>を与えて、<span class=\"highlight\">{g:citadel_inline_attribute:'Slow'}</span>を付与する発射物を放つ。ヒーローにヒットした発射物は、{s:hero_name}に<span class=\"highlight\">スタックする{g:citadel_inline_attribute:'DamageAmp'}</span>を付与する<br>空中で発動すると、{s:hero_name}は<span class=\"highlight\">浮遊</span>する<span class=\"diminish\"><br><br>空中ダッシュまたはフライングクロークを発動してもバラージはキャンセルされない</span>",
+      "text": "着弾地点周辺の敵に<span class=\"highlight\">{g:citadel_inline_attribute:'SpiritDamage'}</span>を与えて、<span class=\"highlight\">{g:citadel_inline_attribute:'Slow'}を付与</span>する発射物を放つ。ヒーローにヒットした発射物は、{s:hero_name}に<span class=\"highlight\">スタックする{g:citadel_inline_attribute:'DamageAmp'}</span>を付与する<br>空中で発動すると、{s:hero_name}は<span class=\"highlight\">浮遊</span>する<span class=\"diminish\"><br><br>空中ダッシュまたはフライングクロークを発動してもバラージはキャンセルされない</span>",
       "group": "citadel_heroes",
-      "hash": "c84168763335"
+      "hash": "c9909a7e44f1"
     },
     "synth_barrage_t3_desc": {
       "text": "増幅／スタック <span class=\"highlight\">+{s:AmpPercentPerStack}%</span>、範囲 <span class=\"highlight\">{s:Radius}m</span>",
@@ -17270,9 +17270,9 @@
       "hash": "f8963ed6d00c"
     },
     "ability_doorman_luggage_cart_desc": {
-      "text": "{g:citadel_inline_attribute:'SpiritDamage'}を与え、進路上の敵ヒーローを{g:citadel_inline_attribute:'Pulls'}るキャリーカートを送り出す<br><br>{g:citadel_binding:'AltCast'}でオルトキャストすると、味方ヒーローを対象にできる",
+      "text": "{g:citadel_inline_attribute:'SpiritDamage'}を与え、通路上の敵ヒーローを{g:citadel_inline_attribute:'Pulls'}るキャリーカートを送り出す<br><br>{g:citadel_binding:'AltCast'}でオルトキャストすると、味方ヒーローを対象にできる",
       "group": "citadel_heroes",
-      "hash": "9e09111bca53"
+      "hash": "064923fa1a5f"
     },
     "ability_doorman_luggage_cart_t3_note": {
       "text": "敵を引きずっている状態でカートが壁に衝突すると、対象に追加ダメージを与える",
@@ -17785,9 +17785,9 @@
       "hash": "e2f95e62e97a"
     },
     "ability_frank_painaura/painaura/painauradebuff": {
-      "text": "苦痛のオーラ",
+      "text": "苦悶のオーラ",
       "group": "citadel_heroes",
-      "hash": "eb850f4d9834"
+      "hash": "f2a78e282903"
     },
     "ability_frank_painaura_buttonhint": {
       "text": "オーラをやめる",
@@ -18465,9 +18465,9 @@
       "hash": "f6983a5e32b7"
     },
     "ShoveRadius_postvalue_label": {
-      "text": "押し出し範囲",
+      "text": "Shove Radius",
       "group": "citadel_heroes",
-      "hash": "f6983a5e32b7"
+      "hash": "b983e4d34d66"
     },
     "ShoveRadius_postfix": {
       "text": "m",
@@ -21169,6 +21169,401 @@
       "group": "citadel_heroes",
       "hash": "4345cb1fa278"
     },
+    "citadel_weapon_ratking_set": {
+      "text": "王の勅令",
+      "group": "citadel_heroes",
+      "hash": "78ff53c0d304"
+    },
+    "citadel_ability_jump_ratking": {
+      "text": "ジャンプ",
+      "group": "citadel_heroes",
+      "hash": "72846f25bfe6"
+    },
+    "ability_ratking_entertunnel": {
+      "text": "体を押し込み中…",
+      "group": "citadel_heroes",
+      "hash": "95dbead387b0"
+    },
+    "ability_ratking_scrap_grenade": {
+      "text": "スクラップグレネード",
+      "group": "citadel_heroes",
+      "hash": "9a5a9849747c"
+    },
+    "ability_ratking_scrap_grenade_desc": {
+      "text": "複数回爆発するスクラップグレネードを投げる。爆発は{g:citadel_inline_attribute:'BulletDamage'}を与え、{g:citadel_inline_attribute:'Slow'}を付与する<br><br><span class=\"diminish\">グレネードは近接攻撃で吹き飛ばせる</span>",
+      "group": "citadel_heroes",
+      "hash": "5637917945fb"
+    },
+    "ability_ratking_scrap_grenade_t3_desc": {
+      "text": "最後に追加で大きな爆発を発生させる",
+      "group": "citadel_heroes",
+      "hash": "ce8493e2342d"
+    },
+    "ability_ratking_scrap_grenade_big_explosion_desc": {
+      "text": "最後の爆発の起爆時間が長くなるが、爆発範囲が拡大して与える{g:citadel_inline_attribute:'BulletDamage'}が増加し、より強力な{g:citadel_inline_attribute:'Slow'}を付与する",
+      "group": "citadel_heroes",
+      "hash": "37d0c4cac3b1"
+    },
+    "DamagePerShrapnel_postvalue_label": {
+      "text": "爆発 ダメージ",
+      "group": "citadel_heroes",
+      "hash": "4d418211d668"
+    },
+    "DamagePerShrapnel_label": {
+      "text": "爆発 ダメージ",
+      "group": "citadel_heroes",
+      "hash": "4d418211d668"
+    },
+    "Detonations_postvalue_label": {
+      "text": "爆発 回数",
+      "group": "citadel_heroes",
+      "hash": "ecd2abb9d653"
+    },
+    "ShrapnelSphereRadius_postvalue_label": {
+      "text": "爆発 範囲",
+      "group": "citadel_heroes",
+      "hash": "fcad0afe674b"
+    },
+    "ShrapnelSphereRadius_label": {
+      "text": "爆発 範囲",
+      "group": "citadel_heroes",
+      "hash": "fcad0afe674b"
+    },
+    "ShrapnelSphereRadius_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "BigExplosionDamage_postvalue_label": {
+      "text": "大爆発 ダメージ",
+      "group": "citadel_heroes",
+      "hash": "67748ebfedb3"
+    },
+    "BigExplosionDamage_label": {
+      "text": "大爆発 ダメージ",
+      "group": "citadel_heroes",
+      "hash": "67748ebfedb3"
+    },
+    "BigExplosionRadius_label": {
+      "text": "大爆発 範囲",
+      "group": "citadel_heroes",
+      "hash": "faa9c365c6a2"
+    },
+    "BigExplosionRadius_postvalue_label": {
+      "text": "大爆発 範囲",
+      "group": "citadel_heroes",
+      "hash": "faa9c365c6a2"
+    },
+    "BigExplosionRadius_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "BigExplosionSlowPercent_postvalue_label": {
+      "text": "大爆発 スロウ",
+      "group": "citadel_heroes",
+      "hash": "5b6bd394d84e"
+    },
+    "BigExplosionSlowPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "BigExplosionSlowPercent_label": {
+      "text": "大爆発 スロウ",
+      "group": "citadel_heroes",
+      "hash": "5b6bd394d84e"
+    },
+    "ability_ratking_ratnibble": {
+      "text": "ラットスウォーム",
+      "group": "citadel_heroes",
+      "hash": "ea64cb03be2f"
+    },
+    "ability_ratking_ratnibble_desc": {
+      "text": "<span class=\"highlight\">ネズミ</span>の群れを呼び出す。ネズミは敵に飛びかかり、噛みつくたびに{g:citadel_inline_attribute:'SpiritDPS'}を与えて{g:citadel_inline_attribute:'BulletResist'}を減少させる。付着しているネズミの数が多いほど、対象に噛みつく頻度が高くなる<br><br>同じ敵には複数のネズミが付着可能だが、敵は<span class=\"highlight\">地上か空中でダッシュ</span>を行うことで、早めに<span class=\"highlight\">ネズミ</span>を振り払える",
+      "group": "citadel_heroes",
+      "hash": "263a69c61240"
+    },
+    "RatsAttached_postvalue_label": {
+      "text": "ネズミ付着数",
+      "group": "citadel_heroes",
+      "hash": "d0bf003f4d7c"
+    },
+    "BiteInterval_postvalue_label": {
+      "text": "噛みつき間隔",
+      "group": "citadel_heroes",
+      "hash": "27da31a0f843"
+    },
+    "BiteInterval_label": {
+      "text": "ネズミあたりの噛みつき間隔",
+      "group": "citadel_heroes",
+      "hash": "ec259850833e"
+    },
+    "BiteInterval_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "DamagePerBite_postvalue_label": {
+      "text": "ダメージ／噛みつき",
+      "group": "citadel_heroes",
+      "hash": "952e88cef2b6"
+    },
+    "DamagePerBite_label": {
+      "text": "ダメージ／噛みつき",
+      "group": "citadel_heroes",
+      "hash": "952e88cef2b6"
+    },
+    "ArmorReductionPerBite_postvalue_label": {
+      "text": "弾薬耐性／噛みつき",
+      "group": "citadel_heroes",
+      "hash": "595a6b28a7ed"
+    },
+    "ArmorReductionPerBite_label": {
+      "text": "弾薬耐性／噛みつき",
+      "group": "citadel_heroes",
+      "hash": "595a6b28a7ed"
+    },
+    "ArmorReductionPerBite_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "ability_ratking_ratnibble_t2_desc": {
+      "text": "<span class=\"highlight\">群れが大きくなる</span><br>デバフ継続時間 <span class=\"highlight\">+{s:DebuffDuration}秒</span>",
+      "group": "citadel_heroes",
+      "hash": "d953370a73ff"
+    },
+    "ability_ratking_ratnibble_t3_desc": {
+      "text": "噛みつきごとのダメージ <span class=\"highlight\">+{s:DamagePerBite}</span>、弾薬耐性 <span class=\"highlight\">{s:ArmorReductionPerBite}%</span>",
+      "group": "citadel_heroes",
+      "hash": "515f4c8d8299"
+    },
+    "ability_ratking_ratnibble/ratking_nibble_enemy": {
+      "text": "噛みつき - ダッシュでネズミを振り払う",
+      "group": "citadel_heroes",
+      "hash": "6a8625492079"
+    },
+    "ability_ratking_ratnibble/ratking_nibble_enemy/ratking_nibble_enemy_linger": {
+      "text": "噛みつき - 弾薬耐性減少",
+      "group": "citadel_heroes",
+      "hash": "def426ab9739"
+    },
+    "ability_ratking_ratnibble/ratking_nibble_enemy/ratking_nibble_armor_total": {
+      "text": "噛みつき - 弾薬耐性減少",
+      "group": "citadel_heroes",
+      "hash": "def426ab9739"
+    },
+    "npc_neutral_bug_rat_swarm/neutral_rat_swarm": {
+      "text": "ラットスウォーム - ダッシュでネズミを振り払う",
+      "group": "citadel_heroes",
+      "hash": "8f1eec85ffb1"
+    },
+    "DamagePerRat_postvalue_label": {
+      "text": "ダメージ／ネズミ",
+      "group": "citadel_heroes",
+      "hash": "48ffdfc2bb9a"
+    },
+    "DashSlowPercent_postvalue_label": {
+      "text": "ダッシュ距離",
+      "group": "citadel_heroes",
+      "hash": "3711e0e7167d"
+    },
+    "DashSlowPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "NibbleInterval_postvalue_label": {
+      "text": "噛みつき間隔",
+      "group": "citadel_heroes",
+      "hash": "27da31a0f843"
+    },
+    "MaxRats_postvalue_label": {
+      "text": "ネズミ 最大付着数",
+      "group": "citadel_heroes",
+      "hash": "d80c9e89a6f3"
+    },
+    "ability_ratking_ratarmor": {
+      "text": "ジャンクアーマー",
+      "group": "citadel_heroes",
+      "hash": "fcbfedae11de"
+    },
+    "ability_ratking_ratarmor_desc": {
+      "text": "ガラクタの装甲を身につけ、{g:citadel_inline_attribute:'MaxHealth'}に応じた{g:citadel_inline_attribute:'CombatBarrier'}を獲得する。この装甲がある限り、一定確率で弾薬を攻撃者へと<span class=\"highlight\">反射</span>する<br><br><span class=\"diminish\">バリアには耐性による効果が適用されない</span>",
+      "group": "citadel_heroes",
+      "hash": "55b3d9fb60fd"
+    },
+    "ability_ratking_ratarmor_cap_desc": {
+      "text": "ジャンクアーマーを身につけている間、1回のヒットでラットキングが受けるダメージには上限が設定される。上限を超えるダメージは、与えられる前に上限まで軽減される",
+      "group": "citadel_heroes",
+      "hash": "913e0e5db044"
+    },
+    "ability_ratking_ratarmor_t2_desc": {
+      "text": "クールダウン <span class=\"highlight\">{s:AbilityCooldown}秒</span><br>弾薬反射確率 <span class=\"highlight\">+{s:ReturnFireChance}%</span>",
+      "group": "citadel_heroes",
+      "hash": "dcbdaa4fb286"
+    },
+    "ability_ratking_ratarmor_t3_desc": {
+      "text": "すべてのダメージを最大で<span class=\"highlight\">{s:MaxDamagePerHit}</span>まで軽減する<br>最大HPに応じたバリア獲得量 <span class=\"highlight\">+{s:MaxHealthPct}%</span>",
+      "group": "citadel_heroes",
+      "hash": "cdf4fd06bf47"
+    },
+    "RatCount_postvalue_label": {
+      "text": "ネズミの数",
+      "group": "citadel_heroes",
+      "hash": "d1296bd3fb2c"
+    },
+    "MaxHealthPct_postvalue_label": {
+      "text": "最大HP割合バリア",
+      "group": "citadel_heroes",
+      "hash": "aac5242944f7"
+    },
+    "MaxHealthPct_label": {
+      "text": "最大HP割合バリア",
+      "group": "citadel_heroes",
+      "hash": "aac5242944f7"
+    },
+    "MaxHealthPct_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "MaxDamagePerHit_postvalue_label": {
+      "text": "ダメージ上限",
+      "group": "citadel_heroes",
+      "hash": "fdf281540001"
+    },
+    "MaxDamagePerHit_label": {
+      "text": "ダメージ上限",
+      "group": "citadel_heroes",
+      "hash": "fdf281540001"
+    },
+    "ability_ratking_ratarmor/ratking_armor_caster": {
+      "text": "ジャンクアーマー",
+      "group": "citadel_heroes",
+      "hash": "fcbfedae11de"
+    },
+    "ReturnFireChance_postvalue_label": {
+      "text": "弾薬反射確率",
+      "group": "citadel_heroes",
+      "hash": "e1218abcedac"
+    },
+    "ReturnFireChance_label": {
+      "text": "弾薬反射確率",
+      "group": "citadel_heroes",
+      "hash": "e1218abcedac"
+    },
+    "ReturnFireChance_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "ability_ratking_standard_bearer": {
+      "text": "ラッタニアの王命",
+      "group": "citadel_heroes",
+      "hash": "c511a31fb86b"
+    },
+    "ability_ratking_standard_bearer/modifier_standard_bearrer_aura": {
+      "text": "ラッタニアの王命",
+      "group": "citadel_heroes",
+      "hash": "c511a31fb86b"
+    },
+    "ability_ratking_standard_bearer_charge_label": {
+      "text": "バナーオーラ",
+      "group": "citadel_heroes",
+      "hash": "01d591fd6d06"
+    },
+    "AllyDamageReduction_postvalue_label": {
+      "text": "ダメージ軽減",
+      "group": "citadel_heroes",
+      "hash": "49db49851b1c"
+    },
+    "AllyDamageReduction_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "AllyDamageReduction_label": {
+      "text": "ダメージ軽減",
+      "group": "citadel_heroes",
+      "hash": "49db49851b1c"
+    },
+    "ability_ratking_standard_bearer_desc": {
+      "text": "突進してラッタニアの旗を召喚する。旗は付近にいるすべての味方に増加{g:citadel_inline_attribute:'MoveSpeed'}と<span class=\"highlight\">スロウ無効</span>、<span class=\"highlight\">ダメージ軽減</span>を付与する",
+      "group": "citadel_heroes",
+      "hash": "c5865b066e2c"
+    },
+    "ability_ratking_standard_bearer_t1_desc": {
+      "text": "クールダウン {s:AbilityCooldown}秒、移動速度 +{s:BonusMoveSpeed}m／秒",
+      "group": "citadel_heroes",
+      "hash": "0d6742652d96"
+    },
+    "ability_ratking_standard_bearer_t2_desc": {
+      "text": "突進継続時間 +{s:AbilityDuration}秒<br>旗の継続時間 +{s:FlagDuration}秒<br>範囲 +{s:Radius}m",
+      "group": "citadel_heroes",
+      "hash": "89f72df68717"
+    },
+    "ability_ratking_standard_bearer_t3_desc": {
+      "text": "ダメージ +{s:Damage}、ダメージ軽減 +{s:AllyDamageReduction}%",
+      "group": "citadel_heroes",
+      "hash": "7067afd2bb81"
+    },
+    "ability_ratking_standard_bearer_slam_desc": {
+      "text": "旗を地面に突き刺して地下の下水道から激しい噴出を発生させ、{g:citadel_inline_attribute:'BulletDamage'}を与える。また、その範囲内に留まっているすべての敵を{g:citadel_inline_attribute:'KnockUp'}させ、{g:citadel_inline_attribute:'Slow'}を付与する。下水道からはネズミの群れが出現し、ヒットした敵に<span class=\"highlight\">ラットスウォーム</span>を付与する",
+      "group": "citadel_heroes",
+      "hash": "524af02e432b"
+    },
+    "ability_ratking_standard_bearer_slam_label": {
+      "text": "バナースラム",
+      "group": "citadel_heroes",
+      "hash": "f8311304c232"
+    },
+    "ability_ratking_standard_bearer_flag_desc": {
+      "text": "設置された旗の範囲内にいるすべての味方は{g:citadel_inline_attribute:'FireRate'}を獲得し、<span class=\"highlight\">射撃中の移動速度ペナルティを受けなくなる</span>",
+      "group": "citadel_heroes",
+      "hash": "a4dcebea4c1b"
+    },
+    "ability_ratking_standard_bearer_flag_label": {
+      "text": "バナーオーラ",
+      "group": "citadel_heroes",
+      "hash": "01d591fd6d06"
+    },
+    "ExplodeTimer_postvalue_label": {
+      "text": "噴出 ディレイ",
+      "group": "citadel_heroes",
+      "hash": "40e08c0a91a6"
+    },
+    "ExplodeTimer_label": {
+      "text": "噴出 ディレイ",
+      "group": "citadel_heroes",
+      "hash": "40e08c0a91a6"
+    },
+    "ExplodeTimer_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "FlagDuration_postvalue_label": {
+      "text": "旗 継続時間",
+      "group": "citadel_heroes",
+      "hash": "b1e30d2792d7"
+    },
+    "FlagDuration_label": {
+      "text": "旗 継続時間",
+      "group": "citadel_heroes",
+      "hash": "b1e30d2792d7"
+    },
+    "FlagDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "Ratking_PlantFlag_Hint": {
+      "text": "旗を立てる",
+      "group": "citadel_heroes",
+      "hash": "5f2b512b8296"
+    },
     "ability_header_on_hit": {
       "text": "ヒット時：",
       "group": "citadel_heroes",
@@ -21769,6 +22164,11 @@
       "group": "citadel_heroes",
       "hash": "28b5bcd8a5d4"
     },
+    "ability_melee_ratking": {
+      "text": "近接",
+      "group": "citadel_heroes",
+      "hash": "28b5bcd8a5d4"
+    },
     "Citadel_Familiar_HeroTag_1": {
       "text": "サポート",
       "group": "citadel_heroes",
@@ -21935,14 +22335,14 @@
       "hash": "f180bd04dfe9"
     },
     "Citadel_Ratking_HeroTag_1": {
-      "text": "ケンカ腰",
+      "text": "スクラップ",
       "group": "citadel_heroes",
-      "hash": "0dd297fc2814"
+      "hash": "431a1bd872f4"
     },
     "Citadel_Ratking_HeroTag_2": {
-      "text": "高貴",
+      "text": "君主",
       "group": "citadel_heroes",
-      "hash": "7e0ce0114260"
+      "hash": "b8cd0ddbc087"
     },
     "Citadel_Ratking_HeroTag_3": {
       "text": "頑強",
@@ -22443,6 +22843,11 @@
       "text": "美と伝統と争いの地である北イキシアでは、残虐な政治的\n暴力が珍しくない。そのため、「身の安全のため」として\nニューヨークの学校に入るようにと伝えられたアポロは、\n事態が深刻であることを悟ったのであった。\n\nブラックモア・アカデミーでの生活に慣れるのは、アポロに\nとって容易なことではなかった。本来であればこの学校は、\nカースド・アップルにおける最も優秀で最も聡明な生徒で\nあふれているはずだ。だが実際は、数少ない例外を除き、\n自信過剰な凡才だらけであった。パーティーやダンスなどの\nつまらないことで時間を無駄にするべきではない……そう\n心に決めた彼は、ブラックモアのフェンシングチームの\nキャプテンとして、ピストでの厳しいトレーニングに全力を\n注いでいる。\n\nだがアポロはけっして、ニューヨークにおける退屈な日々に\n強いストレスを感じているというわけではない。いずれ、\n父親に呼ばれて帰還した暁には、先祖代々受け継がれてきた\n剣を扱うにふさわしいことを証明する機会が訪れる……\nアポロはそれを知っているからだ。",
       "group": "citadel_heroes",
       "hash": "ec489b9cf4dc"
+    },
+    "hero_ratking_lore": {
+      "text": "ニューヨークの巣窟を支配する謎の生物であるラットキングは、臣民たちの誰よりも強大な体格や力、そして野心の持ち主だ。地下で隠れ続ける生活にもはや満足できなくなった王は、ニューヨークの街を徘徊する害獣駆除車（ネズミたちが「人間による死の部隊」と呼ぶもの）に怯えることなく、彼と臣民たちが地上を歩き回れる未来を実現するための大胆な構想を明らかにした。\n\nステップ1：ロングアイランドを制圧する\nステップ2：ロングアイランドを国土とする新しい主権国家「ラッタニア」の建国を宣言する\nステップ3：この新しいネズミの楽園から去ろうとしない人類をすべて処刑する\n\nこの計画は非の打ち所のない完璧なものであったが、ネズミの王は運任せにすることを嫌った。こうして彼は、万が一の可能性に備え、パトロンの召喚を決意したのだ。",
+      "group": "citadel_heroes",
+      "hash": "613711e01efb"
     },
     "MODIFIER_STATE_ROOTED": {
       "text": "移動不能状態",
@@ -23175,9 +23580,24 @@
       "hash": "b5e66c411600"
     },
     "StatDesc_DashSpeedInMeters_postfix": {
-      "text": "m",
+      "text": "m／秒",
       "group": "citadel_attributes",
-      "hash": "6b0d31c0d563"
+      "hash": "deedee4188b4"
+    },
+    "StatDesc_SpiritLifestealEffectiveness": {
+      "text": "ライフスティール効果量",
+      "group": "citadel_attributes",
+      "hash": "ddde81b9da6a"
+    },
+    "StatDesc_SpiritLifestealEffectiveness_postvalue_label": {
+      "text": "ライフスティール効果量",
+      "group": "citadel_attributes",
+      "hash": "ddde81b9da6a"
+    },
+    "StatDesc_SpiritLifestealEffectiveness_postfix": {
+      "text": "%",
+      "group": "citadel_attributes",
+      "hash": "4345cb1fa278"
     },
     "StatDesc_BaseWeaponDamage": {
       "text": "武器ダメージ",
@@ -29480,9 +29900,9 @@
       "hash": "eb6aaba1a1ca"
     },
     "FinalSlow_postfix": {
-      "text": "m",
+      "text": "m／秒",
       "group": "citadel_attributes",
-      "hash": "6b0d31c0d563"
+      "hash": "deedee4188b4"
     },
     "WeaponPowerPerStack_prefix": {
       "text": "{s:sign}",
@@ -33413,6 +33833,11 @@
       "text": "ハイドアウトでキラキラを掃除中",
       "group": "citadel_gc",
       "hash": "f624686b2fe5"
+    },
+    "Steam_Citadel_Hideout_LongIsland": {
+      "text": "ハイドアウトがロングアイランドにあったらと願望中",
+      "group": "citadel_gc",
+      "hash": "ec1254199a0e"
     },
     "Citadel_Dashboard_BuildVersion": {
       "text": "#{d:buildNumber}",
@@ -38934,10 +39359,10 @@
       "group": "citadel_main",
       "hash": "5480c0391812"
     },
-    "Citadel_HUD_ToxicChatMute_Desc": {
-      "text": "コミュニケーション悪用を確認したため、30日間の制限が課されました。また、マッチ終了までミュートされます。",
+    "Citadel_HUD_ToxicChatMute_Desc:f": {
+      "text": "コミュニケーションの悪用を確認したため、長期のコミュニケーション制限が課されました。また、マッチ終了までミュートされます。",
       "group": "citadel_main",
-      "hash": "da4e01589156"
+      "hash": "24baf6ea4331"
     },
     "Citadel_HUD_Koth_Warning": {
       "text": "不安定な裂け目が開いた…",
@@ -38975,9 +39400,9 @@
       "hash": "35e3a8127ac0"
     },
     "Citadel_HUD_DamageSummary_Hint": {
-      "text": "{g:citadel_binding:'Scoreboard'}長押しで詳細を表示",
+      "text": "{g:citadel_binding:'ExtraInfo'}長押しで変動後のステータスを表示",
       "group": "citadel_main",
-      "hash": "806f781e1def"
+      "hash": "bb838dc642fe"
     },
     "Citadel_HUD_AdjustedBy": {
       "text": "調整：",
@@ -40853,6 +41278,21 @@
       "text": "接続できませんでした",
       "group": "citadel_main",
       "hash": "ba3216d4c7a7"
+    },
+    "Citadel_HideoutConnectionFailed_TooFewPlayers": {
+      "text": "ハイドアウトに参加するためのプレイヤーが不足しています",
+      "group": "citadel_main",
+      "hash": "103181a9abfd"
+    },
+    "Citadel_HideoutConnectionFailed_PlayersInMatch": {
+      "text": "現在マッチ中のプレイヤーがいます",
+      "group": "citadel_main",
+      "hash": "bff6e5fc0fd6"
+    },
+    "Citadel_HideoutConnectionFailed_GCDisabled": {
+      "text": "ハイドアウトのサーバーが一時的に無効化されています",
+      "group": "citadel_main",
+      "hash": "ced2c043931a"
     },
     "Citadel_HideoutBallJuggle_Increment": {
       "text": "{s:value}x",
@@ -44700,9 +45140,9 @@
       "hash": "fc40e6d71675"
     },
     "EShopFilterJumpAndDash": {
-      "text": "ジャンプ／ダッシュ／スライディング",
+      "text": "ジャンプ / ダッシュ / スライディング",
       "group": "citadel_main",
-      "hash": "2efc8b351785"
+      "hash": "6604f0708c19"
     },
     "EShopFilterTeleport": {
       "text": "テレポート",
@@ -45939,6 +46379,36 @@
       "group": "citadel_main",
       "hash": "40fdd7e1a492"
     },
+    "citadel_settings_default_view": {
+      "text": "設定のデフォルト表示",
+      "group": "citadel_main",
+      "hash": "0a72cc61d3fc"
+    },
+    "citadel_settings_default_view_current_hero": {
+      "text": "現在のヒーロー",
+      "group": "citadel_main",
+      "hash": "9281332398ba"
+    },
+    "citadel_settings_default_view_base_settings": {
+      "text": "基本設定",
+      "group": "citadel_main",
+      "hash": "a141de357f9f"
+    },
+    "citadel_settings_default_view_tooltip": {
+      "text": "設定メニューを開いたときに、デフォルトでどちらを表示するかを選択します。<br><br>現在のヒーロー：現在アクティブなヒーローの設定表示をデフォルトにする。<br><br>基本設定：基本設定の表示をデフォルトにする。",
+      "group": "citadel_main",
+      "hash": "65c5660a8a8d"
+    },
+    "citadel_settings_remember_selected_hero": {
+      "text": "選択したヒーローを記憶",
+      "group": "citadel_main",
+      "hash": "d076012681b6"
+    },
+    "citadel_settings_remember_selected_hero_tooltip": {
+      "text": "無効化すると、デフォルト表示に「現在のヒーロー」を設定している場合、プレイ中のヒーローを表示します。それ以外の場合、基本設定を開きます。<br><br>有効化すると、ヒーロー選択メニューで選んだヒーローが記憶され、同じ表示が再度開かれます。デフォルト表示に「現在のヒーロー」を設定している場合、ゲーム内でヒーローを変更するたび、設定メニューで選択されるヒーローが更新されます。",
+      "group": "citadel_main",
+      "hash": "d01b432b3edb"
+    },
     "citadel_settings_show_all_off_notice_title": {
       "text": "ヒーロー固有設定のみを表示",
       "group": "citadel_main",
@@ -45970,9 +46440,9 @@
       "hash": "03e4c63700e7"
     },
     "citadel_settings_hero_specific_enabled_body": {
-      "text": "特定のヒーローの設定を表示するには、左上のヒーローアイコンをクリックしてヒーロー選択メニューを開き、ヒーローを選択してください。<br><br>最初のアイコンは基本設定を表しています。これらの設定をカスタマイズするとそれぞれのヒーローに適用されますが、変更しない場合は基本設定が適用されます。<br><br>設定メニュー内でTABキーを長押しすると、ヒーローごとにカスタマイズ可能な設定がハイライトされます。それ以外の設定はグローバル設定であり、プレイしているヒーローを問わず適用されます。",
+      "text": "特定のヒーローの設定を表示するには、左上のヒーローアイコンをクリックしてヒーロー選択メニューを開き、ヒーローを選択してください。<br><br>1つ目のアイコンは基本設定を表しています。これらの設定をカスタマイズするとそれぞれのヒーローに適用されますが、変更しない場合は基本設定が適用されます。<br><br>設定メニュー内で{g:citadel_key:'TAB'}を長押しすると、ヒーローごとにカスタマイズ可能な設定がハイライトされます。それ以外の設定はグローバル設定であり、プレイしているヒーローを問わず適用されます。",
       "group": "citadel_main",
-      "hash": "c9ac43dd0323"
+      "hash": "4406d958e716"
     },
     "citadel_settings_hero_specific_disabled_title": {
       "text": "グローバル設定 有効中",
@@ -46315,9 +46785,49 @@
       "hash": "e97b4fa418fc"
     },
     "citadel_settings_subtitles_background_color_tooltip": {
-      "text": "字幕の背景色を調整します。",
+      "text": "字幕の背景の色、または字幕の輪郭の色を調整します。",
       "group": "citadel_main",
-      "hash": "3507402f87be"
+      "hash": "9a7b7ce1e978"
+    },
+    "citadel_settings_subtitles_background_style": {
+      "text": "字幕の背景スタイル",
+      "group": "citadel_main",
+      "hash": "4df8ea6c53b2"
+    },
+    "citadel_settings_subtitles_background_style_tooltip": {
+      "text": "字幕に単色の背景をつけるか、あるいは輪郭をつけるかを設定できます。",
+      "group": "citadel_main",
+      "hash": "1fd560561002"
+    },
+    "citadel_settings_subtitles_background_style_solid": {
+      "text": "背景つき",
+      "group": "citadel_main",
+      "hash": "513e1807b1a1"
+    },
+    "citadel_settings_subtitles_background_style_outline": {
+      "text": "輪郭つき",
+      "group": "citadel_main",
+      "hash": "577c9e341eed"
+    },
+    "citadel_settings_subtitles_background_opacity": {
+      "text": "背景の不透明度",
+      "group": "citadel_main",
+      "hash": "5209fd8fb86d"
+    },
+    "citadel_settings_subtitles_background_opacity_tooltip": {
+      "text": "字幕テキストの背景の不透明度を調整します。",
+      "group": "citadel_main",
+      "hash": "58dcf9465725"
+    },
+    "citadel_settings_subtitles_outline_thickness": {
+      "text": "字幕 輪郭太さ",
+      "group": "citadel_main",
+      "hash": "491da48ae725"
+    },
+    "citadel_settings_subtitles_outline_thickness_tooltip": {
+      "text": "字幕テキストの輪郭の太さを設定します。",
+      "group": "citadel_main",
+      "hash": "16855f9f7218"
     },
     "citadel_settings_subtitles_font": {
       "text": "字幕フォント",
@@ -46434,6 +46944,11 @@
       "group": "citadel_main",
       "hash": "3b6d355c96c7"
     },
+    "citadel_hotkeys_tooltip_down_dash": {
+      "text": "空中で真下にダッシュします。しゃがみを2回タップしても同じ操作が行えます。",
+      "group": "citadel_main",
+      "hash": "a74cd2d3f52c"
+    },
     "citadel_hotkeys_tooltip_held_item": {
       "text": "近接攻撃をパリィします。魂の壺などのアイテムを持っている際にこのコマンドを使用すると、持っているアイテムを投げます。",
       "group": "citadel_main",
@@ -46543,6 +47058,51 @@
       "text": "観戦しているプレイヤーのチームの視界をミニマップに表示します。",
       "group": "citadel_main",
       "hash": "e15c2e8256a8"
+    },
+    "citadel_hotkeys_tooltip_shop_purchase_search_match": {
+      "text": "ショップの検索結果が1つのアイテムに絞り込まれた際、それを購入します。すでに所持している場合は売却します。検索ボックスへの入力中でも機能します。",
+      "group": "citadel_main",
+      "hash": "ffdc26dd8ec9"
+    },
+    "citadel_hotkeys_tooltip_shop_tab_build": {
+      "text": "ショップのビルドタブに切り替えます。",
+      "group": "citadel_main",
+      "hash": "e1a3c82ccc9e"
+    },
+    "citadel_hotkeys_tooltip_shop_tab_recommended": {
+      "text": "ショップの人気のアイテムタブに切り替えます。",
+      "group": "citadel_main",
+      "hash": "11044598665a"
+    },
+    "citadel_hotkeys_tooltip_shop_tab_all_items": {
+      "text": "ショップのすべてのアイテムタブに切り替えます。",
+      "group": "citadel_main",
+      "hash": "c4b3f18f94db"
+    },
+    "citadel_hotkeys_tooltip_shop_tab_weapon": {
+      "text": "ショップのウェポンアイテムタブに切り替えます。",
+      "group": "citadel_main",
+      "hash": "1939b3cc244a"
+    },
+    "citadel_hotkeys_tooltip_shop_tab_spirit": {
+      "text": "ショップのスピリットアイテムタブに切り替えます。",
+      "group": "citadel_main",
+      "hash": "66439686c61c"
+    },
+    "citadel_hotkeys_tooltip_shop_tab_vitality": {
+      "text": "ショップのバイタリティアイテムタブに切り替えます。",
+      "group": "citadel_main",
+      "hash": "cebade452441"
+    },
+    "citadel_hotkeys_tooltip_shop_tier_up": {
+      "text": "ショップにおいて1つ上の価格帯にスクロールします。<br><br>「価格帯にスナップ」を無効化している場合、少しだけスクロールします。",
+      "group": "citadel_main",
+      "hash": "6b7eda75bdd0"
+    },
+    "citadel_hotkeys_tooltip_shop_tier_down": {
+      "text": "ショップにおいて1つ下の価格帯にスクロールします。<br><br>「価格帯にスナップ」を無効化している場合、少しだけスクロールします。",
+      "group": "citadel_main",
+      "hash": "03771285c9b4"
     },
     "citadel_settings_monitor_mic_desc": {
       "text": "チェックを入れると、自分のボイスを聞きながらボイスの調整ができます。",
@@ -46734,6 +47294,26 @@
       "group": "citadel_main",
       "hash": "3c3937b0ae0e"
     },
+    "citadel_settings_enemy_damage_delta_color": {
+      "text": "敵のダメージ色",
+      "group": "citadel_main",
+      "hash": "c8472aa11896"
+    },
+    "citadel_settings_enemy_damage_delta_color_tooltip": {
+      "text": "敵にダメージを与えた際、その敵が失ったHPを一時的に示す色を調整します。",
+      "group": "citadel_main",
+      "hash": "383ea86c6275"
+    },
+    "citadel_settings_enemy_zipline_color": {
+      "text": "敵のジップライン色",
+      "group": "citadel_main",
+      "hash": "f0c7e783bac6"
+    },
+    "citadel_settings_enemy_zipline_color_tooltip": {
+      "text": "敵のジップラインや、ミニマップ上の敵オブジェクトに使用する色を調整します。",
+      "group": "citadel_main",
+      "hash": "c188688b09c4"
+    },
     "citadel_settings_video_preview": {
       "text": "レンダリング変更のプレビュー",
       "group": "citadel_main",
@@ -46855,9 +47435,9 @@
       "hash": "d9c5f9447b56"
     },
     "citadel_settings_shop_open_focus_search_tooltip": {
-      "text": "有効化すると、ショップを開いた際に検索ボックスをフォーカスし、アイテム名を即座に入力できるようになります。ESCAPEを押すとキーボード操作がゲームに戻ります。",
+      "text": "有効化すると、ショップを開いた際に検索ボックスをフォーカスし、アイテム名を即座に入力できるようになります。{g:citadel_key:'ESCAPE'}を押すとキーボード操作がゲームに戻ります。",
       "group": "citadel_main",
-      "hash": "d066a72e3756"
+      "hash": "10a06bb7c9c7"
     },
     "citadel_settings_shop_scroll_snap": {
       "text": "価格帯にスナップ",
@@ -46898,6 +47478,26 @@
       "text": "残りHPが低い敵のHPバーに、テキストとアニメーションを表示します。",
       "group": "citadel_main",
       "hash": "df01d27af1e4"
+    },
+    "citadel_settings_unit_status_hero_name": {
+      "text": "HPバーの上に名前を表示",
+      "group": "citadel_main",
+      "hash": "64d5a76ef899"
+    },
+    "citadel_settings_unit_status_hero_name_tooltip": {
+      "text": "他ヒーローのHPバーの上に何を表示するかを設定します。",
+      "group": "citadel_main",
+      "hash": "7cc2204f1fac"
+    },
+    "citadel_settings_unit_status_hero_name_player": {
+      "text": "プレイヤー名",
+      "group": "citadel_main",
+      "hash": "eb321ace03b3"
+    },
+    "citadel_settings_unit_status_hero_name_hero": {
+      "text": "ヒーロー名",
+      "group": "citadel_main",
+      "hash": "e8f85928475e"
     },
     "citadel_settings_unit_status_hero_name_none": {
       "text": "なし",
@@ -47780,9 +48380,9 @@
       "hash": "a141de357f9f"
     },
     "citadel_settings_share_apply_base_tooltip": {
-      "text": "現在の基本設定をこのコードの設定に置き換えます。<br><br>この設定をオフにすると現在の基本設定を維持し、差分はヒーロー固有設定として該当するヒーローに適用されます。",
+      "text": "現在の基本設定をこのコードの設定に置き換えます。<br><br>この設定を無効化すると現在の基本設定を維持し、差分はヒーロー固有設定として該当するヒーローに適用されます。",
       "group": "citadel_main",
-      "hash": "16e58a7fefa0"
+      "hash": "01460ea8fc72"
     },
     "citadel_settings_share_apply": {
       "text": "適用",
@@ -47885,9 +48485,9 @@
       "hash": "1bd1ee11fc59"
     },
     "citadel_keybind_map_show_chords_tooltip": {
-      "text": "SHIFTを長押しすると、キー単体の設定ではなく、それらのキーに割り当てられた修飾キーの組み合わせを表示します。",
+      "text": "{g:citadel_key:'SHIFT'}を長押しすると、キー単体の設定ではなく、それらのキーに割り当てられた修飾キーの組み合わせを表示します。",
       "group": "citadel_main",
-      "hash": "aae326d41be6"
+      "hash": "076884932ad0"
     },
     "citadel_keybind_map_chord_shift": {
       "text": "S",
@@ -47938,6 +48538,11 @@
       "text": "その他のキー",
       "group": "citadel_main",
       "hash": "c4cef117b102"
+    },
+    "citadel_keybind_map_no_command_bound": {
+      "text": "コマンド設定なし",
+      "group": "citadel_main",
+      "hash": "1926e463fdb4"
     },
     "citadel_keybind_map_keyboard_layout": {
       "text": "キー配列",
@@ -48658,6 +49263,21 @@
       "text": "ショップ",
       "group": "citadel_main",
       "hash": "73b87d6b76c9"
+    },
+    "citadel_settings_shopkeybinds_reset_tooltip": {
+      "text": "ショップのキーバインドをリセットします。",
+      "group": "citadel_main",
+      "hash": "7654a362ca61"
+    },
+    "citadel_settings_shop_keybinds_new_setting": {
+      "text": "ショップのキーバインド",
+      "group": "citadel_main",
+      "hash": "77e966fc5f49"
+    },
+    "citadel_settings_shop_keybinds_new_setting_desc": {
+      "text": "ショップのホットキーを変更できるようになりました。ショップを開いている間、他のキーバインドより優先されます。",
+      "group": "citadel_main",
+      "hash": "e076eeda1488"
     },
     "citadel_settings_audiokeybinds": {
       "text": "オーディオ",
@@ -50709,6 +51329,11 @@
       "group": "citadel_main",
       "hash": "e5bb6b42abc2"
     },
+    "citadel_keybind_down_dash": {
+      "text": "下降ダッシュ",
+      "group": "citadel_main",
+      "hash": "a84c9144527b"
+    },
     "citadel_keybind_push_to_talk": {
       "text": "ボイスチャット（チーム）",
       "group": "citadel_main",
@@ -51253,6 +51878,16 @@
       "text": "HPバーにHPの値を表示するか、与えたダメージの累積値をどのように表示するか、残りHPの低い敵のHPバーにテキストやアニメーションを表示するか、選択できるようになりました。",
       "group": "citadel_main",
       "hash": "49321b2c77b0"
+    },
+    "citadel_settings_unit_status_hero_name_new_setting": {
+      "text": "HPバーの名前表示",
+      "group": "citadel_main",
+      "hash": "1cc8ece11a45"
+    },
+    "citadel_settings_unit_status_hero_name_new_setting_desc": {
+      "text": "他ヒーローのHPバーに、プレイヤー名やヒーロー名を表示するか、あるいは何も表示しないかを選べるようになりました。",
+      "group": "citadel_main",
+      "hash": "ed0e731328d3"
     },
     "guide_get_started_title": {
       "text": "ゲームの基礎",
@@ -52485,9 +53120,9 @@
       "hash": "c15ccc4dc740"
     },
     "citadel_voicelines_category_heroselect": {
-      "text": "ヒーロー選択",
+      "text": "選択時",
       "group": "citadel_main",
-      "hash": "0ff92420ba4b"
+      "hash": "fb1566ac345f"
     },
     "citadel_voicelines_category_abilities": {
       "text": "アビリティ",
@@ -53799,6 +54434,16 @@
       "group": "citadel_main",
       "hash": "ee0ba5c3b112"
     },
+    "HeroTesting_Photomode": {
+      "text": "フォトモード",
+      "group": "citadel_main",
+      "hash": "69628386d298"
+    },
+    "HeroTesting_Photomode_desc": {
+      "text": "すべてのHUD、HPバー、およびローカルプレイヤーを非表示にします。",
+      "group": "citadel_main",
+      "hash": "27ed0b04c9ec"
+    },
     "HeroTesting_HideUI": {
       "text": "UI非表示",
       "group": "citadel_main",
@@ -53845,9 +54490,9 @@
       "hash": "4bbd685dc6cb"
     },
     "HeroTesting_ToggleStreetBrawl_Desc": {
-      "text": "アビリティ／アイテムのバランス調整をストリートブロウル用に切り替えます",
+      "text": "アビリティ / アイテムのバランス調整をストリートブロウル用に切り替えます",
       "group": "citadel_main",
-      "hash": "27c33ceaee85"
+      "hash": "d22657e2f9cd"
     },
     "HeroTesting_ToggleEnhancedItems": {
       "text": "エンハンスドアイテム",
@@ -53895,9 +54540,9 @@
       "hash": "25151b99c33c"
     },
     "HeroTesting_HeroToSpawn": {
-      "text": "ヒーローをスポーン",
+      "text": "ヒーロー生成",
       "group": "citadel_main",
-      "hash": "efca22945bfc"
+      "hash": "3515439eb3a0"
     },
     "HeroTesting_SpawnEnemy": {
       "text": "+敵としてスポーン",
@@ -54080,19 +54725,19 @@
       "hash": "5b1d198098db"
     },
     "HeroTesting_BotRecordTarget_Desc": {
-      "text": "照準を合わせているCPUを操作し、「記録停止」を押すまでアクションを記録します。\n（キーへのバインドを推奨します）",
+      "text": "照準を合わせているCPUを操作し、「記録停止」を押すまでアクションを記録します\n（キーへのバインドを推奨します）",
       "group": "citadel_main",
-      "hash": "aeb9c29eb718"
+      "hash": "7461061231d1"
     },
     "HeroTesting_BotRecordStop_Desc": {
-      "text": "CPUの記録、もしくはプレイバックを停止します。\n（キーへのバインドを推奨します）",
+      "text": "CPUの記録、もしくはプレイバックを停止します\n（キーへのバインドを推奨します）",
       "group": "citadel_main",
-      "hash": "ec7c841c1082"
+      "hash": "4cf4039db8e8"
     },
     "HeroTesting_BotPlayback_Desc": {
-      "text": "記録したコマンドを再生します。\n（キーへのバインドを推奨します）",
+      "text": "記録したコマンドを再生します\n（キーへのバインドを推奨します）",
       "group": "citadel_main",
-      "hash": "5f10a845ef1c"
+      "hash": "93c1623ef2c8"
     },
     "HeroTesting_BotRecordLoop": {
       "text": "プレイバックのループ",
@@ -54325,29 +54970,29 @@
       "hash": "69a805c298a1"
     },
     "HeroTesting_ResetDPSMeter_Desc": {
-      "text": "DPSメーターをクリア",
+      "text": "DPSメーターをクリアします",
       "group": "citadel_main",
-      "hash": "48bf7d562050"
+      "hash": "6dbfdd70c9e1"
     },
     "HeroTesting_DummyBulletResist_Desc": {
-      "text": "全ターゲットダミーの弾薬耐性",
+      "text": "全ターゲットダミーに付与される弾薬耐性の数値です",
       "group": "citadel_main",
-      "hash": "493f2e2b2dda"
+      "hash": "99491d8ff32c"
     },
     "HeroTesting_DummySpiritResist_Desc": {
-      "text": "全ターゲットダミーのスピリット耐性",
+      "text": "全ターゲットダミーに付与されるスピリット耐性の数値です",
       "group": "citadel_main",
-      "hash": "5ca3a4329891"
+      "hash": "8ea7dd2c729b"
     },
     "HeroTesting_DummyDebuffResist_Desc": {
-      "text": "全ターゲットダミーのデバフ耐性",
+      "text": "全ターゲットダミーに付与されるデバフ耐性の数値です",
       "group": "citadel_main",
-      "hash": "63eb26aa95f6"
+      "hash": "6c8bd06d0b24"
     },
     "HeroTesting_DummyHealthRegen_Desc": {
-      "text": "全ターゲットダミーのHPリジェネ",
+      "text": "全ターゲットダミーに付与されるHPリジェネの数値です",
       "group": "citadel_main",
-      "hash": "c286d718ac8c"
+      "hash": "cb8048776c29"
     },
     "HeroTesting_GeneralControls": {
       "text": "一般操作",
@@ -54405,14 +55050,14 @@
       "hash": "818b418b17de"
     },
     "HeroTesting_ChangeHero_Desc": {
-      "text": "別のヒーローに切り替え",
+      "text": "別のヒーローに切り替えます",
       "group": "citadel_main",
-      "hash": "d929e502fbd2"
+      "hash": "94eac438ed4b"
     },
     "HeroTesting_ChangeTeam_Desc": {
-      "text": "逆のチームに切り替え",
+      "text": "逆のチームに切り替えます",
       "group": "citadel_main",
-      "hash": "e3530ddfa4dc"
+      "hash": "e03fafb00bc8"
     },
     "HeroTesting_ResetHero_Desc": {
       "text": "ヒーローを初期状態に戻します：ソウル、アイテム、アビリティの強化がリセットされます",
@@ -54485,9 +55130,9 @@
       "hash": "ea197f465bb2"
     },
     "HeroTesting_FastMovespeed_Desc": {
-      "text": "+9m／秒の移動速度を獲得します",
+      "text": "+9m/秒の移動速度を獲得します",
       "group": "citadel_main",
-      "hash": "36eeeb341e89"
+      "hash": "192f03bdbe86"
     },
     "HeroTesting_Noclip_Desc": {
       "text": "壁や地面を自由に通り抜けられるようになります",
@@ -54600,9 +55245,9 @@
       "hash": "321b91ccc832"
     },
     "HeroTesting_DealBotDamage_Desc": {
-      "text": "入力した数値の弾薬ダメージを照準を合わせているCPUに与えます",
+      "text": "入力した数値の弾薬ダメージを、照準を合わせているCPUに与えます",
       "group": "citadel_main",
-      "hash": "2962967c8685"
+      "hash": "e9a4ce8c40b1"
     },
     "HeroTesting_KillBot_Desc": {
       "text": "照準を合わせているCPUをキルします",
@@ -54815,9 +55460,9 @@
       "hash": "082a00de8b67"
     },
     "HeroTesting_NPC_SpawnTrooper": {
-      "text": "トルーパーを生成",
+      "text": "トルーパー生成",
       "group": "citadel_main",
-      "hash": "9693770116cd"
+      "hash": "97d9b72e35af"
     },
     "HeroTesting_TrooperFriendly": {
       "text": "味方",
@@ -54850,9 +55495,9 @@
       "hash": "7c2281ce7193"
     },
     "HeroTesting_PinOpen": {
-      "text": "ピン留めして開く",
+      "text": "ピン留めする",
       "group": "citadel_main",
-      "hash": "1964d73e86a1"
+      "hash": "3df9d4bb3854"
     },
     "HeroTesting_Unpin": {
       "text": "ピン留め解除",
@@ -55985,9 +56630,9 @@
       "hash": "a0b5e948eb2e"
     },
     "citadel_chatwheel_label_Care": {
-      "text": "注意",
+      "text": "気をつけて",
       "group": "citadel_main",
-      "hash": "f08b55c42cfa"
+      "hash": "41314f4fb9ed"
     },
     "citadel_chatwheel_message_Care": {
       "text": "気をつけて",
@@ -56619,6 +57264,16 @@
       "group": "citadel_main",
       "hash": "abacf3a424d2"
     },
+    "citadel_chatwheel_label_someone_was_here": {
+      "text": "誰かがいた",
+      "group": "citadel_main",
+      "hash": "c8a388837ee9"
+    },
+    "citadel_chatwheel_message_someone_was_here": {
+      "text": "誰かがここにいた",
+      "group": "citadel_main",
+      "hash": "cef7b5ed99df"
+    },
     "citadel_chatwheel_label_shop_closed": {
       "text": "閉店",
       "group": "citadel_main",
@@ -56795,9 +57450,9 @@
       "hash": "0fe42f316d0c"
     },
     "citadel_chatwheel_label_No": {
-      "text": "反対だ",
+      "text": "ダメだ",
       "group": "citadel_main",
-      "hash": "3397f6a4ef44"
+      "hash": "926eaf6a1782"
     },
     "citadel_chatwheel_message_No": {
       "text": "ダメだ！",
@@ -56905,19 +57560,19 @@
       "hash": "15d364638a6b"
     },
     "citadel_chatwheel_message_HeadedToYellow": {
-      "text": "ヨークに向かってる。",
+      "text": "ヨークに向かってる",
       "group": "citadel_main",
-      "hash": "2998fbb8cf87"
+      "hash": "6106aab0bd26"
     },
     "citadel_chatwheel_message_HeadedToBlue": {
-      "text": "ブロードウェイに向かってる。",
+      "text": "ブロードウェイに向かってる",
       "group": "citadel_main",
-      "hash": "b5ae929276d5"
+      "hash": "3df00b25adf5"
     },
     "citadel_chatwheel_message_HeadedToGreen": {
-      "text": "グリニッジに向かってる。",
+      "text": "グリニッジに向かってる",
       "group": "citadel_main",
-      "hash": "cab319443e44"
+      "hash": "9c1e47526330"
     },
     "citadel_chatwheel_message_HeadedToPurple": {
       "text": "パープルに移動",
@@ -56995,9 +57650,9 @@
       "hash": "97651daaa0a9"
     },
     "citadel_chatwheel_heal_please": {
-      "text": "回復してください",
+      "text": "回復を頼む",
       "group": "citadel_main",
-      "hash": "11aeb59691ea"
+      "hash": "3e7e95f5be21"
     },
     "citadel_chatwheel_need_heal": {
       "text": "回復が必要",
@@ -57049,15 +57704,30 @@
       "group": "citadel_main",
       "hash": "134f94db5603"
     },
+    "citadel_chatwheel_message_going_corrupted_shop": {
+      "text": "ブローカーに行く",
+      "group": "citadel_main",
+      "hash": "4bbca44cb7e0"
+    },
     "citadel_chatwheel_label_visit_corrupted_shop": {
       "text": "ショップに行こう",
       "group": "citadel_main",
       "hash": "b56249be3cbb"
     },
+    "citadel_chatwheel_message_visit_corrupted_shop": {
+      "text": "ブローカーに行こう",
+      "group": "citadel_main",
+      "hash": "62ca4980d78f"
+    },
     "citadel_chatwheel_label_ignore_corrupted_shop": {
       "text": "ショップは無視",
       "group": "citadel_main",
       "hash": "28bd5198af16"
+    },
+    "citadel_chatwheel_message_ignore_corrupted_shop": {
+      "text": "ブローカーは無視しよう",
+      "group": "citadel_main",
+      "hash": "217a8e0f5a90"
     },
     "citadel_chatwheel_label_going_farm": {
       "text": "ファームする",
@@ -57790,9 +58460,9 @@
       "hash": "64096be054ce"
     },
     "ping_careful": {
-      "text": "注意",
+      "text": "気をつけて",
       "group": "citadel_main",
-      "hash": "f08b55c42cfa"
+      "hash": "41314f4fb9ed"
     },
     "ping_thank_you": {
       "text": "ありがとう！",
@@ -58194,6 +58864,51 @@
       "group": "citadel_main",
       "hash": "6e5ab75786ef"
     },
+    "citadel_keybind_shop_purchase_search_match": {
+      "text": "検索結果の購入／売却",
+      "group": "citadel_main",
+      "hash": "e3e9366653a7"
+    },
+    "citadel_keybind_shop_tab_build": {
+      "text": "ビルド タブ移動",
+      "group": "citadel_main",
+      "hash": "3fc23bcaf0d2"
+    },
+    "citadel_keybind_shop_tab_recommended": {
+      "text": "人気のアイテム タブ移動",
+      "group": "citadel_main",
+      "hash": "cd78313f91b1"
+    },
+    "citadel_keybind_shop_tab_all_items": {
+      "text": "すべてのアイテム タブ移動",
+      "group": "citadel_main",
+      "hash": "afcba943cc8c"
+    },
+    "citadel_keybind_shop_tab_weapon": {
+      "text": "ウェポン タブ移動",
+      "group": "citadel_main",
+      "hash": "6a4a5228cbc2"
+    },
+    "citadel_keybind_shop_tab_spirit": {
+      "text": "スピリット タブ移動",
+      "group": "citadel_main",
+      "hash": "94f0ecc04d36"
+    },
+    "citadel_keybind_shop_tab_vitality": {
+      "text": "バイタリティ タブ移動",
+      "group": "citadel_main",
+      "hash": "bd0fd24136b5"
+    },
+    "citadel_keybind_shop_tier_up": {
+      "text": "上へスクロール",
+      "group": "citadel_main",
+      "hash": "2c9c68936aa2"
+    },
+    "citadel_keybind_shop_tier_down": {
+      "text": "下へスクロール",
+      "group": "citadel_main",
+      "hash": "ae8579a5b8bb"
+    },
     "Citadel_News_MajorUpdate": {
       "text": "メジャーアップデート",
       "group": "citadel_main",
@@ -58355,9 +59070,9 @@
       "hash": "ad7aca1a4d7c"
     },
     "Citadel_HeroReleaseVote_VotingButton": {
-      "text": "投票の概要",
+      "text": "投票概要",
       "group": "citadel_main",
-      "hash": "4a4385af1e97"
+      "hash": "2970d3465348"
     },
     "Citadel_HeroReleaseVote_VoteCounter": {
       "text": "あなたの合計",
@@ -59045,9 +59760,9 @@
       "hash": "312da9d0e6bf"
     },
     "map_district_fairfax": {
-      "text": "広場",
+      "text": "プラザ",
       "group": "citadel_main",
-      "hash": "ae31c2b984f6"
+      "hash": "fdb05a2a33d1"
     },
     "map_district_theater": {
       "text": "シアター",
@@ -59135,9 +59850,9 @@
       "hash": "b023c08bf046"
     },
     "map_district_building_belltower": {
-      "text": "ベルタワー",
+      "text": "鐘楼",
       "group": "citadel_main",
-      "hash": "3905146560f0"
+      "hash": "2115eb05953a"
     }
   }
 }
