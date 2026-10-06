@@ -1,0 +1,176 @@
+{
+  "from": "6746",
+  "to": "6753",
+  "generatedAt": "2026-10-06T09:00:12.997Z",
+  "entries": [
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "60",
+      "path": "ability_magician_animalhexarea.properties.Radius",
+      "before": 6.5,
+      "after": 6
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "60",
+      "path": "ability_magician_animalhexarea.upgrades.T3.Radius",
+      "before": 3,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "60",
+      "path": "ability_magician_copyult.properties.CopiedUltWindow",
+      "before": 12,
+      "after": 9
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "60",
+      "path": "ability_magician_copyult.properties.CopyCooldownPercentage",
+      "before": 40,
+      "after": 60
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "60",
+      "path": "citadel_weapon_magician_set.weapon.bulletDamage",
+      "before": 17.76,
+      "after": 16.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "60",
+      "path": "citadel_weapon_magician_set.weapon.falloff.endRange",
+      "before": 2400,
+      "after": 2362.205
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "60",
+      "path": "citadel_weapon_magician_set.weapon.falloff.startRange",
+      "before": 1000,
+      "after": 787.402
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "60",
+      "path": "stat.EBaseHealthRegen",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_ratnibble.properties.AbilityCooldown",
+      "before": 28,
+      "after": 24
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.properties.DamagePerShrapnel",
+      "before": 65,
+      "after": 70
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.upgrades.T2.DamagePerShrapnel",
+      "before": 65,
+      "after": 70
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.properties.AbilityCooldown",
+      "before": 130,
+      "after": 160
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.properties.AbilityDuration",
+      "before": 12,
+      "after": 10
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.properties.AllyDamageReduction",
+      "before": 20,
+      "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.properties.BonusMoveSpeed@scale",
+      "before": 0.05,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.properties.Radius",
+      "before": 24,
+      "after": 20
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.upgrades.T1.AbilityCooldown",
+      "before": -20,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.upgrades.T1.BonusMoveSpeed",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.upgrades.T2.AbilityDuration",
+      "before": 8,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.upgrades.T2.FlagDuration",
+      "before": 8,
+      "after": 5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.upgrades.T3.AllyDamageReduction",
+      "before": 15,
+      "after": 10
+    }
+  ],
+  "excludedFieldCount": 26
+}

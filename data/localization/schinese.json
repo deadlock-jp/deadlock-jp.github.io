@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6746",
-  "upstreamCommit": "6746",
-  "generatedAt": "2026-10-05T03:03:24.096Z",
+  "clientVersion": "6753",
+  "upstreamCommit": "6753",
+  "generatedAt": "2026-10-06T09:00:12.826Z",
   "language": "schinese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 618,
-    "citadel_heroes": 3333,
+    "citadel_heroes": 3414,
     "citadel_attributes": 1983,
-    "citadel_gc": 214,
-    "citadel_main": 5189
+    "citadel_gc": 215,
+    "citadel_main": 5203
   },
   "tokens": {
     "hero_vampire:n": {
@@ -21164,6 +21164,401 @@
       "group": "citadel_heroes",
       "hash": "4345cb1fa278"
     },
+    "citadel_weapon_ratking_set": {
+      "text": "君王法令",
+      "group": "citadel_heroes",
+      "hash": "b69cffd9f98d"
+    },
+    "citadel_ability_jump_ratking": {
+      "text": "跳跃",
+      "group": "citadel_heroes",
+      "hash": "cb55b56b42ee"
+    },
+    "ability_ratking_entertunnel": {
+      "text": "挤进去……",
+      "group": "citadel_heroes",
+      "hash": "41b726153850"
+    },
+    "ability_ratking_scrap_grenade": {
+      "text": "废料手雷",
+      "group": "citadel_heroes",
+      "hash": "815ba2299e92"
+    },
+    "ability_ratking_scrap_grenade_desc": {
+      "text": "扔出一枚可以引爆多次的废料手雷，造成{g:citadel_inline_attribute:'BulletDamage'}并施加{g:citadel_inline_attribute:'Slow'}。<br><br><span class=\"diminish\">近战攻击手雷会将其击飞。</span>",
+      "group": "citadel_heroes",
+      "hash": "c522ecd27fbc"
+    },
+    "ability_ratking_scrap_grenade_t3_desc": {
+      "text": "额外增加一次更强的最终爆炸",
+      "group": "citadel_heroes",
+      "hash": "636cc89a8f18"
+    },
+    "ability_ratking_scrap_grenade_big_explosion_desc": {
+      "text": "最终爆炸的引线更长但爆炸半径更大，造成更高的{g:citadel_inline_attribute:'BulletDamage'}并施加更强的{g:citadel_inline_attribute:'Slow'}。",
+      "group": "citadel_heroes",
+      "hash": "cd55c30c00d6"
+    },
+    "DamagePerShrapnel_postvalue_label": {
+      "text": "引爆伤害",
+      "group": "citadel_heroes",
+      "hash": "cf57302eb589"
+    },
+    "DamagePerShrapnel_label": {
+      "text": "引爆伤害",
+      "group": "citadel_heroes",
+      "hash": "cf57302eb589"
+    },
+    "Detonations_postvalue_label": {
+      "text": "引爆次数",
+      "group": "citadel_heroes",
+      "hash": "f5fda6acd552"
+    },
+    "ShrapnelSphereRadius_postvalue_label": {
+      "text": "爆炸半径",
+      "group": "citadel_heroes",
+      "hash": "f3a557b02726"
+    },
+    "ShrapnelSphereRadius_label": {
+      "text": "爆炸半径",
+      "group": "citadel_heroes",
+      "hash": "f3a557b02726"
+    },
+    "ShrapnelSphereRadius_postfix": {
+      "text": "米",
+      "group": "citadel_heroes",
+      "hash": "ee7f305751a5"
+    },
+    "BigExplosionDamage_postvalue_label": {
+      "text": "大爆炸伤害",
+      "group": "citadel_heroes",
+      "hash": "6b3d8a6fc843"
+    },
+    "BigExplosionDamage_label": {
+      "text": "大爆炸伤害",
+      "group": "citadel_heroes",
+      "hash": "6b3d8a6fc843"
+    },
+    "BigExplosionRadius_label": {
+      "text": "大爆炸半径",
+      "group": "citadel_heroes",
+      "hash": "b69f0c3ff00a"
+    },
+    "BigExplosionRadius_postvalue_label": {
+      "text": "大爆炸半径",
+      "group": "citadel_heroes",
+      "hash": "b69f0c3ff00a"
+    },
+    "BigExplosionRadius_postfix": {
+      "text": "米",
+      "group": "citadel_heroes",
+      "hash": "ee7f305751a5"
+    },
+    "BigExplosionSlowPercent_postvalue_label": {
+      "text": "大爆炸移动速度",
+      "group": "citadel_heroes",
+      "hash": "29e8fdc2ded8"
+    },
+    "BigExplosionSlowPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "BigExplosionSlowPercent_label": {
+      "text": "大爆炸移动速度",
+      "group": "citadel_heroes",
+      "hash": "29e8fdc2ded8"
+    },
+    "ability_ratking_ratnibble": {
+      "text": "鼠群",
+      "group": "citadel_heroes",
+      "hash": "ce820a2898ad"
+    },
+    "ability_ratking_ratnibble_desc": {
+      "text": "召唤一群<span class=\"highlight\">老鼠</span>扑向敌人，每次啃咬都会造成{g:citadel_inline_attribute:'SpiritDPS'}并降低{g:citadel_inline_attribute:'BulletResist'}。附着的老鼠越多，他们啃咬目标的速度越快。<br><br>敌人可以被多只老鼠附着，但每次通过<span class=\"highlight\">地面或空中冲刺</span>都可以提前甩掉一只<span class=\"highlight\">老鼠</span>。",
+      "group": "citadel_heroes",
+      "hash": "1238f97f37e0"
+    },
+    "RatsAttached_postvalue_label": {
+      "text": "附着老鼠数量",
+      "group": "citadel_heroes",
+      "hash": "489335aa0c11"
+    },
+    "BiteInterval_postvalue_label": {
+      "text": "啃咬间隔",
+      "group": "citadel_heroes",
+      "hash": "f70e4ae9064b"
+    },
+    "BiteInterval_label": {
+      "text": "每只老鼠啃咬间隔",
+      "group": "citadel_heroes",
+      "hash": "27a99e6b8e8f"
+    },
+    "BiteInterval_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "DamagePerBite_postvalue_label": {
+      "text": "每次啃咬伤害",
+      "group": "citadel_heroes",
+      "hash": "c0819a6a33a8"
+    },
+    "DamagePerBite_label": {
+      "text": "每次啃咬伤害",
+      "group": "citadel_heroes",
+      "hash": "c0819a6a33a8"
+    },
+    "ArmorReductionPerBite_postvalue_label": {
+      "text": "每次啃咬子弹抗性",
+      "group": "citadel_heroes",
+      "hash": "06f7ccbc1665"
+    },
+    "ArmorReductionPerBite_label": {
+      "text": "每次啃咬子弹抗性",
+      "group": "citadel_heroes",
+      "hash": "06f7ccbc1665"
+    },
+    "ArmorReductionPerBite_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "ability_ratking_ratnibble_t2_desc": {
+      "text": "<span class=\"highlight\">鼠群规模增加</span><br><span class=\"highlight\">+{s:DebuffDuration}秒</span>减益持续时间",
+      "group": "citadel_heroes",
+      "hash": "ef2e9e1c23d1"
+    },
+    "ability_ratking_ratnibble_t3_desc": {
+      "text": "每次啃咬<span class=\"highlight\">+{s:DamagePerBite}</span>伤害和<span class=\"highlight\">{s:ArmorReductionPerBite}%</span>子弹抗性",
+      "group": "citadel_heroes",
+      "hash": "33b748713517"
+    },
+    "ability_ratking_ratnibble/ratking_nibble_enemy": {
+      "text": "啃咬 - 冲刺可甩掉老鼠",
+      "group": "citadel_heroes",
+      "hash": "a81e05b22e4a"
+    },
+    "ability_ratking_ratnibble/ratking_nibble_enemy/ratking_nibble_enemy_linger": {
+      "text": "啃咬 - 子弹护甲降低",
+      "group": "citadel_heroes",
+      "hash": "0c11d3058236"
+    },
+    "ability_ratking_ratnibble/ratking_nibble_enemy/ratking_nibble_armor_total": {
+      "text": "啃咬 - 子弹护甲降低",
+      "group": "citadel_heroes",
+      "hash": "0c11d3058236"
+    },
+    "npc_neutral_bug_rat_swarm/neutral_rat_swarm": {
+      "text": "鼠群 - 冲刺可甩掉老鼠",
+      "group": "citadel_heroes",
+      "hash": "f76b47702673"
+    },
+    "DamagePerRat_postvalue_label": {
+      "text": "每只老鼠伤害",
+      "group": "citadel_heroes",
+      "hash": "4707140a5c27"
+    },
+    "DashSlowPercent_postvalue_label": {
+      "text": "冲刺距离",
+      "group": "citadel_heroes",
+      "hash": "1580a8e24849"
+    },
+    "DashSlowPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "NibbleInterval_postvalue_label": {
+      "text": "啃咬间隔",
+      "group": "citadel_heroes",
+      "hash": "f70e4ae9064b"
+    },
+    "MaxRats_postvalue_label": {
+      "text": "最多附着老鼠",
+      "group": "citadel_heroes",
+      "hash": "544954a394f6"
+    },
+    "ability_ratking_ratarmor": {
+      "text": "皇家鼠甲",
+      "group": "citadel_heroes",
+      "hash": "d5eb3c091fc3"
+    },
+    "ability_ratking_ratarmor_desc": {
+      "text": "穿上破旧的盔甲，获得基于{g:citadel_inline_attribute:'MaxHealth'}的{g:citadel_inline_attribute:'CombatBarrier'}。只要盔甲还在，子弹就有几率被<span class=\"highlight\">偏转</span>回攻击者身上。<br><br><span class=\"diminish\">屏障不会从抗性中获益。</span>",
+      "group": "citadel_heroes",
+      "hash": "040de9f3c139"
+    },
+    "ability_ratking_ratarmor_cap_desc": {
+      "text": "穿戴皇家鼠甲时，对鼠王的单次伤害有上限限制。超过上限的伤害会在生效前先降低至上限值",
+      "group": "citadel_heroes",
+      "hash": "0c053004fa65"
+    },
+    "ability_ratking_ratarmor_t2_desc": {
+      "text": "<span class=\"highlight\">{s:AbilityCooldown}秒</span>冷却时间<br><span class=\"highlight\">+{s:ReturnFireChance}%</span>子弹反弹几率",
+      "group": "citadel_heroes",
+      "hash": "df64b57bf88d"
+    },
+    "ability_ratking_ratarmor_t3_desc": {
+      "text": "所有伤害减免至最高<span class=\"highlight\">{s:MaxDamagePerHit}</span><br><span class=\"highlight\">+{s:MaxHealthPct}%</span>最大生命值屏障",
+      "group": "citadel_heroes",
+      "hash": "a27057ea442f"
+    },
+    "RatCount_postvalue_label": {
+      "text": "老鼠数量",
+      "group": "citadel_heroes",
+      "hash": "ddb7ca11d83a"
+    },
+    "MaxHealthPct_postvalue_label": {
+      "text": "最大生命值转屏障",
+      "group": "citadel_heroes",
+      "hash": "2bc896c3b4ca"
+    },
+    "MaxHealthPct_label": {
+      "text": "最大生命值转屏障",
+      "group": "citadel_heroes",
+      "hash": "2bc896c3b4ca"
+    },
+    "MaxHealthPct_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "MaxDamagePerHit_postvalue_label": {
+      "text": "伤害上限",
+      "group": "citadel_heroes",
+      "hash": "c2ba860a5ec9"
+    },
+    "MaxDamagePerHit_label": {
+      "text": "伤害上限",
+      "group": "citadel_heroes",
+      "hash": "c2ba860a5ec9"
+    },
+    "ability_ratking_ratarmor/ratking_armor_caster": {
+      "text": "皇家鼠甲",
+      "group": "citadel_heroes",
+      "hash": "d5eb3c091fc3"
+    },
+    "ReturnFireChance_postvalue_label": {
+      "text": "子弹反弹几率",
+      "group": "citadel_heroes",
+      "hash": "61fe815fe26c"
+    },
+    "ReturnFireChance_label": {
+      "text": "子弹反弹几率",
+      "group": "citadel_heroes",
+      "hash": "61fe815fe26c"
+    },
+    "ReturnFireChance_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "ability_ratking_standard_bearer": {
+      "text": "统治，拉塔尼亚！",
+      "group": "citadel_heroes",
+      "hash": "08c73e88190f"
+    },
+    "ability_ratking_standard_bearer/modifier_standard_bearrer_aura": {
+      "text": "统治，拉塔尼亚！",
+      "group": "citadel_heroes",
+      "hash": "08c73e88190f"
+    },
+    "ability_ratking_standard_bearer_charge_label": {
+      "text": "旗帜光环",
+      "group": "citadel_heroes",
+      "hash": "791092094d48"
+    },
+    "AllyDamageReduction_postvalue_label": {
+      "text": "伤害降低",
+      "group": "citadel_heroes",
+      "hash": "29d5a9b24029"
+    },
+    "AllyDamageReduction_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "AllyDamageReduction_label": {
+      "text": "伤害降低",
+      "group": "citadel_heroes",
+      "hash": "29d5a9b24029"
+    },
+    "ability_ratking_standard_bearer_desc": {
+      "text": "冲刺并召唤拉塔尼亚的旗帜，使附近友军获得{g:citadel_inline_attribute:'MoveSpeed'}，<span class=\"highlight\">免疫减速效果</span>，并且靠近旗帜时<span class=\"highlight\">减少受到的伤害</span>。",
+      "group": "citadel_heroes",
+      "hash": "8fc115af34b8"
+    },
+    "ability_ratking_standard_bearer_t1_desc": {
+      "text": "{s:AbilityCooldown}秒冷却时间<br>+{s:BonusMoveSpeed}米移动速度",
+      "group": "citadel_heroes",
+      "hash": "fdddc8025481"
+    },
+    "ability_ratking_standard_bearer_t2_desc": {
+      "text": "+{s:AbilityDuration}秒冲锋持续时间<br>+{s:FlagDuration}秒旗帜持续时间<br>+{s:Radius}米半径",
+      "group": "citadel_heroes",
+      "hash": "277a98c205a7"
+    },
+    "ability_ratking_standard_bearer_t3_desc": {
+      "text": "+{s:Damage}伤害<br>+{s:AllyDamageReduction}%伤害降低",
+      "group": "citadel_heroes",
+      "hash": "193949c5aa7e"
+    },
+    "ability_ratking_standard_bearer_slam_desc": {
+      "text": "将旗帜猛砸入地面，导致下方的下水道猛烈爆发，对区域内所有敌人造成{g:citadel_inline_attribute:'BulletDamage'}，并施加{g:citadel_inline_attribute:'KnockUp'}和{g:citadel_inline_attribute:'Slow'}。老鼠将从下水道中涌出，对击中的敌人施加<span class=\"highlight\">鼠群</span>。",
+      "group": "citadel_heroes",
+      "hash": "f38bf703fce2"
+    },
+    "ability_ratking_standard_bearer_slam_label": {
+      "text": "旗帜猛击",
+      "group": "citadel_heroes",
+      "hash": "e8422507a041"
+    },
+    "ability_ratking_standard_bearer_flag_desc": {
+      "text": "插下的旗帜为范围内所有友军提供{g:citadel_inline_attribute:'FireRate'}并<span class=\"highlight\">移除射击时的减速惩罚</span>。",
+      "group": "citadel_heroes",
+      "hash": "578c64f8cbcb"
+    },
+    "ability_ratking_standard_bearer_flag_label": {
+      "text": "旗帜光环",
+      "group": "citadel_heroes",
+      "hash": "791092094d48"
+    },
+    "ExplodeTimer_postvalue_label": {
+      "text": "喷发延迟",
+      "group": "citadel_heroes",
+      "hash": "3987e24555f1"
+    },
+    "ExplodeTimer_label": {
+      "text": "喷发延迟",
+      "group": "citadel_heroes",
+      "hash": "3987e24555f1"
+    },
+    "ExplodeTimer_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "FlagDuration_postvalue_label": {
+      "text": "旗帜持续时间",
+      "group": "citadel_heroes",
+      "hash": "041fdcae28b0"
+    },
+    "FlagDuration_label": {
+      "text": "旗帜持续时间",
+      "group": "citadel_heroes",
+      "hash": "041fdcae28b0"
+    },
+    "FlagDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "Ratking_PlantFlag_Hint": {
+      "text": "插下旗帜",
+      "group": "citadel_heroes",
+      "hash": "e286e6d198da"
+    },
     "ability_header_on_hit": {
       "text": "命中时：",
       "group": "citadel_heroes",
@@ -21760,6 +22155,11 @@
       "hash": "404d125d28f3"
     },
     "ability_melee_necro": {
+      "text": "近战",
+      "group": "citadel_heroes",
+      "hash": "404d125d28f3"
+    },
+    "ability_melee_ratking": {
       "text": "近战",
       "group": "citadel_heroes",
       "hash": "404d125d28f3"
@@ -22438,6 +22838,11 @@
       "text": "北伊克斯亚是美丽、传统与冲突并存的土地，残酷的政治暴力早已司空见惯。因此，当阿波罗得知为了保证他的安全，他将被送往纽约求学，他意识到事态严重。\n\n阿波罗很难适应布莱克莫学院的生活。这所学校本应汇聚诅咒的纽约城里最优秀、最聪明的学生，但他看到的，除了少数之外，几乎全是平庸之辈。他没有把时间浪费在派对和舞会之类的琐事上，而是将精力投入到击剑场上，作为布莱克莫击剑队的队长，他刻苦训练。\n\n然而，到头来阿波罗并不太在意纽约生活的单调乏味。他知道，总有一天，父亲会召唤他回家，而他可以证明自己配得上家族的祖传宝剑。",
       "group": "citadel_heroes",
       "hash": "ed26846dbb6e"
+    },
+    "hero_ratking_lore": {
+      "text": "纽约沃伦斯的神秘统治者——鼠王，体型、力量和野心都远超他的臣民。他不再满足于躲藏在地下，而是大胆地描绘了一个未来的蓝图：他和他的臣民可以自由行走在地面上，不再惧怕纽约街头巡逻的灭鼠车（或是老鼠称之为，人类灭害小队）。\n\n第1步：控制长岛\n第2步：宣布长岛为新的主权国家——拉塔尼亚\n第3步：惩处所有拒绝离开这个老鼠乌托邦的人类\n\n然而，尽管这个计划天衣无缝，鼠王并不想冒险：因此，他决定召唤他的守护神来助他一臂之力。",
+      "group": "citadel_heroes",
+      "hash": "84351fcfd0ce"
     },
     "MODIFIER_STATE_ROOTED": {
       "text": "被定身",
@@ -33424,6 +33829,11 @@
       "group": "citadel_gc",
       "hash": "f01918bf5e09"
     },
+    "Steam_Citadel_Hideout_LongIsland": {
+      "text": "希望大本营在长岛",
+      "group": "citadel_gc",
+      "hash": "044dc5f1ad30"
+    },
     "Citadel_Dashboard_BuildVersion": {
       "text": "#{d:buildNumber}",
       "group": "citadel_main",
@@ -38984,6 +39394,11 @@
       "group": "citadel_main",
       "hash": "0b3a9c112e92"
     },
+    "Citadel_HUD_DamageSummary_Hint": {
+      "text": "按住{g:citadel_binding:'ExtraInfo'}可以查看修改后的数值",
+      "group": "citadel_main",
+      "hash": "218c41a2cacc"
+    },
     "Citadel_HUD_AdjustedBy": {
       "text": "调整源：",
       "group": "citadel_main",
@@ -40868,6 +41283,11 @@
       "text": "玩家当前在比赛中",
       "group": "citadel_main",
       "hash": "bb9cf60628e5"
+    },
+    "Citadel_HideoutConnectionFailed_GCDisabled": {
+      "text": "大本营服务器暂时被禁用",
+      "group": "citadel_main",
+      "hash": "05a59ac6c033"
     },
     "Citadel_HideoutBallJuggle_Increment": {
       "text": "{s:value}倍",
@@ -45954,6 +46374,36 @@
       "group": "citadel_main",
       "hash": "388b93570eec"
     },
+    "citadel_settings_default_view": {
+      "text": "默认设置视图",
+      "group": "citadel_main",
+      "hash": "1fe80bb39695"
+    },
+    "citadel_settings_default_view_current_hero": {
+      "text": "当前英雄",
+      "group": "citadel_main",
+      "hash": "850bf26fe613"
+    },
+    "citadel_settings_default_view_base_settings": {
+      "text": "基础设置",
+      "group": "citadel_main",
+      "hash": "35ff7705979b"
+    },
+    "citadel_settings_default_view_tooltip": {
+      "text": "选择打开设置菜单时默认显示的视图。<br><br>当前英雄：默认编辑你当前激活英雄的设置。<br><br>基础设置：默认编辑基础设置。",
+      "group": "citadel_main",
+      "hash": "5a4f6dc5d3bf"
+    },
+    "citadel_settings_remember_selected_hero": {
+      "text": "记住选择的英雄",
+      "group": "citadel_main",
+      "hash": "5c64cc8570d1"
+    },
+    "citadel_settings_remember_selected_hero_tooltip": {
+      "text": "关闭时，如果当前英雄是默认视图，设置菜单将打开使用的英雄的视图，否则将打开基础设置。<br><br>开启时，设置菜单会记住在英雄选择器中选择的英雄，并重新打开相同的视图。如果已将当前英雄选为默认视图，设置菜单中你所选的英雄仍会在你切换游戏内英雄时随之更新。",
+      "group": "citadel_main",
+      "hash": "cba84bc4a88f"
+    },
     "citadel_settings_show_all_off_notice_title": {
       "text": "仅显示英雄特定设置",
       "group": "citadel_main",
@@ -45983,6 +46433,11 @@
       "text": "已启用英雄专属设置",
       "group": "citadel_main",
       "hash": "ddcf33952960"
+    },
+    "citadel_settings_hero_specific_enabled_body": {
+      "text": "要浏览特定英雄的设置，可以点击左上角的英雄图标打开英雄选择界面，再选择英雄。<br><br>第一个图标代表基础设置。每个英雄可以自定义其中一项或多项设置，未自定义的设置将沿用基础设置。<br><br>浏览设置菜单时按住{g:citadel_key:'TAB'}键可以高亮每个英雄能自定义的设置。其他为全局设置，无论使用哪个英雄都会保持不变。",
+      "group": "citadel_main",
+      "hash": "1dfbb0667125"
     },
     "citadel_settings_hero_specific_disabled_title": {
       "text": "已启用全局设置",
@@ -46634,6 +47089,16 @@
       "group": "citadel_main",
       "hash": "71f4ac4c82ce"
     },
+    "citadel_hotkeys_tooltip_shop_tier_up": {
+      "text": "将商店向上滚动一个价格等级<br><br>如果已禁用“自动滚动到价格等级”选项，则此操作只会滚动一小段距离。",
+      "group": "citadel_main",
+      "hash": "69236cd27427"
+    },
+    "citadel_hotkeys_tooltip_shop_tier_down": {
+      "text": "将商店向下滚动一个价格等级<br><br>如果已禁用“自动滚动到价格等级”选项，则此操作只会滚动一小段距离。",
+      "group": "citadel_main",
+      "hash": "31241f82950d"
+    },
     "citadel_settings_monitor_mic_desc": {
       "text": "打开此功能可以在调整音频设置时监听你的麦克风。",
       "group": "citadel_main",
@@ -46963,6 +47428,11 @@
       "text": "启用后搜索时仅使用物品的名称，并且无视物品的描述。",
       "group": "citadel_main",
       "hash": "625a5ef83ad5"
+    },
+    "citadel_settings_shop_open_focus_search_tooltip": {
+      "text": "启用后，打开商店会将键盘放入搜索框中，这样就可以立即键入物品名称。按{g:citadel_key:'ESCAPE'}键后键盘会返回到游戏中。",
+      "group": "citadel_main",
+      "hash": "1ae2e035832e"
     },
     "citadel_settings_shop_scroll_snap": {
       "text": "快速滚动查看价格档位",
@@ -48009,6 +48479,11 @@
       "group": "citadel_main",
       "hash": "77c378fdbedd"
     },
+    "citadel_keybind_map_show_chords_tooltip": {
+      "text": "按住{g:citadel_key:'SHIFT'}键，查看绑定到这些键的修饰键组合，而不是单个键绑定。",
+      "group": "citadel_main",
+      "hash": "6978d0f5bb27"
+    },
     "citadel_keybind_map_chord_shift": {
       "text": "S",
       "group": "citadel_main",
@@ -48058,6 +48533,11 @@
       "text": "其他按键",
       "group": "citadel_main",
       "hash": "94b1a9f9b48f"
+    },
+    "citadel_keybind_map_no_command_bound": {
+      "text": "未绑定指令",
+      "group": "citadel_main",
+      "hash": "34896d5911d7"
     },
     "citadel_keybind_map_keyboard_layout": {
       "text": "键盘布局",

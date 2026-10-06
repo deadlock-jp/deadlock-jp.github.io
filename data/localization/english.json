@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6746",
-  "upstreamCommit": "6746",
-  "generatedAt": "2026-10-05T03:03:24.009Z",
+  "clientVersion": "6753",
+  "upstreamCommit": "6753",
+  "generatedAt": "2026-10-06T09:00:12.754Z",
   "language": "English",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
@@ -11,7 +11,7 @@
     "citadel_heroes": 3423,
     "citadel_attributes": 2015,
     "citadel_gc": 215,
-    "citadel_main": 5224
+    "citadel_main": 5254
   },
   "tokens": {
     "hero_vampire:n": {
@@ -9530,9 +9530,9 @@
       "hash": "261848d1b557"
     },
     "Citadel_Lash_HeroTag_2": {
-      "text": "High Flying",
+      "text": "High-Flying",
       "group": "citadel_heroes",
-      "hash": "b07b41ddc7dd"
+      "hash": "8379687d0d8f"
     },
     "Citadel_Lash_HeroTag_3": {
       "text": "Arrogant",
@@ -21555,14 +21555,14 @@
       "hash": "dbef89ed0532"
     },
     "ability_ratking_standard_bearer_t1_desc": {
-      "text": "{s:AbilityCooldown}s Cooldown and  +{s:BonusMoveSpeed}m Move Speed",
+      "text": "+{s:BonusMoveSpeed}m Move Speed",
       "group": "citadel_heroes",
-      "hash": "d14b59fe5e42"
+      "hash": "970b4af77739"
     },
     "ability_ratking_standard_bearer_t2_desc": {
-      "text": "+{s:AbilityDuration}s Charge Duration<br>+{s:FlagDuration}s Flag Duration<br>+{s:Radius}m Radius",
+      "text": "+{s:FlagDuration}s Flag Duration<br>+{s:Radius}m Radius",
       "group": "citadel_heroes",
-      "hash": "c7881c234129"
+      "hash": "cfc193694787"
     },
     "ability_ratking_standard_bearer_t3_desc": {
       "text": "+{s:Damage} Damage and +{s:AllyDamageReduction}% Damage Reduction",
@@ -47029,6 +47029,76 @@
       "group": "citadel_main",
       "hash": "8cb4562c7e68"
     },
+    "citadel_settings_subtitles_filter_allies": {
+      "text": "Self and allies",
+      "group": "citadel_main",
+      "hash": "66f2791ff4ba"
+    },
+    "citadel_settings_subtitles_filter_allies_tooltip": {
+      "text": "Voice lines from your hero and your teammates.",
+      "group": "citadel_main",
+      "hash": "ada924161304"
+    },
+    "citadel_settings_subtitles_filter_enemies": {
+      "text": "Enemies",
+      "group": "citadel_main",
+      "hash": "dfb05cedef91"
+    },
+    "citadel_settings_subtitles_filter_enemies_tooltip": {
+      "text": "Voice lines from enemy heroes you can hear.",
+      "group": "citadel_main",
+      "hash": "a1778f977ede"
+    },
+    "citadel_settings_subtitles_filter_npcs": {
+      "text": "Announcers and NPCs",
+      "group": "citadel_main",
+      "hash": "ff07c75a3d43"
+    },
+    "citadel_settings_subtitles_filter_npcs_tooltip": {
+      "text": "Voice lines from other characters like the Patrons, the Soul Urn, and the Curiosity Dealer.",
+      "group": "citadel_main",
+      "hash": "b93cf31c0708"
+    },
+    "citadel_settings_subtitles_filter_abilities": {
+      "text": "Abilities and items",
+      "group": "citadel_main",
+      "hash": "7abbb1401b72"
+    },
+    "citadel_settings_subtitles_filter_kills": {
+      "text": "Kills and reactions",
+      "group": "citadel_main",
+      "hash": "fa4a50d59430"
+    },
+    "citadel_settings_subtitles_filter_pings": {
+      "text": "Pings",
+      "group": "citadel_main",
+      "hash": "02acd3bd07c3"
+    },
+    "citadel_settings_subtitles_filter_conversations": {
+      "text": "Conversations",
+      "group": "citadel_main",
+      "hash": "07c59b44128d"
+    },
+    "citadel_settings_subtitles_filter_patrons": {
+      "text": "Patrons",
+      "group": "citadel_main",
+      "hash": "acae9ab8b8cf"
+    },
+    "citadel_settings_subtitles_filter_soul_urn": {
+      "text": "Soul Urn",
+      "group": "citadel_main",
+      "hash": "6ccd8b40073e"
+    },
+    "citadel_settings_subtitles_filter_shopkeeper": {
+      "text": "Shopkeepers",
+      "group": "citadel_main",
+      "hash": "5af559a8d684"
+    },
+    "citadel_settings_subtitles_filter_newscaster": {
+      "text": "Newscaster",
+      "group": "citadel_main",
+      "hash": "8224db5526b1"
+    },
     "citadel_settings_subtitles_font_size": {
       "text": "Subtitle size",
       "group": "citadel_main",
@@ -47144,20 +47214,45 @@
       "group": "citadel_main",
       "hash": "f6916be345e0"
     },
-    "citadel_settings_subtitles_preview_1": {
-      "text": "Lash: Nice beard.",
+    "citadel_settings_subtitles_speaker_names": {
+      "text": "Speaker names",
       "group": "citadel_main",
-      "hash": "f97480410d1b"
+      "hash": "d7c4cf1eb3f9"
+    },
+    "citadel_settings_subtitles_speaker_names_tooltip": {
+      "text": "Show an icon, a name, or both to indicate who is speaking. Speakers without an icon always show their name.",
+      "group": "citadel_main",
+      "hash": "e5521c2da5fc"
+    },
+    "citadel_settings_subtitles_speaker_names_icon_and_name": {
+      "text": "Icon and name",
+      "group": "citadel_main",
+      "hash": "63b37132570c"
+    },
+    "citadel_settings_subtitles_speaker_names_icon": {
+      "text": "Icon only",
+      "group": "citadel_main",
+      "hash": "97ecec4eed3a"
+    },
+    "citadel_settings_subtitles_speaker_names_name": {
+      "text": "Name only",
+      "group": "citadel_main",
+      "hash": "224e65ba6e2e"
+    },
+    "citadel_settings_subtitles_preview_1": {
+      "text": "Nice beard.",
+      "group": "citadel_main",
+      "hash": "d297bc45e6b3"
     },
     "citadel_settings_subtitles_preview_2": {
-      "text": "Kelvin: Nice mustache.",
+      "text": "Nice mustache.",
       "group": "citadel_main",
-      "hash": "d1543184e377"
+      "hash": "cb46bd3e1d77"
     },
     "citadel_settings_subtitles_preview_3": {
-      "text": "Lash: Well aren't we a pair of handsome bastards.",
+      "text": "Well aren't we a pair of handsome bastards.",
       "group": "citadel_main",
-      "hash": "76fcf2b9d79d"
+      "hash": "78ec8eb99598"
     },
     "citadel_settings_voice_steam_link": {
       "text": "Recording device settings are configured using <a href=\"event:DOTAShowSteamVoiceSettings()\">Steam voice settings</a>.",
@@ -48619,6 +48714,16 @@
       "group": "citadel_main",
       "hash": "21ed3992cd1b"
     },
+    "citadel_settings_share_missing_binds_caption": {
+      "text": "After applying, these commands required for gameplay will have no key bound:",
+      "group": "citadel_main",
+      "hash": "384b169a5725"
+    },
+    "citadel_settings_share_missing_binds_caption_scopes": {
+      "text": "After applying, these commands required for gameplay will have no key bound. Be sure to bind them for the heroes shown, or in your base settings if the base settings icon ({g:citadel_icon:'BASE_SETTINGS'}) is shown:",
+      "group": "citadel_main",
+      "hash": "2a17084eb195"
+    },
     "citadel_settings_share_apply_title": {
       "text": "Apply",
       "group": "citadel_main",
@@ -50023,6 +50128,16 @@
       "text": "Allow reticle pips to move as you fire, and let reticle components react to zooming, accuracy effects, and hero abilities.<br><br>When off, reticles always stay static.",
       "group": "citadel_main",
       "hash": "c7ea5d80e90f"
+    },
+    "citadel_settings_crosshair_collapse": {
+      "text": "Collapse static reticle",
+      "group": "citadel_main",
+      "hash": "7e3c05b2d9ab"
+    },
+    "citadel_settings_crosshair_collapse_tooltip": {
+      "text": "Heroes have varying default reticle gaps. Enable this setting to collapse the gap to zero. When using hero-specific settings, this makes it possible to have the same reticle for all heroes without the need to customize the gap for each.",
+      "group": "citadel_main",
+      "hash": "3c02b926c793"
     },
     "citadel_settings_crosshair_custom": {
       "text": "Themed hero reticles",
@@ -56529,6 +56644,26 @@
       "group": "citadel_main",
       "hash": "cfa7cac22894"
     },
+    "citadel_settings_missing_binds_caption": {
+      "text": "These commands are required for gameplay but have no key bound:",
+      "group": "citadel_main",
+      "hash": "021b61277250"
+    },
+    "citadel_settings_missing_binds_caption_scopes": {
+      "text": "These commands are required for gameplay but have no key bound. Bind them for the heroes shown, or in your base settings if the base settings icon ({g:citadel_icon:'BASE_SETTINGS'}) is shown:",
+      "group": "citadel_main",
+      "hash": "fff6c083f6b4"
+    },
+    "citadel_settings_missing_binds_all_heroes": {
+      "text": "All heroes",
+      "group": "citadel_main",
+      "hash": "7ac1a8e9ed4d"
+    },
+    "citadel_settings_missing_binds_more_heroes:f": {
+      "text": "+{d:more_hero_count} {more_hero_count, plural, one{hero} other{heroes}}",
+      "group": "citadel_main",
+      "hash": "c1babc13878b"
+    },
     "AbilityButtonHint_Activate": {
       "text": "Activate",
       "group": "citadel_main",
@@ -59459,6 +59594,16 @@
       "group": "citadel_main",
       "hash": "caa29ccbe8ab"
     },
+    "Citadel_Subtitles_Message_IconAndName": {
+      "text": "<child id='SpeakerIcon' /><b>{s:subtitle_actor}</b>: <i>{s:subtitle_text}</i>",
+      "group": "citadel_main",
+      "hash": "ac7cc025ccb1"
+    },
+    "Citadel_Subtitles_Message_Icon": {
+      "text": "<child id='SpeakerIcon' />: <i>{s:subtitle_text}</i>",
+      "group": "citadel_main",
+      "hash": "d4de62a5f6f3"
+    },
     "npc_newscaster": {
       "text": "Newscaster",
       "group": "citadel_main",
@@ -59473,6 +59618,11 @@
       "text": "Curiosity Dealer",
       "group": "citadel_main",
       "hash": "dd9ddafe8f32"
+    },
+    "npc_broker": {
+      "text": "Broker",
+      "group": "citadel_main",
+      "hash": "a882cca9d54f"
     },
     "npc_spirit_jar": {
       "text": "Spirit Urn",

@@ -2587,7 +2587,7 @@
       "hid": "1380427:8",
       "underground": false,
       "x": -7513,
-      "y": 2008,
+      "y": 2012,
       "z": 291
     },
     {
@@ -5527,20 +5527,20 @@
     {
       "kind": "statue",
       "group": 0,
-      "hid": "1380427:14",
-      "underground": false,
-      "x": -9262,
-      "y": 2893,
-      "z": 486
-    },
-    {
-      "kind": "statue",
-      "group": 0,
       "hid": "1380425:33",
       "underground": false,
       "x": 5188,
       "y": 2901,
       "z": 384
+    },
+    {
+      "kind": "statue",
+      "group": 0,
+      "hid": "1380427:14",
+      "underground": false,
+      "x": -9280,
+      "y": 2939,
+      "z": 488
     },
     {
       "kind": "statue",
@@ -6355,20 +6355,20 @@
     {
       "kind": "tough",
       "group": 0,
-      "hid": "1380427:13",
-      "underground": false,
-      "x": -9280,
-      "y": 2960,
-      "z": 496
-    },
-    {
-      "kind": "tough",
-      "group": 0,
       "hid": "1380421:132",
       "underground": false,
       "x": 5396,
       "y": 2999,
       "z": 256
+    },
+    {
+      "kind": "tough",
+      "group": 0,
+      "hid": "1380427:13",
+      "underground": false,
+      "x": -9282,
+      "y": 3006,
+      "z": 493
     },
     {
       "kind": "tough",
