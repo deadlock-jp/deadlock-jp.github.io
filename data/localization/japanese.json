@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6753",
-  "upstreamCommit": "6753",
-  "generatedAt": "2026-10-06T09:00:12.715Z",
+  "clientVersion": "6759",
+  "upstreamCommit": "6759",
+  "generatedAt": "2026-10-07T10:05:14.480Z",
   "language": "japanese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 618,
     "citadel_heroes": 3415,
-    "citadel_attributes": 1983,
+    "citadel_attributes": 1984,
     "citadel_gc": 215,
-    "citadel_main": 5203
+    "citadel_main": 5220
   },
   "tokens": {
     "hero_vampire:n": {
@@ -9480,9 +9480,9 @@
       "hash": "79a0ed9d4197"
     },
     "Citadel_Lash_HeroTag_2": {
-      "text": "高ジャンプ",
+      "text": "飛翔",
       "group": "citadel_heroes",
-      "hash": "bcfd5cc8625f"
+      "hash": "a3c0f9cef366"
     },
     "Citadel_Lash_HeroTag_3": {
       "text": "傲慢",
@@ -15985,19 +15985,19 @@
       "hash": "0220e2c12c74"
     },
     "HexDuration_label": {
-      "text": "呪い継続時間",
+      "text": "Hex Duration",
       "group": "citadel_heroes",
-      "hash": "b33e008e4c96"
+      "hash": "e3aa33790d1f"
     },
     "HexDuration_postvalue_label": {
-      "text": "呪い継続時間",
+      "text": "Hex Duration",
       "group": "citadel_heroes",
-      "hash": "b33e008e4c96"
+      "hash": "e3aa33790d1f"
     },
     "HexDuration_postfix": {
-      "text": "秒",
+      "text": "s",
       "group": "citadel_heroes",
-      "hash": "eb6aaba1a1ca"
+      "hash": "a0f1490a20d0"
     },
     "ability_magician_stage": {
       "text": "プライベートショータイム",
@@ -18465,9 +18465,9 @@
       "hash": "f6983a5e32b7"
     },
     "ShoveRadius_postvalue_label": {
-      "text": "Shove Radius",
+      "text": "押し出し範囲",
       "group": "citadel_heroes",
-      "hash": "b983e4d34d66"
+      "hash": "f6983a5e32b7"
     },
     "ShoveRadius_postfix": {
       "text": "m",
@@ -21495,14 +21495,14 @@
       "hash": "f45531e2892a"
     },
     "ability_ratking_standard_bearer_t1_desc": {
-      "text": "クールダウン {s:AbilityCooldown}秒、移動速度 +{s:BonusMoveSpeed}m／秒",
+      "text": "移動速度 +{s:BonusMoveSpeed}m／秒",
       "group": "citadel_heroes",
-      "hash": "0d6742652d96"
+      "hash": "5dddbda0953c"
     },
     "ability_ratking_standard_bearer_t2_desc": {
-      "text": "突進継続時間 +{s:AbilityDuration}秒<br>旗の継続時間 +{s:FlagDuration}秒<br>範囲 +{s:Radius}m",
+      "text": "旗の継続時間 +{s:FlagDuration}秒<br>範囲 +{s:Radius}m",
       "group": "citadel_heroes",
-      "hash": "89f72df68717"
+      "hash": "8dde64b54db4"
     },
     "ability_ratking_standard_bearer_t3_desc": {
       "text": "ダメージ +{s:Damage}、ダメージ軽減 +{s:AllyDamageReduction}%",
@@ -25005,6 +25005,11 @@
       "hash": "4345cb1fa278"
     },
     "TechArmorDamageReduction_Label": {
+      "text": "スピリット耐性",
+      "group": "citadel_attributes",
+      "hash": "4244747c7864"
+    },
+    "TechArmorDamageReduction_label": {
       "text": "スピリット耐性",
       "group": "citadel_attributes",
       "hash": "4244747c7864"
@@ -34488,6 +34493,11 @@
       "text": "メタデータファイルのバージョンが不正です",
       "group": "citadel_main",
       "hash": "4d066a9d1c4c"
+    },
+    "Citadel_Scoreboard_Souls": {
+      "text": "ソウル",
+      "group": "citadel_main",
+      "hash": "6ee3c19e08e1"
     },
     "Citadel_Scoreboard_TeamKills": {
       "text": "キル",
@@ -44564,35 +44574,30 @@
       "group": "citadel_main",
       "hash": "54b65d31f7a1"
     },
-    "Citadel_Steamshare_Title_Allied_ObjectiveDestroyed": {
-      "text": "味方の{s:victim_name}",
+    "Citadel_Steamshare_Desc_Allied_ObjectiveDestroyed_Patron": {
+      "text": "味方のパトロンが破壊されました",
       "group": "citadel_main",
-      "hash": "2dc18bb4a86b"
+      "hash": "8e18a6e00a63"
     },
-    "Citadel_Steamshare_Desc_Allied_ObjectiveDestroyed": {
-      "text": "味方の{s:victim_name}が破壊されました",
+    "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed_Guardian": {
+      "text": "敵のガーディアン",
       "group": "citadel_main",
-      "hash": "8f880c4b574d"
+      "hash": "2faecad9560e"
     },
-    "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed": {
-      "text": "敵の{s:victim_name}",
+    "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed_Walker": {
+      "text": "敵のウォーカー",
       "group": "citadel_main",
-      "hash": "6266a1c17365"
+      "hash": "204e1eec16ed"
     },
-    "Citadel_Steamshare_Desc_Enemy_ObjectiveDestroyed": {
-      "text": "敵の{s:victim_name}が破壊されました",
+    "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed_Patron": {
+      "text": "敵のパトロン",
       "group": "citadel_main",
-      "hash": "102da3770511"
+      "hash": "bb30e54ea8ae"
     },
-    "Citadel_Steamshare_Title_Neutral_ObjectiveDestroyed": {
-      "text": "ホーント {s:victim_name}",
+    "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed_Shrine": {
+      "text": "敵のシュライン",
       "group": "citadel_main",
-      "hash": "8a777934d4f8"
-    },
-    "Citadel_Steamshare_Desc_Neutral_ObjectiveDestroyed": {
-      "text": "ホーント {s:victim_name}が倒されました",
-      "group": "citadel_main",
-      "hash": "fcc4eca125ee"
+      "hash": "fbdf6ce85bda"
     },
     "guardian_unit": {
       "text": "ガーディアン",
@@ -46759,6 +46764,76 @@
       "group": "citadel_main",
       "hash": "1c7616aaa6ff"
     },
+    "citadel_settings_subtitles_filter_allies": {
+      "text": "自身と味方",
+      "group": "citadel_main",
+      "hash": "7b9ec76ec784"
+    },
+    "citadel_settings_subtitles_filter_allies_tooltip": {
+      "text": "自身のヒーローと味方ヒーローのボイスラインが含まれるカテゴリーです。",
+      "group": "citadel_main",
+      "hash": "9b614f52aea9"
+    },
+    "citadel_settings_subtitles_filter_enemies": {
+      "text": "敵",
+      "group": "citadel_main",
+      "hash": "b0af5773fc2c"
+    },
+    "citadel_settings_subtitles_filter_enemies_tooltip": {
+      "text": "聞こえる範囲にいる敵ヒーローのボイスラインが含まれるカテゴリーです。",
+      "group": "citadel_main",
+      "hash": "3be1a8230724"
+    },
+    "citadel_settings_subtitles_filter_npcs": {
+      "text": "アナウンサーとNPC",
+      "group": "citadel_main",
+      "hash": "96e76c7c17e0"
+    },
+    "citadel_settings_subtitles_filter_npcs_tooltip": {
+      "text": "パトロンや魂の壺、キュリオシティ・ディーラーなど、他キャラクターのボイスラインが含まれるカテゴリーです。",
+      "group": "citadel_main",
+      "hash": "5f4764966d2b"
+    },
+    "citadel_settings_subtitles_filter_abilities": {
+      "text": "アビリティとアイテム",
+      "group": "citadel_main",
+      "hash": "d644296128ae"
+    },
+    "citadel_settings_subtitles_filter_kills": {
+      "text": "キルとリアクション",
+      "group": "citadel_main",
+      "hash": "6d375d7d6225"
+    },
+    "citadel_settings_subtitles_filter_pings": {
+      "text": "ピン",
+      "group": "citadel_main",
+      "hash": "7711ed0df6ee"
+    },
+    "citadel_settings_subtitles_filter_conversations": {
+      "text": "会話",
+      "group": "citadel_main",
+      "hash": "a21911e56f33"
+    },
+    "citadel_settings_subtitles_filter_patrons": {
+      "text": "パトロン",
+      "group": "citadel_main",
+      "hash": "9a0f3f5cea8a"
+    },
+    "citadel_settings_subtitles_filter_soul_urn": {
+      "text": "魂の壺",
+      "group": "citadel_main",
+      "hash": "d5a353c49632"
+    },
+    "citadel_settings_subtitles_filter_shopkeeper": {
+      "text": "ショップキーパー",
+      "group": "citadel_main",
+      "hash": "d23a345fb2bd"
+    },
+    "citadel_settings_subtitles_filter_newscaster": {
+      "text": "ニュースキャスター",
+      "group": "citadel_main",
+      "hash": "2aad42f1ba03"
+    },
     "citadel_settings_subtitles_font_size": {
       "text": "字幕サイズ",
       "group": "citadel_main",
@@ -46874,20 +46949,45 @@
       "group": "citadel_main",
       "hash": "79a75473461d"
     },
-    "citadel_settings_subtitles_preview_1": {
-      "text": "ラッシュ：いいあごひげだな。",
+    "citadel_settings_subtitles_speaker_names": {
+      "text": "発言者の名前",
       "group": "citadel_main",
-      "hash": "ff8a3f1a7f23"
+      "hash": "22346ff34f0e"
+    },
+    "citadel_settings_subtitles_speaker_names_tooltip": {
+      "text": "発言者のアイコンか名前、あるいはその両方を表示します。発言者がアイコンを持たない場合、常に名前が表示されます。",
+      "group": "citadel_main",
+      "hash": "a6c86de22fc1"
+    },
+    "citadel_settings_subtitles_speaker_names_icon_and_name": {
+      "text": "アイコンと名前",
+      "group": "citadel_main",
+      "hash": "0ce7cee08117"
+    },
+    "citadel_settings_subtitles_speaker_names_icon": {
+      "text": "アイコンのみ",
+      "group": "citadel_main",
+      "hash": "74c6226d07a5"
+    },
+    "citadel_settings_subtitles_speaker_names_name": {
+      "text": "名前のみ",
+      "group": "citadel_main",
+      "hash": "2f010e23a5e3"
+    },
+    "citadel_settings_subtitles_preview_1": {
+      "text": "いいあごひげだな。",
+      "group": "citadel_main",
+      "hash": "71b74c7fcb2a"
     },
     "citadel_settings_subtitles_preview_2": {
-      "text": "ケルビン：いい口ひげだな。",
+      "text": "いい口ひげだな。",
       "group": "citadel_main",
-      "hash": "153ff6f4929a"
+      "hash": "e8d324795c7a"
     },
     "citadel_settings_subtitles_preview_3": {
-      "text": "ラッシュ：俺たち、ずいぶん魅力的なクソ野郎だな。",
+      "text": "俺たち、ずいぶん魅力的なクソ野郎だな。",
       "group": "citadel_main",
-      "hash": "85d91c4cec12"
+      "hash": "a60d2fa317c3"
     },
     "citadel_settings_voice_steam_link": {
       "text": "録音デバイスの設定は<a href=\"event:DOTAShowSteamVoiceSettings()\">Steamのボイス設定</a>を使用して構成されます。",
@@ -48349,6 +48449,16 @@
       "group": "citadel_main",
       "hash": "6cfe00bc21c6"
     },
+    "citadel_settings_share_missing_binds_caption": {
+      "text": "適用すると、プレイに必要となる以下のコマンドへのキー割り当てが解除されます：",
+      "group": "citadel_main",
+      "hash": "31eb1e4b4e1e"
+    },
+    "citadel_settings_share_missing_binds_caption_scopes": {
+      "text": "適用すると、プレイに必要となる以下のコマンドへのキー割り当てが解除されます。表示されているヒーロー向けに、あるいは基本設定アイコン（{g:citadel_icon:'BASE_SETTINGS'}）が表示されている場合は基本設定でコマンドを設定してください：",
+      "group": "citadel_main",
+      "hash": "2feeec84eab4"
+    },
     "citadel_settings_share_apply_title": {
       "text": "適用",
       "group": "citadel_main",
@@ -48968,11 +49078,6 @@
       "text": "選択したカテゴリーにおける、基本設定をゲームのデフォルト設定に戻し、すべてのヒーローのカスタマイズをリセットしますか？<br><br><span color=\"darkorange\">この操作は元に戻せません。</span>",
       "group": "citadel_main",
       "hash": "506cd4dbeacc"
-    },
-    "citadel_settings_reset_hero_scope_title": {
-      "text": "{s:selected_hero_name}をリセットしますか？",
-      "group": "citadel_main",
-      "hash": "df1a1a32ffc0"
     },
     "citadel_settings_reset_hero_scope_note": {
       "text": "{s:selected_hero_name}のヒーロー固有設定を基本設定にリセットします。他ヒーローの設定や基本設定には影響しません。",
@@ -49754,6 +49859,16 @@
       "group": "citadel_main",
       "hash": "8939ee41711b"
     },
+    "citadel_settings_crosshair_collapse": {
+      "text": "静止レティクルの折り畳み",
+      "group": "citadel_main",
+      "hash": "b172595bb0af"
+    },
+    "citadel_settings_crosshair_collapse_tooltip": {
+      "text": "レティクルのオフセットのデフォルト設定は、ヒーローごとに異なります。この機能を有効化すると、オフセットがゼロになります。ヒーロー固有設定を使用している場合、それぞれのヒーロー向けにオフセットを調整する必要なく、すべてのヒーローで同じレティクルを使用できるようになります。",
+      "group": "citadel_main",
+      "hash": "16b6f81e5416"
+    },
     "citadel_settings_crosshair_custom": {
       "text": "ヒーロー専用のレティクル",
       "group": "citadel_main",
@@ -50523,11 +50638,6 @@
       "text": "コンテキストピンなし",
       "group": "citadel_main",
       "hash": "6f4a3b536340"
-    },
-    "citadel_settings_chat_wheel_all": {
-      "text": "[すべて]",
-      "group": "citadel_main",
-      "hash": "6fb75a4e06d1"
     },
     "citadel_settings_mouse": {
       "text": "マウス",
@@ -51354,30 +51464,10 @@
       "group": "citadel_main",
       "hash": "99119a8b654b"
     },
-    "citadel_reset_base_settings_title": {
-      "text": "基本設定をリセットしますか？",
-      "group": "citadel_main",
-      "hash": "2424e872a0e8"
-    },
     "citadel_confirm_reset_keybindings": {
       "text": "キーバインドおよび関連する設定をリセットします。本当にいいですか？",
       "group": "citadel_main",
       "hash": "70bbb8d0a62b"
-    },
-    "citadel_confirm_reset_hero_settings": {
-      "text": "{s:selected_hero_name}のキーバインドと設定のカスタマイズをすべてリセットしますか？<br><br>これにより、{s:selected_hero_name}の設定は基本設定に戻ります。他ヒーローの設定や基本設定には影響しません。",
-      "group": "citadel_main",
-      "hash": "ef6d0a5b4b6c"
-    },
-    "citadel_confirm_reset_keybindings_for_either": {
-      "text": "現在選択しているヒーローのヒーロー固有キーバインドや設定をリセットします。<br><br>ヒーローを選択している場合、そのヒーローのカスタマイズはリセットされ、基本設定が再適用されます。<br><br>基本設定を選択している場合、キーバインドの基本設定やヒーローごとにカスタマイズ可能な設定の値はゲームのデフォルトにリセットされます。この場合、ヒーロー固有設定のカスタマイズは維持されます。",
-      "group": "citadel_main",
-      "hash": "0b37b6629a20"
-    },
-    "citadel_confirm_reset_base_settings": {
-      "text": "キーバインドの基本設定とヒーローごとにカスタマイズ可能なすべての設定の値を、Deadlockのデフォルト設定にリセットしますか？<br><br>ヒーロー固有設定のカスタマイズはすべて維持されます。",
-      "group": "citadel_main",
-      "hash": "57b8c474883e"
     },
     "citadel_switch_camera_teammate_1": {
       "text": "チームメイト 1 カメラ",
@@ -56214,6 +56304,26 @@
       "group": "citadel_main",
       "hash": "ea65964eeb94"
     },
+    "citadel_settings_missing_binds_caption": {
+      "text": "プレイに必要な以下のコマンドは、キー割り当てがされていません：",
+      "group": "citadel_main",
+      "hash": "d537599c1f7b"
+    },
+    "citadel_settings_missing_binds_caption_scopes": {
+      "text": "プレイに必要な以下のコマンドは、キー割り当てがされていません。表示されているヒーロー向けに、あるいは基本設定アイコン（{g:citadel_icon:'BASE_SETTINGS'}）が表示されている場合は基本設定でコマンドを設定してください：",
+      "group": "citadel_main",
+      "hash": "33547b472e84"
+    },
+    "citadel_settings_missing_binds_all_heroes": {
+      "text": "すべてのヒーロー",
+      "group": "citadel_main",
+      "hash": "d41ae26f1930"
+    },
+    "citadel_settings_missing_binds_more_heroes:f": {
+      "text": "+{d:more_hero_count}人のヒーロー",
+      "group": "citadel_main",
+      "hash": "53bd55d7edd1"
+    },
     "AbilityButtonHint_Activate": {
       "text": "発動",
       "group": "citadel_main",
@@ -57438,21 +57548,6 @@
       "text": "一緒に行動しよう",
       "group": "citadel_main",
       "hash": "d4f7ee1c5b41"
-    },
-    "citadel_chatwheel_label_Yes": {
-      "text": "肯定",
-      "group": "citadel_main",
-      "hash": "23aad759781c"
-    },
-    "citadel_chatwheel_message_Yes": {
-      "text": "了解した！",
-      "group": "citadel_main",
-      "hash": "0fe42f316d0c"
-    },
-    "citadel_chatwheel_label_No": {
-      "text": "ダメだ",
-      "group": "citadel_main",
-      "hash": "926eaf6a1782"
     },
     "citadel_chatwheel_message_No": {
       "text": "ダメだ！",
@@ -59124,16 +59219,6 @@
       "group": "citadel_main",
       "hash": "0385ddaa7696"
     },
-    "Citadel_Subtitles_Message_World": {
-      "text": "<i>{s:subtitle_text}</i>",
-      "group": "citadel_main",
-      "hash": "ec5083069785"
-    },
-    "Citadel_Subtitles_Message_Entity": {
-      "text": "<b>{s:subtitle_actor}</b>: <i>{s:subtitle_text}</i>",
-      "group": "citadel_main",
-      "hash": "caa29ccbe8ab"
-    },
     "npc_newscaster": {
       "text": "ニュースキャスター",
       "group": "citadel_main",
@@ -59148,6 +59233,11 @@
       "text": "キュリオシティ・ディーラー",
       "group": "citadel_main",
       "hash": "9dbb6fafd9e6"
+    },
+    "npc_broker": {
+      "text": "ブローカー",
+      "group": "citadel_main",
+      "hash": "8f3928ad309f"
     },
     "npc_spirit_jar": {
       "text": "魂の壺",

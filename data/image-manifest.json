@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-03T14:18:13.668Z",
+  "generatedAt": "2026-10-07T10:05:20.218Z",
   "sourceVpk": "game/citadel/pak01_dir.vpk",
   "entries": [
     {
@@ -55,6 +55,33 @@
       "kind": "vtex",
       "usedBy": [
         "hero:hero_astro:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/baba_card.psd",
+      "vpkPath": "panorama/images/heroes/baba_card_psd.vtex_c",
+      "outPath": "public/images/heroes/baba_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_baba:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/baba_mm.psd",
+      "vpkPath": "panorama/images/heroes/baba_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/baba_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_baba:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/baba_sm.psd",
+      "vpkPath": "panorama/images/heroes/baba_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/baba_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_baba:sm"
       ]
     },
     {
@@ -1160,6 +1187,51 @@
       ]
     },
     {
+      "ref": "file://{images}/hud/abilities/baba/pigeon_hex.psd",
+      "vpkPath": "panorama/images/hud/abilities/baba/pigeon_hex_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/baba/pigeon_hex.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_baba_hexing_brew_throw"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/baba/pigeon_launcher.psd",
+      "vpkPath": "panorama/images/hud/abilities/baba/pigeon_launcher_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/baba/pigeon_launcher.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_baba_ultimate_2"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/baba/strafing_run.psd",
+      "vpkPath": "panorama/images/hud/abilities/baba/strafing_run_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/baba/strafing_run.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_baba_bench_run"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/baba/teapot_brew.psd",
+      "vpkPath": "panorama/images/hud/abilities/baba/teapot_brew_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/baba/teapot_brew.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_baba_hexing_brew"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/baba/threadsap.psd",
+      "vpkPath": "panorama/images/hud/abilities/baba/threadsap_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/baba/threadsap.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_baba_bubbling_brew"
+      ]
+    },
+    {
       "ref": "file://{images}/hud/abilities/bebop/bebop_hook.psd",
       "vpkPath": "panorama/images/hud/abilities/bebop/bebop_hook_psd.vtex_c",
       "outPath": "public/images/hud/abilities/bebop/bebop_hook.png",
@@ -2076,6 +2148,7 @@
         "ability:ability_melee_necro",
         "ability:ability_melee_werewolf",
         "ability:ability_melee_unicorn",
+        "ability:ability_melee_baba",
         "ability:ability_melee_ratking"
       ]
     },
@@ -3158,6 +3231,7 @@
         "ability:citadel_weapon_werewolf_rifle",
         "ability:citadel_weapon_werewolf_claws",
         "ability:citadel_weapon_unicorn_set",
+        "ability:citadel_weapon_baba_set",
         "ability:citadel_weapon_ratking_set"
       ]
     },

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6753",
-  "upstreamCommit": "6753",
-  "generatedAt": "2026-10-06T09:00:12.826Z",
+  "clientVersion": "6759",
+  "upstreamCommit": "6759",
+  "generatedAt": "2026-10-07T10:05:14.635Z",
   "language": "schinese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
@@ -11,7 +11,7 @@
     "citadel_heroes": 3414,
     "citadel_attributes": 1983,
     "citadel_gc": 215,
-    "citadel_main": 5203
+    "citadel_main": 5214
   },
   "tokens": {
     "hero_vampire:n": {
@@ -15980,19 +15980,19 @@
       "hash": "83195cbf5ce9"
     },
     "HexDuration_label": {
-      "text": "扰动持续时间",
+      "text": "Hex Duration",
       "group": "citadel_heroes",
-      "hash": "53c9f7db97e6"
+      "hash": "e3aa33790d1f"
     },
     "HexDuration_postvalue_label": {
-      "text": "扰动持续时间",
+      "text": "Hex Duration",
       "group": "citadel_heroes",
-      "hash": "53c9f7db97e6"
+      "hash": "e3aa33790d1f"
     },
     "HexDuration_postfix": {
-      "text": "秒",
+      "text": "s",
       "group": "citadel_heroes",
-      "hash": "eb6aaba1a1ca"
+      "hash": "a0f1490a20d0"
     },
     "ability_magician_stage": {
       "text": "生死舞台",
@@ -18460,14 +18460,14 @@
       "hash": "576632a54af4"
     },
     "ShoveRadius_postvalue_label": {
-      "text": "Shove Radius",
+      "text": "推撞半径",
       "group": "citadel_heroes",
-      "hash": "b983e4d34d66"
+      "hash": "576632a54af4"
     },
     "ShoveRadius_postfix": {
-      "text": "m",
+      "text": "米",
       "group": "citadel_heroes",
-      "hash": "6b0d31c0d563"
+      "hash": "ee7f305751a5"
     },
     "ability_bookworm_aoemagic": {
       "text": "迷人读物",
@@ -21490,14 +21490,14 @@
       "hash": "8fc115af34b8"
     },
     "ability_ratking_standard_bearer_t1_desc": {
-      "text": "{s:AbilityCooldown}秒冷却时间<br>+{s:BonusMoveSpeed}米移动速度",
+      "text": "+{s:BonusMoveSpeed}米移动速度",
       "group": "citadel_heroes",
-      "hash": "fdddc8025481"
+      "hash": "9e5b4ac75435"
     },
     "ability_ratking_standard_bearer_t2_desc": {
-      "text": "+{s:AbilityDuration}秒冲锋持续时间<br>+{s:FlagDuration}秒旗帜持续时间<br>+{s:Radius}米半径",
+      "text": "+{s:FlagDuration}秒旗帜持续时间<br>+{s:Radius}米半径",
       "group": "citadel_heroes",
-      "hash": "277a98c205a7"
+      "hash": "7722dd3d9098"
     },
     "ability_ratking_standard_bearer_t3_desc": {
       "text": "+{s:Damage}伤害<br>+{s:AllyDamageReduction}%伤害降低",
@@ -44559,36 +44559,6 @@
       "group": "citadel_main",
       "hash": "40566eb87e27"
     },
-    "Citadel_Steamshare_Title_Allied_ObjectiveDestroyed": {
-      "text": "我方{s:victim_name}",
-      "group": "citadel_main",
-      "hash": "35228d145d5e"
-    },
-    "Citadel_Steamshare_Desc_Allied_ObjectiveDestroyed": {
-      "text": "我方{s:victim_name}已被摧毁",
-      "group": "citadel_main",
-      "hash": "29ab77b83667"
-    },
-    "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed": {
-      "text": "敌方{s:victim_name}",
-      "group": "citadel_main",
-      "hash": "24868467bd84"
-    },
-    "Citadel_Steamshare_Desc_Enemy_ObjectiveDestroyed": {
-      "text": "敌方{s:victim_name} 已被摧毁",
-      "group": "citadel_main",
-      "hash": "5899f27bac32"
-    },
-    "Citadel_Steamshare_Title_Neutral_ObjectiveDestroyed": {
-      "text": "魂灵 {s:victim_name}",
-      "group": "citadel_main",
-      "hash": "446fd1c41125"
-    },
-    "Citadel_Steamshare_Desc_Neutral_ObjectiveDestroyed": {
-      "text": "魂灵{s:victim_name}已被摧毁",
-      "group": "citadel_main",
-      "hash": "392bfe5657f9"
-    },
     "guardian_unit": {
       "text": "卫士",
       "group": "citadel_main",
@@ -46754,6 +46724,76 @@
       "group": "citadel_main",
       "hash": "740fa00c5f07"
     },
+    "citadel_settings_subtitles_filter_allies": {
+      "text": "自己和友军",
+      "group": "citadel_main",
+      "hash": "9732469cfc91"
+    },
+    "citadel_settings_subtitles_filter_allies_tooltip": {
+      "text": "来自自己和队友的语音台词。",
+      "group": "citadel_main",
+      "hash": "c4daa4922221"
+    },
+    "citadel_settings_subtitles_filter_enemies": {
+      "text": "敌人",
+      "group": "citadel_main",
+      "hash": "9c4e01fae85c"
+    },
+    "citadel_settings_subtitles_filter_enemies_tooltip": {
+      "text": "可以听到敌方英雄的语音。",
+      "group": "citadel_main",
+      "hash": "0da923d27bda"
+    },
+    "citadel_settings_subtitles_filter_npcs": {
+      "text": "播音和NPC",
+      "group": "citadel_main",
+      "hash": "ef85fdeb512d"
+    },
+    "citadel_settings_subtitles_filter_npcs_tooltip": {
+      "text": "来自其他角色，如守护神、灵瓮和奇物商人的语音台词。",
+      "group": "citadel_main",
+      "hash": "0468f35952f3"
+    },
+    "citadel_settings_subtitles_filter_abilities": {
+      "text": "技能和物品",
+      "group": "citadel_main",
+      "hash": "5dcb1f571bf5"
+    },
+    "citadel_settings_subtitles_filter_kills": {
+      "text": "击败和反应",
+      "group": "citadel_main",
+      "hash": "1e4b1d2fdb36"
+    },
+    "citadel_settings_subtitles_filter_pings": {
+      "text": "信号",
+      "group": "citadel_main",
+      "hash": "932fcb57bfb7"
+    },
+    "citadel_settings_subtitles_filter_conversations": {
+      "text": "对话",
+      "group": "citadel_main",
+      "hash": "00d4cbafeabc"
+    },
+    "citadel_settings_subtitles_filter_patrons": {
+      "text": "守护神",
+      "group": "citadel_main",
+      "hash": "0de6202bf983"
+    },
+    "citadel_settings_subtitles_filter_soul_urn": {
+      "text": "灵瓮",
+      "group": "citadel_main",
+      "hash": "2d63e7690622"
+    },
+    "citadel_settings_subtitles_filter_shopkeeper": {
+      "text": "商人",
+      "group": "citadel_main",
+      "hash": "df28029e30f5"
+    },
+    "citadel_settings_subtitles_filter_newscaster": {
+      "text": "新闻播报员",
+      "group": "citadel_main",
+      "hash": "4b1deb628ce9"
+    },
     "citadel_settings_subtitles_font_size": {
       "text": "字幕大小",
       "group": "citadel_main",
@@ -46869,20 +46909,45 @@
       "group": "citadel_main",
       "hash": "bd108ac5d2a7"
     },
-    "citadel_settings_subtitles_preview_1": {
-      "text": "劳什：胡子不错",
+    "citadel_settings_subtitles_speaker_names": {
+      "text": "说话人名称",
       "group": "citadel_main",
-      "hash": "cf708c1c9fb8"
+      "hash": "7962eafdb2ea"
+    },
+    "citadel_settings_subtitles_speaker_names_tooltip": {
+      "text": "通过图标、名称或二者来显示谁在说话。没有图标时总是会显示名称。",
+      "group": "citadel_main",
+      "hash": "a935c844cd8b"
+    },
+    "citadel_settings_subtitles_speaker_names_icon_and_name": {
+      "text": "图标和名称",
+      "group": "citadel_main",
+      "hash": "b523c5c94203"
+    },
+    "citadel_settings_subtitles_speaker_names_icon": {
+      "text": "仅图标",
+      "group": "citadel_main",
+      "hash": "94d888ec29d9"
+    },
+    "citadel_settings_subtitles_speaker_names_name": {
+      "text": "仅名称",
+      "group": "citadel_main",
+      "hash": "2a1a22995304"
+    },
+    "citadel_settings_subtitles_preview_1": {
+      "text": "漂亮的胡子",
+      "group": "citadel_main",
+      "hash": "ed6274404298"
     },
     "citadel_settings_subtitles_preview_2": {
-      "text": "开尔文：胡子很漂亮。",
+      "text": "漂亮的胡子",
       "group": "citadel_main",
-      "hash": "66618b3983b2"
+      "hash": "ed6274404298"
     },
     "citadel_settings_subtitles_preview_3": {
-      "text": "劳什：好吧，我们不是一对英俊的狂徒吗",
+      "text": "好吧，我们不是一对英俊的狂徒吗",
       "group": "citadel_main",
-      "hash": "f0e58dc13c5d"
+      "hash": "16a259ccad0a"
     },
     "citadel_settings_voice_steam_link": {
       "text": "用<a href=\"event:DOTAShowSteamVoiceSettings()\">蒸汽平台语音设置</a>配置录音设备设置。",
@@ -48344,6 +48409,16 @@
       "group": "citadel_main",
       "hash": "0e1e52d14af2"
     },
+    "citadel_settings_share_missing_binds_caption": {
+      "text": "应用后，以下游戏所需命令将没有按键绑定：",
+      "group": "citadel_main",
+      "hash": "446a204a2520"
+    },
+    "citadel_settings_share_missing_binds_caption_scopes": {
+      "text": "应用后，以下游戏所需的命令将没有按键绑定。请为所示英雄绑定这些按键，或基础设置图标（{g:citadel_icon:'BASE_SETTINGS'}）有显示时在基础设置中进行绑定：",
+      "group": "citadel_main",
+      "hash": "d40516f62520"
+    },
     "citadel_settings_share_apply_title": {
       "text": "应用",
       "group": "citadel_main",
@@ -48963,11 +49038,6 @@
       "text": "确定要把所选类别中的基础设置恢复为默认值并移除所有英雄的自定义设置吗？<br><br><span color=\"darkorange\">这个操作无法撤销。</span>",
       "group": "citadel_main",
       "hash": "71723f032fe3"
-    },
-    "citadel_settings_reset_hero_scope_title": {
-      "text": "重置 {s:selected_hero_name}？",
-      "group": "citadel_main",
-      "hash": "e10427e272b9"
     },
     "citadel_settings_reset_hero_scope_note": {
       "text": "{s:selected_hero_name}的英雄专属设置将恢复为基础设置。其他英雄和基础设置不受影响。",
@@ -49749,6 +49819,16 @@
       "group": "citadel_main",
       "hash": "d7bf4cd356f0"
     },
+    "citadel_settings_crosshair_collapse": {
+      "text": "缩小静态准星",
+      "group": "citadel_main",
+      "hash": "6f388329b38f"
+    },
+    "citadel_settings_crosshair_collapse_tooltip": {
+      "text": "英雄的默认准星间隙各不相同。启用此设置可将间隙缩小至零。使用英雄专属设置时，可使所有英雄拥有相同的准星，而无需为每个英雄单独自定义间隙。",
+      "group": "citadel_main",
+      "hash": "b2e323030045"
+    },
     "citadel_settings_crosshair_custom": {
       "text": "英雄主题准星",
       "group": "citadel_main",
@@ -50518,11 +50598,6 @@
       "text": "没有情境信号消息",
       "group": "citadel_main",
       "hash": "9a5f18423e90"
-    },
-    "citadel_settings_chat_wheel_all": {
-      "text": "[所有人]",
-      "group": "citadel_main",
-      "hash": "f15eae97fa48"
     },
     "citadel_settings_mouse": {
       "text": "鼠标",
@@ -51349,30 +51424,10 @@
       "group": "citadel_main",
       "hash": "b8ffab89e6ba"
     },
-    "citadel_reset_base_settings_title": {
-      "text": "重置基础设置？",
-      "group": "citadel_main",
-      "hash": "5859b24da39b"
-    },
     "citadel_confirm_reset_keybindings": {
       "text": "确定要重置键位绑定和关联设置吗？",
       "group": "citadel_main",
       "hash": "3ab1702c4a0c"
-    },
-    "citadel_confirm_reset_hero_settings": {
-      "text": "确定要移除{s:selected_hero_name}的所有键位绑定和自定义设置吗？<br><br>{s:selected_hero_name}将重新使用基础设置。其他英雄和基础设置不受影响。",
-      "group": "citadel_main",
-      "hash": "f3a660783f6c"
-    },
-    "citadel_confirm_reset_keybindings_for_either": {
-      "text": "重置当前所选英雄的英雄专属键位和设置。<br><br>选择英雄后，该英雄的自定义设置将被移除，再次使用你的基础设置。<br><br>选择基础设置后，您的基础键位绑定和英雄可自定义设置的基值将恢复为游戏默认值。英雄专属的自定义设置将会保留。",
-      "group": "citadel_main",
-      "hash": "7b0a6ba13f67"
-    },
-    "citadel_confirm_reset_base_settings": {
-      "text": "确定要将基础按键绑定和所有其他英雄可自定义设置的基础值重置为默认设置吗？<br><br>所有英雄专属自定义设置都将保留。",
-      "group": "citadel_main",
-      "hash": "549727e63d2e"
     },
     "citadel_switch_camera_teammate_1": {
       "text": "队友 1 视角",
@@ -56209,6 +56264,26 @@
       "group": "citadel_main",
       "hash": "aa31bbc90c9e"
     },
+    "citadel_settings_missing_binds_caption": {
+      "text": "游戏中需要以下指令，但尚未绑定按键：",
+      "group": "citadel_main",
+      "hash": "4acfddc02996"
+    },
+    "citadel_settings_missing_binds_caption_scopes": {
+      "text": "游戏中需要以下指令，但尚未绑定按键。请为所示英雄绑定这些按键，或基础设置图标（{g:citadel_icon:'BASE_SETTINGS'}）有显示时在基础设置中进行绑定：",
+      "group": "citadel_main",
+      "hash": "1679a9b8b703"
+    },
+    "citadel_settings_missing_binds_all_heroes": {
+      "text": "所有英雄",
+      "group": "citadel_main",
+      "hash": "0f256a51ae72"
+    },
+    "citadel_settings_missing_binds_more_heroes:f": {
+      "text": "+{d:more_hero_count}名{more_hero_count, plural, one{英雄} other{英雄}}",
+      "group": "citadel_main",
+      "hash": "58f837e21e65"
+    },
     "AbilityButtonHint_Activate": {
       "text": "激活",
       "group": "citadel_main",
@@ -57433,21 +57508,6 @@
       "text": "一起行动",
       "group": "citadel_main",
       "hash": "4941e1ce9b0d"
-    },
-    "citadel_chatwheel_label_Yes": {
-      "text": "好的！",
-      "group": "citadel_main",
-      "hash": "1b13580bf5fc"
-    },
-    "citadel_chatwheel_message_Yes": {
-      "text": "没问题！",
-      "group": "citadel_main",
-      "hash": "c4ec11656adc"
-    },
-    "citadel_chatwheel_label_No": {
-      "text": "不！",
-      "group": "citadel_main",
-      "hash": "3951d137cc14"
     },
     "citadel_chatwheel_message_No": {
       "text": "不！",
@@ -59119,16 +59179,6 @@
       "group": "citadel_main",
       "hash": "89e2e5a34fc4"
     },
-    "Citadel_Subtitles_Message_World": {
-      "text": "<i>{s:subtitle_text}</i>",
-      "group": "citadel_main",
-      "hash": "ec5083069785"
-    },
-    "Citadel_Subtitles_Message_Entity": {
-      "text": "<b>{s:subtitle_actor}</b>：<i>{s:subtitle_text}</i>",
-      "group": "citadel_main",
-      "hash": "4e17f9c45701"
-    },
     "npc_newscaster": {
       "text": "新闻播报员",
       "group": "citadel_main",
@@ -59143,6 +59193,11 @@
       "text": "奇物商人",
       "group": "citadel_main",
       "hash": "2a1e4f4fa8e1"
+    },
+    "npc_broker": {
+      "text": "经纪商",
+      "group": "citadel_main",
+      "hash": "78551f755f3d"
     },
     "npc_spirit_jar": {
       "text": "灵瓮",

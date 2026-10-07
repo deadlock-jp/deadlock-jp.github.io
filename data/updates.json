@@ -4,6 +4,162 @@
   "upstreamRepo": "https://github.com/SteamDatabase/GameTracking-Deadlock",
   "entries": [
     {
+      "date": "2026-10-05",
+      "upstreamCommit": null,
+      "title": "マイナー アップデート - 2026年10月5日",
+      "fromVersion": "6746",
+      "toVersion": "6753",
+      "changes": [
+        "ヒーロー・アイテムの数値差分から自動生成 (バフ 0 / ナーフ 1 / 混在 1、変更項目 21)"
+      ],
+      "adjustments": [
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_magician",
+          "note": "範囲 6.5→6 / T3強化 範囲 3→2 / コピー継続時間 12→9 ほか",
+          "changes": [
+            {
+              "path": "ability_magician_animalhexarea.properties.Radius",
+              "from": 6.5,
+              "to": 6,
+              "good": false
+            },
+            {
+              "path": "ability_magician_animalhexarea.upgrades.T3.Radius",
+              "from": 3,
+              "to": 2,
+              "good": false
+            },
+            {
+              "path": "ability_magician_copyult.properties.CopiedUltWindow",
+              "from": 12,
+              "to": 9,
+              "good": false
+            },
+            {
+              "path": "ability_magician_copyult.properties.CopyCooldownPercentage",
+              "from": 40,
+              "to": 60,
+              "good": false
+            },
+            {
+              "path": "citadel_weapon_magician_set.weapon.bulletDamage",
+              "from": 17.76,
+              "to": 16.5,
+              "good": false
+            },
+            {
+              "path": "citadel_weapon_magician_set.weapon.falloff.endRange",
+              "from": 2400,
+              "to": 2362.205,
+              "good": false
+            },
+            {
+              "path": "citadel_weapon_magician_set.weapon.falloff.startRange",
+              "from": 1000,
+              "to": 787.402,
+              "good": false
+            },
+            {
+              "path": "stat.EBaseHealthRegen",
+              "from": 2,
+              "to": 1,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_ratking",
+          "note": "クールダウン 28→24 / 爆発 ダメージ 65→70 / T2強化 爆発 ダメージ 65→70 ほか",
+          "changes": [
+            {
+              "path": "ability_ratking_ratnibble.properties.AbilityCooldown",
+              "from": 28,
+              "to": 24,
+              "good": true
+            },
+            {
+              "path": "ability_ratking_scrap_grenade.properties.DamagePerShrapnel",
+              "from": 65,
+              "to": 70,
+              "good": true
+            },
+            {
+              "path": "ability_ratking_scrap_grenade.upgrades.T2.DamagePerShrapnel",
+              "from": 65,
+              "to": 70,
+              "good": true
+            },
+            {
+              "path": "ability_ratking_standard_bearer.properties.AbilityCooldown",
+              "from": 130,
+              "to": 160,
+              "good": false
+            },
+            {
+              "path": "ability_ratking_standard_bearer.properties.AbilityDuration",
+              "from": 12,
+              "to": 10,
+              "good": false
+            },
+            {
+              "path": "ability_ratking_standard_bearer.properties.AllyDamageReduction",
+              "from": 20,
+              "to": 15,
+              "good": false
+            },
+            {
+              "path": "ability_ratking_standard_bearer.properties.BonusMoveSpeed@scale",
+              "from": 0.05,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "ability_ratking_standard_bearer.properties.Radius",
+              "from": 24,
+              "to": 20,
+              "good": false
+            },
+            {
+              "path": "ability_ratking_standard_bearer.upgrades.T1.AbilityCooldown",
+              "from": -20,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "ability_ratking_standard_bearer.upgrades.T1.BonusMoveSpeed",
+              "from": 1,
+              "to": 2,
+              "good": true
+            },
+            {
+              "path": "ability_ratking_standard_bearer.upgrades.T2.AbilityDuration",
+              "from": 8,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "ability_ratking_standard_bearer.upgrades.T2.FlagDuration",
+              "from": 8,
+              "to": 5,
+              "good": false
+            },
+            {
+              "path": "ability_ratking_standard_bearer.upgrades.T3.AllyDamageReduction",
+              "from": 15,
+              "to": 10,
+              "good": false
+            }
+          ]
+        }
+      ],
+      "sourceTitle": "マイナー アップデート - 2026年10月5日",
+      "sourceUrl": "https://store.steampowered.com/news/app/1422450/view/703281025618282632"
+    },
+    {
       "date": "2026-09-30",
       "upstreamCommit": "cc57a5a4117382375d0c1189873474ce4b901260",
       "title": "告知なしの調整 (6726)",

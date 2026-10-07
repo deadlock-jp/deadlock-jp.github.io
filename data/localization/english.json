@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6753",
-  "upstreamCommit": "6753",
-  "generatedAt": "2026-10-06T09:00:12.754Z",
+  "clientVersion": "6759",
+  "upstreamCommit": "6759",
+  "generatedAt": "2026-10-07T10:05:14.535Z",
   "language": "English",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 622,
-    "citadel_heroes": 3423,
-    "citadel_attributes": 2015,
-    "citadel_gc": 215,
-    "citadel_main": 5254
+    "citadel_heroes": 3565,
+    "citadel_attributes": 2013,
+    "citadel_gc": 216,
+    "citadel_main": 5269
   },
   "tokens": {
     "hero_vampire:n": {
@@ -21624,6 +21624,701 @@
       "group": "citadel_heroes",
       "hash": "7f4a26ee3d30"
     },
+    "citadel_weapon_baba_set": {
+      "text": "Bunko-Night Special",
+      "group": "citadel_heroes",
+      "hash": "7b86affc84ef"
+    },
+    "citadel_ability_baba_brew_brewing": {
+      "text": "Brewing",
+      "group": "citadel_heroes",
+      "hash": "16792ae3681f"
+    },
+    "citadel_ability_baba_brew_brewed": {
+      "text": "Fully Brewed",
+      "group": "citadel_heroes",
+      "hash": "6011a067f98d"
+    },
+    "citadel_ability_baba_brew_lock": {
+      "text": "Pause Brewing",
+      "group": "citadel_heroes",
+      "hash": "c5d53b637662"
+    },
+    "citadel_ability_baba_brew_unlock": {
+      "text": "Resume Brewing",
+      "group": "citadel_heroes",
+      "hash": "7c993ff96363"
+    },
+    "ability_baba_bubbling_brew": {
+      "text": "Threadsap",
+      "group": "citadel_heroes",
+      "hash": "f7899ae497c3"
+    },
+    "ability_baba_bubbling_brew_quip": {
+      "text": "Threadsap",
+      "group": "citadel_heroes",
+      "hash": "f7899ae497c3"
+    },
+    "ability_baba_bubbling_brew_gun_damage": {
+      "text": "Threadsap (On-Hit)",
+      "group": "citadel_heroes",
+      "hash": "a1b49dd4e67b"
+    },
+    "ability_baba_bubbling_brew_desc": {
+      "text": "Weave a scraggly thread that follows your crosshair before bursting along its path, dealing {g:citadel_inline_attribute:'SpiritDamage'} and stealing enemy {g:citadel_inline_attribute:'Spirit'}, increased in effectiveness for Baba.<br><br>While holding stolen {g:citadel_inline_attribute:'Spirit'}, Baba deals {g:citadel_inline_attribute:'BonusSpiritDamage'} with every bullet.",
+      "group": "citadel_heroes",
+      "hash": "1e427e4c75b3"
+    },
+    "ability_baba_bubbling_brew_t2_desc": {
+      "text": "{s:AbilityCooldown}s Cooldown<br>+{s:DebuffDuration}s Debuff Duration",
+      "group": "citadel_heroes",
+      "hash": "5a89cfde46ab"
+    },
+    "ability_baba_bubbling_brew_t3_desc": {
+      "text": "+{s:AbilityCharges} Charge<br>On Hit: Pull enemies {s:PullDistance}m",
+      "group": "citadel_heroes",
+      "hash": "948eef8375eb"
+    },
+    "BubblingBrew_TechPowerSteal_label": {
+      "text": "Spirit Stolen per Hit",
+      "group": "citadel_heroes",
+      "hash": "1c622340a850"
+    },
+    "BubblingBrew_TechPowerSteal_postvalue_label": {
+      "text": "Spirit Stolen per Hit",
+      "group": "citadel_heroes",
+      "hash": "1c622340a850"
+    },
+    "StolenSpiritEffectiveness_label": {
+      "text": "Stolen Spirit Effectiveness",
+      "group": "citadel_heroes",
+      "hash": "2a634e5874c3"
+    },
+    "StolenSpiritEffectiveness_postvalue_label": {
+      "text": "Stolen Spirit Effectiveness",
+      "group": "citadel_heroes",
+      "hash": "2a634e5874c3"
+    },
+    "StolenSpiritEffectiveness_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "ExplodeTime_label": {
+      "text": "Burst Delay",
+      "group": "citadel_heroes",
+      "hash": "c23fbaf3d4c6"
+    },
+    "ExplodeTime_postvalue_label": {
+      "text": "Burst Delay",
+      "group": "citadel_heroes",
+      "hash": "c23fbaf3d4c6"
+    },
+    "ExplodeTime_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "ExplodeTimeInterval_label": {
+      "text": "Burst Interval",
+      "group": "citadel_heroes",
+      "hash": "bb504f7f9f69"
+    },
+    "ExplodeTimeInterval_postvalue_label": {
+      "text": "Burst Interval",
+      "group": "citadel_heroes",
+      "hash": "bb504f7f9f69"
+    },
+    "ExplodeTimeInterval_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "MaxStacks_BabaBubblingBrew_label": {
+      "text": "Max Spirit Stolen",
+      "group": "citadel_heroes",
+      "hash": "752be45d1785"
+    },
+    "MaxStacks_BabaBubblingBrew_postvalue_label": {
+      "text": "Max Spirit Stolen",
+      "group": "citadel_heroes",
+      "hash": "752be45d1785"
+    },
+    "modifier_baba_bubbling_brew_buff": {
+      "text": "Stolen Spirit",
+      "group": "citadel_heroes",
+      "hash": "3f01e4b93b63"
+    },
+    "modifier_baba_bubbling_brew_debuff": {
+      "text": "Threadsap",
+      "group": "citadel_heroes",
+      "hash": "f7899ae497c3"
+    },
+    "modifier_baba_thread_pull": {
+      "text": "Threadsap Pull",
+      "group": "citadel_heroes",
+      "hash": "ffd4453d99e2"
+    },
+    "KnockbackDuration_label": {
+      "text": "Knockback Duration",
+      "group": "citadel_heroes",
+      "hash": "54ea415f4fcc"
+    },
+    "KnockbackDuration_postvalue_label": {
+      "text": "Knockback Duration",
+      "group": "citadel_heroes",
+      "hash": "54ea415f4fcc"
+    },
+    "KnockbackDuration_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "ability_baba_bench_run": {
+      "text": "Granny Long Legs",
+      "group": "citadel_heroes",
+      "hash": "4808665f28a0"
+    },
+    "ability_baba_bench_run_quip": {
+      "text": "Granny Long Legs: jump high and kick anyone nearby with spirit-charged legs.",
+      "group": "citadel_heroes",
+      "hash": "a3380042fcec"
+    },
+    "ability_baba_bench_run_desc": {
+      "text": "Your bench's legs extend, granting {g:citadel_inline_attribute:'BonusMoveSpeed'}, higher jumps, <span class=\"highlight\">Debuff Resistance</span> and <span class=\"highlight\">Melee Resistance</span>.<br><br><span class=\"diminish\">Light Melee:</span> Perform a <span class=\"highlight\">kick</span> that knocks enemies back.<br><span class=\"diminish\">Heavy Melee:</span> Perform a <span class=\"highlight\">ground pound</span> that applies {g:citadel_inline_attribute:'KnockUp'}, {g:citadel_inline_attribute:'Slow'}, and deals {g:citadel_inline_attribute:'SpiritDamage'}.<br><br><span class=\"diminish\">Hold {g:citadel_binding:'Crouch'} to charge a high jump, release to jump.</span>",
+      "group": "citadel_heroes",
+      "hash": "44b97253713a"
+    },
+    "ability_baba_bench_run_t1_desc": {
+      "text": "+{s:BonusMoveSpeed}m Move Speed",
+      "group": "citadel_heroes",
+      "hash": "970b4af77739"
+    },
+    "ability_baba_bench_run_t2_desc": {
+      "text": "{s:AbilityCooldown}s Cooldown",
+      "group": "citadel_heroes",
+      "hash": "56f01b7736d0"
+    },
+    "ability_baba_bench_run_t3_desc": {
+      "text": "+{s:MeleeResist}% Resists<br>+{s:MeleeLifesteal}% Melee Lifesteal",
+      "group": "citadel_heroes",
+      "hash": "459d78c8271d"
+    },
+    "modifier_baba_bench_run": {
+      "text": "Granny Long Legs",
+      "group": "citadel_heroes",
+      "hash": "4808665f28a0"
+    },
+    "BulletProcDamage_label": {
+      "text": "Bonus Spirit Damage Per Bullet",
+      "group": "citadel_heroes",
+      "hash": "6c05eb87041a"
+    },
+    "BulletProcDamage_postvalue_label": {
+      "text": "Bonus Spirit Damage Per Bullet",
+      "group": "citadel_heroes",
+      "hash": "6c05eb87041a"
+    },
+    "StolenSpiritBulletDamagePercent_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "StolenSpiritBulletDamagePercent_label": {
+      "text": "Bonus Damage From Stolen Spirit",
+      "group": "citadel_heroes",
+      "hash": "b8c0e1e42f90"
+    },
+    "StolenSpiritBulletDamagePercent_postvalue_label": {
+      "text": "Bonus Damage From Stolen Spirit",
+      "group": "citadel_heroes",
+      "hash": "b8c0e1e42f90"
+    },
+    "StolenSpiritBulletDamagePercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "LightKickKnockbackDistance_label": {
+      "text": "Light Melee Knockback",
+      "group": "citadel_heroes",
+      "hash": "84005e0f9065"
+    },
+    "LightKickKnockbackDistance_postvalue_label": {
+      "text": "Light Melee Knockback",
+      "group": "citadel_heroes",
+      "hash": "84005e0f9065"
+    },
+    "LightKickKnockbackDistance_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "GroundPoundKnockUpDuration_label": {
+      "text": "Ground Pound Knock Up",
+      "group": "citadel_heroes",
+      "hash": "8783944ba40c"
+    },
+    "GroundPoundKnockUpDuration_postvalue_label": {
+      "text": "Ground Pound Knock Up",
+      "group": "citadel_heroes",
+      "hash": "8783944ba40c"
+    },
+    "GroundPoundKnockUpDuration_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "BonusMeleeRange_label": {
+      "text": "Melee Range",
+      "group": "citadel_heroes",
+      "hash": "88a083ffe07f"
+    },
+    "BonusMeleeRange_postvalue_label": {
+      "text": "Melee Range",
+      "group": "citadel_heroes",
+      "hash": "88a083ffe07f"
+    },
+    "BonusMeleeRange_prefix": {
+      "text": "{s:sign}",
+      "group": "citadel_heroes",
+      "hash": "e2f95e62e97a"
+    },
+    "BonusMeleeRange_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "MeleeSpiritDamage_label": {
+      "text": "Light Melee Spirit Damage",
+      "group": "citadel_heroes",
+      "hash": "d4a0971d9bfd"
+    },
+    "MeleeSpiritDamage_postvalue_label": {
+      "text": "Light Melee Spirit Damage",
+      "group": "citadel_heroes",
+      "hash": "d4a0971d9bfd"
+    },
+    "HeavyMeleeSpiritDamage_label": {
+      "text": "Heavy Melee Damage",
+      "group": "citadel_heroes",
+      "hash": "2089553e54e4"
+    },
+    "HeavyMeleeSpiritDamage_postvalue_label": {
+      "text": "Heavy Melee Damage",
+      "group": "citadel_heroes",
+      "hash": "2089553e54e4"
+    },
+    "HeavyMeleeSlowPercent_label": {
+      "text": "Heavy Melee Movement Slow",
+      "group": "citadel_heroes",
+      "hash": "0b44606bce6f"
+    },
+    "HeavyMeleeSlowPercent_postvalue_label": {
+      "text": "Heavy Melee Movement Slow",
+      "group": "citadel_heroes",
+      "hash": "0b44606bce6f"
+    },
+    "HeavyMeleeSlowPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "HeavyMeleeSlowDuration_label": {
+      "text": "Heavy Melee Slow Duration",
+      "group": "citadel_heroes",
+      "hash": "fecf40c98483"
+    },
+    "HeavyMeleeSlowDuration_postvalue_label": {
+      "text": "Heavy Melee Slow Duration",
+      "group": "citadel_heroes",
+      "hash": "fecf40c98483"
+    },
+    "HeavyMeleeSlowDuration_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "MeleeResist_label": {
+      "text": "Melee Resist",
+      "group": "citadel_heroes",
+      "hash": "245f855977d5"
+    },
+    "MeleeResist_postvalue_label": {
+      "text": "Melee Resist",
+      "group": "citadel_heroes",
+      "hash": "245f855977d5"
+    },
+    "MeleeResist_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "MeleeResist_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "MaxJumpHeight_label": {
+      "text": "Fully Charged Jump Height",
+      "group": "citadel_heroes",
+      "hash": "bc075b9f234c"
+    },
+    "MaxJumpHeight_postvalue_label": {
+      "text": "Fully Charged Jump Height",
+      "group": "citadel_heroes",
+      "hash": "bc075b9f234c"
+    },
+    "MaxJumpHeight_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "MaxJumpHeight_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "MinJumpHeight_label": {
+      "text": "Jump Height",
+      "group": "citadel_heroes",
+      "hash": "7b13a95956d4"
+    },
+    "MinJumpHeight_postvalue_label": {
+      "text": "Jump Height",
+      "group": "citadel_heroes",
+      "hash": "7b13a95956d4"
+    },
+    "MinJumpHeight_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "MinJumpHeight_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "ability_baba_hexing_brew": {
+      "text": "Baba's Brew",
+      "group": "citadel_heroes",
+      "hash": "eed7d7c7181b"
+    },
+    "ability_baba_hexing_brew_quip": {
+      "text": "Brew Baba's special pot of tea, then throw it to ignite or silence enemies, or shield allies",
+      "group": "citadel_heroes",
+      "hash": "b0ab4633970b"
+    },
+    "ability_baba_hexing_brew_desc": {
+      "text": "Brew a pot of tea that applies a magical effect in an area when thrown, cycling over time between a soothing {g:citadel_inline_attribute:'CombatBarrier'}, {g:citadel_inline_attribute:'Silence'}, or scalding burn that deals {g:citadel_inline_attribute:'SpiritDPS'} and reduces {g:citadel_inline_attribute:'SpiritResist'}. <br><br>Press {g:citadel_binding:'ADS'} to pause or resume brewing.",
+      "group": "citadel_heroes",
+      "hash": "a8029d669e1d"
+    },
+    "ability_baba_hexing_brew_t3_desc": {
+      "text": "+{s:BrewEffectiveness}% Brew Effectiveness",
+      "group": "citadel_heroes",
+      "hash": "c1804201526e"
+    },
+    "ability_header_baba_brew_barrier": {
+      "text": "Soothing Brew:",
+      "group": "citadel_heroes",
+      "hash": "151ec74c365e"
+    },
+    "ability_header_baba_brew_silence": {
+      "text": "Silencing Brew:",
+      "group": "citadel_heroes",
+      "hash": "da128cd5b543"
+    },
+    "ability_header_baba_brew_fire": {
+      "text": "Scalding Brew:",
+      "group": "citadel_heroes",
+      "hash": "9715dd2a80ce"
+    },
+    "BabaBrewBurnDPS_label": {
+      "text": "Burn DPS",
+      "group": "citadel_heroes",
+      "hash": "53cea563c7c5"
+    },
+    "BabaBrewBurnDPS_postvalue_label": {
+      "text": "Burn DPS",
+      "group": "citadel_heroes",
+      "hash": "53cea563c7c5"
+    },
+    "BabaBrewBurnSpiritResist_prefix": {
+      "text": "{s:sign}",
+      "group": "citadel_heroes",
+      "hash": "e2f95e62e97a"
+    },
+    "BabaBrewBurnSpiritResist_label": {
+      "text": "Burn Spirit Resist",
+      "group": "citadel_heroes",
+      "hash": "01d765dce6f3"
+    },
+    "BabaBrewBurnSpiritResist_postvalue_label": {
+      "text": "Burn Spirit Resist",
+      "group": "citadel_heroes",
+      "hash": "01d765dce6f3"
+    },
+    "BabaBrewBurnSpiritResist_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "modifier_baba_brew_fire": {
+      "text": "Scalding Brew",
+      "group": "citadel_heroes",
+      "hash": "6fe4e3daf15f"
+    },
+    "modifier_baba_brew_barrier": {
+      "text": "Soothing Brew",
+      "group": "citadel_heroes",
+      "hash": "3c2ba90be68e"
+    },
+    "modifier_baba_brew_holding_silence": {
+      "text": "Brew: Silence",
+      "group": "citadel_heroes",
+      "hash": "3dfa2b0c2af6"
+    },
+    "modifier_baba_brew_holding_fire": {
+      "text": "Brew: Fire",
+      "group": "citadel_heroes",
+      "hash": "37d012042ed4"
+    },
+    "modifier_baba_brew_holding_barrier": {
+      "text": "Brew: Barrier",
+      "group": "citadel_heroes",
+      "hash": "426e5c89e453"
+    },
+    "modifier_baba_brew_segment_none": {
+      "text": "Brewing",
+      "group": "citadel_heroes",
+      "hash": "16792ae3681f"
+    },
+    "modifier_baba_brew_segment_barrier": {
+      "text": "Soothing",
+      "group": "citadel_heroes",
+      "hash": "575ab928e9da"
+    },
+    "modifier_baba_brew_segment_fire": {
+      "text": "Scalding",
+      "group": "citadel_heroes",
+      "hash": "161c7ec3ef18"
+    },
+    "modifier_baba_brew_segment_silence": {
+      "text": "Silencing",
+      "group": "citadel_heroes",
+      "hash": "a528992acce7"
+    },
+    "modifier_baba_brew_segment_fail": {
+      "text": "",
+      "group": "citadel_heroes",
+      "hash": "da39a3ee5e6b"
+    },
+    "BrewTime_label": {
+      "text": "Initial Brew Time",
+      "group": "citadel_heroes",
+      "hash": "2de41dfa1471"
+    },
+    "BrewTime_postvalue_label": {
+      "text": "Initial Brew Time",
+      "group": "citadel_heroes",
+      "hash": "2de41dfa1471"
+    },
+    "BrewTime_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "ability_baba_hexing_brew/modifier_baba_brew_silence": {
+      "text": "Silencing Brew",
+      "group": "citadel_heroes",
+      "hash": "c5de13cb5094"
+    },
+    "modifier_baba_brew_holding": {
+      "text": "Baba's Brew",
+      "group": "citadel_heroes",
+      "hash": "eed7d7c7181b"
+    },
+    "baba_brew_ui_brewing": {
+      "text": "Brewing...",
+      "group": "citadel_heroes",
+      "hash": "77a09de39c43"
+    },
+    "MaxLockonStacks_label": {
+      "text": "Max Pigeons Per Target",
+      "group": "citadel_heroes",
+      "hash": "a64b33aafc9a"
+    },
+    "MaxLockonStacks_postvalue_label": {
+      "text": "Max Pigeons Per Target",
+      "group": "citadel_heroes",
+      "hash": "a64b33aafc9a"
+    },
+    "FullLockonTime_label": {
+      "text": "Time To Full Lock-On",
+      "group": "citadel_heroes",
+      "hash": "61956d923616"
+    },
+    "FullLockonTime_postvalue_label": {
+      "text": "Time To Full Lock-On",
+      "group": "citadel_heroes",
+      "hash": "61956d923616"
+    },
+    "FullLockonTime_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "TimeToGainLockonStack_label": {
+      "text": "Lock-on Time Per Pigeon",
+      "group": "citadel_heroes",
+      "hash": "9bb1575866f9"
+    },
+    "TimeToGainLockonStack_postvalue_label": {
+      "text": "Lock-on Time Per Pigeon",
+      "group": "citadel_heroes",
+      "hash": "9bb1575866f9"
+    },
+    "TimeToGainLockonStack_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "ability_baba_ultimate_2": {
+      "text": "Feed The Birds",
+      "group": "citadel_heroes",
+      "hash": "0fb29b2eb6a1"
+    },
+    "ability_baba_ultimate_2_desc": {
+      "text": "Cover targets in front of you with <span class=\"highlight\">bread</span>, adding a stacking {g:citadel_inline_attribute:'Slow'} .<br><br>When the channel ends a flock of pigeons bombard the target, dealing {g:citadel_inline_attribute:'SpiritDamage'} and hexing the target into a <span class=\"highlight\">pigeon</span>, increasing in both damage and duration based on bread count.",
+      "group": "citadel_heroes",
+      "hash": "240f3c0b59eb"
+    },
+    "ability_baba_ultimate_2_t1_desc": {
+      "text": "+{s:AbilityCastRange}m Cast Range<br>+{s:BabaUlt2MaxSlow}% Max Slow",
+      "group": "citadel_heroes",
+      "hash": "0fc3cdadba92"
+    },
+    "citadel_ability_baba_pigeon_assault_release_early": {
+      "text": "Release Early",
+      "group": "citadel_heroes",
+      "hash": "27725b567280"
+    },
+    "ability_baba_ultimate_2_t3_desc": {
+      "text": "+{s:MaxDamage} Max Damage <br>+{s:MaxDamage_scale} Spirit Scaling<br>+{s:MaxPigeonDuration}s Max Duration",
+      "group": "citadel_heroes",
+      "hash": "0de97bc5ae16"
+    },
+    "MaxPigeonDuration_label": {
+      "text": "Max Pigeon Duration",
+      "group": "citadel_heroes",
+      "hash": "adf0a0194c9c"
+    },
+    "MaxPigeonDuration_postvalue_label": {
+      "text": "Max Pigeon Duration",
+      "group": "citadel_heroes",
+      "hash": "adf0a0194c9c"
+    },
+    "MaxPigeonDuration_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "BabaUlt2LockOns_label": {
+      "text": "Max Bread Stacks Per Target",
+      "group": "citadel_heroes",
+      "hash": "584d850c4f5b"
+    },
+    "BabaUlt2LockOns_postvalue_label": {
+      "text": "Max Bread Stacks Per Target",
+      "group": "citadel_heroes",
+      "hash": "584d850c4f5b"
+    },
+    "BabaUlt2TimeToMaxStacks_label": {
+      "text": "Time To Max Stacks",
+      "group": "citadel_heroes",
+      "hash": "9aafb170e3ce"
+    },
+    "BabaUlt2TimeToMaxStacks_postvalue_label": {
+      "text": "Time To Max Stacks",
+      "group": "citadel_heroes",
+      "hash": "9aafb170e3ce"
+    },
+    "BabaUlt2TimeToMaxStacks_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "BabaUlt2MaxSlow_label": {
+      "text": "Max Slow",
+      "group": "citadel_heroes",
+      "hash": "a78b22993735"
+    },
+    "BabaUlt2MaxSlow_postvalue_label": {
+      "text": "Max Slow",
+      "group": "citadel_heroes",
+      "hash": "a78b22993735"
+    },
+    "BabaUlt2MaxSlow_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "TickInterval_label": {
+      "text": "Time Between Hits",
+      "group": "citadel_heroes",
+      "hash": "ee1b13d4b8f7"
+    },
+    "TickInterval_postvalue_label": {
+      "text": "Time Between Hits",
+      "group": "citadel_heroes",
+      "hash": "ee1b13d4b8f7"
+    },
+    "TickInterval_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "StunDuration_label": {
+      "text": "Stun Duration",
+      "group": "citadel_heroes",
+      "hash": "de25d2b7d0aa"
+    },
+    "StunDuration_postvalue_label": {
+      "text": "Stun Duration",
+      "group": "citadel_heroes",
+      "hash": "de25d2b7d0aa"
+    },
+    "StunDuration_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "modifier_baba_ult2_mark": {
+      "text": "Marked",
+      "group": "citadel_heroes",
+      "hash": "99a860635892"
+    },
+    "modifier_baba_ult2_pigeon": {
+      "text": "Pigeon",
+      "group": "citadel_heroes",
+      "hash": "04e2190535da"
+    },
+    "TickDamageIncreasePerHit_label": {
+      "text": "Damage Escalation",
+      "group": "citadel_heroes",
+      "hash": "dff9053961fc"
+    },
+    "TickDamageIncreasePerHit_postvalue_label": {
+      "text": "Damage Escalation",
+      "group": "citadel_heroes",
+      "hash": "dff9053961fc"
+    },
+    "TickDamageIncreasePerHit_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
     "ability_header_on_hit": {
       "text": "On Hit:",
       "group": "citadel_heroes",
@@ -22225,6 +22920,16 @@
       "hash": "e00694b1e25c"
     },
     "ability_melee_ratking": {
+      "text": "Melee",
+      "group": "citadel_heroes",
+      "hash": "e00694b1e25c"
+    },
+    "ability_melee_baba": {
+      "text": "Melee",
+      "group": "citadel_heroes",
+      "hash": "e00694b1e25c"
+    },
+    "ability_baba_bench_melee": {
       "text": "Melee",
       "group": "citadel_heroes",
       "hash": "e00694b1e25c"
@@ -22908,6 +23613,11 @@
       "text": "The cryptid ruler of the New York Warrens,  The Rat King towers over his subjects in size, strength, and ambition.  No longer content with hiding underground, the king has revealed his bold vision for a future where he and his subjects can walk the surface without fear of the pest control vans that roam the streets of New York (or as the rats call them: human death squads)\n\nStep 1: Take control of Long Island\nStep 2: Declare Long Island as the new sovereign nation of Ratannia\nStep 3: Execute every human that refuses to leave this new rat utopia\n\nBut air tight as this plan is, the king of rats didn't want to take chances: and so he’s decided to the summon the patron to help hedge his bets.",
       "group": "citadel_heroes",
       "hash": "bd020e268564"
+    },
+    "hero_baba_lore": {
+      "text": "There are a few things most denizens of The Cursed Apple hope to experience at some point in their lives.\n\nSee a Broadway show.\nIce Skate at Rockefeller Center during Christmas season.\nGet yelled at by the Central Park Pigeon Lady.\n\nBecause Baba is more than just an old woman that feeds spirit pigeons in the park... she's an institution.  A force of nature woven into the very lore of New York City.  Is it true that she's sat at the same bench every day for the past 50 years, rain or shine?  Maybe.  Is she REALLY the leader of The Soho Coven?  Who's to say.  One thing's for sure though... she's a New Yorker.  And she's not going to sit back and watch a bunch of tourists tear apart Manhattan in pursuit of power.",
+      "group": "citadel_heroes",
+      "hash": "d766b1ac836c"
     },
     "MODIFIER_STATE_ROOTED": {
       "text": "Immobilized",
@@ -25104,6 +25814,11 @@
       "group": "citadel_attributes",
       "hash": "a79e809e8e08"
     },
+    "TechArmorDamageReduction_label": {
+      "text": "Spirit Resist",
+      "group": "citadel_attributes",
+      "hash": "a79e809e8e08"
+    },
     "TechArmorDamageReduction_postvalue_label": {
       "text": "Spirit Resist",
       "group": "citadel_attributes",
@@ -26918,21 +27633,6 @@
       "text": "%",
       "group": "citadel_attributes",
       "hash": "4345cb1fa278"
-    },
-    "StunDuration_label": {
-      "text": "Stun Duration",
-      "group": "citadel_attributes",
-      "hash": "de25d2b7d0aa"
-    },
-    "StunDuration_postvalue_label": {
-      "text": "Stun Duration",
-      "group": "citadel_attributes",
-      "hash": "de25d2b7d0aa"
-    },
-    "StunDuration_postfix": {
-      "text": "s",
-      "group": "citadel_attributes",
-      "hash": "a0f1490a20d0"
     },
     "StunDelay_label": {
       "text": "Stun Delay",
@@ -34059,6 +34759,11 @@
       "group": "citadel_gc",
       "hash": "eedf709686de"
     },
+    "Steam_Citadel_Hideout_Mildred": {
+      "text": "Hating Mildred in the Hideout",
+      "group": "citadel_gc",
+      "hash": "01d0756d95ba"
+    },
     "Citadel_Dashboard_BuildVersion": {
       "text": "#{d:buildNumber}",
       "group": "citadel_main",
@@ -34708,6 +35413,11 @@
       "text": "The metadata file was an invalid version",
       "group": "citadel_main",
       "hash": "9ae28e81c4c9"
+    },
+    "Citadel_Scoreboard_Souls": {
+      "text": "Souls",
+      "group": "citadel_main",
+      "hash": "ddc5b782224f"
     },
     "Citadel_Scoreboard_TeamKills": {
       "text": "Kills",
@@ -43919,6 +44629,16 @@
       "group": "citadel_main",
       "hash": "cb8988c48763"
     },
+    "Citadel_HeroBuilds_Error_InvalidBuild": {
+      "text": "Invalid build submitted.",
+      "group": "citadel_main",
+      "hash": "427680a14ba2"
+    },
+    "Citadel_HeroBuilds_Error_BuildTooLarge": {
+      "text": "This build is too large to publish. Try shortening its descriptions or annotations, or removing some items.",
+      "group": "citadel_main",
+      "hash": "a1ecede1c5e1"
+    },
     "Citadel_HeroBuilds_Reverting_Title": {
       "text": "Reverting Build",
       "group": "citadel_main",
@@ -44804,35 +45524,115 @@
       "group": "citadel_main",
       "hash": "1354ddce6789"
     },
-    "Citadel_Steamshare_Title_Allied_ObjectiveDestroyed": {
-      "text": "Allied {s:victim_name}",
+    "Citadel_Steamshare_Title_Allied_ObjectiveDestroyed_Guardian": {
+      "text": "Allied Guardian",
       "group": "citadel_main",
-      "hash": "710d647f49c8"
+      "hash": "717d4410ddc0"
     },
-    "Citadel_Steamshare_Desc_Allied_ObjectiveDestroyed": {
-      "text": "Your {s:victim_name} has been destroyed",
+    "Citadel_Steamshare_Desc_Allied_ObjectiveDestroyed_Guardian": {
+      "text": "Your Guardian has been destroyed",
       "group": "citadel_main",
-      "hash": "736c68f9fa37"
+      "hash": "d41e1b0efd63"
     },
-    "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed": {
-      "text": "Enemy {s:victim_name}",
+    "Citadel_Steamshare_Title_Allied_ObjectiveDestroyed_Walker": {
+      "text": "Allied Walker",
       "group": "citadel_main",
-      "hash": "ee7aa356a23e"
+      "hash": "9b53e8ea7d95"
     },
-    "Citadel_Steamshare_Desc_Enemy_ObjectiveDestroyed": {
-      "text": "Enemy {s:victim_name} has been destroyed",
+    "Citadel_Steamshare_Desc_Allied_ObjectiveDestroyed_Walker": {
+      "text": "Your Walker has been destroyed",
       "group": "citadel_main",
-      "hash": "1fd0b27aa15b"
+      "hash": "bb03c228d744"
     },
-    "Citadel_Steamshare_Title_Neutral_ObjectiveDestroyed": {
-      "text": "Haunt {s:victim_name}",
+    "Citadel_Steamshare_Title_Allied_ObjectiveDestroyed_Patron": {
+      "text": "Allied Patron",
       "group": "citadel_main",
-      "hash": "1bd19f404389"
+      "hash": "51cac1be916e"
     },
-    "Citadel_Steamshare_Desc_Neutral_ObjectiveDestroyed": {
-      "text": "Haunt {s:victim_name} has been defeated",
+    "Citadel_Steamshare_Desc_Allied_ObjectiveDestroyed_Patron": {
+      "text": "Your Patron has been destroyed",
       "group": "citadel_main",
-      "hash": "2ab26b0b2b3b"
+      "hash": "41573715cd8c"
+    },
+    "Citadel_Steamshare_Title_Allied_ObjectiveDestroyed_BaseGuardians": {
+      "text": "Allied Base Guardians",
+      "group": "citadel_main",
+      "hash": "a31df8f0d9fa"
+    },
+    "Citadel_Steamshare_Desc_Allied_ObjectiveDestroyed_BaseGuardians": {
+      "text": "Your Base Guardians have been destroyed",
+      "group": "citadel_main",
+      "hash": "077c55ec9cae"
+    },
+    "Citadel_Steamshare_Title_Allied_ObjectiveDestroyed_Shrine": {
+      "text": "Allied Shrine",
+      "group": "citadel_main",
+      "hash": "3aa6b2bf15de"
+    },
+    "Citadel_Steamshare_Desc_Allied_ObjectiveDestroyed_Shrine": {
+      "text": "Your Shrine has been destroyed",
+      "group": "citadel_main",
+      "hash": "4c2876b54e10"
+    },
+    "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed_Guardian": {
+      "text": "Enemy Guardian",
+      "group": "citadel_main",
+      "hash": "3cc8be6969ea"
+    },
+    "Citadel_Steamshare_Desc_Enemy_ObjectiveDestroyed_Guardian": {
+      "text": "Enemy Guardian has been destroyed",
+      "group": "citadel_main",
+      "hash": "0aad60588416"
+    },
+    "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed_Walker": {
+      "text": "Enemy Walker",
+      "group": "citadel_main",
+      "hash": "c422b483d144"
+    },
+    "Citadel_Steamshare_Desc_Enemy_ObjectiveDestroyed_Walker": {
+      "text": "Enemy Walker has been destroyed",
+      "group": "citadel_main",
+      "hash": "89b5549e365a"
+    },
+    "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed_Patron": {
+      "text": "Enemy Patron",
+      "group": "citadel_main",
+      "hash": "bae2fb031f22"
+    },
+    "Citadel_Steamshare_Desc_Enemy_ObjectiveDestroyed_Patron": {
+      "text": "Enemy Patron has been destroyed",
+      "group": "citadel_main",
+      "hash": "27c4b1c40dd1"
+    },
+    "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed_BaseGuardians": {
+      "text": "Enemy Base Guardians",
+      "group": "citadel_main",
+      "hash": "b33aca15a861"
+    },
+    "Citadel_Steamshare_Desc_Enemy_ObjectiveDestroyed_BaseGuardians": {
+      "text": "Enemy Base Guardians have been destroyed",
+      "group": "citadel_main",
+      "hash": "602c82c3dd79"
+    },
+    "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed_Shrine": {
+      "text": "Enemy Shrine",
+      "group": "citadel_main",
+      "hash": "04175cc77b30"
+    },
+    "Citadel_Steamshare_Desc_Enemy_ObjectiveDestroyed_Shrine": {
+      "text": "Enemy Shrine has been destroyed",
+      "group": "citadel_main",
+      "hash": "0b98ca68852e"
+    },
+    "Citadel_Steamshare_Title_Neutral_ObjectiveDestroyed_MidBoss": {
+      "text": "Haunt MidBoss",
+      "group": "citadel_main",
+      "hash": "5840016ebd5f"
+    },
+    "Citadel_Steamshare_Desc_Neutral_ObjectiveDestroyed_MidBoss": {
+      "text": "Haunt MidBoss has been defeated",
+      "group": "citadel_main",
+      "hash": "48fb6fa5b572"
     },
     "guardian_unit": {
       "text": "Guardian",
@@ -46743,6 +47543,16 @@
       "text": "Close hero selector.",
       "group": "citadel_main",
       "hash": "9d6f41433f7f"
+    },
+    "citadel_settings_hero_selector_switch_to_base_tooltip": {
+      "text": "Change view to base settings.",
+      "group": "citadel_main",
+      "hash": "ef43570af46a"
+    },
+    "citadel_settings_hero_selector_switch_to_hero_tooltip": {
+      "text": "Change view to current hero settings.",
+      "group": "citadel_main",
+      "hash": "78fbc7970c6c"
     },
     "citadel_settings_chatwheel": {
       "text": "Chat Wheel",
@@ -49344,11 +50154,6 @@
       "group": "citadel_main",
       "hash": "9734f07647b4"
     },
-    "citadel_settings_reset_hero_scope_title": {
-      "text": "Reset {s:selected_hero_name}?",
-      "group": "citadel_main",
-      "hash": "fec2470ef6ac"
-    },
     "citadel_settings_reset_hero_scope_note": {
       "text": "Hero-specific settings for {s:selected_hero_name} will revert to your base settings. Other heroes and your base settings will not be affected.",
       "group": "citadel_main",
@@ -50909,11 +51714,6 @@
       "group": "citadel_main",
       "hash": "7aeff40b5bf1"
     },
-    "citadel_settings_chat_wheel_all": {
-      "text": "[ALL]",
-      "group": "citadel_main",
-      "hash": "4cfb91e2db3a"
-    },
     "citadel_settings_mouse": {
       "text": "Mouse",
       "group": "citadel_main",
@@ -51739,30 +52539,10 @@
       "group": "citadel_main",
       "hash": "a2638d8b6d8c"
     },
-    "citadel_reset_base_settings_title": {
-      "text": "Reset Base Settings?",
-      "group": "citadel_main",
-      "hash": "57d269e567b0"
-    },
     "citadel_confirm_reset_keybindings": {
       "text": "Are you sure you want to reset your keybinds and associated settings?",
       "group": "citadel_main",
       "hash": "63344bdbde25"
-    },
-    "citadel_confirm_reset_hero_settings": {
-      "text": "Are you sure you want to remove every keybind and setting customization for {s:selected_hero_name}?<br><br>{s:selected_hero_name} will use your base settings again. Other heroes and your base settings will not be affected.",
-      "group": "citadel_main",
-      "hash": "bb34549bea7d"
-    },
-    "citadel_confirm_reset_keybindings_for_either": {
-      "text": "Reset the hero-specific keybinds and settings for the currently selected hero.<br><br>With a hero selected, that hero's customizations are removed and it uses your base settings again.<br><br>With Base settings selected, your base keybinds and the base values of your hero-customizable settings return to the game defaults. Hero-specific customizations are kept.",
-      "group": "citadel_main",
-      "hash": "d141c47c41b2"
-    },
-    "citadel_confirm_reset_base_settings": {
-      "text": "Are you sure you want to reset your base keybinds and the base values of all other hero-customizable settings to the Deadlock defaults?<br><br>All hero-specific customizations will be kept.",
-      "group": "citadel_main",
-      "hash": "3e5ff9a79176"
     },
     "citadel_switch_camera_teammate_1": {
       "text": "Teammate 1 camera",
@@ -57890,19 +58670,19 @@
       "hash": "12af2e9efeb9"
     },
     "citadel_chatwheel_label_Yes": {
+      "text": "Yes",
+      "group": "citadel_main",
+      "hash": "5397e0583f14"
+    },
+    "citadel_chatwheel_message_Yes": {
       "text": "Yes!",
       "group": "citadel_main",
       "hash": "ee33f3746755"
     },
-    "citadel_chatwheel_message_Yes": {
-      "text": "Affirmative!",
-      "group": "citadel_main",
-      "hash": "2e636b3f0339"
-    },
     "citadel_chatwheel_label_No": {
-      "text": "No!",
+      "text": "No",
       "group": "citadel_main",
-      "hash": "1d59aef12a4c"
+      "hash": "816c52fd2bdd"
     },
     "citadel_chatwheel_message_No": {
       "text": "No!",
@@ -59585,24 +60365,24 @@
       "hash": "03cf56cc30a7"
     },
     "Citadel_Subtitles_Message_World": {
-      "text": "<i>{s:subtitle_text}</i>",
+      "text": "{s:subtitle_text}",
       "group": "citadel_main",
-      "hash": "ec5083069785"
+      "hash": "adfa538c73a3"
     },
     "Citadel_Subtitles_Message_Entity": {
-      "text": "<b>{s:subtitle_actor}</b>: <i>{s:subtitle_text}</i>",
+      "text": "<b>{s:subtitle_actor}</b>: {s:subtitle_text}",
       "group": "citadel_main",
-      "hash": "caa29ccbe8ab"
+      "hash": "11d9cfc6a0d0"
     },
     "Citadel_Subtitles_Message_IconAndName": {
-      "text": "<child id='SpeakerIcon' /><b>{s:subtitle_actor}</b>: <i>{s:subtitle_text}</i>",
+      "text": "<child id='SpeakerIcon' /><b>{s:subtitle_actor}</b>: {s:subtitle_text}",
       "group": "citadel_main",
-      "hash": "ac7cc025ccb1"
+      "hash": "17a4f7392c70"
     },
     "Citadel_Subtitles_Message_Icon": {
-      "text": "<child id='SpeakerIcon' />: <i>{s:subtitle_text}</i>",
+      "text": "<child id='SpeakerIcon' />: {s:subtitle_text}",
       "group": "citadel_main",
-      "hash": "d4de62a5f6f3"
+      "hash": "f4230bf860e0"
     },
     "npc_newscaster": {
       "text": "Newscaster",
