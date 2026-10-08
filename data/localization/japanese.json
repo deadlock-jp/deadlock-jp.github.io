@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6759",
-  "upstreamCommit": "6759",
-  "generatedAt": "2026-10-07T10:05:14.480Z",
+  "clientVersion": "6763",
+  "upstreamCommit": "6763",
+  "generatedAt": "2026-10-08T14:00:12.114Z",
   "language": "japanese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 618,
-    "citadel_heroes": 3415,
-    "citadel_attributes": 1984,
-    "citadel_gc": 215,
-    "citadel_main": 5220
+    "citadel_heroes": 3555,
+    "citadel_attributes": 1981,
+    "citadel_gc": 216,
+    "citadel_main": 5248
   },
   "tokens": {
     "hero_vampire:n": {
@@ -15985,19 +15985,19 @@
       "hash": "0220e2c12c74"
     },
     "HexDuration_label": {
-      "text": "Hex Duration",
+      "text": "呪い継続時間",
       "group": "citadel_heroes",
-      "hash": "e3aa33790d1f"
+      "hash": "b33e008e4c96"
     },
     "HexDuration_postvalue_label": {
-      "text": "Hex Duration",
+      "text": "呪い継続時間",
       "group": "citadel_heroes",
-      "hash": "e3aa33790d1f"
+      "hash": "b33e008e4c96"
     },
     "HexDuration_postfix": {
-      "text": "s",
+      "text": "秒",
       "group": "citadel_heroes",
-      "hash": "a0f1490a20d0"
+      "hash": "eb6aaba1a1ca"
     },
     "ability_magician_stage": {
       "text": "プライベートショータイム",
@@ -21564,6 +21564,691 @@
       "group": "citadel_heroes",
       "hash": "5f2b512b8296"
     },
+    "citadel_weapon_baba_set": {
+      "text": "バンコナイト・スペシャル",
+      "group": "citadel_heroes",
+      "hash": "ec3eeeb3a2f2"
+    },
+    "citadel_ability_baba_brew_brewing": {
+      "text": "抽出中",
+      "group": "citadel_heroes",
+      "hash": "c89111d1dccc"
+    },
+    "citadel_ability_baba_brew_brewed": {
+      "text": "抽出完了",
+      "group": "citadel_heroes",
+      "hash": "651d3a17f436"
+    },
+    "citadel_ability_baba_brew_lock": {
+      "text": "抽出 一時停止",
+      "group": "citadel_heroes",
+      "hash": "e868d6a286cc"
+    },
+    "citadel_ability_baba_brew_unlock": {
+      "text": "抽出を再開",
+      "group": "citadel_heroes",
+      "hash": "6c58b62bdfa8"
+    },
+    "ability_baba_bubbling_brew": {
+      "text": "スレッドサップ",
+      "group": "citadel_heroes",
+      "hash": "9e2e9d4f08e0"
+    },
+    "ability_baba_bubbling_brew_quip": {
+      "text": "スレッドサップ",
+      "group": "citadel_heroes",
+      "hash": "9e2e9d4f08e0"
+    },
+    "ability_baba_bubbling_brew_gun_damage": {
+      "text": "スレッドサップ（ヒット時）",
+      "group": "citadel_heroes",
+      "hash": "df6e651844b5"
+    },
+    "ability_baba_bubbling_brew_desc": {
+      "text": "照準に沿ってまばらな糸を紡ぐ。その後、糸は爆発を起こして{g:citadel_inline_attribute:'SpiritDamage'}を与え、敵の{g:citadel_inline_attribute:'Spirit'}を吸収する。バーバの吸収したスピリットは効果量が増加する<br><br>吸収した{g:citadel_inline_attribute:'Spirit'}を保持している間、バーバの弾薬は{g:citadel_inline_attribute:'BonusSpiritDamage'}を与える",
+      "group": "citadel_heroes",
+      "hash": "d18354a0e8ed"
+    },
+    "ability_baba_bubbling_brew_t2_desc": {
+      "text": "クールダウン {s:AbilityCooldown}秒<br>デバフ継続時間 +{s:DebuffDuration}秒",
+      "group": "citadel_heroes",
+      "hash": "1c88f157cdcb"
+    },
+    "ability_baba_bubbling_brew_t3_desc": {
+      "text": "チャージ +{s:AbilityCharges}<br>ヒット時：敵を{s:PullDistance}m引き寄せる",
+      "group": "citadel_heroes",
+      "hash": "4db32adc7f18"
+    },
+    "BubblingBrew_TechPowerSteal_label": {
+      "text": "スピリット吸収／ヒット",
+      "group": "citadel_heroes",
+      "hash": "f062b5869f46"
+    },
+    "BubblingBrew_TechPowerSteal_postvalue_label": {
+      "text": "スピリット吸収／ヒット",
+      "group": "citadel_heroes",
+      "hash": "f062b5869f46"
+    },
+    "StolenSpiritEffectiveness_label": {
+      "text": "吸収スピリット 効果増加量",
+      "group": "citadel_heroes",
+      "hash": "d9ef61f5490c"
+    },
+    "StolenSpiritEffectiveness_postvalue_label": {
+      "text": "吸収スピリット 効果増加量",
+      "group": "citadel_heroes",
+      "hash": "d9ef61f5490c"
+    },
+    "StolenSpiritEffectiveness_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "ExplodeTime_label": {
+      "text": "爆発 ディレイ",
+      "group": "citadel_heroes",
+      "hash": "81eaa5d18245"
+    },
+    "ExplodeTime_postvalue_label": {
+      "text": "爆発 ディレイ",
+      "group": "citadel_heroes",
+      "hash": "81eaa5d18245"
+    },
+    "ExplodeTime_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "ExplodeTimeInterval_label": {
+      "text": "爆発 間隔",
+      "group": "citadel_heroes",
+      "hash": "b51453886083"
+    },
+    "ExplodeTimeInterval_postvalue_label": {
+      "text": "爆発 間隔",
+      "group": "citadel_heroes",
+      "hash": "b51453886083"
+    },
+    "ExplodeTimeInterval_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "MaxStacks_BabaBubblingBrew_label": {
+      "text": "スピリット 最大吸収量",
+      "group": "citadel_heroes",
+      "hash": "3954a7971761"
+    },
+    "MaxStacks_BabaBubblingBrew_postvalue_label": {
+      "text": "スピリット 最大吸収量",
+      "group": "citadel_heroes",
+      "hash": "3954a7971761"
+    },
+    "modifier_baba_bubbling_brew_buff": {
+      "text": "吸収したスピリット",
+      "group": "citadel_heroes",
+      "hash": "bfc378c3a5fd"
+    },
+    "modifier_baba_bubbling_brew_debuff": {
+      "text": "スレッドサップ",
+      "group": "citadel_heroes",
+      "hash": "9e2e9d4f08e0"
+    },
+    "modifier_baba_thread_pull": {
+      "text": "スレッドサップ 引き寄せ",
+      "group": "citadel_heroes",
+      "hash": "3225f46f9324"
+    },
+    "KnockbackDuration_label": {
+      "text": "ノックバック 継続時間",
+      "group": "citadel_heroes",
+      "hash": "1cfa31277fde"
+    },
+    "KnockbackDuration_postvalue_label": {
+      "text": "ノックバック 継続時間",
+      "group": "citadel_heroes",
+      "hash": "1cfa31277fde"
+    },
+    "KnockbackDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "ability_baba_bench_run": {
+      "text": "おばあちゃんの長い脚",
+      "group": "citadel_heroes",
+      "hash": "9eaa85aeaaba"
+    },
+    "ability_baba_bench_run_quip": {
+      "text": "おばあちゃんの長い脚：高くジャンプし、スピリットをチャージした脚で付近の敵をキックする",
+      "group": "citadel_heroes",
+      "hash": "f8210a0b9497"
+    },
+    "ability_baba_bench_run_desc": {
+      "text": "ベンチの脚が伸びてより高くジャンプできるようになり、{g:citadel_inline_attribute:'BonusMoveSpeed'}、<span class=\"highlight\">デバフ耐性</span>、<span class=\"highlight\">近接攻撃耐性</span>を獲得する<br><br><span class=\"diminish\">近接弱攻撃：</span>敵をノックバックする<span class=\"highlight\">キック</span>を繰り出す<br><span class=\"diminish\">近接強攻撃：</span>敵を{g:citadel_inline_attribute:'KnockUp'}して{g:citadel_inline_attribute:'Slow'}を付与し、{g:citadel_inline_attribute:'SpiritDamage'}を与える<span class=\"highlight\">叩きつけ攻撃</span>を繰り出す<br><br><span class=\"diminish\">{g:citadel_binding:'Crouch'}長押しでチャージしてから離すと、高くジャンプできる</span>",
+      "group": "citadel_heroes",
+      "hash": "a69fd407d4aa"
+    },
+    "ability_baba_bench_run_t1_desc": {
+      "text": "移動速度 +{s:BonusMoveSpeed}m／秒",
+      "group": "citadel_heroes",
+      "hash": "5dddbda0953c"
+    },
+    "ability_baba_bench_run_t2_desc": {
+      "text": "クールダウン {s:AbilityCooldown}秒",
+      "group": "citadel_heroes",
+      "hash": "25edc21f6355"
+    },
+    "ability_baba_bench_run_t3_desc": {
+      "text": "耐性 +{s:MeleeResist}%<br>近接ライフスティール +{s:MeleeLifesteal}%",
+      "group": "citadel_heroes",
+      "hash": "2bf24f1db178"
+    },
+    "modifier_baba_bench_run": {
+      "text": "おばあちゃんの長い脚",
+      "group": "citadel_heroes",
+      "hash": "9eaa85aeaaba"
+    },
+    "BulletProcDamage_label": {
+      "text": "追加スピリットダメージ／弾薬",
+      "group": "citadel_heroes",
+      "hash": "a37babc36c75"
+    },
+    "BulletProcDamage_postvalue_label": {
+      "text": "追加スピリットダメージ／弾薬",
+      "group": "citadel_heroes",
+      "hash": "a37babc36c75"
+    },
+    "StolenSpiritBulletDamagePercent_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "StolenSpiritBulletDamagePercent_label": {
+      "text": "吸収したスピリットによる追加ダメージ",
+      "group": "citadel_heroes",
+      "hash": "e5157533d9a0"
+    },
+    "StolenSpiritBulletDamagePercent_postvalue_label": {
+      "text": "吸収したスピリットによる追加ダメージ",
+      "group": "citadel_heroes",
+      "hash": "e5157533d9a0"
+    },
+    "StolenSpiritBulletDamagePercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "LightKickKnockbackDistance_label": {
+      "text": "近接弱攻撃 ノックバック",
+      "group": "citadel_heroes",
+      "hash": "9e03d50e48b0"
+    },
+    "LightKickKnockbackDistance_postvalue_label": {
+      "text": "近接弱攻撃 ノックバック",
+      "group": "citadel_heroes",
+      "hash": "9e03d50e48b0"
+    },
+    "LightKickKnockbackDistance_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "GroundPoundKnockUpDuration_label": {
+      "text": "叩きつけ ノックアップ",
+      "group": "citadel_heroes",
+      "hash": "80d582027255"
+    },
+    "GroundPoundKnockUpDuration_postvalue_label": {
+      "text": "叩きつけ ノックアップ",
+      "group": "citadel_heroes",
+      "hash": "80d582027255"
+    },
+    "GroundPoundKnockUpDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "BonusMeleeRange_label": {
+      "text": "近接攻撃 範囲",
+      "group": "citadel_heroes",
+      "hash": "37ac88de361e"
+    },
+    "BonusMeleeRange_postvalue_label": {
+      "text": "近接攻撃 範囲",
+      "group": "citadel_heroes",
+      "hash": "37ac88de361e"
+    },
+    "BonusMeleeRange_prefix": {
+      "text": "{s:sign}",
+      "group": "citadel_heroes",
+      "hash": "e2f95e62e97a"
+    },
+    "BonusMeleeRange_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "MeleeSpiritDamage_label": {
+      "text": "近接弱攻撃 スピリットダメージ",
+      "group": "citadel_heroes",
+      "hash": "0da4c5b6a217"
+    },
+    "MeleeSpiritDamage_postvalue_label": {
+      "text": "近接弱攻撃 スピリットダメージ",
+      "group": "citadel_heroes",
+      "hash": "0da4c5b6a217"
+    },
+    "HeavyMeleeSpiritDamage_label": {
+      "text": "近接強攻撃 ダメージ",
+      "group": "citadel_heroes",
+      "hash": "4ab77b4f2b75"
+    },
+    "HeavyMeleeSpiritDamage_postvalue_label": {
+      "text": "近接強攻撃 ダメージ",
+      "group": "citadel_heroes",
+      "hash": "4ab77b4f2b75"
+    },
+    "HeavyMeleeSlowPercent_label": {
+      "text": "近接強攻撃 スロウ",
+      "group": "citadel_heroes",
+      "hash": "1758f48be749"
+    },
+    "HeavyMeleeSlowPercent_postvalue_label": {
+      "text": "近接強攻撃 スロウ",
+      "group": "citadel_heroes",
+      "hash": "1758f48be749"
+    },
+    "HeavyMeleeSlowPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "HeavyMeleeSlowDuration_label": {
+      "text": "近接強 スロウ継続時間",
+      "group": "citadel_heroes",
+      "hash": "026b090adbde"
+    },
+    "HeavyMeleeSlowDuration_postvalue_label": {
+      "text": "近接強 スロウ継続時間",
+      "group": "citadel_heroes",
+      "hash": "026b090adbde"
+    },
+    "HeavyMeleeSlowDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "MeleeResist_label": {
+      "text": "近接攻撃耐性",
+      "group": "citadel_heroes",
+      "hash": "de80f9172a41"
+    },
+    "MeleeResist_postvalue_label": {
+      "text": "近接攻撃耐性",
+      "group": "citadel_heroes",
+      "hash": "de80f9172a41"
+    },
+    "MeleeResist_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "MeleeResist_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "MaxJumpHeight_label": {
+      "text": "フルチャージジャンプの高さ",
+      "group": "citadel_heroes",
+      "hash": "d6afddc163a2"
+    },
+    "MaxJumpHeight_postvalue_label": {
+      "text": "フルチャージジャンプの高さ",
+      "group": "citadel_heroes",
+      "hash": "d6afddc163a2"
+    },
+    "MaxJumpHeight_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "MaxJumpHeight_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "MinJumpHeight_label": {
+      "text": "ジャンプの高さ",
+      "group": "citadel_heroes",
+      "hash": "e7ab7c8455a8"
+    },
+    "MinJumpHeight_postvalue_label": {
+      "text": "ジャンプの高さ",
+      "group": "citadel_heroes",
+      "hash": "e7ab7c8455a8"
+    },
+    "MinJumpHeight_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "MinJumpHeight_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "ability_baba_hexing_brew": {
+      "text": "バーバの特製紅茶",
+      "group": "citadel_heroes",
+      "hash": "15a224bee33e"
+    },
+    "ability_baba_hexing_brew_quip": {
+      "text": "バーバの特製紅茶を抽出する。紅茶は投げることで敵を燃焼させたりサイレンス状態を付与したり、味方にバリアを付与したりする",
+      "group": "citadel_heroes",
+      "hash": "3949986f6329"
+    },
+    "ability_baba_hexing_brew_desc": {
+      "text": "効果範囲内に魔法効果を付与する紅茶を抽出する。効果は時間経過で変化し、{g:citadel_inline_attribute:'CombatBarrier'}を付与する平穏、{g:citadel_inline_attribute:'Silence'}を付与する静寂、{g:citadel_inline_attribute:'SpiritDPS'}を与えて{g:citadel_inline_attribute:'SpiritResist'}を減少させる灼熱の間を循環する<br><br>{g:citadel_binding:'ADS'}で抽出の一時停止や再開ができる",
+      "group": "citadel_heroes",
+      "hash": "48886bddd24c"
+    },
+    "ability_baba_hexing_brew_t3_desc": {
+      "text": "抽出の効果 +{s:BrewEffectiveness}%",
+      "group": "citadel_heroes",
+      "hash": "62f780e75c37"
+    },
+    "ability_header_baba_brew_barrier": {
+      "text": "平穏の紅茶：",
+      "group": "citadel_heroes",
+      "hash": "6a7ef5a57c7e"
+    },
+    "ability_header_baba_brew_silence": {
+      "text": "静寂の紅茶：",
+      "group": "citadel_heroes",
+      "hash": "e474c0198e6d"
+    },
+    "ability_header_baba_brew_fire": {
+      "text": "灼熱の紅茶：",
+      "group": "citadel_heroes",
+      "hash": "384c17cb8b2f"
+    },
+    "BabaBrewBurnDPS_label": {
+      "text": "燃焼DPS",
+      "group": "citadel_heroes",
+      "hash": "cedb60a65b7b"
+    },
+    "BabaBrewBurnDPS_postvalue_label": {
+      "text": "燃焼DPS",
+      "group": "citadel_heroes",
+      "hash": "cedb60a65b7b"
+    },
+    "BabaBrewBurnSpiritResist_prefix": {
+      "text": "{s:sign}",
+      "group": "citadel_heroes",
+      "hash": "e2f95e62e97a"
+    },
+    "BabaBrewBurnSpiritResist_label": {
+      "text": "燃焼 スピリット耐性",
+      "group": "citadel_heroes",
+      "hash": "737b406d554c"
+    },
+    "BabaBrewBurnSpiritResist_postvalue_label": {
+      "text": "燃焼 スピリット耐性",
+      "group": "citadel_heroes",
+      "hash": "737b406d554c"
+    },
+    "BabaBrewBurnSpiritResist_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "modifier_baba_brew_fire": {
+      "text": "灼熱の紅茶",
+      "group": "citadel_heroes",
+      "hash": "d23d675ea483"
+    },
+    "modifier_baba_brew_barrier": {
+      "text": "平穏の紅茶",
+      "group": "citadel_heroes",
+      "hash": "58aaf5389ab9"
+    },
+    "modifier_baba_brew_holding_silence": {
+      "text": "抽出：サイレンス",
+      "group": "citadel_heroes",
+      "hash": "88dc4694fa12"
+    },
+    "modifier_baba_brew_holding_fire": {
+      "text": "抽出：燃焼",
+      "group": "citadel_heroes",
+      "hash": "769dbbd71ebb"
+    },
+    "modifier_baba_brew_holding_barrier": {
+      "text": "抽出：バリア",
+      "group": "citadel_heroes",
+      "hash": "3e81440138c9"
+    },
+    "modifier_baba_brew_segment_none": {
+      "text": "抽出中",
+      "group": "citadel_heroes",
+      "hash": "c89111d1dccc"
+    },
+    "modifier_baba_brew_segment_barrier": {
+      "text": "平穏",
+      "group": "citadel_heroes",
+      "hash": "e9c540c6b8ed"
+    },
+    "modifier_baba_brew_segment_fire": {
+      "text": "灼熱",
+      "group": "citadel_heroes",
+      "hash": "3c5258ce4b97"
+    },
+    "modifier_baba_brew_segment_silence": {
+      "text": "静寂",
+      "group": "citadel_heroes",
+      "hash": "d27e8b69308f"
+    },
+    "BrewTime_label": {
+      "text": "初期抽出時間",
+      "group": "citadel_heroes",
+      "hash": "bb7f26b1a697"
+    },
+    "BrewTime_postvalue_label": {
+      "text": "初期抽出時間",
+      "group": "citadel_heroes",
+      "hash": "bb7f26b1a697"
+    },
+    "BrewTime_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "ability_baba_hexing_brew/modifier_baba_brew_silence": {
+      "text": "静寂の紅茶",
+      "group": "citadel_heroes",
+      "hash": "34ea1480276c"
+    },
+    "modifier_baba_brew_holding": {
+      "text": "バーバの特製紅茶",
+      "group": "citadel_heroes",
+      "hash": "15a224bee33e"
+    },
+    "baba_brew_ui_brewing": {
+      "text": "抽出中…",
+      "group": "citadel_heroes",
+      "hash": "e9c8269585d8"
+    },
+    "MaxLockonStacks_label": {
+      "text": "対象ごとのハト 最大数",
+      "group": "citadel_heroes",
+      "hash": "1a93fd80429d"
+    },
+    "MaxLockonStacks_postvalue_label": {
+      "text": "対象ごとのハト 最大数",
+      "group": "citadel_heroes",
+      "hash": "1a93fd80429d"
+    },
+    "FullLockonTime_label": {
+      "text": "ロックオン完了までの時間",
+      "group": "citadel_heroes",
+      "hash": "e47d5924fe2f"
+    },
+    "FullLockonTime_postvalue_label": {
+      "text": "ロックオン完了までの時間",
+      "group": "citadel_heroes",
+      "hash": "e47d5924fe2f"
+    },
+    "FullLockonTime_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "TimeToGainLockonStack_label": {
+      "text": "ロックオン時間／ハト",
+      "group": "citadel_heroes",
+      "hash": "ed2ba865924c"
+    },
+    "TimeToGainLockonStack_postvalue_label": {
+      "text": "ロックオン時間／ハト",
+      "group": "citadel_heroes",
+      "hash": "ed2ba865924c"
+    },
+    "TimeToGainLockonStack_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "ability_baba_ultimate_2": {
+      "text": "鳥の餌付け",
+      "group": "citadel_heroes",
+      "hash": "e093168a84d7"
+    },
+    "ability_baba_ultimate_2_t1_desc": {
+      "text": "キャスト範囲 +{s:AbilityCastRange}m<br>最大スロウ +{s:BabaUlt2MaxSlow}%",
+      "group": "citadel_heroes",
+      "hash": "9b5cd3bdb4bd"
+    },
+    "citadel_ability_baba_pigeon_assault_release_early": {
+      "text": "詠唱終了",
+      "group": "citadel_heroes",
+      "hash": "1861acd9130a"
+    },
+    "ability_baba_ultimate_2_t3_desc": {
+      "text": "最大ダメージ +{s:MaxDamage}<br>スピリットスケーリング +{s:MaxDamage_scale}<br>最大継続時間 +{s:MaxPigeonDuration}秒",
+      "group": "citadel_heroes",
+      "hash": "388e58ef01c7"
+    },
+    "MaxPigeonDuration_label": {
+      "text": "ハト化 最大継続時間",
+      "group": "citadel_heroes",
+      "hash": "93894e8c40f6"
+    },
+    "MaxPigeonDuration_postvalue_label": {
+      "text": "ハト化 最大継続時間",
+      "group": "citadel_heroes",
+      "hash": "93894e8c40f6"
+    },
+    "MaxPigeonDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "BabaUlt2LockOns_label": {
+      "text": "対象ごとのパン 最大スタック",
+      "group": "citadel_heroes",
+      "hash": "016a611a472a"
+    },
+    "BabaUlt2LockOns_postvalue_label": {
+      "text": "対象ごとのパン 最大スタック",
+      "group": "citadel_heroes",
+      "hash": "016a611a472a"
+    },
+    "BabaUlt2TimeToMaxStacks_label": {
+      "text": "最大スタックまでの時間",
+      "group": "citadel_heroes",
+      "hash": "e769358f40ae"
+    },
+    "BabaUlt2TimeToMaxStacks_postvalue_label": {
+      "text": "最大スタックまでの時間",
+      "group": "citadel_heroes",
+      "hash": "e769358f40ae"
+    },
+    "BabaUlt2TimeToMaxStacks_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "BabaUlt2MaxSlow_label": {
+      "text": "最大スロウ",
+      "group": "citadel_heroes",
+      "hash": "6dadc0af95e3"
+    },
+    "BabaUlt2MaxSlow_postvalue_label": {
+      "text": "最大スロウ",
+      "group": "citadel_heroes",
+      "hash": "6dadc0af95e3"
+    },
+    "BabaUlt2MaxSlow_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "TickInterval_label": {
+      "text": "ヒット間隔",
+      "group": "citadel_heroes",
+      "hash": "c007b4f84cde"
+    },
+    "TickInterval_postvalue_label": {
+      "text": "ヒット間隔",
+      "group": "citadel_heroes",
+      "hash": "c007b4f84cde"
+    },
+    "TickInterval_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "StunDuration_label": {
+      "text": "スタン継続時間",
+      "group": "citadel_heroes",
+      "hash": "ccc54aa09755"
+    },
+    "StunDuration_postvalue_label": {
+      "text": "スタン継続時間",
+      "group": "citadel_heroes",
+      "hash": "ccc54aa09755"
+    },
+    "StunDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "modifier_baba_ult2_mark": {
+      "text": "マークされた",
+      "group": "citadel_heroes",
+      "hash": "9b0eab5e66bf"
+    },
+    "modifier_baba_ult2_pigeon": {
+      "text": "ハト",
+      "group": "citadel_heroes",
+      "hash": "6f91e32ccfd8"
+    },
+    "TickDamageIncreasePerHit_label": {
+      "text": "ダメージ増加率",
+      "group": "citadel_heroes",
+      "hash": "3cbfd4b0341f"
+    },
+    "TickDamageIncreasePerHit_postvalue_label": {
+      "text": "ダメージ増加率",
+      "group": "citadel_heroes",
+      "hash": "3cbfd4b0341f"
+    },
+    "TickDamageIncreasePerHit_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
     "ability_header_on_hit": {
       "text": "ヒット時：",
       "group": "citadel_heroes",
@@ -22165,6 +22850,16 @@
       "hash": "28b5bcd8a5d4"
     },
     "ability_melee_ratking": {
+      "text": "近接",
+      "group": "citadel_heroes",
+      "hash": "28b5bcd8a5d4"
+    },
+    "ability_melee_baba": {
+      "text": "近接",
+      "group": "citadel_heroes",
+      "hash": "28b5bcd8a5d4"
+    },
+    "ability_baba_bench_melee": {
       "text": "近接",
       "group": "citadel_heroes",
       "hash": "28b5bcd8a5d4"
@@ -22848,6 +23543,11 @@
       "text": "ニューヨークの巣窟を支配する謎の生物であるラットキングは、臣民たちの誰よりも強大な体格や力、そして野心の持ち主だ。地下で隠れ続ける生活にもはや満足できなくなった王は、ニューヨークの街を徘徊する害獣駆除車（ネズミたちが「人間による死の部隊」と呼ぶもの）に怯えることなく、彼と臣民たちが地上を歩き回れる未来を実現するための大胆な構想を明らかにした。\n\nステップ1：ロングアイランドを制圧する\nステップ2：ロングアイランドを国土とする新しい主権国家「ラッタニア」の建国を宣言する\nステップ3：この新しいネズミの楽園から去ろうとしない人類をすべて処刑する\n\nこの計画は非の打ち所のない完璧なものであったが、ネズミの王は運任せにすることを嫌った。こうして彼は、万が一の可能性に備え、パトロンの召喚を決意したのだ。",
       "group": "citadel_heroes",
       "hash": "613711e01efb"
+    },
+    "hero_baba_lore": {
+      "text": "カースド・アップルの住民の多くが「人生で一度は経験したい」と願うことはいくつかある。\n\nブロードウェイでショーを観る。\nクリスマスの時期に、ロックフェラー・センターでアイススケートをする。\nセントラルパークにいる\"ハトおばさん\"に怒鳴られる。\n\nというのも、バーバは公園でハトの精霊に餌をやるだけのただの老婆ではなく……名物と呼べる存在だからだ。まさしく、ニューヨークの伝承そのものに織り込まれた自然の力なのだ。この50年間、雨の日も晴れの日も、同じベンチに座り続けているというのは本当なのだろうか？ あり得る話だ。ソーホー魔術結社のリーダーという噂は事実なのだろうか？ それは誰にもわからない。だが一つだけ確かなのは……彼女が生粋のニューヨーカーだということだ。そんな彼女は、力を求める観光客たちがマンハッタンを荒らしまわる様を、黙って見ているつもりはない。",
+      "group": "citadel_heroes",
+      "hash": "8e94d4462a4d"
     },
     "MODIFIER_STATE_ROOTED": {
       "text": "移動不能状態",
@@ -26808,21 +27508,6 @@
       "text": "%",
       "group": "citadel_attributes",
       "hash": "4345cb1fa278"
-    },
-    "StunDuration_label": {
-      "text": "スタン継続時間",
-      "group": "citadel_attributes",
-      "hash": "ccc54aa09755"
-    },
-    "StunDuration_postvalue_label": {
-      "text": "スタン継続時間",
-      "group": "citadel_attributes",
-      "hash": "ccc54aa09755"
-    },
-    "StunDuration_postfix": {
-      "text": "秒",
-      "group": "citadel_attributes",
-      "hash": "eb6aaba1a1ca"
     },
     "StunDelay_label": {
       "text": "スタンディレイ",
@@ -33843,6 +34528,11 @@
       "text": "ハイドアウトがロングアイランドにあったらと願望中",
       "group": "citadel_gc",
       "hash": "ec1254199a0e"
+    },
+    "Steam_Citadel_Hideout_Mildred": {
+      "text": "ハイドアウトでミルドレッドを嫌悪中",
+      "group": "citadel_gc",
+      "hash": "9e9701feb927"
     },
     "Citadel_Dashboard_BuildVersion": {
       "text": "#{d:buildNumber}",
@@ -43689,6 +44379,16 @@
       "group": "citadel_main",
       "hash": "0f126801c721"
     },
+    "Citadel_HeroBuilds_Error_InvalidBuild": {
+      "text": "送信されたビルドが不正です。",
+      "group": "citadel_main",
+      "hash": "d67095ad6a5c"
+    },
+    "Citadel_HeroBuilds_Error_BuildTooLarge": {
+      "text": "サイズが大きすぎるため、このビルドを公開できません。説明文や注釈を短くするか、アイテムの数を減らしてください。",
+      "group": "citadel_main",
+      "hash": "be3b06bd0e9a"
+    },
     "Citadel_HeroBuilds_Reverting_Title": {
       "text": "ビルドの復元",
       "group": "citadel_main",
@@ -44574,30 +45274,115 @@
       "group": "citadel_main",
       "hash": "54b65d31f7a1"
     },
+    "Citadel_Steamshare_Title_Allied_ObjectiveDestroyed_Guardian": {
+      "text": "味方のガーディアン",
+      "group": "citadel_main",
+      "hash": "6170e8d98ba8"
+    },
+    "Citadel_Steamshare_Desc_Allied_ObjectiveDestroyed_Guardian": {
+      "text": "味方のガーディアンが破壊されました",
+      "group": "citadel_main",
+      "hash": "88aee24c15cd"
+    },
+    "Citadel_Steamshare_Title_Allied_ObjectiveDestroyed_Walker": {
+      "text": "味方のウォーカー",
+      "group": "citadel_main",
+      "hash": "306f3fa74ef8"
+    },
+    "Citadel_Steamshare_Desc_Allied_ObjectiveDestroyed_Walker": {
+      "text": "味方のウォーカーが破壊されました",
+      "group": "citadel_main",
+      "hash": "83f5826e8937"
+    },
+    "Citadel_Steamshare_Title_Allied_ObjectiveDestroyed_Patron": {
+      "text": "味方のパトロン",
+      "group": "citadel_main",
+      "hash": "b3fdecdd6d18"
+    },
     "Citadel_Steamshare_Desc_Allied_ObjectiveDestroyed_Patron": {
       "text": "味方のパトロンが破壊されました",
       "group": "citadel_main",
       "hash": "8e18a6e00a63"
+    },
+    "Citadel_Steamshare_Title_Allied_ObjectiveDestroyed_BaseGuardians": {
+      "text": "味方のベース・ガーディアン",
+      "group": "citadel_main",
+      "hash": "801859ef4dcd"
+    },
+    "Citadel_Steamshare_Desc_Allied_ObjectiveDestroyed_BaseGuardians": {
+      "text": "味方のベース・ガーディアンが破壊されました",
+      "group": "citadel_main",
+      "hash": "e47d93c71356"
+    },
+    "Citadel_Steamshare_Title_Allied_ObjectiveDestroyed_Shrine": {
+      "text": "味方のシュライン",
+      "group": "citadel_main",
+      "hash": "c109e0450ac9"
+    },
+    "Citadel_Steamshare_Desc_Allied_ObjectiveDestroyed_Shrine": {
+      "text": "味方のシュラインが破壊されました",
+      "group": "citadel_main",
+      "hash": "40df949f209b"
     },
     "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed_Guardian": {
       "text": "敵のガーディアン",
       "group": "citadel_main",
       "hash": "2faecad9560e"
     },
+    "Citadel_Steamshare_Desc_Enemy_ObjectiveDestroyed_Guardian": {
+      "text": "敵のガーディアンが破壊されました",
+      "group": "citadel_main",
+      "hash": "440ebf51d019"
+    },
     "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed_Walker": {
       "text": "敵のウォーカー",
       "group": "citadel_main",
       "hash": "204e1eec16ed"
+    },
+    "Citadel_Steamshare_Desc_Enemy_ObjectiveDestroyed_Walker": {
+      "text": "敵のウォーカーが破壊されました",
+      "group": "citadel_main",
+      "hash": "2307717fca27"
     },
     "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed_Patron": {
       "text": "敵のパトロン",
       "group": "citadel_main",
       "hash": "bb30e54ea8ae"
     },
+    "Citadel_Steamshare_Desc_Enemy_ObjectiveDestroyed_Patron": {
+      "text": "敵のパトロンが破壊されました",
+      "group": "citadel_main",
+      "hash": "59f95064f531"
+    },
+    "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed_BaseGuardians": {
+      "text": "敵のベース・ガーディアン",
+      "group": "citadel_main",
+      "hash": "e7ed8ea96bb1"
+    },
+    "Citadel_Steamshare_Desc_Enemy_ObjectiveDestroyed_BaseGuardians": {
+      "text": "敵のベース・ガーディアンが破壊されました",
+      "group": "citadel_main",
+      "hash": "5c68853296a5"
+    },
     "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed_Shrine": {
       "text": "敵のシュライン",
       "group": "citadel_main",
       "hash": "fbdf6ce85bda"
+    },
+    "Citadel_Steamshare_Desc_Enemy_ObjectiveDestroyed_Shrine": {
+      "text": "敵のシュラインが破壊されました",
+      "group": "citadel_main",
+      "hash": "6aec1fcc26ef"
+    },
+    "Citadel_Steamshare_Title_Neutral_ObjectiveDestroyed_MidBoss": {
+      "text": "ホーント・ミッドボス",
+      "group": "citadel_main",
+      "hash": "ea6271cdb778"
+    },
+    "Citadel_Steamshare_Desc_Neutral_ObjectiveDestroyed_MidBoss": {
+      "text": "ホーント・ミッドボスが撃破されました",
+      "group": "citadel_main",
+      "hash": "8c321826e9f0"
     },
     "guardian_unit": {
       "text": "ガーディアン",
@@ -46478,6 +47263,16 @@
       "text": "ヒーロー選択メニューを閉じます。",
       "group": "citadel_main",
       "hash": "d856542e9d9e"
+    },
+    "citadel_settings_hero_selector_switch_to_base_tooltip": {
+      "text": "表示を基本設定に切り替えます。",
+      "group": "citadel_main",
+      "hash": "6f816778bf1c"
+    },
+    "citadel_settings_hero_selector_switch_to_hero_tooltip": {
+      "text": "表示を現在のヒーロー設定に切り替えます。",
+      "group": "citadel_main",
+      "hash": "9d9b5b328db8"
     },
     "citadel_settings_chatwheel": {
       "text": "チャットホイール",
@@ -57549,6 +58344,21 @@
       "group": "citadel_main",
       "hash": "d4f7ee1c5b41"
     },
+    "citadel_chatwheel_label_Yes": {
+      "text": "ああ。",
+      "group": "citadel_main",
+      "hash": "bee1378b4b2f"
+    },
+    "citadel_chatwheel_message_Yes": {
+      "text": "はい！",
+      "group": "citadel_main",
+      "hash": "11e35b8b36f3"
+    },
+    "citadel_chatwheel_label_No": {
+      "text": "いいえ。",
+      "group": "citadel_main",
+      "hash": "45df7455a6c0"
+    },
     "citadel_chatwheel_message_No": {
       "text": "ダメだ！",
       "group": "citadel_main",
@@ -59218,6 +60028,26 @@
       "text": "{s:hero_name}に変更",
       "group": "citadel_main",
       "hash": "0385ddaa7696"
+    },
+    "Citadel_Subtitles_Message_World": {
+      "text": "{s:subtitle_text}",
+      "group": "citadel_main",
+      "hash": "adfa538c73a3"
+    },
+    "Citadel_Subtitles_Message_Entity": {
+      "text": "<b>{s:subtitle_actor}</b>：{s:subtitle_text}",
+      "group": "citadel_main",
+      "hash": "79492cbc5106"
+    },
+    "Citadel_Subtitles_Message_IconAndName": {
+      "text": "<child id='SpeakerIcon' /><b>{s:subtitle_actor}</b>：{s:subtitle_text}",
+      "group": "citadel_main",
+      "hash": "c368163cef12"
+    },
+    "Citadel_Subtitles_Message_Icon": {
+      "text": "<child id='SpeakerIcon' />：{s:subtitle_text}",
+      "group": "citadel_main",
+      "hash": "0ca79200a9a5"
     },
     "npc_newscaster": {
       "text": "ニュースキャスター",

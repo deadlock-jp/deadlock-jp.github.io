@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6759",
-  "upstreamCommit": "6759",
-  "generatedAt": "2026-10-07T10:05:14.581Z",
+  "clientVersion": "6763",
+  "upstreamCommit": "6763",
+  "generatedAt": "2026-10-08T14:00:12.210Z",
   "language": "koreana",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 618,
-    "citadel_heroes": 3415,
-    "citadel_attributes": 1983,
-    "citadel_gc": 215,
-    "citadel_main": 5215
+    "citadel_heroes": 3555,
+    "citadel_attributes": 1981,
+    "citadel_gc": 216,
+    "citadel_main": 5249
   },
   "tokens": {
     "hero_vampire:n": {
@@ -15985,19 +15985,19 @@
       "hash": "27e06cdba97c"
     },
     "HexDuration_label": {
-      "text": "Hex Duration",
+      "text": "주술 지속 시간",
       "group": "citadel_heroes",
-      "hash": "e3aa33790d1f"
+      "hash": "d4e3be01ad30"
     },
     "HexDuration_postvalue_label": {
-      "text": "Hex Duration",
+      "text": "주술 지속 시간",
       "group": "citadel_heroes",
-      "hash": "e3aa33790d1f"
+      "hash": "d4e3be01ad30"
     },
     "HexDuration_postfix": {
-      "text": "s",
+      "text": "초",
       "group": "citadel_heroes",
-      "hash": "a0f1490a20d0"
+      "hash": "3845248e2861"
     },
     "ability_magician_stage": {
       "text": "관중 장악",
@@ -21564,6 +21564,691 @@
       "group": "citadel_heroes",
       "hash": "fc0abd44ca43"
     },
+    "citadel_weapon_baba_set": {
+      "text": "번코 나이트 스페셜",
+      "group": "citadel_heroes",
+      "hash": "7135edabde4a"
+    },
+    "citadel_ability_baba_brew_brewing": {
+      "text": "차 우리는 중",
+      "group": "citadel_heroes",
+      "hash": "5c59ae82997e"
+    },
+    "citadel_ability_baba_brew_brewed": {
+      "text": "차 우리기 완료",
+      "group": "citadel_heroes",
+      "hash": "e20af374bba4"
+    },
+    "citadel_ability_baba_brew_lock": {
+      "text": "차 우리기 일시 정지",
+      "group": "citadel_heroes",
+      "hash": "5113b7d73407"
+    },
+    "citadel_ability_baba_brew_unlock": {
+      "text": "차 우리기 재개",
+      "group": "citadel_heroes",
+      "hash": "54fee2095931"
+    },
+    "ability_baba_bubbling_brew": {
+      "text": "마력 강탈 실타래",
+      "group": "citadel_heroes",
+      "hash": "29f810ceaa0a"
+    },
+    "ability_baba_bubbling_brew_quip": {
+      "text": "마력 강탈 실타래",
+      "group": "citadel_heroes",
+      "hash": "29f810ceaa0a"
+    },
+    "ability_baba_bubbling_brew_gun_damage": {
+      "text": "마력 강탈 실타래(적중 시)",
+      "group": "citadel_heroes",
+      "hash": "27a1ead40176"
+    },
+    "ability_baba_bubbling_brew_desc": {
+      "text": "조준점을 따라 움직이는 헝클어진 실을 엮어 경로를 따라 터뜨립니다. 적군에게 {g:citadel_inline_attribute:'SpiritDamage'}를 입히고 {g:citadel_inline_attribute:'Spirit'}을 훔칩니다. 훔친 마력은 바바에게 더 높은 효율로 적용됩니다.<br><br>훔친 {g:citadel_inline_attribute:'Spirit'}을 보유하는 동안 바바의 모든 탄환이 {g:citadel_inline_attribute:'BonusSpiritDamage'}를 입힙니다.",
+      "group": "citadel_heroes",
+      "hash": "f29fad04a17a"
+    },
+    "ability_baba_bubbling_brew_t2_desc": {
+      "text": "쿨다운 {s:AbilityCooldown}초 감소<br>약화 지속 시간 +{s:DebuffDuration}초 증가",
+      "group": "citadel_heroes",
+      "hash": "e14a38c949b3"
+    },
+    "ability_baba_bubbling_brew_t3_desc": {
+      "text": "충전 +{s:AbilityCharges}회 증가<br>적중 시: 적군을 바바 쪽으로 {s:PullDistance}m 당김",
+      "group": "citadel_heroes",
+      "hash": "963f3a746769"
+    },
+    "BubblingBrew_TechPowerSteal_label": {
+      "text": "타격당 훔치는 마력",
+      "group": "citadel_heroes",
+      "hash": "42d2221dc52a"
+    },
+    "BubblingBrew_TechPowerSteal_postvalue_label": {
+      "text": "타격당 훔치는 마력",
+      "group": "citadel_heroes",
+      "hash": "42d2221dc52a"
+    },
+    "StolenSpiritEffectiveness_label": {
+      "text": "훔친 마력 효율",
+      "group": "citadel_heroes",
+      "hash": "4d30e94310d3"
+    },
+    "StolenSpiritEffectiveness_postvalue_label": {
+      "text": "훔친 마력 효율",
+      "group": "citadel_heroes",
+      "hash": "4d30e94310d3"
+    },
+    "StolenSpiritEffectiveness_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "ExplodeTime_label": {
+      "text": "폭발 지연 시간",
+      "group": "citadel_heroes",
+      "hash": "e5b6582c97b9"
+    },
+    "ExplodeTime_postvalue_label": {
+      "text": "폭발 지연 시간",
+      "group": "citadel_heroes",
+      "hash": "e5b6582c97b9"
+    },
+    "ExplodeTime_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "ExplodeTimeInterval_label": {
+      "text": "폭발 간격",
+      "group": "citadel_heroes",
+      "hash": "19999ffca255"
+    },
+    "ExplodeTimeInterval_postvalue_label": {
+      "text": "폭발 간격",
+      "group": "citadel_heroes",
+      "hash": "19999ffca255"
+    },
+    "ExplodeTimeInterval_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "MaxStacks_BabaBubblingBrew_label": {
+      "text": "훔친 최대 마력",
+      "group": "citadel_heroes",
+      "hash": "47fd09881c6e"
+    },
+    "MaxStacks_BabaBubblingBrew_postvalue_label": {
+      "text": "훔친 최대 마력",
+      "group": "citadel_heroes",
+      "hash": "47fd09881c6e"
+    },
+    "modifier_baba_bubbling_brew_buff": {
+      "text": "훔친 마력",
+      "group": "citadel_heroes",
+      "hash": "c752300b27bd"
+    },
+    "modifier_baba_bubbling_brew_debuff": {
+      "text": "마력 강탈 실타래",
+      "group": "citadel_heroes",
+      "hash": "29f810ceaa0a"
+    },
+    "modifier_baba_thread_pull": {
+      "text": "마력 강탈 실타래 당기기",
+      "group": "citadel_heroes",
+      "hash": "4647af079e66"
+    },
+    "KnockbackDuration_label": {
+      "text": "밀쳐내기 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "2f0cd134f791"
+    },
+    "KnockbackDuration_postvalue_label": {
+      "text": "밀쳐내기 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "2f0cd134f791"
+    },
+    "KnockbackDuration_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "ability_baba_bench_run": {
+      "text": "키다리 할머니",
+      "group": "citadel_heroes",
+      "hash": "956cf7bf7718"
+    },
+    "ability_baba_bench_run_quip": {
+      "text": "키다리 할머니: 높이 뛰어오르고 마력이 깃든 다리로 주변의 적군을 걷어찹니다.",
+      "group": "citadel_heroes",
+      "hash": "284ac0d11179"
+    },
+    "ability_baba_bench_run_desc": {
+      "text": "벤치 다리가 길어져 {g:citadel_inline_attribute:'BonusMoveSpeed'}를 얻고 더 높이 점프할 수 있습니다. <span class=\"highlight\">약화 효과 저항</span>과 <span class=\"highlight\">근거리 공격 저항</span>이 증가합니다.<br><br><span class=\"diminish\">약한 근거리 공격:</span> 적군을 밀쳐내는 <span class=\"highlight\">발차기</span>를 합니다.<br><span class=\"diminish\">강한 근거리 공격:</span> 지면을 <span class=\"highlight\">내려찍어</span> {g:citadel_inline_attribute:'KnockUp'} 및 {g:citadel_inline_attribute:'Slow'} 효과를 적용하고 {g:citadel_inline_attribute:'SpiritDamage'}를 입힙니다.<br><br><span class=\"diminish\">{g:citadel_binding:'Crouch'} 키를 길게 눌러 힘을 모으고, 키에서 손을 떼면 높이 점프합니다.</span>",
+      "group": "citadel_heroes",
+      "hash": "46d828559271"
+    },
+    "ability_baba_bench_run_t1_desc": {
+      "text": "이동 속도 +{s:BonusMoveSpeed}m 증가",
+      "group": "citadel_heroes",
+      "hash": "a35681650414"
+    },
+    "ability_baba_bench_run_t2_desc": {
+      "text": "쿨다운 {s:AbilityCooldown}초 감소",
+      "group": "citadel_heroes",
+      "hash": "826bd3d0be26"
+    },
+    "ability_baba_bench_run_t3_desc": {
+      "text": "저항 +{s:MeleeResist}% 증가<br>근거리 공격 체력 흡수 +{s:MeleeLifesteal}% 증가",
+      "group": "citadel_heroes",
+      "hash": "3f38ec787043"
+    },
+    "modifier_baba_bench_run": {
+      "text": "키다리 할머니",
+      "group": "citadel_heroes",
+      "hash": "956cf7bf7718"
+    },
+    "BulletProcDamage_label": {
+      "text": "탄환당 보너스 마법 피해",
+      "group": "citadel_heroes",
+      "hash": "a2dcc4281fd9"
+    },
+    "BulletProcDamage_postvalue_label": {
+      "text": "탄환당 보너스 마법 피해",
+      "group": "citadel_heroes",
+      "hash": "a2dcc4281fd9"
+    },
+    "StolenSpiritBulletDamagePercent_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "StolenSpiritBulletDamagePercent_label": {
+      "text": "훔친 마력 비례 보너스 피해",
+      "group": "citadel_heroes",
+      "hash": "ce5a9ab4d233"
+    },
+    "StolenSpiritBulletDamagePercent_postvalue_label": {
+      "text": "훔친 마력 비례 보너스 피해",
+      "group": "citadel_heroes",
+      "hash": "ce5a9ab4d233"
+    },
+    "StolenSpiritBulletDamagePercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "LightKickKnockbackDistance_label": {
+      "text": "약한 근거리 공격 밀쳐내기 거리",
+      "group": "citadel_heroes",
+      "hash": "f9c2e13c697d"
+    },
+    "LightKickKnockbackDistance_postvalue_label": {
+      "text": "약한 근거리 공격 밀쳐내기 거리",
+      "group": "citadel_heroes",
+      "hash": "f9c2e13c697d"
+    },
+    "LightKickKnockbackDistance_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "GroundPoundKnockUpDuration_label": {
+      "text": "내려찍기 시 들어올리기 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "bd5966a9f7b6"
+    },
+    "GroundPoundKnockUpDuration_postvalue_label": {
+      "text": "내려찍기 시 들어올리기 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "bd5966a9f7b6"
+    },
+    "GroundPoundKnockUpDuration_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "BonusMeleeRange_label": {
+      "text": "근거리 공격 범위",
+      "group": "citadel_heroes",
+      "hash": "925b9d8bfa30"
+    },
+    "BonusMeleeRange_postvalue_label": {
+      "text": "근거리 공격 범위",
+      "group": "citadel_heroes",
+      "hash": "925b9d8bfa30"
+    },
+    "BonusMeleeRange_prefix": {
+      "text": "{s:sign}",
+      "group": "citadel_heroes",
+      "hash": "e2f95e62e97a"
+    },
+    "BonusMeleeRange_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "MeleeSpiritDamage_label": {
+      "text": "약한 근거리 공격 마법 피해",
+      "group": "citadel_heroes",
+      "hash": "8540c1d531d1"
+    },
+    "MeleeSpiritDamage_postvalue_label": {
+      "text": "약한 근거리 공격 마법 피해",
+      "group": "citadel_heroes",
+      "hash": "8540c1d531d1"
+    },
+    "HeavyMeleeSpiritDamage_label": {
+      "text": "강한 근거리 공격 피해",
+      "group": "citadel_heroes",
+      "hash": "bdc09f806d5e"
+    },
+    "HeavyMeleeSpiritDamage_postvalue_label": {
+      "text": "강한 근거리 공격 피해",
+      "group": "citadel_heroes",
+      "hash": "bdc09f806d5e"
+    },
+    "HeavyMeleeSlowPercent_label": {
+      "text": "강한 근거리 공격 이동 속도 둔화",
+      "group": "citadel_heroes",
+      "hash": "2456ab7a1840"
+    },
+    "HeavyMeleeSlowPercent_postvalue_label": {
+      "text": "강한 근거리 공격 이동 속도 둔화",
+      "group": "citadel_heroes",
+      "hash": "2456ab7a1840"
+    },
+    "HeavyMeleeSlowPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "HeavyMeleeSlowDuration_label": {
+      "text": "강한 근거리 공격 둔화 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "4287d65658d1"
+    },
+    "HeavyMeleeSlowDuration_postvalue_label": {
+      "text": "강한 근거리 공격 둔화 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "4287d65658d1"
+    },
+    "HeavyMeleeSlowDuration_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "MeleeResist_label": {
+      "text": "근거리 공격 저항",
+      "group": "citadel_heroes",
+      "hash": "82afce11167a"
+    },
+    "MeleeResist_postvalue_label": {
+      "text": "근거리 공격 저항",
+      "group": "citadel_heroes",
+      "hash": "82afce11167a"
+    },
+    "MeleeResist_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "MeleeResist_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "MaxJumpHeight_label": {
+      "text": "완전 충전 시 점프 높이",
+      "group": "citadel_heroes",
+      "hash": "1d4bbc408088"
+    },
+    "MaxJumpHeight_postvalue_label": {
+      "text": "완전 충전 시 점프 높이",
+      "group": "citadel_heroes",
+      "hash": "1d4bbc408088"
+    },
+    "MaxJumpHeight_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "MaxJumpHeight_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "MinJumpHeight_label": {
+      "text": "점프 높이",
+      "group": "citadel_heroes",
+      "hash": "fbd46b67b302"
+    },
+    "MinJumpHeight_postvalue_label": {
+      "text": "점프 높이",
+      "group": "citadel_heroes",
+      "hash": "fbd46b67b302"
+    },
+    "MinJumpHeight_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "MinJumpHeight_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "ability_baba_hexing_brew": {
+      "text": "바바의 차",
+      "group": "citadel_heroes",
+      "hash": "2bfae6cb569f"
+    },
+    "ability_baba_hexing_brew_quip": {
+      "text": "바바의 특별한 차를 우리고 던집니다. 적군에게 불을 붙이거나 침묵 효과를 적용하고, 아군에게는 방벽을 부여합니다.",
+      "group": "citadel_heroes",
+      "hash": "b922a88cf172"
+    },
+    "ability_baba_hexing_brew_desc": {
+      "text": "마법의 차를 우립니다. 차를 우리는 동안 {g:citadel_inline_attribute:'CombatBarrier'} 효과, {g:citadel_inline_attribute:'Silence'} 효과, 뜨거운 화상 효과가 차례로 반복됩니다. 화상은 {g:citadel_inline_attribute:'SpiritDPS'}를 입히고 {g:citadel_inline_attribute:'SpiritResist'}을 감소시킵니다. 차를 던지면 해당 효과가 범위 내에 적용됩니다.<br><br>{g:citadel_binding:'ADS'} 키를 누르면 차 우리기를 일시 정지하거나 재개합니다.",
+      "group": "citadel_heroes",
+      "hash": "a5a36e6cfff8"
+    },
+    "ability_baba_hexing_brew_t3_desc": {
+      "text": "차 효과 +{s:BrewEffectiveness}% 증가",
+      "group": "citadel_heroes",
+      "hash": "28fb63337d82"
+    },
+    "ability_header_baba_brew_barrier": {
+      "text": "진정의 차:",
+      "group": "citadel_heroes",
+      "hash": "a12c796cdc7f"
+    },
+    "ability_header_baba_brew_silence": {
+      "text": "침묵의 차:",
+      "group": "citadel_heroes",
+      "hash": "a5701f44bb88"
+    },
+    "ability_header_baba_brew_fire": {
+      "text": "화상의 차:",
+      "group": "citadel_heroes",
+      "hash": "d4e821c6a305"
+    },
+    "BabaBrewBurnDPS_label": {
+      "text": "화상 초당 피해",
+      "group": "citadel_heroes",
+      "hash": "834017c02dd7"
+    },
+    "BabaBrewBurnDPS_postvalue_label": {
+      "text": "화상 초당 피해",
+      "group": "citadel_heroes",
+      "hash": "834017c02dd7"
+    },
+    "BabaBrewBurnSpiritResist_prefix": {
+      "text": "{s:sign}",
+      "group": "citadel_heroes",
+      "hash": "e2f95e62e97a"
+    },
+    "BabaBrewBurnSpiritResist_label": {
+      "text": "화상 시 마법 저항",
+      "group": "citadel_heroes",
+      "hash": "97766dedcf0d"
+    },
+    "BabaBrewBurnSpiritResist_postvalue_label": {
+      "text": "화상 시 마법 저항",
+      "group": "citadel_heroes",
+      "hash": "97766dedcf0d"
+    },
+    "BabaBrewBurnSpiritResist_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "modifier_baba_brew_fire": {
+      "text": "화상의 차",
+      "group": "citadel_heroes",
+      "hash": "7d90a115cb18"
+    },
+    "modifier_baba_brew_barrier": {
+      "text": "진정의 차",
+      "group": "citadel_heroes",
+      "hash": "1e092e0d2615"
+    },
+    "modifier_baba_brew_holding_silence": {
+      "text": "차: 침묵",
+      "group": "citadel_heroes",
+      "hash": "08993ae1fbf0"
+    },
+    "modifier_baba_brew_holding_fire": {
+      "text": "차: 화염",
+      "group": "citadel_heroes",
+      "hash": "014a5b388616"
+    },
+    "modifier_baba_brew_holding_barrier": {
+      "text": "차: 방벽",
+      "group": "citadel_heroes",
+      "hash": "6681a6261da5"
+    },
+    "modifier_baba_brew_segment_none": {
+      "text": "차 우리는 중",
+      "group": "citadel_heroes",
+      "hash": "5c59ae82997e"
+    },
+    "modifier_baba_brew_segment_barrier": {
+      "text": "진정",
+      "group": "citadel_heroes",
+      "hash": "748f604ff46b"
+    },
+    "modifier_baba_brew_segment_fire": {
+      "text": "화상",
+      "group": "citadel_heroes",
+      "hash": "772fac1ea080"
+    },
+    "modifier_baba_brew_segment_silence": {
+      "text": "침묵",
+      "group": "citadel_heroes",
+      "hash": "b5acb398d5b7"
+    },
+    "BrewTime_label": {
+      "text": "최초 차 우리기 시간",
+      "group": "citadel_heroes",
+      "hash": "c8e081faadf3"
+    },
+    "BrewTime_postvalue_label": {
+      "text": "최초 차 우리기 시간",
+      "group": "citadel_heroes",
+      "hash": "c8e081faadf3"
+    },
+    "BrewTime_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "ability_baba_hexing_brew/modifier_baba_brew_silence": {
+      "text": "침묵의 차",
+      "group": "citadel_heroes",
+      "hash": "7fbbba0d8e70"
+    },
+    "modifier_baba_brew_holding": {
+      "text": "바바의 차",
+      "group": "citadel_heroes",
+      "hash": "2bfae6cb569f"
+    },
+    "baba_brew_ui_brewing": {
+      "text": "차 우리는 중...",
+      "group": "citadel_heroes",
+      "hash": "443216ce9de4"
+    },
+    "MaxLockonStacks_label": {
+      "text": "대상당 최대 비둘기 수",
+      "group": "citadel_heroes",
+      "hash": "e86e579bdf35"
+    },
+    "MaxLockonStacks_postvalue_label": {
+      "text": "대상당 최대 비둘기 수",
+      "group": "citadel_heroes",
+      "hash": "e86e579bdf35"
+    },
+    "FullLockonTime_label": {
+      "text": "완전 조준 고정 시간",
+      "group": "citadel_heroes",
+      "hash": "ab783e6fc385"
+    },
+    "FullLockonTime_postvalue_label": {
+      "text": "완전 조준 고정 시간",
+      "group": "citadel_heroes",
+      "hash": "ab783e6fc385"
+    },
+    "FullLockonTime_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "TimeToGainLockonStack_label": {
+      "text": "비둘기 한 마리당 조준 고정 시간",
+      "group": "citadel_heroes",
+      "hash": "ef29f6c9ac56"
+    },
+    "TimeToGainLockonStack_postvalue_label": {
+      "text": "비둘기 한 마리당 조준 고정 시간",
+      "group": "citadel_heroes",
+      "hash": "ef29f6c9ac56"
+    },
+    "TimeToGainLockonStack_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "ability_baba_ultimate_2": {
+      "text": "모이 뿌리기",
+      "group": "citadel_heroes",
+      "hash": "9354c05f9e53"
+    },
+    "ability_baba_ultimate_2_t1_desc": {
+      "text": "시전 범위 +{s:AbilityCastRange}m 증가<br>최대 둔화 +{s:BabaUlt2MaxSlow}% 증가",
+      "group": "citadel_heroes",
+      "hash": "ed321847287d"
+    },
+    "citadel_ability_baba_pigeon_assault_release_early": {
+      "text": "즉시 발동",
+      "group": "citadel_heroes",
+      "hash": "753e484a64dd"
+    },
+    "ability_baba_ultimate_2_t3_desc": {
+      "text": "최대 피해 +{s:MaxDamage} 증가<br>마력 배수 +{s:MaxDamage_scale} 증가<br>최대 지속 시간 +{s:MaxPigeonDuration}초 증가",
+      "group": "citadel_heroes",
+      "hash": "b81a0759c768"
+    },
+    "MaxPigeonDuration_label": {
+      "text": "최대 비둘기 변신 시간",
+      "group": "citadel_heroes",
+      "hash": "1efc501aedd9"
+    },
+    "MaxPigeonDuration_postvalue_label": {
+      "text": "최대 비둘기 변신 시간",
+      "group": "citadel_heroes",
+      "hash": "1efc501aedd9"
+    },
+    "MaxPigeonDuration_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "BabaUlt2LockOns_label": {
+      "text": "대상당 최대 빵 중첩 수",
+      "group": "citadel_heroes",
+      "hash": "dc6be483492a"
+    },
+    "BabaUlt2LockOns_postvalue_label": {
+      "text": "대상당 최대 빵 중첩 수",
+      "group": "citadel_heroes",
+      "hash": "dc6be483492a"
+    },
+    "BabaUlt2TimeToMaxStacks_label": {
+      "text": "최대 중첩 도달 시간",
+      "group": "citadel_heroes",
+      "hash": "dba75c7335a3"
+    },
+    "BabaUlt2TimeToMaxStacks_postvalue_label": {
+      "text": "최대 중첩 도달 시간",
+      "group": "citadel_heroes",
+      "hash": "dba75c7335a3"
+    },
+    "BabaUlt2TimeToMaxStacks_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "BabaUlt2MaxSlow_label": {
+      "text": "최대 둔화",
+      "group": "citadel_heroes",
+      "hash": "488b65cd671e"
+    },
+    "BabaUlt2MaxSlow_postvalue_label": {
+      "text": "최대 둔화",
+      "group": "citadel_heroes",
+      "hash": "488b65cd671e"
+    },
+    "BabaUlt2MaxSlow_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "TickInterval_label": {
+      "text": "타격 간격",
+      "group": "citadel_heroes",
+      "hash": "7d93e2a5bd3c"
+    },
+    "TickInterval_postvalue_label": {
+      "text": "타격 간격",
+      "group": "citadel_heroes",
+      "hash": "7d93e2a5bd3c"
+    },
+    "TickInterval_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "StunDuration_label": {
+      "text": "기절 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "1ab9abf54e06"
+    },
+    "StunDuration_postvalue_label": {
+      "text": "기절 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "1ab9abf54e06"
+    },
+    "StunDuration_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "modifier_baba_ult2_mark": {
+      "text": "표식 적용",
+      "group": "citadel_heroes",
+      "hash": "1deeb16cb801"
+    },
+    "modifier_baba_ult2_pigeon": {
+      "text": "비둘기",
+      "group": "citadel_heroes",
+      "hash": "3550f8a08e81"
+    },
+    "TickDamageIncreasePerHit_label": {
+      "text": "피해 증가",
+      "group": "citadel_heroes",
+      "hash": "d16c7ae80041"
+    },
+    "TickDamageIncreasePerHit_postvalue_label": {
+      "text": "피해 증가",
+      "group": "citadel_heroes",
+      "hash": "d16c7ae80041"
+    },
+    "TickDamageIncreasePerHit_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
     "ability_header_on_hit": {
       "text": "적중 시:",
       "group": "citadel_heroes",
@@ -22165,6 +22850,16 @@
       "hash": "8e969664bfc2"
     },
     "ability_melee_ratking": {
+      "text": "근거리 공격",
+      "group": "citadel_heroes",
+      "hash": "8e969664bfc2"
+    },
+    "ability_melee_baba": {
+      "text": "근거리 공격",
+      "group": "citadel_heroes",
+      "hash": "8e969664bfc2"
+    },
+    "ability_baba_bench_melee": {
       "text": "근거리 공격",
       "group": "citadel_heroes",
       "hash": "8e969664bfc2"
@@ -22848,6 +23543,11 @@
       "text": "뉴욕 지하 하수구의 미확인 생명체이자 통치자인 랫 킹은 체격과 힘, 야망에서 신하들을 압도한다. 더는 지하에 숨어 지내는 삶에 만족하지 못한 왕은 자신과 신하들이 뉴욕 거리를 누비는 해충 방제 차량(쥐들이 부르는 이름으로는 인간 살인 부대)을 두려워하지 않고 지상을 활보할 미래를 위한 대담한 구상을 밝혔다.\n\n1단계: 롱아일랜드 장악\n2단계: 롱아일랜드를 새로운 주권 국가, 랫타니아로 선포\n3단계: 이 새로운 쥐들의 낙원을 떠나지 않는 모든 인간 처형\n\n빈틈없는 계획이지만 쥐들의 왕은 혹시 모를 위험조차 감수하고 싶지 않았다. 그래서 이 계획의 성공을 확고히 하고자 패트런을 소환하기로 했다.",
       "group": "citadel_heroes",
       "hash": "5fab0ded06bf"
+    },
+    "hero_baba_lore": {
+      "text": "저주받은 사과의 주민 대부분이 살면서 한 번쯤은 해 보고 싶어 하는 일이 몇 가지 있다.\n\n브로드웨이 공연 보기.\n크리스마스 시즌에 록펠러 센터에서 스케이트 타기.\n센트럴파크의 비둘기 할머니에게 한 소리 듣기.\n\n바바는 공원에서 영혼 비둘기에게 먹이를 주는 평범한 할머니가 아니라... 뉴욕의 명물이다. 뉴욕의 전설 속에 깊이 자리 잡은, 누구도 막을 수 없는 존재다. 지난 50년 동안 비가 오나 눈이 오나, 바바가 매일 같은 벤치에 앉아 있었다는 게 사실일까? 그럴지도 모른다. 정말 소호 마법 연맹의 수장일까? 누가 알겠는가. 하지만 한 가지 사실만은 분명하다... 바로 바바가 뉴요커라는 점이다. 그리고 바바는 힘을 좇는 관광객 무리가 맨해튼을 망가뜨리는 모습을 가만히 앉아 지켜보지 않을 것이다.",
+      "group": "citadel_heroes",
+      "hash": "079fd88f3829"
     },
     "MODIFIER_STATE_ROOTED": {
       "text": "이동 불가 상태",
@@ -25009,6 +25709,11 @@
       "group": "citadel_attributes",
       "hash": "4e875a3ebbbe"
     },
+    "TechArmorDamageReduction_label": {
+      "text": "마법 저항",
+      "group": "citadel_attributes",
+      "hash": "4e875a3ebbbe"
+    },
     "TechArmorDamageReduction_postvalue_label": {
       "text": "마법 저항",
       "group": "citadel_attributes",
@@ -26803,21 +27508,6 @@
       "text": "%",
       "group": "citadel_attributes",
       "hash": "4345cb1fa278"
-    },
-    "StunDuration_label": {
-      "text": "기절 지속 시간",
-      "group": "citadel_attributes",
-      "hash": "1ab9abf54e06"
-    },
-    "StunDuration_postvalue_label": {
-      "text": "기절 지속 시간",
-      "group": "citadel_attributes",
-      "hash": "1ab9abf54e06"
-    },
-    "StunDuration_postfix": {
-      "text": "초",
-      "group": "citadel_attributes",
-      "hash": "3845248e2861"
     },
     "StunDelay_label": {
       "text": "기절 지연",
@@ -32725,9 +33415,9 @@
       "hash": "d172b9792fb2"
     },
     "InlineAttribute_KnockBack": {
-      "text": "밀치기",
+      "text": "밀쳐내기",
       "group": "citadel_attributes",
-      "hash": "41ea4013da96"
+      "hash": "c4c151c052ae"
     },
     "InlineAttribute_KnockUp": {
       "text": "들어올리기",
@@ -33839,6 +34529,11 @@
       "group": "citadel_gc",
       "hash": "b97fd3828eca"
     },
+    "Steam_Citadel_Hideout_Mildred": {
+      "text": "은신처에서 밀드레드를 싫어하는 중",
+      "group": "citadel_gc",
+      "hash": "54d703977781"
+    },
     "Citadel_Dashboard_BuildVersion": {
       "text": "#{d:buildNumber}",
       "group": "citadel_main",
@@ -34488,6 +35183,11 @@
       "text": "메타데이터 파일의 버전이 유효하지 않습니다.",
       "group": "citadel_main",
       "hash": "c3258d146a78"
+    },
+    "Citadel_Scoreboard_Souls": {
+      "text": "영혼",
+      "group": "citadel_main",
+      "hash": "567be1353a0e"
     },
     "Citadel_Scoreboard_TeamKills": {
       "text": "처치",
@@ -43679,6 +44379,16 @@
       "group": "citadel_main",
       "hash": "98b974006fef"
     },
+    "Citadel_HeroBuilds_Error_InvalidBuild": {
+      "text": "유효하지 않은 빌드가 제출되었습니다.",
+      "group": "citadel_main",
+      "hash": "7efd382fc58f"
+    },
+    "Citadel_HeroBuilds_Error_BuildTooLarge": {
+      "text": "이 빌드는 용량이 너무 커서 게시할 수 없습니다. 설명이나 주석을 줄이거나 일부 아이템을 제거해 보세요.",
+      "group": "citadel_main",
+      "hash": "6f4459390fca"
+    },
     "Citadel_HeroBuilds_Reverting_Title": {
       "text": "빌드 되돌리는 중",
       "group": "citadel_main",
@@ -44563,6 +45273,116 @@
       "text": "부활했습니다",
       "group": "citadel_main",
       "hash": "d59ca90aef80"
+    },
+    "Citadel_Steamshare_Title_Allied_ObjectiveDestroyed_Guardian": {
+      "text": "아군 가디언",
+      "group": "citadel_main",
+      "hash": "c40a8c1bbed4"
+    },
+    "Citadel_Steamshare_Desc_Allied_ObjectiveDestroyed_Guardian": {
+      "text": "아군 가디언이 파괴되었습니다.",
+      "group": "citadel_main",
+      "hash": "5cd8c8e6c34d"
+    },
+    "Citadel_Steamshare_Title_Allied_ObjectiveDestroyed_Walker": {
+      "text": "아군 워커",
+      "group": "citadel_main",
+      "hash": "6b4c5fe819e1"
+    },
+    "Citadel_Steamshare_Desc_Allied_ObjectiveDestroyed_Walker": {
+      "text": "아군 워커가 파괴되었습니다.",
+      "group": "citadel_main",
+      "hash": "0876f82e9e92"
+    },
+    "Citadel_Steamshare_Title_Allied_ObjectiveDestroyed_Patron": {
+      "text": "아군 패트런",
+      "group": "citadel_main",
+      "hash": "f95143f43fa9"
+    },
+    "Citadel_Steamshare_Desc_Allied_ObjectiveDestroyed_Patron": {
+      "text": "아군 패트런이 파괴되었습니다.",
+      "group": "citadel_main",
+      "hash": "63c45813577c"
+    },
+    "Citadel_Steamshare_Title_Allied_ObjectiveDestroyed_BaseGuardians": {
+      "text": "아군 기지 가디언",
+      "group": "citadel_main",
+      "hash": "c9adcc4fc45f"
+    },
+    "Citadel_Steamshare_Desc_Allied_ObjectiveDestroyed_BaseGuardians": {
+      "text": "아군 기지 가디언이 파괴되었습니다.",
+      "group": "citadel_main",
+      "hash": "b0bbb5749f13"
+    },
+    "Citadel_Steamshare_Title_Allied_ObjectiveDestroyed_Shrine": {
+      "text": "아군 성지",
+      "group": "citadel_main",
+      "hash": "2f367168efa1"
+    },
+    "Citadel_Steamshare_Desc_Allied_ObjectiveDestroyed_Shrine": {
+      "text": "아군 성지가 파괴되었습니다.",
+      "group": "citadel_main",
+      "hash": "a88e7512cb24"
+    },
+    "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed_Guardian": {
+      "text": "적군 가디언",
+      "group": "citadel_main",
+      "hash": "4b72d97d1e98"
+    },
+    "Citadel_Steamshare_Desc_Enemy_ObjectiveDestroyed_Guardian": {
+      "text": "적군 가디언이 파괴되었습니다.",
+      "group": "citadel_main",
+      "hash": "efcda7b65442"
+    },
+    "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed_Walker": {
+      "text": "적군 워커",
+      "group": "citadel_main",
+      "hash": "5cc95474360b"
+    },
+    "Citadel_Steamshare_Desc_Enemy_ObjectiveDestroyed_Walker": {
+      "text": "적군 워커가 파괴되었습니다.",
+      "group": "citadel_main",
+      "hash": "3d66190252ad"
+    },
+    "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed_Patron": {
+      "text": "적군 패트런",
+      "group": "citadel_main",
+      "hash": "0476ac0f200d"
+    },
+    "Citadel_Steamshare_Desc_Enemy_ObjectiveDestroyed_Patron": {
+      "text": "적군 패트런이 파괴되었습니다.",
+      "group": "citadel_main",
+      "hash": "f9c035b2d012"
+    },
+    "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed_BaseGuardians": {
+      "text": "적군 기지 가디언",
+      "group": "citadel_main",
+      "hash": "162a594b5e49"
+    },
+    "Citadel_Steamshare_Desc_Enemy_ObjectiveDestroyed_BaseGuardians": {
+      "text": "적군 기지 가디언이 파괴되었습니다.",
+      "group": "citadel_main",
+      "hash": "fc6dc34759c2"
+    },
+    "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed_Shrine": {
+      "text": "적군 성지",
+      "group": "citadel_main",
+      "hash": "57cab4840ef5"
+    },
+    "Citadel_Steamshare_Desc_Enemy_ObjectiveDestroyed_Shrine": {
+      "text": "적군 성지가 파괴되었습니다.",
+      "group": "citadel_main",
+      "hash": "16a785a1764a"
+    },
+    "Citadel_Steamshare_Title_Neutral_ObjectiveDestroyed_MidBoss": {
+      "text": "중앙 보스",
+      "group": "citadel_main",
+      "hash": "cdf1c3e2d388"
+    },
+    "Citadel_Steamshare_Desc_Neutral_ObjectiveDestroyed_MidBoss": {
+      "text": "중앙 보스가 처치되었습니다.",
+      "group": "citadel_main",
+      "hash": "531f31f72f94"
     },
     "guardian_unit": {
       "text": "가디언",
@@ -46443,6 +47263,16 @@
       "text": "영웅 선택 닫기",
       "group": "citadel_main",
       "hash": "90ba62b070f9"
+    },
+    "citadel_settings_hero_selector_switch_to_base_tooltip": {
+      "text": "기본 설정 화면으로 전환합니다.",
+      "group": "citadel_main",
+      "hash": "b8cdfba2ed56"
+    },
+    "citadel_settings_hero_selector_switch_to_hero_tooltip": {
+      "text": "현재 영웅 설정 화면으로 전환합니다.",
+      "group": "citadel_main",
+      "hash": "de5040d95b8d"
     },
     "citadel_settings_chatwheel": {
       "text": "채팅 휠",
@@ -57514,6 +58344,21 @@
       "group": "citadel_main",
       "hash": "b84779f6d62a"
     },
+    "citadel_chatwheel_label_Yes": {
+      "text": "알았어.",
+      "group": "citadel_main",
+      "hash": "996758ea36d0"
+    },
+    "citadel_chatwheel_message_Yes": {
+      "text": "알겠다!",
+      "group": "citadel_main",
+      "hash": "d887c433eeee"
+    },
+    "citadel_chatwheel_label_No": {
+      "text": "안 돼.",
+      "group": "citadel_main",
+      "hash": "20ef2986d977"
+    },
     "citadel_chatwheel_message_No": {
       "text": "안 된다!",
       "group": "citadel_main",
@@ -59188,6 +60033,26 @@
       "text": "{s:hero_name} 영웅으로 변경",
       "group": "citadel_main",
       "hash": "f33a5148a76c"
+    },
+    "Citadel_Subtitles_Message_World": {
+      "text": "{s:subtitle_text}",
+      "group": "citadel_main",
+      "hash": "adfa538c73a3"
+    },
+    "Citadel_Subtitles_Message_Entity": {
+      "text": "<b>{s:subtitle_actor}</b>: {s:subtitle_text}",
+      "group": "citadel_main",
+      "hash": "11d9cfc6a0d0"
+    },
+    "Citadel_Subtitles_Message_IconAndName": {
+      "text": "<child id='SpeakerIcon' /><b>{s:subtitle_actor}</b>: {s:subtitle_text}",
+      "group": "citadel_main",
+      "hash": "17a4f7392c70"
+    },
+    "Citadel_Subtitles_Message_Icon": {
+      "text": "<child id='SpeakerIcon' />: {s:subtitle_text}",
+      "group": "citadel_main",
+      "hash": "f4230bf860e0"
     },
     "npc_newscaster": {
       "text": "뉴스 진행자",

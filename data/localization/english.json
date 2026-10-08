@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6759",
-  "upstreamCommit": "6759",
-  "generatedAt": "2026-10-07T10:05:14.535Z",
+  "clientVersion": "6763",
+  "upstreamCommit": "6763",
+  "generatedAt": "2026-10-08T14:00:12.155Z",
   "language": "English",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
@@ -22190,9 +22190,9 @@
       "hash": "0fb29b2eb6a1"
     },
     "ability_baba_ultimate_2_desc": {
-      "text": "Cover targets in front of you with <span class=\"highlight\">bread</span>, adding a stacking {g:citadel_inline_attribute:'Slow'} .<br><br>When the channel ends a flock of pigeons bombard the target, dealing {g:citadel_inline_attribute:'SpiritDamage'} and hexing the target into a <span class=\"highlight\">pigeon</span>, increasing in both damage and duration based on bread count.",
+      "text": "Cover targets in front of you with <span class=\"highlight\">bread</span>, adding a stacking {g:citadel_inline_attribute:'Slow'} .<br><br>When the channel ends a flock of pigeons bombard the targets, dealing {g:citadel_inline_attribute:'SpiritDamage'} and hexing each target into a <span class=\"highlight\">pigeon</span>, increasing in both damage and duration based on bread count.",
       "group": "citadel_heroes",
-      "hash": "240f3c0b59eb"
+      "hash": "a2d7b7111728"
     },
     "ability_baba_ultimate_2_t1_desc": {
       "text": "+{s:AbilityCastRange}m Cast Range<br>+{s:BabaUlt2MaxSlow}% Max Slow",

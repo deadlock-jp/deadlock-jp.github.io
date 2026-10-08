@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6759",
-  "upstreamCommit": "6759",
-  "generatedAt": "2026-10-07T10:05:14.635Z",
+  "clientVersion": "6763",
+  "upstreamCommit": "6763",
+  "generatedAt": "2026-10-08T14:00:12.251Z",
   "language": "schinese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 618,
-    "citadel_heroes": 3414,
-    "citadel_attributes": 1983,
-    "citadel_gc": 215,
-    "citadel_main": 5214
+    "citadel_heroes": 3553,
+    "citadel_attributes": 1981,
+    "citadel_gc": 216,
+    "citadel_main": 5248
   },
   "tokens": {
     "hero_vampire:n": {
@@ -15980,19 +15980,19 @@
       "hash": "83195cbf5ce9"
     },
     "HexDuration_label": {
-      "text": "Hex Duration",
+      "text": "扰动持续时间",
       "group": "citadel_heroes",
-      "hash": "e3aa33790d1f"
+      "hash": "53c9f7db97e6"
     },
     "HexDuration_postvalue_label": {
-      "text": "Hex Duration",
+      "text": "扰动持续时间",
       "group": "citadel_heroes",
-      "hash": "e3aa33790d1f"
+      "hash": "53c9f7db97e6"
     },
     "HexDuration_postfix": {
-      "text": "s",
+      "text": "秒",
       "group": "citadel_heroes",
-      "hash": "a0f1490a20d0"
+      "hash": "eb6aaba1a1ca"
     },
     "ability_magician_stage": {
       "text": "生死舞台",
@@ -21559,6 +21559,686 @@
       "group": "citadel_heroes",
       "hash": "e286e6d198da"
     },
+    "citadel_weapon_baba_set": {
+      "text": "文库之夜特辑",
+      "group": "citadel_heroes",
+      "hash": "14d4f40f0f0e"
+    },
+    "citadel_ability_baba_brew_brewing": {
+      "text": "调制中",
+      "group": "citadel_heroes",
+      "hash": "8281ac2d2ca6"
+    },
+    "citadel_ability_baba_brew_brewed": {
+      "text": "完全冲泡",
+      "group": "citadel_heroes",
+      "hash": "fc5aa63d1c83"
+    },
+    "citadel_ability_baba_brew_lock": {
+      "text": "暂停冲泡",
+      "group": "citadel_heroes",
+      "hash": "4a6fdf8c550b"
+    },
+    "citadel_ability_baba_brew_unlock": {
+      "text": "恢复冲泡",
+      "group": "citadel_heroes",
+      "hash": "d6593d457b41"
+    },
+    "ability_baba_bubbling_brew": {
+      "text": "丝液",
+      "group": "citadel_heroes",
+      "hash": "610a2cf61939"
+    },
+    "ability_baba_bubbling_brew_quip": {
+      "text": "丝液",
+      "group": "citadel_heroes",
+      "hash": "610a2cf61939"
+    },
+    "ability_baba_bubbling_brew_gun_damage": {
+      "text": "丝液（击中）",
+      "group": "citadel_heroes",
+      "hash": "ea2281904ca8"
+    },
+    "ability_baba_bubbling_brew_t2_desc": {
+      "text": "{s:AbilityCooldown}秒冷却时间<br>+{s:DebuffDuration}秒减益持续时间",
+      "group": "citadel_heroes",
+      "hash": "070a850c776f"
+    },
+    "ability_baba_bubbling_brew_t3_desc": {
+      "text": "+{s:AbilityCharges}充能<br>击中时：拉拽敌人{s:PullDistance}米",
+      "group": "citadel_heroes",
+      "hash": "6580f4b74874"
+    },
+    "BubblingBrew_TechPowerSteal_label": {
+      "text": "每次击中吸取元灵",
+      "group": "citadel_heroes",
+      "hash": "20c3590e6a1f"
+    },
+    "BubblingBrew_TechPowerSteal_postvalue_label": {
+      "text": "每次击中吸取元灵",
+      "group": "citadel_heroes",
+      "hash": "20c3590e6a1f"
+    },
+    "StolenSpiritEffectiveness_label": {
+      "text": "吸取元灵效果",
+      "group": "citadel_heroes",
+      "hash": "b4a176ee8011"
+    },
+    "StolenSpiritEffectiveness_postvalue_label": {
+      "text": "吸取元灵效果",
+      "group": "citadel_heroes",
+      "hash": "b4a176ee8011"
+    },
+    "StolenSpiritEffectiveness_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "ExplodeTime_label": {
+      "text": "爆发延迟",
+      "group": "citadel_heroes",
+      "hash": "773fe15acf84"
+    },
+    "ExplodeTime_postvalue_label": {
+      "text": "爆发延迟",
+      "group": "citadel_heroes",
+      "hash": "773fe15acf84"
+    },
+    "ExplodeTime_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "ExplodeTimeInterval_label": {
+      "text": "爆发间隔",
+      "group": "citadel_heroes",
+      "hash": "a8cb49107b2e"
+    },
+    "ExplodeTimeInterval_postvalue_label": {
+      "text": "爆发间隔",
+      "group": "citadel_heroes",
+      "hash": "a8cb49107b2e"
+    },
+    "ExplodeTimeInterval_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "MaxStacks_BabaBubblingBrew_label": {
+      "text": "最大元灵吸取",
+      "group": "citadel_heroes",
+      "hash": "6dedd258b35d"
+    },
+    "MaxStacks_BabaBubblingBrew_postvalue_label": {
+      "text": "最大元灵吸取",
+      "group": "citadel_heroes",
+      "hash": "6dedd258b35d"
+    },
+    "modifier_baba_bubbling_brew_buff": {
+      "text": "吸取的元灵",
+      "group": "citadel_heroes",
+      "hash": "1c949dbd0cca"
+    },
+    "modifier_baba_bubbling_brew_debuff": {
+      "text": "丝液",
+      "group": "citadel_heroes",
+      "hash": "610a2cf61939"
+    },
+    "modifier_baba_thread_pull": {
+      "text": "丝液拉拽",
+      "group": "citadel_heroes",
+      "hash": "59adbb8a9d3d"
+    },
+    "KnockbackDuration_label": {
+      "text": "击退持续时间",
+      "group": "citadel_heroes",
+      "hash": "531705b4f4ca"
+    },
+    "KnockbackDuration_postvalue_label": {
+      "text": "击退持续时间",
+      "group": "citadel_heroes",
+      "hash": "531705b4f4ca"
+    },
+    "KnockbackDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "ability_baba_bench_run": {
+      "text": "长腿老妪",
+      "group": "citadel_heroes",
+      "hash": "667201bdefce"
+    },
+    "ability_baba_bench_run_quip": {
+      "text": "长腿老妪：高高跳起再用充满灵力的腿踢飞附近的任何人。",
+      "group": "citadel_heroes",
+      "hash": "c4fd97a4ed36"
+    },
+    "ability_baba_bench_run_desc": {
+      "text": "你的长凳伸展双腿，获得{g:citadel_inline_attribute:'BonusMoveSpeed'}、更高的跳跃、<span class=\"highlight\">减益抗性</span>和<span class=\"highlight\">近战抗性</span>。<br><br><span class=\"diminish\">近战轻击：</span>发动<span class=\"highlight\">踢腿</span>将敌人击退。<br><span class=\"diminish\">近战重击：</span>发动<span class=\"highlight\">地面重击</span>，施加{g:citadel_inline_attribute:'KnockUp'}、{g:citadel_inline_attribute:'Slow'}，并造成{g:citadel_inline_attribute:'SpiritDamage'}。<br><br><span class=\"diminish\">按住{g:citadel_binding:'Crouch'}为高跳蓄力，然后释放进行跳跃。</span>",
+      "group": "citadel_heroes",
+      "hash": "75184157ae7a"
+    },
+    "ability_baba_bench_run_t1_desc": {
+      "text": "+{s:BonusMoveSpeed}米移动速度",
+      "group": "citadel_heroes",
+      "hash": "9e5b4ac75435"
+    },
+    "ability_baba_bench_run_t2_desc": {
+      "text": "{s:AbilityCooldown}秒冷却时间",
+      "group": "citadel_heroes",
+      "hash": "190a957482ab"
+    },
+    "ability_baba_bench_run_t3_desc": {
+      "text": "+{s:MeleeResist}%抗性<br>+{s:MeleeLifesteal}%近战吸取生命",
+      "group": "citadel_heroes",
+      "hash": "8db2afdd8f56"
+    },
+    "modifier_baba_bench_run": {
+      "text": "长腿老妪",
+      "group": "citadel_heroes",
+      "hash": "667201bdefce"
+    },
+    "BulletProcDamage_label": {
+      "text": "每发子弹的额外元灵伤害",
+      "group": "citadel_heroes",
+      "hash": "feec8dde6586"
+    },
+    "BulletProcDamage_postvalue_label": {
+      "text": "每发子弹的额外元灵伤害",
+      "group": "citadel_heroes",
+      "hash": "feec8dde6586"
+    },
+    "StolenSpiritBulletDamagePercent_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "StolenSpiritBulletDamagePercent_label": {
+      "text": "吸取元灵的额外伤害",
+      "group": "citadel_heroes",
+      "hash": "01719a69a124"
+    },
+    "StolenSpiritBulletDamagePercent_postvalue_label": {
+      "text": "吸取元灵的额外伤害",
+      "group": "citadel_heroes",
+      "hash": "01719a69a124"
+    },
+    "StolenSpiritBulletDamagePercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "LightKickKnockbackDistance_label": {
+      "text": "近战轻击击退",
+      "group": "citadel_heroes",
+      "hash": "d903644f7c63"
+    },
+    "LightKickKnockbackDistance_postvalue_label": {
+      "text": "近战轻击击退",
+      "group": "citadel_heroes",
+      "hash": "d903644f7c63"
+    },
+    "LightKickKnockbackDistance_postfix": {
+      "text": "米",
+      "group": "citadel_heroes",
+      "hash": "ee7f305751a5"
+    },
+    "GroundPoundKnockUpDuration_label": {
+      "text": "地面猛击击飞",
+      "group": "citadel_heroes",
+      "hash": "f44a66e56a3d"
+    },
+    "GroundPoundKnockUpDuration_postvalue_label": {
+      "text": "地面猛击击飞",
+      "group": "citadel_heroes",
+      "hash": "f44a66e56a3d"
+    },
+    "GroundPoundKnockUpDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "BonusMeleeRange_label": {
+      "text": "近战范围",
+      "group": "citadel_heroes",
+      "hash": "757840efeeb8"
+    },
+    "BonusMeleeRange_postvalue_label": {
+      "text": "近战范围",
+      "group": "citadel_heroes",
+      "hash": "757840efeeb8"
+    },
+    "BonusMeleeRange_prefix": {
+      "text": "{s:sign}",
+      "group": "citadel_heroes",
+      "hash": "e2f95e62e97a"
+    },
+    "BonusMeleeRange_postfix": {
+      "text": "米",
+      "group": "citadel_heroes",
+      "hash": "ee7f305751a5"
+    },
+    "MeleeSpiritDamage_label": {
+      "text": "近战轻击元灵伤害",
+      "group": "citadel_heroes",
+      "hash": "355e3c383928"
+    },
+    "MeleeSpiritDamage_postvalue_label": {
+      "text": "近战轻击元灵伤害",
+      "group": "citadel_heroes",
+      "hash": "355e3c383928"
+    },
+    "HeavyMeleeSpiritDamage_label": {
+      "text": "近战重击伤害",
+      "group": "citadel_heroes",
+      "hash": "f151141c9fdc"
+    },
+    "HeavyMeleeSpiritDamage_postvalue_label": {
+      "text": "近战重击伤害",
+      "group": "citadel_heroes",
+      "hash": "f151141c9fdc"
+    },
+    "HeavyMeleeSlowPercent_label": {
+      "text": "近战重击减速",
+      "group": "citadel_heroes",
+      "hash": "6d978f173b73"
+    },
+    "HeavyMeleeSlowPercent_postvalue_label": {
+      "text": "近战重击减速",
+      "group": "citadel_heroes",
+      "hash": "6d978f173b73"
+    },
+    "HeavyMeleeSlowPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "HeavyMeleeSlowDuration_label": {
+      "text": "近战重击减速持续时间",
+      "group": "citadel_heroes",
+      "hash": "f40107fc0590"
+    },
+    "HeavyMeleeSlowDuration_postvalue_label": {
+      "text": "近战重击减速持续时间",
+      "group": "citadel_heroes",
+      "hash": "f40107fc0590"
+    },
+    "HeavyMeleeSlowDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "MeleeResist_label": {
+      "text": "近战抗性",
+      "group": "citadel_heroes",
+      "hash": "1c8159c42b28"
+    },
+    "MeleeResist_postvalue_label": {
+      "text": "近战抗性",
+      "group": "citadel_heroes",
+      "hash": "1c8159c42b28"
+    },
+    "MeleeResist_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "MeleeResist_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "MaxJumpHeight_label": {
+      "text": "完全蓄力的跳跃高度",
+      "group": "citadel_heroes",
+      "hash": "0bb9bd297f4f"
+    },
+    "MaxJumpHeight_postvalue_label": {
+      "text": "完全蓄力的跳跃高度",
+      "group": "citadel_heroes",
+      "hash": "0bb9bd297f4f"
+    },
+    "MaxJumpHeight_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "MaxJumpHeight_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "MinJumpHeight_label": {
+      "text": "跳跃高度",
+      "group": "citadel_heroes",
+      "hash": "db1a87f79369"
+    },
+    "MinJumpHeight_postvalue_label": {
+      "text": "跳跃高度",
+      "group": "citadel_heroes",
+      "hash": "db1a87f79369"
+    },
+    "MinJumpHeight_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "MinJumpHeight_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "ability_baba_hexing_brew": {
+      "text": "婆婆泡茶",
+      "group": "citadel_heroes",
+      "hash": "512a44b015f4"
+    },
+    "ability_baba_hexing_brew_quip": {
+      "text": "冲泡婆婆的一壶特制茶，再扔出去点燃或沉默敌人，或者保护友军",
+      "group": "citadel_heroes",
+      "hash": "20ab74cedbe2"
+    },
+    "ability_baba_hexing_brew_desc": {
+      "text": "冲泡一壶茶，扔出后会对一片区域施加魔法效果，具体效果会在舒缓的{g:citadel_inline_attribute:'CombatBarrier'}、{g:citadel_inline_attribute:'Silence'}和灼烧的沸水之间循环，沸水会造成{g:citadel_inline_attribute:'SpiritDPS'}并降低{g:citadel_inline_attribute:'SpiritResist'}。<br><br>按下{g:citadel_binding:'ADS'}可以暂停或恢复冲泡。",
+      "group": "citadel_heroes",
+      "hash": "37c8791c3978"
+    },
+    "ability_baba_hexing_brew_t3_desc": {
+      "text": "+{s:BrewEffectiveness}%药剂效果",
+      "group": "citadel_heroes",
+      "hash": "f413964886eb"
+    },
+    "ability_header_baba_brew_barrier": {
+      "text": "舒缓之茶：",
+      "group": "citadel_heroes",
+      "hash": "63469a07aa83"
+    },
+    "ability_header_baba_brew_silence": {
+      "text": "沉默之茶：",
+      "group": "citadel_heroes",
+      "hash": "bd717978a961"
+    },
+    "ability_header_baba_brew_fire": {
+      "text": "沉默之茶：",
+      "group": "citadel_heroes",
+      "hash": "bd717978a961"
+    },
+    "BabaBrewBurnDPS_label": {
+      "text": "每秒燃烧伤害",
+      "group": "citadel_heroes",
+      "hash": "820feb238084"
+    },
+    "BabaBrewBurnDPS_postvalue_label": {
+      "text": "每秒燃烧伤害",
+      "group": "citadel_heroes",
+      "hash": "820feb238084"
+    },
+    "BabaBrewBurnSpiritResist_prefix": {
+      "text": "{s:sign}",
+      "group": "citadel_heroes",
+      "hash": "e2f95e62e97a"
+    },
+    "BabaBrewBurnSpiritResist_label": {
+      "text": "灼烧元灵抗性",
+      "group": "citadel_heroes",
+      "hash": "6ec35b6548bf"
+    },
+    "BabaBrewBurnSpiritResist_postvalue_label": {
+      "text": "灼烧元灵抗性",
+      "group": "citadel_heroes",
+      "hash": "6ec35b6548bf"
+    },
+    "BabaBrewBurnSpiritResist_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "modifier_baba_brew_fire": {
+      "text": "沸腾之茶",
+      "group": "citadel_heroes",
+      "hash": "78c8ff12d478"
+    },
+    "modifier_baba_brew_barrier": {
+      "text": "舒缓之茶",
+      "group": "citadel_heroes",
+      "hash": "e49890db0c27"
+    },
+    "modifier_baba_brew_holding_silence": {
+      "text": "药剂：沉默",
+      "group": "citadel_heroes",
+      "hash": "fb5f7af0816d"
+    },
+    "modifier_baba_brew_holding_fire": {
+      "text": "药剂：火焰",
+      "group": "citadel_heroes",
+      "hash": "628d46f055ba"
+    },
+    "modifier_baba_brew_holding_barrier": {
+      "text": "药剂：屏障",
+      "group": "citadel_heroes",
+      "hash": "7d63d979b5c0"
+    },
+    "modifier_baba_brew_segment_none": {
+      "text": "调制中",
+      "group": "citadel_heroes",
+      "hash": "8281ac2d2ca6"
+    },
+    "modifier_baba_brew_segment_barrier": {
+      "text": "舒缓",
+      "group": "citadel_heroes",
+      "hash": "630e4d4f880b"
+    },
+    "modifier_baba_brew_segment_fire": {
+      "text": "沸腾",
+      "group": "citadel_heroes",
+      "hash": "d94882692038"
+    },
+    "modifier_baba_brew_segment_silence": {
+      "text": "沉默",
+      "group": "citadel_heroes",
+      "hash": "359d79ff7c84"
+    },
+    "BrewTime_label": {
+      "text": "初始冲泡时间",
+      "group": "citadel_heroes",
+      "hash": "3655179cc09e"
+    },
+    "BrewTime_postvalue_label": {
+      "text": "初始冲泡时间",
+      "group": "citadel_heroes",
+      "hash": "3655179cc09e"
+    },
+    "BrewTime_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "ability_baba_hexing_brew/modifier_baba_brew_silence": {
+      "text": "沉默之茶",
+      "group": "citadel_heroes",
+      "hash": "8419f6690b80"
+    },
+    "modifier_baba_brew_holding": {
+      "text": "婆婆泡茶",
+      "group": "citadel_heroes",
+      "hash": "512a44b015f4"
+    },
+    "baba_brew_ui_brewing": {
+      "text": "泡茶中……",
+      "group": "citadel_heroes",
+      "hash": "ec971babd716"
+    },
+    "MaxLockonStacks_label": {
+      "text": "每个目标最多鸽子",
+      "group": "citadel_heroes",
+      "hash": "627a5bab5c9d"
+    },
+    "MaxLockonStacks_postvalue_label": {
+      "text": "每个目标最多鸽子",
+      "group": "citadel_heroes",
+      "hash": "627a5bab5c9d"
+    },
+    "FullLockonTime_label": {
+      "text": "完全锁定所需时间",
+      "group": "citadel_heroes",
+      "hash": "7a579121aef4"
+    },
+    "FullLockonTime_postvalue_label": {
+      "text": "完全锁定所需时间",
+      "group": "citadel_heroes",
+      "hash": "7a579121aef4"
+    },
+    "FullLockonTime_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "TimeToGainLockonStack_label": {
+      "text": "每只鸽子的锁定时间",
+      "group": "citadel_heroes",
+      "hash": "b782c8e6a90b"
+    },
+    "TimeToGainLockonStack_postvalue_label": {
+      "text": "每只鸽子的锁定时间",
+      "group": "citadel_heroes",
+      "hash": "b782c8e6a90b"
+    },
+    "TimeToGainLockonStack_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "ability_baba_ultimate_2": {
+      "text": "喂鸟",
+      "group": "citadel_heroes",
+      "hash": "837fba93089a"
+    },
+    "ability_baba_ultimate_2_t1_desc": {
+      "text": "+{s:AbilityCastRange}米施法距离<br>+{s:BabaUlt2MaxSlow}%最大减速",
+      "group": "citadel_heroes",
+      "hash": "aec702397e20"
+    },
+    "citadel_ability_baba_pigeon_assault_release_early": {
+      "text": "提前释放",
+      "group": "citadel_heroes",
+      "hash": "fa95b96bf2cf"
+    },
+    "ability_baba_ultimate_2_t3_desc": {
+      "text": "+{s:MaxDamage}最高伤害<br>+{s:MaxDamage_scale}元灵增强系数<br>+{s:MaxPigeonDuration}秒最大持续时间",
+      "group": "citadel_heroes",
+      "hash": "7b5a8fe46b78"
+    },
+    "MaxPigeonDuration_label": {
+      "text": "最大鸽子持续时间",
+      "group": "citadel_heroes",
+      "hash": "c903850b7576"
+    },
+    "MaxPigeonDuration_postvalue_label": {
+      "text": "最大鸽子持续时间",
+      "group": "citadel_heroes",
+      "hash": "c903850b7576"
+    },
+    "MaxPigeonDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "BabaUlt2LockOns_label": {
+      "text": "每个目标的最高面包层数",
+      "group": "citadel_heroes",
+      "hash": "0032e517a03c"
+    },
+    "BabaUlt2LockOns_postvalue_label": {
+      "text": "每个目标的最高面包层数",
+      "group": "citadel_heroes",
+      "hash": "0032e517a03c"
+    },
+    "BabaUlt2TimeToMaxStacks_label": {
+      "text": "到达最大叠加次数所需时间",
+      "group": "citadel_heroes",
+      "hash": "547e847d2cd6"
+    },
+    "BabaUlt2TimeToMaxStacks_postvalue_label": {
+      "text": "到达最大叠加次数所需时间",
+      "group": "citadel_heroes",
+      "hash": "547e847d2cd6"
+    },
+    "BabaUlt2TimeToMaxStacks_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "BabaUlt2MaxSlow_label": {
+      "text": "最大减速",
+      "group": "citadel_heroes",
+      "hash": "176564abef89"
+    },
+    "BabaUlt2MaxSlow_postvalue_label": {
+      "text": "最大减速",
+      "group": "citadel_heroes",
+      "hash": "176564abef89"
+    },
+    "BabaUlt2MaxSlow_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "TickInterval_label": {
+      "text": "攻击间隔时间",
+      "group": "citadel_heroes",
+      "hash": "30e8c072b0fd"
+    },
+    "TickInterval_postvalue_label": {
+      "text": "攻击间隔时间",
+      "group": "citadel_heroes",
+      "hash": "30e8c072b0fd"
+    },
+    "TickInterval_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "StunDuration_label": {
+      "text": "眩晕时间",
+      "group": "citadel_heroes",
+      "hash": "fe6a7dd7c8e3"
+    },
+    "StunDuration_postvalue_label": {
+      "text": "眩晕时间",
+      "group": "citadel_heroes",
+      "hash": "fe6a7dd7c8e3"
+    },
+    "StunDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "modifier_baba_ult2_mark": {
+      "text": "被标记",
+      "group": "citadel_heroes",
+      "hash": "0ea3ff030f4c"
+    },
+    "modifier_baba_ult2_pigeon": {
+      "text": "鸽子",
+      "group": "citadel_heroes",
+      "hash": "bed6360b1b4c"
+    },
+    "TickDamageIncreasePerHit_label": {
+      "text": "伤害递增",
+      "group": "citadel_heroes",
+      "hash": "e0a7017a7775"
+    },
+    "TickDamageIncreasePerHit_postvalue_label": {
+      "text": "伤害递增",
+      "group": "citadel_heroes",
+      "hash": "e0a7017a7775"
+    },
+    "TickDamageIncreasePerHit_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
     "ability_header_on_hit": {
       "text": "命中时：",
       "group": "citadel_heroes",
@@ -22160,6 +22840,16 @@
       "hash": "404d125d28f3"
     },
     "ability_melee_ratking": {
+      "text": "近战",
+      "group": "citadel_heroes",
+      "hash": "404d125d28f3"
+    },
+    "ability_melee_baba": {
+      "text": "近战",
+      "group": "citadel_heroes",
+      "hash": "404d125d28f3"
+    },
+    "ability_baba_bench_melee": {
       "text": "近战",
       "group": "citadel_heroes",
       "hash": "404d125d28f3"
@@ -22843,6 +23533,11 @@
       "text": "纽约沃伦斯的神秘统治者——鼠王，体型、力量和野心都远超他的臣民。他不再满足于躲藏在地下，而是大胆地描绘了一个未来的蓝图：他和他的臣民可以自由行走在地面上，不再惧怕纽约街头巡逻的灭鼠车（或是老鼠称之为，人类灭害小队）。\n\n第1步：控制长岛\n第2步：宣布长岛为新的主权国家——拉塔尼亚\n第3步：惩处所有拒绝离开这个老鼠乌托邦的人类\n\n然而，尽管这个计划天衣无缝，鼠王并不想冒险：因此，他决定召唤他的守护神来助他一臂之力。",
       "group": "citadel_heroes",
       "hash": "84351fcfd0ce"
+    },
+    "hero_baba_lore": {
+      "text": "大多数被诅咒的纽约城居民都希望在一生中能经历几件事。\n\n看一场百老汇秀。\n在圣诞季去洛克菲勒中心滑冰。\n被中央公园的鸽子夫人骂一顿。\n\n因为婆婆可不仅仅是在公园里喂灵异鸽子的老太太……她是一个传奇。一股编织进纽约城传说本身的自然之力。她是否真的在过去50年里每天风雨无阻地坐在同一张长椅上？也许吧。她是否真的是苏荷女巫团的首领？谁知道呢。但有一件事是肯定的……她是纽约人。她绝不会袖手旁观，看着一群游客为了争夺力量把曼哈顿搅得天翻地覆。",
+      "group": "citadel_heroes",
+      "hash": "74e57f8f87e1"
     },
     "MODIFIER_STATE_ROOTED": {
       "text": "被定身",
@@ -25004,6 +25699,11 @@
       "group": "citadel_attributes",
       "hash": "00247db29f7a"
     },
+    "TechArmorDamageReduction_label": {
+      "text": "元灵抗性",
+      "group": "citadel_attributes",
+      "hash": "00247db29f7a"
+    },
     "TechArmorDamageReduction_postvalue_label": {
       "text": "元灵抗性",
       "group": "citadel_attributes",
@@ -26798,21 +27498,6 @@
       "text": "%",
       "group": "citadel_attributes",
       "hash": "4345cb1fa278"
-    },
-    "StunDuration_label": {
-      "text": "眩晕时间",
-      "group": "citadel_attributes",
-      "hash": "fe6a7dd7c8e3"
-    },
-    "StunDuration_postvalue_label": {
-      "text": "眩晕时间",
-      "group": "citadel_attributes",
-      "hash": "fe6a7dd7c8e3"
-    },
-    "StunDuration_postfix": {
-      "text": "秒",
-      "group": "citadel_attributes",
-      "hash": "eb6aaba1a1ca"
     },
     "StunDelay_label": {
       "text": "眩晕延迟",
@@ -33834,6 +34519,11 @@
       "group": "citadel_gc",
       "hash": "044dc5f1ad30"
     },
+    "Steam_Citadel_Hideout_Mildred": {
+      "text": "在大本营讨厌米尔德丽德",
+      "group": "citadel_gc",
+      "hash": "36298bdb01c4"
+    },
     "Citadel_Dashboard_BuildVersion": {
       "text": "#{d:buildNumber}",
       "group": "citadel_main",
@@ -34483,6 +35173,11 @@
       "text": "元数据文件是无效版本",
       "group": "citadel_main",
       "hash": "8fd36a10da2a"
+    },
+    "Citadel_Scoreboard_Souls": {
+      "text": "魂魄",
+      "group": "citadel_main",
+      "hash": "2da9c55e2e2d"
     },
     "Citadel_Scoreboard_TeamKills": {
       "text": "击败次数",
@@ -43674,6 +44369,16 @@
       "group": "citadel_main",
       "hash": "13fb88cda4af"
     },
+    "Citadel_HeroBuilds_Error_InvalidBuild": {
+      "text": "提交的出装无效。",
+      "group": "citadel_main",
+      "hash": "24771f3b427b"
+    },
+    "Citadel_HeroBuilds_Error_BuildTooLarge": {
+      "text": "这个出装过大无法发布。请尝试缩短描述或注释，或者删除部分物品。",
+      "group": "citadel_main",
+      "hash": "751f61a8debe"
+    },
     "Citadel_HeroBuilds_Reverting_Title": {
       "text": "正在还原出装",
       "group": "citadel_main",
@@ -44558,6 +45263,116 @@
       "text": "你重生了",
       "group": "citadel_main",
       "hash": "40566eb87e27"
+    },
+    "Citadel_Steamshare_Title_Allied_ObjectiveDestroyed_Guardian": {
+      "text": "友方卫士",
+      "group": "citadel_main",
+      "hash": "bf28a40e1ad3"
+    },
+    "Citadel_Steamshare_Desc_Allied_ObjectiveDestroyed_Guardian": {
+      "text": "我方卫士已被摧毁",
+      "group": "citadel_main",
+      "hash": "e6d5b22dac88"
+    },
+    "Citadel_Steamshare_Title_Allied_ObjectiveDestroyed_Walker": {
+      "text": "友方机甲",
+      "group": "citadel_main",
+      "hash": "065371c67f3e"
+    },
+    "Citadel_Steamshare_Desc_Allied_ObjectiveDestroyed_Walker": {
+      "text": "我方机甲已被摧毁",
+      "group": "citadel_main",
+      "hash": "2cd8eb71962d"
+    },
+    "Citadel_Steamshare_Title_Allied_ObjectiveDestroyed_Patron": {
+      "text": "友方守护神",
+      "group": "citadel_main",
+      "hash": "d62f15243d00"
+    },
+    "Citadel_Steamshare_Desc_Allied_ObjectiveDestroyed_Patron": {
+      "text": "你的守护神已被摧毁",
+      "group": "citadel_main",
+      "hash": "03149a2a6145"
+    },
+    "Citadel_Steamshare_Title_Allied_ObjectiveDestroyed_BaseGuardians": {
+      "text": "友方基地卫士",
+      "group": "citadel_main",
+      "hash": "80460f4da643"
+    },
+    "Citadel_Steamshare_Desc_Allied_ObjectiveDestroyed_BaseGuardians": {
+      "text": "我方基地卫士已被摧毁",
+      "group": "citadel_main",
+      "hash": "d2d5a2e014a4"
+    },
+    "Citadel_Steamshare_Title_Allied_ObjectiveDestroyed_Shrine": {
+      "text": "友方圣坛",
+      "group": "citadel_main",
+      "hash": "6d235bcc1362"
+    },
+    "Citadel_Steamshare_Desc_Allied_ObjectiveDestroyed_Shrine": {
+      "text": "我方圣坛已被摧毁",
+      "group": "citadel_main",
+      "hash": "4ec4526de5bd"
+    },
+    "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed_Guardian": {
+      "text": "敌方卫士",
+      "group": "citadel_main",
+      "hash": "1a09f8e7b8d9"
+    },
+    "Citadel_Steamshare_Desc_Enemy_ObjectiveDestroyed_Guardian": {
+      "text": "敌方卫士已被摧毁",
+      "group": "citadel_main",
+      "hash": "88e2c91d725c"
+    },
+    "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed_Walker": {
+      "text": "敌方机甲",
+      "group": "citadel_main",
+      "hash": "9a58bba141a6"
+    },
+    "Citadel_Steamshare_Desc_Enemy_ObjectiveDestroyed_Walker": {
+      "text": "敌方机甲已被摧毁",
+      "group": "citadel_main",
+      "hash": "9443a268d5de"
+    },
+    "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed_Patron": {
+      "text": "敌方守护神",
+      "group": "citadel_main",
+      "hash": "7d39050f5829"
+    },
+    "Citadel_Steamshare_Desc_Enemy_ObjectiveDestroyed_Patron": {
+      "text": "敌方守护神已被摧毁",
+      "group": "citadel_main",
+      "hash": "243e0f0bd3dd"
+    },
+    "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed_BaseGuardians": {
+      "text": "敌方基地卫士",
+      "group": "citadel_main",
+      "hash": "c51636cc3a03"
+    },
+    "Citadel_Steamshare_Desc_Enemy_ObjectiveDestroyed_BaseGuardians": {
+      "text": "敌方基地卫士已被摧毁",
+      "group": "citadel_main",
+      "hash": "6cc496c00272"
+    },
+    "Citadel_Steamshare_Title_Enemy_ObjectiveDestroyed_Shrine": {
+      "text": "敌方圣坛",
+      "group": "citadel_main",
+      "hash": "b0cd47af62c9"
+    },
+    "Citadel_Steamshare_Desc_Enemy_ObjectiveDestroyed_Shrine": {
+      "text": "敌方圣坛已被摧毁",
+      "group": "citadel_main",
+      "hash": "af086a6b5d47"
+    },
+    "Citadel_Steamshare_Title_Neutral_ObjectiveDestroyed_MidBoss": {
+      "text": "魂灵中区头目",
+      "group": "citadel_main",
+      "hash": "bee3664e8e4b"
+    },
+    "Citadel_Steamshare_Desc_Neutral_ObjectiveDestroyed_MidBoss": {
+      "text": "魂灵中区头目已被击败",
+      "group": "citadel_main",
+      "hash": "e1813c398009"
     },
     "guardian_unit": {
       "text": "卫士",
@@ -46438,6 +47253,16 @@
       "text": "关闭英雄选择界面",
       "group": "citadel_main",
       "hash": "46a8999ddb28"
+    },
+    "citadel_settings_hero_selector_switch_to_base_tooltip": {
+      "text": "切换到基础设置视图。",
+      "group": "citadel_main",
+      "hash": "f0466e184272"
+    },
+    "citadel_settings_hero_selector_switch_to_hero_tooltip": {
+      "text": "切换到当前英雄设置的视图。",
+      "group": "citadel_main",
+      "hash": "f336574a9316"
     },
     "citadel_settings_chatwheel": {
       "text": "聊天轮盘",
@@ -57509,6 +58334,21 @@
       "group": "citadel_main",
       "hash": "4941e1ce9b0d"
     },
+    "citadel_chatwheel_label_Yes": {
+      "text": "好",
+      "group": "citadel_main",
+      "hash": "27e4fe4c3fe2"
+    },
+    "citadel_chatwheel_message_Yes": {
+      "text": "好的！",
+      "group": "citadel_main",
+      "hash": "1b13580bf5fc"
+    },
+    "citadel_chatwheel_label_No": {
+      "text": "不",
+      "group": "citadel_main",
+      "hash": "8fa7401e9077"
+    },
     "citadel_chatwheel_message_No": {
       "text": "不！",
       "group": "citadel_main",
@@ -59178,6 +60018,26 @@
       "text": "换为{s:hero_name}",
       "group": "citadel_main",
       "hash": "89e2e5a34fc4"
+    },
+    "Citadel_Subtitles_Message_World": {
+      "text": "{s:subtitle_text}",
+      "group": "citadel_main",
+      "hash": "adfa538c73a3"
+    },
+    "Citadel_Subtitles_Message_Entity": {
+      "text": "<b>{s:subtitle_actor}</b>：{s:subtitle_text}",
+      "group": "citadel_main",
+      "hash": "79492cbc5106"
+    },
+    "Citadel_Subtitles_Message_IconAndName": {
+      "text": "<child id='SpeakerIcon' /><b>{s:subtitle_actor}</b>：{s:subtitle_text}",
+      "group": "citadel_main",
+      "hash": "c368163cef12"
+    },
+    "Citadel_Subtitles_Message_Icon": {
+      "text": "<child id='SpeakerIcon' />：{s:subtitle_text}",
+      "group": "citadel_main",
+      "hash": "0ca79200a9a5"
     },
     "npc_newscaster": {
       "text": "新闻播报员",
