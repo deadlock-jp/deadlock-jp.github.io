@@ -98,9 +98,6 @@ const balanceAbilityKeys = [
     </a>
   )}
 
-  {/* X の投稿の紹介(日本のプレイヤー向けなので日本語版のみ。押されるまで X のものは何も読まない) */}
-  {lang === "ja" && <PlayClips />}
-
   <section class="block panel first">
     <h2>
       {T.nav.heroes}
@@ -130,6 +127,9 @@ const balanceAbilityKeys = [
       }
     </ul>
   </section>
+
+  {/* X の投稿の紹介(日本のプレイヤー向けなので日本語版のみ。この欄に近づくまで X のものは何も読まない) */}
+  {lang === "ja" && <PlayClips />}
 
   <section class="block panel">
     <h2>

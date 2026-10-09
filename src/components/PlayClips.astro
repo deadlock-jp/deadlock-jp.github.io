@@ -1,12 +1,13 @@
 ---
 /**
- * トップページの「プレイ動画」。X の投稿を横スライドのカードで紹介する(日本語版のトップだけ)。
+ * トップページの「プレイ動画」。X の投稿を1枚ずつのカルーセルで紹介する(日本語版のトップ、ヒーロー一覧の下)。
  *
- * 最初の表示では X のものを何も読まない(ページの速さと、閲覧者のデータを X に送らないため)。
- * カードの「再生する」が押されたときに初めて widgets.js を1回だけ読み、そのカードの中に
- * X の公式の埋め込みを作る(dnt: true = X に閲覧の追跡に使わせない指定)。
- * 絵はサイトに既にあるものだけを使う。ヒーローの縦長カードはトップのヒーロー一覧と同じ URL なので、
- * 追加の転送は起きない(X のサムネイルは保存も表示もしない)。
+ * 最初の表示では X のものを何も読まない。この欄が画面に近づいたときに初めて widgets.js を1回だけ読み、
+ * 表示中の1枚と次の1枚にだけ X の公式の埋め込みを作る(dnt: true = X に閲覧の追跡に使わせない指定)。
+ * 埋め込みは X 側で幅 550px が上限なので、PC では CSS の zoom で画面に合わせて拡大する(全画面は X のボタンで)。
+ * 別の1枚へ移ったら、離れた1枚の埋め込みは作り直す(見えない所で再生が続かないように)。
+ * 読み込めないとき(広告ブロック等)は、見出しと「X で見る」だけのカードになる。
+ * 絵はサイトに既にあるものだけを使う(ヒーローの縦長カードはヒーロー一覧と同じ URL)。
  * 一覧は data/featured-clips.json(src/lib/featuredClips.ts)。空ならセクションごと出さない。
  */
 import { existsSync } from "node:fs";
@@ -27,7 +28,7 @@ const clips = featuredClips().map((c) => {
       id: c.hero.id,
       name: t(c.hero.nameToken, c.hero.key),
       art: existsSync(join(process.cwd(), "public", rel)) ? `${base}/${rel}` : null,
-      // トップのヒーロー一覧と同じ絵(スマホは同じ縮小版)。同じ URL なので読み直しにならない
+      // ヒーロー一覧と同じ絵(スマホは同じ縮小版)。同じ URL なので読み直しにならない
       artSmall: ((r) => (r ? `${base}/${r}` : null))(thumbAt(rel, 210)),
     },
   };
@@ -35,18 +36,21 @@ const clips = featuredClips().map((c) => {
 ---
 
 {clips.length > 0 && (
-  <section class="clips panel" aria-labelledby="clips-h">
+  <section class="clips panel" aria-labelledby="clips-h" aria-roledescription="カルーセル">
     <div class="clips-head">
       <h2 id="clips-h">プレイ動画</h2>
-      <div class="clips-nav" hidden>
-        <button type="button" class="clips-prev" aria-label="前の動画へ" aria-controls="clips-track">‹</button>
-        <button type="button" class="clips-next" aria-label="次の動画へ" aria-controls="clips-track">›</button>
-      </div>
+      {clips.length > 1 && (
+        <div class="clips-nav">
+          <span class="clips-count" aria-live="polite"><b class="clips-cur">1</b> / {clips.length}</span>
+          <button type="button" class="clips-prev" aria-label="前の動画" aria-controls="clips-track" disabled>‹</button>
+          <button type="button" class="clips-next" aria-label="次の動画" aria-controls="clips-track">›</button>
+        </div>
+      )}
     </div>
     <ul class="clips-track" id="clips-track" tabindex="0" aria-label="プレイ動画の一覧">
-      {clips.map((c) => (
-        <li class="clip" data-clip-id={c.id} data-state="idle">
-          <div class="clip-top">
+      {clips.map((c, i) => (
+        <li class="clip" data-clip-id={c.id} data-state="idle" aria-roledescription="スライド" aria-label={`${i + 1} / ${clips.length}`}>
+          <div class="clip-cap">
             {c.heroView?.art && (
               <a class="clip-art" href={`${base}/heroes/${c.heroView.id}/`} tabindex="-1" aria-hidden="true">
                 <picture>
@@ -62,25 +66,30 @@ const clips = featuredClips().map((c) => {
                 {c.heroView && (
                   <a class="clip-hero" href={`${base}/heroes/${c.heroView.id}/`} data-herocard={c.heroView.id}>{c.heroView.name}</a>
                 )}
-              </span>
-              <span class="clip-actions">
-                <button type="button" class="clip-play">
-                  <span class="clip-play-main">▶ 再生する</span>
-                  <span class="clip-play-sub">(X の投稿を読み込みます)</span>
-                </button>
                 <a class="clip-x" href={c.url} target="_blank" rel="noopener">X で見る ↗</a>
               </span>
             </div>
           </div>
-          <div class="clip-embed" hidden></div>
+          <div class="clip-embed">
+            <p class="clip-status">X の投稿を読み込みます…</p>
+          </div>
         </li>
       ))}
     </ul>
+    {clips.length > 1 && (
+      <div class="clips-dots">
+        {clips.map((c, i) => (
+          <button type="button" class="clips-dot" data-i={i} aria-label={`${i + 1}枚目: ${c.title}`} title={c.title} aria-current={i === 0 ? "true" : undefined} />
+        ))}
+      </div>
+    )}
   </section>
 )}
 
 <script>
   const WIDGETS_SRC = "https://platform.twitter.com/widgets.js";
+  /** X の埋め込みの既定の幅(px)。これ以上には広がらないので、拡大は zoom で行う */
+  const EMBED_W = 550;
 
   interface Twttr {
     widgets: {
@@ -88,7 +97,7 @@ const clips = featuredClips().map((c) => {
     };
   }
 
-  /* widgets.js は最初に押されたときに1回だけ読む。読めなかったときは次に押されたら読み直す */
+  /* widgets.js は1回だけ読む。読めなかったときは次の機会に読み直す */
   let loader: Promise<Twttr> | null = null;
   function loadWidgets(): Promise<Twttr> {
     const w = window as unknown as { twttr?: Twttr };
@@ -111,149 +120,242 @@ const clips = featuredClips().map((c) => {
     return Promise.race([p, new Promise<T>((_, reject) => setTimeout(() => reject(new Error("timeout")), ms))]);
   }
 
-  function status(text: string, url?: string): HTMLElement {
+  function statusLine(text: string): HTMLElement {
     const p = document.createElement("p");
     p.className = "clip-status";
-    p.append(text);
-    if (url) {
-      const a = document.createElement("a");
-      a.href = url;
-      a.target = "_blank";
-      a.rel = "noopener";
-      a.textContent = "X で見る";
-      p.append(a, " から開いてください。");
-    }
+    p.textContent = text;
     return p;
-  }
-
-  async function play(li: HTMLElement) {
-    if (li.dataset.state === "loading" || li.dataset.state === "ready") return;
-    const id = li.dataset.clipId!;
-    const url = li.querySelector<HTMLAnchorElement>(".clip-x")!.href;
-    const embed = li.querySelector<HTMLElement>(".clip-embed")!;
-    const btn = li.querySelector<HTMLButtonElement>(".clip-play")!;
-    li.dataset.state = "loading";
-    btn.disabled = true;
-    embed.hidden = false;
-    embed.replaceChildren(status("X から読み込み中…"));
-    try {
-      const twttr = await within(loadWidgets(), 15000);
-      const holder = document.createElement("div");
-      embed.append(holder);
-      const el = await within(
-        twttr.widgets.createTweet(id, holder, { theme: "dark", dnt: true, lang: "ja", align: "center", conversation: "none" }),
-        20000,
-      );
-      if (!el) throw new Error("not found");
-      embed.replaceChildren(holder);
-      li.dataset.state = "ready";
-    } catch {
-      embed.replaceChildren(status("読み込めませんでした。", url));
-      li.dataset.state = "error";
-      btn.disabled = false;
-    }
   }
 
   for (const section of document.querySelectorAll<HTMLElement>(".clips")) {
     const track = section.querySelector<HTMLElement>(".clips-track")!;
-    const nav = section.querySelector<HTMLElement>(".clips-nav")!;
-    const prev = section.querySelector<HTMLButtonElement>(".clips-prev")!;
-    const next = section.querySelector<HTMLButtonElement>(".clips-next")!;
+    const slides = [...track.querySelectorAll<HTMLElement>(".clip")];
+    const prev = section.querySelector<HTMLButtonElement>(".clips-prev");
+    const next = section.querySelector<HTMLButtonElement>(".clips-next");
+    const cur = section.querySelector<HTMLElement>(".clips-cur");
+    const dots = [...section.querySelectorAll<HTMLButtonElement>(".clips-dot")];
+    let active = 0;
+    let started = false;
 
-    track.addEventListener("click", (e) => {
-      const btn = (e.target as HTMLElement).closest(".clip-play");
-      if (btn) play(btn.closest<HTMLElement>(".clip")!);
+    async function render(li: HTMLElement) {
+      if (li.dataset.state !== "idle" && li.dataset.state !== "error") return;
+      const embed = li.querySelector<HTMLElement>(".clip-embed")!;
+      const token = String(Math.random());
+      li.dataset.token = token;
+      li.dataset.state = "loading";
+      embed.replaceChildren(statusLine("X から読み込み中…"));
+      try {
+        const twttr = await within(loadWidgets(), 15000);
+        const holder = document.createElement("div");
+        holder.className = "clip-holder";
+        embed.append(holder);
+        const el = await within(
+          twttr.widgets.createTweet(li.dataset.clipId!, holder, { theme: "dark", dnt: true, lang: "ja", align: "center", conversation: "none" }),
+          20000,
+        );
+        if (li.dataset.token !== token) return; // 待っている間に作り直しになった
+        if (!el) throw new Error("not found");
+        embed.replaceChildren(holder);
+        li.dataset.state = "ready";
+      } catch {
+        if (li.dataset.token !== token) return;
+        li.dataset.state = "error";
+        const p = statusLine("X の投稿を読み込めませんでした。");
+        const retry = document.createElement("button");
+        retry.type = "button";
+        retry.className = "clip-retry";
+        retry.textContent = "もう一度読み込む";
+        retry.addEventListener("click", () => render(li));
+        const open = li.querySelector<HTMLAnchorElement>(".clip-x")!.cloneNode(true) as HTMLAnchorElement;
+        open.className = "clip-open";
+        p.append(document.createElement("br"), retry, open);
+        embed.replaceChildren(p);
+      }
+      fitHeight();
+    }
+
+    /* 離れた1枚の埋め込みは消しておく(再生中の動画が見えない所で鳴り続けないように)。戻ってきたら作り直す */
+    function reset(li: HTMLElement) {
+      if (li.dataset.state === "idle") return;
+      li.dataset.token = "";
+      li.dataset.state = "idle";
+      li.querySelector<HTMLElement>(".clip-embed")!.replaceChildren(statusLine("X の投稿を読み込みます…"));
+    }
+
+    function ensureAround(i: number) {
+      if (!started) return;
+      for (const j of [i, i + 1]) if (slides[j]) render(slides[j]);
+    }
+
+    /* 拡大率: 埋め込みの幅を、枠の幅と画面の高さに収まる範囲で広げる(上限 1.6 倍)。スマホは X の幅に任せる */
+    function fitZoom() {
+      const w = track.clientWidth;
+      const z = w <= EMBED_W ? 1 : Math.max(1, Math.min(w / EMBED_W, (innerHeight - 160) / 600, 1.6));
+      section.style.setProperty("--z", z.toFixed(3));
+    }
+
+    /* 枠の高さは表示中の1枚に合わせる(他の1枚の高さに引きずられない) */
+    function fitHeight() {
+      const li = slides[active];
+      if (li) track.style.height = `${li.offsetHeight}px`;
+    }
+
+    function setActive(i: number) {
+      i = Math.max(0, Math.min(slides.length - 1, i));
+      if (i !== active) {
+        reset(slides[active]!);
+        active = i;
+      }
+      if (cur) cur.textContent = String(i + 1);
+      if (prev) prev.disabled = i === 0;
+      if (next) next.disabled = i === slides.length - 1;
+      dots.forEach((d, j) => (j === i ? d.setAttribute("aria-current", "true") : d.removeAttribute("aria-current")));
+      fitHeight();
+      ensureAround(i);
+    }
+
+    const smooth = (): ScrollBehavior => (matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth");
+    const goTo = (i: number) => track.scrollTo({ left: i * track.clientWidth, behavior: smooth() });
+    prev?.addEventListener("click", () => goTo(active - 1));
+    next?.addEventListener("click", () => goTo(active + 1));
+    for (const d of dots) d.addEventListener("click", () => goTo(Number(d.dataset.i)));
+    track.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+        e.preventDefault();
+        goTo(active + (e.key === "ArrowLeft" ? -1 : 1));
+      }
     });
 
-    /* 前後のボタン: カード1枚ぶん(幅 + すき間)ずつ動かす */
-    const step = () => {
-      const card = track.querySelector<HTMLElement>(".clip");
-      return card ? card.offsetWidth + parseFloat(getComputedStyle(track).columnGap || "0") : track.clientWidth;
-    };
-    const smooth = () => (matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth");
-    prev.addEventListener("click", () => track.scrollBy({ left: -step(), behavior: smooth() }));
-    next.addEventListener("click", () => track.scrollBy({ left: step(), behavior: smooth() }));
+    /* スワイプ・ボタンのどちらで動いても、止まった位置から表示中の1枚を決める */
+    let raf = 0;
+    track.addEventListener(
+      "scroll",
+      () => {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          const i = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
+          if (i !== active || !started) setActive(i);
+        });
+      },
+      { passive: true },
+    );
 
-    const update = () => {
-      const max = track.scrollWidth - track.clientWidth;
-      nav.hidden = max <= 1;
-      prev.disabled = track.scrollLeft <= 1;
-      next.disabled = track.scrollLeft >= max - 1;
-    };
-    track.addEventListener("scroll", update, { passive: true });
-    new ResizeObserver(update).observe(track);
-    update();
+    const ro = new ResizeObserver(() => {
+      fitZoom();
+      fitHeight();
+    });
+    ro.observe(track);
+    for (const li of slides) ro.observe(li);
+    fitZoom();
+    setActive(0);
+
+    /* この欄が画面に近づいたら、初めて X を読み込む */
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        io.disconnect();
+        started = true;
+        ensureAround(active);
+      },
+      { rootMargin: "300px 0px" },
+    );
+    io.observe(section);
   }
 </script>
 
 <style>
-  .clips { margin: 0 0 var(--sp-4); }
+  .clips { margin-top: var(--sp-5); }
   .clips-head {
     display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3);
     margin-bottom: var(--sp-3); border-bottom: 1px solid var(--c-glass-border-strong);
   }
   .clips-head h2 { margin: 0; border: none; }
-  .clips-nav { display: flex; gap: 6px; }
-  .clips-nav[hidden] { display: none; }
+  .clips-nav { display: flex; align-items: center; gap: 6px; }
+  .clips-count { margin-right: 6px; font-family: var(--font-mono); font-size: 12px; color: var(--c-text-muted); }
+  .clips-count b { color: var(--c-text-strong); font-weight: 500; }
   .clips-nav button {
-    width: 32px; height: 28px; padding: 0; font-size: 18px; line-height: 1;
+    width: 36px; height: 32px; padding: 0; font-size: 20px; line-height: 1;
     color: var(--c-text); background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius);
     cursor: pointer;
   }
   .clips-nav button:hover:not(:disabled) { border-color: var(--c-accent-dim); color: var(--c-accent); }
   .clips-nav button:disabled { opacity: 0.35; cursor: default; }
 
-  /* 横スライド。カードの幅は固定、高さは埋め込みに合わせて伸びる(隣のカードは伸びない) */
+  /* 1枚ずつの横スライド。枠の高さは表示中の1枚に合わせる(JS) */
   .clips-track {
-    --gap: 12px;
-    list-style: none; margin: 0; padding: 0 0 var(--sp-2);
-    display: flex; align-items: flex-start; gap: var(--gap);
-    overflow-x: auto; overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory; scrollbar-width: thin;
+    list-style: none; margin: 0; padding: 0;
+    display: flex; align-items: flex-start;
+    overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scrollbar-width: none;
+    transition: height 0.2s ease;
   }
+  .clips-track::-webkit-scrollbar { display: none; }
   .clips-track:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { .clips-track { transition: none; } }
   .clip {
-    flex: 0 0 calc((100% - 2 * var(--gap)) / 3);
-    min-width: 0;
-    scroll-snap-align: start;
-    background: var(--c-surface);
-    border: 1px solid var(--c-border);
-    border-radius: var(--radius);
-    overflow: hidden;
-  }
-  @media (max-width: 900px) { .clip { flex-basis: calc((100% - var(--gap)) / 2); } }
-  /* スマホは1枚ずつ。X の埋め込みは幅 250px より狭くならないので、のぞかせずに全幅を使う */
-  @media (max-width: 560px) {
-    .clip { flex-basis: 100%; }
+    flex: 0 0 100%; min-width: 0;
+    scroll-snap-align: start; scroll-snap-stop: always;
+    display: flex; flex-direction: column; align-items: center;
   }
 
-  .clip-top { display: flex; align-items: stretch; min-height: 118px; }
-  .clip-art { flex: none; width: 82px; display: block; overflow: hidden; }
-  .clip-art img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
-  .clip-art:hover img { filter: brightness(1.1); }
-  .clip-tx { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; }
-  .clip-title { font-size: 14px; font-weight: 700; line-height: 1.45; color: var(--c-text-strong); }
-  .clip-meta { display: flex; flex-wrap: wrap; gap: 2px 10px; font-size: 12px; color: var(--c-text-muted); }
+  /* 見出し(埋め込みと同じ幅にそろえる) */
+  .clip-cap {
+    display: flex; align-items: center; gap: 12px;
+    width: 100%; max-width: calc(550px * var(--z, 1));
+    margin-bottom: 10px;
+  }
+  .clip-art {
+    flex: none; width: 46px; height: 46px; overflow: hidden; display: block;
+    border: 1px solid var(--c-glass-border); border-radius: var(--radius);
+  }
+  .clip-art img { width: 100%; height: auto; display: block; transform: translateY(-6%); }
+  .clip-tx { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+  .clip-title { font-size: 16px; font-weight: 700; line-height: 1.4; color: var(--c-text-strong); }
+  .clip-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; font-size: 12.5px; color: var(--c-text-muted); }
   .clip-by { font-family: var(--font-mono); }
-  .clip-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-top: auto; padding-top: 6px; }
-  .clip-play {
-    display: inline-flex; flex-direction: column; align-items: flex-start; gap: 1px;
-    padding: 5px 12px; text-align: left; cursor: pointer;
-    color: var(--c-text-strong); background: var(--c-accent-bg); border: 1px solid var(--c-accent-dim); border-radius: var(--radius);
-  }
-  .clip-play:hover:not(:disabled) { border-color: var(--c-accent); }
-  .clip-play:disabled { cursor: progress; opacity: 0.6; }
-  .clip-play-main { font-size: 13px; font-weight: 700; }
-  .clip-play-sub { font-size: 10.5px; color: var(--c-text-muted); }
-  .clip[data-state="ready"] .clip-play { display: none; }
-  .clip-x { font-size: 12px; white-space: nowrap; }
+  .clip-x { white-space: nowrap; }
 
-  .clip-embed { padding: 0 8px 8px; }
-  .clip-embed[hidden] { display: none; }
-  @media (max-width: 560px) { .clip-embed { padding: 0 0 4px; } }
-  /* X の埋め込みは幅を決めて差し込むので、カードの幅からはみ出さないようにする */
-  .clip-embed :global(.twitter-tweet), .clip-embed :global(iframe) { max-width: 100% !important; margin: 0 auto !important; }
-  /* サイトは color-scheme: dark。埋め込みの中身と食い違うと iframe の角に白い下地が出るので、iframe だけ既定に戻す */
-  .clip-embed :global(iframe) { color-scheme: normal; }
-  .clip-embed :global(.clip-status) { margin: 8px 4px 0; font-size: 12.5px; color: var(--c-text-muted); }
+  /* 埋め込み。読み込み前・読み込み中は同じくらいの高さを取っておく */
+  .clip-embed {
+    width: 100%; max-width: calc(550px * var(--z, 1));
+    min-height: calc(480px * var(--z, 1));
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 12px;
+  }
+  .clip[data-state="ready"] .clip-embed { min-height: 0; background: none; border: none; display: block; }
+  /*
+   * X の埋め込みは幅 550px 上限なので、包みの div を X の幅(550px)で組んでから拡大率(--z)で拡大する。
+   * スマホ(--z が 1)は枠の幅に合わせて X が縮む。全画面にしたときは X が画面いっぱいに描く
+   */
+  .clip-embed :global(.clip-holder) { width: min(100%, 550px); margin: 0 auto; zoom: var(--z, 1); }
+  .clip-embed :global(.twitter-tweet) { margin: 0 auto !important; }
+  .clip-embed :global(iframe) {
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    /* サイトは color-scheme: dark。埋め込みの中身と食い違うと iframe の角に白い下地が出るので、iframe だけ既定に戻す */
+    color-scheme: normal;
+  }
+  .clip-embed :global(.clip-status) { margin: 0; padding: 16px; font-size: 13px; line-height: 1.9; text-align: center; color: var(--c-text-muted); }
+  .clip-embed :global(.clip-retry) {
+    margin: 6px 8px 0 0; padding: 4px 12px; font-size: 12.5px; cursor: pointer;
+    color: var(--c-text); background: var(--c-surface-2); border: 1px solid var(--c-border); border-radius: var(--radius);
+  }
+  .clip-embed :global(.clip-open) { font-size: 12.5px; }
+
+  .clips-dots { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px; margin-top: var(--sp-3); }
+  .clips-dot {
+    width: 28px; height: 20px; padding: 0; cursor: pointer; background: none; border: none;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .clips-dot::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c-border-strong); transition: width 0.2s; }
+  .clips-dot:hover::before { background: var(--c-text-muted); }
+  .clips-dot[aria-current="true"]::before { width: 20px; border-radius: 4px; background: var(--c-accent); }
+
+  /* スマホは枠の左右の余白を外して、埋め込みを少しでも広く出す(見出し類だけ余白を残す) */
+  @media (max-width: 560px) {
+    .clips { padding-inline: 0; }
+    .clips-head, .clip-cap { padding-inline: 14px; }
+    .clip-title { font-size: 14.5px; }
+    .clip-embed { min-height: 420px; }
+  }
 </style>

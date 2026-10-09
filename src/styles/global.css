@@ -15,6 +15,10 @@ html {
    */
   scrollbar-gutter: stable;
 }
+/* 埋め込み(X の動画など)を全画面にしている間は、確保した幅を外す。残すと右端に約15pxの帯が出る */
+html:has(:fullscreen) {
+  scrollbar-gutter: auto;
+}
 
 /* 見た目には出さないが支援技術には読ませる */
 .sr-only {
