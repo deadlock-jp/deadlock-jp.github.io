@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6763",
-  "upstreamCommit": "6763",
-  "generatedAt": "2026-10-08T14:00:12.210Z",
+  "clientVersion": "6766",
+  "upstreamCommit": "6766",
+  "generatedAt": "2026-10-09T13:57:37.848Z",
   "language": "koreana",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 618,
-    "citadel_heroes": 3555,
+    "citadel_heroes": 3556,
     "citadel_attributes": 1981,
     "citadel_gc": 216,
     "citadel_main": 5249
@@ -22123,6 +22123,11 @@
       "text": "모이 뿌리기",
       "group": "citadel_heroes",
       "hash": "9354c05f9e53"
+    },
+    "ability_baba_ultimate_2_desc": {
+      "text": "전방에 있는 대상들에게 <span class=\"highlight\">빵</span>을 뿌려 중첩되는 {g:citadel_inline_attribute:'Slow'} 효과를 적용합니다.<br><br>정신 집중이 끝나면 비둘기 떼가 각 대상을 공격해 {g:citadel_inline_attribute:'SpiritDamage'}를 입히고 저주를 걸어 <span class=\"highlight\">비둘기</span>로 변신시킵니다. 대상에게 묻은 빵이 많을수록 대상이 입는 피해와 변신 지속 시간이 증가합니다.",
+      "group": "citadel_heroes",
+      "hash": "d352099438d2"
     },
     "ability_baba_ultimate_2_t1_desc": {
       "text": "시전 범위 +{s:AbilityCastRange}m 증가<br>최대 둔화 +{s:BabaUlt2MaxSlow}% 증가",

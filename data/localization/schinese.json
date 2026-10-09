@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6763",
-  "upstreamCommit": "6763",
-  "generatedAt": "2026-10-08T14:00:12.251Z",
+  "clientVersion": "6766",
+  "upstreamCommit": "6766",
+  "generatedAt": "2026-10-09T13:57:37.878Z",
   "language": "schinese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 618,
-    "citadel_heroes": 3553,
+    "citadel_heroes": 3555,
     "citadel_attributes": 1981,
     "citadel_gc": 216,
     "citadel_main": 5248
@@ -21599,6 +21599,11 @@
       "group": "citadel_heroes",
       "hash": "ea2281904ca8"
     },
+    "ability_baba_bubbling_brew_desc": {
+      "text": "织出一条蜿蜒的线，跟随准星移动，随后沿路径爆裂，造成{g:citadel_inline_attribute:'SpiritDamage'}并吸取敌人的{g:citadel_inline_attribute:'Spirit'}，对婆婆的效果有所提升。<br><br>持有吸取的{g:citadel_inline_attribute:'Spirit'}期间，婆婆的每颗子弹都会造成{g:citadel_inline_attribute:'BonusSpiritDamage'}。",
+      "group": "citadel_heroes",
+      "hash": "5cdf20438c9a"
+    },
     "ability_baba_bubbling_brew_t2_desc": {
       "text": "{s:AbilityCooldown}秒冷却时间<br>+{s:DebuffDuration}秒减益持续时间",
       "group": "citadel_heroes",
@@ -21960,9 +21965,9 @@
       "hash": "bd717978a961"
     },
     "ability_header_baba_brew_fire": {
-      "text": "沉默之茶：",
+      "text": "沸腾之茶：",
       "group": "citadel_heroes",
-      "hash": "bd717978a961"
+      "hash": "eb2612184f68"
     },
     "BabaBrewBurnDPS_label": {
       "text": "每秒燃烧伤害",
@@ -22113,6 +22118,11 @@
       "text": "喂鸟",
       "group": "citadel_heroes",
       "hash": "837fba93089a"
+    },
+    "ability_baba_ultimate_2_desc": {
+      "text": "用<span class=\"highlight\">面包</span>覆盖前方的目标，施加可叠加的{g:citadel_inline_attribute:'Slow'}。<br><br>持续施法结束时一群鸽子会轰炸目标，造成{g:citadel_inline_attribute:'SpiritDamage'}并把每个目标变成一只<span class=\"highlight\">鸽子</span>，根据面包数量会提升伤害和持续时间。",
+      "group": "citadel_heroes",
+      "hash": "7b10bf7cf7d1"
     },
     "ability_baba_ultimate_2_t1_desc": {
       "text": "+{s:AbilityCastRange}米施法距离<br>+{s:BabaUlt2MaxSlow}%最大减速",
