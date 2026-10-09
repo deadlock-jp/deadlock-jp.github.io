@@ -9,6 +9,7 @@ import ItemHoverCard from "../components/ItemHoverCard.astro";
 import BalanceChips from "../components/BalanceChips.astro";
 import AbilityHoverCards from "../components/AbilityHoverCards.astro";
 import MapPreview from "../components/MapPreview.astro";
+import PlayClips from "../components/PlayClips.astro";
 import {
   releasedHeroes,
   shopItems,
@@ -96,6 +97,9 @@ const balanceAbilityKeys = [
       <span class="bg-link">はじめての Deadlock →</span>
     </a>
   )}
+
+  {/* X の投稿の紹介(日本のプレイヤー向けなので日本語版のみ。押されるまで X のものは何も読まない) */}
+  {lang === "ja" && <PlayClips />}
 
   <section class="block panel first">
     <h2>

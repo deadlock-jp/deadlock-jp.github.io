@@ -1,0 +1,259 @@
+---
+/**
+ * トップページの「プレイ動画」。X の投稿を横スライドのカードで紹介する(日本語版のトップだけ)。
+ *
+ * 最初の表示では X のものを何も読まない(ページの速さと、閲覧者のデータを X に送らないため)。
+ * カードの「再生する」が押されたときに初めて widgets.js を1回だけ読み、そのカードの中に
+ * X の公式の埋め込みを作る(dnt: true = X に閲覧の追跡に使わせない指定)。
+ * 絵はサイトに既にあるものだけを使う。ヒーローの縦長カードはトップのヒーロー一覧と同じ URL なので、
+ * 追加の転送は起きない(X のサムネイルは保存も表示もしない)。
+ * 一覧は data/featured-clips.json(src/lib/featuredClips.ts)。空ならセクションごと出さない。
+ */
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+import { featuredClips } from "../lib/featuredClips.ts";
+import { t } from "../lib/data.ts";
+import { thumbAt } from "../lib/thumbs.ts";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+const clips = featuredClips().map((c) => {
+  if (!c.hero) return { ...c, heroView: null };
+  const key = c.hero.key.replace(/^hero_/, "");
+  const rel = `images/heroes/card/${key}.webp`;
+  return {
+    ...c,
+    heroView: {
+      id: c.hero.id,
+      name: t(c.hero.nameToken, c.hero.key),
+      art: existsSync(join(process.cwd(), "public", rel)) ? `${base}/${rel}` : null,
+      // トップのヒーロー一覧と同じ絵(スマホは同じ縮小版)。同じ URL なので読み直しにならない
+      artSmall: ((r) => (r ? `${base}/${r}` : null))(thumbAt(rel, 210)),
+    },
+  };
+});
+---
+
+{clips.length > 0 && (
+  <section class="clips panel" aria-labelledby="clips-h">
+    <div class="clips-head">
+      <h2 id="clips-h">プレイ動画</h2>
+      <div class="clips-nav" hidden>
+        <button type="button" class="clips-prev" aria-label="前の動画へ" aria-controls="clips-track">‹</button>
+        <button type="button" class="clips-next" aria-label="次の動画へ" aria-controls="clips-track">›</button>
+      </div>
+    </div>
+    <ul class="clips-track" id="clips-track" tabindex="0" aria-label="プレイ動画の一覧">
+      {clips.map((c) => (
+        <li class="clip" data-clip-id={c.id} data-state="idle">
+          <div class="clip-top">
+            {c.heroView?.art && (
+              <a class="clip-art" href={`${base}/heroes/${c.heroView.id}/`} tabindex="-1" aria-hidden="true">
+                <picture>
+                  {c.heroView.artSmall && <source media="(max-width: 560px)" srcset={c.heroView.artSmall} type="image/webp" />}
+                  <img src={c.heroView.art} alt="" width="280" height="380" loading="lazy" />
+                </picture>
+              </a>
+            )}
+            <div class="clip-tx">
+              <span class="clip-title">{c.title}</span>
+              <span class="clip-meta">
+                <span class="clip-by">{c.handle}</span>
+                {c.heroView && (
+                  <a class="clip-hero" href={`${base}/heroes/${c.heroView.id}/`} data-herocard={c.heroView.id}>{c.heroView.name}</a>
+                )}
+              </span>
+              <span class="clip-actions">
+                <button type="button" class="clip-play">
+                  <span class="clip-play-main">▶ 再生する</span>
+                  <span class="clip-play-sub">(X の投稿を読み込みます)</span>
+                </button>
+                <a class="clip-x" href={c.url} target="_blank" rel="noopener">X で見る ↗</a>
+              </span>
+            </div>
+          </div>
+          <div class="clip-embed" hidden></div>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}
+
+<script>
+  const WIDGETS_SRC = "https://platform.twitter.com/widgets.js";
+
+  interface Twttr {
+    widgets: {
+      createTweet(id: string, el: HTMLElement, opts: Record<string, unknown>): Promise<HTMLElement | undefined>;
+    };
+  }
+
+  /* widgets.js は最初に押されたときに1回だけ読む。読めなかったときは次に押されたら読み直す */
+  let loader: Promise<Twttr> | null = null;
+  function loadWidgets(): Promise<Twttr> {
+    const w = window as unknown as { twttr?: Twttr };
+    if (w.twttr?.widgets) return Promise.resolve(w.twttr);
+    loader ??= new Promise<Twttr>((resolve, reject) => {
+      const s = document.createElement("script");
+      s.src = WIDGETS_SRC;
+      s.async = true;
+      s.onload = () => (w.twttr?.widgets ? resolve(w.twttr) : reject(new Error("twttr")));
+      s.onerror = () => reject(new Error("widgets.js"));
+      document.head.append(s);
+    }).catch((e) => {
+      loader = null;
+      throw e;
+    });
+    return loader;
+  }
+
+  function within<T>(p: Promise<T>, ms: number): Promise<T> {
+    return Promise.race([p, new Promise<T>((_, reject) => setTimeout(() => reject(new Error("timeout")), ms))]);
+  }
+
+  function status(text: string, url?: string): HTMLElement {
+    const p = document.createElement("p");
+    p.className = "clip-status";
+    p.append(text);
+    if (url) {
+      const a = document.createElement("a");
+      a.href = url;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.textContent = "X で見る";
+      p.append(a, " から開いてください。");
+    }
+    return p;
+  }
+
+  async function play(li: HTMLElement) {
+    if (li.dataset.state === "loading" || li.dataset.state === "ready") return;
+    const id = li.dataset.clipId!;
+    const url = li.querySelector<HTMLAnchorElement>(".clip-x")!.href;
+    const embed = li.querySelector<HTMLElement>(".clip-embed")!;
+    const btn = li.querySelector<HTMLButtonElement>(".clip-play")!;
+    li.dataset.state = "loading";
+    btn.disabled = true;
+    embed.hidden = false;
+    embed.replaceChildren(status("X から読み込み中…"));
+    try {
+      const twttr = await within(loadWidgets(), 15000);
+      const holder = document.createElement("div");
+      embed.append(holder);
+      const el = await within(
+        twttr.widgets.createTweet(id, holder, { theme: "dark", dnt: true, lang: "ja", align: "center", conversation: "none" }),
+        20000,
+      );
+      if (!el) throw new Error("not found");
+      embed.replaceChildren(holder);
+      li.dataset.state = "ready";
+    } catch {
+      embed.replaceChildren(status("読み込めませんでした。", url));
+      li.dataset.state = "error";
+      btn.disabled = false;
+    }
+  }
+
+  for (const section of document.querySelectorAll<HTMLElement>(".clips")) {
+    const track = section.querySelector<HTMLElement>(".clips-track")!;
+    const nav = section.querySelector<HTMLElement>(".clips-nav")!;
+    const prev = section.querySelector<HTMLButtonElement>(".clips-prev")!;
+    const next = section.querySelector<HTMLButtonElement>(".clips-next")!;
+
+    track.addEventListener("click", (e) => {
+      const btn = (e.target as HTMLElement).closest(".clip-play");
+      if (btn) play(btn.closest<HTMLElement>(".clip")!);
+    });
+
+    /* 前後のボタン: カード1枚ぶん(幅 + すき間)ずつ動かす */
+    const step = () => {
+      const card = track.querySelector<HTMLElement>(".clip");
+      return card ? card.offsetWidth + parseFloat(getComputedStyle(track).columnGap || "0") : track.clientWidth;
+    };
+    const smooth = () => (matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth");
+    prev.addEventListener("click", () => track.scrollBy({ left: -step(), behavior: smooth() }));
+    next.addEventListener("click", () => track.scrollBy({ left: step(), behavior: smooth() }));
+
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      nav.hidden = max <= 1;
+      prev.disabled = track.scrollLeft <= 1;
+      next.disabled = track.scrollLeft >= max - 1;
+    };
+    track.addEventListener("scroll", update, { passive: true });
+    new ResizeObserver(update).observe(track);
+    update();
+  }
+</script>
+
+<style>
+  .clips { margin: 0 0 var(--sp-4); }
+  .clips-head {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3);
+    margin-bottom: var(--sp-3); border-bottom: 1px solid var(--c-glass-border-strong);
+  }
+  .clips-head h2 { margin: 0; border: none; }
+  .clips-nav { display: flex; gap: 6px; }
+  .clips-nav[hidden] { display: none; }
+  .clips-nav button {
+    width: 32px; height: 28px; padding: 0; font-size: 18px; line-height: 1;
+    color: var(--c-text); background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius);
+    cursor: pointer;
+  }
+  .clips-nav button:hover:not(:disabled) { border-color: var(--c-accent-dim); color: var(--c-accent); }
+  .clips-nav button:disabled { opacity: 0.35; cursor: default; }
+
+  /* 横スライド。カードの幅は固定、高さは埋め込みに合わせて伸びる(隣のカードは伸びない) */
+  .clips-track {
+    --gap: 12px;
+    list-style: none; margin: 0; padding: 0 0 var(--sp-2);
+    display: flex; align-items: flex-start; gap: var(--gap);
+    overflow-x: auto; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scrollbar-width: thin;
+  }
+  .clips-track:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 2px; }
+  .clip {
+    flex: 0 0 calc((100% - 2 * var(--gap)) / 3);
+    min-width: 0;
+    scroll-snap-align: start;
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  @media (max-width: 900px) { .clip { flex-basis: calc((100% - var(--gap)) / 2); } }
+  /* スマホは1枚ずつ。X の埋め込みは幅 250px より狭くならないので、のぞかせずに全幅を使う */
+  @media (max-width: 560px) {
+    .clip { flex-basis: 100%; }
+  }
+
+  .clip-top { display: flex; align-items: stretch; min-height: 118px; }
+  .clip-art { flex: none; width: 82px; display: block; overflow: hidden; }
+  .clip-art img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .clip-art:hover img { filter: brightness(1.1); }
+  .clip-tx { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; }
+  .clip-title { font-size: 14px; font-weight: 700; line-height: 1.45; color: var(--c-text-strong); }
+  .clip-meta { display: flex; flex-wrap: wrap; gap: 2px 10px; font-size: 12px; color: var(--c-text-muted); }
+  .clip-by { font-family: var(--font-mono); }
+  .clip-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-top: auto; padding-top: 6px; }
+  .clip-play {
+    display: inline-flex; flex-direction: column; align-items: flex-start; gap: 1px;
+    padding: 5px 12px; text-align: left; cursor: pointer;
+    color: var(--c-text-strong); background: var(--c-accent-bg); border: 1px solid var(--c-accent-dim); border-radius: var(--radius);
+  }
+  .clip-play:hover:not(:disabled) { border-color: var(--c-accent); }
+  .clip-play:disabled { cursor: progress; opacity: 0.6; }
+  .clip-play-main { font-size: 13px; font-weight: 700; }
+  .clip-play-sub { font-size: 10.5px; color: var(--c-text-muted); }
+  .clip[data-state="ready"] .clip-play { display: none; }
+  .clip-x { font-size: 12px; white-space: nowrap; }
+
+  .clip-embed { padding: 0 8px 8px; }
+  .clip-embed[hidden] { display: none; }
+  @media (max-width: 560px) { .clip-embed { padding: 0 0 4px; } }
+  /* X の埋め込みは幅を決めて差し込むので、カードの幅からはみ出さないようにする */
+  .clip-embed :global(.twitter-tweet), .clip-embed :global(iframe) { max-width: 100% !important; margin: 0 auto !important; }
+  /* サイトは color-scheme: dark。埋め込みの中身と食い違うと iframe の角に白い下地が出るので、iframe だけ既定に戻す */
+  .clip-embed :global(iframe) { color-scheme: normal; }
+  .clip-embed :global(.clip-status) { margin: 8px 4px 0; font-size: 12.5px; color: var(--c-text-muted); }
+</style>

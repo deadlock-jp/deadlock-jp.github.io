@@ -1,0 +1,46 @@
+{
+  "//": "トップページの「プレイ動画」に出す X の投稿(手で管理する)。並びは added の新しい順(同じ日付ならこのファイルの順)で、最大10件。title はこちらで付ける短い見出しで、元の投稿文の訳や書き写しにはしない。hero はヒーローの内部キー(hero_xxx。無ければ省く)。投稿者から削除の依頼があれば、その項目を消す。読み込みと検査は src/lib/featuredClips.ts",
+  "clips": [
+    {
+      "url": "https://x.com/JumpStart_GG/status/2106063472614101390",
+      "handle": "@JumpStart_GG",
+      "hero": "hero_priest",
+      "title": "魔呪の狩猟罠に施設の攻撃を引き受けさせる",
+      "added": "2026-10-10"
+    },
+    {
+      "url": "https://x.com/IntelDeadlock/status/2107581864781488499",
+      "handle": "@IntelDeadlock",
+      "hero": "hero_baba",
+      "title": "おばあちゃんの長い脚で罪人の供物をまとめて狩る",
+      "added": "2026-10-10"
+    },
+    {
+      "url": "https://x.com/savbelyakov/status/2068467041556635946",
+      "handle": "@savbelyakov",
+      "title": "ジップラインから降りるときのダッシュの向き",
+      "added": "2026-10-10"
+    },
+    {
+      "url": "https://x.com/weenockss/status/2108389192732725659",
+      "handle": "@weenockss",
+      "hero": "hero_unicorn",
+      "title": "ロープを使った立体的な移動",
+      "added": "2026-10-10"
+    },
+    {
+      "url": "https://x.com/ladderglide/status/2107596505741996416",
+      "handle": "@ladderglide",
+      "hero": "hero_baba",
+      "title": "おばあちゃんの長い脚でミッドを一気に横断",
+      "added": "2026-10-10"
+    },
+    {
+      "url": "https://x.com/lomeine/status/2102263103325077896",
+      "handle": "@lomeine",
+      "hero": "hero_shiv",
+      "title": "銃で戦うシヴ",
+      "added": "2026-10-10"
+    }
+  ]
+}
