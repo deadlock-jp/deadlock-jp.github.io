@@ -340,6 +340,9 @@ export const zhCn: Dict = {
     farming: "发育",
     lategame: "后期",
     controls: "角色操作",
+    newHero: "新英雄",
+    released: "上线",
+    heroPage: "英雄页面 →",
   },
   heroes: {
     title: "英雄列表",

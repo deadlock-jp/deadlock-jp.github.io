@@ -18,6 +18,8 @@ import {
   ADJUSTMENT_LABEL,
   patchNotes,
   noteTitle,
+  recentlyReleasedHeroes,
+  heroTags,
 } from "../lib/data.ts";
 import { balanceUpdates } from "../lib/balance.ts";
 import { smallImage, thumbAt } from "../lib/thumbs.ts";
@@ -39,6 +41,19 @@ const heroes = releasedHeroes().map((h) => {
     verticalSmall: ((r) => (r ? `${base}/${r}` : null))(thumbAt(verticalRel, 210)),
   };
 });
+
+/* 最近解禁されたヒーロー(解禁から14日間・新しい順に3体まで)。カードの絵が無いヒーローは出さない */
+const newHeroes = recentlyReleasedHeroes(14)
+  .map(({ hero, date }) => {
+    const key = hero.key.replace(/^hero_/, "");
+    const img = (dir: string) =>
+      existsSync(join(process.cwd(), "public", `images/heroes/${dir}/${key}.webp`)) ? `${base}/images/heroes/${dir}/${key}.webp` : null;
+    const card = img("card");
+    return { hero, date, name: t(hero.nameToken, hero.key), tags: heroTags(hero), card, gloat: img("gloat") ?? card };
+  })
+  .filter((n) => n.card)
+  .slice(0, 3);
+const [newFeature, ...newOthers] = newHeroes;
 
 const slots = ["WeaponMod", "Armor", "Tech"] as const;
 const items = shopItems();
@@ -71,6 +86,30 @@ const balanceAbilityKeys = [
     <span class="eyebrow">Unofficial Database</span>
     <h1>{T.top.h1}</h1>
   </div>
+
+  {newFeature && (
+    <section class="newhero" data-count={newHeroes.length} aria-label={T.top.newHero}>
+      <a class="nh-feature" href={`${base}${langPath(`/heroes/${newFeature.hero.id}/`)}`} style={`--nh-bg: url(${newFeature.card})`}>
+        <img class="nh-art" src={newFeature.gloat} alt="" width="280" height="380" />
+        <span class="nh-tx">
+          <span class="nh-eyebrow">{T.top.newHero}</span>
+          <span class="nh-name">{newFeature.name}</span>
+          {newFeature.tags.length > 0 && <span class="nh-tags">{newFeature.tags.map((g) => <span>{g}</span>)}</span>}
+          <span class="nh-date"><time datetime={newFeature.date}>{newFeature.date}</time> {T.top.released}</span>
+          <span class="nh-link">{T.top.heroPage}</span>
+        </span>
+      </a>
+      {newOthers.map((n) => (
+        <a class="nh-sub" href={`${base}${langPath(`/heroes/${n.hero.id}/`)}`} data-herocard={n.hero.id}>
+          <img src={n.card} alt="" width="280" height="380" loading="lazy" />
+          <span class="nh-subtx">
+            <span class="nh-subname">{n.name}</span>
+            <span class="nh-date"><time datetime={n.date}>{n.date}</time> {T.top.released}</span>
+          </span>
+        </a>
+      ))}
+    </section>
+  )}
 
   {latestNote && (
     <a class="latest panel" href={`${base}${langPath(`/patch-notes/${latestNote.date}/`)}`}>
@@ -236,6 +275,48 @@ const balanceAbilityKeys = [
     @media (max-width: 560px) {
       .beginner { flex-wrap: wrap; }
       .bg-link { width: 100%; text-align: right; }
+    }
+
+    /* ---- 最近解禁されたヒーロー(見出しのすぐ下) ---- */
+    .newhero { display: grid; grid-template-columns: minmax(0, 2fr) repeat(2, minmax(0, 1fr)); gap: var(--sp-3); margin: 0 0 var(--sp-4); }
+    .newhero[data-count="1"] { grid-template-columns: minmax(0, 1fr); }
+    .newhero[data-count="2"] { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+    .nh-feature, .nh-sub {
+      position: relative; overflow: hidden; border-radius: var(--radius-lg);
+      border: 1px solid var(--c-glass-border-strong); color: inherit; text-decoration: none;
+    }
+    .nh-feature { display: flex; align-items: stretch; min-height: 220px; background: var(--c-surface); isolation: isolate; }
+    /* 背景はそのヒーローのカードの絵を大きくぼかしたもの(ヒーローの色がそのまま帯の色になる) */
+    .nh-feature::before {
+      content: ""; position: absolute; inset: -40px; z-index: -1;
+      background: var(--nh-bg) center 30% / cover no-repeat;
+      filter: blur(28px) saturate(1.3) brightness(0.45);
+    }
+    .nh-art { flex: none; width: 42%; max-width: 230px; height: auto; min-height: 100%; align-self: stretch; object-fit: cover; object-position: center top;
+      -webkit-mask-image: linear-gradient(to right, #000 70%, transparent); mask-image: linear-gradient(to right, #000 70%, transparent); }
+    .nh-tx { display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: var(--sp-4) var(--sp-5); min-width: 0; }
+    .nh-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: var(--c-accent); }
+    .nh-name { font-family: var(--font-display); font-size: clamp(26px, 3.4vw, 40px); font-weight: 700; line-height: 1.1; color: var(--c-text-strong); text-shadow: 0 2px 14px rgb(0 0 0 / 0.6); }
+    .nh-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .nh-tags span { font-size: 12px; padding: 2px 10px; border-radius: 999px; background: rgb(0 0 0 / 0.35); border: 1px solid rgb(255 255 255 / 0.18); color: var(--c-text); }
+    .nh-date { font-size: 12px; color: var(--c-text-muted); }
+    .nh-date time { font-family: var(--font-mono); }
+    .nh-link { margin-top: 4px; font-size: 13px; color: var(--c-accent); }
+    .nh-feature:hover { border-color: var(--c-accent-dim); text-decoration: none; }
+    .nh-feature:hover .nh-link { color: var(--c-accent-hover); }
+    .nh-sub { display: block; background: var(--c-surface); }
+    .nh-sub img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; transition: transform 0.25s; }
+    .nh-subtx { position: absolute; inset: auto 0 0; display: flex; flex-direction: column; gap: 2px; padding: 28px var(--sp-3) var(--sp-2); background: linear-gradient(transparent, rgb(0 0 0 / 0.85)); }
+    .nh-subname { font-size: 16px; font-weight: 700; color: var(--c-text-strong); }
+    .nh-sub:hover { border-color: var(--c-accent-dim); text-decoration: none; }
+    .nh-sub:hover img { transform: scale(1.04); }
+    @media (max-width: 720px) {
+      .newhero, .newhero[data-count="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .nh-feature { grid-column: 1 / -1; min-height: 180px; }
+      .nh-art { width: 38%; }
+      .nh-tx { padding: var(--sp-3) var(--sp-4); }
+      .nh-sub { aspect-ratio: 1 / 1; }
+      .nh-sub img { object-position: center 35%; }
     }
 
     /* 最新アップデートの入口(トップの見出しのすぐ下) */

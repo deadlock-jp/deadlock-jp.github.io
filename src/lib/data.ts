@@ -1,6 +1,6 @@
 /** data/snapshots/<version>/*.json の読み込みと、表示名の解決 */
 
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import updatesJson from "../../data/updates.json" with { type: "json" };
 import heroNotesJson from "../../data/hero-notes.json" with { type: "json" };
@@ -465,6 +465,43 @@ export function releasedHeroes(): Hero[] {
 }
 
 /**
+ * 最近解禁されたヒーロー(新しい順)。トップページの告知に使う。
+ * 解禁日は「released が初めて true になったスナップショット」の抽出日時(meta.json の
+ * extractedAt)を日本時間の日付にしたもの。手で日付を書かずに済み、取り込むたびに入れ替わる。
+ * いちばん古いスナップショットで既に解禁済みのヒーローは解禁日が分からないので対象外。
+ * 表示する期間はビルドした時点から数える(本番は6時間おきにビルドされるので、自然に消える)。
+ */
+export interface RecentHero {
+  hero: Hero;
+  /** YYYY-MM-DD(日本時間) */
+  date: string;
+}
+export function recentlyReleasedHeroes(days = 14, now = new Date()): RecentHero[] {
+  const versions = readdirSync(join(DATA_DIR, "snapshots"))
+    .filter((v) => existsSync(join(DATA_DIR, "snapshots", v, "heroes.json")))
+    .sort((a, b) => Number(a) - Number(b));
+  const firstSeen = new Map<number, string>();
+  versions.forEach((v, i) => {
+    const dir = join(DATA_DIR, "snapshots", v);
+    const heroes = Object.values(readJson<HeroesFile>(join(dir, "heroes.json")).heroes);
+    const at = readJson<{ extractedAt?: string }>(join(dir, "meta.json")).extractedAt;
+    for (const h of heroes) {
+      if (!h.released || firstSeen.has(h.id)) continue;
+      firstSeen.set(h.id, i === 0 || !at ? "" : at);
+    }
+  });
+  const jstDate = (iso: string) => new Date(Date.parse(iso) + 9 * 3600_000).toISOString().slice(0, 10);
+  const since = now.getTime() - days * 86400_000;
+  return releasedHeroes()
+    .flatMap((hero) => {
+      const at = firstSeen.get(hero.id);
+      return at && Date.parse(at) >= since ? [{ hero, date: jstDate(at), at }] : [];
+    })
+    .sort((a, b) => b.at.localeCompare(a.at))
+    .map(({ hero, date }) => ({ hero, date }));
+}
+
+/**
  * ヒーロータグ(ゲーム内ヒーローセレクトの3語)。
  * トークンは citadel_heroes の Citadel_<名前>_HeroTag_1..3。
  * <名前> はキー由来のコードネームだったり表示名だったりで規則が一定しないため、
@@ -481,6 +518,9 @@ const HERO_TAG_BASE: Record<string, string> = {
   hero_priest: "Priest", hero_frank: "Frank", hero_bookworm: "Bookworm", hero_doorman: "Doorman",
   hero_punkgoat: "Punkgoat", hero_necro: "Necro", hero_fencer: "Fencer", hero_familiar: "Familiar",
   hero_werewolf: "Werewolf", hero_unicorn: "Unicorn",
+  /* 2026-09-29「眠らない街」の新ヒーロー(解禁は 10/3〜 順次) */
+  hero_ratking: "Ratking", hero_baba: "Baba", hero_chessmaster: "Chessmaster",
+  hero_deadpack: "Deadpack", hero_artist: "Artist", hero_nurse: "Nurse",
 };
 export function heroTags(hero: Hero): string[] {
   const base = HERO_TAG_BASE[hero.key];

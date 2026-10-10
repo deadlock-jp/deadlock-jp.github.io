@@ -360,6 +360,10 @@ export const ja = {
     farming: "ファーミング",
     lategame: "終盤",
     controls: "キャラクターコントロール",
+    /** 最近解禁されたヒーローの告知(解禁から14日間) */
+    newHero: "新ヒーロー",
+    released: "解禁",
+    heroPage: "ヒーローのページ →",
   },
   /** ヒーロー一覧(src/pages/heroes/index.astro) */
   heroes: {

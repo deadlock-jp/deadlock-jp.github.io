@@ -342,6 +342,9 @@ export const ko: Dict = {
     farming: "파밍",
     lategame: "후반",
     controls: "캐릭터 조작",
+    newHero: "신규 영웅",
+    released: "출시",
+    heroPage: "영웅 페이지 →",
   },
   heroes: {
     title: "영웅 목록",

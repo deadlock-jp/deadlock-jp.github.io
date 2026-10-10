@@ -340,6 +340,9 @@ export const en: Dict = {
     farming: "Farming",
     lategame: "Late Game",
     controls: "Character Controls",
+    newHero: "New Hero",
+    released: "Released",
+    heroPage: "Hero page →",
   },
   heroes: {
     title: "Heroes",
