@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6766",
-  "upstreamCommit": "6766",
-  "generatedAt": "2026-10-09T13:57:37.753Z",
+  "clientVersion": "6774",
+  "upstreamCommit": "6774",
+  "generatedAt": "2026-10-10T02:37:44.609Z",
   "language": "japanese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 618,
     "citadel_heroes": 3556,
-    "citadel_attributes": 1981,
+    "citadel_attributes": 1980,
     "citadel_gc": 216,
     "citadel_main": 5248
   },
@@ -25710,11 +25710,6 @@
       "hash": "4345cb1fa278"
     },
     "TechArmorDamageReduction_Label": {
-      "text": "スピリット耐性",
-      "group": "citadel_attributes",
-      "hash": "4244747c7864"
-    },
-    "TechArmorDamageReduction_label": {
       "text": "スピリット耐性",
       "group": "citadel_attributes",
       "hash": "4244747c7864"

@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6766",
-  "upstreamCommit": "6766",
-  "generatedAt": "2026-10-09T13:57:37.810Z",
+  "clientVersion": "6774",
+  "upstreamCommit": "6774",
+  "generatedAt": "2026-10-10T02:37:44.650Z",
   "language": "English",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 622,
-    "citadel_heroes": 3565,
-    "citadel_attributes": 2013,
-    "citadel_gc": 216,
-    "citadel_main": 5269
+    "citadel_heroes": 3655,
+    "citadel_attributes": 2012,
+    "citadel_gc": 218,
+    "citadel_main": 5273
   },
   "tokens": {
     "hero_vampire:n": {
@@ -22319,6 +22319,446 @@
       "group": "citadel_heroes",
       "hash": "4345cb1fa278"
     },
+    "citadel_weapon_chessmaster_set": {
+      "text": "Alekhine's Gun",
+      "group": "citadel_heroes",
+      "hash": "f9712231c481"
+    },
+    "ability_chessmaster_placepawn": {
+      "text": "Setup Pawn",
+      "group": "citadel_heroes",
+      "hash": "f207fa0b95b3"
+    },
+    "ability_chessmaster_movechesspiece": {
+      "text": "Move Piece",
+      "group": "citadel_heroes",
+      "hash": "188b303cca3c"
+    },
+    "ability_chessmaster_movechesspiece_desc": {
+      "text": "<span class=\"diminish\">Move ({g:citadel_binding:'ADS'}):</span> Select a <span class=\"highlight\">chess piece</span> and move it to a target location, triggering effects based on the type of piece.<br><br> Move Piece has a unique cooldown per target.",
+      "group": "citadel_heroes",
+      "hash": "9c868bdabb87"
+    },
+    "ability_chessmaster_confirm_move_tip": {
+      "text": "Move",
+      "group": "citadel_heroes",
+      "hash": "76cdb9507216"
+    },
+    "ability_chessmaster_cancel_move_tip": {
+      "text": "Cancel",
+      "group": "citadel_heroes",
+      "hash": "77dfd2135f4d"
+    },
+    "ability_chessmaster_movechesspiece/moveally": {
+      "text": "Move Piece",
+      "group": "citadel_heroes",
+      "hash": "188b303cca3c"
+    },
+    "MoveDistance_postvalue_label": {
+      "text": "Move Distance",
+      "group": "citadel_heroes",
+      "hash": "677604e935ff"
+    },
+    "MoveDistance_label": {
+      "text": "Move Distance",
+      "group": "citadel_heroes",
+      "hash": "677604e935ff"
+    },
+    "MoveDistance_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "SelfMoveDistance_postvalue_label": {
+      "text": "King Move Distance",
+      "group": "citadel_heroes",
+      "hash": "f43af051b787"
+    },
+    "SelfMoveDistance_label": {
+      "text": "King Move Distance",
+      "group": "citadel_heroes",
+      "hash": "f43af051b787"
+    },
+    "SelfMoveDistance_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "ability_header_on_move": {
+      "text": "On Move:",
+      "group": "citadel_heroes",
+      "hash": "c98e9dc675bb"
+    },
+    "AbilityButtonHint_MovePieceConfirm": {
+      "text": "Complete Move",
+      "group": "citadel_heroes",
+      "hash": "8238d3258306"
+    },
+    "AbilityButtonHint_MovePieceCancel": {
+      "text": "Takeback",
+      "group": "citadel_heroes",
+      "hash": "abc71672cbc7"
+    },
+    "ability_chessmaster_movechesspiece/movechesspiece": {
+      "text": "Advancing",
+      "group": "citadel_heroes",
+      "hash": "1b1bac5e02dc"
+    },
+    "ability_chessmaster_throwbishop": {
+      "text": "Setup Bishop",
+      "group": "citadel_heroes",
+      "hash": "0a1ae2366072"
+    },
+    "ability_chessmaster_throwbishop_trigger": {
+      "text": "Setup Bishop",
+      "group": "citadel_heroes",
+      "hash": "0a1ae2366072"
+    },
+    "ability_chessmaster_throwbishop_desc": {
+      "text": "Create a <span class=\"highlight\">bishop</span> that remains in place indefinitely. <br><br><span class=\"diminish\">Move ({g:citadel_binding:'ADS'}):</span> Moves the bishop, applying a fading {g:citadel_inline_attribute:'Slow'} and dealing {g:citadel_inline_attribute:'SpiritDamage'} to enemies it passes through. After a delay, activates diagonal squares that deal additional {g:citadel_inline_attribute:'SpiritDamage'} when stepped on.<br><br><span class=\"diminish\">Re-activate to recall all bishops, ending the ability.</span>",
+      "group": "citadel_heroes",
+      "hash": "929689b556e0"
+    },
+    "ability_chessmaster_throwbishop_t1_desc": {
+      "text": "+{s:MoveDistance}m Move Distance<br>+{s:FadingSlowPercent}% Fading Slow",
+      "group": "citadel_heroes",
+      "hash": "4085c7d8854f"
+    },
+    "ability_chessmaster_throwbishop_t2_desc": {
+      "text": "<span class=\"highlight\">+{s:MaxPieces}</span> Max Pieces<br>Can Recast within {s:RecastWindow}s",
+      "group": "citadel_heroes",
+      "hash": "89d758ed585d"
+    },
+    "ability_chessmaster_throwbishop_t3_desc": {
+      "text": "+{s:TileSteps} Square Range<br>Squares reduce Spirit Resist by {s:TechArmorDamageReductionPerStack}%, stacking {s:MaxStacks} times",
+      "group": "citadel_heroes",
+      "hash": "1eb297ca8167"
+    },
+    "ability_chessmaster_throwbishop_dot": {
+      "text": "Setup Bishop - Squares",
+      "group": "citadel_heroes",
+      "hash": "4225043c0871"
+    },
+    "ability_header_on_square": {
+      "text": "On Square:",
+      "group": "citadel_heroes",
+      "hash": "6fec383d2f26"
+    },
+    "MoveCooldown_postvalue_label": {
+      "text": "Move Cooldown",
+      "group": "citadel_heroes",
+      "hash": "62d24b892289"
+    },
+    "MoveCooldown_label": {
+      "text": "Move Cooldown",
+      "group": "citadel_heroes",
+      "hash": "62d24b892289"
+    },
+    "MoveCooldown_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "ExpireDistance_postvalue_label": {
+      "text": "Recall Distance",
+      "group": "citadel_heroes",
+      "hash": "c2ae87977dd8"
+    },
+    "ExpireDistance_label": {
+      "text": "Recall Distance",
+      "group": "citadel_heroes",
+      "hash": "c2ae87977dd8"
+    },
+    "ExpireDistance_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "GroundAuraLingerDuration_label": {
+      "text": "Aura Linger Duration",
+      "group": "citadel_heroes",
+      "hash": "4e03c92280b6"
+    },
+    "GroundAuraLingerDuration_postvalue_label": {
+      "text": "Aura Linger Duration",
+      "group": "citadel_heroes",
+      "hash": "4e03c92280b6"
+    },
+    "GroundAuraLingerDuration_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "MaxPieces_label": {
+      "text": "Max Deployed Pieces",
+      "group": "citadel_heroes",
+      "hash": "3288554b22d0"
+    },
+    "MaxPieces_postvalue_label": {
+      "text": "Max Deployed Pieces",
+      "group": "citadel_heroes",
+      "hash": "3288554b22d0"
+    },
+    "ability_chessmaster_knightbuff": {
+      "text": "Kingside Knight",
+      "group": "citadel_heroes",
+      "hash": "3733bf7058b1"
+    },
+    "ability_chessmaster_knightbuff_desc": {
+      "text": "Promote an ally to be a <span class=\"highlight\">knight</span>, granting <span class=\"highlight\">bonus stamina</span> and {g:citadel_inline_attribute:'CombatBarrier'} for a duration.<br><br>If self-cast you develop yourself as <span class=\"highlight\">king</span> instead, granting double the {g:citadel_inline_attribute:'CombatBarrier'} but no stamina. <br><br><span class=\"diminish\">Move ({g:citadel_binding:'ADS'}):</span> Moves the piece, making it <span class=\"highlight\">invulnerable</span> during the duration before landing.",
+      "group": "citadel_heroes",
+      "hash": "a62eeb0f42f6"
+    },
+    "ability_chessmaster_knightbuff_t2_desc": {
+      "text": "+{s:CombatBarrier} Barrier<br>+{s:Stamina} Stamina",
+      "group": "citadel_heroes",
+      "hash": "4e7f3e80ad2a"
+    },
+    "ability_chessmaster_knightbuff_t3_desc": {
+      "text": "Can target two allies within radius.<br>On Self: <span class=\"highlight\">Remove all debuffs</span> after a move",
+      "group": "citadel_heroes",
+      "hash": "9ae5bbd5f01f"
+    },
+    "ability_chessmaster_forkpiece": {
+      "text": "Rook Battery",
+      "group": "citadel_heroes",
+      "hash": "b10a60c332bc"
+    },
+    "ability_chessmaster_forkpiece_trigger": {
+      "text": "Rook Battery",
+      "group": "citadel_heroes",
+      "hash": "b10a60c332bc"
+    },
+    "ability_chessmaster_forkpiece_desc": {
+      "text": "Release a pair of <span class=\"highlight\">rooks</span> that travel forward, dealing {g:citadel_inline_attribute:'SpiritDamage'} and applying {g:citadel_inline_attribute:'Immobilize'}. If the rooks hit a wall, they reflect back in the opposite direction. <br><br><span class=\"diminish\">Re-Activate</span>: Split the rooks perpendicularly.</span>",
+      "group": "citadel_heroes",
+      "hash": "993b47b36f7c"
+    },
+    "ability_chessmaster_forkpiece_t1_desc": {
+      "text": "On Hit: Reduce {s:FireRateSlow}% Fire Rate for {s:DebuffDuration}s",
+      "group": "citadel_heroes",
+      "hash": "b39a178a1ff0"
+    },
+    "ability_chessmaster_forkpiece_t2_desc": {
+      "text": "On Hit: {s:CurrentHealthPercent}% Current Health as Damage",
+      "group": "citadel_heroes",
+      "hash": "0946abba2eec"
+    },
+    "ability_chessmaster_forkpiece_t3_desc": {
+      "text": "+{s:MaxReflectCount} Wall Reflects<br>{s:AbilityCooldown}s Cooldown<br>+{s:ImmobilizeDuration}s Immobilize Duration",
+      "group": "citadel_heroes",
+      "hash": "331548c2428c"
+    },
+    "ImmobilizeMinDuration_postvalue_label": {
+      "text": "Min Immobilize",
+      "group": "citadel_heroes",
+      "hash": "e33c55e60d80"
+    },
+    "ImmobilizeMinDuration_label": {
+      "text": "Min Immobilize",
+      "group": "citadel_heroes",
+      "hash": "e33c55e60d80"
+    },
+    "ImmobilizeMinDuration_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "MaxReflectCount_postvalue_label": {
+      "text": "Wall Reflects",
+      "group": "citadel_heroes",
+      "hash": "f18e5bd833c6"
+    },
+    "MaxReflectCount_label": {
+      "text": "Wall Reflects",
+      "group": "citadel_heroes",
+      "hash": "f18e5bd833c6"
+    },
+    "ImmobilizeMaxDuration_postvalue_label": {
+      "text": "Max Immobilize",
+      "group": "citadel_heroes",
+      "hash": "06a156011044"
+    },
+    "ImmobilizeMaxDuration_label": {
+      "text": "Max Immobilize",
+      "group": "citadel_heroes",
+      "hash": "06a156011044"
+    },
+    "ImmobilizeMaxDuration_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "KnightAuraRadius_postvalue_label": {
+      "text": "Knight Trail Radius",
+      "group": "citadel_heroes",
+      "hash": "65d93588450d"
+    },
+    "KnightAuraRadius_label": {
+      "text": "Knight Trail Radius",
+      "group": "citadel_heroes",
+      "hash": "65d93588450d"
+    },
+    "KnightAuraRadius_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "KnightAuraDuration_postvalue_label": {
+      "text": "Knight Trail Duration",
+      "group": "citadel_heroes",
+      "hash": "6a6cf8fbd593"
+    },
+    "KnightAuraDuration_label": {
+      "text": "Knight Trail Duration",
+      "group": "citadel_heroes",
+      "hash": "6a6cf8fbd593"
+    },
+    "KnightAuraDuration_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "ability_chessmaster_queen": {
+      "text": "Develop Queen",
+      "group": "citadel_heroes",
+      "hash": "fa1760b2a3b9"
+    },
+    "ability_chessmaster_queen_trigger": {
+      "text": "Develop Queen",
+      "group": "citadel_heroes",
+      "hash": "fa1760b2a3b9"
+    },
+    "ability_chessmaster_queen_desc_active": {
+      "text": "Summon a <span class=\"highlight\">queen</span> that crashes down, dealing {g:citadel_inline_attribute:'SpiritDamage'} in an area. After a delay, the queen releases squares in straight lines that deal {g:citadel_inline_attribute:'SpiritDamage'} again and apply {g:citadel_inline_attribute:'Stun'}.  <br><br><span class=\"diminish\">Move ({g:citadel_binding:'ADS'}):</span> The queen leaps to the target location, dealing the same effects again. <span class=\"diminish\"><br><br>Re-activate to recall the queen early, ending the ability.</span>",
+      "group": "citadel_heroes",
+      "hash": "40b05d3e965d"
+    },
+    "ability_chessmaster_queen_t2_desc": {
+      "text": "+{s:SlowPercent}% Slow. Checkmates heroes below {s:CheckmateThreshold} health, executing them.",
+      "group": "citadel_heroes",
+      "hash": "415f66bee8f6"
+    },
+    "ability_chessmaster_queen_t3_desc": {
+      "text": "+{s:QueenBonusMoves} Moves<br>+{s:TileSteps} Square Range",
+      "group": "citadel_heroes",
+      "hash": "c07297ea26b7"
+    },
+    "ability_chessmaster_queen/active": {
+      "text": "Develop Queen",
+      "group": "citadel_heroes",
+      "hash": "fa1760b2a3b9"
+    },
+    "ability_chessmaster_queen/lift": {
+      "text": "Check...",
+      "group": "citadel_heroes",
+      "hash": "eb63b18d1af5"
+    },
+    "TileSteps_postvalue_label": {
+      "text": "Square Range",
+      "group": "citadel_heroes",
+      "hash": "8275df2cfbc0"
+    },
+    "TileSteps_label": {
+      "text": "Square Range",
+      "group": "citadel_heroes",
+      "hash": "8275df2cfbc0"
+    },
+    "TileSteps_postfix": {
+      "text": "",
+      "group": "citadel_heroes",
+      "hash": "da39a3ee5e6b"
+    },
+    "QueenCooldown_postvalue_label": {
+      "text": "Queen Cooldown",
+      "group": "citadel_heroes",
+      "hash": "65b01d990760"
+    },
+    "QueenCooldown_label": {
+      "text": "Queen Cooldown",
+      "group": "citadel_heroes",
+      "hash": "65b01d990760"
+    },
+    "QueenCooldown_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "QueenBonusMoves_postvalue_label": {
+      "text": "Additional Moves",
+      "group": "citadel_heroes",
+      "hash": "dbf4a9168d51"
+    },
+    "QueenBonusMoves_label": {
+      "text": "Additional Moves",
+      "group": "citadel_heroes",
+      "hash": "dbf4a9168d51"
+    },
+    "VisionAuraRadius_postvalue_label": {
+      "text": "Vision Radius",
+      "group": "citadel_heroes",
+      "hash": "61748a6ea436"
+    },
+    "VisionAuraRadius_label": {
+      "text": "Vision Radius",
+      "group": "citadel_heroes",
+      "hash": "61748a6ea436"
+    },
+    "VisionAuraRadius_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "SquareDuration_label": {
+      "text": "Square Duration",
+      "group": "citadel_heroes",
+      "hash": "a737480c61da"
+    },
+    "SquareDuration_postvalue_label": {
+      "text": "Square Duration",
+      "group": "citadel_heroes",
+      "hash": "a737480c61da"
+    },
+    "SquareDuration_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "SquareSize_label": {
+      "text": "Square Range",
+      "group": "citadel_heroes",
+      "hash": "8275df2cfbc0"
+    },
+    "SquareSize_postvalue_label": {
+      "text": "Square Range",
+      "group": "citadel_heroes",
+      "hash": "8275df2cfbc0"
+    },
+    "SquareSize_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "CheckmateDamage_postvalue_label": {
+      "text": "Checkmate Damage",
+      "group": "citadel_heroes",
+      "hash": "1cfaa0f6c016"
+    },
+    "CheckmateDamage_label": {
+      "text": "Checkmate Damage",
+      "group": "citadel_heroes",
+      "hash": "1cfaa0f6c016"
+    },
+    "CheckmateThreshold_postvalue_label": {
+      "text": "Checkmate Threshold",
+      "group": "citadel_heroes",
+      "hash": "d5c9516f4773"
+    },
+    "CheckmateThreshold_label": {
+      "text": "Checkmate Threshold",
+      "group": "citadel_heroes",
+      "hash": "d5c9516f4773"
+    },
     "ability_header_on_hit": {
       "text": "On Hit:",
       "group": "citadel_heroes",
@@ -22930,6 +23370,11 @@
       "hash": "e00694b1e25c"
     },
     "ability_baba_bench_melee": {
+      "text": "Melee",
+      "group": "citadel_heroes",
+      "hash": "e00694b1e25c"
+    },
+    "ability_melee_chessmaster": {
       "text": "Melee",
       "group": "citadel_heroes",
       "hash": "e00694b1e25c"
@@ -23618,6 +24063,11 @@
       "text": "There are a few things most denizens of The Cursed Apple hope to experience at some point in their lives.\n\nSee a Broadway show.\nIce Skate at Rockefeller Center during Christmas season.\nGet yelled at by the Central Park Pigeon Lady.\n\nBecause Baba is more than just an old woman that feeds spirit pigeons in the park... she's an institution.  A force of nature woven into the very lore of New York City.  Is it true that she's sat at the same bench every day for the past 50 years, rain or shine?  Maybe.  Is she REALLY the leader of The Soho Coven?  Who's to say.  One thing's for sure though... she's a New Yorker.  And she's not going to sit back and watch a bunch of tourists tear apart Manhattan in pursuit of power.",
       "group": "citadel_heroes",
       "hash": "d766b1ac836c"
+    },
+    "hero_chessmaster_lore": {
+      "text": "In a world that moves too fast, Solomon is content to stop and listen. Offering a friendly ear and good counsel, Solomon has found himself sitting across the chess table from tourists, criminals, and titans of industry.  But no matter his opponent, Solomon remains un-phased… because to him, chess is so much more than a game.  It's an equalizer.  A way for him to connect to people from all walks of life on an even playing field.",
+      "group": "citadel_heroes",
+      "hash": "90cac45c6094"
     },
     "MODIFIER_STATE_ROOTED": {
       "text": "Immobilized",
@@ -25810,11 +26260,6 @@
       "hash": "4345cb1fa278"
     },
     "TechArmorDamageReduction_Label": {
-      "text": "Spirit Resist",
-      "group": "citadel_attributes",
-      "hash": "a79e809e8e08"
-    },
-    "TechArmorDamageReduction_label": {
       "text": "Spirit Resist",
       "group": "citadel_attributes",
       "hash": "a79e809e8e08"
@@ -34555,34 +35000,34 @@
       "hash": "c3e839df6084"
     },
     "Steam_Citadel_Hideout_Default": {
-      "text": "Relaxing in the Hideout",
+      "text": "Relaxing In The Hideout",
       "group": "citadel_gc",
-      "hash": "8d2ad830dfcb"
+      "hash": "5152fef4a7cb"
     },
     "Steam_Citadel_Hideout_Lounging": {
-      "text": "Lounging in the Hideout",
+      "text": "Lounging In The Hideout",
       "group": "citadel_gc",
-      "hash": "0579825f864a"
+      "hash": "30d6cd439e0a"
     },
     "Steam_Citadel_Hideout_Chilling": {
-      "text": "Chilling in the Hideout",
+      "text": "Chilling In The Hideout",
       "group": "citadel_gc",
-      "hash": "b8e88bed5e3f"
+      "hash": "e9d0c5627f33"
     },
     "Steam_Citadel_Hideout_Investigating": {
-      "text": "Investigating the Hideout",
+      "text": "Investigating The Hideout",
       "group": "citadel_gc",
-      "hash": "d038f72fed6c"
+      "hash": "58fbbeb39790"
     },
     "Steam_Citadel_Hideout_Brooding": {
-      "text": "Brooding in the Hideout",
+      "text": "Brooding In The Hideout",
       "group": "citadel_gc",
-      "hash": "125c1724a850"
+      "hash": "9b391cdb6f99"
     },
     "Steam_Citadel_Hideout_Luxuriating": {
-      "text": "Luxuriating in the Hideout",
+      "text": "Luxuriating In The Hideout",
       "group": "citadel_gc",
-      "hash": "cd62bd96b79d"
+      "hash": "85ca87c6a450"
     },
     "Steam_Citadel_Hideout_Pontificating": {
       "text": "Pontificating in the Hideout",
@@ -34590,179 +35035,189 @@
       "hash": "c10e794e8b4e"
     },
     "Steam_Citadel_Hideout_Engineering": {
-      "text": "Tinkering in the Hideout",
+      "text": "Tinkering In The Hideout",
       "group": "citadel_gc",
-      "hash": "400a104c762d"
+      "hash": "1150f5911997"
     },
     "Steam_Citadel_Hideout_Cocktails": {
-      "text": "Mixing Drinks in the Hideout",
+      "text": "Mixing Drinks In The Hideout",
       "group": "citadel_gc",
-      "hash": "31a76d0c7b36"
+      "hash": "6ce7b5195d53"
     },
     "Steam_Citadel_Hideout_Plotting": {
-      "text": "Plotting in the Hideout",
+      "text": "Plotting In The Hideout",
       "group": "citadel_gc",
-      "hash": "06252bb67f40"
+      "hash": "1bce4f059821"
     },
     "Steam_Citadel_Hideout_Fabulous": {
-      "text": "Being Fabulous in the Hideout",
+      "text": "Being Fabulous In The Hideout",
       "group": "citadel_gc",
-      "hash": "d4161f04be0b"
+      "hash": "94a91d5bda68"
     },
     "Steam_Citadel_Hideout_Cards": {
-      "text": "Gambling in the Hideout",
+      "text": "Gambling In The Hideout",
       "group": "citadel_gc",
-      "hash": "8640b390fc3f"
+      "hash": "fe15a1be8223"
     },
     "Steam_Citadel_Hideout_Scheming": {
-      "text": "Scheming in the Hideout",
+      "text": "Scheming In The Hideout",
       "group": "citadel_gc",
-      "hash": "95bfd66e4866"
+      "hash": "db6c1c15b80d"
     },
     "Steam_Citadel_Hideout_Sleep_Walk": {
-      "text": "Sleep Walking in the Hideout",
+      "text": "Sleep Walking In The Hideout",
       "group": "citadel_gc",
-      "hash": "91ee7b6cc435"
+      "hash": "49b6603688ff"
     },
     "Steam_Citadel_Hideout_Mystery": {
-      "text": "Solving Mysteries in the Hideout",
+      "text": "Solving Mysteries In The Hideout",
       "group": "citadel_gc",
-      "hash": "3c57395c804c"
+      "hash": "5f44fe9d2757"
     },
     "Steam_Citadel_Hideout_Ignoring_Lash": {
-      "text": "Ignoring Lash in the Hideout",
+      "text": "Ignoring Lash In The Hideout",
       "group": "citadel_gc",
-      "hash": "939c57b42fa3"
+      "hash": "23572a89f945"
     },
     "Steam_Citadel_Hideout_Ava": {
-      "text": "Playing With Ava in the Hideout",
+      "text": "Playing With Ava In The Hideout",
       "group": "citadel_gc",
-      "hash": "4271b86d28d2"
+      "hash": "25cf127991f2"
     },
     "Steam_Citadel_Hideout_Mourning": {
-      "text": "Mourning in the Hideout",
+      "text": "Mourning In The Hideout",
       "group": "citadel_gc",
-      "hash": "3bd03dd376dd"
+      "hash": "b96d25967ffd"
     },
     "Steam_Citadel_Hideout_Knives": {
-      "text": "Playing With Knives in the Hideout",
+      "text": "Playing With Knives In The Hideout",
       "group": "citadel_gc",
-      "hash": "6ecf5d90c4aa"
+      "hash": "3f64f687d2ea"
     },
     "Steam_Citadel_Hideout_Homesick": {
-      "text": "Wishing the Arroyos were in the Hideout",
+      "text": "Wishing the Arroyos were In The Hideout",
       "group": "citadel_gc",
-      "hash": "a4bed0c12c14"
+      "hash": "fa8c13210a8e"
     },
     "Steam_Citadel_Hideout_Training": {
-      "text": "Training in the Hideout",
+      "text": "Training In The Hideout",
       "group": "citadel_gc",
-      "hash": "bba8b77a5c9d"
+      "hash": "6242fb2132aa"
     },
     "Steam_Citadel_Hideout_Reminiscing": {
-      "text": "Reminiscing in the Hideout",
+      "text": "Reminiscing In The Hideout",
       "group": "citadel_gc",
-      "hash": "1aa07b0a544a"
+      "hash": "bc0d67d336fb"
     },
     "Steam_Citadel_Hideout_Lash": {
-      "text": "Thinking About Lash in the Hideout",
+      "text": "Thinking About Lash In The Hideout",
       "group": "citadel_gc",
-      "hash": "7afc4ca3057a"
+      "hash": "ab8827f004c4"
     },
     "Steam_Citadel_Hideout_Cube": {
-      "text": "Wishing the Hideout was The Cube",
+      "text": "Wishing the Hideout Was The Cube",
       "group": "citadel_gc",
-      "hash": "626ef6cc17cf"
+      "hash": "6d996df0e60a"
     },
     "Steam_Citadel_Hideout_Sulking": {
-      "text": "Sulking in the Hideout",
+      "text": "Sulking In The Hideout",
       "group": "citadel_gc",
-      "hash": "0717c82d7626"
+      "hash": "4987964b506a"
     },
     "Steam_Citadel_Hideout_Wyoming": {
-      "text": "Dreaming of Wyoming in the Hideout",
+      "text": "Dreaming Of Wyoming In The Hideout",
       "group": "citadel_gc",
-      "hash": "a12eb1b1bdd3"
+      "hash": "6cc867b6fe75"
     },
     "Steam_Citadel_Hideout_Pruno": {
-      "text": "Making Pruno in the Hideout",
+      "text": "Making Pruno In The Hideout",
       "group": "citadel_gc",
-      "hash": "b0e3b0bf9854"
+      "hash": "2d46bf25d866"
     },
     "Steam_Citadel_Hideout_Magic": {
-      "text": "Working Magic in the Hideout",
+      "text": "Working Magic In The Hideout",
       "group": "citadel_gc",
-      "hash": "5b6311ebe4db"
+      "hash": "cd9454ea2614"
     },
     "Steam_Citadel_Hideout_Life": {
-      "text": "Grabbing a bite in the Hideout",
+      "text": "Grabbing A Bite In The Hideout",
       "group": "citadel_gc",
-      "hash": "90712dc483a2"
+      "hash": "18d1fd82430c"
     },
     "Steam_Citadel_Hideout_Prowl": {
-      "text": "Prowling in the Hideout",
+      "text": "Prowling In The Hideout",
       "group": "citadel_gc",
-      "hash": "ef4d63512d07"
+      "hash": "493ce0c33da7"
     },
     "Steam_Citadel_Hideout_Pray": {
-      "text": "Praying in the Hideout",
+      "text": "Praying In The Hideout",
       "group": "citadel_gc",
-      "hash": "7bbb8ea1905a"
+      "hash": "8a4888e99912"
     },
     "Steam_Citadel_Hideout_Read": {
-      "text": "Reading in the Hideout",
+      "text": "Reading In The Hideout",
       "group": "citadel_gc",
-      "hash": "a07a51ea5055"
+      "hash": "af68880ad15b"
     },
     "Steam_Citadel_Hideout_Service": {
-      "text": "At Your Service in the Hideout",
+      "text": "At Your Service In The Hideout",
       "group": "citadel_gc",
-      "hash": "034d3858c295"
+      "hash": "b628f6eb4a51"
     },
     "Steam_Citadel_Hideout_Ranting": {
-      "text": "Ranting in the Hideout",
+      "text": "Ranting In The Hideout",
       "group": "citadel_gc",
-      "hash": "9bd89572a530"
+      "hash": "c7e2f2f2582d"
     },
     "Steam_Citadel_Hideout_Dreams": {
-      "text": "Having Sweet Dreams in the Hideout",
+      "text": "Having Sweet Dreams In The Hideout",
       "group": "citadel_gc",
-      "hash": "eceea7b2e5ad"
+      "hash": "b3b987467e38"
     },
     "Steam_Citadel_Hideout_Dead": {
-      "text": "Playing With The Dead in the Hideout",
+      "text": "Playing With The Dead In The Hideout",
       "group": "citadel_gc",
-      "hash": "2710d1900a06"
+      "hash": "1ef2514378bc"
     },
     "Steam_Citadel_Hideout_Hangover": {
-      "text": "Figuring Out What Happened Last Night in the Hideout",
+      "text": "Figuring Out What Happened Last Night In The Hideout",
       "group": "citadel_gc",
-      "hash": "4584bcc80ee0"
+      "hash": "63da3eff9597"
     },
     "Steam_Citadel_Hideout_Bless": {
-      "text": "Blessing Ammunition in the Hideout",
+      "text": "Blessing Ammunition In The Hideout",
       "group": "citadel_gc",
-      "hash": "9e5babcfaf25"
+      "hash": "7681c38002a7"
     },
     "Steam_Citadel_Hideout_Fencer": {
-      "text": "Striving Towards Perfection in the Hideout",
+      "text": "Striving Towards Perfection In The Hideout",
       "group": "citadel_gc",
-      "hash": "5929048c3d88"
+      "hash": "cc952ab6ae58"
     },
     "Steam_Citadel_Hideout_Glitter": {
-      "text": "Cleaning Up Glitter in the Hideout",
+      "text": "Cleaning Up Glitter In The Hideout",
       "group": "citadel_gc",
-      "hash": "f0e2ab3528c0"
+      "hash": "d6cc3a9c6ba0"
     },
     "Steam_Citadel_Hideout_LongIsland": {
-      "text": "Wishing the Hideout was on Long Island",
+      "text": "Wishing The Hideout Was On Long Island",
       "group": "citadel_gc",
-      "hash": "eedf709686de"
+      "hash": "15dacf15a3f8"
     },
     "Steam_Citadel_Hideout_Mildred": {
-      "text": "Hating Mildred in the Hideout",
+      "text": "Hating Mildred In The Hideout",
       "group": "citadel_gc",
-      "hash": "01d0756d95ba"
+      "hash": "a8a53dc980ae"
+    },
+    "Steam_Citadel_Hideout_Hathorne": {
+      "text": "Plotting Against Hathorne In The Hideout",
+      "group": "citadel_gc",
+      "hash": "23b24c92546d"
+    },
+    "Steam_Citadel_Hideout_Chess": {
+      "text": "Planning Moves In The Hideout",
+      "group": "citadel_gc",
+      "hash": "47b416f74b7f"
     },
     "Citadel_Dashboard_BuildVersion": {
       "text": "#{d:buildNumber}",
@@ -45359,6 +45814,16 @@
       "group": "citadel_main",
       "hash": "9f53777045f4"
     },
+    "Citadel_HeroBuilds_UseBuild": {
+      "text": "Use Build",
+      "group": "citadel_main",
+      "hash": "e78333645105"
+    },
+    "Citadel_HeroBuilds_Overview": {
+      "text": "Overview",
+      "group": "citadel_main",
+      "hash": "0efc2e6be4c2"
+    },
     "Citadel_BuildBrowser_Title": {
       "text": "Browse Builds",
       "group": "citadel_main",
@@ -48158,6 +48623,11 @@
       "text": "Used on the hero roster to mark a hero you want to ensure you are not assigned.",
       "group": "citadel_main",
       "hash": "2ec4fa0d880e"
+    },
+    "citadel_hotkeys_tooltip_instant_ping": {
+      "text": "Tap to Ping. Long hold will cancel ping. Chat Wheel will not open. Mini Radials Will.",
+      "group": "citadel_main",
+      "hash": "40c018fb6605"
     },
     "citadel_hotkeys_tooltip_ping": {
       "text": "Press to ping the location you are aiming at. Hold to open the Chat Wheel.",
@@ -52230,9 +52700,14 @@
       "hash": "3ddf13c6fb38"
     },
     "citadel_keybind_ping": {
-      "text": "In-world ping / Chat Wheel",
+      "text": "In-world Ping (Long Hold) Chat Wheel",
       "group": "citadel_main",
-      "hash": "55ff1ad6a6fe"
+      "hash": "03a82f432608"
+    },
+    "citadel_keybind_instant_ping": {
+      "text": "In-world Ping",
+      "group": "citadel_main",
+      "hash": "37fdd39fab25"
     },
     "citadel_keybind_quick_response": {
       "text": "Quick Response",
@@ -57645,14 +58120,14 @@
       "hash": "a329be299a27"
     },
     "AbilityButtonHint_MeleeIdolCashIn": {
-      "text": "Heavy Melee to contest Spirit Urn",
+      "text": "Heavy Melee to contest Soul Urn",
       "group": "citadel_main",
-      "hash": "b7342e7f063d"
+      "hash": "6dc9511452be"
     },
     "AbilityButtonHint_MeleeIdolPickup": {
-      "text": "Melee to pick up Spirit Urn",
+      "text": "Melee to pick up Soul Urn",
       "group": "citadel_main",
-      "hash": "abd7abdc73c6"
+      "hash": "2a34e8bba143"
     },
     "AbilityButtonHint_ClimbRope": {
       "text": "Hold {g:citadel_binding:'Zipline'} to Climb Rope",
@@ -58835,9 +59310,9 @@
       "hash": "bba591e7d1f9"
     },
     "citadel_chatwheel_idol_here_message": {
-      "text": "Spirit Urn is here!",
+      "text": "Soul Urn is here!",
       "group": "citadel_main",
-      "hash": "0186f8475ed7"
+      "hash": "7c4978c29ee2"
     },
     "citadel_chatwheel_help_with_idol_message": {
       "text": "Help me deliver the urn",
@@ -59755,9 +60230,9 @@
       "hash": "ffa38c7bf656"
     },
     "ping_jar_call": {
-      "text": "Spirit Urn is here!",
+      "text": "Soul Urn is here!",
       "group": "citadel_main",
-      "hash": "0186f8475ed7"
+      "hash": "7c4978c29ee2"
     },
     "ping_koth": {
       "text": "Unstable Rift is here!",
@@ -60405,9 +60880,9 @@
       "hash": "a882cca9d54f"
     },
     "npc_spirit_jar": {
-      "text": "Spirit Urn",
+      "text": "Soul Urn",
       "group": "citadel_main",
-      "hash": "0c9d20da9635"
+      "hash": "6ccd8b40073e"
     },
     "npc_male_patron": {
       "text": "Hidden King",

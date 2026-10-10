@@ -1,0 +1,1472 @@
+{
+  "from": "6766",
+  "to": "6774",
+  "generatedAt": "2026-10-10T02:38:20.759Z",
+  "entries": [
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.AbilityCastDelay",
+      "before": null,
+      "after": 0.25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.AbilityCooldown",
+      "before": null,
+      "after": 33
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.AbilityCooldownBetweenCharge",
+      "before": null,
+      "after": -1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.AbilityUnitTargetLimit",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.AirDrag",
+      "before": null,
+      "after": 0.3
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.AirSpeedMax",
+      "before": null,
+      "after": 100
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.BonusMoveSpeedPercent@scale",
+      "before": null,
+      "after": 0.1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.ChannelMoveSpeed",
+      "before": null,
+      "after": -1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.CombatBarrier",
+      "before": null,
+      "after": 100
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.Damage",
+      "before": null,
+      "after": 50
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.Damage@scale",
+      "before": null,
+      "after": 1.3
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.DetonationDelay",
+      "before": null,
+      "after": 0.25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.FallSpeedMax",
+      "before": null,
+      "after": 10
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.GroundAuraHeight",
+      "before": null,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.GroundAuraLingerDuration",
+      "before": null,
+      "after": 0.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.GroundAuraRadius@scale",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.GroundAuraSpacing",
+      "before": null,
+      "after": 3
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.ImmobilizeDuration",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.MaxReflectCount",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.MaxTriggers",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.MoveDistance",
+      "before": null,
+      "after": 12
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.MoveDistance@scale",
+      "before": null,
+      "after": 0.23
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.SlideScale",
+      "before": null,
+      "after": 100
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.SummonHealth",
+      "before": null,
+      "after": 100
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.TossBackSpeed",
+      "before": null,
+      "after": 300
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.TossDuration",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.TossUpSpeed",
+      "before": null,
+      "after": 220
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.upgrades.T1.DebuffDuration",
+      "before": null,
+      "after": 5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.upgrades.T1.FireRateSlow",
+      "before": null,
+      "after": 25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.upgrades.T2.CurrentHealthPercent",
+      "before": null,
+      "after": 5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.upgrades.T3.AbilityCooldown",
+      "before": null,
+      "after": -12
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.upgrades.T3.ImmobilizeDuration",
+      "before": null,
+      "after": 0.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.upgrades.T3.MaxReflectCount",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_knightbuff.properties.AbilityCastRange",
+      "before": null,
+      "after": 28
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_knightbuff.properties.AbilityCooldown",
+      "before": null,
+      "after": 25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_knightbuff.properties.AbilityCooldownBetweenCharge",
+      "before": null,
+      "after": -1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_knightbuff.properties.AbilityPostCastDuration",
+      "before": null,
+      "after": 0.15
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_knightbuff.properties.AbilityUnitTargetLimit",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_knightbuff.properties.BuffDuration",
+      "before": null,
+      "after": 7
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_knightbuff.properties.ChannelMoveSpeed",
+      "before": null,
+      "after": -1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_knightbuff.properties.CombatBarrier",
+      "before": null,
+      "after": 80
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_knightbuff.properties.CombatBarrier@scale",
+      "before": null,
+      "after": 0.8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_knightbuff.properties.MaxPieces",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_knightbuff.properties.MoveCooldown",
+      "before": null,
+      "after": 10
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_knightbuff.properties.MoveDistance",
+      "before": null,
+      "after": 13
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_knightbuff.properties.MoveDistance@scale",
+      "before": null,
+      "after": 0.23
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_knightbuff.properties.SelfMoveDistance",
+      "before": null,
+      "after": 7
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_knightbuff.properties.SelfMoveDistance@scale",
+      "before": null,
+      "after": 0.14
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_knightbuff.properties.Stamina",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_knightbuff.properties.TargetingConeAngle",
+      "before": null,
+      "after": 30
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_knightbuff.upgrades.T1.AbilityCooldown",
+      "before": null,
+      "after": -8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_knightbuff.upgrades.T2.CombatBarrier",
+      "before": null,
+      "after": 80
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_knightbuff.upgrades.T2.Stamina",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_knightbuff.upgrades.T3.BonusTargetRadius",
+      "before": null,
+      "after": 20
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_knightbuff.upgrades.T3.MaxPieces",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_knightbuff.upgrades.T3.RemoveDebuffs",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.AbilityCastDelay",
+      "before": null,
+      "after": 0.75
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.AbilityCastRange",
+      "before": null,
+      "after": 30
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.AbilityCooldown",
+      "before": null,
+      "after": 210
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.AbilityCooldownBetweenCharge",
+      "before": null,
+      "after": -1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.AbilityUnitTargetLimit",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.AuraHeight",
+      "before": null,
+      "after": 8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.AuraLingerDuration",
+      "before": null,
+      "after": 0.15
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.ChannelMoveSpeed",
+      "before": null,
+      "after": -1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.Damage",
+      "before": null,
+      "after": 120
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.Damage@scale",
+      "before": null,
+      "after": 1.4
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.DPS",
+      "before": null,
+      "after": 50
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.DPS@scale",
+      "before": null,
+      "after": 0.7
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.DPSTickInterval",
+      "before": null,
+      "after": 0.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.ExpireDistance",
+      "before": null,
+      "after": 80
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.GroundAuraHeight",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.Height",
+      "before": null,
+      "after": 10
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.LiftHeight",
+      "before": null,
+      "after": 4
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.MaxPieces",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.MaxStacks",
+      "before": null,
+      "after": 3
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.MoveCooldown",
+      "before": null,
+      "after": 5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.MoveDistance",
+      "before": null,
+      "after": 16
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.MoveDistance@scale",
+      "before": null,
+      "after": 0.23
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.QueenBonusMoves",
+      "before": null,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.SlowDuration",
+      "before": null,
+      "after": 1.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.SlowDuration@scale",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.SlowPercent",
+      "before": null,
+      "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.StunDuration",
+      "before": null,
+      "after": 1.25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.TileSteps",
+      "before": null,
+      "after": 3
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.TossUpSpeed",
+      "before": null,
+      "after": 600
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.upgrades.T1.AbilityCooldown",
+      "before": null,
+      "after": -40
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.upgrades.T2.CheckmateThreshold",
+      "before": null,
+      "after": 200
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.upgrades.T2.CheckmateThreshold#2",
+      "before": null,
+      "after": 5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.upgrades.T2.SlowPercent",
+      "before": null,
+      "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.upgrades.T3.QueenBonusMoves",
+      "before": null,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.upgrades.T3.TileSteps",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.AbilityCastDelay",
+      "before": null,
+      "after": 0.2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.AbilityCastRange",
+      "before": null,
+      "after": 20
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.AbilityCooldown",
+      "before": null,
+      "after": 12
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.AbilityCooldownBetweenCharge",
+      "before": null,
+      "after": -1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.AbilityUnitTargetLimit",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.AuraHeight",
+      "before": null,
+      "after": 50
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.BishopTimemBetweenShots",
+      "before": null,
+      "after": 0.05
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.BulletResist",
+      "before": null,
+      "after": 25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.ChannelMoveSpeed",
+      "before": null,
+      "after": -1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.CurrentCooldownRefundPercent",
+      "before": null,
+      "after": 50
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.Damage",
+      "before": null,
+      "after": 25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.Damage@scale",
+      "before": null,
+      "after": 0.64
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.DashSlowPercent",
+      "before": null,
+      "after": -25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.DPS",
+      "before": null,
+      "after": 30
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.DPS@scale",
+      "before": null,
+      "after": 0.7
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.DPSTickInterval",
+      "before": null,
+      "after": 0.25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.ExpireDistance",
+      "before": null,
+      "after": 80
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.FadingSlowPercent",
+      "before": null,
+      "after": 30
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.GroundAuraHeight",
+      "before": null,
+      "after": 4
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.ImpactDamage",
+      "before": null,
+      "after": 70
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.ImpactDamage@scale",
+      "before": null,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.ImpactRadius",
+      "before": null,
+      "after": 2.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.MaxPieces",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.MoveCooldown",
+      "before": null,
+      "after": 3
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.MoveDistance",
+      "before": null,
+      "after": 12
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.MoveDistance@scale",
+      "before": null,
+      "after": 0.23
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.MultiHitPenaltyPercentage",
+      "before": null,
+      "after": 25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.Radius",
+      "before": null,
+      "after": 3.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.SlowDuration",
+      "before": null,
+      "after": 3
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.SlowDuration@scale",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.StackDuration@scale",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.TechResist",
+      "before": null,
+      "after": 50
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.TickInterval",
+      "before": null,
+      "after": 0.15
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.TileSteps",
+      "before": null,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.upgrades.T1.FadingSlowPercent",
+      "before": null,
+      "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.upgrades.T1.MoveDistance",
+      "before": null,
+      "after": 5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.upgrades.T2.MaxPieces",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.upgrades.T2.RecastWindow",
+      "before": null,
+      "after": 8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.upgrades.T3.MaxStacks",
+      "before": null,
+      "after": 10
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.upgrades.T3.StackDuration",
+      "before": null,
+      "after": 10
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.upgrades.T3.TechArmorDamageReductionPerStack",
+      "before": null,
+      "after": -2.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.upgrades.T3.TileSteps",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_chessmaster_shotgun.weapon.bulletDamage",
+      "before": null,
+      "after": 30
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_chessmaster_shotgun.weapon.bulletLifetime",
+      "before": null,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_chessmaster_shotgun.weapon.bulletRadius",
+      "before": null,
+      "after": 8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_chessmaster_shotgun.weapon.bulletSpeed",
+      "before": null,
+      "after": 14000
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_chessmaster_shotgun.weapon.bulletsPerShot",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_chessmaster_shotgun.weapon.burstShotCount",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_chessmaster_shotgun.weapon.clipSize",
+      "before": null,
+      "after": 8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_chessmaster_shotgun.weapon.crit.bonusEnd",
+      "before": null,
+      "after": 1.65
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_chessmaster_shotgun.weapon.crit.bonusStart",
+      "before": null,
+      "after": 1.65
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_chessmaster_shotgun.weapon.crit.endRange",
+      "before": null,
+      "after": 1500
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_chessmaster_shotgun.weapon.crit.startRange",
+      "before": null,
+      "after": 500
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_chessmaster_shotgun.weapon.cycleTime",
+      "before": null,
+      "after": 0.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_chessmaster_shotgun.weapon.falloff.bias",
+      "before": null,
+      "after": 0.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_chessmaster_shotgun.weapon.falloff.endRange",
+      "before": null,
+      "after": 1800
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_chessmaster_shotgun.weapon.falloff.endScale",
+      "before": null,
+      "after": 0.1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_chessmaster_shotgun.weapon.falloff.startRange",
+      "before": null,
+      "after": 787
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_chessmaster_shotgun.weapon.falloff.startScale",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_chessmaster_shotgun.weapon.range",
+      "before": null,
+      "after": 7000
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_chessmaster_shotgun.weapon.reloadDuration",
+      "before": null,
+      "after": 3
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_chessmaster_shotgun.weapon.shootMoveSpeedPercent",
+      "before": null,
+      "after": 0.75
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_chessmaster_shotgun.weapon.standingSpread",
+      "before": null,
+      "after": 1.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_inferno_set.weapon.bulletDamage",
+      "before": 5.5,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_inferno_set.weapon.bulletGravityScale",
+      "before": 0.8,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_inferno_set.weapon.bulletLifetime",
+      "before": 2,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_inferno_set.weapon.bulletRadius",
+      "before": 4,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_inferno_set.weapon.bulletSpeed",
+      "before": 26000,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_inferno_set.weapon.bulletsPerShot",
+      "before": 1,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_inferno_set.weapon.burstShotCount",
+      "before": 1,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_inferno_set.weapon.clipSize",
+      "before": 27,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_inferno_set.weapon.crit.bonusEnd",
+      "before": 1.65,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_inferno_set.weapon.crit.bonusStart",
+      "before": 1.65,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_inferno_set.weapon.crit.endRange",
+      "before": 1500,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_inferno_set.weapon.crit.startRange",
+      "before": 500,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_inferno_set.weapon.cycleTime",
+      "before": 0.105,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_inferno_set.weapon.falloff.bias",
+      "before": 0.5,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_inferno_set.weapon.falloff.endRange",
+      "before": 2165.35,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_inferno_set.weapon.falloff.endScale",
+      "before": 0.1,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_inferno_set.weapon.falloff.startRange",
+      "before": 708.661,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_inferno_set.weapon.falloff.startScale",
+      "before": 1,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_inferno_set.weapon.range",
+      "before": 7000,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_inferno_set.weapon.reloadDuration",
+      "before": 2.25,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_inferno_set.weapon.shootMoveSpeedPercent",
+      "before": 0.75,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_inferno_set.weapon.spread",
+      "before": 0.05,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_inferno_set.weapon.standingSpread",
+      "before": 1.5,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "growth.MODIFIER_VALUE_BASE_HEALTH_FROM_LEVEL",
+      "before": 38,
+      "after": 40
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "stat.EAirDashDuration",
+      "before": 0.47,
+      "after": 0.51
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "stat.EGroundDashDuration",
+      "before": 0.68,
+      "after": 0.72
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "stat.EMaxMoveSpeed",
+      "before": 7.2,
+      "after": 6.7
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "stat.ESprintSpeed",
+      "before": 1.6,
+      "after": 3.25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "stat.EStamina",
+      "before": 3,
+      "after": 2
+    }
+  ],
+  "excludedFieldCount": 26
+}

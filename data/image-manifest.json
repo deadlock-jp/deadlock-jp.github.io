@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-07T10:05:20.218Z",
+  "generatedAt": "2026-10-10T02:38:15.740Z",
   "sourceVpk": "game/citadel/pak01_dir.vpk",
   "entries": [
     {
@@ -163,6 +163,33 @@
       "kind": "vtex",
       "usedBy": [
         "hero:hero_atlas:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/chessmaster_card.psd",
+      "vpkPath": "panorama/images/heroes/chessmaster_card_psd.vtex_c",
+      "outPath": "public/images/heroes/chessmaster_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_chessmaster:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/chessmaster_mm.psd",
+      "vpkPath": "panorama/images/heroes/chessmaster_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/chessmaster_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_chessmaster:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/chessmaster_sm.psd",
+      "vpkPath": "panorama/images/heroes/chessmaster_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/chessmaster_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_chessmaster:sm"
       ]
     },
     {
@@ -1381,6 +1408,78 @@
       ]
     },
     {
+      "ref": "file://{images}/hud/abilities/chess/chessmaster_bishop.psd",
+      "vpkPath": "panorama/images/hud/abilities/chess/chessmaster_bishop_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/chess/chessmaster_bishop.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_chessmaster_throwbishop"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/chess/chessmaster_fork.psd",
+      "vpkPath": "panorama/images/hud/abilities/chess/chessmaster_fork_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/chess/chessmaster_fork.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_chessmaster_forkpiece_trigger"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/chess/chessmaster_knight.psd",
+      "vpkPath": "panorama/images/hud/abilities/chess/chessmaster_knight_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/chess/chessmaster_knight.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_chessmaster_knightbuff"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/chess/chessmaster_movepiece.psd",
+      "vpkPath": "panorama/images/hud/abilities/chess/chessmaster_movepiece_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/chess/chessmaster_movepiece.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_chessmaster_movechesspiece"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/chess/chessmaster_queen.psd",
+      "vpkPath": "panorama/images/hud/abilities/chess/chessmaster_queen_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/chess/chessmaster_queen.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_chessmaster_queen"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/chess/chessmaster_rook.psd",
+      "vpkPath": "panorama/images/hud/abilities/chess/chessmaster_rook_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/chess/chessmaster_rook.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_chessmaster_forkpiece"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/chess/chessmaster_undobishop.psd",
+      "vpkPath": "panorama/images/hud/abilities/chess/chessmaster_undobishop_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/chess/chessmaster_undobishop.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_chessmaster_throwbishop_trigger"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/chess/chessmaster_undoqueen.psd",
+      "vpkPath": "panorama/images/hud/abilities/chess/chessmaster_undoqueen_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/chess/chessmaster_undoqueen.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_chessmaster_queen_trigger"
+      ]
+    },
+    {
       "ref": "file://{images}/hud/abilities/chrono/chrono_swap.psd",
       "vpkPath": "panorama/images/hud/abilities/chrono/chrono_swap_psd.vtex_c",
       "outPath": "public/images/hud/abilities/chrono/chrono_swap.png",
@@ -2149,6 +2248,7 @@
         "ability:ability_melee_werewolf",
         "ability:ability_melee_unicorn",
         "ability:ability_melee_baba",
+        "ability:ability_melee_chessmaster",
         "ability:ability_melee_ratking"
       ]
     },
@@ -3232,6 +3332,8 @@
         "ability:citadel_weapon_werewolf_claws",
         "ability:citadel_weapon_unicorn_set",
         "ability:citadel_weapon_baba_set",
+        "ability:citadel_weapon_chessmaster_shotgun",
+        "ability:citadel_weapon_chessmaster_set",
         "ability:citadel_weapon_ratking_set"
       ]
     },

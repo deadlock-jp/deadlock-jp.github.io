@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "upstreamCommit": "6766",
-  "generatedAt": "2026-10-09T13:57:37.423Z",
+  "upstreamCommit": "6774",
+  "generatedAt": "2026-10-10T02:37:44.270Z",
   "objects": {
     "weapon_base": {
       "id": "weapon_base",
@@ -1499,6 +1499,70 @@
       },
       "flags": {
         "outlineWhenVisible": false
+      },
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
+    },
+    "citadel_chesspiece_bishop": {
+      "id": "citadel_chesspiece_bishop",
+      "className": "citadel_chesspiece_entity",
+      "baseKey": null,
+      "stats": {
+        "knockbackStrength": 300,
+        "knockupStrength": 300,
+        "physicsImpulseMultiplier": 1,
+        "stepHeight": 0,
+        "acceleration": 0,
+        "sightRangeNPCs": 0,
+        "sightRangePlayers": 0,
+        "hopSpeed": 200,
+        "cooldownOutlineWidth": 0,
+        "maxHealth": 0,
+        "meleeKnockupStrength": 300,
+        "meleeKnockbackStrength": 300,
+        "walkSpeed": 0,
+        "runSpeed": 0,
+        "strafeSpeed": 0,
+        "turnRate": 0
+      },
+      "flags": {
+        "spawnOnGround": false,
+        "useTeamRelativeMaterialGroups": false,
+        "trackOutOfCombatStatus": true,
+        "shouldTakeDamage": false,
+        "shouldKnockupAndHealOnDeath": false,
+        "shouldUseCooldownOutline": false,
+        "spawnBreakablesOnDeath": true,
+        "outlineThroughWalls": true
+      },
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
+    },
+    "citadel_chesspiece_queen": {
+      "id": "citadel_chesspiece_queen",
+      "className": "citadel_chesspiece_entity",
+      "baseKey": null,
+      "stats": {
+        "knockbackStrength": 200,
+        "knockupStrength": 200,
+        "physicsImpulseMultiplier": 1,
+        "stepHeight": 36,
+        "acceleration": 5,
+        "sightRangeNPCs": 0,
+        "sightRangePlayers": 0,
+        "hopSpeed": 200,
+        "cooldownOutlineWidth": 0,
+        "maxHealth": 0
+      },
+      "flags": {
+        "spawnOnGround": true,
+        "useTeamRelativeMaterialGroups": false,
+        "shouldTakeDamage": false,
+        "shouldUseCooldownOutline": false,
+        "outlineThroughWalls": true,
+        "spawnBreakablesOnDeath": true
       },
       "nameToken": null,
       "icon": null,

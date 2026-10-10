@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6766",
-  "upstreamCommit": "6766",
-  "generatedAt": "2026-10-09T13:57:37.878Z",
+  "clientVersion": "6774",
+  "upstreamCommit": "6774",
+  "generatedAt": "2026-10-10T02:37:44.724Z",
   "language": "schinese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 618,
-    "citadel_heroes": 3555,
-    "citadel_attributes": 1981,
+    "citadel_heroes": 3642,
+    "citadel_attributes": 1980,
     "citadel_gc": 216,
-    "citadel_main": 5248
+    "citadel_main": 5252
   },
   "tokens": {
     "hero_vampire:n": {
@@ -21560,9 +21560,9 @@
       "hash": "e286e6d198da"
     },
     "citadel_weapon_baba_set": {
-      "text": "文库之夜特辑",
+      "text": "邦科之夜特制",
       "group": "citadel_heroes",
-      "hash": "14d4f40f0f0e"
+      "hash": "5ef3eb4c60cb"
     },
     "citadel_ability_baba_brew_brewing": {
       "text": "调制中",
@@ -21950,9 +21950,9 @@
       "hash": "37c8791c3978"
     },
     "ability_baba_hexing_brew_t3_desc": {
-      "text": "+{s:BrewEffectiveness}%药剂效果",
+      "text": "+{s:BrewEffectiveness}%泡茶效果",
       "group": "citadel_heroes",
-      "hash": "f413964886eb"
+      "hash": "9c780e52a397"
     },
     "ability_header_baba_brew_barrier": {
       "text": "舒缓之茶：",
@@ -22248,6 +22248,431 @@
       "text": "%",
       "group": "citadel_heroes",
       "hash": "4345cb1fa278"
+    },
+    "citadel_weapon_chessmaster_set": {
+      "text": "阿廖欣的枪",
+      "group": "citadel_heroes",
+      "hash": "8adeda06afb8"
+    },
+    "ability_chessmaster_placepawn": {
+      "text": "摆放兵",
+      "group": "citadel_heroes",
+      "hash": "79d84f03ba44"
+    },
+    "ability_chessmaster_movechesspiece": {
+      "text": "移动棋子",
+      "group": "citadel_heroes",
+      "hash": "eef823ef9a89"
+    },
+    "ability_chessmaster_movechesspiece_desc": {
+      "text": "<span class=\"diminish\">移动（{g:citadel_binding:'ADS'}）：</span>选择一个<span class=\"highlight\">棋子</span>并移动至目标地点，根据棋子的类型触发对应效果。<br><br>移动棋子对每个目标都拥有独立的冷却时间。",
+      "group": "citadel_heroes",
+      "hash": "a417197f2cfa"
+    },
+    "ability_chessmaster_confirm_move_tip": {
+      "text": "移动",
+      "group": "citadel_heroes",
+      "hash": "591f3aa55fda"
+    },
+    "ability_chessmaster_cancel_move_tip": {
+      "text": "取消",
+      "group": "citadel_heroes",
+      "hash": "4d0b4688c787"
+    },
+    "ability_chessmaster_movechesspiece/moveally": {
+      "text": "移动棋子",
+      "group": "citadel_heroes",
+      "hash": "eef823ef9a89"
+    },
+    "MoveDistance_postvalue_label": {
+      "text": "移动距离",
+      "group": "citadel_heroes",
+      "hash": "f207ee805a88"
+    },
+    "MoveDistance_label": {
+      "text": "移动距离",
+      "group": "citadel_heroes",
+      "hash": "f207ee805a88"
+    },
+    "MoveDistance_postfix": {
+      "text": "米",
+      "group": "citadel_heroes",
+      "hash": "ee7f305751a5"
+    },
+    "SelfMoveDistance_postvalue_label": {
+      "text": "王移动距离",
+      "group": "citadel_heroes",
+      "hash": "24eee924dbf2"
+    },
+    "SelfMoveDistance_label": {
+      "text": "王移动距离",
+      "group": "citadel_heroes",
+      "hash": "24eee924dbf2"
+    },
+    "SelfMoveDistance_postfix": {
+      "text": "米",
+      "group": "citadel_heroes",
+      "hash": "ee7f305751a5"
+    },
+    "ability_header_on_move": {
+      "text": "移动时：",
+      "group": "citadel_heroes",
+      "hash": "134410d0f6c8"
+    },
+    "AbilityButtonHint_MovePieceConfirm": {
+      "text": "完成移动",
+      "group": "citadel_heroes",
+      "hash": "491de3cbc090"
+    },
+    "AbilityButtonHint_MovePieceCancel": {
+      "text": "收回",
+      "group": "citadel_heroes",
+      "hash": "54a4e76b4629"
+    },
+    "ability_chessmaster_movechesspiece/movechesspiece": {
+      "text": "前进",
+      "group": "citadel_heroes",
+      "hash": "320ffeefca2c"
+    },
+    "ability_chessmaster_throwbishop": {
+      "text": "摆放象",
+      "group": "citadel_heroes",
+      "hash": "9814c8771b39"
+    },
+    "ability_chessmaster_throwbishop_desc": {
+      "text": "<span class=\"diminish\">主动：</span>制造一个<span class=\"highlight\">象</span>，可以无限期停留在原地。<br><br><span class=\"diminish\">移动({g:citadel_binding:'ADS'})：</span>移动象，对其穿过的敌人施加逐渐减弱的{g:citadel_inline_attribute:'Slow'}并造成{g:citadel_inline_attribute:'SpiritDamage'}。<br><br>象会在一定延迟后留下方格，威胁敌人并造成{g:citadel_inline_attribute:'SpiritDamage'}。<br><br><span class=\"diminish\">重新激活可以召回所有象，结束本技能。</span>",
+      "group": "citadel_heroes",
+      "hash": "b76e5bb92314"
+    },
+    "ability_chessmaster_throwbishop_t1_desc": {
+      "text": "+{s:MoveDistance}米移动距离<br>+{s:FadingSlowPercent}%减弱的减速",
+      "group": "citadel_heroes",
+      "hash": "be2876e4359b"
+    },
+    "ability_chessmaster_throwbishop_t2_desc": {
+      "text": "<span class=\"highlight\">+{s:MaxPieces}</span>最大棋子数<br>{s:RecastWindow}秒内可以重新施放",
+      "group": "citadel_heroes",
+      "hash": "b694c23eb79f"
+    },
+    "ability_chessmaster_throwbishop_t3_desc": {
+      "text": "+{s:TileSteps}方格范围<br>方格减少{s:TechArmorDamageReductionPerStack}%元灵抗性，可叠加{s:MaxStacks}次",
+      "group": "citadel_heroes",
+      "hash": "b26fa364df8b"
+    },
+    "ability_chessmaster_throwbishop_dot": {
+      "text": "摆放象 - 方格",
+      "group": "citadel_heroes",
+      "hash": "48662e732e43"
+    },
+    "ability_header_on_square": {
+      "text": "在方块上：",
+      "group": "citadel_heroes",
+      "hash": "1f4cde8e5d21"
+    },
+    "MoveCooldown_postvalue_label": {
+      "text": "移动冷却时间",
+      "group": "citadel_heroes",
+      "hash": "76abde861f58"
+    },
+    "MoveCooldown_label": {
+      "text": "移动冷却时间",
+      "group": "citadel_heroes",
+      "hash": "76abde861f58"
+    },
+    "MoveCooldown_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "ExpireDistance_postvalue_label": {
+      "text": "召回距离",
+      "group": "citadel_heroes",
+      "hash": "73eafb0cba57"
+    },
+    "ExpireDistance_label": {
+      "text": "召回距离",
+      "group": "citadel_heroes",
+      "hash": "73eafb0cba57"
+    },
+    "ExpireDistance_postfix": {
+      "text": "米",
+      "group": "citadel_heroes",
+      "hash": "ee7f305751a5"
+    },
+    "GroundAuraLingerDuration_label": {
+      "text": "光环粘滞时间",
+      "group": "citadel_heroes",
+      "hash": "ca536aa5dfa6"
+    },
+    "GroundAuraLingerDuration_postvalue_label": {
+      "text": "光环粘滞时间",
+      "group": "citadel_heroes",
+      "hash": "ca536aa5dfa6"
+    },
+    "GroundAuraLingerDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "MaxPieces_label": {
+      "text": "最大部署数量",
+      "group": "citadel_heroes",
+      "hash": "8518c04b35fb"
+    },
+    "MaxPieces_postvalue_label": {
+      "text": "最大部署数量",
+      "group": "citadel_heroes",
+      "hash": "8518c04b35fb"
+    },
+    "ability_chessmaster_knightbuff": {
+      "text": "王翼马",
+      "group": "citadel_heroes",
+      "hash": "31151b5f16ed"
+    },
+    "ability_chessmaster_knightbuff_desc": {
+      "text": "<span class=\"diminish\">主动：</span>将一名友军提拔为<span class=\"highlight\">马</span>，使其获得<span class=\"highlight\">额外耐力</span>和{g:citadel_inline_attribute:'CombatBarrier'}，持续一段时间。<br><br>对自身施放时自己会作为<span class=\"highlight\">王</span>出击，获得双倍{g:citadel_inline_attribute:'CombatBarrier'}，但是没有耐力。<br><br><span class=\"diminish\">移动（{g:citadel_binding:'ADS'}）：</span>移动棋子，使其在落地前的持续时间内<span class=\"highlight\">无敌</span>。",
+      "group": "citadel_heroes",
+      "hash": "b86660d1ea24"
+    },
+    "ability_chessmaster_knightbuff_t2_desc": {
+      "text": "+{s:CombatBarrier}屏障<br>+{s:Stamina}耐力",
+      "group": "citadel_heroes",
+      "hash": "8f276128b11c"
+    },
+    "ability_chessmaster_knightbuff_t3_desc": {
+      "text": "对友军：再提拔<span class=\"highlight\">一个马</span><br>对自身：走一步后<span class=\"highlight\">移除所有减益</span>",
+      "group": "citadel_heroes",
+      "hash": "656696759665"
+    },
+    "ability_chessmaster_forkpiece": {
+      "text": "车阵",
+      "group": "citadel_heroes",
+      "hash": "2c454ccf936d"
+    },
+    "ability_chessmaster_forkpiece_desc": {
+      "text": "<span class=\"diminish\">主动：</span>放出一对向前行进的<span class=\"highlight\">车</span>，造成{g:citadel_inline_attribute:'SpiritDamage'}并施加{g:citadel_inline_attribute:'Immobilize'}。如果车击中了墙壁，则会反弹为相反方向。<br><br><span class=\"diminish\">再次激活</span>：车会垂直分开。</span>",
+      "group": "citadel_heroes",
+      "hash": "7182fb4acf71"
+    },
+    "ability_chessmaster_forkpiece_t1_desc": {
+      "text": "击中时：<br>减少{s:FireRateSlow}%射速，持续{s:SlowDuration}秒",
+      "group": "citadel_heroes",
+      "hash": "3b0e3622b724"
+    },
+    "ability_chessmaster_forkpiece_t2_desc": {
+      "text": "击中时：<br>造成{s:CurrentHealthPercent}%当前生命值的伤害",
+      "group": "citadel_heroes",
+      "hash": "9375b4592097"
+    },
+    "ability_chessmaster_forkpiece_t3_desc": {
+      "text": "+{s:MaxReflectCount}次墙壁反弹<br>{s:AbilityCooldown}秒冷却时间<br>+{s:ImmobilizeDuration}秒定身持续时间",
+      "group": "citadel_heroes",
+      "hash": "3f8249dc701b"
+    },
+    "ImmobilizeMinDuration_postvalue_label": {
+      "text": "最短定身",
+      "group": "citadel_heroes",
+      "hash": "4b46ccad49ee"
+    },
+    "ImmobilizeMinDuration_label": {
+      "text": "最短定身",
+      "group": "citadel_heroes",
+      "hash": "4b46ccad49ee"
+    },
+    "ImmobilizeMinDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "MaxReflectCount_postvalue_label": {
+      "text": "墙壁反弹",
+      "group": "citadel_heroes",
+      "hash": "bcc274ac9eb9"
+    },
+    "MaxReflectCount_label": {
+      "text": "墙壁反弹",
+      "group": "citadel_heroes",
+      "hash": "bcc274ac9eb9"
+    },
+    "ImmobilizeMaxDuration_postvalue_label": {
+      "text": "最长定身",
+      "group": "citadel_heroes",
+      "hash": "a81141e701db"
+    },
+    "ImmobilizeMaxDuration_label": {
+      "text": "最长定身",
+      "group": "citadel_heroes",
+      "hash": "a81141e701db"
+    },
+    "ImmobilizeMaxDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "KnightAuraRadius_postvalue_label": {
+      "text": "马尾迹半径",
+      "group": "citadel_heroes",
+      "hash": "0181e80a9d3d"
+    },
+    "KnightAuraRadius_label": {
+      "text": "马尾迹半径",
+      "group": "citadel_heroes",
+      "hash": "0181e80a9d3d"
+    },
+    "KnightAuraRadius_postfix": {
+      "text": "米",
+      "group": "citadel_heroes",
+      "hash": "ee7f305751a5"
+    },
+    "KnightAuraDuration_postvalue_label": {
+      "text": "马尾迹持续时间",
+      "group": "citadel_heroes",
+      "hash": "7dca680490b4"
+    },
+    "KnightAuraDuration_label": {
+      "text": "马尾迹持续时间",
+      "group": "citadel_heroes",
+      "hash": "7dca680490b4"
+    },
+    "KnightAuraDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "ability_chessmaster_queen": {
+      "text": "出后",
+      "group": "citadel_heroes",
+      "hash": "750bb1992d39"
+    },
+    "ability_chessmaster_queen_desc_active": {
+      "text": "<span class=\"diminish\">主动：</span>召唤一个<span class=\"highlight\">后</span>，猛然坠落对一个区域造成{g:citadel_inline_attribute:'SpiritDamage'}。在一定延迟后，后会放出沿直线分布的方格，再次造成{g:citadel_inline_attribute:'SpiritDamage'}并施加{g:citadel_inline_attribute:'Stun'}。<br><br><span class=\"diminish\">移动（{g:citadel_binding:'ADS'}）：</span>后跳跃至目标地点，再次造成相同效果。<span class=\"diminish\"><br><br>后被摧毁前只能移动有限次数，或者可以被召回，提前结束本技能。</span>",
+      "group": "citadel_heroes",
+      "hash": "5856b2c9f397"
+    },
+    "ability_chessmaster_queen_t2_desc": {
+      "text": "击中时：施加{s:SlowPercent}%减速。击败{s:CheckmateThreshold}生命以下的英雄",
+      "group": "citadel_heroes",
+      "hash": "5f5bf23fa4e3"
+    },
+    "ability_chessmaster_queen_t3_desc": {
+      "text": "+{s:QueenBonusMoves}步数<br>+{s:TileSteps}方格范围",
+      "group": "citadel_heroes",
+      "hash": "ffd27446b718"
+    },
+    "ability_chessmaster_queen/active": {
+      "text": "出后",
+      "group": "citadel_heroes",
+      "hash": "750bb1992d39"
+    },
+    "ability_chessmaster_queen/lift": {
+      "text": "将军……",
+      "group": "citadel_heroes",
+      "hash": "02768c245718"
+    },
+    "TileSteps_postvalue_label": {
+      "text": "方格范围",
+      "group": "citadel_heroes",
+      "hash": "bf1394f9c812"
+    },
+    "TileSteps_label": {
+      "text": "方格范围",
+      "group": "citadel_heroes",
+      "hash": "bf1394f9c812"
+    },
+    "TileSteps_postfix": {
+      "text": "方格",
+      "group": "citadel_heroes",
+      "hash": "a8ba90ae7c14"
+    },
+    "QueenCooldown_postvalue_label": {
+      "text": "后冷却时间",
+      "group": "citadel_heroes",
+      "hash": "7136803228b0"
+    },
+    "QueenCooldown_label": {
+      "text": "后冷却时间",
+      "group": "citadel_heroes",
+      "hash": "7136803228b0"
+    },
+    "QueenCooldown_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "QueenBonusMoves_postvalue_label": {
+      "text": "额外移动次数",
+      "group": "citadel_heroes",
+      "hash": "a227c8c466f0"
+    },
+    "QueenBonusMoves_label": {
+      "text": "额外移动次数",
+      "group": "citadel_heroes",
+      "hash": "a227c8c466f0"
+    },
+    "VisionAuraRadius_postvalue_label": {
+      "text": "视野半径",
+      "group": "citadel_heroes",
+      "hash": "169e84ca1194"
+    },
+    "VisionAuraRadius_label": {
+      "text": "视野半径",
+      "group": "citadel_heroes",
+      "hash": "169e84ca1194"
+    },
+    "VisionAuraRadius_postfix": {
+      "text": "米",
+      "group": "citadel_heroes",
+      "hash": "ee7f305751a5"
+    },
+    "SquareDuration_label": {
+      "text": "方格持续时间",
+      "group": "citadel_heroes",
+      "hash": "d1f63d04089c"
+    },
+    "SquareDuration_postvalue_label": {
+      "text": "方格持续时间",
+      "group": "citadel_heroes",
+      "hash": "d1f63d04089c"
+    },
+    "SquareDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "SquareSize_label": {
+      "text": "方格范围",
+      "group": "citadel_heroes",
+      "hash": "bf1394f9c812"
+    },
+    "SquareSize_postvalue_label": {
+      "text": "方格范围",
+      "group": "citadel_heroes",
+      "hash": "bf1394f9c812"
+    },
+    "SquareSize_postfix": {
+      "text": "米",
+      "group": "citadel_heroes",
+      "hash": "ee7f305751a5"
+    },
+    "CheckmateDamage_postvalue_label": {
+      "text": "将军伤害",
+      "group": "citadel_heroes",
+      "hash": "c2e9d209fa19"
+    },
+    "CheckmateDamage_label": {
+      "text": "将军伤害",
+      "group": "citadel_heroes",
+      "hash": "c2e9d209fa19"
+    },
+    "CheckmateThreshold_postvalue_label": {
+      "text": "将军临界值",
+      "group": "citadel_heroes",
+      "hash": "0b1794e704c1"
+    },
+    "CheckmateThreshold_label": {
+      "text": "将军临界值",
+      "group": "citadel_heroes",
+      "hash": "0b1794e704c1"
     },
     "ability_header_on_hit": {
       "text": "命中时：",
@@ -22860,6 +23285,11 @@
       "hash": "404d125d28f3"
     },
     "ability_baba_bench_melee": {
+      "text": "近战",
+      "group": "citadel_heroes",
+      "hash": "404d125d28f3"
+    },
+    "ability_melee_chessmaster": {
       "text": "近战",
       "group": "citadel_heroes",
       "hash": "404d125d28f3"
@@ -23548,6 +23978,11 @@
       "text": "大多数被诅咒的纽约城居民都希望在一生中能经历几件事。\n\n看一场百老汇秀。\n在圣诞季去洛克菲勒中心滑冰。\n被中央公园的鸽子夫人骂一顿。\n\n因为婆婆可不仅仅是在公园里喂灵异鸽子的老太太……她是一个传奇。一股编织进纽约城传说本身的自然之力。她是否真的在过去50年里每天风雨无阻地坐在同一张长椅上？也许吧。她是否真的是苏荷女巫团的首领？谁知道呢。但有一件事是肯定的……她是纽约人。她绝不会袖手旁观，看着一群游客为了争夺力量把曼哈顿搅得天翻地覆。",
       "group": "citadel_heroes",
       "hash": "74e57f8f87e1"
+    },
+    "hero_chessmaster_lore": {
+      "text": "在这个节奏飞快的世界里，所罗门乐于停下来倾听。他总是耐心倾听，提供中肯的建议，因此，他发现坐在自己对面下棋的有游客、罪犯和行业巨头。无论对手是谁，所罗门都泰然处之……因为对他而言，国际象棋远不止是游戏。这是平等的具象，让他能在公平的平台上与各行各业的人进行交流。",
+      "group": "citadel_heroes",
+      "hash": "07d7eaf7fbca"
     },
     "MODIFIER_STATE_ROOTED": {
       "text": "被定身",
@@ -25705,11 +26140,6 @@
       "hash": "4345cb1fa278"
     },
     "TechArmorDamageReduction_Label": {
-      "text": "元灵抗性",
-      "group": "citadel_attributes",
-      "hash": "00247db29f7a"
-    },
-    "TechArmorDamageReduction_label": {
       "text": "元灵抗性",
       "group": "citadel_attributes",
       "hash": "00247db29f7a"
@@ -45109,6 +45539,16 @@
       "group": "citadel_main",
       "hash": "15450583c2a1"
     },
+    "Citadel_HeroBuilds_UseBuild": {
+      "text": "使用出装",
+      "group": "citadel_main",
+      "hash": "d87af6714f2f"
+    },
+    "Citadel_HeroBuilds_Overview": {
+      "text": "概览",
+      "group": "citadel_main",
+      "hash": "5060421d1574"
+    },
     "Citadel_BuildBrowser_Title": {
       "text": "浏览出装",
       "group": "citadel_main",
@@ -47878,6 +48318,11 @@
       "text": "用于英雄阵容中标记想确保不会被分配到的英雄。",
       "group": "citadel_main",
       "hash": "34907fdf6990"
+    },
+    "citadel_hotkeys_tooltip_instant_ping": {
+      "text": "点击发送信号。长按可取消发送信号。聊天轮盘不会打开。迷你轮盘会打开。",
+      "group": "citadel_main",
+      "hash": "623204b42f3b"
     },
     "citadel_hotkeys_tooltip_ping": {
       "text": "按下可标记你瞄准的位置。按住可打开聊天轮盘。",
@@ -51950,9 +52395,14 @@
       "hash": "e5506038f335"
     },
     "citadel_keybind_ping": {
-      "text": "游戏内信号/聊天轮盘",
+      "text": "游戏内信号（长按）聊天轮盘",
       "group": "citadel_main",
-      "hash": "bc9c01899139"
+      "hash": "eeb543c1dee7"
+    },
+    "citadel_keybind_instant_ping": {
+      "text": "游戏内信号",
+      "group": "citadel_main",
+      "hash": "bfdab9b94834"
     },
     "citadel_keybind_quick_response": {
       "text": "快速回复",
@@ -58510,9 +58960,9 @@
       "hash": "b76d90e13745"
     },
     "citadel_chatwheel_idol_here_message": {
-      "text": "灵瓮在这里！",
+      "text": "灵瓮就在这里！",
       "group": "citadel_main",
-      "hash": "6616c72b27de"
+      "hash": "4f28ab94f78f"
     },
     "citadel_chatwheel_help_with_idol_message": {
       "text": "帮我护送灵瓮",
@@ -59425,9 +59875,9 @@
       "hash": "2d827fef276d"
     },
     "ping_jar_call": {
-      "text": "灵瓮在此！",
+      "text": "灵瓮就在这里！",
       "group": "citadel_main",
-      "hash": "2720fef89423"
+      "hash": "4f28ab94f78f"
     },
     "ping_koth": {
       "text": "不稳定裂隙在这里！",
