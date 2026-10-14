@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6774",
-  "upstreamCommit": "6774",
-  "generatedAt": "2026-10-10T02:37:44.685Z",
+  "clientVersion": "6779",
+  "upstreamCommit": "6779",
+  "generatedAt": "2026-10-14T04:10:01.357Z",
   "language": "koreana",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 618,
-    "citadel_heroes": 3556,
+    "citadel_heroes": 3645,
     "citadel_attributes": 1980,
-    "citadel_gc": 216,
-    "citadel_main": 5249
+    "citadel_gc": 218,
+    "citadel_main": 5253
   },
   "tokens": {
     "hero_vampire:n": {
@@ -22254,6 +22254,441 @@
       "group": "citadel_heroes",
       "hash": "4345cb1fa278"
     },
+    "citadel_weapon_chessmaster_set": {
+      "text": "알레킨의 총",
+      "group": "citadel_heroes",
+      "hash": "f595792e28b6"
+    },
+    "ability_chessmaster_placepawn": {
+      "text": "폰 배치",
+      "group": "citadel_heroes",
+      "hash": "627e46dfeacb"
+    },
+    "ability_chessmaster_movechesspiece": {
+      "text": "말 이동",
+      "group": "citadel_heroes",
+      "hash": "9056f27323d5"
+    },
+    "ability_chessmaster_movechesspiece_desc": {
+      "text": "<span class=\"diminish\">이동 ({g:citadel_binding:'ADS'}):</span> <span class=\"highlight\">체스 말</span>을 선택해 대상 위치로 이동시킵니다. 말의 종류에 따라 효과가 발동합니다.<br><br>말 이동의 쿨다운은 대상별로 적용됩니다.",
+      "group": "citadel_heroes",
+      "hash": "663297a33230"
+    },
+    "ability_chessmaster_confirm_move_tip": {
+      "text": "이동",
+      "group": "citadel_heroes",
+      "hash": "c686d05434a6"
+    },
+    "ability_chessmaster_cancel_move_tip": {
+      "text": "취소",
+      "group": "citadel_heroes",
+      "hash": "19b2d19bc141"
+    },
+    "ability_chessmaster_movechesspiece/moveally": {
+      "text": "이동",
+      "group": "citadel_heroes",
+      "hash": "c686d05434a6"
+    },
+    "MoveDistance_postvalue_label": {
+      "text": "이동 거리",
+      "group": "citadel_heroes",
+      "hash": "cbf2df59ee05"
+    },
+    "MoveDistance_label": {
+      "text": "이동 거리",
+      "group": "citadel_heroes",
+      "hash": "cbf2df59ee05"
+    },
+    "MoveDistance_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "SelfMoveDistance_postvalue_label": {
+      "text": "킹 이동 거리",
+      "group": "citadel_heroes",
+      "hash": "392ab1d4010a"
+    },
+    "SelfMoveDistance_label": {
+      "text": "킹 이동 거리",
+      "group": "citadel_heroes",
+      "hash": "392ab1d4010a"
+    },
+    "SelfMoveDistance_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "ability_header_on_move": {
+      "text": "이동 시:",
+      "group": "citadel_heroes",
+      "hash": "d183a951dd90"
+    },
+    "AbilityButtonHint_MovePieceConfirm": {
+      "text": "이동 확정",
+      "group": "citadel_heroes",
+      "hash": "f1982fca067b"
+    },
+    "AbilityButtonHint_MovePieceCancel": {
+      "text": "무르기",
+      "group": "citadel_heroes",
+      "hash": "e66e59004818"
+    },
+    "ability_chessmaster_movechesspiece/movechesspiece": {
+      "text": "이동 중",
+      "group": "citadel_heroes",
+      "hash": "db4df1a29f91"
+    },
+    "ability_chessmaster_throwbishop": {
+      "text": "비숍 배치",
+      "group": "citadel_heroes",
+      "hash": "bd8aa9dd80a5"
+    },
+    "ability_chessmaster_throwbishop_trigger": {
+      "text": "비숍 배치",
+      "group": "citadel_heroes",
+      "hash": "bd8aa9dd80a5"
+    },
+    "ability_chessmaster_throwbishop_desc": {
+      "text": "지정한 위치에 계속 남아 있는 <span class=\"highlight\">비숍</span>을 생성합니다.<br><br><span class=\"diminish\">이동 ({g:citadel_binding:'ADS'}):</span> 비숍을 이동시켜 경로상의 적군에게 시간이 지남에 따라 약해지는 {g:citadel_inline_attribute:'Slow'} 효과를 적용하고 {g:citadel_inline_attribute:'SpiritDamage'}를 입힙니다. 잠시 후 비숍을 중심으로 대각선 방향의 칸이 활성화됩니다. 해당 칸을 밟는 적군은 추가 {g:citadel_inline_attribute:'SpiritDamage'}를 입습니다.<br><br><span class=\"diminish\">재시전하면 모든 비숍을 회수하고 능력을 종료합니다.</span>",
+      "group": "citadel_heroes",
+      "hash": "74a772f47ccd"
+    },
+    "ability_chessmaster_throwbishop_t1_desc": {
+      "text": "이동 거리 +{s:MoveDistance}m 증가<br>점진적 둔화 +{s:FadingSlowPercent}% 증가",
+      "group": "citadel_heroes",
+      "hash": "eaf811e0a594"
+    },
+    "ability_chessmaster_throwbishop_t2_desc": {
+      "text": "최대 배치 말 수 <span class=\"highlight\">+{s:MaxPieces}</span> 증가<br>{s:RecastWindow}초 이내에 재시전 가능",
+      "group": "citadel_heroes",
+      "hash": "bb4b4c6af8e9"
+    },
+    "ability_chessmaster_throwbishop_t3_desc": {
+      "text": "칸 범위 +{s:TileSteps}칸 증가<br>칸 위의 적군에게 마법 저항 {s:TechArmorDamageReductionPerStack}% 감소 적용, 최대 {s:MaxStacks}회 중첩",
+      "group": "citadel_heroes",
+      "hash": "2244a6ac59b2"
+    },
+    "ability_chessmaster_throwbishop_dot": {
+      "text": "비숍 배치 - 칸",
+      "group": "citadel_heroes",
+      "hash": "4617f6a02f32"
+    },
+    "ability_header_on_square": {
+      "text": "칸 위에 있을 때:",
+      "group": "citadel_heroes",
+      "hash": "f16fde016825"
+    },
+    "MoveCooldown_postvalue_label": {
+      "text": "이동 쿨다운",
+      "group": "citadel_heroes",
+      "hash": "e64334c88c53"
+    },
+    "MoveCooldown_label": {
+      "text": "이동 쿨다운",
+      "group": "citadel_heroes",
+      "hash": "e64334c88c53"
+    },
+    "MoveCooldown_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "ExpireDistance_postvalue_label": {
+      "text": "회수 거리",
+      "group": "citadel_heroes",
+      "hash": "267c5da32c8f"
+    },
+    "ExpireDistance_label": {
+      "text": "회수 거리",
+      "group": "citadel_heroes",
+      "hash": "267c5da32c8f"
+    },
+    "ExpireDistance_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "GroundAuraLingerDuration_label": {
+      "text": "오라 잔류 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "5bbfca4e2383"
+    },
+    "GroundAuraLingerDuration_postvalue_label": {
+      "text": "오라 잔류 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "5bbfca4e2383"
+    },
+    "GroundAuraLingerDuration_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "MaxPieces_label": {
+      "text": "최대 배치 말 수",
+      "group": "citadel_heroes",
+      "hash": "4c8366498357"
+    },
+    "MaxPieces_postvalue_label": {
+      "text": "최대 배치 말 수",
+      "group": "citadel_heroes",
+      "hash": "4c8366498357"
+    },
+    "ability_chessmaster_knightbuff": {
+      "text": "킹사이드 나이트",
+      "group": "citadel_heroes",
+      "hash": "c9c91ad64515"
+    },
+    "ability_chessmaster_knightbuff_desc": {
+      "text": "아군을 <span class=\"highlight\">나이트</span>로 승격시켜 일정 시간 동안 <span class=\"highlight\">보너스 활력</span>과 {g:citadel_inline_attribute:'CombatBarrier'} 효과를 부여합니다.<br><br>자신에게 시전하면 자신을 <span class=\"highlight\">킹</span>으로 지정해 두 배의 {g:citadel_inline_attribute:'CombatBarrier'}이 부여되지만, 활력은 부여되지 않습니다.<br><br><span class=\"diminish\">이동 ({g:citadel_binding:'ADS'}):</span> 해당 말을 이동시킵니다. 대상은 착지할 때까지 <span class=\"highlight\">무적</span> 상태가 됩니다.",
+      "group": "citadel_heroes",
+      "hash": "9501c165e0fe"
+    },
+    "ability_chessmaster_knightbuff_t2_desc": {
+      "text": "방벽 +{s:CombatBarrier} 증가<br>활력 +{s:Stamina} 증가",
+      "group": "citadel_heroes",
+      "hash": "d3c5d9418e15"
+    },
+    "ability_chessmaster_knightbuff_t3_desc": {
+      "text": "반경 내 아군 두 명을 대상으로 지정 가능<br>자신에게 시전 시: 이동 후 <span class=\"highlight\">모든 약화 효과 제거</span>",
+      "group": "citadel_heroes",
+      "hash": "f038bac1cedf"
+    },
+    "ability_chessmaster_forkpiece": {
+      "text": "룩 배터리",
+      "group": "citadel_heroes",
+      "hash": "8a19731495a0"
+    },
+    "ability_chessmaster_forkpiece_trigger": {
+      "text": "룩 배터리",
+      "group": "citadel_heroes",
+      "hash": "8a19731495a0"
+    },
+    "ability_chessmaster_forkpiece_desc": {
+      "text": "두 개의 <span class=\"highlight\">룩</span>을 전방으로 보내 {g:citadel_inline_attribute:'SpiritDamage'}를 입히고 {g:citadel_inline_attribute:'Immobilize'} 효과를 적용합니다. 룩은 벽에 부딪히면 튕겨서 반대 방향으로 돌진합니다.<br><br><span class=\"diminish\">재시전</span>: 두 개의 룩이 직각으로 갈라져 서로 반대 방향으로 이동합니다.</span>",
+      "group": "citadel_heroes",
+      "hash": "961544d7d6b7"
+    },
+    "ability_chessmaster_forkpiece_t1_desc": {
+      "text": "적중 시: {s:DebuffDuration}초 동안 연사 속도 {s:FireRateSlow}% 감소",
+      "group": "citadel_heroes",
+      "hash": "3a1bebf42398"
+    },
+    "ability_chessmaster_forkpiece_t2_desc": {
+      "text": "적중 시: +{s:CurrentHealthPercent}% 현재 체력 비례 피해",
+      "group": "citadel_heroes",
+      "hash": "5518f5786f3f"
+    },
+    "ability_chessmaster_forkpiece_t3_desc": {
+      "text": "벽 튕김 +{s:MaxReflectCount}회<br>쿨다운 {s:AbilityCooldown}초 감소<br>이동 불가 지속 시간 +{s:ImmobilizeDuration}초",
+      "group": "citadel_heroes",
+      "hash": "ea76e0b15349"
+    },
+    "ImmobilizeMinDuration_postvalue_label": {
+      "text": "최소 이동 불가 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "4fa79016892e"
+    },
+    "ImmobilizeMinDuration_label": {
+      "text": "최소 이동 불가 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "4fa79016892e"
+    },
+    "ImmobilizeMinDuration_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "MaxReflectCount_postvalue_label": {
+      "text": "벽 튕김",
+      "group": "citadel_heroes",
+      "hash": "3e7852a87115"
+    },
+    "MaxReflectCount_label": {
+      "text": "벽 튕김",
+      "group": "citadel_heroes",
+      "hash": "3e7852a87115"
+    },
+    "ImmobilizeMaxDuration_postvalue_label": {
+      "text": "최대 이동 불가 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "783cfb65d22c"
+    },
+    "ImmobilizeMaxDuration_label": {
+      "text": "최대 이동 불가 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "783cfb65d22c"
+    },
+    "ImmobilizeMaxDuration_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "KnightAuraRadius_postvalue_label": {
+      "text": "나이트 이동 반경",
+      "group": "citadel_heroes",
+      "hash": "9d9cfe3fc5ef"
+    },
+    "KnightAuraRadius_label": {
+      "text": "나이트 이동 반경",
+      "group": "citadel_heroes",
+      "hash": "9d9cfe3fc5ef"
+    },
+    "KnightAuraRadius_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "KnightAuraDuration_postvalue_label": {
+      "text": "나이트 이동 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "10b88b366c95"
+    },
+    "KnightAuraDuration_label": {
+      "text": "나이트 이동 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "10b88b366c95"
+    },
+    "KnightAuraDuration_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "ability_chessmaster_queen": {
+      "text": "퀸 전개",
+      "group": "citadel_heroes",
+      "hash": "c71f299b5d3e"
+    },
+    "ability_chessmaster_queen_trigger": {
+      "text": "퀸 전개",
+      "group": "citadel_heroes",
+      "hash": "c71f299b5d3e"
+    },
+    "ability_chessmaster_queen_desc_active": {
+      "text": "<span class=\"highlight\">퀸</span>을 소환해 내려찍고 범위 내에 {g:citadel_inline_attribute:'SpiritDamage'}를 입힙니다. 잠시 후 퀸을 중심으로 직선 방향의 칸이 활성화되어 다시 {g:citadel_inline_attribute:'SpiritDamage'}를 입히고 {g:citadel_inline_attribute:'Stun'} 효과를 적용합니다.<br><br><span class=\"diminish\">이동 ({g:citadel_binding:'ADS'}):</span> 퀸이 대상 위치로 도약해 동일한 효과를 다시 발동합니다. <span class=\"diminish\"><br><br>재시전하면 퀸을 조기에 회수하고 능력을 종료합니다.</span>",
+      "group": "citadel_heroes",
+      "hash": "fdebb62f5e7e"
+    },
+    "ability_chessmaster_queen_t2_desc": {
+      "text": "둔화 +{s:SlowPercent}% 증가. 체력이 {s:CheckmateThreshold} 미만인 영웅을 체크메이트하여 처형",
+      "group": "citadel_heroes",
+      "hash": "99327ac61a66"
+    },
+    "ability_chessmaster_queen_t3_desc": {
+      "text": "이동 +{s:QueenBonusMoves}회 증가<br>칸 범위 +{s:TileSteps}칸 증가",
+      "group": "citadel_heroes",
+      "hash": "dce481ff7226"
+    },
+    "ability_chessmaster_queen/active": {
+      "text": "퀸 전개",
+      "group": "citadel_heroes",
+      "hash": "c71f299b5d3e"
+    },
+    "ability_chessmaster_queen/lift": {
+      "text": "체크...",
+      "group": "citadel_heroes",
+      "hash": "1ececb92d950"
+    },
+    "TileSteps_postvalue_label": {
+      "text": "칸 범위",
+      "group": "citadel_heroes",
+      "hash": "19ce170771c7"
+    },
+    "TileSteps_label": {
+      "text": "칸 범위",
+      "group": "citadel_heroes",
+      "hash": "19ce170771c7"
+    },
+    "QueenCooldown_postvalue_label": {
+      "text": "퀸 쿨다운",
+      "group": "citadel_heroes",
+      "hash": "6ab63b142b90"
+    },
+    "QueenCooldown_label": {
+      "text": "퀸 쿨다운",
+      "group": "citadel_heroes",
+      "hash": "6ab63b142b90"
+    },
+    "QueenCooldown_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "QueenBonusMoves_postvalue_label": {
+      "text": "추가 이동 횟수",
+      "group": "citadel_heroes",
+      "hash": "8cb392100d5a"
+    },
+    "QueenBonusMoves_label": {
+      "text": "추가 이동 횟수",
+      "group": "citadel_heroes",
+      "hash": "8cb392100d5a"
+    },
+    "VisionAuraRadius_postvalue_label": {
+      "text": "시야 반경",
+      "group": "citadel_heroes",
+      "hash": "4c120104e915"
+    },
+    "VisionAuraRadius_label": {
+      "text": "시야 반경",
+      "group": "citadel_heroes",
+      "hash": "4c120104e915"
+    },
+    "VisionAuraRadius_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "SquareDuration_label": {
+      "text": "칸 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "7e0a81c69d02"
+    },
+    "SquareDuration_postvalue_label": {
+      "text": "칸 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "7e0a81c69d02"
+    },
+    "SquareDuration_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "SquareSize_label": {
+      "text": "칸 범위",
+      "group": "citadel_heroes",
+      "hash": "19ce170771c7"
+    },
+    "SquareSize_postvalue_label": {
+      "text": "칸 범위",
+      "group": "citadel_heroes",
+      "hash": "19ce170771c7"
+    },
+    "SquareSize_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "CheckmateDamage_postvalue_label": {
+      "text": "체크메이트 피해",
+      "group": "citadel_heroes",
+      "hash": "6e2e027633da"
+    },
+    "CheckmateDamage_label": {
+      "text": "체크메이트 피해",
+      "group": "citadel_heroes",
+      "hash": "6e2e027633da"
+    },
+    "CheckmateThreshold_postvalue_label": {
+      "text": "체크메이트 체력 기준",
+      "group": "citadel_heroes",
+      "hash": "dcce0814840c"
+    },
+    "CheckmateThreshold_label": {
+      "text": "체크메이트 체력 기준",
+      "group": "citadel_heroes",
+      "hash": "dcce0814840c"
+    },
     "ability_header_on_hit": {
       "text": "적중 시:",
       "group": "citadel_heroes",
@@ -22865,6 +23300,11 @@
       "hash": "8e969664bfc2"
     },
     "ability_baba_bench_melee": {
+      "text": "근거리 공격",
+      "group": "citadel_heroes",
+      "hash": "8e969664bfc2"
+    },
+    "ability_melee_chessmaster": {
       "text": "근거리 공격",
       "group": "citadel_heroes",
       "hash": "8e969664bfc2"
@@ -23553,6 +23993,11 @@
       "text": "저주받은 사과의 주민 대부분이 살면서 한 번쯤은 해 보고 싶어 하는 일이 몇 가지 있다.\n\n브로드웨이 공연 보기.\n크리스마스 시즌에 록펠러 센터에서 스케이트 타기.\n센트럴파크의 비둘기 할머니에게 한 소리 듣기.\n\n바바는 공원에서 영혼 비둘기에게 먹이를 주는 평범한 할머니가 아니라... 뉴욕의 명물이다. 뉴욕의 전설 속에 깊이 자리 잡은, 누구도 막을 수 없는 존재다. 지난 50년 동안 비가 오나 눈이 오나, 바바가 매일 같은 벤치에 앉아 있었다는 게 사실일까? 그럴지도 모른다. 정말 소호 마법 연맹의 수장일까? 누가 알겠는가. 하지만 한 가지 사실만은 분명하다... 바로 바바가 뉴요커라는 점이다. 그리고 바바는 힘을 좇는 관광객 무리가 맨해튼을 망가뜨리는 모습을 가만히 앉아 지켜보지 않을 것이다.",
       "group": "citadel_heroes",
       "hash": "079fd88f3829"
+    },
+    "hero_chessmaster_lore": {
+      "text": "너무도 빠르게 흘러가는 세상에서 솔로몬은 잠시 멈춰 다른 이의 이야기에 귀를 기울이는 것을 즐긴다. 다정하게 이야기를 들어 주고 좋은 조언을 건네다 보니, 관광객부터 범죄자, 재계의 거물까지 온갖 사람들과 체스판을 사이에 두고 마주 앉게 되었다. 하지만 상대가 누구든 솔로몬은 흔들리지 않는다... 그에게 체스는 단순한 게임 이상의 의미를 지니기 때문이다. 체스는 모두를 동등하게 만든다. 서로 다른 삶을 살아온 사람들과 대등한 입장에서 교류할 수 있는 솔로몬만의 방식이다.",
+      "group": "citadel_heroes",
+      "hash": "7b5ef0ade794"
     },
     "MODIFIER_STATE_ROOTED": {
       "text": "이동 불가 상태",
@@ -34340,9 +34785,9 @@
       "hash": "54047d68e8fc"
     },
     "Steam_Citadel_Hideout_Investigating": {
-      "text": "은신처 수사하는 중",
+      "text": "은신처를 수사하는 중",
       "group": "citadel_gc",
-      "hash": "6c0ca1d6ccd8"
+      "hash": "24365275db4a"
     },
     "Steam_Citadel_Hideout_Brooding": {
       "text": "은신처에서 생각에 잠겨 있는 중",
@@ -34410,9 +34855,9 @@
       "hash": "10386997ee70"
     },
     "Steam_Citadel_Hideout_Mourning": {
-      "text": "은신처에서 애통해 하는 중",
+      "text": "은신처에서 애도하는 중",
       "group": "citadel_gc",
-      "hash": "f6809a8b0ed2"
+      "hash": "4392d44711a2"
     },
     "Steam_Citadel_Hideout_Knives": {
       "text": "은신처에서 칼 묘기 부리는 중",
@@ -34495,9 +34940,9 @@
       "hash": "724c6d8fce14"
     },
     "Steam_Citadel_Hideout_Dreams": {
-      "text": "은신처에서 달콤한 꿈을 꾸는 중",
+      "text": "은신처에서 달콤한 꿈 꾸는 중",
       "group": "citadel_gc",
-      "hash": "8fbed0c0c0f8"
+      "hash": "b7f1718a4515"
     },
     "Steam_Citadel_Hideout_Dead": {
       "text": "은신처에서 망자와 노는 중",
@@ -34505,14 +34950,14 @@
       "hash": "6bf39d8928a5"
     },
     "Steam_Citadel_Hideout_Hangover": {
-      "text": "어젯밤 은신처에서 무슨 일이 있었는지 알아내는 중",
+      "text": "은신처에서 어젯밤 일을 떠올리려는 중",
       "group": "citadel_gc",
-      "hash": "b67250217b9b"
+      "hash": "6336a648558f"
     },
     "Steam_Citadel_Hideout_Bless": {
-      "text": "은신처에서 탄약을 축복하는 중",
+      "text": "은신처에서 탄약 축복하는 중",
       "group": "citadel_gc",
-      "hash": "065d06c67a1f"
+      "hash": "17f71679d641"
     },
     "Steam_Citadel_Hideout_Fencer": {
       "text": "은신처에서 완벽을 위해 노력하는 중",
@@ -34520,9 +34965,9 @@
       "hash": "f09b9408b74e"
     },
     "Steam_Citadel_Hideout_Glitter": {
-      "text": "은신처에서 반짝이 청소하는 중",
+      "text": "은신처에서 반짝이 가루 청소하는 중",
       "group": "citadel_gc",
-      "hash": "93f71b68a303"
+      "hash": "ff9bf59d20ec"
     },
     "Steam_Citadel_Hideout_LongIsland": {
       "text": "은신처가 롱아일랜드에 있었으면 하는 중",
@@ -34530,9 +34975,19 @@
       "hash": "b97fd3828eca"
     },
     "Steam_Citadel_Hideout_Mildred": {
-      "text": "은신처에서 밀드레드를 싫어하는 중",
+      "text": "은신처에서 밀드레드 싫어하는 중",
       "group": "citadel_gc",
-      "hash": "54d703977781"
+      "hash": "989e9b639905"
+    },
+    "Steam_Citadel_Hideout_Hathorne": {
+      "text": "은신처에서 호손을 상대로 음모 꾸미는 중",
+      "group": "citadel_gc",
+      "hash": "c24d4e7e28c8"
+    },
+    "Steam_Citadel_Hideout_Chess": {
+      "text": "은신처에서 다음 수 구상하는 중",
+      "group": "citadel_gc",
+      "hash": "6a7c37c599e4"
     },
     "Citadel_Dashboard_BuildVersion": {
       "text": "#{d:buildNumber}",
@@ -45109,6 +45564,16 @@
       "group": "citadel_main",
       "hash": "2b04da177f37"
     },
+    "Citadel_HeroBuilds_UseBuild": {
+      "text": "빌드 사용",
+      "group": "citadel_main",
+      "hash": "a055ad2c3771"
+    },
+    "Citadel_HeroBuilds_Overview": {
+      "text": "개요",
+      "group": "citadel_main",
+      "hash": "476966c5a860"
+    },
     "Citadel_BuildBrowser_Title": {
       "text": "빌드 검색",
       "group": "citadel_main",
@@ -47878,6 +48343,11 @@
       "text": "영웅 목록에서 배정받고 싶지 않은 영웅을 표시할 때 사용합니다.",
       "group": "citadel_main",
       "hash": "2d7276002df8"
+    },
+    "citadel_hotkeys_tooltip_instant_ping": {
+      "text": "짧게 눌러 핑을 표시합니다. 길게 누르면 핑이 취소됩니다. 채팅 휠은 열리지 않지만 미니 원형 메뉴는 열립니다.",
+      "group": "citadel_main",
+      "hash": "3a5d20e3f08d"
     },
     "citadel_hotkeys_tooltip_ping": {
       "text": "눌러서 조준 중인 위치에 핑을 찍습니다. 길게 누르면 채팅 휠이 열립니다.",
@@ -51950,9 +52420,14 @@
       "hash": "1fa76c210fcc"
     },
     "citadel_keybind_ping": {
-      "text": "월드 핑/채팅 휠",
+      "text": "월드 핑(길게 누르기) 채팅 휠",
       "group": "citadel_main",
-      "hash": "1bc300571f52"
+      "hash": "24357758b685"
+    },
+    "citadel_keybind_instant_ping": {
+      "text": "월드 핑",
+      "group": "citadel_main",
+      "hash": "9b25984d2b2d"
     },
     "citadel_keybind_quick_response": {
       "text": "빠른 반응",
@@ -58510,9 +58985,9 @@
       "hash": "5ae9490b4ad1"
     },
     "citadel_chatwheel_idol_here_message": {
-      "text": "영혼 단지가 여기 있다!",
+      "text": "여기에 영혼 단지!",
       "group": "citadel_main",
-      "hash": "e2430f36924b"
+      "hash": "2999105e5767"
     },
     "citadel_chatwheel_help_with_idol_message": {
       "text": "단지 전달을 도와줘",

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-10T02:38:15.740Z",
+  "generatedAt": "2026-10-14T04:11:02.150Z",
   "sourceVpk": "game/citadel/pak01_dir.vpk",
   "entries": [
     {
@@ -217,6 +217,33 @@
       "kind": "vtex",
       "usedBy": [
         "hero:hero_chrono:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/deadpack_card.psd",
+      "vpkPath": "panorama/images/heroes/deadpack_card_psd.vtex_c",
+      "outPath": "public/images/heroes/deadpack_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_deadpack:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/deadpack_mm.psd",
+      "vpkPath": "panorama/images/heroes/deadpack_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/deadpack_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_deadpack:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/deadpack_sm.psd",
+      "vpkPath": "panorama/images/heroes/deadpack_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/deadpack_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_deadpack:sm"
       ]
     },
     {
@@ -1507,6 +1534,42 @@
       ]
     },
     {
+      "ref": "file://{images}/hud/abilities/deadpack/deadpack_chimera.psd",
+      "vpkPath": "panorama/images/hud/abilities/deadpack/deadpack_chimera_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/deadpack/deadpack_chimera.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_deadpack_rocketeer"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/deadpack/deadpack_flight.psd",
+      "vpkPath": "panorama/images/hud/abilities/deadpack/deadpack_flight_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/deadpack/deadpack_flight.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_deadpack_ultimate"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/deadpack/deadpack_salvo.psd",
+      "vpkPath": "panorama/images/hud/abilities/deadpack/deadpack_salvo_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/deadpack/deadpack_salvo.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_deadpack_chargeblast"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/deadpack/deadpack_thermalmass.psd",
+      "vpkPath": "panorama/images/hud/abilities/deadpack/deadpack_thermalmass_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/deadpack/deadpack_thermalmass.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_deadpack_flamethrower"
+      ]
+    },
+    {
       "ref": "file://{images}/hud/abilities/doorman/doorman_bell.psd",
       "vpkPath": "panorama/images/hud/abilities/doorman/doorman_bell_psd.vtex_c",
       "outPath": "public/images/hud/abilities/doorman/doorman_bell.png",
@@ -2249,6 +2312,7 @@
         "ability:ability_melee_unicorn",
         "ability:ability_melee_baba",
         "ability:ability_melee_chessmaster",
+        "ability:ability_melee_deadpack",
         "ability:ability_melee_ratking"
       ]
     },
@@ -3334,6 +3398,7 @@
         "ability:citadel_weapon_baba_set",
         "ability:citadel_weapon_chessmaster_shotgun",
         "ability:citadel_weapon_chessmaster_set",
+        "ability:ability_deadpack_primary_weapon_charge",
         "ability:citadel_weapon_ratking_set"
       ]
     },

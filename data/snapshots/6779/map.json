@@ -3277,6 +3277,24 @@
     {
       "kind": "crate",
       "group": 0,
+      "hid": "15126:50",
+      "underground": false,
+      "x": 644,
+      "y": 4172,
+      "z": 384
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "hid": "15126:49",
+      "underground": false,
+      "x": 724,
+      "y": 4172,
+      "z": 384
+    },
+    {
+      "kind": "crate",
+      "group": 0,
       "hid": "15126:52",
       "underground": false,
       "x": -304,
@@ -3289,24 +3307,6 @@
       "hid": "15126:51",
       "underground": false,
       "x": -208,
-      "y": 4176,
-      "z": 384
-    },
-    {
-      "kind": "crate",
-      "group": 0,
-      "hid": "15126:50",
-      "underground": false,
-      "x": 720,
-      "y": 4176,
-      "z": 384
-    },
-    {
-      "kind": "crate",
-      "group": 0,
-      "hid": "15126:49",
-      "underground": false,
-      "x": 800,
       "y": 4176,
       "z": 384
     },

@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6774",
-  "upstreamCommit": "6774",
-  "generatedAt": "2026-10-10T02:37:44.724Z",
+  "clientVersion": "6779",
+  "upstreamCommit": "6779",
+  "generatedAt": "2026-10-14T04:10:01.398Z",
   "language": "schinese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 618,
-    "citadel_heroes": 3642,
-    "citadel_attributes": 1980,
-    "citadel_gc": 216,
-    "citadel_main": 5252
+    "citadel_heroes": 3694,
+    "citadel_attributes": 1986,
+    "citadel_gc": 219,
+    "citadel_main": 5255
   },
   "tokens": {
     "hero_vampire:n": {
@@ -16549,21 +16549,6 @@
       "group": "citadel_heroes",
       "hash": "4917a7ed145c"
     },
-    "RecastWindow_label": {
-      "text": "再次施放窗口",
-      "group": "citadel_heroes",
-      "hash": "0d0575af23e0"
-    },
-    "RecastWindow_postvalue_label": {
-      "text": "再次施放窗口",
-      "group": "citadel_heroes",
-      "hash": "0d0575af23e0"
-    },
-    "RecastWindow_postfix": {
-      "text": "秒",
-      "group": "citadel_heroes",
-      "hash": "eb6aaba1a1ca"
-    },
     "BonusBullets_postvalue_label": {
       "text": "额外子弹",
       "group": "citadel_heroes",
@@ -22209,21 +22194,6 @@
       "group": "citadel_heroes",
       "hash": "eb6aaba1a1ca"
     },
-    "StunDuration_label": {
-      "text": "眩晕时间",
-      "group": "citadel_heroes",
-      "hash": "fe6a7dd7c8e3"
-    },
-    "StunDuration_postvalue_label": {
-      "text": "眩晕时间",
-      "group": "citadel_heroes",
-      "hash": "fe6a7dd7c8e3"
-    },
-    "StunDuration_postfix": {
-      "text": "秒",
-      "group": "citadel_heroes",
-      "hash": "eb6aaba1a1ca"
-    },
     "modifier_baba_ult2_mark": {
       "text": "被标记",
       "group": "citadel_heroes",
@@ -22339,10 +22309,15 @@
       "group": "citadel_heroes",
       "hash": "9814c8771b39"
     },
-    "ability_chessmaster_throwbishop_desc": {
-      "text": "<span class=\"diminish\">主动：</span>制造一个<span class=\"highlight\">象</span>，可以无限期停留在原地。<br><br><span class=\"diminish\">移动({g:citadel_binding:'ADS'})：</span>移动象，对其穿过的敌人施加逐渐减弱的{g:citadel_inline_attribute:'Slow'}并造成{g:citadel_inline_attribute:'SpiritDamage'}。<br><br>象会在一定延迟后留下方格，威胁敌人并造成{g:citadel_inline_attribute:'SpiritDamage'}。<br><br><span class=\"diminish\">重新激活可以召回所有象，结束本技能。</span>",
+    "ability_chessmaster_throwbishop_trigger": {
+      "text": "摆放象",
       "group": "citadel_heroes",
-      "hash": "b76e5bb92314"
+      "hash": "9814c8771b39"
+    },
+    "ability_chessmaster_throwbishop_desc": {
+      "text": "制造一个<span class=\"highlight\">象</span>，可以无限期停留在原地。<br><br><span class=\"diminish\">移动（{g:citadel_binding:'ADS'}）：</span>移动象，对其穿过的敌人施加逐渐减弱的{g:citadel_inline_attribute:'Slow'}并造成{g:citadel_inline_attribute:'SpiritDamage'}。一定延迟后激活对角方格，对踏上去的敌人造成{g:citadel_inline_attribute:'SpiritDamage'}。<br><br><span class=\"diminish\">重新激活可以召回所有象，结束本技能。</span>",
+      "group": "citadel_heroes",
+      "hash": "2ee199547aba"
     },
     "ability_chessmaster_throwbishop_t1_desc": {
       "text": "+{s:MoveDistance}米移动距离<br>+{s:FadingSlowPercent}%减弱的减速",
@@ -22430,9 +22405,9 @@
       "hash": "31151b5f16ed"
     },
     "ability_chessmaster_knightbuff_desc": {
-      "text": "<span class=\"diminish\">主动：</span>将一名友军提拔为<span class=\"highlight\">马</span>，使其获得<span class=\"highlight\">额外耐力</span>和{g:citadel_inline_attribute:'CombatBarrier'}，持续一段时间。<br><br>对自身施放时自己会作为<span class=\"highlight\">王</span>出击，获得双倍{g:citadel_inline_attribute:'CombatBarrier'}，但是没有耐力。<br><br><span class=\"diminish\">移动（{g:citadel_binding:'ADS'}）：</span>移动棋子，使其在落地前的持续时间内<span class=\"highlight\">无敌</span>。",
+      "text": "将一名友军提拔为<span class=\"highlight\">马</span>，使其获得<span class=\"highlight\">额外耐力</span>和{g:citadel_inline_attribute:'CombatBarrier'}，持续一段时间。<br><br>对自身施放时自己会作为<span class=\"highlight\">王</span>出击，获得双倍{g:citadel_inline_attribute:'CombatBarrier'}，但是没有耐力。<br><br><span class=\"diminish\">移动（{g:citadel_binding:'ADS'}）：</span>移动棋子，使其在落地前的持续时间内<span class=\"highlight\">无敌</span>。",
       "group": "citadel_heroes",
-      "hash": "b86660d1ea24"
+      "hash": "175531473bec"
     },
     "ability_chessmaster_knightbuff_t2_desc": {
       "text": "+{s:CombatBarrier}屏障<br>+{s:Stamina}耐力",
@@ -22440,24 +22415,29 @@
       "hash": "8f276128b11c"
     },
     "ability_chessmaster_knightbuff_t3_desc": {
-      "text": "对友军：再提拔<span class=\"highlight\">一个马</span><br>对自身：走一步后<span class=\"highlight\">移除所有减益</span>",
+      "text": "能以半径内两名友军为目标<br>对自身：一步后<span class=\"highlight\">移除所有减益</span>",
       "group": "citadel_heroes",
-      "hash": "656696759665"
+      "hash": "bd63a1b9fd22"
     },
     "ability_chessmaster_forkpiece": {
       "text": "车阵",
       "group": "citadel_heroes",
       "hash": "2c454ccf936d"
     },
-    "ability_chessmaster_forkpiece_desc": {
-      "text": "<span class=\"diminish\">主动：</span>放出一对向前行进的<span class=\"highlight\">车</span>，造成{g:citadel_inline_attribute:'SpiritDamage'}并施加{g:citadel_inline_attribute:'Immobilize'}。如果车击中了墙壁，则会反弹为相反方向。<br><br><span class=\"diminish\">再次激活</span>：车会垂直分开。</span>",
+    "ability_chessmaster_forkpiece_trigger": {
+      "text": "车阵",
       "group": "citadel_heroes",
-      "hash": "7182fb4acf71"
+      "hash": "2c454ccf936d"
+    },
+    "ability_chessmaster_forkpiece_desc": {
+      "text": "放出一对向前行进的<span class=\"highlight\">车</span>，造成{g:citadel_inline_attribute:'SpiritDamage'}并施加{g:citadel_inline_attribute:'Immobilize'}。如果车击中了墙壁，则会反弹为相反方向。<br><br><span class=\"diminish\">再次激活</span>：车会垂直分开。</span>",
+      "group": "citadel_heroes",
+      "hash": "392c38512b8b"
     },
     "ability_chessmaster_forkpiece_t1_desc": {
-      "text": "击中时：<br>减少{s:FireRateSlow}%射速，持续{s:SlowDuration}秒",
+      "text": "击中时：<br>减少{s:FireRateSlow}%射速，持续{s:DebuffDuration}秒",
       "group": "citadel_heroes",
-      "hash": "3b0e3622b724"
+      "hash": "f623375ac1f0"
     },
     "ability_chessmaster_forkpiece_t2_desc": {
       "text": "击中时：<br>造成{s:CurrentHealthPercent}%当前生命值的伤害",
@@ -22544,15 +22524,20 @@
       "group": "citadel_heroes",
       "hash": "750bb1992d39"
     },
-    "ability_chessmaster_queen_desc_active": {
-      "text": "<span class=\"diminish\">主动：</span>召唤一个<span class=\"highlight\">后</span>，猛然坠落对一个区域造成{g:citadel_inline_attribute:'SpiritDamage'}。在一定延迟后，后会放出沿直线分布的方格，再次造成{g:citadel_inline_attribute:'SpiritDamage'}并施加{g:citadel_inline_attribute:'Stun'}。<br><br><span class=\"diminish\">移动（{g:citadel_binding:'ADS'}）：</span>后跳跃至目标地点，再次造成相同效果。<span class=\"diminish\"><br><br>后被摧毁前只能移动有限次数，或者可以被召回，提前结束本技能。</span>",
+    "ability_chessmaster_queen_trigger": {
+      "text": "出后",
       "group": "citadel_heroes",
-      "hash": "5856b2c9f397"
+      "hash": "750bb1992d39"
+    },
+    "ability_chessmaster_queen_desc_active": {
+      "text": "召唤一个<span class=\"highlight\">后</span>，猛然坠落对一个区域造成{g:citadel_inline_attribute:'SpiritDamage'}。在一定延迟后，后会放出沿直线分布的方格，再次造成{g:citadel_inline_attribute:'SpiritDamage'}并施加{g:citadel_inline_attribute:'Stun'}。<br><br><span class=\"diminish\">移动（{g:citadel_binding:'ADS'}）：</span>后跳跃至目标地点，再次造成相同效果。<span class=\"diminish\"><br><br>重新激活可以提前召回后，结束本技能。</span>",
+      "group": "citadel_heroes",
+      "hash": "f2cace82a834"
     },
     "ability_chessmaster_queen_t2_desc": {
-      "text": "击中时：施加{s:SlowPercent}%减速。击败{s:CheckmateThreshold}生命以下的英雄",
+      "text": "+{s:SlowPercent}%减速<br>将军{s:CheckmateThreshold}生命以下的英雄，将其淘汰",
       "group": "citadel_heroes",
-      "hash": "5f5bf23fa4e3"
+      "hash": "bca4be363e9d"
     },
     "ability_chessmaster_queen_t3_desc": {
       "text": "+{s:QueenBonusMoves}步数<br>+{s:TileSteps}方格范围",
@@ -22578,11 +22563,6 @@
       "text": "方格范围",
       "group": "citadel_heroes",
       "hash": "bf1394f9c812"
-    },
-    "TileSteps_postfix": {
-      "text": "方格",
-      "group": "citadel_heroes",
-      "hash": "a8ba90ae7c14"
     },
     "QueenCooldown_postvalue_label": {
       "text": "后冷却时间",
@@ -22673,6 +22653,461 @@
       "text": "将军临界值",
       "group": "citadel_heroes",
       "hash": "0b1794e704c1"
+    },
+    "ability_deadpack_chargeblast": {
+      "text": "林鸮齐射",
+      "group": "citadel_heroes",
+      "hash": "cd002af2e066"
+    },
+    "ability_deadpack_chargeblast_desc": {
+      "text": "发射<span class=\"highlight\">一连串元灵导弹，会沿直线嵌入地面</span>。导弹经过一段延迟或检测到敌人时会爆炸，造成{g:citadel_inline_attribute:'SpiritDamage'}并<span class=\"highlight\">标记</span>目标。<br><br>使用蓄力射击标记的敌人会造成{g:citadel_inline_attribute:'BonusSpiritDamage'}并施加逐渐减弱的{g:citadel_inline_attribute:'Slow'}。<br><br><span class=\"diminish\">按住并拖拽可以选择角度。</span>",
+      "group": "citadel_heroes",
+      "hash": "971208a2f924"
+    },
+    "ability_deadpack_chargeblast_t1_desc": {
+      "text": "{s:AbilityCooldown}秒冷却时间",
+      "group": "citadel_heroes",
+      "hash": "190a957482ab"
+    },
+    "ability_deadpack_chargeblast_t2_desc": {
+      "text": "+{s:Damage}伤害<br>+{s:CoatedDamage}标记伤害",
+      "group": "citadel_heroes",
+      "hash": "182088446dcc"
+    },
+    "ability_deadpack_chargeblast_t3_desc": {
+      "text": "+{s:MarksTotal}导弹，距离更长，提升元灵增强系数",
+      "group": "citadel_heroes",
+      "hash": "a899cb28a0f6"
+    },
+    "MarksTotal_postvalue_label": {
+      "text": "发射导弹数",
+      "group": "citadel_heroes",
+      "hash": "919966e428bc"
+    },
+    "MarksTotal_label": {
+      "text": "发射导弹数",
+      "group": "citadel_heroes",
+      "hash": "919966e428bc"
+    },
+    "HeatGainedTotal_label": {
+      "text": "获得热量",
+      "group": "citadel_heroes",
+      "hash": "3ff48e5c6e89"
+    },
+    "HeatGainedTotal_postvalue_label": {
+      "text": "获得热量",
+      "group": "citadel_heroes",
+      "hash": "3ff48e5c6e89"
+    },
+    "HeatGainedTotal_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "DamageRamp_label": {
+      "text": "伤害增幅",
+      "group": "citadel_heroes",
+      "hash": "d2997bf97117"
+    },
+    "DamageRamp_postvalue_label": {
+      "text": "伤害增幅",
+      "group": "citadel_heroes",
+      "hash": "d2997bf97117"
+    },
+    "ability_deadpack_chargeblast/debuff": {
+      "text": "齐射减速",
+      "group": "citadel_heroes",
+      "hash": "29b3187865e3"
+    },
+    "ability_deadpack_chargeblast/coated_buff": {
+      "text": "射速",
+      "group": "citadel_heroes",
+      "hash": "96c1a5c620a4"
+    },
+    "CoatedDamage_postvalue_label": {
+      "text": "标记伤害",
+      "group": "citadel_heroes",
+      "hash": "5123aaad4bdd"
+    },
+    "CoatedDamage_label": {
+      "text": "标记伤害",
+      "group": "citadel_heroes",
+      "hash": "5123aaad4bdd"
+    },
+    "CoatedSlowPercent_label": {
+      "text": "渐弱减速",
+      "group": "citadel_heroes",
+      "hash": "06f9825dc389"
+    },
+    "CoatedSlowPercent_postvalue_label": {
+      "text": "渐弱减速",
+      "group": "citadel_heroes",
+      "hash": "06f9825dc389"
+    },
+    "CoatedSlowPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "CoatedSlowDuration_postvalue_label": {
+      "text": "减速持续时间",
+      "group": "citadel_heroes",
+      "hash": "5aa952b692d0"
+    },
+    "CoatedSlowDuration_label": {
+      "text": "减速持续时间",
+      "group": "citadel_heroes",
+      "hash": "5aa952b692d0"
+    },
+    "CoatedSlowDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "CoatedDuration_postvalue_label": {
+      "text": "标记持续时间",
+      "group": "citadel_heroes",
+      "hash": "af807a614132"
+    },
+    "CoatedDuration_label": {
+      "text": "标记持续时间",
+      "group": "citadel_heroes",
+      "hash": "af807a614132"
+    },
+    "CoatedDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "MissileGroundDuration_postvalue_label": {
+      "text": "爆炸延迟",
+      "group": "citadel_heroes",
+      "hash": "d167ff64fe36"
+    },
+    "MissileGroundDuration_label": {
+      "text": "爆炸延迟",
+      "group": "citadel_heroes",
+      "hash": "d167ff64fe36"
+    },
+    "MissileGroundDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "ability_deadpack_flamethrower": {
+      "text": "抛洒燃料",
+      "group": "citadel_heroes",
+      "hash": "195ea6632237"
+    },
+    "ability_deadpack_flamethrower_t2_desc": {
+      "text": "+{s:ScorchDamage}爆炸伤害<br>反向喷射击中时：+{s:BonusFireRate}%射速，持续{s:BuffDuration}秒",
+      "group": "citadel_heroes",
+      "hash": "e09372eb6811"
+    },
+    "ability_deadpack_flamethrower_t3_desc": {
+      "text": "{s:BulletResistReduction}%子弹抗性削弱<br>反向喷射击中时：施加一个标记",
+      "group": "citadel_heroes",
+      "hash": "aa19b0f42b36"
+    },
+    "ability_deadpack_flamethrower/firerate_buff": {
+      "text": "射速",
+      "group": "citadel_heroes",
+      "hash": "96c1a5c620a4"
+    },
+    "ChargeShotExplosionRadiusPercent_label": {
+      "text": "蓄力射击爆炸半径",
+      "group": "citadel_heroes",
+      "hash": "76e2052ae86e"
+    },
+    "ChargeShotExplosionRadiusPercent_postvalue_label": {
+      "text": "蓄力射击爆炸半径",
+      "group": "citadel_heroes",
+      "hash": "76e2052ae86e"
+    },
+    "ChargeShotExplosionRadiusPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "ability_deadpack_flamethrower/resist_reduction": {
+      "text": "焦黑",
+      "group": "citadel_heroes",
+      "hash": "bea82632d315"
+    },
+    "ScorchDamage_label": {
+      "text": "爆发伤害",
+      "group": "citadel_heroes",
+      "hash": "60fc0857def5"
+    },
+    "ScorchDamage_postvalue_label": {
+      "text": "爆发伤害",
+      "group": "citadel_heroes",
+      "hash": "60fc0857def5"
+    },
+    "ResistDuration_value_label": {
+      "text": "减速持续时间",
+      "group": "citadel_heroes",
+      "hash": "5aa952b692d0"
+    },
+    "ResistDuration_postvalue_label": {
+      "text": "减速持续时间",
+      "group": "citadel_heroes",
+      "hash": "5aa952b692d0"
+    },
+    "ResistDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "ability_deadpack_rocketeer": {
+      "text": "奇美拉马克1号",
+      "group": "citadel_heroes",
+      "hash": "49d01a6c3383"
+    },
+    "ability_deadpack_rocketeer_t3_desc": {
+      "text": "击中英雄时：<br>-{s:OverheatLockoutDurationReductionOnPlayerHitPercent}%冷却时间<br>+{s:ExplosionDamage}元灵伤害",
+      "group": "citadel_heroes",
+      "hash": "8dc2c537f801"
+    },
+    "ability_deadpack_rocketeer/maxheat": {
+      "text": "过热",
+      "group": "citadel_heroes",
+      "hash": "5ecbc0ed4664"
+    },
+    "ability_deadpack_rocketeer/maxheat/lockout": {
+      "text": "降温中",
+      "group": "citadel_heroes",
+      "hash": "ba509c981d16"
+    },
+    "FuelPct_postvalue_label": {
+      "text": "燃料",
+      "group": "citadel_heroes",
+      "hash": "028448f9baf5"
+    },
+    "FuelPct_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "HeatVentedPct_postvalue_label": {
+      "text": "排出热量",
+      "group": "citadel_heroes",
+      "hash": "8dea98bc38b2"
+    },
+    "HeatVentedPct_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "FuelRefillRate_postvalue_label": {
+      "text": "在地面降温",
+      "group": "citadel_heroes",
+      "hash": "fad4673e2ac0"
+    },
+    "FuelRefillRate_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "OverheatStunDuration_postvalue_label": {
+      "text": "眩晕",
+      "group": "citadel_heroes",
+      "hash": "361fdff98915"
+    },
+    "OverheatStunDuration_label": {
+      "text": "眩晕",
+      "group": "citadel_heroes",
+      "hash": "361fdff98915"
+    },
+    "OverheatStunDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "OverheatStunDurationSelf_postvalue_label": {
+      "text": "自身眩晕",
+      "group": "citadel_heroes",
+      "hash": "c05077c52c5f"
+    },
+    "OverheatStunDurationSelf_label": {
+      "text": "自身眩晕",
+      "group": "citadel_heroes",
+      "hash": "c05077c52c5f"
+    },
+    "OverheatStunDurationSelf_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "OverheatLockoutDuration_postvalue_label": {
+      "text": "正在降温",
+      "group": "citadel_heroes",
+      "hash": "5d47f7044d28"
+    },
+    "OverheatLockoutDuration_label": {
+      "text": "正在降温",
+      "group": "citadel_heroes",
+      "hash": "5d47f7044d28"
+    },
+    "OverheatLockoutDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "HeatGainRate_postvalue_label": {
+      "text": "获得热量",
+      "group": "citadel_heroes",
+      "hash": "3ff48e5c6e89"
+    },
+    "HeatGainRate_label": {
+      "text": "获得热量",
+      "group": "citadel_heroes",
+      "hash": "3ff48e5c6e89"
+    },
+    "HeatGainRate_postfix": {
+      "text": "/秒",
+      "group": "citadel_heroes",
+      "hash": "a3ab7f188d18"
+    },
+    "HeatGainAirDash_postvalue_label": {
+      "text": "空中冲刺热量",
+      "group": "citadel_heroes",
+      "hash": "fda95b27d430"
+    },
+    "HeatGainAirDash_label": {
+      "text": "空中冲刺热量",
+      "group": "citadel_heroes",
+      "hash": "fda95b27d430"
+    },
+    "HeatGainAirDash_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "SelfDamagePercent_postvalue_label": {
+      "text": "自身伤害",
+      "group": "citadel_heroes",
+      "hash": "fe111b14a240"
+    },
+    "SelfDamagePercent_label": {
+      "text": "自身伤害",
+      "group": "citadel_heroes",
+      "hash": "fe111b14a240"
+    },
+    "SelfDamagePercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "MaxHealthSelfDamagePercent_postvalue_label": {
+      "text": "自身伤害",
+      "group": "citadel_heroes",
+      "hash": "fe111b14a240"
+    },
+    "MaxHealthSelfDamagePercent_label": {
+      "text": "自身伤害",
+      "group": "citadel_heroes",
+      "hash": "fe111b14a240"
+    },
+    "MaxHealthSelfDamagePercent_postfix": {
+      "text": "%最大生命值",
+      "group": "citadel_heroes",
+      "hash": "3b4f23ff19f8"
+    },
+    "ExplosionBulletDamage_label": {
+      "text": "爆炸伤害",
+      "group": "citadel_heroes",
+      "hash": "6454bbf80acf"
+    },
+    "ExplosionBulletDamage_postvalue_label": {
+      "text": "爆炸伤害",
+      "group": "citadel_heroes",
+      "hash": "6454bbf80acf"
+    },
+    "citadel_ability_deadpack_heat_ui_meter": {
+      "text": "热量",
+      "group": "citadel_heroes",
+      "hash": "eb13744594ab"
+    },
+    "ability_deadpack_ultimate": {
+      "text": "绝对锁定",
+      "group": "citadel_heroes",
+      "hash": "fd9f385d1efd"
+    },
+    "ability_deadpack_ultimate_desc": {
+      "text": "<span class=\"highlight\">抓住一个敌人</span>，来一场亲身示范，先飞向空中，再向地面坠落。<br><br>你和参与者在下落时会受到{g:citadel_inline_attribute:'SpiritDPS'}，撞地时会受到{g:citadel_inline_attribute:'SpiritDamage'}。<span class=\"highlight\">生命值低于{s:LowHealthEnemyThresholdPct}%</span>的敌人受到的伤害会增加。",
+      "group": "citadel_heroes",
+      "hash": "172565399cfc"
+    },
+    "ability_deadpack_ultimate_t3_desc": {
+      "text": "+{s:StunDuration}秒眩晕<br>+{s:DamagePerMeter}伤害/米",
+      "group": "citadel_heroes",
+      "hash": "5e70d39b5550"
+    },
+    "ability_deadpack_ultimate/overloaded": {
+      "text": "过热",
+      "group": "citadel_heroes",
+      "hash": "5ecbc0ed4664"
+    },
+    "ability_deadpack_ultimate/grabbed": {
+      "text": "被丹尼抓住",
+      "group": "citadel_heroes",
+      "hash": "ba01430cfb91"
+    },
+    "modifier_citadel_deadpack_target": {
+      "text": "被丹尼抓住",
+      "group": "citadel_heroes",
+      "hash": "ba01430cfb91"
+    },
+    "DamagePerMeter_postvalue_label": {
+      "text": "坠落伤害",
+      "group": "citadel_heroes",
+      "hash": "f889e6004d0f"
+    },
+    "DamagePerMeter_label": {
+      "text": "坠落伤害",
+      "group": "citadel_heroes",
+      "hash": "f889e6004d0f"
+    },
+    "DamagePerMeter_postfix": {
+      "text": " /米",
+      "group": "citadel_heroes",
+      "hash": "e1cdd7b130f8"
+    },
+    "DeadpackUltBonusTotalDamage_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "DeadpackUltBonusTotalDamage_label": {
+      "text": "额外伤害",
+      "group": "citadel_heroes",
+      "hash": "a107a380e961"
+    },
+    "DeadpackUltBonusTotalDamage_postvalue_label": {
+      "text": "额外伤害",
+      "group": "citadel_heroes",
+      "hash": "a107a380e961"
+    },
+    "DeadpackUltBonusTotalDamage_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "DeadpackUlt_Target_Modifier": {
+      "text": "现场演示",
+      "group": "citadel_heroes",
+      "hash": "514734303617"
+    },
+    "GrabRange_postvalue_label": {
+      "text": "抓取范围",
+      "group": "citadel_heroes",
+      "hash": "1ab9a73afb2c"
+    },
+    "GrabRange_label": {
+      "text": "Grab Range",
+      "group": "citadel_heroes",
+      "hash": "ed6e3c1d3cc3"
     },
     "ability_header_on_hit": {
       "text": "命中时：",
@@ -23294,6 +23729,11 @@
       "group": "citadel_heroes",
       "hash": "404d125d28f3"
     },
+    "ability_melee_deadpack": {
+      "text": "近战",
+      "group": "citadel_heroes",
+      "hash": "404d125d28f3"
+    },
     "Citadel_Familiar_HeroTag_1": {
       "text": "雪 中 送 炭",
       "group": "citadel_heroes",
@@ -23774,70 +24214,10 @@
       "group": "citadel_heroes",
       "hash": "ea6501040185"
     },
-    "hero_astro_lore": {
-      "text": "有的人终其一生都梦想着能够搬去纽约。哈雷黛却不是这样的人。她满足地做着一名小镇警长，唯一一次动枪还是在县集市上表演射击。对于这样的职业生涯她乐在其中。接着谋杀案就发生了。\n\n作案手法可怖而残忍：受害者的胸腔被撕扯开，内脏好像被鸟啄过一样散乱一摊。哈雷黛追查到了凶手——一名四处游荡的民乐手，被媒体冠以“游吟杀手”的称号。但是当她与凶手对峙时，那人却砰然化作一团乌鸦飞走了。\n\n一晃6个月过去，虽然这座位于伊利诺伊州中部的小镇已不再被谋杀案所笼罩，但哈雷黛对案件的调查并没有停止。她相信游吟杀手正逃往纽约。等她抓到了凶手，她一定要亲手送那个坏人上路。",
-      "group": "citadel_heroes",
-      "hash": "a9f50a4640a9"
-    },
-    "hero_atlas_lore": {
-      "text": "办事则雷利风行、处世则沉着冷静、喝酒则开怀痛饮，亚伯兰侦探多年来一直是纽约刑侦界的的大人物。从艺术品盗窃到人口失踪再到涉及人命的仪式，亚伯兰可不是只把案子接下，他会尽数妥善处置。\n\n但他跟踪花心萝卜揭开隐秘情事的日子终于走到了尽头。一天他打开办公室大门，发现桌子上赫然放着宝书。\n\n一张字条上用黑玛瑙血写道“别让他们夺走宝书”，除此之外再无其他指示。亚伯兰还没搞清楚宝书是从哪来的，但鉴于他的居所已遭闯入、他的办公室三次被人翻遍、他的车爆炸起火，他有足够多的理由将整件事查个水落石出。",
-      "group": "citadel_heroes",
-      "hash": "06fbe28da4dc"
-    },
     "hero_bebop_lore": {
       "text": "比波普是由一个孀居的垃圾场看门女用双手做出来的，但他可不仅仅是个只会干粗活的破烂拼接人，他是她求之不得的宝贝儿子。白天，他俩会一起在废铁场干活儿，晚上则是共同聆听爵士乐。这种日复一日的生活，虽然算不上多舒心，但起码安稳。可是现在，给了比波普生命的人一病不起。要是雪莉小姐得知比波普为了给她买药在晚上都从事着哪些行当，她肯定不答应，但只要她不知道，就不会受到伤害。",
       "group": "citadel_heroes",
       "hash": "8b20db90f3de"
-    },
-    "hero_wrecker_lore": {
-      "text": "当异度涡旋最初袭击纽约时，它不仅仅让全世界都陷入了一个新的神秘主义时代，还改变了地缘政治的面貌。从中情局雇佣的预言者能在威胁尚未崛起的数十年前便洞察其行踪，到烟雾弥漫的密室中缔结的神秘契约，数不清的战争和暴行得到遏止。倘若让其发生，那么历史将被重塑。但这并不意味着战争不会出现，只不过战争的方式发生了变化。\n\n超自然军事公司在此时赫然登场。这些公司利用外星生物和各种血魔法，得以绕过这个国家洞察万象的神启先知们设立的防线，成为想要发动战争的国家的代理人。\n\n破坏王就是这其中一名士兵。\n\n他受雇于“邪异战术解决方案”（菲尔法克斯实业的子公司），是雇佣兵中的精英。人人都知道，让其他超自然军事公司望而却步的脏活累活，他反倒当仁不让。",
-      "group": "citadel_heroes",
-      "hash": "15610e203c84"
-    },
-    "hero_chrono_lore": {
-      "text": "悖论，时间开了个小差造成的故障，也是臭名昭著的盗贼帮派的名字。这帮小偷会制定出精密复杂的作案手法，专门找最有权有势的人物和机构下手，并以此为傲。他们将无数的古董、机密、名人验亲结果搞到手后，会做什么呢？将它们放到快闪博物馆里展示一番，以此向全世界宣告没有谁能躲得过他们的魔爪。\n\n帮会的每个成员都隐藏在谜团之中，他们戴上面具，用组织的名字称呼自己。他们无处不在，但又无处可寻。只要他们想拿到某样东西，就没有什么能拦得住他们。",
-      "group": "citadel_heroes",
-      "hash": "83a66d0cff92"
-    },
-    "hero_dynamo_lore": {
-      "text": "身为科学家，奇能总保持着一颗好奇心。因此，当一道时空裂痕在中央公园豁开时，他是最先赶到现场调查的。虽然他预料到目睹如此壮观的景象将会改变他的生命，但他以为这种改变只是象征性的，而不是让他的身体原子化并坍缩成一颗小小的濒死恒星。\n\n尽管他的身体已经湮灭，他的精神和求知欲没有消亡。作为哥伦比亚学院的终身教授，奇能希望一边研究他自身的状况，一边扛下授课任务，毕竟，他还要启发一颗颗年轻的头脑。",
-      "group": "citadel_heroes",
-      "hash": "5e470fda618d"
-    },
-    "hero_forge_lore": {
-      "text": "麦吉·麦金妮从小就很会造东西。4岁时，她就能用积木搭出炫丽的建筑；10岁时，她鼓捣出特制的灯光装置，还改造了电路，好为父母的结婚纪念日增添光彩；15岁时，她设计出了一种机器，能从死者身上提炼出灵魂……这个机器要比她搭的积木房子稍微更引人注目一点。\n\n如今，身为菲尔法克斯实业军事研发部的总监，麦金妮把时间都花在机器车间里，而从不光顾实验室。她对理论没兴趣，在她眼里，科学是能用手触摸的魔法。",
-      "group": "citadel_heroes",
-      "hash": "5a2ad923f203"
-    },
-    "hero_ghost_lore": {
-      "text": "吉安娜·盖斯特夫人曾一度是个炙手可热的万人迷。但随着时光飞逝，红颜渐褪，她跻身上流社会的逍遥日子也越来越离她远去。到最后，她沦为养老院里的孱弱阿婆，整天讲述着她曾经的辉煌。也就是在这时，守誓者出现了。守誓者是来自异域空间的强大魂灵，他给盖斯特夫人提供了寻回昔日浮华的办法。他可以帮她重获青春，而她要做的就只是从世人身上吸取精华，使青春常驻。\n\n盖斯特内心充满了挣扎。显然这可是个险恶的行径，而且毫无疑问这个守誓者不是可以信赖的家伙。可话虽如此，一想到能够再现青春时光，她就无法抗拒。因此，她心生一计：先跟守誓者定下契约，然后将他捆住，监视他，限制住守誓者对她的影响力和吸引力。她仍然会给守誓者喂食，但是一切会按照按她的要求。\n\n然而，随着几年变成几十年，盖斯特的力量已经衰减，而守誓者的胃口却胜过以往任何时候……",
-      "group": "citadel_heroes",
-      "hash": "2135bd261c23"
-    },
-    "hero_gigawatt_lore": {
-      "text": "当神秘能量在地球上觉醒时，整个世界都变了……任何事情都有可能。但仅仅因为任何事情都有可能，并不代表任何事情都应该成为可能。因此政府制定了规则，也就是法律。是这些法律让美国公民们能够安全地享受超自然世界的种种好处。但受制于规则和法律的都是凡夫俗子，是平庸之辈，他们可不能跟柒相提并论。\n\n坊间流传着各种关于柒的谣言，试图去揣测他当年究竟干了什么，以至于被送到了永寂黑渊——这个地牢专门关押世间最最危险的玄冥术士。但他受刑那天晚上所发生的事，是毫无疑问的。\n\n当晚有七国最强法师联合派出的护卫坐镇。创造这些护卫不仅是为了防止行刑时受到神秘力量的干扰，也是为了齐力毁灭柒的魂魄，以防日后再有人为继承他的衣钵而召唤、复苏或假以他法利用他的魂魄。但一切都是徒劳。\n\n围观者们胆颤心惊地目睹美军最强心术师的头颅像葡萄一样爆裂；他们尖叫着看到苏格兰场调查玄冥之术的头号警探——据称也是让柒落网的那个人——化为灰烬。柒的身体在束带之下猛烈地扭动，他的皮肤在诡异的电流下燃烧……然而他就是不死。他狂笑起来。\n\n他在笑声中挣脱了束缚。\n\n他在笑声中瞧见他的对手畏畏缩缩。\n\n他在笑声中把折磨他的人一扫而光。\n\n他在笑声中品尝着多年没有呼吸到的新鲜空气。\n\n他在笑声中想象着他到纽约之后都要干些什么。",
-      "group": "citadel_heroes",
-      "hash": "d8d24e17a847"
-    },
-    "hero_haze_lore": {
-      "text": "玄冥力量安全和调查委员会是个让中情局都显得透明的隐秘政府组织。抵御当地执法部门无力对抗的凶险力量，保障国家安全，这全都依靠组成该委员会的男男女女和各路鬼神们。\n\n岚梦是恶名昭彰的“睡魔作战队”的一员，她时常负责潜入观察对象的梦中，评估其威胁等级，必要的话……还会让其陷入沉睡。",
-      "group": "citadel_heroes",
-      "hash": "812b14f6adba"
-    },
-    "hero_hornet_lore": {
-      "text": "薇妲曾是塞勒姆审巫案中约翰·霍桑的受害人。在第一场异度涡旋（也就是让大众领略到了超自然力量的那次事件）降临时，她的魂魄被带回了尘世。\n\n她孤“魂”奋战，对抗着“人性联盟”——一个由霍桑的后代建立的女巫裁判所。薇妲力图保护超自然世界，使其免受霍桑之流的侵扰。为了达到目的，就算敌人在她面前堆积如山她也毫不畏惧。",
-      "group": "citadel_heroes",
-      "hash": "86be1bf2df9f"
-    },
-    "hero_inferno_lore": {
-      "text": "曾经，炽焱和大多数少年一样，狂傲、叛逆而又冲动。但和大多数少年不一样的是，他是来自异域空间的生物，他有着能驾驭火焰的超自然力量。很显然：他的青葱岁月是在一次次纵火、谋杀和毁尸灭迹中度过的。不过那都是往事了。如今炽焱已长大成人，他的性情也温和了不少。他开开心心地在酒吧工作，听着现场音乐，跟有趣的人聊天。话虽这么说，只要酒吧里有人寻衅滋事、拳脚相加，他可不怕施展曾经练就的技能。",
-      "group": "citadel_heroes",
-      "hash": "c0ed0f14c4b1"
-    },
-    "hero_kelvin_lore": {
-      "text": "开尔文是声名显赫的探险科学家，探索并了解未知世界是他一生的追求。因此当有传言称北极地区隐藏着第八座星际大门时，开尔文自然以最快的速度组建了远征队。他召集了他这一代最优秀的科学家，团队在众人欢呼雀跃中启航了。\n\n然而他们从此再没有回来。\n\n一年半以后，一艘拖网渔船发现了开尔文被冰封的遗体，他紧握着一块带有发光铭文的石头。船员一点点凿开封住开尔文的冰块，希望能凑近看他的遗体，结果开尔文张开了双眼，令他们大惊失色。他们检查了他的生命迹象……他没有脉搏。他们试图包扎他敞开的伤口……没有鲜血。然而，开尔文却反常地“活着”。\n\n他已经完全不记得远征时发生了什么，因此他要寻找答案。",
-      "group": "citadel_heroes",
-      "hash": "847c149dfb5f"
     },
     "hero_lash_lore": {
       "text": "雅各布·劳什不是好人。",
@@ -23849,140 +24229,20 @@
       "group": "citadel_heroes",
       "hash": "23c27c681e29"
     },
-    "hero_nano_lore": {
-      "text": "卡厉可曾经是拜克斯特协会的一名荣誉成员，在意识到免费追猎怪物远不如为钱害人后，毅然离开了这个尊崇的组织。\n\n如今，作为炙手可热的职业猎人，卡厉可过着幸福的生活，而她的目标们就没有生活可言了。",
-      "group": "citadel_heroes",
-      "hash": "6a79a9e09de1"
-    },
-    "hero_orion_lore": {
-      "text": "卫斯理·灰爪是“拜克斯特协会”的创始成员。他花了将近40年的时光捕杀那些猎食人类的怪物，最后决定让他人接手，并放下了他的弓箭。灰爪从前的职业生涯意味着他总是没有太多时间陪伴妻儿，如今儿子也已成家，他意识到这是与亲爱的家人共享天伦之乐的最后机会。\n\n退休的生活很适合卫斯理。他弥补了不曾守候在夫人身旁的时光。他宠溺着孙儿们。他每周三都为一大家子做晚饭。他过得很快乐。\n\n接着他便接到了那个电话。\n\n政府部门称那是场意外……大火吞没了他儿子的家，没有人逃出生天。但卫斯理知道事情没这么简单。他的儿媳是伊克斯亚人，她可以用意念扑灭火焰。假设他们的遗体是在火场被人发现，那他们肯定是在大火前遇难。\n\n至此，灰爪再一次拿起了弓箭，等他追查到了是谁下此毒手，定叫他付出代价。",
-      "group": "citadel_heroes",
-      "hash": "bc7b1d6a5487"
-    },
-    "hero_shiv_lore": {
-      "text": "希弗是怪物猎人的国际团体“拜克斯特协会”的忠实成员。他游走于北美大地，捕获那些猎食生灵的怪物。\n\n虽然他桀骜不驯的个性和违法犯罪的过去让协会里一些较为传统的成员心存疑虑，但没人能否认他手到擒来的本事。",
-      "group": "citadel_heroes",
-      "hash": "1e07e14eb546"
-    },
-    "hero_viscous_lore": {
-      "text": "百慕大三角从来就不是荒诞传说，而是大西洋之下的隐秘交汇点。大多数时候，从这一星际大门逃离出来的东西并不危险（比如尼斯湖水怪），不过现在，某个仅被称作“恶魔”的黑暗而凶险之物在海洋中作祟，这让海中的居民们心惊胆战。\n\n但其中一位居民——一只能通灵的海葵决定做点什么。它召唤出幽灵般的黏液状身体，好让它能在海面上穿行。魔液竭尽所能地试图召唤守护神，以使深海秘境免受潜伏在底部的不速之客侵扰。",
-      "group": "citadel_heroes",
-      "hash": "904c2d4ec678"
-    },
-    "hero_warden_lore": {
-      "text": "大多数人以为超自然力量是50年前降临到这个世界的。他们错了。超自然力量的存在已经塑造了好几代人的传说。只要有人害怕阴影，就有人一生都在与阴影抗争。\n\n沃督的家族曾世代都是好战的炼金术士，他们一直都担心某一天将要应对神秘的末日灾难，因而训练着自己。不过随着时间的流逝，这一训诫的重要性似乎变得越来越轻。昔日被这个家族的人当作是衷心告诫的东西慢慢地被当成了迷信的祖辈们讲述的轶事。\n\n当星际大门在中央公园开启的时候，沃督的父母意识到不仅他们从小听到的是真的，而且他们还对此毫无准备。为了不让下一代人在危机之下措手不及，他们从沃督出生那天起就把他训练成超自然力量的追猎机器。目的只有一个：让守护神们永远不要再闯入这个世界。",
-      "group": "citadel_heroes",
-      "hash": "9fc62119308d"
-    },
     "hero_wraith_lore": {
       "text": "灵魅的组织是纽约投机圈的基石，这一点是公开到不能再公开的秘密。不过，在一次次犯下恶行之后，灵魅知道律法对她无可奈何。",
       "group": "citadel_heroes",
       "hash": "ff7adca17190"
-    },
-    "hero_yamato_lore": {
-      "text": "出身于黑道世家的香织和哥哥大和从小就知道，待父亲去世后，他俩注定要掌管“第七月”。多年来他们平起平坐地经营着这个组织，大举获利、屡创佳绩，还计划着向美国扩张。\n\n他们的想法很简单：香织留在日本，维持大本营的业务，而大和则奔赴美国，创立国际分支。只是这对兄妹没有料想到，这一计划使一些不安的下属感到不满，他们不愿意在日本接受香织的统领。接着就发生了一场迅速而血腥的叛变。大和为了保护香织而丢了性命，不过他确保了香织和几个忠臣能够逃离日本，前往美国。\n\n当香织来到美国的时候，原本要与大和见面的联系人迎接了香织一行。由于不熟悉日本男女的名字，那人便管她叫大和。香织本想纠正他，但她随后决定，将哥哥的记忆永远留存下来的最好办法就是继承他的名字，实现他的梦想。",
-      "group": "citadel_heroes",
-      "hash": "fae1e161d1fd"
-    },
-    "hero_tengu_lore": {
-      "text": "当屋顶上的那只石兽突然活过来时，它都不知道究竟是怎么回事……它只知道一个成年的人类和一个小小的人类正受到伤害。所以它飞速赶去营救，把攻击者打了个落荒而逃。那个小小的人类向它说了声谢谢，还问它叫什么名字，但它没有名字。于是小小人类就说：“那我就叫你‘青藤’吧！”石兽当时身上爬满了常青藤，它觉得这名字有点太直白了，但为了小小人类，还是决定接受它。\n\n那两个人类问青藤是否愿意跟他们回家，好让他们答谢它，于是青藤跟着他们走了。那天晚上青藤了解到了很多事情。那一家人姓阿若悠。那个小小人类叫索菲亚。他们管一盘美味佳肴叫“磨丰果”。不过最重要的是，她了解到袭击那两个人类的家伙们叫“门多萨集团”，他们到处害人，像阿若悠一家那样的好人。\n\n自阿若悠一家收留青藤那天起已经过了18年。这些年里，她视捣毁门多萨集团、解放东哈勒姆区为己任。不过，把将近20年的时间全都花在一桩事业上的问题在于，达成目标后就无所适从了。生平第一次，青藤准备好要走出东哈勒姆区，看看世间除了做义警之外还有什么。",
-      "group": "citadel_heroes",
-      "hash": "a95d6c1c3ec8"
-    },
-    "hero_synth_lore": {
-      "text": "艾伦·菲尔法克斯是菲尔法克斯实业的头号继承人。艾伦18岁生日当天惨遭枪击，又被双亲抛下等死。自那之后的五年里他就一直隐姓埋名地活着。艾伦不知道是谁在试图阻止自己继承父母的公司……但是在菲尔法克斯实业这个利欲横流的贼窝里，谁都有嫌疑。\n\n艾伦改称自己为“口袋”，并竭力隐藏自己的真实身份。这么做不仅仅是为了保护自己，也是为了寻找脱离父母的、只属于自己的认同感。",
-      "group": "citadel_heroes",
-      "hash": "a327997526dd"
-    },
-    "hero_mirage_lore": {
-      "text": "镇尼是当代世界较为奇异的族群之一。他们拥有强大的法力，但施展有度。他们没法保持人形超过48分钟，这之后就不得不回到容器里。正因如此，大多数镇尼会雇佣人类守卫，负责接送、保护、陪伴他们。\n\n蜃景就是这样一个守卫。他受雇于镇尼大使那沙拉·迪昂，目前在纽约参与外交任务。镇尼们希望能通过跟美国政府协商买下怀俄明州一部分土地，好让镇尼族建立属于自己的主权国家。",
-      "group": "citadel_heroes",
-      "hash": "d828c81764d0"
     },
     "hero_slork_lore": {
       "text": "作为深海秘境中臭名昭著的怪物，海魇向来喜欢在自己周围营造神秘和恐惧的氛围。他猎食莽撞的水手，向海豹人索要贡品，日子过得心满意足。但这一切都被“恶魔”的到来彻底摧毁了。毕竟，在散播恐惧方面，他又怎么比得过一个屠戮众生的自然力量呢？这简直太不公平了。为了避免自己沦为无名之辈，他不得不采取行动……于是，他转而召唤守护神，确保自己永远是深海秘境中的顶级掠食者。",
       "group": "citadel_heroes",
       "hash": "4291ce03b979"
     },
-    "hero_viper_lore": {
-      "text": "要是干着违法犯罪的行径，那么在行动时千万要记住的是不要被抓。蝰邪从来没吸取过这个教训。幸运的是，要说有一件事蝰邪干起来要比躲避追捕得心应手，那就是越狱脱逃。\n\n蝰邪在纽约大都会区的每一所大监狱都待过，她因此结识了一大帮形形色色的亡命之徒，每个人都欠她一份人情。但她也跟一大帮形形色色的亡命之徒结下了梁子，每个人都不想给她活路。不过蝰邪努力看向积极的那一面。",
-      "group": "citadel_heroes",
-      "hash": "ce0c3039a977"
-    },
-    "hero_magician_lore": {
-      "text": "亨利的父母曾告诉他，他年纪还太小，性子太莽撞，不可以乱碰真魔法，于是他们给了亨利一叠卡牌供他玩耍。他无师自通地练就了一手耍牌的好本事，很快就凭借精彩绝伦的阵阵幻象让同学们眼花缭乱；不过他可完全没有依靠神秘道具，也没有施加咒语。\n\n亨利上高中时遇到了莎瓦娜，他俩都钟情于舞台魔术，彼此之间也迅速擦出火花。两人很快坠入爱河，还搭档成为魔术师组合。他们显而易见是天生一对，因此在毕业舞会上，亨利向莎瓦娜求婚，二人在毕业后很快喜结连理。\n\n毫不意外的是，双方父母都对这桩婚事冷眼相看，但亨利和莎瓦娜深信对方是自己的灵魂伴侣。因此，他们为了巩固对彼此的爱，用秘法将灵魂永远地绑在了一起。\n\n后来，两人在台上表演魔术时发生意外，双双殒命。但没人知道这场意外到底是谁的错。亨利说莎瓦娜搞错位置；莎瓦娜说亨利没等提示。但有一件事是肯定的，由于他们的灵魂被束缚在一起，因此他们谁也没法重新开始。现在，亨利和莎瓦娜成了一对吵来吵去的鬼魂，如果他们想要有机会解开这永世的姻缘，就必须携手合作。",
-      "group": "citadel_heroes",
-      "hash": "4540f626841d"
-    },
     "hero_trapper_lore": {
       "text": "作为纽约巫政厅的一名雇员，陷阱师每天都在建造灵瓮、诱捕巨型老鼠，以/捕捉来自其他次元的各种入侵物种。这不是一份特别光鲜的工作，而且他真的很讨厌和蜘蛛打交道，但纽约博克队的季票钱总得靠打工才能挣到。",
       "group": "citadel_heroes",
       "hash": "a09232c3def4"
-    },
-    "hero_operative_lore": {
-      "text": "凭着叶卡捷琳娜大帝魂灵的护佑，苏维埃帝国在充满神秘主义的美丽新世界里走向繁荣昌盛。虽然叶卡捷琳娜大帝更深层次的动机常常不为外部世界所知，但有一件事是肯定的：她痛恨做一个鬼魂。正因这件事，她给苏维埃帝国的间谍统领指定了一个目标：想办法让她重获肉身。\n\n这名为了完成任务决不罢休的特工只有一个代号，叫“渡鸦”。他搜遍了全世界，寻找奇异的宝物、不寻常的著作和超脱尘世的智慧。如今渡鸦人在纽约，他试图找到一个方法，能让叶卡捷琳娜的魂灵在这纷纷扰扰的人间安定下来。",
-      "group": "citadel_heroes",
-      "hash": "e7b2f9d885f5"
-    },
-    "hero_vampirebat_lore": {
-      "text": "何米娜拥有一切……富有的父母和精英的教育，还有一桩包办的婚姻，将使她从普通的上流社会升为美国的皇室成员。她很开心。\n\n然后她的订婚者被暗害了。\n\n米娜哭了；不是因为未婚夫的命没了，是因为她的前途没了。为什么杀手不等到婚礼后呢？那样她就能冠上梦寐以求的夫姓，谁也不用假装爱着谁。一切都会很完美，但人生并不公平……所以米娜干了一件事，就像大多数被宠坏的孩子发现事情和预想的不一样：她让她的父母处理好这一切。\n\n何家知道，想要安抚他们的女儿，唯一的办法就是给她找来的东西要大过她所失去的……而嫁入全世界的豪门之一本身就是难以逾越的任务。他们必须更大胆。他们必须打破常规。他们必须承诺让女儿永生不灭。\n\n虽然花了不少钱，但最后他们找到了一个愿意把她转化为同类的血族。不出所料的是，米娜认为永恒的青春和信托基金的想法是可以接受的备用计划，所以很高兴地接受了提议。\n\n现在她是刚起步的血族，但她很快发现自己作为人类所拥有的影响力在血族的上流社会里无足轻重……起初她为此很生气，但要说米娜有什么特长，那就是学习规则再颠覆规则的本领。她将成为纽约的子爵，只是其他血族还一无所知。",
-      "group": "citadel_heroes",
-      "hash": "960e199f30f2"
-    },
-    "hero_punkgoat_lore": {
-      "text": "比利是一团满怀怒气的白色火球，愤怒的点……在于某种东西。可能是警察。可能是魔法的规律。可能是市中心陀螺店的糟糕服务。（不是那家好店。是另一家。）\n\n别问他怎么长了个羊头。",
-      "group": "citadel_heroes",
-      "hash": "db1b9bcd5bc5"
-    },
-    "hero_doorman_lore": {
-      "text": "他举止得体。他彬彬有礼。但是这个巴隆妮斯酒店的谦逊门卫，远非表面看上去这么简单。\n\n尽管他只打算在这个位面体验一两个月的生活，但门侍很快发现，通过纽约的服务业，他能持续了解那些能取悦到人类的奇特需求。",
-      "group": "citadel_heroes",
-      "hash": "ddc55f154197"
-    },
-    "hero_familiar_lore": {
-      "text": "雷姆意外地从梦境世界偷渡而来，发现自己滞留在这座不夜城里。出于好奇心，雷姆和他的朋友们在五大区四处游荡，寻找回家的路。\n\n要是下班乘坐蓝线地铁回家时打起了瞌睡，也许刚刚就是遇到了诅咒纽约城里的最新居民。",
-      "group": "citadel_heroes",
-      "hash": "cb5928efbcab"
-    },
-    "hero_necro_lore": {
-      "text": "达西·格瑞墓的双亲是叱咤风云的辩护律师，她从小就生活在一言不合就辩论、争吵或谈判的家庭里。这样的生活令人疲惫不堪。不过她的父母常常忙于会见客户或处理案件，无暇顾及她，而魂灵却一直倾听她的心声。\n\n格瑞墓很享受她在墓地的时光。宁静祥和，非常适合她平复思绪、倾诉烦恼……但有一天这种单方面的倾诉开始发生改变。\n\n一切始于微弱的耳语，一个女人的声音似乎在回应格瑞墓的抱怨。格瑞墓受好奇心驱使，倾听着……并循着声音的指引，最终来到范科特兰公园里一个铅衬的盒子前。如果大多数高中生挖出一只英灵的手，恐怕都会吓得魂飞魄散，但格瑞墓显然不是一般的青少年。手恢复自由后，英灵的声音变得更加洪亮……她多年来一直在寻找学生去传授知识，而格瑞墓渴望学习。\n\n作为一名初出茅庐的魂灵法师，达西不仅要兼顾布莱克莫学院的学业……还要应对墓园居民的各种需求，他们每个人都有未了的心愿，需要她的帮助才能解决。",
-      "group": "citadel_heroes",
-      "hash": "d7ace14dbca1"
-    },
-    "hero_werewolf_lore": {
-      "text": "莉拉·西尔芙简直一团糟。她沉迷杯中物，她沉迷相思草，至于她的私生活，还是少提为妙。尽管西尔芙有不少缺点，但她作为赏金猎人还是闯出了一番名堂。她自认为事业的成功完全归功于她超凡的直觉，但她身为狼人的身份也功不可没。",
-      "group": "citadel_heroes",
-      "hash": "c6ee6a2c1e73"
-    },
-    "hero_priest_lore": {
-      "text": "圣本笃诛邪者是一支由梵蒂冈批准的精锐特遣部队，成员都被派到超自然掠食者高度集中的地区。他们人数稀少，惯用手法是观察、识别再歼灭。他们有条不紊，他们精确非常，一旦他们发现了对教徒的威胁，他们就会毫不留情。\n\n但在以圣本笃之剑著称的这支精锐之师中，还是有一人脱颖而出。他有着一副铁石心肠，为了大业他愿意付出极大的代价…而他再次被派遣至纽约。",
-      "group": "citadel_heroes",
-      "hash": "e986ee6905a7"
-    },
-    "hero_unicorn_lore": {
-      "text": "即使在充满魔法的世界里，有些东西还是太过稀有而独特。所以一只独角兽该如何自处？向世人宣告自己的存在，可能会招来偷猎者锯掉她的角？还是大大方方地隐藏在康尼岛的杂耍表演中，让大多数人以为她的样子只是表演的一部分？\n\n“耀眼的赛凌”已成为康尼岛上最受欢迎的表演之一。虽然观众的掌声让她感到欣慰，但真正让她每天早上充满干劲的，是她在工作中结识的家人。\n\n美人鱼珂露芭。\n\n木头人莱尼。\n\n鸡翅侠。\n\n铁德。\n\n这些都是她的伙伴。所以，当她发现其中一个同伴为了偿还赌债出卖了部分灵魂，赛凌明白自己是时候走出阴影，不惜一切将其赎回。向守护神展现自己的力量是否过于冒险？没错。但那是明天的问题……今天她的家人需要帮助。",
-      "group": "citadel_heroes",
-      "hash": "0665c0a209e4"
-    },
-    "hero_fencer_lore": {
-      "text": "北伊克斯亚是美丽、传统与冲突并存的土地，残酷的政治暴力早已司空见惯。因此，当阿波罗得知为了保证他的安全，他将被送往纽约求学，他意识到事态严重。\n\n阿波罗很难适应布莱克莫学院的生活。这所学校本应汇聚诅咒的纽约城里最优秀、最聪明的学生，但他看到的，除了少数之外，几乎全是平庸之辈。他没有把时间浪费在派对和舞会之类的琐事上，而是将精力投入到击剑场上，作为布莱克莫击剑队的队长，他刻苦训练。\n\n然而，到头来阿波罗并不太在意纽约生活的单调乏味。他知道，总有一天，父亲会召唤他回家，而他可以证明自己配得上家族的祖传宝剑。",
-      "group": "citadel_heroes",
-      "hash": "ed26846dbb6e"
-    },
-    "hero_ratking_lore": {
-      "text": "纽约沃伦斯的神秘统治者——鼠王，体型、力量和野心都远超他的臣民。他不再满足于躲藏在地下，而是大胆地描绘了一个未来的蓝图：他和他的臣民可以自由行走在地面上，不再惧怕纽约街头巡逻的灭鼠车（或是老鼠称之为，人类灭害小队）。\n\n第1步：控制长岛\n第2步：宣布长岛为新的主权国家——拉塔尼亚\n第3步：惩处所有拒绝离开这个老鼠乌托邦的人类\n\n然而，尽管这个计划天衣无缝，鼠王并不想冒险：因此，他决定召唤他的守护神来助他一臂之力。",
-      "group": "citadel_heroes",
-      "hash": "84351fcfd0ce"
-    },
-    "hero_baba_lore": {
-      "text": "大多数被诅咒的纽约城居民都希望在一生中能经历几件事。\n\n看一场百老汇秀。\n在圣诞季去洛克菲勒中心滑冰。\n被中央公园的鸽子夫人骂一顿。\n\n因为婆婆可不仅仅是在公园里喂灵异鸽子的老太太……她是一个传奇。一股编织进纽约城传说本身的自然之力。她是否真的在过去50年里每天风雨无阻地坐在同一张长椅上？也许吧。她是否真的是苏荷女巫团的首领？谁知道呢。但有一件事是肯定的……她是纽约人。她绝不会袖手旁观，看着一群游客为了争夺力量把曼哈顿搅得天翻地覆。",
-      "group": "citadel_heroes",
-      "hash": "74e57f8f87e1"
-    },
-    "hero_chessmaster_lore": {
-      "text": "在这个节奏飞快的世界里，所罗门乐于停下来倾听。他总是耐心倾听，提供中肯的建议，因此，他发现坐在自己对面下棋的有游客、罪犯和行业巨头。无论对手是谁，所罗门都泰然处之……因为对他而言，国际象棋远不止是游戏。这是平等的具象，让他能在公平的平台上与各行各业的人进行交流。",
-      "group": "citadel_heroes",
-      "hash": "07d7eaf7fbca"
     },
     "MODIFIER_STATE_ROOTED": {
       "text": "被定身",
@@ -27938,6 +28198,21 @@
       "text": "%",
       "group": "citadel_attributes",
       "hash": "4345cb1fa278"
+    },
+    "StunDuration_label": {
+      "text": "眩晕时间",
+      "group": "citadel_attributes",
+      "hash": "fe6a7dd7c8e3"
+    },
+    "StunDuration_postvalue_label": {
+      "text": "眩晕时间",
+      "group": "citadel_attributes",
+      "hash": "fe6a7dd7c8e3"
+    },
+    "StunDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_attributes",
+      "hash": "eb6aaba1a1ca"
     },
     "StunDelay_label": {
       "text": "眩晕延迟",
@@ -33579,6 +33854,21 @@
       "group": "citadel_attributes",
       "hash": "4345cb1fa278"
     },
+    "RecastWindow_label": {
+      "text": "再次施放窗口",
+      "group": "citadel_attributes",
+      "hash": "0d0575af23e0"
+    },
+    "RecastWindow_postvalue_label": {
+      "text": "再次施放窗口",
+      "group": "citadel_attributes",
+      "hash": "0d0575af23e0"
+    },
+    "RecastWindow_postfix": {
+      "text": "秒",
+      "group": "citadel_attributes",
+      "hash": "eb6aaba1a1ca"
+    },
     "UnstoppablePerHero_prefix": {
       "text": "+",
       "group": "citadel_attributes",
@@ -34950,9 +35240,9 @@
       "hash": "90a59387e2ff"
     },
     "Steam_Citadel_Hideout_Glitter": {
-      "text": "清理大本营的闪光",
+      "text": "清理大本营的亮片",
       "group": "citadel_gc",
-      "hash": "f01918bf5e09"
+      "hash": "fcc17e68cd7e"
     },
     "Steam_Citadel_Hideout_LongIsland": {
       "text": "希望大本营在长岛",
@@ -34963,6 +35253,21 @@
       "text": "在大本营讨厌米尔德丽德",
       "group": "citadel_gc",
       "hash": "36298bdb01c4"
+    },
+    "Steam_Citadel_Hideout_Hathorne": {
+      "text": "在大本营密谋对付霍桑",
+      "group": "citadel_gc",
+      "hash": "3dce09f2235c"
+    },
+    "Steam_Citadel_Hideout_Chess": {
+      "text": "在大本营筹划棋局",
+      "group": "citadel_gc",
+      "hash": "9255616e9fe2"
+    },
+    "Steam_Citadel_Hideout_FairfaxTesting": {
+      "text": "在大本营测试菲尔法克斯精品产品",
+      "group": "citadel_gc",
+      "hash": "4501683d28a3"
     },
     "Citadel_Dashboard_BuildVersion": {
       "text": "#{d:buildNumber}",
@@ -36698,6 +37003,11 @@
       "text": "按住{g:citadel_binding:'Zipline'}即可搭乘",
       "group": "citadel_main",
       "hash": "a58fce31dd88"
+    },
+    "Citadel_Hud_RideZipLineUnHoldRequired": {
+      "text": "飞行时禁用",
+      "group": "citadel_main",
+      "hash": "9e42195396e1"
     },
     "Citadel_Hud_RideZipLineOnCooldownValue": {
       "text": "{f:1:cooldown_seconds}秒",
@@ -46479,10 +46789,20 @@
       "group": "citadel_main",
       "hash": "e9ab85564f8f"
     },
-    "Minimap_HintControls": {
-      "text": "按住{g:citadel_key:'MOUSE1'}或{g:citadel_binding:'Ping'}可以访问小地图信号轮盘。<br>按住{g:citadel_key:'MOUSE2'}可以在小地图上绘图。",
+    "Minimap_HintControls_MinimapPing": {
+      "text": "{g:citadel_key:'MOUSE1'} / {g:citadel_binding:'Ping'}：信号",
       "group": "citadel_main",
-      "hash": "ee37a106cca2"
+      "hash": "54e811e83425"
+    },
+    "Minimap_HintControls_MinimapRadialMenu": {
+      "text": "{g:citadel_key:'MOUSE1'} / {g:citadel_binding:'Ping'}按住：环形菜单",
+      "group": "citadel_main",
+      "hash": "ea6adb6659cf"
+    },
+    "Minimap_HintControls_MinimapDrawing": {
+      "text": "{g:citadel_key:'MOUSE2'}：小地图绘画",
+      "group": "citadel_main",
+      "hash": "d2722bff782a"
     },
     "EShopFilterItemWeapon": {
       "text": "武器物品",

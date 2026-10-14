@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "upstreamCommit": "6774",
-  "generatedAt": "2026-10-10T02:37:44.270Z",
+  "upstreamCommit": "6779",
+  "generatedAt": "2026-10-14T04:10:00.864Z",
   "objects": {
     "weapon_base": {
       "id": "weapon_base",

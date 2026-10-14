@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6774",
-  "upstreamCommit": "6774",
-  "generatedAt": "2026-10-10T02:37:44.609Z",
+  "clientVersion": "6779",
+  "upstreamCommit": "6779",
+  "generatedAt": "2026-10-14T04:10:01.263Z",
   "language": "japanese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 618,
-    "citadel_heroes": 3556,
+    "citadel_heroes": 3645,
     "citadel_attributes": 1980,
-    "citadel_gc": 216,
-    "citadel_main": 5248
+    "citadel_gc": 218,
+    "citadel_main": 5252
   },
   "tokens": {
     "hero_vampire:n": {
@@ -22254,6 +22254,441 @@
       "group": "citadel_heroes",
       "hash": "4345cb1fa278"
     },
+    "citadel_weapon_chessmaster_set": {
+      "text": "アレヒンの銃",
+      "group": "citadel_heroes",
+      "hash": "bc8bd791e335"
+    },
+    "ability_chessmaster_placepawn": {
+      "text": "セットアップ・ポーン",
+      "group": "citadel_heroes",
+      "hash": "d0b345618e6d"
+    },
+    "ability_chessmaster_movechesspiece": {
+      "text": "ピース移動",
+      "group": "citadel_heroes",
+      "hash": "eec7d90c59e3"
+    },
+    "ability_chessmaster_movechesspiece_desc": {
+      "text": "<span class=\"diminish\">移動 ({g:citadel_binding:'ADS'})：</span><span class=\"highlight\">チェスのピース</span>を1つ選択し、指定地点に移動させる。移動したピースは、種類に応じた効果を発動する<br><br>ピースの移動は対象ごとにクールダウンが存在する",
+      "group": "citadel_heroes",
+      "hash": "762769c909e8"
+    },
+    "ability_chessmaster_confirm_move_tip": {
+      "text": "移動",
+      "group": "citadel_heroes",
+      "hash": "9a97fc3ae6bd"
+    },
+    "ability_chessmaster_cancel_move_tip": {
+      "text": "キャンセル",
+      "group": "citadel_heroes",
+      "hash": "269b0f92e460"
+    },
+    "ability_chessmaster_movechesspiece/moveally": {
+      "text": "ピース移動",
+      "group": "citadel_heroes",
+      "hash": "eec7d90c59e3"
+    },
+    "MoveDistance_postvalue_label": {
+      "text": "移動距離",
+      "group": "citadel_heroes",
+      "hash": "c37456740c3f"
+    },
+    "MoveDistance_label": {
+      "text": "移動距離",
+      "group": "citadel_heroes",
+      "hash": "c37456740c3f"
+    },
+    "MoveDistance_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "SelfMoveDistance_postvalue_label": {
+      "text": "キング 移動距離",
+      "group": "citadel_heroes",
+      "hash": "61c9439a3860"
+    },
+    "SelfMoveDistance_label": {
+      "text": "キング 移動距離",
+      "group": "citadel_heroes",
+      "hash": "61c9439a3860"
+    },
+    "SelfMoveDistance_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "ability_header_on_move": {
+      "text": "移動時：",
+      "group": "citadel_heroes",
+      "hash": "9c718e514448"
+    },
+    "AbilityButtonHint_MovePieceConfirm": {
+      "text": "移動先を確定",
+      "group": "citadel_heroes",
+      "hash": "624b060806a4"
+    },
+    "AbilityButtonHint_MovePieceCancel": {
+      "text": "撤回",
+      "group": "citadel_heroes",
+      "hash": "f16418c45919"
+    },
+    "ability_chessmaster_movechesspiece/movechesspiece": {
+      "text": "前進",
+      "group": "citadel_heroes",
+      "hash": "b453a0d6b4c9"
+    },
+    "ability_chessmaster_throwbishop": {
+      "text": "セットアップ・ビショップ",
+      "group": "citadel_heroes",
+      "hash": "1fa4921e39e8"
+    },
+    "ability_chessmaster_throwbishop_trigger": {
+      "text": "セットアップ・ビショップ",
+      "group": "citadel_heroes",
+      "hash": "1fa4921e39e8"
+    },
+    "ability_chessmaster_throwbishop_desc": {
+      "text": "その場に永続的に留まる<span class=\"highlight\">ビショップ</span>を生成する<br><br><span class=\"diminish\">移動 ({g:citadel_binding:'ADS'})：</span>ビショップを移動させ、通過した敵に{g:citadel_inline_attribute:'SpiritDamage'}を与えて徐々に減衰する{g:citadel_inline_attribute:'Slow'}を付与する。ディレイ後、斜め方向にマスを展開し、踏んだ敵に追加の{g:citadel_inline_attribute:'SpiritDamage'}を与える<br><br><span class=\"diminish\">再発動するとすべてのビショップを呼び戻し、アビリティを終了する</span>",
+      "group": "citadel_heroes",
+      "hash": "8c3ee83c332e"
+    },
+    "ability_chessmaster_throwbishop_t1_desc": {
+      "text": "移動距離 +{s:MoveDistance}m<br>徐々に減衰するスロウ +{s:FadingSlowPercent}%",
+      "group": "citadel_heroes",
+      "hash": "06899ef5c603"
+    },
+    "ability_chessmaster_throwbishop_t2_desc": {
+      "text": "最大ピース数 <span class=\"highlight\">+{s:MaxPieces}</span><br>{s:RecastWindow}秒以内であれば再発動可能",
+      "group": "citadel_heroes",
+      "hash": "4bf7619877f6"
+    },
+    "ability_chessmaster_throwbishop_t3_desc": {
+      "text": "マス範囲 +{s:TileSteps}<br>マスがスピリット耐性を{s:TechArmorDamageReductionPerStack}%減少させる。{s:MaxStacks}回までスタック可能",
+      "group": "citadel_heroes",
+      "hash": "42b2f010b785"
+    },
+    "ability_chessmaster_throwbishop_dot": {
+      "text": "セットアップ・ビショップ - マス",
+      "group": "citadel_heroes",
+      "hash": "65c5e1b37c67"
+    },
+    "ability_header_on_square": {
+      "text": "マスヒット時：",
+      "group": "citadel_heroes",
+      "hash": "8eae96140411"
+    },
+    "MoveCooldown_postvalue_label": {
+      "text": "移動 クールダウン",
+      "group": "citadel_heroes",
+      "hash": "8ee4a29af68a"
+    },
+    "MoveCooldown_label": {
+      "text": "移動 クールダウン",
+      "group": "citadel_heroes",
+      "hash": "8ee4a29af68a"
+    },
+    "MoveCooldown_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "ExpireDistance_postvalue_label": {
+      "text": "呼び戻し 距離",
+      "group": "citadel_heroes",
+      "hash": "4aa6c374406c"
+    },
+    "ExpireDistance_label": {
+      "text": "呼び戻し 距離",
+      "group": "citadel_heroes",
+      "hash": "4aa6c374406c"
+    },
+    "ExpireDistance_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "GroundAuraLingerDuration_label": {
+      "text": "オーラ 残存時間",
+      "group": "citadel_heroes",
+      "hash": "10a6be0ed64b"
+    },
+    "GroundAuraLingerDuration_postvalue_label": {
+      "text": "オーラ 残存時間",
+      "group": "citadel_heroes",
+      "hash": "10a6be0ed64b"
+    },
+    "GroundAuraLingerDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "MaxPieces_label": {
+      "text": "ピース 最大設置可能数",
+      "group": "citadel_heroes",
+      "hash": "7aeb7f40def6"
+    },
+    "MaxPieces_postvalue_label": {
+      "text": "ピース 最大設置可能数",
+      "group": "citadel_heroes",
+      "hash": "7aeb7f40def6"
+    },
+    "ability_chessmaster_knightbuff": {
+      "text": "キングサイド・ナイト",
+      "group": "citadel_heroes",
+      "hash": "6d94060e663a"
+    },
+    "ability_chessmaster_knightbuff_desc": {
+      "text": "味方1人を<span class=\"highlight\">ナイト</span>にプロモーションし、<span class=\"highlight\">追加スタミナ</span>と{g:citadel_inline_attribute:'CombatBarrier'}を一定時間付与する<br><br>セルフキャストした場合、自身が<span class=\"highlight\">キング</span>にプロモーションし、スタミナを獲得しない代わりに2倍の{g:citadel_inline_attribute:'CombatBarrier'}を獲得する<br><br><span class=\"diminish\">移動 ({g:citadel_binding:'ADS'})：</span>ピースを移動させる。ピースは移動完了するまでの間、<span class=\"highlight\">無敵状態</span>になる",
+      "group": "citadel_heroes",
+      "hash": "2d66071dc582"
+    },
+    "ability_chessmaster_knightbuff_t2_desc": {
+      "text": "バリア +{s:CombatBarrier}<br>スタミナ +{s:Stamina}",
+      "group": "citadel_heroes",
+      "hash": "25f9df551f1e"
+    },
+    "ability_chessmaster_knightbuff_t3_desc": {
+      "text": "範囲内の味方2人を対象にできる<br>自身対象時：移動後に<span class=\"highlight\">すべてのデバフを解除</span>する",
+      "group": "citadel_heroes",
+      "hash": "9540594f6c66"
+    },
+    "ability_chessmaster_forkpiece": {
+      "text": "ルーク・バッテリー",
+      "group": "citadel_heroes",
+      "hash": "e307fef35b4d"
+    },
+    "ability_chessmaster_forkpiece_trigger": {
+      "text": "ルーク・バッテリー",
+      "group": "citadel_heroes",
+      "hash": "e307fef35b4d"
+    },
+    "ability_chessmaster_forkpiece_desc": {
+      "text": "2体の<span class=\"highlight\">ルーク</span>を放つ。ルークは前方に移動して{g:citadel_inline_attribute:'SpiritDamage'}を与え、{g:citadel_inline_attribute:'Immobilize'}を付与する。壁にぶつかると、ルークは反対方向に跳ね返る<br><br><span class=\"diminish\">再発動</span>：ルークを垂直方向に分裂させる</span>",
+      "group": "citadel_heroes",
+      "hash": "0e8b02b01429"
+    },
+    "ability_chessmaster_forkpiece_t1_desc": {
+      "text": "ヒット時：{s:SlowDuration}秒間、発射速度を{s:DebuffDuration}%減少させる",
+      "group": "citadel_heroes",
+      "hash": "04a060bd9707"
+    },
+    "ability_chessmaster_forkpiece_t2_desc": {
+      "text": "ヒット時：現在HPの{s:CurrentHealthPercent}%をダメージとして与える",
+      "group": "citadel_heroes",
+      "hash": "d42d942b7a01"
+    },
+    "ability_chessmaster_forkpiece_t3_desc": {
+      "text": "壁の跳ね返り回数 +{s:MaxReflectCount}<br>クールダウン {s:AbilityCooldown}秒<br>移動不能継続時間 +{s:ImmobilizeDuration}秒",
+      "group": "citadel_heroes",
+      "hash": "20e936637ce4"
+    },
+    "ImmobilizeMinDuration_postvalue_label": {
+      "text": "移動不能 最小継続時間",
+      "group": "citadel_heroes",
+      "hash": "ad6a6bb8fd2e"
+    },
+    "ImmobilizeMinDuration_label": {
+      "text": "移動不能 最小継続時間",
+      "group": "citadel_heroes",
+      "hash": "ad6a6bb8fd2e"
+    },
+    "ImmobilizeMinDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "MaxReflectCount_postvalue_label": {
+      "text": "壁 跳ね返り回数",
+      "group": "citadel_heroes",
+      "hash": "d2080c1b2a47"
+    },
+    "MaxReflectCount_label": {
+      "text": "壁 跳ね返り回数",
+      "group": "citadel_heroes",
+      "hash": "d2080c1b2a47"
+    },
+    "ImmobilizeMaxDuration_postvalue_label": {
+      "text": "移動不能 最大継続時間",
+      "group": "citadel_heroes",
+      "hash": "8602dbfa8ff9"
+    },
+    "ImmobilizeMaxDuration_label": {
+      "text": "移動不能 最大継続時間",
+      "group": "citadel_heroes",
+      "hash": "8602dbfa8ff9"
+    },
+    "ImmobilizeMaxDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "KnightAuraRadius_postvalue_label": {
+      "text": "ナイト 痕跡範囲",
+      "group": "citadel_heroes",
+      "hash": "f3e6c8616498"
+    },
+    "KnightAuraRadius_label": {
+      "text": "ナイト 痕跡範囲",
+      "group": "citadel_heroes",
+      "hash": "f3e6c8616498"
+    },
+    "KnightAuraRadius_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "KnightAuraDuration_postvalue_label": {
+      "text": "ナイト 痕跡継続時間",
+      "group": "citadel_heroes",
+      "hash": "8bae03b29e9e"
+    },
+    "KnightAuraDuration_label": {
+      "text": "ナイト 痕跡継続時間",
+      "group": "citadel_heroes",
+      "hash": "8bae03b29e9e"
+    },
+    "KnightAuraDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "ability_chessmaster_queen": {
+      "text": "デベロップ・クイーン",
+      "group": "citadel_heroes",
+      "hash": "8b2ebe7e25c1"
+    },
+    "ability_chessmaster_queen_trigger": {
+      "text": "デベロップ・クイーン",
+      "group": "citadel_heroes",
+      "hash": "8b2ebe7e25c1"
+    },
+    "ability_chessmaster_queen_desc_active": {
+      "text": "<span class=\"highlight\">クイーン</span>を召喚して落下させ、範囲内に{g:citadel_inline_attribute:'SpiritDamage'}を与える。クイーンはディレイ後、{g:citadel_inline_attribute:'SpiritDamage'}を与えて{g:citadel_inline_attribute:'Stun'}を付与するタイルを直線状に放つ<br><br><span class=\"diminish\">移動 ({g:citadel_binding:'ADS'})：</span>クイーンが指定地点に向かって跳躍し、同様の効果を再び発生させる<span class=\"diminish\"><br><br>再発動するとクイーンを早めに呼び戻し、アビリティを終了できる</span>",
+      "group": "citadel_heroes",
+      "hash": "60dc36099de0"
+    },
+    "ability_chessmaster_queen_t2_desc": {
+      "text": "スロウ +{s:SlowPercent}%、HPが{s:CheckmateThreshold}を下回るヒーローをチェックメイトして処刑する",
+      "group": "citadel_heroes",
+      "hash": "af1404f0a431"
+    },
+    "ability_chessmaster_queen_t3_desc": {
+      "text": "移動回数 +{s:QueenBonusMoves}<br>マス範囲 +{s:TileSteps}",
+      "group": "citadel_heroes",
+      "hash": "a395080e99af"
+    },
+    "ability_chessmaster_queen/active": {
+      "text": "デベロップ・クイーン",
+      "group": "citadel_heroes",
+      "hash": "8b2ebe7e25c1"
+    },
+    "ability_chessmaster_queen/lift": {
+      "text": "チェック…",
+      "group": "citadel_heroes",
+      "hash": "1beb4f990daa"
+    },
+    "TileSteps_postvalue_label": {
+      "text": "マス範囲",
+      "group": "citadel_heroes",
+      "hash": "755187d4418c"
+    },
+    "TileSteps_label": {
+      "text": "マス範囲",
+      "group": "citadel_heroes",
+      "hash": "755187d4418c"
+    },
+    "QueenCooldown_postvalue_label": {
+      "text": "クイーン クールダウン",
+      "group": "citadel_heroes",
+      "hash": "56b0466797b7"
+    },
+    "QueenCooldown_label": {
+      "text": "クイーン クールダウン",
+      "group": "citadel_heroes",
+      "hash": "56b0466797b7"
+    },
+    "QueenCooldown_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "QueenBonusMoves_postvalue_label": {
+      "text": "追加移動回数",
+      "group": "citadel_heroes",
+      "hash": "198cb912792f"
+    },
+    "QueenBonusMoves_label": {
+      "text": "追加移動回数",
+      "group": "citadel_heroes",
+      "hash": "198cb912792f"
+    },
+    "VisionAuraRadius_postvalue_label": {
+      "text": "視界 範囲",
+      "group": "citadel_heroes",
+      "hash": "8d0582b152f5"
+    },
+    "VisionAuraRadius_label": {
+      "text": "視界 範囲",
+      "group": "citadel_heroes",
+      "hash": "8d0582b152f5"
+    },
+    "VisionAuraRadius_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "SquareDuration_label": {
+      "text": "マス 継続時間",
+      "group": "citadel_heroes",
+      "hash": "5d136086d7da"
+    },
+    "SquareDuration_postvalue_label": {
+      "text": "マス 継続時間",
+      "group": "citadel_heroes",
+      "hash": "5d136086d7da"
+    },
+    "SquareDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "SquareSize_label": {
+      "text": "マス範囲",
+      "group": "citadel_heroes",
+      "hash": "755187d4418c"
+    },
+    "SquareSize_postvalue_label": {
+      "text": "マス範囲",
+      "group": "citadel_heroes",
+      "hash": "755187d4418c"
+    },
+    "SquareSize_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "CheckmateDamage_postvalue_label": {
+      "text": "チェックメイト ダメージ",
+      "group": "citadel_heroes",
+      "hash": "fc3c79d36b9b"
+    },
+    "CheckmateDamage_label": {
+      "text": "チェックメイト ダメージ",
+      "group": "citadel_heroes",
+      "hash": "fc3c79d36b9b"
+    },
+    "CheckmateThreshold_postvalue_label": {
+      "text": "チェックメイト しきい値",
+      "group": "citadel_heroes",
+      "hash": "b6599ad53b49"
+    },
+    "CheckmateThreshold_label": {
+      "text": "チェックメイト しきい値",
+      "group": "citadel_heroes",
+      "hash": "b6599ad53b49"
+    },
     "ability_header_on_hit": {
       "text": "ヒット時：",
       "group": "citadel_heroes",
@@ -22865,6 +23300,11 @@
       "hash": "28b5bcd8a5d4"
     },
     "ability_baba_bench_melee": {
+      "text": "近接",
+      "group": "citadel_heroes",
+      "hash": "28b5bcd8a5d4"
+    },
+    "ability_melee_chessmaster": {
       "text": "近接",
       "group": "citadel_heroes",
       "hash": "28b5bcd8a5d4"
@@ -23553,6 +23993,11 @@
       "text": "カースド・アップルの住民の多くが「人生で一度は経験したい」と願うことはいくつかある。\n\nブロードウェイでショーを観る。\nクリスマスの時期に、ロックフェラー・センターでアイススケートをする。\nセントラルパークにいる\"ハトおばさん\"に怒鳴られる。\n\nというのも、バーバは公園でハトの精霊に餌をやるだけのただの老婆ではなく……名物と呼べる存在だからだ。まさしく、ニューヨークの伝承そのものに織り込まれた自然の力なのだ。この50年間、雨の日も晴れの日も、同じベンチに座り続けているというのは本当なのだろうか？ あり得る話だ。ソーホー魔術結社のリーダーという噂は事実なのだろうか？ それは誰にもわからない。だが一つだけ確かなのは……彼女が生粋のニューヨーカーだということだ。そんな彼女は、力を求める観光客たちがマンハッタンを荒らしまわる様を、黙って見ているつもりはない。",
       "group": "citadel_heroes",
       "hash": "8e94d4462a4d"
+    },
+    "hero_chessmaster_lore": {
+      "text": "あらゆる出来事が足早に過ぎ去っていくこの世界において、ソロモンは立ち止まって耳を傾けることを厭わない。親身になって話を聞き、的確な助言を与えてくれるソロモンは、観光客から犯罪者、果てには産業界における大物まで、様々な相手とチェス盤を挟んできた。だが対戦相手が誰であろうと、ソロモンが揺らぐことはない……なぜなら彼にとってチェスとはただのゲームではなく、平等をもたらすもの――異なる背景を持つ人々と、対等な立場で繋がるための手段なのだ。",
+      "group": "citadel_heroes",
+      "hash": "efc460301150"
     },
     "MODIFIER_STATE_ROOTED": {
       "text": "移動不能状態",
@@ -34534,6 +34979,16 @@
       "group": "citadel_gc",
       "hash": "9e9701feb927"
     },
+    "Steam_Citadel_Hideout_Hathorne": {
+      "text": "ハイドアウトでホーソーンへの陰謀を構想中",
+      "group": "citadel_gc",
+      "hash": "3112dd05fd5c"
+    },
+    "Steam_Citadel_Hideout_Chess": {
+      "text": "ハイドアイトで次の一手を思案中",
+      "group": "citadel_gc",
+      "hash": "26561c87a4f4"
+    },
     "Citadel_Dashboard_BuildVersion": {
       "text": "#{d:buildNumber}",
       "group": "citadel_main",
@@ -45109,6 +45564,16 @@
       "group": "citadel_main",
       "hash": "c76c230a2c38"
     },
+    "Citadel_HeroBuilds_UseBuild": {
+      "text": "ビルドを使用",
+      "group": "citadel_main",
+      "hash": "d0e897a46247"
+    },
+    "Citadel_HeroBuilds_Overview": {
+      "text": "概要",
+      "group": "citadel_main",
+      "hash": "7a52d716ffef"
+    },
     "Citadel_BuildBrowser_Title": {
       "text": "ビルド閲覧",
       "group": "citadel_main",
@@ -47878,6 +48343,11 @@
       "text": "ヒーローロスター内で、割り当てられたくないヒーローを指定するために使用します。",
       "group": "citadel_main",
       "hash": "120e744770a2"
+    },
+    "citadel_hotkeys_tooltip_instant_ping": {
+      "text": "短押しするとピンをします。長押しをするとピンをキャンセルします。チャットホイールは開きませんが、ミニラジアルは開きます。",
+      "group": "citadel_main",
+      "hash": "771f0361e7d7"
     },
     "citadel_hotkeys_tooltip_ping": {
       "text": "短押しすると、エイムしている位置にピンをします。長押しすると、チャットホイールを開きます。",
@@ -51950,9 +52420,14 @@
       "hash": "9a14f927a31c"
     },
     "citadel_keybind_ping": {
-      "text": "ゲーム内ピン／チャットホイール",
+      "text": "ワールド内ピン（長押し）チャットホイール",
       "group": "citadel_main",
-      "hash": "60bf66497f4f"
+      "hash": "aff866c9d22a"
+    },
+    "citadel_keybind_instant_ping": {
+      "text": "ワールド内ピン",
+      "group": "citadel_main",
+      "hash": "cd9b35c15e0b"
     },
     "citadel_keybind_quick_response": {
       "text": "クイック応答",
@@ -58510,9 +58985,9 @@
       "hash": "8c6293c6d9bc"
     },
     "citadel_chatwheel_idol_here_message": {
-      "text": "魂の壺がある！",
+      "text": "ここに魂の壺がある！",
       "group": "citadel_main",
-      "hash": "0768166ed733"
+      "hash": "082c80c1d283"
     },
     "citadel_chatwheel_help_with_idol_message": {
       "text": "壺を運ぶのを手伝って",
@@ -59425,9 +59900,9 @@
       "hash": "ceaa1014e9b7"
     },
     "ping_jar_call": {
-      "text": "魂の壺がある！",
+      "text": "ここに魂の壺がある！",
       "group": "citadel_main",
-      "hash": "0768166ed733"
+      "hash": "082c80c1d283"
     },
     "ping_koth": {
       "text": "ここに不安定な裂け目がある！",
