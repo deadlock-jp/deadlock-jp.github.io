@@ -4,6 +4,194 @@
   "upstreamRepo": "https://github.com/SteamDatabase/GameTracking-Deadlock",
   "entries": [
     {
+      "date": "2026-10-14",
+      "upstreamCommit": null,
+      "title": "Minor Update - 10-14-2026",
+      "fromVersion": "6779",
+      "toVersion": "6785",
+      "changes": [
+        "ヒーロー・アイテムの数値差分から自動生成 (バフ 0 / ナーフ 2 / 混在 1、変更項目 25)"
+      ],
+      "adjustments": [
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_baba",
+          "note": "クールダウン 30→32 / クールダウン 26→28 / クールダウン 25→27 ほか",
+          "changes": [
+            {
+              "path": "ability_baba_bench_run.properties.AbilityCooldown",
+              "from": 30,
+              "to": 32,
+              "good": false
+            },
+            {
+              "path": "ability_baba_bubbling_brew.properties.AbilityCooldown",
+              "from": 26,
+              "to": 28,
+              "good": false
+            },
+            {
+              "path": "ability_baba_hexing_brew.properties.AbilityCooldown",
+              "from": 25,
+              "to": 27,
+              "good": false
+            },
+            {
+              "path": "ability_baba_hexing_brew.properties.CombatBarrier",
+              "from": 100,
+              "to": 90,
+              "good": false
+            },
+            {
+              "path": "ability_baba_hexing_brew.properties.CombatBarrier@scale",
+              "from": 1.2,
+              "to": 0.7,
+              "good": false
+            },
+            {
+              "path": "ability_baba_hexing_brew.upgrades.T2.AbilityCooldown",
+              "from": -12,
+              "to": -14,
+              "good": true
+            },
+            {
+              "path": "stat.EBulletArmorDamageReduction",
+              "from": null,
+              "to": -7,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_deadpack",
+          "note": "クールダウン 30→25 / Marked Damage 0.9→1.1 / T2強化 Marked Damage 35→45 ほか",
+          "changes": [
+            {
+              "path": "ability_deadpack_chargeblast.properties.AbilityCooldown",
+              "from": 30,
+              "to": 25,
+              "good": true
+            },
+            {
+              "path": "ability_deadpack_chargeblast.properties.CoatedDamage@scale",
+              "from": 0.9,
+              "to": 1.1,
+              "good": true
+            },
+            {
+              "path": "ability_deadpack_chargeblast.upgrades.T2.CoatedDamage",
+              "from": 35,
+              "to": 45,
+              "good": true
+            },
+            {
+              "path": "ability_deadpack_chargeblast.upgrades.T2.Damage",
+              "from": 20,
+              "to": 30,
+              "good": true
+            },
+            {
+              "path": "ability_deadpack_chargeblast.upgrades.T3.CoatedDamage",
+              "from": 0.2,
+              "to": 0.35,
+              "good": true
+            },
+            {
+              "path": "ability_deadpack_chargeblast.upgrades.T3.Damage",
+              "from": 0.225,
+              "to": 0.35,
+              "good": true
+            },
+            {
+              "path": "ability_deadpack_primary_weapon_charge.weapon.bulletDamage",
+              "from": 12,
+              "to": 15,
+              "good": true
+            },
+            {
+              "path": "ability_deadpack_rocketeer.properties.AbilityCooldown@scale",
+              "from": -0.25,
+              "to": -0.45,
+              "good": true
+            },
+            {
+              "path": "ability_deadpack_rocketeer.properties.ExplosionBulletDamage@scale",
+              "from": 1.15,
+              "to": 1.4,
+              "good": true
+            },
+            {
+              "path": "ability_deadpack_rocketeer.properties.HeatGainRateSlowPercentEffectiveness",
+              "from": 75,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "ability_deadpack_rocketeer.properties.MaxHealthSelfDamagePercent",
+              "from": 12,
+              "to": 10,
+              "good": false
+            },
+            {
+              "path": "ability_deadpack_rocketeer.upgrades.T2.HealOnHit#2",
+              "from": 1,
+              "to": 2,
+              "good": true
+            },
+            {
+              "path": "ability_deadpack_rocketeer.upgrades.T3.OverheatLockoutDurationReductionOnPlayerHitPercent",
+              "from": 40,
+              "to": 50,
+              "good": true
+            },
+            {
+              "path": "ability_deadpack_ultimate.properties.BonusDamagePercent",
+              "from": 50,
+              "to": 75,
+              "good": true
+            },
+            {
+              "path": "ability_deadpack_ultimate.upgrades.T1.Damage",
+              "from": 50,
+              "to": 90,
+              "good": true
+            },
+            {
+              "path": "stat.EBaseHealthRegen",
+              "from": 2.5,
+              "to": 3.25,
+              "good": true
+            },
+            {
+              "path": "stat.EMaxHealth",
+              "from": 680,
+              "to": 730,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_resonant_healing",
+          "note": "リジェネ 0.04→0.035",
+          "changes": [
+            {
+              "path": "properties.Regeneration@scale",
+              "from": 0.04,
+              "to": 0.035,
+              "good": false
+            }
+          ]
+        }
+      ],
+      "sourceTitle": "Minor Update - 10-14-2026",
+      "sourceUrl": "https://store.steampowered.com/news/app/1422450/view/669505296465396213"
+    },
+    {
       "date": "2026-10-05",
       "upstreamCommit": null,
       "title": "マイナー アップデート - 2026年10月5日",
