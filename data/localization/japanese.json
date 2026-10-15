@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6779",
-  "upstreamCommit": "6779",
-  "generatedAt": "2026-10-14T04:10:01.263Z",
+  "clientVersion": "6785",
+  "upstreamCommit": "6785",
+  "generatedAt": "2026-10-15T14:18:09.700Z",
   "language": "japanese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
@@ -11,7 +11,7 @@
     "citadel_heroes": 3645,
     "citadel_attributes": 1980,
     "citadel_gc": 218,
-    "citadel_main": 5252
+    "citadel_main": 5251
   },
   "tokens": {
     "hero_vampire:n": {
@@ -46503,11 +46503,6 @@
       "text": "{g:citadel_key:'MOUSE1'}でフィルターを1つ選択します。<br>{g:citadel_key:'MOUSE2'}で複数のフィルターを選択します",
       "group": "citadel_main",
       "hash": "f6495e873f4a"
-    },
-    "Minimap_HintControls": {
-      "text": "{g:citadel_key:'MOUSE1'} か {g:citadel_binding:'Ping'} を長押しすると、ミニマップのピンホイールを表示します。<br>{g:citadel_key:'MOUSE2'} を長押しするとミニマップに線を描けます。",
-      "group": "citadel_main",
-      "hash": "d43d05fc7149"
     },
     "EShopFilterItemWeapon": {
       "text": "ウェポンアイテム",
