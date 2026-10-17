@@ -2,6 +2,20 @@
   "//": "トップページの「プレイ動画」に出す X の投稿(手で管理する)。並びは added の新しい順(同じ日付ならこのファイルの順)で、最大10件。title はこちらで付ける短い見出しで、元の投稿文の訳や書き写しにはしない。hero はヒーローの内部キー(hero_xxx。無ければ省く)。投稿者から削除の依頼があれば、その項目を消す。読み込みと検査は src/lib/featuredClips.ts",
   "clips": [
     {
+      "url": "https://x.com/eskay520/status/2111239726242123909",
+      "handle": "@eskay520",
+      "hero": "hero_artist",
+      "title": "バイオレットの立ち回り",
+      "added": "2026-10-17"
+    },
+    {
+      "url": "https://x.com/StushRush_/status/2110134884325097875",
+      "handle": "@StushRush_",
+      "hero": "hero_deadpack",
+      "title": "デッドマン・ダニーのロケットジャンプで移動する道筋",
+      "added": "2026-10-17"
+    },
+    {
       "url": "https://x.com/JumpStart_GG/status/2106063472614101390",
       "handle": "@JumpStart_GG",
       "hero": "hero_priest",
