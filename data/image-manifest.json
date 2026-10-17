@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-14T04:11:02.150Z",
+  "generatedAt": "2026-10-17T14:11:15.096Z",
   "sourceVpk": "game/citadel/pak01_dir.vpk",
   "entries": [
     {
@@ -28,6 +28,33 @@
       "kind": "vtex",
       "usedBy": [
         "hero:hero_orion:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/artist_card.psd",
+      "vpkPath": "panorama/images/heroes/artist_card_psd.vtex_c",
+      "outPath": "public/images/heroes/artist_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_artist:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/artist_mm.psd",
+      "vpkPath": "panorama/images/heroes/artist_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/artist_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_artist:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/artist_sm.psd",
+      "vpkPath": "panorama/images/heroes/artist_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/artist_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_artist:sm"
       ]
     },
     {
@@ -1187,6 +1214,61 @@
       ]
     },
     {
+      "ref": "file://{images}/hud/abilities/artist/artist_brush.psd",
+      "vpkPath": "panorama/images/hud/abilities/artist/artist_brush_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/artist/artist_brush.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_artist_rollingprojectile"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/artist/artist_brushflick.psd",
+      "vpkPath": "panorama/images/hud/abilities/artist/artist_brushflick_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/artist/artist_brushflick.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_artist_rollingprojectile_trigger"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/artist/artist_landscape.psd",
+      "vpkPath": "panorama/images/hud/abilities/artist/artist_landscape_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/artist/artist_landscape.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_artist_bamboogrove"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/artist/artist_landscapeend.psd",
+      "vpkPath": "panorama/images/hud/abilities/artist/artist_landscapeend_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/artist/artist_landscapeend.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_artist_bamboogrove_trigger"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/artist/artist_livingink.psd",
+      "vpkPath": "panorama/images/hud/abilities/artist/artist_livingink_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/artist/artist_livingink.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_artist_homingbrush",
+        "ability:ability_artist_pullbrush"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/artist/artist_portrait.psd",
+      "vpkPath": "panorama/images/hud/abilities/artist/artist_portrait_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/artist/artist_portrait.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_artist_tether"
+      ]
+    },
+    {
       "ref": "file://{images}/hud/abilities/astro/bounce_pad.psd",
       "vpkPath": "panorama/images/hud/abilities/astro/bounce_pad_psd.vtex_c",
       "outPath": "public/images/hud/abilities/astro/bounce_pad.png",
@@ -1459,6 +1541,15 @@
       "kind": "vtex",
       "usedBy": [
         "ability:ability_chessmaster_knightbuff"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/chess/chessmaster_moveking.psd",
+      "vpkPath": "panorama/images/hud/abilities/chess/chessmaster_moveking_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/chess/chessmaster_moveking.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_chessmaster_knightbuff_trigger"
       ]
     },
     {
@@ -2310,6 +2401,7 @@
         "ability:ability_melee_necro",
         "ability:ability_melee_werewolf",
         "ability:ability_melee_unicorn",
+        "ability:ability_melee_artist",
         "ability:ability_melee_baba",
         "ability:ability_melee_chessmaster",
         "ability:ability_melee_deadpack",
@@ -3395,6 +3487,8 @@
         "ability:citadel_weapon_werewolf_rifle",
         "ability:citadel_weapon_werewolf_claws",
         "ability:citadel_weapon_unicorn_set",
+        "ability:citadel_weapon_artist_set",
+        "ability:citadel_weapon_artist_projectile",
         "ability:citadel_weapon_baba_set",
         "ability:citadel_weapon_chessmaster_shotgun",
         "ability:citadel_weapon_chessmaster_set",
@@ -5426,9 +5520,9 @@
       ]
     },
     {
-      "ref": "file://{images}/npcs/neutrals/neutral_drain_creature_weak.psd",
-      "vpkPath": "panorama/images/npcs/neutrals/neutral_drain_creature_weak_psd.vtex_c",
-      "outPath": "public/images/npcs/neutrals/neutral_drain_creature_weak.png",
+      "ref": "file://{images}/npcs/neutrals/neutral_drain_creature_normal.psd",
+      "vpkPath": "panorama/images/npcs/neutrals/neutral_drain_creature_normal_psd.vtex_c",
+      "outPath": "public/images/npcs/neutrals/neutral_drain_creature_normal.png",
       "kind": "vtex",
       "usedBy": [
         "haunt:neutral_trash"

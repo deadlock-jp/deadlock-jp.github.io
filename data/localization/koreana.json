@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6785",
-  "upstreamCommit": "6785",
-  "generatedAt": "2026-10-15T14:18:09.770Z",
+  "clientVersion": "6793",
+  "upstreamCommit": "6793",
+  "generatedAt": "2026-10-17T14:10:16.047Z",
   "language": "koreana",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
-    "citadel_mods": 618,
-    "citadel_heroes": 3738,
+    "citadel_mods": 617,
+    "citadel_heroes": 3737,
     "citadel_attributes": 1986,
     "citadel_gc": 219,
-    "citadel_main": 5256
+    "citadel_main": 5255
   },
   "tokens": {
     "hero_vampire:n": {
@@ -3623,11 +3623,6 @@
       "text": "%",
       "group": "citadel_mods",
       "hash": "4345cb1fa278"
-    },
-    "upgrade_burst_fire_desc": {
-      "text": "총탄이 1발이라도 적군 영웅에게 적중하면 잠시 동안 <span class=\"highlight\">연사 속도</span>와 <span class=\"highlight\">이동 속도</span>가 증가합니다.",
-      "group": "citadel_mods",
-      "hash": "96edc281985b"
     },
     "upgrade_intensifying_clip_desc": {
       "text": "무기를 연사할수록 <span class=\"highlight\">무기 피해</span>가 증가합니다.",
@@ -22409,11 +22404,6 @@
       "group": "citadel_heroes",
       "hash": "c9c91ad64515"
     },
-    "ability_chessmaster_knightbuff_desc": {
-      "text": "아군을 <span class=\"highlight\">나이트</span>로 승격시켜 일정 시간 동안 <span class=\"highlight\">보너스 활력</span>과 {g:citadel_inline_attribute:'CombatBarrier'} 효과를 부여합니다.<br><br>자신에게 시전하면 자신을 <span class=\"highlight\">킹</span>으로 지정해 두 배의 {g:citadel_inline_attribute:'CombatBarrier'}이 부여되지만, 활력은 부여되지 않습니다.<br><br><span class=\"diminish\">이동 ({g:citadel_binding:'ADS'}):</span> 해당 말을 이동시킵니다. 대상은 착지할 때까지 <span class=\"highlight\">무적</span> 상태가 됩니다.",
-      "group": "citadel_heroes",
-      "hash": "9501c165e0fe"
-    },
     "ability_chessmaster_knightbuff_t2_desc": {
       "text": "방벽 +{s:CombatBarrier} 증가<br>활력 +{s:Stamina} 증가",
       "group": "citadel_heroes",
@@ -22660,9 +22650,9 @@
       "hash": "dcce0814840c"
     },
     "citadel_weapon_deadpack_set": {
-      "text": "평화를 선사하는 키메라",
+      "text": "키메라 피스브링어",
       "group": "citadel_heroes",
-      "hash": "d579c2d619b5"
+      "hash": "5b7db5136396"
     },
     "ability_deadpack_chargeblast": {
       "text": "스트릭스 일제 사격",
@@ -57933,11 +57923,6 @@
       "text": "업그레이드",
       "group": "citadel_main",
       "hash": "0fe479dc8922"
-    },
-    "Sandbox_Tutorial_Controls_PurchaseMods": {
-      "text": "'마법 증폭 중첩' 구매하기",
-      "group": "citadel_main",
-      "hash": "0308001ad0c1"
     },
     "Sandbox_Tutorial_Controls_CloseShop": {
       "text": "상점 닫기",

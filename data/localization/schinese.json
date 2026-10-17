@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6785",
-  "upstreamCommit": "6785",
-  "generatedAt": "2026-10-15T14:18:09.810Z",
+  "clientVersion": "6793",
+  "upstreamCommit": "6793",
+  "generatedAt": "2026-10-17T14:10:16.124Z",
   "language": "schinese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 618,
-    "citadel_heroes": 3737,
+    "citadel_heroes": 3812,
     "citadel_attributes": 1986,
-    "citadel_gc": 219,
-    "citadel_main": 5255
+    "citadel_gc": 220,
+    "citadel_main": 5258
   },
   "tokens": {
     "hero_vampire:n": {
@@ -3625,9 +3625,9 @@
       "hash": "4345cb1fa278"
     },
     "upgrade_burst_fire_desc": {
-      "text": "当子弹击中敌方英雄时，短暂地获得<span class=\"highlight\">射速</span>和<span class=\"highlight\">移动速度</span>的提升。",
+      "text": "子弹击中英雄时，短暂地获得<span class=\"highlight\">射速</span>和<span class=\"highlight\">移动速度</span>的提升。",
       "group": "citadel_mods",
-      "hash": "c6c9a696dcce"
+      "hash": "f32b47be557f"
     },
     "upgrade_intensifying_clip_desc": {
       "text": "持续射击时增加<span class=\"highlight\">武器伤害</span>。",
@@ -22404,10 +22404,15 @@
       "group": "citadel_heroes",
       "hash": "31151b5f16ed"
     },
-    "ability_chessmaster_knightbuff_desc": {
-      "text": "将一名友军提拔为<span class=\"highlight\">马</span>，使其获得<span class=\"highlight\">额外耐力</span>和{g:citadel_inline_attribute:'CombatBarrier'}，持续一段时间。<br><br>对自身施放时自己会作为<span class=\"highlight\">王</span>出击，获得双倍{g:citadel_inline_attribute:'CombatBarrier'}，但是没有耐力。<br><br><span class=\"diminish\">移动（{g:citadel_binding:'ADS'}）：</span>移动棋子，使其在落地前的持续时间内<span class=\"highlight\">无敌</span>。",
+    "ability_chessmaster_knightbuff_trigger": {
+      "text": "移动王",
       "group": "citadel_heroes",
-      "hash": "175531473bec"
+      "hash": "d7b3be2e2769"
+    },
+    "ability_chessmaster_knightbuff_desc": {
+      "text": "将一名友军提拔为<span class=\"highlight\">马</span>，使其获得<span class=\"highlight\">额外耐力</span>和{g:citadel_inline_attribute:'CombatBarrier'}，持续一段时间。<br><br>对自身施放时自己会作为<span class=\"highlight\">王</span>出击，获得双倍{g:citadel_inline_attribute:'CombatBarrier'}，但是没有耐力。<br><br><span class=\"diminish\">移动（{g:citadel_binding:'ADS'}）：</span>移动棋子，使其在落地前的持续时间内<span class=\"highlight\">无敌</span>。如果对自身施放，再次激活技能会开始移动。",
+      "group": "citadel_heroes",
+      "hash": "18f0f096a7b9"
     },
     "ability_chessmaster_knightbuff_t2_desc": {
       "text": "+{s:CombatBarrier}屏障<br>+{s:Stamina}耐力",
@@ -22418,6 +22423,11 @@
       "text": "能以半径内两名友军为目标<br>对自身：一步后<span class=\"highlight\">移除所有减益</span>",
       "group": "citadel_heroes",
       "hash": "bd63a1b9fd22"
+    },
+    "ability_chessmaster_knightbuff/rookbuff": {
+      "text": "王翼马",
+      "group": "citadel_heroes",
+      "hash": "31151b5f16ed"
     },
     "ability_chessmaster_forkpiece": {
       "text": "车阵",
@@ -23139,6 +23149,361 @@
       "group": "citadel_heroes",
       "hash": "ed6e3c1d3cc3"
     },
+    "citadel_weapon_artist_set": {
+      "text": "妙笔奇招",
+      "group": "citadel_heroes",
+      "hash": "72f47a952212"
+    },
+    "ability_artist_pullbrush": {
+      "text": "浓墨重彩",
+      "group": "citadel_heroes",
+      "hash": "60872f254bdd"
+    },
+    "ability_artist_homingbrush": {
+      "text": "浓墨重彩",
+      "group": "citadel_heroes",
+      "hash": "60872f254bdd"
+    },
+    "ability_artist_homingbrush_desc_passive": {
+      "text": "<span class=\"diminish\">被动：</span>施放任意其他技能都会刷新<span class=\"highlight\">行云流水</span>的冷却时间。",
+      "group": "citadel_heroes",
+      "hash": "4fa26b2c69be"
+    },
+    "ability_artist_homingbrush_desc_active": {
+      "text": "<span class=\"diminish\">强化（{g:citadel_binding:'ABILITY1'}）：</span>接下来的<span class=\"highlight\">3</span>发子弹焕发生机，行进时可以操控。子弹造成更高的{g:citadel_inline_attribute:'BulletDamage'}，并且在小范围内溅射{g:citadel_inline_attribute:'SpiritDamage'}。<br><br>每次成功击中一名英雄都会减少<span class=\"highlight\">所有技能的冷却时间</span>，对<span class=\"highlight\">所有物品的冷却时间</span>减少的数值减半。",
+      "group": "citadel_heroes",
+      "hash": "9319edd01ad8"
+    },
+    "ability_artist_homingbrush_desc_active_alt": {
+      "text": "<span class=\"diminish\">绘画（{g:citadel_binding:'ADS'}）：</span>绘制一道实心的墨迹，可以阻挡投射物和角色通过。<br><br>墨迹可以被一次近战重击摧毁，但是对攻击者造成{g:citadel_inline_attribute:'SpiritDamage'}。</span>",
+      "group": "citadel_heroes",
+      "hash": "6cb98f555e9e"
+    },
+    "ability_artist_homingbrush/stack": {
+      "text": "浓墨重彩",
+      "group": "citadel_heroes",
+      "hash": "60872f254bdd"
+    },
+    "ability_artist_homingbrush/stackingbuff": {
+      "text": "浓墨重彩",
+      "group": "citadel_heroes",
+      "hash": "60872f254bdd"
+    },
+    "BulletDamageMultiplier_postvalue_label": {
+      "text": "子弹伤害",
+      "group": "citadel_heroes",
+      "hash": "c54333794b6f"
+    },
+    "BulletDamageMultiplier_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "ability_artist_homingbrush/active": {
+      "text": "浓墨重彩",
+      "group": "citadel_heroes",
+      "hash": "60872f254bdd"
+    },
+    "ability_artist_homingbrush_t2_desc": {
+      "text": "强化时：<br>获得+{s:BonusFireRatePerStack}%射速，持续{s:StackDuration}秒，可叠加{s:MaxStacks}次",
+      "group": "citadel_heroes",
+      "hash": "95a84930c820"
+    },
+    "ability_artist_homingbrush_t1_desc": {
+      "text": "{s:AbilityCooldown}秒冷却时间<br>{s:MaxDrawDistance}米最大绘制距离",
+      "group": "citadel_heroes",
+      "hash": "9116891939e3"
+    },
+    "ability_artist_homingbrush_t3_desc": {
+      "text": "+{s:CooldownReductionPerHit}秒每次击中减少冷却<br>提升增强系数",
+      "group": "citadel_heroes",
+      "hash": "4c4b47559155"
+    },
+    "MaxDrawDistance_label": {
+      "text": "最大绘图尺寸",
+      "group": "citadel_heroes",
+      "hash": "672c3b5c60c4"
+    },
+    "MaxDrawDistance_postvalue_label": {
+      "text": "最大绘图尺寸",
+      "group": "citadel_heroes",
+      "hash": "672c3b5c60c4"
+    },
+    "MaxDrawDistance_postfix": {
+      "text": "米",
+      "group": "citadel_heroes",
+      "hash": "ee7f305751a5"
+    },
+    "DrawDuration_label": {
+      "text": "绘画持续时间",
+      "group": "citadel_heroes",
+      "hash": "5273cce9dd60"
+    },
+    "DrawDuration_postvalue_label": {
+      "text": "绘画持续时间",
+      "group": "citadel_heroes",
+      "hash": "5273cce9dd60"
+    },
+    "DrawDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "ability_artist_rollingprojectile": {
+      "text": "行云流水",
+      "group": "citadel_heroes",
+      "hash": "8784c55899b4"
+    },
+    "ability_artist_rollingprojectile_desc": {
+      "text": "拖动一支持续向前行进的墨笔，留下一道墨迹，为友军提供<span class=\"highlight\">额外滑行距离</span>，同时对经过的敌人施加逐渐减弱的{g:citadel_inline_attribute:'Slow'}和{g:citadel_inline_attribute:'SpiritDamage'}，行进距离越远，效果越强。<br><br>再次激活技能可以向前甩出墨笔，提前结束技能，但是在更大范围内造成{g:citadel_inline_attribute:'SpiritDamage'}。",
+      "group": "citadel_heroes",
+      "hash": "6faa072bfc32"
+    },
+    "ability_artist_rollingprojectile_t1_desc": {
+      "text": "滑行时：+{s:StaminaCooldownReduction}%耐力恢复",
+      "group": "citadel_heroes",
+      "hash": "1203516b0bbd"
+    },
+    "ability_artist_rollingprojectile_t2_desc": {
+      "text": "{s:AbilityCooldown}秒冷却时间<br>+{s:ExplosionRadius}米甩动距离<br>+{s:GroundAuraDuration}秒轨迹持续时间",
+      "group": "citadel_heroes",
+      "hash": "51b53555d7c4"
+    },
+    "ability_artist_rollingprojectile_t3_desc": {
+      "text": "滑行时：<br>逐渐获得伤害增强，最高为{s:OutgoingDamagePercent}%，持续{s:DamageAmpDuration}秒",
+      "group": "citadel_heroes",
+      "hash": "8e8d6e262a69"
+    },
+    "ability_artist_rollingprojectile/debuff": {
+      "text": "行云流水",
+      "group": "citadel_heroes",
+      "hash": "8784c55899b4"
+    },
+    "GroundAuraDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "GroundAuraDuration_postvalue_label": {
+      "text": "地面光环持续时间",
+      "group": "citadel_heroes",
+      "hash": "104a488b4b45"
+    },
+    "GroundAuraDuration_label": {
+      "text": "地面光环持续时间",
+      "group": "citadel_heroes",
+      "hash": "104a488b4b45"
+    },
+    "ability_artist_tether": {
+      "text": "静物",
+      "group": "citadel_heroes",
+      "hash": "99d7b641e923"
+    },
+    "ability_artist_tether_desc": {
+      "text": "选择一名英雄成为<span class=\"highlight\">素描对象</span>，只要看着他就会造成{g:citadel_inline_attribute:'SpiritDPS'}。<br><br>如果素描完成，他将受到额外{g:citadel_inline_attribute:'SpiritDamage'}以及{g:citadel_inline_attribute:'Stun'}，并掉落一幅可以捡起的<span class=\"highlight\">素描</span>。<br><br>每收集一幅<span class=\"highlight\">素描</span>，都会根据英雄永久获得属性。",
+      "group": "citadel_heroes",
+      "hash": "bf555858f558"
+    },
+    "ability_artist_tether_t1_desc": {
+      "text": "施放时：<br>获得{s:HealthRegen}生命恢复，持续{s:BuffDuration}秒，捡起时刷新",
+      "group": "citadel_heroes",
+      "hash": "93463519d626"
+    },
+    "ability_artist_tether_t2_desc": {
+      "text": "绘画时：<br>对象造成{s:OutgoingDamagePercent}%伤害",
+      "group": "citadel_heroes",
+      "hash": "4e109ae0ffb7"
+    },
+    "ability_artist_tether_t3_desc": {
+      "text": "+{s:BonusMoveSpeedPercent}%移动速度<br>{s:AbilityCooldown}秒冷却时间<br>+{s:StunDuration}秒眩晕时间",
+      "group": "citadel_heroes",
+      "hash": "3481c4b60306"
+    },
+    "ability_artist_tether/buildup": {
+      "text": "仍在绘制",
+      "group": "citadel_heroes",
+      "hash": "2f8a5647e1de"
+    },
+    "ability_artist_tether/buildup/stun": {
+      "text": "静物",
+      "group": "citadel_heroes",
+      "hash": "99d7b641e923"
+    },
+    "ability_artist_tether/buildup/buff": {
+      "text": "静物",
+      "group": "citadel_heroes",
+      "hash": "99d7b641e923"
+    },
+    "ability_artist_tether/self": {
+      "text": "静物",
+      "group": "citadel_heroes",
+      "hash": "99d7b641e923"
+    },
+    "ability_artist_tether/stun": {
+      "text": "静物",
+      "group": "citadel_heroes",
+      "hash": "99d7b641e923"
+    },
+    "BuildUpPerAbility_postvalue_label": {
+      "text": "每个技能的累积量",
+      "group": "citadel_heroes",
+      "hash": "c37009d4469a"
+    },
+    "BuildUpPerAbility_label": {
+      "text": "每个技能的累积量",
+      "group": "citadel_heroes",
+      "hash": "c37009d4469a"
+    },
+    "BuildUpPerAbility_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "TotalDrawingTime_postvalue_label": {
+      "text": "绘画时间",
+      "group": "citadel_heroes",
+      "hash": "9624f27896a9"
+    },
+    "TotalDrawingTime_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "OutgoingDamagePercentPerPickup_postvalue_label": {
+      "text": "每幅画的伤害加成",
+      "group": "citadel_heroes",
+      "hash": "51f4d082105d"
+    },
+    "OutgoingDamagePercentPerPickup_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "IncomingDamagePercentReductionPerPickup_postvalue_label": {
+      "text": "每幅画的伤害降低",
+      "group": "citadel_heroes",
+      "hash": "e55601abbf1e"
+    },
+    "IncomingDamagePercentReductionPerPickup_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "SpiritPerPickup_postvalue_label": {
+      "text": "每幅画的元灵",
+      "group": "citadel_heroes",
+      "hash": "f6d0c1472763"
+    },
+    "SpiritPerPickup_label": {
+      "text": "每幅画的元灵",
+      "group": "citadel_heroes",
+      "hash": "f6d0c1472763"
+    },
+    "CurrentSketches_label": {
+      "text": "已收集素描：",
+      "group": "citadel_heroes",
+      "hash": "1d5ef8f37117"
+    },
+    "Citadel_Graph_PermanentBuff_ArtistMystic": {
+      "text": "艺术家素描",
+      "group": "citadel_heroes",
+      "hash": "e8d6eacd9414"
+    },
+    "Citadel_Graph_PermanentBuff_ArtistBrawler": {
+      "text": "斗士素描",
+      "group": "citadel_heroes",
+      "hash": "57a812bc7e72"
+    },
+    "Citadel_Graph_PermanentBuff_ArtistAssassin": {
+      "text": "刺客素描",
+      "group": "citadel_heroes",
+      "hash": "d2f38ed5a17c"
+    },
+    "Citadel_Graph_PermanentBuff_ArtistMarksman": {
+      "text": "射手素描",
+      "group": "citadel_heroes",
+      "hash": "b4fdb529db8f"
+    },
+    "artist_drawing_mystic": {
+      "text": "秘士素描",
+      "group": "citadel_heroes",
+      "hash": "920df5505143"
+    },
+    "artist_drawing_marksman": {
+      "text": "射手素描",
+      "group": "citadel_heroes",
+      "hash": "b4fdb529db8f"
+    },
+    "artist_drawing_brawler": {
+      "text": "斗士素描",
+      "group": "citadel_heroes",
+      "hash": "57a812bc7e72"
+    },
+    "artist_drawing_assassin": {
+      "text": "刺客素描",
+      "group": "citadel_heroes",
+      "hash": "d2f38ed5a17c"
+    },
+    "ability_artist_bamboogrove": {
+      "text": "点墨成境",
+      "group": "citadel_heroes",
+      "hash": "6b8081efc8c9"
+    },
+    "ability_artist_bamboogrove_desc": {
+      "text": "制造一片圆形的墨迹，可以阻挡视野，并且使友军获得{g:citadel_inline_attribute:'Spirit'}。<br><br>丛林中的敌人会显形，并且离开会使他们受到{g:citadel_inline_attribute:'SpiritDamage'}，同时被{g:citadel_inline_attribute:'Silence'}和{g:citadel_inline_attribute:'Slow'}，过程中会摧毁墨迹。",
+      "group": "citadel_heroes",
+      "hash": "905812ef7a42"
+    },
+    "ability_artist_bamboogrove/center/buff": {
+      "text": "点墨成境",
+      "group": "citadel_heroes",
+      "hash": "6b8081efc8c9"
+    },
+    "ability_artist_bamboogrove_t2_desc": {
+      "text": "增益时：<br>+{s:AbilityLifestealPercentHero}%元灵吸取生命<br>+{s:TechPower}元灵力量",
+      "group": "citadel_heroes",
+      "hash": "d49ab98ded3a"
+    },
+    "ability_artist_bamboogrove_t3_desc": {
+      "text": "+{s:SilenceDuration}秒沉默时间<br>+{s:AbilityDuration}秒技能持续时间<br>墨迹不再被摧毁",
+      "group": "citadel_heroes",
+      "hash": "3cbc4dbd91b7"
+    },
+    "ability_artist_bamboogrove/groundaura/silence": {
+      "text": "点墨成境",
+      "group": "citadel_heroes",
+      "hash": "6b8081efc8c9"
+    },
+    "ability_artist_bamboogrove/groveally/buff": {
+      "text": "点墨成境",
+      "group": "citadel_heroes",
+      "hash": "6b8081efc8c9"
+    },
+    "AttackFrequency_postvalue_label": {
+      "text": "攻击频率",
+      "group": "citadel_heroes",
+      "hash": "cc1178af0458"
+    },
+    "AttackFrequency_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "GroveRadius_postvalue_label": {
+      "text": "墨迹半径",
+      "group": "citadel_heroes",
+      "hash": "491a09a6b025"
+    },
+    "GroveRadius_label": {
+      "text": "墨迹半径",
+      "group": "citadel_heroes",
+      "hash": "491a09a6b025"
+    },
+    "GroveRadius_postfix": {
+      "text": "米",
+      "group": "citadel_heroes",
+      "hash": "ee7f305751a5"
+    },
     "ability_header_on_hit": {
       "text": "命中时：",
       "group": "citadel_heroes",
@@ -23764,6 +24129,11 @@
       "group": "citadel_heroes",
       "hash": "404d125d28f3"
     },
+    "ability_melee_artist": {
+      "text": "近战",
+      "group": "citadel_heroes",
+      "hash": "404d125d28f3"
+    },
     "Citadel_Familiar_HeroTag_1": {
       "text": "雪 中 送 炭",
       "group": "citadel_heroes",
@@ -24295,9 +24665,9 @@
       "hash": "c8fd89d10ea7"
     },
     "hero_hornet_lore": {
-      "text": "薇妲曾是塞勒姆审巫案中约翰·霍桑的受害人。在第一场异度涡旋（也就是让大众领略到了超自然力量的那次事件）降临时，她的魂魄被带回了尘世。<br><br>她孤“魂”奋战，对抗着“人性联盟”——一个由霍桑的后代建立的女巫裁判所。薇妲力图保护超自然世界，使其免受霍桑之流的侵扰。为了达到目的，就算敌人在她面前堆积如山她也毫不畏惧。",
+      "text": "薇妲曾是塞勒姆审巫案中约翰·霍桑的受害人。在第一场异度涡旋（也就是让大众领略到了超自然力量的那次事件）降临时，她的魂魄被带回了尘世。<br><br>她孤“魂”奋战，对抗着“人类之友”——一个由霍桑的后代建立的女巫裁判所。薇妲力图保护超自然世界，使其免受霍桑之流的侵扰。为了达到目的，就算敌人在她面前堆积如山她也毫不畏惧。",
       "group": "citadel_heroes",
-      "hash": "b237a54eb292"
+      "hash": "6998554f56c6"
     },
     "hero_inferno_lore": {
       "text": "曾经，炽焱和大多数少年一样，狂傲、叛逆而又冲动。但和大多数少年不一样的是，他是来自异域空间的生物，他有着能驾驭火焰的超自然力量。很显然：他的青葱岁月是在一次次纵火、谋杀和毁尸灭迹中度过的。不过那都是往事了。如今炽焱已长大成人，他的性情也温和了不少。他开开心心地在酒吧工作，听着现场音乐，跟有趣的人聊天。话虽这么说，只要酒吧里有人寻衅滋事、拳脚相加，他可不怕施展曾经练就的技能。",
@@ -24458,6 +24828,11 @@
       "text": "“女士们先生们，我要告诉你们一个令人震惊的秘密：在菲尔法克斯实业，我们对安全一无所知。现在我来说一件更令人震惊的……这是件好事！在我任职期间，我曾被枪击、刺伤、穿刺、从窗户扔出去、炸飞、原子化,还有斩首——不是一次,不是两次，不是三次，而是四次。没错，我的头被砍掉的次数多到我不得不发明一个新词来形容它。<br><br>但我让自己经历这种象征性的炼狱，有时甚至是真实的，是因为仅仅去想象事情如何出错是不够的，我们需要真正了解事情是如何出错的。<br><br>现在你们即将见证的演示极其危险。所以请坐好，戴上你们的安全护目镜，见证菲尔法克斯实业出品的奇美拉1型带来的飞行奇迹。”<br><br><span class=\"italics\">丹尼在军事科技博览会上的开场白文字记录由菲尔法克斯实业提供</span>",
       "group": "citadel_heroes",
       "hash": "d78f0681e910"
+    },
+    "hero_artist_lore": {
+      "text": "阿紫在12岁时移民到了被诅咒的纽约城，虽然适应纽约生活让她经历了不少文化冲击，但她很快爱上了这座洋溢着活力的城市。她全身心投入对艺术的追求，这份热情让她取得了远超大多数同龄人的成就。<br><br>首先是美术学院的全额奖学金。<br><br>随后在大三那年，入选了现代艺术博物馆久负盛名的学生艺术家庆典：“新秀画廊”。<br><br>无论从哪个角度看，以她的年龄而言都表现得非凡出众，然而阿紫始终无法摆脱自己对失败而亡的生存恐惧。她深知，艺术家要取得商业上的成功，并非取决于有多优秀，甚至不取决于是否超卓。关键在于能否在正确的时间被正确的人看见。因此她将目光投向了“仪式”……并非为了给自己的才华锦上添花，而只是为了有机会向世界展示自己的本领。",
+      "group": "citadel_heroes",
+      "hash": "deace6d056e0"
     },
     "MODIFIER_STATE_ROOTED": {
       "text": "被定身",
@@ -35484,6 +35859,11 @@
       "group": "citadel_gc",
       "hash": "4501683d28a3"
     },
+    "Steam_Citadel_Hideout_Painting": {
+      "text": "在大本营作画",
+      "group": "citadel_gc",
+      "hash": "9f359b407c59"
+    },
     "Citadel_Dashboard_BuildVersion": {
       "text": "#{d:buildNumber}",
       "group": "citadel_main",
@@ -36999,6 +37379,11 @@
       "group": "citadel_main",
       "hash": "8dde057856f3"
     },
+    "Citadel_Hud_HealingMode": {
+      "text": "疗伤针头",
+      "group": "citadel_main",
+      "hash": "153ed9016d09"
+    },
     "Citadel_Hud_Pauser": {
       "text": "{s:pauser}暂停了比赛",
       "group": "citadel_main",
@@ -37443,6 +37828,11 @@
       "text": "{i:items_ready}",
       "group": "citadel_main",
       "hash": "5950b8e31d8f"
+    },
+    "Citadel_Hud_Quickbuy_ItemSlotsLocked": {
+      "text": "栏位已锁定",
+      "group": "citadel_main",
+      "hash": "d5751fb284bc"
     },
     "Citadel_Hud_Quickbuy_ToastLabel_Purchase": {
       "text": "已购买物品",
@@ -57930,9 +58320,9 @@
       "hash": "2e8e70958c4a"
     },
     "Sandbox_Tutorial_Controls_PurchaseMods": {
-      "text": "购买伤上加伤",
+      "text": "购买{g:citadel_ability_name:'upgrade_escalating_exposure'}",
       "group": "citadel_main",
-      "hash": "2164a8455b94"
+      "hash": "7527cc796f03"
     },
     "Sandbox_Tutorial_Controls_CloseShop": {
       "text": "关闭商店",
@@ -60688,6 +61078,11 @@
       "text": "按下{g:citadel_binding:'Interact'}查看假日挑战进度",
       "group": "citadel_main",
       "hash": "5327c0e6b83c"
+    },
+    "Citadel_Hideout_HeavyCrate": {
+      "text": "按住{g:citadel_binding:'AbilityMelee'}使用近战重击进行破坏",
+      "group": "citadel_main",
+      "hash": "9c27de0c02dc"
     },
     "citadel_keybind_hideout_use": {
       "text": "与大本营物体互动",

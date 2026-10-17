@@ -1,0 +1,1312 @@
+{
+  "from": "6785",
+  "to": "6793",
+  "generatedAt": "2026-10-17T14:10:22.789Z",
+  "entries": [
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.properties.AbilityChannelTime",
+      "before": null,
+      "after": 0.6
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.properties.AbilityCooldown",
+      "before": null,
+      "after": 165
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.properties.AbilityCooldownBetweenCharge",
+      "before": null,
+      "after": -1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.properties.AbilityDuration",
+      "before": null,
+      "after": 6
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.properties.AbilityDuration@scale",
+      "before": null,
+      "after": 0.04
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.properties.AbilityUnitTargetLimit",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.properties.AttackFrequency",
+      "before": null,
+      "after": -1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.properties.AuraLingerDuration",
+      "before": null,
+      "after": 5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.properties.ChannelMoveSpeed",
+      "before": null,
+      "after": -1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.properties.Damage",
+      "before": null,
+      "after": 100
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.properties.Damage@scale",
+      "before": null,
+      "after": 1.4
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.properties.DestroyOnDamage",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.properties.GroundAuraHeight",
+      "before": null,
+      "after": 20
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.properties.GroundAuraRadius",
+      "before": null,
+      "after": 1.9
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.properties.GroundAuraSpacing",
+      "before": null,
+      "after": 3.8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.properties.GroveRadius",
+      "before": null,
+      "after": 18
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.properties.SilenceDuration",
+      "before": null,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.properties.SlowPercent",
+      "before": null,
+      "after": 30
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.properties.TechPower",
+      "before": null,
+      "after": 25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.upgrades.T1.AbilityCooldown",
+      "before": null,
+      "after": -20
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.upgrades.T2.AbilityLifestealPercentHero",
+      "before": null,
+      "after": 25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.upgrades.T2.TechPower",
+      "before": null,
+      "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.upgrades.T3.AbilityDuration",
+      "before": null,
+      "after": 4
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.upgrades.T3.DestroyOnDamage",
+      "before": null,
+      "after": -1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.upgrades.T3.SilenceDuration",
+      "before": null,
+      "after": 1.25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.properties.AbilityCastDelay",
+      "before": null,
+      "after": 0.1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.properties.AbilityCharges",
+      "before": null,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.properties.AbilityCooldown",
+      "before": null,
+      "after": 22
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.properties.AbilityCooldownBetweenCharge",
+      "before": null,
+      "after": 7
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.properties.AbilityDuration",
+      "before": null,
+      "after": 10
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.properties.AbilityPostCastDuration",
+      "before": null,
+      "after": 0.1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.properties.AbilityUnitTargetLimit",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.properties.BulletDamageMultiplier",
+      "before": null,
+      "after": 120
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.properties.ChannelMoveSpeed",
+      "before": null,
+      "after": -1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.properties.CooldownReductionPerHit",
+      "before": null,
+      "after": 1.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.properties.Damage",
+      "before": null,
+      "after": 35
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.properties.Damage@scale",
+      "before": null,
+      "after": 0.7
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.properties.DrawDuration",
+      "before": null,
+      "after": 20
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.properties.FireRateSlow",
+      "before": null,
+      "after": 20
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.properties.MaxDrawDistance",
+      "before": null,
+      "after": 25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.properties.MaxDrawDistance@scale",
+      "before": null,
+      "after": 0.12
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.properties.MaxShots",
+      "before": null,
+      "after": 3
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.properties.Radius",
+      "before": null,
+      "after": 2.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.upgrades.T1.AbilityCooldown",
+      "before": null,
+      "after": -4
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.upgrades.T1.MaxDrawDistance",
+      "before": null,
+      "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.upgrades.T2.BonusFireRatePerStack",
+      "before": null,
+      "after": 10
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.upgrades.T2.MaxStacks",
+      "before": null,
+      "after": 5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.upgrades.T2.StackDuration",
+      "before": null,
+      "after": 10
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.upgrades.T3.BulletDamageMultiplier",
+      "before": null,
+      "after": 30
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.upgrades.T3.CooldownReductionPerHit",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_homingbrush.upgrades.T3.Damage",
+      "before": null,
+      "after": 0.4
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.properties.AbilityCastDelay",
+      "before": null,
+      "after": 0.2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.properties.AbilityCooldown",
+      "before": null,
+      "after": 23
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.properties.AbilityCooldownBetweenCharge",
+      "before": null,
+      "after": -1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.properties.AbilityUnitTargetLimit",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.properties.AuraLingerDuration",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.properties.ChannelMoveSpeed",
+      "before": null,
+      "after": -1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.properties.DashAirSpeed",
+      "before": null,
+      "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.properties.DashSpeed",
+      "before": null,
+      "after": 20
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.properties.ExplosionCone",
+      "before": null,
+      "after": 90
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.properties.ExplosionRadius",
+      "before": null,
+      "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.properties.FadingSlowPercent",
+      "before": null,
+      "after": 60
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.properties.GroundAuraDuration",
+      "before": null,
+      "after": 6
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.properties.GroundAuraHeight",
+      "before": null,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.properties.GroundAuraRadius",
+      "before": null,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.properties.GroundAuraSpacing",
+      "before": null,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.properties.MaxDamage",
+      "before": null,
+      "after": 100
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.properties.MaxDamage@scale",
+      "before": null,
+      "after": 1.8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.properties.MaxDamageTime",
+      "before": null,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.properties.MinDamage",
+      "before": null,
+      "after": 50
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.properties.MinDamage@scale",
+      "before": null,
+      "after": 0.9
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.properties.SideMoveSpeedReduction",
+      "before": null,
+      "after": -65
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.properties.SlideScale",
+      "before": null,
+      "after": 100
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.properties.SlideTurnScale",
+      "before": null,
+      "after": 25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.properties.SlowDuration",
+      "before": null,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.properties.TickRate",
+      "before": null,
+      "after": 0.1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.upgrades.T1.StaminaCooldownReduction",
+      "before": null,
+      "after": 150
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.upgrades.T2.AbilityCooldown",
+      "before": null,
+      "after": -6
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.upgrades.T2.ExplosionRadius",
+      "before": null,
+      "after": 8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.upgrades.T2.GroundAuraDuration",
+      "before": null,
+      "after": 4
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.upgrades.T3.DamageAmpBuildDuration",
+      "before": null,
+      "after": 4
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.upgrades.T3.DamageAmpDuration",
+      "before": null,
+      "after": 6
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_rollingprojectile.upgrades.T3.OutgoingDamagePercent",
+      "before": null,
+      "after": 20
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.properties.AbilityCastRange",
+      "before": null,
+      "after": 25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.properties.AbilityChannelTime",
+      "before": null,
+      "after": 2.6
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.properties.AbilityCooldown",
+      "before": null,
+      "after": 35
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.properties.AbilityCooldownBetweenCharge",
+      "before": null,
+      "after": -1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.properties.AbilityPostCastDuration",
+      "before": null,
+      "after": 0.35
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.properties.AbilityUnitTargetLimit",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.properties.BuildUpPerAbility",
+      "before": null,
+      "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.properties.BuildUpPerSecond",
+      "before": null,
+      "after": 33
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.properties.BuildUpPerShot",
+      "before": null,
+      "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.properties.ChannelMoveSpeed",
+      "before": null,
+      "after": -1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.properties.Damage",
+      "before": null,
+      "after": 60
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.properties.Damage@scale",
+      "before": null,
+      "after": 1.4
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.properties.DPS",
+      "before": null,
+      "after": 30
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.properties.DPS@scale",
+      "before": null,
+      "after": 0.7
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.properties.EffectivenessPerHit",
+      "before": null,
+      "after": 0.35
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.properties.IncomingDamagePercentReductionPerPickup",
+      "before": null,
+      "after": 2.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.properties.OutgoingDamagePercentPerPickup",
+      "before": null,
+      "after": 2.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.properties.PullDistance",
+      "before": null,
+      "after": 800
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.properties.SpiritPerPickup",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.properties.StunDuration",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.properties.TargetingConeAngle",
+      "before": null,
+      "after": 40
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.properties.TetherBreakRange",
+      "before": null,
+      "after": 35
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.properties.TickInterval",
+      "before": null,
+      "after": 0.15
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.upgrades.T1.BuffDuration",
+      "before": null,
+      "after": 4
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.upgrades.T1.HealthRegen",
+      "before": null,
+      "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.upgrades.T1.HealthRegen#2",
+      "before": null,
+      "after": 0.25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.upgrades.T2.OutgoingDamagePercent",
+      "before": null,
+      "after": -35
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.upgrades.T3.AbilityCooldown",
+      "before": null,
+      "after": -11
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.upgrades.T3.BonusMoveSpeedPercent",
+      "before": null,
+      "after": 20
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.upgrades.T3.StunDuration",
+      "before": null,
+      "after": 0.35
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_artist_set.weapon.bulletDamage",
+      "before": null,
+      "after": 30
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_artist_set.weapon.bulletLifetime",
+      "before": null,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_artist_set.weapon.bulletRadius",
+      "before": null,
+      "after": 10
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_artist_set.weapon.bulletSpeed",
+      "before": null,
+      "after": 19500
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_artist_set.weapon.bulletsPerShot",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_artist_set.weapon.burstShotCount",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_artist_set.weapon.clipSize",
+      "before": null,
+      "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_artist_set.weapon.crit.bonusEnd",
+      "before": null,
+      "after": 1.65
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_artist_set.weapon.crit.bonusStart",
+      "before": null,
+      "after": 1.65
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_artist_set.weapon.crit.endRange",
+      "before": null,
+      "after": 1500
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_artist_set.weapon.crit.startRange",
+      "before": null,
+      "after": 500
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_artist_set.weapon.cycleTime",
+      "before": null,
+      "after": 0.65
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_artist_set.weapon.falloff.bias",
+      "before": null,
+      "after": 0.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_artist_set.weapon.falloff.endRange",
+      "before": null,
+      "after": 2520
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_artist_set.weapon.falloff.endScale",
+      "before": null,
+      "after": 0.1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_artist_set.weapon.falloff.startRange",
+      "before": null,
+      "after": 787
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_artist_set.weapon.falloff.startScale",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_artist_set.weapon.range",
+      "before": null,
+      "after": 7000
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_artist_set.weapon.reloadDuration",
+      "before": null,
+      "after": 2.7
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_artist_set.weapon.shootMoveSpeedPercent",
+      "before": null,
+      "after": 0.75
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_artist_set.weapon.standingSpread",
+      "before": null,
+      "after": 1.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_inferno_set.weapon.bulletDamage",
+      "before": 5.5,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_inferno_set.weapon.bulletGravityScale",
+      "before": 0.8,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_inferno_set.weapon.bulletLifetime",
+      "before": 2,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_inferno_set.weapon.bulletRadius",
+      "before": 4,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_inferno_set.weapon.bulletSpeed",
+      "before": 26000,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_inferno_set.weapon.bulletsPerShot",
+      "before": 1,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_inferno_set.weapon.burstShotCount",
+      "before": 1,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_inferno_set.weapon.clipSize",
+      "before": 27,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_inferno_set.weapon.crit.bonusEnd",
+      "before": 1.65,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_inferno_set.weapon.crit.bonusStart",
+      "before": 1.65,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_inferno_set.weapon.crit.endRange",
+      "before": 1500,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_inferno_set.weapon.crit.startRange",
+      "before": 500,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_inferno_set.weapon.cycleTime",
+      "before": 0.105,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_inferno_set.weapon.falloff.bias",
+      "before": 0.5,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_inferno_set.weapon.falloff.endRange",
+      "before": 2165.35,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_inferno_set.weapon.falloff.endScale",
+      "before": 0.1,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_inferno_set.weapon.falloff.startRange",
+      "before": 708.661,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_inferno_set.weapon.falloff.startScale",
+      "before": 1,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_inferno_set.weapon.range",
+      "before": 7000,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_inferno_set.weapon.reloadDuration",
+      "before": 2.25,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_inferno_set.weapon.shootMoveSpeedPercent",
+      "before": 0.75,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_inferno_set.weapon.spread",
+      "before": 0.05,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "citadel_weapon_inferno_set.weapon.standingSpread",
+      "before": 1.5,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "stat.EAirDashDuration",
+      "before": 0.47,
+      "after": 0.43
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "stat.ECritDamageBonusScale",
+      "before": 1,
+      "after": 0.8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "stat.EGroundDashDuration",
+      "before": 0.68,
+      "after": 0.62
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "stat.EMaxHealth",
+      "before": 780,
+      "after": 710
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "stat.EMaxMoveSpeed",
+      "before": 7.2,
+      "after": 6.9
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "stat.ESprintSpeed",
+      "before": 1.6,
+      "after": 2.5
+    }
+  ],
+  "excludedFieldCount": 26
+}

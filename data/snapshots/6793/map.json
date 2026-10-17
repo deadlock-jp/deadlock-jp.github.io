@@ -84,8 +84,8 @@
       "name": "park_chapel_camp",
       "units": 5,
       "haunts": {
-        "neutral_drain_creature_normal": 1,
-        "neutral_drain_creature_weak": 4
+        "neutral_library_normal": 1,
+        "neutral_library_weak": 4
       },
       "underground": false,
       "x": 7936,
@@ -748,6 +748,15 @@
     {
       "kind": "crate",
       "group": 0,
+      "hid": "1380550:18",
+      "underground": false,
+      "x": 6888,
+      "y": -5760,
+      "z": 384
+    },
+    {
+      "kind": "crate",
+      "group": 0,
       "hid": "1388748:20",
       "underground": false,
       "x": -5581,
@@ -757,18 +766,9 @@
     {
       "kind": "crate",
       "group": 0,
-      "hid": "1380550:18",
-      "underground": false,
-      "x": 6896,
-      "y": -5744,
-      "z": 384
-    },
-    {
-      "kind": "crate",
-      "group": 0,
       "hid": "1380550:17",
       "underground": false,
-      "x": 6896,
+      "x": 6888,
       "y": -5676,
       "z": 384
     },
@@ -1351,24 +1351,6 @@
     {
       "kind": "crate",
       "group": 0,
-      "hid": "1380419:116",
-      "underground": false,
-      "x": 1808,
-      "y": -2720,
-      "z": 456
-    },
-    {
-      "kind": "crate",
-      "group": 0,
-      "hid": "1380419:117",
-      "underground": false,
-      "x": 1888,
-      "y": -2720,
-      "z": 457
-    },
-    {
-      "kind": "crate",
-      "group": 0,
       "hid": "1380421:13",
       "underground": false,
       "x": 7744,
@@ -1383,6 +1365,24 @@
       "x": 7824,
       "y": -2720,
       "z": 256
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "hid": "1380419:116",
+      "underground": false,
+      "x": 1808,
+      "y": -2704,
+      "z": 456
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "hid": "1380419:117",
+      "underground": false,
+      "x": 1888,
+      "y": -2704,
+      "z": 457
     },
     {
       "kind": "crate",
@@ -2917,6 +2917,15 @@
     {
       "kind": "crate",
       "group": 0,
+      "hid": "1380425:32",
+      "underground": false,
+      "x": 5172,
+      "y": 2829,
+      "z": 384
+    },
+    {
+      "kind": "crate",
+      "group": 0,
       "hid": "1380425:2",
       "underground": false,
       "x": 3880,
@@ -2958,15 +2967,6 @@
       "x": -528,
       "y": 2896,
       "z": 708
-    },
-    {
-      "kind": "crate",
-      "group": 0,
-      "hid": "1380421:132",
-      "underground": false,
-      "x": 5396,
-      "y": 2999,
-      "z": 256
     },
     {
       "kind": "crate",
@@ -3108,8 +3108,8 @@
       "group": 0,
       "hid": "15126:54",
       "underground": false,
-      "x": -288,
-      "y": 3600,
+      "x": -261,
+      "y": 3617,
       "z": 384
     },
     {
@@ -3117,8 +3117,8 @@
       "group": 0,
       "hid": "15126:55",
       "underground": false,
-      "x": -368,
-      "y": 3602,
+      "x": -317,
+      "y": 3675,
       "z": 384
     },
     {
@@ -3187,15 +3187,6 @@
     {
       "kind": "crate",
       "group": 0,
-      "hid": "1380425:82",
-      "underground": false,
-      "x": 2442,
-      "y": 3947,
-      "z": 448
-    },
-    {
-      "kind": "crate",
-      "group": 0,
       "hid": "1380425:30",
       "underground": false,
       "x": 4415,
@@ -3232,10 +3223,19 @@
     {
       "kind": "crate",
       "group": 0,
+      "hid": "1380425:82",
+      "underground": false,
+      "x": 2444,
+      "y": 4043,
+      "z": 448
+    },
+    {
+      "kind": "crate",
+      "group": 0,
       "hid": "1380425:52",
       "underground": false,
-      "x": 2442,
-      "y": 4032,
+      "x": 2444,
+      "y": 4128,
       "z": 448
     },
     {
@@ -3295,24 +3295,6 @@
     {
       "kind": "crate",
       "group": 0,
-      "hid": "15126:52",
-      "underground": false,
-      "x": -304,
-      "y": 4176,
-      "z": 384
-    },
-    {
-      "kind": "crate",
-      "group": 0,
-      "hid": "15126:51",
-      "underground": false,
-      "x": -208,
-      "y": 4176,
-      "z": 384
-    },
-    {
-      "kind": "crate",
-      "group": 0,
       "hid": "1380425:48",
       "underground": false,
       "x": 4759,
@@ -3345,6 +3327,24 @@
       "x": -7608,
       "y": 4360,
       "z": 384
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "hid": "15126:52",
+      "underground": false,
+      "x": 0,
+      "y": 4376,
+      "z": 392
+    },
+    {
+      "kind": "crate",
+      "group": 0,
+      "hid": "15126:51",
+      "underground": false,
+      "x": 80,
+      "y": 4376,
+      "z": 392
     },
     {
       "kind": "crate",
@@ -3531,18 +3531,18 @@
       "group": 0,
       "hid": "1388749:41",
       "underground": false,
-      "x": -2976,
-      "y": 5384,
-      "z": 1062
+      "x": -2968,
+      "y": 5376,
+      "z": 1056
     },
     {
       "kind": "crate",
       "group": 0,
       "hid": "1388749:40",
       "underground": false,
-      "x": -2912,
-      "y": 5384,
-      "z": 1062
+      "x": -2883,
+      "y": 5392,
+      "z": 1056
     },
     {
       "kind": "crate",
@@ -3558,8 +3558,8 @@
       "group": 0,
       "hid": "1388749:16",
       "underground": false,
-      "x": -3815,
-      "y": 5439,
+      "x": -3802,
+      "y": 5454,
       "z": 408
     },
     {
@@ -3567,8 +3567,8 @@
       "group": 0,
       "hid": "1388749:29",
       "underground": false,
-      "x": -3883,
-      "y": 5507,
+      "x": -3872,
+      "y": 5519,
       "z": 408
     },
     {
@@ -4485,7 +4485,7 @@
       "group": 0,
       "hid": "1380550:4",
       "underground": false,
-      "x": 6912,
+      "x": 6904,
       "y": -5610,
       "z": 384
     },
@@ -5680,19 +5680,19 @@
     {
       "kind": "statue",
       "group": 0,
-      "hid": "1388749:7",
+      "hid": "15126:53",
       "underground": false,
-      "x": -7936,
-      "y": 4144,
+      "x": -384,
+      "y": 4112,
       "z": 384
     },
     {
       "kind": "statue",
       "group": 0,
-      "hid": "15126:53",
+      "hid": "1388749:7",
       "underground": false,
-      "x": -384,
-      "y": 4176,
+      "x": -7936,
+      "y": 4144,
       "z": 384
     },
     {
@@ -6373,11 +6373,11 @@
     {
       "kind": "tough",
       "group": 0,
-      "hid": "1380425:32",
+      "hid": "1380421:132",
       "underground": false,
-      "x": 5172,
-      "y": 2829,
-      "z": 384
+      "x": 5396,
+      "y": 2999,
+      "z": 256
     },
     {
       "kind": "tough",
@@ -7025,9 +7025,9 @@
       "lane": null,
       "team": null,
       "underground": false,
-      "x": 7296,
+      "x": 7280,
       "y": -4992,
-      "z": 1152
+      "z": 1024
     },
     {
       "kind": "snack",
@@ -7045,7 +7045,7 @@
       "underground": false,
       "x": 4000,
       "y": -4384,
-      "z": 1344
+      "z": 1216
     },
     {
       "kind": "snack",
@@ -7135,7 +7135,7 @@
       "underground": false,
       "x": 7944,
       "y": -2960,
-      "z": 960
+      "z": 832
     },
     {
       "kind": "snack",

@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6785",
-  "upstreamCommit": "6785",
-  "generatedAt": "2026-10-15T14:18:09.737Z",
+  "clientVersion": "6793",
+  "upstreamCommit": "6793",
+  "generatedAt": "2026-10-17T14:10:15.991Z",
   "language": "English",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 622,
-    "citadel_heroes": 3748,
+    "citadel_heroes": 3823,
     "citadel_attributes": 2018,
-    "citadel_gc": 219,
-    "citadel_main": 5276
+    "citadel_gc": 220,
+    "citadel_main": 5279
   },
   "tokens": {
     "hero_vampire:n": {
@@ -3625,9 +3625,9 @@
       "hash": "4345cb1fa278"
     },
     "upgrade_burst_fire_desc": {
-      "text": "Briefly gain <span class=\"highlight\">Fire Rate</span> and <span class=\"highlight\">Move Speed</span> when one of your bullets hits an enemy hero.",
+      "text": "Briefly gain <span class=\"highlight\">Fire Rate</span> and <span class=\"highlight\">Move Speed</span> when one of your bullets hits a hero.",
       "group": "citadel_mods",
-      "hash": "8a1d6af41b5c"
+      "hash": "579bbb83538c"
     },
     "upgrade_intensifying_clip_desc": {
       "text": "Increases <span class=\"highlight\">Weapon Damage</span> as you continuously fire your weapon.",
@@ -22474,10 +22474,15 @@
       "group": "citadel_heroes",
       "hash": "3733bf7058b1"
     },
-    "ability_chessmaster_knightbuff_desc": {
-      "text": "Promote an ally to be a <span class=\"highlight\">knight</span>, granting <span class=\"highlight\">bonus stamina</span> and {g:citadel_inline_attribute:'CombatBarrier'} for a duration.<br><br>If self-cast you develop yourself as <span class=\"highlight\">king</span> instead, granting double the {g:citadel_inline_attribute:'CombatBarrier'} but no stamina. <br><br><span class=\"diminish\">Move ({g:citadel_binding:'ADS'}):</span> Moves the piece, making it <span class=\"highlight\">invulnerable</span> during the duration before landing.",
+    "ability_chessmaster_knightbuff_trigger": {
+      "text": "Move King",
       "group": "citadel_heroes",
-      "hash": "a62eeb0f42f6"
+      "hash": "7b4ca182933d"
+    },
+    "ability_chessmaster_knightbuff_desc": {
+      "text": "Promote an ally to be a <span class=\"highlight\">knight</span>, granting <span class=\"highlight\">bonus stamina</span> and {g:citadel_inline_attribute:'CombatBarrier'} for a duration.<br><br>If self-cast you develop yourself as <span class=\"highlight\">king</span> instead, granting double the {g:citadel_inline_attribute:'CombatBarrier'} but no stamina. <br><br><span class=\"diminish\">Move ({g:citadel_binding:'ADS'}):</span> Moves the piece, making it <span class=\"highlight\">invulnerable</span> during the duration before landing. If self-cast, re-activate the ability to move instead.",
+      "group": "citadel_heroes",
+      "hash": "bd04fc03c592"
     },
     "ability_chessmaster_knightbuff_t2_desc": {
       "text": "+{s:CombatBarrier} Barrier<br>+{s:Stamina} Stamina",
@@ -22488,6 +22493,11 @@
       "text": "Can target two allies within radius.<br>On Self: <span class=\"highlight\">Remove all debuffs</span> after a move",
       "group": "citadel_heroes",
       "hash": "9ae5bbd5f01f"
+    },
+    "ability_chessmaster_knightbuff/rookbuff": {
+      "text": "Kingside Knight",
+      "group": "citadel_heroes",
+      "hash": "3733bf7058b1"
     },
     "ability_chessmaster_forkpiece": {
       "text": "Rook Battery",
@@ -23214,6 +23224,361 @@
       "group": "citadel_heroes",
       "hash": "ed6e3c1d3cc3"
     },
+    "citadel_weapon_artist_set": {
+      "text": "Creative Solutions",
+      "group": "citadel_heroes",
+      "hash": "8bdfea8f35fa"
+    },
+    "ability_artist_pullbrush": {
+      "text": "Living Ink",
+      "group": "citadel_heroes",
+      "hash": "65fda45ae569"
+    },
+    "ability_artist_homingbrush": {
+      "text": "Living Ink",
+      "group": "citadel_heroes",
+      "hash": "65fda45ae569"
+    },
+    "ability_artist_homingbrush_desc_passive": {
+      "text": "<span class=\"diminish\">Passive:</span> Casting any other ability refreshes the cooldown of <span class=\"highlight\">Flow State</span>.",
+      "group": "citadel_heroes",
+      "hash": "f1e5634cd6c3"
+    },
+    "ability_artist_homingbrush_desc_active": {
+      "text": "<span class=\"diminish\">Empower ({g:citadel_binding:'ABILITY1'}):</span> Your next <span class=\"highlight\">3</span> bullets come to life, allowing you to steer them as they travel. The bullets deal increased {g:citadel_inline_attribute:'BulletDamage'} and splash {g:citadel_inline_attribute:'SpiritDamage'} in a small area.<br><br>Each successful hit against a hero reduces <span class=\"highlight\">all ability cooldowns</span>, and half for <span class=\"highlight\">all item cooldowns</span>.",
+      "group": "citadel_heroes",
+      "hash": "12926d853c65"
+    },
+    "ability_artist_homingbrush_desc_active_alt": {
+      "text": "<span class=\"diminish\">Draw ({g:citadel_binding:'ADS'}):</span> Paint a solid stroke of ink instead that blocks projectiles and characters from passing through.<br><br>The stroke can be destroyed with a heavy melee, but deals {g:citadel_inline_attribute:'SpiritDamage'} to the attacker.</span>",
+      "group": "citadel_heroes",
+      "hash": "7fc8cd0555c0"
+    },
+    "ability_artist_homingbrush/stack": {
+      "text": "Living Ink",
+      "group": "citadel_heroes",
+      "hash": "65fda45ae569"
+    },
+    "ability_artist_homingbrush/stackingbuff": {
+      "text": "Living Ink",
+      "group": "citadel_heroes",
+      "hash": "65fda45ae569"
+    },
+    "BulletDamageMultiplier_postvalue_label": {
+      "text": "Bullet Damage",
+      "group": "citadel_heroes",
+      "hash": "186350f836ca"
+    },
+    "BulletDamageMultiplier_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "ability_artist_homingbrush/active": {
+      "text": "Living Ink",
+      "group": "citadel_heroes",
+      "hash": "65fda45ae569"
+    },
+    "ability_artist_homingbrush_t2_desc": {
+      "text": "On Empower: Gain +{s:BonusFireRatePerStack}% Fire Rate for {s:StackDuration}s, stacking {s:MaxStacks} times",
+      "group": "citadel_heroes",
+      "hash": "3c077bbc45dc"
+    },
+    "ability_artist_homingbrush_t1_desc": {
+      "text": "{s:AbilityCooldown}s Cooldown<br>{s:MaxDrawDistance}m Max Draw Distance",
+      "group": "citadel_heroes",
+      "hash": "d710a5a120df"
+    },
+    "ability_artist_homingbrush_t3_desc": {
+      "text": "+{s:CooldownReductionPerHit}s Cooldown Reduction Per Hit<br>Improve scaling",
+      "group": "citadel_heroes",
+      "hash": "4019697ea46d"
+    },
+    "MaxDrawDistance_label": {
+      "text": "Max Drawing Size",
+      "group": "citadel_heroes",
+      "hash": "bdd10d301816"
+    },
+    "MaxDrawDistance_postvalue_label": {
+      "text": "Max Drawing Size",
+      "group": "citadel_heroes",
+      "hash": "bdd10d301816"
+    },
+    "MaxDrawDistance_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "DrawDuration_label": {
+      "text": "Drawing Duration",
+      "group": "citadel_heroes",
+      "hash": "13f16aba8462"
+    },
+    "DrawDuration_postvalue_label": {
+      "text": "Drawing Duration",
+      "group": "citadel_heroes",
+      "hash": "13f16aba8462"
+    },
+    "DrawDuration_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "ability_artist_rollingprojectile": {
+      "text": "Flow State",
+      "group": "citadel_heroes",
+      "hash": "8a1cee5077a1"
+    },
+    "ability_artist_rollingprojectile_desc": {
+      "text": "Drag a brush that continues to travel forward, leaving a trail that grants <span class=\"highlight\">bonus slide distance</span> for allies and a fading {g:citadel_inline_attribute:'Slow'} and {g:citadel_inline_attribute:'SpiritDamage'} to enemies it passes through, increased the further it travels. <br><br>Re-activate the ability to flick the brush forward, ending the ability early but dealing {g:citadel_inline_attribute:'SpiritDamage'} in a larger area.",
+      "group": "citadel_heroes",
+      "hash": "23b350aec730"
+    },
+    "ability_artist_rollingprojectile_t1_desc": {
+      "text": "On Slide: +{s:StaminaCooldownReduction}% Stamina Regeneration",
+      "group": "citadel_heroes",
+      "hash": "9affe3fc73ec"
+    },
+    "ability_artist_rollingprojectile_t2_desc": {
+      "text": "{s:AbilityCooldown}s Cooldown<br>+{s:ExplosionRadius}m Flick Range<br>+{s:GroundAuraDuration}s Trail Duration",
+      "group": "citadel_heroes",
+      "hash": "da29f153991f"
+    },
+    "ability_artist_rollingprojectile_t3_desc": {
+      "text": "On Slide: Gain Damage Amp over time, up to {s:OutgoingDamagePercent}% for {s:DamageAmpDuration}s",
+      "group": "citadel_heroes",
+      "hash": "b44e31c44e6c"
+    },
+    "ability_artist_rollingprojectile/debuff": {
+      "text": "Flow State",
+      "group": "citadel_heroes",
+      "hash": "8a1cee5077a1"
+    },
+    "GroundAuraDuration_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "GroundAuraDuration_postvalue_label": {
+      "text": "Ground Aura Duration",
+      "group": "citadel_heroes",
+      "hash": "8780b1424810"
+    },
+    "GroundAuraDuration_label": {
+      "text": "Ground Aura Duration",
+      "group": "citadel_heroes",
+      "hash": "8780b1424810"
+    },
+    "ability_artist_tether": {
+      "text": "Still Life",
+      "group": "citadel_heroes",
+      "hash": "5ae5fe91ab11"
+    },
+    "ability_artist_tether_desc": {
+      "text": "Choose a hero to be your <span class=\"highlight\">subject</span>, dealing {g:citadel_inline_attribute:'SpiritDPS'} as long as you are looking at them. <br><br>If the sketch is completed they take additional {g:citadel_inline_attribute:'SpiritDamage'}, suffer from {g:citadel_inline_attribute:'Stun'}, and drop a <span class=\"highlight\">sketch</span> that can be picked up.<br><br> For each collected <span class=\"highlight\">sketch</span>, you permanently gain stats based on the hero.",
+      "group": "citadel_heroes",
+      "hash": "3e834044268f"
+    },
+    "ability_artist_tether_t1_desc": {
+      "text": "On Cast: Gain {s:HealthRegen} Health Regen for {s:BuffDuration}s, refreshed on pickup",
+      "group": "citadel_heroes",
+      "hash": "728da8a29cae"
+    },
+    "ability_artist_tether_t2_desc": {
+      "text": "While Drawing: Subjects deal {s:OutgoingDamagePercent}% Damage",
+      "group": "citadel_heroes",
+      "hash": "bdadc0196734"
+    },
+    "ability_artist_tether_t3_desc": {
+      "text": "+{s:BonusMoveSpeedPercent}% Move Speed<br>{s:AbilityCooldown}s Cooldown<br>+{s:StunDuration}s Stun Duration",
+      "group": "citadel_heroes",
+      "hash": "2cefe983fb22"
+    },
+    "ability_artist_tether/buildup": {
+      "text": "Still Drawing",
+      "group": "citadel_heroes",
+      "hash": "c12760f56918"
+    },
+    "ability_artist_tether/buildup/stun": {
+      "text": "Still Life",
+      "group": "citadel_heroes",
+      "hash": "5ae5fe91ab11"
+    },
+    "ability_artist_tether/buildup/buff": {
+      "text": "Still Life",
+      "group": "citadel_heroes",
+      "hash": "5ae5fe91ab11"
+    },
+    "ability_artist_tether/self": {
+      "text": "Still Life",
+      "group": "citadel_heroes",
+      "hash": "5ae5fe91ab11"
+    },
+    "ability_artist_tether/stun": {
+      "text": "Still Life",
+      "group": "citadel_heroes",
+      "hash": "5ae5fe91ab11"
+    },
+    "BuildUpPerAbility_postvalue_label": {
+      "text": "Buildup Per Ability",
+      "group": "citadel_heroes",
+      "hash": "a815f2b5f67f"
+    },
+    "BuildUpPerAbility_label": {
+      "text": "Buildup Per Ability",
+      "group": "citadel_heroes",
+      "hash": "a815f2b5f67f"
+    },
+    "BuildUpPerAbility_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "TotalDrawingTime_postvalue_label": {
+      "text": "Time to Draw",
+      "group": "citadel_heroes",
+      "hash": "c0c130cd4fc6"
+    },
+    "TotalDrawingTime_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "OutgoingDamagePercentPerPickup_postvalue_label": {
+      "text": "Damage Bonus per Drawing",
+      "group": "citadel_heroes",
+      "hash": "94eca80f098e"
+    },
+    "OutgoingDamagePercentPerPickup_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "IncomingDamagePercentReductionPerPickup_postvalue_label": {
+      "text": "Damage Reduction per Drawing",
+      "group": "citadel_heroes",
+      "hash": "caab523b8a7e"
+    },
+    "IncomingDamagePercentReductionPerPickup_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "SpiritPerPickup_postvalue_label": {
+      "text": "Spirit per Sketch",
+      "group": "citadel_heroes",
+      "hash": "12683b24ce29"
+    },
+    "SpiritPerPickup_label": {
+      "text": "Spirit per Sketch",
+      "group": "citadel_heroes",
+      "hash": "12683b24ce29"
+    },
+    "CurrentSketches_label": {
+      "text": "Sketches Collected:",
+      "group": "citadel_heroes",
+      "hash": "7e614bbe90e5"
+    },
+    "Citadel_Graph_PermanentBuff_ArtistMystic": {
+      "text": "Artist Sketches",
+      "group": "citadel_heroes",
+      "hash": "d24ce03d02a3"
+    },
+    "Citadel_Graph_PermanentBuff_ArtistBrawler": {
+      "text": "Brawler Sketches",
+      "group": "citadel_heroes",
+      "hash": "6a8ed0556e7c"
+    },
+    "Citadel_Graph_PermanentBuff_ArtistAssassin": {
+      "text": "Assassin Sketches",
+      "group": "citadel_heroes",
+      "hash": "48628b87a197"
+    },
+    "Citadel_Graph_PermanentBuff_ArtistMarksman": {
+      "text": "Marksman Sketches",
+      "group": "citadel_heroes",
+      "hash": "e204de5ae9ba"
+    },
+    "artist_drawing_mystic": {
+      "text": "Mystic Sketch",
+      "group": "citadel_heroes",
+      "hash": "cba18891ddf1"
+    },
+    "artist_drawing_marksman": {
+      "text": "Marksman Sketch",
+      "group": "citadel_heroes",
+      "hash": "ade419b965da"
+    },
+    "artist_drawing_brawler": {
+      "text": "Brawler Sketch",
+      "group": "citadel_heroes",
+      "hash": "c63e5f063c4e"
+    },
+    "artist_drawing_assassin": {
+      "text": "Assassin Sketch",
+      "group": "citadel_heroes",
+      "hash": "d122783ab484"
+    },
+    "ability_artist_bamboogrove": {
+      "text": "Abstract Landscape",
+      "group": "citadel_heroes",
+      "hash": "9f1fa2a55672"
+    },
+    "ability_artist_bamboogrove_desc": {
+      "text": "Create a circular display of ink that blocks vision and grants allies {g:citadel_inline_attribute:'Spirit'}.<br><br>Enemies inside are revealed, and leaving causes them to take {g:citadel_inline_attribute:'SpiritDamage'} and suffer from {g:citadel_inline_attribute:'Silence'} and {g:citadel_inline_attribute:'Slow'}, destroying the ink in the process.",
+      "group": "citadel_heroes",
+      "hash": "853a7e41e98b"
+    },
+    "ability_artist_bamboogrove/center/buff": {
+      "text": "Abstract Landscape",
+      "group": "citadel_heroes",
+      "hash": "9f1fa2a55672"
+    },
+    "ability_artist_bamboogrove_t2_desc": {
+      "text": "On Buff: +{s:AbilityLifestealPercentHero}% Spirit Lifesteal<br>+{s:TechPower} Spirit Power",
+      "group": "citadel_heroes",
+      "hash": "3e7aec103f42"
+    },
+    "ability_artist_bamboogrove_t3_desc": {
+      "text": "+{s:SilenceDuration}s Silence Duration<br>+{s:AbilityDuration}s Ability Duration<br>Ink is no longer destroyed",
+      "group": "citadel_heroes",
+      "hash": "38cb8acd2329"
+    },
+    "ability_artist_bamboogrove/groundaura/silence": {
+      "text": "Abstract Landscape",
+      "group": "citadel_heroes",
+      "hash": "9f1fa2a55672"
+    },
+    "ability_artist_bamboogrove/groveally/buff": {
+      "text": "Abstract Landscape",
+      "group": "citadel_heroes",
+      "hash": "9f1fa2a55672"
+    },
+    "AttackFrequency_postvalue_label": {
+      "text": "Attack Frequency",
+      "group": "citadel_heroes",
+      "hash": "1ed1a6d91ec9"
+    },
+    "AttackFrequency_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "GroveRadius_postvalue_label": {
+      "text": "Display Radius",
+      "group": "citadel_heroes",
+      "hash": "10c67ab47cc9"
+    },
+    "GroveRadius_label": {
+      "text": "Display Radius",
+      "group": "citadel_heroes",
+      "hash": "10c67ab47cc9"
+    },
+    "GroveRadius_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
     "ability_header_on_hit": {
       "text": "On Hit:",
       "group": "citadel_heroes",
@@ -23835,6 +24200,11 @@
       "hash": "e00694b1e25c"
     },
     "ability_melee_deadpack": {
+      "text": "Melee",
+      "group": "citadel_heroes",
+      "hash": "e00694b1e25c"
+    },
+    "ability_melee_artist": {
       "text": "Melee",
       "group": "citadel_heroes",
       "hash": "e00694b1e25c"
@@ -24533,6 +24903,11 @@
       "text": "\"Ladies and Gentlemen, I'm going to tell you a shocking secret: at Fairfax Industries we know nothing about safety. Now let me tell you something even MORE shocking... that's a good thing! Now in my tenure here I have been shot, stabbed, impaled, defenestrated, blown up, atomized, and decapitated-not once. not twice. not thrice. but quice. That's right, my head has been cut off enough times that I had to use a made up word to quantify it.<br><br>But I put myself through figurative and sometimes literal hell because it's not enough to THINK about how things go wrong, we need to KNOW how things go wrong.<br><br>Now the demonstration you are about to witness is extremely dangerous. So sit back. Put on your safety googles. And bear witness to the miracle of flight courtesy of Fairfax Industries, and the Chimera Mark 1.\"<br><br><span class=\"italics\">- This transcription of Danny's opening remarks at The Military Technology Expo has been provided by Fairfax Industries</span>",
       "group": "citadel_heroes",
       "hash": "331b4ce9f182"
+    },
+    "hero_artist_lore": {
+      "text": "Violet immigrated to The Cursed Apple when she was 12, and while there was a certain amount of culture shock to adapting to New York, she quickly fell in love with the vibrance of the city.   Dedicating herself to the pursuit of the arts, Violet's passion lead her to successes far beyond most of her peers.<br><br>First, a full ride to art school.<br><br>Then in her junior year, inclusion in MOMA'S prestigious celebration of student artists: \"The Upstart Gallery\".<br><br>By any measure she's doing phenomenal for her age, however Violet has not been able shake her existential dread of dying a failure. She knows that commercial success as a fine artist isn't about being good enough. It's not even about being great. It's about being seen by the right person at the right time.  And so she has set her sights on The Ritual... not to embellish on her own talent, but just to have a chance to show the world what she can do.",
+      "group": "citadel_heroes",
+      "hash": "beba6caec09d"
     },
     "MODIFIER_STATE_ROOTED": {
       "text": "Immobilized",
@@ -35719,6 +36094,11 @@
       "group": "citadel_gc",
       "hash": "4b4547fd7a28"
     },
+    "Steam_Citadel_Hideout_Painting": {
+      "text": "Painting In The Hideout",
+      "group": "citadel_gc",
+      "hash": "d95df188147b"
+    },
     "Citadel_Dashboard_BuildVersion": {
       "text": "#{d:buildNumber}",
       "group": "citadel_main",
@@ -37239,6 +37619,11 @@
       "group": "citadel_main",
       "hash": "90f35600063c"
     },
+    "Citadel_Hud_HealingMode": {
+      "text": "Healing Needles",
+      "group": "citadel_main",
+      "hash": "eb75ab7fd325"
+    },
     "Citadel_Hud_Pauser": {
       "text": " by {s:pauser}",
       "group": "citadel_main",
@@ -37683,6 +38068,11 @@
       "text": "{i:items_ready}",
       "group": "citadel_main",
       "hash": "5950b8e31d8f"
+    },
+    "Citadel_Hud_Quickbuy_ItemSlotsLocked": {
+      "text": "Slots Locked",
+      "group": "citadel_main",
+      "hash": "d642c0a69b00"
     },
     "Citadel_Hud_Quickbuy_ToastLabel_Purchase": {
       "text": "Item Purchased",
@@ -58260,9 +58650,9 @@
       "hash": "a6f47e00e036"
     },
     "Sandbox_Tutorial_Controls_PurchaseMods": {
-      "text": "Purchase Escalating Exposure",
+      "text": "Purchase {g:citadel_ability_name:'upgrade_escalating_exposure'}",
       "group": "citadel_main",
-      "hash": "43a18317fb45"
+      "hash": "b49cce3ce215"
     },
     "Sandbox_Tutorial_Controls_CloseShop": {
       "text": "Close Shop",
@@ -61028,6 +61418,11 @@
       "text": "Press {g:citadel_binding:'Interact'} to view Holiday Challenge Progress",
       "group": "citadel_main",
       "hash": "1ead123611d1"
+    },
+    "Citadel_Hideout_HeavyCrate": {
+      "text": "Hold {g:citadel_binding:'AbilityMelee'} to break with heavy melee",
+      "group": "citadel_main",
+      "hash": "a7e7b610605a"
     },
     "citadel_keybind_hideout_use": {
       "text": "Interact with Hideout object",

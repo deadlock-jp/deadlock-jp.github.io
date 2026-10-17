@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "upstreamCommit": "6785",
-  "generatedAt": "2026-10-15T14:18:09.366Z",
+  "upstreamCommit": "6793",
+  "generatedAt": "2026-10-17T14:10:15.460Z",
   "objects": {
     "weapon_base": {
       "id": "weapon_base",
@@ -3068,6 +3068,20 @@
       },
       "flags": {
         "debugDraw": false
+      },
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
+    },
+    "citadel_artist_strokeblocker": {
+      "id": "citadel_artist_strokeblocker",
+      "className": "citadel_artist_strokeblocker",
+      "baseKey": null,
+      "stats": {
+        "meleeHits": 1
+      },
+      "flags": {
+        "blockerIsVisible": false
       },
       "nameToken": null,
       "icon": null,
