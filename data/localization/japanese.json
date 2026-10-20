@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6795",
-  "upstreamCommit": "6795",
-  "generatedAt": "2026-10-18T09:00:09.617Z",
+  "clientVersion": "6796",
+  "upstreamCommit": "6796",
+  "generatedAt": "2026-10-20T02:39:02.759Z",
   "language": "japanese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
-    "citadel_mods": 617,
-    "citadel_heroes": 3737,
+    "citadel_mods": 618,
+    "citadel_heroes": 3813,
     "citadel_attributes": 1986,
-    "citadel_gc": 219,
-    "citadel_main": 5254
+    "citadel_gc": 220,
+    "citadel_main": 5258
   },
   "tokens": {
     "hero_vampire:n": {
@@ -3623,6 +3623,11 @@
       "text": "%",
       "group": "citadel_mods",
       "hash": "4345cb1fa278"
+    },
+    "upgrade_burst_fire_desc": {
+      "text": "弾薬がヒーローにヒットすると、<span class=\"highlight\">発射速度</span>と<span class=\"highlight\">移動速度</span>が一時的に上昇する",
+      "group": "citadel_mods",
+      "hash": "7c2bd9ab926c"
     },
     "upgrade_intensifying_clip_desc": {
       "text": "武器を連続で発射し続けることで<span class=\"highlight\">武器ダメージ</span>が上昇する",
@@ -22404,6 +22409,16 @@
       "group": "citadel_heroes",
       "hash": "6d94060e663a"
     },
+    "ability_chessmaster_knightbuff_trigger": {
+      "text": "キング移動",
+      "group": "citadel_heroes",
+      "hash": "bba972040f2d"
+    },
+    "ability_chessmaster_knightbuff_desc": {
+      "text": "味方1人を<span class=\"highlight\">ナイト</span>にプロモーションさせて、一定時間<span class=\"highlight\">追加スタミナ</span>と{g:citadel_inline_attribute:'CombatBarrier'}を付与する<br><br>セルフキャストした場合は自身が<span class=\"highlight\">キング</span>となり、2倍の{g:citadel_inline_attribute:'CombatBarrier'}を得るがスタミナは得られない<br><br><span class=\"diminish\">移動 ({g:citadel_binding:'ADS'})：</span>ピースを移動させる。移動中は着地するまで<span class=\"highlight\">無敵状態</span>になる。セルフキャストしていた場合は、再発動することで移動が可能",
+      "group": "citadel_heroes",
+      "hash": "8bfdffe462dd"
+    },
     "ability_chessmaster_knightbuff_t2_desc": {
       "text": "バリア +{s:CombatBarrier}<br>スタミナ +{s:Stamina}",
       "group": "citadel_heroes",
@@ -22413,6 +22428,11 @@
       "text": "範囲内の味方2人を対象にできる<br>自身対象時：移動後に<span class=\"highlight\">すべてのデバフを解除</span>する",
       "group": "citadel_heroes",
       "hash": "9540594f6c66"
+    },
+    "ability_chessmaster_knightbuff/rookbuff": {
+      "text": "キングサイド・ナイト",
+      "group": "citadel_heroes",
+      "hash": "6d94060e663a"
     },
     "ability_chessmaster_forkpiece": {
       "text": "ルーク・バッテリー",
@@ -23134,6 +23154,361 @@
       "group": "citadel_heroes",
       "hash": "ed6e3c1d3cc3"
     },
+    "citadel_weapon_artist_set": {
+      "text": "創造的な解決法",
+      "group": "citadel_heroes",
+      "hash": "2c216ecfcf6e"
+    },
+    "ability_artist_pullbrush": {
+      "text": "リビングインク",
+      "group": "citadel_heroes",
+      "hash": "10163ad17848"
+    },
+    "ability_artist_homingbrush": {
+      "text": "リビングインク",
+      "group": "citadel_heroes",
+      "hash": "10163ad17848"
+    },
+    "ability_artist_homingbrush_desc_passive": {
+      "text": "<span class=\"diminish\">パッシブ：</span>他のアビリティをキャストすると、<span class=\"highlight\">一意専心</span>のクールダウンをリフレッシュする",
+      "group": "citadel_heroes",
+      "hash": "ec7bd8344eb5"
+    },
+    "ability_artist_homingbrush_desc_active": {
+      "text": "<span class=\"diminish\">強化：</span>次の<span class=\"highlight\">3発</span>の弾薬に生命を宿し、飛翔中に操作可能になる。この3発は通常よりも高い{g:citadel_inline_attribute:'BulletDamage'}を与え、小範囲に拡散して{g:citadel_inline_attribute:'SpiritDamage'}を与える<br><br>ヒーローにヒットするたびに<span class=\"highlight\">全アビリティのクールダウン</span>が短縮され、<span class=\"highlight\">全アイテムのクールダウン</span>がその半分だけ短縮される",
+      "group": "citadel_heroes",
+      "hash": "99d802f72000"
+    },
+    "ability_artist_homingbrush_desc_active_alt": {
+      "text": "<span class=\"diminish\">描画 ({g:citadel_binding:'ADS'})：</span>絵具を実体化させ、発射物およびキャラクターの通過を防ぐ線を描く<br><br>この線は近接強攻撃で破壊できるが、破壊したキャラクターに{g:citadel_inline_attribute:'SpiritDamage'}を与える</span>",
+      "group": "citadel_heroes",
+      "hash": "43115f468831"
+    },
+    "ability_artist_homingbrush/stack": {
+      "text": "リビングインク",
+      "group": "citadel_heroes",
+      "hash": "10163ad17848"
+    },
+    "ability_artist_homingbrush/stackingbuff": {
+      "text": "リビングインク",
+      "group": "citadel_heroes",
+      "hash": "10163ad17848"
+    },
+    "BulletDamageMultiplier_postvalue_label": {
+      "text": "弾薬ダメージ",
+      "group": "citadel_heroes",
+      "hash": "221a15b5baca"
+    },
+    "BulletDamageMultiplier_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "ability_artist_homingbrush/active": {
+      "text": "リビングインク",
+      "group": "citadel_heroes",
+      "hash": "10163ad17848"
+    },
+    "ability_artist_homingbrush_t2_desc": {
+      "text": "強化時：{s:StackDuration}秒間、発射速度 +{s:BonusFireRatePerStack}%を獲得。{s:MaxStacks}回までスタックする",
+      "group": "citadel_heroes",
+      "hash": "c11addbcccab"
+    },
+    "ability_artist_homingbrush_t1_desc": {
+      "text": "クールダウン {s:AbilityCooldown}秒<br>最大描画距離 +{s:MaxDrawDistance}m",
+      "group": "citadel_heroes",
+      "hash": "d7a08084099e"
+    },
+    "ability_artist_homingbrush_t3_desc": {
+      "text": "クールダウン短縮 +{s:CooldownReductionPerHit}秒／ヒット<br>スケーリングが上昇する",
+      "group": "citadel_heroes",
+      "hash": "e95608711263"
+    },
+    "MaxDrawDistance_label": {
+      "text": "最大描画距離",
+      "group": "citadel_heroes",
+      "hash": "4fcbd56cca89"
+    },
+    "MaxDrawDistance_postvalue_label": {
+      "text": "最大描画距離",
+      "group": "citadel_heroes",
+      "hash": "4fcbd56cca89"
+    },
+    "MaxDrawDistance_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "DrawDuration_label": {
+      "text": "描画継続時間",
+      "group": "citadel_heroes",
+      "hash": "510658d99f55"
+    },
+    "DrawDuration_postvalue_label": {
+      "text": "描画継続時間",
+      "group": "citadel_heroes",
+      "hash": "510658d99f55"
+    },
+    "DrawDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "ability_artist_rollingprojectile": {
+      "text": "一意専心",
+      "group": "citadel_heroes",
+      "hash": "e30e77a86e5a"
+    },
+    "ability_artist_rollingprojectile_desc": {
+      "text": "前方に筆を走らせて筆跡を残す。筆跡は、味方には<span class=\"highlight\">追加スライディング距離</span>を付与し、通過する敵には徐々に減衰する{g:citadel_inline_attribute:'Slow'}と{g:citadel_inline_attribute:'SpiritDamage'}を与える。この効果は通過する距離に応じて増加する<br><br>再発動すると、アビリティを早めに終了させる代わりに筆を前方に弾いて、より大きな範囲に{g:citadel_inline_attribute:'SpiritDamage'}を与える",
+      "group": "citadel_heroes",
+      "hash": "d5cfb1e8e4aa"
+    },
+    "ability_artist_rollingprojectile_t1_desc": {
+      "text": "スライディング時：スタミナリジェネ +{s:StaminaCooldownReduction}%",
+      "group": "citadel_heroes",
+      "hash": "dbde781c9a05"
+    },
+    "ability_artist_rollingprojectile_t2_desc": {
+      "text": "クールダウン {s:AbilityCooldown}秒<br>弾き範囲 +{s:ExplosionRadius}m<br>筆跡の継続時間 +{s:GroundAuraDuration}秒",
+      "group": "citadel_heroes",
+      "hash": "9e1d23493927"
+    },
+    "ability_artist_rollingprojectile_t3_desc": {
+      "text": "スライディング時：時間経過でダメージ増幅を獲得する。{s:DamageAmpDuration}秒間で最大{s:OutgoingDamagePercent}%まで増加する",
+      "group": "citadel_heroes",
+      "hash": "4039c27d4c87"
+    },
+    "ability_artist_rollingprojectile/debuff": {
+      "text": "一意専心",
+      "group": "citadel_heroes",
+      "hash": "e30e77a86e5a"
+    },
+    "GroundAuraDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "GroundAuraDuration_postvalue_label": {
+      "text": "筆跡 継続時間",
+      "group": "citadel_heroes",
+      "hash": "f91eeedd9cab"
+    },
+    "GroundAuraDuration_label": {
+      "text": "筆跡 継続時間",
+      "group": "citadel_heroes",
+      "hash": "f91eeedd9cab"
+    },
+    "ability_artist_tether": {
+      "text": "スティルライフ",
+      "group": "citadel_heroes",
+      "hash": "f52c8a62033b"
+    },
+    "ability_artist_tether_desc": {
+      "text": "ヒーローを<span class=\"highlight\">題材</span>として選択する。対象を見ている間は{g:citadel_inline_attribute:'SpiritDPS'}を与え続ける<br><br>描画が完了すると対象は追加の{g:citadel_inline_attribute:'SpiritDamage'}を受けて{g:citadel_inline_attribute:'Stun'}状態になり、回収可能な<span class=\"highlight\">スケッチ</span>を落とす<br><br><span class=\"highlight\">スケッチ</span>を回収するたび、そのヒーローに応じたステータスを永続的に獲得する",
+      "group": "citadel_heroes",
+      "hash": "be03f0fa5f55"
+    },
+    "ability_artist_tether_t1_desc": {
+      "text": "発動時：{s:BuffDuration}秒間、HPリジェネ +{s:HealthRegen}。スケッチ回収でリフレッシュ",
+      "group": "citadel_heroes",
+      "hash": "67229cca5ec7"
+    },
+    "ability_artist_tether_t2_desc": {
+      "text": "スケッチ中：対象の与ダメージ {s:OutgoingDamagePercent}%",
+      "group": "citadel_heroes",
+      "hash": "9bd41e0963a9"
+    },
+    "ability_artist_tether_t3_desc": {
+      "text": "移動速度 +{s:BonusMoveSpeedPercent}%<br>クールダウン {s:AbilityCooldown}秒<br>スタン継続時間 +{s:StunDuration}秒",
+      "group": "citadel_heroes",
+      "hash": "ab558095e9b6"
+    },
+    "ability_artist_tether/buildup": {
+      "text": "描画中",
+      "group": "citadel_heroes",
+      "hash": "49017a470f09"
+    },
+    "ability_artist_tether/buildup/stun": {
+      "text": "スティルライフ",
+      "group": "citadel_heroes",
+      "hash": "f52c8a62033b"
+    },
+    "ability_artist_tether/buildup/buff": {
+      "text": "スティルライフ",
+      "group": "citadel_heroes",
+      "hash": "f52c8a62033b"
+    },
+    "ability_artist_tether/self": {
+      "text": "スティルライフ",
+      "group": "citadel_heroes",
+      "hash": "f52c8a62033b"
+    },
+    "ability_artist_tether/stun": {
+      "text": "スティルライフ",
+      "group": "citadel_heroes",
+      "hash": "f52c8a62033b"
+    },
+    "BuildUpPerAbility_postvalue_label": {
+      "text": "蓄積／アビリティ",
+      "group": "citadel_heroes",
+      "hash": "403c040908a5"
+    },
+    "BuildUpPerAbility_label": {
+      "text": "蓄積／アビリティ",
+      "group": "citadel_heroes",
+      "hash": "403c040908a5"
+    },
+    "BuildUpPerAbility_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "TotalDrawingTime_postvalue_label": {
+      "text": "描画時間",
+      "group": "citadel_heroes",
+      "hash": "9f2dde5420ba"
+    },
+    "TotalDrawingTime_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "OutgoingDamagePercentPerPickup_postvalue_label": {
+      "text": "ダメージ増加／スケッチ",
+      "group": "citadel_heroes",
+      "hash": "939983cc15d7"
+    },
+    "OutgoingDamagePercentPerPickup_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "IncomingDamagePercentReductionPerPickup_postvalue_label": {
+      "text": "ダメージ軽減／スケッチ",
+      "group": "citadel_heroes",
+      "hash": "cd51c57afb48"
+    },
+    "IncomingDamagePercentReductionPerPickup_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "SpiritPerPickup_postvalue_label": {
+      "text": "スピリット／スケッチ",
+      "group": "citadel_heroes",
+      "hash": "5c2914c82e18"
+    },
+    "SpiritPerPickup_label": {
+      "text": "スピリット／スケッチ",
+      "group": "citadel_heroes",
+      "hash": "5c2914c82e18"
+    },
+    "CurrentSketches_label": {
+      "text": "回収したスケッチ：",
+      "group": "citadel_heroes",
+      "hash": "a689388dc81d"
+    },
+    "Citadel_Graph_PermanentBuff_ArtistMystic": {
+      "text": "ミスティックのスケッチ",
+      "group": "citadel_heroes",
+      "hash": "af52db274ece"
+    },
+    "Citadel_Graph_PermanentBuff_ArtistBrawler": {
+      "text": "ブローラーのスケッチ",
+      "group": "citadel_heroes",
+      "hash": "b2309978f2a7"
+    },
+    "Citadel_Graph_PermanentBuff_ArtistAssassin": {
+      "text": "アサシンのスケッチ",
+      "group": "citadel_heroes",
+      "hash": "1ff63741d0b8"
+    },
+    "Citadel_Graph_PermanentBuff_ArtistMarksman": {
+      "text": "マークスマンのスケッチ",
+      "group": "citadel_heroes",
+      "hash": "22c14167a594"
+    },
+    "artist_drawing_mystic": {
+      "text": "ミスティックのスケッチ",
+      "group": "citadel_heroes",
+      "hash": "af52db274ece"
+    },
+    "artist_drawing_marksman": {
+      "text": "マークスマンのスケッチ",
+      "group": "citadel_heroes",
+      "hash": "22c14167a594"
+    },
+    "artist_drawing_brawler": {
+      "text": "ブローラーのスケッチ",
+      "group": "citadel_heroes",
+      "hash": "b2309978f2a7"
+    },
+    "artist_drawing_assassin": {
+      "text": "アサシンのスケッチ",
+      "group": "citadel_heroes",
+      "hash": "1ff63741d0b8"
+    },
+    "ability_artist_bamboogrove": {
+      "text": "アブストラクト・ランドスケープ",
+      "group": "citadel_heroes",
+      "hash": "0f6523843991"
+    },
+    "ability_artist_bamboogrove_desc": {
+      "text": "絵具で円形の壁を描き、視界を遮る。また、内部の味方に{g:citadel_inline_attribute:'Spirit'}を付与する<br><br>円の内部にいる敵は視認可能状態になる。敵が円から出ると円は破壊され、敵は{g:citadel_inline_attribute:'SpiritDamage'}を受けて{g:citadel_inline_attribute:'Silence'}と{g:citadel_inline_attribute:'Slow'}状態になる",
+      "group": "citadel_heroes",
+      "hash": "8c2abb0f249d"
+    },
+    "ability_artist_bamboogrove/center/buff": {
+      "text": "アブストラクト・ランドスケープ",
+      "group": "citadel_heroes",
+      "hash": "0f6523843991"
+    },
+    "ability_artist_bamboogrove_t2_desc": {
+      "text": "バフ時：スピリットライフスティール +{s:AbilityLifestealPercentHero}%<br>スピリットパワー +{s:TechPower}",
+      "group": "citadel_heroes",
+      "hash": "d72c6d6cb7fd"
+    },
+    "ability_artist_bamboogrove_t3_desc": {
+      "text": "サイレンス継続時間 +{s:SilenceDuration}秒<br>アビリティ継続時間 +{s:AbilityDuration}秒<br>壁が破壊されなくなる",
+      "group": "citadel_heroes",
+      "hash": "e63dd51ff878"
+    },
+    "ability_artist_bamboogrove/groundaura/silence": {
+      "text": "アブストラクト・ランドスケープ",
+      "group": "citadel_heroes",
+      "hash": "0f6523843991"
+    },
+    "ability_artist_bamboogrove/groveally/buff": {
+      "text": "アブストラクト・ランドスケープ",
+      "group": "citadel_heroes",
+      "hash": "0f6523843991"
+    },
+    "AttackFrequency_postvalue_label": {
+      "text": "攻撃頻度",
+      "group": "citadel_heroes",
+      "hash": "484651c9f8b7"
+    },
+    "AttackFrequency_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "GroveRadius_postvalue_label": {
+      "text": "壁の範囲",
+      "group": "citadel_heroes",
+      "hash": "a1b4630ca008"
+    },
+    "GroveRadius_label": {
+      "text": "壁の範囲",
+      "group": "citadel_heroes",
+      "hash": "a1b4630ca008"
+    },
+    "GroveRadius_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
     "ability_header_on_hit": {
       "text": "ヒット時：",
       "group": "citadel_heroes",
@@ -23758,6 +24133,11 @@
       "text": "近接攻撃",
       "group": "citadel_heroes",
       "hash": "2c86e8c42b15"
+    },
+    "ability_melee_artist": {
+      "text": "メレー",
+      "group": "citadel_heroes",
+      "hash": "594f3be6ceac"
     },
     "Citadel_Familiar_HeroTag_1": {
       "text": "サポート",
@@ -24453,6 +24833,11 @@
       "text": "「紳士淑女の皆様に、衝撃的な秘密をお教えしましょう。フェアファックス・インダストリーズは、安全性について何も知りません。さらに衝撃的なのは……それが喜ぶべきことだという事実です！ 私がこの仕事に就いてからと言うもの、撃たれたことや刺されたこと、串刺しにされたこと、窓から放り投げられたこと、爆破されたこと、原子レベルに分解されたこと、そして首を切られたことは一度や二度や三度ではありません。そう、四度です。語呂の悪い言葉遊びをするくらい多く、この首を落とされてきたのです」<br><br>「そんな地獄……時には比喩でなく、文字通りの地獄にこの身を置いているのは、なぜ失敗したのかを\"考える\"だけでは不十分で、それを\"知る\"必要があるからです」<br><br>「さて、これから皆様へご覧に入れるデモンストレーションは非常に危険なものとなっております。椅子に深く座り直し、安全ゴーグルの着用をお願いします。それではご覧ください。フェアファックス・インダストリーズによる奇跡の飛行、そしてキメラ・マークIの雄姿を」<br><br>- フェアファックス・インダストリーズ主催の軍事技術博覧会でのダニーによる開会挨拶<span class=\"italics\"></span>",
       "group": "citadel_heroes",
       "hash": "576757ca455b"
+    },
+    "hero_artist_lore": {
+      "text": "バイオレットは12歳のときにカースド・アップルへ移住した。ニューヨークに馴染むまでにはある程度のカルチャーショックも受けたが、すぐに活気あふれるこの街に魅了された。芸術の追求に身を捧げたバイオレットの情熱は、同世代の者たちを遥かにしのぐ成功へと導いた。<br><br>まずは、美術学校への進学にあたり、全額給付の奨学金を獲得した。<br><br>そして第3学年では、ニューヨーク近代美術館（MoMA）が主催する権威ある学生芸術家の展覧会「アップスタート・ギャラリー」への出展を果たした。<br><br>誰の目から見ても、バイオレットは若くして目覚ましい活躍をしている。それでも彼女は、何者にもなれないまま人生を終えることへの実存的な恐怖を拭い去れずにいる。ファインアートの世界で商業的な成功を収めるには、ただ優れているだけでは不十分であることを、バイオレットは心得ている。どれだけ優れていようと足りないのだ。すべては然るべき時に、然るべき人物に見出されるかどうかにかかっている。\"儀式\"に目をつけたのはそのためだ。自らの才能を高めるためではなく、自分に何ができるかを世界に知らしめるチャンスを得るために。",
+      "group": "citadel_heroes",
+      "hash": "4a8dc73ad97c"
     },
     "MODIFIER_STATE_ROOTED": {
       "text": "移動不能状態",
@@ -35479,6 +35864,11 @@
       "group": "citadel_gc",
       "hash": "3df8371dc999"
     },
+    "Steam_Citadel_Hideout_Painting": {
+      "text": "ハイドアウトでお絵かき中",
+      "group": "citadel_gc",
+      "hash": "a4081c36aa56"
+    },
     "Citadel_Dashboard_BuildVersion": {
       "text": "#{d:buildNumber}",
       "group": "citadel_main",
@@ -36994,6 +37384,11 @@
       "group": "citadel_main",
       "hash": "a2270712567c"
     },
+    "Citadel_Hud_HealingMode": {
+      "text": "ヒーリングニードル",
+      "group": "citadel_main",
+      "hash": "600c9fe2d237"
+    },
     "Citadel_Hud_Pauser": {
       "text": " 実行者：{s:pauser}",
       "group": "citadel_main",
@@ -37438,6 +37833,11 @@
       "text": "{i:items_ready}",
       "group": "citadel_main",
       "hash": "5950b8e31d8f"
+    },
+    "Citadel_Hud_Quickbuy_ItemSlotsLocked": {
+      "text": "スロットロック中",
+      "group": "citadel_main",
+      "hash": "5590e8e25c0f"
     },
     "Citadel_Hud_Quickbuy_ToastLabel_Purchase": {
       "text": "アイテム購入",
@@ -57924,6 +58324,11 @@
       "group": "citadel_main",
       "hash": "75b2b4705c34"
     },
+    "Sandbox_Tutorial_Controls_PurchaseMods": {
+      "text": "{g:citadel_ability_name:'upgrade_escalating_exposure'}を購入",
+      "group": "citadel_main",
+      "hash": "31c0e0e507ce"
+    },
     "Sandbox_Tutorial_Controls_CloseShop": {
       "text": "ショップを閉じる",
       "group": "citadel_main",
@@ -60678,6 +61083,11 @@
       "text": "{g:citadel_binding:'Interact'} でホリデーチャレンジの進行状況を確認",
       "group": "citadel_main",
       "hash": "4bea58ea5dc7"
+    },
+    "Citadel_Hideout_HeavyCrate": {
+      "text": "{g:citadel_binding:'AbilityMelee'}を長押しして近接強攻撃で破壊",
+      "group": "citadel_main",
+      "hash": "1262e11a5fa5"
     },
     "citadel_keybind_hideout_use": {
       "text": "ハイドアウトのオブジェクトにインタラクト",

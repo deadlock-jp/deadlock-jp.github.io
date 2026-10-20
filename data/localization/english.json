@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6795",
-  "upstreamCommit": "6795",
-  "generatedAt": "2026-10-18T09:00:09.656Z",
+  "clientVersion": "6796",
+  "upstreamCommit": "6796",
+  "generatedAt": "2026-10-20T02:39:02.791Z",
   "language": "English",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
@@ -23285,9 +23285,9 @@
       "hash": "3c077bbc45dc"
     },
     "ability_artist_homingbrush_t1_desc": {
-      "text": "{s:AbilityCooldown}s Cooldown<br>{s:MaxDrawDistance}m Max Draw Distance",
+      "text": "{s:AbilityCooldown}s Cooldown<br>+{s:MaxDrawDistance}m Max Drawing Distance",
       "group": "citadel_heroes",
-      "hash": "d710a5a120df"
+      "hash": "b06b857eeed3"
     },
     "ability_artist_homingbrush_t3_desc": {
       "text": "+{s:CooldownReductionPerHit}s Cooldown Reduction Per Hit<br>Improve scaling",

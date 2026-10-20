@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6795",
-  "upstreamCommit": "6795",
-  "generatedAt": "2026-10-18T09:00:09.690Z",
+  "clientVersion": "6796",
+  "upstreamCommit": "6796",
+  "generatedAt": "2026-10-20T02:39:02.829Z",
   "language": "koreana",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
-    "citadel_mods": 617,
-    "citadel_heroes": 3737,
+    "citadel_mods": 618,
+    "citadel_heroes": 3813,
     "citadel_attributes": 1986,
-    "citadel_gc": 219,
-    "citadel_main": 5255
+    "citadel_gc": 220,
+    "citadel_main": 5259
   },
   "tokens": {
     "hero_vampire:n": {
@@ -3623,6 +3623,11 @@
       "text": "%",
       "group": "citadel_mods",
       "hash": "4345cb1fa278"
+    },
+    "upgrade_burst_fire_desc": {
+      "text": "총탄이 1발이라도 영웅에게 적중하면 잠시 동안 <span class=\"highlight\">연사 속도</span>와 <span class=\"highlight\">이동 속도</span>가 증가합니다.",
+      "group": "citadel_mods",
+      "hash": "3be4bd56d1ed"
     },
     "upgrade_intensifying_clip_desc": {
       "text": "무기를 연사할수록 <span class=\"highlight\">무기 피해</span>가 증가합니다.",
@@ -22404,6 +22409,16 @@
       "group": "citadel_heroes",
       "hash": "c9c91ad64515"
     },
+    "ability_chessmaster_knightbuff_trigger": {
+      "text": "킹 이동",
+      "group": "citadel_heroes",
+      "hash": "93c6da4626a9"
+    },
+    "ability_chessmaster_knightbuff_desc": {
+      "text": "아군을 <span class=\"highlight\">나이트</span>로 승격시켜 일정 시간 동안 <span class=\"highlight\">보너스 활력</span>과 {g:citadel_inline_attribute:'CombatBarrier'} 효과를 부여합니다.<br><br>자신에게 시전하면 자신을 <span class=\"highlight\">킹</span>으로 지정해 두 배의 {g:citadel_inline_attribute:'CombatBarrier'}이 부여되지만, 활력은 부여되지 않습니다.<br><br><span class=\"diminish\">이동 ({g:citadel_binding:'ADS'}):</span> 해당 말을 이동시킵니다. 대상은 착지할 때까지 <span class=\"highlight\">무적</span> 상태가 됩니다. 자신에게 시전한 경우에는 능력을 다시 사용하여 이동합니다.",
+      "group": "citadel_heroes",
+      "hash": "5f6c78182494"
+    },
     "ability_chessmaster_knightbuff_t2_desc": {
       "text": "방벽 +{s:CombatBarrier} 증가<br>활력 +{s:Stamina} 증가",
       "group": "citadel_heroes",
@@ -22413,6 +22428,11 @@
       "text": "반경 내 아군 두 명을 대상으로 지정 가능<br>자신에게 시전 시: 이동 후 <span class=\"highlight\">모든 약화 효과 제거</span>",
       "group": "citadel_heroes",
       "hash": "f038bac1cedf"
+    },
+    "ability_chessmaster_knightbuff/rookbuff": {
+      "text": "킹사이드 나이트",
+      "group": "citadel_heroes",
+      "hash": "c9c91ad64515"
     },
     "ability_chessmaster_forkpiece": {
       "text": "룩 배터리",
@@ -23134,6 +23154,361 @@
       "group": "citadel_heroes",
       "hash": "ed6e3c1d3cc3"
     },
+    "citadel_weapon_artist_set": {
+      "text": "창의적 해결책",
+      "group": "citadel_heroes",
+      "hash": "9806bfead77e"
+    },
+    "ability_artist_pullbrush": {
+      "text": "살아있는 잉크",
+      "group": "citadel_heroes",
+      "hash": "a64c07327dfa"
+    },
+    "ability_artist_homingbrush": {
+      "text": "살아있는 잉크",
+      "group": "citadel_heroes",
+      "hash": "a64c07327dfa"
+    },
+    "ability_artist_homingbrush_desc_passive": {
+      "text": "<span class=\"diminish\">지속 효과:</span> 다른 능력을 시전하면 <span class=\"highlight\">몰입의 경지</span>의 쿨다운이 초기화됩니다.",
+      "group": "citadel_heroes",
+      "hash": "1d196e916bf5"
+    },
+    "ability_artist_homingbrush_desc_active": {
+      "text": "<span class=\"diminish\">강화({g:citadel_binding:'ABILITY1'}):</span> 다음 탄환 <span class=\"highlight\">3</span>발에 생명을 불어넣어 비행 중 방향을 조종할 수 있게 합니다. 강화된 탄환은 {g:citadel_inline_attribute:'BulletDamage'}가 증가하고, 좁은 범위에 {g:citadel_inline_attribute:'SpiritDamage'}를 줍니다.<br><br>영웅에게 적중할 때마다 <span class=\"highlight\">모든 능력의 쿨다운</span>이 감소하며, <span class=\"highlight\">모든 아이템의 쿨다운</span>도 해당 감소량의 절반만큼 감소합니다.",
+      "group": "citadel_heroes",
+      "hash": "ad15f95ed698"
+    },
+    "ability_artist_homingbrush_desc_active_alt": {
+      "text": "<span class=\"diminish\">그리기({g:citadel_binding:'ADS'}):</span> 투사체와 캐릭터가 통과하지 못하도록 막는 잉크 선을 그립니다.<br><br>잉크 선은 강한 근거리 공격으로 파괴할 수 있지만, 공격자에게 {g:citadel_inline_attribute:'SpiritDamage'}를 입힙니다.</span>",
+      "group": "citadel_heroes",
+      "hash": "50cab00233f9"
+    },
+    "ability_artist_homingbrush/stack": {
+      "text": "살아있는 잉크",
+      "group": "citadel_heroes",
+      "hash": "a64c07327dfa"
+    },
+    "ability_artist_homingbrush/stackingbuff": {
+      "text": "살아있는 잉크",
+      "group": "citadel_heroes",
+      "hash": "a64c07327dfa"
+    },
+    "BulletDamageMultiplier_postvalue_label": {
+      "text": "총탄 피해",
+      "group": "citadel_heroes",
+      "hash": "66f8fc3e69fa"
+    },
+    "BulletDamageMultiplier_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "ability_artist_homingbrush/active": {
+      "text": "살아있는 잉크",
+      "group": "citadel_heroes",
+      "hash": "a64c07327dfa"
+    },
+    "ability_artist_homingbrush_t2_desc": {
+      "text": "강화 시: {s:StackDuration}초 동안 연사 속도 +{s:BonusFireRatePerStack}% 증가, 최대 {s:MaxStacks}회 중첩",
+      "group": "citadel_heroes",
+      "hash": "7d8dccaf496c"
+    },
+    "ability_artist_homingbrush_t1_desc": {
+      "text": "쿨다운 {s:AbilityCooldown}초 감소<br>최대 그리기 거리 +{s:MaxDrawDistance}m 증가",
+      "group": "citadel_heroes",
+      "hash": "9501618d320d"
+    },
+    "ability_artist_homingbrush_t3_desc": {
+      "text": "적중당 쿨다운 감소 +{s:CooldownReductionPerHit}초<br>배수 증가",
+      "group": "citadel_heroes",
+      "hash": "daee483d137e"
+    },
+    "MaxDrawDistance_label": {
+      "text": "최대 그리기 거리",
+      "group": "citadel_heroes",
+      "hash": "3dfc05695036"
+    },
+    "MaxDrawDistance_postvalue_label": {
+      "text": "최대 그리기 거리",
+      "group": "citadel_heroes",
+      "hash": "3dfc05695036"
+    },
+    "MaxDrawDistance_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "DrawDuration_label": {
+      "text": "잉크 선 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "710eed411b85"
+    },
+    "DrawDuration_postvalue_label": {
+      "text": "잉크 선 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "710eed411b85"
+    },
+    "DrawDuration_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "ability_artist_rollingprojectile": {
+      "text": "몰입의 경지",
+      "group": "citadel_heroes",
+      "hash": "9671aaddd2dc"
+    },
+    "ability_artist_rollingprojectile_desc": {
+      "text": "궤적을 남기는 붓을 전방으로 보냅니다. 궤적은 아군의 <span class=\"highlight\">활주 거리를 증가</span>시키고, 붓은 통과하는 적군에게 점차 약해지는 {g:citadel_inline_attribute:'Slow'} 효과를 부여하고 {g:citadel_inline_attribute:'SpiritDamage'}를 입힙니다. 붓이 멀리 이동할수록 피해가 증가합니다.<br><br>능력을 다시 사용하면 능력을 조기에 종료하고, 붓을 앞으로 튕겨 더 넓은 범위에 {g:citadel_inline_attribute:'SpiritDamage'}를 입힙니다.",
+      "group": "citadel_heroes",
+      "hash": "2fb959ea9502"
+    },
+    "ability_artist_rollingprojectile_t1_desc": {
+      "text": "활주 시: 활력 재생 +{s:StaminaCooldownReduction}% 증가",
+      "group": "citadel_heroes",
+      "hash": "f493baa69dbd"
+    },
+    "ability_artist_rollingprojectile_t2_desc": {
+      "text": "쿨다운 {s:AbilityCooldown}초 감소<br>튕기기 범위 +{s:ExplosionRadius}m 증가<br>궤적 지속 시간 +{s:GroundAuraDuration}초 증가",
+      "group": "citadel_heroes",
+      "hash": "4bbd4515dac2"
+    },
+    "ability_artist_rollingprojectile_t3_desc": {
+      "text": "활주 시: 시간이 지남에 따라 최대 {s:OutgoingDamagePercent}%까지 피해 증폭, {s:DamageAmpDuration}초 동안 지속",
+      "group": "citadel_heroes",
+      "hash": "7825a6b7af18"
+    },
+    "ability_artist_rollingprojectile/debuff": {
+      "text": "몰입의 경지",
+      "group": "citadel_heroes",
+      "hash": "9671aaddd2dc"
+    },
+    "GroundAuraDuration_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "GroundAuraDuration_postvalue_label": {
+      "text": "궤적 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "9bd66bfb4dad"
+    },
+    "GroundAuraDuration_label": {
+      "text": "궤적 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "9bd66bfb4dad"
+    },
+    "ability_artist_tether": {
+      "text": "정물화",
+      "group": "citadel_heroes",
+      "hash": "3d485f20fb73"
+    },
+    "ability_artist_tether_desc": {
+      "text": "영웅 하나를 <span class=\"highlight\">그림의 모델</span>로 지정하고, 대상을 바라보는 동안 {g:citadel_inline_attribute:'SpiritDPS'}를 줍니다.<br><br>스케치를 완성하면 대상에게 추가 {g:citadel_inline_attribute:'SpiritDamage'}를 입히고 {g:citadel_inline_attribute:'Stun'} 효과를 적용하며, 수집할 수 있는 <span class=\"highlight\">스케치</span>를 떨어뜨립니다.<br><br><span class=\"highlight\">스케치</span>를 수집할 때마다 스케치에 그려진 영웅에 따라 능력치가 영구적으로 증가합니다.",
+      "group": "citadel_heroes",
+      "hash": "3386fc67b8b0"
+    },
+    "ability_artist_tether_t1_desc": {
+      "text": "시전 시: {s:BuffDuration}초 동안 체력 재생 {s:HealthRegen} 증가, 스케치 수집 시 지속 시간 갱신",
+      "group": "citadel_heroes",
+      "hash": "7b4471fb85e6"
+    },
+    "ability_artist_tether_t2_desc": {
+      "text": "스케치하는 동안: 대상이 입히는 피해 {s:OutgoingDamagePercent}%",
+      "group": "citadel_heroes",
+      "hash": "921d900bedba"
+    },
+    "ability_artist_tether_t3_desc": {
+      "text": "이동 속도 +{s:BonusMoveSpeedPercent}% 증가<br>쿨다운 {s:AbilityCooldown}초 감소<br>기절 지속 시간 +{s:StunDuration}초 증가",
+      "group": "citadel_heroes",
+      "hash": "6defab1f002a"
+    },
+    "ability_artist_tether/buildup": {
+      "text": "그리는 중",
+      "group": "citadel_heroes",
+      "hash": "9c199739018d"
+    },
+    "ability_artist_tether/buildup/stun": {
+      "text": "정물화",
+      "group": "citadel_heroes",
+      "hash": "3d485f20fb73"
+    },
+    "ability_artist_tether/buildup/buff": {
+      "text": "정물화",
+      "group": "citadel_heroes",
+      "hash": "3d485f20fb73"
+    },
+    "ability_artist_tether/self": {
+      "text": "정물화",
+      "group": "citadel_heroes",
+      "hash": "3d485f20fb73"
+    },
+    "ability_artist_tether/stun": {
+      "text": "정물화",
+      "group": "citadel_heroes",
+      "hash": "3d485f20fb73"
+    },
+    "BuildUpPerAbility_postvalue_label": {
+      "text": "능력당 축적",
+      "group": "citadel_heroes",
+      "hash": "de2b96d1f030"
+    },
+    "BuildUpPerAbility_label": {
+      "text": "능력당 축적",
+      "group": "citadel_heroes",
+      "hash": "de2b96d1f030"
+    },
+    "BuildUpPerAbility_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "TotalDrawingTime_postvalue_label": {
+      "text": "스케치 소요 시간",
+      "group": "citadel_heroes",
+      "hash": "628b30e594f3"
+    },
+    "TotalDrawingTime_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "OutgoingDamagePercentPerPickup_postvalue_label": {
+      "text": "스케치당 피해 보너스",
+      "group": "citadel_heroes",
+      "hash": "f41a853c006f"
+    },
+    "OutgoingDamagePercentPerPickup_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "IncomingDamagePercentReductionPerPickup_postvalue_label": {
+      "text": "스케치당 피해 감소",
+      "group": "citadel_heroes",
+      "hash": "84108e445771"
+    },
+    "IncomingDamagePercentReductionPerPickup_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "SpiritPerPickup_postvalue_label": {
+      "text": "스케치당 마력",
+      "group": "citadel_heroes",
+      "hash": "1ac616165249"
+    },
+    "SpiritPerPickup_label": {
+      "text": "스케치당 마력",
+      "group": "citadel_heroes",
+      "hash": "1ac616165249"
+    },
+    "CurrentSketches_label": {
+      "text": "수집한 스케치:",
+      "group": "citadel_heroes",
+      "hash": "901c4bcb2eb3"
+    },
+    "Citadel_Graph_PermanentBuff_ArtistMystic": {
+      "text": "화가 스케치",
+      "group": "citadel_heroes",
+      "hash": "98d4cd37ad35"
+    },
+    "Citadel_Graph_PermanentBuff_ArtistBrawler": {
+      "text": "싸움꾼 스케치",
+      "group": "citadel_heroes",
+      "hash": "9ecfb6fdb3e8"
+    },
+    "Citadel_Graph_PermanentBuff_ArtistAssassin": {
+      "text": "암살자 스케치",
+      "group": "citadel_heroes",
+      "hash": "d3120b5ad737"
+    },
+    "Citadel_Graph_PermanentBuff_ArtistMarksman": {
+      "text": "명사수 스케치",
+      "group": "citadel_heroes",
+      "hash": "05eed87aeccd"
+    },
+    "artist_drawing_mystic": {
+      "text": "신비술사 스케치",
+      "group": "citadel_heroes",
+      "hash": "34895274c74e"
+    },
+    "artist_drawing_marksman": {
+      "text": "명사수 스케치",
+      "group": "citadel_heroes",
+      "hash": "05eed87aeccd"
+    },
+    "artist_drawing_brawler": {
+      "text": "싸움꾼 스케치",
+      "group": "citadel_heroes",
+      "hash": "9ecfb6fdb3e8"
+    },
+    "artist_drawing_assassin": {
+      "text": "암살자 스케치",
+      "group": "citadel_heroes",
+      "hash": "d3120b5ad737"
+    },
+    "ability_artist_bamboogrove": {
+      "text": "추상 풍경화",
+      "group": "citadel_heroes",
+      "hash": "705af32da96f"
+    },
+    "ability_artist_bamboogrove_desc": {
+      "text": "원형으로 시야를 차단하는 잉크를 펼치고 아군에게 {g:citadel_inline_attribute:'Spirit'}을 부여합니다.<br><br>내부에 있는 적군은 위치가 드러납니다. 적군이 잉크 밖으로 나가면 {g:citadel_inline_attribute:'SpiritDamage'}를 입고, {g:citadel_inline_attribute:'Silence'} 및 {g:citadel_inline_attribute:'Slow'} 효과를 받으며, 그 과정에서 잉크는 파괴됩니다.",
+      "group": "citadel_heroes",
+      "hash": "9a3e7b5f3e52"
+    },
+    "ability_artist_bamboogrove/center/buff": {
+      "text": "추상 풍경화",
+      "group": "citadel_heroes",
+      "hash": "705af32da96f"
+    },
+    "ability_artist_bamboogrove_t2_desc": {
+      "text": "강화 효과 적용 시: 마법 체력 흡수 +{s:AbilityLifestealPercentHero}%<br>마력 +{s:TechPower} 증가",
+      "group": "citadel_heroes",
+      "hash": "7362b829d56f"
+    },
+    "ability_artist_bamboogrove_t3_desc": {
+      "text": "침묵 지속 시간 +{s:SilenceDuration}초 증가<br>능력 지속 시간 +{s:AbilityDuration}초 증가<br>잉크가 더 이상 파괴되지 않음",
+      "group": "citadel_heroes",
+      "hash": "8784e7280925"
+    },
+    "ability_artist_bamboogrove/groundaura/silence": {
+      "text": "추상 풍경화",
+      "group": "citadel_heroes",
+      "hash": "705af32da96f"
+    },
+    "ability_artist_bamboogrove/groveally/buff": {
+      "text": "추상 풍경화",
+      "group": "citadel_heroes",
+      "hash": "705af32da96f"
+    },
+    "AttackFrequency_postvalue_label": {
+      "text": "공격 간격",
+      "group": "citadel_heroes",
+      "hash": "c78b61de8d4d"
+    },
+    "AttackFrequency_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "GroveRadius_postvalue_label": {
+      "text": "풍경화 반경",
+      "group": "citadel_heroes",
+      "hash": "84c96076264e"
+    },
+    "GroveRadius_label": {
+      "text": "풍경화 반경",
+      "group": "citadel_heroes",
+      "hash": "84c96076264e"
+    },
+    "GroveRadius_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
     "ability_header_on_hit": {
       "text": "적중 시:",
       "group": "citadel_heroes",
@@ -23755,6 +24130,11 @@
       "hash": "8e969664bfc2"
     },
     "ability_melee_deadpack": {
+      "text": "근거리 공격",
+      "group": "citadel_heroes",
+      "hash": "8e969664bfc2"
+    },
+    "ability_melee_artist": {
       "text": "근거리 공격",
       "group": "citadel_heroes",
       "hash": "8e969664bfc2"
@@ -24453,6 +24833,11 @@
       "text": "\"신사 숙녀 여러분, 충격적인 비밀을 하나 알려 드리겠습니다. 저희 페어팩스 인더스트리는 안전에 관해 아는 게 전혀 없습니다. 자, 이제 더 충격적인 사실을 말씀드리죠... 그게 좋은 일이라는 겁니다! 저는 이곳에서 일하는 동안 총에 맞고, 칼에 찔리고, 몸이 꿰뚫리고, 창밖으로 던져지고, 폭발에 휘말리고, 원자 단위로 분해되고, 목이 잘렸습니다. 한 번, 두 번, 세 번 정도가 아니라... 네다섯백 번이나 그랬죠. 맞습니다. 머리가 얼마나 많이 잘렸는지, 그 횟수를 표현하려면 없는 말까지 만들어야 할 정도였습니다.<br><br>하지만 제가 비유적으로, 때로는 말 그대로 지옥을 겪는 이유는, 어떻게 사고가 일어날지 생각만 해서는 부족하기 때문입니다. 실제로 어떻게 사고가 일어나는지 알아야 한다는 말이죠.<br><br>이제 여러분이 보게 되실 시연은 대단히 위험합니다. 그러니 편히 앉으세요. 보안경도 쓰시고요. 그리고 페어팩스 인더스트리와 키메라 마크 1이 선사하는 비행의 기적을 직접 목격하세요.\"<br><br><span class=\"italics\">- 페어팩스 인더스트리 제공: 군사 기술 박람회에서 대니의 개회사 녹취록</span>",
       "group": "citadel_heroes",
       "hash": "c7c7d1f51f4b"
+    },
+    "hero_artist_lore": {
+      "text": "바이올렛은 열두 살에 저주받은 사과로 이주했다. 뉴욕 생활에 적응하는 과정에서 문화적 충격을 겪기도 했지만, 이내 도시의 활기에 매료되었다. 예술에 열정을 쏟아부은 바이올렛은 또래 대부분을 훨씬 뛰어넘는 성과를 거두었다.<br><br>먼저 전액 장학금을 받고 미술 학교에 입학했다.<br><br>그리고 3학년 때는 뉴욕 현대미술관에서 학생 예술가들을 조명하는 권위 있는 전시인 '신예 예술인 갤러리' 참여자로도 선정되었다.<br><br>어떤 기준으로 보더라도 나이에 비해 눈부신 성과를 거두고 있지만, 바이올렛은 실패자로 생을 마칠지도 모른다는 근원적인 두려움을 떨치지 못한다. 순수예술가로서 상업적 성공을 거두려면 실력만으로는 부족하다는 사실을 잘 알고 있기 때문이다. 탁월한 실력을 갖췄다는 것이 곧 성공을 보장하지는 않는 법이다. 적절한 순간에 자신을 알아봐 줄 사람의 눈에 드는 것이 더 중요하다. 그래서 바이올렛은 의식에 관심을 가지기 시작했다... 재능을 더 키우기 위해서가 아니라, 무엇을 할 수 있는지 세상에 보여 줄 기회를 얻기 위해서 말이다.",
+      "group": "citadel_heroes",
+      "hash": "60e5a5e23099"
     },
     "MODIFIER_STATE_ROOTED": {
       "text": "이동 불가 상태",
@@ -35479,6 +35864,11 @@
       "group": "citadel_gc",
       "hash": "89662388f546"
     },
+    "Steam_Citadel_Hideout_Painting": {
+      "text": "은신처에서 그림 그리는 중",
+      "group": "citadel_gc",
+      "hash": "9648c8a81f85"
+    },
     "Citadel_Dashboard_BuildVersion": {
       "text": "#{d:buildNumber}",
       "group": "citadel_main",
@@ -36994,6 +37384,11 @@
       "group": "citadel_main",
       "hash": "badab036b6f0"
     },
+    "Citadel_Hud_HealingMode": {
+      "text": "치유 바늘",
+      "group": "citadel_main",
+      "hash": "9cafe84e69c3"
+    },
     "Citadel_Hud_Pauser": {
       "text": "({s:pauser} 님)",
       "group": "citadel_main",
@@ -37438,6 +37833,11 @@
       "text": "{i:items_ready}",
       "group": "citadel_main",
       "hash": "5950b8e31d8f"
+    },
+    "Citadel_Hud_Quickbuy_ItemSlotsLocked": {
+      "text": "슬롯 잠김",
+      "group": "citadel_main",
+      "hash": "807209eee35a"
     },
     "Citadel_Hud_Quickbuy_ToastLabel_Purchase": {
       "text": "구매한 아이템",
@@ -57924,6 +58324,11 @@
       "group": "citadel_main",
       "hash": "0fe479dc8922"
     },
+    "Sandbox_Tutorial_Controls_PurchaseMods": {
+      "text": "{g:citadel_ability_name:'upgrade_escalating_exposure'} 구매",
+      "group": "citadel_main",
+      "hash": "b3c9e46371cd"
+    },
     "Sandbox_Tutorial_Controls_CloseShop": {
       "text": "상점 닫기",
       "group": "citadel_main",
@@ -60683,6 +61088,11 @@
       "text": "크리스마스 챌린지 진척도를 보려면 {g:citadel_binding:'Interact'} 키를 누르세요",
       "group": "citadel_main",
       "hash": "0da4434bdd1e"
+    },
+    "Citadel_Hideout_HeavyCrate": {
+      "text": "{g:citadel_binding:'AbilityMelee'} 키를 길게 눌러 강한 근거리 공격으로 부수기",
+      "group": "citadel_main",
+      "hash": "57c19db36172"
     },
     "citadel_keybind_hideout_use": {
       "text": "은신처 오브젝트와 상호작용",
