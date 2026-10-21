@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6805",
-  "upstreamCommit": "6805",
-  "generatedAt": "2026-10-21T02:45:42.803Z",
+  "clientVersion": "6807",
+  "upstreamCommit": "6807",
+  "generatedAt": "2026-10-21T09:00:13.795Z",
   "language": "schinese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
