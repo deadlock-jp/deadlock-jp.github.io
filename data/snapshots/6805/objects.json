@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "upstreamCommit": "6796",
-  "generatedAt": "2026-10-20T02:39:02.431Z",
+  "upstreamCommit": "6805",
+  "generatedAt": "2026-10-21T02:45:42.350Z",
   "objects": {
     "weapon_base": {
       "id": "weapon_base",
@@ -1454,6 +1454,43 @@
         "vPhysicsForceMul": 650
       },
       "flags": {},
+      "nameToken": null,
+      "icon": null,
+      "neutralType": null
+    },
+    "npc_nurse_leech": {
+      "id": "npc_nurse_leech",
+      "className": "npc_nurse_leech",
+      "baseKey": null,
+      "stats": {
+        "modelScale": 0.4,
+        "modelScaleAttachedStart": 0.4,
+        "modelScaleAttachedEnd": 4,
+        "modelScaleHunting": 1.6,
+        "minScaleDuration": 0,
+        "maxScaleDuration": 7,
+        "maxHealth": 1,
+        "capsuleRadiusOverride": 4,
+        "capsuleHeightOverride": 8,
+        "sightRangePlayers": 0,
+        "sightRangeNPCs": 0,
+        "meleeAttemptRange": 0,
+        "meleeHitRange": 0,
+        "walkSpeed": 100,
+        "runSpeed": 100,
+        "turnRate": 180,
+        "acceleration": 0,
+        "outlineRange": 2000,
+        "collectRadius": 86.6,
+        "crawlRadius": 400,
+        "crawlCycleDuration": 0.85,
+        "trailRadius": 10,
+        "trailRadiusHunting": 6
+      },
+      "flags": {
+        "outlineWhenVisible": true,
+        "outlineThroughWalls": true
+      },
       "nameToken": null,
       "icon": null,
       "neutralType": null

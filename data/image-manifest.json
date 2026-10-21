@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-17T14:11:15.096Z",
+  "generatedAt": "2026-10-21T02:46:21.479Z",
   "sourceVpk": "game/citadel/pak01_dir.vpk",
   "entries": [
     {
@@ -757,6 +757,33 @@
       "kind": "vtex",
       "usedBy": [
         "hero:hero_necro:sm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/nurse_card.psd",
+      "vpkPath": "panorama/images/heroes/nurse_card_psd.vtex_c",
+      "outPath": "public/images/heroes/nurse_card.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_nurse:card"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/nurse_mm.psd",
+      "vpkPath": "panorama/images/heroes/nurse_mm_psd.vtex_c",
+      "outPath": "public/images/heroes/nurse_mm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_nurse:mm"
+      ]
+    },
+    {
+      "ref": "file://{images}/heroes/nurse_sm.psd",
+      "vpkPath": "panorama/images/heroes/nurse_sm_psd.vtex_c",
+      "outPath": "public/images/heroes/nurse_sm.png",
+      "kind": "vtex",
+      "usedBy": [
+        "hero:hero_nurse:sm"
       ]
     },
     {
@@ -2405,6 +2432,7 @@
         "ability:ability_melee_baba",
         "ability:ability_melee_chessmaster",
         "ability:ability_melee_deadpack",
+        "ability:ability_melee_nurse",
         "ability:ability_melee_ratking"
       ]
     },
@@ -2607,6 +2635,42 @@
       "usedBy": [
         "ability:ability_necro_hauntingskull",
         "ability:ability_necro_wither"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/nurse/leech.psd",
+      "vpkPath": "panorama/images/hud/abilities/nurse/leech_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/nurse/leech.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_nurse_leech_therapy"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/nurse/medicine_bag.psd",
+      "vpkPath": "panorama/images/hud/abilities/nurse/medicine_bag_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/nurse/medicine_bag.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_nurse_fear"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/nurse/needle.psd",
+      "vpkPath": "panorama/images/hud/abilities/nurse/needle_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/nurse/needle.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_nurse_healing_needles"
+      ]
+    },
+    {
+      "ref": "file://{images}/hud/abilities/nurse/nurse_vapors.psd",
+      "vpkPath": "panorama/images/hud/abilities/nurse/nurse_vapors_psd.vtex_c",
+      "outPath": "public/images/hud/abilities/nurse/nurse_vapors.png",
+      "kind": "vtex",
+      "usedBy": [
+        "ability:ability_nurse_adrenaline_rush"
       ]
     },
     {
@@ -3493,6 +3557,8 @@
         "ability:citadel_weapon_chessmaster_shotgun",
         "ability:citadel_weapon_chessmaster_set",
         "ability:ability_deadpack_primary_weapon_charge",
+        "ability:citadel_weapon_nurse_set",
+        "ability:citadel_weapon_nurse_healing_needles",
         "ability:citadel_weapon_ratking_set"
       ]
     },

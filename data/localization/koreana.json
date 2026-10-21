@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6796",
-  "upstreamCommit": "6796",
-  "generatedAt": "2026-10-20T02:39:02.829Z",
+  "clientVersion": "6805",
+  "upstreamCommit": "6805",
+  "generatedAt": "2026-10-21T02:45:42.770Z",
   "language": "koreana",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
-    "citadel_mods": 618,
-    "citadel_heroes": 3813,
+    "citadel_mods": 617,
+    "citadel_heroes": 3812,
     "citadel_attributes": 1986,
     "citadel_gc": 220,
-    "citadel_main": 5259
+    "citadel_main": 5251
   },
   "tokens": {
     "hero_vampire:n": {
@@ -5273,11 +5273,6 @@
       "text": "분당 영혼",
       "group": "citadel_mods",
       "hash": "819dc41754d0"
-    },
-    "upgrade_upgrade_auto_cleanse_desc": {
-      "text": "다음에 걸리는 <span class=\"highlight\">기절, 속박, 이동 불가, 수면 또는 침묵</span>을 자동으로 정화합니다. 정화가 발동하면 <span class=\"highlight\">방벽</span>을 획득하고 모든 <span class=\"highlight\">능력 쿨다운</span>이 {s:CooldownReductionOnProc}% 감소합니다.",
-      "group": "citadel_mods",
-      "hash": "d71bf862df85"
     },
     "upgrade_superior_stamina_passive": {
       "text": "착지 전에 <span class=\"highlight\">공중 점프</span> 또는 <span class=\"highlight\">공중 대시</span>를 추가로 사용할 수 있습니다.",
@@ -14873,11 +14868,6 @@
       "text": "피해 +{s:Damage} 및 반경 +{s:Radius}m 증가",
       "group": "citadel_heroes",
       "hash": "a6d09bfa21f9"
-    },
-    "viscous_goo_grenade_t3_desc": {
-      "text": "+{s:MaxBounces}번 튕김 및 마력 배수 증가",
-      "group": "citadel_heroes",
-      "hash": "2c93b9022306"
     },
     "MaxBounces_label": {
       "text": "튕김",
@@ -39174,11 +39164,6 @@
       "group": "citadel_main",
       "hash": "36009c8d7c02"
     },
-    "Citadel_RankedSeason_ProtectionRemaining": {
-      "text": "보호 {d:demotion_protection_remaining}/{d:demotion_protection_total} 남음",
-      "group": "citadel_main",
-      "hash": "1084eefd4b0e"
-    },
     "Citadel_RankedSeason_ProtectionUsed": {
       "text": "강등 보호 사용됨",
       "group": "citadel_main",
@@ -39388,11 +39373,6 @@
       "text": "참여 자격",
       "group": "citadel_main",
       "hash": "84fafa7fbb02"
-    },
-    "Citadel_Ranked_Overview_Eligibility_Bullet1:f": {
-      "text": "계정에 총 {d:required_account_wins}회 이상 승리 기록이 있어야 합니다. 또한 일반 매치에서 각각 {d:required_hero_wins}회 이상 승리한 영웅이 {d:required_hero_unlocks}명 이상 있어야 합니다.",
-      "group": "citadel_main",
-      "hash": "be9035e42ec4"
     },
     "Citadel_Ranked_Overview_Eligibility_Bullet2": {
       "text": "랭크 매치에서 플레이어는 1인 또는 2인 파티로만 대기열에 들어갈 수 있습니다. 2인 파티의 두 플레이어는 서로 랭크 차이가 1단계 이내여야 합니다. 불멸자 플레이어는 서브랭크 차이가 3단계 이내인 다른 불멸자 플레이어와만 대기열에 들어갈 수 있습니다.",
@@ -48504,11 +48484,6 @@
       "group": "citadel_main",
       "hash": "7831dd12a70a"
     },
-    "citadel_settings_steaminput_connected": {
-      "text": "연결됨",
-      "group": "citadel_main",
-      "hash": "ca3372f3bce7"
-    },
     "citadel_ability_upgrade_tab_desc": {
       "text": "능력 업그레이드 기본 단축키는 {g:citadel_binding:'Scoreboard'} + [{g:citadel_binding:'Ability1'}/{g:citadel_binding:'Ability2'}/{g:citadel_binding:'Ability3'}/{g:citadel_binding:'Ability4'}입니다. 아래에서 추가 단축키를 설정할 수도 있습니다.",
       "group": "citadel_main",
@@ -56244,16 +56219,6 @@
       "group": "citadel_main",
       "hash": "19b2d19bc141"
     },
-    "Unranked_AbandonTriggerEarly": {
-      "text": "이 게임은 기록되지 않습니다. {d:end_game_countdown}초 후 매치가 종료됩니다.",
-      "group": "citadel_main",
-      "hash": "cf2f37e373c3"
-    },
-    "Ranked_AbandonTriggerEarly": {
-      "text": "이 게임은 기록되지 않습니다. {d:end_game_countdown}초 후 매치가 종료됩니다. 플레이어 랭크에 아무 영향이 없을 것입니다.",
-      "group": "citadel_main",
-      "hash": "ed1b871ac8f5"
-    },
     "AbandonTriggerTeam_Title": {
       "text": "플레이어가 매치를 떠났습니다",
       "group": "citadel_main",
@@ -57559,30 +57524,15 @@
       "group": "citadel_main",
       "hash": "7dbb798bb63b"
     },
-    "HeroTesting_BotAbility_Desc": {
-      "text": "모든 봇이 쿨다운을 무시하고 몇 초마다 이 능력을 시전합니다.",
-      "group": "citadel_main",
-      "hash": "1314d8ac7c20"
-    },
     "HeroTesting_BotAbilityStop_Desc": {
       "text": "모든 봇이 능력 시전을 중지합니다.",
       "group": "citadel_main",
       "hash": "b7d157982d24"
     },
-    "HeroTesting_BotItem_Desc": {
-      "text": "모든 봇이 쿨다운을 무시하고 몇 초마다 이 슬롯의 활성 아이템을 사용합니다.",
-      "group": "citadel_main",
-      "hash": "3b252929d709"
-    },
     "HeroTesting_BotItemStop_Desc": {
       "text": "모든 봇이 아이템 사용을 중지합니다.",
       "group": "citadel_main",
       "hash": "1b91756a99e0"
-    },
-    "HeroTesting_BotUseAbilityRepeated_Desc": {
-      "text": "끄면 봇이 한 번만 시전한 후 멈춥니다.",
-      "group": "citadel_main",
-      "hash": "ba2abd654a9f"
     },
     "HeroTesting_InfiniteMoney_Desc": {
       "text": "영혼을 소모하지 않고 아이템을 구매합니다.",

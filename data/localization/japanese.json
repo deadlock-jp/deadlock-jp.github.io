@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6796",
-  "upstreamCommit": "6796",
-  "generatedAt": "2026-10-20T02:39:02.759Z",
+  "clientVersion": "6805",
+  "upstreamCommit": "6805",
+  "generatedAt": "2026-10-21T02:45:42.691Z",
   "language": "japanese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
-    "citadel_mods": 618,
-    "citadel_heroes": 3813,
+    "citadel_mods": 617,
+    "citadel_heroes": 3812,
     "citadel_attributes": 1986,
     "citadel_gc": 220,
-    "citadel_main": 5258
+    "citadel_main": 5250
   },
   "tokens": {
     "hero_vampire:n": {
@@ -5273,11 +5273,6 @@
       "text": "ソウル／分",
       "group": "citadel_mods",
       "hash": "9c781d5a3a78"
-    },
-    "upgrade_upgrade_auto_cleanse_desc": {
-      "text": "次に付与される<span class=\"highlight\">スタン、束縛、移動不能、睡眠、サイレンス</span>を自動的に浄化する。この効果が発動すると<span class=\"highlight\">バリア</span>を獲得し、すべての<span class=\"highlight\">アビリティのクールダウン</span>が{s:CooldownReductionOnProc}%短縮される",
-      "group": "citadel_mods",
-      "hash": "2f42cd6615f2"
     },
     "upgrade_superior_stamina_passive": {
       "text": "着地前に<span class=\"highlight\">空中ジャンプ</span>と<span class=\"highlight\">空中ダッシュ</span>が追加で1回使用できるようになる",
@@ -14873,11 +14868,6 @@
       "text": "ダメージ +{s:Damage}、範囲 +{s:Radius}m",
       "group": "citadel_heroes",
       "hash": "c9b155f02b5d"
-    },
-    "viscous_goo_grenade_t3_desc": {
-      "text": "バウンド回数 +{s:MaxBounces}、スピリットスケーリングが上昇する",
-      "group": "citadel_heroes",
-      "hash": "2f2ac11766f4"
     },
     "MaxBounces_label": {
       "text": "バウンド回数",
@@ -39174,11 +39164,6 @@
       "group": "citadel_main",
       "hash": "3d4f14b5654e"
     },
-    "Citadel_RankedSeason_ProtectionRemaining": {
-      "text": "残り保護回数： {d:demotion_protection_remaining}/{d:demotion_protection_total}",
-      "group": "citadel_main",
-      "hash": "b1c01281e8cb"
-    },
     "Citadel_RankedSeason_ProtectionUsed": {
       "text": "降格保護が使用されました",
       "group": "citadel_main",
@@ -39388,11 +39373,6 @@
       "text": "プレイ資格について",
       "group": "citadel_main",
       "hash": "f70bf01bd47c"
-    },
-    "Citadel_Ranked_Overview_Eligibility_Bullet1:f": {
-      "text": "アカウントの通算勝利数が{d:required_account_wins}{d:required_account_wins, plural, one {マッチ} other {マッチ}}以上である必要があります。また、スタンダードモードにて、{d:required_hero_wins}{d:required_hero_wins, plural, one {勝} other {勝}}を達成しているヒーローが{d:required_hero_unlocks}{d:required_hero_unlocks, plural, one {人} other {人}}以上いる必要があります。",
-      "group": "citadel_main",
-      "hash": "3c7088d71e17"
     },
     "Citadel_Ranked_Overview_Eligibility_Bullet2": {
       "text": "ランクマッチには、ソロかデュオでのみキューできます。デュオの場合、プレイヤー同士の差は1ランク以内である必要があります。エターナスのプレイヤーは、サブランクの差が3以内の、同じエターナスのプレイヤーとパーティーを組んでマッチングに参加できます。",
@@ -48504,11 +48484,6 @@
       "group": "citadel_main",
       "hash": "1d24bf061000"
     },
-    "citadel_settings_steaminput_connected": {
-      "text": "接続済み",
-      "group": "citadel_main",
-      "hash": "975e90dbbccd"
-    },
     "citadel_ability_upgrade_tab_desc": {
       "text": "アビリティ強化は {g:citadel_binding:'Scoreboard'} + [{g:citadel_binding:'Ability1'}/{g:citadel_binding:'Ability2'}/{g:citadel_binding:'Ability3'}/{g:citadel_binding:'Ability4'}] で可能です。このバインドは追加の設定です。",
       "group": "citadel_main",
@@ -56244,16 +56219,6 @@
       "group": "citadel_main",
       "hash": "ef09be27993f"
     },
-    "Unranked_AbandonTriggerEarly": {
-      "text": "このマッチはスコアに反映されません。マッチは{d:end_game_countdown}秒後に終了します。",
-      "group": "citadel_main",
-      "hash": "ba5f1cca05a6"
-    },
-    "Ranked_AbandonTriggerEarly": {
-      "text": "このマッチはスコアに反映されません。マッチは{d:end_game_countdown}秒後に終了します。あなたのランクは変動しません。",
-      "group": "citadel_main",
-      "hash": "c93b30e55cae"
-    },
     "AbandonTriggerTeam_Title": {
       "text": "プレイヤーがマッチを途中退出しました",
       "group": "citadel_main",
@@ -57559,30 +57524,15 @@
       "group": "citadel_main",
       "hash": "c0e6e769f320"
     },
-    "HeroTesting_BotAbility_Desc": {
-      "text": "すべてのCPUがこのアビリティを数秒ごとにキャストします（クールダウンは無視されます）",
-      "group": "citadel_main",
-      "hash": "0b95fd7efd4e"
-    },
     "HeroTesting_BotAbilityStop_Desc": {
       "text": "すべてのCPUがアビリティのキャストをやめます",
       "group": "citadel_main",
       "hash": "fb384857d9c3"
     },
-    "HeroTesting_BotItem_Desc": {
-      "text": "すべてのCPUがこのスロット内のアクティブアイテムを数秒ごとに使用します（クールダウンは無視されます）",
-      "group": "citadel_main",
-      "hash": "74463f708e05"
-    },
     "HeroTesting_BotItemStop_Desc": {
       "text": "すべてのCPUがアイテムの使用をやめます",
       "group": "citadel_main",
       "hash": "dccc31740e3b"
-    },
-    "HeroTesting_BotUseAbilityRepeated_Desc": {
-      "text": "無効化すると、CPUは1度だけキャストして停止します",
-      "group": "citadel_main",
-      "hash": "8f5423dc2555"
     },
     "HeroTesting_InfiniteMoney_Desc": {
       "text": "ソウルを消費せずにアイテムを購入できるようになります",

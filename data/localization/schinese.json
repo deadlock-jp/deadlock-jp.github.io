@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6796",
-  "upstreamCommit": "6796",
-  "generatedAt": "2026-10-20T02:39:02.861Z",
+  "clientVersion": "6805",
+  "upstreamCommit": "6805",
+  "generatedAt": "2026-10-21T02:45:42.803Z",
   "language": "schinese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 618,
-    "citadel_heroes": 3812,
+    "citadel_heroes": 3966,
     "citadel_attributes": 1986,
-    "citadel_gc": 220,
+    "citadel_gc": 221,
     "citadel_main": 5258
   },
   "tokens": {
@@ -1025,9 +1025,9 @@
       "hash": "4711a779eb44"
     },
     "hero_nurse_search:n": {
-      "text": "亥芮护士 hairui hushi 护士 戴泽 daize 薄葬 bozang",
+      "text": "亥芮护士 hairui hushi 护士 昆卡 kunka",
       "group": "citadel_gc_hero_names",
-      "hash": "4f03134d021e"
+      "hash": "475a2f7c852d"
     },
     "hero_nurse_sort:n": {
       "text": "亥芮护士",
@@ -5275,9 +5275,9 @@
       "hash": "aff2a6a6190f"
     },
     "upgrade_upgrade_auto_cleanse_desc": {
-      "text": "下一个<span class=\"highlight\">眩晕、禁锢、定身、睡眠或沉默</span>效果会被自动净化。净化时获得<span class=\"highlight\">屏障</span>并且所有的<span class=\"highlight\">技能冷却时间</span>减少{s:CooldownReductionOnProc}%。",
+      "text": "下一个<span class=\"highlight\">眩晕、禁锢、定身、睡眠、沉默或恐惧</span>效果会被自动净化。净化时获得<span class=\"highlight\">屏障</span>并且所有的<span class=\"highlight\">技能冷却时间</span>减少{s:CooldownReductionOnProc}%。",
       "group": "citadel_mods",
-      "hash": "592d4932f8fe"
+      "hash": "37dcd10943db"
     },
     "upgrade_superior_stamina_passive": {
       "text": "在落地前允许额外使用一次<span class=\"highlight\">空中跳跃</span>或<span class=\"highlight\">空中冲刺</span>。",
@@ -22734,6 +22734,11 @@
       "group": "citadel_heroes",
       "hash": "29b3187865e3"
     },
+    "ability_deadpack_chargeblast/coated": {
+      "text": "被标记",
+      "group": "citadel_heroes",
+      "hash": "0ea3ff030f4c"
+    },
     "ability_deadpack_chargeblast/coated_buff": {
       "text": "射速",
       "group": "citadel_heroes",
@@ -23210,9 +23215,9 @@
       "hash": "95a84930c820"
     },
     "ability_artist_homingbrush_t1_desc": {
-      "text": "{s:AbilityCooldown}秒冷却时间<br>{s:MaxDrawDistance}米最大绘制距离",
+      "text": "{s:AbilityCooldown}秒冷却时间<br>+{s:MaxDrawDistance}米最大绘制距离",
       "group": "citadel_heroes",
-      "hash": "9116891939e3"
+      "hash": "d5b065ec4b9e"
     },
     "ability_artist_homingbrush_t3_desc": {
       "text": "+{s:CooldownReductionPerHit}秒每次击中减少冷却<br>提升增强系数",
@@ -23503,6 +23508,761 @@
       "text": "米",
       "group": "citadel_heroes",
       "hash": "ee7f305751a5"
+    },
+    "citadel_weapon_nurse_set": {
+      "text": "蓝色预警",
+      "group": "citadel_heroes",
+      "hash": "9647a5bf458e"
+    },
+    "ability_nurse_leech_therapy": {
+      "text": "水蛭疗法",
+      "group": "citadel_heroes",
+      "hash": "76328823cb79"
+    },
+    "ability_nurse_leech_therapy_desc": {
+      "text": "投掷一罐水蛭，附着在敌人身上，造成{g:citadel_inline_attribute:'SpiritDPS'}并<span class=\"highlight\">吸食敌人身上增益效果的持续时间</span>。",
+      "group": "citadel_heroes",
+      "hash": "9f272de0afba"
+    },
+    "ability_nurse_leech_therapy_leech_desc": {
+      "text": "亥芮可以在水蛭完成吸食后捡起水蛭，自身被{g:citadel_inline_attribute:'Healing'}吸取的生命值，并永久获得{g:citadel_inline_attribute:'Regen'}和{g:citadel_inline_attribute:'FireRate'}。<br><br><span class=\"small_diminish\">25%的水蛭叠加层数会在被击倒时失去。</span>",
+      "group": "citadel_heroes",
+      "hash": "2d5cc4effba3"
+    },
+    "ability_nurse_leech_therapy_t1_desc": {
+      "text": "水蛭吸取耐力并在拾取时自身恢复",
+      "group": "citadel_heroes",
+      "hash": "8bc3afd13a88"
+    },
+    "ability_nurse_leech_therapy_t2_desc": {
+      "text": "{s:AbilityCooldown}秒冷却时间<br>+{s:SpiritPowerPerLeechStack}每只水蛭元灵力量",
+      "group": "citadel_heroes",
+      "hash": "485ad5bfda59"
+    },
+    "ability_nurse_leech_therapy_t3_desc": {
+      "text": "+{s:Radius}米半径<br>+{s:DPS_scale}元灵增强系数<br>+{s:MaxLeechBonusStacks}水蛭最大叠加层数",
+      "group": "citadel_heroes",
+      "hash": "56972516275f"
+    },
+    "modifier_nurse_leech_therapy_pickup_bonus": {
+      "text": "水蛭拾取奖励",
+      "group": "citadel_heroes",
+      "hash": "d18ca2a198e4"
+    },
+    "modifier_nurse_leech_therapy_eating_buffs": {
+      "text": "吸食增益",
+      "group": "citadel_heroes",
+      "hash": "4a4410935374"
+    },
+    "nurse_leech_pickups_stacklabel": {
+      "text": "已回收水蛭：",
+      "group": "citadel_heroes",
+      "hash": "a9322cf0af90"
+    },
+    "Citadel_AbilityProperty_OnLeechPickup": {
+      "text": "拾取水蛭时：",
+      "group": "citadel_heroes",
+      "hash": "0527eb15ce1a"
+    },
+    "MaxHealPercentOfLeechDamage_label": {
+      "text": "最高水蛭伤害转为治疗",
+      "group": "citadel_heroes",
+      "hash": "5feee66496b9"
+    },
+    "MaxHealPercentOfLeechDamage_postvalue_label": {
+      "text": "最高水蛭伤害转为治疗",
+      "group": "citadel_heroes",
+      "hash": "5feee66496b9"
+    },
+    "MaxHealPercentOfLeechDamage_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "RegenPerLeechPickup_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "RegenPerLeechPickup_label": {
+      "text": "每只水蛭生命恢复",
+      "group": "citadel_heroes",
+      "hash": "499f668050cb"
+    },
+    "RegenPerLeechPickup_postvalue_label": {
+      "text": "每只水蛭生命恢复",
+      "group": "citadel_heroes",
+      "hash": "499f668050cb"
+    },
+    "FireRatePerLeechPickup_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "FireRatePerLeechPickup_label": {
+      "text": "每只水蛭射速",
+      "group": "citadel_heroes",
+      "hash": "41b936d7cc02"
+    },
+    "FireRatePerLeechPickup_postvalue_label": {
+      "text": "每只水蛭射速",
+      "group": "citadel_heroes",
+      "hash": "41b936d7cc02"
+    },
+    "FireRatePerLeechPickup_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "SpiritPowerPerLeechStack_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "SpiritPowerPerLeechStack_label": {
+      "text": "每只水蛭元灵力量",
+      "group": "citadel_heroes",
+      "hash": "e6be103f1e62"
+    },
+    "SpiritPowerPerLeechStack_postvalue_label": {
+      "text": "每只水蛭元灵力量",
+      "group": "citadel_heroes",
+      "hash": "e6be103f1e62"
+    },
+    "LeechBonusDuration_label": {
+      "text": "加成持续时间",
+      "group": "citadel_heroes",
+      "hash": "b7955f756f70"
+    },
+    "LeechBonusDuration_postvalue_label": {
+      "text": "加成持续时间",
+      "group": "citadel_heroes",
+      "hash": "b7955f756f70"
+    },
+    "LeechBonusDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "MaxLeechBonusStacks_label": {
+      "text": "最大水蛭叠加层数",
+      "group": "citadel_heroes",
+      "hash": "2614923051bb"
+    },
+    "MaxLeechBonusStacks_postvalue_label": {
+      "text": "最大水蛭叠加层数",
+      "group": "citadel_heroes",
+      "hash": "2614923051bb"
+    },
+    "LeechCrawlRadius_label": {
+      "text": "水蛭爬行范围",
+      "group": "citadel_heroes",
+      "hash": "542bc9297e36"
+    },
+    "LeechCrawlRadius_postvalue_label": {
+      "text": "水蛭爬行范围",
+      "group": "citadel_heroes",
+      "hash": "542bc9297e36"
+    },
+    "LeechCrawlRadius_postfix": {
+      "text": "米",
+      "group": "citadel_heroes",
+      "hash": "ee7f305751a5"
+    },
+    "LeechStaminaDrain_postvalue_label": {
+      "text": "耐力流失",
+      "group": "citadel_heroes",
+      "hash": "3520cbaa6f3c"
+    },
+    "LeechStaminaDrain_label": {
+      "text": "耐力流失",
+      "group": "citadel_heroes",
+      "hash": "3520cbaa6f3c"
+    },
+    "LeechStaminaDrain_postfix": {
+      "text": "/秒",
+      "group": "citadel_heroes",
+      "hash": "a3ab7f188d18"
+    },
+    "LeechEatDurationPerSecond_label": {
+      "text": "每秒吸食增益持续时间",
+      "group": "citadel_heroes",
+      "hash": "65b520586bc3"
+    },
+    "LeechEatDurationPerSecond_postvalue_label": {
+      "text": "每秒吸食增益持续时间",
+      "group": "citadel_heroes",
+      "hash": "65b520586bc3"
+    },
+    "LeechEatDurationPerSecond_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "ability_nurse_fear": {
+      "text": "恐惧潜伏",
+      "group": "citadel_heroes",
+      "hash": "94abd4379020"
+    },
+    "ability_nurse_fear_desc": {
+      "text": "打开小包，露出里面携带的恐怖之物，对前方的敌人造成{g:citadel_inline_attribute:'SpiritDPS'}。<span class=\"highlight\">注视着你</span>的敌人会积累恐惧，并且<span class=\"highlight\">无法使用耐力或位移类技能</span>。在恐惧达到最大时，他们<span class=\"highlight\">会向远离你的方向逃跑</span>。<br><br>收集的每只水蛭都会增加<span class=\"highlight\">恐惧的持续时间</span>。<br><span class=\"diminish\"><br>没有面朝你的敌人会受到{s:FacingAwayDamagePercent}%伤害，除非被恐惧。</span>",
+      "group": "citadel_heroes",
+      "hash": "d482864ed3b7"
+    },
+    "ability_nurse_fear_t2_desc": {
+      "text": "-{s:SlowPercent}%移动速度和射速<br>+{s:DPS}每秒伤害",
+      "group": "citadel_heroes",
+      "hash": "a525055f2e49"
+    },
+    "ability_nurse_fear_t3_desc": {
+      "text": "+{s:AbilityChannelTime}秒持续施法<br>+{s:DPS_scale}元灵增强系数<br>持续施法时免疫伤害",
+      "group": "citadel_heroes",
+      "hash": "904bcb071392"
+    },
+    "FearDurationPerLeechStack_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "FearDurationPerLeechStack_label": {
+      "text": "每只水蛭恐惧持续时间",
+      "group": "citadel_heroes",
+      "hash": "bba710c265d1"
+    },
+    "FearDurationPerLeechStack_postvalue_label": {
+      "text": "每只水蛭恐惧持续时间",
+      "group": "citadel_heroes",
+      "hash": "bba710c265d1"
+    },
+    "FearDurationPerLeechStack_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "FearDuration_label": {
+      "text": "恐惧持续时间",
+      "group": "citadel_heroes",
+      "hash": "f840f628a0c2"
+    },
+    "FearDuration_postvalue_label": {
+      "text": "恐惧持续时间",
+      "group": "citadel_heroes",
+      "hash": "f840f628a0c2"
+    },
+    "FearDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "FearBuildupTime_label": {
+      "text": "恐惧积累时间",
+      "group": "citadel_heroes",
+      "hash": "9e8330a7ef52"
+    },
+    "FearBuildupTime_postvalue_label": {
+      "text": "恐惧积累时间",
+      "group": "citadel_heroes",
+      "hash": "9e8330a7ef52"
+    },
+    "FearBuildupTime_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "FearBuildupDecayTime_label": {
+      "text": "恐惧积累衰减时间",
+      "group": "citadel_heroes",
+      "hash": "6fd7143e42f2"
+    },
+    "FearBuildupDecayTime_postvalue_label": {
+      "text": "恐惧积累衰减时间",
+      "group": "citadel_heroes",
+      "hash": "6fd7143e42f2"
+    },
+    "FearBuildupDecayTime_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "FearLookAngle_label": {
+      "text": "注视角度",
+      "group": "citadel_heroes",
+      "hash": "8ad5528dd5e7"
+    },
+    "FearLookAngle_postvalue_label": {
+      "text": "注视角度",
+      "group": "citadel_heroes",
+      "hash": "8ad5528dd5e7"
+    },
+    "FearLookAngle_postfix": {
+      "text": "°",
+      "group": "citadel_heroes",
+      "hash": "55d0c1bb201e"
+    },
+    "GazeLingerDuration_label": {
+      "text": "耐力锁定粘滞",
+      "group": "citadel_heroes",
+      "hash": "bd4180e4db05"
+    },
+    "GazeLingerDuration_postvalue_label": {
+      "text": "耐力锁定粘滞",
+      "group": "citadel_heroes",
+      "hash": "bd4180e4db05"
+    },
+    "GazeLingerDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "FearMoveSpeedBonus_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "FearMoveSpeedBonus_label": {
+      "text": "逃跑敌人移动速度",
+      "group": "citadel_heroes",
+      "hash": "7321cf2a9041"
+    },
+    "FearMoveSpeedBonus_postvalue_label": {
+      "text": "逃跑敌人移动速度",
+      "group": "citadel_heroes",
+      "hash": "7321cf2a9041"
+    },
+    "FearMoveSpeedBonus_postfix": {
+      "text": "米/秒",
+      "group": "citadel_heroes",
+      "hash": "ca8c4ea71eec"
+    },
+    "modifier_citadel_nurse_fear_debuff": {
+      "text": "被恐惧",
+      "group": "citadel_heroes",
+      "hash": "2bb5cf697b14"
+    },
+    "modifier_nurse_fear_buildup": {
+      "text": "回避视线",
+      "group": "citadel_heroes",
+      "hash": "4c6096520015"
+    },
+    "ability_nurse_healing_needles": {
+      "text": "疗伤针头",
+      "group": "citadel_heroes",
+      "hash": "153ed9016d09"
+    },
+    "ability_nurse_healing_needles_desc": {
+      "text": "武器装填满弹匣的注射器，可以{g:citadel_inline_attribute:'Heal'}友军。<span class=\"highlight\">造成伤害</span>会恢复充能，而每只收集的水蛭都会缓慢恢复能量。<br><br><span class=\"small_diminish\">治疗针头会穿过敌人。装填会消耗一点能量来获得新的弹匣，并返还未使用的注射器。重新施放可以收起注射器。</span>",
+      "group": "citadel_heroes",
+      "hash": "7e7cdd4a2fbd"
+    },
+    "ability_nurse_healing_needles_t1_desc": {
+      "text": "+{s:AbilityCharges}最大能量",
+      "group": "citadel_heroes",
+      "hash": "fc22d407c559"
+    },
+    "ability_nurse_healing_needles_t2_desc": {
+      "text": "+{s:HealRegen}每针治疗<br>针头恢复{s:StaminaRestorePerHit}耐力",
+      "group": "citadel_heroes",
+      "hash": "51fbd044a2ff"
+    },
+    "ChargePercentPerSecondPerLeech_label": {
+      "text": "每只水蛭能量",
+      "group": "citadel_heroes",
+      "hash": "2806c4079ceb"
+    },
+    "ChargePercentPerSecondPerLeech_postvalue_label": {
+      "text": "每只水蛭能量",
+      "group": "citadel_heroes",
+      "hash": "2806c4079ceb"
+    },
+    "ChargePercentPerSecondPerLeech_postfix": {
+      "text": "%/秒",
+      "group": "citadel_heroes",
+      "hash": "276143e4daf4"
+    },
+    "ChargeGenPctScale_label": {
+      "text": "充能速率",
+      "group": "citadel_heroes",
+      "hash": "93e910349c89"
+    },
+    "ChargeGenPctScale_postvalue_label": {
+      "text": "充能速率",
+      "group": "citadel_heroes",
+      "hash": "93e910349c89"
+    },
+    "ChargeGenPctScale_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "ability_nurse_healing_needles_t3_desc": {
+      "text": "+{s:HealRegen_scale}元灵增强系数<br>针头延长非大招增益{s:BuffExtendPercentPerShot}%持续时间，最高为完整持续时间",
+      "group": "citadel_heroes",
+      "hash": "c3c648abff38"
+    },
+    "StaminaRestorePerHit_postvalue_label": {
+      "text": "每针耐力",
+      "group": "citadel_heroes",
+      "hash": "1b4bc433fe97"
+    },
+    "StaminaRestorePerHit_label": {
+      "text": "每针耐力",
+      "group": "citadel_heroes",
+      "hash": "1b4bc433fe97"
+    },
+    "BuffExtendPercentPerShot_label": {
+      "text": "每针增益延长",
+      "group": "citadel_heroes",
+      "hash": "54e7a405aa8b"
+    },
+    "StaminaRestorePerHit_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "modifier_nurse_healing_needles_buff": {
+      "text": "疗伤针头",
+      "group": "citadel_heroes",
+      "hash": "153ed9016d09"
+    },
+    "modifier_nurse_lifeforce_buildup": {
+      "text": "脓液积聚",
+      "group": "citadel_heroes",
+      "hash": "fa234ad406d2"
+    },
+    "PainPerProc_label": {
+      "text": "撕裂时储存脓液",
+      "group": "citadel_heroes",
+      "hash": "3e72b387efa7"
+    },
+    "PainPerProc_postvalue_label": {
+      "text": "撕裂时储存脓液",
+      "group": "citadel_heroes",
+      "hash": "3e72b387efa7"
+    },
+    "NeedleBuildUpPerShot_label": {
+      "text": "每次射击的累积量",
+      "group": "citadel_heroes",
+      "hash": "a9306624a21f"
+    },
+    "NeedleBuildUpPerShot_postvalue_label": {
+      "text": "每次射击的累积量",
+      "group": "citadel_heroes",
+      "hash": "a9306624a21f"
+    },
+    "NeedleBuildUpPerShot_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "NeedleBuildUpDuration_label": {
+      "text": "积累持续时间",
+      "group": "citadel_heroes",
+      "hash": "c46a6dfdd3d9"
+    },
+    "NeedleBuildUpDuration_postvalue_label": {
+      "text": "积累持续时间",
+      "group": "citadel_heroes",
+      "hash": "c46a6dfdd3d9"
+    },
+    "NeedleBuildUpDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "NeedleProcCooldown_label": {
+      "text": "每个目标冷却时间",
+      "group": "citadel_heroes",
+      "hash": "6962d8466acf"
+    },
+    "NeedleProcCooldown_postvalue_label": {
+      "text": "每个目标冷却时间",
+      "group": "citadel_heroes",
+      "hash": "6962d8466acf"
+    },
+    "NeedleProcCooldown_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "HealRegen_label": {
+      "text": "每针治疗",
+      "group": "citadel_heroes",
+      "hash": "c4861453c661"
+    },
+    "HealRegen_postvalue_label": {
+      "text": "每针治疗",
+      "group": "citadel_heroes",
+      "hash": "c4861453c661"
+    },
+    "HealingNeedlesAmpDuration_label": {
+      "text": "增益持续时间",
+      "group": "citadel_heroes",
+      "hash": "905fb2a297ae"
+    },
+    "HealingNeedlesAmpDuration_postvalue_label": {
+      "text": "增益持续时间",
+      "group": "citadel_heroes",
+      "hash": "905fb2a297ae"
+    },
+    "HealingNeedlesAmpDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "HealMaxHealthPercentPerShot_label": {
+      "text": "每针最大生命值治疗",
+      "group": "citadel_heroes",
+      "hash": "8fd1413e99b6"
+    },
+    "HealMaxHealthPercentPerShot_postvalue_label": {
+      "text": "每针最大生命值治疗",
+      "group": "citadel_heroes",
+      "hash": "8fd1413e99b6"
+    },
+    "HealMaxHealthPercentPerShot_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "MaxAbilityResource_label": {
+      "text": "最大脓液",
+      "group": "citadel_heroes",
+      "hash": "bccba270d056"
+    },
+    "MaxAbilityResource_postvalue_label": {
+      "text": "最大脓液",
+      "group": "citadel_heroes",
+      "hash": "bccba270d056"
+    },
+    "HeadshotHealBonusPercent_label": {
+      "text": "头弹治疗加成",
+      "group": "citadel_heroes",
+      "hash": "93e77350488f"
+    },
+    "HeadshotHealBonusPercent_postvalue_label": {
+      "text": "头弹治疗加成",
+      "group": "citadel_heroes",
+      "hash": "93e77350488f"
+    },
+    "HeadshotHealBonusPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "HeadshotHealBonusPercent_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "MissedShotCostPercent_label": {
+      "text": "未命中针头消耗",
+      "group": "citadel_heroes",
+      "hash": "b8937c93bcf5"
+    },
+    "MissedShotCostPercent_postvalue_label": {
+      "text": "未命中针头消耗",
+      "group": "citadel_heroes",
+      "hash": "b8937c93bcf5"
+    },
+    "MissedShotCostPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "MeterFillNPCPercent_label": {
+      "text": "NPC的脓液",
+      "group": "citadel_heroes",
+      "hash": "c00f6a192f4c"
+    },
+    "MeterFillNPCPercent_postvalue_label": {
+      "text": "NPC的脓液",
+      "group": "citadel_heroes",
+      "hash": "c00f6a192f4c"
+    },
+    "MeterFillNPCPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "PainRegenPerLeech_label": {
+      "text": "每只水蛭脓液",
+      "group": "citadel_heroes",
+      "hash": "cd17f6b1a702"
+    },
+    "PainRegenPerLeech_postvalue_label": {
+      "text": "每只水蛭脓液",
+      "group": "citadel_heroes",
+      "hash": "cd17f6b1a702"
+    },
+    "PainRegenPerLeech_postfix": {
+      "text": "/秒",
+      "group": "citadel_heroes",
+      "hash": "a3ab7f188d18"
+    },
+    "OverhealBarrierDuration_label": {
+      "text": "屏障持续时间",
+      "group": "citadel_heroes",
+      "hash": "eb820484ba9b"
+    },
+    "OverhealBarrierDuration_postvalue_label": {
+      "text": "屏障持续时间",
+      "group": "citadel_heroes",
+      "hash": "eb820484ba9b"
+    },
+    "OverhealBarrierDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "ability_nurse_healing_needles/modifier_nurse_healing_needles_buff": {
+      "text": "疗伤针头",
+      "group": "citadel_heroes",
+      "hash": "153ed9016d09"
+    },
+    "ability_nurse_adrenaline_rush": {
+      "text": "污浊蒸汽",
+      "group": "citadel_heroes",
+      "hash": "7fd71459f8fa"
+    },
+    "ability_nurse_adrenaline_rush_desc": {
+      "text": "对自身或一名友军施加蒸汽。蒸汽持续时间内他们<span class=\"highlight\">行动更快</span>，并且受到伤害会从他们身体里撕裂出阴影，<span class=\"highlight\">使伤害延迟结算</span>。治疗会驱除阴影，将其移除。<br><br>毒气消失后，<span class=\"highlight\">他们行动更慢</span>，并且剩余的阴影会在{s:CrashDuration}秒内造成延迟的伤害，再加上<span class=\"highlight\">额外伤害</span>。",
+      "group": "citadel_heroes",
+      "hash": "f4823305b4a4"
+    },
+    "ability_nurse_adrenaline_rush_t1_desc": {
+      "text": "{s:AbilityCooldown}秒冷却时间<br>+{s:AbilityCastRange}米施法距离",
+      "group": "citadel_heroes",
+      "hash": "d82d4690745e"
+    },
+    "ability_nurse_adrenaline_rush_t2_desc": {
+      "text": "+{s:AbilityDuration}秒持续时间<br>+{s:HealingEffectivenessPercent}%治疗威力",
+      "group": "citadel_heroes",
+      "hash": "2f2fb7818b2f"
+    },
+    "ability_nurse_adrenaline_rush_t3_desc": {
+      "text": "+{s:RushTimeScaleBonusPercent}%冲刺速度<br>驱散非大招减益",
+      "group": "citadel_heroes",
+      "hash": "0a183d025d2d"
+    },
+    "modifier_nurse_adrenaline_rush_buff": {
+      "text": "蒸汽冲刺",
+      "group": "citadel_heroes",
+      "hash": "14ddc0dd205c"
+    },
+    "modifier_nurse_adrenaline_rush_crash": {
+      "text": "蒸气崩溃",
+      "group": "citadel_heroes",
+      "hash": "0287976a50ff"
+    },
+    "DeferredDamagePercent_postvalue_label": {
+      "text": "伤害延迟",
+      "group": "citadel_heroes",
+      "hash": "8f11c9462871"
+    },
+    "DeferredDamagePercent_label": {
+      "text": "伤害延迟",
+      "group": "citadel_heroes",
+      "hash": "8f11c9462871"
+    },
+    "DeferredDamagePercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "DeferredDamageBonusPercent_postvalue_label": {
+      "text": "额外承受伤害",
+      "group": "citadel_heroes",
+      "hash": "8fc2dae50afe"
+    },
+    "DeferredDamageBonusPercent_label": {
+      "text": "额外承受伤害",
+      "group": "citadel_heroes",
+      "hash": "8fc2dae50afe"
+    },
+    "DeferredDamageBonusPercent_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "DeferredDamageBonusPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "RushTimeScaleBonusPercent_postvalue_label": {
+      "text": "冲刺速度",
+      "group": "citadel_heroes",
+      "hash": "9a9175df9fe9"
+    },
+    "RushTimeScaleBonusPercent_label": {
+      "text": "冲锋速度",
+      "group": "citadel_heroes",
+      "hash": "f009adf5aa07"
+    },
+    "RushTimeScaleBonusPercent_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "RushTimeScaleBonusPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "CrashDuration_postvalue_label": {
+      "text": "崩溃持续时间",
+      "group": "citadel_heroes",
+      "hash": "bd7fb3ec20f8"
+    },
+    "CrashDuration_label": {
+      "text": "崩溃持续时间",
+      "group": "citadel_heroes",
+      "hash": "bd7fb3ec20f8"
+    },
+    "CrashDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "HealingEffectivenessPercent_label": {
+      "text": "治疗威力",
+      "group": "citadel_heroes",
+      "hash": "25214b23b830"
+    },
+    "HealingEffectivenessPercent_postvalue_label": {
+      "text": "治疗威力",
+      "group": "citadel_heroes",
+      "hash": "25214b23b830"
+    },
+    "HealingEffectivenessPercent_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "HealingEffectivenessPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "CrashTimeScalePenaltyPercent_postvalue_label": {
+      "text": "崩溃减速",
+      "group": "citadel_heroes",
+      "hash": "c6cae02807a6"
+    },
+    "CrashTimeScalePenaltyPercent_label": {
+      "text": "崩溃减速",
+      "group": "citadel_heroes",
+      "hash": "c6cae02807a6"
+    },
+    "CrashTimeScalePenaltyPercent_prefix": {
+      "text": "-",
+      "group": "citadel_heroes",
+      "hash": "3bc15c8aae3e"
+    },
+    "CrashTimeScalePenaltyPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
     },
     "ability_header_on_hit": {
       "text": "命中时：",
@@ -24130,6 +24890,11 @@
       "hash": "404d125d28f3"
     },
     "ability_melee_artist": {
+      "text": "近战",
+      "group": "citadel_heroes",
+      "hash": "404d125d28f3"
+    },
+    "ability_melee_nurse": {
       "text": "近战",
       "group": "citadel_heroes",
       "hash": "404d125d28f3"
@@ -24833,6 +25598,11 @@
       "text": "阿紫在12岁时移民到了被诅咒的纽约城，虽然适应纽约生活让她经历了不少文化冲击，但她很快爱上了这座洋溢着活力的城市。她全身心投入对艺术的追求，这份热情让她取得了远超大多数同龄人的成就。<br><br>首先是美术学院的全额奖学金。<br><br>随后在大三那年，入选了现代艺术博物馆久负盛名的学生艺术家庆典：“新秀画廊”。<br><br>无论从哪个角度看，以她的年龄而言都表现得非凡出众，然而阿紫始终无法摆脱自己对失败而亡的生存恐惧。她深知，艺术家要取得商业上的成功，并非取决于有多优秀，甚至不取决于是否超卓。关键在于能否在正确的时间被正确的人看见。因此她将目光投向了“仪式”……并非为了给自己的才华锦上添花，而只是为了有机会向世界展示自己的本领。",
       "group": "citadel_heroes",
       "hash": "deace6d056e0"
+    },
+    "hero_nurse_lore": {
+      "text": "作为马布尔山附身科病房备受尊敬的支柱，亥芮护士毕生致力于对抗超自然附身的恐怖。她兼具关怀、严厉和冷静务实的特质；一些病人称她为圣人，另一些病人则称她为残酷的女管家。两种说法可能都没错。<br><br>任何一个理智的人看到亥芮把病人的痛苦收进她的医疗包里，都会质疑她的手法和动机，但没有人会质疑她的治疗方案达到的效果……虽然可能非常残忍。",
+      "group": "citadel_heroes",
+      "hash": "ef8e81ca4645"
     },
     "MODIFIER_STATE_ROOTED": {
       "text": "被定身",
@@ -35864,6 +36634,11 @@
       "group": "citadel_gc",
       "hash": "9f359b407c59"
     },
+    "Steam_Citadel_Hideout_Rounds": {
+      "text": "在大本营巡视",
+      "group": "citadel_gc",
+      "hash": "209ff5ea60b1"
+    },
     "Citadel_Dashboard_BuildVersion": {
       "text": "#{d:buildNumber}",
       "group": "citadel_main",
@@ -39169,10 +39944,10 @@
       "group": "citadel_main",
       "hash": "de47bcb3afad"
     },
-    "Citadel_RankedSeason_ProtectionRemaining": {
-      "text": "还剩余{d:demotion_protection_remaining}/{d:demotion_protection_total}次保护",
+    "Citadel_RankedSeason_ProtectionRemaining:f": {
+      "text": "剩余{d:demotion_protection_remaining}/{d:demotion_protection_total}次{demotion_protection_total, plural, one{保护} other{保护}}",
       "group": "citadel_main",
-      "hash": "8dd57939960c"
+      "hash": "d8d782a7a790"
     },
     "Citadel_RankedSeason_ProtectionUsed": {
       "text": "已使用降级保护",
@@ -39385,9 +40160,9 @@
       "hash": "e2a662c1f95c"
     },
     "Citadel_Ranked_Overview_Eligibility_Bullet1:f": {
-      "text": "你的账号必须拥有{d:required_account_wins}场总{d:required_account_wins, plural, one {胜场} other {胜场}}。你还必须拥有至少{d:required_hero_unlocks}名{d:required_hero_unlocks, plural, one {英雄} other {英雄}}在标准模式达到{d:required_hero_wins}场{d:required_hero_wins, plural, one {胜利} other {胜利}}。",
+      "text": "你的账号必须拥有{d:required_account_wins}场总{required_account_wins, plural, one {胜场} other {胜场}}。你还必须拥有至少{d:required_hero_unlocks}名{required_hero_unlocks, plural, one {英雄} other {英雄}}在标准模式达到{d:required_hero_wins}场{required_hero_wins, plural, one {胜利} other {胜利}}。",
       "group": "citadel_main",
-      "hash": "4f12399f8020"
+      "hash": "38ac659b93f2"
     },
     "Citadel_Ranked_Overview_Eligibility_Bullet2": {
       "text": "玩家只能单排或双排去匹配天梯模式。双排的玩家必须在相邻的一个段位以内。不朽之星玩家只能与相差在3个子段位的其他不朽之星玩家一起匹配。",
@@ -48499,10 +49274,10 @@
       "group": "citadel_main",
       "hash": "a1e3b44f8513"
     },
-    "citadel_settings_steaminput_connected": {
-      "text": "已连接",
+    "citadel_settings_steaminput_connected:f": {
+      "text": "{controller_count, plural, one{已连接} other{已连接}}",
       "group": "citadel_main",
-      "hash": "65fe35c45e4e"
+      "hash": "457906143a4b"
     },
     "citadel_ability_upgrade_tab_desc": {
       "text": "{g:citadel_binding:'Scoreboard'}+[{g:citadel_binding:'Ability1'}/{g:citadel_binding:'Ability2'}/{g:citadel_binding:'Ability3'}/{g:citadel_binding:'Ability4'}]将升级你的技能。这些是额外绑定。",
@@ -56239,15 +57014,15 @@
       "group": "citadel_main",
       "hash": "14d722bad906"
     },
-    "Unranked_AbandonTriggerEarly": {
-      "text": "本场比赛不会记录。比赛将于{d:end_game_countdown}秒后结束。",
+    "Unranked_AbandonTriggerEarly:f": {
+      "text": "本场比赛不会记录。比赛将于{d:end_game_countdown}{end_game_countdown, plural, one{秒} other{秒}}后结束。",
       "group": "citadel_main",
-      "hash": "7efe3f1a7242"
+      "hash": "5f0809dc4fb8"
     },
-    "Ranked_AbandonTriggerEarly": {
-      "text": "本场比赛不会记录。比赛将于{d:end_game_countdown}秒后结束。你的段位不受影响。",
+    "Ranked_AbandonTriggerEarly:f": {
+      "text": "本场比赛不会记录。比赛将于{d:end_game_countdown}{end_game_countdown, plural, one{秒} other{秒}}后结束。你的段位不受影响。",
       "group": "citadel_main",
-      "hash": "58e475cc5b2c"
+      "hash": "92688cfd4a46"
     },
     "AbandonTriggerTeam_Title": {
       "text": "玩家已退出比赛",
@@ -57555,9 +58330,9 @@
       "hash": "6b89e0c51112"
     },
     "HeroTesting_BotAbility_Desc": {
-      "text": "所有机器人每隔几秒就会施放此技能，无视其冷却时间",
+      "text": "所有机器人都会施放此技能，无视其冷却时间。",
       "group": "citadel_main",
-      "hash": "e1878c1d8a75"
+      "hash": "9ad9088f4aaa"
     },
     "HeroTesting_BotAbilityStop_Desc": {
       "text": "所有机器人停止施放技能",
@@ -57565,9 +58340,9 @@
       "hash": "30e2cb384b4c"
     },
     "HeroTesting_BotItem_Desc": {
-      "text": "所有机器人每隔几秒就会使用此栏位中的主动物品，无视其冷却时间",
+      "text": "所有机器人都会使用此栏位中的主动物品，无视其冷却时间。",
       "group": "citadel_main",
-      "hash": "672ccb1665f0"
+      "hash": "3ca3ef0a90cf"
     },
     "HeroTesting_BotItemStop_Desc": {
       "text": "所有机器人停止使用物品",
@@ -57575,9 +58350,9 @@
       "hash": "0162c35abff5"
     },
     "HeroTesting_BotUseAbilityRepeated_Desc": {
-      "text": "关闭时，机器人施法一次然后停下",
+      "text": "开启后每隔几秒就会重复施放一次。",
       "group": "citadel_main",
-      "hash": "ae4237fc6323"
+      "hash": "462a0e4b353c"
     },
     "HeroTesting_InfiniteMoney_Desc": {
       "text": "无需消耗魂魄即可购买物品",

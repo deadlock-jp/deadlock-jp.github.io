@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6796",
-  "upstreamCommit": "6796",
-  "generatedAt": "2026-10-20T02:39:02.791Z",
+  "clientVersion": "6805",
+  "upstreamCommit": "6805",
+  "generatedAt": "2026-10-21T02:45:42.729Z",
   "language": "English",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 622,
-    "citadel_heroes": 3823,
+    "citadel_heroes": 3978,
     "citadel_attributes": 2018,
-    "citadel_gc": 220,
+    "citadel_gc": 221,
     "citadel_main": 5279
   },
   "tokens": {
@@ -2990,9 +2990,9 @@
       "hash": "a5367ba4778a"
     },
     "upgrade_tech_overflow_desc": {
-      "text": "Gain bonus <span class=\"highlight\">Fire Rate</span>, <span class=\"highlight\">Spirit Power</span> and <span class=\"highlight\">Spirit Lifesteal</span> by <span class=\"highlight\">charging up</span> when shooting enemy heroes.",
+      "text": "Gain bonus <span class=\"highlight\">Fire Rate</span>, <span class=\"highlight\">Spirit Power</span> and <span class=\"highlight\">Spirit Lifesteal</span> by <span class=\"highlight\">charging up</span> when shooting heroes.",
       "group": "citadel_mods",
-      "hash": "144521d8c60b"
+      "hash": "55cea585310c"
     },
     "modifier_tech_overflow_building": {
       "text": "Spiritual Overflow Building...",
@@ -3665,9 +3665,9 @@
       "hash": "a0f1490a20d0"
     },
     "upgrade_reinforcing_casings_desc": {
-      "text": "Grants <span class=\"highlight\">Bullet Resist</span> when your bullets hit an enemy hero. <span class=\"highlight\">Each shot can only grant one stack.</span>",
+      "text": "Grants <span class=\"highlight\">Bullet Resist</span> when your bullets hit a hero. <span class=\"highlight\">Each shot can only grant one stack.</span>",
       "group": "citadel_mods",
-      "hash": "40fb7c5a55a2"
+      "hash": "a58ef37af075"
     },
     "MaxArmorStacks_label": {
       "text": "Max Bullet Resist",
@@ -5295,9 +5295,9 @@
       "hash": "de078ad78376"
     },
     "upgrade_upgrade_auto_cleanse_desc": {
-      "text": "The next <span class=\"highlight\">Stun, Chain, Immobilize, Sleep or Silence</span> is automatically cleansed. When this happens, you gain a <span class=\"highlight\">barrier</span> and all your <span class=\"highlight\">ability cooldowns</span> get reduced by {s:CooldownReductionOnProc}%.",
+      "text": "The next <span class=\"highlight\">Stun, Chain, Immobilize, Sleep, Silence or Fear</span> is automatically cleansed. When this happens, you gain a <span class=\"highlight\">barrier</span> and all your <span class=\"highlight\">ability cooldowns</span> get reduced by {s:CooldownReductionOnProc}%.",
       "group": "citadel_mods",
-      "hash": "d8bcdeff1e91"
+      "hash": "3c9351c09b11"
     },
     "upgrade_superior_stamina_passive": {
       "text": "Allows an additional use of <span class=\"highlight\">Air Jump</span> or <span class=\"highlight\">Air Dash</span> before landing.",
@@ -14925,9 +14925,9 @@
       "hash": "6e7f1f12b5fa"
     },
     "viscous_goo_grenade_t3_desc": {
-      "text": "+{s:MaxBounces} Bounces and improved Spirit Scaling",
+      "text": "+{s:MaxBounces} Bounce and improved Spirit Scaling",
       "group": "citadel_heroes",
-      "hash": "9538c05e2eac"
+      "hash": "e583ecbcf46c"
     },
     "MaxBounces_label": {
       "text": "Bounces",
@@ -22809,6 +22809,11 @@
       "group": "citadel_heroes",
       "hash": "5e0ea85af6e3"
     },
+    "ability_deadpack_chargeblast/coated": {
+      "text": "Marked",
+      "group": "citadel_heroes",
+      "hash": "99a860635892"
+    },
     "ability_deadpack_chargeblast/coated_buff": {
       "text": "Fire Rate",
       "group": "citadel_heroes",
@@ -23579,6 +23584,766 @@
       "group": "citadel_heroes",
       "hash": "6b0d31c0d563"
     },
+    "citadel_weapon_nurse_set": {
+      "text": "Code Blue",
+      "group": "citadel_heroes",
+      "hash": "c28d42b5d112"
+    },
+    "ability_nurse_leech_therapy": {
+      "text": "Leech Therapy",
+      "group": "citadel_heroes",
+      "hash": "ae2f937431f1"
+    },
+    "ability_nurse_leech_therapy_desc": {
+      "text": "Throw a jar of leeches that attach to enemies, dealing {g:citadel_inline_attribute:'SpiritDPS'} and <span class=\"highlight\">eating away at the duration of enemy buffs</span>.",
+      "group": "citadel_heroes",
+      "hash": "99060bd28b16"
+    },
+    "ability_nurse_leech_therapy_leech_desc": {
+      "text": "Harrow can pick up leeches after they finish feeding, {g:citadel_inline_attribute:'Healing'} her for the health drained and permanently granting {g:citadel_inline_attribute:'Regen'} and {g:citadel_inline_attribute:'FireRate'}. <br><br><span class=\"small_diminish\">25% of your leech stacks are lost on death.</span>",
+      "group": "citadel_heroes",
+      "hash": "1b1ba6dca6f8"
+    },
+    "ability_nurse_leech_therapy_t1_desc": {
+      "text": "Leeches drain stamina and restore it to you on pickup",
+      "group": "citadel_heroes",
+      "hash": "94eae8898a41"
+    },
+    "ability_nurse_leech_therapy_t2_desc": {
+      "text": "{s:AbilityCooldown}s Cooldown<br>+{s:SpiritPowerPerLeechStack} Spirit Power Per Leech",
+      "group": "citadel_heroes",
+      "hash": "a4f0fcd70ae7"
+    },
+    "ability_nurse_leech_therapy_t3_desc": {
+      "text": "+{s:Radius}m Radius<br>+{s:DPS_scale} Spirit Scaling<br>+{s:MaxLeechBonusStacks} Max Leech Stacks",
+      "group": "citadel_heroes",
+      "hash": "62e9c12e1c71"
+    },
+    "modifier_nurse_leech_therapy_pickup_bonus": {
+      "text": "Leech Pickup Bonus",
+      "group": "citadel_heroes",
+      "hash": "e230eb0ba388"
+    },
+    "modifier_nurse_leech_therapy_eating_buffs": {
+      "text": "Eating Buffs",
+      "group": "citadel_heroes",
+      "hash": "6920f20864a6"
+    },
+    "nurse_leech_pickups_stacklabel": {
+      "text": "Leeches Collected:",
+      "group": "citadel_heroes",
+      "hash": "8217bb439516"
+    },
+    "Citadel_AbilityProperty_OnLeechPickup": {
+      "text": "On Leech Pickup:",
+      "group": "citadel_heroes",
+      "hash": "d9d2223208af"
+    },
+    "MaxHealPercentOfLeechDamage_label": {
+      "text": "Max Leech Damage As Healing",
+      "group": "citadel_heroes",
+      "hash": "493fe6c9c996"
+    },
+    "MaxHealPercentOfLeechDamage_postvalue_label": {
+      "text": "Max Leech Damage As Healing",
+      "group": "citadel_heroes",
+      "hash": "493fe6c9c996"
+    },
+    "MaxHealPercentOfLeechDamage_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "RegenPerLeechPickup_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "RegenPerLeechPickup_label": {
+      "text": "Health Regen Per Leech",
+      "group": "citadel_heroes",
+      "hash": "4c9e2dd97d2c"
+    },
+    "RegenPerLeechPickup_postvalue_label": {
+      "text": "Health Regen Per Leech",
+      "group": "citadel_heroes",
+      "hash": "4c9e2dd97d2c"
+    },
+    "FireRatePerLeechPickup_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "FireRatePerLeechPickup_label": {
+      "text": "Fire Rate Per Leech",
+      "group": "citadel_heroes",
+      "hash": "368538751b3a"
+    },
+    "FireRatePerLeechPickup_postvalue_label": {
+      "text": "Fire Rate Per Leech",
+      "group": "citadel_heroes",
+      "hash": "368538751b3a"
+    },
+    "FireRatePerLeechPickup_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "SpiritPowerPerLeechStack_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "SpiritPowerPerLeechStack_label": {
+      "text": "Spirit Power Per Leech",
+      "group": "citadel_heroes",
+      "hash": "bdaedac89a0a"
+    },
+    "SpiritPowerPerLeechStack_postvalue_label": {
+      "text": "Spirit Power Per Leech",
+      "group": "citadel_heroes",
+      "hash": "bdaedac89a0a"
+    },
+    "LeechBonusDuration_label": {
+      "text": "Bonus Duration",
+      "group": "citadel_heroes",
+      "hash": "71d388187c60"
+    },
+    "LeechBonusDuration_postvalue_label": {
+      "text": "Bonus Duration",
+      "group": "citadel_heroes",
+      "hash": "71d388187c60"
+    },
+    "LeechBonusDuration_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "MaxLeechBonusStacks_label": {
+      "text": "Max Leech Stacks",
+      "group": "citadel_heroes",
+      "hash": "29d78541f93f"
+    },
+    "MaxLeechBonusStacks_postvalue_label": {
+      "text": "Max Leech Stacks",
+      "group": "citadel_heroes",
+      "hash": "29d78541f93f"
+    },
+    "LeechCrawlRadius_label": {
+      "text": "Leech Crawl Range",
+      "group": "citadel_heroes",
+      "hash": "dc192d3e6ed2"
+    },
+    "LeechCrawlRadius_postvalue_label": {
+      "text": "Leech Crawl Range",
+      "group": "citadel_heroes",
+      "hash": "dc192d3e6ed2"
+    },
+    "LeechCrawlRadius_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "LeechStaminaDrain_postvalue_label": {
+      "text": "Stamina Drain",
+      "group": "citadel_heroes",
+      "hash": "1e603d6558d3"
+    },
+    "LeechStaminaDrain_label": {
+      "text": "Stamina Drain",
+      "group": "citadel_heroes",
+      "hash": "1e603d6558d3"
+    },
+    "LeechStaminaDrain_postfix": {
+      "text": "/s",
+      "group": "citadel_heroes",
+      "hash": "f9b05e880934"
+    },
+    "LeechEatDurationPerSecond_label": {
+      "text": "Buff Duration Drain Per Second",
+      "group": "citadel_heroes",
+      "hash": "94670e98f9e1"
+    },
+    "LeechEatDurationPerSecond_postvalue_label": {
+      "text": "Buff Duration Drain Per Second",
+      "group": "citadel_heroes",
+      "hash": "94670e98f9e1"
+    },
+    "LeechEatDurationPerSecond_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "ability_nurse_fear": {
+      "text": "Lurking Terrors",
+      "group": "citadel_heroes",
+      "hash": "aa04ff4b3670"
+    },
+    "ability_nurse_fear_desc": {
+      "text": "Open your bag and reveal the horrors you carry inside, dealing {g:citadel_inline_attribute:'SpiritDPS'} to enemies in front of you. Enemies <span class=\"highlight\">looking at you</span> build up terror and <span class=\"highlight\">cannot use stamina or movement abilities</span>. At max terror, they <span class=\"highlight\">flee in fear away from you</span>.<br><br>Each leech you have collected adds <span class=\"highlight\">fear duration</span>.<br><span class=\"diminish\"><br>Enemies facing away from you take {s:FacingAwayDamagePercent}% damage unless feared.</span>",
+      "group": "citadel_heroes",
+      "hash": "7a303186f4a9"
+    },
+    "ability_nurse_fear_t2_desc": {
+      "text": "-{s:SlowPercent}% Move Speed and Fire Rate<br>+{s:DPS} DPS",
+      "group": "citadel_heroes",
+      "hash": "f5f6555aba93"
+    },
+    "ability_nurse_fear_t3_desc": {
+      "text": "+{s:AbilityChannelTime}s Channel Time<br>+{s:DPS_scale} Spirit Scaling<br>Immune to damage while channeling",
+      "group": "citadel_heroes",
+      "hash": "e0763efd1fee"
+    },
+    "FearDurationPerLeechStack_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "FearDurationPerLeechStack_label": {
+      "text": "Fear Duration Per Leech",
+      "group": "citadel_heroes",
+      "hash": "29c29c1d5f34"
+    },
+    "FearDurationPerLeechStack_postvalue_label": {
+      "text": "Fear Duration Per Leech",
+      "group": "citadel_heroes",
+      "hash": "29c29c1d5f34"
+    },
+    "FearDurationPerLeechStack_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "FearDuration_label": {
+      "text": "Fear Duration",
+      "group": "citadel_heroes",
+      "hash": "60220650dc4e"
+    },
+    "FearDuration_postvalue_label": {
+      "text": "Fear Duration",
+      "group": "citadel_heroes",
+      "hash": "60220650dc4e"
+    },
+    "FearDuration_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "FearBuildupTime_label": {
+      "text": "Fear Buildup Time",
+      "group": "citadel_heroes",
+      "hash": "50be074c15e5"
+    },
+    "FearBuildupTime_postvalue_label": {
+      "text": "Fear Buildup Time",
+      "group": "citadel_heroes",
+      "hash": "50be074c15e5"
+    },
+    "FearBuildupTime_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "FearBuildupDecayTime_label": {
+      "text": "Fear Buildup Decay Time",
+      "group": "citadel_heroes",
+      "hash": "74d3fe80c7cc"
+    },
+    "FearBuildupDecayTime_postvalue_label": {
+      "text": "Fear Buildup Decay Time",
+      "group": "citadel_heroes",
+      "hash": "74d3fe80c7cc"
+    },
+    "FearBuildupDecayTime_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "FearLookAngle_label": {
+      "text": "Look Angle",
+      "group": "citadel_heroes",
+      "hash": "17976a911f0c"
+    },
+    "FearLookAngle_postvalue_label": {
+      "text": "Look Angle",
+      "group": "citadel_heroes",
+      "hash": "17976a911f0c"
+    },
+    "FearLookAngle_postfix": {
+      "text": "°",
+      "group": "citadel_heroes",
+      "hash": "55d0c1bb201e"
+    },
+    "GazeLingerDuration_label": {
+      "text": "Stamina Lock Linger",
+      "group": "citadel_heroes",
+      "hash": "c49e847609fc"
+    },
+    "GazeLingerDuration_postvalue_label": {
+      "text": "Stamina Lock Linger",
+      "group": "citadel_heroes",
+      "hash": "c49e847609fc"
+    },
+    "GazeLingerDuration_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "FearMoveSpeedBonus_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "FearMoveSpeedBonus_label": {
+      "text": "Fleeing Enemy Move Speed",
+      "group": "citadel_heroes",
+      "hash": "fb547b413fb0"
+    },
+    "FearMoveSpeedBonus_postvalue_label": {
+      "text": "Fleeing Enemy Move Speed",
+      "group": "citadel_heroes",
+      "hash": "fb547b413fb0"
+    },
+    "FearMoveSpeedBonus_postfix": {
+      "text": " m/s",
+      "group": "citadel_heroes",
+      "hash": "2c93cf8edd31"
+    },
+    "modifier_citadel_nurse_fear_debuff": {
+      "text": "Feared",
+      "group": "citadel_heroes",
+      "hash": "001a05383bda"
+    },
+    "modifier_nurse_fear_buildup": {
+      "text": "Avert Your Eyes",
+      "group": "citadel_heroes",
+      "hash": "59b039af0ade"
+    },
+    "ability_nurse_healing_needles": {
+      "text": "Healing Needles",
+      "group": "citadel_heroes",
+      "hash": "eb75ab7fd325"
+    },
+    "ability_nurse_healing_needles_desc": {
+      "text": "Load your weapon with a full clip of syringes that {g:citadel_inline_attribute:'Heal'} allies. <span class=\"highlight\">Dealing damage</span> recovers charges, and each leech you have collected slowly restores them.<br><br>Reloading spends a charge for a fresh clip.<br><br><span class=\"small_diminish\">Unused syringes are refunded as a partial charge. Recast to put them away.</span>",
+      "group": "citadel_heroes",
+      "hash": "b374146923bd"
+    },
+    "ability_nurse_healing_needles_t1_desc": {
+      "text": "+{s:AbilityCharges} Max Charge",
+      "group": "citadel_heroes",
+      "hash": "73b38615c99d"
+    },
+    "ability_nurse_healing_needles_t2_desc": {
+      "text": "+{s:HealRegen} Heal Per Shot<br>Shots restore {s:StaminaRestorePerHit} stamina",
+      "group": "citadel_heroes",
+      "hash": "c03b312ccd14"
+    },
+    "ChargePercentPerSecondPerLeech_label": {
+      "text": "Charge Per Leech",
+      "group": "citadel_heroes",
+      "hash": "274aea49a7bc"
+    },
+    "ChargePercentPerSecondPerLeech_postvalue_label": {
+      "text": "Charge Per Leech",
+      "group": "citadel_heroes",
+      "hash": "274aea49a7bc"
+    },
+    "ChargePercentPerSecondPerLeech_postfix": {
+      "text": "%/s",
+      "group": "citadel_heroes",
+      "hash": "81b2b521e2ff"
+    },
+    "ChargeGenPctScale_label": {
+      "text": "Charge Rate",
+      "group": "citadel_heroes",
+      "hash": "17cff15a3ceb"
+    },
+    "ChargeGenPctScale_postvalue_label": {
+      "text": "Charge Rate",
+      "group": "citadel_heroes",
+      "hash": "17cff15a3ceb"
+    },
+    "ChargeGenPctScale_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "ability_nurse_healing_needles_t3_desc": {
+      "text": "+{s:HealRegen_scale} Spirit Scaling<br>Shots extend non-ultimate buff durations by {s:BuffExtendPercentPerShot}%, up to their max duration",
+      "group": "citadel_heroes",
+      "hash": "65ee6d0f12b4"
+    },
+    "StaminaRestorePerHit_postvalue_label": {
+      "text": "Stamina Per Shot",
+      "group": "citadel_heroes",
+      "hash": "84fccdffbaff"
+    },
+    "StaminaRestorePerHit_label": {
+      "text": "Stamina Per Shot",
+      "group": "citadel_heroes",
+      "hash": "84fccdffbaff"
+    },
+    "BuffExtendPercentPerShot_label": {
+      "text": "Buff Extension Per Shot",
+      "group": "citadel_heroes",
+      "hash": "3c47f6c89e53"
+    },
+    "StaminaRestorePerHit_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "modifier_nurse_healing_needles_buff": {
+      "text": "Healing Needles",
+      "group": "citadel_heroes",
+      "hash": "eb75ab7fd325"
+    },
+    "modifier_nurse_lifeforce_buildup": {
+      "text": "Ichor Buildup",
+      "group": "citadel_heroes",
+      "hash": "47ec744193ee"
+    },
+    "PainPerProc_label": {
+      "text": "Ichor Stored On Rip",
+      "group": "citadel_heroes",
+      "hash": "124cbde9d0b2"
+    },
+    "PainPerProc_postvalue_label": {
+      "text": "Ichor Stored On Rip",
+      "group": "citadel_heroes",
+      "hash": "124cbde9d0b2"
+    },
+    "NeedleBuildUpPerShot_label": {
+      "text": "Buildup Per Shot",
+      "group": "citadel_heroes",
+      "hash": "2a0a22da0372"
+    },
+    "NeedleBuildUpPerShot_postvalue_label": {
+      "text": "Buildup Per Shot",
+      "group": "citadel_heroes",
+      "hash": "2a0a22da0372"
+    },
+    "NeedleBuildUpPerShot_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "NeedleBuildUpDuration_label": {
+      "text": "Buildup Duration",
+      "group": "citadel_heroes",
+      "hash": "71eda42e4c73"
+    },
+    "NeedleBuildUpDuration_postvalue_label": {
+      "text": "Buildup Duration",
+      "group": "citadel_heroes",
+      "hash": "71eda42e4c73"
+    },
+    "NeedleBuildUpDuration_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "NeedleProcCooldown_label": {
+      "text": "Per Target Cooldown",
+      "group": "citadel_heroes",
+      "hash": "93a0ebaddebf"
+    },
+    "NeedleProcCooldown_postvalue_label": {
+      "text": "Per Target Cooldown",
+      "group": "citadel_heroes",
+      "hash": "93a0ebaddebf"
+    },
+    "NeedleProcCooldown_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "HealRegen_label": {
+      "text": "Heal Per Shot",
+      "group": "citadel_heroes",
+      "hash": "81339e816a91"
+    },
+    "HealRegen_postvalue_label": {
+      "text": "Heal Per Shot",
+      "group": "citadel_heroes",
+      "hash": "81339e816a91"
+    },
+    "HealingNeedlesAmpDuration_label": {
+      "text": "Buff Duration",
+      "group": "citadel_heroes",
+      "hash": "17aa0e167a2b"
+    },
+    "HealingNeedlesAmpDuration_postvalue_label": {
+      "text": "Buff Duration",
+      "group": "citadel_heroes",
+      "hash": "17aa0e167a2b"
+    },
+    "HealingNeedlesAmpDuration_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "HealMaxHealthPercentPerShot_label": {
+      "text": "Max Health Heal / Shot",
+      "group": "citadel_heroes",
+      "hash": "9cf6e871428b"
+    },
+    "HealMaxHealthPercentPerShot_postvalue_label": {
+      "text": "Max Health Heal / Shot",
+      "group": "citadel_heroes",
+      "hash": "9cf6e871428b"
+    },
+    "HealMaxHealthPercentPerShot_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "MaxAbilityResource_label": {
+      "text": "Max Ichor",
+      "group": "citadel_heroes",
+      "hash": "be8efd1b3278"
+    },
+    "MaxAbilityResource_postvalue_label": {
+      "text": "Max Ichor",
+      "group": "citadel_heroes",
+      "hash": "be8efd1b3278"
+    },
+    "HeadshotHealBonusPercent_label": {
+      "text": "Headshot Heal Bonus",
+      "group": "citadel_heroes",
+      "hash": "c461ec23d339"
+    },
+    "HeadshotHealBonusPercent_postvalue_label": {
+      "text": "Headshot Heal Bonus",
+      "group": "citadel_heroes",
+      "hash": "c461ec23d339"
+    },
+    "HeadshotHealBonusPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "HeadshotHealBonusPercent_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "MissedShotCostPercent_label": {
+      "text": "Missed Needle Cost",
+      "group": "citadel_heroes",
+      "hash": "cf867adce293"
+    },
+    "MissedShotCostPercent_postvalue_label": {
+      "text": "Missed Needle Cost",
+      "group": "citadel_heroes",
+      "hash": "cf867adce293"
+    },
+    "MissedShotCostPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "MeterFillNPCPercent_label": {
+      "text": "Ichor from NPCs",
+      "group": "citadel_heroes",
+      "hash": "492a32012604"
+    },
+    "MeterFillNPCPercent_postvalue_label": {
+      "text": "Ichor from NPCs",
+      "group": "citadel_heroes",
+      "hash": "492a32012604"
+    },
+    "MeterFillNPCPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "PainRegenPerLeech_label": {
+      "text": "Ichor per Leech",
+      "group": "citadel_heroes",
+      "hash": "0c50532ff2a6"
+    },
+    "PainRegenPerLeech_postvalue_label": {
+      "text": "Ichor per Leech",
+      "group": "citadel_heroes",
+      "hash": "0c50532ff2a6"
+    },
+    "PainRegenPerLeech_postfix": {
+      "text": "/s",
+      "group": "citadel_heroes",
+      "hash": "f9b05e880934"
+    },
+    "OverhealBarrierDuration_label": {
+      "text": "Barrier Duration",
+      "group": "citadel_heroes",
+      "hash": "bbe5c3a9c41d"
+    },
+    "OverhealBarrierDuration_postvalue_label": {
+      "text": "Barrier Duration",
+      "group": "citadel_heroes",
+      "hash": "bbe5c3a9c41d"
+    },
+    "OverhealBarrierDuration_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "ability_nurse_healing_needles/modifier_nurse_healing_needles_buff": {
+      "text": "Healing Needles",
+      "group": "citadel_heroes",
+      "hash": "eb75ab7fd325"
+    },
+    "ability_nurse_adrenaline_rush": {
+      "text": "Wretched Vapors",
+      "group": "citadel_heroes",
+      "hash": "524eca4117b3"
+    },
+    "ability_nurse_adrenaline_rush_desc": {
+      "text": "Crack open a vial to release an ethereal vapor onto yourself or an ally that causes a rush, then a crash.<br><br><span class=\"diminish\">Specter Rush:</span> While it lasts, increases the speed of all actions and temporarily <span class=\"highlight\">numbs all incoming damage</span> creating looming specters.<br><br><span class=\"diminish\">Specter Crash:</span> When the vapors wear off, all actions are slower and any remaining specters <span class=\"highlight\">deal their delayed damage plus extra damage</span>.<br><br><span class=\"small_diminish\">Incoming healing will prioritize removing specters first, preventing them from dealing damage.</span>",
+      "group": "citadel_heroes",
+      "hash": "dbdf991ac237"
+    },
+    "ability_nurse_adrenaline_rush_desc_old": {
+      "text": "Apply vapors to you or an ally. While it lasts they <span class=\"highlight\">act faster</span> and taking damage rips a specter from their body, <span class=\"highlight\">delaying the damage</span>. Healing exorcises the specters, removing them.<br><br>When the vapors wear off they <span class=\"highlight\">act slower</span> and the remaining specters deal the delayed damage plus <span class=\"highlight\">extra damage</span> over {s:CrashDuration}s.",
+      "group": "citadel_heroes",
+      "hash": "8a9e87fdbb48"
+    },
+    "ability_nurse_adrenaline_rush_t1_desc": {
+      "text": "{s:AbilityCooldown}s Cooldown<br>+{s:AbilityCastRange}m Cast Range",
+      "group": "citadel_heroes",
+      "hash": "21a4d1fe363e"
+    },
+    "ability_nurse_adrenaline_rush_t2_desc": {
+      "text": "+{s:AbilityDuration}s Duration<br>+{s:HealingEffectivenessPercent}% Healing Effectiveness",
+      "group": "citadel_heroes",
+      "hash": "a83dc31bf390"
+    },
+    "ability_nurse_adrenaline_rush_t3_desc": {
+      "text": "+{s:RushTimeScaleBonusPercent}% Rush Speed<br>Dispels non-ult debuffs",
+      "group": "citadel_heroes",
+      "hash": "1ec3ec7e9d2b"
+    },
+    "modifier_nurse_adrenaline_rush_buff": {
+      "text": "Specter Rush",
+      "group": "citadel_heroes",
+      "hash": "b69bd721e1dc"
+    },
+    "modifier_nurse_adrenaline_rush_crash": {
+      "text": "Specter Crash",
+      "group": "citadel_heroes",
+      "hash": "14e421c2a9d6"
+    },
+    "DeferredDamagePercent_postvalue_label": {
+      "text": "Damage Deferred",
+      "group": "citadel_heroes",
+      "hash": "0fd93b48b8ff"
+    },
+    "DeferredDamagePercent_label": {
+      "text": "Damage Deferred",
+      "group": "citadel_heroes",
+      "hash": "0fd93b48b8ff"
+    },
+    "DeferredDamagePercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "DeferredDamageBonusPercent_postvalue_label": {
+      "text": "Extra Damage Taken",
+      "group": "citadel_heroes",
+      "hash": "a9dafd4df6eb"
+    },
+    "DeferredDamageBonusPercent_label": {
+      "text": "Extra Damage Taken",
+      "group": "citadel_heroes",
+      "hash": "a9dafd4df6eb"
+    },
+    "DeferredDamageBonusPercent_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "DeferredDamageBonusPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "RushTimeScaleBonusPercent_postvalue_label": {
+      "text": "Rush Speed",
+      "group": "citadel_heroes",
+      "hash": "1efcbd28da30"
+    },
+    "RushTimeScaleBonusPercent_label": {
+      "text": "Rush Speed",
+      "group": "citadel_heroes",
+      "hash": "1efcbd28da30"
+    },
+    "RushTimeScaleBonusPercent_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "RushTimeScaleBonusPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "CrashDuration_postvalue_label": {
+      "text": "Crash Duration",
+      "group": "citadel_heroes",
+      "hash": "02f2afbff0e7"
+    },
+    "CrashDuration_label": {
+      "text": "Crash Duration",
+      "group": "citadel_heroes",
+      "hash": "02f2afbff0e7"
+    },
+    "CrashDuration_postfix": {
+      "text": "s",
+      "group": "citadel_heroes",
+      "hash": "a0f1490a20d0"
+    },
+    "HealingEffectivenessPercent_label": {
+      "text": "Healing Effectiveness",
+      "group": "citadel_heroes",
+      "hash": "ac4ab672b9f6"
+    },
+    "HealingEffectivenessPercent_postvalue_label": {
+      "text": "Healing Effectiveness",
+      "group": "citadel_heroes",
+      "hash": "ac4ab672b9f6"
+    },
+    "HealingEffectivenessPercent_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "HealingEffectivenessPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "CrashTimeScalePenaltyPercent_postvalue_label": {
+      "text": "Crash Slowdown",
+      "group": "citadel_heroes",
+      "hash": "f520444b3cdd"
+    },
+    "CrashTimeScalePenaltyPercent_label": {
+      "text": "Crash Slowdown",
+      "group": "citadel_heroes",
+      "hash": "f520444b3cdd"
+    },
+    "CrashTimeScalePenaltyPercent_prefix": {
+      "text": "-",
+      "group": "citadel_heroes",
+      "hash": "3bc15c8aae3e"
+    },
+    "CrashTimeScalePenaltyPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
     "ability_header_on_hit": {
       "text": "On Hit:",
       "group": "citadel_heroes",
@@ -24205,6 +24970,11 @@
       "hash": "e00694b1e25c"
     },
     "ability_melee_artist": {
+      "text": "Melee",
+      "group": "citadel_heroes",
+      "hash": "e00694b1e25c"
+    },
+    "ability_melee_nurse": {
       "text": "Melee",
       "group": "citadel_heroes",
       "hash": "e00694b1e25c"
@@ -24908,6 +25678,11 @@
       "text": "Violet immigrated to The Cursed Apple when she was 12, and while there was a certain amount of culture shock to adapting to New York, she quickly fell in love with the vibrance of the city.   Dedicating herself to the pursuit of the arts, Violet's passion lead her to successes far beyond most of her peers.<br><br>First, a full ride to art school.<br><br>Then in her junior year, inclusion in MOMA'S prestigious celebration of student artists: \"The Upstart Gallery\".<br><br>By any measure she's doing phenomenal for her age, however Violet has not been able shake her existential dread of dying a failure. She knows that commercial success as a fine artist isn't about being good enough. It's not even about being great. It's about being seen by the right person at the right time.  And so she has set her sights on The Ritual... not to embellish on her own talent, but just to have a chance to show the world what she can do.",
       "group": "citadel_heroes",
       "hash": "beba6caec09d"
+    },
+    "hero_nurse_lore": {
+      "text": "A respected pillar at the Marble Hill Possession Ward, Nurse Harrow has dedicated her life to combating the horrors of supernatural possession. A blend of care, severity, and detached pragmatism; Harrow has been called a saint by some of her patients, and a cruel governess by others. Both are probably true.<br><br>But while any sane person would question how and why Harrow keeps the pain of her patients stored in her medical bag,  none can question the results of her treatment program... cruel though it may be.",
+      "group": "citadel_heroes",
+      "hash": "c9bd4e95fa09"
     },
     "MODIFIER_STATE_ROOTED": {
       "text": "Immobilized",
@@ -36099,6 +36874,11 @@
       "group": "citadel_gc",
       "hash": "d95df188147b"
     },
+    "Steam_Citadel_Hideout_Rounds": {
+      "text": "Conducting Rounds In The Hideout",
+      "group": "citadel_gc",
+      "hash": "40012ff2cf6a"
+    },
     "Citadel_Dashboard_BuildVersion": {
       "text": "#{d:buildNumber}",
       "group": "citadel_main",
@@ -39409,10 +40189,10 @@
       "group": "citadel_main",
       "hash": "c73a5ee1fcf3"
     },
-    "Citadel_RankedSeason_ProtectionRemaining": {
-      "text": "{d:demotion_protection_remaining}/{d:demotion_protection_total} Protections Remaining",
+    "Citadel_RankedSeason_ProtectionRemaining:f": {
+      "text": "{d:demotion_protection_remaining}/{d:demotion_protection_total} {demotion_protection_total, plural, one{Protection} other{Protections}} Remaining",
       "group": "citadel_main",
-      "hash": "add6b4197e84"
+      "hash": "d236084f5388"
     },
     "Citadel_RankedSeason_ProtectionUsed": {
       "text": "Demotion Protection Used",
@@ -39625,9 +40405,9 @@
       "hash": "31fabe6859ff"
     },
     "Citadel_Ranked_Overview_Eligibility_Bullet1:f": {
-      "text": "You must have at least {d:required_account_wins} total {d:required_account_wins, plural, one {win} other {wins}} on your account. You must also have at least {d:required_hero_unlocks} {d:required_hero_unlocks, plural, one {hero} other {heroes}} with {d:required_hero_wins} {d:required_hero_wins, plural, one {win} other {wins}} on each in Standard Mode.",
+      "text": "You must have at least {d:required_account_wins} total {required_account_wins, plural, one {win} other {wins}} on your account. You must also have at least {d:required_hero_unlocks} {required_hero_unlocks, plural, one {hero} other {heroes}} with {d:required_hero_wins} {required_hero_wins, plural, one {win} other {wins}} on each in Standard Mode.",
       "group": "citadel_main",
-      "hash": "42cd3c710174"
+      "hash": "2390b9f9c9d8"
     },
     "Citadel_Ranked_Overview_Eligibility_Bullet2": {
       "text": "Players are only allowed to queue up for ranked as a Solo or Duo. Duo parties must be within 1 Rank up or down from each other. Eternus players can only queue with other Eternus players who are within 3 subranks of each other.",
@@ -48784,10 +49564,10 @@
       "group": "citadel_main",
       "hash": "a36a5ffa6e0d"
     },
-    "citadel_settings_steaminput_connected": {
-      "text": "Connected",
+    "citadel_settings_steaminput_connected:f": {
+      "text": "{controller_count, plural, one{Connected} other{Connected}}",
       "group": "citadel_main",
-      "hash": "c2f9b7b4897f"
+      "hash": "0aeadc4c8aad"
     },
     "citadel_ability_upgrade_tab_desc": {
       "text": "{g:citadel_binding:'Scoreboard'} + [{g:citadel_binding:'Ability1'}/{g:citadel_binding:'Ability2'}/{g:citadel_binding:'Ability3'}/{g:citadel_binding:'Ability4'}] will upgrade your ability. These are additional binds.",
@@ -56559,15 +57339,15 @@
       "group": "citadel_main",
       "hash": "ae768f766f75"
     },
-    "Unranked_AbandonTriggerEarly": {
-      "text": "This game will not be scored. The match will end in {d:end_game_countdown} seconds.",
+    "Unranked_AbandonTriggerEarly:f": {
+      "text": "This game will not be scored. The match will end in {d:end_game_countdown} {end_game_countdown, plural, one{second} other{seconds}}.",
       "group": "citadel_main",
-      "hash": "ca0f2c6cf6e1"
+      "hash": "96fc1bab9d55"
     },
-    "Ranked_AbandonTriggerEarly": {
-      "text": "This game will not be scored. The match will end in {d:end_game_countdown} seconds. Your rank will not be adjusted.",
+    "Ranked_AbandonTriggerEarly:f": {
+      "text": "This game will not be scored. The match will end in {d:end_game_countdown} {end_game_countdown, plural, one{second} other{seconds}}. Your rank will not be adjusted.",
       "group": "citadel_main",
-      "hash": "fb466f155fd9"
+      "hash": "ed6a76498cfa"
     },
     "AbandonTriggerTeam_Title": {
       "text": "Player has Left Match",
@@ -57885,9 +58665,9 @@
       "hash": "f26063875455"
     },
     "HeroTesting_BotAbility_Desc": {
-      "text": "All bots cast this ability every few seconds, ignoring its cooldown",
+      "text": "All bots cast this ability, ignoring its cooldown.",
       "group": "citadel_main",
-      "hash": "9634ae404014"
+      "hash": "4edc79cec9d7"
     },
     "HeroTesting_BotAbilityStop_Desc": {
       "text": "All bots stop casting abilities",
@@ -57895,9 +58675,9 @@
       "hash": "275e83a0f167"
     },
     "HeroTesting_BotItem_Desc": {
-      "text": "All bots use the active item in this slot every few seconds, ignoring its cooldown",
+      "text": "All bots use the active item in this slot, ignoring its cooldown.",
       "group": "citadel_main",
-      "hash": "4b71423eb805"
+      "hash": "f06f242cc55d"
     },
     "HeroTesting_BotItemStop_Desc": {
       "text": "All bots stop using items",
@@ -57905,9 +58685,9 @@
       "hash": "f958d89aa529"
     },
     "HeroTesting_BotUseAbilityRepeated_Desc": {
-      "text": "When off, bots cast once and then stop",
+      "text": "Repeats casts every few seconds while on.",
       "group": "citadel_main",
-      "hash": "3e7d372ca8c1"
+      "hash": "04ad109b893c"
     },
     "HeroTesting_InfiniteMoney_Desc": {
       "text": "Buy items without spending souls",
