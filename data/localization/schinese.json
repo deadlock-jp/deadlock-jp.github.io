@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6807",
-  "upstreamCommit": "6807",
-  "generatedAt": "2026-10-21T09:00:13.795Z",
+  "clientVersion": "6812",
+  "upstreamCommit": "6812",
+  "generatedAt": "2026-10-22T02:19:35.850Z",
   "language": "schinese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 618,
-    "citadel_heroes": 3966,
+    "citadel_heroes": 3967,
     "citadel_attributes": 1986,
     "citadel_gc": 221,
     "citadel_main": 5258
@@ -2990,9 +2990,9 @@
       "hash": "ac01c22b76ee"
     },
     "upgrade_tech_overflow_desc": {
-      "text": "通过向敌方英雄射击<span class=\"highlight\">充能</span>，获得额外的<span class=\"highlight\">射速</span>，<span class=\"highlight\">元灵力量</span>和<span class=\"highlight\">元灵吸取生命</span>。",
+      "text": "通过向英雄射击<span class=\"highlight\">充能</span>，获得额外的<span class=\"highlight\">射速</span>，<span class=\"highlight\">元灵力量</span>和<span class=\"highlight\">元灵吸取生命</span>。",
       "group": "citadel_mods",
-      "hash": "479528e9709c"
+      "hash": "3d8f9d710ef9"
     },
     "modifier_tech_overflow_building": {
       "text": "正在累积元灵漫溢效果…",
@@ -3665,9 +3665,9 @@
       "hash": "eb6aaba1a1ca"
     },
     "upgrade_reinforcing_casings_desc": {
-      "text": "当子弹击中敌方英雄时，赋予<span class=\"highlight\">子弹抗性</span>。<span class=\"highlight\">每次射击只能赋予一次抗性叠加。</span>",
+      "text": "当子弹击中英雄时，赋予<span class=\"highlight\">子弹抗性</span>。<span class=\"highlight\">每次射击只能赋予一次抗性叠加。</span>",
       "group": "citadel_mods",
-      "hash": "d74359e0ed26"
+      "hash": "25fc86b34858"
     },
     "MaxArmorStacks_label": {
       "text": "最大子弹抗性",
@@ -23850,9 +23850,9 @@
       "hash": "153ed9016d09"
     },
     "ability_nurse_healing_needles_desc": {
-      "text": "武器装填满弹匣的注射器，可以{g:citadel_inline_attribute:'Heal'}友军。<span class=\"highlight\">造成伤害</span>会恢复充能，而每只收集的水蛭都会缓慢恢复能量。<br><br><span class=\"small_diminish\">治疗针头会穿过敌人。装填会消耗一点能量来获得新的弹匣，并返还未使用的注射器。重新施放可以收起注射器。</span>",
+      "text": "武器装填上满弹匣的注射器，可以{g:citadel_inline_attribute:'Heal'}友军。<span class=\"highlight\">造成伤害</span>会恢复能量，而每只收集的水蛭都会缓慢恢复能量。<br><br>重新装填会消耗一点能量来获得新的弹匣。<br><br><span class=\"small_diminish\">未使用的注射器会按比例返还部分能量。重新施放可以收起注射器。</span>",
       "group": "citadel_heroes",
-      "hash": "7e7cdd4a2fbd"
+      "hash": "f120f5251f7d"
     },
     "ability_nurse_healing_needles_t1_desc": {
       "text": "+{s:AbilityCharges}最大能量",
@@ -24125,9 +24125,14 @@
       "hash": "7fd71459f8fa"
     },
     "ability_nurse_adrenaline_rush_desc": {
-      "text": "对自身或一名友军施加蒸汽。蒸汽持续时间内他们<span class=\"highlight\">行动更快</span>，并且受到伤害会从他们身体里撕裂出阴影，<span class=\"highlight\">使伤害延迟结算</span>。治疗会驱除阴影，将其移除。<br><br>毒气消失后，<span class=\"highlight\">他们行动更慢</span>，并且剩余的阴影会在{s:CrashDuration}秒内造成延迟的伤害，再加上<span class=\"highlight\">额外伤害</span>。",
+      "text": "打开一个药瓶，对自身或一名友军释放一阵虚幻的蒸汽，会产生狂飙效果，然后是崩溃。<br><br><span class=\"diminish\">阴影狂飙：</span>效果持续期间，会提升所有动作的速度，并暂时<span class=\"highlight\">对所有受到的伤害感到麻木</span>，产生潜伏的阴影。<br><br><span class=\"diminish\">阴影崩溃：</span>蒸汽消散时，所有动作变慢，剩余的阴影会<span class=\"highlight\">造成延迟的伤害加上额外伤害</span>。<br><br><span class=\"small_diminish\">受到治疗会优先移除阴影，阻止其造成伤害。</span>",
       "group": "citadel_heroes",
-      "hash": "f4823305b4a4"
+      "hash": "7d6297295e0f"
+    },
+    "ability_nurse_adrenaline_rush_desc_old": {
+      "text": "对自身或一名友军施加蒸汽。蒸汽持续时间内他们<span class=\"highlight\">行动更快</span>，并且受到伤害会从他们身体里撕裂出阴影，<span class=\"highlight\">使伤害延迟结算</span>。治疗会驱除阴影，将其移除。<br><br>蒸汽消失后，<span class=\"highlight\">他们行动更慢</span>，并且剩余的阴影会在{s:CrashDuration}秒内造成延迟的伤害，再加上<span class=\"highlight\">额外伤害</span>。",
+      "group": "citadel_heroes",
+      "hash": "91307cd6b458"
     },
     "ability_nurse_adrenaline_rush_t1_desc": {
       "text": "{s:AbilityCooldown}秒冷却时间<br>+{s:AbilityCastRange}米施法距离",
@@ -24140,19 +24145,19 @@
       "hash": "2f2fb7818b2f"
     },
     "ability_nurse_adrenaline_rush_t3_desc": {
-      "text": "+{s:RushTimeScaleBonusPercent}%冲刺速度<br>驱散非大招减益",
+      "text": "+{s:RushTimeScaleBonusPercent}%狂飙速度<br>驱散非大招减益",
       "group": "citadel_heroes",
-      "hash": "0a183d025d2d"
+      "hash": "b0549a6b4420"
     },
     "modifier_nurse_adrenaline_rush_buff": {
-      "text": "蒸汽冲刺",
+      "text": "阴影狂飙",
       "group": "citadel_heroes",
-      "hash": "14ddc0dd205c"
+      "hash": "7e830c4f7a3c"
     },
     "modifier_nurse_adrenaline_rush_crash": {
-      "text": "蒸气崩溃",
+      "text": "阴影崩溃",
       "group": "citadel_heroes",
-      "hash": "0287976a50ff"
+      "hash": "05072509e186"
     },
     "DeferredDamagePercent_postvalue_label": {
       "text": "伤害延迟",
@@ -24190,14 +24195,14 @@
       "hash": "4345cb1fa278"
     },
     "RushTimeScaleBonusPercent_postvalue_label": {
-      "text": "冲刺速度",
+      "text": "狂飙速度",
       "group": "citadel_heroes",
-      "hash": "9a9175df9fe9"
+      "hash": "57837d188903"
     },
     "RushTimeScaleBonusPercent_label": {
-      "text": "冲锋速度",
+      "text": "狂飙速度",
       "group": "citadel_heroes",
-      "hash": "f009adf5aa07"
+      "hash": "57837d188903"
     },
     "RushTimeScaleBonusPercent_prefix": {
       "text": "+",

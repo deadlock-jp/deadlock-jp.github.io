@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "sourceVersion": "6807",
-  "generatedAt": "2026-10-21T09:00:13.219Z",
+  "sourceVersion": "6812",
+  "generatedAt": "2026-10-22T02:19:35.438Z",
   "values": {
     "citadel_autobuy_refund_time": 12,
     "citadel_comeback_redirect_fraction": 0.7,

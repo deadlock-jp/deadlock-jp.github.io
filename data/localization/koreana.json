@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6807",
-  "upstreamCommit": "6807",
-  "generatedAt": "2026-10-21T09:00:13.743Z",
+  "clientVersion": "6812",
+  "upstreamCommit": "6812",
+  "generatedAt": "2026-10-22T02:19:35.818Z",
   "language": "koreana",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
-    "citadel_mods": 617,
-    "citadel_heroes": 3812,
+    "citadel_mods": 618,
+    "citadel_heroes": 3968,
     "citadel_attributes": 1986,
-    "citadel_gc": 220,
-    "citadel_main": 5251
+    "citadel_gc": 221,
+    "citadel_main": 5259
   },
   "tokens": {
     "hero_vampire:n": {
@@ -2990,9 +2990,9 @@
       "hash": "b0945cd4ef4b"
     },
     "upgrade_tech_overflow_desc": {
-      "text": "적군 영웅이 총탄에 맞으면 강화 효과가 <span class=\"highlight\">축적</span>됩니다. 축적이 완료되면 보너스 <span class=\"highlight\">연사 속도</span>, <span class=\"highlight\">마력</span>, <span class=\"highlight\">마법 체력 흡수</span>를 얻습니다.",
+      "text": "영웅이 총탄에 맞으면 강화 효과가 <span class=\"highlight\">축적</span>됩니다. 축적이 완료되면 보너스 <span class=\"highlight\">연사 속도</span>, <span class=\"highlight\">마력</span>, <span class=\"highlight\">마법 체력 흡수</span>를 얻습니다.",
       "group": "citadel_mods",
-      "hash": "7ff4adfe609e"
+      "hash": "2b2279128fcc"
     },
     "modifier_tech_overflow_building": {
       "text": "영혼의 너울 축적 중...",
@@ -3665,9 +3665,9 @@
       "hash": "3845248e2861"
     },
     "upgrade_reinforcing_casings_desc": {
-      "text": "적군 영웅에게 총탄 피해를 입히면 <span class=\"highlight\">총탄 저항</span>이 부여됩니다. <span class=\"highlight\">각 총탄은 중첩 1회에 해당하는 총탄 저항만 부여합니다.</span>",
+      "text": "영웅에게 총탄 피해를 입히면 <span class=\"highlight\">총탄 저항</span>이 부여됩니다. <span class=\"highlight\">각 총탄은 중첩 1회에 해당하는 총탄 저항만 부여합니다.</span>",
       "group": "citadel_mods",
-      "hash": "9a2af08766a0"
+      "hash": "97d77169ac3b"
     },
     "MaxArmorStacks_label": {
       "text": "최대 총탄 저항",
@@ -5273,6 +5273,11 @@
       "text": "분당 영혼",
       "group": "citadel_mods",
       "hash": "819dc41754d0"
+    },
+    "upgrade_upgrade_auto_cleanse_desc": {
+      "text": "다음에 걸리는 <span class=\"highlight\">기절, 속박, 이동 불가, 수면, 침묵 또는 공포</span>를 자동으로 정화합니다. 정화가 발동하면 <span class=\"highlight\">방벽</span>을 획득하고 모든 <span class=\"highlight\">능력 쿨다운</span>이 {s:CooldownReductionOnProc}% 감소합니다.",
+      "group": "citadel_mods",
+      "hash": "eb863c0fd468"
     },
     "upgrade_superior_stamina_passive": {
       "text": "착지 전에 <span class=\"highlight\">공중 점프</span> 또는 <span class=\"highlight\">공중 대시</span>를 추가로 사용할 수 있습니다.",
@@ -14869,6 +14874,11 @@
       "group": "citadel_heroes",
       "hash": "a6d09bfa21f9"
     },
+    "viscous_goo_grenade_t3_desc": {
+      "text": "+{s:MaxBounces}번 튕김 및 마력 배수 증가",
+      "group": "citadel_heroes",
+      "hash": "2c93b9022306"
+    },
     "MaxBounces_label": {
       "text": "튕김",
       "group": "citadel_heroes",
@@ -22729,6 +22739,11 @@
       "group": "citadel_heroes",
       "hash": "d1d41bca7a35"
     },
+    "ability_deadpack_chargeblast/coated": {
+      "text": "표식 적용",
+      "group": "citadel_heroes",
+      "hash": "1deeb16cb801"
+    },
     "ability_deadpack_chargeblast/coated_buff": {
       "text": "연사 속도",
       "group": "citadel_heroes",
@@ -23499,6 +23514,766 @@
       "group": "citadel_heroes",
       "hash": "6b0d31c0d563"
     },
+    "citadel_weapon_nurse_set": {
+      "text": "코드 블루",
+      "group": "citadel_heroes",
+      "hash": "acf7a2ae5f70"
+    },
+    "ability_nurse_leech_therapy": {
+      "text": "거머리 요법",
+      "group": "citadel_heroes",
+      "hash": "bb65d77f77fc"
+    },
+    "ability_nurse_leech_therapy_desc": {
+      "text": "거머리가 든 병을 던집니다. 거머리는 적군에게 달라붙어 {g:citadel_inline_attribute:'SpiritDPS'}를 입히고 <span class=\"highlight\">적군의 강화 효과 지속 시간을 먹어치웁니다</span>.",
+      "group": "citadel_heroes",
+      "hash": "49d316855d72"
+    },
+    "ability_nurse_leech_therapy_leech_desc": {
+      "text": "해로우는 흡혈을 마친 거머리를 회수할 수 있습니다. 회수 시 거머리가 흡수한 체력만큼 자신을 {g:citadel_inline_attribute:'Healing'}하고, 영구적으로 {g:citadel_inline_attribute:'Regen'} 및 {g:citadel_inline_attribute:'FireRate'} 증가 효과를 얻습니다.<br><br><span class=\"small_diminish\">사망 시 거머리 중첩의 25%를 잃습니다.</span>",
+      "group": "citadel_heroes",
+      "hash": "d7faa9c59e99"
+    },
+    "ability_nurse_leech_therapy_t1_desc": {
+      "text": "거머리가 활력 흡수, 회수 시 흡수한 활력 회복",
+      "group": "citadel_heroes",
+      "hash": "15fd65afa467"
+    },
+    "ability_nurse_leech_therapy_t2_desc": {
+      "text": "쿨다운 {s:AbilityCooldown}초 감소<br>거머리당 마력 +{s:SpiritPowerPerLeechStack} 증가",
+      "group": "citadel_heroes",
+      "hash": "d23ba47e4e2a"
+    },
+    "ability_nurse_leech_therapy_t3_desc": {
+      "text": "반경 +{s:Radius}m 증가<br>마력 배수 +{s:DPS_scale} 증가<br>최대 거머리 중첩 +{s:MaxLeechBonusStacks} 증가",
+      "group": "citadel_heroes",
+      "hash": "10da08fbac37"
+    },
+    "modifier_nurse_leech_therapy_pickup_bonus": {
+      "text": "거머리 회수 보너스",
+      "group": "citadel_heroes",
+      "hash": "539a8ec27b46"
+    },
+    "modifier_nurse_leech_therapy_eating_buffs": {
+      "text": "강화 효과 잠식",
+      "group": "citadel_heroes",
+      "hash": "7aebfffe7161"
+    },
+    "nurse_leech_pickups_stacklabel": {
+      "text": "수집한 거머리:",
+      "group": "citadel_heroes",
+      "hash": "c41a9de8ef4d"
+    },
+    "Citadel_AbilityProperty_OnLeechPickup": {
+      "text": "거머리 회수 시:",
+      "group": "citadel_heroes",
+      "hash": "03f1bad4acaf"
+    },
+    "MaxHealPercentOfLeechDamage_label": {
+      "text": "거머리 피해의 최대 치유 전환 비율",
+      "group": "citadel_heroes",
+      "hash": "9f92e0e2f71c"
+    },
+    "MaxHealPercentOfLeechDamage_postvalue_label": {
+      "text": "거머리 피해의 최대 치유 전환 비율",
+      "group": "citadel_heroes",
+      "hash": "9f92e0e2f71c"
+    },
+    "MaxHealPercentOfLeechDamage_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "RegenPerLeechPickup_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "RegenPerLeechPickup_label": {
+      "text": "거머리당 체력 재생",
+      "group": "citadel_heroes",
+      "hash": "0d73657cd87c"
+    },
+    "RegenPerLeechPickup_postvalue_label": {
+      "text": "거머리당 체력 재생",
+      "group": "citadel_heroes",
+      "hash": "0d73657cd87c"
+    },
+    "FireRatePerLeechPickup_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "FireRatePerLeechPickup_label": {
+      "text": "거머리당 연사 속도",
+      "group": "citadel_heroes",
+      "hash": "d2ba80fd93c8"
+    },
+    "FireRatePerLeechPickup_postvalue_label": {
+      "text": "거머리당 연사 속도",
+      "group": "citadel_heroes",
+      "hash": "d2ba80fd93c8"
+    },
+    "FireRatePerLeechPickup_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "SpiritPowerPerLeechStack_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "SpiritPowerPerLeechStack_label": {
+      "text": "거머리당 마력",
+      "group": "citadel_heroes",
+      "hash": "55b8c6bc6458"
+    },
+    "SpiritPowerPerLeechStack_postvalue_label": {
+      "text": "거머리당 마력",
+      "group": "citadel_heroes",
+      "hash": "55b8c6bc6458"
+    },
+    "LeechBonusDuration_label": {
+      "text": "보너스 효과 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "bdac9ecc68a8"
+    },
+    "LeechBonusDuration_postvalue_label": {
+      "text": "보너스 효과 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "bdac9ecc68a8"
+    },
+    "LeechBonusDuration_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "MaxLeechBonusStacks_label": {
+      "text": "최대 거머리 중첩",
+      "group": "citadel_heroes",
+      "hash": "1de64863796f"
+    },
+    "MaxLeechBonusStacks_postvalue_label": {
+      "text": "최대 거머리 중첩",
+      "group": "citadel_heroes",
+      "hash": "1de64863796f"
+    },
+    "LeechCrawlRadius_label": {
+      "text": "거머리 이동 범위",
+      "group": "citadel_heroes",
+      "hash": "1129f181eb03"
+    },
+    "LeechCrawlRadius_postvalue_label": {
+      "text": "거머리 이동 범위",
+      "group": "citadel_heroes",
+      "hash": "1129f181eb03"
+    },
+    "LeechCrawlRadius_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "LeechStaminaDrain_postvalue_label": {
+      "text": "활력 흡수",
+      "group": "citadel_heroes",
+      "hash": "00a91b8db7af"
+    },
+    "LeechStaminaDrain_label": {
+      "text": "활력 흡수",
+      "group": "citadel_heroes",
+      "hash": "00a91b8db7af"
+    },
+    "LeechStaminaDrain_postfix": {
+      "text": "(초당)",
+      "group": "citadel_heroes",
+      "hash": "8db1967de3cd"
+    },
+    "LeechEatDurationPerSecond_label": {
+      "text": "초당 강화 효과 지속 시간 감소",
+      "group": "citadel_heroes",
+      "hash": "cf66fc9a24d3"
+    },
+    "LeechEatDurationPerSecond_postvalue_label": {
+      "text": "초당 강화 효과 지속 시간 감소",
+      "group": "citadel_heroes",
+      "hash": "cf66fc9a24d3"
+    },
+    "LeechEatDurationPerSecond_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "ability_nurse_fear": {
+      "text": "도사린 공포",
+      "group": "citadel_heroes",
+      "hash": "5c7b127b6082"
+    },
+    "ability_nurse_fear_desc": {
+      "text": "가방을 열어 그 안에 도사린 공포를 드러내고, 전방의 적군에게 {g:citadel_inline_attribute:'SpiritDPS'}를 입힙니다. <span class=\"highlight\">해로우를 바라보는</span> 적군은 공포가 축적되며 <span class=\"highlight\">활력 및 이동 능력을 사용할 수 없습니다</span>. 공포가 최대치에 도달하면, 대상은 <span class=\"highlight\">공포에 질려 해로우에게서 달아납니다</span>.<br><br>수집한 거머리 하나당 <span class=\"highlight\">공포 지속 시간</span>이 증가합니다.<br><span class=\"diminish\"><br>해로우를 등진 적군은 공포 상태가 아닐 경우 피해의 {s:FacingAwayDamagePercent}%만 입습니다.</span>",
+      "group": "citadel_heroes",
+      "hash": "129fefd79d0c"
+    },
+    "ability_nurse_fear_t2_desc": {
+      "text": "이동 속도 및 연사 속도 -{s:SlowPercent}%<br>초당 피해 +{s:DPS} 증가",
+      "group": "citadel_heroes",
+      "hash": "f6f881d88091"
+    },
+    "ability_nurse_fear_t3_desc": {
+      "text": "능력 집중 시간 +{s:AbilityChannelTime}초 증가<br>마력 배수 +{s:DPS_scale} 증가<br>능력 집중 중 피해 면역",
+      "group": "citadel_heroes",
+      "hash": "2caf1b74ff70"
+    },
+    "FearDurationPerLeechStack_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "FearDurationPerLeechStack_label": {
+      "text": "거머리당 공포 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "aeb644a7715e"
+    },
+    "FearDurationPerLeechStack_postvalue_label": {
+      "text": "거머리당 공포 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "aeb644a7715e"
+    },
+    "FearDurationPerLeechStack_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "FearDuration_label": {
+      "text": "공포 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "4101b302e370"
+    },
+    "FearDuration_postvalue_label": {
+      "text": "공포 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "4101b302e370"
+    },
+    "FearDuration_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "FearBuildupTime_label": {
+      "text": "공포 축적 시간",
+      "group": "citadel_heroes",
+      "hash": "ae9398fa2b17"
+    },
+    "FearBuildupTime_postvalue_label": {
+      "text": "공포 축적 시간",
+      "group": "citadel_heroes",
+      "hash": "ae9398fa2b17"
+    },
+    "FearBuildupTime_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "FearBuildupDecayTime_label": {
+      "text": "축적된 공포 감소 시간",
+      "group": "citadel_heroes",
+      "hash": "e40bd61f4082"
+    },
+    "FearBuildupDecayTime_postvalue_label": {
+      "text": "축적된 공포 감소 시간",
+      "group": "citadel_heroes",
+      "hash": "e40bd61f4082"
+    },
+    "FearBuildupDecayTime_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "FearLookAngle_label": {
+      "text": "시선 판정 각도",
+      "group": "citadel_heroes",
+      "hash": "b3be223e08d8"
+    },
+    "FearLookAngle_postvalue_label": {
+      "text": "시선 판정 각도",
+      "group": "citadel_heroes",
+      "hash": "b3be223e08d8"
+    },
+    "FearLookAngle_postfix": {
+      "text": "°",
+      "group": "citadel_heroes",
+      "hash": "55d0c1bb201e"
+    },
+    "GazeLingerDuration_label": {
+      "text": "활력 사용 차단 잔여 시간",
+      "group": "citadel_heroes",
+      "hash": "d09b0a179e5e"
+    },
+    "GazeLingerDuration_postvalue_label": {
+      "text": "활력 사용 차단 잔여 시간",
+      "group": "citadel_heroes",
+      "hash": "d09b0a179e5e"
+    },
+    "GazeLingerDuration_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "FearMoveSpeedBonus_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "FearMoveSpeedBonus_label": {
+      "text": "도주하는 적군 이동 속도",
+      "group": "citadel_heroes",
+      "hash": "0dc356d69f7c"
+    },
+    "FearMoveSpeedBonus_postvalue_label": {
+      "text": "도주하는 적군 이동 속도",
+      "group": "citadel_heroes",
+      "hash": "0dc356d69f7c"
+    },
+    "FearMoveSpeedBonus_postfix": {
+      "text": "m(초당)",
+      "group": "citadel_heroes",
+      "hash": "2a33fe8c33ae"
+    },
+    "modifier_citadel_nurse_fear_debuff": {
+      "text": "공포 상태",
+      "group": "citadel_heroes",
+      "hash": "aec97d79a6c4"
+    },
+    "modifier_nurse_fear_buildup": {
+      "text": "시선을 돌리세요",
+      "group": "citadel_heroes",
+      "hash": "7b0d16a6d1d9"
+    },
+    "ability_nurse_healing_needles": {
+      "text": "구원의 바늘",
+      "group": "citadel_heroes",
+      "hash": "6cf0fe6cd6bc"
+    },
+    "ability_nurse_healing_needles_desc": {
+      "text": "아군을 {g:citadel_inline_attribute:'Heal'}하는 주사기로 무기의 탄창을 가득 채웁니다. <span class=\"highlight\">피해를 입히면</span> 충전량이 회복되며, 수집한 거머리 하나당 충전량이 서서히 회복됩니다.<br><br>재장전 시 충전 1회를 소모하여 탄창을 새로 채웁니다.<br><br><span class=\"small_diminish\">재시전하면 주사기를 집어넣습니다. 남은 탄약에 해당하는 충전량을 돌려받습니다.</span>",
+      "group": "citadel_heroes",
+      "hash": "0f53a251d08e"
+    },
+    "ability_nurse_healing_needles_t1_desc": {
+      "text": "최대 충전 횟수 +{s:AbilityCharges}회 증가",
+      "group": "citadel_heroes",
+      "hash": "9eceae292e66"
+    },
+    "ability_nurse_healing_needles_t2_desc": {
+      "text": "사격당 치유 +{s:HealRegen} 증가<br>적중 시 활력 {s:StaminaRestorePerHit}칸 회복",
+      "group": "citadel_heroes",
+      "hash": "45c8d91f41b5"
+    },
+    "ChargePercentPerSecondPerLeech_label": {
+      "text": "거머리당 충전",
+      "group": "citadel_heroes",
+      "hash": "f87f675acd39"
+    },
+    "ChargePercentPerSecondPerLeech_postvalue_label": {
+      "text": "거머리당 충전",
+      "group": "citadel_heroes",
+      "hash": "f87f675acd39"
+    },
+    "ChargePercentPerSecondPerLeech_postfix": {
+      "text": "%(초당)",
+      "group": "citadel_heroes",
+      "hash": "ecd7c3b419f3"
+    },
+    "ChargeGenPctScale_label": {
+      "text": "충전 속도",
+      "group": "citadel_heroes",
+      "hash": "35a7a91a9427"
+    },
+    "ChargeGenPctScale_postvalue_label": {
+      "text": "충전 속도",
+      "group": "citadel_heroes",
+      "hash": "35a7a91a9427"
+    },
+    "ChargeGenPctScale_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "ability_nurse_healing_needles_t3_desc": {
+      "text": "마력 배수 +{s:HealRegen_scale} 증가<br>적중 시 궁극기가 아닌 강화 효과의 지속 시간 {s:BuffExtendPercentPerShot}% 연장, 최대 지속 시간 초과 불가",
+      "group": "citadel_heroes",
+      "hash": "e457a5b7cd77"
+    },
+    "StaminaRestorePerHit_postvalue_label": {
+      "text": "사격당 활력 회복",
+      "group": "citadel_heroes",
+      "hash": "f234d5af2839"
+    },
+    "StaminaRestorePerHit_label": {
+      "text": "사격당 활력 회복",
+      "group": "citadel_heroes",
+      "hash": "f234d5af2839"
+    },
+    "BuffExtendPercentPerShot_label": {
+      "text": "사격당 강화 지속 시간 연장",
+      "group": "citadel_heroes",
+      "hash": "c38a178e2a4c"
+    },
+    "StaminaRestorePerHit_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "modifier_nurse_healing_needles_buff": {
+      "text": "구원의 바늘",
+      "group": "citadel_heroes",
+      "hash": "6cf0fe6cd6bc"
+    },
+    "modifier_nurse_lifeforce_buildup": {
+      "text": "이코르 축적",
+      "group": "citadel_heroes",
+      "hash": "a84af0cd933c"
+    },
+    "PainPerProc_label": {
+      "text": "추출 시 이코르 저장량",
+      "group": "citadel_heroes",
+      "hash": "5d978274134b"
+    },
+    "PainPerProc_postvalue_label": {
+      "text": "추출 시 이코르 저장량",
+      "group": "citadel_heroes",
+      "hash": "5d978274134b"
+    },
+    "NeedleBuildUpPerShot_label": {
+      "text": "사격당 축적",
+      "group": "citadel_heroes",
+      "hash": "972d832f6492"
+    },
+    "NeedleBuildUpPerShot_postvalue_label": {
+      "text": "사격당 축적",
+      "group": "citadel_heroes",
+      "hash": "972d832f6492"
+    },
+    "NeedleBuildUpPerShot_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "NeedleBuildUpDuration_label": {
+      "text": "축적 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "e7894f7f18c7"
+    },
+    "NeedleBuildUpDuration_postvalue_label": {
+      "text": "축적 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "e7894f7f18c7"
+    },
+    "NeedleBuildUpDuration_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "NeedleProcCooldown_label": {
+      "text": "대상당 쿨다운",
+      "group": "citadel_heroes",
+      "hash": "a31351011ad0"
+    },
+    "NeedleProcCooldown_postvalue_label": {
+      "text": "대상당 쿨다운",
+      "group": "citadel_heroes",
+      "hash": "a31351011ad0"
+    },
+    "NeedleProcCooldown_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "HealRegen_label": {
+      "text": "사격당 치유",
+      "group": "citadel_heroes",
+      "hash": "fd2ada8b3eba"
+    },
+    "HealRegen_postvalue_label": {
+      "text": "사격당 치유",
+      "group": "citadel_heroes",
+      "hash": "fd2ada8b3eba"
+    },
+    "HealingNeedlesAmpDuration_label": {
+      "text": "강화 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "bc981e4b6bb3"
+    },
+    "HealingNeedlesAmpDuration_postvalue_label": {
+      "text": "강화 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "bc981e4b6bb3"
+    },
+    "HealingNeedlesAmpDuration_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "HealMaxHealthPercentPerShot_label": {
+      "text": "사격당 최대 체력 비례 치유",
+      "group": "citadel_heroes",
+      "hash": "97f7408302f9"
+    },
+    "HealMaxHealthPercentPerShot_postvalue_label": {
+      "text": "사격당 최대 체력 비례 치유",
+      "group": "citadel_heroes",
+      "hash": "97f7408302f9"
+    },
+    "HealMaxHealthPercentPerShot_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "MaxAbilityResource_label": {
+      "text": "최대 이코르",
+      "group": "citadel_heroes",
+      "hash": "5c206758598a"
+    },
+    "MaxAbilityResource_postvalue_label": {
+      "text": "최대 이코르",
+      "group": "citadel_heroes",
+      "hash": "5c206758598a"
+    },
+    "HeadshotHealBonusPercent_label": {
+      "text": "헤드샷 치유 보너스",
+      "group": "citadel_heroes",
+      "hash": "90eadc42b593"
+    },
+    "HeadshotHealBonusPercent_postvalue_label": {
+      "text": "헤드샷 치유 보너스",
+      "group": "citadel_heroes",
+      "hash": "90eadc42b593"
+    },
+    "HeadshotHealBonusPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "HeadshotHealBonusPercent_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "MissedShotCostPercent_label": {
+      "text": "주사기 빗나감 시 소모량",
+      "group": "citadel_heroes",
+      "hash": "df620dbdc727"
+    },
+    "MissedShotCostPercent_postvalue_label": {
+      "text": "주사기 빗나감 시 소모량",
+      "group": "citadel_heroes",
+      "hash": "df620dbdc727"
+    },
+    "MissedShotCostPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "MeterFillNPCPercent_label": {
+      "text": "NPC 대상 이코르",
+      "group": "citadel_heroes",
+      "hash": "4ce6bfd0fa46"
+    },
+    "MeterFillNPCPercent_postvalue_label": {
+      "text": "NPC 대상 이코르",
+      "group": "citadel_heroes",
+      "hash": "4ce6bfd0fa46"
+    },
+    "MeterFillNPCPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "PainRegenPerLeech_label": {
+      "text": "거머리당 이코르",
+      "group": "citadel_heroes",
+      "hash": "9592ca5b6397"
+    },
+    "PainRegenPerLeech_postvalue_label": {
+      "text": "거머리당 이코르",
+      "group": "citadel_heroes",
+      "hash": "9592ca5b6397"
+    },
+    "PainRegenPerLeech_postfix": {
+      "text": "(초당)",
+      "group": "citadel_heroes",
+      "hash": "8db1967de3cd"
+    },
+    "OverhealBarrierDuration_label": {
+      "text": "방벽 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "3fc022d40295"
+    },
+    "OverhealBarrierDuration_postvalue_label": {
+      "text": "방벽 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "3fc022d40295"
+    },
+    "OverhealBarrierDuration_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "ability_nurse_healing_needles/modifier_nurse_healing_needles_buff": {
+      "text": "구원의 바늘",
+      "group": "citadel_heroes",
+      "hash": "6cf0fe6cd6bc"
+    },
+    "ability_nurse_adrenaline_rush": {
+      "text": "음산한 증기",
+      "group": "citadel_heroes",
+      "hash": "e17e254ee861"
+    },
+    "ability_nurse_adrenaline_rush_desc": {
+      "text": "작은 병을 열어 자신이나 아군을 대상으로 초자연적인 증기를 내뿜습니다. 대상은 일시적으로 활기를 얻은 뒤 쇠약해집니다.<br><br><span class=\"diminish\">망령의 활기:</span> 효과가 지속되는 동안 모든 동작의 속도가 증가하고, <span class=\"highlight\">입는 모든 피해가 일시적으로 지연</span>되며 망령이 나타납니다.<br><br><span class=\"diminish\">망령의 쇠약:</span> 증기 효과가 끝나면 모든 동작 속도가 감소하고, 남아 있는 망령이 <span class=\"highlight\">지연된 피해에 추가 피해를 더해 대상에게 입힙니다</span>.<br><br><span class=\"small_diminish\">받는 치유는 망령을 제거하는 데 우선 사용되며, 망령이 제거되면 피해를 입히지 않습니다.</span>",
+      "group": "citadel_heroes",
+      "hash": "5fe7a6947ea0"
+    },
+    "ability_nurse_adrenaline_rush_desc_old": {
+      "text": "자신이나 아군에게 증기를 적용합니다. 효과가 지속되는 동안 대상의 <span class=\"highlight\">모든 동작이 빨라지며</span>, 피해를 받으면 몸에서 망령이 떨어져 나와 <span class=\"highlight\">피해 적용을 지연시킵니다</span>. 치유를 받으면 망령이 퇴치됩니다.<br><br>증기 효과가 끝나면 대상의 <span class=\"highlight\">모든 동작이 느려지며</span>, 남아 있는 망령이 {s:CrashDuration}초에 걸쳐 지연된 피해에 <span class=\"highlight\">추가 피해</span>를 더해 입힙니다.",
+      "group": "citadel_heroes",
+      "hash": "4b70315a1bbb"
+    },
+    "ability_nurse_adrenaline_rush_t1_desc": {
+      "text": "쿨다운 {s:AbilityCooldown}초 감소<br>시전 범위 +{s:AbilityCastRange}m 증가",
+      "group": "citadel_heroes",
+      "hash": "e75b3100c2b7"
+    },
+    "ability_nurse_adrenaline_rush_t2_desc": {
+      "text": "지속 시간 +{s:AbilityDuration}초 증가<br>치유 효율 +{s:HealingEffectivenessPercent}% 증가",
+      "group": "citadel_heroes",
+      "hash": "f8c63302c52c"
+    },
+    "ability_nurse_adrenaline_rush_t3_desc": {
+      "text": "활기 상태 동작 속도 +{s:RushTimeScaleBonusPercent}% 증가<br>궁극기가 아닌 약화 효과 해제",
+      "group": "citadel_heroes",
+      "hash": "ca56536840a6"
+    },
+    "modifier_nurse_adrenaline_rush_buff": {
+      "text": "망령의 활기",
+      "group": "citadel_heroes",
+      "hash": "cb056dc177ce"
+    },
+    "modifier_nurse_adrenaline_rush_crash": {
+      "text": "망령의 쇠약",
+      "group": "citadel_heroes",
+      "hash": "32c98bdb778a"
+    },
+    "DeferredDamagePercent_postvalue_label": {
+      "text": "지연되는 피해",
+      "group": "citadel_heroes",
+      "hash": "bf6e6d080b98"
+    },
+    "DeferredDamagePercent_label": {
+      "text": "지연되는 피해",
+      "group": "citadel_heroes",
+      "hash": "bf6e6d080b98"
+    },
+    "DeferredDamagePercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "DeferredDamageBonusPercent_postvalue_label": {
+      "text": "추가로 입는 피해",
+      "group": "citadel_heroes",
+      "hash": "a5b1776b5820"
+    },
+    "DeferredDamageBonusPercent_label": {
+      "text": "추가로 입는 피해",
+      "group": "citadel_heroes",
+      "hash": "a5b1776b5820"
+    },
+    "DeferredDamageBonusPercent_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "DeferredDamageBonusPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "RushTimeScaleBonusPercent_postvalue_label": {
+      "text": "활기 상태 동작 속도",
+      "group": "citadel_heroes",
+      "hash": "180429030edc"
+    },
+    "RushTimeScaleBonusPercent_label": {
+      "text": "활기 상태 동작 속도",
+      "group": "citadel_heroes",
+      "hash": "180429030edc"
+    },
+    "RushTimeScaleBonusPercent_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "RushTimeScaleBonusPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "CrashDuration_postvalue_label": {
+      "text": "쇠약 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "f88d2b80cde0"
+    },
+    "CrashDuration_label": {
+      "text": "쇠약 지속 시간",
+      "group": "citadel_heroes",
+      "hash": "f88d2b80cde0"
+    },
+    "CrashDuration_postfix": {
+      "text": "초",
+      "group": "citadel_heroes",
+      "hash": "3845248e2861"
+    },
+    "HealingEffectivenessPercent_label": {
+      "text": "치유 효율",
+      "group": "citadel_heroes",
+      "hash": "30ce718c5a24"
+    },
+    "HealingEffectivenessPercent_postvalue_label": {
+      "text": "치유 효율",
+      "group": "citadel_heroes",
+      "hash": "30ce718c5a24"
+    },
+    "HealingEffectivenessPercent_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "HealingEffectivenessPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "CrashTimeScalePenaltyPercent_postvalue_label": {
+      "text": "쇠약 상태 동작 속도 감소",
+      "group": "citadel_heroes",
+      "hash": "9ed1b5ff2ecd"
+    },
+    "CrashTimeScalePenaltyPercent_label": {
+      "text": "쇠약 상태 동작 속도 감소",
+      "group": "citadel_heroes",
+      "hash": "9ed1b5ff2ecd"
+    },
+    "CrashTimeScalePenaltyPercent_prefix": {
+      "text": "-",
+      "group": "citadel_heroes",
+      "hash": "3bc15c8aae3e"
+    },
+    "CrashTimeScalePenaltyPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
     "ability_header_on_hit": {
       "text": "적중 시:",
       "group": "citadel_heroes",
@@ -24125,6 +24900,11 @@
       "hash": "8e969664bfc2"
     },
     "ability_melee_artist": {
+      "text": "근거리 공격",
+      "group": "citadel_heroes",
+      "hash": "8e969664bfc2"
+    },
+    "ability_melee_nurse": {
       "text": "근거리 공격",
       "group": "citadel_heroes",
       "hash": "8e969664bfc2"
@@ -24828,6 +25608,11 @@
       "text": "바이올렛은 열두 살에 저주받은 사과로 이주했다. 뉴욕 생활에 적응하는 과정에서 문화적 충격을 겪기도 했지만, 이내 도시의 활기에 매료되었다. 예술에 열정을 쏟아부은 바이올렛은 또래 대부분을 훨씬 뛰어넘는 성과를 거두었다.<br><br>먼저 전액 장학금을 받고 미술 학교에 입학했다.<br><br>그리고 3학년 때는 뉴욕 현대미술관에서 학생 예술가들을 조명하는 권위 있는 전시인 '신예 예술인 갤러리' 참여자로도 선정되었다.<br><br>어떤 기준으로 보더라도 나이에 비해 눈부신 성과를 거두고 있지만, 바이올렛은 실패자로 생을 마칠지도 모른다는 근원적인 두려움을 떨치지 못한다. 순수예술가로서 상업적 성공을 거두려면 실력만으로는 부족하다는 사실을 잘 알고 있기 때문이다. 탁월한 실력을 갖췄다는 것이 곧 성공을 보장하지는 않는 법이다. 적절한 순간에 자신을 알아봐 줄 사람의 눈에 드는 것이 더 중요하다. 그래서 바이올렛은 의식에 관심을 가지기 시작했다... 재능을 더 키우기 위해서가 아니라, 무엇을 할 수 있는지 세상에 보여 줄 기회를 얻기 위해서 말이다.",
       "group": "citadel_heroes",
       "hash": "60e5a5e23099"
+    },
+    "hero_nurse_lore": {
+      "text": "마블 힐 빙의 병동에서 존경받는 핵심 인물인 너스 해로우는 초자연적 빙의가 초래하는 공포에 맞서 싸우는 데 평생을 바쳤다. 자상함과 엄격함, 냉철한 실용주의를 겸비한 그녀는 어떤 환자들에게는 성녀로, 또 다른 이들에게는 잔혹한 가정교사로 불린다. 아마 둘 다 사실일 것이다.<br><br>제정신인 사람이라면 누구나 해로우가 어떻게, 그리고 왜 환자들의 고통을 의료 가방에 담고 있는지 의문을 품겠지만, 그 치료의 효과만큼은 누구도 부정할 수 없다... 아무리 잔혹한 치료일지라도 말이다.",
+      "group": "citadel_heroes",
+      "hash": "6b2ec85f663c"
     },
     "MODIFIER_STATE_ROOTED": {
       "text": "이동 불가 상태",
@@ -35859,6 +36644,11 @@
       "group": "citadel_gc",
       "hash": "9648c8a81f85"
     },
+    "Steam_Citadel_Hideout_Rounds": {
+      "text": "은신처에서 회진 중",
+      "group": "citadel_gc",
+      "hash": "788357b476e5"
+    },
     "Citadel_Dashboard_BuildVersion": {
       "text": "#{d:buildNumber}",
       "group": "citadel_main",
@@ -39164,6 +39954,11 @@
       "group": "citadel_main",
       "hash": "36009c8d7c02"
     },
+    "Citadel_RankedSeason_ProtectionRemaining:f": {
+      "text": "보호 {d:demotion_protection_remaining}/{d:demotion_protection_total} 남음",
+      "group": "citadel_main",
+      "hash": "1084eefd4b0e"
+    },
     "Citadel_RankedSeason_ProtectionUsed": {
       "text": "강등 보호 사용됨",
       "group": "citadel_main",
@@ -39373,6 +40168,11 @@
       "text": "참여 자격",
       "group": "citadel_main",
       "hash": "84fafa7fbb02"
+    },
+    "Citadel_Ranked_Overview_Eligibility_Bullet1:f": {
+      "text": "계정에 총 {d:required_account_wins}회 이상 승리 기록이 있어야 합니다. 또한 일반 매치에서 각각 {d:required_hero_wins}회 이상 승리한 영웅이 {d:required_hero_unlocks}명 이상 있어야 합니다.",
+      "group": "citadel_main",
+      "hash": "be9035e42ec4"
     },
     "Citadel_Ranked_Overview_Eligibility_Bullet2": {
       "text": "랭크 매치에서 플레이어는 1인 또는 2인 파티로만 대기열에 들어갈 수 있습니다. 2인 파티의 두 플레이어는 서로 랭크 차이가 1단계 이내여야 합니다. 불멸자 플레이어는 서브랭크 차이가 3단계 이내인 다른 불멸자 플레이어와만 대기열에 들어갈 수 있습니다.",
@@ -48484,6 +49284,11 @@
       "group": "citadel_main",
       "hash": "7831dd12a70a"
     },
+    "citadel_settings_steaminput_connected:f": {
+      "text": "연결됨",
+      "group": "citadel_main",
+      "hash": "ca3372f3bce7"
+    },
     "citadel_ability_upgrade_tab_desc": {
       "text": "능력 업그레이드 기본 단축키는 {g:citadel_binding:'Scoreboard'} + [{g:citadel_binding:'Ability1'}/{g:citadel_binding:'Ability2'}/{g:citadel_binding:'Ability3'}/{g:citadel_binding:'Ability4'}입니다. 아래에서 추가 단축키를 설정할 수도 있습니다.",
       "group": "citadel_main",
@@ -56219,6 +57024,16 @@
       "group": "citadel_main",
       "hash": "19b2d19bc141"
     },
+    "Unranked_AbandonTriggerEarly:f": {
+      "text": "이 게임은 기록되지 않습니다. {d:end_game_countdown}초 후 매치가 종료됩니다.",
+      "group": "citadel_main",
+      "hash": "cf2f37e373c3"
+    },
+    "Ranked_AbandonTriggerEarly:f": {
+      "text": "이 게임은 기록되지 않습니다. {d:end_game_countdown}초 후 매치가 종료됩니다. 플레이어 랭크에 아무 영향이 없을 것입니다.",
+      "group": "citadel_main",
+      "hash": "ed1b871ac8f5"
+    },
     "AbandonTriggerTeam_Title": {
       "text": "플레이어가 매치를 떠났습니다",
       "group": "citadel_main",
@@ -57524,15 +58339,30 @@
       "group": "citadel_main",
       "hash": "7dbb798bb63b"
     },
+    "HeroTesting_BotAbility_Desc": {
+      "text": "모든 봇이 쿨다운을 무시하고 이 능력을 시전합니다.",
+      "group": "citadel_main",
+      "hash": "6973a3a1ebcd"
+    },
     "HeroTesting_BotAbilityStop_Desc": {
       "text": "모든 봇이 능력 시전을 중지합니다.",
       "group": "citadel_main",
       "hash": "b7d157982d24"
     },
+    "HeroTesting_BotItem_Desc": {
+      "text": "모든 봇이 쿨다운을 무시하고 이 슬롯의 활성 아이템을 사용합니다.",
+      "group": "citadel_main",
+      "hash": "e1d8c27eb9cc"
+    },
     "HeroTesting_BotItemStop_Desc": {
       "text": "모든 봇이 아이템 사용을 중지합니다.",
       "group": "citadel_main",
       "hash": "1b91756a99e0"
+    },
+    "HeroTesting_BotUseAbilityRepeated_Desc": {
+      "text": "켜면 몇 초마다 반복해서 시전합니다.",
+      "group": "citadel_main",
+      "hash": "30a70f9ab82e"
     },
     "HeroTesting_InfiniteMoney_Desc": {
       "text": "영혼을 소모하지 않고 아이템을 구매합니다.",
