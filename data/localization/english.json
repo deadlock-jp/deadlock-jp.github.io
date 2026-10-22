@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6812",
-  "upstreamCommit": "6812",
-  "generatedAt": "2026-10-22T02:19:35.777Z",
+  "clientVersion": "6813",
+  "upstreamCommit": "6813",
+  "generatedAt": "2026-10-22T09:00:12.009Z",
   "language": "English",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
@@ -9070,9 +9070,9 @@
       "hash": "a3ef8ce415eb"
     },
     "ability_warden_riot_protocol_desc": {
-      "text": "After charging for {s:AbilityCastDelay}s, <span class=\"highlight\">release pulses that damage enemies and heal you</span> based on the damage done. <br>While channeling Last Stand you have greatly increased <span class=\"highlight\">bullet and spirit resist</span>.",
+      "text": "After charging for {s:AbilityCastDelay}s, <span class=\"highlight\">release pulses that damage enemies and heal you</span> based on the damage done. <br>While channeling Last Stand you have greatly increased <span class=\"highlight\">bullet and spirit resist</span>.<br><br><span class=\"small_diminish\">Immune to fear while Last Stand is active.</span>",
       "group": "citadel_heroes",
-      "hash": "eab91c81d371"
+      "hash": "585fcde37095"
     },
     "ability_warden_riot_protocol_t2_desc": {
       "text": "+{s:PulseDPS} DPS<br>{s:AbilityCooldown}s Cooldown",
