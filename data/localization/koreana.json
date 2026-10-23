@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6813",
-  "upstreamCommit": "6813",
-  "generatedAt": "2026-10-22T09:00:12.045Z",
+  "clientVersion": "6819",
+  "upstreamCommit": "6819",
+  "generatedAt": "2026-10-23T09:00:10.705Z",
   "language": "koreana",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
@@ -9020,9 +9020,9 @@
       "hash": "56d0d5259826"
     },
     "ability_warden_riot_protocol_desc": {
-      "text": "{s:AbilityCastDelay}초 충전 후 적군에게 입힌 피해에 따라 <span class=\"highlight\">피해를 입히고 자가 치유하는 파동을 방출</span>합니다.<br>최후의 저항이 연결된 동안 <span class=\"highlight\">총탄 및 마법 저항</span>이 대폭 증가합니다.",
+      "text": "{s:AbilityCastDelay}초 충전 후 적군에게 <span class=\"highlight\">피해를 입히고</span> 입힌 피해의 일정 비율로 <span class=\"highlight\">자신을 치유하는 파동을 방출</span>합니다.<br>능력 집중 시간 동안 <span class=\"highlight\">총탄 및 마법 저항</span>이 대폭 증가합니다. <br><br><span class=\"small_diminish\">최후의 저항이 활성화된 동안 공포에 면역이 됩니다.</span>",
       "group": "citadel_heroes",
-      "hash": "781743f10da7"
+      "hash": "e9cbd58dbdff"
     },
     "ability_warden_riot_protocol_t2_desc": {
       "text": "초당 피해 +{s:PulseDPS}<br>쿨다운 {s:AbilityCooldown}초",

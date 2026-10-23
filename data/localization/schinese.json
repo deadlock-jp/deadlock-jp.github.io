@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6813",
-  "upstreamCommit": "6813",
-  "generatedAt": "2026-10-22T09:00:12.086Z",
+  "clientVersion": "6819",
+  "upstreamCommit": "6819",
+  "generatedAt": "2026-10-23T09:00:10.738Z",
   "language": "schinese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
@@ -9015,9 +9015,9 @@
       "hash": "ddda7845deb0"
     },
     "ability_warden_riot_protocol_desc": {
-      "text": "充能{s:AbilityCastDelay}秒后，<span class=\"highlight\">发出脉冲，对敌人造成伤害，并基于造成的伤害治疗自身</span>。<br>施放“屹立不倒”期间，<span class=\"highlight\">子弹抗性和元灵抗性</span>会极大提高。",
+      "text": "充能{s:AbilityCastDelay}秒后，<span class=\"highlight\">发出脉冲，对敌人造成伤害，并基于造成的伤害治疗自身</span>。<br>施放“屹立不倒”期间，<span class=\"highlight\">子弹抗性和元灵抗性</span>会极大提高。<br><br><span class=\"small_diminish\">屹立不倒生效时免疫恐惧。</span>",
       "group": "citadel_heroes",
-      "hash": "41fc7adf1713"
+      "hash": "42ae69015c2f"
     },
     "ability_warden_riot_protocol_t2_desc": {
       "text": "+{s:PulseDPS}每秒伤害<br>{s:AbilityCooldown}秒冷却时间",
