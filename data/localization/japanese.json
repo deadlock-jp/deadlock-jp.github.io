@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6819",
-  "upstreamCommit": "6819",
-  "generatedAt": "2026-10-23T09:00:10.628Z",
+  "clientVersion": "6821",
+  "upstreamCommit": "6821",
+  "generatedAt": "2026-10-27T09:00:10.524Z",
   "language": "japanese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
-    "citadel_mods": 617,
-    "citadel_heroes": 3812,
+    "citadel_mods": 618,
+    "citadel_heroes": 3968,
     "citadel_attributes": 1986,
-    "citadel_gc": 220,
-    "citadel_main": 5250
+    "citadel_gc": 221,
+    "citadel_main": 5258
   },
   "tokens": {
     "hero_vampire:n": {
@@ -2990,9 +2990,9 @@
       "hash": "0ad697dab688"
     },
     "upgrade_tech_overflow_desc": {
-      "text": "敵ヒーローに弾薬を<span class=\"highlight\">ヒットさせ続ける</span>と、<span class=\"highlight\">発射速度</span>と<span class=\"highlight\">スピリットパワー</span>と<span class=\"highlight\">スピリットライフスティール</span>を獲得する",
+      "text": "ヒーローに弾薬を<span class=\"highlight\">ヒットさせ続ける</span>と、<span class=\"highlight\">発射速度</span>と<span class=\"highlight\">スピリットパワー</span>と<span class=\"highlight\">スピリットライフスティール</span>を獲得する",
       "group": "citadel_mods",
-      "hash": "8be8a08f8dda"
+      "hash": "df8aa8029b95"
     },
     "modifier_tech_overflow_building": {
       "text": "オーバーフロー蓄積中…",
@@ -3665,9 +3665,9 @@
       "hash": "eb6aaba1a1ca"
     },
     "upgrade_reinforcing_casings_desc": {
-      "text": "弾薬が敵ヒーローにヒットすると、<span class=\"highlight\">弾薬耐性</span>を獲得する。<span class=\"highlight\">1回の射撃で複数ヒットしても1スタックしか獲得しない</span>",
+      "text": "弾薬がヒーローにヒットすると、<span class=\"highlight\">弾薬耐性</span>を獲得する。<span class=\"highlight\">1回の射撃で複数ヒットしても1スタックしか獲得しない</span>",
       "group": "citadel_mods",
-      "hash": "9db1489822a9"
+      "hash": "2a0478cea2d9"
     },
     "MaxArmorStacks_label": {
       "text": "最大弾薬耐性",
@@ -5273,6 +5273,11 @@
       "text": "ソウル／分",
       "group": "citadel_mods",
       "hash": "9c781d5a3a78"
+    },
+    "upgrade_upgrade_auto_cleanse_desc": {
+      "text": "次に付与される<span class=\"highlight\">スタン、束縛、移動不能、睡眠、サイレンス、恐慌</span>を自動的に浄化する。この効果が発動すると<span class=\"highlight\">バリア</span>を獲得し、すべての<span class=\"highlight\">アビリティのクールダウン</span>が{s:CooldownReductionOnProc}%短縮される",
+      "group": "citadel_mods",
+      "hash": "755cb2961ac3"
     },
     "upgrade_superior_stamina_passive": {
       "text": "着地前に<span class=\"highlight\">空中ジャンプ</span>と<span class=\"highlight\">空中ダッシュ</span>が追加で1回使用できるようになる",
@@ -9015,9 +9020,9 @@
       "hash": "26ce56182ef4"
     },
     "ability_warden_riot_protocol_desc": {
-      "text": "{s:AbilityCastDelay}秒間のチャージ後、<span class=\"highlight\">敵にダメージを与えて自身を回復するパルスを放つ</span>。回復量は与ダメージ量に応じてスケールする<br>ラストスタンドの詠唱中は<span class=\"highlight\">弾薬耐性とスピリット耐性</span>が上昇する",
+      "text": "{s:AbilityCastDelay}秒間の詠唱後、<span class=\"highlight\">敵にダメージを与えて自身を回復するパルスを放つ</span>。回復量は与ダメージに応じて増加する<br>詠唱中は<span class=\"highlight\">弾薬耐性とスピリット耐性</span>が大幅に上昇する<br><br><span class=\"small_diminish\">発動中は恐慌状態にならない</span>",
       "group": "citadel_heroes",
-      "hash": "e7730411fc85"
+      "hash": "65550f289cff"
     },
     "ability_warden_riot_protocol_t2_desc": {
       "text": "DPS +{s:PulseDPS}<br>クールダウン {s:AbilityCooldown}秒",
@@ -14868,6 +14873,11 @@
       "text": "ダメージ +{s:Damage}、範囲 +{s:Radius}m",
       "group": "citadel_heroes",
       "hash": "c9b155f02b5d"
+    },
+    "viscous_goo_grenade_t3_desc": {
+      "text": "バウンド回数 +{s:MaxBounces}、スピリットスケーリングが上昇",
+      "group": "citadel_heroes",
+      "hash": "c5ded0768027"
     },
     "MaxBounces_label": {
       "text": "バウンド回数",
@@ -22729,6 +22739,11 @@
       "group": "citadel_heroes",
       "hash": "709783796b8b"
     },
+    "ability_deadpack_chargeblast/coated": {
+      "text": "マークされた",
+      "group": "citadel_heroes",
+      "hash": "9b0eab5e66bf"
+    },
     "ability_deadpack_chargeblast/coated_buff": {
       "text": "発射速度",
       "group": "citadel_heroes",
@@ -23499,6 +23514,766 @@
       "group": "citadel_heroes",
       "hash": "6b0d31c0d563"
     },
+    "citadel_weapon_nurse_set": {
+      "text": "コードブルー",
+      "group": "citadel_heroes",
+      "hash": "34103d2bbcf3"
+    },
+    "ability_nurse_leech_therapy": {
+      "text": "ヒル治療",
+      "group": "citadel_heroes",
+      "hash": "324313c0b9e8"
+    },
+    "ability_nurse_leech_therapy_desc": {
+      "text": "ヒルの入った瓶を投げつけ、{g:citadel_inline_attribute:'SpiritDPS'}を与えながら<span class=\"highlight\">対象のバフの継続時間を食いつぶす</span>",
+      "group": "citadel_heroes",
+      "hash": "f56a8db02824"
+    },
+    "ability_nurse_leech_therapy_leech_desc": {
+      "text": "食事が完了したヒルを回収することで、ヒルが吸収した分のHPを{g:citadel_inline_attribute:'Healing'}し、永続的に{g:citadel_inline_attribute:'Regen'}と{g:citadel_inline_attribute:'FireRate'}を獲得する<br><br>デスするとヒルのスタックの25%を失う</span>",
+      "group": "citadel_heroes",
+      "hash": "4602a20cda41"
+    },
+    "ability_nurse_leech_therapy_t1_desc": {
+      "text": "ヒルがスタミナを吸収し、回収時に回復できるようになる",
+      "group": "citadel_heroes",
+      "hash": "25d8a50f4c6d"
+    },
+    "ability_nurse_leech_therapy_t2_desc": {
+      "text": "クールダウン {s:AbilityCooldown}秒<br>スピリットパワー +{s:SpiritPowerPerLeechStack}／ヒル",
+      "group": "citadel_heroes",
+      "hash": "1ed88aa33261"
+    },
+    "ability_nurse_leech_therapy_t3_desc": {
+      "text": "範囲 +{s:Radius}m<br>スピリットスケーリング +{s:DPS_scale}<br>ヒルの最大スタック数 +{s:MaxLeechBonusStacks}",
+      "group": "citadel_heroes",
+      "hash": "f68b7aebd237"
+    },
+    "modifier_nurse_leech_therapy_pickup_bonus": {
+      "text": "ヒル回収ボーナス",
+      "group": "citadel_heroes",
+      "hash": "1cff83a9f163"
+    },
+    "modifier_nurse_leech_therapy_eating_buffs": {
+      "text": "バフを捕食中",
+      "group": "citadel_heroes",
+      "hash": "77e28b94f1b3"
+    },
+    "nurse_leech_pickups_stacklabel": {
+      "text": "回収したヒル：",
+      "group": "citadel_heroes",
+      "hash": "75b09fa089c9"
+    },
+    "Citadel_AbilityProperty_OnLeechPickup": {
+      "text": "ヒル回収時：",
+      "group": "citadel_heroes",
+      "hash": "51f92a215106"
+    },
+    "MaxHealPercentOfLeechDamage_label": {
+      "text": "ヒルのダメージによる最大回復量",
+      "group": "citadel_heroes",
+      "hash": "71303facd64b"
+    },
+    "MaxHealPercentOfLeechDamage_postvalue_label": {
+      "text": "ヒルのダメージによる最大回復量",
+      "group": "citadel_heroes",
+      "hash": "71303facd64b"
+    },
+    "MaxHealPercentOfLeechDamage_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "RegenPerLeechPickup_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "RegenPerLeechPickup_label": {
+      "text": "HPリジェネ／ヒル",
+      "group": "citadel_heroes",
+      "hash": "4f265e972b1f"
+    },
+    "RegenPerLeechPickup_postvalue_label": {
+      "text": "HPリジェネ／ヒル",
+      "group": "citadel_heroes",
+      "hash": "4f265e972b1f"
+    },
+    "FireRatePerLeechPickup_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "FireRatePerLeechPickup_label": {
+      "text": "発射速度／ヒル",
+      "group": "citadel_heroes",
+      "hash": "610a04616d3e"
+    },
+    "FireRatePerLeechPickup_postvalue_label": {
+      "text": "発射速度／ヒル",
+      "group": "citadel_heroes",
+      "hash": "610a04616d3e"
+    },
+    "FireRatePerLeechPickup_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "SpiritPowerPerLeechStack_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "SpiritPowerPerLeechStack_label": {
+      "text": "スピリットパワー／ヒル",
+      "group": "citadel_heroes",
+      "hash": "8ace43d047d6"
+    },
+    "SpiritPowerPerLeechStack_postvalue_label": {
+      "text": "スピリットパワー／ヒル",
+      "group": "citadel_heroes",
+      "hash": "8ace43d047d6"
+    },
+    "LeechBonusDuration_label": {
+      "text": "ボーナス継続時間",
+      "group": "citadel_heroes",
+      "hash": "9fba6a845016"
+    },
+    "LeechBonusDuration_postvalue_label": {
+      "text": "ボーナス継続時間",
+      "group": "citadel_heroes",
+      "hash": "9fba6a845016"
+    },
+    "LeechBonusDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "MaxLeechBonusStacks_label": {
+      "text": "ヒルの最大スタック数",
+      "group": "citadel_heroes",
+      "hash": "b799b7b09ef4"
+    },
+    "MaxLeechBonusStacks_postvalue_label": {
+      "text": "ヒルの最大スタック数",
+      "group": "citadel_heroes",
+      "hash": "b799b7b09ef4"
+    },
+    "LeechCrawlRadius_label": {
+      "text": "ヒルの移動範囲",
+      "group": "citadel_heroes",
+      "hash": "049217b0f4a1"
+    },
+    "LeechCrawlRadius_postvalue_label": {
+      "text": "ヒルの移動範囲",
+      "group": "citadel_heroes",
+      "hash": "049217b0f4a1"
+    },
+    "LeechCrawlRadius_postfix": {
+      "text": "m",
+      "group": "citadel_heroes",
+      "hash": "6b0d31c0d563"
+    },
+    "LeechStaminaDrain_postvalue_label": {
+      "text": "スタミナ吸収",
+      "group": "citadel_heroes",
+      "hash": "c7a758adee63"
+    },
+    "LeechStaminaDrain_label": {
+      "text": "スタミナ吸収",
+      "group": "citadel_heroes",
+      "hash": "c7a758adee63"
+    },
+    "LeechStaminaDrain_postfix": {
+      "text": "／秒",
+      "group": "citadel_heroes",
+      "hash": "a623e5a53e3b"
+    },
+    "LeechEatDurationPerSecond_label": {
+      "text": "バフの継続時間吸収量／秒",
+      "group": "citadel_heroes",
+      "hash": "c753b8bc075f"
+    },
+    "LeechEatDurationPerSecond_postvalue_label": {
+      "text": "バフの継続時間吸収量／秒",
+      "group": "citadel_heroes",
+      "hash": "c753b8bc075f"
+    },
+    "LeechEatDurationPerSecond_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "ability_nurse_fear": {
+      "text": "クリーピングテラー",
+      "group": "citadel_heroes",
+      "hash": "5cd92237cfcb"
+    },
+    "ability_nurse_fear_desc": {
+      "text": "カバンの中に潜む恐ろしいなにかを解き放ち、前方の敵に{g:citadel_inline_attribute:'SpiritDPS'}を与える<span class=\"highlight\">こちらを見ている</span>敵は恐怖を蓄積させていき、<span class=\"highlight\">スタミナと移動アビリティを使用できなくなる</span>。恐怖が最高潮に達するとその敵は恐慌状態となり、<span class=\"highlight\">ナース・ハロウから逃げていく</span><br><br>回収したヒルの数に応じて<span class=\"highlight\">恐慌状態の継続時間</span>が延長される<br><span class=\"diminish\"><br>恐慌状態の場合を除き、こちらを見ていない敵へのダメージは{s:FacingAwayDamagePercent}%になる</span>",
+      "group": "citadel_heroes",
+      "hash": "7d2a8cd4845a"
+    },
+    "ability_nurse_fear_t2_desc": {
+      "text": "移動速度と発射速度 -{s:SlowPercent}%<br>DPS +{s:DPS}",
+      "group": "citadel_heroes",
+      "hash": "4a74b7cf2724"
+    },
+    "ability_nurse_fear_t3_desc": {
+      "text": "詠唱時間 +{s:AbilityChannelTime}秒<br>スピリットスケーリング +{s:DPS_scale}<br>詠唱中はダメージを無効化",
+      "group": "citadel_heroes",
+      "hash": "625fa10a79d6"
+    },
+    "FearDurationPerLeechStack_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "FearDurationPerLeechStack_label": {
+      "text": "恐慌状態の継続時間／ヒル",
+      "group": "citadel_heroes",
+      "hash": "0c14a65fb3ad"
+    },
+    "FearDurationPerLeechStack_postvalue_label": {
+      "text": "恐慌状態の継続時間／ヒル",
+      "group": "citadel_heroes",
+      "hash": "0c14a65fb3ad"
+    },
+    "FearDurationPerLeechStack_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "FearDuration_label": {
+      "text": "恐慌状態の継続時間",
+      "group": "citadel_heroes",
+      "hash": "154504b0fb46"
+    },
+    "FearDuration_postvalue_label": {
+      "text": "恐慌状態の継続時間",
+      "group": "citadel_heroes",
+      "hash": "154504b0fb46"
+    },
+    "FearDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "FearBuildupTime_label": {
+      "text": "恐怖の蓄積時間",
+      "group": "citadel_heroes",
+      "hash": "ed0d3925e354"
+    },
+    "FearBuildupTime_postvalue_label": {
+      "text": "恐怖の蓄積時間",
+      "group": "citadel_heroes",
+      "hash": "ed0d3925e354"
+    },
+    "FearBuildupTime_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "FearBuildupDecayTime_label": {
+      "text": "蓄積した恐怖の減衰時間",
+      "group": "citadel_heroes",
+      "hash": "9de603f8d355"
+    },
+    "FearBuildupDecayTime_postvalue_label": {
+      "text": "蓄積した恐怖の減衰時間",
+      "group": "citadel_heroes",
+      "hash": "9de603f8d355"
+    },
+    "FearBuildupDecayTime_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "FearLookAngle_label": {
+      "text": "視線の角度",
+      "group": "citadel_heroes",
+      "hash": "738aa00a025e"
+    },
+    "FearLookAngle_postvalue_label": {
+      "text": "視線の角度",
+      "group": "citadel_heroes",
+      "hash": "738aa00a025e"
+    },
+    "FearLookAngle_postfix": {
+      "text": "°",
+      "group": "citadel_heroes",
+      "hash": "55d0c1bb201e"
+    },
+    "GazeLingerDuration_label": {
+      "text": "スタミナ使用不能時間",
+      "group": "citadel_heroes",
+      "hash": "392a55cfe93f"
+    },
+    "GazeLingerDuration_postvalue_label": {
+      "text": "スタミナ使用不能時間",
+      "group": "citadel_heroes",
+      "hash": "392a55cfe93f"
+    },
+    "GazeLingerDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "FearMoveSpeedBonus_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "FearMoveSpeedBonus_label": {
+      "text": "敵逃亡時の移動速度",
+      "group": "citadel_heroes",
+      "hash": "89f89b4e9503"
+    },
+    "FearMoveSpeedBonus_postvalue_label": {
+      "text": "敵逃亡時の移動速度",
+      "group": "citadel_heroes",
+      "hash": "89f89b4e9503"
+    },
+    "FearMoveSpeedBonus_postfix": {
+      "text": " m／秒",
+      "group": "citadel_heroes",
+      "hash": "8eb9612af4e2"
+    },
+    "modifier_citadel_nurse_fear_debuff": {
+      "text": "恐慌状態",
+      "group": "citadel_heroes",
+      "hash": "0d63f48dd2fd"
+    },
+    "modifier_nurse_fear_buildup": {
+      "text": "目をそらせ",
+      "group": "citadel_heroes",
+      "hash": "e3700314bd49"
+    },
+    "ability_nurse_healing_needles": {
+      "text": "ヒーリングニードル",
+      "group": "citadel_heroes",
+      "hash": "600c9fe2d237"
+    },
+    "ability_nurse_healing_needles_desc": {
+      "text": "武器に味方を{g:citadel_inline_attribute:'Heal'}するシリンジを充填する。<span class=\"highlight\">ダメージを与える</span>とチャージが溜まっていき、回収したヒルの数に応じても徐々に溜まっていく<br><br>リロードするとシリンジを再充填でき、その分チャージを消費する<br><br><span class=\"small_diminish\">再発動でシリンジを破棄し、未使用のシリンジはチャージに充てられる</span>",
+      "group": "citadel_heroes",
+      "hash": "05c7bbc42e9d"
+    },
+    "ability_nurse_healing_needles_t1_desc": {
+      "text": "最大チャージ +{s:AbilityCharges}",
+      "group": "citadel_heroes",
+      "hash": "696f6ad8525b"
+    },
+    "ability_nurse_healing_needles_t2_desc": {
+      "text": "ヒットあたりの回復量 +{s:HealRegen}<br>ヒット時にスタミナを{s:StaminaRestorePerHit}回復",
+      "group": "citadel_heroes",
+      "hash": "9d244d2266f3"
+    },
+    "ChargePercentPerSecondPerLeech_label": {
+      "text": "チャージ／ヒル",
+      "group": "citadel_heroes",
+      "hash": "c7346b3a80d2"
+    },
+    "ChargePercentPerSecondPerLeech_postvalue_label": {
+      "text": "チャージ／ヒル",
+      "group": "citadel_heroes",
+      "hash": "c7346b3a80d2"
+    },
+    "ChargePercentPerSecondPerLeech_postfix": {
+      "text": "%／秒",
+      "group": "citadel_heroes",
+      "hash": "7af4914f8779"
+    },
+    "ChargeGenPctScale_label": {
+      "text": "チャージ効率",
+      "group": "citadel_heroes",
+      "hash": "d108d0069e04"
+    },
+    "ChargeGenPctScale_postvalue_label": {
+      "text": "チャージ効率",
+      "group": "citadel_heroes",
+      "hash": "d108d0069e04"
+    },
+    "ChargeGenPctScale_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "ability_nurse_healing_needles_t3_desc": {
+      "text": "スピリットスケーリング +{s:HealRegen_scale}<br>ヒット時に非アルティメットのバフ継続時間を{s:BuffExtendPercentPerShot}%（最長でそれぞれの最大継続時間まで）延長させる",
+      "group": "citadel_heroes",
+      "hash": "5b6bb00f65fe"
+    },
+    "StaminaRestorePerHit_postvalue_label": {
+      "text": "スタミナ／注射器",
+      "group": "citadel_heroes",
+      "hash": "34b6ec3e9494"
+    },
+    "StaminaRestorePerHit_label": {
+      "text": "スタミナ／注射器",
+      "group": "citadel_heroes",
+      "hash": "34b6ec3e9494"
+    },
+    "BuffExtendPercentPerShot_label": {
+      "text": "ヒットごとのバフ延長量",
+      "group": "citadel_heroes",
+      "hash": "a81f264e2cd5"
+    },
+    "StaminaRestorePerHit_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "modifier_nurse_healing_needles_buff": {
+      "text": "ヒーリングニードル",
+      "group": "citadel_heroes",
+      "hash": "600c9fe2d237"
+    },
+    "modifier_nurse_lifeforce_buildup": {
+      "text": "イコルの蓄積",
+      "group": "citadel_heroes",
+      "hash": "dc2c3ad2fbe6"
+    },
+    "PainPerProc_label": {
+      "text": "破裂時のイコル蓄積量",
+      "group": "citadel_heroes",
+      "hash": "da9c7cbac1e4"
+    },
+    "PainPerProc_postvalue_label": {
+      "text": "破裂時のイコル蓄積量",
+      "group": "citadel_heroes",
+      "hash": "da9c7cbac1e4"
+    },
+    "NeedleBuildUpPerShot_label": {
+      "text": "蓄積／発",
+      "group": "citadel_heroes",
+      "hash": "88376f12219d"
+    },
+    "NeedleBuildUpPerShot_postvalue_label": {
+      "text": "蓄積／発",
+      "group": "citadel_heroes",
+      "hash": "88376f12219d"
+    },
+    "NeedleBuildUpPerShot_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "NeedleBuildUpDuration_label": {
+      "text": "蓄積継続時間",
+      "group": "citadel_heroes",
+      "hash": "850b80c68801"
+    },
+    "NeedleBuildUpDuration_postvalue_label": {
+      "text": "蓄積継続時間",
+      "group": "citadel_heroes",
+      "hash": "850b80c68801"
+    },
+    "NeedleBuildUpDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "NeedleProcCooldown_label": {
+      "text": "対象ごとのクールダウン",
+      "group": "citadel_heroes",
+      "hash": "08d56d08b60a"
+    },
+    "NeedleProcCooldown_postvalue_label": {
+      "text": "対象ごとのクールダウン",
+      "group": "citadel_heroes",
+      "hash": "08d56d08b60a"
+    },
+    "NeedleProcCooldown_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "HealRegen_label": {
+      "text": "回復／注射器",
+      "group": "citadel_heroes",
+      "hash": "f31995aa44d9"
+    },
+    "HealRegen_postvalue_label": {
+      "text": "回復／注射器",
+      "group": "citadel_heroes",
+      "hash": "f31995aa44d9"
+    },
+    "HealingNeedlesAmpDuration_label": {
+      "text": "バフ継続時間",
+      "group": "citadel_heroes",
+      "hash": "362ac9d54d79"
+    },
+    "HealingNeedlesAmpDuration_postvalue_label": {
+      "text": "バフ継続時間",
+      "group": "citadel_heroes",
+      "hash": "362ac9d54d79"
+    },
+    "HealingNeedlesAmpDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "HealMaxHealthPercentPerShot_label": {
+      "text": "最大HP回復／注射器",
+      "group": "citadel_heroes",
+      "hash": "54b4adeb1c0b"
+    },
+    "HealMaxHealthPercentPerShot_postvalue_label": {
+      "text": "最大HP回復／注射器",
+      "group": "citadel_heroes",
+      "hash": "54b4adeb1c0b"
+    },
+    "HealMaxHealthPercentPerShot_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "MaxAbilityResource_label": {
+      "text": "イコルの最大量",
+      "group": "citadel_heroes",
+      "hash": "6b44be12e104"
+    },
+    "MaxAbilityResource_postvalue_label": {
+      "text": "イコルの最大量",
+      "group": "citadel_heroes",
+      "hash": "6b44be12e104"
+    },
+    "HeadshotHealBonusPercent_label": {
+      "text": "ヘッドショット 回復ボーナス",
+      "group": "citadel_heroes",
+      "hash": "337ed07adf61"
+    },
+    "HeadshotHealBonusPercent_postvalue_label": {
+      "text": "ヘッドショット 回復ボーナス",
+      "group": "citadel_heroes",
+      "hash": "337ed07adf61"
+    },
+    "HeadshotHealBonusPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "HeadshotHealBonusPercent_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "MissedShotCostPercent_label": {
+      "text": "注射器 ミス時のコスト",
+      "group": "citadel_heroes",
+      "hash": "0279c90339ae"
+    },
+    "MissedShotCostPercent_postvalue_label": {
+      "text": "注射器 ミス時のコスト",
+      "group": "citadel_heroes",
+      "hash": "0279c90339ae"
+    },
+    "MissedShotCostPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "MeterFillNPCPercent_label": {
+      "text": "NPCからのイコル",
+      "group": "citadel_heroes",
+      "hash": "177f28380a83"
+    },
+    "MeterFillNPCPercent_postvalue_label": {
+      "text": "NPCからのイコル",
+      "group": "citadel_heroes",
+      "hash": "177f28380a83"
+    },
+    "MeterFillNPCPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "PainRegenPerLeech_label": {
+      "text": "イコル／ヒル",
+      "group": "citadel_heroes",
+      "hash": "78783ed045c3"
+    },
+    "PainRegenPerLeech_postvalue_label": {
+      "text": "イコル／ヒル",
+      "group": "citadel_heroes",
+      "hash": "78783ed045c3"
+    },
+    "PainRegenPerLeech_postfix": {
+      "text": "／秒",
+      "group": "citadel_heroes",
+      "hash": "a623e5a53e3b"
+    },
+    "OverhealBarrierDuration_label": {
+      "text": "バリア継続時間",
+      "group": "citadel_heroes",
+      "hash": "7dbac6826342"
+    },
+    "OverhealBarrierDuration_postvalue_label": {
+      "text": "バリア継続時間",
+      "group": "citadel_heroes",
+      "hash": "7dbac6826342"
+    },
+    "OverhealBarrierDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "ability_nurse_healing_needles/modifier_nurse_healing_needles_buff": {
+      "text": "ヒーリングニードル",
+      "group": "citadel_heroes",
+      "hash": "600c9fe2d237"
+    },
+    "ability_nurse_adrenaline_rush": {
+      "text": "カースドヴェイパー",
+      "group": "citadel_heroes",
+      "hash": "1b63dc163c5c"
+    },
+    "ability_nurse_adrenaline_rush_desc": {
+      "text": "自身または味方ひとりに薬瓶を割って霊的な蒸気を浴びせ、「スペクターラッシュ」状態にした後、「スペクタークラッシュ」状態にする<br><span class=\"diminish\">スペクターラッシュ：</span>一時的にすべてのアクションのスピードを上昇させる。また、<span class=\"highlight\">あらゆる被ダメージを感じ取れなくする</span>と同時に、忍び寄る亡霊を生成する<br><br><span class=\"diminish\">スペクタークラッシュ：</span>蒸気が消えるとすべてのアクションのスピードが低下し、残っている亡霊が<span class=\"highlight\">遅延ダメージと追加ダメージを与える</span><br><br><span class=\"small_diminish\">受けた回復はまず亡霊の除去に使用され、除去された分だけ受けるダメージが減少する</span>",
+      "group": "citadel_heroes",
+      "hash": "679d3e00245f"
+    },
+    "ability_nurse_adrenaline_rush_desc_old": {
+      "text": "自身または味方ひとりに蒸気を浴びせ、一時的に<span class=\"highlight\">アクションのスピードを上昇</span>させる。また、ダメージを受けると肉体から霊魂が引き剥がされ、<span class=\"highlight\">ダメージを遅延させる</span>。回復を受けると霊魂は取り除かれる<br><br>蒸気が消えると<span class=\"highlight\">アクションのスピードが低下</span>し、残っている亡霊が遅延ダメージと<span class=\"highlight\">追加ダメージ</span>を{s:CrashDuration}秒間にわたって与える",
+      "group": "citadel_heroes",
+      "hash": "7291613d4f9c"
+    },
+    "ability_nurse_adrenaline_rush_t1_desc": {
+      "text": "クールダウン {s:AbilityCooldown}秒<br>キャスト範囲 +{s:AbilityCastRange}m",
+      "group": "citadel_heroes",
+      "hash": "e83dabd9ba35"
+    },
+    "ability_nurse_adrenaline_rush_t2_desc": {
+      "text": "継続時間 +{s:AbilityDuration}秒<br>回復効率 +{s:HealingEffectivenessPercent}%",
+      "group": "citadel_heroes",
+      "hash": "1567f72fdef0"
+    },
+    "ability_nurse_adrenaline_rush_t3_desc": {
+      "text": "ラッシュ時のスピード +{s:RushTimeScaleBonusPercent}%<br>非アルティメットのデバフを解除",
+      "group": "citadel_heroes",
+      "hash": "c9720308e617"
+    },
+    "modifier_nurse_adrenaline_rush_buff": {
+      "text": "スペクターラッシュ",
+      "group": "citadel_heroes",
+      "hash": "fcdcb1a10dc2"
+    },
+    "modifier_nurse_adrenaline_rush_crash": {
+      "text": "スペクタークラッシュ",
+      "group": "citadel_heroes",
+      "hash": "ad9f15771624"
+    },
+    "DeferredDamagePercent_postvalue_label": {
+      "text": "保留したダメージ",
+      "group": "citadel_heroes",
+      "hash": "b43553d6b516"
+    },
+    "DeferredDamagePercent_label": {
+      "text": "保留したダメージ",
+      "group": "citadel_heroes",
+      "hash": "b43553d6b516"
+    },
+    "DeferredDamagePercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "DeferredDamageBonusPercent_postvalue_label": {
+      "text": "受けた追加ダメージ",
+      "group": "citadel_heroes",
+      "hash": "d8803f919287"
+    },
+    "DeferredDamageBonusPercent_label": {
+      "text": "受けた追加ダメージ",
+      "group": "citadel_heroes",
+      "hash": "d8803f919287"
+    },
+    "DeferredDamageBonusPercent_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "DeferredDamageBonusPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "RushTimeScaleBonusPercent_postvalue_label": {
+      "text": "ラッシュ時のスピード上昇",
+      "group": "citadel_heroes",
+      "hash": "086c2a959e62"
+    },
+    "RushTimeScaleBonusPercent_label": {
+      "text": "ラッシュ時のスピード上昇",
+      "group": "citadel_heroes",
+      "hash": "086c2a959e62"
+    },
+    "RushTimeScaleBonusPercent_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "RushTimeScaleBonusPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "CrashDuration_postvalue_label": {
+      "text": "クラッシュの継続時間",
+      "group": "citadel_heroes",
+      "hash": "e63d81041463"
+    },
+    "CrashDuration_label": {
+      "text": "クラッシュの継続時間",
+      "group": "citadel_heroes",
+      "hash": "e63d81041463"
+    },
+    "CrashDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_heroes",
+      "hash": "eb6aaba1a1ca"
+    },
+    "HealingEffectivenessPercent_label": {
+      "text": "回復効果量",
+      "group": "citadel_heroes",
+      "hash": "c588e1cec454"
+    },
+    "HealingEffectivenessPercent_postvalue_label": {
+      "text": "回復効果量",
+      "group": "citadel_heroes",
+      "hash": "c588e1cec454"
+    },
+    "HealingEffectivenessPercent_prefix": {
+      "text": "+",
+      "group": "citadel_heroes",
+      "hash": "a979ef10cc6f"
+    },
+    "HealingEffectivenessPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
+    "CrashTimeScalePenaltyPercent_postvalue_label": {
+      "text": "クラッシュ時のスピード低下",
+      "group": "citadel_heroes",
+      "hash": "8199a44509fd"
+    },
+    "CrashTimeScalePenaltyPercent_label": {
+      "text": "クラッシュ時のスピード低下",
+      "group": "citadel_heroes",
+      "hash": "8199a44509fd"
+    },
+    "CrashTimeScalePenaltyPercent_prefix": {
+      "text": "-",
+      "group": "citadel_heroes",
+      "hash": "3bc15c8aae3e"
+    },
+    "CrashTimeScalePenaltyPercent_postfix": {
+      "text": "%",
+      "group": "citadel_heroes",
+      "hash": "4345cb1fa278"
+    },
     "ability_header_on_hit": {
       "text": "ヒット時：",
       "group": "citadel_heroes",
@@ -24128,6 +24903,11 @@
       "text": "メレー",
       "group": "citadel_heroes",
       "hash": "594f3be6ceac"
+    },
+    "ability_melee_nurse": {
+      "text": "近接攻撃",
+      "group": "citadel_heroes",
+      "hash": "2c86e8c42b15"
     },
     "Citadel_Familiar_HeroTag_1": {
       "text": "サポート",
@@ -24828,6 +25608,11 @@
       "text": "バイオレットは12歳のときにカースド・アップルへ移住した。ニューヨークに馴染むまでにはある程度のカルチャーショックも受けたが、すぐに活気あふれるこの街に魅了された。芸術の追求に身を捧げたバイオレットの情熱は、同世代の者たちを遥かにしのぐ成功へと導いた。<br><br>まずは、美術学校への進学にあたり、全額給付の奨学金を獲得した。<br><br>そして第3学年では、ニューヨーク近代美術館（MoMA）が主催する権威ある学生芸術家の展覧会「アップスタート・ギャラリー」への出展を果たした。<br><br>誰の目から見ても、バイオレットは若くして目覚ましい活躍をしている。それでも彼女は、何者にもなれないまま人生を終えることへの実存的な恐怖を拭い去れずにいる。ファインアートの世界で商業的な成功を収めるには、ただ優れているだけでは不十分であることを、バイオレットは心得ている。どれだけ優れていようと足りないのだ。すべては然るべき時に、然るべき人物に見出されるかどうかにかかっている。\"儀式\"に目をつけたのはそのためだ。自らの才能を高めるためではなく、自分に何ができるかを世界に知らしめるチャンスを得るために。",
       "group": "citadel_heroes",
       "hash": "4a8dc73ad97c"
+    },
+    "hero_nurse_lore": {
+      "text": "マーブルヒル憑依病棟の中心人物であり、周囲の尊敬を集めるナース・ハロウは、人々に憑依する超自然的存在との戦いにその生涯を捧げてきた。思いやりと厳格さを併せ持ち、公平な現実主義者であるハロウは、ある患者からは聖人と呼ばれ、別の患者からは冷酷な支配者と呼ばれている。おそらく、そのどちらもが真実であろう。<br><br>正気の者なら誰しも、彼女が一体どのような方法で、そしてどのような理由で患者の痛みを自身の医療用カバンに溜め込んでいるのか、疑問に思うことだろう。しかし、その治療プログラムの結果に異を唱えられる者はいない。たとえそれがどれほど残酷なものであろうとも……",
+      "group": "citadel_heroes",
+      "hash": "3d5187426c0b"
     },
     "MODIFIER_STATE_ROOTED": {
       "text": "移動不能状態",
@@ -35859,6 +36644,11 @@
       "group": "citadel_gc",
       "hash": "a4081c36aa56"
     },
+    "Steam_Citadel_Hideout_Rounds": {
+      "text": "ハイドアウトで巡回中",
+      "group": "citadel_gc",
+      "hash": "636ec6e557ee"
+    },
     "Citadel_Dashboard_BuildVersion": {
       "text": "#{d:buildNumber}",
       "group": "citadel_main",
@@ -39164,6 +39954,11 @@
       "group": "citadel_main",
       "hash": "3d4f14b5654e"
     },
+    "Citadel_RankedSeason_ProtectionRemaining:f": {
+      "text": "残り保護回数：{d:demotion_protection_remaining}／{d:demotion_protection_total}",
+      "group": "citadel_main",
+      "hash": "14343de42412"
+    },
     "Citadel_RankedSeason_ProtectionUsed": {
       "text": "降格保護が使用されました",
       "group": "citadel_main",
@@ -39373,6 +40168,11 @@
       "text": "プレイ資格について",
       "group": "citadel_main",
       "hash": "f70bf01bd47c"
+    },
+    "Citadel_Ranked_Overview_Eligibility_Bullet1:f": {
+      "text": "アカウントの通算勝利数が{d:required_account_wins}回以上必要です。また、スタンダードモードで{d:required_hero_wins}勝を達成しているヒーローが{d:required_hero_unlocks}人以上いる必要があります。",
+      "group": "citadel_main",
+      "hash": "1d9380e527b0"
     },
     "Citadel_Ranked_Overview_Eligibility_Bullet2": {
       "text": "ランクマッチには、ソロかデュオでのみキューできます。デュオの場合、プレイヤー同士の差は1ランク以内である必要があります。エターナスのプレイヤーは、サブランクの差が3以内の、同じエターナスのプレイヤーとパーティーを組んでマッチングに参加できます。",
@@ -48484,6 +49284,11 @@
       "group": "citadel_main",
       "hash": "1d24bf061000"
     },
+    "citadel_settings_steaminput_connected:f": {
+      "text": "接続済み",
+      "group": "citadel_main",
+      "hash": "975e90dbbccd"
+    },
     "citadel_ability_upgrade_tab_desc": {
       "text": "アビリティ強化は {g:citadel_binding:'Scoreboard'} + [{g:citadel_binding:'Ability1'}/{g:citadel_binding:'Ability2'}/{g:citadel_binding:'Ability3'}/{g:citadel_binding:'Ability4'}] で可能です。このバインドは追加の設定です。",
       "group": "citadel_main",
@@ -56219,6 +57024,16 @@
       "group": "citadel_main",
       "hash": "ef09be27993f"
     },
+    "Unranked_AbandonTriggerEarly:f": {
+      "text": "このマッチはスコアに影響されません。マッチは{d:end_game_countdown}秒後に終了します。",
+      "group": "citadel_main",
+      "hash": "21495c046926"
+    },
+    "Ranked_AbandonTriggerEarly:f": {
+      "text": "このマッチはスコアに影響されません。マッチは{d:end_game_countdown}秒後に終了します。自身のランクは変動しません。",
+      "group": "citadel_main",
+      "hash": "a2ff0470ece3"
+    },
     "AbandonTriggerTeam_Title": {
       "text": "プレイヤーがマッチを途中退出しました",
       "group": "citadel_main",
@@ -57524,15 +58339,30 @@
       "group": "citadel_main",
       "hash": "c0e6e769f320"
     },
+    "HeroTesting_BotAbility_Desc": {
+      "text": "すべてのCPUがこのアビリティをキャストします（クールダウンは無視されます）",
+      "group": "citadel_main",
+      "hash": "0fcf8abe8cca"
+    },
     "HeroTesting_BotAbilityStop_Desc": {
       "text": "すべてのCPUがアビリティのキャストをやめます",
       "group": "citadel_main",
       "hash": "fb384857d9c3"
     },
+    "HeroTesting_BotItem_Desc": {
+      "text": "すべてのCPUがこのスロット内のアクティブアイテムを使用します（クールダウンは無視されます）",
+      "group": "citadel_main",
+      "hash": "926fc68e8a3d"
+    },
     "HeroTesting_BotItemStop_Desc": {
       "text": "すべてのCPUがアイテムの使用をやめます",
       "group": "citadel_main",
       "hash": "dccc31740e3b"
+    },
+    "HeroTesting_BotUseAbilityRepeated_Desc": {
+      "text": "オンになっている間、数秒ごとにキャストを繰り返します",
+      "group": "citadel_main",
+      "hash": "663b891b75e8"
     },
     "HeroTesting_InfiniteMoney_Desc": {
       "text": "ソウルを消費せずにアイテムを購入できるようになります",

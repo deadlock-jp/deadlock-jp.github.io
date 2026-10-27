@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6819",
-  "upstreamCommit": "6819",
-  "generatedAt": "2026-10-23T09:00:10.738Z",
+  "clientVersion": "6821",
+  "upstreamCommit": "6821",
+  "generatedAt": "2026-10-27T09:00:10.644Z",
   "language": "schinese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
@@ -935,9 +935,9 @@
       "hash": "1849287b1e3e"
     },
     "hero_necro_search:n": {
-      "text": "格瑞姆 geruimu necro 亡灵 wangling 白毛 baimao 鬼女 guinv 哥特女 getenv 地雷妹 dileimei",
+      "text": "格瑞墓 geruimu necro 亡灵 wangling 白毛 baimao 鬼女 guinv 哥特女 getenv 地雷妹 dileimei",
       "group": "citadel_gc_hero_names",
-      "hash": "495d6612f213"
+      "hash": "f63947c785a0"
     },
     "hero_necro_sort:n": {
       "text": "格瑞墓",
@@ -950,9 +950,9 @@
       "hash": "b8ada9ad590a"
     },
     "hero_werewolf_search:n": {
-      "text": "xierfu 狼人 langren 狼妹 langmei 福瑞 furui",
+      "text": "西尔芙 xierfu 狼人 langren 狼妹 langmei 福瑞 furui",
       "group": "citadel_gc_hero_names",
-      "hash": "97a0c7a45ff9"
+      "hash": "dc0baa814f01"
     },
     "hero_werewolf_sort:n": {
       "text": "西尔芙",
@@ -980,9 +980,9 @@
       "hash": "4a704db0c747"
     },
     "hero_baba_search:n": {
-      "text": "婆婆 popo 奶奶 nainai 鸽子 gezi",
+      "text": "婆婆 popo 奶奶 nainai 鸽子 gezi baba yaga",
       "group": "citadel_gc_hero_names",
-      "hash": "cb99e099835d"
+      "hash": "1f7785e37d91"
     },
     "hero_baba_sort:n": {
       "text": "婆婆",
