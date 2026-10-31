@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6821",
-  "upstreamCommit": "6821",
-  "generatedAt": "2026-10-27T09:00:10.524Z",
+  "clientVersion": "6833",
+  "upstreamCommit": "6833",
+  "generatedAt": "2026-10-31T02:48:14.771Z",
   "language": "japanese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 618,
-    "citadel_heroes": 3968,
-    "citadel_attributes": 1986,
+    "citadel_heroes": 3971,
+    "citadel_attributes": 1991,
     "citadel_gc": 221,
-    "citadel_main": 5258
+    "citadel_main": 5246
   },
   "tokens": {
     "hero_vampire:n": {
@@ -4570,9 +4570,9 @@
       "hash": "41ff955b697d"
     },
     "upgrade_resonant_healing_desc": {
-      "text": "アビリティを発動するとHPを回復し、ボーナス<span class=\"highlight\">移動速度</span>を短時間獲得する",
+      "text": "戦闘中にアビリティを発動するとHPが回復し、<span class=\"highlight\">移動速度</span>が短時間上昇する",
       "group": "citadel_mods",
-      "hash": "da95496eda00"
+      "hash": "c18419417b55"
     },
     "HealingPerCast_Label": {
       "text": "アビリティ発動時の回復量",
@@ -4925,14 +4925,14 @@
       "hash": "05436587f45c"
     },
     "HealOnActivate_label": {
-      "text": "発動時のHP回復量",
+      "text": "回復量",
       "group": "citadel_mods",
-      "hash": "73bd479a7772"
+      "hash": "7021e83e3c7d"
     },
     "HealOnActivate_postvalue_label": {
-      "text": "発動時のHP回復量",
+      "text": "回復量",
       "group": "citadel_mods",
-      "hash": "73bd479a7772"
+      "hash": "7021e83e3c7d"
     },
     "damage_reduction_postfix": {
       "text": "%",
@@ -5300,9 +5300,9 @@
       "hash": "81368b71957b"
     },
     "upgrade_cloaking_device_active_ambush_desc": {
-      "text": "<br>攻撃するかアビリティを使用するとステルス状態が解け、<span class=\"highlight\">奇襲</span>状態となる。奇襲状態では<span class=\"highlight\">発射速度</span>と<span class=\"highlight\">スピリットパワー</span>、<span class=\"highlight\">近接ダメージ</span>が一時的に上昇する",
+      "text": "<br>攻撃するかアビリティを使用するとステルス状態が解け、<span class=\"highlight\">奇襲</span>状態となる。奇襲状態では<span class=\"highlight\">武器ダメージ</span>と<span class=\"highlight\">スピリットパワー</span>が一時的に上昇する",
       "group": "citadel_mods",
-      "hash": "ec149e03cdc4"
+      "hash": "a795998cc8fa"
     },
     "modifier_cloaking_device_active_stealth": {
       "text": "シャドウウィーブ - ステルス",
@@ -5329,22 +5329,22 @@
       "group": "citadel_mods",
       "hash": "1a71f39c00b4"
     },
-    "AmbushBonusFireRate_prefix": {
+    "AmbushBonusWeaponDamage_prefix": {
       "text": "+",
       "group": "citadel_mods",
       "hash": "a979ef10cc6f"
     },
-    "AmbushBonusFireRate_label": {
-      "text": "奇襲状態の発射速度",
+    "AmbushBonusWeaponDamage_label": {
+      "text": "奇襲状態の武器ダメージ",
       "group": "citadel_mods",
-      "hash": "0ba73117123a"
+      "hash": "621c8aaf131f"
     },
-    "AmbushBonusFireRate_postvalue_label": {
-      "text": "奇襲状態の発射速度",
+    "AmbushBonusWeaponDamage_postvalue_label": {
+      "text": "奇襲状態の武器ダメージ",
       "group": "citadel_mods",
-      "hash": "0ba73117123a"
+      "hash": "621c8aaf131f"
     },
-    "AmbushBonusFireRate_postfix": {
+    "AmbushBonusWeaponDamage_postfix": {
       "text": "%",
       "group": "citadel_mods",
       "hash": "4345cb1fa278"
@@ -5375,6 +5375,21 @@
       "hash": "fae0641130e3"
     },
     "AmbushDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_mods",
+      "hash": "eb6aaba1a1ca"
+    },
+    "AmbushBuildUpDuration_label": {
+      "text": "完全な奇襲状態になるまでの時間",
+      "group": "citadel_mods",
+      "hash": "687127a4424b"
+    },
+    "AmbushBuildUpDuration_postvalue_label": {
+      "text": "完全な奇襲状態になるまでの時間",
+      "group": "citadel_mods",
+      "hash": "687127a4424b"
+    },
+    "AmbushBuildUpDuration_postfix": {
       "text": "秒",
       "group": "citadel_mods",
       "hash": "eb6aaba1a1ca"
@@ -5734,40 +5749,25 @@
       "group": "citadel_mods",
       "hash": "49edc8a47c2c"
     },
-    "cosmetic_ability_snowball": {
-      "text": "スノーボール",
+    "HealPerMinute_label": {
+      "text": "回復増加量／分",
       "group": "citadel_mods",
-      "hash": "c2aa87ab7e0b"
+      "hash": "0c88ec839a86"
     },
-    "cosmetic_ability_snowball_desc": {
-      "text": "味方や敵に雪玉を投げる。投てき距離などの性能は「<span class=\"highlight\">2025 ホリデーチャレンジ</span>」の進行度に応じて向上する<br><br><span class=\"diminish\">味方に雪玉を当ててもダメージは与えず、クールダウンがリセットされる</span>",
+    "TechPowerPerMinute_label": {
+      "text": "スピリットパワー上昇量／分",
       "group": "citadel_mods",
-      "hash": "a1d137085f4f"
+      "hash": "10926ee73e9a"
     },
-    "SnowballSpeed_label": {
-      "text": "投球速度",
+    "BonusFireRatePerMinute_label": {
+      "text": "発射速度上昇量／分",
       "group": "citadel_mods",
-      "hash": "9b0b624c19b8"
+      "hash": "0f073e700330"
     },
-    "SnowballSpeed_postvalue_label": {
-      "text": "速度",
+    "BonusMoveSpeedPerMinute_label": {
+      "text": "移動速度上昇量／分",
       "group": "citadel_mods",
-      "hash": "f2fdffbb9ed5"
-    },
-    "SnowballSpeed_postfix": {
-      "text": "m／秒",
-      "group": "citadel_mods",
-      "hash": "deedee4188b4"
-    },
-    "SnowballCount_label": {
-      "text": "雪玉を投げた数",
-      "group": "citadel_mods",
-      "hash": "219a1d74c216"
-    },
-    "SnowballCount_postvalue_label": {
-      "text": "発射物",
-      "group": "citadel_mods",
-      "hash": "3957dfd06526"
+      "hash": "1711e468470f"
     },
     "cosmetic_item_voting_poster": {
       "text": "ポスター設置",
@@ -8110,9 +8110,9 @@
       "hash": "6c3dbb76dce1"
     },
     "ability_fire_bomb_t3_desc": {
-      "text": "スタン継続時間 <span class=\"highlight\">+{s:StunDuration}秒</span>、範囲 <span class=\"highlight\">+{s:Radius}m</span>",
+      "text": "スタン継続時間 <span class=\"highlight\">+{s:StunDuration}秒</span>、範囲 <span class=\"highlight\">+{s:Radius}m</span><br>スピリットスケーリング上昇",
       "group": "citadel_heroes",
-      "hash": "6114b6eaf928"
+      "hash": "478a271cc5a1"
     },
     "BurnDPS_label": {
       "text": "燃焼DPS",
@@ -9510,9 +9510,9 @@
       "hash": "a218f6a1edca"
     },
     "citadel_ability_lash_t3_desc": {
-      "text": "チャージ <span class=\"highlight\">+{s:AbilityCharges}</span><br>発動時：スタミナ<span class=\"highlight\">+{s:RestoreStaminaOnUse}</span>、空中制御<span class=\"highlight\">+{s:AirControlPercent}%</span>",
+      "text": "チャージ <span class=\"highlight\">+{s:AbilityCharges}</span><br>発動時：スタミナ <span class=\"highlight\">+{s:RestoreStaminaOnUse}</span>、空中制御 <span class=\"highlight\">+{s:AirControlPercent}%</span><br>ジャンプ速度 <span class=\"highlight\">+{s:JumpVelocity}m</span>",
       "group": "citadel_heroes",
-      "hash": "c7f7b4914b1a"
+      "hash": "63375417cdcb"
     },
     "LashDamage_label": {
       "text": "グラップルダメージ",
@@ -10158,6 +10158,11 @@
       "text": "自身またはヒーローを対象に、空気を凍らせてその周囲に<span class=\"highlight\">侵入不可能なドーム</span>を作る。ドーム内では味方は高速の{g:citadel_inline_attribute:'Regen'}を獲得し、敵は<span class=\"highlight\">スロウ</span>状態になる<br><br><span class=\"diminish\">フローズンシェルター内ではオブジェクトが無敵状態となり、凍結する</span>",
       "group": "citadel_heroes",
       "hash": "e4db9f6333c7"
+    },
+    "ability_ice_dome_t2_desc": {
+      "text": "継続時間 <span class=\"highlight\">+{s:AbilityDuration}秒</span><br>発射速度 <span class=\"highlight\">-{s:FireRateSlow}%</span>",
+      "group": "citadel_heroes",
+      "hash": "043056743c8f"
     },
     "ability_ice_dome_t3_desc": {
       "text": "自身と味方の非アルティメットのデバフを<span class=\"highlight\">解除</span>する<br>HPリジェネ <span class=\"highlight\">+{s:BonusHealthRegen}</span>、スピリットスケーリングが上昇する",
@@ -11510,14 +11515,14 @@
       "hash": "412e6b163cea"
     },
     "ability_charged_shot_t2_desc": {
-      "text": "<span class=\"highlight\">ダメージ +{s:Damage}</span>",
+      "text": "ダメージ <span class=\"highlight\">+{s:Damage}</span>、チャージディレイ <span class=\"highlight\">{s:AbilityCooldownBetweenCharge}秒</span>",
       "group": "citadel_heroes",
-      "hash": "b44db4159610"
+      "hash": "3af95ff001a5"
     },
     "ability_charged_shot_t3_desc": {
-      "text": "<span class=\"highlight\">ダメージスケールが増加</span>し、アビリティチャージ時間が <span class=\"highlight\">{s:AbilityCooldownBetweenCharge}秒</span>",
+      "text": "<span class=\"highlight\">ダメージスケーリング上昇</span><br><span class=\"highlight\">壁に当たると一度だけ跳弾する</span>",
       "group": "citadel_heroes",
-      "hash": "d8f73c516462"
+      "hash": "4bad78394198"
     },
     "PowerJumpChannelTime_postfix": {
       "text": "秒",
@@ -13535,9 +13540,9 @@
       "hash": "a20b806d10e8"
     },
     "mirage_teleport_desc": {
-      "text": "ミニマップ上で任意の地点を指定する。短い準備時間の後、その地点に<span class=\"highlight\">テレポート</span>する。準備中にダメージを受けると、テレポートが中断される",
+      "text": "ミニマップ上で任意の地点を指定する。短い準備時間の後、その地点に<span class=\"highlight\">テレポート</span>する。準備中にダメージを受ける、またはスタン、移動不能、睡眠、移動アビリティサイレンス状態になると、テレポートが中断される<br><br>テレポート後に<span class=\"highlight\">バリア</span>を獲得する",
       "group": "citadel_heroes",
-      "hash": "d6885434c3c1"
+      "hash": "3636784bb8b9"
     },
     "MirageTeleportMoveSpeed_conditional": {
       "text": "テレポート後",
@@ -13550,14 +13555,14 @@
       "hash": "83c19fc83800"
     },
     "mirage_teleport_t1_desc": {
-      "text": "{s:MovementSpeedBonusDuration}秒間、移動速度+{s:BonusMoveSpeed}m／秒、発射速度 +{s:BonusFireRate}%",
+      "text": "移動速度 +{s:BonusMoveSpeed}m、発射速度 +{s:BonusFireRate}%",
       "group": "citadel_heroes",
-      "hash": "859300ec002f"
+      "hash": "d86ea3fbeb8e"
     },
-    "mirage_teleport_t2_desc": {
-      "text": "スピリットでスケールするバリア {s:CombatBarrier}",
+    "mirage_teleport_t3_desc": {
+      "text": "ダメージを受けても中断されない<br>バリアがスピリットスケーリングを獲得",
       "group": "citadel_heroes",
-      "hash": "41501d660cfc"
+      "hash": "7bb1b4dadb71"
     },
     "TeleportCompletedTime_label": {
       "text": "準備時間",
@@ -14573,11 +14578,6 @@
       "text": "<span class=\"highlight\">+{s:SpiritBonus}</span>のスピリットパワーを<span class=\"highlight\">{s:BuffDuration}秒間</span>獲得する",
       "group": "citadel_heroes",
       "hash": "99707e003b60"
-    },
-    "citadel_ability_flying_strike_t3_desc": {
-      "text": "オルトキャストで味方に飛びつける<br>キャスト範囲 <span class=\"highlight\">+{s:AbilityCastRange}m</span><br><span class=\"highlight\">追加チャージを1つ</span>獲得",
-      "group": "citadel_heroes",
-      "hash": "69b532428b4b"
     },
     "yamato_flying_strike_t3_header": {
       "text": "対象到達時：",
@@ -19445,14 +19445,14 @@
       "hash": "bc5eb61675fb"
     },
     "ability_necro_gravestone_t2_desc": {
-      "text": "継続時間 <span class=\"highlight\">+{s:AbilityDuration}秒</span><br>召喚の間隔 <span class=\"highlight\">{s:SummonFrequency}秒</span>",
+      "text": "継続時間 <span class=\"highlight\">+{s:AbilityDuration}秒</span>",
       "group": "citadel_heroes",
-      "hash": "c87a27cba1a8"
+      "hash": "406176ac663c"
     },
     "ability_necro_gravestone_t3_desc": {
-      "text": "デス時：現在HPの<span class=\"highlight\">+{s:CurrentHealthDamagePercentage}%</span>分のダメージを与える",
+      "text": "デス時：現在HPの<span class=\"highlight\">+{s:CurrentHealthDamagePercentage}%</span>分のダメージを与える<br>召喚の間隔 <span class=\"highlight\">{s:SummonFrequency}秒</span>",
       "group": "citadel_heroes",
-      "hash": "ee2aed234854"
+      "hash": "08d75adea647"
     },
     "ability_necro_gravestone/gravestone/buff": {
       "text": "屍鬼累々",
@@ -20925,9 +20925,9 @@
       "hash": "fec6fcffe109"
     },
     "ability_fencer_riposte_desc": {
-      "text": "次の攻撃を<span class=\"highlight\">受け流す</span>準備をする。受け流しに成功すると、短時間<span class=\"highlight\">無敵状態</span>となる。その後、指定したヒーローに向かって素早くダッシュしてその敵を<span class=\"highlight\">スタン</span>させ、<span class=\"highlight\">近接攻撃耐性</span>を低下させる<br><br><span class=\"diminish\">{g:citadel_binding:'Ability2'}で対象を選択する<br>トルーパーや中立モンスターのダメージでは発動しない</span>",
+      "text": "次の攻撃を<span class=\"highlight\">受け流す</span>準備をする。受け流しに成功すると、短時間<span class=\"highlight\">無敵状態</span>となる。その後、指定した敵ヒーローに向かって素早くダッシュして<span class=\"highlight\">パリィ</span>を封じながら<span class=\"highlight\">移動不能</span>にし、<span class=\"highlight\">近接攻撃耐性</span>を低下させる<br><br><span class=\"diminish\">{g:citadel_binding:'Ability2'}で対象を選択する<br>トルーパーや中立モンスターのダメージでは発動しない</span>",
       "group": "citadel_heroes",
-      "hash": "d31b6ea7c3af"
+      "hash": "592dd737b587"
     },
     "RiposteChannelTime_postvalue_label": {
       "text": "受け流し 継続時間",
@@ -20990,9 +20990,9 @@
       "hash": "fec6fcffe109"
     },
     "ability_fencer_riposte_attack_desc": {
-      "text": "前方に素早くダッシュし、武器の柄頭で敵をスタンさせる",
+      "text": "前方に素早くダッシュし、パリィを封じながら武器の柄頭で敵を移動不能にする",
       "group": "citadel_heroes",
-      "hash": "e28c5477008e"
+      "hash": "c3dc5494ed33"
     },
     "MeleeResistReductionDuration_label": {
       "text": "近接攻撃耐性低下 継続時間",
@@ -21010,9 +21010,9 @@
       "hash": "eb6aaba1a1ca"
     },
     "ability_fencer_riposte_t2_desc": {
-      "text": "近接攻撃耐性 <span class=\"highlight\">{s:MeleeResistReduction}%</span>、スタン継続時間 <span class=\"highlight\">+{s:StunDuration}秒</span>",
+      "text": "近接攻撃耐性 <span class=\"highlight\">{s:MeleeResistReduction}%</span>、移動不能継続時間 <span class=\"highlight\">+{s:ImmobilizeDuration}秒</span>",
       "group": "citadel_heroes",
-      "hash": "50d543fa53b3"
+      "hash": "ac178103f47f"
     },
     "ability_fencer_riposte_t3_desc": {
       "text": "{s:TargetLifestealDuration}秒間、リポストした対象への弾薬、スピリット、近接ライフスティールを<span class=\"highlight\">{s:TargetLifesteal}%</span>獲得する",
@@ -21935,9 +21935,9 @@
       "hash": "3949986f6329"
     },
     "ability_baba_hexing_brew_desc": {
-      "text": "効果範囲内に魔法効果を付与する紅茶を抽出する。効果は時間経過で変化し、{g:citadel_inline_attribute:'CombatBarrier'}を付与する平穏、{g:citadel_inline_attribute:'Silence'}を付与する静寂、{g:citadel_inline_attribute:'SpiritDPS'}を与えて{g:citadel_inline_attribute:'SpiritResist'}を減少させる灼熱の間を循環する<br><br>{g:citadel_binding:'ADS'}で抽出の一時停止や再開ができる",
+      "text": "効果範囲内に魔法効果を付与する紅茶を抽出する。効果は{g:citadel_inline_attribute:'CombatBarrier'}を付与する平穏、{g:citadel_inline_attribute:'Silence'}を付与する静寂、{g:citadel_inline_attribute:'SpiritDPS'}を与えて{g:citadel_inline_attribute:'SpiritResist'}を減少させる灼熱の3種類があり、ランダムな並びで時間経過によってループする。<br><br>{g:citadel_binding:'ADS'}で抽出の一時停止と再開ができる",
       "group": "citadel_heroes",
-      "hash": "48886bddd24c"
+      "hash": "9627e79fa337"
     },
     "ability_baba_hexing_brew_t3_desc": {
       "text": "抽出の効果 +{s:BrewEffectiveness}%",
@@ -22335,9 +22335,9 @@
       "hash": "4bf7619877f6"
     },
     "ability_chessmaster_throwbishop_t3_desc": {
-      "text": "マス範囲 +{s:TileSteps}<br>マスがスピリット耐性を{s:TechArmorDamageReductionPerStack}%減少させる。{s:MaxStacks}回までスタック可能",
+      "text": "マス範囲 +{s:TileSteps}<br>命中時にスピリット耐性を{s:TechArmorDamageReductionPerStack}%減少させる。{s:MaxStacks}回までスタック可能",
       "group": "citadel_heroes",
-      "hash": "42b2f010b785"
+      "hash": "b83158188ea4"
     },
     "ability_chessmaster_throwbishop_dot": {
       "text": "セットアップ・ビショップ - マス",
@@ -22545,14 +22545,14 @@
       "hash": "8b2ebe7e25c1"
     },
     "ability_chessmaster_queen_desc_active": {
-      "text": "<span class=\"highlight\">クイーン</span>を召喚して落下させ、範囲内に{g:citadel_inline_attribute:'SpiritDamage'}を与える。クイーンはディレイ後、{g:citadel_inline_attribute:'SpiritDamage'}を与えて{g:citadel_inline_attribute:'Stun'}を付与するタイルを直線状に放つ<br><br><span class=\"diminish\">移動 ({g:citadel_binding:'ADS'})：</span>クイーンが指定地点に向かって跳躍し、同様の効果を再び発生させる<span class=\"diminish\"><br><br>再発動するとクイーンを早めに呼び戻し、アビリティを終了できる</span>",
+      "text": "<span class=\"highlight\">クイーン</span>を召喚して落下させ、範囲内に{g:citadel_inline_attribute:'SpiritDamage'}を与える。クイーンはディレイ後、{g:citadel_inline_attribute:'SpiritDamage'}を与えて{g:citadel_inline_attribute:'Stun'}を付与するタイルを直線状に放つ<br><br>命中したヒーローのHPが低い場合は<span class=\"highlight\">チェックメイト</span>して処刑する。<br><br><span class=\"diminish\">移動 ({g:citadel_binding:'ADS'})：</span>クイーンが指定地点に向かって跳躍し、同様の効果を再び発生させる<span class=\"diminish\"><br><br>再発動するとクイーンを早めに呼び戻し、アビリティを終了できる</span>",
       "group": "citadel_heroes",
-      "hash": "60dc36099de0"
+      "hash": "cb88f281f710"
     },
     "ability_chessmaster_queen_t2_desc": {
-      "text": "スロウ +{s:SlowPercent}%、HPが{s:CheckmateThreshold}を下回るヒーローをチェックメイトして処刑する",
+      "text": "スロウ +{s:SlowPercent}%<br>チェックメイトしきい値 +{s:CheckmateThreshold}",
       "group": "citadel_heroes",
-      "hash": "af1404f0a431"
+      "hash": "521b78cc5fb4"
     },
     "ability_chessmaster_queen_t3_desc": {
       "text": "移動回数 +{s:QueenBonusMoves}<br>マス範囲 +{s:TileSteps}",
@@ -23315,9 +23315,9 @@
       "hash": "be03f0fa5f55"
     },
     "ability_artist_tether_t1_desc": {
-      "text": "発動時：{s:BuffDuration}秒間、HPリジェネ +{s:HealthRegen}。スケッチ回収でリフレッシュ",
+      "text": "スケッチ中：HPリジェネ +{s:HealthRegen}。スケッチ回収で {s:BuffDuration}秒追加",
       "group": "citadel_heroes",
-      "hash": "67229cca5ec7"
+      "hash": "ff566f8ad914"
     },
     "ability_artist_tether_t2_desc": {
       "text": "スケッチ中：対象の与ダメージ {s:OutgoingDamagePercent}%",
@@ -23330,9 +23330,9 @@
       "hash": "ab558095e9b6"
     },
     "ability_artist_tether/buildup": {
-      "text": "描画中",
+      "text": "スティルライフ",
       "group": "citadel_heroes",
-      "hash": "49017a470f09"
+      "hash": "f52c8a62033b"
     },
     "ability_artist_tether/buildup/stun": {
       "text": "スティルライフ",
@@ -23350,6 +23350,11 @@
       "hash": "f52c8a62033b"
     },
     "ability_artist_tether/stun": {
+      "text": "スティルライフ",
+      "group": "citadel_heroes",
+      "hash": "f52c8a62033b"
+    },
+    "modifier_artist_still_life": {
       "text": "スティルライフ",
       "group": "citadel_heroes",
       "hash": "f52c8a62033b"
@@ -23434,6 +23439,11 @@
       "group": "citadel_heroes",
       "hash": "22c14167a594"
     },
+    "Citadel_Graph_PermanentBuff_ArtistHealer": {
+      "text": "ヒーラーのスケッチ",
+      "group": "citadel_heroes",
+      "hash": "21f02f3d5ba4"
+    },
     "artist_drawing_mystic": {
       "text": "ミスティックのスケッチ",
       "group": "citadel_heroes",
@@ -23453,6 +23463,11 @@
       "text": "アサシンのスケッチ",
       "group": "citadel_heroes",
       "hash": "1ff63741d0b8"
+    },
+    "artist_drawing_healer": {
+      "text": "ヒーラーのスケッチ",
+      "group": "citadel_heroes",
+      "hash": "21f02f3d5ba4"
     },
     "ability_artist_bamboogrove": {
       "text": "アブストラクト・ランドスケープ",
@@ -23475,9 +23490,9 @@
       "hash": "d72c6d6cb7fd"
     },
     "ability_artist_bamboogrove_t3_desc": {
-      "text": "サイレンス継続時間 +{s:SilenceDuration}秒<br>アビリティ継続時間 +{s:AbilityDuration}秒<br>壁が破壊されなくなる",
+      "text": "サイレンス継続時間 +{s:SilenceDuration}秒<br>アビリティ継続時間 +{s:AbilityDuration}秒",
       "group": "citadel_heroes",
-      "hash": "e63dd51ff878"
+      "hash": "c7976108c70e"
     },
     "ability_artist_bamboogrove/groundaura/silence": {
       "text": "アブストラクト・ランドスケープ",
@@ -23720,9 +23735,9 @@
       "hash": "4a74b7cf2724"
     },
     "ability_nurse_fear_t3_desc": {
-      "text": "詠唱時間 +{s:AbilityChannelTime}秒<br>スピリットスケーリング +{s:DPS_scale}<br>詠唱中はダメージを無効化",
+      "text": "詠唱時間 +{s:AbilityChannelTime}秒<br>スピリットスケーリング +{s:DPS_scale}<br>詠唱中は被ダメージが{s:DamageResistPctWhileChanneling}%減少",
       "group": "citadel_heroes",
-      "hash": "625fa10a79d6"
+      "hash": "d88d3836dadf"
     },
     "FearDurationPerLeechStack_prefix": {
       "text": "+",
@@ -24145,9 +24160,9 @@
       "hash": "e83dabd9ba35"
     },
     "ability_nurse_adrenaline_rush_t2_desc": {
-      "text": "継続時間 +{s:AbilityDuration}秒<br>回復効率 +{s:HealingEffectivenessPercent}%",
+      "text": "継続時間 +{s:AbilityDuration}秒<br>被回復量 +{s:HealingEffectivenessPercent}%",
       "group": "citadel_heroes",
-      "hash": "1567f72fdef0"
+      "hash": "69785763bda6"
     },
     "ability_nurse_adrenaline_rush_t3_desc": {
       "text": "ラッシュ時のスピード +{s:RushTimeScaleBonusPercent}%<br>非アルティメットのデバフを解除",
@@ -24180,14 +24195,14 @@
       "hash": "4345cb1fa278"
     },
     "DeferredDamageBonusPercent_postvalue_label": {
-      "text": "受けた追加ダメージ",
+      "text": "受ける追加ダメージ",
       "group": "citadel_heroes",
-      "hash": "d8803f919287"
+      "hash": "73b9b208dac1"
     },
     "DeferredDamageBonusPercent_label": {
-      "text": "受けた追加ダメージ",
+      "text": "受ける追加ダメージ",
       "group": "citadel_heroes",
-      "hash": "d8803f919287"
+      "hash": "73b9b208dac1"
     },
     "DeferredDamageBonusPercent_prefix": {
       "text": "+",
@@ -24235,14 +24250,14 @@
       "hash": "eb6aaba1a1ca"
     },
     "HealingEffectivenessPercent_label": {
-      "text": "回復効果量",
+      "text": "被回復量",
       "group": "citadel_heroes",
-      "hash": "c588e1cec454"
+      "hash": "2deea7a1209e"
     },
     "HealingEffectivenessPercent_postvalue_label": {
-      "text": "回復効果量",
+      "text": "被回復量",
       "group": "citadel_heroes",
-      "hash": "c588e1cec454"
+      "hash": "2deea7a1209e"
     },
     "HealingEffectivenessPercent_prefix": {
       "text": "+",
@@ -25813,6 +25828,11 @@
       "text": "移動不能状態",
       "group": "citadel_attributes",
       "hash": "e9d5b1f8997d"
+    },
+    "modifier_citadel_sleep": {
+      "text": "睡眠状態",
+      "group": "citadel_attributes",
+      "hash": "c4a6b13791ef"
     },
     "modifier_citadel_silenced": {
       "text": "サイレンス状態",
@@ -34899,6 +34919,26 @@
       "group": "citadel_attributes",
       "hash": "4345cb1fa278"
     },
+    "GravityScaleIncrease_label": {
+      "text": "重力スケール",
+      "group": "citadel_attributes",
+      "hash": "13ff43915ad2"
+    },
+    "GravityScaleIncrease_postvalue_label": {
+      "text": "重力スケール",
+      "group": "citadel_attributes",
+      "hash": "13ff43915ad2"
+    },
+    "GravityScaleIncrease_prefix": {
+      "text": "+",
+      "group": "citadel_attributes",
+      "hash": "a979ef10cc6f"
+    },
+    "GravityScaleIncrease_postfix": {
+      "text": "%",
+      "group": "citadel_attributes",
+      "hash": "4345cb1fa278"
+    },
     "AirBonusDamageGiven_label": {
       "text": "空中ダメージ",
       "group": "citadel_attributes",
@@ -42399,56 +42439,6 @@
       "group": "citadel_main",
       "hash": "9c08691f30f6"
     },
-    "Citadel_Hud_Toast_SeasonalAchievement2024Unlocked": {
-      "text": "{g:citadel_persona:account_id} が {s:hero_name} のホリデーチアを達成した！",
-      "group": "citadel_main",
-      "hash": "47880c6e7aed"
-    },
-    "Citadel_Showcase_SeasonalAchievement2024": {
-      "text": "2024年12月",
-      "group": "citadel_main",
-      "hash": "0e7912c8d181"
-    },
-    "Citadel_Hud_Toast_SeasonalAchievement2025Unlocked": {
-      "text": "{s:hero_name}のオーナメントを{g:citadel_persona:account_id}がアンロックした！",
-      "group": "citadel_main",
-      "hash": "075532bf3274"
-    },
-    "Citadel_Showcase_SeasonalAchievement2025": {
-      "text": "2025年12月",
-      "group": "citadel_main",
-      "hash": "927df81171b5"
-    },
-    "Citadel_Hud_Toast_SeasonalKill": {
-      "text": "<span class=\"Emphasis\">{g:citadel_persona:killer_account_id}</span>の",
-      "group": "citadel_main",
-      "hash": "1a51928c7f56"
-    },
-    "Citadel_Hud_Toast_SeasonalKill2": {
-      "text": "スノーボールキル！",
-      "group": "citadel_main",
-      "hash": "7ffebb1021da"
-    },
-    "Citadel_Event_Holiday_Challenge2025_Title": {
-      "text": "2025 ホリデーチャレンジ",
-      "group": "citadel_main",
-      "hash": "49cab8a1496a"
-    },
-    "Citadel_Event_Holiday_Challenge2025_Desc": {
-      "text": "異なるヒーローでマッチに勝利すると、ハイドアウトのツリーを装飾するためのユニークなオーナメントをもらえます。",
-      "group": "citadel_main",
-      "hash": "46d34c4c00ba"
-    },
-    "Citadel_Event_Holiday_Challenge2025_Snowball": {
-      "text": "ツリーにオーナメントを追加して、アクティブアイテム「<span class=\"Emphasis\">スノーボール</span>」を強化しましょう。",
-      "group": "citadel_main",
-      "hash": "232a7fc9257b"
-    },
-    "Citadel_Event_Holiday_Challenge2025_Snowball_Level": {
-      "text": "レベル {i:item_level} / {i:item_max_level}",
-      "group": "citadel_main",
-      "hash": "c5a19dbda686"
-    },
     "Citadel_Hud_Voting_Poster_Tooltip_Header": {
       "text": "ポスターを選択",
       "group": "citadel_main",
@@ -48858,6 +48848,11 @@
       "text": "{g:citadel_binding:'Attack'}で対象への飛びつきを早めに発動できます。",
       "group": "citadel_main",
       "hash": "17b4694a2471"
+    },
+    "citadel_rejuvenator_hud_hint": {
+      "text": "リジュベネーターの残り効果時間。有効なリジュベネーターがない場合はミッドボスのリスポーンまでの時間が表示される",
+      "group": "citadel_main",
+      "hash": "3b550ad4d6d9"
     },
     "fire_rate_pickup/small_fire_rate": {
       "text": "発射速度上昇",
@@ -55784,11 +55779,6 @@
       "group": "citadel_main",
       "hash": "cbbbd6897e3d"
     },
-    "menu_seasonal_2025": {
-      "text": "ホリデーチャレンジ",
-      "group": "citadel_main",
-      "hash": "1d477d116ff4"
-    },
     "menu_new_violator": {
       "text": "New",
       "group": "citadel_main",
@@ -61844,11 +61834,6 @@
       "group": "citadel_main",
       "hash": "c54bae797650"
     },
-    "Citadel_Hideout_XmasGlobeEarned_Temp": {
-      "text": "ウィンターアップデート中に{s:hideout_owner}が獲得した記念品",
-      "group": "citadel_main",
-      "hash": "93eb3ab669c4"
-    },
     "Citadel_Hideout_VaultHint01": {
       "text": "{g:citadel_binding:'AbilityMelee'} 近接攻撃でソウルを集める",
       "group": "citadel_main",
@@ -61858,11 +61843,6 @@
       "text": "点滅中に {g:citadel_binding:'AbilityMelee'} 近接攻撃でボーナスを獲得、近接強攻撃ならさらに追加で獲得できる",
       "group": "citadel_main",
       "hash": "6f8935cc210d"
-    },
-    "Citadel_Hideout_HolidayChallenge": {
-      "text": "{g:citadel_binding:'Interact'} でホリデーチャレンジの進行状況を確認",
-      "group": "citadel_main",
-      "hash": "4bea58ea5dc7"
     },
     "Citadel_Hideout_HeavyCrate": {
       "text": "{g:citadel_binding:'AbilityMelee'}を長押しして近接強攻撃で破壊",
@@ -62215,11 +62195,6 @@
       "hash": "0ca79200a9a5"
     },
     "npc_newscaster": {
-      "text": "ニュースキャスター",
-      "group": "citadel_main",
-      "hash": "2aad42f1ba03"
-    },
-    "npc_seasonal": {
       "text": "ニュースキャスター",
       "group": "citadel_main",
       "hash": "2aad42f1ba03"
@@ -62938,6 +62913,11 @@
       "text": "鐘楼",
       "group": "citadel_main",
       "hash": "2115eb05953a"
+    },
+    "AbilityButtonHint_HalloweenTroll": {
+      "text": "トロールのトリック・オア・トリート - 近接強攻撃でキャンディを渡す",
+      "group": "citadel_main",
+      "hash": "38fcec32148b"
     }
   }
 }

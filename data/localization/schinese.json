@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6821",
-  "upstreamCommit": "6821",
-  "generatedAt": "2026-10-27T09:00:10.644Z",
+  "clientVersion": "6833",
+  "upstreamCommit": "6833",
+  "generatedAt": "2026-10-31T02:48:14.883Z",
   "language": "schinese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 618,
-    "citadel_heroes": 3967,
-    "citadel_attributes": 1986,
+    "citadel_heroes": 3971,
+    "citadel_attributes": 1991,
     "citadel_gc": 221,
-    "citadel_main": 5258
+    "citadel_main": 5247
   },
   "tokens": {
     "hero_vampire:n": {
@@ -4570,9 +4570,9 @@
       "hash": "f226b90ef326"
     },
     "upgrade_resonant_healing_desc": {
-      "text": "施放技能时会在一小段时间内获得<span class=\"highlight\">治疗</span>和额外<span class=\"highlight\">移动速度</span>。",
+      "text": "在战斗中，施放技能时会在一小段时间内获得<span class=\"highlight\">治疗</span>和额外<span class=\"highlight\">移动速度</span>。",
       "group": "citadel_mods",
-      "hash": "a3a9367013c6"
+      "hash": "fd8ea86a4682"
     },
     "HealingPerCast_Label": {
       "text": "技能施放时治疗",
@@ -4925,14 +4925,14 @@
       "hash": "8329c3f8ab39"
     },
     "HealOnActivate_label": {
-      "text": "激活时治疗量",
+      "text": "治疗量",
       "group": "citadel_mods",
-      "hash": "1538fd830e21"
+      "hash": "015cc7af6e0b"
     },
     "HealOnActivate_postvalue_label": {
-      "text": "激活时治疗量",
+      "text": "治疗量",
       "group": "citadel_mods",
-      "hash": "1538fd830e21"
+      "hash": "015cc7af6e0b"
     },
     "damage_reduction_postfix": {
       "text": "%",
@@ -5300,9 +5300,9 @@
       "hash": "0fc115e8e02f"
     },
     "upgrade_cloaking_device_active_ambush_desc": {
-      "text": "<br>攻击或使用技能将结束隐身状态，并发动一次<span class=\"highlight\">伏击</span>，暂时提供额外的<span class=\"highlight\">射速</span>、<span class=\"highlight\">元灵力量</span>和<span class=\"highlight\">近战伤害</span>。",
+      "text": "<br>攻击或使用技能将结束隐身状态，并开始<span class=\"highlight\">伏击</span>，暂时为你提供额外的<span class=\"highlight\">武器伤害</span>和<span class=\"highlight\">元灵力量</span>。",
       "group": "citadel_mods",
-      "hash": "c2ff7d113149"
+      "hash": "ef9cdcb85b13"
     },
     "modifier_cloaking_device_active_stealth": {
       "text": "来去无踪 - 潜行",
@@ -5329,22 +5329,22 @@
       "group": "citadel_mods",
       "hash": "9adf34b541ee"
     },
-    "AmbushBonusFireRate_prefix": {
+    "AmbushBonusWeaponDamage_prefix": {
       "text": "+",
       "group": "citadel_mods",
       "hash": "a979ef10cc6f"
     },
-    "AmbushBonusFireRate_label": {
-      "text": "伏击射速",
+    "AmbushBonusWeaponDamage_label": {
+      "text": "伏击武器伤害",
       "group": "citadel_mods",
-      "hash": "d228e7f86c3a"
+      "hash": "91230cdde308"
     },
-    "AmbushBonusFireRate_postvalue_label": {
-      "text": "伏击射速",
+    "AmbushBonusWeaponDamage_postvalue_label": {
+      "text": "伏击武器伤害",
       "group": "citadel_mods",
-      "hash": "d228e7f86c3a"
+      "hash": "91230cdde308"
     },
-    "AmbushBonusFireRate_postfix": {
+    "AmbushBonusWeaponDamage_postfix": {
       "text": "%",
       "group": "citadel_mods",
       "hash": "4345cb1fa278"
@@ -5375,6 +5375,21 @@
       "hash": "d41f29de0fbf"
     },
     "AmbushDuration_postfix": {
+      "text": "秒",
+      "group": "citadel_mods",
+      "hash": "eb6aaba1a1ca"
+    },
+    "AmbushBuildUpDuration_label": {
+      "text": "全额伏击所需时间",
+      "group": "citadel_mods",
+      "hash": "86eb4b84f349"
+    },
+    "AmbushBuildUpDuration_postvalue_label": {
+      "text": "全额伏击所需时间",
+      "group": "citadel_mods",
+      "hash": "86eb4b84f349"
+    },
+    "AmbushBuildUpDuration_postfix": {
       "text": "秒",
       "group": "citadel_mods",
       "hash": "eb6aaba1a1ca"
@@ -5734,40 +5749,25 @@
       "group": "citadel_mods",
       "hash": "f6dbf75c25ae"
     },
-    "cosmetic_ability_snowball": {
-      "text": "雪球",
+    "HealPerMinute_label": {
+      "text": "每分钟治疗量提升",
       "group": "citadel_mods",
-      "hash": "a21ea213004f"
+      "hash": "267c9bd558cc"
     },
-    "cosmetic_ability_snowball_desc": {
-      "text": "向你的朋友和敌人投掷雪球。随着你在<span class=\"highlight\">2025年假日挑战</span>获得进度，距离和其他属性都会得到提升。<br><br><span class=\"diminish\">向盟友投掷雪球不会造成伤害，并且会重置其冷却时间。</span>",
+    "TechPowerPerMinute_label": {
+      "text": "每分钟元灵力量提升",
       "group": "citadel_mods",
-      "hash": "2787f6824ed5"
+      "hash": "bbd30d32adbc"
     },
-    "SnowballSpeed_label": {
-      "text": "投掷速度",
+    "BonusFireRatePerMinute_label": {
+      "text": "每分钟射速提升",
       "group": "citadel_mods",
-      "hash": "14d982afaa45"
+      "hash": "d11e7b2eb5f3"
     },
-    "SnowballSpeed_postvalue_label": {
-      "text": "速度",
+    "BonusMoveSpeedPerMinute_label": {
+      "text": "每分钟移动速度提升",
       "group": "citadel_mods",
-      "hash": "f2fdffbb9ed5"
-    },
-    "SnowballSpeed_postfix": {
-      "text": "米/秒",
-      "group": "citadel_mods",
-      "hash": "ca8c4ea71eec"
-    },
-    "SnowballCount_label": {
-      "text": "扔雪球次数",
-      "group": "citadel_mods",
-      "hash": "5f01448c6a7d"
-    },
-    "SnowballCount_postvalue_label": {
-      "text": "投射物数量",
-      "group": "citadel_mods",
-      "hash": "c37791a0166b"
+      "hash": "bfc0d818b5a8"
     },
     "cosmetic_item_voting_poster": {
       "text": "地点海报",
@@ -8110,9 +8110,9 @@
       "hash": "bd06ac538fd4"
     },
     "ability_fire_bomb_t3_desc": {
-      "text": "<span class=\"highlight\">+{s:StunDuration}秒</span>眩晕时间<br><span class=\"highlight\">+{s:Radius}米</span>半径",
+      "text": "<span class=\"highlight\">+{s:StunDuration}秒</span>眩晕时间<br><span class=\"highlight\">+{s:Radius}米</span>半径<br>提升元灵增强系数",
       "group": "citadel_heroes",
-      "hash": "717dd33b300f"
+      "hash": "49e318cd01b5"
     },
     "BurnDPS_label": {
       "text": "每秒燃烧伤害",
@@ -9505,9 +9505,9 @@
       "hash": "785774670dab"
     },
     "citadel_ability_lash_t3_desc": {
-      "text": "<span class=\"highlight\">+{s:AbilityCharges}</span>充能<br>施放时：<span class=\"highlight\">+{s:RestoreStaminaOnUse}</span>耐力<br><span class=\"highlight\">+{s:AirControlPercent}%</span>空中控制",
+      "text": "<span class=\"highlight\">+{s:AbilityCharges}</span>充能<br>施放时：<span class=\"highlight\">+{s:RestoreStaminaOnUse}</span>耐力<br><span class=\"highlight\">+{s:AirControlPercent}%</span>空中控制<br><span class=\"highlight\">+{s:JumpVelocity}米</span>跳跃速度",
       "group": "citadel_heroes",
-      "hash": "54dad3821c08"
+      "hash": "c4a1d4f06a5c"
     },
     "LashDamage_label": {
       "text": "鞭长可及伤害",
@@ -10153,6 +10153,11 @@
       "text": "以自己或一名英雄为目标，冻结周围的空气，在其身边制造一个<span class=\"highlight\">无法穿透的罩子</span>。罩子中的友军会获得快速{g:citadel_inline_attribute:'Regen'}，而敌人会被<span class=\"highlight\">减速</span>。<br><br><span class=\"diminish\">冰冻庇护下的目标物变得无敌并被冻结。</span>",
       "group": "citadel_heroes",
       "hash": "4b624b9ec2df"
+    },
+    "ability_ice_dome_t2_desc": {
+      "text": "<span class=\"highlight\">+{s:AbilityDuration}秒</span>持续时间<br>施加<span class=\"highlight\">-{s:FireRateSlow}%</span>射速",
+      "group": "citadel_heroes",
+      "hash": "49fe1172316a"
     },
     "ability_ice_dome_t3_desc": {
       "text": "<span class=\"highlight\">净化</span>自身和友军的非终极技能减益效果。<br><span class=\"highlight\">+{s:BonusHealthRegen}</span>生命恢复并提升元灵增强系数",
@@ -11505,14 +11510,14 @@
       "hash": "ca4960e9c944"
     },
     "ability_charged_shot_t2_desc": {
-      "text": "<span class=\"highlight\">+{s:Damage}伤害</span>",
+      "text": "<span class=\"highlight\">+{s:Damage}伤害</span><br><span class=\"highlight\">{s:AbilityCooldownBetweenCharge}秒</span>充能延迟",
       "group": "citadel_heroes",
-      "hash": "25259114cd6c"
+      "hash": "9d905bb1e294"
     },
     "ability_charged_shot_t3_desc": {
-      "text": "<span class=\"highlight\">提升伤害增长速率</span><br><br><span class=\"highlight\">{s:AbilityCooldownBetweenCharge}秒</span>充能延迟",
+      "text": "<span class=\"highlight\">提升伤害系数</span> <br><span class=\"highlight\">在墙上反弹一次</span>",
       "group": "citadel_heroes",
-      "hash": "9f0444fbf2cb"
+      "hash": "bffc4bf9b08c"
     },
     "PowerJumpChannelTime_postfix": {
       "text": "秒",
@@ -13530,9 +13535,9 @@
       "hash": "b27ee3068bf0"
     },
     "mirage_teleport_desc": {
-      "text": "以小地图上的一个地点为目标。在短暂等待后，<span class=\"highlight\">传送</span>到该地点。在等待期间受到伤害会使传送被打断。",
+      "text": "以小地图上的一个地点为目标。经过短暂等待后会<span class=\"highlight\">传送</span>至该地点。在等待期间受到伤害，或者被眩晕、定身、睡眠或位移类沉默都会使传送中断。<br><br>传送后会获得<span class=\"highlight\">屏障</span>。",
       "group": "citadel_heroes",
-      "hash": "9b0d6720743e"
+      "hash": "5b4a44613ae2"
     },
     "MirageTeleportMoveSpeed_conditional": {
       "text": "传送后",
@@ -13545,14 +13550,14 @@
       "hash": "72543d4331c5"
     },
     "mirage_teleport_t1_desc": {
-      "text": "<br>+{s:BonusMoveSpeed}米移动速度和+{s:BonusFireRate}%射速，持续{s:MovementSpeedBonusDuration}秒",
+      "text": "+{s:BonusMoveSpeed}米移动速度<br>+{s:BonusFireRate}%射速",
       "group": "citadel_heroes",
-      "hash": "345d80151ff7"
+      "hash": "44318f02831f"
     },
-    "mirage_teleport_t2_desc": {
-      "text": "{s:CombatBarrier}屏障，跟随元灵力量增强",
+    "mirage_teleport_t3_desc": {
+      "text": "不会被伤害打断<br>屏障获得元灵增强系数",
       "group": "citadel_heroes",
-      "hash": "41ca5971b70b"
+      "hash": "649450c6fe0f"
     },
     "TeleportCompletedTime_label": {
       "text": "等待时间",
@@ -19440,14 +19445,14 @@
       "hash": "a679e3b5ff11"
     },
     "ability_necro_gravestone_t2_desc": {
-      "text": "<span class=\"highlight\">+{s:AbilityDuration}秒</span>持续时间<br><span class=\"highlight\">{s:SummonFrequency}秒</span>产生所需时间",
+      "text": "<span class=\"highlight\">+{s:AbilityDuration}秒</span>持续时间",
       "group": "citadel_heroes",
-      "hash": "134bf739dad7"
+      "hash": "81f6a4f7cc7b"
     },
     "ability_necro_gravestone_t3_desc": {
-      "text": "倒下时：<br>造成<span class=\"highlight\">+{s:CurrentHealthDamagePercentage}%</span>当前生命值的伤害",
+      "text": "倒下时：造成<span class=\"highlight\">+{s:CurrentHealthDamagePercentage}%</span>当前生命值的伤害<br><span class=\"highlight\">{s:SummonFrequency}秒</span>生成时间",
       "group": "citadel_heroes",
-      "hash": "18ac976b07c6"
+      "hash": "f5a31199cb13"
     },
     "ability_necro_gravestone/gravestone/buff": {
       "text": "代行敕令",
@@ -20920,9 +20925,9 @@
       "hash": "7f4133ebf489"
     },
     "ability_fencer_riposte_desc": {
-      "text": "准备好<span class=\"highlight\">偏转</span>即将到来的攻击。在成功偏转时，暂时变得<span class=\"highlight\">无敌</span>并选定一个敌方英雄冲向他们，造成<span class=\"highlight\">眩晕</span>并降低他们的<span class=\"highlight\">近战抗性</span>。<br><br><span class=\"diminish\">按{g:citadel_binding:'Ability2'}选择目标。<br>不会对士兵或中立生物触发。</span>",
+      "text": "准备好<span class=\"highlight\">偏转</span>即将到来的攻击。在成功偏转时，暂时变得<span class=\"highlight\">无敌</span>并选定一个敌方英雄冲向他们，造成<span class=\"highlight\">定身</span>，阻止他们<span class=\"highlight\">格挡</span>并降低他们的<span class=\"highlight\">近战抗性</span>。<br><br><span class=\"diminish\">按{g:citadel_binding:'Ability2'}选择目标。<br>不会对士兵或中立生物触发。</span>",
       "group": "citadel_heroes",
-      "hash": "f3db463550bc"
+      "hash": "6c288822b382"
     },
     "RiposteChannelTime_postvalue_label": {
       "text": "偏转持续时间",
@@ -20985,9 +20990,9 @@
       "hash": "7f4133ebf489"
     },
     "ability_fencer_riposte_attack_desc": {
-      "text": "快速向前冲刺，用剑柄击晕敌人。",
+      "text": "快速向前冲刺，用武器的剑柄击中敌人，阻止他们格挡。",
       "group": "citadel_heroes",
-      "hash": "31cd852b18d2"
+      "hash": "2ac8843fa7d2"
     },
     "MeleeResistReductionDuration_label": {
       "text": "近战抗性降低持续时间",
@@ -21005,9 +21010,9 @@
       "hash": "eb6aaba1a1ca"
     },
     "ability_fencer_riposte_t2_desc": {
-      "text": "<span class=\"highlight\">{s:MeleeResistReduction}%</span>近战抗性<br><span class=\"highlight\">+{s:StunDuration}秒</span>眩晕时间",
+      "text": "<span class=\"highlight\">{s:MeleeResistReduction}%</span>近战抗性<br><span class=\"highlight\">+{s:ImmobilizeDuration}秒</span>定身时间",
       "group": "citadel_heroes",
-      "hash": "266875bfdaac"
+      "hash": "6c0bf5e61d5b"
     },
     "ability_fencer_riposte_t3_desc": {
       "text": "对还击目标获得<span class=\"highlight\">{s:TargetLifesteal}%</span>子弹、元灵和近战吸取生命，持续{s:TargetLifestealDuration}秒",
@@ -21930,9 +21935,9 @@
       "hash": "20ab74cedbe2"
     },
     "ability_baba_hexing_brew_desc": {
-      "text": "冲泡一壶茶，扔出后会对一片区域施加魔法效果，具体效果会在舒缓的{g:citadel_inline_attribute:'CombatBarrier'}、{g:citadel_inline_attribute:'Silence'}和灼烧的沸水之间循环，沸水会造成{g:citadel_inline_attribute:'SpiritDPS'}并降低{g:citadel_inline_attribute:'SpiritResist'}。<br><br>按下{g:citadel_binding:'ADS'}可以暂停或恢复冲泡。",
+      "text": "冲泡一壶茶，扔出后会对一片区域施加魔法效果，具体效果会在舒缓的{g:citadel_inline_attribute:'CombatBarrier'}、{g:citadel_inline_attribute:'Silence'}和灼烧的沸水之间以随机顺序进行循环，沸水会造成{g:citadel_inline_attribute:'SpiritDPS'}并降低{g:citadel_inline_attribute:'SpiritResist'}。<br><br>按下{g:citadel_binding:'ADS'}可以暂停或恢复冲泡。",
       "group": "citadel_heroes",
-      "hash": "37c8791c3978"
+      "hash": "482051a41011"
     },
     "ability_baba_hexing_brew_t3_desc": {
       "text": "+{s:BrewEffectiveness}%泡茶效果",
@@ -22330,9 +22335,9 @@
       "hash": "b694c23eb79f"
     },
     "ability_chessmaster_throwbishop_t3_desc": {
-      "text": "+{s:TileSteps}方格范围<br>方格减少{s:TechArmorDamageReductionPerStack}%元灵抗性，可叠加{s:MaxStacks}次",
+      "text": "+{s:TileSteps}方格范围<br>撞击降低{s:TechArmorDamageReductionPerStack}%元灵抗性，可叠加{s:MaxStacks}次",
       "group": "citadel_heroes",
-      "hash": "b26fa364df8b"
+      "hash": "7628921651f6"
     },
     "ability_chessmaster_throwbishop_dot": {
       "text": "摆放象 - 方格",
@@ -22540,14 +22545,14 @@
       "hash": "750bb1992d39"
     },
     "ability_chessmaster_queen_desc_active": {
-      "text": "召唤一个<span class=\"highlight\">后</span>，猛然坠落对一个区域造成{g:citadel_inline_attribute:'SpiritDamage'}。在一定延迟后，后会放出沿直线分布的方格，再次造成{g:citadel_inline_attribute:'SpiritDamage'}并施加{g:citadel_inline_attribute:'Stun'}。<br><br><span class=\"diminish\">移动（{g:citadel_binding:'ADS'}）：</span>后跳跃至目标地点，再次造成相同效果。<span class=\"diminish\"><br><br>重新激活可以提前召回后，结束本技能。</span>",
+      "text": "召唤一个<span class=\"highlight\">后</span>，猛然坠落对一个区域造成{g:citadel_inline_attribute:'SpiritDamage'}。在一定延迟后，后会放出沿直线分布的方格，再次造成{g:citadel_inline_attribute:'SpiritDamage'}并施加{g:citadel_inline_attribute:'Stun'}。<br><br>被击中的英雄生命值过低时会被<span class=\"highlight\">将军</span>，直接被击倒。<br><br><span class=\"diminish\">移动（{g:citadel_binding:'ADS'}）：</span>后跳跃至目标地点，再次造成相同效果。<span class=\"diminish\"><br><br>重新激活可以提前召回后，结束本技能。</span>",
       "group": "citadel_heroes",
-      "hash": "f2cace82a834"
+      "hash": "62871c388dba"
     },
     "ability_chessmaster_queen_t2_desc": {
-      "text": "+{s:SlowPercent}%减速<br>将军{s:CheckmateThreshold}生命以下的英雄，将其淘汰",
+      "text": "+{s:SlowPercent}%减速<br>+{s:CheckmateThreshold}将军临界值",
       "group": "citadel_heroes",
-      "hash": "bca4be363e9d"
+      "hash": "2f8a9d22d92c"
     },
     "ability_chessmaster_queen_t3_desc": {
       "text": "+{s:QueenBonusMoves}步数<br>+{s:TileSteps}方格范围",
@@ -23310,9 +23315,9 @@
       "hash": "bf555858f558"
     },
     "ability_artist_tether_t1_desc": {
-      "text": "施放时：<br>获得{s:HealthRegen}生命恢复，持续{s:BuffDuration}秒，捡起时刷新",
+      "text": "绘画时：<br>获得{s:HealthRegen}生命恢复，捡起时刷新，持续{s:BuffDuration}秒",
       "group": "citadel_heroes",
-      "hash": "93463519d626"
+      "hash": "80bc24df694c"
     },
     "ability_artist_tether_t2_desc": {
       "text": "绘画时：<br>对象造成{s:OutgoingDamagePercent}%伤害",
@@ -23325,9 +23330,9 @@
       "hash": "3481c4b60306"
     },
     "ability_artist_tether/buildup": {
-      "text": "仍在绘制",
+      "text": "静物",
       "group": "citadel_heroes",
-      "hash": "2f8a5647e1de"
+      "hash": "99d7b641e923"
     },
     "ability_artist_tether/buildup/stun": {
       "text": "静物",
@@ -23345,6 +23350,11 @@
       "hash": "99d7b641e923"
     },
     "ability_artist_tether/stun": {
+      "text": "静物",
+      "group": "citadel_heroes",
+      "hash": "99d7b641e923"
+    },
+    "modifier_artist_still_life": {
       "text": "静物",
       "group": "citadel_heroes",
       "hash": "99d7b641e923"
@@ -23429,6 +23439,11 @@
       "group": "citadel_heroes",
       "hash": "b4fdb529db8f"
     },
+    "Citadel_Graph_PermanentBuff_ArtistHealer": {
+      "text": "医者素描",
+      "group": "citadel_heroes",
+      "hash": "b5048a10d57c"
+    },
     "artist_drawing_mystic": {
       "text": "秘士素描",
       "group": "citadel_heroes",
@@ -23449,15 +23464,20 @@
       "group": "citadel_heroes",
       "hash": "d2f38ed5a17c"
     },
+    "artist_drawing_healer": {
+      "text": "医者素描",
+      "group": "citadel_heroes",
+      "hash": "b5048a10d57c"
+    },
     "ability_artist_bamboogrove": {
       "text": "点墨成境",
       "group": "citadel_heroes",
       "hash": "6b8081efc8c9"
     },
     "ability_artist_bamboogrove_desc": {
-      "text": "制造一片圆形的墨迹，可以阻挡视野，并且使友军获得{g:citadel_inline_attribute:'Spirit'}。<br><br>丛林中的敌人会显形，并且离开会使他们受到{g:citadel_inline_attribute:'SpiritDamage'}，同时被{g:citadel_inline_attribute:'Silence'}和{g:citadel_inline_attribute:'Slow'}，过程中会摧毁墨迹。",
+      "text": "制造一片圆形的墨迹，可以阻挡视野，并且使友军获得{g:citadel_inline_attribute:'Spirit'}。<br><br>身处其中的敌人会显形，并且离开会使他们受到{g:citadel_inline_attribute:'SpiritDamage'}，同时被{g:citadel_inline_attribute:'Silence'}和{g:citadel_inline_attribute:'Slow'}，过程中会摧毁墨迹。",
       "group": "citadel_heroes",
-      "hash": "905812ef7a42"
+      "hash": "68f7909ecff0"
     },
     "ability_artist_bamboogrove/center/buff": {
       "text": "点墨成境",
@@ -23470,9 +23490,9 @@
       "hash": "d49ab98ded3a"
     },
     "ability_artist_bamboogrove_t3_desc": {
-      "text": "+{s:SilenceDuration}秒沉默时间<br>+{s:AbilityDuration}秒技能持续时间<br>墨迹不再被摧毁",
+      "text": "+{s:SilenceDuration}秒沉默时间<br>+{s:AbilityDuration}秒技能持续时间",
       "group": "citadel_heroes",
-      "hash": "3cbc4dbd91b7"
+      "hash": "56b6bcc36848"
     },
     "ability_artist_bamboogrove/groundaura/silence": {
       "text": "点墨成境",
@@ -23715,9 +23735,9 @@
       "hash": "a525055f2e49"
     },
     "ability_nurse_fear_t3_desc": {
-      "text": "+{s:AbilityChannelTime}秒持续施法<br>+{s:DPS_scale}元灵增强系数<br>持续施法时免疫伤害",
+      "text": "+{s:AbilityChannelTime}秒持续施法时间<br>+{s:DPS_scale}元灵增强系数<br>持续施法时受到伤害减少{s:DamageResistPctWhileChanneling}%",
       "group": "citadel_heroes",
-      "hash": "904bcb071392"
+      "hash": "bb4dac86ef13"
     },
     "FearDurationPerLeechStack_prefix": {
       "text": "+",
@@ -24140,9 +24160,9 @@
       "hash": "d82d4690745e"
     },
     "ability_nurse_adrenaline_rush_t2_desc": {
-      "text": "+{s:AbilityDuration}秒持续时间<br>+{s:HealingEffectivenessPercent}%治疗威力",
+      "text": "+{s:AbilityDuration}秒持续时间<br>+{s:HealingEffectivenessPercent}%受疗量",
       "group": "citadel_heroes",
-      "hash": "2f2fb7818b2f"
+      "hash": "1dbef0bab2ba"
     },
     "ability_nurse_adrenaline_rush_t3_desc": {
       "text": "+{s:RushTimeScaleBonusPercent}%狂飙速度<br>驱散非大招减益",
@@ -24230,14 +24250,14 @@
       "hash": "eb6aaba1a1ca"
     },
     "HealingEffectivenessPercent_label": {
-      "text": "治疗威力",
+      "text": "受疗量",
       "group": "citadel_heroes",
-      "hash": "25214b23b830"
+      "hash": "c9d3f046e7d0"
     },
     "HealingEffectivenessPercent_postvalue_label": {
-      "text": "治疗威力",
+      "text": "受疗量",
       "group": "citadel_heroes",
-      "hash": "25214b23b830"
+      "hash": "c9d3f046e7d0"
     },
     "HealingEffectivenessPercent_prefix": {
       "text": "+",
@@ -25808,6 +25828,11 @@
       "text": "被定身",
       "group": "citadel_attributes",
       "hash": "01a39b6fb00d"
+    },
+    "modifier_citadel_sleep": {
+      "text": "沉睡中",
+      "group": "citadel_attributes",
+      "hash": "f2af72f78110"
     },
     "modifier_citadel_silenced": {
       "text": "被沉默",
@@ -34894,6 +34919,26 @@
       "group": "citadel_attributes",
       "hash": "4345cb1fa278"
     },
+    "GravityScaleIncrease_label": {
+      "text": "重力比例",
+      "group": "citadel_attributes",
+      "hash": "e653c76e525f"
+    },
+    "GravityScaleIncrease_postvalue_label": {
+      "text": "重力比例",
+      "group": "citadel_attributes",
+      "hash": "e653c76e525f"
+    },
+    "GravityScaleIncrease_prefix": {
+      "text": "+",
+      "group": "citadel_attributes",
+      "hash": "a979ef10cc6f"
+    },
+    "GravityScaleIncrease_postfix": {
+      "text": "%",
+      "group": "citadel_attributes",
+      "hash": "4345cb1fa278"
+    },
     "AirBonusDamageGiven_label": {
       "text": "空中时伤害",
       "group": "citadel_attributes",
@@ -42394,56 +42439,6 @@
       "group": "citadel_main",
       "hash": "cf1656101ed5"
     },
-    "Citadel_Hud_Toast_SeasonalAchievement2024Unlocked": {
-      "text": "{g:citadel_persona:account_id}获得了{s:hero_name}的节日奖励！",
-      "group": "citadel_main",
-      "hash": "44fe52ca1494"
-    },
-    "Citadel_Showcase_SeasonalAchievement2024": {
-      "text": "2024年12月",
-      "group": "citadel_main",
-      "hash": "0e7912c8d181"
-    },
-    "Citadel_Hud_Toast_SeasonalAchievement2025Unlocked": {
-      "text": "{g:citadel_persona:account_id}解锁的{s:hero_name}装饰品！",
-      "group": "citadel_main",
-      "hash": "ad972e033e97"
-    },
-    "Citadel_Showcase_SeasonalAchievement2025": {
-      "text": "2025年12月",
-      "group": "citadel_main",
-      "hash": "927df81171b5"
-    },
-    "Citadel_Hud_Toast_SeasonalKill": {
-      "text": "<span class=\"Emphasis\">{g:citadel_persona:killer_account_id}</span>获得了",
-      "group": "citadel_main",
-      "hash": "97ef7d4d4ec2"
-    },
-    "Citadel_Hud_Toast_SeasonalKill2": {
-      "text": "雪球击倒！",
-      "group": "citadel_main",
-      "hash": "176394fa7ad7"
-    },
-    "Citadel_Event_Holiday_Challenge2025_Title": {
-      "text": "2025年假日挑战",
-      "group": "citadel_main",
-      "hash": "86e52bb9759b"
-    },
-    "Citadel_Event_Holiday_Challenge2025_Desc": {
-      "text": "使用每位英雄赢下一场比赛就能获得大本营的树上一件独特的装饰品。",
-      "group": "citadel_main",
-      "hash": "c0f21221e63f"
-    },
-    "Citadel_Event_Holiday_Challenge2025_Snowball": {
-      "text": "向圣诞树上添加更多装饰品可以升级你的投掷<span class=\"Emphasis\">雪球</span>主动道具。",
-      "group": "citadel_main",
-      "hash": "6110423b91d8"
-    },
-    "Citadel_Event_Holiday_Challenge2025_Snowball_Level": {
-      "text": "等级 {i:item_level} / {i:item_max_level}",
-      "group": "citadel_main",
-      "hash": "9950d862068c"
-    },
     "Citadel_Hud_Voting_Poster_Tooltip_Header": {
       "text": "选择你的海报",
       "group": "citadel_main",
@@ -48853,6 +48848,11 @@
       "text": "按下{g:citadel_binding:'Attack'}提前飞向目标。",
       "group": "citadel_main",
       "hash": "e7aab904f245"
+    },
+    "citadel_rejuvenator_hud_hint": {
+      "text": "生效的复生石的剩余时间，或者没有复活石处于生效时中区头目的复活时间。",
+      "group": "citadel_main",
+      "hash": "48cef968467f"
     },
     "fire_rate_pickup/small_fire_rate": {
       "text": "射速提高",
@@ -55779,11 +55779,6 @@
       "group": "citadel_main",
       "hash": "2aa68ca03ae7"
     },
-    "menu_seasonal_2025": {
-      "text": "假日挑战",
-      "group": "citadel_main",
-      "hash": "d57cf063c096"
-    },
     "menu_new_violator": {
       "text": "全新",
       "group": "citadel_main",
@@ -61839,11 +61834,6 @@
       "group": "citadel_main",
       "hash": "f39ec14f6522"
     },
-    "Citadel_Hideout_XmasGlobeEarned_Temp": {
-      "text": "冬季更新期间{s:hideout_owner}获得的纪念品",
-      "group": "citadel_main",
-      "hash": "01c746f162f0"
-    },
     "Citadel_Hideout_VaultHint01": {
       "text": "{g:citadel_binding:'AbilityMelee'}近战攻击后收集魂魄",
       "group": "citadel_main",
@@ -61853,11 +61843,6 @@
       "text": "闪光期间进行{g:citadel_binding:'AbilityMelee'}近战攻击可获得加成，近战重击可获得更多加成",
       "group": "citadel_main",
       "hash": "9b9910d760a0"
-    },
-    "Citadel_Hideout_HolidayChallenge": {
-      "text": "按下{g:citadel_binding:'Interact'}查看假日挑战进度",
-      "group": "citadel_main",
-      "hash": "5327c0e6b83c"
     },
     "Citadel_Hideout_HeavyCrate": {
       "text": "按住{g:citadel_binding:'AbilityMelee'}使用近战重击进行破坏",
@@ -62210,11 +62195,6 @@
       "hash": "0ca79200a9a5"
     },
     "npc_newscaster": {
-      "text": "新闻播报员",
-      "group": "citadel_main",
-      "hash": "4b1deb628ce9"
-    },
-    "npc_seasonal": {
       "text": "新闻播报员",
       "group": "citadel_main",
       "hash": "4b1deb628ce9"
@@ -62933,6 +62913,16 @@
       "text": "钟楼",
       "group": "citadel_main",
       "hash": "242bfc347b2b"
+    },
+    "AbilityButtonHint_HalloweenTroll": {
+      "text": "捣蛋就给糖 - 近战重击可给出糖果",
+      "group": "citadel_main",
+      "hash": "e6d3eff770c5"
+    },
+    "AbilityButtonHint_HalloweenCauldron": {
+      "text": "近战重击后获得糖果",
+      "group": "citadel_main",
+      "hash": "bd9757e8a179"
     }
   }
 }

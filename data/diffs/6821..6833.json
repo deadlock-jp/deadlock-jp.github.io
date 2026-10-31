@@ -1,0 +1,1616 @@
+{
+  "from": "6821",
+  "to": "6833",
+  "generatedAt": "2026-10-31T02:48:15.037Z",
+  "entries": [
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "1",
+      "path": "ability_fire_bomb.upgrades.T3.Damage",
+      "before": null,
+      "after": 0.4
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "1",
+      "path": "ability_incendiary_projectile.upgrades.T2.LifestealPercentHero",
+      "before": 15,
+      "after": 20
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "10",
+      "path": "citadel_ability_chrono_swap.properties.AbilityCooldown",
+      "before": 110,
+      "after": 95
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "12",
+      "path": "ability_ice_dome.properties.AbilityCooldown",
+      "before": 185,
+      "after": 190
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "12",
+      "path": "ability_ice_dome.upgrades.T1.AbilityCooldown",
+      "before": -20,
+      "after": -30
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "12",
+      "path": "ability_ice_dome.upgrades.T2.FireRateSlow",
+      "before": null,
+      "after": 20
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "12",
+      "path": "ability_ice_dome.upgrades.T3.BonusHealthRegen",
+      "before": 65,
+      "after": 75
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "16",
+      "path": "ability_nano_catform.upgrades.T3.DamageAmpDuration",
+      "before": 6,
+      "after": 8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "16",
+      "path": "ability_nano_dash.upgrades.T3.ImpactDamage",
+      "before": 60,
+      "after": 90
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "17",
+      "path": "ability_charged_shot.upgrades.T2.AbilityCooldownBetweenCharge",
+      "before": null,
+      "after": -2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "17",
+      "path": "ability_charged_shot.upgrades.T3.AbilityCooldownBetweenCharge",
+      "before": -3,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "17",
+      "path": "ability_charged_shot.upgrades.T3.WallRicochet",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "18",
+      "path": "ability_burrow.properties.DPS",
+      "before": 75,
+      "after": 65
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "18",
+      "path": "ability_burrow.properties.DPS@scale",
+      "before": 1.488,
+      "after": 1.339
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "18",
+      "path": "ability_burrow.upgrades.T1.DPS",
+      "before": 50,
+      "after": 45
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "18",
+      "path": "ability_intimidate.properties.Damage",
+      "before": 50,
+      "after": 45
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "18",
+      "path": "ability_intimidate.properties.Damage@scale",
+      "before": 0.75,
+      "after": 0.675
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "18",
+      "path": "ability_intimidate.upgrades.T1.Damage",
+      "before": 35,
+      "after": 30
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "18",
+      "path": "ability_throw_sand.properties.Damage",
+      "before": 40,
+      "after": 35
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "18",
+      "path": "ability_throw_sand.upgrades.T1.Damage",
+      "before": 50,
+      "after": 45
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "18",
+      "path": "ability_ult_combo.properties.DPS",
+      "before": 40,
+      "after": 35
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "18",
+      "path": "ability_ult_combo.properties.DPS@scale",
+      "before": 0.6,
+      "after": 0.54
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "18",
+      "path": "ability_ult_combo.upgrades.T3.DPS",
+      "before": 40,
+      "after": 35
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "18",
+      "path": "ability_ult_combo.upgrades.T3.DPS#2",
+      "before": 0.4,
+      "after": 0.36
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "18",
+      "path": "growth.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL",
+      "before": 0.0847,
+      "after": 0.0881
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "18",
+      "path": "growth.MODIFIER_VALUE_TECH_POWER",
+      "before": 1.1,
+      "after": 0.6
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "19",
+      "path": "citadel_ability_shiv_dagger.properties.FullRageCurrentHealthDamagePct",
+      "before": 3.5,
+      "after": 4
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "19",
+      "path": "citadel_ability_shiv_dagger.properties.FullRageCurrentHealthDamagePct@scale",
+      "before": 0.01,
+      "after": 0.015
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "19",
+      "path": "citadel_ability_shiv_dagger.upgrades.T3.FullRageCurrentHealthDamagePct",
+      "before": null,
+      "after": 0.01
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "19",
+      "path": "citadel_ability_shiv_killing_blow.properties.RecastWindow",
+      "before": 16,
+      "after": 12
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "19",
+      "path": "growth.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL_ALT_FIRE",
+      "before": 0.24,
+      "after": 0.228
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "2",
+      "path": "citadel_ability_static_charge.upgrades.T3.StunDuration",
+      "before": 0.9,
+      "after": 1.1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "25",
+      "path": "ability_warden_crowd_control.properties.WeaponPowerDebuff",
+      "before": -25,
+      "after": -30
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "25",
+      "path": "ability_warden_high_alert.properties.MoveSpeedBonusPct",
+      "before": 15,
+      "after": 20
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "25",
+      "path": "ability_warden_riot_protocol.upgrades.T2.AbilityCooldown",
+      "before": -30,
+      "after": -40
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "25",
+      "path": "ability_warden_riot_protocol.upgrades.T2.PulseDPS",
+      "before": 40.5,
+      "after": 50
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "27",
+      "path": "citadel_ability_flying_strike.properties.AbilityCastRange",
+      "before": 26,
+      "after": 23
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "27",
+      "path": "citadel_ability_flying_strike.upgrades.T3.AbilityCastRange",
+      "before": 15,
+      "after": 8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "27",
+      "path": "citadel_ability_infinity_slash.properties.AbilityCooldown",
+      "before": 150,
+      "after": 160
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "27",
+      "path": "citadel_ability_infinity_slash.upgrades.T2.",
+      "before": -20,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "27",
+      "path": "citadel_ability_infinity_slash.upgrades.T2.AbilityCooldown",
+      "before": null,
+      "after": -30
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "27",
+      "path": "citadel_ability_power_slash.properties.FullChargeDamage@scale",
+      "before": 1.85,
+      "after": 1.96
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "27",
+      "path": "citadel_ability_power_slash.upgrades.T3.FullChargeDamage#2",
+      "before": 0.5,
+      "after": 0.53
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "31",
+      "path": "citadel_ability_lash.upgrades.T3.JumpVelocity",
+      "before": null,
+      "after": 4
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "35",
+      "path": "growth.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL_ALT_FIRE",
+      "before": 1.44,
+      "after": 1.512
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "35",
+      "path": "viscous_goo_grenade.upgrades.T1.Damage",
+      "before": 36,
+      "after": 45
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "4",
+      "path": "ability_blood_bomb.properties.Damage@scale",
+      "before": 1.22,
+      "after": 1.35
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "52",
+      "path": "mirage_teleport.properties.CombatBarrier",
+      "before": 0,
+      "after": 400
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "52",
+      "path": "mirage_teleport.properties.InterruptCooldown",
+      "before": 4,
+      "after": 5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "52",
+      "path": "mirage_teleport.properties.MovementSpeedBonusDuration",
+      "before": 0,
+      "after": 12
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "52",
+      "path": "mirage_teleport.properties.TeleportCompletedTime",
+      "before": 2,
+      "after": 3
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "52",
+      "path": "mirage_teleport.upgrades.T1.MovementSpeedBonusDuration",
+      "before": 12,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "52",
+      "path": "mirage_teleport.upgrades.T2.AbilityCooldown",
+      "before": null,
+      "after": -65
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "52",
+      "path": "mirage_teleport.upgrades.T2.CombatBarrier",
+      "before": 400,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "52",
+      "path": "mirage_teleport.upgrades.T2.CombatBarrier#2",
+      "before": 0.6,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "52",
+      "path": "mirage_teleport.upgrades.T3.AbilityCooldown",
+      "before": -90,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "52",
+      "path": "mirage_teleport.upgrades.T3.CombatBarrier",
+      "before": null,
+      "after": 0.8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "52",
+      "path": "mirage_teleport.upgrades.T3.UninterruptibleByDamage",
+      "before": null,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "6",
+      "path": "citadel_ability_bull_heal.upgrades.T3.DPS",
+      "before": 18,
+      "after": 22
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "6",
+      "path": "citadel_weapon_bull_set.weapon.bulletDamage",
+      "before": 3.6,
+      "after": 3.78
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "64",
+      "path": "ability_drifter_hunger.upgrades.T3.AmpDamagePercent",
+      "before": 11,
+      "after": 12
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "64",
+      "path": "citadel_weapon_drifter_set.weapon.bulletDamage",
+      "before": 19.5,
+      "after": 20.1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "64",
+      "path": "drifter_darkness.upgrades.T3.AbilityDuration",
+      "before": 2.5,
+      "after": 2.75
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "65",
+      "path": "ability_priest_weaponswap.properties.BonusDamage",
+      "before": 115,
+      "after": 95
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "65",
+      "path": "ability_priest_weaponswap.properties.BonusDamage@scale",
+      "before": 3,
+      "after": 3.6
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "66",
+      "path": "ability_frank_painaura.upgrades.T3.IncomingDamagePercent",
+      "before": 15,
+      "after": 16
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "67",
+      "path": "citadel_weapon_bookworm_set2.weapon.bulletDamage",
+      "before": 35,
+      "after": 32
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "67",
+      "path": "growth.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL",
+      "before": 0.52,
+      "after": 0.61
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "69",
+      "path": "ability_doorman_luggage_cart.upgrades.T2.WallImpactDamage",
+      "before": 75,
+      "after": 90
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "69",
+      "path": "ability_doorman_luggage_cart.upgrades.T3.AbilityCooldown",
+      "before": -15,
+      "after": -18
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "7",
+      "path": "citadel_ability_card_toss.properties.HeartHeal",
+      "before": 60,
+      "after": 45
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "7",
+      "path": "citadel_ability_projectmind.properties.AbilityCastDelay",
+      "before": 0.75,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "7",
+      "path": "citadel_ability_projectmind.properties.AbilityCooldown",
+      "before": 46,
+      "after": 50
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "72",
+      "path": "ability_punkgoat_blasted.properties.AbilityCooldown",
+      "before": 27,
+      "after": 25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "72",
+      "path": "ability_punkgoat_goatflip.upgrades.T3.MaxHealthBuffDuration",
+      "before": 16,
+      "after": 20
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "72",
+      "path": "ability_punkgoat_goatflip.upgrades.T3.MaxHealthBuffPct",
+      "before": 10,
+      "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "76",
+      "path": "ability_necro_gravestone.upgrades.T2.SummonFrequency",
+      "before": -0.3,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "76",
+      "path": "ability_necro_gravestone.upgrades.T3.SummonFrequency",
+      "before": null,
+      "after": -0.3
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "76",
+      "path": "ability_necro_zombiewall.properties.GrabHeight",
+      "before": null,
+      "after": 1.75
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "76",
+      "path": "ability_necro_zombiewall.properties.ZombieWallDeployTime",
+      "before": 0.6,
+      "after": 0.8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "76",
+      "path": "growth.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL",
+      "before": 0.054,
+      "after": 0.052
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "76",
+      "path": "stat.EMaxMoveSpeed",
+      "before": 7,
+      "after": 6.7
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "77",
+      "path": "ability_fencer_riposte.properties.StunDuration",
+      "before": 0.8,
+      "after": 1.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "77",
+      "path": "ability_fencer_riposte.upgrades.T2.StunDuration",
+      "before": 0.4,
+      "after": 0.6
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "8",
+      "path": "citadel_ability_shieldedsentry.properties.NonHeroDamagePercentOutgoing",
+      "before": 50,
+      "after": 65
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "8",
+      "path": "citadel_ability_shieldedsentry.properties.TurretBaseHealth@scale",
+      "before": 9,
+      "after": 10
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "80",
+      "path": "stat.EBaseHealthRegen",
+      "before": 2.5,
+      "after": 3
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "81",
+      "path": "ability_unicorn_dazzlingorb.properties.Damage",
+      "before": 140,
+      "after": 125
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.properties.DamagePerShrapnel",
+      "before": 70,
+      "after": 60
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.upgrades.T2.DamagePerShrapnel",
+      "before": 70,
+      "after": 60
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_scrap_grenade.upgrades.T3.BigExplosionDamage",
+      "before": 300,
+      "after": 275
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.properties.AbilityCooldown",
+      "before": 160,
+      "after": 180
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_ratking_set.weapon.bulletDamage",
+      "before": 6,
+      "after": 5.7
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "growth.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL",
+      "before": 0.18,
+      "after": 0.144
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.properties.Damage@scale",
+      "before": 1.3,
+      "after": 0.9
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_forkpiece.upgrades.T3.AbilityCooldown",
+      "before": -12,
+      "after": -10
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.AbilityCooldown",
+      "before": 210,
+      "after": 240
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.CheckmateThreshold",
+      "before": 0,
+      "after": 100
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.CheckmateThreshold@scale",
+      "before": 0,
+      "after": 5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.properties.Damage@scale",
+      "before": 1.4,
+      "after": 1.6
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.upgrades.T2.CheckmateThreshold",
+      "before": 200,
+      "after": 150
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_queen.upgrades.T2.CheckmateThreshold#2",
+      "before": 5,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.Damage@scale",
+      "before": 0.64,
+      "after": 0.85
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.properties.GroundAuraHeight",
+      "before": 4,
+      "after": 1
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.upgrades.T1.FadingSlowPercent",
+      "before": 15,
+      "after": 25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.upgrades.T3.MaxStacks",
+      "before": 10,
+      "after": 5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "ability_chessmaster_throwbishop.upgrades.T3.TechArmorDamageReductionPerStack",
+      "before": -2.5,
+      "after": -5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "citadel_weapon_chessmaster_shotgun.weapon.bulletDamage",
+      "before": 30,
+      "after": 25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "85",
+      "path": "stat.ECritDamageBonusScale",
+      "before": 1,
+      "after": 0.8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.properties.AbilityCooldown",
+      "before": 165,
+      "after": 180
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.properties.AbilityDuration@scale",
+      "before": 0.04,
+      "after": 0.01
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_bamboogrove.upgrades.T3.DestroyOnDamage",
+      "before": -1,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.properties.StunDuration",
+      "before": 1,
+      "after": 0.9
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.upgrades.T1.HealthRegen#2",
+      "before": 0.25,
+      "after": 0.15
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "86",
+      "path": "ability_artist_tether.upgrades.T3.StunDuration",
+      "before": 0.35,
+      "after": 0.45
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "87",
+      "path": "ability_nurse_adrenaline_rush.upgrades.T3.RushTimeScaleBonusPercent",
+      "before": 15,
+      "after": 20
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "87",
+      "path": "ability_nurse_fear.properties.BuildupLookAngleVertical",
+      "before": null,
+      "after": 50
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "87",
+      "path": "ability_nurse_fear.properties.BuildupTime",
+      "before": 1.3,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "87",
+      "path": "ability_nurse_fear.upgrades.T3.ChannelDamageImmune",
+      "before": 1,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "87",
+      "path": "ability_nurse_fear.upgrades.T3.DamageResistPctWhileChanneling",
+      "before": null,
+      "after": 50
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "87",
+      "path": "ability_nurse_healing_needles.properties.HealRegen",
+      "before": 25,
+      "after": 22
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "87",
+      "path": "ability_nurse_healing_needles.properties.HealRegen@scale",
+      "before": 0.2,
+      "after": 0.24
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "87",
+      "path": "ability_nurse_healing_needles.upgrades.T2.HealRegen",
+      "before": 20,
+      "after": 16
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "87",
+      "path": "ability_nurse_leech_therapy.properties.LeechGroundLifetime",
+      "before": 180,
+      "after": 120
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "87",
+      "path": "ability_nurse_leech_therapy.properties.LeechGroundLifetimePerMinute",
+      "before": null,
+      "after": 3
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "87",
+      "path": "citadel_weapon_nurse_set.weapon.bulletDamage",
+      "before": 14.858,
+      "after": 13.372
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "88",
+      "path": "ability_baba_bench_run.properties.HeavyMeleeSlowDuration",
+      "before": 4,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "88",
+      "path": "ability_baba_bench_run.properties.LightKickKnockbackDistance",
+      "before": 10,
+      "after": 8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "88",
+      "path": "ability_baba_bubbling_brew.properties.DebuffDuration",
+      "before": 22,
+      "after": 16
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "88",
+      "path": "ability_baba_hexing_brew.properties.BarrierLockTime",
+      "before": 2.5,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "88",
+      "path": "ability_baba_hexing_brew.properties.BarrierWindow",
+      "before": null,
+      "after": 1.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "88",
+      "path": "ability_baba_hexing_brew.properties.BrewTime",
+      "before": 1.5,
+      "after": 0
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "88",
+      "path": "ability_baba_hexing_brew.properties.FireLockTime",
+      "before": 4.5,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "88",
+      "path": "ability_baba_hexing_brew.properties.FireWindow",
+      "before": null,
+      "after": 1.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "88",
+      "path": "ability_baba_hexing_brew.properties.SilenceDuration",
+      "before": 3,
+      "after": 2.75
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "88",
+      "path": "ability_baba_hexing_brew.properties.SilenceLockTime",
+      "before": 3.5,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "88",
+      "path": "ability_baba_hexing_brew.properties.SilenceWindow",
+      "before": null,
+      "after": 1.5
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_ability_power_shard",
+      "path": "properties.AbilityPostCastDuration",
+      "before": 0.5,
+      "after": 0.2
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_aprounds",
+      "path": "properties.ProcChance",
+      "before": 55,
+      "after": 60
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_banshee_slugs",
+      "path": "properties.HealAmpReceivePenaltyPercent",
+      "before": -35,
+      "after": -40
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_banshee_slugs",
+      "path": "properties.HealAmpRegenPenaltyPercent",
+      "before": -35,
+      "after": -40
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_cloaking_device_active",
+      "path": "properties.AmbushBonusFireRate",
+      "before": 25,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_cloaking_device_active",
+      "path": "properties.AmbushBonusMeleeDamage",
+      "before": 25,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_cloaking_device_active",
+      "path": "properties.AmbushBonusWeaponDamage",
+      "before": null,
+      "after": 50
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_cloaking_device_active",
+      "path": "properties.AmbushBuildUpDuration",
+      "before": null,
+      "after": 6
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_cloaking_device_active",
+      "path": "upgrades.T1.AmbushBonusFireRate",
+      "before": 35,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_cloaking_device_active",
+      "path": "upgrades.T1.AmbushBonusMeleeDamage",
+      "before": 30,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_cloaking_device_active",
+      "path": "upgrades.T1.AmbushBonusWeaponDamage",
+      "before": null,
+      "after": 35
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_close_quarter_combat",
+      "path": "properties.SlowDuration",
+      "before": 2,
+      "after": 2.5
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_damage_recycler",
+      "path": "properties.AbilityLifestealPercentHero",
+      "before": 28,
+      "after": 30
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_damage_recycler",
+      "path": "properties.BulletLifestealPercent",
+      "before": 28,
+      "after": 30
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_divine_barrier",
+      "path": "properties.AbilityCooldown",
+      "before": 45,
+      "after": 55
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_express_shot",
+      "path": "properties.ProcBaseAttackDamagePercentAltFire",
+      "before": 40,
+      "after": 38
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_express_shot",
+      "path": "properties.ProcBaseAttackDamagePercentAltFire@scale",
+      "before": 1.3,
+      "after": 1.24
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_focus_lens",
+      "path": "properties.AbilityCooldown",
+      "before": 45,
+      "after": 40
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_fury_trance",
+      "path": "properties.ActiveBonusMoveSpeed",
+      "before": 1,
+      "after": 1.5
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_fury_trance",
+      "path": "properties.BaseAttackDamagePercent",
+      "before": 6,
+      "after": 10
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_fury_trance",
+      "path": "properties.BulletLifestealPercent",
+      "before": 14,
+      "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_glass_cannon",
+      "path": "properties.BaseAttackDamagePercent",
+      "before": 80,
+      "after": 85
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_goose_egg",
+      "path": "properties.OutgoingDamagePenaltyPercent",
+      "before": -15,
+      "after": -12
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_healbane",
+      "path": "properties.HealOnKill",
+      "before": 275,
+      "after": 170
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_healbane",
+      "path": "properties.HealOnKill@scale",
+      "before": null,
+      "after": 3
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_healing_booster",
+      "path": "components.upgrade_endurance",
+      "before": 1,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_healing_booster",
+      "path": "properties.BonusHealthRegen",
+      "before": 3,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_healing_booster",
+      "path": "properties.OutOfCombatHealthRegen",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_healing_booster",
+      "path": "upgrades.T1.BonusHealthRegen",
+      "before": 9,
+      "after": null
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_health_nova",
+      "path": "properties.TotalHealthRegen@scale",
+      "before": 6,
+      "after": 1.1
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_health_stealing_magic",
+      "path": "properties.AbilityLifestealPercentHero",
+      "before": 13,
+      "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_health_stealing_magic",
+      "path": "properties.TechPower",
+      "before": 6,
+      "after": 8
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_high_velocity_mag",
+      "path": "properties.BonusBulletSpeedPercent",
+      "before": 60,
+      "after": 45
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_improved_bullet_armor",
+      "path": "properties.BulletResist",
+      "before": 30,
+      "after": 35
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_improved_bullet_armor",
+      "path": "properties.OutOfCombatHealthRegen",
+      "before": 3,
+      "after": 5
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_infuser",
+      "path": "properties.AbilityLifestealPercentHero",
+      "before": 70,
+      "after": 75
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_infuser",
+      "path": "properties.AbilityLifestealPercentHeroPassive",
+      "before": 13,
+      "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_infuser",
+      "path": "properties.TechPower",
+      "before": 6,
+      "after": 8
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_juggernaut",
+      "path": "properties.BonusHealthRegen",
+      "before": 8,
+      "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_magic_slow",
+      "path": "properties.GroundDashReductionPercent",
+      "before": -10,
+      "after": -12
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_melee_rebuttal",
+      "path": "properties.ParryCooldownReduction",
+      "before": 1.75,
+      "after": 1.25
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_metal_skin",
+      "path": "properties.GravityScale",
+      "before": null,
+      "after": 20
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_regenerating_bullet_shield",
+      "path": "properties.BaseAttackDamagePercent",
+      "before": 18,
+      "after": 22
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_resonant_healing",
+      "path": "properties.HealingPerCast",
+      "before": 65,
+      "after": 40
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_resonant_healing",
+      "path": "properties.HealingPerCast@scale",
+      "before": 1.7,
+      "after": 1.4
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_resonant_healing",
+      "path": "properties.Regeneration@scale",
+      "before": 0.035,
+      "after": 0.025
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_rupture",
+      "path": "properties.HealAmpReceivePenaltyPercent",
+      "before": -50,
+      "after": -55
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_rupture",
+      "path": "properties.HealAmpRegenPenaltyPercent",
+      "before": -50,
+      "after": -55
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_spirit_bubble",
+      "path": "properties.TechResist",
+      "before": 18,
+      "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_spirit_sap",
+      "path": "properties.AbilityCastRange",
+      "before": 40,
+      "after": 35
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_spirit_sap",
+      "path": "properties.AbilityCooldown",
+      "before": 18,
+      "after": 22
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_surging_power",
+      "path": "properties.ActiveBonusLifesteal",
+      "before": 70,
+      "after": 75
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_surging_power",
+      "path": "properties.BaseAttackDamagePercent",
+      "before": 6,
+      "after": 10
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_surging_power",
+      "path": "properties.BulletLifestealPercent",
+      "before": 13,
+      "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_targeted_silence",
+      "path": "properties.BonusHealth",
+      "before": 50,
+      "after": 90
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_tech_damage_pulse",
+      "path": "properties.MeleeResistPercent",
+      "before": 18,
+      "after": 22
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_tech_overflow",
+      "path": "properties.AbilityLifestealPercentHero",
+      "before": 13,
+      "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_tech_overflow",
+      "path": "properties.TechPower",
+      "before": 6,
+      "after": 8
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_toxic_bullets",
+      "path": "properties.HealAmpReceivePenaltyPercent",
+      "before": -35,
+      "after": -40
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_toxic_bullets",
+      "path": "properties.HealAmpRegenPenaltyPercent",
+      "before": -35,
+      "after": -40
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_ultimate_burst",
+      "path": "properties.Damage@scale",
+      "before": null,
+      "after": 0.35
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_ultimate_burst",
+      "path": "properties.GroundDashReductionPercent",
+      "before": -10,
+      "after": -12
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_vampire",
+      "path": "properties.BaseAttackDamagePercent",
+      "before": 6,
+      "after": 10
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_vampire",
+      "path": "properties.BulletLifestealPercent",
+      "before": 13,
+      "after": 15
+    }
+  ],
+  "excludedFieldCount": 26
+}

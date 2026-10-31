@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6821",
-  "upstreamCommit": "6821",
-  "generatedAt": "2026-10-27T09:00:10.609Z",
+  "clientVersion": "6833",
+  "upstreamCommit": "6833",
+  "generatedAt": "2026-10-31T02:48:14.847Z",
   "language": "koreana",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 618,
-    "citadel_heroes": 3968,
-    "citadel_attributes": 1986,
+    "citadel_heroes": 3971,
+    "citadel_attributes": 1991,
     "citadel_gc": 221,
-    "citadel_main": 5259
+    "citadel_main": 5248
   },
   "tokens": {
     "hero_vampire:n": {
@@ -4570,9 +4570,9 @@
       "hash": "34211421beb8"
     },
     "upgrade_resonant_healing_desc": {
-      "text": "능력을 시전할 때 자신을 <span class=\"highlight\">치유</span>하고 짧은 시간 동안 보너스 <span class=\"highlight\">이동 속도</span>를 얻습니다.",
+      "text": "전투 중 능력을 시전할 때 자신을 <span class=\"highlight\">치유</span>하고 짧은 시간 동안 보너스 <span class=\"highlight\">이동 속도</span>를 얻습니다.",
       "group": "citadel_mods",
-      "hash": "b2aeda4d20f9"
+      "hash": "edc709dbf775"
     },
     "HealingPerCast_Label": {
       "text": "능력 시전 시 치유",
@@ -4925,14 +4925,14 @@
       "hash": "4fa04a44283e"
     },
     "HealOnActivate_label": {
-      "text": "시전 시 체력 치유",
+      "text": "치유량",
       "group": "citadel_mods",
-      "hash": "905f71589a31"
+      "hash": "ccb93e2a7cbd"
     },
     "HealOnActivate_postvalue_label": {
-      "text": "시전 시 체력 치유",
+      "text": "치유량",
       "group": "citadel_mods",
-      "hash": "905f71589a31"
+      "hash": "ccb93e2a7cbd"
     },
     "damage_reduction_postfix": {
       "text": "%",
@@ -5300,9 +5300,9 @@
       "hash": "e3b2ae323be7"
     },
     "upgrade_cloaking_device_active_ambush_desc": {
-      "text": "<br>공격하거나 능력을 시전하여 은신 상태가 해제되면 <span class=\"highlight\">기습</span>이 시작됩니다. 일시적으로 보너스 <span class=\"highlight\">연사 속도</span>, <span class=\"highlight\">마력</span>, <span class=\"highlight\">근거리 피해</span>를 얻습니다.",
+      "text": "<br>공격하거나 능력을 시전하여 은신 상태가 해제되면 <span class=\"highlight\">기습</span>이 시작됩니다. 일시적으로 보너스 <span class=\"highlight\">무기 피해</span>와 <span class=\"highlight\">마력</span>이 부여됩니다.",
       "group": "citadel_mods",
-      "hash": "4abf6cf068a6"
+      "hash": "94baa11f2351"
     },
     "modifier_cloaking_device_active_stealth": {
       "text": "그림자 장막 - 은신",
@@ -5329,22 +5329,22 @@
       "group": "citadel_mods",
       "hash": "901d961dd6a6"
     },
-    "AmbushBonusFireRate_prefix": {
+    "AmbushBonusWeaponDamage_prefix": {
       "text": "+",
       "group": "citadel_mods",
       "hash": "a979ef10cc6f"
     },
-    "AmbushBonusFireRate_label": {
-      "text": "기습 시 연사 속도",
+    "AmbushBonusWeaponDamage_label": {
+      "text": "기습 무기 피해",
       "group": "citadel_mods",
-      "hash": "3939d02fa771"
+      "hash": "453f70c54f46"
     },
-    "AmbushBonusFireRate_postvalue_label": {
-      "text": "기습 시 연사 속도",
+    "AmbushBonusWeaponDamage_postvalue_label": {
+      "text": "기습 무기 피해",
       "group": "citadel_mods",
-      "hash": "3939d02fa771"
+      "hash": "453f70c54f46"
     },
-    "AmbushBonusFireRate_postfix": {
+    "AmbushBonusWeaponDamage_postfix": {
       "text": "%",
       "group": "citadel_mods",
       "hash": "4345cb1fa278"
@@ -5375,6 +5375,21 @@
       "hash": "faaeaf32e696"
     },
     "AmbushDuration_postfix": {
+      "text": "초",
+      "group": "citadel_mods",
+      "hash": "3845248e2861"
+    },
+    "AmbushBuildUpDuration_label": {
+      "text": "기습 최대 효과 도달 시간",
+      "group": "citadel_mods",
+      "hash": "afc00bebd138"
+    },
+    "AmbushBuildUpDuration_postvalue_label": {
+      "text": "기습 최대 효과 도달 시간",
+      "group": "citadel_mods",
+      "hash": "afc00bebd138"
+    },
+    "AmbushBuildUpDuration_postfix": {
       "text": "초",
       "group": "citadel_mods",
       "hash": "3845248e2861"
@@ -5734,40 +5749,25 @@
       "group": "citadel_mods",
       "hash": "b68fd999ea55"
     },
-    "cosmetic_ability_snowball": {
-      "text": "눈덩이",
+    "HealPerMinute_label": {
+      "text": "분당 치유량 증가",
       "group": "citadel_mods",
-      "hash": "d5567dfd048f"
+      "hash": "2202ffd50fd9"
     },
-    "cosmetic_ability_snowball_desc": {
-      "text": "친구와 적에게 눈덩이를 던져보세요. <span class=\"highlight\">2025 크리스마스 챌린지</span> 진척도에 따라 사거리 및 다른 속성이 향상됩니다.<br><br><span class=\"diminish\">아군에게는 눈덩이를 던져도 피해를 입히지 않으며 쿨다운이 초기화됩니다.</span>",
+    "TechPowerPerMinute_label": {
+      "text": "분당 마력 증가",
       "group": "citadel_mods",
-      "hash": "29559cba4101"
+      "hash": "f453bf38a17a"
     },
-    "SnowballSpeed_label": {
-      "text": "던지기 속도",
+    "BonusFireRatePerMinute_label": {
+      "text": "분당 연사 속도 증가",
       "group": "citadel_mods",
-      "hash": "31c32b766f0e"
+      "hash": "6400c11f3df2"
     },
-    "SnowballSpeed_postvalue_label": {
-      "text": "속도",
+    "BonusMoveSpeedPerMinute_label": {
+      "text": "분당 이동 속도 증가",
       "group": "citadel_mods",
-      "hash": "e8a20d8c72e1"
-    },
-    "SnowballSpeed_postfix": {
-      "text": "m(초당)",
-      "group": "citadel_mods",
-      "hash": "2a33fe8c33ae"
-    },
-    "SnowballCount_label": {
-      "text": "던진 눈덩이",
-      "group": "citadel_mods",
-      "hash": "d67215217e34"
-    },
-    "SnowballCount_postvalue_label": {
-      "text": "투사체",
-      "group": "citadel_mods",
-      "hash": "f663616e238e"
+      "hash": "a4eec55aafb3"
     },
     "cosmetic_item_voting_poster": {
       "text": "포스터 배치",
@@ -8110,9 +8110,9 @@
       "hash": "7dd420eaf157"
     },
     "ability_fire_bomb_t3_desc": {
-      "text": "기절 지속 시간 <span class=\"highlight\">+{s:StunDuration}초</span> 및 반경 <span class=\"highlight\">+{s:Radius}m</span> 증가",
+      "text": "기절 지속 시간 <span class=\"highlight\">+{s:StunDuration}초</span> 및 반경 <span class=\"highlight\">+{s:Radius}m</span> 증가<br>마력 배수 증가",
       "group": "citadel_heroes",
-      "hash": "b933ff973397"
+      "hash": "916d7bbb996f"
     },
     "BurnDPS_label": {
       "text": "화상 초당 피해",
@@ -9510,9 +9510,9 @@
       "hash": "29e0002e6676"
     },
     "citadel_ability_lash_t3_desc": {
-      "text": "충전 <span class=\"highlight\">+{s:AbilityCharges}회</span> 증가<br>시전 시: 활력 <span class=\"highlight\">+{s:RestoreStaminaOnUse}</span>칸 및 공중 제어<span class=\"highlight\">+{s:AirControlPercent}%</span> 증가",
+      "text": "능력 충전 <span class=\"highlight\">+{s:AbilityCharges}회</span> 증가<br>시전 시: 활력 <span class=\"highlight\">+{s:RestoreStaminaOnUse}</span>칸 회복 및 공중 제어 <span class=\"highlight\">+{s:AirControlPercent}%</span> 증가<br>점프 속도 <span class=\"highlight\">+{s:JumpVelocity}m</span> 증가",
       "group": "citadel_heroes",
-      "hash": "922eeb4e64ce"
+      "hash": "34bc31cafcf9"
     },
     "LashDamage_label": {
       "text": "추격 채찍 피해",
@@ -10158,6 +10158,11 @@
       "text": "자신이나 영웅 하나를 대상으로 주변 공기를 얼려, 대상 주위에 <span class=\"highlight\">방탄 돔</span>을 생성합니다. 돔 안에 있는 아군은 급속 {g:citadel_inline_attribute:'Regen'}을 얻으며, 적군은 <span class=\"highlight\">둔화</span>됩니다.<br><br><span class=\"diminish\">주요 목표물이 얼음 쉼터 내에 있는 경우 무적 상태가 되며 얼어붙습니다.</span>",
       "group": "citadel_heroes",
       "hash": "45349c75af24"
+    },
+    "ability_ice_dome_t2_desc": {
+      "text": "지속 시간 <span class=\"highlight\">+{s:AbilityDuration}초</span> 증가<br>적군 연사 속도 <span class=\"highlight\">-{s:FireRateSlow}%</span>",
+      "group": "citadel_heroes",
+      "hash": "8b23ff2f84b7"
     },
     "ability_ice_dome_t3_desc": {
       "text": "자신이나 아군에게 적용된 궁극기가 아닌 약화 효과 <span class=\"highlight\">정화</span><br>체력 재생 <span class=\"highlight\">+{s:BonusHealthRegen}</span> 및 마력 배수 증가",
@@ -11510,14 +11515,14 @@
       "hash": "8e7852d0279f"
     },
     "ability_charged_shot_t2_desc": {
-      "text": "피해 <span class=\"highlight\">+{s:Damage} </span> 증가",
+      "text": "피해 <span class=\"highlight\">+{s:Damage}</span> 증가 및 충전 지연 시간 <span class=\"highlight\">{s:AbilityCooldownBetweenCharge}초</span> 감소",
       "group": "citadel_heroes",
-      "hash": "4a734a2c1068"
+      "hash": "66dd2854cb49"
     },
     "ability_charged_shot_t3_desc": {
-      "text": "<span class=\"highlight\">피해 배수 증가 </span> 및 충전 지연 시간 <span class=\"highlight\">{s:AbilityCooldownBetweenCharge}초</span> 감소",
+      "text": "<span class=\"highlight\">피해 배수 증가</span><br><span class=\"highlight\">벽에 부딪히면 한 번 도탄</span>",
       "group": "citadel_heroes",
-      "hash": "25ce298dafa3"
+      "hash": "80c91f8b1885"
     },
     "PowerJumpChannelTime_postfix": {
       "text": "초",
@@ -13535,9 +13540,9 @@
       "hash": "6b914baa2351"
     },
     "mirage_teleport_desc": {
-      "text": "미니맵의 한 위치를 대상으로 지정합니다. 잠시 후, 해당 위치로 <span class=\"highlight\">순간 이동</span>합니다. 대기 시간 동안 피해를 입으면 순간 이동이 중단됩니다.",
+      "text": "미니맵에서 위치를 지정합니다. 잠시 후 해당 위치로 <span class=\"highlight\">순간이동</span>합니다. 대기 중 피해를 입거나 기절, 이동 불가, 수면 상태가 되거나 이동 능력 사용이 차단되면 순간이동이 중단됩니다.<br><br>순간이동 후 <span class=\"highlight\">방벽</span>을 얻습니다.",
       "group": "citadel_heroes",
-      "hash": "a54a90305c3b"
+      "hash": "b4ecb605d1b6"
     },
     "MirageTeleportMoveSpeed_conditional": {
       "text": "순간이동 이후",
@@ -13550,14 +13555,14 @@
       "hash": "0b380fa30f28"
     },
     "mirage_teleport_t1_desc": {
-      "text": "{s:MovementSpeedBonusDuration}초 동안 이동 속도 +{s:BonusMoveSpeed}m(초당) 및 연사 속도 +{s:BonusFireRate}% 증가",
+      "text": "이동 속도 +{s:BonusMoveSpeed}m 및 연사 속도 +{s:BonusFireRate}% 증가",
       "group": "citadel_heroes",
-      "hash": "63afd8f4b906"
+      "hash": "8d1b86025c1b"
     },
-    "mirage_teleport_t2_desc": {
-      "text": "마력에 비례하여 방벽 {s:CombatBarrier} 부여",
+    "mirage_teleport_t3_desc": {
+      "text": "피해를 입어도 순간이동이 중단되지 않음<br>방벽에 마력 배수 적용",
       "group": "citadel_heroes",
-      "hash": "58f03d86965c"
+      "hash": "f4dd9d85f445"
     },
     "TeleportCompletedTime_label": {
       "text": "대기 시간",
@@ -14573,11 +14578,6 @@
       "text": "<span class=\"highlight\">{s:BuffDuration}초</span> 동안 마력 <span class=\"highlight\">+{s:SpiritBonus}</span> 획득",
       "group": "citadel_heroes",
       "hash": "e107dcf80f94"
-    },
-    "citadel_ability_flying_strike_t3_desc": {
-      "text": "대체 능력 시전으로 아군에게 사용 가능<br>시전 범위 <span class=\"highlight\">+{s:AbilityCastRange}m</span> 증가<br><span class=\"highlight\">추가 충전 1회</span> 획득",
-      "group": "citadel_heroes",
-      "hash": "587d07ddc72f"
     },
     "yamato_flying_strike_t3_header": {
       "text": "적군에게 도달 시:",
@@ -19445,14 +19445,14 @@
       "hash": "9f8228ffb322"
     },
     "ability_necro_gravestone_t2_desc": {
-      "text": "지속 시간 <span class=\"highlight\">+{s:AbilityDuration}초</span> 증가<br>소환 주기 <span class=\"highlight\">{s:SummonFrequency}초</span> 감소",
+      "text": "지속 시간 <span class=\"highlight\">+{s:AbilityDuration}초</span> 증가",
       "group": "citadel_heroes",
-      "hash": "c4757e6ca105"
+      "hash": "a7f736b9073f"
     },
     "ability_necro_gravestone_t3_desc": {
-      "text": "사망 시: <span class=\"highlight\">+{s:CurrentHealthDamagePercentage}%</span> 현재 체력 비례 피해",
+      "text": "사망 시: 현재 체력 비례 피해 <span class=\"highlight\">+{s:CurrentHealthDamagePercentage}%</span><br>구울 소환 주기 <span class=\"highlight\">{s:SummonFrequency}초</span> 감소",
       "group": "citadel_heroes",
-      "hash": "8d6486174529"
+      "hash": "377040530a14"
     },
     "ability_necro_gravestone/gravestone/buff": {
       "text": "빌려온 칙령",
@@ -20925,9 +20925,9 @@
       "hash": "097e5edfdc85"
     },
     "ability_fencer_riposte_desc": {
-      "text": "다음 공격을 <span class=\"highlight\">튕겨낼</span> 준비를 합니다. 튕겨내기에 성공하면 잠시 동안 <span class=\"highlight\">무적</span> 상태가 된 후, 대상으로 지정한 적군 영웅을 향해 돌진하여 <span class=\"highlight\">기절</span>시키고 <span class=\"highlight\">근거리 공격 저항</span>을 감소시킵니다.<br><br><span class=\"diminish\">{g:citadel_binding:'Ability2'} 키를 눌러 대상을 선택합니다.<br>트루퍼 및 중립 유닛의 피해에는 발동하지 않습니다.</span>",
+      "text": "다음 공격을 <span class=\"highlight\">튕겨낼</span> 준비를 합니다. 튕겨내기에 성공하면 잠시 동안 <span class=\"highlight\">무적</span> 상태가 되며, 적군 영웅을 지정해 대상에게 돌진합니다. 해당 적군 영웅은 <span class=\"highlight\">이동 불가</span> 상태가 되고 <span class=\"highlight\">방어</span>할 수 없으며 <span class=\"highlight\">근거리 공격 저항</span>이 감소합니다.<br><br><span class=\"diminish\">{g:citadel_binding:'Ability2'} 키를 눌러 대상을 선택합니다.<br>트루퍼 및 중립 유닛의 피해에는 발동하지 않습니다.</span>",
       "group": "citadel_heroes",
-      "hash": "74d00ce6d693"
+      "hash": "87545e17d039"
     },
     "RiposteChannelTime_postvalue_label": {
       "text": "튕겨내기 지속 시간",
@@ -20990,9 +20990,9 @@
       "hash": "097e5edfdc85"
     },
     "ability_fencer_riposte_attack_desc": {
-      "text": "전방으로 빠르게 대시해 무기의 폼멜로 적군을 기절시킵니다.",
+      "text": "전방으로 빠르게 대시하여 무기 손잡이 끝으로 적군을 가격해 이동 불가 상태로 만들고, 방어하지 못하게 합니다.",
       "group": "citadel_heroes",
-      "hash": "66d474eb5854"
+      "hash": "6207b1d08b63"
     },
     "MeleeResistReductionDuration_label": {
       "text": "근거리 공격 저항 감소 지속 시간",
@@ -21010,9 +21010,9 @@
       "hash": "3845248e2861"
     },
     "ability_fencer_riposte_t2_desc": {
-      "text": "근거리 공격 저항 <span class=\"highlight\">{s:MeleeResistReduction}%</span> 및 기절 지속 시간 <span class=\"highlight\">+{s:StunDuration}초</span> 증가",
+      "text": "근거리 공격 저항 <span class=\"highlight\">{s:MeleeResistReduction}%</span> 감소 및 이동 불가 지속 시간 <span class=\"highlight\">+{s:ImmobilizeDuration}초</span> 증가",
       "group": "citadel_heroes",
-      "hash": "fb1aa70e6dab"
+      "hash": "455585254111"
     },
     "ability_fencer_riposte_t3_desc": {
       "text": "{s:TargetLifestealDuration}초 동안 반격 대상을 상대로 총탄, 마법, 근거리 공격 체력 흡수 <span class=\"highlight\">{s:TargetLifesteal}%</span> 획득",
@@ -21935,9 +21935,9 @@
       "hash": "b922a88cf172"
     },
     "ability_baba_hexing_brew_desc": {
-      "text": "마법의 차를 우립니다. 차를 우리는 동안 {g:citadel_inline_attribute:'CombatBarrier'} 효과, {g:citadel_inline_attribute:'Silence'} 효과, 뜨거운 화상 효과가 차례로 반복됩니다. 화상은 {g:citadel_inline_attribute:'SpiritDPS'}를 입히고 {g:citadel_inline_attribute:'SpiritResist'}을 감소시킵니다. 차를 던지면 해당 효과가 범위 내에 적용됩니다.<br><br>{g:citadel_binding:'ADS'} 키를 누르면 차 우리기를 일시 정지하거나 재개합니다.",
+      "text": "마법의 차를 우립니다. 차를 우리는 동안 {g:citadel_inline_attribute:'CombatBarrier'} 효과, {g:citadel_inline_attribute:'Silence'} 효과, 뜨거운 화상 효과가 무작위 순서로 반복됩니다. 화상은 {g:citadel_inline_attribute:'SpiritDPS'}를 입히고 {g:citadel_inline_attribute:'SpiritResist'}을 감소시킵니다. 차를 던지면 해당 효과가 범위 내에 적용됩니다.<br><br>{g:citadel_binding:'ADS'} 키를 누르면 차 우리기를 일시 정지하거나 재개합니다.",
       "group": "citadel_heroes",
-      "hash": "a5a36e6cfff8"
+      "hash": "b1afcb47e932"
     },
     "ability_baba_hexing_brew_t3_desc": {
       "text": "차 효과 +{s:BrewEffectiveness}% 증가",
@@ -22335,9 +22335,9 @@
       "hash": "bb4b4c6af8e9"
     },
     "ability_chessmaster_throwbishop_t3_desc": {
-      "text": "칸 범위 +{s:TileSteps}칸 증가<br>칸 위의 적군에게 마법 저항 {s:TechArmorDamageReductionPerStack}% 감소 적용, 최대 {s:MaxStacks}회 중첩",
+      "text": "칸 범위 +{s:TileSteps}칸 증가<br>적중 시 마법 저항 {s:TechArmorDamageReductionPerStack}% 감소, 최대 {s:MaxStacks}회 중첩",
       "group": "citadel_heroes",
-      "hash": "2244a6ac59b2"
+      "hash": "c3013183852f"
     },
     "ability_chessmaster_throwbishop_dot": {
       "text": "비숍 배치 - 칸",
@@ -22545,14 +22545,14 @@
       "hash": "c71f299b5d3e"
     },
     "ability_chessmaster_queen_desc_active": {
-      "text": "<span class=\"highlight\">퀸</span>을 소환해 내려찍고 범위 내에 {g:citadel_inline_attribute:'SpiritDamage'}를 입힙니다. 잠시 후 퀸을 중심으로 직선 방향의 칸이 활성화되어 다시 {g:citadel_inline_attribute:'SpiritDamage'}를 입히고 {g:citadel_inline_attribute:'Stun'} 효과를 적용합니다.<br><br><span class=\"diminish\">이동 ({g:citadel_binding:'ADS'}):</span> 퀸이 대상 위치로 도약해 동일한 효과를 다시 발동합니다. <span class=\"diminish\"><br><br>재시전하면 퀸을 조기에 회수하고 능력을 종료합니다.</span>",
+      "text": "<span class=\"highlight\">퀸</span>을 소환해 내리꽂으며 범위 내에 {g:citadel_inline_attribute:'SpiritDamage'}를 입힙니다. 잠시 후 퀸을 중심으로 직선 방향의 칸이 활성화되어 다시 {g:citadel_inline_attribute:'SpiritDamage'}를 입히고 {g:citadel_inline_attribute:'Stun'} 효과를 적용합니다.<br><br>체력이 낮은 영웅에게 적중 시 <span class=\"highlight\">체크메이트</span>하여 즉시 처치합니다.<br><br><span class=\"diminish\">이동 ({g:citadel_binding:'ADS'}):</span> 퀸이 대상 위치로 도약해 동일한 효과를 다시 적용합니다. <span class=\"diminish\"><br><br>재시전하면 퀸을 조기에 회수하고 능력을 종료합니다.</span>",
       "group": "citadel_heroes",
-      "hash": "fdebb62f5e7e"
+      "hash": "e4d2e0b76af1"
     },
     "ability_chessmaster_queen_t2_desc": {
-      "text": "둔화 +{s:SlowPercent}% 증가. 체력이 {s:CheckmateThreshold} 미만인 영웅을 체크메이트하여 처형",
+      "text": "둔화 +{s:SlowPercent}% 증가<br>체크메이트 체력 기준 +{s:CheckmateThreshold} 증가",
       "group": "citadel_heroes",
-      "hash": "99327ac61a66"
+      "hash": "49f92a3fbbf8"
     },
     "ability_chessmaster_queen_t3_desc": {
       "text": "이동 +{s:QueenBonusMoves}회 증가<br>칸 범위 +{s:TileSteps}칸 증가",
@@ -23315,9 +23315,9 @@
       "hash": "3386fc67b8b0"
     },
     "ability_artist_tether_t1_desc": {
-      "text": "시전 시: {s:BuffDuration}초 동안 체력 재생 {s:HealthRegen} 증가, 스케치 수집 시 지속 시간 갱신",
+      "text": "스케치하는 동안: 체력 재생 {s:HealthRegen} 증가, 스케치 수집 시 효과 지속 시간 {s:BuffDuration}초로 갱신",
       "group": "citadel_heroes",
-      "hash": "7b4471fb85e6"
+      "hash": "2ced81fcfd67"
     },
     "ability_artist_tether_t2_desc": {
       "text": "스케치하는 동안: 대상이 입히는 피해 {s:OutgoingDamagePercent}%",
@@ -23330,9 +23330,9 @@
       "hash": "6defab1f002a"
     },
     "ability_artist_tether/buildup": {
-      "text": "그리는 중",
+      "text": "정물화",
       "group": "citadel_heroes",
-      "hash": "9c199739018d"
+      "hash": "3d485f20fb73"
     },
     "ability_artist_tether/buildup/stun": {
       "text": "정물화",
@@ -23350,6 +23350,11 @@
       "hash": "3d485f20fb73"
     },
     "ability_artist_tether/stun": {
+      "text": "정물화",
+      "group": "citadel_heroes",
+      "hash": "3d485f20fb73"
+    },
+    "modifier_artist_still_life": {
       "text": "정물화",
       "group": "citadel_heroes",
       "hash": "3d485f20fb73"
@@ -23434,6 +23439,11 @@
       "group": "citadel_heroes",
       "hash": "05eed87aeccd"
     },
+    "Citadel_Graph_PermanentBuff_ArtistHealer": {
+      "text": "치유사 스케치",
+      "group": "citadel_heroes",
+      "hash": "b24a29b3b17f"
+    },
     "artist_drawing_mystic": {
       "text": "신비술사 스케치",
       "group": "citadel_heroes",
@@ -23453,6 +23463,11 @@
       "text": "암살자 스케치",
       "group": "citadel_heroes",
       "hash": "d3120b5ad737"
+    },
+    "artist_drawing_healer": {
+      "text": "치유사 스케치",
+      "group": "citadel_heroes",
+      "hash": "b24a29b3b17f"
     },
     "ability_artist_bamboogrove": {
       "text": "추상 풍경화",
@@ -23475,9 +23490,9 @@
       "hash": "7362b829d56f"
     },
     "ability_artist_bamboogrove_t3_desc": {
-      "text": "침묵 지속 시간 +{s:SilenceDuration}초 증가<br>능력 지속 시간 +{s:AbilityDuration}초 증가<br>잉크가 더 이상 파괴되지 않음",
+      "text": "침묵 지속 시간 +{s:SilenceDuration}초 증가<br>능력 지속 시간 +{s:AbilityDuration}초 증가",
       "group": "citadel_heroes",
-      "hash": "8784e7280925"
+      "hash": "1adab0e1d533"
     },
     "ability_artist_bamboogrove/groundaura/silence": {
       "text": "추상 풍경화",
@@ -23720,9 +23735,9 @@
       "hash": "f6f881d88091"
     },
     "ability_nurse_fear_t3_desc": {
-      "text": "능력 집중 시간 +{s:AbilityChannelTime}초 증가<br>마력 배수 +{s:DPS_scale} 증가<br>능력 집중 중 피해 면역",
+      "text": "능력 집중 시간 +{s:AbilityChannelTime}초 증가<br>마력 배수 +{s:DPS_scale} 증가<br>능력 집중 중 입는 피해 {s:DamageResistPctWhileChanneling}% 감소",
       "group": "citadel_heroes",
-      "hash": "2caf1b74ff70"
+      "hash": "8261bf2bf76a"
     },
     "FearDurationPerLeechStack_prefix": {
       "text": "+",
@@ -24145,9 +24160,9 @@
       "hash": "e75b3100c2b7"
     },
     "ability_nurse_adrenaline_rush_t2_desc": {
-      "text": "지속 시간 +{s:AbilityDuration}초 증가<br>치유 효율 +{s:HealingEffectivenessPercent}% 증가",
+      "text": "지속 시간 +{s:AbilityDuration}초 증가<br>받는 치유량 +{s:HealingEffectivenessPercent}% 증가",
       "group": "citadel_heroes",
-      "hash": "f8c63302c52c"
+      "hash": "4c1966d63f5a"
     },
     "ability_nurse_adrenaline_rush_t3_desc": {
       "text": "활기 상태 동작 속도 +{s:RushTimeScaleBonusPercent}% 증가<br>궁극기가 아닌 약화 효과 해제",
@@ -24235,14 +24250,14 @@
       "hash": "3845248e2861"
     },
     "HealingEffectivenessPercent_label": {
-      "text": "치유 효율",
+      "text": "받는 치유량",
       "group": "citadel_heroes",
-      "hash": "30ce718c5a24"
+      "hash": "38bda7b94947"
     },
     "HealingEffectivenessPercent_postvalue_label": {
-      "text": "치유 효율",
+      "text": "받는 치유량",
       "group": "citadel_heroes",
-      "hash": "30ce718c5a24"
+      "hash": "38bda7b94947"
     },
     "HealingEffectivenessPercent_prefix": {
       "text": "+",
@@ -25813,6 +25828,11 @@
       "text": "이동 불가 상태",
       "group": "citadel_attributes",
       "hash": "21c1a6d2e8c1"
+    },
+    "modifier_citadel_sleep": {
+      "text": "수면 상태",
+      "group": "citadel_attributes",
+      "hash": "187e3012ded1"
     },
     "modifier_citadel_silenced": {
       "text": "침묵",
@@ -34899,6 +34919,26 @@
       "group": "citadel_attributes",
       "hash": "4345cb1fa278"
     },
+    "GravityScaleIncrease_label": {
+      "text": "중력 비율",
+      "group": "citadel_attributes",
+      "hash": "d58bb9040313"
+    },
+    "GravityScaleIncrease_postvalue_label": {
+      "text": "중력 비율",
+      "group": "citadel_attributes",
+      "hash": "d58bb9040313"
+    },
+    "GravityScaleIncrease_prefix": {
+      "text": "+",
+      "group": "citadel_attributes",
+      "hash": "a979ef10cc6f"
+    },
+    "GravityScaleIncrease_postfix": {
+      "text": "%",
+      "group": "citadel_attributes",
+      "hash": "4345cb1fa278"
+    },
     "AirBonusDamageGiven_label": {
       "text": "공중 피해",
       "group": "citadel_attributes",
@@ -42399,56 +42439,6 @@
       "group": "citadel_main",
       "hash": "825d29ac2c00"
     },
-    "Citadel_Hud_Toast_SeasonalAchievement2024Unlocked": {
-      "text": "{g:citadel_persona:account_id} 님이 {s:hero_name} 영웅의 크리스마스 보상을 받았습니다!",
-      "group": "citadel_main",
-      "hash": "5df84ce78710"
-    },
-    "Citadel_Showcase_SeasonalAchievement2024": {
-      "text": "2024년 12월",
-      "group": "citadel_main",
-      "hash": "be1a5d8a47d2"
-    },
-    "Citadel_Hud_Toast_SeasonalAchievement2025Unlocked": {
-      "text": "{g:citadel_persona:account_id} 님이 {s:hero_name} 장식을 잠금 해제했습니다!",
-      "group": "citadel_main",
-      "hash": "905ad4c7f603"
-    },
-    "Citadel_Showcase_SeasonalAchievement2025": {
-      "text": "2025년 12월",
-      "group": "citadel_main",
-      "hash": "49341fa1cb6f"
-    },
-    "Citadel_Hud_Toast_SeasonalKill": {
-      "text": "<span class=\"Emphasis\">{g:citadel_persona:killer_account_id}</span> 님이",
-      "group": "citadel_main",
-      "hash": "c753413f5cc3"
-    },
-    "Citadel_Hud_Toast_SeasonalKill2": {
-      "text": "눈덩이로 처치!",
-      "group": "citadel_main",
-      "hash": "c58a42f3aa36"
-    },
-    "Citadel_Event_Holiday_Challenge2025_Title": {
-      "text": "2025 크리스마스 챌린지",
-      "group": "citadel_main",
-      "hash": "5fa36b4923aa"
-    },
-    "Citadel_Event_Holiday_Challenge2025_Desc": {
-      "text": "각 영웅으로 매치에서 승리하면 은신처 트리에 사용할 수 있는 고유한 장식을 획득할 수 있습니다.",
-      "group": "citadel_main",
-      "hash": "bd7d87da9920"
-    },
-    "Citadel_Event_Holiday_Challenge2025_Snowball": {
-      "text": "트리에 더 많은 장식을 추가하면 던질 수 있는 <span class=\"Emphasis\">눈덩이</span> 활성 아이템을 업그레이드할 수 있습니다.",
-      "group": "citadel_main",
-      "hash": "dda8fc5c3b57"
-    },
-    "Citadel_Event_Holiday_Challenge2025_Snowball_Level": {
-      "text": "레벨 {i:item_level} / {i:item_max_level}",
-      "group": "citadel_main",
-      "hash": "79860cea38e9"
-    },
     "Citadel_Hud_Voting_Poster_Tooltip_Header": {
       "text": "포스터 선택",
       "group": "citadel_main",
@@ -48858,6 +48848,11 @@
       "text": "{g:citadel_binding:'Attack'} 키를 눌러 목표물로 미리 날아가세요.",
       "group": "citadel_main",
       "hash": "fadb636b5956"
+    },
+    "citadel_rejuvenator_hud_hint": {
+      "text": "활성화된 소생의 보석의 남은 시간을 표시합니다. 활성화된 소생의 보석이 없으면 중앙 보스의 재등장까지 남은 시간을 표시합니다.",
+      "group": "citadel_main",
+      "hash": "37f14e710e7d"
     },
     "fire_rate_pickup/small_fire_rate": {
       "text": "증가된 연사 속도",
@@ -55784,11 +55779,6 @@
       "group": "citadel_main",
       "hash": "c5677461b6ba"
     },
-    "menu_seasonal_2025": {
-      "text": "크리스마스 챌린지",
-      "group": "citadel_main",
-      "hash": "bfd9fe22ee40"
-    },
     "menu_new_violator": {
       "text": "신규",
       "group": "citadel_main",
@@ -61849,11 +61839,6 @@
       "group": "citadel_main",
       "hash": "433a5c24677b"
     },
-    "Citadel_Hideout_XmasGlobeEarned_Temp": {
-      "text": "겨울 업데이트 기간 동안 {s:hideout_owner} 님이 획득한 기념품",
-      "group": "citadel_main",
-      "hash": "84cdabd574c4"
-    },
     "Citadel_Hideout_VaultHint01": {
       "text": "{g:citadel_binding:'AbilityMelee'}: 근거리 공격으로 영혼 수집",
       "group": "citadel_main",
@@ -61863,11 +61848,6 @@
       "text": "{g:citadel_binding:'AbilityMelee'} 빛이 점멸하는 중 근거리 공격으로 보너스 획득, 강한 근거리 공격으로 더 많은 보너스 획득",
       "group": "citadel_main",
       "hash": "9667d1856491"
-    },
-    "Citadel_Hideout_HolidayChallenge": {
-      "text": "크리스마스 챌린지 진척도를 보려면 {g:citadel_binding:'Interact'} 키를 누르세요",
-      "group": "citadel_main",
-      "hash": "0da4434bdd1e"
     },
     "Citadel_Hideout_HeavyCrate": {
       "text": "{g:citadel_binding:'AbilityMelee'} 키를 길게 눌러 강한 근거리 공격으로 부수기",
@@ -62220,11 +62200,6 @@
       "hash": "f4230bf860e0"
     },
     "npc_newscaster": {
-      "text": "뉴스 진행자",
-      "group": "citadel_main",
-      "hash": "e0350787d365"
-    },
-    "npc_seasonal": {
       "text": "뉴스 진행자",
       "group": "citadel_main",
       "hash": "e0350787d365"
@@ -62943,6 +62918,16 @@
       "text": "종탑",
       "group": "citadel_main",
       "hash": "e7b029e62a68"
+    },
+    "AbilityButtonHint_HalloweenTroll": {
+      "text": "트롤에게 사탕 주기 - 강한 근거리 공격",
+      "group": "citadel_main",
+      "hash": "2ebf5b61f475"
+    },
+    "AbilityButtonHint_HalloweenCauldron": {
+      "text": "강한 근거리 공격으로 사탕 획득",
+      "group": "citadel_main",
+      "hash": "b2faac3b1f01"
     }
   }
 }

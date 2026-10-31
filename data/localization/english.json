@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6821",
-  "upstreamCommit": "6821",
-  "generatedAt": "2026-10-27T09:00:10.564Z",
+  "clientVersion": "6833",
+  "upstreamCommit": "6833",
+  "generatedAt": "2026-10-31T02:48:14.805Z",
   "language": "English",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 622,
-    "citadel_heroes": 3978,
-    "citadel_attributes": 2018,
+    "citadel_heroes": 3982,
+    "citadel_attributes": 2023,
     "citadel_gc": 221,
-    "citadel_main": 5279
+    "citadel_main": 5268
   },
   "tokens": {
     "hero_vampire:n": {
@@ -4590,9 +4590,9 @@
       "hash": "08f5de04cf17"
     },
     "upgrade_resonant_healing_desc": {
-      "text": "<span class=\"highlight\">Heal</span> and gain bonus <span class=\"highlight\">Movement Speed</span> for a short duration when you cast an ability.",
+      "text": "While in-combat, <span class=\"highlight\">Heal</span> and gain bonus <span class=\"highlight\">Movement Speed</span> for a short duration when you cast an ability.",
       "group": "citadel_mods",
-      "hash": "39e195b1311f"
+      "hash": "d666de0d3ece"
     },
     "HealingPerCast_Label": {
       "text": "Healing on Ability Cast",
@@ -4945,14 +4945,14 @@
       "hash": "76a181ff670f"
     },
     "HealOnActivate_label": {
-      "text": "HP Healed On Activate",
+      "text": "Heal Amount",
       "group": "citadel_mods",
-      "hash": "786ffe34a870"
+      "hash": "d790fc486951"
     },
     "HealOnActivate_postvalue_label": {
-      "text": "HP Healed On Activate",
+      "text": "Heal Amount",
       "group": "citadel_mods",
-      "hash": "786ffe34a870"
+      "hash": "d790fc486951"
     },
     "damage_reduction_postfix": {
       "text": "%",
@@ -5320,9 +5320,9 @@
       "hash": "c6ccedf8be5d"
     },
     "upgrade_cloaking_device_active_ambush_desc": {
-      "text": "<br>Attacking or using an ability will end your stealth and start an <span class=\"highlight\">ambush</span>, temporarily granting you bonus <span class=\"highlight\">Fire Rate</span>, <span class=\"highlight\">Spirit Power</span> and <span class=\"highlight\">Melee Damage</span>.",
+      "text": "<br>Attacking or using an ability will end your stealth and start an <span class=\"highlight\">ambush</span>, temporarily granting you bonus <span class=\"highlight\">Weapon Damage</span> and <span class=\"highlight\">Spirit Power</span>.",
       "group": "citadel_mods",
-      "hash": "d2637812a588"
+      "hash": "5fb0c8dec826"
     },
     "modifier_cloaking_device_active_stealth": {
       "text": "Shadow Weave - Stealth",
@@ -5349,22 +5349,22 @@
       "group": "citadel_mods",
       "hash": "e5dd556120fd"
     },
-    "AmbushBonusFireRate_prefix": {
+    "AmbushBonusWeaponDamage_prefix": {
       "text": "+",
       "group": "citadel_mods",
       "hash": "a979ef10cc6f"
     },
-    "AmbushBonusFireRate_label": {
-      "text": "Ambush Fire Rate",
+    "AmbushBonusWeaponDamage_label": {
+      "text": "Ambush Weapon Damage",
       "group": "citadel_mods",
-      "hash": "14cbbc019708"
+      "hash": "43b77a12ec01"
     },
-    "AmbushBonusFireRate_postvalue_label": {
-      "text": "Ambush Fire Rate",
+    "AmbushBonusWeaponDamage_postvalue_label": {
+      "text": "Ambush Weapon Damage",
       "group": "citadel_mods",
-      "hash": "14cbbc019708"
+      "hash": "43b77a12ec01"
     },
-    "AmbushBonusFireRate_postfix": {
+    "AmbushBonusWeaponDamage_postfix": {
       "text": "%",
       "group": "citadel_mods",
       "hash": "4345cb1fa278"
@@ -5395,6 +5395,21 @@
       "hash": "2c78c09a3a2a"
     },
     "AmbushDuration_postfix": {
+      "text": "s",
+      "group": "citadel_mods",
+      "hash": "a0f1490a20d0"
+    },
+    "AmbushBuildUpDuration_label": {
+      "text": "Time to Full Ambush",
+      "group": "citadel_mods",
+      "hash": "62ca0b2f9637"
+    },
+    "AmbushBuildUpDuration_postvalue_label": {
+      "text": "Time to Full Ambush",
+      "group": "citadel_mods",
+      "hash": "62ca0b2f9637"
+    },
+    "AmbushBuildUpDuration_postfix": {
       "text": "s",
       "group": "citadel_mods",
       "hash": "a0f1490a20d0"
@@ -5754,40 +5769,25 @@
       "group": "citadel_mods",
       "hash": "3cd4d5cf2e5a"
     },
-    "cosmetic_ability_snowball": {
-      "text": "Snowball",
+    "HealPerMinute_label": {
+      "text": "Heal Increase Per Minute",
       "group": "citadel_mods",
-      "hash": "5aa672038dc4"
+      "hash": "0d5d89c37b83"
     },
-    "cosmetic_ability_snowball_desc": {
-      "text": "Throw snowballs at your friends and enemies. Distance and other properties improve as you make progress in the <span class=\"highlight\">2025 Holiday Challenge</span>.<br><br><span class=\"diminish\">Throwing a Snowball at an ally won't inflict damage and will reset its cooldown.</span>",
+    "TechPowerPerMinute_label": {
+      "text": "Spirit Power Increase Per Minute",
       "group": "citadel_mods",
-      "hash": "e44e879b591c"
+      "hash": "018cb378d46c"
     },
-    "SnowballSpeed_label": {
-      "text": "Throw Speed",
+    "BonusFireRatePerMinute_label": {
+      "text": "Fire Rate Increase Per Minute",
       "group": "citadel_mods",
-      "hash": "5149c08dd2ad"
+      "hash": "390ec97b9c52"
     },
-    "SnowballSpeed_postvalue_label": {
-      "text": "Velocity",
+    "BonusMoveSpeedPerMinute_label": {
+      "text": "Move Speed Increase Per Minute",
       "group": "citadel_mods",
-      "hash": "d80a548eda6c"
-    },
-    "SnowballSpeed_postfix": {
-      "text": "m/s",
-      "group": "citadel_mods",
-      "hash": "33132004a9db"
-    },
-    "SnowballCount_label": {
-      "text": "Snowballs Thrown",
-      "group": "citadel_mods",
-      "hash": "564643d0d966"
-    },
-    "SnowballCount_postvalue_label": {
-      "text": "Projectiles",
-      "group": "citadel_mods",
-      "hash": "808cc6b761a2"
+      "hash": "0a8eb8e847c5"
     },
     "cosmetic_item_voting_poster": {
       "text": "Place Poster",
@@ -8155,9 +8155,9 @@
       "hash": "118b99a30bf8"
     },
     "ability_fire_bomb_t3_desc": {
-      "text": "<span class=\"highlight\">+{s:StunDuration}s</span> Stun Duration and <span class=\"highlight\">+{s:Radius}m</span> Radius",
+      "text": "<span class=\"highlight\">+{s:StunDuration}s</span> Stun Duration and <span class=\"highlight\">+{s:Radius}m</span> Radius<br>Increased Spirit Scaling",
       "group": "citadel_heroes",
-      "hash": "54213ca7bb1b"
+      "hash": "0dd27e11fa71"
     },
     "BurnDPS_label": {
       "text": "Burn DPS",
@@ -9560,9 +9560,9 @@
       "hash": "c06f3ea7a177"
     },
     "citadel_ability_lash_t3_desc": {
-      "text": "<span class=\"highlight\">+{s:AbilityCharges}</span> Charges<br>OnCast : <span class=\"highlight\">+{s:RestoreStaminaOnUse}</span> Stamina and <span class=\"highlight\">+{s:AirControlPercent}%</span> Air Control",
+      "text": "<span class=\"highlight\">+{s:AbilityCharges}</span> Charges<br>OnCast : <span class=\"highlight\">+{s:RestoreStaminaOnUse}</span> Stamina and <span class=\"highlight\">+{s:AirControlPercent}%</span> Air Control<br><span class=\"highlight\">+{s:JumpVelocity}m</span> Jump Velocity",
       "group": "citadel_heroes",
-      "hash": "30b0d0fa9278"
+      "hash": "82fef34cc805"
     },
     "LashDamage_label": {
       "text": "Grapple Damage",
@@ -10208,6 +10208,11 @@
       "text": "Target yourself or a Hero to freeze the air and create an <span class=\"highlight\">impenetrable dome</span> around them. While in the dome, allies gain rapid {g:citadel_inline_attribute:'Regen'} and enemies are <span class=\"highlight\">slowed</span>. <br><br><span class=\"diminish\">Objectives become Invulnerable and Frozen under Frozen Shelter</span>",
       "group": "citadel_heroes",
       "hash": "588305757fd2"
+    },
+    "ability_ice_dome_t2_desc": {
+      "text": "<span class=\"highlight\">+{s:AbilityDuration}s</span> Duration<br>Applies <span class=\"highlight\">-{s:FireRateSlow}%</span> Fire Rate",
+      "group": "citadel_heroes",
+      "hash": "a3936e364b29"
     },
     "ability_ice_dome_t3_desc": {
       "text": "<span class=\"highlight\">Purges</span> non-ult debuffs for you and your allies. <br><span class=\"highlight\">+{s:BonusHealthRegen}</span> Health Regen and increased Spirit Scaling",
@@ -11560,14 +11565,14 @@
       "hash": "b0e55206a1f3"
     },
     "ability_charged_shot_t2_desc": {
-      "text": "<span class=\"highlight\">+{s:Damage} Damage</span>",
+      "text": "<span class=\"highlight\">+{s:Damage} Damage</span> and <span class=\"highlight\">{s:AbilityCooldownBetweenCharge}s</span> Charge Delay",
       "group": "citadel_heroes",
-      "hash": "07d5f539acbf"
+      "hash": "bb465959ffab"
     },
     "ability_charged_shot_t3_desc": {
-      "text": "<span class=\"highlight\">Improved damage scaling</span> and <span class=\"highlight\">{s:AbilityCooldownBetweenCharge}s</span> Charge Delay",
+      "text": "<span class=\"highlight\">Improved damage scaling</span> <br><span class=\"highlight\">Ricochets once off walls, floors, and ceilings</span>",
       "group": "citadel_heroes",
-      "hash": "3c41024423dd"
+      "hash": "61431ffae302"
     },
     "PowerJumpChannelTime_postfix": {
       "text": "s",
@@ -13585,9 +13590,9 @@
       "hash": "8aa163378aae"
     },
     "mirage_teleport_desc": {
-      "text": "Target a location on the minimap.  After a brief wait, <span class=\"highlight\">teleport</span> to that location.  Taking damage during the wait period causes the teleport to be interrupted.",
+      "text": "Target a location on the minimap.  After a brief wait, <span class=\"highlight\">teleport</span> to that location.  Taking damage or being Stunned, Immobilized, put to Sleep or Movement Silenced during the wait period causes the teleport to be interrupted.<br><br>After teleporting, gain a <span class=\"highlight\">Barrier</span>.",
       "group": "citadel_heroes",
-      "hash": "c6eec1d71b9b"
+      "hash": "ac5c14ae1bec"
     },
     "MirageTeleportMoveSpeed_conditional": {
       "text": "After Teleport",
@@ -13600,14 +13605,14 @@
       "hash": "574b78230e55"
     },
     "mirage_teleport_t1_desc": {
-      "text": "+{s:BonusMoveSpeed}m Move Speed and +{s:BonusFireRate}% Fire Rate for {s:MovementSpeedBonusDuration}s",
+      "text": "+{s:BonusMoveSpeed}m Move Speed and +{s:BonusFireRate}% Fire Rate",
       "group": "citadel_heroes",
-      "hash": "7704e8ee4cba"
+      "hash": "f97e78cbc9fe"
     },
-    "mirage_teleport_t2_desc": {
-      "text": "{s:CombatBarrier} Barrier that scales with Spirit",
+    "mirage_teleport_t3_desc": {
+      "text": "Cannot be interrupted by damage<br>Barrier gains Spirit Scaling",
       "group": "citadel_heroes",
-      "hash": "b0873c7a7439"
+      "hash": "6344445ff015"
     },
     "TeleportCompletedTime_label": {
       "text": "Wait Time",
@@ -19500,14 +19505,14 @@
       "hash": "dd26ca122bbb"
     },
     "ability_necro_gravestone_t2_desc": {
-      "text": "<span class=\"highlight\">+{s:AbilityDuration}s</span> Duration<br><span class=\"highlight\">{s:SummonFrequency}s</span> Time To Spawn",
+      "text": "<span class=\"highlight\">+{s:AbilityDuration}s</span> Duration",
       "group": "citadel_heroes",
-      "hash": "92be8a4b4254"
+      "hash": "d4e7aba5164c"
     },
     "ability_necro_gravestone_t3_desc": {
-      "text": "On Death: Deal <span class=\"highlight\">+{s:CurrentHealthDamagePercentage}%</span> Current Health as Damage",
+      "text": "On Death: Deal <span class=\"highlight\">+{s:CurrentHealthDamagePercentage}%</span> Current Health as Damage<br><span class=\"highlight\">{s:SummonFrequency}s</span> Time To Spawn",
       "group": "citadel_heroes",
-      "hash": "3707f60110e5"
+      "hash": "5b263eaaa2eb"
     },
     "ability_necro_gravestone/gravestone/buff": {
       "text": "Borrowed Decree",
@@ -20985,9 +20990,9 @@
       "hash": "b12208363c40"
     },
     "ability_fencer_riposte_desc": {
-      "text": "Prepare to <span class=\"highlight\">deflect</span> the next incoming attack. On a successful deflection, briefly become <span class=\"highlight\">invulnerable</span> and target an enemy hero to dash towards them, <span class=\"highlight\">stunning</span> them and reducing their <span class=\"highlight\">Melee Resist</span>.<br><br><span class=\"diminish\">Press {g:citadel_binding:'Ability2'} to select a target.<br>Does not trigger against trooper or neutral damage.</span>",
+      "text": "Prepare to <span class=\"highlight\">deflect</span> the next incoming attack. On a successful deflection, briefly become <span class=\"highlight\">invulnerable</span> and target an enemy hero to dash towards them, <span class=\"highlight\">immobilizing</span> them, preventing them from <span class=\"highlight\">parrying</span>, and reducing their <span class=\"highlight\">Melee Resist</span>.<br><br><span class=\"diminish\">Press {g:citadel_binding:'Ability2'} to select a target.<br>Does not trigger against trooper or neutral damage.</span>",
       "group": "citadel_heroes",
-      "hash": "baf3e7d14db5"
+      "hash": "aaa7b622571a"
     },
     "RiposteChannelTime_postvalue_label": {
       "text": "Deflect Duration",
@@ -21050,9 +21055,9 @@
       "hash": "b12208363c40"
     },
     "ability_fencer_riposte_attack_desc": {
-      "text": "Perform a quick dash forward and stun an enemy with your weapon's pommel.",
+      "text": "Perform a quick dash forward and immobilize an enemy with your weapon's pommel, preventing them from parrying.",
       "group": "citadel_heroes",
-      "hash": "7d35023f843e"
+      "hash": "e7fc71d45c54"
     },
     "MeleeResistReductionDuration_label": {
       "text": "Melee Resist Reduction Duration",
@@ -21070,9 +21075,9 @@
       "hash": "a0f1490a20d0"
     },
     "ability_fencer_riposte_t2_desc": {
-      "text": "<span class=\"highlight\">{s:MeleeResistReduction}%</span> Melee Resist and <span class=\"highlight\">+{s:StunDuration}s</span> Stun Duration",
+      "text": "<span class=\"highlight\">{s:MeleeResistReduction}%</span> Melee Resist and <span class=\"highlight\">+{s:ImmobilizeDuration}s</span> Immobilize Duration",
       "group": "citadel_heroes",
-      "hash": "4b5272a1947f"
+      "hash": "5c2c819da5a3"
     },
     "ability_fencer_riposte_t3_desc": {
       "text": "Gain <span class=\"highlight\">{s:TargetLifesteal}%</span> Bullet, Spirit &amp; Melee Lifesteal against the Riposte target for {s:TargetLifestealDuration}s",
@@ -21995,9 +22000,9 @@
       "hash": "b0ab4633970b"
     },
     "ability_baba_hexing_brew_desc": {
-      "text": "Brew a pot of tea that applies a magical effect in an area when thrown, cycling over time between a soothing {g:citadel_inline_attribute:'CombatBarrier'}, {g:citadel_inline_attribute:'Silence'}, or scalding burn that deals {g:citadel_inline_attribute:'SpiritDPS'} and reduces {g:citadel_inline_attribute:'SpiritResist'}. <br><br>Press {g:citadel_binding:'ADS'} to pause or resume brewing.",
+      "text": "Brew a pot of tea that applies a magical effect in an area when thrown, cycling over time in a random order between a soothing {g:citadel_inline_attribute:'CombatBarrier'}, {g:citadel_inline_attribute:'Silence'}, or scalding burn that deals {g:citadel_inline_attribute:'SpiritDPS'} and reduces {g:citadel_inline_attribute:'SpiritResist'}. <br><br>Press {g:citadel_binding:'ADS'} to pause or resume brewing.",
       "group": "citadel_heroes",
-      "hash": "a8029d669e1d"
+      "hash": "72d17fe52f62"
     },
     "ability_baba_hexing_brew_t3_desc": {
       "text": "+{s:BrewEffectiveness}% Brew Effectiveness",
@@ -22400,9 +22405,9 @@
       "hash": "89d758ed585d"
     },
     "ability_chessmaster_throwbishop_t3_desc": {
-      "text": "+{s:TileSteps} Square Range<br>Squares reduce Spirit Resist by {s:TechArmorDamageReductionPerStack}%, stacking {s:MaxStacks} times",
+      "text": "+{s:TileSteps} Square Range<br>Impacts reduce Spirit Resist by {s:TechArmorDamageReductionPerStack}%, stacking {s:MaxStacks} times",
       "group": "citadel_heroes",
-      "hash": "1eb297ca8167"
+      "hash": "400ebd924085"
     },
     "ability_chessmaster_throwbishop_dot": {
       "text": "Setup Bishop - Squares",
@@ -22610,14 +22615,14 @@
       "hash": "fa1760b2a3b9"
     },
     "ability_chessmaster_queen_desc_active": {
-      "text": "Summon a <span class=\"highlight\">queen</span> that crashes down, dealing {g:citadel_inline_attribute:'SpiritDamage'} in an area. After a delay, the queen releases squares in straight lines that deal {g:citadel_inline_attribute:'SpiritDamage'} again and apply {g:citadel_inline_attribute:'Stun'}.  <br><br><span class=\"diminish\">Move ({g:citadel_binding:'ADS'}):</span> The queen leaps to the target location, dealing the same effects again. <span class=\"diminish\"><br><br>Re-activate to recall the queen early, ending the ability.</span>",
+      "text": "Summon a <span class=\"highlight\">queen</span> that crashes down, dealing {g:citadel_inline_attribute:'SpiritDamage'} in an area. After a delay, the queen releases squares in straight lines that deal {g:citadel_inline_attribute:'SpiritDamage'} again and apply {g:citadel_inline_attribute:'Stun'}. <br><br>Heroes hit that are low health are <span class=\"highlight\">checkmated</span>, executing them.  <br><br><span class=\"diminish\">Move ({g:citadel_binding:'ADS'}):</span> The queen leaps to the target location, dealing the same effects again. <span class=\"diminish\"><br><br>Re-activate to recall the queen early, ending the ability.</span>",
       "group": "citadel_heroes",
-      "hash": "40b05d3e965d"
+      "hash": "c52524aa1557"
     },
     "ability_chessmaster_queen_t2_desc": {
-      "text": "+{s:SlowPercent}% Slow. Checkmates heroes below {s:CheckmateThreshold} health, executing them.",
+      "text": "+{s:SlowPercent}% Slow<br>+{s:CheckmateThreshold} Checkmate Threshold",
       "group": "citadel_heroes",
-      "hash": "415f66bee8f6"
+      "hash": "6ac9a7151f3d"
     },
     "ability_chessmaster_queen_t3_desc": {
       "text": "+{s:QueenBonusMoves} Moves<br>+{s:TileSteps} Square Range",
@@ -23385,9 +23390,9 @@
       "hash": "3e834044268f"
     },
     "ability_artist_tether_t1_desc": {
-      "text": "On Cast: Gain {s:HealthRegen} Health Regen for {s:BuffDuration}s, refreshed on pickup",
+      "text": "While Drawing: Gain {s:HealthRegen} Health Regen, refreshed for {s:BuffDuration}s on pickup",
       "group": "citadel_heroes",
-      "hash": "728da8a29cae"
+      "hash": "591c621a6451"
     },
     "ability_artist_tether_t2_desc": {
       "text": "While Drawing: Subjects deal {s:OutgoingDamagePercent}% Damage",
@@ -23400,9 +23405,9 @@
       "hash": "2cefe983fb22"
     },
     "ability_artist_tether/buildup": {
-      "text": "Still Drawing",
+      "text": "Still Life",
       "group": "citadel_heroes",
-      "hash": "c12760f56918"
+      "hash": "5ae5fe91ab11"
     },
     "ability_artist_tether/buildup/stun": {
       "text": "Still Life",
@@ -23420,6 +23425,11 @@
       "hash": "5ae5fe91ab11"
     },
     "ability_artist_tether/stun": {
+      "text": "Still Life",
+      "group": "citadel_heroes",
+      "hash": "5ae5fe91ab11"
+    },
+    "modifier_artist_still_life": {
       "text": "Still Life",
       "group": "citadel_heroes",
       "hash": "5ae5fe91ab11"
@@ -23504,6 +23514,11 @@
       "group": "citadel_heroes",
       "hash": "e204de5ae9ba"
     },
+    "Citadel_Graph_PermanentBuff_ArtistHealer": {
+      "text": "Healer Sketches",
+      "group": "citadel_heroes",
+      "hash": "e9f7e36e6c52"
+    },
     "artist_drawing_mystic": {
       "text": "Mystic Sketch",
       "group": "citadel_heroes",
@@ -23523,6 +23538,11 @@
       "text": "Assassin Sketch",
       "group": "citadel_heroes",
       "hash": "d122783ab484"
+    },
+    "artist_drawing_healer": {
+      "text": "Healer Sketch",
+      "group": "citadel_heroes",
+      "hash": "175fb09dbe82"
     },
     "ability_artist_bamboogrove": {
       "text": "Abstract Landscape",
@@ -23545,9 +23565,9 @@
       "hash": "3e7aec103f42"
     },
     "ability_artist_bamboogrove_t3_desc": {
-      "text": "+{s:SilenceDuration}s Silence Duration<br>+{s:AbilityDuration}s Ability Duration<br>Ink is no longer destroyed",
+      "text": "+{s:SilenceDuration}s Silence Duration<br>+{s:AbilityDuration}s Ability Duration",
       "group": "citadel_heroes",
-      "hash": "38cb8acd2329"
+      "hash": "5d587a5a8b46"
     },
     "ability_artist_bamboogrove/groundaura/silence": {
       "text": "Abstract Landscape",
@@ -23790,9 +23810,9 @@
       "hash": "f5f6555aba93"
     },
     "ability_nurse_fear_t3_desc": {
-      "text": "+{s:AbilityChannelTime}s Channel Time<br>+{s:DPS_scale} Spirit Scaling<br>Immune to damage while channeling",
+      "text": "+{s:AbilityChannelTime}s Channel Time<br>+{s:DPS_scale} Spirit Scaling<br>Takes {s:DamageResistPctWhileChanneling}% Reduced Damage while channeling",
       "group": "citadel_heroes",
-      "hash": "e0763efd1fee"
+      "hash": "f2c65732ce41"
     },
     "FearDurationPerLeechStack_prefix": {
       "text": "+",
@@ -24215,9 +24235,9 @@
       "hash": "21a4d1fe363e"
     },
     "ability_nurse_adrenaline_rush_t2_desc": {
-      "text": "+{s:AbilityDuration}s Duration<br>+{s:HealingEffectivenessPercent}% Healing Effectiveness",
+      "text": "+{s:AbilityDuration}s Duration<br>+{s:HealingEffectivenessPercent}% Incoming Healing",
       "group": "citadel_heroes",
-      "hash": "a83dc31bf390"
+      "hash": "af6509abc987"
     },
     "ability_nurse_adrenaline_rush_t3_desc": {
       "text": "+{s:RushTimeScaleBonusPercent}% Rush Speed<br>Dispels non-ult debuffs",
@@ -24305,14 +24325,14 @@
       "hash": "a0f1490a20d0"
     },
     "HealingEffectivenessPercent_label": {
-      "text": "Healing Effectiveness",
+      "text": "Incoming Healing",
       "group": "citadel_heroes",
-      "hash": "ac4ab672b9f6"
+      "hash": "5ff463a4184e"
     },
     "HealingEffectivenessPercent_postvalue_label": {
-      "text": "Healing Effectiveness",
+      "text": "Incoming Healing",
       "group": "citadel_heroes",
-      "hash": "ac4ab672b9f6"
+      "hash": "5ff463a4184e"
     },
     "HealingEffectivenessPercent_prefix": {
       "text": "+",
@@ -25883,6 +25903,11 @@
       "text": "Immobilized",
       "group": "citadel_attributes",
       "hash": "4f889189adb6"
+    },
+    "modifier_citadel_sleep": {
+      "text": "Sleeping",
+      "group": "citadel_attributes",
+      "hash": "dd43b59ee118"
     },
     "modifier_citadel_silenced": {
       "text": "Silenced",
@@ -35124,6 +35149,26 @@
       "group": "citadel_attributes",
       "hash": "4345cb1fa278"
     },
+    "GravityScaleIncrease_label": {
+      "text": "Gravity Scale",
+      "group": "citadel_attributes",
+      "hash": "67af24b15b39"
+    },
+    "GravityScaleIncrease_postvalue_label": {
+      "text": "Gravity Scale",
+      "group": "citadel_attributes",
+      "hash": "67af24b15b39"
+    },
+    "GravityScaleIncrease_prefix": {
+      "text": "+",
+      "group": "citadel_attributes",
+      "hash": "a979ef10cc6f"
+    },
+    "GravityScaleIncrease_postfix": {
+      "text": "%",
+      "group": "citadel_attributes",
+      "hash": "4345cb1fa278"
+    },
     "AirBonusDamageGiven_label": {
       "text": "In Air Damage",
       "group": "citadel_attributes",
@@ -42644,56 +42689,6 @@
       "group": "citadel_main",
       "hash": "70c07ec18ef8"
     },
-    "Citadel_Hud_Toast_SeasonalAchievement2024Unlocked": {
-      "text": "{g:citadel_persona:account_id} achieved holiday cheer for {s:hero_name}!",
-      "group": "citadel_main",
-      "hash": "266a07292f77"
-    },
-    "Citadel_Showcase_SeasonalAchievement2024": {
-      "text": "December 2024",
-      "group": "citadel_main",
-      "hash": "dfa84f8d8500"
-    },
-    "Citadel_Hud_Toast_SeasonalAchievement2025Unlocked": {
-      "text": "{s:hero_name} ornament unlocked by {g:citadel_persona:account_id}!",
-      "group": "citadel_main",
-      "hash": "49c962dbe19f"
-    },
-    "Citadel_Showcase_SeasonalAchievement2025": {
-      "text": "December 2025",
-      "group": "citadel_main",
-      "hash": "e5c6b6e67c51"
-    },
-    "Citadel_Hud_Toast_SeasonalKill": {
-      "text": "<span class=\"Emphasis\">{g:citadel_persona:killer_account_id}</span> got a",
-      "group": "citadel_main",
-      "hash": "e71c99f5c4be"
-    },
-    "Citadel_Hud_Toast_SeasonalKill2": {
-      "text": "Snowball Kill!",
-      "group": "citadel_main",
-      "hash": "e6a91ac1c83d"
-    },
-    "Citadel_Event_Holiday_Challenge2025_Title": {
-      "text": "2025 Holiday Challenge",
-      "group": "citadel_main",
-      "hash": "aac1122f6950"
-    },
-    "Citadel_Event_Holiday_Challenge2025_Desc": {
-      "text": "Win a match with each hero to receive a unique ornament for your hideout tree.",
-      "group": "citadel_main",
-      "hash": "203fd960dfbb"
-    },
-    "Citadel_Event_Holiday_Challenge2025_Snowball": {
-      "text": "Upgrade your throwable <span class=\"Emphasis\">Snowball</span> active item by adding more ornaments to your tree.",
-      "group": "citadel_main",
-      "hash": "5c934e0282b5"
-    },
-    "Citadel_Event_Holiday_Challenge2025_Snowball_Level": {
-      "text": "Level {i:item_level} / {i:item_max_level}",
-      "group": "citadel_main",
-      "hash": "dc14f981dfd7"
-    },
     "Citadel_Hud_Voting_Poster_Tooltip_Header": {
       "text": "Choose Your Poster",
       "group": "citadel_main",
@@ -49123,6 +49118,11 @@
       "text": "Press {g:citadel_binding:'Attack'} to fly to your target early.",
       "group": "citadel_main",
       "hash": "ac827e8d95e1"
+    },
+    "citadel_rejuvenator_hud_hint": {
+      "text": "Time remaining on active rejuvenators, or MidBoss respawn if no rejuvenators are active.",
+      "group": "citadel_main",
+      "hash": "8c327113bd0c"
     },
     "fire_rate_pickup/small_fire_rate": {
       "text": "Increased fire rate",
@@ -56079,11 +56079,6 @@
       "group": "citadel_main",
       "hash": "8b51d602b6d7"
     },
-    "menu_seasonal_2025": {
-      "text": "Holiday Challenge",
-      "group": "citadel_main",
-      "hash": "409b7b785ae7"
-    },
     "menu_new_violator": {
       "text": "New",
       "group": "citadel_main",
@@ -62179,11 +62174,6 @@
       "group": "citadel_main",
       "hash": "951d4efa5a95"
     },
-    "Citadel_Hideout_XmasGlobeEarned_Temp": {
-      "text": "Souvenir earned by {s:hideout_owner} during the Winter Update",
-      "group": "citadel_main",
-      "hash": "c90e365a5bd5"
-    },
     "Citadel_Hideout_VaultHint01": {
       "text": "{g:citadel_binding:'AbilityMelee'} Melee to Collect Souls",
       "group": "citadel_main",
@@ -62193,11 +62183,6 @@
       "text": "{g:citadel_binding:'AbilityMelee'} Melee during flashing lights for bonuses, heavy melee for even more",
       "group": "citadel_main",
       "hash": "7204b7d1e6fc"
-    },
-    "Citadel_Hideout_HolidayChallenge": {
-      "text": "Press {g:citadel_binding:'Interact'} to view Holiday Challenge Progress",
-      "group": "citadel_main",
-      "hash": "1ead123611d1"
     },
     "Citadel_Hideout_HeavyCrate": {
       "text": "Hold {g:citadel_binding:'AbilityMelee'} to break with heavy melee",
@@ -62550,11 +62535,6 @@
       "hash": "f4230bf860e0"
     },
     "npc_newscaster": {
-      "text": "Newscaster",
-      "group": "citadel_main",
-      "hash": "8224db5526b1"
-    },
-    "npc_seasonal": {
       "text": "Newscaster",
       "group": "citadel_main",
       "hash": "8224db5526b1"
@@ -63273,6 +63253,16 @@
       "text": "Bell Tower",
       "group": "citadel_main",
       "hash": "8eed35bf8b6c"
+    },
+    "AbilityButtonHint_HalloweenTroll": {
+      "text": "Troll Trick or Treat - Heavy Melee to Give Candy",
+      "group": "citadel_main",
+      "hash": "341dc4c9d5bf"
+    },
+    "AbilityButtonHint_HalloweenCauldron": {
+      "text": "Heavy Melee to get Candy",
+      "group": "citadel_main",
+      "hash": "286c86a1648f"
     }
   }
 }
