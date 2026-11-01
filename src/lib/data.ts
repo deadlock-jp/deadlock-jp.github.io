@@ -899,7 +899,7 @@ export function adjustmentGroups(a: Adjustment): AdjustmentGroup[] {
    * 調整」という名前になって、上のエンティティ名と重複して読みにくくなる)。
    */
   if (a.target === "system") {
-    const buckets: EconomyBucket[] = ["objective", "kill", "rejuv", "rift", "breakable"];
+    const buckets: EconomyBucket[] = ["objective", "kill", "rejuv", "rift", "breakable", "pickup"];
     const groups: AdjustmentGroup[] = [];
     for (const b of buckets) {
       const rows = changes.filter((c) => economyBucketOf(c.path) === b);

@@ -37,7 +37,7 @@ function objectiveLabel(key: string): string | undefined {
   }
 }
 
-export type EconomyBucket = "objective" | "kill" | "rejuv" | "rift" | "breakable";
+export type EconomyBucket = "objective" | "kill" | "rejuv" | "rift" | "breakable" | "pickup";
 
 /** どのカードにまとめるか */
 export function economyBucketOf(path: string): EconomyBucket | null {
@@ -45,7 +45,8 @@ export function economyBucketOf(path: string): EconomyBucket | null {
   if (path.startsWith("trooperKillGoldShareFrac.") || path.startsWith("heroKillGoldShareFrac.")) return "kill";
   if (path.startsWith("rejuv.")) return "rejuv";
   if (path.startsWith("riftComeback.")) return "rift";
-  if (path.startsWith("breakableSpawnTimes.")) return "breakable";
+  if (path.startsWith("breakableSpawnTimes.") || path.startsWith("breakableGold.")) return "breakable";
+  if (path.startsWith("healingSnack.") || path.startsWith("powerupSpawn.")) return "pickup";
   return null;
 }
 
@@ -84,6 +85,13 @@ export function economyFieldLabel(path: string): string | null {
   if (m) return e.breakableInitial(m[1]!);
   m = /^breakableSpawnTimes\.(\d+)\.respawnInterval$/.exec(path);
   if (m) return e.breakableRespawn(m[1]!);
+  if (path === "breakableGold.dropChancePct") return e.breakableDropChance;
+  if (path === "breakableGold.goldAmount") return e.breakableGold;
+  if (path === "breakableGold.goldPerMinute") return e.breakableGoldPerMinute;
+
+  if (path === "healingSnack.maxHealthPercent") return e.snackHeal(term("healingSnack"));
+  if (path === "powerupSpawn.initialSpawnSeconds") return e.powerupInitial;
+  if (path === "powerupSpawn.respawnIntervalSeconds") return e.powerupRespawn;
 
   return null;
 }
@@ -101,6 +109,10 @@ export function economyValueText(path: string, value: number | null): string | n
     return `×${value}`;
   }
   if (path.startsWith("riftComeback.")) return `${value}%`;
-  if (path.startsWith("breakableSpawnTimes.")) return `${value / 60}${L().common.minute}`;
+  if (path.startsWith("breakableSpawnTimes.") || path.startsWith("powerupSpawn.")) {
+    return `${value / 60}${L().common.minute}`;
+  }
+  if (path === "breakableGold.dropChancePct" || path === "healingSnack.maxHealthPercent") return `${value}%`;
+  if (path.startsWith("breakableGold.")) return souls(value);
   return String(value);
 }

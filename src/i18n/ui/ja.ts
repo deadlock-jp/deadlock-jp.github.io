@@ -603,7 +603,8 @@ export const ja = {
       objective: "建造物破壊のソウル",
       kill: "キルのソウル分配",
       rift: "不安定な裂け目のカムバック",
-      breakable: "破壊可能オブジェクトの出現",
+      breakable: "破壊可能オブジェクト",
+      pickup: "回復・パワーアップ",
     },
     /** 「ガーディアン（Tier1）」 */
     withTier: (name: string, tier: string) => `${name}（${tier}）`,
@@ -628,6 +629,12 @@ export const ja = {
     } as Record<string, string>,
     breakableInitial: (n: string) => `破壊可能オブジェクトの初回出現（配置${n}）`,
     breakableRespawn: (n: string) => `破壊可能オブジェクトの再出現間隔（配置${n}）`,
+    breakableDropChance: "破壊可能オブジェクトがソウルを落とす確率",
+    breakableGold: "破壊可能オブジェクトのソウル",
+    breakableGoldPerMinute: "破壊可能オブジェクトのソウル増加（1分ごと）",
+    snackHeal: (snack: string) => `${snack}の回復量（最大HPに対する割合）`,
+    powerupInitial: "パワーアップの初回出現",
+    powerupRespawn: "パワーアップの再出現間隔",
   },
 };
 

@@ -188,6 +188,19 @@ export function economyFieldMap(economy) {
   for (const [k, v] of Object.entries(economy?.riftComeback ?? {})) {
     if (isNum(v)) out[`riftComeback.${k}`] = v;
   }
+  // 抽出はしていたが比較から漏れていた(2026-10-30 の「破壊可能オブジェクトの成長 -10%」
+  // 「ヒーリングスナック 10%→14%」が差分に出なかった)
+  for (const k of ["dropChancePct", "goldAmount", "goldPerMinute"]) {
+    const v = economy?.breakableGold?.[k];
+    if (isNum(v)) out[`breakableGold.${k}`] = v;
+  }
+  for (const k of ["initialSpawnSeconds", "respawnIntervalSeconds"]) {
+    const v = economy?.powerupSpawn?.[k];
+    if (isNum(v)) out[`powerupSpawn.${k}`] = v;
+  }
+  if (isNum(economy?.healingSnack?.maxHealthPercent)) {
+    out["healingSnack.maxHealthPercent"] = economy.healingSnack.maxHealthPercent;
+  }
   return out;
 }
 

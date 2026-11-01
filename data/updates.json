@@ -4,6 +4,1782 @@
   "upstreamRepo": "https://github.com/SteamDatabase/GameTracking-Deadlock",
   "entries": [
     {
+      "date": "2026-10-30",
+      "upstreamCommit": null,
+      "title": "Halloween 2026 + Gameplay Update",
+      "fromVersion": "6821",
+      "toVersion": "6833",
+      "changes": [
+        "ヒーロー・アイテムの数値差分から自動生成 (バフ 34 / ナーフ 13 / 混在 15、変更項目 203)"
+      ],
+      "adjustments": [
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_artist",
+          "note": "クールダウン 165→180 / 継続時間 0.04→0.01 / T3強化 DestroyOnDamage を削除 ほか",
+          "changes": [
+            {
+              "path": "ability_artist_bamboogrove.properties.AbilityCooldown",
+              "from": 165,
+              "to": 180,
+              "good": false
+            },
+            {
+              "path": "ability_artist_bamboogrove.properties.AbilityDuration@scale",
+              "from": 0.04,
+              "to": 0.01,
+              "good": false
+            },
+            {
+              "path": "ability_artist_bamboogrove.upgrades.T3.DestroyOnDamage",
+              "from": -1,
+              "to": null,
+              "good": true
+            },
+            {
+              "path": "ability_artist_tether.properties.StunDuration",
+              "from": 1,
+              "to": 0.9,
+              "good": false
+            },
+            {
+              "path": "ability_artist_tether.upgrades.T1.HealthRegen#2",
+              "from": 0.25,
+              "to": 0.15,
+              "good": false
+            },
+            {
+              "path": "ability_artist_tether.upgrades.T3.StunDuration",
+              "from": 0.35,
+              "to": 0.45,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_atlas",
+          "note": "T3強化 ダメージ／秒 18→22 / 弾薬ダメージ 3.6→3.78",
+          "changes": [
+            {
+              "path": "citadel_ability_bull_heal.upgrades.T3.DPS",
+              "from": 18,
+              "to": 22,
+              "good": true
+            },
+            {
+              "path": "citadel_weapon_bull_set.weapon.bulletDamage",
+              "from": 3.6,
+              "to": 3.78,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_baba",
+          "note": "近接強 スロウ継続時間 4→2 / 近接弱攻撃 ノックバック 10→8 / デバフ継続時間 22→16 ほか",
+          "changes": [
+            {
+              "path": "ability_baba_bench_run.properties.HeavyMeleeSlowDuration",
+              "from": 4,
+              "to": 2,
+              "good": false
+            },
+            {
+              "path": "ability_baba_bench_run.properties.LightKickKnockbackDistance",
+              "from": 10,
+              "to": 8,
+              "good": false
+            },
+            {
+              "path": "ability_baba_bubbling_brew.properties.DebuffDuration",
+              "from": 22,
+              "to": 16,
+              "good": false
+            },
+            {
+              "path": "ability_baba_hexing_brew.properties.BarrierLockTime",
+              "from": 2.5,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "ability_baba_hexing_brew.properties.BarrierWindow",
+              "from": null,
+              "to": 1.5,
+              "good": true
+            },
+            {
+              "path": "ability_baba_hexing_brew.properties.BrewTime",
+              "from": 1.5,
+              "to": 0,
+              "good": false
+            },
+            {
+              "path": "ability_baba_hexing_brew.properties.FireLockTime",
+              "from": 4.5,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "ability_baba_hexing_brew.properties.FireWindow",
+              "from": null,
+              "to": 1.5,
+              "good": true
+            },
+            {
+              "path": "ability_baba_hexing_brew.properties.SilenceDuration",
+              "from": 3,
+              "to": 2.75,
+              "good": false
+            },
+            {
+              "path": "ability_baba_hexing_brew.properties.SilenceLockTime",
+              "from": 3.5,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "ability_baba_hexing_brew.properties.SilenceWindow",
+              "from": null,
+              "to": 1.5,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_bookworm",
+          "note": "弾薬ダメージ 35→32 / MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL 0.52→0.61",
+          "changes": [
+            {
+              "path": "citadel_weapon_bookworm_set2.weapon.bulletDamage",
+              "from": 35,
+              "to": 32,
+              "good": false
+            },
+            {
+              "path": "growth.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL",
+              "from": 0.52,
+              "to": 0.61,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_chessmaster",
+          "note": "ダメージ 1.3→0.9 / T3強化 クールダウン -12→-10 / クールダウン 210→240 ほか",
+          "changes": [
+            {
+              "path": "ability_chessmaster_forkpiece.properties.Damage@scale",
+              "from": 1.3,
+              "to": 0.9,
+              "good": false
+            },
+            {
+              "path": "ability_chessmaster_forkpiece.upgrades.T3.AbilityCooldown",
+              "from": -12,
+              "to": -10,
+              "good": false
+            },
+            {
+              "path": "ability_chessmaster_queen.properties.AbilityCooldown",
+              "from": 210,
+              "to": 240,
+              "good": false
+            },
+            {
+              "path": "ability_chessmaster_queen.properties.CheckmateThreshold",
+              "from": 0,
+              "to": 100,
+              "good": true
+            },
+            {
+              "path": "ability_chessmaster_queen.properties.CheckmateThreshold@scale",
+              "from": 0,
+              "to": 5,
+              "good": true
+            },
+            {
+              "path": "ability_chessmaster_queen.properties.Damage@scale",
+              "from": 1.4,
+              "to": 1.6,
+              "good": true
+            },
+            {
+              "path": "ability_chessmaster_queen.upgrades.T2.CheckmateThreshold",
+              "from": 200,
+              "to": 150,
+              "good": false
+            },
+            {
+              "path": "ability_chessmaster_queen.upgrades.T2.CheckmateThreshold#2",
+              "from": 5,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "ability_chessmaster_throwbishop.properties.Damage@scale",
+              "from": 0.64,
+              "to": 0.85,
+              "good": true
+            },
+            {
+              "path": "ability_chessmaster_throwbishop.properties.GroundAuraHeight",
+              "from": 4,
+              "to": 1,
+              "good": false
+            },
+            {
+              "path": "ability_chessmaster_throwbishop.upgrades.T1.FadingSlowPercent",
+              "from": 15,
+              "to": 25,
+              "good": true
+            },
+            {
+              "path": "ability_chessmaster_throwbishop.upgrades.T3.MaxStacks",
+              "from": 10,
+              "to": 5,
+              "good": false
+            },
+            {
+              "path": "ability_chessmaster_throwbishop.upgrades.T3.TechArmorDamageReductionPerStack",
+              "from": -2.5,
+              "to": -5,
+              "good": null
+            },
+            {
+              "path": "citadel_weapon_chessmaster_shotgun.weapon.bulletDamage",
+              "from": 30,
+              "to": 25,
+              "good": false
+            },
+            {
+              "path": "stat.ECritDamageBonusScale",
+              "from": 1,
+              "to": 0.8,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_chrono",
+          "note": "クールダウン 110→95",
+          "changes": [
+            {
+              "path": "citadel_ability_chrono_swap.properties.AbilityCooldown",
+              "from": 110,
+              "to": 95,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_doorman",
+          "note": "T2強化 衝突ダメージ 75→90 / T3強化 クールダウン -15→-18",
+          "changes": [
+            {
+              "path": "ability_doorman_luggage_cart.upgrades.T2.WallImpactDamage",
+              "from": 75,
+              "to": 90,
+              "good": true
+            },
+            {
+              "path": "ability_doorman_luggage_cart.upgrades.T3.AbilityCooldown",
+              "from": -15,
+              "to": -18,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_drifter",
+          "note": "T3強化 増加ダメージ 11→12 / 弾薬ダメージ 19.5→20.1 / T3強化 継続時間 2.5→2.75",
+          "changes": [
+            {
+              "path": "ability_drifter_hunger.upgrades.T3.AmpDamagePercent",
+              "from": 11,
+              "to": 12,
+              "good": true
+            },
+            {
+              "path": "citadel_weapon_drifter_set.weapon.bulletDamage",
+              "from": 19.5,
+              "to": 20.1,
+              "good": true
+            },
+            {
+              "path": "drifter_darkness.upgrades.T3.AbilityDuration",
+              "from": 2.5,
+              "to": 2.75,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_fencer",
+          "note": "スタン継続時間 0.8→1.5 / T2強化 スタン継続時間 0.4→0.6",
+          "changes": [
+            {
+              "path": "ability_fencer_riposte.properties.StunDuration",
+              "from": 0.8,
+              "to": 1.5,
+              "good": true
+            },
+            {
+              "path": "ability_fencer_riposte.upgrades.T2.StunDuration",
+              "from": 0.4,
+              "to": 0.6,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_forge",
+          "note": "NonHeroDamagePercentOutgoing 50→65 / タレットのHP 9→10",
+          "changes": [
+            {
+              "path": "citadel_ability_shieldedsentry.properties.NonHeroDamagePercentOutgoing",
+              "from": 50,
+              "to": 65,
+              "good": true
+            },
+            {
+              "path": "citadel_ability_shieldedsentry.properties.TurretBaseHealth@scale",
+              "from": 9,
+              "to": 10,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_frank",
+          "note": "T3強化 被ダメージ 15→16",
+          "changes": [
+            {
+              "path": "ability_frank_painaura.upgrades.T3.IncomingDamagePercent",
+              "from": 15,
+              "to": 16,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_ghost",
+          "note": "ダメージ 1.22→1.35",
+          "changes": [
+            {
+              "path": "ability_blood_bomb.properties.Damage@scale",
+              "from": 1.22,
+              "to": 1.35,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_gigawatt",
+          "note": "T3強化 スタン継続時間 0.9→1.1",
+          "changes": [
+            {
+              "path": "citadel_ability_static_charge.upgrades.T3.StunDuration",
+              "from": 0.9,
+              "to": 1.1,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_inferno",
+          "note": "T3強化 ダメージ 0.4 を追加 / T2強化 ライフスティール 15→20",
+          "changes": [
+            {
+              "path": "ability_fire_bomb.upgrades.T3.Damage",
+              "from": null,
+              "to": 0.4,
+              "good": true
+            },
+            {
+              "path": "ability_incendiary_projectile.upgrades.T2.LifestealPercentHero",
+              "from": 15,
+              "to": 20,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_kelvin",
+          "note": "クールダウン 185→190 / T1強化 クールダウン -20→-30 / T2強化 発射速度 20 を追加 ほか",
+          "changes": [
+            {
+              "path": "ability_ice_dome.properties.AbilityCooldown",
+              "from": 185,
+              "to": 190,
+              "good": false
+            },
+            {
+              "path": "ability_ice_dome.upgrades.T1.AbilityCooldown",
+              "from": -20,
+              "to": -30,
+              "good": true
+            },
+            {
+              "path": "ability_ice_dome.upgrades.T2.FireRateSlow",
+              "from": null,
+              "to": 20,
+              "good": true
+            },
+            {
+              "path": "ability_ice_dome.upgrades.T3.BonusHealthRegen",
+              "from": 65,
+              "to": 75,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_krill",
+          "note": "ダメージ／秒 75→65 / ダメージ／秒 1.488→1.339 / T1強化 ダメージ／秒 50→45 ほか",
+          "changes": [
+            {
+              "path": "ability_burrow.properties.DPS",
+              "from": 75,
+              "to": 65,
+              "good": false
+            },
+            {
+              "path": "ability_burrow.properties.DPS@scale",
+              "from": 1.488,
+              "to": 1.339,
+              "good": false
+            },
+            {
+              "path": "ability_burrow.upgrades.T1.DPS",
+              "from": 50,
+              "to": 45,
+              "good": false
+            },
+            {
+              "path": "ability_intimidate.properties.Damage",
+              "from": 50,
+              "to": 45,
+              "good": false
+            },
+            {
+              "path": "ability_intimidate.properties.Damage@scale",
+              "from": 0.75,
+              "to": 0.675,
+              "good": false
+            },
+            {
+              "path": "ability_intimidate.upgrades.T1.Damage",
+              "from": 35,
+              "to": 30,
+              "good": false
+            },
+            {
+              "path": "ability_throw_sand.properties.Damage",
+              "from": 40,
+              "to": 35,
+              "good": false
+            },
+            {
+              "path": "ability_throw_sand.upgrades.T1.Damage",
+              "from": 50,
+              "to": 45,
+              "good": false
+            },
+            {
+              "path": "ability_ult_combo.properties.DPS",
+              "from": 40,
+              "to": 35,
+              "good": false
+            },
+            {
+              "path": "ability_ult_combo.properties.DPS@scale",
+              "from": 0.6,
+              "to": 0.54,
+              "good": false
+            },
+            {
+              "path": "ability_ult_combo.upgrades.T3.DPS",
+              "from": 40,
+              "to": 35,
+              "good": false
+            },
+            {
+              "path": "ability_ult_combo.upgrades.T3.DPS#2",
+              "from": 0.4,
+              "to": 0.36,
+              "good": false
+            },
+            {
+              "path": "growth.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL",
+              "from": 0.0847,
+              "to": 0.0881,
+              "good": true
+            },
+            {
+              "path": "growth.MODIFIER_VALUE_TECH_POWER",
+              "from": 1.1,
+              "to": 0.6,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_lash",
+          "note": "T3強化 ジャンプ速度 4 を追加",
+          "changes": [
+            {
+              "path": "citadel_ability_lash.upgrades.T3.JumpVelocity",
+              "from": null,
+              "to": 4,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_mirage",
+          "note": "バリア 0→400 / 中断クールダウン 4→5 / 移動速度継続時間 0→12 ほか",
+          "changes": [
+            {
+              "path": "mirage_teleport.properties.CombatBarrier",
+              "from": 0,
+              "to": 400,
+              "good": true
+            },
+            {
+              "path": "mirage_teleport.properties.InterruptCooldown",
+              "from": 4,
+              "to": 5,
+              "good": false
+            },
+            {
+              "path": "mirage_teleport.properties.MovementSpeedBonusDuration",
+              "from": 0,
+              "to": 12,
+              "good": true
+            },
+            {
+              "path": "mirage_teleport.properties.TeleportCompletedTime",
+              "from": 2,
+              "to": 3,
+              "good": true
+            },
+            {
+              "path": "mirage_teleport.upgrades.T1.MovementSpeedBonusDuration",
+              "from": 12,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "mirage_teleport.upgrades.T2.AbilityCooldown",
+              "from": null,
+              "to": -65,
+              "good": true
+            },
+            {
+              "path": "mirage_teleport.upgrades.T2.CombatBarrier",
+              "from": 400,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "mirage_teleport.upgrades.T2.CombatBarrier#2",
+              "from": 0.6,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "mirage_teleport.upgrades.T3.AbilityCooldown",
+              "from": -90,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "mirage_teleport.upgrades.T3.CombatBarrier",
+              "from": null,
+              "to": 0.8,
+              "good": true
+            },
+            {
+              "path": "mirage_teleport.upgrades.T3.UninterruptibleByDamage",
+              "from": null,
+              "to": 1,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_nano",
+          "note": "T3強化 DamageAmpDuration 6→8 / T3強化 衝突ダメージ 60→90",
+          "changes": [
+            {
+              "path": "ability_nano_catform.upgrades.T3.DamageAmpDuration",
+              "from": 6,
+              "to": 8,
+              "good": true
+            },
+            {
+              "path": "ability_nano_dash.upgrades.T3.ImpactDamage",
+              "from": 60,
+              "to": 90,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_necro",
+          "note": "T2強化 召喚の間隔 を削除 / T3強化 召喚の間隔 -0.3 を追加 / GrabHeight 1.75 を追加 ほか",
+          "changes": [
+            {
+              "path": "ability_necro_gravestone.upgrades.T2.SummonFrequency",
+              "from": -0.3,
+              "to": null,
+              "good": true
+            },
+            {
+              "path": "ability_necro_gravestone.upgrades.T3.SummonFrequency",
+              "from": null,
+              "to": -0.3,
+              "good": false
+            },
+            {
+              "path": "ability_necro_zombiewall.properties.GrabHeight",
+              "from": null,
+              "to": 1.75,
+              "good": true
+            },
+            {
+              "path": "ability_necro_zombiewall.properties.ZombieWallDeployTime",
+              "from": 0.6,
+              "to": 0.8,
+              "good": true
+            },
+            {
+              "path": "growth.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL",
+              "from": 0.054,
+              "to": 0.052,
+              "good": false
+            },
+            {
+              "path": "stat.EMaxMoveSpeed",
+              "from": 7,
+              "to": 6.7,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_nurse",
+          "note": "T3強化 ラッシュ時のスピード上昇 15→20 / BuildupLookAngleVertical 50 を追加 / BuildupTime 1.3→2 ほか",
+          "changes": [
+            {
+              "path": "ability_nurse_adrenaline_rush.upgrades.T3.RushTimeScaleBonusPercent",
+              "from": 15,
+              "to": 20,
+              "good": true
+            },
+            {
+              "path": "ability_nurse_fear.properties.BuildupLookAngleVertical",
+              "from": null,
+              "to": 50,
+              "good": true
+            },
+            {
+              "path": "ability_nurse_fear.properties.BuildupTime",
+              "from": 1.3,
+              "to": 2,
+              "good": true
+            },
+            {
+              "path": "ability_nurse_fear.upgrades.T3.ChannelDamageImmune",
+              "from": 1,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "ability_nurse_fear.upgrades.T3.DamageResistPctWhileChanneling",
+              "from": null,
+              "to": 50,
+              "good": true
+            },
+            {
+              "path": "ability_nurse_healing_needles.properties.HealRegen",
+              "from": 25,
+              "to": 22,
+              "good": false
+            },
+            {
+              "path": "ability_nurse_healing_needles.properties.HealRegen@scale",
+              "from": 0.2,
+              "to": 0.24,
+              "good": true
+            },
+            {
+              "path": "ability_nurse_healing_needles.upgrades.T2.HealRegen",
+              "from": 20,
+              "to": 16,
+              "good": false
+            },
+            {
+              "path": "ability_nurse_leech_therapy.properties.LeechGroundLifetime",
+              "from": 180,
+              "to": 120,
+              "good": false
+            },
+            {
+              "path": "ability_nurse_leech_therapy.properties.LeechGroundLifetimePerMinute",
+              "from": null,
+              "to": 3,
+              "good": true
+            },
+            {
+              "path": "citadel_weapon_nurse_set.weapon.bulletDamage",
+              "from": 14.858,
+              "to": 13.372,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_orion",
+          "note": "T2強化 チャージディレイ -2 を追加 / T3強化 チャージディレイ を削除 / T3強化 WallRicochet 1 を追加",
+          "changes": [
+            {
+              "path": "ability_charged_shot.upgrades.T2.AbilityCooldownBetweenCharge",
+              "from": null,
+              "to": -2,
+              "good": true
+            },
+            {
+              "path": "ability_charged_shot.upgrades.T3.AbilityCooldownBetweenCharge",
+              "from": -3,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "ability_charged_shot.upgrades.T3.WallRicochet",
+              "from": null,
+              "to": 1,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_priest",
+          "note": "追加ダメージ 115→95 / 追加ダメージ 3→3.6",
+          "changes": [
+            {
+              "path": "ability_priest_weaponswap.properties.BonusDamage",
+              "from": 115,
+              "to": 95,
+              "good": false
+            },
+            {
+              "path": "ability_priest_weaponswap.properties.BonusDamage@scale",
+              "from": 3,
+              "to": 3.6,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_punkgoat",
+          "note": "クールダウン 27→25 / T3強化 継続時間 16→20 / T3強化 最大HP 10→15",
+          "changes": [
+            {
+              "path": "ability_punkgoat_blasted.properties.AbilityCooldown",
+              "from": 27,
+              "to": 25,
+              "good": true
+            },
+            {
+              "path": "ability_punkgoat_goatflip.upgrades.T3.MaxHealthBuffDuration",
+              "from": 16,
+              "to": 20,
+              "good": true
+            },
+            {
+              "path": "ability_punkgoat_goatflip.upgrades.T3.MaxHealthBuffPct",
+              "from": 10,
+              "to": 15,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_ratking",
+          "note": "爆発 ダメージ 70→60 / T2強化 爆発 ダメージ 70→60 / T3強化 大爆発 ダメージ 300→275 ほか",
+          "changes": [
+            {
+              "path": "ability_ratking_scrap_grenade.properties.DamagePerShrapnel",
+              "from": 70,
+              "to": 60,
+              "good": false
+            },
+            {
+              "path": "ability_ratking_scrap_grenade.upgrades.T2.DamagePerShrapnel",
+              "from": 70,
+              "to": 60,
+              "good": false
+            },
+            {
+              "path": "ability_ratking_scrap_grenade.upgrades.T3.BigExplosionDamage",
+              "from": 300,
+              "to": 275,
+              "good": false
+            },
+            {
+              "path": "ability_ratking_standard_bearer.properties.AbilityCooldown",
+              "from": 160,
+              "to": 180,
+              "good": false
+            },
+            {
+              "path": "citadel_weapon_ratking_set.weapon.bulletDamage",
+              "from": 6,
+              "to": 5.7,
+              "good": false
+            },
+            {
+              "path": "growth.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL",
+              "from": 0.18,
+              "to": 0.144,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_shiv",
+          "note": "現在HPの割合ダメージ 3.5→4 / 現在HPの割合ダメージ 0.01→0.015 / T3強化 現在HPの割合ダメージ 0.01 を追加 ほか",
+          "changes": [
+            {
+              "path": "citadel_ability_shiv_dagger.properties.FullRageCurrentHealthDamagePct",
+              "from": 3.5,
+              "to": 4,
+              "good": true
+            },
+            {
+              "path": "citadel_ability_shiv_dagger.properties.FullRageCurrentHealthDamagePct@scale",
+              "from": 0.01,
+              "to": 0.015,
+              "good": true
+            },
+            {
+              "path": "citadel_ability_shiv_dagger.upgrades.T3.FullRageCurrentHealthDamagePct",
+              "from": null,
+              "to": 0.01,
+              "good": true
+            },
+            {
+              "path": "citadel_ability_shiv_killing_blow.properties.RecastWindow",
+              "from": 16,
+              "to": 12,
+              "good": false
+            },
+            {
+              "path": "growth.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL_ALT_FIRE",
+              "from": 0.24,
+              "to": 0.228,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_unicorn",
+          "note": "ダメージ 140→125",
+          "changes": [
+            {
+              "path": "ability_unicorn_dazzlingorb.properties.Damage",
+              "from": 140,
+              "to": 125,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_viscous",
+          "note": "MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL_ALT_FIRE 1.44→1.512 / T1強化 ダメージ 36→45",
+          "changes": [
+            {
+              "path": "growth.MODIFIER_VALUE_BASE_BULLET_DAMAGE_FROM_LEVEL_ALT_FIRE",
+              "from": 1.44,
+              "to": 1.512,
+              "good": true
+            },
+            {
+              "path": "viscous_goo_grenade.upgrades.T1.Damage",
+              "from": 36,
+              "to": 45,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_warden",
+          "note": "武器ダメージ -25→-30 / 移動速度ボーナス 15→20 / T2強化 クールダウン -30→-40 ほか",
+          "changes": [
+            {
+              "path": "ability_warden_crowd_control.properties.WeaponPowerDebuff",
+              "from": -25,
+              "to": -30,
+              "good": false
+            },
+            {
+              "path": "ability_warden_high_alert.properties.MoveSpeedBonusPct",
+              "from": 15,
+              "to": 20,
+              "good": true
+            },
+            {
+              "path": "ability_warden_riot_protocol.upgrades.T2.AbilityCooldown",
+              "from": -30,
+              "to": -40,
+              "good": true
+            },
+            {
+              "path": "ability_warden_riot_protocol.upgrades.T2.PulseDPS",
+              "from": 40.5,
+              "to": 50,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_werewolf",
+          "note": "EBaseHealthRegen 2.5→3",
+          "changes": [
+            {
+              "path": "stat.EBaseHealthRegen",
+              "from": 2.5,
+              "to": 3,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_wraith",
+          "note": "回復量 60→45 / キャストディレイ 0.75→1 / クールダウン 46→50",
+          "changes": [
+            {
+              "path": "citadel_ability_card_toss.properties.HeartHeal",
+              "from": 60,
+              "to": 45,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_projectmind.properties.AbilityCastDelay",
+              "from": 0.75,
+              "to": 1,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_projectmind.properties.AbilityCooldown",
+              "from": 46,
+              "to": 50,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_yamato",
+          "note": "キャスト範囲 26→23 / T3強化 キャスト範囲 15→8 / クールダウン 150→160 ほか",
+          "changes": [
+            {
+              "path": "citadel_ability_flying_strike.properties.AbilityCastRange",
+              "from": 26,
+              "to": 23,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_flying_strike.upgrades.T3.AbilityCastRange",
+              "from": 15,
+              "to": 8,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_infinity_slash.properties.AbilityCooldown",
+              "from": 150,
+              "to": 160,
+              "good": false
+            },
+            {
+              "path": "citadel_ability_infinity_slash.upgrades.T2.",
+              "from": -20,
+              "to": null,
+              "good": true
+            },
+            {
+              "path": "citadel_ability_infinity_slash.upgrades.T2.AbilityCooldown",
+              "from": null,
+              "to": -30,
+              "good": true
+            },
+            {
+              "path": "citadel_ability_power_slash.properties.FullChargeDamage@scale",
+              "from": 1.85,
+              "to": 1.96,
+              "good": true
+            },
+            {
+              "path": "citadel_ability_power_slash.upgrades.T3.FullChargeDamage#2",
+              "from": 0.5,
+              "to": 0.53,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_ability_power_shard",
+          "note": "AbilityPostCastDuration 0.5→0.2",
+          "changes": [
+            {
+              "path": "properties.AbilityPostCastDuration",
+              "from": 0.5,
+              "to": 0.2,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_aprounds",
+          "note": "プロック確率 55→60",
+          "changes": [
+            {
+              "path": "properties.ProcChance",
+              "from": 55,
+              "to": 60,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "neutral",
+          "target": "item",
+          "key": "upgrade_banshee_slugs",
+          "note": "被回復量 -35→-40 / 被回復量 -35→-40",
+          "changes": [
+            {
+              "path": "properties.HealAmpReceivePenaltyPercent",
+              "from": -35,
+              "to": -40,
+              "good": null
+            },
+            {
+              "path": "properties.HealAmpRegenPenaltyPercent",
+              "from": -35,
+              "to": -40,
+              "good": null
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "item",
+          "key": "upgrade_cloaking_device_active",
+          "note": "AmbushBonusFireRate を削除 / 奇襲状態の近接ダメージ を削除 / 奇襲状態の武器ダメージ 50 を追加 ほか",
+          "changes": [
+            {
+              "path": "properties.AmbushBonusFireRate",
+              "from": 25,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "properties.AmbushBonusMeleeDamage",
+              "from": 25,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "properties.AmbushBonusWeaponDamage",
+              "from": null,
+              "to": 50,
+              "good": true
+            },
+            {
+              "path": "properties.AmbushBuildUpDuration",
+              "from": null,
+              "to": 6,
+              "good": true
+            },
+            {
+              "path": "upgrades.T1.AmbushBonusFireRate",
+              "from": 35,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "upgrades.T1.AmbushBonusMeleeDamage",
+              "from": 30,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "upgrades.T1.AmbushBonusWeaponDamage",
+              "from": null,
+              "to": 35,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_close_quarter_combat",
+          "note": "スロウ継続時間 2→2.5",
+          "changes": [
+            {
+              "path": "properties.SlowDuration",
+              "from": 2,
+              "to": 2.5,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_damage_recycler",
+          "note": "スピリットライフスティール 28→30 / 弾薬ライフスティール 28→30",
+          "changes": [
+            {
+              "path": "properties.AbilityLifestealPercentHero",
+              "from": 28,
+              "to": 30,
+              "good": true
+            },
+            {
+              "path": "properties.BulletLifestealPercent",
+              "from": 28,
+              "to": 30,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_divine_barrier",
+          "note": "クールダウン 45→55",
+          "changes": [
+            {
+              "path": "properties.AbilityCooldown",
+              "from": 45,
+              "to": 55,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_express_shot",
+          "note": "ProcBaseAttackDamagePercentAltFire 40→38 / ProcBaseAttackDamagePercentAltFire 1.3→1.24",
+          "changes": [
+            {
+              "path": "properties.ProcBaseAttackDamagePercentAltFire",
+              "from": 40,
+              "to": 38,
+              "good": false
+            },
+            {
+              "path": "properties.ProcBaseAttackDamagePercentAltFire@scale",
+              "from": 1.3,
+              "to": 1.24,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_focus_lens",
+          "note": "クールダウン 45→40",
+          "changes": [
+            {
+              "path": "properties.AbilityCooldown",
+              "from": 45,
+              "to": 40,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_fury_trance",
+          "note": "移動速度 1→1.5 / 武器ダメージ 6→10 / 弾薬ライフスティール 14→15",
+          "changes": [
+            {
+              "path": "properties.ActiveBonusMoveSpeed",
+              "from": 1,
+              "to": 1.5,
+              "good": true
+            },
+            {
+              "path": "properties.BaseAttackDamagePercent",
+              "from": 6,
+              "to": 10,
+              "good": true
+            },
+            {
+              "path": "properties.BulletLifestealPercent",
+              "from": 14,
+              "to": 15,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_glass_cannon",
+          "note": "武器ダメージ 80→85",
+          "changes": [
+            {
+              "path": "properties.BaseAttackDamagePercent",
+              "from": 80,
+              "to": 85,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "neutral",
+          "target": "item",
+          "key": "upgrade_goose_egg",
+          "note": "ダメージ低下 -15→-12",
+          "changes": [
+            {
+              "path": "properties.OutgoingDamagePenaltyPercent",
+              "from": -15,
+              "to": -12,
+              "good": null
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "item",
+          "key": "upgrade_healbane",
+          "note": "ヒーローキル時の回復 275→170 / ヒーローキル時の回復 3 を追加",
+          "changes": [
+            {
+              "path": "properties.HealOnKill",
+              "from": 275,
+              "to": 170,
+              "good": false
+            },
+            {
+              "path": "properties.HealOnKill@scale",
+              "from": null,
+              "to": 3,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "item",
+          "key": "upgrade_healing_booster",
+          "note": "構成素材 エクストラリジェネ を除外 / HPリジェネ を削除 / 非戦闘時リジェネ 1→2 ほか",
+          "changes": [
+            {
+              "path": "components.upgrade_endurance",
+              "from": 1,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "properties.BonusHealthRegen",
+              "from": 3,
+              "to": null,
+              "good": false
+            },
+            {
+              "path": "properties.OutOfCombatHealthRegen",
+              "from": 1,
+              "to": 2,
+              "good": true
+            },
+            {
+              "path": "upgrades.T1.BonusHealthRegen",
+              "from": 9,
+              "to": null,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_health_nova",
+          "note": "合計HPリジェネ 6→1.1",
+          "changes": [
+            {
+              "path": "properties.TotalHealthRegen@scale",
+              "from": 6,
+              "to": 1.1,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_health_stealing_magic",
+          "note": "スピリットライフスティール 13→15 / スピリットパワー 6→8",
+          "changes": [
+            {
+              "path": "properties.AbilityLifestealPercentHero",
+              "from": 13,
+              "to": 15,
+              "good": true
+            },
+            {
+              "path": "properties.TechPower",
+              "from": 6,
+              "to": 8,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_high_velocity_mag",
+          "note": "弾速 60→45",
+          "changes": [
+            {
+              "path": "properties.BonusBulletSpeedPercent",
+              "from": 60,
+              "to": 45,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_improved_bullet_armor",
+          "note": "弾薬耐性 30→35 / 非戦闘時リジェネ 3→5",
+          "changes": [
+            {
+              "path": "properties.BulletResist",
+              "from": 30,
+              "to": 35,
+              "good": true
+            },
+            {
+              "path": "properties.OutOfCombatHealthRegen",
+              "from": 3,
+              "to": 5,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_infuser",
+          "note": "スピリットライフスティール 70→75 / スピリットライフスティール 13→15 / スピリットパワー 6→8",
+          "changes": [
+            {
+              "path": "properties.AbilityLifestealPercentHero",
+              "from": 70,
+              "to": 75,
+              "good": true
+            },
+            {
+              "path": "properties.AbilityLifestealPercentHeroPassive",
+              "from": 13,
+              "to": 15,
+              "good": true
+            },
+            {
+              "path": "properties.TechPower",
+              "from": 6,
+              "to": 8,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_juggernaut",
+          "note": "HPリジェネ 8→15",
+          "changes": [
+            {
+              "path": "properties.BonusHealthRegen",
+              "from": 8,
+              "to": 15,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "neutral",
+          "target": "item",
+          "key": "upgrade_magic_slow",
+          "note": "ダッシュ距離 -10→-12",
+          "changes": [
+            {
+              "path": "properties.GroundDashReductionPercent",
+              "from": -10,
+              "to": -12,
+              "good": null
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_melee_rebuttal",
+          "note": "パリィ クールダウン 1.75→1.25",
+          "changes": [
+            {
+              "path": "properties.ParryCooldownReduction",
+              "from": 1.75,
+              "to": 1.25,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_metal_skin",
+          "note": "重力スケール 20 を追加",
+          "changes": [
+            {
+              "path": "properties.GravityScale",
+              "from": null,
+              "to": 20,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_regenerating_bullet_shield",
+          "note": "武器ダメージ 18→22",
+          "changes": [
+            {
+              "path": "properties.BaseAttackDamagePercent",
+              "from": 18,
+              "to": 22,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_resonant_healing",
+          "note": "アビリティ発動時の回復量 65→40 / アビリティ発動時の回復量 1.7→1.4 / リジェネ 0.035→0.025",
+          "changes": [
+            {
+              "path": "properties.HealingPerCast",
+              "from": 65,
+              "to": 40,
+              "good": false
+            },
+            {
+              "path": "properties.HealingPerCast@scale",
+              "from": 1.7,
+              "to": 1.4,
+              "good": false
+            },
+            {
+              "path": "properties.Regeneration@scale",
+              "from": 0.035,
+              "to": 0.025,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "neutral",
+          "target": "item",
+          "key": "upgrade_rupture",
+          "note": "被回復量 -50→-55 / 被回復量 -50→-55",
+          "changes": [
+            {
+              "path": "properties.HealAmpReceivePenaltyPercent",
+              "from": -50,
+              "to": -55,
+              "good": null
+            },
+            {
+              "path": "properties.HealAmpRegenPenaltyPercent",
+              "from": -50,
+              "to": -55,
+              "good": null
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_spirit_bubble",
+          "note": "スピリット耐性 18→15",
+          "changes": [
+            {
+              "path": "properties.TechResist",
+              "from": 18,
+              "to": 15,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "item",
+          "key": "upgrade_spirit_sap",
+          "note": "キャスト範囲 40→35 / クールダウン 18→22",
+          "changes": [
+            {
+              "path": "properties.AbilityCastRange",
+              "from": 40,
+              "to": 35,
+              "good": false
+            },
+            {
+              "path": "properties.AbilityCooldown",
+              "from": 18,
+              "to": 22,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_surging_power",
+          "note": "弾薬ライフスティール 70→75 / 武器ダメージ 6→10 / 弾薬ライフスティール 13→15",
+          "changes": [
+            {
+              "path": "properties.ActiveBonusLifesteal",
+              "from": 70,
+              "to": 75,
+              "good": true
+            },
+            {
+              "path": "properties.BaseAttackDamagePercent",
+              "from": 6,
+              "to": 10,
+              "good": true
+            },
+            {
+              "path": "properties.BulletLifestealPercent",
+              "from": 13,
+              "to": 15,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_targeted_silence",
+          "note": "HP増加 50→90",
+          "changes": [
+            {
+              "path": "properties.BonusHealth",
+              "from": 50,
+              "to": 90,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_tech_damage_pulse",
+          "note": "近接攻撃耐性 18→22",
+          "changes": [
+            {
+              "path": "properties.MeleeResistPercent",
+              "from": 18,
+              "to": 22,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_tech_overflow",
+          "note": "スピリットライフスティール 13→15 / スピリットパワー 6→8",
+          "changes": [
+            {
+              "path": "properties.AbilityLifestealPercentHero",
+              "from": 13,
+              "to": 15,
+              "good": true
+            },
+            {
+              "path": "properties.TechPower",
+              "from": 6,
+              "to": 8,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "neutral",
+          "target": "item",
+          "key": "upgrade_toxic_bullets",
+          "note": "被回復量 -35→-40 / 被回復量 -35→-40",
+          "changes": [
+            {
+              "path": "properties.HealAmpReceivePenaltyPercent",
+              "from": -35,
+              "to": -40,
+              "good": null
+            },
+            {
+              "path": "properties.HealAmpRegenPenaltyPercent",
+              "from": -35,
+              "to": -40,
+              "good": null
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_ultimate_burst",
+          "note": "ダメージ 0.35 を追加 / ダッシュ距離 -10→-12",
+          "changes": [
+            {
+              "path": "properties.Damage@scale",
+              "from": null,
+              "to": 0.35,
+              "good": true
+            },
+            {
+              "path": "properties.GroundDashReductionPercent",
+              "from": -10,
+              "to": -12,
+              "good": null
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_vampire",
+          "note": "武器ダメージ 6→10 / 弾薬ライフスティール 13→15",
+          "changes": [
+            {
+              "path": "properties.BaseAttackDamagePercent",
+              "from": 6,
+              "to": 10,
+              "good": true
+            },
+            {
+              "path": "properties.BulletLifestealPercent",
+              "from": 13,
+              "to": 15,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "neutral",
+          "target": "system",
+          "key": "economy",
+          "note": "破壊可能オブジェクトのソウル増加（1分ごと） 2→1.8 / ヒーリングスナックの回復量（最大HPに対する割合） 10%→14%",
+          "changes": [
+            {
+              "path": "breakableGold.goldPerMinute",
+              "from": 2,
+              "to": 1.8,
+              "good": null
+            },
+            {
+              "path": "healingSnack.maxHealthPercent",
+              "from": 10,
+              "to": 14,
+              "good": null
+            }
+          ]
+        }
+      ],
+      "sourceTitle": "Halloween 2026 + Gameplay Update",
+      "sourceUrl": "https://store.steampowered.com/news/app/1422450/view/680765564125186045"
+    },
+    {
       "date": "2026-10-14",
       "upstreamCommit": null,
       "title": "Minor Update - 10-14-2026",

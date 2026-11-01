@@ -1,7 +1,7 @@
 {
   "from": "6821",
   "to": "6833",
-  "generatedAt": "2026-10-31T02:48:15.037Z",
+  "generatedAt": "2026-11-01T03:26:24.185Z",
   "entries": [
     {
       "kind": "changed",
@@ -1610,6 +1610,22 @@
       "path": "properties.BulletLifestealPercent",
       "before": 13,
       "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "system",
+      "id": "economy",
+      "path": "breakableGold.goldPerMinute",
+      "before": 2,
+      "after": 1.8
+    },
+    {
+      "kind": "changed",
+      "type": "system",
+      "id": "economy",
+      "path": "healingSnack.maxHealthPercent",
+      "before": 10,
+      "after": 14
     }
   ],
   "excludedFieldCount": 26

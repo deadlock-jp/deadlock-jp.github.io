@@ -94,6 +94,7 @@ const TERMS = {
   shrine: { token: "Citadel_Hud_KillFeedShieldName" },
   patron: { token: "Citadel_Hud_KillFeedTitan" },
   rejuvenator: { token: "Item_Rejuvenator" },
+  healingSnack: { token: "HeroTesting_HealingSnacks" },
   trooper: { token: "Citadel_AttackerClass_CLASS_TROOPER" },
 } satisfies Record<string, TermDef>;
 
