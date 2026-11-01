@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6835",
-  "upstreamCommit": "6835",
-  "generatedAt": "2026-10-31T09:00:10.367Z",
+  "clientVersion": "6839",
+  "upstreamCommit": "6839",
+  "generatedAt": "2026-11-01T03:00:11.855Z",
   "language": "schinese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
@@ -11515,9 +11515,9 @@
       "hash": "9d905bb1e294"
     },
     "ability_charged_shot_t3_desc": {
-      "text": "<span class=\"highlight\">提升伤害系数</span> <br><span class=\"highlight\">在墙上反弹一次</span>",
+      "text": "<span class=\"highlight\">提升伤害系数</span> <br><span class=\"highlight\">在墙上、地面和天花板反弹一次</span>",
       "group": "citadel_heroes",
-      "hash": "bffc4bf9b08c"
+      "hash": "1c17e92a6a25"
     },
     "PowerJumpChannelTime_postfix": {
       "text": "秒",
