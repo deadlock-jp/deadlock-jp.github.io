@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6839",
-  "upstreamCommit": "6839",
-  "generatedAt": "2026-11-01T03:00:11.855Z",
+  "clientVersion": "6842",
+  "upstreamCommit": "6842",
+  "generatedAt": "2026-11-03T02:27:56.878Z",
   "language": "schinese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
@@ -13010,9 +13010,9 @@
       "hash": "553b11c504a2"
     },
     "citadel_ability_shiv_killing_blow_passive_desc_footer": {
-      "text": "<br><span class=\"diminish\">如果未命中英雄，冷却时间增 {s:FailedExecuteCooldownPenalty}%。</span>",
+      "text": "<br><span class=\"diminish\">如果未命中英雄，冷却时间增加+{s:FailedExecuteCooldownPenalty}%。</span>",
       "group": "citadel_heroes",
-      "hash": "24987a2fd832"
+      "hash": "fe5dc3be84fe"
     },
     "citadel_ability_shiv_killing_blow/active_buff": {
       "text": "怒气冲天",
@@ -22345,9 +22345,9 @@
       "hash": "48662e732e43"
     },
     "ability_header_on_square": {
-      "text": "在方块上：",
+      "text": "在方格上：",
       "group": "citadel_heroes",
-      "hash": "1f4cde8e5d21"
+      "hash": "86d7f3490fb1"
     },
     "MoveCooldown_postvalue_label": {
       "text": "移动冷却时间",
