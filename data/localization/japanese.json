@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6842",
-  "upstreamCommit": "6842",
-  "generatedAt": "2026-11-03T02:27:56.771Z",
+  "clientVersion": "6848",
+  "upstreamCommit": "6848",
+  "generatedAt": "2026-11-04T09:00:14.337Z",
   "language": "japanese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 618,
-    "citadel_heroes": 3971,
+    "citadel_heroes": 3972,
     "citadel_attributes": 1991,
     "citadel_gc": 221,
-    "citadel_main": 5246
+    "citadel_main": 5247
   },
   "tokens": {
     "hero_vampire:n": {
@@ -11520,9 +11520,9 @@
       "hash": "3af95ff001a5"
     },
     "ability_charged_shot_t3_desc": {
-      "text": "<span class=\"highlight\">ダメージスケーリング上昇</span><br><span class=\"highlight\">壁に当たると一度だけ跳弾する</span>",
+      "text": "<span class=\"highlight\">ダメージスケーリング上昇</span><br><span class=\"highlight\">壁、床または天井に当たると一度だけ跳弾する</span>",
       "group": "citadel_heroes",
-      "hash": "4bad78394198"
+      "hash": "463775888ade"
     },
     "PowerJumpChannelTime_postfix": {
       "text": "秒",
@@ -14578,6 +14578,11 @@
       "text": "<span class=\"highlight\">+{s:SpiritBonus}</span>のスピリットパワーを<span class=\"highlight\">{s:BuffDuration}秒間</span>獲得する",
       "group": "citadel_heroes",
       "hash": "99707e003b60"
+    },
+    "citadel_ability_flying_strike_t3_desc": {
+      "text": "オルトキャストで味方に飛びつける<br>キャスト範囲 <span class=\"highlight\">+{s:AbilityCastRange}m</span><br><span class=\"highlight\">追加チャージを1つ</span>獲得",
+      "group": "citadel_heroes",
+      "hash": "69b532428b4b"
     },
     "yamato_flying_strike_t3_header": {
       "text": "対象到達時：",
@@ -62918,6 +62923,11 @@
       "text": "トロールのトリック・オア・トリート - 近接強攻撃でキャンディを渡す",
       "group": "citadel_main",
       "hash": "38fcec32148b"
+    },
+    "AbilityButtonHint_HalloweenCauldron": {
+      "text": "近接強攻撃でキャンディ獲得",
+      "group": "citadel_main",
+      "hash": "73f280f1dcc6"
     }
   }
 }

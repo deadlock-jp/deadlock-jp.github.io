@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6842",
-  "upstreamCommit": "6842",
-  "generatedAt": "2026-11-03T02:27:56.846Z",
+  "clientVersion": "6848",
+  "upstreamCommit": "6848",
+  "generatedAt": "2026-11-04T09:00:14.473Z",
   "language": "koreana",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 618,
-    "citadel_heroes": 3971,
+    "citadel_heroes": 3972,
     "citadel_attributes": 1991,
     "citadel_gc": 221,
     "citadel_main": 5248
@@ -11520,9 +11520,9 @@
       "hash": "66dd2854cb49"
     },
     "ability_charged_shot_t3_desc": {
-      "text": "<span class=\"highlight\">피해 배수 증가</span><br><span class=\"highlight\">벽에 부딪히면 한 번 도탄</span>",
+      "text": "<span class=\"highlight\">피해 배수 증가</span><br><span class=\"highlight\">벽, 바닥, 천장에 부딪히면 한 번 도탄</span>",
       "group": "citadel_heroes",
-      "hash": "80c91f8b1885"
+      "hash": "8473507b192f"
     },
     "PowerJumpChannelTime_postfix": {
       "text": "초",
@@ -14578,6 +14578,11 @@
       "text": "<span class=\"highlight\">{s:BuffDuration}초</span> 동안 마력 <span class=\"highlight\">+{s:SpiritBonus}</span> 획득",
       "group": "citadel_heroes",
       "hash": "e107dcf80f94"
+    },
+    "citadel_ability_flying_strike_t3_desc": {
+      "text": "대체 능력 시전으로 아군에게 사용 가능<br>시전 범위 <span class=\"highlight\">+{s:AbilityCastRange}m</span> 증가<br><span class=\"highlight\">추가 충전 1회</span> 획득",
+      "group": "citadel_heroes",
+      "hash": "587d07ddc72f"
     },
     "yamato_flying_strike_t3_header": {
       "text": "적군에게 도달 시:",
