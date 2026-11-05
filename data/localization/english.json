@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6848",
-  "upstreamCommit": "6848",
-  "generatedAt": "2026-11-04T09:00:14.397Z",
+  "clientVersion": "6849",
+  "upstreamCommit": "6849",
+  "generatedAt": "2026-11-05T02:22:38.089Z",
   "language": "English",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
@@ -11,7 +11,7 @@
     "citadel_heroes": 3982,
     "citadel_attributes": 2023,
     "citadel_gc": 221,
-    "citadel_main": 5268
+    "citadel_main": 5269
   },
   "tokens": {
     "hero_vampire:n": {
@@ -40218,6 +40218,11 @@
       "text": "{t:d:t:T:time_remaining} remaining",
       "group": "citadel_main",
       "hash": "1ba55fb1ed0f"
+    },
+    "Citadel_RankedSeason_LastDay": {
+      "text": "Last Day",
+      "group": "citadel_main",
+      "hash": "d85ff84fc3a3"
     },
     "Citadel_RankedSeason_CurrentRank": {
       "text": "Current Rank",
