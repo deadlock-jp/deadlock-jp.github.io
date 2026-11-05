@@ -1,0 +1,320 @@
+{
+  "from": "6849",
+  "to": "6851",
+  "generatedAt": "2026-11-05T09:00:07.013Z",
+  "entries": [
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "18",
+      "path": "ability_burrow.properties.Radius",
+      "before": 5,
+      "after": 5.5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "18",
+      "path": "ability_intimidate.properties.DamageHealMult",
+      "before": 1.2,
+      "after": 1.3
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "18",
+      "path": "ability_throw_sand.upgrades.T2.GroundDashReductionPercent",
+      "before": -26,
+      "after": -28
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "18",
+      "path": "ability_throw_sand.upgrades.T2.SlowPercent",
+      "before": 24,
+      "after": 28
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "18",
+      "path": "ability_ult_combo.properties.BonusHealthOnKill",
+      "before": 40,
+      "after": 50
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "77",
+      "path": "ability_fencer_riposte.upgrades.T2.StunDuration",
+      "before": 0.6,
+      "after": 0.7
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "77",
+      "path": "ability_fencer_ultimate.upgrades.T3.BonusDamagePercent",
+      "before": 50,
+      "after": 60
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "78",
+      "path": "ability_deadpack_chargeblast.properties.CoatedDamage@scale",
+      "before": 1.1,
+      "after": 1.012
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "78",
+      "path": "ability_deadpack_chargeblast.properties.Damage@scale",
+      "before": 0.74,
+      "after": 0.681
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "78",
+      "path": "ability_deadpack_chargeblast.upgrades.T3.CoatedDamage",
+      "before": 0.35,
+      "after": 0.322
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "78",
+      "path": "ability_deadpack_chargeblast.upgrades.T3.Damage",
+      "before": 0.35,
+      "after": 0.322
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "78",
+      "path": "ability_deadpack_rocketeer.upgrades.T2.HealOnHit",
+      "before": 150,
+      "after": 125
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "78",
+      "path": "ability_deadpack_rocketeer.upgrades.T2.HealOnHit#2",
+      "before": 2,
+      "after": 1.7
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "78",
+      "path": "ability_deadpack_ultimate.properties.BonusDamagePercent",
+      "before": 75,
+      "after": 55
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "81",
+      "path": "ability_unicorn_dazzlingorb.properties.AbilityCooldown",
+      "before": 160,
+      "after": 170
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "81",
+      "path": "ability_unicorn_dazzlingorb.properties.BounceRadius",
+      "before": 15.5,
+      "after": 15
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "81",
+      "path": "ability_unicorn_dazzlingorb.properties.SlowPercent",
+      "before": 32,
+      "after": 28
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "81",
+      "path": "ability_unicorn_dazzlingorb.upgrades.T1.SlowPercent",
+      "before": 16,
+      "after": 14
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "81",
+      "path": "ability_unicorn_luminousstrike.properties.AbilityCastRange",
+      "before": 30,
+      "after": 25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "81",
+      "path": "ability_unicorn_luminousstrike.properties.MagicIncreasePerStack",
+      "before": 7,
+      "after": 6
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "81",
+      "path": "ability_unicorn_luminousstrike.upgrades.T2.AbilityCastRange",
+      "before": null,
+      "after": 5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "81",
+      "path": "ability_unicorn_luminousstrike.upgrades.T3.MagicIncreasePerStack",
+      "before": 4,
+      "after": 5
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "81",
+      "path": "ability_unicorn_prismaticguard.upgrades.T3.DebuffDuration",
+      "before": 1.25,
+      "after": 0.75
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.properties.BonusMoveSpeed",
+      "before": 3,
+      "after": 4
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "ability_ratking_standard_bearer.upgrades.T1.AbilityCooldown",
+      "before": null,
+      "after": -25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_ratking_set.weapon.bulletDamage",
+      "before": 5.7,
+      "after": 5.8
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "84",
+      "path": "citadel_weapon_ratking_set.weapon.clipSize",
+      "before": 24,
+      "after": 26
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "87",
+      "path": "ability_nurse_fear.properties.BuildupLookAngleVertical",
+      "before": 50,
+      "after": 65
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "87",
+      "path": "ability_nurse_fear.properties.BuildupTime",
+      "before": 2,
+      "after": 1.75
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "87",
+      "path": "citadel_weapon_nurse_set.weapon.bulletDamage",
+      "before": 13.372,
+      "after": 14.442
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "88",
+      "path": "ability_baba_bench_run.properties.MeleeResist",
+      "before": 30,
+      "after": 25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "88",
+      "path": "ability_baba_bench_run.properties.StatusResistancePercent",
+      "before": 30,
+      "after": 25
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "88",
+      "path": "ability_baba_hexing_brew.properties.AbilityCooldown",
+      "before": 27,
+      "after": 28
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "88",
+      "path": "ability_baba_hexing_brew.properties.BarrierWindow",
+      "before": 1.5,
+      "after": 1.6
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "88",
+      "path": "ability_baba_hexing_brew.properties.DamagePerSecond@scale",
+      "before": 0.152,
+      "after": 0.13
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "88",
+      "path": "ability_baba_hexing_brew.properties.FireWindow",
+      "before": 1.5,
+      "after": 1.6
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "88",
+      "path": "ability_baba_hexing_brew.properties.SilenceWindow",
+      "before": 1.5,
+      "after": 1.6
+    },
+    {
+      "kind": "changed",
+      "type": "hero",
+      "id": "88",
+      "path": "growth.MODIFIER_VALUE_BASE_MELEE_DAMAGE_FROM_LEVEL",
+      "before": 0.7,
+      "after": 0.63
+    },
+    {
+      "kind": "changed",
+      "type": "item",
+      "id": "upgrade_healbane",
+      "path": "properties.StackingPenaltyAnchorPercent",
+      "before": null,
+      "after": 80
+    }
+  ],
+  "excludedFieldCount": 26
+}

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6849",
-  "upstreamCommit": "6849",
-  "generatedAt": "2026-11-05T02:22:38.089Z",
+  "clientVersion": "6851",
+  "upstreamCommit": "6851",
+  "generatedAt": "2026-11-05T09:00:06.796Z",
   "language": "English",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
@@ -20685,9 +20685,9 @@
       "hash": "730bc5b75ae1"
     },
     "ability_unicorn_luminousstrike_t2_desc": {
-      "text": "{s:AbilityCooldown}s Cooldown and +{s:ImpactDamage} Impact Damage",
+      "text": "{s:AbilityCooldown}s Cooldown, +{s:ImpactDamage} Impact Damage and +{s:AbilityCastRange}m Cast Range",
       "group": "citadel_heroes",
-      "hash": "10befedb1419"
+      "hash": "40d43bfd96d8"
     },
     "ability_unicorn_luminousstrike_t3_desc": {
       "text": "+{s:MagicIncreasePerStack}% Spirit Amp and +{s:FireRatePerStack}% Fire Rate Per Stack",
@@ -20990,9 +20990,9 @@
       "hash": "b12208363c40"
     },
     "ability_fencer_riposte_desc": {
-      "text": "Prepare to <span class=\"highlight\">deflect</span> the next incoming attack. On a successful deflection, briefly become <span class=\"highlight\">invulnerable</span> and target an enemy hero to dash towards them, <span class=\"highlight\">immobilizing</span> them, preventing them from <span class=\"highlight\">parrying</span>, and reducing their <span class=\"highlight\">Melee Resist</span>.<br><br><span class=\"diminish\">Press {g:citadel_binding:'Ability2'} to select a target.<br>Does not trigger against trooper or neutral damage.</span>",
+      "text": "Prepare to <span class=\"highlight\">deflect</span> the next incoming attack. On a successful deflection, briefly become <span class=\"highlight\">invulnerable</span> and target an enemy hero to dash towards them, <span class=\"highlight\">immobilizing</span> and <span class=\"highlight\">disarming</span> them, preventing them from <span class=\"highlight\">parrying</span>, and reducing their <span class=\"highlight\">Melee Resist</span>.<br><br><span class=\"diminish\">Press {g:citadel_binding:'Ability2'} to select a target.<br>Does not trigger against trooper or neutral damage.</span>",
       "group": "citadel_heroes",
-      "hash": "aaa7b622571a"
+      "hash": "ad415c13a7ad"
     },
     "RiposteChannelTime_postvalue_label": {
       "text": "Deflect Duration",
@@ -21055,9 +21055,9 @@
       "hash": "b12208363c40"
     },
     "ability_fencer_riposte_attack_desc": {
-      "text": "Perform a quick dash forward and immobilize an enemy with your weapon's pommel, preventing them from parrying.",
+      "text": "Perform a quick dash forward and immobilize and disarm an enemy with your weapon's pommel, preventing them from parrying.",
       "group": "citadel_heroes",
-      "hash": "e7fc71d45c54"
+      "hash": "43c065b1ae65"
     },
     "MeleeResistReductionDuration_label": {
       "text": "Melee Resist Reduction Duration",
@@ -21545,9 +21545,9 @@
       "hash": "dbef89ed0532"
     },
     "ability_ratking_standard_bearer_t1_desc": {
-      "text": "+{s:BonusMoveSpeed}m Move Speed",
+      "text": "+{s:BonusMoveSpeed}m Move Speed<br>{s:AbilityCooldown}s Cooldown",
       "group": "citadel_heroes",
-      "hash": "970b4af77739"
+      "hash": "0378077778b8"
     },
     "ability_ratking_standard_bearer_t2_desc": {
       "text": "+{s:FlagDuration}s Flag Duration<br>+{s:Radius}m Radius",
