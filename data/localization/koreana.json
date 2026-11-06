@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6851",
-  "upstreamCommit": "6851",
-  "generatedAt": "2026-11-05T09:00:06.839Z",
+  "clientVersion": "6860",
+  "upstreamCommit": "6860",
+  "generatedAt": "2026-11-06T09:00:11.286Z",
   "language": "koreana",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
@@ -11,7 +11,7 @@
     "citadel_heroes": 3972,
     "citadel_attributes": 1991,
     "citadel_gc": 221,
-    "citadel_main": 5248
+    "citadel_main": 5257
   },
   "tokens": {
     "hero_vampire:n": {
@@ -20625,9 +20625,9 @@
       "hash": "ff1e06971eed"
     },
     "ability_unicorn_luminousstrike_t2_desc": {
-      "text": "쿨다운 {s:AbilityCooldown}초 감소 및 적중 시 피해 +{s:ImpactDamage} 증가",
+      "text": "{s:AbilityCooldown}초 쿨다운, 충격 피해 +{s:ImpactDamage}, 시전 범위 +{s:AbilityCastRange}m",
       "group": "citadel_heroes",
-      "hash": "589e857175fe"
+      "hash": "f592c762986c"
     },
     "ability_unicorn_luminousstrike_t3_desc": {
       "text": "마력 증폭 +{s:MagicIncreasePerStack}% 및 중첩당 연사 속도 +{s:FireRatePerStack}% 증가",
@@ -20930,9 +20930,9 @@
       "hash": "097e5edfdc85"
     },
     "ability_fencer_riposte_desc": {
-      "text": "다음 공격을 <span class=\"highlight\">튕겨낼</span> 준비를 합니다. 튕겨내기에 성공하면 잠시 동안 <span class=\"highlight\">무적</span> 상태가 되며, 적군 영웅을 지정해 대상에게 돌진합니다. 해당 적군 영웅은 <span class=\"highlight\">이동 불가</span> 상태가 되고 <span class=\"highlight\">방어</span>할 수 없으며 <span class=\"highlight\">근거리 공격 저항</span>이 감소합니다.<br><br><span class=\"diminish\">{g:citadel_binding:'Ability2'} 키를 눌러 대상을 선택합니다.<br>트루퍼 및 중립 유닛의 피해에는 발동하지 않습니다.</span>",
+      "text": "다음 공격을 <span class=\"highlight\">튕겨낼</span> 준비를 합니다. 튕겨내기에 성공하면 잠시 동안 <span class=\"highlight\">무적</span> 상태가 되며, 적군 영웅을 지정해 대상에게 돌진합니다. 해당 적군 영웅은 <span class=\"highlight\">이동 불가</span> 및 <span class=\"highlight\">무장 해제</span> 상태가 되고 <span class=\"highlight\">방어</span>할 수 없으며 <span class=\"highlight\">근거리 공격 저항</span>이 감소합니다.<br><br><span class=\"diminish\">{g:citadel_binding:'Ability2'} 키를 눌러 대상을 선택합니다.<br>트루퍼 및 중립 유닛의 피해에는 발동하지 않습니다.</span>",
       "group": "citadel_heroes",
-      "hash": "87545e17d039"
+      "hash": "2bf0942d9886"
     },
     "RiposteChannelTime_postvalue_label": {
       "text": "튕겨내기 지속 시간",
@@ -20995,9 +20995,9 @@
       "hash": "097e5edfdc85"
     },
     "ability_fencer_riposte_attack_desc": {
-      "text": "전방으로 빠르게 대시하여 무기 손잡이 끝으로 적군을 가격해 이동 불가 상태로 만들고, 방어하지 못하게 합니다.",
+      "text": "전방으로 빠르게 대시하여 무기 손잡이 끝으로 적군을 가격해 이동 불가 및 무장 해제 상태로 만들고, 방어하지 못하게 합니다.",
       "group": "citadel_heroes",
-      "hash": "6207b1d08b63"
+      "hash": "a91063213725"
     },
     "MeleeResistReductionDuration_label": {
       "text": "근거리 공격 저항 감소 지속 시간",
@@ -21485,9 +21485,9 @@
       "hash": "1b289ce7c2c0"
     },
     "ability_ratking_standard_bearer_t1_desc": {
-      "text": "이동 속도 +{s:BonusMoveSpeed}m 증가",
+      "text": "이동 속도 +{s:BonusMoveSpeed}m<br>쿨다운 {s:AbilityCooldown}초 감소",
       "group": "citadel_heroes",
-      "hash": "a35681650414"
+      "hash": "10c9913fde32"
     },
     "ability_ratking_standard_bearer_t2_desc": {
       "text": "깃발 지속 시간 +{s:FlagDuration}초 증가<br>반경 +{s:Radius}m 증가",
@@ -38680,9 +38680,9 @@
       "hash": "728450fcb613"
     },
     "Citadel_Hud_Quickbuy_Tooltip_Autobuy": {
-      "text": "상점 범위 내에 있으며 영혼이 충분할 경우 이 아이템을 구매할 수 있습니다. 이 기능은 영웅 체험 모드와 같이 무료 구매가 가능한 경우에는 사용할 수 없습니다.",
+      "text": "상점 범위 안에 있고 이 아이템을 구매할 만큼 충분한 영혼을 보유하고 있다면 아이템이 자동으로 구매됩니다. 영웅 체험 모드처럼 무료 구매가 활성화된 경우에는 이 기능이 적용되지 않습니다.",
       "group": "citadel_main",
-      "hash": "3dd97edb5b2a"
+      "hash": "e3cfda638044"
     },
     "Citadel_Hud_Quickbuy_Tooltip_Empty": {
       "text": "[M2]를 눌러 빠른 구매 대기열에 아이템을 추가하거나 제거합니다.",
@@ -39984,6 +39984,11 @@
       "group": "citadel_main",
       "hash": "6321d3184aa6"
     },
+    "Citadel_RankedSeason_LastDay": {
+      "text": "마지막 날",
+      "group": "citadel_main",
+      "hash": "a5287c22aee2"
+    },
     "Citadel_RankedSeason_CurrentRank": {
       "text": "현재 랭크",
       "group": "citadel_main",
@@ -39999,6 +40004,11 @@
       "group": "citadel_main",
       "hash": "36009c8d7c02"
     },
+    "Citadel_RankedSeason_FinalRank": {
+      "text": "시즌 최고 랭크",
+      "group": "citadel_main",
+      "hash": "4c3f11e9d61f"
+    },
     "Citadel_RankedSeason_ProtectionRemaining:f": {
       "text": "보호 {d:demotion_protection_remaining}/{d:demotion_protection_total} 남음",
       "group": "citadel_main",
@@ -40010,9 +40020,9 @@
       "hash": "488a33c85b37"
     },
     "Citadel_RankedSeason_ResultingRank": {
-      "text": "결과 순위",
+      "text": "결과 랭크",
       "group": "citadel_main",
-      "hash": "04d30f01d685"
+      "hash": "db63c668167e"
     },
     "Citadel_RankedSeason_HeroWins:f": {
       "text": "{d:hero_wins} 승리",
@@ -40020,9 +40030,19 @@
       "hash": "24ddd42ae06d"
     },
     "Citadel_RankedSeason_HeroWinsRequired:f": {
-      "text": "랭크 매치를 위한 영웅 자격을 잠금 해제하려면 <b>{d:wins_required_per_hero}회 승리</b>해야 합니다.",
+      "text": "랭크 매치에서 해당 영웅을 사용하려면 <b>{d:wins_required_per_hero}승</b>을 달성해야 합니다.",
       "group": "citadel_main",
-      "hash": "fd335cd4c587"
+      "hash": "277449d2cc6a"
+    },
+    "Citadel_RankedSeason_HeroPoints:f": {
+      "text": "{d:hero_points} 포인트",
+      "group": "citadel_main",
+      "hash": "16e5e49c3052"
+    },
+    "Citadel_RankedSeason_HeroPointsRequired:f": {
+      "text": "랭크 매치에서 해당 영웅을 사용하려면 <b>{d:points_required_per_hero} 포인트</b>를 획득해야 합니다.<br />승리 = 2 포인트&nbsp;&nbsp;/&nbsp;&nbsp;패배 = 1 포인트",
+      "group": "citadel_main",
+      "hash": "0d21a5b9e0aa"
     },
     "Citadel_Ranked_ViewSeasonHistory": {
       "text": "시즌 기록 보기",
@@ -40104,11 +40124,6 @@
       "group": "citadel_main",
       "hash": "a9e65852005d"
     },
-    "Citadel_RankedSeason_Eligibility_HeroUnlocks:f": {
-      "text": "{d:required_hero_win_count} 승리 이상을 보유한 영웅 {d:current_unlocked_heroes} / {d:required_unlocked_heroes}",
-      "group": "citadel_main",
-      "hash": "326c127559c0"
-    },
     "Citadel_RankedSeason_Eligibility_NotEligible": {
       "text": "랭크 매치를 잠금 해제하려면 일반 매치를 플레이하세요.",
       "group": "citadel_main",
@@ -40118,6 +40133,11 @@
       "text": "랭크 매치는 플레이 메뉴에서 이용하실 수 있습니다.",
       "group": "citadel_main",
       "hash": "b894a8d3825f"
+    },
+    "Citadel_RankedSeason_JoinSeason": {
+      "text": "시즌 참가",
+      "group": "citadel_main",
+      "hash": "db6ab5190db6"
     },
     "Citadel_RankedMatchHistory_Calibrating": {
       "text": "측정 중 {d:calibrating_number}/{d:calibration_matches}",
@@ -40135,9 +40155,9 @@
       "hash": "e1d36718a75b"
     },
     "Citadel_RankedHistory_Title": {
-      "text": "랭크 시즌",
+      "text": "랭크 시즌 기록",
       "group": "citadel_main",
-      "hash": "766b60e2ae75"
+      "hash": "4896f6a4b005"
     },
     "Citadel_RankedHistory_SeasonNotJoined": {
       "text": "참여 안 함",
@@ -40158,6 +40178,11 @@
       "text": "--",
       "group": "citadel_main",
       "hash": "e6a9fc04320a"
+    },
+    "Citadel_RankedSeasonCompleted_Title": {
+      "text": "종료",
+      "group": "citadel_main",
+      "hash": "cafdc61bbf9e"
     },
     "Citadel_Ranked_NoSeasonActive": {
       "text": "현재 활성화된 시즌 없음",
@@ -40215,19 +40240,24 @@
       "hash": "84fafa7fbb02"
     },
     "Citadel_Ranked_Overview_Eligibility_Bullet1:f": {
-      "text": "계정에 총 {d:required_account_wins}회 이상 승리 기록이 있어야 합니다. 또한 일반 매치에서 각각 {d:required_hero_wins}회 이상 승리한 영웅이 {d:required_hero_unlocks}명 이상 있어야 합니다.",
+      "text": "계정 전체 누적 승리 횟수가 {d:required_account_wins}회 이상이어야 합니다.",
       "group": "citadel_main",
-      "hash": "be9035e42ec4"
+      "hash": "96049599044c"
+    },
+    "Citadel_Ranked_Overview_Eligibility_Bullet1_HeroWins:f": {
+      "text": "일반 매치에서 각각 {d:required_hero_wins}회 이상 승리한 영웅이 {d:required_hero_unlocks}명 이상 있어야 합니다.",
+      "group": "citadel_main",
+      "hash": "4c8a27e82dea"
+    },
+    "Citadel_Ranked_Overview_Eligibility_Bullet1_HeroPoints:f": {
+      "text": "각각 {d:required_hero_points}포인트 이상 획득한 영웅이 {d:required_hero_unlocks}명 이상 있어야 합니다. 일반 매치에서 승리하면 2 포인트, 패배하면 1 포인트를 획득합니다.",
+      "group": "citadel_main",
+      "hash": "e75a29497c55"
     },
     "Citadel_Ranked_Overview_Eligibility_Bullet2": {
       "text": "랭크 매치에서 플레이어는 1인 또는 2인 파티로만 대기열에 들어갈 수 있습니다. 2인 파티의 두 플레이어는 서로 랭크 차이가 1단계 이내여야 합니다. 불멸자 플레이어는 서브랭크 차이가 3단계 이내인 다른 불멸자 플레이어와만 대기열에 들어갈 수 있습니다.",
       "group": "citadel_main",
       "hash": "effd4925988f"
-    },
-    "Citadel_Ranked_Overview_Eligibility_Bullet3": {
-      "text": "1인 측정 게임을 {d:required_solo_calibration_games}회 완료해야 합니다. 측정 완료 시 받을 수 있는 최고 랭크는 {g:citadel_packed_rank_name:max_calibration_rank}입니다.",
-      "group": "citadel_main",
-      "hash": "eb019e7ece3b"
     },
     "Citadel_Ranked_Overview_PlayingMatches": {
       "text": "레벨 상승",
@@ -40239,15 +40269,15 @@
       "group": "citadel_main",
       "hash": "e7a8cbbdb3cf"
     },
-    "Citadel_Ranked_Overview_Playing_Bullet2": {
-      "text": "새로운 랭크 또는 서브랭크로 승격되면 강등 보호 토큰을 얻습니다. 배지 랭크가 완전히 상승하면 5개를 얻고, 서브랭크가 상승하면 2개를 얻습니다. 강등 보호가 활성화되어 있을 때 랭크가 내려가는 패배를 당하면 강등되는 대신 토큰이 소모됩니다.",
+    "Citadel_Ranked_Overview_Playing_Bullet2:f": {
+      "text": "새로운 랭크 또는 서브랭크로 승급하면 강등 보호 방패를 획득합니다. 랭크 승급 시에는 {d:main_rank_demotion_protection}개, 서브랭크 승급 시에는 {d:sub_rank_demotion_protection}개의 방패를 획득합니다. 매치에서 패배해 랭크가 내려갈 상황이 되었을 때 강등 보호가 활성화되어 있다면, 방패 1개를 소모하고 현재 랭크를 유지합니다. {g:citadel_packed_rank_name:last_demotion_protection_packed_rank}보다 높은 랭크 또는 서브랭크에서는 강등 보호 방패가 제공되지 않습니다.",
       "group": "citadel_main",
-      "hash": "355d3e9117bb"
+      "hash": "81e3e8ba54ac"
     },
     "Citadel_Ranked_Overview_Playing_Bullet3": {
-      "text": "서브랭크를 올리려면 1,000 랭크 포인트가 필요합니다(예: {g:citadel_packed_rank_name:'62'} -> {g:citadel_packed_rank_name:'63'}). 다음 배지 랭크로 완전히 승격하려면 2,000 랭크 포인트가 필요합니다(예: {g:citadel_packed_rank_name:'56'} -> {g:citadel_packed_rank_name:'61'}).",
+      "text": "다음 서브랭크로 승급하려면 {d:sub_rank_progress_required} 랭크 포인트가 필요합니다(예: {g:citadel_packed_rank_name:'62'} -> {g:citadel_packed_rank_name:'63'}). 다음 배지 랭크로 승급하려면 {d:main_rank_progress_required} 랭크 포인트가 필요합니다(예: {g:citadel_packed_rank_name:'56'} -> {g:citadel_packed_rank_name:'61'}).",
       "group": "citadel_main",
-      "hash": "b35d5f4b049e"
+      "hash": "0bf0d5d211ff"
     },
     "Citadel_Ranked_Overview_Playing_Bullet4": {
       "text": "최고 랭크에서는 규칙이 약간 바뀝니다. 랭크 포인트를 얻거나 잃는 건 다른 랭크와 같지만, 서브랭크가 일정한 포인트에 묶여 있지 않습니다. 그 대신 {g:citadel_packed_rank_rank_name:'111'} 랭크에 속한 플레이어의 백분위에 따라 하루에 한 번 다른 서브랭크가 배정됩니다.",
@@ -40278,6 +40308,11 @@
       "text": "베타 시즌 1",
       "group": "citadel_main",
       "hash": "184bb39b3cd6"
+    },
+    "Citadel_RankedSeasonName_BetaSeason2": {
+      "text": "베타 시즌 2",
+      "group": "citadel_main",
+      "hash": "095e73552472"
     },
     "Citadel_RankedProgress_CalibratedRank": {
       "text": "측정 완료",
@@ -41835,9 +41870,9 @@
       "hash": "edb400c6997c"
     },
     "Citadel_Roster_Instructions_Desc_HeroLabs": {
-      "text": "새로운 실험 영웅을 선택하거나 상대로 플레이합니다.<br><br>영웅을 3명 이상 선택합니다.<b>선택한 영웅 중 2명은 테스트 대상이 아닌 일반 영웅이어야 합니다.</b>플레이어가 실험 영웅을 마지막으로 플레이한 시기에 따라 실험 영웅이 명단에 포함될 가능성이 높아집니다.",
+      "text": "새로운 실험 영웅으로 플레이하거나 실험 영웅을 상대로 플레이할 수 있습니다.<br><br>영웅을 최소 3명 선택해야 하며, <b>그중 2명은 테스트 대상이 아닌 일반 영웅이어야 합니다.</b> 실험 영웅으로 플레이한 지 오래될수록 명단에 있는 실험 영웅을 배정받을 가능성이 높아집니다.",
       "group": "citadel_main",
-      "hash": "775e9d8b6d12"
+      "hash": "a118be1a0388"
     },
     "Citadel_RosterUpdate_FailedTitle": {
       "text": "영웅 명단 업데이트 불가",
@@ -44300,9 +44335,9 @@
       "hash": "94456da70e8d"
     },
     "Citadel_PartyFindMatch_SoloPartyBody": {
-      "text": "파티에 아무도 없습니다. 친구를 초대하여 함께 플레이하거나 파티에서 나간 다음 플레이하세요.",
+      "text": "현재 파티에 혼자 있습니다. 친구를 초대하여 함께 플레이하거나 파티에서 나간 다음 플레이하세요.",
       "group": "citadel_main",
-      "hash": "482fd0bf97c3"
+      "hash": "0a83efddb2ec"
     },
     "Citadel_PartyFindMatch_SoloParty_Leave": {
       "text": "혼자 플레이하기",
@@ -53760,9 +53795,9 @@
       "hash": "e81f9eb530b6"
     },
     "Citadel_LowLatencyVSyncRecommendation_Nvidia": {
-      "text": "NVIDIA G-Sync가 활성화되어 있지만, V-Sync와 NVIDIA Reflex는 활성화되어 있지 않은 것 같습니다. 최상의 게임플레이 경험을 위해서는 3가지 설정을 모두 활성화하는 것이 좋습니다.",
+      "text": "NVIDIA G-Sync가 활성화되어 있지만 V-Sync와 NVIDIA Reflex 중 적어도 하나는 비활성화되어 있는 것 같습니다. 최상의 게임플레이 경험을 위해서는 3가지 설정을 모두 활성화하는 것이 좋습니다.",
       "group": "citadel_main",
-      "hash": "1e36672ef96f"
+      "hash": "9a5496686deb"
     },
     "citadel_settings_gsync": {
       "text": "NVIDIA G-Sync",
@@ -55100,9 +55135,9 @@
       "hash": "feef8c58201b"
     },
     "guide_upgrades_deny_desc": {
-      "text": "적군의 영혼 구슬은 주황색이며, 적군이 영혼 구슬을 공중으로 날려 보내거나 쏘면 획득하게 됩니다.<br><br>이 주황색 구슬을 먼저 쏘면 영혼을 훔칠 수 있습니다.",
+      "text": "적군의 영혼 구슬은 주황색입니다. 구슬이 떠내려가거나 적군이 구슬을 쏘면 적군이 영혼을 획득합니다.<br><br>이 주황색 구슬을 먼저 쏘면 영혼을 훔칠 수 있습니다.",
       "group": "citadel_main",
-      "hash": "2ee848dcf322"
+      "hash": "4002c8b2f51d"
     },
     "guide_upgrades_killing_guardians_header": {
       "text": "능력 포인트",
@@ -55980,9 +56015,9 @@
       "hash": "260c13829031"
     },
     "menu_play_lane_training_desc": {
-      "text": "플레이하기 쉬운 영웅으로 게임 초반 플레이를 배워 보세요.",
+      "text": "친근한 영웅의 안내를 받으며 게임 초반의 기본기를 익혀 보세요.",
       "group": "citadel_main",
-      "hash": "0b1fa5fd5e17"
+      "hash": "11aed04eef63"
     },
     "menu_play_bots_easy_desc": {
       "text": "봇을 상대로 비공개 매치를 플레이하세요.",
@@ -56495,9 +56530,9 @@
       "hash": "734c8e37fd41"
     },
     "Citadel_ranked_comingsoon": {
-      "text": "첫 랭크 매치는 10월 15일 화요일 오전 8시(그리니치 표준시)에 시작됩니다.",
+      "text": "첫 랭크 매치는 10월 15일 화요일 오후 8시(그리니치 표준시)에 시작됩니다.",
       "group": "citadel_main",
-      "hash": "90f630f59644"
+      "hash": "b0d3dc54db6b"
     },
     "Citadel_ranked_schedule_explainer": {
       "text": "랭크 매치는 특정 시간대에만 플레이할 수 있습니다. 플레이하기 전에 본인에게 가장 적합한 플레이 시간대를 선택해야 합니다.",
@@ -56629,15 +56664,25 @@
       "group": "citadel_main",
       "hash": "36392692239e"
     },
-    "Citadel_Ranked_Validating": {
-      "text": "랭크 매치메이킹 처리 중...",
+    "Citadel_Ranked_PleaseWait": {
+      "text": "잠시 기다려 주세요...",
       "group": "citadel_main",
-      "hash": "81e78a570252"
+      "hash": "2f99e1021806"
+    },
+    "Citadel_Ranked_Validating": {
+      "text": "랭크 시즌 참가 중",
+      "group": "citadel_main",
+      "hash": "6225efdac4ee"
     },
     "Citadel_Ranked_ErrorTitle": {
-      "text": "랭크 매치메이킹에 오류 발생",
+      "text": "랭크 매치메이킹을 시작할 수 없습니다",
       "group": "citadel_main",
-      "hash": "a5e892d9d5e9"
+      "hash": "632f3944dbb5"
+    },
+    "Citadel_Ranked_Timeout": {
+      "text": "시간 초과",
+      "group": "citadel_main",
+      "hash": "0ad9a1ce7a33"
     },
     "Citadel_Ranked_NotEnoughMatchesPlayed": {
       "text": "플레이한 매치 수가 부족합니다.",
@@ -57190,9 +57235,9 @@
       "hash": "817a66e18cbf"
     },
     "MyRosterPartyHighSkillRangeNew": {
-      "text": "파티원 간의 실력 차이가 큽니다.<br><br>이에 따라, 실력이 부족한 플레이어는 매치에서 더 많은 어려움을 겪습니다.",
+      "text": "파티원 간의 실력 차이가 큽니다.<br><br>따라서 매치에서 상대적으로 실력이 낮은 플레이어는 평소보다 더 어려움을 겪을 수 있습니다.",
       "group": "citadel_main",
-      "hash": "9385376bfd22"
+      "hash": "ce2efa301949"
     },
     "PartyWarningPostGame": {
       "text": "실력 차이가 큰 파티 매치",

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6851",
-  "upstreamCommit": "6851",
-  "generatedAt": "2026-11-05T09:00:06.872Z",
+  "clientVersion": "6860",
+  "upstreamCommit": "6860",
+  "generatedAt": "2026-11-06T09:00:11.318Z",
   "language": "schinese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
@@ -11,7 +11,7 @@
     "citadel_heroes": 3971,
     "citadel_attributes": 1991,
     "citadel_gc": 221,
-    "citadel_main": 5247
+    "citadel_main": 5257
   },
   "tokens": {
     "hero_vampire:n": {
@@ -20620,9 +20620,9 @@
       "hash": "7c5e90d92d78"
     },
     "ability_unicorn_luminousstrike_t2_desc": {
-      "text": "{s:AbilityCooldown}秒冷却时间<br>+{s:ImpactDamage}冲击伤害",
+      "text": "{s:AbilityCooldown}秒冷却时间<br>+{s:ImpactDamage}撞击伤害<br>+{s:AbilityCastRange}米施法距离",
       "group": "citadel_heroes",
-      "hash": "6f2f1aaf195d"
+      "hash": "b3e8e2d0077c"
     },
     "ability_unicorn_luminousstrike_t3_desc": {
       "text": "每层叠加+{s:MagicIncreasePerStack}%元灵增强和+{s:FireRatePerStack}%射速",
@@ -20925,9 +20925,9 @@
       "hash": "7f4133ebf489"
     },
     "ability_fencer_riposte_desc": {
-      "text": "准备好<span class=\"highlight\">偏转</span>即将到来的攻击。在成功偏转时，暂时变得<span class=\"highlight\">无敌</span>并选定一个敌方英雄冲向他们，造成<span class=\"highlight\">定身</span>，阻止他们<span class=\"highlight\">格挡</span>并降低他们的<span class=\"highlight\">近战抗性</span>。<br><br><span class=\"diminish\">按{g:citadel_binding:'Ability2'}选择目标。<br>不会对士兵或中立生物触发。</span>",
+      "text": "准备好<span class=\"highlight\">偏转</span>即将到来的攻击。在成功偏转时，暂时变得<span class=\"highlight\">无敌</span>并选定一个敌方英雄冲向他们，造成<span class=\"highlight\">定身</span>和<span class=\"highlight\">缴械</span>，阻止他们<span class=\"highlight\">格挡</span>并降低他们的<span class=\"highlight\">近战抗性</span>。<br><br><span class=\"diminish\">按{g:citadel_binding:'Ability2'}选择目标。<br>不会对士兵或中立生物触发。</span>",
       "group": "citadel_heroes",
-      "hash": "6c288822b382"
+      "hash": "3ba6dc1508dc"
     },
     "RiposteChannelTime_postvalue_label": {
       "text": "偏转持续时间",
@@ -20990,9 +20990,9 @@
       "hash": "7f4133ebf489"
     },
     "ability_fencer_riposte_attack_desc": {
-      "text": "快速向前冲刺，用武器的剑柄击中敌人，阻止他们格挡。",
+      "text": "快速向前冲刺，用武器的剑柄击中敌人将其定身并缴械，阻止他们格挡。",
       "group": "citadel_heroes",
-      "hash": "2ac8843fa7d2"
+      "hash": "b4d6488a1e48"
     },
     "MeleeResistReductionDuration_label": {
       "text": "近战抗性降低持续时间",
@@ -21480,9 +21480,9 @@
       "hash": "8fc115af34b8"
     },
     "ability_ratking_standard_bearer_t1_desc": {
-      "text": "+{s:BonusMoveSpeed}米移动速度",
+      "text": "+{s:BonusMoveSpeed}米移动速度<br>{s:AbilityCooldown}秒冷却时间",
       "group": "citadel_heroes",
-      "hash": "9e5b4ac75435"
+      "hash": "fc4ae9d84967"
     },
     "ability_ratking_standard_bearer_t2_desc": {
       "text": "+{s:FlagDuration}秒旗帜持续时间<br>+{s:Radius}米半径",
@@ -39979,6 +39979,11 @@
       "group": "citadel_main",
       "hash": "75c3a768bb3e"
     },
+    "Citadel_RankedSeason_LastDay": {
+      "text": "最后一天",
+      "group": "citadel_main",
+      "hash": "f0860b46fce8"
+    },
     "Citadel_RankedSeason_CurrentRank": {
       "text": "当前段位",
       "group": "citadel_main",
@@ -39993,6 +39998,11 @@
       "text": "最高段位",
       "group": "citadel_main",
       "hash": "de47bcb3afad"
+    },
+    "Citadel_RankedSeason_FinalRank": {
+      "text": "本赛季最高段位",
+      "group": "citadel_main",
+      "hash": "a4fa483d91a9"
     },
     "Citadel_RankedSeason_ProtectionRemaining:f": {
       "text": "剩余{d:demotion_protection_remaining}/{d:demotion_protection_total}次{demotion_protection_total, plural, one{保护} other{保护}}",
@@ -40015,9 +40025,19 @@
       "hash": "84987c9f409d"
     },
     "Citadel_RankedSeason_HeroWinsRequired:f": {
-      "text": "每名英雄都需要<b>{d:wins_required_per_hero}{wins_required_per_hero, plural, one{场胜利} other{场胜利}}</b>才能在天梯模式中游玩",
+      "text": "每名英雄都需要<b>{d:wins_required_per_hero}{wins_required_per_hero, plural, one{场胜利} other{场胜利}}</b>才能在天梯模式中游玩.",
       "group": "citadel_main",
-      "hash": "57b3caf6db41"
+      "hash": "fe4509fc316e"
+    },
+    "Citadel_RankedSeason_HeroPoints:f": {
+      "text": "{d:hero_points} {hero_points, plural, one{分} other{分}}",
+      "group": "citadel_main",
+      "hash": "6b32fbbfaae6"
+    },
+    "Citadel_RankedSeason_HeroPointsRequired:f": {
+      "text": "需要<b>{d:points_required_per_hero} {points_required_per_hero, plural, one{分} other{分}}</b>才能解锁对应英雄的天梯游玩资格。<br />胜利 = 2 分&nbsp;&nbsp;/&nbsp;&nbsp;失败 = 1 分",
+      "group": "citadel_main",
+      "hash": "59844442c855"
     },
     "Citadel_Ranked_ViewSeasonHistory": {
       "text": "查看赛季历史",
@@ -40099,11 +40119,6 @@
       "group": "citadel_main",
       "hash": "e6deb3cdfc07"
     },
-    "Citadel_RankedSeason_Eligibility_HeroUnlocks:f": {
-      "text": "{d:current_unlocked_heroes} / {d:required_unlocked_heroes}名英雄超过{d:required_hero_win_count}场胜利",
-      "group": "citadel_main",
-      "hash": "928f8f6d3255"
-    },
     "Citadel_RankedSeason_Eligibility_NotEligible": {
       "text": "游玩标准比赛可以解锁天梯模式",
       "group": "citadel_main",
@@ -40113,6 +40128,11 @@
       "text": "天梯模式在游玩菜单中可以找到",
       "group": "citadel_main",
       "hash": "dd19f7fd5ea9"
+    },
+    "Citadel_RankedSeason_JoinSeason": {
+      "text": "加入赛季",
+      "group": "citadel_main",
+      "hash": "709e0d5edd44"
     },
     "Citadel_RankedMatchHistory_Calibrating": {
       "text": "校准中 {d:calibrating_number}/{d:calibration_matches}",
@@ -40130,9 +40150,9 @@
       "hash": "af521688a13f"
     },
     "Citadel_RankedHistory_Title": {
-      "text": "天梯赛季",
+      "text": "天梯赛季历史",
       "group": "citadel_main",
-      "hash": "4a46f770bff5"
+      "hash": "b67ebbb08b85"
     },
     "Citadel_RankedHistory_SeasonNotJoined": {
       "text": "未加入",
@@ -40153,6 +40173,11 @@
       "text": "--",
       "group": "citadel_main",
       "hash": "e6a9fc04320a"
+    },
+    "Citadel_RankedSeasonCompleted_Title": {
+      "text": "已结束",
+      "group": "citadel_main",
+      "hash": "20391328c89e"
     },
     "Citadel_Ranked_NoSeasonActive": {
       "text": "目前没有进行中的赛季",
@@ -40210,19 +40235,24 @@
       "hash": "e2a662c1f95c"
     },
     "Citadel_Ranked_Overview_Eligibility_Bullet1:f": {
-      "text": "你的账号必须拥有{d:required_account_wins}场总{required_account_wins, plural, one {胜场} other {胜场}}。你还必须拥有至少{d:required_hero_unlocks}名{required_hero_unlocks, plural, one {英雄} other {英雄}}在标准模式达到{d:required_hero_wins}场{required_hero_wins, plural, one {胜利} other {胜利}}。",
+      "text": "你的账号必须拥有{d:required_account_wins}场总{required_account_wins, plural, one {胜场} other {胜场}}。",
       "group": "citadel_main",
-      "hash": "38ac659b93f2"
+      "hash": "c0c686bddea7"
+    },
+    "Citadel_Ranked_Overview_Eligibility_Bullet1_HeroWins:f": {
+      "text": "你必须在标准模式下有至少{d:required_hero_unlocks}名{required_hero_unlocks, plural, one {英雄} other {英雄}}均拥有{d:required_hero_wins}场{required_hero_wins, plural, one {胜利} other {胜利}}。",
+      "group": "citadel_main",
+      "hash": "afc81225d7b2"
+    },
+    "Citadel_Ranked_Overview_Eligibility_Bullet1_HeroPoints:f": {
+      "text": "你必须有至少{d:required_hero_unlocks}名{required_hero_unlocks, plural, one {英雄} other {英雄}}均拥有{d:required_hero_wins}场{required_hero_points, plural, one {胜利} other {胜利}}。标准模式下每场胜利为2分，每场失败为1分。",
+      "group": "citadel_main",
+      "hash": "cb64319823ea"
     },
     "Citadel_Ranked_Overview_Eligibility_Bullet2": {
       "text": "玩家只能单排或双排去匹配天梯模式。双排的玩家必须在相邻的一个段位以内。不朽之星玩家只能与相差在3个子段位的其他不朽之星玩家一起匹配。",
       "group": "citadel_main",
       "hash": "7b40a8387bdc"
-    },
-    "Citadel_Ranked_Overview_Eligibility_Bullet3": {
-      "text": "必须完成{d:required_solo_calibration_games}场单排校准比赛。完成校准后的最高段位是{g:citadel_packed_rank_name:max_calibration_rank}。",
-      "group": "citadel_main",
-      "hash": "83caf675ca80"
     },
     "Citadel_Ranked_Overview_PlayingMatches": {
       "text": "升级",
@@ -40234,15 +40264,15 @@
       "group": "citadel_main",
       "hash": "46a8f29b3287"
     },
-    "Citadel_Ranked_Overview_Playing_Bullet2": {
-      "text": "晋升到新段位或子段位时，你都会获得降级保护代币。每次徽章段位晋升时会获得5枚，子段位晋升时会获得2枚。如果在降级保护生效时比赛失败，原本应该降级实际不会降级，而是消耗一枚代币。",
+    "Citadel_Ranked_Overview_Playing_Bullet2:f": {
+      "text": "晋升到新段位或子段位时，你都会获得降级保护盾牌。每次徽章段位晋升时会获得{d:main_rank_demotion_protection}面{main_rank_demotion_protection, plural, one {盾牌} other {盾牌}}，子段位晋升时获得{d:sub_rank_demotion_protection}面{sub_rank_demotion_protection, plural, one {盾牌} other {盾牌}}。如果在降级保护生效时比赛失败，段位不会变化，同时消耗一面盾牌。{g:citadel_packed_rank_name:last_demotion_protection_packed_rank}以上的段位和子段位不会奖励降级保护。",
       "group": "citadel_main",
-      "hash": "cd249bc288c6"
+      "hash": "8e5de3c8da7f"
     },
     "Citadel_Ranked_Overview_Playing_Bullet3": {
-      "text": "从一个子段位晋升到下一个子段位时，需要获得1 000天梯积分（如{g:citadel_packed_rank_name:'62'} -> {g:citadel_packed_rank_name:'63'}）。从一个完整的徽章段位晋升到下一个段位，需要获得2 000天梯积分（如{g:citadel_packed_rank_name:'56'} -> {g:citadel_packed_rank_name:'61'}）。",
+      "text": "从一个子段位晋升到下一个子段位时，需要获得{d:sub_rank_progress_required}天梯积分（如{g:citadel_packed_rank_name:'62'} -> {g:citadel_packed_rank_name:'63'}）。从一个完整的徽章段位晋升到下一个段位，需要获得{d:main_rank_progress_required}天梯积分（如{g:citadel_packed_rank_name:'56'} -> {g:citadel_packed_rank_name:'61'}）。",
       "group": "citadel_main",
-      "hash": "9346f4af06a0"
+      "hash": "323de9089ed6"
     },
     "Citadel_Ranked_Overview_Playing_Bullet4": {
       "text": "在最高段位时，规则稍有变化。还是和以前一样获得或失去天梯积分，但是子段位不再是固定数值。子段位会根据{g:citadel_packed_rank_rank_name:'111'}段位内的玩家百分位每天分配一次。",
@@ -40273,6 +40303,11 @@
       "text": "测试赛季1",
       "group": "citadel_main",
       "hash": "46d6c77cc0f5"
+    },
+    "Citadel_RankedSeasonName_BetaSeason2": {
+      "text": "测试赛季 2",
+      "group": "citadel_main",
+      "hash": "c6e864bb8890"
     },
     "Citadel_RankedProgress_CalibratedRank": {
       "text": "校准完成",
@@ -56624,15 +56659,25 @@
       "group": "citadel_main",
       "hash": "94a782d49bef"
     },
-    "Citadel_Ranked_Validating": {
-      "text": "正在处理天梯匹配中……",
+    "Citadel_Ranked_PleaseWait": {
+      "text": "请稍等...",
       "group": "citadel_main",
-      "hash": "920d12a29342"
+      "hash": "50009613eea9"
+    },
+    "Citadel_Ranked_Validating": {
+      "text": "正在加入天梯赛季",
+      "group": "citadel_main",
+      "hash": "08d65ed66d9c"
     },
     "Citadel_Ranked_ErrorTitle": {
-      "text": "天梯匹配错误",
+      "text": "无法开始天梯匹配",
       "group": "citadel_main",
-      "hash": "24a6e7a75098"
+      "hash": "2e0924128cd7"
+    },
+    "Citadel_Ranked_Timeout": {
+      "text": "已超时",
+      "group": "citadel_main",
+      "hash": "411ebfdad774"
     },
     "Citadel_Ranked_NotEnoughMatchesPlayed": {
       "text": "未游玩足够的比赛。",
@@ -56653,6 +56698,11 @@
       "text": "赛季结束时可查看",
       "group": "citadel_main",
       "hash": "f2a7cde022c3"
+    },
+    "Citadel_RankedSeasonReward_Interact": {
+      "text": "{g:citadel_persona:nl:account_id}在{s:season_name}期间获得了{g:citadel_packed_rank_name:packed_rank}段位。",
+      "group": "citadel_main",
+      "hash": "a21b06840485"
     },
     "Citadel_ranks_rank0": {
       "text": "无名",

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6851",
-  "upstreamCommit": "6851",
-  "generatedAt": "2026-11-05T09:00:06.796Z",
+  "clientVersion": "6860",
+  "upstreamCommit": "6860",
+  "generatedAt": "2026-11-06T09:00:11.246Z",
   "language": "English",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
@@ -11,7 +11,7 @@
     "citadel_heroes": 3982,
     "citadel_attributes": 2023,
     "citadel_gc": 221,
-    "citadel_main": 5269
+    "citadel_main": 5282
   },
   "tokens": {
     "hero_vampire:n": {
@@ -40239,6 +40239,11 @@
       "group": "citadel_main",
       "hash": "c73a5ee1fcf3"
     },
+    "Citadel_RankedSeason_FinalRank": {
+      "text": "Highest Rank of the Season",
+      "group": "citadel_main",
+      "hash": "f1f1041949ce"
+    },
     "Citadel_RankedSeason_ProtectionRemaining:f": {
       "text": "{d:demotion_protection_remaining}/{d:demotion_protection_total} {demotion_protection_total, plural, one{Protection} other{Protections}} Remaining",
       "group": "citadel_main",
@@ -40260,9 +40265,19 @@
       "hash": "76a9279309f7"
     },
     "Citadel_RankedSeason_HeroWinsRequired:f": {
-      "text": "<b>{d:wins_required_per_hero} {wins_required_per_hero, plural, one{win} other{wins}}</b> required to unlock hero eligibility for ranked",
+      "text": "<b>{d:wins_required_per_hero} {wins_required_per_hero, plural, one{Win} other{Wins}}</b> required to unlock hero eligibility for ranked.",
       "group": "citadel_main",
-      "hash": "78a7fc5ec70a"
+      "hash": "a5b43f8cd949"
+    },
+    "Citadel_RankedSeason_HeroPoints:f": {
+      "text": "{d:hero_points} {hero_points, plural, one{Point} other{Points}}",
+      "group": "citadel_main",
+      "hash": "53537cbfd388"
+    },
+    "Citadel_RankedSeason_HeroPointsRequired:f": {
+      "text": "<b>{d:points_required_per_hero} {points_required_per_hero, plural, one{Point} other{Points}}</b> required to unlock hero eligibility for ranked.<br />Win = 2 Points&nbsp;&nbsp;/&nbsp;&nbsp;Loss = 1 Point",
+      "group": "citadel_main",
+      "hash": "47d980ccb887"
     },
     "Citadel_Ranked_ViewSeasonHistory": {
       "text": "View Season History",
@@ -40344,10 +40359,15 @@
       "group": "citadel_main",
       "hash": "a27b835eaba2"
     },
-    "Citadel_RankedSeason_Eligibility_HeroUnlocks:f": {
-      "text": "{d:current_unlocked_heroes} / {d:required_unlocked_heroes} heroes with {d:required_hero_win_count} or more wins",
+    "Citadel_RankedSeason_Eligibility_HeroUnlocks_Wins:f": {
+      "text": "{d:current_unlocked_heroes} / {d:required_unlocked_heroes} heroes with {d:required_hero_win_count} or more Wins",
       "group": "citadel_main",
-      "hash": "cbf604faa203"
+      "hash": "49f1af5a80e9"
+    },
+    "Citadel_RankedSeason_Eligibility_HeroUnlocks_Points:f": {
+      "text": "{d:current_unlocked_heroes} / {d:required_unlocked_heroes} heroes with {d:required_hero_point_count} or more Points",
+      "group": "citadel_main",
+      "hash": "d726547e9952"
     },
     "Citadel_RankedSeason_Eligibility_NotEligible": {
       "text": "Play Standard matches to unlock Ranked",
@@ -40358,6 +40378,11 @@
       "text": "Ranked is available in the Play Menu",
       "group": "citadel_main",
       "hash": "ced662a50dd2"
+    },
+    "Citadel_RankedSeason_JoinSeason": {
+      "text": "Join Season",
+      "group": "citadel_main",
+      "hash": "a03103688ed5"
     },
     "Citadel_RankedMatchHistory_Calibrating": {
       "text": "Calibrating {d:calibrating_number}/{d:calibration_matches}",
@@ -40375,9 +40400,9 @@
       "hash": "b82ac810f38c"
     },
     "Citadel_RankedHistory_Title": {
-      "text": "Ranked Seasons",
+      "text": "Ranked Season History",
       "group": "citadel_main",
-      "hash": "6312a7f94ca3"
+      "hash": "de076832ac2b"
     },
     "Citadel_RankedHistory_SeasonNotJoined": {
       "text": "Not Joined",
@@ -40398,6 +40423,11 @@
       "text": "--",
       "group": "citadel_main",
       "hash": "e6a9fc04320a"
+    },
+    "Citadel_RankedSeasonCompleted_Title": {
+      "text": "has ended",
+      "group": "citadel_main",
+      "hash": "2a82402a2e37"
     },
     "Citadel_Ranked_NoSeasonActive": {
       "text": "No Season Currently Active",
@@ -40455,9 +40485,19 @@
       "hash": "31fabe6859ff"
     },
     "Citadel_Ranked_Overview_Eligibility_Bullet1:f": {
-      "text": "You must have at least {d:required_account_wins} total {required_account_wins, plural, one {win} other {wins}} on your account. You must also have at least {d:required_hero_unlocks} {required_hero_unlocks, plural, one {hero} other {heroes}} with {d:required_hero_wins} {required_hero_wins, plural, one {win} other {wins}} on each in Standard Mode.",
+      "text": "You must have at least {d:required_account_wins} total {required_account_wins, plural, one {win} other {wins}} on your account.",
       "group": "citadel_main",
-      "hash": "2390b9f9c9d8"
+      "hash": "d1f458660cb2"
+    },
+    "Citadel_Ranked_Overview_Eligibility_Bullet1_HeroWins:f": {
+      "text": "You must have at least {d:required_hero_unlocks} {required_hero_unlocks, plural, one {hero} other {heroes}} with {d:required_hero_wins} {required_hero_wins, plural, one {win} other {wins}} on each in Standard Mode.",
+      "group": "citadel_main",
+      "hash": "7fce0a073990"
+    },
+    "Citadel_Ranked_Overview_Eligibility_Bullet1_HeroPoints:f": {
+      "text": "You must have at least {d:required_hero_unlocks} {required_hero_unlocks, plural, one {hero} other {heroes}} with {d:required_hero_points} {required_hero_points, plural, one {point} other {points}}. Each win in Standard mode is worth 2 points, and a loss in Standard mode is worth 1 point.",
+      "group": "citadel_main",
+      "hash": "46af1e660292"
     },
     "Citadel_Ranked_Overview_Eligibility_Bullet2": {
       "text": "Players are only allowed to queue up for ranked as a Solo or Duo. Duo parties must be within 1 Rank up or down from each other. Eternus players can only queue with other Eternus players who are within 3 subranks of each other.",
@@ -40465,9 +40505,9 @@
       "hash": "4344cf70b78f"
     },
     "Citadel_Ranked_Overview_Eligibility_Bullet3": {
-      "text": "You must complete {d:required_solo_calibration_games} solo calibration games. The max rank you can exit calibration with is {g:citadel_packed_rank_name:max_calibration_rank}.",
+      "text": "If you did not compete in the previous ranked season, you must complete {d:required_solo_calibration_games} solo calibration games. The max rank you can exit calibration with is {g:citadel_packed_rank_name:max_calibration_rank}.",
       "group": "citadel_main",
-      "hash": "e031067803cb"
+      "hash": "178fba206698"
     },
     "Citadel_Ranked_Overview_PlayingMatches": {
       "text": "Leveling Up",
@@ -40479,15 +40519,15 @@
       "group": "citadel_main",
       "hash": "1aced04da3fe"
     },
-    "Citadel_Ranked_Overview_Playing_Bullet2": {
-      "text": "When you are promoted to a new Rank or Subrank, you earn Demotion Protection tokens. For full badge Rank ups, you earn 5 tokens and for each Subrank you earn 2. If you lose while Demotion Protection is active, and you would have gone down a Rank, you instead stay the same Rank and a token is consumed.",
+    "Citadel_Ranked_Overview_Playing_Bullet2:f": {
+      "text": "When you are promoted to a new Rank or Subrank, you earn Demotion Protection shields. For full badge Rank ups, you earn {d:main_rank_demotion_protection} {main_rank_demotion_protection, plural, one {shield} other {shields}} and for each Subrank you earn {d:sub_rank_demotion_protection} {sub_rank_demotion_protection, plural, one {shield} other {shields}}. If you lose while Demotion Protection is active, and you would have gone down a Rank, you instead stay the same Rank and a shield is consumed. Demotion Protection is not awarded for Ranks or Subranks above {g:citadel_packed_rank_name:last_demotion_protection_packed_rank}.",
       "group": "citadel_main",
-      "hash": "2b5762920dea"
+      "hash": "6fca96c60304"
     },
     "Citadel_Ranked_Overview_Playing_Bullet3": {
-      "text": "To advance from one Subrank to the next, you need to earn 1,000 Rank Points (ex. {g:citadel_packed_rank_name:'62'} -> {g:citadel_packed_rank_name:'63'}). To advance from one full badge Rank to the next, you will need to earn 2,000 Rank Points (ex. {g:citadel_packed_rank_name:'56'} -> {g:citadel_packed_rank_name:'61'}).",
+      "text": "To advance from one Subrank to the next, you need to earn {d:sub_rank_progress_required} Rank Points (ex. {g:citadel_packed_rank_name:'62'} -> {g:citadel_packed_rank_name:'63'}). To advance from one full badge Rank to the next, you will need to earn {d:main_rank_progress_required} Rank Points (ex. {g:citadel_packed_rank_name:'56'} -> {g:citadel_packed_rank_name:'61'}).",
       "group": "citadel_main",
-      "hash": "7ce9c417ad39"
+      "hash": "e40dace4dad1"
     },
     "Citadel_Ranked_Overview_Playing_Bullet4": {
       "text": "At the highest Rank, the rules change slightly. You still gain or lose Rank points the same as before, but the Subranks are no longer fixed-point amounts. Instead, once a day, Subranks are assigned according to the percentiles of players within the {g:citadel_packed_rank_rank_name:'111'} Rank.",
@@ -40518,6 +40558,11 @@
       "text": "Beta Season 1",
       "group": "citadel_main",
       "hash": "88e0f4d419f1"
+    },
+    "Citadel_RankedSeasonName_BetaSeason2": {
+      "text": "Beta Season 2",
+      "group": "citadel_main",
+      "hash": "b6d8da6a88d6"
     },
     "Citadel_RankedProgress_CalibratedRank": {
       "text": "Calibration Complete",
@@ -42203,6 +42248,11 @@
       "text": "Wins",
       "group": "citadel_main",
       "hash": "b6c015d12e1b"
+    },
+    "Citadel_RankedMatchStatus_Points": {
+      "text": "Points",
+      "group": "citadel_main",
+      "hash": "4b2a6a314956"
     },
     "Citadel_ViewMatchID_Title": {
       "text": "View Match ID",
@@ -56929,15 +56979,25 @@
       "group": "citadel_main",
       "hash": "b9f3e470aa3f"
     },
-    "Citadel_Ranked_Validating": {
-      "text": "Processing Ranked Matchmaking...",
+    "Citadel_Ranked_PleaseWait": {
+      "text": "Please wait...",
       "group": "citadel_main",
-      "hash": "beff7045a145"
+      "hash": "89e944f8eb37"
+    },
+    "Citadel_Ranked_Validating": {
+      "text": "Joining Ranked Season",
+      "group": "citadel_main",
+      "hash": "a15d95d2ad64"
     },
     "Citadel_Ranked_ErrorTitle": {
-      "text": "Error in Ranked Matchmaking",
+      "text": "Unable to Start Ranked Matchmaking",
       "group": "citadel_main",
-      "hash": "ae9156c4a441"
+      "hash": "3719ed3a3a91"
+    },
+    "Citadel_Ranked_Timeout": {
+      "text": "Timed out",
+      "group": "citadel_main",
+      "hash": "edcd3630837b"
     },
     "Citadel_Ranked_NotEnoughMatchesPlayed": {
       "text": "Not enough matches played.",
@@ -56958,6 +57018,11 @@
       "text": "Viewable when season ends",
       "group": "citadel_main",
       "hash": "0b4d2fb1692e"
+    },
+    "Citadel_RankedSeasonReward_Interact": {
+      "text": "{g:citadel_persona:nl:account_id} received rank {g:citadel_packed_rank_name:packed_rank} during {s:season_name}.",
+      "group": "citadel_main",
+      "hash": "e3e3a782e316"
     },
     "Citadel_ranks_rank0": {
       "text": "Obscurus",
