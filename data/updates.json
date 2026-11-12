@@ -4,6 +4,318 @@
   "upstreamRepo": "https://github.com/SteamDatabase/GameTracking-Deadlock",
   "entries": [
     {
+      "date": "2026-11-04",
+      "upstreamCommit": null,
+      "title": "マイナー アップデート - 2026年11月04日",
+      "fromVersion": "6849",
+      "toVersion": "6851",
+      "changes": [
+        "ヒーロー・アイテムの数値差分から自動生成 (バフ 4 / ナーフ 2 / 混在 2、変更項目 39)"
+      ],
+      "adjustments": [
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_baba",
+          "note": "近接攻撃耐性 30→25 / デバフ耐性 30→25 / クールダウン 27→28 ほか",
+          "changes": [
+            {
+              "path": "ability_baba_bench_run.properties.MeleeResist",
+              "from": 30,
+              "to": 25,
+              "good": false
+            },
+            {
+              "path": "ability_baba_bench_run.properties.StatusResistancePercent",
+              "from": 30,
+              "to": 25,
+              "good": false
+            },
+            {
+              "path": "ability_baba_hexing_brew.properties.AbilityCooldown",
+              "from": 27,
+              "to": 28,
+              "good": false
+            },
+            {
+              "path": "ability_baba_hexing_brew.properties.BarrierWindow",
+              "from": 1.5,
+              "to": 1.6,
+              "good": true
+            },
+            {
+              "path": "ability_baba_hexing_brew.properties.DamagePerSecond@scale",
+              "from": 0.152,
+              "to": 0.13,
+              "good": false
+            },
+            {
+              "path": "ability_baba_hexing_brew.properties.FireWindow",
+              "from": 1.5,
+              "to": 1.6,
+              "good": true
+            },
+            {
+              "path": "ability_baba_hexing_brew.properties.SilenceWindow",
+              "from": 1.5,
+              "to": 1.6,
+              "good": true
+            },
+            {
+              "path": "growth.MODIFIER_VALUE_BASE_MELEE_DAMAGE_FROM_LEVEL",
+              "from": 0.7,
+              "to": 0.63,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_deadpack",
+          "note": "マークダメージ 1.1→1.012 / ダメージ 0.74→0.681 / T3強化 マークダメージ 0.35→0.322 ほか",
+          "changes": [
+            {
+              "path": "ability_deadpack_chargeblast.properties.CoatedDamage@scale",
+              "from": 1.1,
+              "to": 1.012,
+              "good": false
+            },
+            {
+              "path": "ability_deadpack_chargeblast.properties.Damage@scale",
+              "from": 0.74,
+              "to": 0.681,
+              "good": false
+            },
+            {
+              "path": "ability_deadpack_chargeblast.upgrades.T3.CoatedDamage",
+              "from": 0.35,
+              "to": 0.322,
+              "good": false
+            },
+            {
+              "path": "ability_deadpack_chargeblast.upgrades.T3.Damage",
+              "from": 0.35,
+              "to": 0.322,
+              "good": false
+            },
+            {
+              "path": "ability_deadpack_rocketeer.upgrades.T2.HealOnHit",
+              "from": 150,
+              "to": 125,
+              "good": false
+            },
+            {
+              "path": "ability_deadpack_rocketeer.upgrades.T2.HealOnHit#2",
+              "from": 2,
+              "to": 1.7,
+              "good": false
+            },
+            {
+              "path": "ability_deadpack_ultimate.properties.BonusDamagePercent",
+              "from": 75,
+              "to": 55,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_fencer",
+          "note": "T2強化 スタン継続時間 0.6→0.7 / T3強化 追加ダメージ 50→60",
+          "changes": [
+            {
+              "path": "ability_fencer_riposte.upgrades.T2.StunDuration",
+              "from": 0.6,
+              "to": 0.7,
+              "good": true
+            },
+            {
+              "path": "ability_fencer_ultimate.upgrades.T3.BonusDamagePercent",
+              "from": 50,
+              "to": 60,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_krill",
+          "note": "範囲 5→5.5 / ダメージの回復変換割合（対ヒーロー） 1.2→1.3 / T2強化 ダッシュ距離 -26→-28 ほか",
+          "changes": [
+            {
+              "path": "ability_burrow.properties.Radius",
+              "from": 5,
+              "to": 5.5,
+              "good": true
+            },
+            {
+              "path": "ability_intimidate.properties.DamageHealMult",
+              "from": 1.2,
+              "to": 1.3,
+              "good": true
+            },
+            {
+              "path": "ability_throw_sand.upgrades.T2.GroundDashReductionPercent",
+              "from": -26,
+              "to": -28,
+              "good": null
+            },
+            {
+              "path": "ability_throw_sand.upgrades.T2.SlowPercent",
+              "from": 24,
+              "to": 28,
+              "good": true
+            },
+            {
+              "path": "ability_ult_combo.properties.BonusHealthOnKill",
+              "from": 40,
+              "to": 50,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "mixed",
+          "target": "hero",
+          "key": "hero_nurse",
+          "note": "BuildupLookAngleVertical 50→65 / BuildupTime 2→1.75 / 弾薬ダメージ 13.372→14.442",
+          "changes": [
+            {
+              "path": "ability_nurse_fear.properties.BuildupLookAngleVertical",
+              "from": 50,
+              "to": 65,
+              "good": true
+            },
+            {
+              "path": "ability_nurse_fear.properties.BuildupTime",
+              "from": 2,
+              "to": 1.75,
+              "good": false
+            },
+            {
+              "path": "citadel_weapon_nurse_set.weapon.bulletDamage",
+              "from": 13.372,
+              "to": 14.442,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "hero",
+          "key": "hero_ratking",
+          "note": "移動速度 3→4 / T1強化 クールダウン -25 を追加 / 弾薬ダメージ 5.7→5.8 ほか",
+          "changes": [
+            {
+              "path": "ability_ratking_standard_bearer.properties.BonusMoveSpeed",
+              "from": 3,
+              "to": 4,
+              "good": true
+            },
+            {
+              "path": "ability_ratking_standard_bearer.upgrades.T1.AbilityCooldown",
+              "from": null,
+              "to": -25,
+              "good": true
+            },
+            {
+              "path": "citadel_weapon_ratking_set.weapon.bulletDamage",
+              "from": 5.7,
+              "to": 5.8,
+              "good": true
+            },
+            {
+              "path": "citadel_weapon_ratking_set.weapon.clipSize",
+              "from": 24,
+              "to": 26,
+              "good": true
+            }
+          ]
+        },
+        {
+          "kind": "nerf",
+          "target": "hero",
+          "key": "hero_unicorn",
+          "note": "クールダウン 160→170 / 連鎖範囲 15.5→15 / 移動速度 32→28 ほか",
+          "changes": [
+            {
+              "path": "ability_unicorn_dazzlingorb.properties.AbilityCooldown",
+              "from": 160,
+              "to": 170,
+              "good": false
+            },
+            {
+              "path": "ability_unicorn_dazzlingorb.properties.BounceRadius",
+              "from": 15.5,
+              "to": 15,
+              "good": false
+            },
+            {
+              "path": "ability_unicorn_dazzlingorb.properties.SlowPercent",
+              "from": 32,
+              "to": 28,
+              "good": false
+            },
+            {
+              "path": "ability_unicorn_dazzlingorb.upgrades.T1.SlowPercent",
+              "from": 16,
+              "to": 14,
+              "good": false
+            },
+            {
+              "path": "ability_unicorn_luminousstrike.properties.AbilityCastRange",
+              "from": 30,
+              "to": 25,
+              "good": false
+            },
+            {
+              "path": "ability_unicorn_luminousstrike.properties.MagicIncreasePerStack",
+              "from": 7,
+              "to": 6,
+              "good": false
+            },
+            {
+              "path": "ability_unicorn_luminousstrike.upgrades.T2.AbilityCastRange",
+              "from": null,
+              "to": 5,
+              "good": true
+            },
+            {
+              "path": "ability_unicorn_luminousstrike.upgrades.T3.MagicIncreasePerStack",
+              "from": 4,
+              "to": 5,
+              "good": true
+            },
+            {
+              "path": "ability_unicorn_prismaticguard.upgrades.T3.DebuffDuration",
+              "from": 1.25,
+              "to": 0.75,
+              "good": false
+            }
+          ]
+        },
+        {
+          "kind": "buff",
+          "target": "item",
+          "key": "upgrade_healbane",
+          "note": "StackingPenaltyAnchorPercent 80 を追加",
+          "changes": [
+            {
+              "path": "properties.StackingPenaltyAnchorPercent",
+              "from": null,
+              "to": 80,
+              "good": true
+            }
+          ]
+        }
+      ],
+      "sourceTitle": "マイナー アップデート - 2026年11月04日",
+      "sourceUrl": "https://store.steampowered.com/news/app/1422450/view/680766308468391944"
+    },
+    {
       "date": "2026-10-30",
       "upstreamCommit": null,
       "title": "Halloween 2026 + Gameplay Update",
