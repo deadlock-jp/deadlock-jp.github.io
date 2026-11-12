@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6860",
-  "upstreamCommit": "6860",
-  "generatedAt": "2026-11-06T09:00:11.214Z",
+  "clientVersion": "6861",
+  "upstreamCommit": "6861",
+  "generatedAt": "2026-11-12T02:16:25.632Z",
   "language": "japanese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 618,
-    "citadel_heroes": 3968,
+    "citadel_heroes": 3972,
     "citadel_attributes": 1991,
     "citadel_gc": 221,
-    "citadel_main": 5238
+    "citadel_main": 5261
   },
   "tokens": {
     "hero_vampire:n": {
@@ -20624,6 +20624,11 @@
       "group": "citadel_heroes",
       "hash": "749fa5b849d8"
     },
+    "ability_unicorn_luminousstrike_t2_desc": {
+      "text": "クールダウン {s:AbilityCooldown}秒、衝突ダメージ +{s:ImpactDamage}、キャスト範囲 +{s:AbilityCastRange}m",
+      "group": "citadel_heroes",
+      "hash": "f88aaa686e4a"
+    },
     "ability_unicorn_luminousstrike_t3_desc": {
       "text": "スタックごとのスピリット増幅 +{s:MagicIncreasePerStack}%、発射速度 +{s:FireRatePerStack}%",
       "group": "citadel_heroes",
@@ -20924,6 +20929,11 @@
       "group": "citadel_heroes",
       "hash": "fec6fcffe109"
     },
+    "ability_fencer_riposte_desc": {
+      "text": "次の攻撃を<span class=\"highlight\">受け流す</span>準備をする。受け流しに成功すると、短時間<span class=\"highlight\">無敵状態</span>となる。その後、指定した敵ヒーローに向かって素早くダッシュして<span class=\"highlight\">パリィ</span>を封じながら<span class=\"highlight\">移動不能</span>と<span class=\"highlight\">ディスアーム</span>状態にし、<span class=\"highlight\">近接攻撃耐性</span>を低下させる<br><br><span class=\"diminish\">{g:citadel_binding:'Ability2'}で対象を選択する<br>トルーパーや中立モンスターのダメージでは発動しない</span>",
+      "group": "citadel_heroes",
+      "hash": "1f6177c14d5b"
+    },
     "RiposteChannelTime_postvalue_label": {
       "text": "受け流し 継続時間",
       "group": "citadel_heroes",
@@ -20983,6 +20993,11 @@
       "text": "リポスト",
       "group": "citadel_heroes",
       "hash": "fec6fcffe109"
+    },
+    "ability_fencer_riposte_attack_desc": {
+      "text": "前方に素早くダッシュして武器の柄頭で敵を突き、パリィを封じながら移動不能とディスアーム状態にする",
+      "group": "citadel_heroes",
+      "hash": "f90725e4a1a0"
     },
     "MeleeResistReductionDuration_label": {
       "text": "近接攻撃耐性低下 継続時間",
@@ -21468,6 +21483,11 @@
       "text": "詠唱してラッタニアの旗を召喚し、突進を開始する。旗は付近にいるすべての味方に増加{g:citadel_inline_attribute:'MoveSpeed'}と<span class=\"highlight\">スロウ無効</span>、<span class=\"highlight\">被ダメージ軽減</span>を付与する",
       "group": "citadel_heroes",
       "hash": "f45531e2892a"
+    },
+    "ability_ratking_standard_bearer_t1_desc": {
+      "text": "移動速度 +{s:BonusMoveSpeed}m／秒<br>クールダウン {s:AbilityCooldown}秒",
+      "group": "citadel_heroes",
+      "hash": "e40e95e7c97e"
     },
     "ability_ratking_standard_bearer_t2_desc": {
       "text": "旗の継続時間 +{s:FlagDuration}秒<br>範囲 +{s:Radius}m",
@@ -39964,6 +39984,11 @@
       "group": "citadel_main",
       "hash": "5fa0bab09418"
     },
+    "Citadel_RankedSeason_LastDay": {
+      "text": "最終日",
+      "group": "citadel_main",
+      "hash": "9f47fc873ae7"
+    },
     "Citadel_RankedSeason_CurrentRank": {
       "text": "現在のランク",
       "group": "citadel_main",
@@ -39978,6 +40003,11 @@
       "text": "最高ランク",
       "group": "citadel_main",
       "hash": "3d4f14b5654e"
+    },
+    "Citadel_RankedSeason_FinalRank": {
+      "text": "今シーズンの最高ランク",
+      "group": "citadel_main",
+      "hash": "857b6a7f4bff"
     },
     "Citadel_RankedSeason_ProtectionRemaining:f": {
       "text": "残り保護回数：{d:demotion_protection_remaining}／{d:demotion_protection_total}",
@@ -39998,6 +40028,21 @@
       "text": "{d:hero_wins} {hero_wins, plural, one{勝} other{勝}}",
       "group": "citadel_main",
       "hash": "af25a1c659e4"
+    },
+    "Citadel_RankedSeason_HeroWinsRequired:f": {
+      "text": "ランクマッチでヒーローを使用するには<b>{d:wins_required_per_hero}勝</b>する必要があります",
+      "group": "citadel_main",
+      "hash": "fbac60952a36"
+    },
+    "Citadel_RankedSeason_HeroPoints:f": {
+      "text": "{d:hero_points}ポイント",
+      "group": "citadel_main",
+      "hash": "34a0921bbb62"
+    },
+    "Citadel_RankedSeason_HeroPointsRequired:f": {
+      "text": "ランクマッチでヒーローを使用するには<b>{d:points_required_per_hero}ポイント</b>獲得する必要があります<br />勝利 = 2 ポイント&nbsp;&nbsp;/&nbsp;&nbsp;敗北 = 1ポイント",
+      "group": "citadel_main",
+      "hash": "bbc6d75bee86"
     },
     "Citadel_Ranked_ViewSeasonHistory": {
       "text": "シーズン履歴を表示",
@@ -40079,6 +40124,16 @@
       "group": "citadel_main",
       "hash": "a5cd62b92ee8"
     },
+    "Citadel_RankedSeason_Eligibility_HeroUnlocks_Wins:f": {
+      "text": "{d:required_hero_win_count}勝以上のヒーロー：{d:current_unlocked_heroes} / {d:required_unlocked_heroes}",
+      "group": "citadel_main",
+      "hash": "e9e6f17e0a48"
+    },
+    "Citadel_RankedSeason_Eligibility_HeroUnlocks_Points:f": {
+      "text": "{d:required_hero_point_count}ポイント以上のヒーロー：{d:current_unlocked_heroes} / {d:required_unlocked_heroes}",
+      "group": "citadel_main",
+      "hash": "12e13942ccb7"
+    },
     "Citadel_RankedSeason_Eligibility_NotEligible": {
       "text": "スタンダードマッチをプレイして、ランクマッチをアンロックしましょう",
       "group": "citadel_main",
@@ -40088,6 +40143,11 @@
       "text": "ランクマッチはプレイメニューから選択できます",
       "group": "citadel_main",
       "hash": "30d846066967"
+    },
+    "Citadel_RankedSeason_JoinSeason": {
+      "text": "シーズンに参加",
+      "group": "citadel_main",
+      "hash": "b85de33dc00c"
     },
     "Citadel_RankedMatchHistory_Calibrating": {
       "text": "振り分け {d:calibrating_number}/{d:calibration_matches}",
@@ -40103,6 +40163,11 @@
       "text": "{s:rank_points_change}pts",
       "group": "citadel_main",
       "hash": "b82ac810f38c"
+    },
+    "Citadel_RankedHistory_Title": {
+      "text": "ランクシーズン履歴",
+      "group": "citadel_main",
+      "hash": "71d9f5954ce0"
     },
     "Citadel_RankedHistory_SeasonNotJoined": {
       "text": "参加しませんでした",
@@ -40123,6 +40188,11 @@
       "text": "--",
       "group": "citadel_main",
       "hash": "e6a9fc04320a"
+    },
+    "Citadel_RankedSeasonCompleted_Title": {
+      "text": "終了",
+      "group": "citadel_main",
+      "hash": "ecc8edea5c44"
     },
     "Citadel_Ranked_NoSeasonActive": {
       "text": "有効なシーズンが現在ありません",
@@ -40179,10 +40249,30 @@
       "group": "citadel_main",
       "hash": "f70bf01bd47c"
     },
+    "Citadel_Ranked_Overview_Eligibility_Bullet1:f": {
+      "text": "アカウントの通算勝利数が{d:required_account_wins}勝以上必要です。",
+      "group": "citadel_main",
+      "hash": "6e1a16955ebf"
+    },
+    "Citadel_Ranked_Overview_Eligibility_Bullet1_HeroWins:f": {
+      "text": "スタンダードモードで{d:required_hero_wins}勝を達成したヒーローが{d:required_hero_unlocks}人以上いる必要があります。",
+      "group": "citadel_main",
+      "hash": "ae1d93abe6d9"
+    },
+    "Citadel_Ranked_Overview_Eligibility_Bullet1_HeroPoints:f": {
+      "text": "{d:required_hero_points}ポイント以上獲得したヒーローが{d:required_hero_unlocks}人以上いる必要があります。スタンダードモードで勝利すると2ポイント、敗北すると1ポイント獲得します。",
+      "group": "citadel_main",
+      "hash": "201814742127"
+    },
     "Citadel_Ranked_Overview_Eligibility_Bullet2": {
       "text": "ランクマッチには、ソロかデュオでのみキューできます。デュオの場合、プレイヤー同士の差は1ランク以内である必要があります。エターナスのプレイヤーは、サブランクの差が3以内の、同じエターナスのプレイヤーとパーティーを組んでマッチングに参加できます。",
       "group": "citadel_main",
       "hash": "b2afbbf492e9"
+    },
+    "Citadel_Ranked_Overview_Eligibility_Bullet3": {
+      "text": "昨シーズン中に振り分けが完了していない場合、ソロで振り分けマッチを{d:required_solo_calibration_games}戦プレイする必要があります。振り分けマッチでは、最高でも{g:citadel_packed_rank_name:max_calibration_rank}までしか到達できません。",
+      "group": "citadel_main",
+      "hash": "4b28a1ea871b"
     },
     "Citadel_Ranked_Overview_PlayingMatches": {
       "text": "レベルアップ",
@@ -40193,6 +40283,16 @@
       "text": "マッチに勝利・敗北すると、ランクポイントが平均で{d:ranked_point_gain}増加・減少します。この数値は、マッチメイカーによる勝敗の予想や、連続勝利といった要素によって若干変動することがあります。マッチ終了後には、ランクポイントの変動を進捗バーで視覚的に確認できます。",
       "group": "citadel_main",
       "hash": "19cfbab26a9f"
+    },
+    "Citadel_Ranked_Overview_Playing_Bullet2:f": {
+      "text": "新しいランク/サブランクに昇格すると、降格保護シールドを獲得します。バッジをまたぐ昇格の場合は{d:main_rank_demotion_protection}回分、サブランクの場合は{d:sub_rank_demotion_protection}回分獲得します。降格保護が有効な状態で敗北し、それによって降格する場合、シールドを消費することでそのランクに留まることができます。降格保護は{g:citadel_packed_rank_name:last_demotion_protection_packed_rank}より上のランク/サブランクでは適用されません。",
+      "group": "citadel_main",
+      "hash": "e17a15347313"
+    },
+    "Citadel_Ranked_Overview_Playing_Bullet3": {
+      "text": "1つ上のサブランクに昇格するには、{d:sub_rank_progress_required}ランクポイントが必要となります（例：{g:citadel_packed_rank_name:'62'} -> {g:citadel_packed_rank_name:'63'}）。1つ上のランクに昇格するには、{d:main_rank_progress_required}ランクポイントが必要となります（例：{g:citadel_packed_rank_name:'56'} -> {g:citadel_packed_rank_name:'61'}）。",
+      "group": "citadel_main",
+      "hash": "55d62a464482"
     },
     "Citadel_Ranked_Overview_Playing_Bullet4": {
       "text": "最高ランクに到達すると、サブランクに関するルールが少しだけ変更されます。ランクポイントの増減はそれまでと変わりませんが、サブランクはポイントの獲得値で昇格・降格するのではなく、1日に1度、ランク「{g:citadel_packed_rank_rank_name:'111'}」内に存在するプレイヤーのパーセンタイル順位によって割り振られます。",
@@ -40223,6 +40323,11 @@
       "text": "ベータシーズン1",
       "group": "citadel_main",
       "hash": "6f62fe087ef9"
+    },
+    "Citadel_RankedSeasonName_BetaSeason2": {
+      "text": "ベータシーズン2",
+      "group": "citadel_main",
+      "hash": "3a62b296fdcc"
     },
     "Citadel_RankedProgress_CalibratedRank": {
       "text": "振り分け完了",
@@ -41898,6 +42003,11 @@
       "text": "勝利",
       "group": "citadel_main",
       "hash": "2949d100bd55"
+    },
+    "Citadel_RankedMatchStatus_Points": {
+      "text": "ポイント",
+      "group": "citadel_main",
+      "hash": "81299e6a6858"
     },
     "Citadel_ViewMatchID_Title": {
       "text": "マッチIDを見る",
@@ -56574,6 +56684,26 @@
       "group": "citadel_main",
       "hash": "72e93508728e"
     },
+    "Citadel_Ranked_PleaseWait": {
+      "text": "しばらくお待ちください……",
+      "group": "citadel_main",
+      "hash": "2133b4307387"
+    },
+    "Citadel_Ranked_Validating": {
+      "text": "ランクシーズンに参加中",
+      "group": "citadel_main",
+      "hash": "7af782ddcd13"
+    },
+    "Citadel_Ranked_ErrorTitle": {
+      "text": "ランクマッチメイキングを開始できません",
+      "group": "citadel_main",
+      "hash": "b27ccddc15ad"
+    },
+    "Citadel_Ranked_Timeout": {
+      "text": "タイムアウト",
+      "group": "citadel_main",
+      "hash": "ed9aa9a84cba"
+    },
     "Citadel_Ranked_NotEnoughMatchesPlayed": {
       "text": "プレイしたマッチ数が不足しています。",
       "group": "citadel_main",
@@ -56593,6 +56723,11 @@
       "text": "シーズン終了時に閲覧可能",
       "group": "citadel_main",
       "hash": "be65430033b3"
+    },
+    "Citadel_RankedSeasonReward_Interact": {
+      "text": "{g:citadel_persona:nl:account_id}：{s:season_name} - {g:citadel_packed_rank_name:packed_rank}",
+      "group": "citadel_main",
+      "hash": "3ae6cae6fc9d"
     },
     "Citadel_ranks_rank0": {
       "text": "オブスキュラス",

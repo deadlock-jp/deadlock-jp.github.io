@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6860",
-  "upstreamCommit": "6860",
-  "generatedAt": "2026-11-06T09:00:11.318Z",
+  "clientVersion": "6861",
+  "upstreamCommit": "6861",
+  "generatedAt": "2026-11-12T02:16:25.742Z",
   "language": "schinese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
@@ -11,7 +11,7 @@
     "citadel_heroes": 3971,
     "citadel_attributes": 1991,
     "citadel_gc": 221,
-    "citadel_main": 5257
+    "citadel_main": 5261
   },
   "tokens": {
     "hero_vampire:n": {
@@ -40119,6 +40119,16 @@
       "group": "citadel_main",
       "hash": "e6deb3cdfc07"
     },
+    "Citadel_RankedSeason_Eligibility_HeroUnlocks_Wins:f": {
+      "text": "{d:current_unlocked_heroes} / {d:required_unlocked_heroes}名英雄超过{d:required_hero_win_count}场胜利",
+      "group": "citadel_main",
+      "hash": "928f8f6d3255"
+    },
+    "Citadel_RankedSeason_Eligibility_HeroUnlocks_Points:f": {
+      "text": "{d:current_unlocked_heroes} / {d:required_unlocked_heroes}名英雄超过{d:required_hero_point_count}分",
+      "group": "citadel_main",
+      "hash": "1873a60682ec"
+    },
     "Citadel_RankedSeason_Eligibility_NotEligible": {
       "text": "游玩标准比赛可以解锁天梯模式",
       "group": "citadel_main",
@@ -40253,6 +40263,11 @@
       "text": "玩家只能单排或双排去匹配天梯模式。双排的玩家必须在相邻的一个段位以内。不朽之星玩家只能与相差在3个子段位的其他不朽之星玩家一起匹配。",
       "group": "citadel_main",
       "hash": "7b40a8387bdc"
+    },
+    "Citadel_Ranked_Overview_Eligibility_Bullet3": {
+      "text": "如果没有参加上个天梯赛季，必须完成{d:required_solo_calibration_games}场单排校准比赛。完成校准后的最高段位是{g:citadel_packed_rank_name:max_calibration_rank}。",
+      "group": "citadel_main",
+      "hash": "50f8a6e3baa5"
     },
     "Citadel_Ranked_Overview_PlayingMatches": {
       "text": "升级",
@@ -41983,6 +41998,11 @@
       "text": "获胜次数",
       "group": "citadel_main",
       "hash": "9fdc39a67527"
+    },
+    "Citadel_RankedMatchStatus_Points": {
+      "text": "积分",
+      "group": "citadel_main",
+      "hash": "b3e2659e5f12"
     },
     "Citadel_ViewMatchID_Title": {
       "text": "查看比赛 ID",
