@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6864",
-  "upstreamCommit": "6864",
-  "generatedAt": "2026-11-19T02:35:10.589Z",
+  "clientVersion": "6865",
+  "upstreamCommit": "6865",
+  "generatedAt": "2026-11-24T14:21:03.954Z",
   "language": "schinese",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
@@ -40255,9 +40255,9 @@
       "hash": "afc81225d7b2"
     },
     "Citadel_Ranked_Overview_Eligibility_Bullet1_HeroPoints:f": {
-      "text": "你必须有至少{d:required_hero_unlocks}名{required_hero_unlocks, plural, one {英雄} other {英雄}}均拥有{d:required_hero_wins}场{required_hero_points, plural, one {胜利} other {胜利}}。标准模式下每场胜利为2分，每场失败为1分。",
+      "text": "你必须有至少{d:required_hero_unlocks}名{required_hero_unlocks, plural, one {英雄} other {英雄}}均拥有{d:required_hero_points}点{required_hero_points, plural, one {积分} other {积分}}。标准模式下每场胜利为2分，每场失败为1分。",
       "group": "citadel_main",
-      "hash": "cb64319823ea"
+      "hash": "15b7d0c8f4bd"
     },
     "Citadel_Ranked_Overview_Eligibility_Bullet2": {
       "text": "玩家只能单排或双排去匹配天梯模式。双排的玩家必须在相邻的一个段位以内。不朽之星玩家只能与相差在3个子段位的其他不朽之星玩家一起匹配。",
