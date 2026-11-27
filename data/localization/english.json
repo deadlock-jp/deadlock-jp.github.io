@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "clientVersion": "6868",
-  "upstreamCommit": "6868",
-  "generatedAt": "2026-11-25T14:25:54.127Z",
+  "clientVersion": "6875",
+  "upstreamCommit": "6875",
+  "generatedAt": "2026-11-27T14:54:41.406Z",
   "language": "English",
   "groupCounts": {
     "citadel_gc_hero_names": 298,
     "citadel_gc_mod_names": 236,
     "citadel_mods": 622,
-    "citadel_heroes": 3982,
+    "citadel_heroes": 3987,
     "citadel_attributes": 2023,
     "citadel_gc": 221,
-    "citadel_main": 5282
+    "citadel_main": 5362
   },
   "tokens": {
     "hero_vampire:n": {
@@ -5720,9 +5720,9 @@
       "hash": "c6f4ab8aa80a"
     },
     "upgrade_cloak_of_opportunity_desc": {
-      "text": "Block the next debuff that would apply <span class=\"highlight\">movement lock, Stun, Chained, Immobilize, or Sleep</span> and become <span class=\"highlight\">Unstoppable</span>. Also gain a <span class=\"highlight\">Barrier</span> and bonus {g:citadel_inline_attribute:'MoveSpeed'}",
+      "text": "Block the next debuff that would apply <span class=\"highlight\">movement lock, Stun, Chained, Immobilize, Sleep, or Fear</span> and become <span class=\"highlight\">Unstoppable</span>. Also gain a <span class=\"highlight\">Barrier</span> and bonus {g:citadel_inline_attribute:'MoveSpeed'}",
       "group": "citadel_mods",
-      "hash": "44b06bcd11fe"
+      "hash": "d174e8799c7a"
     },
     "upgrade_runed_gauntlets_desc": {
       "text": "Every time you land a heavy melee, your existing cooldowns get reduced.",
@@ -8958,6 +8958,11 @@
       "text": "Gain a <span class=\"highlight\">Barrier</span> and <span class=\"highlight\">bonus move speed</span>.",
       "group": "citadel_heroes",
       "hash": "96bdcfab3120"
+    },
+    "ability_warden_high_alert_t1_desc": {
+      "text": "<span class=\"highlight\">+{s:MoveSpeedBonusPct}%</span> Move Speed and <span class=\"highlight\">+{s:CombatBarrier}</span> Barrier",
+      "group": "citadel_heroes",
+      "hash": "448c7150428a"
     },
     "ability_warden_high_alert_t2_desc": {
       "text": "{s:AbilityCooldown}s Cooldown and +{s:AbilityDuration}s Duration",
@@ -12945,14 +12950,14 @@
       "hash": "a0f1490a20d0"
     },
     "citadel_ability_shiv_dash_t2_desc": {
-      "text": "<span class=\"highlight\">{s:TechArmorDamageReduction}%</span> Spirit Resist<br><span class=\"highlight\">+{s:DashRange}m</span> Dash Range",
+      "text": "<span class=\"highlight\">+{s:ImpactDamage}</span> Impact Damage<br><span class=\"highlight\">+{s:DashRange}m</span> Dash Range",
       "group": "citadel_heroes",
-      "hash": "5aa7aba06586"
+      "hash": "10d44b63aa05"
     },
     "citadel_ability_shiv_dash_t3_desc": {
-      "text": "<span class=\"highlight\">+{s:ImpactDamage}</span> Impact Damage<br><span class=\"highlight\">-{s:CooldownReductionOnHit}s</span> Cooldown per Hero hit.",
+      "text": "<span class=\"highlight\">{s:TechArmorDamageReduction}%</span> Spirit Resist<br><span class=\"highlight\">-{s:CooldownReductionOnHit}s</span> Cooldown per Hero hit.",
       "group": "citadel_heroes",
-      "hash": "49ef9398ce27"
+      "hash": "5b7634bc150c"
     },
     "citadel_ability_shiv_defer_damage": {
       "text": "Bloodletting",
@@ -13590,9 +13595,9 @@
       "hash": "8aa163378aae"
     },
     "mirage_teleport_desc": {
-      "text": "Target a location on the minimap.  After a brief wait, <span class=\"highlight\">teleport</span> to that location.  Taking damage or being Stunned, Immobilized, put to Sleep or Movement Silenced during the wait period causes the teleport to be interrupted.<br><br>After teleporting, gain a <span class=\"highlight\">Barrier</span>.",
+      "text": "Target a location on the minimap.  After a brief wait, <span class=\"highlight\">teleport</span> to that location.  Taking damage or being Stunned, Immobilized, put to Sleep or Movement Silenced during the wait period causes the teleport to be interrupted.<br><br>After teleporting, gain a <span class=\"highlight\">Barrier</span>.<br><br>{g:citadel_binding:'AltCast'} to target your base's healing area.",
       "group": "citadel_heroes",
-      "hash": "ac5c14ae1bec"
+      "hash": "6f58ea676790"
     },
     "MirageTeleportMoveSpeed_conditional": {
       "text": "After Teleport",
@@ -13820,9 +13825,9 @@
       "hash": "4bd759fe6810"
     },
     "citadel_ability_tengu_stone_form_t3_desc": {
-      "text": "<span class=\"highlight\">+{s:StunDuration}s</span> Stun Duration and increased Damage spirit scaling",
+      "text": "<span class=\"highlight\">{s:AbilityCooldown}s</span> Cooldown and increased Damage spirit scaling",
       "group": "citadel_heroes",
-      "hash": "b8f39367f29a"
+      "hash": "97fc320c423f"
     },
     "MaxHealthRegen_label": {
       "text": "Max Health Heal",
@@ -13940,14 +13945,14 @@
       "hash": "b54090aec3d3"
     },
     "citadel_ability_tengu_airlift_t1_desc": {
-      "text": "On Fly End : <span class=\"highlight\">{s:AirDropBulletShield}</span> Barrier to {s:hero_name} and ally that scales with Spirit",
-      "group": "citadel_heroes",
-      "hash": "bdb27240fb0b"
-    },
-    "citadel_ability_tengu_airlift_t2_desc": {
       "text": "<span class=\"highlight\">+{s:SlowPercent}%</span> Slow for <span class=\"highlight\">{s:AirDropDebuffDuration}s</span> on enemies hit",
       "group": "citadel_heroes",
       "hash": "e48e3341c5bf"
+    },
+    "citadel_ability_tengu_airlift_t2_desc": {
+      "text": "On Fly End : <span class=\"highlight\">{s:AirDropBulletShield}</span> Barrier to {s:hero_name} and ally that scales with Spirit",
+      "group": "citadel_heroes",
+      "hash": "bdb27240fb0b"
     },
     "citadel_ability_tengu_airlift_t3_desc": {
       "text": "<span class=\"highlight\">Silence</span> for <span class=\"highlight\">{s:AirDropSilenceDuration}s</span> on enemies hit.<br>Increases damage and barrier scaling.",
@@ -16565,9 +16570,9 @@
       "hash": "16abb66ae5d2"
     },
     "ability_vampirebat_lovebites_t2_desc": {
-      "text": "<span class=\"highlight\">+{s:MagicDamagePerBullet}</span> Spirit Damage per Bullet & <br><span class=\"highlight\">+{s:BonusDamage}</span> Bonus Damage",
+      "text": "<span class=\"highlight\">+{s:MagicDamagePerBullet}</span> Spirit Damage per Bullet & <br><span class=\"highlight\">+{s:BonusDamage}</span> Bonus Damage with increased Spirit scaling",
       "group": "citadel_heroes",
-      "hash": "4f4e58560b10"
+      "hash": "d32504c0ca18"
     },
     "ability_vampirebat_lovebites_t3_desc": {
       "text": "<span class=\"highlight\">{s:PerTargetCooldown}</span> Cooldown <br>On Proc: <span class=\"highlight\">+{s:BonusFireRate}%</span> Fire Rate for {s:BuffDuration}s",
@@ -20990,9 +20995,9 @@
       "hash": "b12208363c40"
     },
     "ability_fencer_riposte_desc": {
-      "text": "Prepare to <span class=\"highlight\">deflect</span> the next incoming attack. On a successful deflection, briefly become <span class=\"highlight\">invulnerable</span> and target an enemy hero to dash towards them, <span class=\"highlight\">immobilizing</span> and <span class=\"highlight\">disarming</span> them, preventing them from <span class=\"highlight\">parrying</span>, and reducing their <span class=\"highlight\">Melee Resist</span>.<br><br><span class=\"diminish\">Press {g:citadel_binding:'Ability2'} to select a target.<br>Does not trigger against trooper or neutral damage.</span>",
+      "text": "Prepare to <span class=\"highlight\">deflect</span> all incoming <span class=\"highlight\">ability</span> damage. On a successful deflection, briefly become <span class=\"highlight\">invulnerable</span> and gain the ability to dash to an enemy hero whose attack you deflected. Hitting them deals {g:citadel_inline_attribute:'SpiritDamage'}, knocks them back, applies {g:citadel_inline_attribute:'Slow'} and prevents <span class=\"highlight\">stamina usage</span>.<br><br>While deflecting, <span class=\"highlight\">bullets</span> are reflected back at the attacker.<br><br><span class=\"diminish\">Press {g:citadel_binding:'Ability2'} to counter attack.<br>Reflected bullets do not trigger the counter attack.</span>",
       "group": "citadel_heroes",
-      "hash": "ad415c13a7ad"
+      "hash": "938b45b7f2fc"
     },
     "RiposteChannelTime_postvalue_label": {
       "text": "Deflect Duration",
@@ -21055,9 +21060,9 @@
       "hash": "b12208363c40"
     },
     "ability_fencer_riposte_attack_desc": {
-      "text": "Perform a quick dash forward and immobilize and disarm an enemy with your weapon's pommel, preventing them from parrying.",
+      "text": "Perform a quick dash to the targeted enemy hero whose attack you deflected, damaging them with your weapon's pommel, knocking them back, slowing them and preventing stamina usage.",
       "group": "citadel_heroes",
-      "hash": "43c065b1ae65"
+      "hash": "907454ec6bf8"
     },
     "MeleeResistReductionDuration_label": {
       "text": "Melee Resist Reduction Duration",
@@ -21075,9 +21080,9 @@
       "hash": "a0f1490a20d0"
     },
     "ability_fencer_riposte_t2_desc": {
-      "text": "<span class=\"highlight\">{s:MeleeResistReduction}%</span> Melee Resist and <span class=\"highlight\">+{s:ImmobilizeDuration}s</span> Immobilize Duration",
+      "text": "<span class=\"highlight\">+{s:Damage}</span> Damage <br><span class=\"highlight\">+{s:SlowDuration}s</span> Debuff Duration",
       "group": "citadel_heroes",
-      "hash": "5c2c819da5a3"
+      "hash": "aeb8617e969e"
     },
     "ability_fencer_riposte_t3_desc": {
       "text": "Gain <span class=\"highlight\">{s:TargetLifesteal}%</span> Bullet, Spirit &amp; Melee Lifesteal against the Riposte target for {s:TargetLifestealDuration}s",
@@ -23300,9 +23305,9 @@
       "hash": "b06b857eeed3"
     },
     "ability_artist_homingbrush_t3_desc": {
-      "text": "+{s:CooldownReductionPerHit}s Cooldown Reduction Per Hit<br>Improve scaling",
+      "text": "+{s:BulletDamageMultiplier}% Bullet Damage<br>+{s:CooldownReductionPerHit}s Cooldown Reduction Per Hit<br>Increased Spirit Damage Scaling",
       "group": "citadel_heroes",
-      "hash": "4019697ea46d"
+      "hash": "b62e51361e2f"
     },
     "MaxDrawDistance_label": {
       "text": "Max Drawing Size",
@@ -24563,6 +24568,26 @@
       "text": "Fires a continuous beam with no bullet travel",
       "group": "citadel_heroes",
       "hash": "f7c8f902194e"
+    },
+    "citadel_weapon_shiv_set_alt_desc": {
+      "text": "Fires a heavy blast of pellets that uses extra ammo",
+      "group": "citadel_heroes",
+      "hash": "10b6b14c3905"
+    },
+    "citadel_weapon_yamato_set_alt_desc": {
+      "text": "Launches an explosive dart that uses extra ammo",
+      "group": "citadel_heroes",
+      "hash": "34ff51f7bb60"
+    },
+    "citadel_weapon_viscous_set_alt_desc": {
+      "text": "Lobs a ball of goo that explodes on impact and uses extra ammo",
+      "group": "citadel_heroes",
+      "hash": "eceb1a4c1951"
+    },
+    "citadel_weapon_deadpack_set_alt_desc": {
+      "text": "Hold fire to charge a single heavy shot",
+      "group": "citadel_heroes",
+      "hash": "fbc1d352cf2e"
     },
     "citadel_weapon_nano_set": {
       "text": "Sweetest Lie",
@@ -37634,6 +37659,16 @@
       "group": "citadel_main",
       "hash": "6557047df5bd"
     },
+    "Citadel_Scoreboard_RejuvCredit_Tooltip": {
+      "text": "Rejuvenation Credit can be spent by:",
+      "group": "citadel_main",
+      "hash": "f3486cdeb81c"
+    },
+    "Citadel_Scoreboard_RejuvCredit_Tooltip_None": {
+      "text": "No living players can spend this Rejuvenation Credit.",
+      "group": "citadel_main",
+      "hash": "13ff82a460cd"
+    },
     "Citadel_Scoreboard_BrawlRoundTitle": {
       "text": "Round {i:sb_round}",
       "group": "citadel_main",
@@ -38459,6 +38494,11 @@
       "group": "citadel_main",
       "hash": "0dd18bed4a02"
     },
+    "Citadel_Hud_LockOn_NoLineOfSight": {
+      "text": "No Line of Sight",
+      "group": "citadel_main",
+      "hash": "7f7f47d20a04"
+    },
     "Citadel_Notification_Paused_Title": {
       "text": "Paused",
       "group": "citadel_main",
@@ -38573,6 +38613,11 @@
       "text": "Assassinate!",
       "group": "citadel_main",
       "hash": "2270c9cbd23d"
+    },
+    "Citadel_Hud_LowHealth": {
+      "text": "Low Health",
+      "group": "citadel_main",
+      "hash": "6a3bb3a4eb8c"
     },
     "Citadel_Hud_HealthWarning": {
       "text": "Health Warning",
@@ -39359,6 +39404,16 @@
       "group": "citadel_main",
       "hash": "f7f4b752ca4a"
     },
+    "Citadel_Player_Level_SecondaryFire": {
+      "text": "Secondary Fire Damage",
+      "group": "citadel_main",
+      "hash": "f1f9b8050aea"
+    },
+    "Citadel_Player_Level_ChargedShot": {
+      "text": "Charged Shot Damage",
+      "group": "citadel_main",
+      "hash": "6a76e0e6405b"
+    },
     "Citadel_Player_Level_BaseMelee": {
       "text": "Base Melee Damage",
       "group": "citadel_main",
@@ -39728,6 +39783,16 @@
       "text": "Owned by:",
       "group": "citadel_main",
       "hash": "94a6758f4384"
+    },
+    "Citadel_ItemDisablesEnemyAbilities": {
+      "text": "Movement abilities disabled:",
+      "group": "citadel_main",
+      "hash": "3379e5ba45d8"
+    },
+    "Citadel_ItemDisablesEnemyFlyingAbilities": {
+      "text": "Flying abilities interrupted:",
+      "group": "citadel_main",
+      "hash": "a09ca9d2554f"
     },
     "Citadel_ItemModifies": {
       "text": "Modifies",
@@ -41939,6 +42004,21 @@
       "group": "citadel_main",
       "hash": "3a9d66c6f405"
     },
+    "Citael_PrivateLobbyModal_CreateNewDesc": {
+      "text": "Set up a private match and invite your friends",
+      "group": "citadel_main",
+      "hash": "076283ab364d"
+    },
+    "Citael_PrivateLobbyModal_CreateButton": {
+      "text": "Create Match",
+      "group": "citadel_main",
+      "hash": "b6816f6ff679"
+    },
+    "Citael_PrivateLobbyModal_JoinCodeDesc": {
+      "text": "Enter a code to join an existing custom match",
+      "group": "citadel_main",
+      "hash": "3b2dc603dbc8"
+    },
     "Citadel_BotMatchModal_PrivateBrawl": {
       "text": "Play a private brawl match",
       "group": "citadel_main",
@@ -42548,6 +42628,26 @@
       "text": "Go to the Rift to claim its power",
       "group": "citadel_main",
       "hash": "06a3abce3f59"
+    },
+    "Citadel_HUD_Koth_TrailingBonus_Friendly": {
+      "text": "Your Trailing Bonus",
+      "group": "citadel_main",
+      "hash": "75cb90bd1dab"
+    },
+    "Citadel_HUD_Koth_TrailingBonus_Enemy": {
+      "text": "Enemy Trailing Bonus",
+      "group": "citadel_main",
+      "hash": "bdbe04b4ebbc"
+    },
+    "Citadel_HUD_Koth_TrailingBonus_Spectator": {
+      "text": "Trailing Team Bonus",
+      "group": "citadel_main",
+      "hash": "f208993c1e4a"
+    },
+    "Citadel_HUD_Koth_TrailingBonus_Resists": {
+      "text": "Resists",
+      "group": "citadel_main",
+      "hash": "50adc6dc3435"
     },
     "Citadel_HUD_CorruptedItemShopSpawn": {
       "text": "The Broker has opened shop...",
@@ -44720,9 +44820,9 @@
       "hash": "bd5853a26f41"
     },
     "Citadel_JoinOrCreateParty_JoinParty": {
-      "text": "Join",
+      "text": "Join Match",
       "group": "citadel_main",
-      "hash": "e0d73143de80"
+      "hash": "ae42098f2de8"
     },
     "Citadel_JoinOrCreateParty_CreateNewParty": {
       "text": "Create Party",
@@ -45999,6 +46099,21 @@
       "group": "citadel_main",
       "hash": "e3646cf171c9"
     },
+    "Citadel_GraphType_MitigationBySource": {
+      "text": "Damage Mitigated by Source",
+      "group": "citadel_main",
+      "hash": "2a8be2f84322"
+    },
+    "Citadel_GraphType_CrowdControlDealt": {
+      "text": "Crowd Control Dealt",
+      "group": "citadel_main",
+      "hash": "2fb5038ef583"
+    },
+    "Citadel_GraphType_CrowdControlReceived": {
+      "text": "Crowd Control Received",
+      "group": "citadel_main",
+      "hash": "d3a8f218812c"
+    },
     "Citadel_ProfileCard_StatTitle_Wins": {
       "text": "Wins",
       "group": "citadel_main",
@@ -46353,6 +46468,91 @@
       "text": "Haunts",
       "group": "citadel_main",
       "hash": "9365f30abf8e"
+    },
+    "Citadel_Graph_Value_Seconds": {
+      "text": "{s:value}s",
+      "group": "citadel_main",
+      "hash": "ed9c679ccdec"
+    },
+    "Citadel_Graph_CrowdControl_Stun": {
+      "text": "Stun",
+      "group": "citadel_main",
+      "hash": "d97664aa1386"
+    },
+    "Citadel_Graph_CrowdControl_Sleep": {
+      "text": "Sleep",
+      "group": "citadel_main",
+      "hash": "3cac34e67446"
+    },
+    "Citadel_Graph_CrowdControl_Fear": {
+      "text": "Fear",
+      "group": "citadel_main",
+      "hash": "689e027c2657"
+    },
+    "Citadel_Graph_CrowdControl_Root": {
+      "text": "Immobilize",
+      "group": "citadel_main",
+      "hash": "43c86e18477a"
+    },
+    "Citadel_Graph_CrowdControl_Tether": {
+      "text": "Tether",
+      "group": "citadel_main",
+      "hash": "f80307233d45"
+    },
+    "Citadel_Graph_CrowdControl_Silence": {
+      "text": "Silence",
+      "group": "citadel_main",
+      "hash": "0d18b4610c43"
+    },
+    "Citadel_Graph_CrowdControl_Disarm": {
+      "text": "Disarm",
+      "group": "citadel_main",
+      "hash": "f26d27b073d8"
+    },
+    "Citadel_Graph_CrowdControl_Slow": {
+      "text": "Movement Slow",
+      "group": "citadel_main",
+      "hash": "cd5cf830e29f"
+    },
+    "Citadel_Graph_Mitigation_BulletResist": {
+      "text": "Bullet Resist",
+      "group": "citadel_main",
+      "hash": "b2dc374bdcc7"
+    },
+    "Citadel_Graph_Mitigation_SpiritResist": {
+      "text": "Spirit Resist",
+      "group": "citadel_main",
+      "hash": "a79e809e8e08"
+    },
+    "Citadel_Graph_Mitigation_MeleeResist": {
+      "text": "Melee Resist",
+      "group": "citadel_main",
+      "hash": "245f855977d5"
+    },
+    "Citadel_Graph_Mitigation_Barrier": {
+      "text": "Barrier",
+      "group": "citadel_main",
+      "hash": "10c02649e226"
+    },
+    "Citadel_Graph_Mitigation_DamageReduction": {
+      "text": "Damage Reduction",
+      "group": "citadel_main",
+      "hash": "8d34a68bd448"
+    },
+    "Citadel_Graph_Mitigation_Immunity": {
+      "text": "Immunity",
+      "group": "citadel_main",
+      "hash": "56868b5aa530"
+    },
+    "Citadel_Graph_Mitigation_Evasion": {
+      "text": "Evasion",
+      "group": "citadel_main",
+      "hash": "bce8cf990550"
+    },
+    "Citadel_Graph_Mitigation_ItemsAndAbilities": {
+      "text": "Other Items & Abilities",
+      "group": "citadel_main",
+      "hash": "dac10d6dead2"
     },
     "Citadel_LaneStats_Kills": {
       "text": "Kills",
@@ -46758,6 +46958,46 @@
       "text": "N/A",
       "group": "citadel_main",
       "hash": "08d2e98e6754"
+    },
+    "CitadelHeroStats_Weapon_SecondaryFire": {
+      "text": "Secondary Fire",
+      "group": "citadel_main",
+      "hash": "11561eafb287"
+    },
+    "CitadelHeroStats_Weapon_ChargedShot": {
+      "text": "Charged Shot",
+      "group": "citadel_main",
+      "hash": "fdc2177eee57"
+    },
+    "CitadelHeroStats_AltFire_ChargeTime_postvalue_label": {
+      "text": "Charge Time",
+      "group": "citadel_main",
+      "hash": "f55720c24e6a"
+    },
+    "CitadelHeroStats_AltFire_ChargeTime_postfix": {
+      "text": "s",
+      "group": "citadel_main",
+      "hash": "a0f1490a20d0"
+    },
+    "CitadelHeroStats_Weapon_Pellets_postvalue_label": {
+      "text": "Bullets per shot",
+      "group": "citadel_main",
+      "hash": "b4d796c2c7bc"
+    },
+    "CitadelHeroStats_AltFire_AmmoPerShot_postvalue_label": {
+      "text": "Ammo per shot",
+      "group": "citadel_main",
+      "hash": "6241cf1d20dd"
+    },
+    "CitadelHeroStats_AltFire_ExplosionRadius_postvalue_label": {
+      "text": "Explosion Radius",
+      "group": "citadel_main",
+      "hash": "008f4977a90c"
+    },
+    "CitadelHeroStats_AltFire_ExplosionRadius_postfix": {
+      "text": "m",
+      "group": "citadel_main",
+      "hash": "6b0d31c0d563"
     },
     "Citadel_Shop_Sort_Tooltip_Categories": {
       "text": "Sort Items by Category",
@@ -49345,9 +49585,9 @@
       "hash": "9aaec63bfea8"
     },
     "range_permanent_pickup_label": {
-      "text": "+0.25% Ability Range",
+      "text": "+0.5% Ability Range",
       "group": "citadel_main",
-      "hash": "6fc6105bd2e3"
+      "hash": "8f446bf74617"
     },
     "movespeed_permanent_pickup_label": {
       "text": "+0.1m Move Speed",
@@ -49385,19 +49625,19 @@
       "hash": "50afc9c38772"
     },
     "bulletresist_permanent_pickup_label_lv2": {
-      "text": "+0.75% Bullet Resist",
+      "text": "+1% Bullet Resist",
       "group": "citadel_main",
-      "hash": "e7efe582f81c"
+      "hash": "edf8004e5553"
     },
     "spiritresist_permanent_pickup_label_lv2": {
-      "text": "+0.75% Spirit Resist",
+      "text": "+1% Spirit Resist",
       "group": "citadel_main",
-      "hash": "d8f8f613508b"
+      "hash": "7ea98fdd88b7"
     },
     "range_permanent_pickup_label_lv2": {
-      "text": "+0.5% Ability Range",
+      "text": "+0.75% Ability Range",
       "group": "citadel_main",
-      "hash": "8f446bf74617"
+      "hash": "186e7f68b173"
     },
     "movespeed_permanent_pickup_label_lv2": {
       "text": "+0.2m Move Speed",
@@ -49435,24 +49675,24 @@
       "hash": "4d017d069e96"
     },
     "bulletresist_permanent_pickup_label_lv3": {
-      "text": "+1% Bullet Resist",
+      "text": "+1.5% Bullet Resist",
       "group": "citadel_main",
-      "hash": "edf8004e5553"
+      "hash": "4eb587ca6cb6"
     },
     "spiritresist_permanent_pickup_label_lv3": {
-      "text": "+1% Spirit Resist",
+      "text": "+1.5% Spirit Resist",
       "group": "citadel_main",
-      "hash": "7ea98fdd88b7"
+      "hash": "2a307100a6a9"
     },
     "range_permanent_pickup_label_lv3": {
-      "text": "+0.75% Ability Range",
+      "text": "+1% Ability Range",
       "group": "citadel_main",
-      "hash": "186e7f68b173"
+      "hash": "aa06828d72ec"
     },
     "movespeed_permanent_pickup_label_lv3": {
-      "text": "+0.3m Move Speed",
+      "text": "+0.4m Move Speed",
       "group": "citadel_main",
-      "hash": "97e7778e7532"
+      "hash": "d08837c08042"
     },
     "breakable_pickup_missing_loc": {
       "text": "PICKUP MISSING LOC NAME",
@@ -58154,6 +58394,101 @@
       "group": "citadel_main",
       "hash": "6e703588ab00"
     },
+    "HeroTesting_BotDrillSection": {
+      "text": "Bot Drills",
+      "group": "citadel_main",
+      "hash": "edc047e19dd8"
+    },
+    "HeroTesting_BotDrillSelect": {
+      "text": "Select Drill",
+      "group": "citadel_main",
+      "hash": "e2549f457781"
+    },
+    "HeroTesting_BotDrillNone": {
+      "text": "No Drill",
+      "group": "citadel_main",
+      "hash": "77bb01a2c6b1"
+    },
+    "HeroTesting_BotDrillDiveDanny": {
+      "text": "Danny - Dive Bomb",
+      "group": "citadel_main",
+      "hash": "a147acd09cdd"
+    },
+    "HeroTesting_BotDrillFlyVindicta": {
+      "text": "Vindicta - Sky Strafe",
+      "group": "citadel_main",
+      "hash": "cc863b1e2588"
+    },
+    "HeroTesting_BotDrillAbrams": {
+      "text": "Abrams - Bull Rush",
+      "group": "citadel_main",
+      "hash": "7499de94dc14"
+    },
+    "HeroTesting_BotDrillGreyTalon": {
+      "text": "Grey Talon - Air Raid",
+      "group": "citadel_main",
+      "hash": "645bb99d6d65"
+    },
+    "HeroTesting_BotDrillParadox": {
+      "text": "Paradox - Carbine Swap",
+      "group": "citadel_main",
+      "hash": "0a446f911697"
+    },
+    "HeroTesting_BotDrillViscousGooBall": {
+      "text": "Viscous - Rolling Goo",
+      "group": "citadel_main",
+      "hash": "aeeeb7220940"
+    },
+    "HeroTesting_BotDrillViscousPuddlePunch": {
+      "text": "Viscous - Sucker Punch",
+      "group": "citadel_main",
+      "hash": "a2b587c001fc"
+    },
+    "HeroTesting_BotDrillBebopHook": {
+      "text": "Bebop - Hook Dodge",
+      "group": "citadel_main",
+      "hash": "c1f5663cd0f0"
+    },
+    "HeroTesting_BotDrillGravesTombstone": {
+      "text": "Graves - Parry Bait",
+      "group": "citadel_main",
+      "hash": "b08c0b9c63e0"
+    },
+    "HeroTesting_BotDrillBabaThreadsap": {
+      "text": "Baba - Threadsap Tag",
+      "group": "citadel_main",
+      "hash": "4dfee454ce41"
+    },
+    "HeroTesting_BotDrillBilly": {
+      "text": "Billy - Chain Beatdown",
+      "group": "citadel_main",
+      "hash": "64468a65050d"
+    },
+    "HeroTesting_BotDrillBabaLongLegs": {
+      "text": "Baba - Granny Rampage",
+      "group": "citadel_main",
+      "hash": "b3202784fa9b"
+    },
+    "HeroTesting_BotDrillLashCombo": {
+      "text": "Lash - Sky Slam",
+      "group": "citadel_main",
+      "hash": "46be80ad9412"
+    },
+    "HeroTesting_BotDrillSilver": {
+      "text": "Silver - Wolf Hunt",
+      "group": "citadel_main",
+      "hash": "324069367ec7"
+    },
+    "HeroTesting_BotDrillHolliday": {
+      "text": "Holliday - Keg Drop",
+      "group": "citadel_main",
+      "hash": "6e6a945c180f"
+    },
+    "HeroTesting_BotDrillMcGinnis": {
+      "text": "McGinnis - Wall Barrage",
+      "group": "citadel_main",
+      "hash": "62633ec29cde"
+    },
     "HeroTesting_BotRecording": {
       "text": "Bot Recording",
       "group": "citadel_main",
@@ -58753,6 +59088,91 @@
       "text": "Repeats casts every few seconds while on.",
       "group": "citadel_main",
       "hash": "04ad109b893c"
+    },
+    "HeroTesting_BotDrill_Desc": {
+      "text": "Pick a drill for an enemy bot to run in front of you. Pick No Drill to stop",
+      "group": "citadel_main",
+      "hash": "8d5d1f4fbf7f"
+    },
+    "HeroTesting_BotDrillDiveDanny_Desc": {
+      "text": "An enemy Danny takes off in front of you, overheats and dives at you, then starts over",
+      "group": "citadel_main",
+      "hash": "99e4e4b43c30"
+    },
+    "HeroTesting_BotDrillFlyVindicta_Desc": {
+      "text": "An enemy Vindicta takes Flight in front of you and strafes side to side",
+      "group": "citadel_main",
+      "hash": "61fd1301f5ec"
+    },
+    "HeroTesting_BotDrillAbrams_Desc": {
+      "text": "An enemy Abrams with Superior Duration uses Shoulder Charge at you and follows up with light and heavy melee attacks, then starts over",
+      "group": "citadel_main",
+      "hash": "b21f320ae2cd"
+    },
+    "HeroTesting_BotDrillGreyTalon_Desc": {
+      "text": "An enemy Grey Talon launches into the air with Rain of Arrows and shoots at you, sometimes firing a Charged Shot, then starts over",
+      "group": "citadel_main",
+      "hash": "bceaae36734a"
+    },
+    "HeroTesting_BotDrillParadox_Desc": {
+      "text": "An enemy Paradox moves and jumps around, charging Kinetic Carbine, shooting you with it and then hitting you with Paradoxical Swap every few seconds",
+      "group": "citadel_main",
+      "hash": "9d3030eb687b"
+    },
+    "HeroTesting_BotDrillViscousGooBall_Desc": {
+      "text": "An enemy Viscous moves and jumps around, then rolls after you with Goo Ball and starts over",
+      "group": "citadel_main",
+      "hash": "746cb7adcca3"
+    },
+    "HeroTesting_BotDrillViscousPuddlePunch_Desc": {
+      "text": "An enemy Viscous moves and jumps around while using Puddle Punch under you at random intervals",
+      "group": "citadel_main",
+      "hash": "f477182d1ea5"
+    },
+    "HeroTesting_BotDrillBebopHook_Desc": {
+      "text": "An enemy Bebop moves and jumps around while firing Grapple Arm at you every few seconds",
+      "group": "citadel_main",
+      "hash": "0d980bc8b3ad"
+    },
+    "HeroTesting_BotDrillGravesTombstone_Desc": {
+      "text": "An enemy Graves with Rebuttal summons a gravestone with Borrowed Decree and stands in it ready to parry. Bait out her parry, then destroy the gravestone with heavy melees",
+      "group": "citadel_main",
+      "hash": "ad6382a232aa"
+    },
+    "HeroTesting_BotDrillBabaThreadsap_Desc": {
+      "text": "An enemy Baba moves and jumps around while using Threadsap on you every few seconds",
+      "group": "citadel_main",
+      "hash": "97c3c1af438a"
+    },
+    "HeroTesting_BotDrillBilly_Desc": {
+      "text": "An enemy Billy with Melee Charge closes in on you and uses Chain Gang into Bashdown and Rising Ram, follows up with a light and a heavy melee attack, then starts over",
+      "group": "citadel_main",
+      "hash": "4c21556ac082"
+    },
+    "HeroTesting_BotDrillBabaLongLegs_Desc": {
+      "text": "An enemy Baba chases you in Granny Long Legs form, moving side to side while using light and heavy melee attacks at random",
+      "group": "citadel_main",
+      "hash": "5093f429085f"
+    },
+    "HeroTesting_BotDrillLashCombo_Desc": {
+      "text": "An enemy Lash with Stamina Mastery uses Grapple and air jumps to get high above you, uses Death Slam on you followed by Ground Strike, then starts over",
+      "group": "citadel_main",
+      "hash": "42b94884c3ed"
+    },
+    "HeroTesting_BotDrillSilver_Desc": {
+      "text": "An enemy Silver transforms with Lycan Curse and chases you, attacking with her claws, Mauling Leap, Go For The Throat and Tail Whack",
+      "group": "citadel_main",
+      "hash": "d8d2208b5e8a"
+    },
+    "HeroTesting_BotDrillHolliday_Desc": {
+      "text": "An enemy Holliday with Greater Expansion places a Bounce Pad, launches off it and throws a Powder Keg at you from the air, then starts over",
+      "group": "citadel_main",
+      "hash": "e4e5b3e25947"
+    },
+    "HeroTesting_BotDrillMcGinnis_Desc": {
+      "text": "An enemy McGinnis fires a Spectral Wall that deploys behind you, then uses Heavy Barrage on you. She dashes away when you get within 10m of her, then starts over",
+      "group": "citadel_main",
+      "hash": "8a96314f56bd"
     },
     "HeroTesting_InfiniteMoney_Desc": {
       "text": "Buy items without spending souls",
@@ -59863,6 +60283,11 @@
       "text": "Heavy Melee to claim souls",
       "group": "citadel_main",
       "hash": "416d2b30e3dc"
+    },
+    "AbilityButtonHint_MeleeItem": {
+      "text": "Heavy Melee to claim item",
+      "group": "citadel_main",
+      "hash": "6da934ca6611"
     },
     "AbilityButtonHint_MeleeHeavyPunchDestroy": {
       "text": "Heavy Melee to Destroy",
